@@ -48,6 +48,53 @@ Stuns, roots, slows, speed modifiers, combat restrictions, animation and network
 
 A future Hybrid option that accepts both click-to-move and WASD simultaneously may be useful, but it is **not yet a committed requirement**.
 
+## Basic attacks
+
+Every class normally has a basic attack.
+
+The default interaction should feel like Warcraft III / League:
+- command an attack on an enemy;
+- the character moves into valid attack range if needed;
+- once in range, the character repeatedly performs its basic attack while the target remains valid;
+- ranged classes fire from range;
+- melee classes close into melee.
+
+Most caster classes are expected to have ranged basic attacks, while some magical/melee classes can use melee basic attacks.
+
+A future class with no conventional basic attack is possible, but would be an intentional special-case class mechanic rather than a normal rule.
+
+Every class has a **primary stat** used in its basic-attack scaling. The exact stat list and formula remain to be designed.
+
+## Health and primary stats
+
+**Vitality** contributes to maximum HP.
+
+Current conceptual formula:
+
+```
+Max HP = class base HP + (Vitality × HP coefficient) + other modifiers
+```
+
+Open design question: whether the Vitality-to-HP coefficient is universal or class-specific.
+
+Each class has a primary stat used for base/basic attack scaling.
+
+Other primary/derived stats are not yet finalized.
+
+## Defense and equipment families
+
+There is one common defense model rather than multiple armor-weight defense types.
+
+There is no generic Cloth/Leather/Mail/Plate defense hierarchy.
+
+Classes instead differ through:
+- which equipment families they are allowed to equip;
+- the stat packages on those equipment families;
+- item requirements;
+- class abilities/passives.
+
+Equipment **Intrinsics** can provide larger fixed stat packages than their DiceBound equivalents and are an important part of gear identity.
+
 ## Movement and mobility
 
 There is **no universal dodge/roll**.
@@ -64,15 +111,26 @@ Overworld enemies have:
 - an aggro/acquisition range;
 - a maximum pursuit/leash distance or equivalent return-home rule.
 
-Enemies can follow a player across a cube edge **if the player remains within their valid pursuit rules**.
+Enemies can follow a player across a cube edge if the player remains inside valid pursuit rules.
 
-Once the enemy has chased too far from its home/encounter area, it gives up and returns/reset to its home state.
+Once they exceed their leash, they return/reset to their home state.
 
-The goal is to let the cube-world behave physically without producing absurd cases where a starter-zone slime follows somebody across three faces into endgame territory.
+## Threat
+
+DiceFree will have a real **threat/aggro system** so tank-oriented classes can intentionally control enemies.
+
+Bosses and special enemies may override ordinary threat with mechanics such as:
+- forced target swaps;
+- random/marked targets;
+- proximity targeting;
+- scripted fixates;
+- untankable mechanics.
+
+Threat is a system, not a promise that every enemy always attacks the highest-threat character.
 
 ## Ability loadouts
 
-DiceFree should keep the number of buttons relatively small, but there is **no requirement that every class has the same number of active abilities**.
+DiceFree should keep the number of buttons relatively small, but classes do not need identical active/passive counts.
 
 A class may lean toward:
 - more active abilities;
@@ -90,40 +148,27 @@ Different classes can use different resources.
 
 Later advancements may retain, modify or completely replace the previous resource system.
 
-There is no universal resource that every class is required to use.
-
 ## Party design
 
 The initial multiplayer target is **up to 4 players**.
 
-Classes may naturally lean toward:
-- durability/tanking;
-- support/healing;
-- ranged damage;
-- melee burst;
-- summoning;
-- control;
-- hybrid roles.
+Ordinary progression should not require a fixed MMO trinity composition, but tanking/healing/support identities are absolutely allowed and supported.
 
-Ordinary progression should not require a fixed MMO trinity composition.
+## Healing/support targeting
 
-## Abilities
+Support abilities should support both:
+- targeting characters in the 3D world;
+- targeting eligible allies through party frames/UI.
 
-Abilities should be modular enough to support:
-- direct damage;
-- area damage;
-- projectiles;
-- summons;
-- damage over time;
-- healing/shields;
-- movement;
-- crowd control;
-- resource generation/spending;
-- conditional effects;
-- item-modified variants;
-- resurrection.
+Party-frame targeting is important so healing does not require pixel-hunting moving characters in an isometric battlefield.
 
-Ability behaviour should not depend on whether the player uses Classic or Direct movement.
+## Consumables
+
+Consumables use cooldowns.
+
+Different consumables can have different cooldown rules.
+
+Classes, passives, equipment or profession-related effects may modify how consumables work, including cooldowns or effectiveness.
 
 ## Resurrection
 
@@ -132,28 +177,26 @@ Healer-type resurrection can be repeatable, but intentionally expensive/risky:
 - high mana/resource cost;
 - stacking Resurrection Sickness applied to the revived player.
 
-This creates room for recovery without making repeated deaths free.
+## Enemy level display
+
+Enemy levels should normally be visible.
+
+For enemies dramatically beyond the current character's level, displaying **???** instead of the exact level is an available design option to preserve mystery/threat. The threshold/rule is not yet decided.
 
 ## Bosses
 
 Boss encounters should contain recognizable mechanics rather than only inflated health.
 
-Harder dungeon/raid modes should be able to add:
-- new attacks/mechanics;
-- tighter timings;
-- modified arena hazards;
-- stronger enemy combinations;
-- increased stats;
-- altered/new loot tables.
-
-Movement-sensitive mechanics must be tested primarily with Classic click-to-move so WASD does not quietly become required for reliable execution.
+Harder dungeon/raid modes should add mechanics as well as stats.
 
 ## Open questions
 
-- Exact click/attack/context command conventions.
+- Exact mouse-button/context conventions.
 - Whether Hybrid mode should ship.
-- Exact targeting behaviour.
+- Exact targeting behaviour for offensive abilities.
 - Potion/item hotkeys.
 - Controller support expectations.
-- Threat/taunt system depth.
-- Whether basic attack is universal or class-specific.
+- Exact threat formula/taunt rules.
+- Final primary-stat list.
+- Universal vs class-specific Vitality-to-HP coefficient.
+- Exact enemy-level threshold for displaying ???.
