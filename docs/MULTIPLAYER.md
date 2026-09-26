@@ -6,77 +6,72 @@ DiceFree is a **lobby/session co-op game**, not an MMO.
 
 Initial target: **1–4 players**.
 
-The intended flow is similar in spirit to Warcraft III custom games:
-1. create or join a lobby;
-2. invite/join friends, including Steam invites;
-3. start the game session together;
-4. continue adventuring in the shared session.
+Flow:
+1. create/join lobby;
+2. invite/join friends including Steam invites;
+3. start session;
+4. adventure together.
 
-## Joining a game already in progress
+## Joining started sessions
 
-Players may join an overworld session after it has already started.
+Players may join an already-started overworld session.
 
-When joining:
-- the joining manifestation loads into the session;
-- they spawn at the **town/resurrection point that manifestation most recently set**;
-- they do not teleport directly to the existing party.
+They spawn at the **resurrection point their manifestation last explicitly selected**, even if the existing party is currently inside a dungeon.
 
-This remains true even if the current party is inside a dungeon.
+They do not teleport directly to the party.
 
-## Dungeon and raid joins
+## Dungeon joins
 
-A player **cannot join a dungeon or raid that has already started**.
+A player cannot join a dungeon/raid already in progress.
 
-Dungeon participation is locked to the eligible party members present when the run begins.
-
-This protects:
-- wipe/reset rules;
-- encounter state;
-- reward eligibility;
-- private loot-room results;
-- mechanic scaling.
-
-A late joiner can remain in the overworld/town and join the party after the current run ends.
+Participation is fixed when the run starts.
 
 ## Quest credit
 
-Multiplayer quest credit is eligibility-aware.
+Eligible players receive quest credit.
 
-If a player is eligible for a quest/objective when the party completes it, they receive appropriate credit.
+Ineligible players do not.
 
-If they are not eligible, they do not receive that quest completion merely because they were present.
+This applies to side quests as well as main/other quests.
 
-Exact rules can vary by quest type.
+## Experience in parties
 
-## World ownership/state
+Players should not be punished simply for grouping with friends.
 
-Some quest/event state belongs to the manifestation, some to the Echo account, and some may be session/world state.
+Eligible nearby/participating players receive their own full XP reward rather than dividing one finite XP pool between party members.
 
-The exact authority model should support:
-- manifestation-specific quests;
-- account-wide discoveries;
-- shared session encounters;
-- host/session progression where necessary.
+However, XP can be reduced by **level difference between the character and the defeated enemy**.
 
-Do not assume every piece of world state must belong to the host permanently.
+Exact level-gap formula remains a balance problem.
+
+## Powerleveling
+
+Powerleveling is allowed in principle.
+
+A high-level player should be able to help a lower-level manifestation level faster.
+
+However, it should not trivialize the entire progression ladder.
+
+Possible tools to prototype later include:
+- enemy/character level-gap XP curves;
+- maximum useful XP per kill;
+- FFXIV-style level sync for selected content;
+- minimum participation/range rules;
+- dungeon/mode-specific sync.
+
+No specific sync model is committed yet.
+
+## World/session state
+
+Some state is manifestation-specific, some Echo-wide, some session-based.
 
 ## Steam
 
-Steam lobby/invite integration is a target for PC release.
-
-The exact networking stack/transport is not decided yet.
-
-## Scaling
-
-Encounter systems should support scaling based on current valid party size.
-
-Actual scaling formulas are a playtest/balance problem, not a pre-production assumption.
+Steam lobby/invite integration is a PC-release target.
 
 ## Not planned
 
-At the current stage:
-- no MMO shard/world;
-- no strangers wandering through your overworld unless they joined your lobby/session;
-- no raid lockouts;
-- no mandatory matchmaking service requirement;
-- no unrestricted player-to-player item economy.
+- MMO shard/open world;
+- random strangers appearing without joining session;
+- raid lockouts;
+- unrestricted item economy.
