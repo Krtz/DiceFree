@@ -295,3 +295,116 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Mountains, forests, cliffs, roads and other authored geography may restrict crossings to selected routes.
 
 **Decision:** We will prototype seamless local-gravity cube-edge traversal versus segmented/streamed face spaces and choose the implementation that best preserves feel, readability and production feasibility.
+
+
+## 2026-09-26 — Health and primary-stat direction
+
+**Decision:** Vitality contributes to maximum HP using a class base plus Vitality-derived amount.
+
+**Open:** Whether the Vitality-to-HP coefficient is universal or class-specific.
+
+**Decision:** Every normal class has a primary stat used for its basic-attack scaling.
+
+## 2026-09-26 — Defense and equipment families
+
+**Decision:** DiceFree has one underlying Defense type rather than separate cloth/leather/mail/plate defense systems.
+
+**Decision:** Classes can equip different equipment families, and those families differ through stats, Intrinsics, affix pools and class permissions.
+
+**Decision:** Equipment Intrinsics can provide larger stat packages than in DiceBound.
+
+## 2026-09-26 — Basic attacks
+
+**Decision:** Every normal class has a Warcraft III / League-style basic attack: attacking a target moves into range if necessary and repeatedly attacks while the target remains valid.
+
+**Decision:** Basic attacks may be melee or ranged depending on class.
+
+**Open:** A future no-basic-attack class is allowed only as an intentional special case.
+
+## 2026-09-26 — Loot-room inspection and fallback
+
+**Decision:** Loot-room offers can be fully inspected before choosing.
+
+**Decision:** Unchosen offers disappear.
+
+**Decision:** The chosen reward may be sent directly to the shared bank.
+
+**Decision:** If equipment offers are undesirable, content may offer a fallback reward such as XP, gold or materials.
+
+**Decision:** There is no universal baseline number of loot choices; offer counts are content-specific.
+
+**Decision:** Ultra-rare jackpot items, hard-mode exclusivity and drop odds are decided per item/dungeon.
+
+## 2026-09-26 — Recipe discovery and professions
+
+**Decision:** NPC crafting recipes can be initially visible, quest rewards, secret, discovered through ingredients/exploration, or Echo-wide discoveries.
+
+**Decision:** Player profession progression/knowledge is Echo-wide.
+
+## 2026-09-26 — Consumable cooldowns
+
+**Decision:** Consumables have cooldowns, with category/item-specific rules.
+
+**Decision:** Classes, passives, equipment and profession effects may modify consumable cooldowns/effectiveness.
+
+## 2026-09-26 — Currency risk model
+
+**Decision:** Carried gold is manifestation-specific and may lose a percentage on death.
+
+**Decision:** Banked gold is Echo-wide and safe.
+
+**Decision:** Future materials/currencies may individually be safe or losable and may use similar carried/stored rules.
+
+**Decision:** Systems should support additional future currencies without defining the endgame currency ecosystem now.
+
+## 2026-09-26 — Resurrection points and overworld death
+
+**Decision:** Resurrection points are explicitly selected by interacting with a lore-appropriate world object/location; simply passing a camp does not overwrite the selection.
+
+**Decision:** Overworld death does not reset the world. Allies can resurrect the player before they accept respawn.
+
+## 2026-09-26 — Dungeon abandonment and entrances
+
+**Decision:** A dungeon/raid run may be abandoned, but the abandoned run cannot be re-entered.
+
+**Decision:** Dungeons have physical world entrances.
+
+**Decision:** Entry requirements are content-specific and may include levels, quests, keys, items, achievements or other conditions.
+
+## 2026-09-26 — Powerleveling and party XP
+
+**Decision:** Powerleveling is allowed in principle but should not trivialize the entire progression ladder.
+
+**Decision:** Party XP is not divided as a finite pool; participating/eligible players receive their own XP.
+
+**Decision:** Character-vs-enemy level difference can reduce XP.
+
+**Open:** Exact anti-trivialization/sync system, including possible FFXIV-style sync for selected content.
+
+## 2026-09-26 — Threat and support targeting
+
+**Decision:** DiceFree has a threat system so tank classes can intentionally control enemies.
+
+**Decision:** Bosses may override ordinary threat with encounter mechanics.
+
+**Decision:** Healing/support abilities can target both world characters and party frames.
+
+## 2026-09-26 — Enemy level display
+
+**Decision:** Enemy levels are normally visible.
+
+**Open:** Enemies far beyond the character may display ??? instead of an exact level to preserve mystery.
+
+## 2026-09-26 — World knowledge and inter-face society
+
+**Decision:** NPCs do not normally understand that their world is a die; to them its geometry is simply normal.
+
+**Decision:** NPCs can travel between faces and there can be trade, politics, migration, wars and alliances across face boundaries.
+
+**Idea:** An NPC who claims the world is literally a die and is treated as crazy is explicitly welcome.
+
+## 2026-09-26 — Endgame philosophy
+
+**Direction:** Endgame follows an ARPG-style progression loop: acquire stronger/unique gear to access harder content, which rewards stronger/more build-enabling gear, while secret/unique items enable new builds.
+
+**Note:** Detailed endgame structure is intentionally deferred.
