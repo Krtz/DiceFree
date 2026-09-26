@@ -212,3 +212,86 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-26 — Edge-transition camera direction
 
 **Working decision:** The camera should ultimately align to the local gravity of the current face and smoothly blend through the 90-degree orientation change when crossing an edge. It should preserve stable player framing/isometric readability and avoid gratuitous spinning. This must be validated by prototype before being treated as final.
+
+
+## 2026-09-26 — Overleveling and secret-class hooks
+
+**Decision:** Reaching an advancement threshold does not stop further leveling.
+
+**Decision:** Overleveling has no inherent long-term bonus beyond being stronger for the current class/advancement quest.
+
+**Decision:** Extreme overleveling is allowed. A level-200 Novice should be possible and is an explicit example of a future secret-class unlock condition.
+
+## 2026-09-26 — First advancement identities
+
+**Decision:** The two current first-advancement identities are **Physically Blessed Novice** and **Magically Touched Novice**.
+
+**Open:** Their following melee/ranged branches are not yet finalized.
+
+## 2026-09-26 — Completion-only equipment rewards
+
+**Decision:** Dungeon/raid bosses may grant experience, gold, materials/resources and progression credit during the run, but equipment loot is awarded only after successful completion through the private loot room.
+
+**Decision:** Loot-room offer counts may vary by content/difficulty, and offers may include items useful to other manifestations/classes.
+
+## 2026-09-26 — Inventory, bank and materials
+
+**Decision:** Inventory/bank friction should be low.
+
+**Decision:** Items can be sent/deposited to the shared bank from anywhere, but can only be withdrawn while in town.
+
+**Decision:** The bank should be generous.
+
+**Decision:** Common crafting materials should generally behave as currencies/resources rather than physical inventory clutter.
+
+## 2026-09-26 — Crafting and professions
+
+**Decision:** Progression gear crafting is handled by NPC crafters using recipes that may consume existing dungeon/raid items, boss materials, currencies and gold.
+
+**Decision:** Player professions focus on potions, food, consumables, gathering/resources and similar support systems rather than main equipment crafting.
+
+## 2026-09-26 — Durability
+
+**Decision:** DiceFree has **no equipment durability system**.
+
+## 2026-09-26 — Overworld respawns
+
+**Decision:** Normal overworld enemies respawn on timers.
+
+**Decision:** Named/elites use longer respawn timers.
+
+## 2026-09-26 — Multiplayer lobby/session model
+
+**Decision:** DiceFree is lobby/session-based co-op, initially up to four players, rather than an MMO/open shared world.
+
+**Decision:** Steam invites/lobbies are a target.
+
+**Decision:** Players may join a started overworld session and spawn at their manifestation's last-set town/resurrection point.
+
+**Decision:** Players cannot join a dungeon/raid that has already started.
+
+**Decision:** Quest credit is granted only when the joining/participating manifestation is eligible.
+
+## 2026-09-26 — Towns, camps and travel
+
+**Decision:** Towns provide the full service set; camps provide only a subset.
+
+**Decision:** Fast travel is travel-point to travel-point, not teleport-from-anywhere.
+
+**Decision:** Most travel points are connected, but not all; disconnected routes should have in-world/lore justification.
+
+## 2026-09-26 — d6 regional map identity
+
+**Decision:** The one-dot face is the starting region, then two-dot through six-dot in intended progression order.
+
+**Decision:** Each region should use distinct landmarks arranged so its map/minimap evokes the corresponding d6 pip layout.
+
+**Decision:** High-level/endgame/secret content can be hidden in any region, including the starting face.
+
+## 2026-09-26 — Cube traversal implementation remains open
+
+**Decision:** The fantasy is still a six-faced physical Dice world, but fully seamless traversal along every edge is **not** technically mandatory.
+
+**Decision:** Mountains, forests, cliffs, roads and other authored geography may restrict crossings to selected routes.
+
+**Decision:** We will prototype seamless local-gravity cube-edge traversal versus segmented/streamed face spaces and choose the implementation that best preserves feel, readability and production feasibility.
