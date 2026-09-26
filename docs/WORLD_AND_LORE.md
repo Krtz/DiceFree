@@ -16,7 +16,20 @@ As in DiceBound, the Echo gains a shape/identity through class choice rather tha
 
 The class is therefore a major part of both gameplay identity and visual identity.
 
-Exact metaphysics of what an Echo is, why the survivor exists this way outside, and how much continuity of memory/personality carries through remain to be written.
+## Alternate manifestations
+
+All character slots are manifestations of the **same Echo** across different timelines/possibilities/multiversal expressions.
+
+This provides the in-world basis for:
+- permanent class branches;
+- multiple character slots;
+- shared bank access;
+- some account-wide quest/event state;
+- some shared unlocks/discoveries.
+
+Not every event must be account-wide. Some quests/events are experienced separately by each manifestation.
+
+The exact metaphysics of why the Echo can exist this way remain open.
 
 ## Character appearance philosophy
 
@@ -26,17 +39,13 @@ Possible minimal identity choices such as boy/girl/undefined presentation remain
 
 **class + equipped gear define the character's appearance.**
 
-This keeps the visual pipeline focused and makes advancement itself visually meaningful.
-
 ## The six faces
 
 The exterior is a massive cube-world whose six faces form the six main overworld regions.
 
 Each face should be thematically related to one of DiceBound's six boards without simply copying it.
 
-The connection can be physical, metaphysical, historical or environmental. Internal events may have shaped the corresponding exterior face.
-
-Players are encouraged by level scaling, story progression and advancement placement to experience the faces in an intended order, but they are not hard-gated into a single route.
+Players are encouraged by fixed regional scaling, lightweight main-story guidance and class advancement placement to experience the faces in an intended order, but they are not hard-gated into a single route.
 
 ## Crossing the edges
 
@@ -44,9 +53,9 @@ The faces connect physically.
 
 A player can reach an edge of the Dice and **walk over it**. Gravity changes with the new face rather than using a portal or gateway.
 
-The transition should feel like traversing a real cube-world.
+The preferred camera direction is to smoothly blend its local-up orientation through the 90-degree face transition, maintaining stable player framing and an isometric feel rather than snapping instantly.
 
-The exact camera, physics and visual treatment of edge transitions require prototyping.
+The exact implementation requires prototyping.
 
 ## The Last Equation
 
@@ -54,14 +63,13 @@ The Last Equation is the narrative bridge between games.
 
 Open questions:
 - What exactly is an Echo?
+- Why can the Echo manifest across alternate timelines/possibilities?
 - Was The Last Equation a jailer, law of reality, defense mechanism, god-like intelligence, or something else?
 - Did defeating it free the survivor, damage the Dice, or merely open a path?
 - Did anyone on the outside know life existed inside?
 - Is the Dice artificial?
 - What is the Dice sitting in/on?
 - Are there other Dice?
-
-These should remain open until the wider cosmology earns an answer.
 
 ## Tone
 
