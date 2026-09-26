@@ -4,9 +4,9 @@
 
 Loot should be relatively meaningful rather than constantly exploding from every enemy.
 
-DiceFree will use deliberate **drop tables**.
+DiceFree uses deliberate **drop tables**.
 
-The primary route to significant equipment upgrades is **successfully finishing dungeons and raids**, supplemented by rare overworld enemy drops, quests, crafting and other systems added later.
+The primary route to significant equipment upgrades is **successfully finishing dungeons and raids**, supplemented by rare overworld enemy drops, quests, NPC crafting and other systems.
 
 ## Dungeon and raid rewards
 
@@ -14,34 +14,65 @@ When a dungeon or raid is successfully completed, **each player is sent to a pri
 
 In that room, the player is presented with a generated selection from the relevant completion drop table and may choose **one** reward.
 
+The number of offered choices is content/difficulty dependent rather than globally fixed.
+
+The selection may contain equipment intended for other classes/manifestations. Because items are account-bound, the player may choose such an item and send it to the shared bank.
+
 Important implications:
 - each player receives their own reward choice;
 - party members do not compete through Need/Greed for the main completion reward;
-- class/equipment restrictions can be considered when designing loot-table quality;
-- harder modes can have distinct or expanded reward tables;
-- wiping means never reaching the private loot room.
+- loot tables are authored per content/mode;
+- wiping means never reaching the private loot room;
+- finishing the dungeon is what produces equipment loot.
 
-Exact choice counts, table sizes and rarity weighting remain to be designed.
+## Bosses inside dungeons
+
+Dungeon/raid bosses can reward:
+- experience;
+- gold;
+- crafting materials/resources;
+- progression/quest credit.
+
+They do **not** directly award equipment before the run is complete.
+
+Equipment is awarded through successful completion/private loot-room rewards so farming an early boss and resetting cannot bypass the dungeon-clear requirement.
 
 ## Overworld drops
 
-Enemies in the overworld can drop items, but these drops should be **quite rare**.
+Enemies in the overworld can drop equipment, but these drops should be **quite rare**.
 
-Overworld enemy drops are **free-for-all** rather than privately instanced.
+Overworld equipment drops are **free-for-all** rather than privately instanced.
 
-Aggro/leash rules should prevent players from dragging ordinary enemies indefinitely across the world merely to farm or grief.
+Normal overworld monsters respawn after a timer. Named/elites use longer respawn timers.
+
+## Item generation
+
+DiceFree uses **both** randomized and handcrafted equipment.
+
+DiceBound is a major reference for:
+- stat rolls;
+- rarity rolls;
+- randomized affixes/effects;
+- unusual combinations.
+
+DiceFree should also contain more deliberately authored gear:
+- named items;
+- boss/dungeon items;
+- crafted transformation items;
+- Mythical/Artifact-like gear;
+- items with fixed identity or bespoke effects.
+
+The two approaches can coexist: some named items may have a fixed identity while still rolling within controlled ranges.
 
 ## Binding
 
 **All items are account-bound.**
 
-Items can move between the player's character manifestations through the shared account bank, subject to their normal class/type/level/stat requirements.
+Items can move between manifestations through the shared bank, subject to normal class/type/level/stat requirements.
 
 There is no current plan for unrestricted player-to-player equipment trading.
 
 ## Equipment slots
-
-Current planned equipment slots:
 
 1. Head
 2. Shoulders
@@ -55,21 +86,31 @@ Current planned equipment slots:
 10. Amulet
 11. Back
 
-The Back slot covers things such as cloaks, capes and other suitable back-mounted items.
+The Back slot covers cloaks, capes and other suitable back-mounted items.
 
-Not every slot needs to be usable by every class, and not every slot must always have a visible mesh if doing so would produce poor visual results.
+## Bank and inventory
 
-## Visible equipment
+Inventory/bank design should be generous rather than built around constant inventory friction.
 
-Equipped gear should be represented on the character wherever practical.
+Rules:
+- items may be **sent/deposited to the account bank from anywhere**;
+- items may only be **withdrawn from the bank while in a town**;
+- the bank itself should have generous capacity;
+- crafting materials/resources should generally behave more like currencies/resource counters than physical inventory-stack clutter.
 
-All modular character equipment should be designed around shared rig/attachment conventions where the involved class form allows it.
+This lets dungeon loot be preserved for another manifestation without turning every run into inventory Tetris, while towns still matter because withdrawing/organizing stored gear requires returning to civilization.
+
+## Durability
+
+**There is no equipment durability system.**
+
+No repair tax. No durability loss on death.
 
 ## Equipment requirements
 
-Equipment is **not universally usable**.
+Equipment is not universally usable.
 
-Items may have one or more requirements such as:
+Items may require:
 - class;
 - class family/type;
 - equipment proficiency;
@@ -77,9 +118,7 @@ Items may have one or more requirements such as:
 - stats;
 - other special conditions.
 
-Advancement can change what equipment a character is allowed to use.
-
-The system should support interesting restrictions without turning every item into unusable clutter.
+Advancement can change available equipment categories.
 
 ## Stats
 
@@ -89,50 +128,47 @@ Later advancement tiers generally begin from a higher level-1 base stat package.
 
 Players do not manually allocate stat points.
 
-Equipment provides additional stats and can also provide special effects.
+Equipment provides additional stats and special effects.
 
-## Technical art rule
+## NPC gear crafting
 
-Character, armor and weapon standards must be decided early so we do not later discover that hundreds of items cannot fit the supported class forms.
+Major equipment crafting is performed by **NPC crafters**, not as a player gear-crafting profession.
 
-Likely concepts:
-- shared humanoid rig conventions where practical;
-- skinned armor meshes for body equipment;
-- attachment sockets for weapons/shields/back items;
-- hide-body/hide-hair rules where necessary;
-- swappable materials and variants.
+Crafting should often transform meaningful existing items/resources into a new authored reward.
 
-The exact body/presentation strategy must account for the fact that **class form is the main character visual identity**.
+Example structure:
 
-## Rarity direction
+```
+Longsword from Dungeon 4
++ Heart of the Dragon raid boss
++ 500 rarity crystals
+= Longsword of the Dragon
+```
 
-Exact rarity names are not locked, but DiceBound's progression philosophy is useful:
-- ordinary statistical items;
-- stronger rare items;
-- build-changing legendary-style items;
-- named/mythical items with fixed identity/intrinsics;
-- extremely rare boss/dungeon artifacts.
+Exact recipes can require:
+- specific equipment;
+- boss trophies/materials;
+- rarity currencies;
+- quest items;
+- gold.
 
-## Item design
+Crafted gear should complement dungeon progression rather than obsolete it, often requiring dungeon/raid loot as ingredients.
 
-A memorable item can alter:
-- an ability;
-- a summon;
-- status application;
-- resource economy;
-- movement;
-- survivability;
-- party interaction;
-- class passive.
+## Player professions
 
-## Storage
+Player professions should focus on consumables/resources rather than primary equipment crafting.
 
-A **shared account bank** is committed.
+Possible areas:
+- potions;
+- food;
+- temporary buffs;
+- gathering/resource production;
+- support consumables.
 
-Other storage systems may include:
-- character inventory;
-- character-specific bags;
-- collection/codex;
-- heirloom-like account items.
+Exact professions remain to be designed.
 
-Exact bank size, tabs and expansion systems are not yet locked.
+## Visible equipment
+
+Equipped gear should be represented on the character wherever practical.
+
+Character/armor standards must be prototyped before mass asset production.
