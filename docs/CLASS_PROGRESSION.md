@@ -26,6 +26,10 @@ When they finally advance:
 - excess experience does **not** carry over;
 - the new class uses its own base stats and level-growth rules.
 
+Overleveling is not intended to produce special long-term power by itself. Its practical value is mostly making the current class stronger before tackling its advancement quest.
+
+There is no normal hard cap at the advancement threshold. Extreme overleveling is allowed. For example, a **level 200 Novice** should be possible and is explicitly a good kind of condition for a future secret-class unlock.
+
 All normal and secret classes use the same advancement-level cadence.
 
 ## Class stats
@@ -42,30 +46,31 @@ Stats are therefore not simply accumulated forever from every earlier class. The
 
 Players do **not** manually allocate stat points.
 
+## Opening branches
+
+The current first advancement identities are:
+
+- **Physically Blessed Novice**
+- **Magically Touched Novice**
+
+These are both evolutions of the Novice rather than fully specialized fantasy jobs.
+
+They create the broad Physical/Magic split while preserving the idea that the Echo is still only beginning to acquire a true shape.
+
+A possible next split remains:
+
+```
+Physically Blessed Novice -> physical melee / physical ranged
+Magically Touched Novice  -> magical melee / magical ranged
+```
+
+The actual second-tier class names and identities are not finalized.
+
 ## Tree shape
 
-The earlier 4 -> 8 -> 16 -> 32 -> 64 model is no longer a strict target.
+The class tree should remain as balanced/even as practical, but it is not required to be perfectly binary.
 
-The current leading idea is a broader first distinction:
-
-```
-                 Novice
-                /      \
-          Physical      Magic
-```
-
-A possible next split is:
-
-```
-Physical -> melee / ranged
-Magic    -> melee / ranged
-```
-
-This is a **working design direction**, not yet a finalized class list or naming scheme.
-
-After that, branches can become increasingly specialized.
-
-The tree should remain as balanced/even as practical, but it is not required to be perfectly binary. Some classes may:
+Some classes may:
 - have more or fewer descendants;
 - branch into secret paths;
 - retain the same identity/name family across advancements;
@@ -75,7 +80,9 @@ The tree should remain as balanced/even as practical, but it is not required to 
 
 Secret classes can branch from different points in the tree.
 
-They may require hidden achievements, encounters, items, quests, account discoveries or other unusual conditions, but once entered they still follow the same advancement level thresholds as ordinary classes.
+They may require hidden achievements, encounters, items, quests, account discoveries or unusual progression conditions such as intentionally refusing advancement and reaching an absurd level.
+
+Once entered, secret classes still follow the same advancement-level thresholds as ordinary classes.
 
 ## Advancement philosophy
 
@@ -94,7 +101,7 @@ Depending on the class, an advancement may:
 
 There is deliberately **no global rule that every ability must survive or every class must gain exactly the same number of abilities**.
 
-Advancement quests are designed on a class-by-class basis. They do not need to occur in the character's current intended-level region. A mobility/stealth class, for example, could receive an advancement trial that deliberately sends it deep into a much higher-level face because that class has the tools to attempt it.
+Advancement quests are designed on a class-by-class basis. They do not need to occur in the character's current intended-level region. A stealth class could, for example, receive a level-30 advancement trial that requires sneaking into the sixth face's capital while being far too weak to fight the enemies surrounding it.
 
 ## Resources
 
@@ -112,7 +119,7 @@ There is no universal mana requirement across the class tree.
 
 A chosen advancement branch is permanent on that character slot.
 
-The game supports multiple character slots representing alternate manifestations/timelines of the same underlying Echo. This lets the player explore different permanent lineages without making the fiction require multiple unrelated DiceBound survivors.
+The game supports multiple character slots representing alternate manifestations/timelines of the same underlying Echo.
 
 Exact character-slot count is not yet decided.
 
@@ -138,8 +145,7 @@ Avoid scattering class-specific conditionals across unrelated systems.
 
 ## Unresolved
 
-- Final names and identities for the first Physical/Magic split.
-- Whether the second split is actually melee/ranged on both sides.
+- Exact second-tier melee/ranged branch names and fantasies.
 - Exact stat list and formulas.
 - Number of character slots.
 - Whether any extremely rare system can ever undo a class choice.
