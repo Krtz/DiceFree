@@ -2,97 +2,105 @@
 
 ## Party size
 
-The initial multiplayer target is **up to 4 players**.
-
-Systems should be written so encounter scaling by party size is possible, but the exact balance formulas are deliberately left for playtesting.
+Initial multiplayer target: **1–4 players**.
 
 ## Dungeons and raids
 
-A raid is fundamentally a larger/more ambitious **handcrafted dungeon**, not a separate MMO schedule system.
+Raids are larger/more ambitious handcrafted dungeons rather than a separate MMO schedule system.
 
-Current principles:
-- most dungeons are handcrafted;
-- some dungeon types may use procedural/RNG-generated layouts or content;
-- raids are handcrafted;
-- there are **no raid lockout timers**;
-- replaying content for loot is allowed.
+- most dungeons handcrafted;
+- some procedural/RNG dungeon types;
+- raids handcrafted;
+- no raid lockouts;
+- replay freely for loot.
+
+Dungeon length is content-specific.
+
+A dungeon may be:
+- one boss and done;
+- a short gauntlet;
+- a medium multi-boss dungeon;
+- a very long raid-like experience.
+
+There is no universal runtime target.
+
+## Entering dungeons
+
+Dungeons are entered through physical/world entrances such as:
+- caves;
+- crypts;
+- towers;
+- houses;
+- ruins;
+- portals where fiction calls for one;
+- other authored entrances.
+
+Requirements are content-specific. A dungeon/mode may require a level, quest, key, achievement, item or other condition.
+
+A player may discover an entrance long before being eligible to clear it.
+
+## Participation lock
+
+Once a dungeon/raid starts, new players cannot join that run.
+
+A run can be voluntarily **abandoned**.
+
+Abandoning the run destroys the current run state and its completion reward opportunity. You cannot simply leave and re-enter the same run.
 
 ## Completion rewards
 
-Successfully completing a dungeon/raid sends each player to their own **private loot room**.
+Successful completion sends each player to a private loot room.
 
-Each player chooses one reward from a generated selection based on that dungeon/raid/mode's drop table.
+Equipment is completion-only.
 
-The main reward therefore comes from **finishing the run**, not from competing with party members for one chest drop.
+## Death
 
-A full wipe means the group never receives that completion reward.
+### Overworld
 
-## Death outside a wipe
+When a player dies in the overworld:
+- allies may resurrect them before they choose to respawn;
+- the dead player can accept respawn;
+- respawn occurs at their explicitly selected resurrection point;
+- the overworld itself does not reset.
 
-When a character dies:
-- another player can resurrect them if an available class/ability allows it;
-- some classes may have self-revive mechanics;
-- otherwise the character respawns at an appropriate camp/resurrection point.
+### Dungeons/raids
 
-Death carries a modest penalty:
-- lose some gold;
-- lose a **small** amount of experience.
-
-Exact percentages and whether experience loss can reduce a level remain to be balanced later.
+The default baseline is **full run reset on party wipe**.
 
 ## Resurrection
 
-Healer-type classes may be able to resurrect repeatedly rather than having a universal hard encounter limit.
+Healer-type resurrection can be repeated:
+- long cast;
+- high resource cost;
+- stacking Resurrection Sickness.
 
-Repeated resurrection is controlled through cost and risk:
-- resurrection has a **long cast time**;
-- resurrection has a **high mana/resource cost**;
-- revived characters gain a **stacking Resurrection Sickness** debuff.
+## Resurrection points
 
-The exact sickness penalties, duration and whether stacks can expire during combat remain to be designed.
+Resurrection points are set **explicitly** by interacting with a designated world object/location.
 
-Some classes may have self-revive mechanics.
+The object does not need to be a literal building. Depending on lore/region it could be:
+- a shrine;
+- fountain;
+- stone;
+- beacon;
+- statue;
+- altar;
+- other appropriate landmark.
 
-## Dungeon wipes
+Merely walking past a camp does not silently replace the player's chosen resurrection point.
 
-The default rule for **all dungeons and raids** is a **full reset on party wipe**.
+## Death losses
 
-That means:
-- restart the run from the beginning;
-- no completion loot from the failed run;
-- previously defeated encounters do not stay cleared.
+Carried gold/currencies may lose a percentage on death.
 
-Exceptional content may deliberately use different rules later, but full reset is the baseline.
+Banked currency is safe.
 
-Procedural dungeon seeds may be regenerated or preserved on wipe depending on the eventual dungeon design; this remains an implementation/content decision.
+Materials/currencies can have individual safety/loss rules once designed.
 
-## Scaling
+## Party scaling
 
-Encounter systems should be built so party-size scaling is possible.
-
-The exact scaling model will be determined through balancing and playtesting rather than locked before the combat game exists.
-
-Potential scaling dimensions include:
-- enemy health;
-- damage;
-- number of enemies;
-- mechanic target counts;
-- mechanic timing;
-- role requirements.
-
-Scaling should not become a purely mathematical HP sponge multiplier.
+Systems should support scaling, but exact formulas come from playtesting.
 
 ## Difficulty modes
 
-Dungeons and raids can have multiple modes.
-
-Harder modes should increase more than raw stats. They can add:
-- new boss mechanics;
-- altered phases;
-- tighter timing;
-- additional enemy behaviours;
-- changed arena hazards;
-- stronger stat tuning;
-- mode-specific loot tables/rewards.
-
-Exact mode names and progression are not yet locked.
+Harder modes add mechanics as well as stats and can use unique loot-table rules.
