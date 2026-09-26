@@ -16,7 +16,7 @@ Current working assumptions:
 
 ## Control schemes
 
-DiceFree should support both of these from the beginning:
+DiceFree supports both Classic click-to-move and Direct WASD movement.
 
 ### Classic / mouse movement
 
@@ -34,11 +34,9 @@ This is the **design and balance baseline** for movement speed, encounter spacin
 
 Players may instead control movement directly with WASD.
 
-WASD is a supported first-class option, not an accessibility afterthought, but it should not become the reference point that causes encounter design to assume action-game movement precision unavailable to click-to-move players.
+WASD is a supported first-class option, but it should not become the reference point that causes encounter design to assume action-game movement precision unavailable to click-to-move players.
 
 ### Shared movement architecture
-
-The two input styles should feed the same underlying character movement/combat systems rather than become separate implementations.
 
 ```
 Classic click-to-move ─┐
@@ -46,7 +44,7 @@ Classic click-to-move ─┐
 Direct WASD movement ──┘
 ```
 
-Stuns, roots, slows, speed modifiers, combat restrictions, animation and networking should therefore operate consistently regardless of control style.
+Stuns, roots, slows, speed modifiers, combat restrictions, animation and networking should operate consistently regardless of control style.
 
 A future Hybrid option that accepts both click-to-move and WASD simultaneously may be useful, but it is **not yet a committed requirement**.
 
@@ -60,7 +58,17 @@ Mobility is part of class identity:
 - classes may have different base movement speeds;
 - stronger mobility should come with appropriate tradeoffs elsewhere in the kit.
 
-This preserves the Warcraft/ORPG-style importance of ordinary positioning instead of making every encounter assume universal invulnerability frames.
+## Enemy aggro and leashing
+
+Overworld enemies have:
+- an aggro/acquisition range;
+- a maximum pursuit/leash distance or equivalent return-home rule.
+
+Enemies can follow a player across a cube edge **if the player remains within their valid pursuit rules**.
+
+Once the enemy has chased too far from its home/encounter area, it gives up and returns/reset to its home state.
+
+The goal is to let the cube-world behave physically without producing absurd cases where a starter-zone slime follows somebody across three faces into endgame territory.
 
 ## Ability loadouts
 
@@ -76,11 +84,17 @@ A class may lean toward:
 
 Advancement may add, evolve or replace abilities depending on that class.
 
-The goal is strong class identity, not UI symmetry.
+## Resources
+
+Different classes can use different resources.
+
+Later advancements may retain, modify or completely replace the previous resource system.
+
+There is no universal resource that every class is required to use.
 
 ## Party design
 
-The game should support solo play and eventual co-op.
+The initial multiplayer target is **up to 4 players**.
 
 Classes may naturally lean toward:
 - durability/tanking;
@@ -91,7 +105,7 @@ Classes may naturally lean toward:
 - control;
 - hybrid roles.
 
-However, ordinary progression should not require a fixed MMO trinity composition.
+Ordinary progression should not require a fixed MMO trinity composition.
 
 ## Abilities
 
@@ -106,9 +120,19 @@ Abilities should be modular enough to support:
 - crowd control;
 - resource generation/spending;
 - conditional effects;
-- item-modified variants.
+- item-modified variants;
+- resurrection.
 
-Ability behaviour should not depend on whether the player uses Classic or Direct movement. Targeted, ground-targeted, directional and self-cast abilities should resolve through shared targeting/ability systems.
+Ability behaviour should not depend on whether the player uses Classic or Direct movement.
+
+## Resurrection
+
+Healer-type resurrection can be repeatable, but intentionally expensive/risky:
+- long cast time;
+- high mana/resource cost;
+- stacking Resurrection Sickness applied to the revived player.
+
+This creates room for recovery without making repeated deaths free.
 
 ## Bosses
 
