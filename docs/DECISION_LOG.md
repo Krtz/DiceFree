@@ -127,3 +127,88 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-26 — Questing
 
 **Decision:** DiceFree includes regular quests and dedicated advancement quests.
+
+
+## 2026-09-26 — Advancement stat model
+
+**Decision:** Each class/advancement has its own level-1 base stats and its own stat growth. Later advancement tiers generally start from higher base stats.
+
+**Decision:** When a class advances, the new class begins at level 1 using that class's own stat package. Stats are not simply accumulated forever from prior classes.
+
+**Decision:** A character may continue leveling past the advancement threshold, but excess experience does **not** carry into the new class after advancement.
+
+## 2026-09-26 — Class resources
+
+**Decision:** Different classes can use different resources.
+
+**Decision:** Later advancements may keep, modify or completely replace the previous class resource.
+
+## 2026-09-26 — Equipment slots and binding
+
+**Decision:** Planned equipment slots are Head, Shoulders, Chest, Hands, Legs, Feet, Main Hand, Off Hand, Ring, Amulet and Back.
+
+**Decision:** All items are account-bound.
+
+## 2026-09-26 — Dungeon reward rooms
+
+**Decision:** On successful dungeon/raid completion, each player is sent to a private loot room and chooses one reward from a generated selection tied to that content's drop table.
+
+**Decision:** Overworld enemy drops are free-for-all and comparatively rare.
+
+## 2026-09-26 — Multiplayer and scaling
+
+**Decision:** Initial multiplayer target is up to 4 players.
+
+**Decision:** Systems should support party-size encounter scaling, but exact scaling formulas are deferred to playtesting/balance work.
+
+## 2026-09-26 — Wipe reset baseline
+
+**Decision:** The default rule for dungeons and raids is a full reset on party wipe.
+
+**Decision:** Exceptional content may deliberately use different reset rules later.
+
+## 2026-09-26 — Resurrection
+
+**Decision:** Healer-type classes may resurrect repeatedly.
+
+**Decision:** Resurrection is balanced through a long cast, high mana/resource cost and a stacking Resurrection Sickness debuff on revived characters.
+
+## 2026-09-26 — Quest structure
+
+**Decision:** Main quests are relatively lightweight and primarily guide players through the world.
+
+**Decision:** Side quests support leveling, gear, resources and worldbuilding.
+
+**Decision:** Advancement quests are designed class-by-class and may deliberately send a class into much higher-level regions if that class has tools to survive the task.
+
+## 2026-09-26 — Town services
+
+**Decision:** Towns may provide vendors, crafting, resurrection points, healers, NPC/quest services, class advancement and shared bank access.
+
+## 2026-09-26 — Enemy aggro and leashing
+
+**Decision:** Overworld enemies use aggro ranges and pursuit/leash limits.
+
+**Decision:** Enemies may follow across cube edges while inside their pursuit rules, but eventually give up and return home rather than chase indefinitely across the world.
+
+## 2026-09-26 — Fixed zone difficulty
+
+**Decision:** Enemy difficulty/levels are fixed by zone. Enemies do not scale to the player.
+
+**Decision:** Players may enter higher-level regions early and face enemies far beyond their current power.
+
+## 2026-09-26 — Raids
+
+**Decision:** Raids are essentially larger/more ambitious handcrafted dungeons.
+
+**Decision:** There are no raid lockout timers.
+
+## 2026-09-26 — Echo manifestations and persistence
+
+**Decision:** All character slots are alternate manifestations/timelines of the same underlying Echo.
+
+**Decision:** Some quests/events are account-level and persist across manifestations; others are intentionally replayed on each character slot.
+
+## 2026-09-26 — Edge-transition camera direction
+
+**Working decision:** The camera should ultimately align to the local gravity of the current face and smoothly blend through the 90-degree orientation change when crossing an edge. It should preserve stable player framing/isometric readability and avoid gratuitous spinning. This must be validated by prototype before being treated as final.
