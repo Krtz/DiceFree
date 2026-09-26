@@ -35,3 +35,13 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-25 — Engine direction
 
 **Decision:** Unity is the preferred engine direction, but the exact Unity version will be chosen when implementation actually begins.
+
+## 2026-09-26 — Player movement control styles
+
+**Decision:** DiceFree will support both **mouse-driven click-to-move** and **WASD/direct movement**.
+
+**Primary balance target:** Classic mouse movement is the default/reference control scheme. Movement speed, encounter spacing, telegraphs, kiting, attack ranges and other movement-sensitive mechanics should be designed and tested primarily around click-to-move so direct movement does not become implicitly required.
+
+**Architecture rule:** Both control styles should feed shared movement/combat systems rather than become separate character-controller implementations.
+
+**Open:** A simultaneous Hybrid mode may be added later, but is not yet required.
