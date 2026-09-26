@@ -8,13 +8,11 @@ All character slots represent the **same underlying Echo** manifested through di
 
 They are not canonically unrelated survivors.
 
-This supports permanent class choices while preserving one protagonist identity.
-
-Each manifestation can follow a different class lineage and repeat character-specific content.
+Each manifestation can follow a different permanent class lineage and replay manifestation-specific content.
 
 ## Character-specific progression
 
-Confirmed character-slot-specific elements include:
+Confirmed manifestation-specific elements include:
 - current class and permanent advancement lineage;
 - current class level;
 - equipped gear;
@@ -24,11 +22,13 @@ Confirmed character-slot-specific elements include:
 
 ## Account-level progression
 
-Some quests/events/discoveries can persist for the Echo account and therefore affect every manifestation.
+World discoveries, systemic unlocks and other persistent accomplishments are good default candidates for Echo-wide progression.
 
-Other quests are intentionally replayed on each character slot.
+Story execution, class progression and many ordinary quests are good default candidates for manifestation-specific progression.
 
-The exact split should be decided system-by-system based on whether replaying the content is meaningful.
+These are guidelines rather than absolute laws: persistence is decided case-by-case.
+
+Eligible characters receive quest credit in multiplayer; ineligible manifestations do not.
 
 ## Character slots
 
@@ -38,40 +38,30 @@ The exact number of slots and whether more can be earned/unlocked is not yet dec
 
 ## Shared bank
 
-The bank is **account-wide/shared between manifestations**.
+The bank is account-wide/shared between manifestations.
 
-All equipment/items are currently planned to be **account-bound**, allowing them to move through the shared bank between eligible manifestations.
+All equipment/items are account-bound.
 
-Normal item requirements still apply when another manifestation tries to equip the item.
+Bank behaviour:
+- deposit/send to bank from anywhere;
+- withdraw only while in a town;
+- generous storage capacity;
+- materials generally live as account/resource currencies rather than physical item stacks when sensible.
 
 ## Other possible account progression
 
-Still undecided:
-- secret class discoveries;
+Still to decide:
+- exact secret-class unlock sharing rules;
 - achievements;
-- codex entries;
+- codex;
 - pets;
 - cosmetics;
-- crafting knowledge;
-- major world discoveries;
+- profession/crafting knowledge;
 - difficulty unlocks;
-- legacy-style bonuses/unlocks.
+- legacy-style bonuses.
 
 ## Philosophy
 
-Creating another manifestation should still feel like beginning a new class journey, but the account should remember meaningful discoveries and remove pointless friction.
+Creating another manifestation should still feel like beginning a new class journey, but the account should remember meaningful discoveries and remove pointless repetition.
 
-The same-Echo/multiple-timelines fiction should be used where helpful to make account-wide systems feel natural rather than arbitrary.
-
-## Hidden unlocks
-
-DiceBound-style unlock logic is explicitly welcome.
-
-Examples:
-- defeat a boss under a strange condition;
-- complete an achievement with a specific class lineage;
-- discover a hidden NPC after another manifestation finishes a quest;
-- use an unusual item in the correct location;
-- survive or deal a threshold of a special mechanic.
-
-Exact unlocks should be designed deliberately rather than become arbitrary wiki-checklist chores.
+The same-Echo/multiple-timelines fiction should make account-wide systems feel natural rather than arbitrary.
