@@ -2,7 +2,11 @@
 
 ## Core concept
 
+Every player character is an **Echo**, continuing the same metaphysical identity established in DiceBound.
+
 Every new character begins as a **Novice**.
+
+Novice should be understood as an Echo whose current manifestation is comparatively uncommitted rather than as a person with no metaphysical class identity at all.
 
 Around level 10, the Novice makes a first major advancement into a small set of base classes. The current working model is four.
 
@@ -25,6 +29,24 @@ future tiers if the game ever deserves them
 ```
 
 This is a long-term architecture target, not a promise to implement 124+ advanced classes before release.
+
+## Narrative ontology — Ways
+
+DiceFree class progression uses the same **Ways** principle as DiceBound.
+
+A Way is a stable pattern of possibility that an Echo can embody.
+
+The shared narrative rule is:
+
+> **An Echo becomes what reality has enough evidence to recognize.**
+
+DiceBound class unlocks usually prove a Way through repeated behavior or strange run conditions.
+
+DiceFree advancement proves a more persistent and specialized Way through character growth, quests, trials, discoveries, bosses, locations, items and secret conditions.
+
+A class branch should therefore make narrative sense as a lineage of increasingly specific identities. The advancement requirement should ideally demonstrate the thing the new Way claims the Echo has become.
+
+Secret classes are especially valuable when their requirements reveal something about the Echo, the world or the hidden logic of the Way rather than behaving like arbitrary checklist puzzles.
 
 ## Advancement philosophy
 

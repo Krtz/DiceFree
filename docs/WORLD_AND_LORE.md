@@ -4,9 +4,13 @@
 
 DiceBound is the inside of the Dice.
 
+The protagonist is already an **Echo during DiceBound**. Escaping does not transform them into an Echo; it moves an Echo that survived the Road beyond the system that previously contained and repeatedly reconstructed them.
+
 At the end of DiceBound, the player defeats **The Last Equation** and breaches the boundary of the world they believed was everything.
 
 DiceFree begins on the **outside of the Dice**.
+
+The outside world may possess language, scholarship or institutions that can finally name what the protagonist already was: an Echo.
 
 The exact cosmology is intentionally not fully defined yet. The central image is a massive cube-world or planet-like object whose exterior has six habitable faces.
 
@@ -25,6 +29,24 @@ Each face should eventually have:
 - dungeons;
 - world bosses or major encounters;
 - secrets that deepen the Dice mystery.
+
+## Echoes and Ways
+
+An **Echo** is a person whose identity can persist despite reality being rewritten, routes collapsing or one manifestation ending.
+
+DiceBound already demonstrates this through death/reset continuity, Legacy, Prestige, the Camp's memory and the player's ability to accumulate permanent possibilities across routes.
+
+Classes in both games are **Ways**: stable patterns of possibility an Echo can embody.
+
+The shared rule is:
+
+> **An Echo becomes what reality has enough evidence to recognize.**
+
+In DiceBound, unlock conditions prove that a Way has become a permanent possible alignment for the Echo.
+
+In DiceFree, class advancement is a deeper and more persistent manifestation of the same phenomenon. Levels, quests, trials, bosses, discoveries and secret conditions provide evidence for increasingly specific descendant Ways.
+
+This means DiceFree's class tree is not a new metaphysical class system layered onto the survivor. It is the outside-world continuation of something the player has already experienced inside the Dice.
 
 ## The Last Equation
 
