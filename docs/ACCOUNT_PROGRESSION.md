@@ -4,17 +4,39 @@ DiceFree should distinguish **character progression** from **account progression
 
 ## Character progression
 
-Possible character-specific systems:
-- level;
-- current class and advancement lineage;
+Confirmed character-specific elements include:
+- current class and permanent advancement lineage;
+- current class level;
 - equipped gear;
-- abilities;
+- class abilities;
+- automatic class-based stat growth.
+
+Likely character-specific elements:
 - personal quest state;
 - character-specific dungeon progress.
 
-## Account progression
+## Character slots
 
-Possible account-wide systems:
+Players will have multiple character slots so they can explore permanent alternate class branches.
+
+The exact number of slots and whether more can be earned/unlocked is not yet decided.
+
+## Shared bank
+
+The bank is **account-wide/shared between characters**.
+
+This is intended to make alternate characters and permanent branches practical without requiring awkward external item transfer.
+
+Exact bank rules remain to be designed:
+- size/tabs;
+- currencies;
+- bind rules;
+- whether every item can be banked;
+- expansion methods.
+
+## Other possible account progression
+
+Still undecided:
 - discovered secret classes;
 - achievements;
 - codex entries;
@@ -22,14 +44,14 @@ Possible account-wide systems:
 - cosmetics;
 - crafting knowledge;
 - major world discoveries;
-- shared stash/heirloom systems;
-- legacy-style bonuses or unlocks.
+- difficulty unlocks;
+- legacy-style bonuses/unlocks.
 
 ## Philosophy
 
-Creating another character should still feel like beginning as a Novice, but the player's account should remember that they have already done remarkable things.
+Creating another character should still feel like beginning as a Novice, but the account may remember meaningful discoveries and reduce pointless repetition.
 
-Account progression should encourage experimentation with alternate branches of the class tree rather than make every alt repeat identical chores.
+How generous this persistence becomes is intentionally unresolved.
 
 ## Hidden unlocks
 
