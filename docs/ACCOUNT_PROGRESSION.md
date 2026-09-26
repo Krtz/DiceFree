@@ -1,67 +1,79 @@
 # Account Progression
 
-DiceFree distinguishes **character-manifestation progression** from **account/Echo progression**.
+DiceFree distinguishes **manifestation-specific progression** from **Echo/account progression**.
 
-## The Echo and character slots
+## Character manifestations
 
-All character slots represent the **same underlying Echo** manifested through different timelines/possibilities.
+All character slots are alternate manifestations/timelines of the same underlying Echo.
 
-They are not canonically unrelated survivors.
-
-Each manifestation can follow a different permanent class lineage and replay manifestation-specific content.
-
-## Character-specific progression
-
-Confirmed manifestation-specific elements include:
-- current class and permanent advancement lineage;
+Manifestation-specific systems include:
+- class lineage;
 - current class level;
 - equipped gear;
 - class abilities/resources;
-- class base stats and growth;
+- carried currency;
 - at least some quests/events.
 
-## Account-level progression
+## Echo-wide systems
 
-World discoveries, systemic unlocks and other persistent accomplishments are good default candidates for Echo-wide progression.
+Good default candidates:
+- shared bank;
+- banked currency;
+- profession knowledge/progression;
+- discovered recipes where marked Echo-wide;
+- world/systemic discoveries;
+- selected quests/events;
+- account-bound items.
 
-Story execution, class progression and many ordinary quests are good default candidates for manifestation-specific progression.
+Persistence is still decided case by case.
 
-These are guidelines rather than absolute laws: persistence is decided case-by-case.
+## Currency split
 
-Eligible characters receive quest credit in multiplayer; ineligible manifestations do not.
+Gold and similar currencies can exist in two places:
 
-## Character slots
+### Carried by manifestation
 
-Players have multiple character slots so they can explore permanent alternate class branches.
+- character-specific;
+- available for immediate spending/use;
+- a percentage may be lost on death.
 
-The exact number of slots and whether more can be earned/unlocked is not yet decided.
+### Stored in bank/account
+
+- Echo-wide;
+- safe from ordinary death penalties.
+
+Future currencies/materials may use the same carried-versus-stored model where appropriate.
+
+Some materials/currencies may be completely safe, while others may be partially lost on death. That is decided when those resources are designed.
+
+## Professions
+
+Profession progression/knowledge is **Echo-wide**.
+
+Professions are secondary supporting systems, so replaying profession leveling separately on every manifestation is not intended.
 
 ## Shared bank
 
-The bank is account-wide/shared between manifestations.
+- account-wide;
+- all items account-bound;
+- deposit from anywhere;
+- withdraw only in town;
+- generous capacity.
 
-All equipment/items are account-bound.
+## Quest persistence
 
-Bank behaviour:
-- deposit/send to bank from anywhere;
-- withdraw only while in a town;
-- generous storage capacity;
-- materials generally live as account/resource currencies rather than physical item stacks when sensible.
+World/systemic discoveries are good account-wide candidates.
 
-## Other possible account progression
+Story execution, class progression and ordinary quests are good manifestation-specific candidates.
 
-Still to decide:
-- exact secret-class unlock sharing rules;
+Multiplayer quest credit still requires eligibility.
+
+## Still open
+
+- secret-class unlock sharing;
 - achievements;
 - codex;
 - pets;
 - cosmetics;
-- profession/crafting knowledge;
 - difficulty unlocks;
-- legacy-style bonuses.
-
-## Philosophy
-
-Creating another manifestation should still feel like beginning a new class journey, but the account should remember meaningful discoveries and remove pointless repetition.
-
-The same-Echo/multiple-timelines fiction should make account-wide systems feel natural rather than arbitrary.
+- exact character-slot count.
