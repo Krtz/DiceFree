@@ -9,7 +9,7 @@ Current working assumptions:
 - **mouse-driven click-to-move is the primary/default control style and primary balance target**;
 - WASD/direct movement is also supported as an alternative control style;
 - mouse aiming/targeting/context interaction;
-- compact but meaningful active ability bar;
+- a compact but class-dependent active toolkit;
 - readable enemy attacks and boss mechanics;
 - distinct class resources;
 - strong hit feedback without unreadable visual noise.
@@ -40,8 +40,6 @@ WASD is a supported first-class option, not an accessibility afterthought, but i
 
 The two input styles should feed the same underlying character movement/combat systems rather than become separate implementations.
 
-Conceptually:
-
 ```
 Classic click-to-move ─┐
                        ├─> movement intent -> character motor -> gameplay
@@ -52,9 +50,37 @@ Stuns, roots, slows, speed modifiers, combat restrictions, animation and network
 
 A future Hybrid option that accepts both click-to-move and WASD simultaneously may be useful, but it is **not yet a committed requirement**.
 
+## Movement and mobility
+
+There is **no universal dodge/roll**.
+
+Mobility is part of class identity:
+- some classes may have dashes, teleports, rolls or other evasive tools;
+- some may have none;
+- classes may have different base movement speeds;
+- stronger mobility should come with appropriate tradeoffs elsewhere in the kit.
+
+This preserves the Warcraft/ORPG-style importance of ordinary positioning instead of making every encounter assume universal invulnerability frames.
+
+## Ability loadouts
+
+DiceFree should keep the number of buttons relatively small, but there is **no requirement that every class has the same number of active abilities**.
+
+A class may lean toward:
+- more active abilities;
+- more passive abilities;
+- transformations;
+- summons;
+- stance/resource mechanics;
+- a very compact core kit.
+
+Advancement may add, evolve or replace abilities depending on that class.
+
+The goal is strong class identity, not UI symmetry.
+
 ## Party design
 
-The game should support solo play and eventually 1–4 player co-op.
+The game should support solo play and eventual co-op.
 
 Classes may naturally lean toward:
 - durability/tanking;
@@ -88,12 +114,13 @@ Ability behaviour should not depend on whether the player uses Classic or Direct
 
 Boss encounters should contain recognizable mechanics rather than only inflated health.
 
-Difficulty increases can add:
+Harder dungeon/raid modes should be able to add:
 - new attacks/mechanics;
 - tighter timings;
 - modified arena hazards;
 - stronger enemy combinations;
-- new loot tables.
+- increased stats;
+- altered/new loot tables.
 
 Movement-sensitive mechanics must be tested primarily with Classic click-to-move so WASD does not quietly become required for reliable execution.
 
@@ -101,7 +128,8 @@ Movement-sensitive mechanics must be tested primarily with Classic click-to-move
 
 - Exact click/attack/context command conventions.
 - Whether Hybrid mode should ship.
-- Number of active abilities.
-- Dodge as universal action versus class-dependent movement.
+- Exact targeting behaviour.
+- Potion/item hotkeys.
+- Controller support expectations.
 - Threat/taunt system depth.
 - Whether basic attack is universal or class-specific.
