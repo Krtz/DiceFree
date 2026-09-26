@@ -4,24 +4,43 @@
 
 Every character begins as a **Novice**.
 
-Class advancement is permanent for that character and is intended to create a lineage rather than a reversible loadout choice. Players will have multiple character slots, while some account systems such as the bank are shared.
+Class advancement is permanent for that character and is intended to create a lineage rather than a reversible loadout choice. Players have multiple character slots representing alternate manifestations/timelines of the same Echo, while some account systems such as the bank are shared.
 
 ## Advancement cadence
 
 Current advancement targets:
 
 ```
-Novice        -> reach level 10  -> advance -> level resets
-Tier I        -> reach level 30  -> advance -> level resets
-Tier II       -> reach level 60  -> advance -> level resets
-Tier III      -> reach level 120 -> advance -> level resets
-Tier IV       -> reach level 200 -> advance -> level resets
+Novice        -> reach level 10  -> advance -> new class starts at level 1
+Tier I        -> reach level 30  -> advance -> new class starts at level 1
+Tier II       -> reach level 60  -> advance -> new class starts at level 1
+Tier III      -> reach level 120 -> advance -> new class starts at level 1
+Tier IV       -> reach level 200 -> advance -> new class starts at level 1
 Tier V
 ```
 
-The current-class level resets when an advancement is completed. The exact handling of persistent stats/experience totals around that reset still needs implementation design.
+A character may continue gaining levels after reaching the level required for their next advancement if they delay the advancement quest.
+
+When they finally advance:
+- the new class starts at level 1;
+- excess experience does **not** carry over;
+- the new class uses its own base stats and level-growth rules.
 
 All normal and secret classes use the same advancement-level cadence.
+
+## Class stats
+
+Each class/advancement has its own:
+- level-1 base stats;
+- per-level stat growth;
+- movement speed where relevant;
+- resources/mechanics.
+
+Later classes generally begin with a higher level-1 stat baseline appropriate to their tier.
+
+Stats are therefore not simply accumulated forever from every earlier class. The new class defines the character's new base package, while equipment adds on top of it.
+
+Players do **not** manually allocate stat points.
 
 ## Tree shape
 
@@ -67,34 +86,33 @@ Depending on the class, an advancement may:
 - evolve existing abilities;
 - replace old abilities;
 - add or replace passives;
-- change resource mechanics;
-- alter stat growth;
+- replace the class resource entirely;
+- change stat baselines and growth;
 - unlock/restrict equipment categories;
 - change the character model, silhouette or VFX;
 - preserve the class identity while advancing it.
 
 There is deliberately **no global rule that every ability must survive or every class must gain exactly the same number of abilities**.
 
-Advancement should usually involve gameplay: a quest, trial, boss, discovery or condition rather than simply clicking a menu button.
+Advancement quests are designed on a class-by-class basis. They do not need to occur in the character's current intended-level region. A mobility/stealth class, for example, could receive an advancement trial that deliberately sends it deep into a much higher-level face because that class has the tools to attempt it.
 
-## Stats on level-up
+## Resources
 
-Classes have different automatic stat gains when they level.
+Different classes can use different combat resources.
 
-Players do **not** manually allocate stat points.
+An advancement may:
+- keep the previous resource;
+- modify it;
+- replace it entirely;
+- introduce a new secondary resource.
 
-Equipment also contributes stats.
+There is no universal mana requirement across the class tree.
 
-The detailed stat list and per-class growth model remain to be designed.
+## Permanence and alternate manifestations
 
-## Permanence and alts
+A chosen advancement branch is permanent on that character slot.
 
-A chosen advancement branch is permanent on that character.
-
-The game should therefore support:
-- multiple character slots;
-- meaningful replay through alternate lineages;
-- a shared bank to reduce pointless item shuffling between characters.
+The game supports multiple character slots representing alternate manifestations/timelines of the same underlying Echo. This lets the player explore different permanent lineages without making the fiction require multiple unrelated DiceBound survivors.
 
 Exact character-slot count is not yet decided.
 
@@ -104,8 +122,10 @@ Class definitions should be data-driven and refer to:
 - ID and display name;
 - parent class/path;
 - advancement requirements;
+- level-1 base stats;
 - automatic stat growth;
-- resource type;
+- movement speed;
+- resource type/mechanics;
 - passive(s);
 - active abilities;
 - ability evolution/replacement rules;
@@ -120,6 +140,6 @@ Avoid scattering class-specific conditionals across unrelated systems.
 
 - Final names and identities for the first Physical/Magic split.
 - Whether the second split is actually melee/ranged on both sides.
-- Exact persistent-stat behaviour when class level resets.
+- Exact stat list and formulas.
 - Number of character slots.
 - Whether any extremely rare system can ever undo a class choice.
