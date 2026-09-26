@@ -2,102 +2,147 @@
 
 DiceFree is planned around **six major overworld regions**, corresponding to the six outer faces of the Dice.
 
-## Region rule
+## Dice-face identity
 
-Each face should be inspired by the identity of its matching DiceBound board, but translated into a full 3D RPG region with its own culture, ecology, dungeons and progression.
+The six faces are ordered like the faces of a **d6**.
 
-There are six primary overworld zones in total, but each face can contain many towns, dungeons, raids, caves, interiors and other sub-areas.
+The **one-dot face** is the starting region, the **two-dot face** is the next intended region, continuing through the six-dot face.
+
+Each overworld should contain large, visually distinct landmarks arranged so the region/map/minimap can evoke that face's pip arrangement.
+
+The goal is that zooming out or looking at the regional map makes the world itself read like a die face rather than merely naming the regions "one through six."
 
 ## Progression and route choice
 
 The six faces have an intended progression order expressed through:
 - fixed regional enemy levels/difficulty;
-- the lightweight main quest;
+- lightweight main-story guidance;
 - class-specific advancement quests;
 - encounter difficulty;
 - loot progression.
 
-Players can choose alternate routes and physically travel elsewhere earlier if they want.
+Players may travel into later regions early.
 
-**Enemies do not scale to the player.** Zones have fixed intended difficulty. A low-level character can enter a much later face and encounter enemies far beyond their ability to fight.
+**Enemies do not scale to the player.**
 
-This is intentional.
+Higher-level and endgame pockets can exist inside earlier regions. Returning to the one-dot starting face at endgame should still reveal dangerous hidden content.
+
+Example tone: a perpetually burning house in the starting town might eventually reveal a secret dungeon containing something like the Pale Devil.
 
 ## Quest structure
 
-The main quest is relatively lightweight and primarily exists to:
-- provide context;
-- point players toward the intended next areas;
-- introduce important towns/dungeons;
-- move the broader Dice story forward.
+The main quest is lightweight and primarily points the player through the world.
 
-Side quests provide:
-- leveling help;
-- equipment;
-- resources;
-- worldbuilding;
-- optional discoveries.
+Side quests provide leveling, gear, resources, worldbuilding and discoveries.
 
-Advancement quests are class-specific and can intentionally break regional order. A stealth-oriented class could, for example, be sent to infiltrate a high-level capital long before it could fight the surrounding enemies directly.
+Advancement quests are class-specific and can deliberately violate the normal region order.
 
-## Towns and settlements
+## Towns and camps
 
-Towns can provide:
+### Towns
+
+Towns provide the broad service set:
 - vendors;
-- crafting;
-- resurrection points;
+- NPC gear crafters;
+- profession/resource services;
+- bank withdrawal/access;
 - healers;
-- quest/NPC services;
+- resurrection-point setting;
+- quest NPCs;
 - class advancement;
-- shared bank access.
+- other major services.
 
-Exact town count per face is not fixed.
+### Camps
+
+Camps provide only a subset of town services.
+
+They can act as:
+- resurrection points;
+- local rest/healing points;
+- limited vendors/services;
+- travel points where appropriate.
+
+A camp is not a replacement for a proper town.
+
+## Fast travel
+
+Fast travel is **travel-point to travel-point** rather than teleport-from-anywhere.
+
+Most travel points connect into useful networks, but not every point connects directly to every other point.
+
+Some missing/limited connections should have in-world/lore explanations rather than feeling arbitrary.
 
 ## Traversal between faces
 
-Faces are physically connected.
+The intended fantasy remains that faces physically meet at cube edges and gravity/orientation changes when crossing.
 
-At an edge, the player can walk over onto the neighboring face and gravity rotates/changes to match the new surface.
+However, **continuous everywhere-accessible edge traversal is not yet a hard technical commitment**.
 
-There is no normal gateway/portal between adjacent faces.
+World geometry may deliberately restrict crossings using:
+- mountains;
+- forests;
+- cliffs;
+- walls;
+- dangerous terrain;
+- roads/passes;
+- settlements/bridges.
 
-### Camera direction
+This creates authored crossing routes and reduces technical/pathfinding/camera chaos.
 
-Current preferred camera behaviour for edge traversal:
+We should prototype both:
+1. a genuinely continuous edge crossing;
+2. a more segmented/streamed world where crossing routes transition between face spaces while visually preserving the cube-world illusion.
 
-- the camera is ultimately aligned to the **local gravity/up direction** of the face the player is standing on;
-- crossing an edge blends smoothly between the old and new face orientation;
-- the camera should travel through a controlled quarter-turn rather than snap 90 degrees;
-- player framing, distance and isometric viewing angle should remain as stable as possible during the blend;
-- the transition should visibly communicate that the player has walked around a cube edge without gratuitous spinning/rolling.
+The final implementation should prioritize game feel, stability and production feasibility over proving that every centimeter of every cube edge is physically traversable.
 
-This must be prototyped early. Comfort and readability take priority over preserving a mathematically literal camera orientation.
+## Camera direction
+
+If continuous edge traversal is used, the preferred camera behaviour is:
+- align ultimately to the new face's local gravity/up;
+- smoothly blend through the 90-degree change;
+- preserve player framing/isometric angle;
+- avoid gratuitous rolling/spinning.
+
+## Projectiles and surface effects
+
+Preferred fantasy, subject to technical validation:
+- projectiles/gravity-sensitive effects should behave coherently as local gravity/orientation changes;
+- effects that are intended to follow terrain should conform to the local surface;
+- behavior at face boundaries must be prototyped rather than hard-coded from assumptions.
+
+If fully continuous curved projectile behaviour becomes technically expensive or unreadable, authored crossing zones/segmented faces are an acceptable solution.
 
 ## Enemy traversal
 
-Enemies can physically follow players across edges when their aggro/leash rules permit it.
+Enemies may follow across face transitions only while within normal aggro/leash rules.
 
-They should not pursue indefinitely. Once outside their allowed pursuit range, they return to their home/encounter area.
+They never chase indefinitely across the world.
 
-## Working structure for each region
+## Respawning
 
-Potential content per face:
-- one or more towns/hubs;
-- overworld questing;
-- class-specific advancement content;
-- enemy families;
-- handcrafted dungeons;
-- occasional procedural/randomized dungeons;
-- handcrafted raids;
-- named elites and secret bosses;
-- region-specific item sets and artifacts;
-- secrets that deepen the Dice mystery.
+Normal monsters respawn after a content-defined timer.
+
+Named enemies/elites use longer timers.
+
+Exact timers are encounter/content-specific.
+
+## Hidden high-level content
+
+Endgame and secret content should be distributed throughout all six faces rather than concentrated only in the final region.
+
+Earlier zones can hide:
+- endgame dungeons;
+- secret bosses;
+- unusual advancement quests;
+- late-game crafting requirements;
+- account-wide secrets;
+- dangerous subzones.
 
 ## To define
 
-1. Map each DiceBound board to an outer-face theme.
-2. Decide the first face players emerge onto after The Last Equation.
-3. Define intended level/progression bands for all six faces.
-4. Decide whether edges/corners contain special content beyond traversal.
-5. Prototype gravity/camera/navigation behaviour at a cube edge.
-6. Decide how day/night and the sky/horizon work across faces.
+1. Exact DiceBound-board theme mapped to each pip face.
+2. Regional level bands.
+3. Major landmarks/pip arrangement for each face.
+4. Edge/corner treatment.
+5. Continuous cube vs segmented/streamed implementation after prototype.
+6. Day/night, sky and horizon behaviour.
