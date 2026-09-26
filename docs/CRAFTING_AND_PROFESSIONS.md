@@ -2,66 +2,73 @@
 
 ## Gear crafting
 
-Primary equipment crafting is handled by **NPC crafters**.
+Primary progression-equipment crafting is handled by **NPC crafters**.
 
-The player does not choose a blacksmith/armorsmith profession in order to create progression gear.
-
-NPC gear crafting is intended to create deterministic or semi-authored upgrade paths that combine meaningful pieces of content.
+Recipes can combine:
+- existing gear;
+- boss trophies;
+- raid/dungeon materials;
+- currencies/resources;
+- quest items;
+- gold.
 
 Example:
 
 ```
 Longsword from Dungeon 4
-+ Heart of the Dragon raid boss
++ Heart of Dragon Raid Boss
 + 500 rarity crystals
 = Longsword of the Dragon
 ```
 
-Recipes may consume:
-- a specific piece of equipment;
-- boss trophies;
-- dungeon/raid materials;
-- rarity currencies;
-- quest resources;
-- gold;
-- other special ingredients.
+## Recipe discovery
 
-This lets crafting extend dungeon progression instead of competing with it.
+Recipes use multiple discovery methods.
 
-## Materials as resources
+Some are:
+- visible from the beginning;
+- unlocked by quests;
+- secret;
+- discovered by bringing/obtaining relevant ingredients;
+- unlocked through exploration/achievements;
+- Echo-wide discoveries.
 
-Most common crafting materials should behave more like **currencies/resources** than physical inventory objects.
+Recipe visibility is intentionally content-specific.
 
-Goals:
-- reduce inventory clutter;
-- make long-term accumulation readable;
-- support account-level storage where appropriate;
-- let recipes request large quantities without forcing stacks of junk into bags.
+## Materials
 
-Rare unique ingredients can still exist as named items when the identity matters.
+Most common materials should behave like resource/currency counters rather than physical inventory stacks.
+
+Some may be safe on death; others may use carried/stored risk rules. This is decided when the resource is created.
 
 ## Player professions
 
-Player professions focus on **consumables and supporting resources**, not core equipment progression.
+Professions focus on supporting systems rather than core gear crafting.
 
-Possible profession areas:
-- potions/alchemy;
-- cooking/food;
-- buff consumables;
+Examples:
+- potions;
+- food;
+- temporary buffs;
 - gathering;
 - resource refinement;
-- utility items.
+- utility consumables.
 
-Exact profession count, leveling and specialization are not yet decided.
+Profession progression/knowledge is **Echo-wide**.
 
-## Town dependency
+## Consumables
 
-Major NPC crafting happens in towns or appropriate special crafting locations.
+Consumables have cooldowns.
 
-This reinforces towns as service hubs while still allowing the player to send found equipment/material value toward account storage during adventures.
+Different consumables may:
+- use different cooldown durations;
+- have shared cooldown groups;
+- be modified by specific classes/passives/equipment;
+- gain profession-related bonuses.
 
-## Design principle
+Exact categories and cooldowns are designed with the consumables themselves.
 
-Dungeon/raid loot should remain exciting.
+## Future currencies
 
-A crafted weapon should usually require meaningful content rewards rather than allow the player to bypass that content through repetitive low-risk gathering.
+DiceFree will eventually support more currencies/resources than gold.
+
+Do not design the endgame currency ecosystem prematurely, but technical systems should support multiple currency types, carried/stored states, and individual death-loss rules.
