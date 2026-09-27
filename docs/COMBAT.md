@@ -2,201 +2,249 @@
 
 ## Direction
 
-DiceFree should use real-time 3D isometric action-RPG combat.
+DiceFree is a real-time 3D isometric action RPG.
 
-Current working assumptions:
-- PC-first controls;
-- **mouse-driven click-to-move is the primary/default control style and primary balance target**;
-- WASD/direct movement is also supported as an alternative control style;
-- mouse aiming/targeting/context interaction;
-- a compact but class-dependent active toolkit;
-- readable enemy attacks and boss mechanics;
-- distinct class resources;
-- strong hit feedback without unreadable visual noise.
+Primary design assumptions:
+- mouse-driven click-to-move is the default/reference control style and primary balance target;
+- WASD/direct movement is a fully supported alternative;
+- compact, class-dependent kits;
+- readable mechanics;
+- class-specific movement and resources;
+- strong class identity over universal action-game mechanics.
 
 ## Control schemes
 
-DiceFree supports both Classic click-to-move and Direct WASD movement.
-
 ### Classic / mouse movement
-
-The primary control scheme, inspired by Warcraft III, Dota and League of Legends.
-
-Typical behaviour:
-- click the ground to move;
-- movement uses pathfinding around valid obstacles;
-- mouse input handles targeting and contextual actions;
-- abilities receive targets/positions independently of the movement system.
-
-This is the **design and balance baseline** for movement speed, encounter spacing, boss telegraphs, kiting, attack ranges, cast times and other movement-sensitive mechanics.
+Warcraft III / League-style click-to-move is the primary balance baseline.
 
 ### Direct / WASD movement
+WASD feeds the same movement/combat systems and must not become the hidden requirement for encounter execution.
 
-Players may instead control movement directly with WASD.
-
-WASD is a supported first-class option, but it should not become the reference point that causes encounter design to assume action-game movement precision unavailable to click-to-move players.
-
-### Shared movement architecture
-
-```
-Classic click-to-move ─┐
-                       ├─> movement intent -> character motor -> gameplay
-Direct WASD movement ──┘
-```
-
-Stuns, roots, slows, speed modifiers, combat restrictions, animation and networking should operate consistently regardless of control style.
-
-A future Hybrid option that accepts both click-to-move and WASD simultaneously may be useful, but it is **not yet a committed requirement**.
+A simultaneous Hybrid mode remains possible but not committed.
 
 ## Basic attacks
 
-Every class normally has a basic attack.
+Every normal class has a Warcraft III / League-style repeating basic attack:
+- command an attack on a target;
+- move into attack range if necessary;
+- repeatedly attack while the target remains valid.
 
-The default interaction should feel like Warcraft III / League:
-- command an attack on an enemy;
-- the character moves into valid attack range if needed;
-- once in range, the character repeatedly performs its basic attack while the target remains valid;
-- ranged classes fire from range;
-- melee classes close into melee.
+Basic attacks may be melee or ranged depending on class.
 
-Most caster classes are expected to have ranged basic attacks, while some magical/melee classes can use melee basic attacks.
+Most caster classes will be ranged, but magical melee classes are fully valid.
 
-A future class with no conventional basic attack is possible, but would be an intentional special-case class mechanic rather than a normal rule.
+A future class with no conventional basic attack is possible only as an intentional special-case design.
 
-Every class has a **primary stat** used in its basic-attack scaling. The exact stat list and formula remain to be designed.
+## Primary attributes
 
-## Health and primary stats
+Current core attributes:
 
-**Vitality** contributes to maximum HP.
+- **Vitality**
+- **Strength**
+- **Agility**
+- **Intelligence**
+- **Spirit**
 
-Current conceptual formula:
+Every attribute should have at least one useful secondary effect in addition to any role it plays as a class's primary attack attribute.
+
+Every class has one or more **primary attributes** used for its base/basic-attack scaling.
+
+Most classes will likely use one primary attribute, but hybrid classes may legitimately use multiple. A future secret class using all attributes as primary is explicitly compatible with the system.
+
+Exact secondary effects are still being designed.
+
+Current candidates include:
+- Strength -> physical durability and/or HP-related benefit;
+- Agility -> evasion, movement speed and/or attack speed;
+- Intelligence -> resource regeneration, maximum resource and/or magical durability;
+- Spirit -> healing given and healing received;
+- Vitality -> maximum HP.
+
+Do not lock these candidate secondary effects until the complete stat model is designed.
+
+## Health
+
+Vitality contributes to maximum HP.
+
+Conceptually:
 
 ```
 Max HP = class base HP + (Vitality × HP coefficient) + other modifiers
 ```
 
-Open design question: whether the Vitality-to-HP coefficient is universal or class-specific.
+Open question: whether the Vitality coefficient is universal or class-specific.
 
-Each class has a primary stat used for base/basic attack scaling.
+## Damage channels and elements
 
-Other primary/derived stats are not yet finalized.
+Every damaging hit can carry at least two independent classifications:
 
-## Defense and equipment families
+1. **Damage channel:** Physical or Magical.
+2. **Element:** one of DiceFree's elements inherited/expanded from DiceBound, or no special element where appropriate.
 
-There is one common defense model rather than multiple armor-weight defense types.
+An element is not inherently physical or magical. The same element can appear on either channel depending on the attack.
 
-There is no generic Cloth/Leather/Mail/Plate defense hierarchy.
+Example:
+- Physical Coffee damage
+- Magical Coffee damage
 
-Classes instead differ through:
-- which equipment families they are allowed to equip;
-- the stat packages on those equipment families;
-- item requirements;
-- class abilities/passives.
+This lets classes, monsters and gear interact separately with broad damage channels and specific elements.
 
-Equipment **Intrinsics** can provide larger fixed stat packages than their DiceBound equivalents and are an important part of gear identity.
+## Physical and Magical Defense
+
+DiceFree has:
+- **Physical Defense**
+- **Magical Defense**
+
+Both use diminishing returns rather than linear immunity scaling.
+
+Defense is converted into mitigation against its corresponding damage channel.
+
+The exact diminishing-returns formula will be balanced later.
+
+## Elemental resistance
+
+Characters can also gain resistance to specific elements.
+
+Channel mitigation and elemental resistance multiply rather than add.
+
+Example:
+
+```
+Incoming damage: 100 Physical Coffee
+Physical mitigation: 50%
+Coffee resistance: 50%
+
+100 × 0.50 × 0.50 = 25 damage taken
+```
+
+This means defenses stack strongly but do not simply add to 100% immunity.
+
+The exact caps, negative resistance rules, penetration and diminishing-return behaviour remain to be designed.
+
+## Equipment families and Intrinsics
+
+There is no armor-weight system such as Cloth/Leather/Mail/Plate.
+
+Classes instead differ through which equipment families they can equip.
+
+Equipment families can have significantly different fixed stat identities.
+
+**Intrinsics** remain a core gear concept and can provide much larger fixed stat bonuses than their DiceBound equivalents.
+
+## Attack speed
+
+Basic attacks have attack-speed values.
+
+Classes can have very different:
+- base attack speed;
+- attack animation timing;
+- attack range;
+- scaling opportunities.
+
+Attack speed can later be modified by attributes, equipment, effects or class mechanics as appropriate.
+
+## Critical hits
+
+Critical-hit design is intentionally unresolved.
+
+Possible models include:
+- crit as a broadly available derived stat;
+- crit tied partly to attributes;
+- crit granted only by certain classes/passives/items;
+- different crit rules for attacks, spells, healing and damage-over-time effects.
+
+Do not assume every class automatically has the same crit system.
 
 ## Movement and mobility
 
-There is **no universal dodge/roll**.
+There is no universal dodge/roll.
 
-Mobility is part of class identity:
-- some classes may have dashes, teleports, rolls or other evasive tools;
-- some may have none;
-- classes may have different base movement speeds;
-- stronger mobility should come with appropriate tradeoffs elsewhere in the kit.
-
-## Enemy aggro and leashing
-
-Overworld enemies have:
-- an aggro/acquisition range;
-- a maximum pursuit/leash distance or equivalent return-home rule.
-
-Enemies can follow a player across a cube edge if the player remains inside valid pursuit rules.
-
-Once they exceed their leash, they return/reset to their home state.
+Mobility is class identity:
+- some classes get dashes/teleports/rolls;
+- others get none;
+- base move speed can differ by class;
+- strong mobility should have tradeoffs.
 
 ## Threat
 
-DiceFree will have a real **threat/aggro system** so tank-oriented classes can intentionally control enemies.
+DiceFree has a proper threat system.
 
-Bosses and special enemies may override ordinary threat with mechanics such as:
-- forced target swaps;
-- random/marked targets;
-- proximity targeting;
-- scripted fixates;
-- untankable mechanics.
+Every relevant combat action can define its own threat value/coefficient, including:
+- basic attacks;
+- damaging skills;
+- healing;
+- buffs/support;
+- special tank abilities;
+- crowd control where appropriate.
 
-Threat is a system, not a promise that every enemy always attacks the highest-threat character.
+Healing generates threat.
 
-## Ability loadouts
+Healers are also expected to contribute damage, closer to Final Fantasy XIV's healer philosophy than a pure "stand still and only heal" model.
 
-DiceFree should keep the number of buttons relatively small, but classes do not need identical active/passive counts.
+### Taunts
 
-A class may lean toward:
-- more active abilities;
-- more passive abilities;
-- transformations;
-- summons;
-- stance/resource mechanics;
-- a very compact core kit.
+Tank kits can use multiple styles of threat control.
 
-Advancement may add, evolve or replace abilities depending on that class.
+Examples:
+- forced target/taunt for X seconds;
+- large threat-generation abilities;
+- abilities that both force target temporarily and establish/catch up threat.
 
-## Resources
-
-Different classes can use different resources.
-
-Later advancements may retain, modify or completely replace the previous resource system.
-
-## Party design
-
-The initial multiplayer target is **up to 4 players**.
-
-Ordinary progression should not require a fixed MMO trinity composition, but tanking/healing/support identities are absolutely allowed and supported.
+Boss mechanics may deliberately ignore or override normal threat.
 
 ## Healing/support targeting
 
-Support abilities should support both:
-- targeting characters in the 3D world;
-- targeting eligible allies through party frames/UI.
+Support abilities can target:
+- characters in the 3D world;
+- eligible allies through party frames/UI.
 
-Party-frame targeting is important so healing does not require pixel-hunting moving characters in an isometric battlefield.
+## Fixed kits
+
+Classes use **fixed ability kits**, not a large library of skills that players swap in and out freely.
+
+Advancement may add, evolve or replace parts of that fixed kit.
+
+Gear, Intrinsics and special effects can modify how the fixed kit behaves.
 
 ## Consumables
 
-Consumables use cooldowns.
+Consumables have cooldowns.
 
-Different consumables can have different cooldown rules.
+Different consumables can use different cooldown durations/groups.
 
-Classes, passives, equipment or profession-related effects may modify how consumables work, including cooldowns or effectiveness.
+Classes, passives, gear and profession effects may modify consumable behaviour.
 
 ## Resurrection
 
-Healer-type resurrection can be repeatable, but intentionally expensive/risky:
+Repeatable healer resurrection is allowed but costly:
 - long cast time;
-- high mana/resource cost;
-- stacking Resurrection Sickness applied to the revived player.
+- high resource cost;
+- stacking Resurrection Sickness.
+
+Current working sickness direction:
+- each stack reduces **all character stats by 10%**.
+
+Exact duration, maximum stacks and whether the reduction uses additive or multiplicative stacking still need balancing.
 
 ## Enemy level display
 
-Enemy levels should normally be visible.
+Enemy levels are normally visible.
 
-For enemies dramatically beyond the current character's level, displaying **???** instead of the exact level is an available design option to preserve mystery/threat. The threshold/rule is not yet decided.
+Current working idea:
+- enemies far enough above the character may display **???** instead of an exact level.
 
-## Bosses
-
-Boss encounters should contain recognizable mechanics rather than only inflated health.
-
-Harder dungeon/raid modes should add mechanics as well as stats.
+A threshold around 20+ levels above the character is a candidate, not yet final.
 
 ## Open questions
 
-- Exact mouse-button/context conventions.
-- Whether Hybrid mode should ship.
-- Exact targeting behaviour for offensive abilities.
-- Potion/item hotkeys.
-- Controller support expectations.
-- Exact threat formula/taunt rules.
-- Final primary-stat list.
-- Universal vs class-specific Vitality-to-HP coefficient.
-- Exact enemy-level threshold for displaying ???.
+- exact mouse-button/context conventions;
+- offensive targeting details;
+- Hybrid mode;
+- controller support;
+- final secondary effect of each primary attribute;
+- universal vs class-specific Vitality-to-HP coefficient;
+- exact defense diminishing-returns formula;
+- resistance caps/penetration;
+- crit system;
+- exact Resurrection Sickness math;
+- exact ??? level threshold.
