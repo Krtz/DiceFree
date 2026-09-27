@@ -65,9 +65,16 @@ Healer resurrection:
 - applies stacking Resurrection Sickness.
 
 Current working sickness:
-- each stack gives **-10% to all stats**.
+- each stack gives roughly **-10% to the five primary attributes only**:
+  - Vitality
+  - Strength
+  - Agility
+  - Intelligence
+  - Spirit
 
-The exact math, duration and stack cap remain open.
+Derived combat values then fall naturally from those attributes.
+
+Exact duration, cap and stacking math remain open.
 
 ## Death losses
 
@@ -83,7 +90,7 @@ High-level characters can normally return to old dungeons and overpower them.
 
 There is no automatic universal down-sync for old content.
 
-Selected content may later choose to use syncing for specific reasons.
+Selected content may later use sync/mentor rules where helping lower-level players or preserving encounter design benefits from it.
 
 ## Difficulty modes
 
