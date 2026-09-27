@@ -892,3 +892,86 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-27 — Starter-village onward quest
 
 **Decision:** A village NPC eventually sends/points the player toward the next town/settlement, providing the lightweight main-quest nudge out of the starter pocket.
+
+
+## 2026-09-27 — Face biome diversity and edge blending
+
+**Decision:** A DiceBound-derived face theme is a dominant identity, not a one-biome restriction.
+
+**Decision:** Faces can contain multiple biomes.
+
+**Direction:** The middle/interior of a face should generally express that face's strongest visual identity, while edges can increasingly reflect neighboring faces. Corners may combine influence from three faces and can become especially unusual.
+
+## 2026-09-27 — Echo death is timeline continuation
+
+**Decision:** Ordinary inhabitants do not resurrect.
+
+**Decision:** When an Echo "dies", it is understood metaphysically as the Echo continuing into another timeline/manifestation where the death did not occur, rather than a corpse returning to life.
+
+## 2026-09-27 — Resurrection-stone form
+
+**Decision:** Resurrection points are ancient stone d6s resting on one corner.
+
+**Decision:** The face/pip pattern corresponding to the current world is presented toward the player/camera and lights up when that stone is selected as the active resurrection point.
+
+**Decision:** Ordinary inhabitants do not know these stones possess Echo-related power.
+
+## 2026-09-27 — Cornberg
+
+**Decision:** The starter settlement is named **Cornberg**: a small self-reliant farming village near the southwest corner mountain, with the name intentionally evoking corner mountain/Cornberg and local corn farming.
+
+**Direction:** Roughly 10–15 main buildings plus farms/barns/utilities; perceived scale matters more than literal structure count.
+
+**Decision:** Cornberg sits in a mountain-foot valley/bowl and uses local timber and stone construction.
+
+**Decision:** A mountain stream feeds a mildly magical water source/well that improves crops, invigorates farmers and heals/restores nearby people.
+
+## 2026-09-27 — Cornberg civic structure
+
+**Decision:** Cornberg has no mayor or permanent village authority.
+
+**Decision:** Once per week the villagers hold an open meeting in the central village green/square and rotate who serves as meeting president/chair.
+
+## 2026-09-27 — Cornberg services
+
+**Decision:** Cornberg includes a general-goods merchant selling starter equipment.
+
+**Decision:** A small blacksmith introduces NPC gear crafting with early recipes somewhat stronger than general-store gear and/or covering gear slots the store does not sell.
+
+**Decision:** Cornberg has Alchemist, Fisherman and Cook profession teachers.
+
+**Decision:** Profession training eligibility is any Tier 1+ class OR a level-25+ Novice. Novice is Tier 0.
+
+**Decision:** Cornberg has no conventional tavern/inn; it has a small working brewery with communal tables/chairs around the brewing area.
+
+## 2026-09-27 — Cornberg retired-adventurer couple
+
+**Direction:** Cornberg may contain a retired magical adventurer and her girlfriend, a former sword-wielder who put down her sword to become a farmer.
+
+**Direction:** They can later guide Magically Touched and Physically Blessed lines toward class-specific teachers/quests/advancements. Exact class branches and responsibilities remain open.
+
+## 2026-09-27 — Cornberg Slime situation
+
+**Decision:** Slimes are normally known local pests that stay outside the crops/village.
+
+**Decision:** The opening infestation is unusually severe and brings them into the crop fields, quietly foreshadowing a deeper Slime problem.
+
+## 2026-09-27 — Cornberg arrival
+
+**Decision:** Nobody witnesses the Echo emerge from the mountain; the Echo walks into Cornberg alone.
+
+## 2026-09-27 — Cornberg mountain folklore
+
+**Decision:** The mountain has never previously been known to spit out a person.
+
+**Decision:** It nevertheless has abundant local folklore, helped by the magical water and normal village mythmaking.
+
+## 2026-09-27 — Cornberg abandoned house
+
+**Decision:** Villagers give contradictory accounts of the abandoned house's history/former owner.
+
+## 2026-09-27 — Cornberg runner
+
+**Decision:** Cornberg sends one runner to the next settlement each week to carry and return with important news before the weekly open session.
+
+**Direction:** The runner returns shortly after the initial Slime quest/follow-up and becomes the first natural main-quest bridge toward the next town.
