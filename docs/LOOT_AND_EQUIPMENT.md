@@ -50,16 +50,16 @@ DiceFree uses both:
 
 There is no armor-weight defense taxonomy.
 
-All equipment ultimately interacts with the same Physical Defense / Magical Defense systems, but families can differ greatly in stat identity.
-
-Families can emphasize:
+Families can strongly differentiate stat identity through Intrinsics and affixes, including:
 - Physical Defense;
 - Magical Defense;
-- primary attributes;
-- elemental resistances;
-- attack speed;
+- Vitality/Strength/Agility/Intelligence/Spirit;
+- elemental resistance;
+- Attack Speed;
+- Movement Speed;
 - resource stats;
 - healing/support stats;
+- elemental penetration;
 - other derived stats.
 
 ## Intrinsics
