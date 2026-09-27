@@ -29,7 +29,7 @@ Examples can include:
 
 Primary secondary effects:
 - maximum HP;
-- HP regeneration.
+- **flat HP regeneration**.
 
 Conceptually:
 
@@ -189,7 +189,7 @@ Characters and enemies can have separate resistance values for each element.
 
 The current direction is that characters and enemies begin with **negative elemental resistance by default**, rather than neutral 0%.
 
-Exact baseline value is not yet locked.
+Default elemental resistance starts at **-10%** for players and enemies unless content/class design explicitly overrides it.
 
 This creates room for:
 - resistance-building as meaningful defense;
@@ -232,9 +232,16 @@ Working preference: elemental resistance is expressed to players as an actual **
 - negative values allowed;
 - exceptional classes/items/effects capable of raising the normal cap.
 
-Exact baseline, cap, floor and cap-raising mechanics remain open.
+Default normal maximum elemental resistance is **75%**.
 
-A rating-to-percentage diminishing-return implementation is still technically possible, but direct percentage resistance is currently preferred because buffs/debuffs/aura design becomes much more readable.
+Elemental resistance is represented directly as a percentage rather than as a hidden rating conversion.
+
+Rules:
+- baseline: -10%;
+- normal cap: 75%;
+- negative resistance is allowed;
+- exceptional classes/items/effects may raise the 75% cap;
+- exact minimum floor and cap-raising limits remain open.
 
 ## Elemental healing
 
@@ -261,17 +268,25 @@ Examples:
 
 This creates support interactions where resistance buffs can simultaneously protect and improve matching healing.
 
-Exact caps and whether healing uses the same full resistance value as damage remain balanceable.
+Whether a heal is elemental or non-elemental is defined case by case by that heal/ability.
+
+Non-elemental healing ignores elemental resistance.
+
+Elemental healing uses the full matching resistance value unless a specific ability explicitly says otherwise.
 
 ## Penetration and resistance modification
 
-The framework must support case-by-case:
-- Physical Defense penetration;
-- Magical Defense penetration;
-- specific elemental resistance penetration;
+The framework must support, case by case:
+- **flat Physical Defense penetration**;
+- **percentage Physical Defense penetration**;
+- **flat Magical Defense penetration**;
+- **percentage Magical Defense penetration**;
+- flat/percentage elemental resistance penetration where appropriate;
 - resistance reduction;
 - temporary vulnerability;
 - resistance-cap modification.
+
+Different classes/advancements may use different penetration models. An early class might use flat penetration while a later advancement upgrades into percentage penetration.
 
 Do not assume every class has access to these.
 
@@ -289,6 +304,31 @@ Different effect types can define separate crit eligibility:
 - summons.
 
 Exact crit formulas remain open.
+
+## Damage-over-time effects
+
+Each DoT tick is its own damage instance.
+
+A tick uses the target's **current** defenses, elemental resistance, penetration/debuff state and other relevant mitigation at the moment that tick resolves.
+
+This means defensive buffs applied after a DoT is already active can reduce later ticks.
+
+## Adaptive-scaling UI
+
+If an ability uses adaptive scaling such as "highest of STR/AGI" or "highest attribute", the expanded tooltip must show which attribute is currently being used and the resulting coefficient/calculation.
+
+## Stat transparency
+
+Character-sheet/stat tooltips should expose what each attribute currently contributes.
+
+Examples:
+- current HP gained from Vitality;
+- current Physical Defense contribution from Strength;
+- current Attack/Move Speed contribution from Agility;
+- current Magical Defense contribution from Intelligence;
+- current healing bonuses from Spirit.
+
+The normal UI can remain clean, but the underlying numbers should be inspectable.
 
 ## Combat telemetry
 
