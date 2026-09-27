@@ -16,6 +16,29 @@ As in DiceBound, the Echo gains a shape/identity through class choice rather tha
 
 The class is therefore a major part of both gameplay identity and visual identity.
 
+## Echo death and resurrection stones
+
+Ordinary people do **not** resurrect.
+
+When an Echo appears to die, the metaphysical interpretation is not resurrection of the dead body. The Echo instead continues by **echoing into another timeline/manifestation in which that death did not happen**.
+
+This means:
+- locals do not understand Echo "respawning" as a normal phenomenon;
+- ordinary inhabitants have no reason to associate ancient resurrection stones with revival;
+- the player can reappear at an active resurrection point without establishing that death is reversible for normal people.
+
+### Resurrection stones
+
+Resurrection points are ancient **stone d6s resting on one corner**.
+
+Presentation rule:
+- the face corresponding to the world/face the stone is located on is oriented toward the camera/readable side;
+- when the player activates that stone as their current resurrection point, that face's pip/pips illuminate.
+
+To ordinary inhabitants these are simply old strange stones/monuments.
+
+They do not know the stones have power.
+
 ## Alternate manifestations
 
 All character slots are manifestations of the **same Echo** across different timelines/possibilities/multiversal expressions.
