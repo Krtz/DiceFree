@@ -28,7 +28,7 @@ From the southwest starter area, the tree should be a distant landmark generally
 
 ## Opening: the southwest mountain
 
-DiceFree begins in the **southwestern part of World 1**.
+DiceFree begins in the **southwestern part of World 1**, near **Cornberg mountain** at the corner-side of the face.
 
 A mountain near the southwest boundary/corner of the region **spits the Echo out** after the events of DiceBound / The Last Equation.
 
@@ -40,6 +40,19 @@ The player does not initially understand:
 
 This is intentionally a long-term mystery.
 
+### Nobody meets the Echo on the mountain path
+
+No villager witnesses the Echo emerge.
+
+The player walks into Cornberg alone.
+
+The first local interaction should have the mild awkwardness of:
+- an unknown person appearing from the mountain-side path;
+- possibly looking/behaving unlike an ordinary traveler;
+- locals wondering why the newcomer came from that direction.
+
+Nobody treats it as a prophesied arrival.
+
 ### First movement
 
 After emerging:
@@ -48,6 +61,23 @@ After emerging:
 3. reaches the nearby starter village.
 
 The intro should get the player into the real world quickly rather than trapping them in a long tutorial corridor.
+
+### Local legends of Cornberg mountain
+
+The mountain has **never spat out a person before** in living/history known to Cornberg.
+
+That does not mean it lacks stories.
+
+Because:
+- the water is magical;
+- the mountain dominates local geography;
+- every old village accumulates folklore;
+
+Cornberg has multiple contradictory legends about the mountain.
+
+No legend needs to be objectively correct.
+
+The emergence event should remain unprecedented.
 
 ## Level-10 return to the mountain
 
@@ -67,13 +97,101 @@ Exact ritual, visual manifestation and explanation remain open.
 
 The mountain must remain physically reachable from the starter region after the player has explored/leveled.
 
-## Starter settlement: small mountain village
+## Starter settlement: Cornberg
 
-The first settlement is a **small self-reliant mountain village** close to the emergence mountain.
+The first settlement is **Cornberg**, a small self-reliant mountain farming village close to the emergence mountain.
 
 It is not a capital and is not economically important to the wider world.
 
 It exists primarily through local farming and ordinary self-sufficient life.
+
+### Cornberg identity and scale
+
+Cornberg is named for three overlapping local facts:
+- it sits near the corner region of World 1;
+- its mountain is effectively the "corner mountain";
+- the village grows corn among its crops.
+
+The name is intentionally a little Swenglish/folk-etymological: **Cornberg**.
+
+Scale should be communicated more through composition and surrounding landscape than strict building count.
+
+Working size:
+- roughly 10–15 main buildings;
+- additional barns, sheds, fields, fences and utility structures;
+- compact enough that the player quickly learns where everything is;
+- large enough to feel like a real lived-in community rather than a quest hub with three huts.
+
+### Terrain and architecture
+
+Cornberg sits in a small mountain-foot valley/bowl.
+
+Environment:
+- the emergence mountain rises southwest of the village;
+- forest presses in around the valley;
+- farmland opens toward the east/northeast;
+- the Great Tree is visible far away toward the interior of World 1.
+
+Local construction uses what the environment provides:
+- fieldstone;
+- timber;
+- wooden beams;
+- forest-sourced lumber;
+- practical rural/mountain architecture;
+- cozy rather than grand.
+
+Exact roof style/material can be decided during art direction/blockout.
+
+### Mountain stream and magical well
+
+A stream descends from Cornberg mountain and supports the village's agriculture.
+
+The village was originally settled partly because of a **magical pool/aquifer** feeding the local well.
+
+The water:
+- helps crops grow unusually well;
+- invigorates farmers;
+- provides mild restorative/healing effects to people near or using it;
+- contributes to local legends about the mountain.
+
+The village's central gathering area grew around:
+1. this useful magical well/water source;
+2. a strange ancient six-sided stone already standing nearby.
+
+### Village green / meeting square
+
+Cornberg has a modest central green/square rather than a formal civic plaza.
+
+It contains or directly borders:
+- the magical well;
+- the resurrection stone;
+- communal seating/open space;
+- access to the small brewery.
+
+Once per week the villagers hold an **open village session** here.
+
+Cornberg has no permanent mayor/leader.
+
+Instead:
+- the whole village can attend;
+- practical matters/news are discussed openly;
+- villagers take turns serving as the meeting's president/chair.
+
+The settlement is too small to maintain a formal government structure.
+
+### Resurrection stone
+
+Cornberg's resurrection point is a **stone d6 resting on one corner**.
+
+To locals:
+- it is an old strange monument;
+- nobody knows it has resurrection/Echo significance.
+
+When the Echo activates it:
+- the Face 1 side is oriented toward/readable to the camera;
+- the **single pip lights up** to show that Cornberg is the current active resurrection point.
+
+No ordinary villager has ever resurrected through it.
 
 ### Required village features
 
@@ -89,13 +207,106 @@ The starter village includes:
 
 The bank teaches the account/Echo storage concept early.
 
-The resurrection point should use an explicit interactable lore object appropriate to the village; exact form remains open.
+The resurrection point is the ancient corner-resting stone d6 described above.
+
+### Cornberg services and NPC roles
+
+Cornberg should teach several long-term systems without feeling like a giant tutorial center.
+
+#### General goods store
+
+A general-goods merchant sells:
+- basic starter equipment;
+- common supplies;
+- only a subset of equipment slots/families.
+
+This creates room for crafting to immediately matter.
+
+#### Small blacksmith / crafting introduction
+
+A small village blacksmith introduces NPC-based gear crafting.
+
+Early recipes:
+- are somewhat better than basic general-store gear;
+- may cover equipment slots/families the general store does not sell;
+- teach the recipe/material loop without turning crafting into a player profession.
+
+#### Profession teachers
+
+Cornberg has three novice-profession teachers:
+- **Alchemist**
+- **Fisherman**
+- **Cook**
+
+They teach their respective player professions to:
+- any **Tier 1+ class**, or
+- a **level 25+ Novice** who deliberately refuses first advancement.
+
+Novice is **Tier 0**.
+
+This keeps professions as optional side systems while still allowing a deliberately overleveled Novice to access them.
+
+Exact profession mechanics/recipes are documented later.
+
+#### Brewery
+
+Cornberg has **no conventional tavern/inn**.
+
+Instead it has a small working brewery.
+
+Presentation:
+- brewing vats are the main purpose of the building;
+- several tables/chairs sit around the brewery floor/yard;
+- villagers socialize there;
+- occasional outsiders/runners can stop there;
+- it feels communal and practical rather than designed for travelers.
+
+The village receives few visitors and largely supports itself.
+
+#### Bank
+
+Cornberg provides account/Echo-wide bank access despite its size.
+
+Physical presentation can be:
+- a modest local storehouse/keeper;
+- with an Echo-compatible storage object/interface inside.
+
+Exact metaphysics of why deposits reach the same bank across manifestations/towns can remain mysterious for now.
+
+### Local adventurer couple / class guidance
+
+Cornberg may contain a retired adventurer couple:
+
+- a woman with some magical training who settled here after an unremarkable adventuring career;
+- her girlfriend, once a sword-wielder, who put down her sword to become a farmer.
+
+The sword-wielder literally **put down her sword to pick up a hoe**.
+
+These two are candidates for early class-guidance roles:
+- the magic user can help point a Magically Touched Novice toward later magical advancement/training;
+- the former swordswoman can help point a Physically Blessed Novice toward later physical advancement/training;
+- they may give class-specific advancement quests or clues rather than directly performing every advancement themselves.
+
+This is a strong NPC concept but exact class branches/quest responsibilities remain open.
 
 ### Farming identity
 
 Fields immediately around the village grow crops.
 
 This lets the first combat quest arise from an ordinary local problem rather than world-ending stakes.
+
+### Slimes are a known pest, but this is worse
+
+Cornberg villagers know Slimes.
+
+Normally the creatures remain outside the village/crop area and are treated as a manageable local nuisance.
+
+The current crop infestation is unusual:
+- more Slimes are coming closer than normal;
+- they are actively damaging crops;
+- the problem is serious enough that someone asks the unknown newcomer for help.
+
+This quietly foreshadows that something deeper in the forest/Slime ecology has changed.
 
 ## First quest: slimes in the crops
 
@@ -282,6 +493,20 @@ Rules:
 
 What is inside remains open.
 
+### Abandoned-house stories disagree
+
+Different villagers give **different accounts** of the house's history and former occupant.
+
+This inconsistency is intentional.
+
+Possible dialogue can contradict:
+- who lived there;
+- how long it has been empty;
+- whether anyone died/disappeared;
+- whether the noises are new or ancient.
+
+Do not establish one obviously authoritative village answer early.
+
 This replaces the earlier burning-house concept.
 
 The mystery should be visible from the first visit so that opening it much later feels like returning to a remembered place.
@@ -298,6 +523,20 @@ Late game:
 - there should be reason to investigate **why** this mountain connects to the inside of the Dice.
 
 Do not explain the mountain too early.
+
+### Weekly runner and onward news
+
+Cornberg sends one **runner** to the next settlement each week.
+
+Purpose:
+- carry important village news outward;
+- bring back major news from the wider world;
+- return before the weekly open session so the village can discuss anything important.
+
+Story timing:
+- the runner returns shortly after the Slime crop quest, or after a direct follow-up to that quest;
+- their return becomes the player's first natural source of broader-world information;
+- this can create the lightweight quest/hook that eventually sends the Echo toward the next town.
 
 ## Main-quest direction
 
