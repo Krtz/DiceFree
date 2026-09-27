@@ -126,6 +126,14 @@ Tank kits can include:
 
 Not every tank tool needs to work the same way.
 
+### Threat UI
+
+Default threat presentation should be simple and readable, using color/state indicators rather than a permanent wall of numbers.
+
+Players may enable more detailed threat information as an option.
+
+The underlying system should always track exact values for debugging and encounter logic.
+
 ## Healers
 
 Healers are full combat classes, not passive health-bar babysitters.
