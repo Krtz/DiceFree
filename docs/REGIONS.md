@@ -18,6 +18,24 @@ The mapping is now fixed:
 
 These are inspiration anchors, not literal 1:1 recreations.
 
+## Biome blending between faces
+
+A face's DiceBound-derived theme is a **dominant regional identity**, not the only biome allowed on that face.
+
+Faces may contain multiple biomes.
+
+Preferred world logic:
+- the central/interior portions of a face express that face's strongest visual identity;
+- terrain closer to an edge can gradually pick up environmental influence from the neighboring face;
+- corners can blend influences from three faces and are allowed to become especially strange;
+- transitions should feel like one continuous world rather than six themed maps touching at hard seams.
+
+Examples:
+- a green Face 1 forest near an edge bordering a colder/mistier face might become rockier, foggier and less pastoral;
+- a border toward a volcanic face might become drier, ashier or geothermally active before the gravity transition itself.
+
+This is a worldbuilding/design principle, not a demand for uniform gradient blending everywhere. Mountains, rivers, climate, magic and local geography can create sharper transitions where appropriate.
+
 ## d6 identity
 
 The one-dot face is the starting region, then two-dot through six-dot in intended progression order.
