@@ -819,3 +819,76 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Undeveloped territory should be blocked by believable natural/world obstacles such as forests, mountains, collapsed roads, cliffs or gates; these can be removed/reworked as the region expands.
 
 **Decision:** Face 1 should prove the starter town, outdoor loop, first dungeon, level-10 advancement, world services and long-term return hooks before later faces receive equivalent detail.
+
+
+## 2026-09-27 — DiceBound visual inheritance
+
+**Decision:** Each DiceFree face uses the corresponding DiceBound Board background and Normal combat background as its primary visual/environmental inspiration.
+
+**Mapping:** Face 1 Green Road/woodland; Face 2 Astral/misty rocky forest; Face 3 Fractured/desolate ruined fortress; Face 4 Crown/cursed enchanted swamp; Face 5 Oblivion/volcanic mountain fortress; Face 6 End of Mathematics/ashen emberlit gothic citadel.
+
+## 2026-09-27 — World 1 visual identity
+
+**Decision:** World 1 is a green, welcoming start-of-adventure region of roads, forests, hills and pastoral terrain, deliberately evoking the feel of the Shire while remaining original.
+
+**Decision:** A gigantic Yggdrasil-scale tree stands around the middle of World 1 and serves as the one-pip central landmark.
+
+## 2026-09-27 — World 1 opening
+
+**Decision:** The Echo emerges in southwest World 1 when a mountain expels/spits them out.
+
+**Decision:** A short path leads from the emergence mountain to a small self-reliant mountain farming village.
+
+## 2026-09-27 — Starter village
+
+**Decision:** Starter village includes at least a resurrection point, account bank access, NPCs/quests, starter NPC crafting and crop fields.
+
+**Decision:** The village is not a major economic hub; it is largely self-reliant.
+
+## 2026-09-27 — Initial road and forest
+
+**Decision:** One main road leaves the village eastward/slightly northward into forest, avoiding an immediate sightline/run toward the Dice-face edge.
+
+**Decision:** Dense southern forest/terrain blocks early edge access.
+
+**Decision:** The earliest development build ends the road at a believable dense-forest blocker which can later be removed/reworked as World 1 expands.
+
+## 2026-09-27 — Opening Slime ecosystem
+
+**Decision:** Slimes are the only initial enemy family.
+
+**Decision:** Opening slimes are green and element-neutral.
+
+**Decision:** Difficulty/visual escalation through the forest uses DiceBound Slime Board progression as inspiration: Board-1-like crop slimes, Board-2-like road slimes, Board-3-like deeper-forest slimes, Board-4-like dangerous pockets and potentially a Board-5-like elite.
+
+## 2026-09-27 — Crop Slime quest
+
+**Decision:** An early quest sends the player to kill Slimes damaging village crops.
+
+**Direction:** quest XP plus required/natural slime kills should bring a fresh player to roughly level 4–5.
+
+## 2026-09-27 — First Slime dungeon
+
+**Decision:** The first dungeon is Slime-themed and physically located/discovered in the forest.
+
+**Decision:** Its normal early boss is not the true apex/source of the Slimes.
+
+**Decision:** The dungeon contains hints of a hidden route/condition leading eventually to a much stronger true Slime ruler/source (Mother/King/Queen/etc.; identity not finalized).
+
+## 2026-09-27 — Abandoned-house mystery
+
+**Decision:** Starter village contains an old abandoned locked house avoided by NPCs.
+
+**Decision:** NPC dialogue can mention strange noises.
+
+**Decision:** Access requires a key/condition found much later in the game; exact contents remain open.
+
+## 2026-09-27 — First blessing at emergence mountain
+
+**Decision:** On reaching level 10, the Echo feels an urge/call to return to the mountain that originally expelled them.
+
+**Decision:** The first class blessing/advancement choice between Physically Blessed Novice and Magically Touched Novice occurs at that mountain.
+
+## 2026-09-27 — Starter-village onward quest
+
+**Decision:** A village NPC eventually sends/points the player toward the next town/settlement, providing the lightweight main-quest nudge out of the starter pocket.
