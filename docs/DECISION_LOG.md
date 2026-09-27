@@ -408,3 +408,98 @@ This file records decisions that are sufficiently settled to design around. It i
 **Direction:** Endgame follows an ARPG-style progression loop: acquire stronger/unique gear to access harder content, which rewards stronger/more build-enabling gear, while secret/unique items enable new builds.
 
 **Note:** Detailed endgame structure is intentionally deferred.
+
+
+## 2026-09-27 — Core attribute set
+
+**Decision:** Core attributes are **Vitality, Strength, Agility, Intelligence and Spirit**.
+
+**Decision:** Every attribute should provide a useful secondary effect.
+
+**Decision:** Every class has one or more primary attributes used for basic-attack scaling.
+
+**Decision:** Hybrid classes may use multiple primary attributes, and exceptional/secret classes may potentially use all attributes as primary.
+
+**Open:** Exact secondary effect of Strength, Agility, Intelligence and Spirit.
+
+## 2026-09-27 — Physical/Magical defense and elemental resistance
+
+**Decision:** DiceFree uses separate **Physical Defense** and **Magical Defense** systems.
+
+**Decision:** Both defenses use diminishing returns.
+
+**Decision:** Elements are independent of damage channel. Any element can be Physical or Magical depending on the attack.
+
+**Decision:** Elemental resistance applies as a separate multiplicative mitigation layer after/beside the broad Physical/Magical mitigation layer.
+
+**Example:** 100 Physical Coffee damage against 50% Physical mitigation and 50% Coffee resistance deals 25 final damage.
+
+**Open:** Exact diminishing-return formulas, resistance caps, penetration and negative-resistance rules.
+
+## 2026-09-27 — Attack speed
+
+**Decision:** Basic attacks have attack-speed values.
+
+**Decision:** Classes can have different base attack speeds and attack animations.
+
+## 2026-09-27 — Critical-hit system
+
+**Open:** Critical hits are not yet tied to any attribute or made universal. Crit may ultimately be broadly available, class/passive-driven, item-driven, or use different rules for attacks/spells/healing/DoTs.
+
+## 2026-09-27 — Fixed class kits
+
+**Decision:** Classes use fixed ability kits rather than freely swapping from a large skill library.
+
+**Decision:** Advancement and gear can evolve/modify that fixed kit.
+
+## 2026-09-27 — Inventory and remote banking
+
+**Decision:** Active carrying capacity can be relatively limited because items may be remotely sent to the shared bank.
+
+**Decision:** Items may be banked remotely even inside dungeons.
+
+**Decision:** Bank withdrawals remain town-only.
+
+**Decision:** Gold/currency cannot be remotely deposited; carried gold is manually deposited in town.
+
+**Decision:** Town banking should include a convenient Deposit All action.
+
+## 2026-09-27 — Death currency loss
+
+**Decision:** Carried gold lost on death disappears rather than creating a recoverable ground/corpse pile.
+
+## 2026-09-27 — Resurrection Sickness direction
+
+**Working decision:** Each Resurrection Sickness stack gives approximately a **10% reduction to all stats**.
+
+**Open:** Exact stacking math, duration and maximum stack count.
+
+## 2026-09-27 — Threat details and healer damage
+
+**Decision:** Healing generates threat.
+
+**Decision:** Combat actions can have individually defined threat values/coefficient rather than all damage/healing creating identical threat.
+
+**Decision:** Healers are expected to contribute damage, closer to Final Fantasy XIV's healer philosophy than pure heal-only gameplay.
+
+**Decision:** Tank tools may include both temporary forced-target taunts and large threat-building abilities.
+
+## 2026-09-27 — Enemy level mystery
+
+**Working direction:** Enemies far above the current character may show **???** instead of exact level. Around 20+ levels higher is a candidate threshold.
+
+## 2026-09-27 — Old-content power
+
+**Decision:** High-level characters can normally return to old dungeons and overpower them.
+
+**Decision:** There is no universal automatic level sync for old content.
+
+**Open:** Selected content may use sync where preserving intended challenge is useful; exact powerleveling controls remain unresolved.
+
+## 2026-09-27 — Overworld loot ownership
+
+**Decision:** Rare overworld equipment drops are immediately free-for-all with no temporary ownership/reservation window.
+
+## 2026-09-27 — Alternate-Echo encounter idea
+
+**Idea:** A future alternative-timeline dungeon where another manifestation of the Echo became evil is explicitly welcome, but this is late-game/story content and not a current implementation priority.
