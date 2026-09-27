@@ -2,6 +2,22 @@
 
 DiceFree is planned around **six major overworld regions**, corresponding to the six outer faces of the Dice.
 
+## DiceBound visual inheritance
+
+Each DiceFree face takes its visual/environmental DNA from the matching DiceBound Board screen background **and** Normal combat background.
+
+See `docs/DICEBOUND_WORLD_VISUAL_REFERENCES.md`.
+
+The mapping is now fixed:
+- Face 1 <- Board 1 / Green Road / welcoming woodland;
+- Face 2 <- Board 2 / Astral Road / misty rocky forest;
+- Face 3 <- Board 3 / Fractured Road / desolate ruined-fortress/graveyard mood;
+- Face 4 <- Board 4 / Crown Road / enchanted cursed swamp and forgotten ruins;
+- Face 5 <- Board 5 / Oblivion Ringroad / volcanic mountain fortress;
+- Face 6 <- Board 6 / End of Mathematics / emberlit ashen gothic citadel.
+
+These are inspiration anchors, not literal 1:1 recreations.
+
 ## d6 identity
 
 The one-dot face is the starting region, then two-dot through six-dot in intended progression order.
