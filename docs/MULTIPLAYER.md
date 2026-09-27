@@ -16,7 +16,7 @@ Flow:
 
 Players may join an already-started overworld session.
 
-They spawn at the **resurrection point their manifestation last explicitly selected**, even if the existing party is currently inside a dungeon.
+They spawn at the resurrection point their manifestation last explicitly selected, even if the existing party is currently inside a dungeon.
 
 They do not teleport directly to the party.
 
@@ -38,28 +38,52 @@ This applies to side quests as well as main/other quests.
 
 Players should not be punished simply for grouping with friends.
 
-Eligible nearby/participating players receive their own full XP reward rather than dividing one finite XP pool between party members.
+Eligible nearby/participating players receive their own XP reward rather than dividing one finite XP pool between party members.
 
-However, XP can be reduced by **level difference between the character and the defeated enemy**.
+XP may be reduced based on **level difference between the character and the defeated enemy**.
 
 Exact level-gap formula remains a balance problem.
+
+## Veteran + new-player co-op
+
+A core social goal is:
+
+**a veteran player should be able to meaningfully play with a new player without either character's progression being ruined.**
+
+DiceFree should support veterans helping newer friends while preserving:
+- the new player's sense of progression;
+- the veteran's ability to use their existing manifestation;
+- the identity of old content;
+- sane XP gains;
+- useful group play.
+
+Possible tools include:
+- level-difference XP curves;
+- optional or content-specific level sync;
+- temporary stat normalization for selected activities;
+- mentor-style scaling;
+- reward normalization;
+- dungeon/mode-specific sync rules.
+
+No single sync solution is committed yet.
 
 ## Powerleveling
 
 Powerleveling is allowed in principle.
 
-A high-level player should be able to help a lower-level manifestation level faster.
+A veteran should be able to help a lower-level manifestation progress faster.
 
-However, it should not trivialize the entire progression ladder.
+However, powerleveling should not collapse the entire leveling curve into trivial instant jumps.
 
-Possible tools to prototype later include:
-- enemy/character level-gap XP curves;
-- maximum useful XP per kill;
-- FFXIV-style level sync for selected content;
-- minimum participation/range rules;
-- dungeon/mode-specific sync.
+The final model should distinguish **playing together/helping a friend** from **breaking progression completely**.
 
-No specific sync model is committed yet.
+## Old content
+
+High-level players can normally return to old content and overpower it.
+
+There is no universal mandatory down-sync for the entire game.
+
+If sync exists, it should be selective enough that becoming powerful still feels meaningful.
 
 ## World/session state
 
