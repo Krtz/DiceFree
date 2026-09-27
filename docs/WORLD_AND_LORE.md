@@ -57,6 +57,16 @@ The preferred camera direction is to smoothly blend its local-up orientation thr
 
 The exact implementation requires prototyping.
 
+## World 1 emergence mountain
+
+After the transition from DiceBound, the Echo first emerges from a mountain in the southwest of Face 1.
+
+The mountain is not explained immediately.
+
+At level 10, the Echo feels compelled/called back to that same mountain, where the first blessing/advancement into Physically Blessed Novice or Magically Touched Novice occurs.
+
+Why the mountain connects to the inside of the Dice, and why it responds to the Echo, are long-term mysteries.
+
 ## The Last Equation
 
 The Last Equation is the narrative bridge between games.
