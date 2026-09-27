@@ -215,6 +215,12 @@ Current working idea:
 
 A threshold around 20+ levels above the character is a candidate, not yet final.
 
+## Combat state
+
+Threat-list membership / active aggro is the primary definition of being "in combat".
+
+See `docs/STATS_AND_DAMAGE.md` for shield ordering, Pure Damage, lifesteal, reflection, dispels, summons, death prevention and CC framework rules.
+
 ## Open questions
 
 - exact mouse-button/context conventions;
