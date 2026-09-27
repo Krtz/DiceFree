@@ -163,6 +163,20 @@ Gear, Intrinsics and special effects can modify how the fixed kit behaves.
 
 Normal tooltips should show readable final values. Holding a modifier key such as Shift should expose detailed formulas/scaling where useful, including the currently-selected attribute for adaptive-scaling abilities.
 
+## Shields, sustain and combat-effect framework
+
+The detailed generic framework for shields, lifesteal, reflection, immunities and CC resistance is documented in `docs/STATS_AND_DAMAGE.md`.
+
+Key rules:
+- shields can filter/scale differently by damage channel or element;
+- default overhealing disappears, but classes/items may convert it;
+- lifesteal/damage-to-healing is framework-level;
+- reflection/thorns cannot accidentally recurse forever;
+- immunity/untargetable flags are first-class statuses;
+- CC resistance and repeated-CC diminishing returns are supported from the framework level.
+
+HP regeneration remains active in combat. Resource regeneration is class/resource-specific.
+
 ## Consumables
 
 Consumables have cooldowns.
