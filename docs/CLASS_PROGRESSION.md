@@ -52,12 +52,19 @@ Players do not manually allocate stat points.
 
 ### Primary attributes
 
-A class can use:
-- one primary attribute;
-- multiple primary attributes for a hybrid;
-- potentially all attributes for an exceptional secret class.
+A class may use one or multiple primary attributes.
 
-The attack-scaling formula for multi-primary classes remains to be designed.
+There is **no universal multi-primary formula**.
+
+Each class defines its own attack scaling according to identity and balance.
+
+Examples could include:
+- equal STR + INT weighting;
+- mostly STR with some INT;
+- AGI + SPI;
+- all five attributes for an exceptional secret class.
+
+The exact coefficients are class data.
 
 ### Vitality
 
@@ -73,12 +80,14 @@ The coefficient may be universal or class-dependent; unresolved.
 
 All five attributes should provide useful secondary effects.
 
-Current brainstorms, not decisions:
-- Strength -> physical durability and/or HP;
-- Agility -> evasion, movement speed and/or attack speed;
-- Intelligence -> resource regeneration, maximum resource and/or magical durability;
-- Spirit -> healing given/received;
+Current ideas, not final:
+- Strength -> some physical durability and/or HP-related benefit;
+- Agility -> attack speed, movement speed and/or evasion;
+- Intelligence -> some magical durability and/or class/resource benefit;
+- Spirit -> healing-related benefits;
 - Vitality -> HP.
+
+Intelligence should not become a completely dead stat on non-Mana classes, but its exact universal secondary value remains unresolved.
 
 ## Opening branches
 
@@ -96,6 +105,7 @@ Each class defines:
 - melee/ranged basic attack;
 - attack range/speed;
 - primary attribute(s);
+- primary-stat coefficients;
 - resource;
 - fixed ability kit;
 - passive mechanics;
@@ -131,10 +141,20 @@ Secret classes may branch from many points and use unusual conditions:
 
 Secret classes use the same advancement thresholds after entering their lineage.
 
+## Healer viability
+
+Healer/support lineages must be fully viable for solo progression.
+
+They should have:
+- a real damage rotation;
+- sufficient solo damage to quest/farm/grind;
+- healing/support tools that become especially valuable in groups;
+- class-specific ways to connect offense and sustain where appropriate.
+
 ## Open questions
 
 - exact secondary effect of each attribute;
-- attack scaling for multiple primary attributes;
+- universal vs class-specific Vitality coefficient;
 - exact second-tier classes;
 - weapon categories as classes require them;
 - number of character slots.
