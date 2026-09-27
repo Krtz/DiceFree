@@ -556,3 +556,69 @@ This file records decisions that are sufficiently settled to design around. It i
 **Open:** Exact solution. Candidate tools include optional/content-specific level sync, mentor-style normalization, level-gap XP curves and reward normalization.
 
 **Decision:** High-level characters can still normally return to old content and overpower it when not using a special sync/mentor rule.
+
+
+## 2026-09-27 — Core attribute secondary direction
+
+**Decision:** Keep Vitality as its own attribute rather than folding HP into Strength.
+
+**Decision:** Current secondary direction:
+- Vitality -> HP and HP regeneration;
+- Strength -> modest Physical Defense;
+- Agility -> very small Attack Speed and Movement Speed gains;
+- Intelligence -> modest Magical Defense, plus class-specific resource interactions where appropriate;
+- Spirit -> healing done and healing received with separate scaling.
+
+**Decision:** Large differences in defenses/speeds/resources come primarily from class base values, gear, abilities and passives rather than attribute secondaries.
+
+## 2026-09-27 — Ability scaling and adaptive scaling
+
+**Decision:** Abilities define their own stat coefficients.
+
+**Decision:** Abilities may use weighted multi-stat scaling or adaptive rules such as highest of STR/AGI, highest attribute overall, or other class-specific formulas.
+
+## 2026-09-27 — Tooltip detail
+
+**Decision:** Default ability tooltips prioritize final readable values such as damage, resource cost and cooldown.
+
+**Decision:** Holding a modifier key should reveal detailed formulas/scaling, League-style.
+
+## 2026-09-27 — Elemental resistance baseline
+
+**Decision:** Players and enemies can begin with negative elemental resistance.
+
+**Direction:** Elemental resistances should likely be displayed as direct percentages with a normal cap, while special classes/items/effects may raise that cap.
+
+**Open:** Exact starting negative resistance, cap, floor and whether direct percentages remain preferable to a rating/diminishing-return conversion.
+
+## 2026-09-27 — Elemental healing
+
+**Decision:** Healing has no Physical/Magical channel.
+
+**Decision:** Healing may have an element.
+
+**Decision:** Matching elemental resistance increases matching elemental healing, while negative resistance reduces it.
+
+**Example:** +50% Fire resistance -> 1.5x Fire healing; -20% Fire resistance -> 0.8x Fire healing.
+
+## 2026-09-27 — Resistance auras and vulnerabilities
+
+**Decision:** The system must support positive/negative elemental resistance auras, temporary all-resistance buffs, enemy resistance debuffs and monster-specific elemental weaknesses/strengths.
+
+## 2026-09-27 — Combat telemetry and floating numbers
+
+**Decision:** Build exact combat-resolution telemetry/debug logging from the beginning, including raw values, mitigation, resistance, coefficients and final values.
+
+**Open:** Whether detailed combat logs/meters are exposed to normal players.
+
+**Decision:** Floating combat numbers are supported and player-toggleable.
+
+**Direction:** Prepare the framework so rapid multi-instance attacks can later aggregate numbers if visual noise becomes a problem.
+
+## 2026-09-27 — Threat UI
+
+**Decision:** Threat UI is toggleable.
+
+**Default:** simple color/state indicators.
+
+**Optional:** exact threat values/rankings for players who enable detailed information.
