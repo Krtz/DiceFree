@@ -645,3 +645,204 @@ The giant central tree can initially exist as a distant visual landmark rather t
 Build the **smallest coherent version** of this region first and expand outward through the same geography.
 
 Do not fully design Faces 2–6 yet.
+
+
+## Cornberg first-arrival presentation
+
+When the Echo first enters Cornberg, use a short non-disruptive presentation beat focused on the ancient resurrection stone.
+
+Sequence:
+1. player crosses into the village;
+2. camera briefly pushes/zooms toward the stone d6 on the village green;
+3. the Face 1 / one-pip side lights automatically;
+4. control returns;
+5. UI can display a concise message such as **Respawn point set: Cornberg**.
+
+The player does **not** manually activate the first resurrection stone.
+
+This establishes the mechanic without requiring an NPC explanation and reinforces that the stone reacts specifically to the Echo.
+
+Later resurrection stones can require explicit interaction/selection.
+
+## Magical well as the healing point
+
+Cornberg's magical well is the village's normal healing/restoration point.
+
+Current direction:
+- being close to the well restores HP over time;
+- it may restore class resources where appropriate;
+- exact rate/resource behavior is tuned later;
+- it is separate from the resurrection stone even though both sit in/near the village green.
+
+The well is known to locals as beneficial/magical.
+
+The resurrection stone is not.
+
+## Hidden Novice profession eligibility
+
+Profession teachers visibly teach Tier 1+ classes.
+
+A **level 25+ Novice can also learn professions**, but this is intentionally a hidden rule:
+- do not advertise it in normal tutorial copy;
+- do not put "Novice level 25" in obvious profession UI requirements;
+- players who deliberately overlevel Novice can discover the interaction naturally.
+
+This supports the game's secret/experimental progression philosophy.
+
+## First Cornberg quest chain
+
+The opening progression chain should be tuned through playtesting, but the current intended structure is:
+
+### Quest 1 — Slimes in the crops
+
+Trigger:
+- approaching the crop fields causes a short camera focus or nearby voiced/text cue;
+- the former swordswoman/farmer is visibly annoyed by the infestation and asks the Echo for help.
+
+Objective flow:
+1. kill 3 weakest crop-field Slimes;
+2. those kills should bring a fresh Novice to approximately level 2;
+3. kill 2 more crop-field Slimes;
+4. return to the former swordswoman;
+5. quest turn-in should bring the player to approximately level 3.
+
+Exact XP numbers are provisional and must be tuned in playtests.
+
+### Quest 2 — Check the road
+
+The swordswoman says the Slimes are behaving unusually and asks the Echo to investigate farther into the forest.
+
+Objective:
+- travel to a designated forest/road investigation point;
+- kill 3 Board-2-inspired road Slimes;
+- return to the swordswoman.
+
+Target progression:
+- player should be approximately level 5 on turn-in.
+
+### Quest 3 — Named Slime
+
+The swordswoman identifies/reports a stronger named Slime deeper in the forest.
+
+Objective:
+- locate and kill the named Slime;
+- return.
+
+Target progression:
+- turn-in brings the player to approximately level 6.
+
+Exact name/location/mechanics remain open.
+
+### Runner returns
+
+After Quest 3, Cornberg's weekly runner returns.
+
+The runner did **not** reach the next town because the road was overrun / blocked by too many Slimes.
+
+The runner does not bring some unrelated apocalypse message.
+
+Their failure simply confirms the local Slime problem is severe enough to disrupt normal travel.
+
+### Quest 4 — Break the Slime surge
+
+The village asks the Echo to reduce the Slime problem enough that normal travel can resume.
+
+Current concept: provide multiple valid ways to satisfy the objective, such as:
+- complete the Slime dungeon;
+- kill the dangerous elite Slime;
+- kill a large total number of Slimes (e.g. ~30 total);
+- potentially other equivalent objectives later.
+
+This is a useful prototype for **multi-path quest completion**.
+
+Exact alternatives/counts/reward parity are not locked.
+
+### Quest 5 — Become Cornberg's runner
+
+After proving capable enough to handle the local danger, Cornberg asks the Echo to carry the village's news/message to the next settlement.
+
+The reason is simple:
+- the normal runner could not get through;
+- the Echo has demonstrated they can.
+
+No larger news hook is required.
+
+By this stage, current tuning intent is that the player is **around level 10**.
+
+### Level 10 — the mountain calls
+
+Once level 10 is reached, the Echo feels the pull/urge to return to Cornberg mountain.
+
+The player returns and receives the first blessing:
+- Physically Blessed Novice, or
+- Magically Touched Novice.
+
+Advancement resets class level to 1 with the stronger Tier 1 base stats.
+
+The onward-runner quest can continue before or after the blessing as pacing/playtesting determines.
+
+## Repeatable Cornberg Slime work after advancement
+
+After the opening chain is completed, the former swordswoman's Slime-related jobs can become repeatable sidequests/bounties.
+
+Purpose:
+- provide a familiar low-stakes activity;
+- give early Tier 1 characters something to do;
+- support farming/XP/resources;
+- let returning characters revisit Cornberg.
+
+Exact repetition cadence, rewards and scaling are deferred.
+
+## Additional Cornberg sidequests
+
+Cornberg should have more sidequests than the required Slime chain.
+
+Do not design all of them before the proof of concept.
+
+Later sidequests can introduce:
+- brewery;
+- well/water;
+- blacksmith;
+- general store;
+- fishing/cooking/alchemy;
+- abandoned-house rumors;
+- mountain folklore;
+- villagers and farms.
+
+The POC only needs enough side content to prove the structure.
+
+## Named Cornberg service NPC: Peter Banker
+
+Cornberg's banker is **Peter Banker**.
+
+Working gag/title:
+> "Your friendly neighborhood banker-man."
+
+Keep the joke light enough that he can still function as a recurring actual NPC rather than a one-line parody.
+
+He runs the mundane local bank/storage service while having no understanding of the Echo/multiversal reason the account-wide bank works.
+
+## Separate blacksmith
+
+The Cornberg blacksmith has a separate forge/building from the general-goods store.
+
+This gives the village:
+- stronger visual/ambient identity;
+- smoke/fire/hammering;
+- a clear physical place for NPC gear crafting.
+
+## Retired magic-user role remains flexible
+
+The former magical adventurer in the retired couple is **not** Cornberg's healer; the magical well fills that mechanical role.
+
+Her present-day village role is intentionally open.
+
+Possible directions:
+- herbalist;
+- brewery helper/brewer;
+- housewife / general helper who uses small practical magic around Cornberg;
+- another mundane village role.
+
+The important point is that she has enough magical experience to recognize and later guide a Magically Touched Novice.
+
+Do not force a formal "wizard NPC" job onto her.
