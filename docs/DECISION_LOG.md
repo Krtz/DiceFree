@@ -975,3 +975,63 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Cornberg sends one runner to the next settlement each week to carry and return with important news before the weekly open session.
 
 **Direction:** The runner returns shortly after the initial Slime quest/follow-up and becomes the first natural main-quest bridge toward the next town.
+
+
+## 2026-09-27 — First Cornberg resurrection-stone activation
+
+**Decision:** On the Echo's first arrival in Cornberg, a short camera focus/zoom presents the stone d6 and the one-pip side lights automatically.
+
+**Decision:** The first stone sets Cornberg as the active respawn point automatically; a concise UI message may confirm this.
+
+## 2026-09-27 — Cornberg well
+
+**Decision:** The magical well is Cornberg's normal healing/restoration point.
+
+**Decision:** It is mechanically distinct from the resurrection stone.
+
+## 2026-09-27 — Hidden level-25 Novice profession access
+
+**Decision:** Level-25+ Novices can learn professions despite remaining Tier 0.
+
+**Decision:** This eligibility is deliberately hidden/not explicitly advertised to players.
+
+## 2026-09-27 — Cornberg opening quest progression
+
+**Direction:** Initial XP/progression targets are:
+- first 3 crop Slimes -> around level 2;
+- 2 more crop Slimes + first quest turn-in -> around level 3;
+- investigate road + kill 3 stronger Slimes + turn-in -> around level 5;
+- named Slime quest + turn-in -> around level 6;
+- final anti-Slime objective(s) + onward-runner setup -> around level 10.
+
+**Decision:** Exact XP values require playtesting.
+
+## 2026-09-27 — Multi-path anti-Slime quest
+
+**Direction:** The final local Slime-problem quest can be completed through alternative objectives such as clearing the Slime dungeon, killing the elite Slime, or reaching a large total Slime-kill count.
+
+**Decision:** This is intended as an early proof of multi-path quest completion.
+
+## 2026-09-27 — Cornberg runner transition
+
+**Decision:** The weekly runner returns because excessive Slime activity prevented them reaching the next town.
+
+**Decision:** Cornberg then asks the Echo to become the runner because the Echo has proved capable of handling the road.
+
+## 2026-09-27 — Cornberg repeatable Slime work
+
+**Decision:** After the initial quest chain, the former swordswoman can offer repeatable Slime-related sidequests/bounties.
+
+## 2026-09-27 — Peter Banker
+
+**Decision:** Cornberg's banker is **Peter Banker**, with the working gag/title "your friendly neighborhood banker-man."
+
+## 2026-09-27 — Separate Cornberg blacksmith
+
+**Decision:** The blacksmith/crafter has a separate forge/building from the general-goods store.
+
+## 2026-09-27 — Retired magic-user village role
+
+**Decision:** The retired magical adventurer is not the dedicated healer NPC; the magical well fills that role.
+
+**Open:** Her mundane Cornberg role may be herbalist, brewery helper, housewife/general magical helper or another fitting village role.
