@@ -37,27 +37,25 @@ A future class with no conventional basic attack is possible only as an intentio
 
 ## Primary attributes
 
+The detailed stat model is documented in `docs/STATS_AND_DAMAGE.md`.
+
 Core attributes:
-- **Vitality**
-- **Strength**
-- **Agility**
-- **Intelligence**
-- **Spirit**
+- Vitality
+- Strength
+- Agility
+- Intelligence
+- Spirit
 
-Every attribute should provide at least one useful secondary effect.
+Current secondary direction:
+- VIT -> HP and HP regeneration;
+- STR -> modest Physical Defense;
+- AGI -> very small Attack Speed and Movement Speed gains;
+- INT -> modest Magical Defense plus class-specific resource interactions where appropriate;
+- SPI -> healing done and healing received, with separate scaling.
 
-Every class has one or more **primary attributes** used for its base/basic-attack scaling.
+Class base stats, gear, abilities and passives remain more important than these secondary attribute bonuses.
 
-Multi-primary scaling is defined **case by case per class**. There is no universal hybrid formula. A class may weight two stats differently, equally, or in some other deliberate way.
-
-A future secret class using all five attributes as primary is compatible with the system.
-
-Current secondary-effect ideas remain provisional:
-- Strength -> physical durability and/or HP-related benefit;
-- Agility -> attack speed, movement speed and/or evasion;
-- Intelligence -> magical durability and/or resource-related benefit;
-- Spirit -> healing-related benefit;
-- Vitality -> maximum HP.
+Classes can use one or more primary attributes, and individual skills can use bespoke/adaptive scaling.
 
 ## Health
 
@@ -81,101 +79,17 @@ Class/resource interactions with Intelligence are defined by class/system design
 
 An advancement may keep, modify or replace the previous resource entirely.
 
-## Damage instances, channels and elements
+## Damage, defense, resistances and crit
 
-Every damage event is represented as one or more **separate damage instances**.
+Detailed damage-instance, Physical/Magical Defense, elemental resistance, elemental healing, penetration and crit rules are maintained in `docs/STATS_AND_DAMAGE.md`.
 
-Each damage instance has its own:
-- damage amount;
-- Physical or Magical channel;
-- element(s), if any;
-- mitigation/resistance calculation;
-- on-hit/trigger context where relevant.
-
-If an attack contains multiple packets, they are processed independently.
-
-Example:
-
-```
-One sword swing:
-- 80 Physical Fire
-- 20 Magical Fire
-```
-
-Those are two separate damage instances, not one blended calculation.
-
-If an attack has multiple elements, those should also be represented as separate damage instances rather than one multi-element packet.
-
-Example:
-
-```
-One attack:
-- 50 Physical Coffee
-- 50 Physical Fire
-```
-
-This keeps resistance calculations, logs, triggers and debugging clear.
-
-## Physical and Magical Defense
-
-DiceFree has:
-- **Physical Defense**
-- **Magical Defense**
-
-Both use diminishing returns rather than linear immunity scaling.
-
-Most survivability comes from:
-- class base stats;
-- equipment;
-- abilities/passives;
-- temporary effects.
-
-Attributes may contribute modestly, but should not replace those systems.
-
-The exact diminishing-returns formula will be balanced later.
-
-## Elemental resistance
-
-Characters can gain resistance to specific elements.
-
-Channel mitigation and elemental resistance multiply rather than add.
-
-Example:
-
-```
-Incoming damage: 100 Physical Coffee
-Physical mitigation: 50%
-Coffee resistance: 50%
-
-100 × 0.50 × 0.50 = 25 damage taken
-```
-
-The exact caps, negative resistance rules and penetration rules remain to be designed.
-
-## Attack speed
-
-Basic attacks have attack-speed values.
-
-Classes can have very different:
-- base attack speed;
-- attack animation timing;
-- attack range;
-- scaling opportunities.
-
-## Critical hits
-
-Critical hits are **not assumed to be a universal baseline mechanic for every class**.
-
-Crit can instead be introduced through:
-- class passives;
-- abilities;
-- equipment;
-- special systems;
-- specific advancement identities.
-
-Different systems may define whether attacks, spells, healing or damage-over-time effects are allowed to crit.
-
-Exact crit rules remain to be designed.
+Important combat rules:
+- mixed damage uses separate damage instances;
+- every instance has one Physical/Magical channel and one element/no element;
+- Physical/Magical Defense and elemental resistance are separate mitigation layers;
+- elemental resistance may be negative;
+- elemental healing can use matching resistance as a positive healing modifier;
+- crit is opt-in rather than universally assumed.
 
 ## Movement and mobility
 
@@ -233,11 +147,13 @@ Support abilities can target:
 
 ## Fixed kits
 
-Classes use **fixed ability kits** rather than freely swapping from a large skill library.
+Classes use fixed ability kits rather than freely swapping from a large skill library.
 
 Advancement may add, evolve or replace parts of that fixed kit.
 
 Gear, Intrinsics and special effects can modify how the fixed kit behaves.
+
+Normal tooltips should show readable final values. Holding a modifier key should expose detailed formulas/scaling where useful.
 
 ## Consumables
 
