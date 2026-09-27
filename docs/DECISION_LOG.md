@@ -673,3 +673,74 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Resistance buffs/debuffs are intended to support rotational gameplay, not just passive gearing.
 
 **Example design space:** an ability may raise an ally's Nature resistance by 30% or lower an enemy's Nature resistance by 30% for 10 seconds, allowing the same class mechanic to set up defense, elemental healing or elemental damage depending on target and timing.
+
+
+## 2026-09-27 — Class-defined defenses
+
+**Decision:** Every class has defined starting Physical Defense and Magical Defense as part of its base stat package.
+
+**Decision:** Physical and Magical Defense use the same general diminishing-return formula structure; class/build differences come from values/modifiers rather than separate formula families.
+
+## 2026-09-27 — Negative resistance and cursed healing
+
+**Decision:** Elemental resistance currently has **no hard negative floor**.
+
+**Decision:** Extremely negative elemental resistance can reduce matching elemental healing to zero and then invert it into damage below -100%.
+
+**Decision:** This inverted elemental-healing behaviour is intentional design space.
+
+## 2026-09-27 — Penetration/healing interaction remains open
+
+**Open:** Exact interaction between elemental penetration and elemental healing.
+
+**Current intuition:** elemental penetration on a healing source may act as the inverse of damage penetration, effectively treating the target as having additional matching resistance for that heal.
+
+## 2026-09-27 — Damage/defense resolution buckets
+
+**Decision:** Combat math uses explicit deterministic resolution buckets rather than arbitrary modifier order.
+
+**Direction:** separate source scaling, instance definition, target mitigation, final modifiers and post-resolution triggers.
+
+**Open:** exact mathematical order within/between those buckets until playable combat exists.
+
+## 2026-09-27 — Regeneration
+
+**Decision:** HP regeneration is always active in combat.
+
+**Decision:** Items/classes may add special out-of-combat regeneration bonuses.
+
+**Decision:** Resource regeneration is entirely class/resource-specific.
+
+## 2026-09-27 — Shields and absorbs
+
+**Decision:** Generic shield/absorb framework is required.
+
+**Decision:** Shields may filter or scale by channel/element and can have bespoke behaviours, e.g. 500 Fire absorb but only 250 absorb for other damage.
+
+## 2026-09-27 — Overhealing
+
+**Decision:** Default overhealing disappears.
+
+**Decision:** Classes/items/passives may explicitly convert overhealing into shields, resources, buffs, damage or other effects.
+
+## 2026-09-27 — Lifesteal / damage-to-healing
+
+**Decision:** Lifesteal, spell-vamp and damage-to-healing are framework-level mechanics rather than one-off class hacks.
+
+## 2026-09-27 — Reflection / thorns
+
+**Decision:** Reflection/thorns is framework-level.
+
+**Decision:** Reflected damage carries context/tags preventing accidental infinite reflection loops.
+
+## 2026-09-27 — Immunity and targetability flags
+
+**Decision:** Framework must support statuses such as Invulnerable, Untargetable, Physical/Magical/Element Immune, Damage Immune, and CC-category immunities.
+
+## 2026-09-27 — Crowd-control resistance and DR
+
+**Decision:** Framework must support resistances to CC categories and class/item/passive bonuses to those resistances.
+
+**Decision:** Repeated crowd-control chains require diminishing-returns/anti-lock framework so coordinated stun-heavy parties cannot permanently disable bosses.
+
+**Open:** exact DR model and whether/how these resistances appear on the default character sheet.
