@@ -540,3 +540,160 @@ Possible future models include:
 - boss break-bars/stagger systems.
 
 These values do not necessarily need to be prominent on the default player stat sheet, but they must exist in the underlying stat/effect framework and be inspectable where relevant.
+
+
+## Pure damage
+
+The combat framework supports a rare **Pure Damage** channel for exceptional mechanics.
+
+Pure Damage:
+- ignores Physical Defense;
+- ignores Magical Defense;
+- ignores elemental resistance;
+- ignores ordinary penetration calculations because there is nothing to penetrate;
+- deals its stated amount unless an effect explicitly says it can block/modify Pure Damage.
+
+Example:
+
+```
+500 Pure Damage = 500 damage
+```
+
+Pure Damage is reserved for special cases and should not become a normal class damage channel.
+
+Whether shields/immunities can absorb Pure Damage is defined explicitly by those shields/statuses.
+
+## Shield resolution order
+
+Shield consumption follows these defaults:
+
+1. explicit shield priority overrides;
+2. matching/specific shields before generic shields;
+3. among equally eligible generic shields, **oldest applied is consumed first**.
+
+Example:
+- a Fire-only shield is consumed before a generic shield against Fire damage;
+- a generic shield with an explicit high-priority "explode when broken" rule can override normal ordering;
+- two ordinary generic shields resolve first-applied, first-consumed.
+
+Incoming damage is normally mitigated by Defense/resistance **before** shield absorption.
+
+Individual shield mechanics may explicitly override normal behavior.
+
+## Mana/resource shields
+
+Default resource-shield behavior:
+- resolve normal damage mitigation first;
+- then convert/absorb the remaining eligible damage through the shield's resource rule.
+
+Classes may define exceptions case by case.
+
+## Healing inversion damage
+
+When elemental healing becomes negative because matching resistance is below -100%, the negative result becomes **damage with no Physical/Magical channel**.
+
+It is not automatically Magical or Physical.
+
+This inverted-healing damage uses the original healing element/context and is intended to integrate with the special/pure-like damage framework without pretending it was an ordinary attack.
+
+Exact interaction with shields, immunity flags and Pure Damage rules should be explicit per effect.
+
+## Healing crits
+
+Healing does not crit by default.
+
+If a class, passive, item or effect enables healing crits, eligible elemental and non-elemental heals may crit under that effect's rules.
+
+## Lifesteal resolution
+
+Default lifesteal/damage-to-healing uses:
+- **final damage actually dealt after mitigation**;
+- capped by **actual HP damage inflicted**, not theoretical overkill.
+
+Example:
+- target has 10 HP;
+- attack resolves for 10,000 final damage;
+- default lifesteal calculation sees 10 actual HP damage.
+
+Effects may explicitly override these defaults.
+
+## Reflection trigger defaults
+
+Reflected/thorns damage does not trigger ordinary lifesteal, on-hit, reflection or attack-proc chains unless an effect explicitly opts in.
+
+This prevents recursive/proc-loop nonsense while preserving room for intentionally stupid builds later.
+
+## Aura stacking
+
+Auras/effects with the same stacking identity do **not** normally stack by multiplying copies from several players.
+
+Default:
+- strongest eligible aura of the same identity applies.
+
+Individual effects can define different rules if desired.
+
+## Dispel strength
+
+Every dispellable effect defines its own dispel interaction.
+
+Framework levels:
+- **Weak Dispel**
+- **Strong Dispel**
+- **Undispellable**
+
+An effect can specify which dispel strength can remove it.
+
+Do not hard-code broad "all poison/all magic" removal categories unless a particular skill deliberately references such a tag.
+
+## Death prevention
+
+Framework must support case-by-case death-prevention effects such as:
+- cannot fall below 1 HP for X seconds;
+- consume a buff/shield/resource instead of dying;
+- self-revive;
+- delayed death;
+- revive with defined HP/resource;
+- conditional death immunity.
+
+These are reusable effect definitions rather than bespoke class code.
+
+## Summon stat behavior
+
+Summon framework must support both:
+- **snapshot stats** when summoned;
+- **dynamic inheritance** that updates from owner stats while active.
+
+Each summon defines its own model.
+
+Summons have independent threat entries unless explicitly designed otherwise.
+
+## Combat-state membership
+
+Primary combat-state rule:
+- an entity is considered **in combat while it has active threat-list membership / is actively engaged or aggroed**.
+
+Combat can propagate through support actions when those actions add threat or link the supporter to an active encounter.
+
+Exact encounter cleanup/grace timing remains an implementation detail.
+
+## Target dummies
+
+Training/test dummies should exist as both dev tools and world objects.
+
+Direction:
+- early/start-town dummies have low/simple defenses;
+- later towns/areas can offer tougher dummies with higher HP/Defense/resistances or specialized configurations.
+
+Exact player-facing configuration UI is deferred.
+
+## Combat-number presentation
+
+Floating-number color indicates broad result/channel:
+- Physical
+- Magical
+- Pure
+- Healing
+
+Elements are communicated primarily with **element icons**, not by assigning a unique floating-text color to every element.
+
+This keeps Coffee/Donut/Math/etc. readable without creating an unusable rainbow.
