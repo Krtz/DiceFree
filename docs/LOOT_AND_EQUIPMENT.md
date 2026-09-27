@@ -2,96 +2,71 @@
 
 ## Principle
 
-Loot should be relatively meaningful rather than constantly exploding from every enemy.
+Loot should be meaningful rather than constant.
 
-DiceFree uses deliberate **drop tables**.
-
-Major equipment progression comes primarily from successfully finishing dungeons/raids, supplemented by rare overworld equipment drops, quests and NPC crafting.
+Major equipment progression comes primarily from successful dungeon/raid completion, supplemented by rare overworld drops, quests and NPC crafting.
 
 ## Dungeon and raid rewards
 
-Successful completion sends each player to a **private loot room**.
+Successful completion sends each player to a private loot room.
 
-The room generates a content-specific number of reward choices from that dungeon/raid/mode's tables.
+Each dungeon/mode defines:
+- its own loot tables;
+- its own number of offered choices;
+- its own rare jackpot rules;
+- its own fallback rewards.
 
-There is **no universal baseline number of choices**. A short dungeon, huge raid, secret boss dungeon and hard mode can all use different offer counts.
+Players can inspect all offers before choosing one.
 
-The player:
-- can fully inspect every offered item;
-- chooses exactly one equipment reward;
-- may equip/keep it or send it directly to the shared bank;
-- may choose gear intended for another manifestation/class;
-- loses all unchosen offers when leaving.
+The chosen item can be kept/equipped or sent directly to the shared bank.
 
-If none of the equipment offers are desirable, the player can instead take an alternate reward such as:
-- experience;
-- gold;
-- materials/resources.
+Unchosen rewards vanish.
 
-Exact fallback amounts are content-specific.
+If the gear choices are undesirable, content may instead offer XP, gold or materials/resources.
 
-### Rare jackpots
+## Equipment only on completion
 
-Loot tables may contain extremely rare jackpot items.
-
-Whether an item:
-- can appear on normal mode at microscopic odds;
-- is exclusive to a harder mode;
-- has better odds on harder modes;
-- requires special conditions
-
-is decided **case by case per dungeon/item**.
-
-## Bosses inside dungeons
-
-Dungeon/raid bosses award:
-- experience;
+Dungeon bosses can award:
+- XP;
 - gold;
 - materials/resources;
-- progression/quest credit.
+- quest/progression credit.
 
-They do **not** award equipment before successful completion.
+They do not award equipment before the run is successfully completed.
 
-## Overworld drops
+## Overworld loot
 
-Overworld equipment drops are comparatively rare and free-for-all.
+Rare overworld equipment drops are **immediately free-for-all**.
 
-Normal monsters respawn on timers; named/elites use longer timers.
+There is no temporary ownership/reservation window.
 
-## Item generation
+## Randomized and handcrafted gear
 
-DiceFree uses both randomized and handcrafted equipment.
+DiceFree uses both:
+- randomized gear inspired by DiceBound's rolls/rarities/affixes;
+- more heavily handcrafted named gear with bespoke identity/effects.
 
-DiceBound is a reference for:
-- stat rolls;
-- rarity rolls;
-- randomized affixes/effects;
-- strange combinations.
+## Equipment families
 
-DiceFree should also contain more bespoke gear:
-- named items;
-- dungeon/boss themed gear;
-- crafted transformations;
-- Mythical/Artifact-like items;
-- fixed/bespoke effects.
+There is no armor-weight defense taxonomy.
 
-## Intrinsics and equipment families
+All equipment ultimately interacts with the same Physical Defense / Magical Defense systems, but families can differ greatly in stat identity.
 
-DiceFree keeps the idea of **Intrinsics**, but they can represent larger fixed stat packages than in DiceBound.
+Families can emphasize:
+- Physical Defense;
+- Magical Defense;
+- primary attributes;
+- elemental resistances;
+- attack speed;
+- resource stats;
+- healing/support stats;
+- other derived stats.
 
-There is one defense type rather than armor-weight defense types.
+## Intrinsics
 
-Different equipment families instead distinguish themselves through:
-- intrinsic stat packages;
-- affix pools;
-- class permissions;
-- special effects.
+Intrinsics are more important numerically than in DiceBound.
 
-For example, two chest-piece families can provide very different offensive/support stat profiles while still feeding the same underlying Defense stat.
-
-## Binding
-
-All items are **account-bound**.
+They can provide significant fixed stat packages that strongly establish what an equipment family/item is "for" before randomized affixes are applied.
 
 ## Equipment slots
 
@@ -107,39 +82,46 @@ All items are **account-bound**.
 10. Amulet
 11. Back
 
-## Bank and inventory
+## Inventory and bank
 
-- generous inventory/bank philosophy;
-- send/deposit items to bank from anywhere;
-- withdraw only in town;
-- materials generally behave like currencies/resources instead of inventory junk.
+Because items can be remotely sent to the bank, active carrying capacity does **not** need to be huge.
+
+Current direction:
+- relatively limited carried inventory;
+- generous account bank;
+- items can be sent/deposited to bank from anywhere, including inside dungeons;
+- items can only be withdrawn from the bank while in town;
+- **gold/currency cannot be remotely deposited**;
+- carried gold must be manually deposited in town;
+- town bank UI should include a convenient **Deposit All** action.
+
+This keeps town banking relevant without forcing players to throw away valuable items during long adventures.
+
+## Currency loss
+
+Carried gold lost on death simply disappears.
+
+It does not create a recoverable corpse pile.
+
+Banked gold is safe.
 
 ## Durability
 
-There is **no durability system**.
+There is no durability system.
 
-## Requirements
+## Equipment swapping
 
-Items may require:
-- class;
-- class family/type;
-- equipment proficiency;
-- level;
-- stats;
-- other special conditions.
+Whether equipped gear can be changed during active combat is still unresolved.
 
-## NPC gear crafting
+Limited carried inventory reduces some swap abuse, but does not by itself decide the rule.
 
-NPC crafters transform meaningful equipment/material combinations into authored upgrades.
+## Binding
 
-Example:
+All items are account-bound.
 
-```
-Longsword from Dungeon 4
-+ Heart of Dragon Raid Boss
-+ 500 rarity crystals
-= Longsword of the Dragon
-```
+## NPC crafting
+
+NPC crafters combine authored gear and resources into new authored equipment.
 
 ## Visible equipment
 
