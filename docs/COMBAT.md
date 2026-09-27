@@ -161,7 +161,7 @@ Advancement may add, evolve or replace parts of that fixed kit.
 
 Gear, Intrinsics and special effects can modify how the fixed kit behaves.
 
-Normal tooltips should show readable final values. Holding a modifier key should expose detailed formulas/scaling where useful.
+Normal tooltips should show readable final values. Holding a modifier key such as Shift should expose detailed formulas/scaling where useful, including the currently-selected attribute for adaptive-scaling abilities.
 
 ## Consumables
 
