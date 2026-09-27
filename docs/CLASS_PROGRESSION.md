@@ -38,8 +38,10 @@ Current attribute set:
 - Spirit
 
 Every class defines:
-- level-1 base values;
-- per-level growth;
+- level-1 base attributes;
+- per-level attribute growth;
+- starting Physical Defense;
+- starting Magical Defense;
 - one or more primary attack attributes;
 - movement speed;
 - base HP;
