@@ -1,74 +1,72 @@
 # Account Progression
 
-DiceFree distinguishes **manifestation-specific progression** from **Echo/account progression**.
+DiceFree distinguishes manifestation-specific progression from Echo/account progression.
 
-## Character manifestations
+## Manifestation-specific
 
-All character slots are alternate manifestations/timelines of the same underlying Echo.
-
-Manifestation-specific systems include:
+Examples:
 - class lineage;
-- current class level;
+- class level;
 - equipped gear;
-- class abilities/resources;
+- class kit/resources;
 - carried currency;
-- at least some quests/events.
+- many quests/events.
 
-## Echo-wide systems
+## Echo-wide
 
-Good default candidates:
+Examples:
 - shared bank;
 - banked currency;
 - profession knowledge/progression;
-- discovered recipes where marked Echo-wide;
-- world/systemic discoveries;
-- selected quests/events;
-- account-bound items.
+- selected recipes/discoveries;
+- account-bound items;
+- some quests/events.
 
-Persistence is still decided case by case.
+Rules are decided case by case.
 
 ## Currency split
 
-Gold and similar currencies can exist in two places:
+Gold and future currencies can have both carried and banked states.
 
-### Carried by manifestation
+### Carried
+- manifestation-specific;
+- used while adventuring;
+- may lose a percentage on death;
+- cannot be remotely deposited.
 
-- character-specific;
-- available for immediate spending/use;
-- a percentage may be lost on death.
-
-### Stored in bank/account
-
+### Banked
 - Echo-wide;
-- safe from ordinary death penalties.
+- safe from normal death loss;
+- deposited manually in town;
+- should support Deposit All.
 
-Future currencies/materials may use the same carried-versus-stored model where appropriate.
+Future currencies/materials may use different safety rules.
 
-Some materials/currencies may be completely safe, while others may be partially lost on death. That is decided when those resources are designed.
+Some resources can be always safe.
 
-## Professions
+Some can use carried/stored risk.
 
-Profession progression/knowledge is **Echo-wide**.
-
-Professions are secondary supporting systems, so replaying profession leveling separately on every manifestation is not intended.
+The currency system should support this generically rather than hard-coding gold assumptions.
 
 ## Shared bank
 
-- account-wide;
 - all items account-bound;
-- deposit from anywhere;
-- withdraw only in town;
-- generous capacity.
+- generous capacity;
+- items can be remotely sent/deposited from anywhere;
+- items can be withdrawn only in town;
+- currencies require physical town banking unless a future currency explicitly defines different rules.
+
+## Professions
+
+Profession progression is Echo-wide.
 
 ## Quest persistence
 
-World/systemic discoveries are good account-wide candidates.
+World/systemic discoveries are good Echo-wide candidates.
 
-Story execution, class progression and ordinary quests are good manifestation-specific candidates.
+Class progression, story execution and ordinary questing are usually manifestation-specific unless designed otherwise.
 
-Multiplayer quest credit still requires eligibility.
-
-## Still open
+## Open
 
 - secret-class unlock sharing;
 - achievements;
@@ -76,4 +74,4 @@ Multiplayer quest credit still requires eligibility.
 - pets;
 - cosmetics;
 - difficulty unlocks;
-- exact character-slot count.
+- exact slot count.
