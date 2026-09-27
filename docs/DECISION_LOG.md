@@ -503,3 +503,56 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-27 — Alternate-Echo encounter idea
 
 **Idea:** A future alternative-timeline dungeon where another manifestation of the Echo became evil is explicitly welcome, but this is late-game/story content and not a current implementation priority.
+
+
+## 2026-09-27 — Multi-primary class scaling
+
+**Decision:** Classes with multiple primary attributes define their attack-scaling weights **case by case**.
+
+**Decision:** There is no universal hybrid-stat formula.
+
+## 2026-09-27 — Separate damage instances
+
+**Decision:** Mixed damage packets are represented as separate damage instances for calculation, resistance, triggers, combat logging and debugging.
+
+**Decision:** If one attack deals both Physical and Magical damage, those are separate instances.
+
+**Decision:** If one attack uses multiple elements, those elemental portions are also separate instances rather than one blended multi-element packet.
+
+## 2026-09-27 — Defense sources
+
+**Decision:** The meaningful bulk of Physical/Magical Defense comes from class base values, gear and abilities/passives.
+
+**Decision:** Attributes may contribute to defense as secondary effects, but should not replace those systems.
+
+## 2026-09-27 — Attribute secondary effects
+
+**Decision:** Spirit's healing-given and healing-received scaling, if both are used, may use different coefficients.
+
+**Decision:** Intelligence must retain useful secondary value even for non-Mana classes, but it does not universally govern resource regeneration.
+
+## 2026-09-27 — Resurrection Sickness scope
+
+**Decision:** Resurrection Sickness reduces the five primary attributes only: Vitality, Strength, Agility, Intelligence and Spirit.
+
+**Working value:** roughly 10% per stack.
+
+## 2026-09-27 — Crit philosophy
+
+**Direction:** Crit is not assumed to be universally available to every class by default.
+
+**Decision:** Crit may be granted/enabled through class mechanics, passives, abilities, gear or other systems, with different rules by effect type.
+
+## 2026-09-27 — Healer combat identity
+
+**Decision:** Healers have real damage rotations and are expected to contribute DPS in group play.
+
+**Decision:** Healers must remain viable for solo questing, farming and grinding.
+
+## 2026-09-27 — Veteran/new-player co-op goal
+
+**Decision:** DiceFree should let veteran players meaningfully play with new players without making old content universally auto-scaled or making progression trivial.
+
+**Open:** Exact solution. Candidate tools include optional/content-specific level sync, mentor-style normalization, level-gap XP curves and reward normalization.
+
+**Decision:** High-level characters can still normally return to old content and overpower it when not using a special sync/mentor rule.
