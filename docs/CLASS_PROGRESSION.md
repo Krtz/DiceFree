@@ -78,16 +78,29 @@ The coefficient may be universal or class-dependent; unresolved.
 
 ### Secondary effects
 
-All five attributes should provide useful secondary effects.
+Current direction:
+- Vitality -> HP and HP regeneration;
+- Strength -> modest Physical Defense;
+- Agility -> very small Attack Speed and Movement Speed;
+- Intelligence -> modest Magical Defense plus class-specific resource value;
+- Spirit -> healing done and healing received with separate coefficients.
 
-Current ideas, not final:
-- Strength -> some physical durability and/or HP-related benefit;
-- Agility -> attack speed, movement speed and/or evasion;
-- Intelligence -> some magical durability and/or class/resource benefit;
-- Spirit -> healing-related benefits;
-- Vitality -> HP.
+Class base stats, equipment, abilities and passives remain the main source of large combat differences.
 
-Intelligence should not become a completely dead stat on non-Mana classes, but its exact universal secondary value remains unresolved.
+See `docs/STATS_AND_DAMAGE.md` for the detailed model.
+
+### Skill scaling
+
+Skill scaling is ability-specific.
+
+Abilities can use:
+- weighted combinations of stats;
+- highest of selected stats;
+- highest stat overall;
+- total stats;
+- class-specific values.
+
+The class's primary attribute(s) do not force every ability to use the same formula.
 
 ## Opening branches
 
