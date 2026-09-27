@@ -622,3 +622,54 @@ This file records decisions that are sufficiently settled to design around. It i
 **Default:** simple color/state indicators.
 
 **Optional:** exact threat values/rankings for players who enable detailed information.
+
+
+## 2026-09-27 — Elemental resistance defaults
+
+**Decision:** Default elemental resistance baseline is **-10%**.
+
+**Decision:** Normal elemental resistance cap is **75%**.
+
+**Decision:** Elemental resistance is displayed/handled as a direct percentage rather than a hidden rating conversion.
+
+**Decision:** Exceptional classes/items/effects may raise the normal 75% cap.
+
+## 2026-09-27 — Penetration models
+
+**Decision:** Systems support both flat and percentage Physical/Magical Defense penetration.
+
+**Decision:** Elemental penetration/reduction can likewise use different models where appropriate.
+
+**Decision:** Which model a class/ability uses is case-by-case; later advancements may upgrade/change penetration style.
+
+## 2026-09-27 — HP regeneration
+
+**Decision:** Vitality provides **flat HP regeneration**, not percentage-max-HP regeneration by default.
+
+## 2026-09-27 — Healing interaction rules
+
+**Decision:** Spirit-based healing-done/healing-received effects apply to all healing unless an effect explicitly excludes them.
+
+**Decision:** Whether a heal is elemental is ability-specific.
+
+**Decision:** Non-elemental healing ignores elemental resistance.
+
+**Decision:** Elemental healing uses matching elemental resistance unless explicitly overridden.
+
+## 2026-09-27 — DoT mitigation
+
+**Decision:** Every DoT tick is a separate damage instance and recalculates using the target's current defenses/resistances at the time of the tick.
+
+## 2026-09-27 — Adaptive scaling visibility
+
+**Decision:** Detailed/Shift tooltips for adaptive-scaling abilities show which attribute is currently selected and the active calculation.
+
+## 2026-09-27 — Stat transparency
+
+**Decision:** Character-sheet/stat hover details should expose the current mechanical contribution of attributes/derived stats even if the default UI remains concise.
+
+## 2026-09-27 — Resistance-manipulation rotations
+
+**Decision:** Resistance buffs/debuffs are intended to support rotational gameplay, not just passive gearing.
+
+**Example design space:** an ability may raise an ally's Nature resistance by 30% or lower an enemy's Nature resistance by 30% for 10 seconds, allowing the same class mechanic to set up defense, elemental healing or elemental damage depending on target and timing.
