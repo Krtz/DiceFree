@@ -2,105 +2,94 @@
 
 ## Party size
 
-Initial multiplayer target: **1–4 players**.
+Initial multiplayer target: 1–4 players.
 
 ## Dungeons and raids
 
-Raids are larger/more ambitious handcrafted dungeons rather than a separate MMO schedule system.
+Raids are larger/more ambitious handcrafted dungeons, not lockout-scheduled MMO raids.
 
-- most dungeons handcrafted;
-- some procedural/RNG dungeon types;
-- raids handcrafted;
-- no raid lockouts;
-- replay freely for loot.
+Dungeon size is content-specific:
+- single boss;
+- short dungeon;
+- multi-boss run;
+- very long raid-like content.
 
-Dungeon length is content-specific.
+No raid lockouts.
 
-A dungeon may be:
-- one boss and done;
-- a short gauntlet;
-- a medium multi-boss dungeon;
-- a very long raid-like experience.
+## Entrances
 
-There is no universal runtime target.
+Dungeons have physical world entrances.
 
-## Entering dungeons
+Entry requirements are decided case by case and may include:
+- level;
+- quest;
+- key/item;
+- achievement;
+- class/secret condition;
+- mode unlock.
 
-Dungeons are entered through physical/world entrances such as:
-- caves;
-- crypts;
-- towers;
-- houses;
-- ruins;
-- portals where fiction calls for one;
-- other authored entrances.
+Recommended level/difficulty can normally be shown, but secret content may deliberately obscure information.
 
-Requirements are content-specific. A dungeon/mode may require a level, quest, key, achievement, item or other condition.
+## Abandoning and re-entry
 
-A player may discover an entrance long before being eligible to clear it.
+A run can be abandoned.
 
-## Participation lock
+An abandoned run cannot be re-entered.
 
-Once a dungeon/raid starts, new players cannot join that run.
+## Completion reward
 
-A run can be voluntarily **abandoned**.
+Equipment is awarded only after successful completion via private loot rooms.
 
-Abandoning the run destroys the current run state and its completion reward opportunity. You cannot simply leave and re-enter the same run.
+## Overworld death
 
-## Completion rewards
-
-Successful completion sends each player to a private loot room.
-
-Equipment is completion-only.
-
-## Death
-
-### Overworld
-
-When a player dies in the overworld:
-- allies may resurrect them before they choose to respawn;
-- the dead player can accept respawn;
-- respawn occurs at their explicitly selected resurrection point;
-- the overworld itself does not reset.
-
-### Dungeons/raids
-
-The default baseline is **full run reset on party wipe**.
-
-## Resurrection
-
-Healer-type resurrection can be repeated:
-- long cast;
-- high resource cost;
-- stacking Resurrection Sickness.
+On overworld death:
+- allies can resurrect before respawn is accepted;
+- player can explicitly accept respawn;
+- respawn occurs at the explicitly set resurrection point;
+- the overworld does not reset.
 
 ## Resurrection points
 
-Resurrection points are set **explicitly** by interacting with a designated world object/location.
+Set explicitly by interacting with an appropriate object/location such as a shrine, fountain, stone, beacon, statue or other region-specific structure.
 
-The object does not need to be a literal building. Depending on lore/region it could be:
-- a shrine;
-- fountain;
-- stone;
-- beacon;
-- statue;
-- altar;
-- other appropriate landmark.
+## Dungeon wipe
 
-Merely walking past a camp does not silently replace the player's chosen resurrection point.
+Default: full run reset.
+
+## Resurrection
+
+Healer resurrection:
+- repeatable;
+- long cast;
+- high resource cost;
+- applies stacking Resurrection Sickness.
+
+Current working sickness:
+- each stack gives **-10% to all stats**.
+
+The exact math, duration and stack cap remain open.
 
 ## Death losses
 
-Carried gold/currencies may lose a percentage on death.
+Carried gold loses a percentage and the lost amount disappears.
 
-Banked currency is safe.
+Banked gold is safe.
 
-Materials/currencies can have individual safety/loss rules once designed.
+Other materials/currencies decide death-risk rules individually.
 
-## Party scaling
+## Old content
 
-Systems should support scaling, but exact formulas come from playtesting.
+High-level characters can normally return to old dungeons and overpower them.
+
+There is no automatic universal down-sync for old content.
+
+Selected content may later choose to use syncing for specific reasons.
 
 ## Difficulty modes
 
-Harder modes add mechanics as well as stats and can use unique loot-table rules.
+Harder modes can add:
+- mechanics;
+- phases;
+- enemies;
+- stat pressure;
+- altered loot tables.
