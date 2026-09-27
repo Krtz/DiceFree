@@ -37,30 +37,27 @@ A future class with no conventional basic attack is possible only as an intentio
 
 ## Primary attributes
 
-Current core attributes:
-
+Core attributes:
 - **Vitality**
 - **Strength**
 - **Agility**
 - **Intelligence**
 - **Spirit**
 
-Every attribute should have at least one useful secondary effect in addition to any role it plays as a class's primary attack attribute.
+Every attribute should provide at least one useful secondary effect.
 
 Every class has one or more **primary attributes** used for its base/basic-attack scaling.
 
-Most classes will likely use one primary attribute, but hybrid classes may legitimately use multiple. A future secret class using all attributes as primary is explicitly compatible with the system.
+Multi-primary scaling is defined **case by case per class**. There is no universal hybrid formula. A class may weight two stats differently, equally, or in some other deliberate way.
 
-Exact secondary effects are still being designed.
+A future secret class using all five attributes as primary is compatible with the system.
 
-Current candidates include:
+Current secondary-effect ideas remain provisional:
 - Strength -> physical durability and/or HP-related benefit;
-- Agility -> evasion, movement speed and/or attack speed;
-- Intelligence -> resource regeneration, maximum resource and/or magical durability;
-- Spirit -> healing given and healing received;
+- Agility -> attack speed, movement speed and/or evasion;
+- Intelligence -> magical durability and/or resource-related benefit;
+- Spirit -> healing-related benefit;
 - Vitality -> maximum HP.
-
-Do not lock these candidate secondary effects until the complete stat model is designed.
 
 ## Health
 
@@ -74,20 +71,50 @@ Max HP = class base HP + (Vitality × HP coefficient) + other modifiers
 
 Open question: whether the Vitality coefficient is universal or class-specific.
 
-## Damage channels and elements
+## Resources
 
-Every damaging hit can carry at least two independent classifications:
+Different classes can use different resources.
 
-1. **Damage channel:** Physical or Magical.
-2. **Element:** one of DiceFree's elements inherited/expanded from DiceBound, or no special element where appropriate.
+Intelligence should never be completely useless to a class just because that class does not use Mana, but Intelligence does **not** universally mean resource regeneration.
 
-An element is not inherently physical or magical. The same element can appear on either channel depending on the attack.
+Class/resource interactions with Intelligence are defined by class/system design.
+
+An advancement may keep, modify or replace the previous resource entirely.
+
+## Damage instances, channels and elements
+
+Every damage event is represented as one or more **separate damage instances**.
+
+Each damage instance has its own:
+- damage amount;
+- Physical or Magical channel;
+- element(s), if any;
+- mitigation/resistance calculation;
+- on-hit/trigger context where relevant.
+
+If an attack contains multiple packets, they are processed independently.
 
 Example:
-- Physical Coffee damage
-- Magical Coffee damage
 
-This lets classes, monsters and gear interact separately with broad damage channels and specific elements.
+```
+One sword swing:
+- 80 Physical Fire
+- 20 Magical Fire
+```
+
+Those are two separate damage instances, not one blended calculation.
+
+If an attack has multiple elements, those should also be represented as separate damage instances rather than one multi-element packet.
+
+Example:
+
+```
+One attack:
+- 50 Physical Coffee
+- 50 Physical Fire
+```
+
+This keeps resistance calculations, logs, triggers and debugging clear.
 
 ## Physical and Magical Defense
 
@@ -97,13 +124,19 @@ DiceFree has:
 
 Both use diminishing returns rather than linear immunity scaling.
 
-Defense is converted into mitigation against its corresponding damage channel.
+Most survivability comes from:
+- class base stats;
+- equipment;
+- abilities/passives;
+- temporary effects.
+
+Attributes may contribute modestly, but should not replace those systems.
 
 The exact diminishing-returns formula will be balanced later.
 
 ## Elemental resistance
 
-Characters can also gain resistance to specific elements.
+Characters can gain resistance to specific elements.
 
 Channel mitigation and elemental resistance multiply rather than add.
 
@@ -117,19 +150,7 @@ Coffee resistance: 50%
 100 × 0.50 × 0.50 = 25 damage taken
 ```
 
-This means defenses stack strongly but do not simply add to 100% immunity.
-
-The exact caps, negative resistance rules, penetration and diminishing-return behaviour remain to be designed.
-
-## Equipment families and Intrinsics
-
-There is no armor-weight system such as Cloth/Leather/Mail/Plate.
-
-Classes instead differ through which equipment families they can equip.
-
-Equipment families can have significantly different fixed stat identities.
-
-**Intrinsics** remain a core gear concept and can provide much larger fixed stat bonuses than their DiceBound equivalents.
+The exact caps, negative resistance rules and penetration rules remain to be designed.
 
 ## Attack speed
 
@@ -141,19 +162,20 @@ Classes can have very different:
 - attack range;
 - scaling opportunities.
 
-Attack speed can later be modified by attributes, equipment, effects or class mechanics as appropriate.
-
 ## Critical hits
 
-Critical-hit design is intentionally unresolved.
+Critical hits are **not assumed to be a universal baseline mechanic for every class**.
 
-Possible models include:
-- crit as a broadly available derived stat;
-- crit tied partly to attributes;
-- crit granted only by certain classes/passives/items;
-- different crit rules for attacks, spells, healing and damage-over-time effects.
+Crit can instead be introduced through:
+- class passives;
+- abilities;
+- equipment;
+- special systems;
+- specific advancement identities.
 
-Do not assume every class automatically has the same crit system.
+Different systems may define whether attacks, spells, healing or damage-over-time effects are allowed to crit.
+
+Exact crit rules remain to be designed.
 
 ## Movement and mobility
 
@@ -179,18 +201,29 @@ Every relevant combat action can define its own threat value/coefficient, includ
 
 Healing generates threat.
 
-Healers are also expected to contribute damage, closer to Final Fantasy XIV's healer philosophy than a pure "stand still and only heal" model.
+Bosses and special enemies may deliberately override ordinary threat.
 
-### Taunts
+### Taunts and threat builders
 
-Tank kits can use multiple styles of threat control.
+Tank kits can include:
+- temporary forced-target taunts;
+- very high threat-generating abilities;
+- abilities that both force target and establish/catch up threat.
 
-Examples:
-- forced target/taunt for X seconds;
-- large threat-generation abilities;
-- abilities that both force target temporarily and establish/catch up threat.
+Not every tank tool needs to work the same way.
 
-Boss mechanics may deliberately ignore or override normal threat.
+## Healers
+
+Healers are full combat classes, not passive health-bar babysitters.
+
+Healers should:
+- have real damage rotations;
+- contribute meaningful DPS while keeping the party alive;
+- be able to play solo;
+- farm and grind effectively;
+- use healing as part of their class loop rather than their only activity.
+
+Different healer classes may connect damage and healing in very different ways.
 
 ## Healing/support targeting
 
@@ -200,7 +233,7 @@ Support abilities can target:
 
 ## Fixed kits
 
-Classes use **fixed ability kits**, not a large library of skills that players swap in and out freely.
+Classes use **fixed ability kits** rather than freely swapping from a large skill library.
 
 Advancement may add, evolve or replace parts of that fixed kit.
 
@@ -221,10 +254,19 @@ Repeatable healer resurrection is allowed but costly:
 - high resource cost;
 - stacking Resurrection Sickness.
 
-Current working sickness direction:
-- each stack reduces **all character stats by 10%**.
+Resurrection Sickness affects the **five primary attributes only**:
+- Vitality
+- Strength
+- Agility
+- Intelligence
+- Spirit
 
-Exact duration, maximum stacks and whether the reduction uses additive or multiplicative stacking still need balancing.
+Current working direction:
+- each stack reduces those five attributes by roughly 10%.
+
+Derived effects then naturally change because the underlying attributes changed.
+
+Exact duration, stack cap and stacking math remain to be balanced.
 
 ## Enemy level display
 
@@ -245,6 +287,7 @@ A threshold around 20+ levels above the character is a candidate, not yet final.
 - universal vs class-specific Vitality-to-HP coefficient;
 - exact defense diminishing-returns formula;
 - resistance caps/penetration;
-- crit system;
+- detailed crit rules;
 - exact Resurrection Sickness math;
-- exact ??? level threshold.
+- exact ??? level threshold;
+- in-combat gear swapping.
