@@ -744,3 +744,78 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Repeated crowd-control chains require diminishing-returns/anti-lock framework so coordinated stun-heavy parties cannot permanently disable bosses.
 
 **Open:** exact DR model and whether/how these resistances appear on the default character sheet.
+
+
+## 2026-09-27 — Shield resolution order
+
+**Decision:** Explicit shield priority overrides all normal ordering.
+
+**Decision:** Otherwise, the most specific eligible shield is consumed before generic shields.
+
+**Decision:** Among equally eligible generic shields, first-applied is consumed first.
+
+**Decision:** Normal damage mitigation/resistance resolves before shield absorption unless a shield explicitly overrides this.
+
+## 2026-09-27 — Pure Damage
+
+**Decision:** Framework includes a rare **Pure Damage** type for exceptional mechanics.
+
+**Decision:** Pure Damage ignores ordinary Physical Defense, Magical Defense and elemental resistance and deals its stated amount unless an effect explicitly interacts with Pure Damage.
+
+**Decision:** Pure Damage is not a normal everyday class damage channel.
+
+## 2026-09-27 — Healing inversion damage
+
+**Decision:** Elemental healing inverted by extreme negative resistance becomes damage with no Physical/Magical channel.
+
+## 2026-09-27 — Lifesteal defaults
+
+**Decision:** Lifesteal uses final damage after mitigation unless explicitly overridden.
+
+**Decision:** Default lifesteal is capped by actual HP damage inflicted, not theoretical overkill.
+
+## 2026-09-27 — Reflection proc defaults
+
+**Decision:** Reflected damage does not trigger normal lifesteal, on-hit, reflection or ordinary attack-proc chains unless explicitly enabled.
+
+## 2026-09-27 — Aura stacking
+
+**Decision:** Multiple copies of the same aura identity normally do not stack; the strongest eligible copy applies.
+
+## 2026-09-27 — Dispel strengths
+
+**Decision:** Effects define dispel behavior individually using Weak Dispel, Strong Dispel or Undispellable rules.
+
+## 2026-09-27 — Death prevention and summons
+
+**Decision:** Generic death-prevention framework is required.
+
+**Decision:** Summons support both snapshot and dynamically inherited owner stats.
+
+**Decision:** Summons have their own threat entries unless explicitly designed otherwise.
+
+## 2026-09-27 — Combat state
+
+**Decision:** Threat-list membership / active aggro is the primary rule for being in combat.
+
+## 2026-09-27 — Target dummies
+
+**Decision:** Training/test dummies exist both as development tools and in-world objects.
+
+**Direction:** Starter-town dummies are simple/weak; later towns can provide tougher or more specialized dummies.
+
+## 2026-09-27 — Floating-number visual language
+
+**Decision:** Floating combat number color represents Physical / Magical / Pure / Healing.
+
+**Decision:** Elements are communicated primarily through icons rather than assigning every element its own floating-number color.
+
+## 2026-09-27 — World 1 first
+
+**Decision:** Detailed world design focuses on the one-dot starter face before the other five faces.
+
+**Decision:** Initial World 1 implementation is deliberately small and expands outward in connected chunks.
+
+**Decision:** Undeveloped territory should be blocked by believable natural/world obstacles such as forests, mountains, collapsed roads, cliffs or gates; these can be removed/reworked as the region expands.
+
+**Decision:** Face 1 should prove the starter town, outdoor loop, first dungeon, level-10 advancement, world services and long-term return hooks before later faces receive equivalent detail.
