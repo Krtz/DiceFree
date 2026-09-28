@@ -43,9 +43,20 @@ Class level does not restrict switching. A player may switch to a much higher- o
 
 ## Dungeon joins
 
-A player cannot join a dungeon/raid already in progress.
+Dungeon participation uses a staging phase.
 
-Participation is fixed when the run starts.
+When the first party member enters:
+- that player enters the shared dungeon waiting room;
+- a 60-second countdown begins;
+- other eligible party members may enter the same waiting room during that window.
+
+When the countdown ends:
+- the dungeon run actually starts;
+- participating players are fixed;
+- equipment becomes locked for the run;
+- no additional player may join that active dungeon/raid.
+
+A player joining the broader overworld session after the dungeon has started does not teleport into or join the active run.
 
 ## Quest credit
 
