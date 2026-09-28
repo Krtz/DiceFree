@@ -126,3 +126,28 @@ NPC crafters combine authored gear and resources into new authored equipment.
 ## Visible equipment
 
 Equipped gear should visibly affect the character wherever practical.
+
+
+## Equipment eligibility and tags
+
+Equipment eligibility uses semantic data requirements rather than maintaining giant per-item allowlists of every future class.
+
+Classes can expose capability/identity tags such as:
+- allowed weapon families;
+- shield use;
+- caster weapon access;
+- melee/ranged capability;
+- armor/equipment families;
+- tier/advancement metadata;
+- specific semantic class tags.
+
+Items can require:
+- one or more capability/taxonomy tags;
+- specific weapon/equipment families;
+- minimum tier/level where appropriate;
+- an exact class ID when a deliberately narrow class-specific item is desired;
+- combinations of semantic requirements.
+
+Specific classes remain valid eligibility predicates. Scalability does **not** remove the ability to make niche class-only gear.
+
+Requirements should use stable IDs/tags, not display-name parsing.
