@@ -8,6 +8,28 @@ The save system protects player progress and data integrity; it is **not** an an
 
 There is no competitive leaderboard/economy requirement that justifies hostile save protection. If a player deliberately restores an old local save to alter their own progression, that is not a design problem we need to police.
 
+## User -> Echo -> manifestation hierarchy
+
+DiceFree separates:
+1. **user/account identity**;
+2. one or more **Echo profiles** owned by that user;
+3. many class manifestations/save-states inside each Echo.
+
+### Multiple Echoes, intentionally unobtrusive
+
+A user may own multiple fully separate Echo profiles.
+
+However, the normal player experience should treat the current Echo as **the game/profile**, not repeatedly ask the player to create/select one.
+
+Default UX direction:
+- first launch creates/uses one primary Echo;
+- normal **Continue / Play** resumes that Echo;
+- creating or switching to another Echo lives in a deliberate profile-management/settings path;
+- do not put a prominent "New Echo" flow in the normal start loop;
+- require clear confirmation before creating a fresh Echo.
+
+This preserves clean-start/replay flexibility without letting new players accidentally fragment their progress across many Echoes.
+
 ## Save ownership model
 
 Persistence is split conceptually by ownership even if serialized into one package.
@@ -171,22 +193,82 @@ Cloud sync should operate on the player's save package/profile and support:
 
 Active multiplayer/dungeon session state is not uploaded as permanent account progression.
 
+## Cloud revision unit and conflicts
+
+Each **Echo profile is one logical cloud revision unit**.
+
+Internally, its data may be chunked into sections, but cloud sync/version/conflict semantics should treat the Echo as one coherent revision.
+
+This avoids impossible merges such as:
+- one machine updates Ranger inventory;
+- another updates Wizard inventory;
+- both independently modify the same shared bank.
+
+### Divergent save conflicts
+
+Do **not** attempt automatic field-by-field merging of two independently changed Echo revisions.
+
+When local and cloud histories diverge:
+- show clear revision metadata such as timestamp, progression summary and save version;
+- let the user deliberately choose which revision becomes current;
+- preserve backups of both sides before resolving where practical.
+
+Protect progress rather than silently guessing.
+
 ## Users / identity / database direction
 
 Prepare a provider-neutral user/profile layer.
 
-A user/profile should have:
-- stable internal profile ID;
+A user/account should have:
+- stable internal **user UUID**;
 - linked platform identity/identities where supported;
-- cloud-save metadata;
-- save revision metadata;
+- one or more Echo profile IDs;
+- cloud/account metadata;
 - optional future service/database metadata.
 
+Each Echo profile should have:
+- stable internal **Echo UUID**;
+- display/profile metadata;
+- current cloud/local revision;
+- save schema version;
+- checksum/integrity metadata;
+- timestamps;
+- deletion/recovery state where applicable.
+
+Initial PC identity can use Steam authentication, but DiceFree's internal UUIDs remain authoritative identifiers.
+
 Do not make gameplay systems depend directly on Steam IDs or a specific backend vendor.
+
+### No required DiceFree login at PC launch
+
+The initial Steam PC version should **not** require a separate DiceFree email/password account.
+
+Steam identity is enough for the normal first-party PC login flow.
+
+The identity layer should still permit attaching additional providers later without changing gameplay save IDs.
 
 If a future database/backend is introduced, it should store service/account metadata and cloud-save coordination cleanly rather than becoming the authoritative runtime combat/world database.
 
 The game should remain playable from local durable saves without requiring a permanent MMO-style backend.
+
+## Database scope
+
+If/when an online database is introduced, its initial purpose should primarily be **account/service metadata**, not authoritative moment-to-moment RPG state.
+
+Good database candidates:
+- internal user UUID;
+- linked platform identities;
+- Echo profile IDs;
+- cloud revision metadata;
+- timestamps/checksums;
+- deletion/recovery metadata;
+- future friend/service metadata.
+
+The actual Echo game state can remain a versioned save package/blob in cloud storage.
+
+Do not normalize every quest flag, sword stat and Slime kill into an online relational database unless a future feature genuinely requires it.
+
+Player saves remain authoritative for ordinary progression; there is no server-authoritative progression requirement for leaderboards/economy/PvP because those systems are not planned.
 
 ## Multiplayer persistence
 
@@ -223,6 +305,84 @@ World/quest events should be able to define who records their persistent outcome
 - other authored policy.
 
 Default ordinary cooperative progression should favor **eligible participants**, not host-only persistence.
+
+## Offline and LAN play
+
+The game must support offline play.
+
+Local autosave, class progression, quests, inventory and other non-online gameplay continue without internet access.
+
+When connectivity returns, cloud sync reconciles revisions through the normal conflict rules.
+
+Local-network multiplayer should also be architecturally possible **without internet/cloud availability**.
+
+LAN/session discovery/transport details remain technical implementation work, but account/cloud services must not be a hard dependency for local multiplayer gameplay.
+
+## Echo deletion / recovery
+
+Deleting an entire Echo profile should not immediately and irreversibly destroy every cloud/local copy.
+
+Direction:
+- explicit confirmation;
+- mark profile deleted;
+- retain a recoverable cloud/local tombstone/backup for a limited period;
+- allow permanent purge later.
+
+Exact recovery duration remains open.
+
+This is separate from deleting/archive of a class manifestation inside an Echo.
+
+## Cross-platform identity direction
+
+Internal user and Echo UUIDs must allow another platform identity/provider to be linked later.
+
+Steam is the first provider, not the database primary key of reality.
+
+Actual cross-platform release/support remains future scope.
+
+## Save package structure
+
+An Echo is one logical revision, but its storage should be **internally chunked/sectioned**.
+
+Candidate sections:
+- Echo header/shared milestones;
+- bank/shared inventory;
+- professions/account progression;
+- per-manifestation records;
+- quest/world state;
+- settings/profile metadata;
+- unresolved/legacy records.
+
+Goals:
+- targeted migrations;
+- easier corruption recovery;
+- easier debugging;
+- avoid one gigantic opaque serialized object as the class roster grows.
+
+A physical implementation may still package these chunks into one archive/blob for atomic/cloud operations.
+
+## Developer Profile Inspector
+
+Provide developer/debug-only tooling to inspect an Echo/profile.
+
+Useful information includes:
+- internal user/Echo IDs;
+- save/schema version;
+- cloud/local revision;
+- last successful write;
+- backup history;
+- migration history;
+- manifestation/class IDs;
+- unresolved records;
+- pending/last transactions;
+- bank/inventory ownership;
+- item generation/budget provenance;
+- event/quest persistence state;
+- integrity/checksum status.
+
+This is **not** normal player-facing UI.
+
+It exists for Axel, developers and development agents/tools such as Codex to diagnose and safely evolve persistent data.
 
 ## Save-scumming / anti-cheat
 
