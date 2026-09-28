@@ -1857,3 +1857,50 @@ The player must visit a bank normally to withdraw shared items.
 **Decision:** The guest's own quest state remains unchanged and can be completed in another compatible game/session.
 
 **Decision:** When the host world still supports the required action, eligible guests may progress their own quests even if the host has already completed those quests.
+
+
+## 2026-09-28 — Physically Blessed basic attack and weapon breadth
+
+**Decision:** Physically Blessed basic attacks scale from the higher of STR or AGI.
+
+**Decision:** Tier 1 can use essentially all ordinary low-level melee weapon families as they are introduced, while remaining a melee class without true ranged basic attacks.
+
+## 2026-09-28 — Physically Blessed Heavy Strike target values
+
+**Decision:** Heavy Strike damage uses the higher of STR or AGI.
+
+**Working balance target:** stun is 0.4 seconds at rank 1 and gains +0.2 seconds per additional rank, reaching 1.4 seconds at rank 6.
+
+**Decision:** Heavy Strike uses normal CC resistance/DR and true-immunity rules.
+
+## 2026-09-28 — Physically Blessed Guard / Brace target values
+
+**Working balance target:** ~3 second duration.
+
+**Working balance target:** 15% Physical/Magical damage reduction at rank 1, +5 percentage points per additional rank, reaching 40% at rank 6.
+
+## 2026-09-28 — Physically Blessed Quickening
+
+**Decision:** Quickening is self-only.
+
+**Direction:** It grants Attack Speed plus a small Movement Speed bonus for roughly 5 seconds.
+
+## 2026-09-28 — Physically Blessed Arrow Rain
+
+**Decision:** Arrow Rain is a short-burst, ground-targeted physical AoE using higher-of-STR/AGI scaling.
+
+**Decision:** The arrows are manifested/spectral enough that Physically Blessed does not need to equip a bow.
+
+## 2026-09-28 — Physically Blessed Martial Aptitude
+
+**Decision:** Keep the Tier-1 passive deliberately simple: increase basic-attack damage and Physical Defense.
+
+More exotic class mechanics are deferred to later specializations.
+
+## 2026-09-28 — Magically Touched Elemental Imbuement direction
+
+**Decision:** The Tier-1 support skill buffs self/allies by adding elemental damage to basic attacks.
+
+**Direction:** The element should be either **Light or Fire**; exact choice remains open.
+
+The skill should demonstrate elemental/support gameplay without over-specializing the blank-slate Tier-1 class.
