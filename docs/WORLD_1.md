@@ -507,9 +507,31 @@ Possible dialogue can contradict:
 
 Do not establish one obviously authoritative village answer early.
 
-This replaces the earlier burning-house concept.
+The abandoned-house mystery remains separate from the later canon **Bob's house burns down** sidequest seed.
 
 The mystery should be visible from the first visit so that opening it much later feels like returning to a remembered place.
+
+## Canon sidequest seed: Bob's house burns down
+
+A recurring multiplayer/persistence example has now become **actual canon**:
+
+> **Bob's house burns down.**
+
+World 1 should eventually contain a weird optional sidequest/event chain involving:
+- a real NPC named **Bob**;
+- Bob's actual house;
+- an authored chain of events that can end with the house burned down;
+- a persistent world-state outcome for eligible participating timelines.
+
+The exact reason the house burns, whether the player causes it directly, whether Bob deserves this, and what the reward/consequence is are intentionally **not designed yet**.
+
+This should be a memorable strange sidequest rather than part of the opening critical path.
+
+It is also an excellent test case for multiplayer persistence:
+- players who participate in the event can record the burned-house outcome in their own timelines;
+- a guest joining a host after the house already burned merely sees the host's burned house and does not automatically inherit the event.
+
+**Important:** Bob's house is separate from Cornberg's locked abandoned-house mystery unless a later design deliberately connects them.
 
 ## Mountain long-term mystery
 
