@@ -58,14 +58,11 @@ For example:
 
 The resulting Mystic Knight uses the **same class ID, stats, kit and class definition**.
 
-However, the route into it can differ:
-- different NPC;
-- different advancement quest;
-- different location;
-- different dialogue/lore;
-- different presentation.
+The **target class owns its advancement quest/ritual**.
 
-The manifestation that actually takes the advancement supplies the timeline snapshot/fork as normal.
+If Wizard and 2H Fighter can both become Mystic Knight, both normally pursue the same Mystic Knight quest, NPC/location and advancement event once their Echo-wide requirements are satisfied.
+
+The qualifying parent determines which manifestation supplies the timeline snapshot, not which version of Mystic Knight is created.
 
 ### Multiple convergence outcomes
 
@@ -189,6 +186,25 @@ Some classes may reveal themselves only once the player actually becomes them.
 
 Visibility and requirement disclosure are **class data**, not one global policy.
 
+## Unlocking never direct-starts a class
+
+Echo-wide discovery/unlock makes a Way **available to pursue**. It does not create that class save and does not allow direct-starting the class from the title/class screen.
+
+To create a missing class save:
+1. load an appropriate earlier-tier/prerequisite class save;
+2. travel to and complete the target class's advancement quest/event;
+3. advance normally;
+4. the new class save is created from that parent timeline snapshot.
+
+Example:
+- a Tier-5 event reveals/unlocks a hidden Tier-1 Way;
+- the player loads the preserved Tier-0 Novice;
+- travels to that newly available Tier-1 advancement quest;
+- completes it;
+- the Tier-1 class save is created.
+
+The preserved lower-tier saves are therefore important parts of the class-web progression loop.
+
 ## Way discovery
 
 Discovering/unlocking knowledge that a Way exists is Echo-wide.
@@ -248,7 +264,11 @@ Because the class roster can become enormous:
 - archived class save-states are hidden from the normal/default picker but remain recoverable;
 - permanent deletion may also exist for players who truly want to discard class-local progress.
 
-Whether a deleted unlocked class later recreates from a fresh baseline, a checkpoint, or another explicit flow remains to be finalized.
+If a class save is permanently deleted:
+- the Way remains discovered/unlocked Echo-wide;
+- all Echo-wide milestones/events earned through that class remain;
+- the deleted class cannot be recreated directly;
+- the player must load an appropriate earlier-tier/prerequisite class save and complete that class's advancement again.
 
 Deleting or archiving a class save-state must never erase:
 - earned Echo-wide class/tier milestones;
