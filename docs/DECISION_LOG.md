@@ -1461,3 +1461,42 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Duplicates follow normal account-bound rules and normal equipment requirements.
 
 **Open:** whether carried inventory beyond equipped gear is also duplicated.
+
+
+## 2026-09-28 — Novice all-stat passive
+
+**Decision:** Novice skill points can also be spent in a passive that grants +1 to all five primary stats per point invested.
+
+**Open:** exact rank cap, if any.
+
+## 2026-09-28 — Novice skill-point notification
+
+**Decision:** Level-up should visibly notify the player when a skill point is available, but spending it is never mandatory.
+
+## 2026-09-28 — Novice-only respec
+
+**Decision:** Cornberg's retired adventurer couple can respec/reallocate Novice skill points.
+
+**Decision:** This service is Novice-only.
+
+**Open:** cost/cooldown/presentation.
+
+## 2026-09-28 — Magic Sand duration
+
+**Decision:** Magic Sand's miss debuff uses **5 seconds** as the current implementation value.
+
+## 2026-09-28 — Novice stun ignores CC resistance
+
+**Decision:** The Novice STR stun ignores ordinary CC resistance and applies its listed stun duration to valid targets.
+
+**Open:** interaction with explicit hard stun-immunity flags.
+
+## 2026-09-28 — Full advancement snapshot
+
+**Decision:** Advancement snapshots all manifestation-specific state into the new child manifestation, including equipment, carried inventory/currency, quest/world progression and relevant skill/class state.
+
+**Decision:** Parent keeps the original state; child gets a duplicate snapshot; both diverge afterward.
+
+## 2026-09-28 — Parent resumes before blessing
+
+**Decision:** Returning to the preserved parent manifestation resumes immediately before the blessing/branch choice that created the child, allowing another branch to be chosen later.
