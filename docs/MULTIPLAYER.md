@@ -117,6 +117,20 @@ Quest/event credit remains eligibility-based.
 
 The exact interaction rules for cases where the host's world state removes or changes an NPC/object that a guest's personal quest still expects are a separate design problem and must not be solved by silently advancing/locking out the guest.
 
+### Host-authoritative world presentation
+
+The **host's world/quest state determines the live session's world presentation**.
+
+Example:
+- if a host has completed an event where a house burns down, everyone in that hosted session sees the burned remains;
+- a guest whose own class save has not completed that event does not get a separate intact house rendered only for them.
+
+Joining another player's world does **not** overwrite the guest's manifestation-specific quest/world progression.
+
+Quest/event credit remains eligibility-based.
+
+The exact interaction rules for cases where the host's world state removes or changes an NPC/object that a guest's personal quest still expects are a separate design problem and must not be solved by silently advancing/locking out the guest.
+
 ## Steam
 
 Steam lobby/invite integration is a PC-release target.
