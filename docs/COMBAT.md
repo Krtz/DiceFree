@@ -14,11 +14,25 @@ Primary design assumptions:
 
 ## Control schemes
 
+Detailed input/selection/camera rules are documented in `docs/INPUT_CONTROLS.md`.
+
 ### Classic / mouse movement
 Warcraft III / League-style click-to-move is the primary balance baseline.
 
+Contextual right-click handles movement/attack/interact.
+
+Attack-Move, Stop and Hold Position are dedicated commands.
+
 ### Direct / WASD movement
 WASD feeds the same movement/combat systems and must not become the hidden requirement for encounter execution.
+
+Classic Mouse and Direct/WASD use **different default keybind profiles**, because Direct mode reserves WASD for movement. Everything remains fully rebindable.
+
+### Selection safety
+
+Unit-selection behavior must be configurable enough to sit between ARPG and Warcraft III RTS conventions.
+
+Accidental selection of allies/summons/other units must never make emergency movement unresponsive during combat.
 
 A simultaneous Hybrid mode remains possible but not committed.
 
@@ -223,7 +237,6 @@ See `docs/STATS_AND_DAMAGE.md` for shield ordering, Pure Damage, lifesteal, refl
 
 ## Open questions
 
-- exact mouse-button/context conventions;
 - offensive targeting details;
 - Hybrid mode;
 - controller support;
