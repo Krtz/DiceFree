@@ -66,11 +66,18 @@ Preferred over giving Tier 1 both a heal and a barrier.
 
 Working fantasy:
 - buff self or ally;
-- add +X% additional auto-attack damage as an element, or another similarly readable elemental enhancement;
+- add additional elemental damage to the target's basic attacks;
 - introduces support/buff gameplay;
-- previews the future barrier/buff support lineage.
+- previews the future barrier/buff support lineage;
+- Tier 1 should remain a broad magical blank slate rather than commit deeply to one elemental identity.
 
-Exact element-selection rules are open.
+Current element candidates:
+- **Light**;
+- **Fire**.
+
+The exact choice between Light and Fire is still open.
+
+Exact bonus, duration, Mana cost and rank scaling remain open.
 
 ### 4. Arcane Burst / magical AoE
 - AoE damage spell;
