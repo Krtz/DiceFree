@@ -2034,3 +2034,65 @@ Supported policy families include unique-per-source, refresh, replace-stronger, 
 **Decision:** Basic attacks use the common combat-action/effect pipeline where practical.
 
 This must support later mechanics such as generating Combo Points/resources from auto-attacks and spending them on skills.
+
+
+## 2026-09-28 — Multiple simultaneous class resources
+
+**Decision:** A class may use multiple resources at once.
+
+Examples include Energy + Combo Points or Mana + Souls.
+
+Resources are independently modeled rather than forced through one universal resource type.
+
+## 2026-09-28 — Resource lifecycle policies
+
+**Decision:** Each resource defines its own persistence/reset/decay/regeneration behavior.
+
+Resources may persist, reset on combat/death, decay, regenerate, or be action-generated according to content.
+
+## 2026-09-28 — Target-bound and owner-bound resources
+
+**Decision:** Framework supports both target-bound and player/owner-bound Combo-Point-style resources.
+
+## 2026-09-28 — Composite ability costs
+
+**Decision:** One ability may consume multiple resource types and/or HP/items/charges simultaneously.
+
+## 2026-09-28 — Ability charge recharge models
+
+**Decision:** Charged abilities support:
+- independent per-charge recharge;
+- sequential recharge;
+- one cooldown restoring all charges.
+
+## 2026-09-28 — Casting/channel policy
+
+**Decision:** Movement interruption, damage interruption, movement-while-casting, cast/channel type and related behavior are defined per ability.
+
+**Decision:** Spell pushback is supported but is not a universal default.
+
+## 2026-09-28 — Broad semantic trigger framework
+
+**Decision:** Combat/gameplay supports a broad extensible trigger vocabulary for classes/items/effects, including hit, crit, damage, healing, resource, effect, kill/death, cast, thorns and custom authored triggers.
+
+## 2026-09-28 — Proc recursion safety with intentional escape hatch
+
+**Decision:** Generated events carry origin/context and accidental proc recursion is prevented by default.
+
+**Decision:** Controlled recursion is explicitly allowed for future classes/items when authored with bounded rules.
+
+## 2026-09-28 — Snapshot and dynamic periodic effects
+
+**Decision:** DoTs/HoTs may either snapshot source state on application or dynamically recalculate on ticks.
+
+## 2026-09-28 — Summon source + owner attribution
+
+**Decision:** Summon events retain both immediate summon source and owning actor/player.
+
+Threat, quest credit, procs and logs can choose the appropriate attribution.
+
+## 2026-09-28 — Generic aura emitter model
+
+**Decision:** Auras are reusable effect emitters defined by source, range/shape, target filters and emitted effect.
+
+Existing effect stacking policies resolve overlapping aura contributions.
