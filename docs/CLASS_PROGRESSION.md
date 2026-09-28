@@ -158,9 +158,9 @@ Current candidate level-30 branching:
 
 This four-plus-four split is still a working direction rather than locked final structure.
 
-### Long-term class-tree scale
+### Long-term class-web scale
 
-A **very large class tree is an explicit long-term goal**.
+A **very large class graph/web is an explicit long-term goal**.
 
 Do not optimize the design around keeping the final class count small.
 
@@ -170,7 +170,9 @@ The tree also does not need to be development-symmetric:
 - additional descendants can be filled in over time;
 - higher-tier concepts can take longer to design and implement.
 
-The architecture must support arbitrary branch counts and partial/asymmetric content without requiring placeholder classes or giant hard-coded trees.
+The architecture must support arbitrary branch counts, convergence requirements and partial/asymmetric content without requiring placeholder classes or giant hard-coded trees.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md` for multi-lineage requirements, visibility/discovery and class-web rules.
 
 ### Tier-1 skill-rank pattern
 
@@ -214,6 +216,26 @@ Advancement may:
 - alter equipment permissions;
 - change visual form.
 
+## Convergence and Echo-wide class evidence
+
+Class progression is not limited to parent -> child lineage requirements.
+
+The Echo permanently records meaningful class/tier milestones account-wide.
+
+A class may require:
+- one lineage milestone;
+- several lineage milestones together;
+- class evidence combined with quests/items/achievements/discoveries;
+- nested AND/OR requirement expressions.
+
+The same resulting class can be reached through different parent manifestations while using different advancement quests/NPCs/locations.
+
+A single prerequisite combination can also unlock multiple different convergence classes.
+
+Deleting/cleaning up an old manifestation does not erase class milestones the Echo already earned.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md`.
+
 ## Secret classes
 
 Secret classes may branch from many points and use unusual conditions:
@@ -239,7 +261,7 @@ They should have:
 
 ## Open questions
 
-- exact slot limits;
+- practical manifestation-slot/archive/cleanup UX;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
 - exact second-tier classes;
