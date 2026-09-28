@@ -1,6 +1,8 @@
 # Unity project setup
 
-The repository now contains an engine project, but gameplay remains unimplemented.
+These notes describe the original engine foundation. The first playable geography
+and traversal increment is documented in [CORNBERG_BLOCKOUT.md](CORNBERG_BLOCKOUT.md).
+Combat, quests and progression remain unimplemented.
 Earlier design-phase documents are preserved; this document records the concrete
 engine setup that supersedes their pending engine-selection/setup instructions.
 

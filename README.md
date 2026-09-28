@@ -11,11 +11,15 @@ The game is intended to combine:
 
 ## Current status
 
-**Design phase only.**
+**Unity foundation and Cornberg traversal blockout.**
 
-DiceBound is still the active development priority. DiceFree exists now so ideas, decisions, lore, systems and future work have a permanent home instead of being buried in chat.
+The first World 1 pocket is available in `Assets/_DiceFree/Scenes/Cornberg.unity`.
+Open it in Unity **6000.6.3f1** and press Play. Right-click moves in Classic mode;
+F6 switches to WASD/Direct, the mouse wheel zooms, and V toggles the lookout.
+Arrow keys or middle-mouse drag pan, Q/E rotate, Home recenters, and F toggles follow.
+See [Cornberg blockout notes](docs/CORNBERG_BLOCKOUT.md) for scope, validation and known limitations.
 
-No Unity project or engine version is locked yet. When implementation begins, we will choose the current appropriate LTS/toolchain rather than prematurely freezing a version today.
+This pass contains placeholder geography and traversal, not combat, quests or progression.
 
 ## Current high-level canon
 
@@ -24,8 +28,8 @@ No Unity project or engine version is locked yet. When implementation begins, we
 - DiceFree takes place on the **outside surface of the Dice**.
 - The world has **six major regions**, one per face, thematically related to DiceBound's six boards.
 - Characters begin as a **Novice**.
-- Around level 10, the Novice advances into a small set of base classes; the current working model is **4 base classes**.
-- Later advancement tiers branch repeatedly: **4 → 8 → 16 → 32 → 64...**
+- At level 10, the first blessing offers **Physically Blessed Novice** or **Magically Touched Novice**.
+- Later permanent lineages follow the current [class progression design](docs/CLASS_PROGRESSION.md).
 - Advancement should feel like becoming a new class, not merely spending another talent point.
 - Gear equipped by the player should be **visibly represented on the character**.
 - The game should support persistent progression and eventually co-op, while remaining playable solo.
