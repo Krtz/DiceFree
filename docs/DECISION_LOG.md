@@ -1162,3 +1162,44 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-28 — Contextual cursor
 
 **Decision:** Mouse cursor uses Warcraft III-like contextual states for move, attack, talk, loot, interact and unavailable actions.
+
+
+## 2026-09-28 — Boss HUD
+
+**Decision:** Bosses use a larger top-center frame with large HP, cast bar, relevant phase/mechanic information and support for multiple active boss bars when needed.
+
+## 2026-09-28 — Boss mechanic communication
+
+**Decision:** Important mechanics can use large center-screen warnings.
+
+**Decision:** Dangerous ground mechanics should also use strong world-space telegraphs such as red circles/cones/lines ("ouch circles").
+
+## 2026-09-28 — Quest markers and journal
+
+**Decision:** Quest markers use standard **!** for available quests and **?** for turn-in/completion.
+
+**Decision:** A quest journal lets players choose which active quests are pinned to the HUD tracker.
+
+**Direction:** Default tracker capacity should be modest, roughly 3–5 quests.
+
+## 2026-09-28 — Fog of war
+
+**Decision:** Map/minimap uses Warcraft III-style fog of war.
+
+**Decision:** Unexplored terrain is black/hidden.
+
+**Decision:** Seen terrain remains revealed for static geography/objects, while current dynamic activity still requires present vision.
+
+**Decision:** Party/allied players share vision.
+
+## 2026-09-28 — Threat-state indicator
+
+**Decision:** Target/party UI uses simple threat-state color/icon indicators by default.
+
+**Direction:** green = safe/low, yellow = rising/contested, red = aggro/current primary threat.
+
+## 2026-09-28 — Low-health feedback
+
+**Decision:** Default low-health warning centers on the player frame: redder frame/portrait treatment, hurt-looking model and increasingly red HP text.
+
+**Decision:** Optional bloody/red screen-edge vignette is supported and toggleable.
