@@ -2171,3 +2171,52 @@ Stat requirements are supported but need not be common.
 **Decision:** Equipment drops identified.
 
 Identification is not a normal loot-management mechanic.
+
+
+## 2026-09-28 — Item level belongs to content source
+
+**Decision:** Item level is defined by the authored drop/source/content, not dynamically scaled to the player's current level by default.
+
+Old content therefore retains its progression identity.
+
+## 2026-09-28 — Gear budget is hidden balancing/debug data
+
+**Decision:** Gear-score/stat-budget totals are not player-facing item-quality ratings.
+
+Players judge actual stats/effects/build fit.
+
+**Decision:** Debug/designer tooling exposes expected budget, actual budget and over/under-budget deltas.
+
+**Decision:** Handcrafted items may intentionally exceed ordinary budget expectations.
+
+## 2026-09-28 — Runewords work on valuable existing gear
+
+**Decision:** Runeword-like effects can be created on magical/rare/epic/etc. socketed items.
+
+They do not require plain/non-magical bases.
+
+**Decision:** Rune/socketable order matters.
+
+**Decision:** The base item remains the same item and keeps its existing stats/affixes; the runeword adds an authored effect/package.
+
+## 2026-09-28 — Destructive socket services
+
+**Decision:** Socket removal/recovery is NPC/service-based and costs resources.
+
+Framework supports:
+- preserve item, destroy removed socketables;
+- preserve/recover socketables, destroy the base item.
+
+## 2026-09-28 — Duplicate named items
+
+**Decision:** Multiple copies of the same named item may be owned.
+
+**Decision:** Unique Equipped is optional item data for multi-slot/dual-wield edge cases, not a universal restriction.
+
+## 2026-09-28 — No general salvage system
+
+**Decision:** Unwanted equipment is sold for gold rather than salvaged/disenchanted into materials.
+
+Materials may instead be purchasable for gold or obtained through authored content if needed later.
+
+**Decision:** Named gear does not automatically yield special content-specific salvage materials.
