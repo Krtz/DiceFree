@@ -1078,3 +1078,42 @@ This file records decisions that are sufficiently settled to design around. It i
 **Direction:** Players should eventually be able to create layouts inspired by WC3, Diablo, WoW, RuneScape or their own arrangement.
 
 **Decision:** The POC only needs one strong default layout plus a framework that does not prevent later customization; a full HUD editor is deferred.
+
+
+## 2026-09-28 — Live player model in HUD
+
+**Decision:** The default bottom player frame uses a live real-time 3D player model/portrait, reflecting class and visible equipped gear where practical.
+
+## 2026-09-28 — XP bar
+
+**Decision:** Default XP presentation is a long thin bar across the bottom of the screen.
+
+## 2026-09-28 — Buff/debuff placement
+
+**Decision:** Player buffs/debuffs default around the bottom player frame.
+
+**Decision:** Target buffs/debuffs default below/around the top-center target frame.
+
+**Decision:** These widgets must be movable and scalable long-term.
+
+## 2026-09-28 — Cast-bar layers
+
+**Decision:** Units may show compact world-space cast bars above their models.
+
+**Decision:** World-space cast-bar visibility is independently toggleable for self/own units, allies and enemies.
+
+**Decision:** The player also has a dedicated movable/scalable cast bar above the bottom-center player information.
+
+**Decision:** The selected target has a cast bar below the top-center target frame.
+
+## 2026-09-28 — Target of target
+
+**Decision:** Target-of-target is supported and can be toggled in options.
+
+## 2026-09-28 — System/menu buttons
+
+**Decision:** The default HUD exposes only a few visible system/menu buttons, Diablo-like in spirit; most actions also use hotkeys.
+
+## 2026-09-28 — Interaction prompts
+
+**Decision:** Interaction prompts should appear near the relevant world object/NPC, with a subtle screen-space fallback where needed.
