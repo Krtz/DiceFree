@@ -16,15 +16,16 @@ This makes class branching a literal Echo/timeline mechanic.
 
 At branch creation:
 - the player immediately continues the current game as the child manifestation;
-- equipped gear is duplicated into the child;
-- parent manifestation keeps the original gear;
-- manifestation-specific state is copied as a timeline snapshot;
+- **all manifestation-specific state is snapshotted** into the child;
+- this includes equipped gear, carried inventory, carried gold/currency, quest/world progression and relevant class/skill state;
+- the parent keeps the original state and the child receives a duplicate snapshot;
 - parent and child diverge independently from that point;
 - Echo-wide systems remain shared.
 
+When the preserved parent is loaded later, it resumes immediately before the blessing/branch choice that created the child.
+
 Open:
-- exact slot cap;
-- whether carried inventory beyond equipped gear is duplicated.
+- exact slot cap.
 
 ## Manifestation-specific
 
