@@ -2419,3 +2419,66 @@ Exact retention period remains open.
 ## 2026-09-28 — Developer Profile Inspector
 
 **Decision:** Provide debug/developer-only profile inspection tooling for save versions, revisions, manifestations, backups, migrations, unresolved records, transactions and hidden item-budget/provenance data.
+
+
+## 2026-09-28 — Host-authoritative simulation
+
+**Decision:** Host is authoritative for live world/combat/session state, including guest combat state while connected.
+
+Clients submit intentions; authoritative outcomes drive persistence.
+
+**Decision:** Solo, LAN and online modes should reuse common gameplay command/event paths where practical.
+
+## 2026-09-28 — Host migration is required
+
+**Decision:** Host migration must exist for overworld sessions.
+
+The session should continue under another participant when the original host disconnects/crashes.
+
+**Direction:** Preserve live session state whenever recoverable and never discard already-earned durable progression simply because host migration failed.
+
+## 2026-09-28 — Dungeon host migration
+
+**Decision:** Host migration also applies to active dungeon/raid runs.
+
+A long run should not automatically fail because the original host disconnects.
+
+## 2026-09-28 — Disconnect grace and slot reservation
+
+**Decision:** Temporarily disconnected players remain represented in-world during a reconnect grace period and may still be harmed/killed.
+
+**Decision:** Reconnecting within the grace period resumes the same live actor.
+
+**Decision:** Dungeon roster slots remain reserved and cannot be replaced during that window.
+
+## 2026-09-28 — Pause rules
+
+**Decision:** Solo supports true pause.
+
+**Decision:** Multiplayer supports vote pause.
+
+Exact vote rules remain open.
+
+## 2026-09-28 — Public lobbies, LAN and direct connection
+
+**Decision:** DiceFree supports truly public stranger lobbies in addition to friends/invite-only games.
+
+**Decision:** Support LAN discovery and direct connection-style joining.
+
+LAN/private networking must not require internet/cloud availability and should work with normal local/private/virtual-LAN setups.
+
+## 2026-09-28 — Vote kick
+
+**Decision:** Multiplayer supports vote kick.
+
+Exact thresholds, host-target behavior and dungeon restrictions remain open.
+
+## 2026-09-28 — No ordinary equipment trading
+
+**Decision:** No general player-to-player equipment trading after pickup.
+
+FFA overworld drops can still be socially assigned before pickup.
+
+**Direction:** Framework supports explicitly tradeable item categories; food/potions are candidate tradeable consumables.
+
+**Decision:** No default direct gold transfer/unrestricted player economy.
