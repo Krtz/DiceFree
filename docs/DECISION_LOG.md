@@ -1957,3 +1957,80 @@ A representative offensive-spell target is roughly **10 Mana at rank 1 -> ~100 M
 **Decision:** Magically Touched becomes modestly smaller/frailer-looking than Novice.
 
 **Decision:** Tier 1 gets no dramatic magical glow effects or highly specialized class silhouettes; flashy identity comes later.
+
+
+## 2026-09-28 — Reusable quest objective framework
+
+**Decision:** Ordinary quests should be composed from reusable semantic objective types such as Kill, Interact, ReachArea, Collect, TalkTo, UseItem and CompleteDungeon, with AND/OR composition.
+
+Custom scripts remain an escape hatch for genuinely unusual quests.
+
+## 2026-09-28 — Quest persistence scopes
+
+**Decision:** Quest/event content can declare different scopes:
+- Echo-once;
+- session-instance once;
+- timeline/class-save once;
+- repeatable.
+
+Ordinary story/side quests normally use timeline scope unless authored otherwise.
+
+## 2026-09-28 — Configurable event / kill credit
+
+**Decision:** There is no universal kill-credit rule.
+
+Content can choose policies including:
+- global;
+- nearby;
+- threat/combat participation;
+- last hit.
+
+The authoritative death/event record supplies facts; individual quest/XP/achievement consumers decide credit.
+
+## 2026-09-28 — NPC interaction actions
+
+**Decision:** NPCs/world interactables expose semantic actions and can support an interaction menu.
+
+**Decision:** A default action may execute directly when appropriate.
+
+One NPC may therefore support combinations such as Talk / Quest / Shop / Bank / Respec / Advancement without duplicating the NPC.
+
+## 2026-09-28 — Effect stacking policy
+
+**Decision:** Effects define stacking/refresh behavior individually.
+
+Supported policy families include unique-per-source, refresh, replace-stronger, capped stacks, independent instances and strongest-wins.
+
+**Direction:** unique-per-source is a common/default pattern, not a universal restriction.
+
+## 2026-09-28 — Dispel hierarchy and effect tags
+
+**Decision:** The main dispel hierarchy is Weak Dispel / Strong Dispel / Undispellable.
+
+**Decision:** Semantic effect tags such as Poison, Curse, Disease, Bleed, Magic and CC are still supported for situational cleanses, consumables and specialized classes.
+
+## 2026-09-28 — Tag-driven equipment eligibility
+
+**Decision:** Equipment eligibility uses stable semantic tags/requirements for scalability.
+
+**Decision:** Exact class IDs remain valid requirements for intentionally niche/class-specific gear.
+
+## 2026-09-28 — Composable abilities with custom escape hatch
+
+**Decision:** Abilities should primarily compose generic targeting, resource, cooldown, damage/heal, elemental, status, movement, summon, threat and resource-generation primitives.
+
+**Decision:** Custom code remains available for genuinely unusual class mechanics.
+
+## 2026-09-28 — Cooldown philosophy
+
+**Decision:** No universal GCD by default.
+
+**Decision:** Framework supports arbitrary shared cooldown groups and optional class-specific/GCD-like groups.
+
+**Decision:** Exceptional mechanics may share a cooldown across different players.
+
+## 2026-09-28 — Basic attacks use common combat hooks
+
+**Decision:** Basic attacks use the common combat-action/effect pipeline where practical.
+
+This must support later mechanics such as generating Combo Points/resources from auto-attacks and spending them on skills.
