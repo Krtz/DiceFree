@@ -2275,3 +2275,70 @@ Explicit future exceptions are allowed.
 **Decision:** Dungeon/encounter milestones emit generic semantic events usable by quests, achievements, class requirements and secret unlocks.
 
 Examples include run start, boss defeat, completion, no-death completion and secret-room discovery.
+
+
+## 2026-09-28 — Aggressive autosave
+
+**Decision:** Durable progression autosaves on meaningful state changes; no required traditional manual Save Game flow.
+
+## 2026-09-28 — Loading spawns at resurrection point
+
+**Decision:** Exact quit position is not the authoritative saved spawn.
+
+Loading a class places it at its latest registered resurrection point, with Cornberg fallback when required.
+
+## 2026-09-28 — Active dungeon runs are not persisted
+
+**Decision:** Quitting an active dungeon abandons the run.
+
+**Decision:** Persistent XP and gold already earned during the run remain saved.
+
+## 2026-09-28 — Echo vs manifestation save ownership
+
+**Decision:** Echo-wide state and per-class manifestation state have explicit ownership boundaries even if serialized together.
+
+Transient session/dungeon state is separate.
+
+## 2026-09-28 — Atomic advancement and bank operations
+
+**Decision:** Advancement/class creation is transactional.
+
+**Decision:** Inventory/bank ownership transfers are transactional.
+
+Crashes must not produce half-created classes, duplicated items or deleted items.
+
+## 2026-09-28 — Versioned saves and migrations
+
+**Decision:** Persistent references use stable IDs and explicit save/schema versions.
+
+**Decision:** Runtime changes use explicit migrations rather than assuming old saves match current data.
+
+## 2026-09-28 — Preserve unresolved save records
+
+**Decision:** Missing/unknown class/item/content references are preserved inertly where practical rather than silently deleted.
+
+## 2026-09-28 — Rotating local save backups
+
+**Decision:** Maintain automatic rotating backups of recent successful save revisions.
+
+## 2026-09-28 — Cloud/user architecture
+
+**Decision:** Prepare provider-neutral user/profile and cloud-save abstractions.
+
+Initial PC direction includes Steam Cloud.
+
+Gameplay systems must not depend directly on a platform-specific user ID or cloud API.
+
+## 2026-09-28 — No anti-save-scumming requirement
+
+**Decision:** DiceFree does not need anti-save-scumming/competitive save protection or leaderboard integrity systems.
+
+Persistence protects against accidental loss/corruption, not deliberate local rollback.
+
+## 2026-09-28 — Cooperative world progress persists to eligible guests
+
+**Decision:** Host state controls live world presentation, but eligible guests can permanently record quest/world outcomes they actually participate in.
+
+**Decision:** Merely joining after an event already happened does not copy that outcome into the guest's timeline.
+
+**Direction:** Event definitions can choose persistence recipients; ordinary co-op progression should normally credit eligible participants.
