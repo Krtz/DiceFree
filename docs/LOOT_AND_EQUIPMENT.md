@@ -98,6 +98,36 @@ Core direction:
 
 The exact formulas are balance data and remain open.
 
+### Item level is source-defined
+
+Item level comes from the authored content/source, not from the current player's level.
+
+Examples:
+- a level-35 dungeon drops roughly level-35 equipment even if a level-100 character clears it;
+- old content keeps its own progression identity;
+- player level does not silently upscale legacy loot.
+
+Specific content may deliberately define exceptions, but player scaling is not the default.
+
+### Budget is a design/debug metric, not a player truth
+
+The point budget exists to help designers, tooling and balancing.
+
+It is **not** a player-facing item-quality score and should not tell the player which item is "better."
+
+A high-budget item can still be niche, awkward or intentionally strange.
+
+Example:
+- +50 HP regeneration and 0 damage may consume more budget than +20 damage and +20 HP regeneration;
+- the latter may be more generally useful;
+- the former may enable a weird sustain build.
+
+Players should evaluate actual stats/effects and build fit.
+
+Budget totals, over-budget deltas and internal power diagnostics belong in **debug/designer views only**.
+
+Handcrafted content may intentionally exceed ordinary budget expectations. The tooling should report the deviation, not forbid it.
+
 A generated item should be reproducible/explainable from:
 - item level;
 - rarity;
@@ -200,18 +230,49 @@ It is **not** merely a generated item with a special label.
 
 Handcrafted gear can intentionally exceed or bend ordinary randomized-generation rules when appropriate, but such exceptions should be explicit in data.
 
+Designer/debug tooling should expose normal expected budget vs actual authored budget/delta so deliberate outliers are visible during development without exposing that number to players.
+
 ## Sockets, socketables and runeword-like systems
 
 The equipment framework should support sockets even if socketable loot is not part of the earliest PoC.
 
 Sockets can accept authored modifier items such as gems/runes/other socketables.
 
-The framework should also leave room for a **runeword-like system**:
-- specific socketable combinations/sequences can produce additional authored effects or transform item behavior;
-- eligibility can depend on item family, socket count/order, tier or other tags;
-- the resulting effect should use the normal item/effect/proc framework rather than special hard-coded weapon logic.
+The framework should also support a **runeword-like system**:
+- specific socketable **ordered sequences** can produce authored additional effects;
+- **order matters**;
+- eligibility can depend on item family, socket count, tier or other tags;
+- runewords can activate on already-magical/rare/epic/etc. equipment — they do **not** require a plain/non-magical base item;
+- the base item remains itself and keeps its existing stats/affixes/effects;
+- the runeword adds to that item rather than transforming it into an unrelated replacement item;
+- the resulting effect uses the normal item/effect/proc framework rather than special hard-coded weapon logic.
 
-Exact runeword rules, order sensitivity, permanence/removal and crafting UX remain open.
+This means finding an excellent rare/epic item with a useful socket layout can be especially exciting because it can also host a runeword.
+
+### Socket removal / recovery services
+
+Socket changes are performed through authored NPC/services and have real cost/consequences.
+
+Framework direction supports at least two destructive service patterns:
+- preserve the **item**, remove/reset its socketables, and destroy the removed socketables permanently;
+- preserve/recover the **socketables**, but destroy the base item permanently.
+
+Exact NPCs, currencies/material costs and which services are available where remain content design.
+
+## Duplicate named items and unique-equipped rules
+
+Players may obtain multiple copies of the same named handcrafted item.
+
+There is no universal "you may only own one" rule.
+
+Because most equipment slots are singular, duplicate-equipping is naturally impossible for many item types.
+
+The framework should still support an explicit **Unique Equipped** limit for edge cases such as:
+- future multiple-ring-slot designs;
+- dual-wielding identical one-handed named weapons;
+- other items that can occupy multiple simultaneous eligible slots.
+
+This is an item-specific restriction, not a default rule.
 
 ## Item sets
 
@@ -297,6 +358,16 @@ Exact UI messaging and whether any exceptional dungeon mechanic can override thi
 ## Binding
 
 All items are account-bound.
+
+## Selling unwanted equipment
+
+There is **no general equipment salvage/disenchant system**.
+
+Unwanted equipment is primarily sold to vendors for gold.
+
+If crafting/material acquisition needs another sink/source later, materials can be sold by NPCs for gold or introduced through authored content rather than requiring every unwanted item to become crafting dust.
+
+Named/handcrafted equipment does not automatically dismantle into special content-specific materials.
 
 ## NPC crafting
 
