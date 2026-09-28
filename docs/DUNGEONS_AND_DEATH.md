@@ -60,6 +60,8 @@ It remains defeated until the run resets.
 
 ### Boss reset
 
+Encounter implementations should follow `docs/ENEMIES_AND_ENCOUNTERS.md` so boss actors, arena state and encounter orchestration remain separately resettable.
+
 If a boss encounter ends without victory, the boss resets cleanly:
 - full HP;
 - adds/minions reset;
@@ -69,6 +71,8 @@ If a boss encounter ends without victory, the boss resets cleanly:
 - temporary encounter state is cleared.
 
 A party cannot slowly chip permanent boss progress across failed pulls.
+
+Individual encounters may explicitly author exceptions where some arena/boss state persists across attempts. Such persistence must be deliberate encounter data, not accidental leftover runtime state.
 
 ### Full wipe
 
