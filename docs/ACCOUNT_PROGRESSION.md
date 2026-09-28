@@ -2,6 +2,23 @@
 
 DiceFree distinguishes manifestation-specific progression from Echo/account progression.
 
+## Advancement creates manifestations
+
+Class advancement creates a **new manifestation slot** rather than overwriting the existing one.
+
+Example:
+- a level-10 Novice chooses Physically Blessed;
+- the level-10 Novice remains playable;
+- a new level-1 Physically Blessed Novice manifestation is created;
+- the same Novice can later branch into Magically Touched, creating another slot.
+
+This makes class branching a literal Echo/timeline mechanic.
+
+Open:
+- exact slot cap;
+- whether/which equipped items/inventory are copied into a new branch;
+- how manifestation-specific quest state initializes in the child branch.
+
 ## Manifestation-specific
 
 Examples:
