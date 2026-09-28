@@ -9,6 +9,7 @@ namespace DiceFree.Combat
         [SerializeField, Min(1)] private int level = 1;
         public ActorDefinition Definition => definition;
         public int Level => level;
+        public event System.Action<float> LevelChanged;
         public AttributeValues Attributes => AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
         public float MaximumHp => definition.baseHp + Attributes.vitality * definition.tuning.hpPerVitality;
         public float Regeneration => Attributes.vitality * definition.tuning.regenerationPerVitality;
@@ -27,5 +28,11 @@ namespace DiceFree.Combat
             return definition.tuning.defaultElementResistance;
         }
         public void Configure(ActorDefinition value, int actorLevel = 1) { definition = value; level = Mathf.Max(1, actorLevel); }
+        public void SetLevel(int value)
+        {
+            var oldMaximum = MaximumHp;
+            level = Mathf.Max(1, value);
+            LevelChanged?.Invoke(oldMaximum);
+        }
     }
 }

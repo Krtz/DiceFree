@@ -1,5 +1,9 @@
 # Cornberg combat increment
 
+The following combat foundation now also supports timed respawn, XP/leveling
+and Q1. See [Cornberg quest/progression notes](CORNBERG_QUESTS.md) for the current
+five-kill starter flow, added components, provisional values and validation.
+
 This extends the saved Phase 1 Cornberg pocket on `poc/cornberg`. The latest six
 design-document changes from `setup/unity-project` at `a5879e9` were copied into
 this branch in `f454373` before implementation. A second documentation-only
@@ -31,10 +35,9 @@ Open `Assets/_DiceFree/Scenes/Cornberg.unity` in Unity 6000.6.3f1, or build/run
    time, independently of the resurrection point. HP regeneration remains active
    during combat too.
 6. The Slime chases within a short home leash and returns/restores HP when the
-   player escapes. A defeated Slime stays defeated in this increment. Use the
-   clearly marked **DEBUG: reset the single crop Slime** button outside combat
-   for another trial. This is a test control, not a replacement for the future
-   timer-based overworld respawn system.
+   player escapes. A defeated Slime now respawns after a configurable timer
+   (currently 10 seconds). The **DEBUG: reset the single crop Slime** button
+   remains an optional test control; normal quest play uses timed respawn.
 
 These combat keys are provisional PoC bindings. Full rebinding/profile UI,
 Attack-Move, Hold, allied/summon selection and ability casting remain deferred.
@@ -44,7 +47,8 @@ Attack-Move, Hold, allied/summon selection and ability casting remain deferred.
 - `ActorDefinition`, `ActorStats`, `AttributeValues`: stable content IDs, five
   base attributes, independent per-level growth, HP/defenses/speed/regeneration.
   Novice starts with one of each attribute and gains one of each per level.
-  No leveling/XP UI or class-resource mechanic is added.
+  XP/leveling is now provided by separate progression components. No class
+  resource mechanic is added.
 - `AttackDefinition`: base value, weighted or highest-attribute scaling,
   Physical/Magical channel, optional element, reach, wind-up and interval.
   Novice fists use the highest of **all five** attributes and remain Physical.
@@ -75,7 +79,8 @@ Attack-Move, Hold, allied/summon selection and ability casting remain deferred.
   damage numbers and simple squash/wind-up/death feedback. Nameplate visibility
   has Always / When Hurt / Never settings; floating numbers can be disabled.
   Widgets block world clicks through their panels. The full portrait, party,
-  minimap, XP, quest and 12-slot HUD layout is outside this increment.
+  minimap and 12-slot HUD layout remain deferred. Separate basic XP and quest
+  widgets are now available in the Q1 increment.
 
 Movement keeps NavMeshAgent avoidance for path movement. Direct movement also
 sweeps against actor colliders to prevent walking through live unit footprints.
@@ -169,9 +174,8 @@ validation. Direct collision uses local +Y sweeps; larger bodies and moving
 crowds need further navigation work. The runtime actor registry and IMGUI are
 small local-PoC implementations, not final large-session or shipping UI systems.
 The capsule Echo, ellipsoid Slime, squash feedback, and all environment art
-remain placeholders. There are no fist rigs, audio, loot or XP rewards.
+remain placeholders. There are no fist rigs, audio or loot drops.
 
-Next: playtest this one duel and return/well route, settle the provisional
-numbers/spacing, then add timer-based respawn and a small reusable kill-credit
-event consumer before implementing the first crop quest. Do not jump to the
-full ability or advancement framework yet.
+Timed respawn, semantic kill credit, XP and Q1 are now implemented; see the
+quest/progression notes for the next small step. Duel tuning remains under
+Axel's separate playtest review; this extension does not finalize issue #19.

@@ -35,8 +35,9 @@ namespace DiceFree.Combat
             Stats = GetComponent<ActorStats>(); Health = GetComponent<Health>(); Motor = GetComponent<TraversalMotor>();
         }
         private void Start() => Motor.SetSpeed(Stats.MoveSpeed);
-        private void OnEnable() { actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; }
-        private void OnDisable() { actors.Remove(this); Health.Died -= OnDeath; Health.Restored -= OnRestore; }
+        private void OnEnable() { actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; Stats.LevelChanged += OnLevel; }
+        private void OnDisable() { actors.Remove(this); Health.Died -= OnDeath; Health.Restored -= OnRestore; Stats.LevelChanged -= OnLevel; }
+        private void OnLevel(float previousMaximum) => Motor.SetSpeed(Stats.MoveSpeed);
         private void OnDeath() { Motor.SetMotionAllowed(false); SetColliders(false); }
         private void OnRestore() { Motor.SetMotionAllowed(true); SetColliders(true); }
         private void SetColliders(bool value) { foreach (var collider in GetComponents<Collider>()) collider.enabled = value; }

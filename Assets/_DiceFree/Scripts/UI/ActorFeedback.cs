@@ -1,4 +1,5 @@
 using DiceFree.Combat;
+using DiceFree.World;
 using UnityEngine;
 
 namespace DiceFree.UI
@@ -12,12 +13,14 @@ namespace DiceFree.UI
         [SerializeField] private bool floatingNumbers = true;
         private CombatActor actor;
         private BasicAttack attack;
+        private OverworldRespawn respawn;
         private Vector3 normalScale;
         private string lastHit;
         private float hitUntil;
         private void Awake()
         {
             actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>();
+            respawn = GetComponent<OverworldRespawn>();
             normalScale = visual.localScale;
         }
         private void OnEnable() => actor.Health.Damaged += OnDamage;
@@ -43,6 +46,7 @@ namespace DiceFree.UI
             if (nameplates == NameplateMode.Always || (nameplates == NameplateMode.WhenHurt && actor.Health.Current < actor.Health.Maximum))
                 GUI.Box(rect, $"{actor.Stats.Definition.displayName} L{actor.Stats.Level} {actor.Health.Current:0}/{actor.Health.Maximum:0}");
             if (floatingNumbers && Time.time < hitUntil) GUI.Label(new Rect(rect.x+65,rect.y-24,60,24), lastHit);
+            if (!actor.Alive && respawn != null) GUI.Label(new Rect(rect.x+30,rect.y+24,160,24),$"Respawn in {respawn.Remaining:0.0}s");
         }
         public void Configure(Transform model) => visual = model;
     }

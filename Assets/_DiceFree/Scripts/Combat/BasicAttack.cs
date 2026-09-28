@@ -26,6 +26,7 @@ namespace DiceFree.Combat
             if (actor != null) actor.Motor.Stop();
             // Deliberately preserve the cooldown: changing targets cannot grant free hits.
         }
+        public void ResetForSpawn() { Cancel(); readyAt = impactAt = repathAt = 0; }
         public bool InRange(CombatActor target) => Vector3.Distance(transform.position, target.transform.position)
             <= actor.Radius + target.Radius + Definition.reach;
         private void Update()

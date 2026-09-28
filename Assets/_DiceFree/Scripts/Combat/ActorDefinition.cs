@@ -16,6 +16,8 @@ namespace DiceFree.Combat
     {
         public string stableId;
         public string displayName;
+        public string familyId;
+        [Min(0)] public int experienceReward;
         public AttributeValues baseAttributes = new AttributeValues(1);
         public AttributeValues growth = new AttributeValues(1);
         [Min(1)] public float baseHp = 10;

@@ -11,7 +11,7 @@ The game is intended to combine:
 
 ## Current status
 
-**Unity foundation, preserved Cornberg blockout, and a one-Slime combat loop.**
+**Cornberg blockout, combat, timed respawn, XP and the first crop quest.**
 
 The first World 1 pocket is available in `Assets/_DiceFree/Scenes/Cornberg.unity`.
 Open it in Unity **6000.6.3f1** and press Play. Right-click moves in Classic mode;
@@ -22,8 +22,10 @@ See [Cornberg blockout notes](docs/CORNBERG_BLOCKOUT.md) for scope, validation a
 The eastern crop field now contains one neutral green Slime. Left-click/Tab selects;
 right-click an enemy or X attacks. R returns to Cornberg after death; the well heals
 nearby living actors. See [combat playtest notes](docs/CORNBERG_COMBAT.md) for controls,
-provisional tuning, architecture and validation. Art remains placeholder; quests,
-XP progression, Tier-1 classes and multiplayer are not implemented.
+provisional tuning, architecture and validation. Art remains placeholder;
+Tier-1 classes and multiplayer are not implemented. Timed Slime respawn, XP and
+the first 3+2 crop quest are now playable: right-click the farmer beside the
+fields, or press I nearby. See [Q1 progression notes](docs/CORNBERG_QUESTS.md).
 
 ## Current high-level canon
 

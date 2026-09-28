@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.ActorDefinition
   stableId: enemy.crop-slime
   displayName: Crop Slime
+  familyId: enemy-family.slime
+  experienceReward: 10
   baseAttributes:
     vitality: 0
     strength: 0

@@ -16,8 +16,9 @@ namespace DiceFree.AI
         public Vector3 Home => home;
         public string State => !actor.Alive ? "Defeated" : Returning ? "Returning" : attack.Target != null ? "Aggro" : "Idle";
         private void Awake() { actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>(); home = transform.position; }
-        private void OnEnable() => actor.Health.Damaged += OnDamaged;
-        private void OnDisable() { actor.Health.Damaged -= OnDamaged; attack.Cancel(); }
+        private void OnEnable() { actor.Health.Damaged += OnDamaged; actor.Health.Restored += ClearState; }
+        private void OnDisable() { actor.Health.Damaged -= OnDamaged; actor.Health.Restored -= ClearState; attack.Cancel(); }
+        private void ClearState() { attack.ResetForSpawn(); Returning = false; nextPath = 0; }
         private void OnDamaged(CombatActor source, DamageResult result)
         {
             if (!Returning && actor.IsHostileTo(source) && Vector3.Distance(source.transform.position, home) <= leash)

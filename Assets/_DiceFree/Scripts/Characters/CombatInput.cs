@@ -31,7 +31,7 @@ namespace DiceFree.Characters
             if (clear.WasPressedThisFrame()) { selection.Select(null); attack.Cancel(); }
             if (select.WasPressedThisFrame() && Mouse.current != null && !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
                 selection.Select(Pick(Mouse.current.position.ReadValue()));
-            if (attackSelected.WasPressedThisFrame()) attack.Order(selection.Selected);
+            if (attackSelected.WasPressedThisFrame()) { GetComponent<Interactor>()?.Cancel(); attack.Order(selection.Selected); }
         }
         private CombatActor Pick(Vector2 screenPoint)
         {

@@ -30,6 +30,8 @@ namespace DiceFree.EditorTools
         private static Keyboard keyboard;
         private static Mouse mouse;
         private static bool commandSent;
+        // Visible ground below the quest tracker even in Unity's 640x480 batch Game View.
+        private static readonly Vector3 ClickDestination = new(5,0,-8);
 
         static CornbergValidation()
         {
@@ -165,7 +167,8 @@ namespace DiceFree.EditorTools
                     Require(motor.GetComponent<TraversalInput>().Mode==TraversalInput.ControlMode.Classic,"F6 did not restore Classic mode.");
                     InputSystem.QueueStateEvent(keyboard,new KeyboardState());
                     mouse=InputSystem.AddDevice<Mouse>();
-                    var point=Camera.main.WorldToScreenPoint(new Vector3(10,0,-3));
+                    var point=Camera.main.WorldToScreenPoint(ClickDestination);
+                    Require(!DiceFree.UI.HudPointerBlocker.Covers(new Vector2(point.x,point.y)),"Traversal test click is obscured by HUD.");
                     InputSystem.QueueStateEvent(mouse,new MouseState { position=new Vector2(point.x,point.y), buttons=2 });
                     stage++; started=Time.time;
                     return;
@@ -173,7 +176,7 @@ namespace DiceFree.EditorTools
                 if(stage==Stops.Length+3)
                 {
                     if(Time.time-started<0.3f) return;
-                    Require(motor.Travelling || Vector3.Distance(motor.transform.position,Sample(new Vector3(10,0,-3)))<0.6f,
+                    Require(motor.Travelling || Vector3.Distance(motor.transform.position,Sample(ClickDestination))<0.6f,
                         "Right-click did not issue a path through the Input System.");
                     if(motor.Travelling) return;
                     motor.GetComponent<NavMeshAgent>().Warp(Sample(new Vector3(-12,0,35)));

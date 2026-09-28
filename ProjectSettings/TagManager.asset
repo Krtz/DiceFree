@@ -16,7 +16,7 @@ TagManager:
   - Walkable
   - WorldSolid
   - CombatActor
-  - 
+  - Interactable
   - 
   - 
   - 
