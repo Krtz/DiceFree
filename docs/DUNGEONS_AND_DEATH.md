@@ -128,6 +128,18 @@ After the allowed reconnect window expires, unresolved reward handling remains a
 
 Equipment is awarded only after successful completion via private loot rooms.
 
+### Disconnect during an active run
+
+A disconnected dungeon participant retains their locked roster slot for the reconnect grace period.
+
+Their actor remains in the active run and can be affected/killed normally while disconnected.
+
+If they reconnect in time, they resume the same live dungeon actor.
+
+No substitute player may take the reserved slot.
+
+Host disconnect should trigger host-migration recovery rather than automatically destroying the dungeon run.
+
 ## Individual death inside a dungeon
 
 A dead player remains resurrectable by healer resurrection **until that player chooses to self-respawn**.
