@@ -147,6 +147,17 @@ Implementation/UI preference:
 
 Total average growth: 6 primary-stat points per level.
 
+## Tier-1 visual direction
+
+Physically Blessed should look **slightly larger, stronger and more physically developed** than Novice.
+
+Keep the change modest:
+- more robust proportions;
+- slightly stronger physical silhouette;
+- no highly specialized tank/rogue/ranger/2H identity yet.
+
+The major silhouette transformations belong to later classes.
+
 ## Possible level-30 branches
 
 Current candidate four-way split:
