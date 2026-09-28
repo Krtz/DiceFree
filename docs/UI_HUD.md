@@ -65,12 +65,18 @@ Default party frames are in the **top-left**.
 The player's own frame is included alongside allies.
 
 Party frames should be able to show:
-- HP;
+- portrait/class icon;
+- name;
+- level;
+- HP bar + current/max;
 - resource where useful;
 - important buffs/debuffs;
 - threat indicator;
 - resurrection sickness;
+- small cast bar;
 - clickable targeting for support/healing.
+
+Party-frame cast bars are independently toggleable.
 
 Detailed exact threat numbers can remain optional.
 
@@ -94,7 +100,10 @@ Bosses can use a larger/dedicated boss presentation in the same broad area.
 
 Default minimap:
 - square;
-- top-right.
+- top-right;
+- **fixed north-up orientation**.
+
+Players can toggle rotating minimap behavior in options.
 
 Quest tracker sits beneath it.
 
@@ -144,7 +153,17 @@ These are modular widgets:
 - movable;
 - scalable;
 - hideable;
-- potentially filterable later.
+- filterable.
+
+Default filtering should prioritize:
+- important class buffs;
+- harmful debuffs;
+- encounter/boss mechanics;
+- effects the current character can remove/cleanse/purge.
+
+Cleanse/purge capability is **not healer-exclusive**. Highlighting should be based on the current character's actual effect-removal capabilities.
+
+Players may opt into showing all effects.
 
 ## XP bar
 
@@ -203,6 +222,64 @@ Long-term each panel should be capable of:
 - potentially switching between alternate templates.
 
 Do not hard-code gameplay logic to one screen coordinate.
+
+## Ground loot labels
+
+Overworld equipment drops are relatively scarce/meaningful, more Warcraft III-like than loot-fountain ARPGs.
+
+Default presentation should therefore make individual drops readable without requiring aggressive filtering.
+
+Direction:
+- item appears clearly when dropped;
+- nearby/hovered items can show labels;
+- an optional modifier key can reveal ground loot labels where useful;
+- rarity/identity should remain easy to read;
+- do not assume screens will be covered in dozens of simultaneous drops.
+
+Exact label behavior/filter controls remain tunable later.
+
+## Carried gold display
+
+Carried gold is shown as a small HUD information element by default because carried gold is the amount exposed to death loss.
+
+Rules:
+- carried gold visible by default;
+- banked gold is not permanently shown on the HUD;
+- HUD gold display can be hidden in options;
+- other currencies/material resources can remain in menus unless a design later needs them persistent.
+
+## Chat and logs
+
+Default direction:
+- bottom-left fading panel;
+- tabs/modes can include Chat, System and Combat;
+- panel fades mostly transparent/inactive when not being used.
+
+Detailed combat telemetry may remain developer-only even if a normal player-facing combat log exists.
+
+## Character/inventory windows
+
+Character, inventory and similar major windows are overlay panels over the live world rather than full-screen pause screens.
+
+Direction:
+- movable;
+- scalable where appropriate;
+- gameplay continues in multiplayer;
+- hotkeys are the primary access method, with limited visible system buttons also available.
+
+## Contextual mouse cursor
+
+Mouse cursor feedback follows Warcraft III-style contextual states.
+
+At minimum support visually distinct cursor states for:
+- move;
+- attack;
+- talk;
+- loot;
+- interact;
+- unavailable/invalid.
+
+The cursor should make click-to-move/context actions immediately understandable without requiring extra text.
 
 ## Interaction prompts
 
