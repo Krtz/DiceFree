@@ -6,9 +6,11 @@ Every new Echo lineage begins as a **Novice**.
 
 See `docs/classes/NOVICE.md` for the detailed starting class.
 
-Advancement branches create alternate manifestations rather than deleting the parent manifestation.
+Advancement branches create alternate class manifestations rather than deleting the parent manifestation.
 
-The original manifestation remains playable, while the chosen advancement creates a new character slot/timeline branch at level 1.
+Each class ID has at most **one persistent save-state** for the Echo.
+
+The original class remains playable, while the first advancement into a new class creates that class's save-state at level 1.
 
 ## Advancement cadence
 
@@ -40,25 +42,28 @@ Advancement is a **branch**, not an overwrite.
 
 When a manifestation reaches an advancement threshold and chooses a class:
 - the current manifestation is preserved as a playable parent slot at the fork point;
-- a new manifestation/character slot is created for the chosen advancement;
+- if the target class does not yet have a save-state, that class save-state is created for the chosen advancement;
 - the game immediately continues as that new advanced manifestation in the same session/world state;
 - the new advanced manifestation begins at level 1 with its own class base stats/growth;
 - **all manifestation-specific state** is snapshotted into the child at the fork, including gear, carried inventory/currency, quest/world progression and relevant class/skill state;
 - the parent keeps its original state and the child receives a duplicate snapshot;
 - the preserved parent resumes immediately before the blessing choice if loaded later;
 - Echo-wide state remains shared;
-- the parent manifestation can later choose another available branch, creating another child manifestation.
+- the parent manifestation can later choose another available branch, creating another class save-state if that class has not already been created;
+- reaching the same resulting class through another route does not create or overwrite a duplicate save-state.
 
 Example after the first split:
-- Level 10 Novice remains playable;
-- Level 1 Physically Blessed Novice exists as another slot;
-- Level 1 Magically Touched Novice can later be created from the same Novice.
+- Novice has one preserved save-state;
+- Physically Blessed Novice can gain one save-state;
+- Magically Touched Novice can gain one save-state.
 
-This branching-slot model is part of the Echo/timeline fantasy.
+The class/Ways UI can serve as the start-game selector for these class save-states.
+
+This one-save-per-class model is part of the Echo/timeline fantasy.
 
 Open:
-- exact slot limits;
-- UI presentation of parent/child lineage.
+- archive/delete/recreate behavior for intentionally discarded class-local saves;
+- UI presentation of historical parent/route relationships.
 
 ## Core attributes
 
@@ -158,9 +163,9 @@ Current candidate level-30 branching:
 
 This four-plus-four split is still a working direction rather than locked final structure.
 
-### Long-term class-tree scale
+### Long-term class-web scale
 
-A **very large class tree is an explicit long-term goal**.
+A **very large class graph/web is an explicit long-term goal**.
 
 Do not optimize the design around keeping the final class count small.
 
@@ -170,7 +175,19 @@ The tree also does not need to be development-symmetric:
 - additional descendants can be filled in over time;
 - higher-tier concepts can take longer to design and implement.
 
-The architecture must support arbitrary branch counts and partial/asymmetric content without requiring placeholder classes or giant hard-coded trees.
+The architecture must support arbitrary branch counts, convergence requirements and partial/asymmetric content without requiring placeholder classes or giant hard-coded trees.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md` for multi-lineage requirements, visibility/discovery and class-web rules.
+
+### No direct class creation
+
+Unlocking/discovering a Way never creates it from the menu.
+
+A missing class save is always created through an eligible earlier class's actual advancement quest/event.
+
+This remains true when a much later-tier Echo-wide event unlocks an earlier-tier Way.
+
+If a class save is permanently deleted, recreate it by advancing into it again from an appropriate earlier class; Echo-wide discovery and milestones remain intact.
 
 ### Tier-1 skill-rank pattern
 
@@ -214,6 +231,26 @@ Advancement may:
 - alter equipment permissions;
 - change visual form.
 
+## Convergence and Echo-wide class evidence
+
+Class progression is not limited to parent -> child lineage requirements.
+
+The Echo permanently records meaningful class/tier milestones account-wide.
+
+A class may require:
+- one lineage milestone;
+- several lineage milestones together;
+- class evidence combined with quests/items/achievements/discoveries;
+- nested AND/OR requirement expressions.
+
+The same resulting class can be reached through different qualifying parent manifestations, but the target class normally uses the same advancement quest/NPC/location regardless of which parent supplies the timeline fork.
+
+A single prerequisite combination can also unlock multiple different convergence classes.
+
+Deleting/cleaning up an old manifestation does not erase class milestones the Echo already earned.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md`.
+
 ## Secret classes
 
 Secret classes may branch from many points and use unusual conditions:
@@ -239,7 +276,7 @@ They should have:
 
 ## Open questions
 
-- exact slot limits;
+- exact archive UI and permanent-delete confirmation UX;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
 - exact second-tier classes;

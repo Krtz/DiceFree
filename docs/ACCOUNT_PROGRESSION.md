@@ -4,13 +4,15 @@ DiceFree distinguishes manifestation-specific progression from Echo/account prog
 
 ## Advancement creates manifestations
 
-Class advancement creates a **new manifestation slot** rather than overwriting the existing one.
+Class advancement creates a new **class manifestation/save-state** rather than overwriting the parent.
+
+The Echo has at most **one persistent save-state per class ID**.
 
 Example:
 - a level-10 Novice chooses Physically Blessed;
-- the level-10 Novice remains playable;
-- a new level-1 Physically Blessed Novice manifestation is created;
-- the same Novice can later branch into Magically Touched, creating another slot.
+- the Novice save remains playable;
+- the first Physically Blessed advancement creates its one level-1 Physically Blessed save-state;
+- the same Novice can later create the one Magically Touched save-state.
 
 This makes class branching a literal Echo/timeline mechanic.
 
@@ -24,8 +26,51 @@ At branch creation:
 
 When the preserved parent is loaded later, it resumes immediately before the blessing/branch choice that created the child.
 
-Open:
-- exact slot cap.
+Roster model:
+- there is no small fixed character-slot cap;
+- roster capacity naturally follows the number of classes;
+- duplicate save-states for the same class are not created;
+- the class/Ways selection UI can be used to choose which class timeline to continue;
+- Archive is the preferred cleanup/organization mechanism;
+- deleting a class-local save must not remove Echo-wide milestones/discoveries.
+
+Permanent deletion behavior:
+- Way discovery/unlocks remain Echo-wide;
+- Echo-wide milestones earned through that class remain;
+- the class save itself is gone;
+- recreating it requires advancing into that class again from an appropriate earlier-tier/prerequisite save.
+
+Archive remains the preferred routine cleanup mechanism.
+
+## Echo-wide class evidence
+
+Reaching meaningful class/tier milestones creates permanent Echo-wide evidence.
+
+Examples:
+- reached Tier 2 Wizard;
+- completed a specific class advancement;
+- discovered a hidden Way.
+
+These records:
+- can satisfy convergence/secret-class requirements;
+- survive deletion/cleanup of the manifestation that originally earned them;
+- are not the same as currently owning a manifestation of that class.
+
+Class/Way discovery is also Echo-wide once earned.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md`.
+
+## Per-class resurrection point
+
+Each class save tracks its own **latest registered resurrection point**.
+
+Rules:
+- starting/loading that class normally spawns it at its latest registered resurrection point;
+- class switching can only be initiated through a resurrection stone;
+- switching to another class uses that class save's own registered point;
+- one class changing its resurrection point does not change another class save's point;
+- when a new class save is first created by advancement, it **inherits the parent class's currently registered resurrection point**;
+- if a saved resurrection point is unavailable/invalid in the current game/session, **Cornberg** is the fallback.
 
 ## Manifestation-specific
 
@@ -73,6 +118,17 @@ Some can use carried/stored risk.
 
 The currency system should support this generically rather than hard-coding gold assumptions.
 
+## Switching and inventory
+
+Class inventories remain separate when switching manifestations.
+
+Switching at a resurrection stone:
+- does not automatically open the bank;
+- does not transfer carried items/equipment between classes;
+- does not pull items from the shared bank.
+
+If the newly selected class needs banked gear, the player must physically go to a bank and withdraw it under the normal rules.
+
 ## Shared bank
 
 - all items account-bound;
@@ -93,7 +149,7 @@ Class progression, story execution and ordinary questing are usually manifestati
 
 ## Open
 
-- secret-class unlock sharing;
+- class-save archive/delete/recreate UX;
 - achievements;
 - codex;
 - pets;

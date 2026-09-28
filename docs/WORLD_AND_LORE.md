@@ -39,13 +39,25 @@ To ordinary inhabitants these are simply old strange stones/monuments.
 
 They do not know the stones have power.
 
+Each class manifestation remembers its own active resurrection stone.
+
+When that class manifestation is loaded or enters a session, it normally appears at the latest resurrection point that manifestation registered.
+
+Resurrection stones are also the in-world interface for switching between existing class manifestations.
+
+A newly-created class manifestation initially inherits its parent manifestation's registered resurrection stone.
+
+If the remembered stone cannot be used in the current game/session, the Echo falls back to **Cornberg**.
+
 ## Alternate manifestations
 
-All character slots are manifestations of the **same Echo** across different timelines/possibilities/multiversal expressions.
+All class save-states are manifestations of the **same Echo** across different timelines/possibilities/multiversal expressions.
+
+The Echo keeps at most one persistent save-state per class identity.
 
 This provides the in-world basis for:
 - permanent class branches;
-- multiple character slots;
+- a large roster of class manifestations;
 - shared bank access;
 - some account-wide quest/event state;
 - some shared unlocks/discoveries.

@@ -53,38 +53,73 @@ Physical Mana philosophy:
 
 Exact base Mana, regeneration and INT interaction remain balance work.
 
+## Basic attack and equipment
+
+Basic attacks scale from **whichever is higher of Strength or Agility**.
+
+Physically Blessed is still fundamentally melee at Tier 1.
+
+Equipment direction:
+- can equip essentially **all ordinary low-level melee weapons** that are not reserved for a more specialized class;
+- examples can include one-handed and two-handed swords, axes, maces, daggers, spears/polearms and similar conventional melee families as they are introduced;
+- shields can be supported as ordinary offhand equipment where appropriate;
+- no true ranged basic-attack weapon identity yet.
+
+The exact attack coefficient/speed remains balance work.
+
 ## Working skill identities
 
 ### 1. Heavy Strike
 - melee single-target physical skill;
 - evolves the Novice stun concept;
-- damage should use the **higher of STR or AGI** as the simple Tier-1 blank-slate rule;
+- damage uses the **higher of STR or AGI**;
 - keeps a stun, but the stun obeys ordinary CC resistance/DR and true immunity.
 
-Avoid splitting "AGI controls damage / STR controls stun" unless later playtesting proves it adds meaningful build choice; the simpler adaptive formula is preferred for now.
+Current stun-duration balance target across ranks 1–6:
+- rank 1: **0.4 s**;
+- +0.2 s per additional rank;
+- rank 6: **1.4 s**.
+
+Damage coefficient, Mana cost and cooldown remain open.
+
+Do not split "AGI controls damage / STR controls stun" unless later playtesting proves it adds meaningful build choice; the simpler adaptive formula is preferred.
 
 ### 2. Guard / Brace
 - short-duration defensive active;
 - useful without requiring a shield;
-- broad Physical + Magical mitigation direction;
+- reduces both Physical and Magical incoming damage;
+- current duration target: **~3 seconds**;
+- current mitigation target: **15% at rank 1**, +5 percentage points per additional rank, reaching **40% at rank 6**;
 - previews the future sword-and-board/tank lineage.
+
+Cooldown and Mana cost remain open.
 
 ### 3. Quickening
 - evolves the Novice attack-speed buff idea;
-- physical tempo/attack-speed identity;
+- **self-only**;
+- increases Attack Speed;
+- also has a small Movement Speed bonus;
+- current duration target: **~5 seconds**;
 - previews agile/Rogue-style descendants.
 
-Exact self/ally targeting remains open.
+Exact Attack Speed/Movement Speed values, cooldown and Mana cost remain open.
 
 ### 4. Arrow Rain
 - ground-targeted physical AoE;
-- calls down a small rain of arrows without requiring the class to equip a bow;
+- calls down a small manifested/spectral rain of arrows without requiring the class to equip a bow;
+- uses **higher of STR or AGI** scaling;
+- resolves as a **short burst**, not a long persistent damage zone;
 - deliberately previews the future Ranger branch while Physically Blessed itself remains melee.
 
+Exact burst duration/hit count, damage, radius, cooldown and Mana cost remain open.
+
 ### 5. Martial Aptitude
-- broad physical passive;
-- should benefit both STR-leaning and AGI-leaning builds;
-- exact bonus remains open.
+- broad, deliberately straightforward physical passive;
+- increases **basic-attack damage**;
+- increases **Physical Defense**;
+- benefits both STR-leaning and AGI-leaning builds without choosing a specialization.
+
+Exact per-rank values remain open. More exotic passive mechanics belong to later specialized classes.
 
 ## Starting stats — current balance target
 
@@ -112,6 +147,17 @@ Implementation/UI preference:
 
 Total average growth: 6 primary-stat points per level.
 
+## Tier-1 visual direction
+
+Physically Blessed should look **slightly larger, stronger and more physically developed** than Novice.
+
+Keep the change modest:
+- more robust proportions;
+- slightly stronger physical silhouette;
+- no highly specialized tank/rogue/ranger/2H identity yet.
+
+The major silhouette transformations belong to later classes.
+
 ## Possible level-30 branches
 
 Current candidate four-way split:
@@ -132,11 +178,10 @@ Development does **not** require symmetric completion. One Tier-2 class may init
 
 ## Open questions
 
-- exact passive;
-- exact three active abilities;
-- which Novice abilities evolve into this kit;
-- basic-attack coefficient;
+- exact damage coefficients;
+- exact Quickening values;
+- exact Martial Aptitude values;
 - base HP/defenses/movement;
-- equipment permissions;
-- Mana pool/regeneration/cost model;
+- exact Mana pool/regeneration/cost model;
+- exact cooldowns;
 - final level-30 branch count and names.

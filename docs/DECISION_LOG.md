@@ -1604,3 +1604,356 @@ This is not yet locked because of class-count/content-production implications.
 **Decision:** Nature is explicitly a DiceFree element regardless of DiceBound's eventual exact roster.
 
 **Direction:** A later Nature Shaman descendant belongs somewhere in the broad esoteric/occult magical lineage.
+
+
+## 2026-09-28 — Class progression is a graph/web
+
+**Decision:** DiceFree class progression is not required to be a strict tree. It supports linear paths, splits and convergence.
+
+**Decision:** Some classes may not split at all (e.g. Priest -> High Priest -> Arch Priest), while others may branch heavily.
+
+## 2026-09-28 — Echo-wide class milestones
+
+**Decision:** Reaching meaningful class/tier milestones is permanently recorded Echo-wide.
+
+**Decision:** Deleting/cleaning up the manifestation that earned a milestone does not remove that milestone.
+
+## 2026-09-28 — Multi-lineage convergence requirements
+
+**Decision:** A class may require milestones from multiple separate manifestations/lineages.
+
+**Decision:** Requirement logic supports AND, OR and nested combinations plus non-class predicates such as quests, items, achievements and discoveries.
+
+## 2026-09-28 — Convergence routes
+
+**Decision:** The same convergence class may be entered from multiple qualifying parent lineages.
+
+**Decision:** Different parent routes may use different NPCs, quests, locations and advancement presentation while producing the same resulting class ID/kit.
+
+**Decision:** The same prerequisite combination may unlock multiple different convergence classes when appropriate.
+
+## 2026-09-28 — Secret class visibility modes
+
+**Decision:** Class visibility/disclosure is per class.
+
+Supported design modes include:
+- visible with explicit requirements;
+- visible/teased with hidden requirements or ???;
+- completely hidden until discovered/unlocked/become-able.
+
+## 2026-09-28 — Way discovery persistence
+
+**Decision:** Discovering/unlocking knowledge of a Way is Echo-wide and permanent.
+
+**Decision:** Becoming that class remains manifestation-specific and still requires an eligible advancement route.
+
+## 2026-09-28 — Higher-tier convergence
+
+**Decision:** Cross-lineage requirements may continue at higher tiers and are decided class-by-class.
+
+A convergence class may itself split, continue linearly, converge again or have no successor.
+
+## 2026-09-28 — Manifestation slot philosophy
+
+**Decision:** Manifestation slots should be effectively unlimited for ordinary play rather than intentionally capped as a progression constraint.
+
+**Decision:** Cleanup/organization/archive/delete tools are desirable for manageability.
+
+**Decision:** Removing a manifestation never removes permanent Echo-wide class milestones or discovered Ways.
+
+## 2026-09-28 — Class-web UI direction
+
+**Direction:** Do not force progression into one literal tree UI.
+
+Tier tabs, graph/web views, current-lineage views and discovered-Ways views are all valid approaches.
+
+**Decision:** Hidden classes must not accidentally leak through UI structure unless that class is intentionally teased.
+
+
+## 2026-09-28 — One persistent save-state per class
+
+**Decision:** The Echo has at most one persistent manifestation/save-state for each class ID.
+
+**Decision:** The same class cannot coexist as multiple duplicate timelines/save-slots.
+
+**Decision:** Reaching the same convergence class through another valid parent route does not create or overwrite another copy.
+
+**Direction:** The class/Ways UI doubles as the start-game selector for existing class save-states.
+
+## 2026-09-28 — Archive preferred over duplicate-slot cleanup
+
+**Direction:** Archive is the preferred way to hide/manage class saves in a very large roster while keeping them recoverable.
+
+**Decision:** Deleting/archiving class-local state never removes Echo-wide milestones, discoveries or unlock-event history.
+
+**Open:** exact fresh/recovery behavior if an unlocked class save is permanently deleted.
+
+## 2026-09-28 — Discovery, eligibility and save existence are separate
+
+**Decision:** "Way discovered", "requirements satisfied", and "class save-state exists" are separate pieces of state.
+
+A discovered hidden class may become visible with unknown requirements before the Echo is eligible to become it.
+
+## 2026-09-28 — Specific and category class-history requirements
+
+**Decision:** Requirements can reference exact classes or broader tagged history.
+
+Examples include:
+- reach Tier 2 Wizard;
+- reach Tier 2 anywhere in the Magically Touched tree;
+- reach Tier 3 in any Nature class;
+- reach Tier 3 in three distinct elemental caster Ways;
+- unlock a specific class such as Death Knight.
+
+## 2026-09-28 — Check-only vs consuming requirements
+
+**Decision:** Item/event requirements support both possession/check-only predicates and authored consuming/sacrifice events.
+
+**Decision:** A completed class-relevant event can create a permanent Echo-wide milestone.
+
+**Decision:** A late-tier event may unlock an earlier-tier class for future play.
+
+## 2026-09-28 — No permanent class/content lockouts
+
+**Decision:** DiceFree should not use irreversible choices that permanently lock the Echo out of another class/Way or major progression route.
+
+Different routes may have distinct quests and flavor, but the player must be able to pursue other unlocks later.
+
+
+## 2026-09-28 — Way unlock does not allow direct class start
+
+**Decision:** Discovering/unlocking a class Echo-wide only makes its advancement available.
+
+**Decision:** A missing class save must always be created by loading an appropriate earlier/prerequisite class and completing the target class's advancement quest/event.
+
+**Example:** A Tier-5 event may unlock a Tier-1 Way, but the player then loads Novice and performs that Tier-1 advancement.
+
+## 2026-09-28 — Convergence classes share their advancement quest
+
+**Decision:** A convergence class normally has one target-class advancement quest/event regardless of which qualifying parent lineage is used.
+
+The parent lineage supplies the timeline snapshot, not a different version of the resulting class.
+
+## 2026-09-28 — Deleted class saves must be re-earned
+
+**Decision:** Permanent deletion removes only that class's local save-state.
+
+**Decision:** Echo-wide Way discovery, class milestones and unlock events remain.
+
+**Decision:** To recreate the class, the player must load an appropriate earlier/prerequisite class and advance into it again.
+
+## 2026-09-28 — Archive remains non-destructive
+
+**Decision:** Archived class saves remain fully valid and continue to count through their already-recorded Echo-wide milestones.
+
+Archive is presentation/organization only.
+
+## 2026-09-28 — Class switching in town
+
+**Decision:** Players can switch between existing class saves from a safe town.
+
+**Decision:** In multiplayer, the party/session remains intact during the switch.
+
+**Decision:** The newly selected class appears at that class save's own latest registered resurrection point.
+
+## 2026-09-28 — Per-class resurrection point
+
+**Decision:** Every class save stores its own latest registered resurrection point.
+
+**Decision:** Starting/loading that class normally spawns at that point.
+
+## 2026-09-28 — Host world state controls session presentation
+
+**Decision:** In multiplayer, the host's world/quest state determines the live world's physical/presentation state for all players.
+
+**Decision:** A guest retains their own manifestation-specific quest/world progression; joining the host does not overwrite it.
+
+**Decision:** Quest/event credit remains eligibility-based.
+
+**Open:** how guest quests interact with host-state NPCs/objects that have been removed or transformed.
+
+
+## 2026-09-28 — Way unlock does not allow direct class start
+
+**Decision:** Discovering/unlocking a class Echo-wide only makes its advancement available.
+
+**Decision:** A missing class save must always be created by loading an appropriate earlier/prerequisite class and completing the target class's advancement quest/event.
+
+**Example:** A Tier-5 event may unlock a Tier-1 Way, but the player then loads Novice and performs that Tier-1 advancement.
+
+## 2026-09-28 — Convergence classes share their advancement quest
+
+**Decision:** A convergence class normally has one target-class advancement quest/event regardless of which qualifying parent lineage is used.
+
+The parent lineage supplies the timeline snapshot, not a different version of the resulting class.
+
+## 2026-09-28 — Deleted class saves must be re-earned
+
+**Decision:** Permanent deletion removes only that class's local save-state.
+
+**Decision:** Echo-wide Way discovery, class milestones and unlock events remain.
+
+**Decision:** To recreate the class, the player must load an appropriate earlier/prerequisite class and advance into it again.
+
+## 2026-09-28 — Archive remains non-destructive
+
+**Decision:** Archived class saves remain fully valid and continue to count through their already-recorded Echo-wide milestones.
+
+Archive is presentation/organization only.
+
+## 2026-09-28 — Class switching in town
+
+**Decision:** Players can switch between existing class saves from a safe town.
+
+**Decision:** In multiplayer, the party/session remains intact during the switch.
+
+**Decision:** The newly selected class appears at that class save's own latest registered resurrection point.
+
+## 2026-09-28 — Per-class resurrection point
+
+**Decision:** Every class save stores its own latest registered resurrection point.
+
+**Decision:** Starting/loading that class normally spawns at that point.
+
+## 2026-09-28 — Host world state controls session presentation
+
+**Decision:** In multiplayer, the host's world/quest state determines the live world's physical/presentation state for all players.
+
+**Decision:** A guest retains their own manifestation-specific quest/world progression; joining the host does not overwrite it.
+
+**Decision:** Quest/event credit remains eligibility-based.
+
+**Open:** how guest quests interact with host-state NPCs/objects that have been removed or transformed.
+
+
+## 2026-09-28 — Resurrection-stone-only class switching
+
+**Decision:** In-world class switching is available only through resurrection stones.
+
+**Decision:** Switching preserves the multiplayer session and loads the chosen existing class at that class save's own registered resurrection point.
+
+**Decision:** Class level does not restrict switching; co-op scaling is a separate concern.
+
+## 2026-09-28 — Advancement inherits resurrection point
+
+**Decision:** A newly-created class save inherits the parent class's currently registered resurrection point.
+
+**Decision:** If a class's remembered resurrection point is unavailable/invalid in the current game/session, Cornberg is the fallback.
+
+## 2026-09-28 — Switching does not transfer bank/inventory state
+
+**Decision:** Each class keeps its own carried inventory/equipment/currency.
+
+**Decision:** Switching classes does not automatically transfer items or open/use the shared bank.
+
+The player must visit a bank normally to withdraw shared items.
+
+## 2026-09-28 — Host-session quest availability
+
+**Decision:** The host's world state determines which NPCs, objects, bosses and events physically exist in the current multiplayer game.
+
+**Decision:** If a guest's quest requires something absent because of host progression, that quest step is simply unavailable in that session.
+
+**Decision:** The guest's own quest state remains unchanged and can be completed in another compatible game/session.
+
+**Decision:** When the host world still supports the required action, eligible guests may progress their own quests even if the host has already completed those quests.
+
+
+## 2026-09-28 — Physically Blessed basic attack and weapon breadth
+
+**Decision:** Physically Blessed basic attacks scale from the higher of STR or AGI.
+
+**Decision:** Tier 1 can use essentially all ordinary low-level melee weapon families as they are introduced, while remaining a melee class without true ranged basic attacks.
+
+## 2026-09-28 — Physically Blessed Heavy Strike target values
+
+**Decision:** Heavy Strike damage uses the higher of STR or AGI.
+
+**Working balance target:** stun is 0.4 seconds at rank 1 and gains +0.2 seconds per additional rank, reaching 1.4 seconds at rank 6.
+
+**Decision:** Heavy Strike uses normal CC resistance/DR and true-immunity rules.
+
+## 2026-09-28 — Physically Blessed Guard / Brace target values
+
+**Working balance target:** ~3 second duration.
+
+**Working balance target:** 15% Physical/Magical damage reduction at rank 1, +5 percentage points per additional rank, reaching 40% at rank 6.
+
+## 2026-09-28 — Physically Blessed Quickening
+
+**Decision:** Quickening is self-only.
+
+**Direction:** It grants Attack Speed plus a small Movement Speed bonus for roughly 5 seconds.
+
+## 2026-09-28 — Physically Blessed Arrow Rain
+
+**Decision:** Arrow Rain is a short-burst, ground-targeted physical AoE using higher-of-STR/AGI scaling.
+
+**Decision:** The arrows are manifested/spectral enough that Physically Blessed does not need to equip a bow.
+
+## 2026-09-28 — Physically Blessed Martial Aptitude
+
+**Decision:** Keep the Tier-1 passive deliberately simple: increase basic-attack damage and Physical Defense.
+
+More exotic class mechanics are deferred to later specializations.
+
+## 2026-09-28 — Magically Touched Elemental Imbuement direction
+
+**Decision:** The Tier-1 support skill buffs self/allies by adding elemental damage to basic attacks.
+
+**Direction:** The element should be either **Light or Fire**; exact choice remains open.
+
+The skill should demonstrate elemental/support gameplay without over-specializing the blank-slate Tier-1 class.
+
+
+## 2026-09-28 — Magically Touched basic attack / equipment
+
+**Decision:** Magically Touched uses a ranged magical basic attack scaling from the higher of INT or SPI.
+
+**Decision:** Tier 1 has broad access to ordinary low-level magical weapon families such as staves, wands, focuses/orbs and caster-style introductory weapons as they are introduced.
+
+## 2026-09-28 — Magic Sand Tier-1 refinement
+
+**Decision:** Magic Sand is Nature-element, ranged and INT-scaled.
+
+**Decision:** Miss chance increases by 7.5 percentage points per rank.
+
+**Decision:** Debuff duration stays fixed at 5 seconds across all six ranks.
+
+## 2026-09-28 — Mend Tier-1 refinement
+
+**Decision:** Mend scales from SPI only and targets self/allies.
+
+**Working balance target:** approximately 10 second cooldown plus a meaningful Mana cost.
+
+## 2026-09-28 — Elemental Imbuement uses Fire
+
+**Decision:** Magically Touched Elemental Imbuement adds **Fire-element** damage to basic attacks.
+
+## 2026-09-28 — Ice delayed AoE
+
+**Decision:** Magically Touched AoE is a small delayed ground-targeted **Ice** explosion.
+
+**Decision:** It applies 2% Movement Speed slow per skill rank, reaching 12% at rank 6 before later resistance/immunity rules.
+
+## 2026-09-28 — Mana Attunement aura
+
+**Direction:** Mana Attunement grants flat Max Mana and flat personal Mana regeneration per rank.
+
+**Direction:** It also projects a small nearby **Mana-regeneration aura** to allies, weaker than the caster's personal benefit.
+
+**Direction:** Mana aura affects Mana only and strongest applicable aura should win rather than stacking additively.
+
+## 2026-09-28 — Magically Touched Mana-cost scaling
+
+**Direction:** Spell Mana costs grow steeply with skill rank.
+
+A representative offensive-spell target is roughly **10 Mana at rank 1 -> ~100 Mana at rank 6**, with a non-linear curve allowed.
+
+## 2026-09-28 — Tier-1 physical/magical visual contrast
+
+**Decision:** Physically Blessed becomes modestly larger/stronger-looking than Novice.
+
+**Decision:** Magically Touched becomes modestly smaller/frailer-looking than Novice.
+
+**Decision:** Tier 1 gets no dramatic magical glow effects or highly specialized class silhouettes; flashy identity comes later.

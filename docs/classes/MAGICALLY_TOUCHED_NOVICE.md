@@ -46,43 +46,94 @@ Magically Touched should:
 
 This creates a real reason for INT/resource progression without making the physical Tier-1 class resource-starved.
 
+## Basic attack and equipment
+
+Magically Touched uses a simple **ranged magical basic attack**.
+
+Basic-attack scaling:
+- use **whichever is higher of INT or SPI**;
+- this keeps both damage-leaning and healing/support-leaning builds comfortable before specialization.
+
+Equipment direction:
+- broad access to **ordinary low-level magical weapons**;
+- examples can include staves, wands, magical focuses/orbs, caster daggers and similar introductory caster equipment as those families are introduced;
+- exact weapon categories remain data-driven rather than predeclared all at once.
+
+The Tier-1 class should remain visually and mechanically general rather than already looking like a full Wizard.
+
 ## Working skill identities
 
 ### 1. Magic Sand — evolved single-target spell
-Strong current direction:
 - preserve the Novice Magic Sand lineage rather than deleting it;
-- make it a real **Nature-element** magical attack;
-- retain an accuracy/miss debuff identity in some form.
+- real **Nature-element** ranged magical attack;
+- damage scales from **INT**;
+- miss-chance debuff scales at **+7.5% per skill rank**;
+- debuff duration stays fixed at **5 seconds** across all six ranks;
+- ranks improve damage/debuff magnitude rather than duration.
 
-Exact damage/debuff scaling is open.
+Mana cost, damage coefficient and cooldown remain balance work.
 
 ### 2. Mend
 - direct heal;
+- scales from **SPI only**;
+- self/ally target;
 - previews the future healing/cleanse lineage;
+- current cooldown target: **~10 seconds**;
+- uses a meaningful but not enormous Mana cost;
 - should not by itself make Magically Touched a complete healer.
+
+Exact heal coefficient and Mana cost remain balance work.
 
 ### 3. Elemental Imbuement / magical buff
 Preferred over giving Tier 1 both a heal and a barrier.
 
 Working fantasy:
 - buff self or ally;
-- add +X% additional auto-attack damage as an element, or another similarly readable elemental enhancement;
+- add additional elemental damage to the target's basic attacks;
 - introduces support/buff gameplay;
-- previews the future barrier/buff support lineage.
+- previews the future barrier/buff support lineage;
+- Tier 1 should remain a broad magical blank slate rather than commit deeply to one elemental identity.
 
-Exact element-selection rules are open.
+Element is **Fire**.
 
-### 4. Arcane Burst / magical AoE
-- AoE damage spell;
-- previews the future Arcane/Wizard lineage;
-- exact element/shape remains open.
+Exact bonus, duration, Mana cost and rank scaling remain open.
+
+### 4. Ice Burst / delayed magical AoE
+- ground-targeted **Ice-element** AoE;
+- uses a **small delayed explosion** rather than an instant blast or long-duration zone;
+- applies a Movement Speed slow of **2% per skill rank**;
+- rank 6 therefore targets **12% slow** before any later resistance/immunity rules;
+- deliberately teaches delayed ground targeting and elemental control at Tier 1.
+
+Exact delay, radius, damage, slow duration, Mana cost and cooldown remain balance work.
 
 ### 5. Mana Attunement
 Passive:
-- increases maximum Mana per rank;
-- increases Mana regeneration per rank.
+- increases **maximum Mana** by a flat amount per rank;
+- increases **personal Mana regeneration** by a flat amount per rank;
+- also emits a **small nearby Mana-regeneration aura** for allies.
 
-This makes resource mastery part of Magically Touched's identity before later branches specialize further.
+Aura direction:
+- self receives the full personal passive benefit;
+- nearby allies receive only a small Mana-regeneration benefit;
+- affects Mana only, not other class resources;
+- multiple copies should not stack additively; strongest applicable aura should win.
+
+This intentionally introduces the aura concept at Tier 1 without making the class a dedicated aura/support specialist.
+
+Exact flat values, aura radius and ally share remain open.
+
+## Mana-cost growth direction
+
+Magically Touched spells should become **substantially more expensive as skill rank rises**.
+
+Current philosophy:
+- rank-1 spells can be cheap enough to use comfortably;
+- rank-6 spells can cost dramatically more because the class has also gained levels, INT, Mana Attunement ranks and better gear;
+- a representative offensive-spell direction is roughly **10 Mana at rank 1 -> ~100 Mana at rank 6**;
+- exact curves do not need to be linear.
+
+This steep cost growth is part of why Magically Touched cares about Max Mana and regeneration much more than Physically Blessed.
 
 ## Starting stats — current balance target
 
@@ -108,6 +159,19 @@ Implementation/UI preference:
 - award +1 STR and +1 AGI every second level rather than exposing half-stat values.
 
 Total average growth: 6 primary-stat points per level.
+
+## Tier-1 visual direction
+
+Magically Touched should look **slightly smaller/frailer** than Novice.
+
+Do **not** add dramatic magical glow, glowing eyes/hands, large rune effects or a finished Wizard silhouette at Tier 1.
+
+The visual message is simply:
+- physically less robust;
+- subtly more caster-like through proportions/equipment;
+- still a low-tier blank magical slate.
+
+Flashier magical transformations belong to later specializations.
 
 ## Possible level-30 branches
 

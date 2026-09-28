@@ -16,9 +16,30 @@ Flow:
 
 Players may join an already-started overworld session.
 
-They spawn at the resurrection point their manifestation last explicitly selected, even if the existing party is currently inside a dungeon.
+They spawn at the latest resurrection point registered by the class save they joined with, even if the existing party is currently inside a dungeon.
 
 They do not teleport directly to the party.
+
+## Switching class saves
+
+Class switching is available **only through resurrection stones**.
+
+There is no generic town/menu class swap away from a stone.
+
+When switching during a multiplayer session:
+- the party/session remains intact;
+- the old class manifestation leaves play;
+- the chosen existing class save enters the session at **that class's own latest registered resurrection point**;
+- switching never creates a missing class save; new classes still require their advancement quest;
+- switching does not move items between class inventories or the shared bank.
+
+Starting/loading an existing class uses the same spawn rule: appear at that class's latest registered resurrection point.
+
+If that saved resurrection point is unavailable/invalid for the current game/session, **Cornberg is the fallback spawn**.
+
+Title-screen selection of existing class saves is also supported.
+
+Class level does not restrict switching. A player may switch to a much higher- or lower-level class save; multiplayer scaling/mentor rules are a separate system.
 
 ## Dungeon joins
 
@@ -88,6 +109,34 @@ If sync exists, it should be selective enough that becoming powerful still feels
 ## World/session state
 
 Some state is manifestation-specific, some Echo-wide, some session-based.
+
+### Host-authoritative world presentation
+
+The **host's world/quest state determines the live session's physical world and available world events**.
+
+Guests see the host's current reality.
+
+Example:
+- if the host completed an event where a house burned down, every player sees the burned remains;
+- if a guest still has a quest to talk to an NPC who only existed inside the intact house, that quest is simply **not completable in this game/session**;
+- the guest's own quest state is not failed, completed or overwritten;
+- the guest can do it later in another game/session whose world state still supports that quest step.
+
+This follows the same general session logic as an action-RPG game where a boss already killed in the host's game cannot be killed again in that same game.
+
+### Guest quest progress when compatible
+
+Guests can still earn their own eligible quest progress when the host's physical world supports the required action.
+
+Examples:
+- if the host already finished a Slime-kill quest but Slimes still exist naturally, an eligible guest can kill them for their own quest;
+- if the needed NPC/object/event no longer exists in the host's world, that quest step is unavailable for that session.
+
+Rules:
+- joining never overwrites the guest's manifestation-specific quest/world progression;
+- quest/event credit remains eligibility-based;
+- host world state controls what can physically happen in the session;
+- no per-player contradictory version of the same world object is required by default.
 
 ## Steam
 
