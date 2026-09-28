@@ -49,11 +49,25 @@ Participation is fixed when the run starts.
 
 ## Quest credit
 
-Eligible players receive quest credit.
+Quest/event credit is **policy-driven per objective/reward**, not one universal multiplayer rule.
 
-Ineligible players do not.
+Supported directions include:
+- global session/party credit;
+- nearby-radius credit;
+- threat/combat-participation credit;
+- authoritative last-hit credit.
 
-This applies to side quests as well as main/other quests.
+A single enemy death can therefore be consumed differently by different systems.
+
+Eligibility is still evaluated separately from world-state availability.
+
+See `docs/QUESTS_AND_INTERACTIONS.md`.
+
+### Configurable credit policies
+
+Combat should expose enough semantic participation data for quest/XP/achievement consumers to decide their own credit rules.
+
+Do not encode "everyone nearby gets credit" or "last hit wins" directly into enemy death logic.
 
 ## Experience in parties
 
