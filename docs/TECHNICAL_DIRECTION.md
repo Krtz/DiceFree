@@ -86,6 +86,27 @@ Summon-origin events retain both summon source and owner attribution.
 
 Auras should be reusable effect emitters rather than separate one-off aura code.
 
+### Item/content authoring architecture
+
+Equipment should use a shared structured item model that supports both:
+- runtime randomized items;
+- fully handcrafted authored items.
+
+Random generation should expose the same constraints/budget logic to editor/design tooling.
+
+Designer tooling should be able to:
+- request candidates by level/rarity/slot/family/theme/drop-source;
+- generate/reroll valid candidates;
+- inspect budget allocation;
+- freeze an accepted candidate into a stable authored item asset/definition;
+- manually edit the frozen result afterward.
+
+Item generation uses a gear-score/stat-budget model rather than arbitrary independent stat rolls.
+
+Affix validity, item eligibility, socket/runeword/set data and proc effects should use stable IDs/tags and generic systems.
+
+Do not require handcrafted and randomized equipment to use separate combat/stat engines.
+
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
