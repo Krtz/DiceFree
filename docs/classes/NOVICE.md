@@ -111,7 +111,7 @@ The skill is melee-range regardless of equipped Novice weapon.
 
 **Novice exception:** this stun ignores normal **CC resistance**. A valid target receives the listed stun duration rather than having it reduced by ordinary CC-resistance rules.
 
-Whether explicit hard stun-immunity flags can still block it remains a separate framework question.
+Explicit hard **Stun Immune** effects/flags still block it. The Novice exception bypasses ordinary CC resistance/DR, not true immunity.
 
 Exact cooldown/damage tuning remains open.
 
@@ -176,7 +176,7 @@ Novice has a deliberately simple skill-point sink/passive:
 
 This lets skill points remain useful after the four active skills reach rank 10 and reinforces the Novice's all-rounder/blank-slate identity.
 
-The exact rank cap, if any, remains open.
+The passive has a maximum of **160 ranks**.
 
 An additional Echo-wide bonus may exist later, but that is not currently defined as part of the Novice kit.
 
@@ -186,7 +186,7 @@ Cornberg's retired adventurer couple can help a Novice respec/reallocate Novice 
 
 This service is **Novice-only**.
 
-The exact presentation and any cost/cooldown are still open.
+The respec is **free**. Exact dialogue/presentation remains open.
 
 ## Level-200 Novice secret
 
