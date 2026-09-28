@@ -2096,3 +2096,78 @@ Threat, quest credit, procs and logs can choose the appropriate attribution.
 **Decision:** Auras are reusable effect emitters defined by source, range/shape, target filters and emitted effect.
 
 Existing effect stacking policies resolve overlapping aura contributions.
+
+
+## 2026-09-28 — Handcrafted gear is the primary loot identity
+
+**Decision:** Handcrafted equipment should make up the majority of meaningful gear progression, especially in later/endgame content.
+
+Randomized gear remains supported but should appear through deliberately authored sources/pools rather than universal random drops.
+
+## 2026-09-28 — Gear-score / stat-budget generation
+
+**Decision:** Item level and rarity contribute to a DiceBound-inspired point/stat budget.
+
+Stats, Intrinsics, affixes and numeric bonuses consume weighted portions of that budget.
+
+Exact budget formulas remain balance work.
+
+## 2026-09-28 — Randomizer as designer authoring tool
+
+**Decision:** The randomized-item generator is also an internal content-authoring tool.
+
+Designers can request/reroll constrained candidates and freeze a good roll into a stable handcrafted item, then manually edit it.
+
+## 2026-09-28 — Affix pool/filter architecture
+
+**Decision:** Affixes can be filtered by slot, family, tier/item level, rarity, element/theme, class tags, role and drop-source/content tags.
+
+**Decision:** Weighted affix pools are supported; exact use/weights are content-specific.
+
+**Decision:** Roll scaling uses a hybrid formula-driven baseline plus authored overrides.
+
+## 2026-09-28 — Rarity can change item structure
+
+**Decision:** Rarity is allowed to unlock structural item features, not merely bigger numbers.
+
+Possible features include extra Intrinsics, sockets, special effect slots or unusual affix categories.
+
+## 2026-09-28 — Handcrafted item framework
+
+**Decision:** Handcrafted items use the shared item/stat/effect framework but have deliberately fixed authored definitions.
+
+They may explicitly bend normal procedural generation constraints when the design calls for it.
+
+## 2026-09-28 — Sockets and runeword-like system support
+
+**Decision:** Equipment architecture supports sockets/socketables.
+
+**Direction:** Leave room for authored runeword-like combinations/sequences using the normal item/effect/proc framework.
+
+Exact runeword rules remain open.
+
+## 2026-09-28 — Item sets
+
+**Decision:** Support item sets and authored threshold bonuses such as 2/3/4-piece effects.
+
+## 2026-09-28 — Gear procs reuse combat trigger framework
+
+**Decision:** Equipment effects/procs use the generic combat trigger/effect architecture rather than a separate item-proc engine.
+
+## 2026-09-28 — Equipment stat requirements
+
+**Decision:** Items may require primary-stat thresholds in addition to class/tag/tier/family requirements.
+
+Stat requirements are supported but need not be common.
+
+## 2026-09-28 — Equipment swapping context
+
+**Decision:** Equipment can be swapped during overworld combat.
+
+**Decision:** Equipment swapping is disabled during active dungeon/raid runs.
+
+## 2026-09-28 — No normal unidentified-item loop
+
+**Decision:** Equipment drops identified.
+
+Identification is not a normal loot-management mechanic.
