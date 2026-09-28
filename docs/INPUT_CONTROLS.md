@@ -59,11 +59,15 @@ The contextual cursor communicates the intended action before click.
 
 ## Hero focus and selection
 
-The player's hero remains the **primary controlled/selected unit by default**.
+The player's hero remains the **primary controlled/selected unit by default**, but controllable summons can still be directly left-click selected.
 
-Selecting or targeting another unit should not casually steal command focus from the hero during combat unless the player deliberately enters unit-control behavior.
+Selection behavior is highly configurable.
 
-Allied targeting for healing/support is separate from changing primary command focus.
+Important distinction:
+- **targeting** a unit for attacks/heals/support does not have to change command focus;
+- **selecting** a controllable summon/unit changes the active command unit when the player's settings allow it.
+
+The default should protect combat responsiveness while still preserving Warcraft III-style direct summon control.
 
 ## Selection safety
 
@@ -195,7 +199,29 @@ Default targeting supports:
 
 Separate configurable bindings can cycle allies/friendly units where useful.
 
-Exact target-priority/range rules remain open.
+Default hostile cycling priority should favor:
+1. enemies currently relevant/near the hero;
+2. enemies actively engaged with the party;
+3. elites/bosses over distant trivial targets;
+4. then other valid nearby hostiles.
+
+Exact weights/range remain tunable.
+
+## Target persistence and retargeting
+
+Default targeting behavior:
+- selected target **persists** when clicking empty terrain to move;
+- target is cleared only when it becomes invalid/dies/out-of-scope or the player deliberately changes/clears it.
+
+This behavior is configurable.
+
+### Auto-retargeting after kills
+
+Default:
+- Attack-Move may automatically acquire another nearby valid enemy after a kill;
+- explicit single-target attack commands do **not** automatically chain to a new enemy.
+
+This behavior is configurable.
 
 ## Camera
 
@@ -245,12 +271,43 @@ Requirements:
 
 Controllable summons/units can be directly left-click selected when that behavior is enabled.
 
-### Control groups
+### Function-key unit selection
 
-Framework should support Warcraft III-style control groups:
-- assign selected controllable units to numbered groups;
-- recall/select them later;
-- exact default modifier/keys can follow RTS conventions where practical.
+Default direct-unit selection uses function keys:
+- **F1** = hero;
+- **F2** = summon/unit 1;
+- **F3** = summon/unit 2;
+- and so on as supported.
+
+Exact maximum count and remapping are configurable.
+
+Traditional RTS control groups can still be supported later if useful, but function-key access is the primary intended default for hero/summon selection.
+
+### Selected-unit action bar
+
+The lower-right action/command grid is **context-sensitive to the currently selected controllable unit**.
+
+When the hero is selected:
+- show hero/class abilities and commands.
+
+When a controllable summon/unit is selected:
+- show that unit's abilities/commands instead.
+
+This is Warcraft III-style unit control rather than a permanently hero-only action bar.
+
+### Autonomous summons
+
+Not every summon must be a directly commanded peer unit.
+
+Framework also supports autonomous/minion-style summons that act primarily through AI.
+
+Possible stances:
+- Aggressive;
+- Defensive;
+- Passive;
+- Hold.
+
+A class can intentionally use these more independent summons without requiring direct micromanagement.
 
 ### Drag selection
 
@@ -265,6 +322,29 @@ Most classes will not need it, but summoner-heavy classes should not require a b
 
 Exact formation/multi-command behavior remains future design work.
 
+## Unit collision, pathing and ghosting
+
+Heroes, enemies and ordinary controllable units **occupy physical gameplay space**.
+
+Default:
+- units have collision/pathing footprints;
+- characters do not freely walk through one another;
+- movement/pathfinding must route around occupied space where possible.
+
+Allied selection/click-through options do **not** imply physical ghosting.
+
+### Ghosting
+
+Ghosting/phasing through units is a rare explicit mechanic.
+
+Examples:
+- a Wraith enemy;
+- a class passive;
+- a temporary spectral state;
+- a special movement ability.
+
+Framework should support it as a flag/effect rather than making all units non-solid.
+
 ## Open questions
 
 - exact Classic Mouse default ability hotkeys;
@@ -275,6 +355,6 @@ Exact formation/multi-command behavior remains future design work.
 - camera pan/rotate/zoom bindings;
 - hero-follow/recenter defaults;
 - selection-safety defaults;
-- control-group default keys;
+- exact F-key summon capacity/mapping;
 - hostile/friendly target-cycle priority;
 - controller scheme.
