@@ -12,6 +12,23 @@ Flow:
 3. start session;
 4. adventure together.
 
+## Network authority
+
+DiceFree uses a **host-authoritative session model**.
+
+During a hosted session:
+- clients send gameplay intent/commands;
+- the host resolves authoritative world state;
+- the host resolves enemies/AI;
+- the host resolves damage/healing/effects;
+- the host resolves guest HP/resources/cooldowns while they are in the session;
+- the host resolves live quest/event/world actions;
+- the host resolves loot/drop outcomes for the session.
+
+Guest save ownership remains separate from live simulation authority. After authoritative outcomes are earned, eligible durable progress is persisted to each player's own Echo/manifestation.
+
+Solo, LAN and online multiplayer should share the same gameplay command/event paths where practical. Do not maintain an unrelated "single-player combat engine" and "multiplayer combat engine."
+
 ## Joining started sessions
 
 Players may join an already-started overworld session.
@@ -41,6 +58,44 @@ Title-screen selection of existing class saves is also supported.
 
 Class level does not restrict switching. A player may switch to a much higher- or lower-level class save; multiplayer scaling/mentor rules are a separate system.
 
+## Host migration
+
+**Host migration is a core multiplayer requirement**, not a nice-to-have.
+
+If the current host disconnects/crashes:
+- another eligible connected participant should be able to become host;
+- the party/session should continue whenever technically recoverable;
+- already-earned durable player progress must not be discarded.
+
+### Session-state preservation
+
+Preferred behavior is to preserve the **current live session state**, including relevant:
+- host-world event state;
+- defeated/alive enemies;
+- encounter state;
+- transient world objects;
+- current party state;
+- active dungeon state when applicable.
+
+Architecture should therefore avoid keeping the only copy of essential session state solely in the host process.
+
+A suitable implementation may use replicated authoritative snapshots/checkpoints plus deterministic/ordered event state as needed.
+
+If perfect live-state migration cannot be recovered after a failure:
+- fall back to the safest recoverable session/checkpoint state;
+- preserve each player's already-earned durable XP, gold, loot, quest/event credit and other committed progression;
+- do **not** silently throw away hours of durable session progress.
+
+Exact replication cadence, election mechanism and failure fallback remain technical design.
+
+### Dungeon host migration
+
+Host migration should also work during active dungeons/raids.
+
+A long dungeon should not automatically fail because the original host disconnected.
+
+Preserve the active run state where recoverable; use safe recovery behavior rather than defaulting to total progress loss.
+
 ## Dungeon joins
 
 Dungeon participation uses a staging phase.
@@ -57,6 +112,27 @@ When the countdown ends:
 - no additional player may join that active dungeon/raid.
 
 A player joining the broader overworld session after the dungeon has started does not teleport into or join the active run.
+
+## Temporary disconnect and reconnect
+
+A temporarily disconnected player remains represented in the live session during a reconnect grace period.
+
+Direction:
+- their actor remains physically in the world;
+- the actor does not become invulnerable merely because the connection dropped;
+- it may remain idle and can die/be affected normally;
+- the player's roster/session slot is reserved during the reconnect window;
+- another player cannot take a locked dungeon participant's slot.
+
+If the player reconnects before timeout:
+- they resume the same live actor/state at its current position/state.
+
+If the grace period expires:
+- their actor leaves the active session according to normal cleanup;
+- a later join follows normal join/spawn rules;
+- active-dungeon participation cannot be replaced by another player.
+
+Exact reconnect grace duration remains tuning/technical work.
 
 ## Quest credit
 
@@ -168,6 +244,51 @@ Rules:
 - if the needed NPC/object/event no longer exists in the host's world, that quest step is unavailable for that session;
 - no per-player contradictory version of the same physical object is required inside one session.
 
+## Pause
+
+### Solo
+Solo play supports a **true game pause**.
+
+Opening the appropriate pause state can stop world/combat simulation.
+
+### Multiplayer
+Multiplayer supports **vote pause**.
+
+A successful pause vote pauses the shared gameplay simulation for everyone.
+
+Exact vote threshold, timeout, cooldown and anti-abuse rules remain open.
+
+## Lobby visibility and discovery
+
+Support multiple session discovery/join modes:
+- Steam friends/invites;
+- Invite Only;
+- Friends;
+- **Public stranger lobbies**;
+- LAN discovery;
+- direct connection/address-style joining where technically appropriate.
+
+Public multiplayer is intentionally supported; DiceFree is not restricted to premade friend groups.
+
+LAN must work without cloud/internet dependency.
+
+Direct/LAN networking should remain compatible with ordinary local/private networking setups, including virtual-LAN tools that present peers as reachable local/private endpoints.
+
+## Vote kick
+
+Multiplayer supports **vote kick**.
+
+Vote-kick exists so public/stranger sessions are not dependent on the host manually policing every disruptive player.
+
+Exact rules remain open, including:
+- vote threshold;
+- who may initiate;
+- cooldown;
+- whether the target votes/counts;
+- host-target behavior;
+- behavior inside active dungeon runs;
+- post-kick rejoin restrictions.
+
 ## Steam
 
 Steam lobby/invite integration is a PC-release target.
@@ -175,6 +296,6 @@ Steam lobby/invite integration is a PC-release target.
 ## Not planned
 
 - MMO shard/open world;
-- random strangers appearing without joining session;
+- random strangers appearing without explicitly joining a session;
 - raid lockouts;
 - unrestricted item economy.
