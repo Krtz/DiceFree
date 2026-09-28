@@ -1035,3 +1035,46 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** The retired magical adventurer is not the dedicated healer NPC; the magical well fills that role.
 
 **Open:** Her mundane Cornberg role may be herbalist, brewery helper, housewife/general magical helper or another fitting village role.
+
+
+## 2026-09-28 — HUD default style
+
+**Decision:** DiceFree's default HUD is primarily Warcraft III-inspired: compact but information-rich, with player portrait/model and command/ability area at the bottom.
+
+## 2026-09-28 — Player HUD panel
+
+**Decision:** Player portrait or 3D model appears in the bottom HUD.
+
+**Decision:** HP numbers use current/max format.
+
+## 2026-09-28 — World-space HP/nameplates
+
+**Decision:** Units can show name, level and HP bar above their world model.
+
+**Decision:** HP-bar visibility supports Always / Only when hurt / Never.
+
+**Decision:** Visibility settings are independently configurable for self/own units, allies and enemies.
+
+## 2026-09-28 — Ability-grid capacity
+
+**Decision:** Default lower-right HUD reserves a maximum visible 12-slot ability/command grid arranged as 3 rows x 4 columns.
+
+**Decision:** This is layout capacity, not a requirement that classes have 12 active abilities.
+
+## 2026-09-28 — Party, target, minimap and quest positions
+
+**Decision:** Party frames default top-left and include the player's own frame.
+
+**Decision:** Target frame defaults top-center.
+
+**Decision:** Minimap defaults to a square panel top-right.
+
+**Decision:** Quest tracker sits below the minimap and can be hidden.
+
+## 2026-09-28 — Modular HUD architecture
+
+**Decision:** HUD architecture must be panel/widget-based, movable, scalable and hideable long-term.
+
+**Direction:** Players should eventually be able to create layouts inspired by WC3, Diablo, WoW, RuneScape or their own arrangement.
+
+**Decision:** The POC only needs one strong default layout plus a framework that does not prevent later customization; a full HUD editor is deferred.
