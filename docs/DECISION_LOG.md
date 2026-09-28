@@ -1668,3 +1668,53 @@ A convergence class may itself split, continue linearly, converge again or have 
 Tier tabs, graph/web views, current-lineage views and discovered-Ways views are all valid approaches.
 
 **Decision:** Hidden classes must not accidentally leak through UI structure unless that class is intentionally teased.
+
+
+## 2026-09-28 — One persistent save-state per class
+
+**Decision:** The Echo has at most one persistent manifestation/save-state for each class ID.
+
+**Decision:** The same class cannot coexist as multiple duplicate timelines/save-slots.
+
+**Decision:** Reaching the same convergence class through another valid parent route does not create or overwrite another copy.
+
+**Direction:** The class/Ways UI doubles as the start-game selector for existing class save-states.
+
+## 2026-09-28 — Archive preferred over duplicate-slot cleanup
+
+**Direction:** Archive is the preferred way to hide/manage class saves in a very large roster while keeping them recoverable.
+
+**Decision:** Deleting/archiving class-local state never removes Echo-wide milestones, discoveries or unlock-event history.
+
+**Open:** exact fresh/recovery behavior if an unlocked class save is permanently deleted.
+
+## 2026-09-28 — Discovery, eligibility and save existence are separate
+
+**Decision:** "Way discovered", "requirements satisfied", and "class save-state exists" are separate pieces of state.
+
+A discovered hidden class may become visible with unknown requirements before the Echo is eligible to become it.
+
+## 2026-09-28 — Specific and category class-history requirements
+
+**Decision:** Requirements can reference exact classes or broader tagged history.
+
+Examples include:
+- reach Tier 2 Wizard;
+- reach Tier 2 anywhere in the Magically Touched tree;
+- reach Tier 3 in any Nature class;
+- reach Tier 3 in three distinct elemental caster Ways;
+- unlock a specific class such as Death Knight.
+
+## 2026-09-28 — Check-only vs consuming requirements
+
+**Decision:** Item/event requirements support both possession/check-only predicates and authored consuming/sacrifice events.
+
+**Decision:** A completed class-relevant event can create a permanent Echo-wide milestone.
+
+**Decision:** A late-tier event may unlock an earlier-tier class for future play.
+
+## 2026-09-28 — No permanent class/content lockouts
+
+**Decision:** DiceFree should not use irreversible choices that permanently lock the Echo out of another class/Way or major progression route.
+
+Different routes may have distinct quests and flavor, but the player must be able to pursue other unlocks later.
