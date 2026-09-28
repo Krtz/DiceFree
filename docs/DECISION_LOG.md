@@ -2482,3 +2482,78 @@ FFA overworld drops can still be socially assigned before pickup.
 **Direction:** Framework supports explicitly tradeable item categories; food/potions are candidate tradeable consumables.
 
 **Decision:** No default direct gold transfer/unrestricted player economy.
+
+
+## 2026-09-28 — Enemy archetypes and authored variants
+
+**Decision:** Enemy definitions support reusable base archetypes plus authored variants/overrides.
+
+Keep composition readable; avoid deep opaque inheritance chains.
+
+## 2026-09-28 — Fixed enemy levels
+
+**Decision:** Enemies use fixed authored levels by default.
+
+There is no universal player-level scaling.
+
+## 2026-09-28 — Enemy stat flexibility
+
+**Decision:** Enemies may use the five primary attributes where useful and/or direct monster stats.
+
+Both feed the common combat pipeline.
+
+## 2026-09-28 — Semantic enemy roles/tags
+
+**Decision:** Enemy role/behavior metadata uses extensible semantic tags such as Melee, Ranged, Caster, Healer, Summoner, Ambusher, Elite and Boss.
+
+Tags do not themselves hard-code behavior.
+
+## 2026-09-28 — Scalable AI decision rules
+
+**Decision:** AI supports extremely simple rules such as nearest-target/basic attack as well as weighted conditional decision logic using nested AND/OR/NOT predicates.
+
+Complex future enemies/bosses may have very large authored condition sets.
+
+## 2026-09-28 — Threat and alternate targeting
+
+**Decision:** Highest threat is a normal target policy, not a universal restriction.
+
+Enemies may target by nearest/farthest/lowest HP/random/role/effect/fixation or other authored criteria.
+
+## 2026-09-28 — Authored leash/reset rules
+
+**Decision:** Overworld enemies define home/leash/reset behavior per archetype/enemy.
+
+Some overworld monsters can use special nonstandard leash/chase rules.
+
+## 2026-09-28 — Enemy packs / patrol groups
+
+**Decision:** Support authored pack definitions for composition, formation, patrol, linked aggro and shared reset behavior.
+
+## 2026-09-28 — Boss phase condition framework
+
+**Decision:** Boss/encounter phase transitions can use generic predicates such as HP, time, add deaths, world objects, player state and nested logical conditions.
+
+## 2026-09-28 — Encounter definitions own fight-wide mechanics
+
+**Decision:** Arena hazards, doors, add waves, timers, dialogue, encounter variables and fight completion/reset belong to encounter definitions rather than being crammed into boss actor code.
+
+## 2026-09-28 — Difficulty modes can change mechanics
+
+**Decision:** Harder difficulty modes can add/change encounter mechanics, phases, enemies, AI, hazards, timers and rewards rather than only scaling HP/damage.
+
+## 2026-09-28 — Reusable enemy modifiers
+
+**Decision:** Support reusable enemy modifiers that can alter stats, abilities, AI, effects, presentation and rewards.
+
+This does not imply ubiquitous random elite affixes.
+
+## 2026-09-28 — Encounter reset with explicit exceptions
+
+**Decision:** Default reset restores all authored encounter-local state.
+
+Specific encounters may explicitly preserve selected state across attempts.
+
+## 2026-09-28 — Encounter debug harness
+
+**Decision:** Provide development tooling to spawn/test encounters, force phases/abilities/HP, inspect AI/threat/variables and simulate relevant party-count conditions.
