@@ -57,6 +57,14 @@ Right-click can:
 
 The contextual cursor communicates the intended action before click.
 
+## Hero focus and selection
+
+The player's hero remains the **primary controlled/selected unit by default**.
+
+Selecting or targeting another unit should not casually steal command focus from the hero during combat unless the player deliberately enters unit-control behavior.
+
+Allied targeting for healing/support is separate from changing primary command focus.
+
 ## Selection safety
 
 DiceFree mixes ARPG immediacy with some Warcraft III-style unit selection/control.
@@ -109,6 +117,68 @@ Basic attacks:
 
 This allows explicit command use even when context-click behavior is undesirable.
 
+## Ability casting modes
+
+Every targeted/ground-targeted ability can use one of three player-selected casting modes unless the ability explicitly requires a particular presentation.
+
+### 1. Normal / confirm cast
+
+Warcraft III-style:
+1. press ability hotkey;
+2. targeting cursor/area/range preview appears;
+3. left-click confirms the target/location;
+4. right-click/Escape/cancel input cancels.
+
+### 2. Semi quick cast
+
+Hold-and-release mode:
+1. press and hold ability hotkey;
+2. targeting cursor/area/range preview appears while held;
+3. releasing the hotkey casts at the current target/location;
+4. cancel behavior must be supported.
+
+### 3. Quick cast
+
+Immediate mode:
+- pressing the ability hotkey immediately casts toward/at the current cursor/target according to the skill's targeting rules.
+
+Casting mode should be configurable:
+- globally;
+- ideally per ability;
+- and/or per keybind/profile if useful later.
+
+The system should not hard-code one cast style for all players.
+
+## Targeting previews and range
+
+Targeted/ground abilities should display their relevant targeting information before confirmation in Normal/Semi Quick modes:
+- circle;
+- cone;
+- line;
+- placement area;
+- range;
+- invalid target/location feedback.
+
+If the selected target/location is out of cast range, the default behavior is:
+- issue movement toward a valid cast position;
+- once in range and still valid, execute the queued cast.
+
+Individual abilities may explicitly override this behavior.
+
+## Self-cast
+
+Self-cast is supported for eligible abilities.
+
+Default direction:
+- modifier + ability, e.g. Alt + ability.
+
+Self-cast method is configurable.
+
+Options can include:
+- modifier + ability;
+- double-press/double-tap ability;
+- other rebound input.
+
 ## Interaction key
 
 A universal keyboard interact action is required in addition to contextual right-click.
@@ -142,15 +212,24 @@ The camera is therefore **not permanently hero-centered**.
 
 Camera movement must still respect the isometric readability goals and future cube-face/local-gravity transitions.
 
-Exact inputs for:
-- edge scrolling;
-- middle-mouse drag;
+Camera control framework supports:
+- screen-edge scrolling;
+- middle-mouse drag/pan;
 - keyboard pan;
 - zoom;
 - rotation;
-- hero-follow toggle
+- hero recenter;
+- persistent hero-follow toggle.
 
-remain to be finalized.
+All of these are configurable.
+
+Edge scrolling can be disabled.
+
+Hero camera behavior should support both:
+- **recenter/snap to hero**;
+- **toggle persistent follow**.
+
+Exact default keys remain open.
 
 ## Controlled units and summons
 
@@ -162,17 +241,40 @@ Requirements:
 - hero selection/follow can be restored quickly;
 - ARPG-oriented players can simplify/limit selection behavior through options.
 
-Exact control groups, multi-selection and formation behavior remain future design work.
+### Direct summon selection
+
+Controllable summons/units can be directly left-click selected when that behavior is enabled.
+
+### Control groups
+
+Framework should support Warcraft III-style control groups:
+- assign selected controllable units to numbered groups;
+- recall/select them later;
+- exact default modifier/keys can follow RTS conventions where practical.
+
+### Drag selection
+
+Box/drag selection of multiple controllable summons/units is supported by the framework.
+
+This behavior should be configurable:
+- always enabled;
+- disabled;
+- potentially limited by control profile/unit category.
+
+Most classes will not need it, but summoner-heavy classes should not require a bespoke input system later.
+
+Exact formation/multi-command behavior remains future design work.
 
 ## Open questions
 
 - exact Classic Mouse default ability hotkeys;
 - exact Direct/WASD default ability hotkeys;
 - default interaction key for each profile;
+- exact default casting mode;
+- exact per-ability casting-mode configuration UX;
 - camera pan/rotate/zoom bindings;
-- hero-follow hotkey;
-- selection-safety settings and defaults;
-- whether combat automatically locks primary hero selection by default;
-- controlled summon multi-selection/control groups;
+- hero-follow/recenter defaults;
+- selection-safety defaults;
+- control-group default keys;
 - hostile/friendly target-cycle priority;
 - controller scheme.
