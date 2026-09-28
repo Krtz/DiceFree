@@ -158,6 +158,31 @@ Current candidate level-30 branching:
 
 This four-plus-four split is still a working direction rather than locked final structure.
 
+### Long-term class-tree scale
+
+A **very large class tree is an explicit long-term goal**.
+
+Do not optimize the design around keeping the final class count small.
+
+The tree also does not need to be development-symmetric:
+- one class may initially have one implemented successor;
+- another may already have three;
+- additional descendants can be filled in over time;
+- higher-tier concepts can take longer to design and implement.
+
+The architecture must support arbitrary branch counts and partial/asymmetric content without requiring placeholder classes or giant hard-coded trees.
+
+### Tier-1 skill-rank pattern
+
+Current Tier-1 direction:
+- 5 skills;
+- 6 ranks each;
+- 1 class skill point at level 1;
+- +1 class skill point per level;
+- exactly 30 total points by level 30.
+
+This clean fit is specific to Tier 1 and is **not** a universal rule for later tiers.
+
 ## Class identity
 
 Each class defines:

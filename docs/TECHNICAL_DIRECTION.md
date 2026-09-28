@@ -14,6 +14,24 @@ Classes, items, enemies, loot tables, regions, advancement requirements, dungeon
 ### Modular systems
 Keep combat, stats, classes, items, world, quests, dungeons, UI, persistence and networking separated enough to evolve independently.
 
+### Large class-tree architecture
+
+DiceFree is expected to grow into a **very large, unevenly branching class tree**.
+
+Architecture requirements:
+- no assumption that every class has the same number of children;
+- no assumption that sibling branches are implemented at the same time;
+- class definitions should be data-driven and independently registerable;
+- advancement edges/requirements should be data rather than switch/case ladders;
+- abilities should be reusable/composable building blocks rather than copied class-specific implementations;
+- resources (Mana, Rage, Combo Points, etc.) should use generic resource interfaces/components where practical;
+- effects, targeting, scaling and elements should be generic systems consumed by class data;
+- UI must render whatever implemented branches actually exist;
+- missing/unimplemented descendants must not crash or corrupt existing manifestations;
+- class rigs/animation sets should reuse shared foundations where possible without forcing all classes into one silhouette.
+
+The goal is to make adding the 50th class mostly content/design work, not an architecture rewrite.
+
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
