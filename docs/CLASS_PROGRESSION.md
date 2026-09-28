@@ -6,9 +6,11 @@ Every new Echo lineage begins as a **Novice**.
 
 See `docs/classes/NOVICE.md` for the detailed starting class.
 
-Advancement branches create alternate manifestations rather than deleting the parent manifestation.
+Advancement branches create alternate class manifestations rather than deleting the parent manifestation.
 
-The original manifestation remains playable, while the chosen advancement creates a new character slot/timeline branch at level 1.
+Each class ID has at most **one persistent save-state** for the Echo.
+
+The original class remains playable, while the first advancement into a new class creates that class's save-state at level 1.
 
 ## Advancement cadence
 
@@ -40,25 +42,28 @@ Advancement is a **branch**, not an overwrite.
 
 When a manifestation reaches an advancement threshold and chooses a class:
 - the current manifestation is preserved as a playable parent slot at the fork point;
-- a new manifestation/character slot is created for the chosen advancement;
+- if the target class does not yet have a save-state, that class save-state is created for the chosen advancement;
 - the game immediately continues as that new advanced manifestation in the same session/world state;
 - the new advanced manifestation begins at level 1 with its own class base stats/growth;
 - **all manifestation-specific state** is snapshotted into the child at the fork, including gear, carried inventory/currency, quest/world progression and relevant class/skill state;
 - the parent keeps its original state and the child receives a duplicate snapshot;
 - the preserved parent resumes immediately before the blessing choice if loaded later;
 - Echo-wide state remains shared;
-- the parent manifestation can later choose another available branch, creating another child manifestation.
+- the parent manifestation can later choose another available branch, creating another class save-state if that class has not already been created;
+- reaching the same resulting class through another route does not create or overwrite a duplicate save-state.
 
 Example after the first split:
-- Level 10 Novice remains playable;
-- Level 1 Physically Blessed Novice exists as another slot;
-- Level 1 Magically Touched Novice can later be created from the same Novice.
+- Novice has one preserved save-state;
+- Physically Blessed Novice can gain one save-state;
+- Magically Touched Novice can gain one save-state.
 
-This branching-slot model is part of the Echo/timeline fantasy.
+The class/Ways UI can serve as the start-game selector for these class save-states.
+
+This one-save-per-class model is part of the Echo/timeline fantasy.
 
 Open:
-- exact slot limits;
-- UI presentation of parent/child lineage.
+- archive/delete/recreate behavior for intentionally discarded class-local saves;
+- UI presentation of historical parent/route relationships.
 
 ## Core attributes
 
@@ -261,7 +266,7 @@ They should have:
 
 ## Open questions
 
-- practical manifestation-slot/archive/cleanup UX;
+- archive/delete/recreate behavior for class save-states;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
 - exact second-tier classes;
