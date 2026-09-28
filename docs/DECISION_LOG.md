@@ -1298,3 +1298,56 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Camera framework supports WC3-style edge scrolling, manual panning, zoom/rotation, hero recenter and persistent hero-follow.
 
 **Decision:** These behaviors are configurable, including disabling edge scrolling.
+
+
+## 2026-09-28 — Direct summon selection remains available
+
+**Decision:** Controllable summons can still be directly left-click selected.
+
+**Decision:** Hero-focused selection safety is configurable rather than hard-locking summons out of direct selection.
+
+## 2026-09-28 — Function-key unit selection
+
+**Decision:** Default unit-selection shortcuts use function keys:
+- F1 = hero;
+- F2 = summon/unit 1;
+- F3 = summon/unit 2;
+- etc.
+
+**Decision:** Bindings remain configurable.
+
+## 2026-09-28 — Selected-unit action bar
+
+**Decision:** The action/command bar changes to the abilities/commands of the currently selected controllable unit.
+
+## 2026-09-28 — Autonomous summon framework
+
+**Decision:** Framework also supports autonomous summons/minions that are not directly micro-controlled peers.
+
+**Decision:** Autonomous summons can use stance systems such as Aggressive / Defensive / Passive / Hold.
+
+## 2026-09-28 — Target-cycle priority
+
+**Decision:** Hostile target cycling prioritizes nearby/relevant enemies around the hero, with engaged threats and elites/bosses favored over distant trivial targets.
+
+## 2026-09-28 — Unit collision and ghosting
+
+**Decision:** Heroes, enemies and normal controllable units occupy physical space and use real collision/pathing.
+
+**Decision:** They do not freely walk through one another by default.
+
+**Decision:** Ghosting/phasing is a rare explicit mechanic for specific classes, enemies, passives or effects.
+
+## 2026-09-28 — Target persistence
+
+**Decision:** Current target persists when the player clicks empty terrain/moves.
+
+**Decision:** Target-persistence behavior is configurable.
+
+## 2026-09-28 — Auto-retarget after kill
+
+**Decision:** Attack-Move can automatically acquire a new nearby enemy after a kill.
+
+**Decision:** Explicit single-target attack commands do not auto-chain by default.
+
+**Decision:** Retarget behavior is configurable.
