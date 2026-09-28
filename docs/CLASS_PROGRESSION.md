@@ -39,9 +39,13 @@ It is also intended to receive a hidden stronger Novice payoff (secret skill and
 Advancement is a **branch**, not an overwrite.
 
 When a manifestation reaches an advancement threshold and chooses a class:
-- the current manifestation remains playable at its current class/level;
+- the current manifestation is preserved as a playable parent slot at the fork point;
 - a new manifestation/character slot is created for the chosen advancement;
+- the game immediately continues as that new advanced manifestation in the same session/world state;
 - the new advanced manifestation begins at level 1 with its own class base stats/growth;
+- equipped gear is duplicated into the child manifestation;
+- manifestation-specific progression/quest state is copied at the fork and may diverge afterward;
+- Echo-wide state remains shared;
 - the parent manifestation can later choose another available branch, creating another child manifestation.
 
 Example after the first split:
@@ -53,8 +57,7 @@ This branching-slot model is part of the Echo/timeline fantasy.
 
 Open:
 - exact slot limits;
-- inventory/equipment state copied on branch creation;
-- quest-state inheritance;
+- whether carried inventory beyond equipped gear is also duplicated;
 - UI presentation of parent/child lineage.
 
 ## Core attributes
@@ -197,8 +200,7 @@ They should have:
 
 ## Open questions
 
-- branch-manifestation inventory/equipment inheritance;
-- branch-manifestation quest-state inheritance;
+- whether carried inventory beyond equipped gear is duplicated on branch creation;
 - exact slot limits;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
