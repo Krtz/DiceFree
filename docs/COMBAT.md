@@ -487,6 +487,27 @@ Derived effects then naturally change because the underlying attributes changed.
 
 Exact duration, stack cap and stacking math remain to be balanced.
 
+## Enemy AI and encounter architecture
+
+Enemies use authored/fixed levels by default and do not universally scale to the player.
+
+Enemy definitions can compose:
+- base archetype;
+- variant overrides;
+- direct monster stats and/or primary attributes;
+- combat actions;
+- threat/targeting policy;
+- AI decision rules;
+- leash/home behavior;
+- semantic tags;
+- reusable modifiers.
+
+AI may be as simple as "attack closest enemy" or use complex AND/OR conditional priorities for advanced enemies/bosses.
+
+Encounter-wide state such as phases, hazards, doors, adds and timers belongs to reusable encounter definitions rather than being forced into one boss actor.
+
+See `docs/ENEMIES_AND_ENCOUNTERS.md`.
+
 ## Enemy level display
 
 Enemy levels are normally visible.
