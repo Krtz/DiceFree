@@ -20,19 +20,26 @@ They spawn at the latest resurrection point registered by the class save they jo
 
 They do not teleport directly to the party.
 
-## Switching class saves in a session
+## Switching class saves
 
-Current direction: players may switch to another existing class save **from a safe town** without leaving the multiplayer session.
+Class switching is available **only through resurrection stones**.
 
-When switching:
+There is no generic town/menu class swap away from a stone.
+
+When switching during a multiplayer session:
 - the party/session remains intact;
 - the old class manifestation leaves play;
-- the chosen class save enters the session at **that class's own latest registered resurrection point**;
-- switching never creates a missing class save; new classes still require their advancement quest.
+- the chosen existing class save enters the session at **that class's own latest registered resurrection point**;
+- switching never creates a missing class save; new classes still require their advancement quest;
+- switching does not move items between class inventories or the shared bank.
 
-Starting a new game/session with an existing class uses the same rule: spawn at that class's latest registered resurrection point.
+Starting/loading an existing class uses the same spawn rule: appear at that class's latest registered resurrection point.
 
-Title-screen class switching remains naturally supported as well.
+If that saved resurrection point is unavailable/invalid for the current game/session, **Cornberg is the fallback spawn**.
+
+Title-screen selection of existing class saves is also supported.
+
+Class level does not restrict switching. A player may switch to a much higher- or lower-level class save; multiplayer scaling/mentor rules are a separate system.
 
 ## Dungeon joins
 
@@ -105,31 +112,31 @@ Some state is manifestation-specific, some Echo-wide, some session-based.
 
 ### Host-authoritative world presentation
 
-The **host's world/quest state determines the live session's world presentation**.
+The **host's world/quest state determines the live session's physical world and available world events**.
+
+Guests see the host's current reality.
 
 Example:
-- if a host has completed an event where a house burns down, everyone in that hosted session sees the burned remains;
-- a guest whose own class save has not completed that event does not get a separate intact house rendered only for them.
+- if the host completed an event where a house burned down, every player sees the burned remains;
+- if a guest still has a quest to talk to an NPC who only existed inside the intact house, that quest is simply **not completable in this game/session**;
+- the guest's own quest state is not failed, completed or overwritten;
+- the guest can do it later in another game/session whose world state still supports that quest step.
 
-Joining another player's world does **not** overwrite the guest's manifestation-specific quest/world progression.
+This follows the same general session logic as an action-RPG game where a boss already killed in the host's game cannot be killed again in that same game.
 
-Quest/event credit remains eligibility-based.
+### Guest quest progress when compatible
 
-The exact interaction rules for cases where the host's world state removes or changes an NPC/object that a guest's personal quest still expects are a separate design problem and must not be solved by silently advancing/locking out the guest.
+Guests can still earn their own eligible quest progress when the host's physical world supports the required action.
 
-### Host-authoritative world presentation
+Examples:
+- if the host already finished a Slime-kill quest but Slimes still exist naturally, an eligible guest can kill them for their own quest;
+- if the needed NPC/object/event no longer exists in the host's world, that quest step is unavailable for that session.
 
-The **host's world/quest state determines the live session's world presentation**.
-
-Example:
-- if a host has completed an event where a house burns down, everyone in that hosted session sees the burned remains;
-- a guest whose own class save has not completed that event does not get a separate intact house rendered only for them.
-
-Joining another player's world does **not** overwrite the guest's manifestation-specific quest/world progression.
-
-Quest/event credit remains eligibility-based.
-
-The exact interaction rules for cases where the host's world state removes or changes an NPC/object that a guest's personal quest still expects are a separate design problem and must not be solved by silently advancing/locking out the guest.
+Rules:
+- joining never overwrites the guest's manifestation-specific quest/world progression;
+- quest/event credit remains eligibility-based;
+- host world state controls what can physically happen in the session;
+- no per-player contradictory version of the same world object is required by default.
 
 ## Steam
 
