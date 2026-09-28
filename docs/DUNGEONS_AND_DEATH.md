@@ -94,6 +94,20 @@ A run can be abandoned.
 
 An abandoned run cannot be re-entered.
 
+## Quitting / persistence during a dungeon
+
+Active dungeon run state is not permanently saved.
+
+Quitting/leaving abandons the active run and it will not resume from the same trash/boss state later.
+
+However, durable rewards already legitimately earned remain saved, including:
+- XP earned;
+- gold earned.
+
+This does not bypass the rule that equipment rewards are granted only through successful completion/private loot rooms.
+
+Loot-room reconnect remains a short-lived recovery exception rather than normal dungeon persistence.
+
 ## Completion reward
 
 The dungeon is considered successfully completed when its authored completion condition is met, normally defeating the final boss.
