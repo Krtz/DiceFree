@@ -36,6 +36,14 @@ Accidental selection of allies/summons/other units must never make emergency mov
 
 A simultaneous Hybrid mode remains possible but not committed.
 
+### Unit collision and ghosting
+
+Heroes, enemies and normal controllable units occupy physical space and participate in pathing/collision.
+
+They are not default ghost units that freely pass through each other.
+
+Ghosting/phasing is a rare explicit mechanic for specific classes, passives, enemies or effects.
+
 ## Basic attacks
 
 Every normal class has a Warcraft III / League-style repeating basic attack:
