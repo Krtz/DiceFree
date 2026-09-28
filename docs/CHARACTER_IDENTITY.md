@@ -6,6 +6,20 @@ The player is an **Echo** of the survivor from DiceBound.
 
 The Echo does not begin as a heavily customized traditional RPG avatar. Instead, as in DiceBound, it gains a stronger shape and identity through class choice and advancement.
 
+## Novice appearance
+
+Novice is intentionally androgynous and visually uncommitted.
+
+A fresh Echo begins:
+- with no equipped gear;
+- in simple baseline underwear + T-shirt;
+- without a strong masculine/feminine class silhouette;
+- without a recognizable warrior/mage/rogue/healer identity.
+
+This baseline clothing is presentation, not equipped armor.
+
+Novice-compatible starter gear is deliberately limited to items explicitly allowed for Novice.
+
 ## Appearance philosophy
 
 The class itself is the primary character visual identity.
