@@ -134,7 +134,12 @@ Core requirements:
 - unknown/missing content records preserved inertly rather than silently deleted;
 - rotating local backups;
 - cloud-save provider abstraction;
-- stable internal user/profile identity separate from platform IDs.
+- stable internal user/Echo UUIDs separate from platform IDs;
+- multiple Echo profiles per user, with unobtrusive profile-management UX;
+- Echo-level logical cloud revisions with internally chunked save data;
+- explicit divergent-cloud conflict selection rather than unsafe field merging;
+- offline and LAN-capable operation without mandatory cloud/backend connectivity;
+- developer Profile Inspector tooling.
 
 Initial PC direction supports Steam Cloud, but gameplay code must not depend directly on Steam-specific persistence APIs.
 
