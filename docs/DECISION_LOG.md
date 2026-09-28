@@ -1904,3 +1904,56 @@ More exotic class mechanics are deferred to later specializations.
 **Direction:** The element should be either **Light or Fire**; exact choice remains open.
 
 The skill should demonstrate elemental/support gameplay without over-specializing the blank-slate Tier-1 class.
+
+
+## 2026-09-28 — Magically Touched basic attack / equipment
+
+**Decision:** Magically Touched uses a ranged magical basic attack scaling from the higher of INT or SPI.
+
+**Decision:** Tier 1 has broad access to ordinary low-level magical weapon families such as staves, wands, focuses/orbs and caster-style introductory weapons as they are introduced.
+
+## 2026-09-28 — Magic Sand Tier-1 refinement
+
+**Decision:** Magic Sand is Nature-element, ranged and INT-scaled.
+
+**Decision:** Miss chance increases by 7.5 percentage points per rank.
+
+**Decision:** Debuff duration stays fixed at 5 seconds across all six ranks.
+
+## 2026-09-28 — Mend Tier-1 refinement
+
+**Decision:** Mend scales from SPI only and targets self/allies.
+
+**Working balance target:** approximately 10 second cooldown plus a meaningful Mana cost.
+
+## 2026-09-28 — Elemental Imbuement uses Fire
+
+**Decision:** Magically Touched Elemental Imbuement adds **Fire-element** damage to basic attacks.
+
+## 2026-09-28 — Ice delayed AoE
+
+**Decision:** Magically Touched AoE is a small delayed ground-targeted **Ice** explosion.
+
+**Decision:** It applies 2% Movement Speed slow per skill rank, reaching 12% at rank 6 before later resistance/immunity rules.
+
+## 2026-09-28 — Mana Attunement aura
+
+**Direction:** Mana Attunement grants flat Max Mana and flat personal Mana regeneration per rank.
+
+**Direction:** It also projects a small nearby **Mana-regeneration aura** to allies, weaker than the caster's personal benefit.
+
+**Direction:** Mana aura affects Mana only and strongest applicable aura should win rather than stacking additively.
+
+## 2026-09-28 — Magically Touched Mana-cost scaling
+
+**Direction:** Spell Mana costs grow steeply with skill rank.
+
+A representative offensive-spell target is roughly **10 Mana at rank 1 -> ~100 Mana at rank 6**, with a non-linear curve allowed.
+
+## 2026-09-28 — Tier-1 physical/magical visual contrast
+
+**Decision:** Physically Blessed becomes modestly larger/stronger-looking than Novice.
+
+**Decision:** Magically Touched becomes modestly smaller/frailer-looking than Novice.
+
+**Decision:** Tier 1 gets no dramatic magical glow effects or highly specialized class silhouettes; flashy identity comes later.
