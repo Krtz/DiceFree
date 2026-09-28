@@ -44,6 +44,30 @@ They are not default ghost units that freely pass through each other.
 
 Ghosting/phasing is a rare explicit mechanic for specific classes, passives, enemies or effects.
 
+## Combat actions and ability composition
+
+Basic attacks and active abilities should resolve through the same core combat-action/effect pipeline where practical.
+
+A combat action can compose reusable pieces such as:
+- targeting rule/shape;
+- range;
+- cast/wind-up time;
+- resource cost;
+- cooldown/cooldown groups;
+- one or more damage/healing packets;
+- Physical/Magical channel;
+- element;
+- applied status/effects;
+- movement/knockback;
+- summon/spawn behavior;
+- threat;
+- resource generation/consumption;
+- other hooks.
+
+Content should be data/composition-first, with a clean custom-code escape hatch for genuinely unusual class mechanics.
+
+Do not require a bespoke combat engine for each class.
+
 ## Basic attacks
 
 Every normal class has a Warcraft III / League-style repeating basic attack:
@@ -52,6 +76,15 @@ Every normal class has a Warcraft III / League-style repeating basic attack:
 - repeatedly attack while the target remains valid.
 
 Basic attacks may be melee or ranged depending on class.
+
+Because basic attacks use the common action/effect pipeline, classes and gear may hook them to:
+- generate Mana/Rage/Energy/Combo Points or other resources;
+- apply on-hit effects;
+- consume charges/stacks;
+- trigger class mechanics;
+- interact with lifesteal, elemental imbuements, accuracy/blind, threat and proc systems.
+
+A later class may, for example, build Combo Points from ordinary auto-attacks and spend them on active skills.
 
 Most caster classes will be ranged, but magical melee classes are fully valid.
 
@@ -175,6 +208,24 @@ Support abilities can target:
 - characters in the 3D world;
 - eligible allies through party frames/UI.
 
+## Cooldowns and shared cooldown groups
+
+DiceFree has **no universal global cooldown by default**.
+
+Abilities normally use their own:
+- cooldown;
+- resource cost;
+- cast/wind-up/recovery rules.
+
+The framework must still support:
+- per-class or per-ability shared cooldown groups;
+- explicit GCD-like groups for classes that need them;
+- item/consumable cooldown groups;
+- cooldown modifiers;
+- **shared cooldown state across different players** when an encounter/class mechanic explicitly requires it.
+
+Cross-player shared cooldowns are exceptional authored mechanics, not the default for ordinary abilities.
+
 ## Fixed kits
 
 Classes use fixed ability kits rather than freely swapping from a large skill library.
@@ -184,6 +235,43 @@ Advancement may add, evolve or replace parts of that fixed kit.
 Gear, Intrinsics and special effects can modify how the fixed kit behaves.
 
 Normal tooltips should show readable final values. Holding a modifier key such as Shift should expose detailed formulas/scaling where useful, including the currently-selected attribute for adaptive-scaling abilities.
+
+## Effect stacking and dispels
+
+Effects define their own stacking/refresh policy in data.
+
+Supported policies include:
+- unique per source;
+- refresh duration;
+- replace with stronger;
+- add stacks up to a cap;
+- independent instances;
+- strongest copy wins;
+- other explicit authored policies.
+
+**Default direction:** many ordinary effects are **unique per source**, allowing different actors to maintain their own copy without one source creating uncontrolled duplicates.
+
+### Dispel strength
+
+The primary gameplay-facing dispel axis is:
+- **Weak Dispel**;
+- **Strong Dispel**;
+- **Undispellable**.
+
+A Strong Dispel can remove effects that a Weak Dispel can remove plus effects explicitly requiring Strong Dispel.
+
+Undispellable effects cannot be removed by ordinary dispels.
+
+Effects may additionally carry semantic tags such as:
+- Poison;
+- Curse;
+- Disease;
+- Bleed;
+- Magic;
+- CC;
+- elemental/status families.
+
+These tags support situational tools such as antidotes or specialized class abilities, but normal healer kits should not be forced into a large collection of narrow one-tag-only cleanse buttons unless that restriction is part of the ability's identity.
 
 ## Shields, sustain and combat-effect framework
 
