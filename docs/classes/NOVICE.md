@@ -77,15 +77,16 @@ Cooldowns should be intentionally somewhat long so the class does not feel like 
 
 ## Skill system
 
-Novice has exactly **four normal active skills**.
+Novice has exactly **four normal active skills** plus a simple stat passive that can absorb additional skill points.
 
-Each normal skill can be raised to **skill level 10**.
+Each normal active skill can be raised to **skill level 10**.
 
 Skill-point rules:
 - a fresh level-1 Novice spawns with **1 unspent skill point**;
-- all four skills begin **unlearned / rank 0**;
+- all four active skills begin **unlearned / rank 0**;
 - rank 1 must be purchased with a skill point;
-- every character level grants **1 additional skill point**.
+- every character level grants **1 additional skill point**;
+- unspent points can also be invested into the Novice stat passive.
 
 The normal skill menu is therefore an explicit allocation system rather than automatic skill unlocks.
 
@@ -108,6 +109,10 @@ So:
 
 The skill is melee-range regardless of equipped Novice weapon.
 
+**Novice exception:** this stun ignores normal **CC resistance**. A valid target receives the listed stun duration rather than having it reduced by ordinary CC-resistance rules.
+
+Whether explicit hard stun-immunity flags can still block it remains a separate framework question.
+
 Exact cooldown/damage tuning remains open.
 
 ### Intelligence skill — ranged magic sand
@@ -120,13 +125,13 @@ Identity:
 Current formula:
 - Damage = **Intelligence × 2**
 - Target attack miss chance increase = **Skill Level × 7.5%**
-- Current duration target: **~5 seconds** (10 seconds remains a possible tuning experiment)
+- Duration: **5 seconds**
 
 The miss effect applies to attacks/skills tagged as **requiring accuracy**, which will primarily mean basic attacks in early Cornberg combat.
 
 At rank 10 this reaches 75% miss chance, intentionally leaving the ability potentially useful even in much later content if a player somehow brings a high-level Novice there.
 
-Exact duration/stacking/refresh behavior remains balance data.
+Stacking/refresh behavior remains balance data.
 
 ### Agility skill — attack-speed buff
 
@@ -163,11 +168,25 @@ Current behavior:
 
 Exact cooldown remains to be balanced.
 
-## No normal passive
+## Novice stat passive
 
-Novice has **no ordinary passive** during normal early progression.
+Novice has a deliberately simple skill-point sink/passive:
 
-An Echo-wide bonus may exist later, but that is not currently defined as part of the Novice kit.
+- each point invested grants **+1 Vitality, +1 Strength, +1 Agility, +1 Intelligence and +1 Spirit**.
+
+This lets skill points remain useful after the four active skills reach rank 10 and reinforces the Novice's all-rounder/blank-slate identity.
+
+The exact rank cap, if any, remains open.
+
+An additional Echo-wide bonus may exist later, but that is not currently defined as part of the Novice kit.
+
+## Novice-only respec
+
+Cornberg's retired adventurer couple can help a Novice respec/reallocate Novice skill points.
+
+This service is **Novice-only**.
+
+The exact presentation and any cost/cooldown are still open.
 
 ## Level-200 Novice secret
 
@@ -212,27 +231,34 @@ When the player chooses a blessing:
 4. the child inherits a snapshot/copy of the parent's current manifestation-specific progression state at that moment;
 5. after the fork, parent and child can diverge independently.
 
-### Gear duplication on branch
+### Full manifestation snapshot on branch
 
-Equipped gear is **duplicated** into the new manifestation when the branch is created.
+Branch creation snapshots **all manifestation-specific state** into the child.
 
-This is intentional.
+This includes, at minimum:
+- equipped gear;
+- carried inventory;
+- carried gold/currency;
+- quest state;
+- world/progression state;
+- learned skills/ranks and other manifestation-specific progression needed to continue coherently.
 
-The original Novice keeps its equipped items and the child receives copies.
+The parent keeps its original state and the child receives a duplicate snapshot.
 
-All such gear remains account-bound under DiceFree's normal item-binding rules, and equipment requirements naturally limit how useful duplicated gear is to unrelated classes.
+All duplicated items remain account-bound under DiceFree's normal item-binding rules, and equipment requirements naturally limit usefulness across classes.
 
-### Quest/world-state inheritance
-
-The child manifestation continues from the same immediate game/world state as the parent at the fork point.
-
-Manifestation-specific state is therefore copied at branch creation and can diverge afterward.
+After the fork, parent and child diverge independently.
 
 Echo-wide state remains shared as usual.
 
+### Parent resume point
+
+When the player later returns to the preserved parent Novice, that manifestation resumes **immediately before the blessing choice that created the child**.
+
+The blessing is still available to that Novice, so the player can choose another branch and create another manifestation.
+
 Open:
 - exact total slot limits;
-- whether all carried inventory (not just equipped gear) is duplicated;
 - exact UI for visualizing parent/child timeline relationships.
 
 ## Design goal
