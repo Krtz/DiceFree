@@ -37,6 +37,31 @@ Architecture requirements:
 
 The goal is to make adding the 50th class mostly content/design work, not an architecture rewrite.
 
+### Quest/event architecture
+
+Quests consume semantic gameplay events through reusable objective definitions rather than inspecting UI/display strings.
+
+The framework should support:
+- Kill / Interact / ReachArea / Collect / TalkTo / UseItem / CompleteDungeon objectives;
+- nested AND/OR objective groups;
+- Echo-once, session-instance-once, timeline-once and repeatable scopes;
+- consumer-specific credit policies such as global, nearby, threat-participation and last-hit;
+- reusable NPC/world interaction actions with optional default action and multi-action menus.
+
+Combat/world event emitters provide facts; quest/XP/achievement consumers decide their own eligibility/credit policy.
+
+### Ability/effect architecture
+
+Abilities are composition-first:
+- reusable targeting, cost, cooldown, damage/heal, element, status, movement, summon, threat and resource primitives;
+- custom-code hooks remain available for genuinely unusual mechanics.
+
+Effects own explicit stacking and dispel metadata.
+
+Basic attacks use the same general action/effect pipeline so they can generate resources or class mechanics.
+
+Cooldown architecture must support individual cooldowns, arbitrary shared groups, optional GCD-like groups and exceptional cross-player shared cooldowns.
+
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
