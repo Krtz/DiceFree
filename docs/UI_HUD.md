@@ -26,11 +26,11 @@ The POC only needs one strong default layout. Do not build a complete HUD editor
 The default WC3-like player panel sits along the bottom.
 
 It contains:
-- player portrait or real-time 3D model;
+- **live real-time 3D player model/portrait** reflecting current class and visible equipped gear where practical;
 - current/max HP as text directly under/around the portrait/model;
 - class resource;
 - level/class identity;
-- buffs/debuffs where appropriate;
+- buffs/debuffs positioned around the player frame by default;
 - nearby ability/command area.
 
 HP numeric format:
@@ -84,6 +84,10 @@ Default content:
 - HP;
 - important status information.
 
+Target buffs/debuffs appear directly below/around this frame by default.
+
+A target-of-target frame is supported and is toggleable in options.
+
 Bosses can use a larger/dedicated boss presentation in the same broad area.
 
 ### Minimap
@@ -102,6 +106,54 @@ Default:
 - can be hidden in options.
 
 Exact number of simultaneously pinned quests is not yet decided.
+
+## Cast bars
+
+DiceFree supports multiple presentation layers for casting.
+
+### World-space cast bars
+
+Units can show a small cast bar above their 3D model/nameplate.
+
+Visibility is independently configurable for:
+- self/own units;
+- allies;
+- enemies.
+
+These bars are toggleable and should remain compact enough not to overwhelm the world view.
+
+### Player cast bar
+
+The player's own dedicated cast bar appears above the main bottom-center player information area by default.
+
+It is a movable/scalable HUD widget.
+
+### Target cast bar
+
+The selected target's cast bar appears below the top-center target frame by default.
+
+Boss encounters may use additional encounter-specific telegraph/cast presentation when needed.
+
+## Buffs and debuffs
+
+Player buffs/debuffs are anchored around the player frame by default.
+
+Target buffs/debuffs are anchored around/below the top-center target frame.
+
+These are modular widgets:
+- movable;
+- scalable;
+- hideable;
+- potentially filterable later.
+
+## XP bar
+
+Default direction:
+- long, thin XP bar across the bottom of the screen.
+
+Exact thickness/segmentation is not final.
+
+XP remains a separate progression display rather than being overloaded as a class-resource bar.
 
 ## World-space HP/nameplates
 
@@ -152,6 +204,30 @@ Long-term each panel should be capable of:
 
 Do not hard-code gameplay logic to one screen coordinate.
 
+## Interaction prompts
+
+Nearby interactable objects/NPCs can show contextual prompts close to the relevant world object, for example:
+- `E — Talk`
+- `E — Interact`
+- `E — Open`
+
+A subtle screen-space fallback may be used when world-space readability is poor.
+
+The player should not need to look away from the object they are trying to interact with.
+
+## Menu/system buttons
+
+The default HUD includes only a **small number of visible system/menu buttons**, Diablo-like in spirit.
+
+Examples:
+- main/system menu;
+- inventory/character;
+- map/journal as appropriate.
+
+Most actions should also have hotkeys.
+
+Do not fill the bottom HUD with a large permanent MMO-style row of system buttons.
+
 ## HUD profiles
 
 Long-term direction: allow multiple layout/profile styles.
@@ -190,18 +266,16 @@ POC does **not** need:
 
 ## Open questions
 
-- portrait: static portrait vs live 3D model implementation details;
 - exact bottom-panel proportions;
 - ability-slot hotkeys and command mapping;
-- buff/debuff placement;
-- target-of-target;
-- cast bars;
-- interaction prompts;
-- XP bar placement;
+- buff/debuff filtering/rules;
+- exact target-of-target presentation;
 - currency display;
-- inventory/character-sheet access;
+- inventory/character-sheet access details;
 - chat/combat log presentation;
 - minimap icon rules;
 - quest-tracker pin count;
 - boss-frame details;
-- UI edit-mode UX.
+- UI edit-mode UX;
+- precise XP-bar styling;
+- exact system/menu button set.
