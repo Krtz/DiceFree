@@ -76,6 +76,29 @@ Example in principle:
 
 The requirement system must therefore model **independent class definitions and requirements**, not assume one unique convergence result per prerequisite pair.
 
+## Requirement scopes and class-family predicates
+
+Requirements may refer to either **specific classes** or **broader class history**.
+
+Examples:
+- reached Tier 2 Wizard;
+- reached Tier 2 anywhere in the Magically Touched lineage;
+- reached Tier 3 in any Nature-tagged class;
+- reached Tier 3 in three different elemental caster Ways;
+- unlocked Death Knight specifically.
+
+Class/tag/category predicates should be data-driven rather than inferred from display names.
+
+Useful class metadata can include tags such as:
+- lineage/family;
+- role;
+- damage style;
+- element/theme;
+- armor/weapon identity;
+- other explicit semantic categories.
+
+A requirement may count distinct qualifying Ways where needed.
+
 ## Requirement expressions
 
 Class unlock/advancement requirements must be data-driven and support composition.
@@ -109,6 +132,34 @@ AND Nature Discovery
 ```
 
 Avoid special-casing individual secret classes in code.
+
+## Consumable and event requirements
+
+Item requirements support both:
+- **check-only** requirements: possess/equip/show an item;
+- **consuming** requirements: sacrifice/turn in/destroy an item as part of an authored event.
+
+The permanent class-relevant outcome should normally be recorded as an **Echo-wide event/milestone** once completed.
+
+Example:
+- "Sacrifice Excalibur to the Woman in the Lake";
+- the item is consumed/replaced as authored;
+- an Echo-wide milestone records that the event happened;
+- that milestone can unlock a class now or much later.
+
+Requirement timing is unrestricted by tier.
+
+A Tier-5 event can unlock a previously hidden **Tier-1 class** for future play.
+
+## No permanent content lockouts
+
+DiceFree should avoid irreversible choices that permanently prevent the player/Echo from accessing another class, Way or major progression path.
+
+Do not use "choose A, permanently lose B" as normal class-progression structure.
+
+Different quests/routes may have different flavor and sequencing, but players should be able to pursue the other unlocks later.
+
+The Echo/timeline framework exists to encourage exploration of possibilities, not punish curiosity.
 
 ## Discovery and visibility modes
 
@@ -145,7 +196,9 @@ Discovering/unlocking knowledge that a Way exists is Echo-wide.
 Once a Way is discovered:
 - the Echo retains that knowledge permanently;
 - future eligible manifestations can see/use that discovery according to the class's rules;
-- becoming the class is still manifestation-specific and occurs through the normal timeline fork.
+- discovery does **not** mean eligibility;
+- eligibility does **not** mean a save-state already exists;
+- the first time the Echo actually becomes that class, its one class save-state is created through the normal timeline fork.
 
 Unlock knowledge does not automatically make every manifestation eligible. The current manifestation must still be at an appropriate advancement point and satisfy any manifestation-specific requirements.
 
@@ -162,19 +215,46 @@ A convergence class can itself:
 
 These decisions are class-by-class.
 
-## Character slots
+## One save-state per class
 
-Design target: **effectively unlimited manifestation slots** for normal player use rather than a small gameplay cap.
+Current direction: the Echo has **at most one persistent manifestation/save-state per class ID**.
 
-Players may still want cleanup/organization tools because a large class web can create many manifestations.
+The roster therefore grows by unlocking and becoming new classes rather than by creating duplicate copies of the same class.
 
-If manifestations can be deleted/archived:
-- deleting one must never erase earned Echo-wide class milestones;
-- deleting one must never erase discovered Ways;
-- shared-bank/account progress remains intact;
-- only manifestation-specific state is removed.
+Examples:
+- one Ranger save-state;
+- one Mystic Knight save-state;
+- one Wizard save-state.
 
-Practical technical/storage limits may exist, but they should not function as an intended class-progression constraint.
+If the same class can be reached through multiple convergence routes:
+- the **first time** the Echo becomes that class, its class save-state is created from the advancing manifestation's normal timeline snapshot;
+- later qualifying routes do not create a second copy of the class and do not overwrite the existing class save-state;
+- route-specific quests/dialogue/discoveries may still exist independently where useful.
+
+This prevents duplicate Ranger #1 / Ranger #2 / Ranger #3 timelines while preserving a huge class roster.
+
+### Starting / switching classes
+
+The unlocked/discovered class UI can double as the **start-game manifestation selector**.
+
+The player chooses an existing class save-state and continues that class's timeline.
+
+This replaces the need for a traditional fixed-size character-slot screen.
+
+### Archive and cleanup
+
+Because the class roster can become enormous:
+- **Archive** is the preferred non-destructive cleanup tool;
+- archived class save-states are hidden from the normal/default picker but remain recoverable;
+- permanent deletion may also exist for players who truly want to discard class-local progress.
+
+Whether a deleted unlocked class later recreates from a fresh baseline, a checkpoint, or another explicit flow remains to be finalized.
+
+Deleting or archiving a class save-state must never erase:
+- earned Echo-wide class/tier milestones;
+- discovered Ways;
+- Echo-wide unlock events;
+- bank/account progression.
 
 ## UI direction
 
