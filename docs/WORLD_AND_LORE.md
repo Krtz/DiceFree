@@ -43,6 +43,12 @@ Each class manifestation remembers its own active resurrection stone.
 
 When that class manifestation is loaded or enters a session, it normally appears at the latest resurrection point that manifestation registered.
 
+Resurrection stones are also the in-world interface for switching between existing class manifestations.
+
+A newly-created class manifestation initially inherits its parent manifestation's registered resurrection stone.
+
+If the remembered stone cannot be used in the current game/session, the Echo falls back to **Cornberg**.
+
 ## Alternate manifestations
 
 All class save-states are manifestations of the **same Echo** across different timelines/possibilities/multiversal expressions.
