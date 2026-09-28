@@ -1351,3 +1351,64 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Explicit single-target attack commands do not auto-chain by default.
 
 **Decision:** Retarget behavior is configurable.
+
+
+## 2026-09-28 — Novice identity
+
+**Decision:** Novice is a Tier 0 blank-slate class intended to sample four broad future combat identities without specializing.
+
+**Decision:** Novice has exactly four normal active skills and no normal passive.
+
+**Decision:** Each normal Novice skill can be raised to skill level 10.
+
+## 2026-09-28 — Novice starting stats and HP
+
+**Decision:** Level-1 Novice begins with 1 Vitality, 1 Strength, 1 Agility, 1 Intelligence and 1 Spirit.
+
+**Direction:** Starting HP is 10 base + the normal Vitality-derived HP contribution.
+
+## 2026-09-28 — Novice basic attack scaling
+
+**Decision:** Novice basic attack scales from the highest of all five primary attributes.
+
+## 2026-09-28 — Novice resource
+
+**Decision:** Novice has no class resource; its four skills use cooldowns.
+
+**Direction:** Novice cooldowns should be somewhat long so the starter kit remains simple/weak.
+
+## 2026-09-28 — Novice skill prototypes
+
+**Direction / balance targets:**
+- STR melee stun: STR × 2 damage; stun = skill level × 0.2.
+- INT ranged magic sand: INT × 2 damage; attack miss chance = skill level × 7.5%.
+- AGI attack-speed buff: 10 + (skill level × 0.2 × AGI)% current formula direction.
+- SPI heal: Spirit × 10 healing.
+
+**Decision:** These formulas are provisional balance targets and may change after playtesting.
+
+## 2026-09-28 — Level-200 Novice payoff
+
+**Decision:** Level-200 Novice receives a hidden stronger payoff.
+
+**Direction:** This includes a stronger secret active skill and may include Novice's first passive.
+
+**Decision:** The secret active does not appear in the normal skill-level menu.
+
+## 2026-09-28 — Novice equipment and appearance
+
+**Decision:** Fresh Novice starts with no equipped gear.
+
+**Decision:** Baseline appearance is androgynous underwear + T-shirt.
+
+**Decision:** Novice can equip only gear explicitly permitted for Novice.
+
+## 2026-09-28 — Advancement creates a new manifestation slot
+
+**Decision:** Choosing an advancement does not overwrite/delete the parent manifestation.
+
+**Decision:** The parent Novice remains playable and the selected advanced class is created as a new level-1 character/manifestation slot.
+
+**Decision:** The same Novice can later choose another available branch, producing another manifestation.
+
+**Open:** exact inventory/equipment/quest-state inheritance and total slot limits.
