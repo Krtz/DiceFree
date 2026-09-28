@@ -14,13 +14,24 @@ It is:
 - sturdier and more physically defined than Novice;
 - broad enough to foreshadow several later physical archetypes.
 
-Current intended kit shape:
-- 1 defensive active;
-- 1 single-target damage active;
-- 1 AoE damage active;
-- 1 passive.
+Current intended Tier-1 kit shape is **5 skills, 6 ranks each**:
+1. single-target melee damage + stun;
+2. defensive active;
+3. attack-speed/physical-tempo buff;
+4. ground-targeted Arrow Rain AoE;
+5. broad physical passive.
 
 A good continuity rule is to evolve some Novice ideas rather than erase the first ten levels completely.
+
+### Skill-point cadence
+
+Tier 1 restarts its own skill progression:
+- level 1 begins with 1 Tier-1 skill point;
+- gain 1 skill point per level;
+- each of the 5 skills has 6 ranks;
+- reaching level 30 provides exactly 30 Tier-1 skill points, enough to max all five skills.
+
+Novice ranks do not numerically carry into Tier 1; inherited/evolved skills are conceptual descendants with their own ranks.
 
 ## Resource direction
 
@@ -34,7 +45,46 @@ Reason:
 
 Mana should not imply "spellcaster only." In DiceFree it can represent generic ability power/effort where a class uses it.
 
-Exact base Mana, regeneration and INT interaction remain open.
+Physical Mana philosophy:
+- lower ability costs than Magically Touched;
+- lower dependence on Mana regeneration;
+- low INT must not make the class dysfunctional;
+- base Mana/base regen and costs are class-defined.
+
+Exact base Mana, regeneration and INT interaction remain balance work.
+
+## Working skill identities
+
+### 1. Heavy Strike
+- melee single-target physical skill;
+- evolves the Novice stun concept;
+- damage should use the **higher of STR or AGI** as the simple Tier-1 blank-slate rule;
+- keeps a stun, but the stun obeys ordinary CC resistance/DR and true immunity.
+
+Avoid splitting "AGI controls damage / STR controls stun" unless later playtesting proves it adds meaningful build choice; the simpler adaptive formula is preferred for now.
+
+### 2. Guard / Brace
+- short-duration defensive active;
+- useful without requiring a shield;
+- broad Physical + Magical mitigation direction;
+- previews the future sword-and-board/tank lineage.
+
+### 3. Quickening
+- evolves the Novice attack-speed buff idea;
+- physical tempo/attack-speed identity;
+- previews agile/Rogue-style descendants.
+
+Exact self/ally targeting remains open.
+
+### 4. Arrow Rain
+- ground-targeted physical AoE;
+- calls down a small rain of arrows without requiring the class to equip a bow;
+- deliberately previews the future Ranger branch while Physically Blessed itself remains melee.
+
+### 5. Martial Aptitude
+- broad physical passive;
+- should benefit both STR-leaning and AGI-leaning builds;
+- exact bonus remains open.
 
 ## Starting stats — current balance target
 
@@ -76,8 +126,9 @@ This is not yet final, but keeping Rogue and 2H melee separate at this tier has 
 - movement/positioning fantasy differs;
 - later specialization has a cleaner foundation.
 
-Risk:
-- four physical branches plus four magical branches creates eight Tier 2 classes at level 30, which is a meaningful content/art workload.
+Large class count is an intentional long-term goal rather than a reason to collapse branches.
+
+Development does **not** require symmetric completion. One Tier-2 class may initially have one implemented successor while another has several. The tree can grow unevenly over time as long as implemented paths are coherent and the architecture does not assume equal branch counts.
 
 ## Open questions
 
