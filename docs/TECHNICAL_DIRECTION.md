@@ -142,11 +142,29 @@ The exact authority/network transport solution is not locked yet.
 
 ## Dungeon instance rule
 
-Starting a dungeon creates a closed run for its current participants.
+Dungeon lifecycle:
+1. first player enters physical entrance;
+2. shared staging room begins a 60-second countdown;
+3. other eligible party members may enter during staging;
+4. countdown expiry starts the active run;
+5. roster and equipped gear are locked;
+6. no mid-run joins;
+7. full party wipe normally resets the entire run;
+8. abandonment destroys/resets the active run;
+9. successful completion moves each participant to a private loot room.
 
-No mid-run joins.
+Dungeon data must be able to define:
+- internal/self-respawn checkpoint policy;
+- default whole-run reset plus explicit exceptional reset rules;
+- encounter/trash reset behavior;
+- loot-room reconnect window;
+- authored completion conditions.
 
-Full party wipe normally resets the entire run.
+Dungeon trash normally does not use timed overworld respawns during an active attempt.
+
+Boss encounter state must be cleanly resettable.
+
+Consumables stay functional during active runs even though equipped gear/class switching are locked.
 
 ## Party scaling
 
