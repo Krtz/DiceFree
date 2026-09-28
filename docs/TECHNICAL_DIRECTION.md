@@ -154,6 +154,38 @@ See `docs/PERSISTENCE_AND_SAVES.md`.
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
+### Enemy / encounter architecture
+
+Enemy content should be composition-first:
+- reusable base archetypes;
+- authored variants/overrides;
+- fixed authored levels;
+- direct monster stats and/or five-attribute participation;
+- semantic tags;
+- reusable AI decision rules;
+- threat/target selectors;
+- home/leash/reset policies;
+- authored pack/patrol definitions;
+- reusable enemy modifiers.
+
+AI logic must support both trivial policies and complex nested conditional/weighted rules.
+
+Encounter definitions own fight-wide orchestration:
+- phases;
+- arena state;
+- hazards;
+- add waves;
+- doors/objects;
+- timers/enrage;
+- difficulty-mode overrides;
+- reset/completion state.
+
+Encounter reset must be deterministic/inspectable for multiplayer host migration and validation.
+
+Build developer encounter-test tooling early enough that bosses can be spawned, phase-forced and inspected without replaying full dungeons.
+
+See `docs/ENEMIES_AND_ENCOUNTERS.md`.
+
 ### Network authority / host migration
 
 Runtime networking should use a host-authoritative simulation:
