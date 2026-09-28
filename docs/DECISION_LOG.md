@@ -1500,3 +1500,52 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-28 — Parent resumes before blessing
 
 **Decision:** Returning to the preserved parent manifestation resumes immediately before the blessing/branch choice that created the child, allowing another branch to be chosen later.
+
+
+## 2026-09-28 — Novice passive cap / respec / stun immunity boundary
+
+**Decision:** Novice all-stat passive caps at 160 ranks.
+
+**Decision:** Cornberg retired-adventurer Novice respec is free.
+
+**Decision:** Novice STR stun bypasses ordinary CC resistance/DR but does not bypass explicit hard Stun Immunity.
+
+## 2026-09-28 — Tier 1 physical stat direction
+
+**Working balance target:** Physically Blessed Novice starts 12 VIT / 12 STR / 12 AGI / 5 INT / 5 SPI.
+
+**Working growth target:** +1 VIT, +2 STR, +2 AGI, +0.5 INT, +0.5 SPI per level on average.
+
+**Implementation direction:** represent half-stat growth as +1 every two levels rather than visible fractional stats.
+
+## 2026-09-28 — Tier 1 magical stat direction
+
+**Working balance target:** Magically Touched Novice starts 10 VIT / 5 STR / 5 AGI / 13 INT / 13 SPI.
+
+**Working growth target:** +1 VIT, +0.5 STR, +0.5 AGI, +2 INT, +2 SPI per level on average.
+
+**Implementation direction:** represent half-stat growth as +1 every two levels.
+
+## 2026-09-28 — Tier 1 Mana direction
+
+**Strong working direction:** Both first-advancement classes use Mana.
+
+**Reason:** Tier 1 teaches resource management through a simple shared system; later specialized classes may replace Mana with Rage, Combo Points/Energy, Focus or other bespoke resources.
+
+## 2026-09-28 — Candidate level-30 branch breadth
+
+**Working direction:** Consider four physical and four magical branches at level 30.
+
+Physical candidates:
+- sword-and-board tank;
+- rogue/agile melee;
+- ranger/physical ranged;
+- two-handed melee DPS.
+
+Magical candidates:
+- shield/buff healer-support;
+- healing-focused healer;
+- arcane wizard;
+- occult caster.
+
+This is not yet locked because of class-count/content-production implications.
