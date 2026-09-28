@@ -365,6 +365,26 @@ Exact UI messaging and whether any exceptional dungeon mechanic can override thi
 
 All items are account-bound.
 
+## Player-to-player transfer policy
+
+There is **no general player-to-player gear trading**.
+
+Rules/direction:
+- equipment already picked up into a player's inventory is normally that player's item;
+- private dungeon rewards are personal;
+- free-for-all overworld drops can still be socially assigned before pickup ("you take it").
+
+The item framework should support **category-specific trade permission** for selected non-equipment items.
+
+Candidate intentionally tradeable categories include:
+- food;
+- potions;
+- similar ordinary consumables.
+
+Exact tradeable consumable/material categories remain open.
+
+There is no default direct gold-transfer or unrestricted material economy between players.
+
 ## Selling unwanted equipment
 
 There is **no general equipment salvage/disenchant system**.
