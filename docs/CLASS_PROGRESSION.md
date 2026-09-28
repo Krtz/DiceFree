@@ -2,14 +2,18 @@
 
 ## Core concept
 
-Every character begins as a **Novice**.
+Every new Echo lineage begins as a **Novice**.
 
-Class advancement is permanent for that manifestation. Multiple character slots represent alternate manifestations/timelines of the same Echo.
+See `docs/classes/NOVICE.md` for the detailed starting class.
+
+Advancement branches create alternate manifestations rather than deleting the parent manifestation.
+
+The original manifestation remains playable, while the chosen advancement creates a new character slot/timeline branch at level 1.
 
 ## Advancement cadence
 
 ```
-Novice        -> reach level 10  -> advance -> new class starts at level 1
+Novice        -> reach level 10  -> branch -> new Tier I manifestation starts at level 1
 Tier I        -> reach level 30  -> advance -> new class starts at level 1
 Tier II       -> reach level 60  -> advance -> new class starts at level 1
 Tier III      -> reach level 120 -> advance -> new class starts at level 1
@@ -26,7 +30,32 @@ When they eventually advance:
 
 Overleveling gives no automatic permanent bonus, but can make advancement quests easier and may satisfy hidden conditions.
 
-A level-200 Novice is intentionally possible and is a good example of a future secret-class requirement.
+A level-200 Novice is intentionally possible.
+
+It is also intended to receive a hidden stronger Novice payoff (secret skill and potentially first passive) rather than remaining permanently identical to the level-10 kit.
+
+## Branching manifestation model
+
+Advancement is a **branch**, not an overwrite.
+
+When a manifestation reaches an advancement threshold and chooses a class:
+- the current manifestation remains playable at its current class/level;
+- a new manifestation/character slot is created for the chosen advancement;
+- the new advanced manifestation begins at level 1 with its own class base stats/growth;
+- the parent manifestation can later choose another available branch, creating another child manifestation.
+
+Example after the first split:
+- Level 10 Novice remains playable;
+- Level 1 Physically Blessed Novice exists as another slot;
+- Level 1 Magically Touched Novice can later be created from the same Novice.
+
+This branching-slot model is part of the Echo/timeline fantasy.
+
+Open:
+- exact slot limits;
+- inventory/equipment state copied on branch creation;
+- quest-state inheritance;
+- UI presentation of parent/child lineage.
 
 ## Core attributes
 
@@ -168,6 +197,9 @@ They should have:
 
 ## Open questions
 
+- branch-manifestation inventory/equipment inheritance;
+- branch-manifestation quest-state inheritance;
+- exact slot limits;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
 - exact second-tier classes;
