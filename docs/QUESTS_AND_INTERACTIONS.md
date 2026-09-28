@@ -151,3 +151,39 @@ Guest eligibility controls whether a physically possible action grants that gues
 If an objective requires an NPC/object/event that no longer exists in the host's world, that objective is simply unavailable in that session; the guest's own progression is not failed or overwritten.
 
 See `docs/MULTIPLAYER.md`.
+
+
+## Dungeon / encounter events
+
+Dungeon and encounter systems emit semantic events through the same general event/requirement architecture.
+
+Examples include:
+- EnteredDungeon;
+- DungeonRunStarted;
+- BossEncounterStarted;
+- BossDefeated;
+- DungeonCompleted;
+- DungeonCompletedWithoutDeath;
+- SecretRoomDiscovered;
+- EncounterCompleted;
+- RunAbandoned;
+- FullPartyWipe;
+- other authored encounter milestones.
+
+These events can be consumed by:
+- quests;
+- achievements;
+- class/Way requirements;
+- item/unlock requirements;
+- hidden discoveries;
+- analytics/debug tooling.
+
+Requirements may combine dungeon events with arbitrary other predicates.
+
+Example in principle:
+- complete Dungeon X as a level-200 Novice;
+- no party deaths;
+- specific item equipped;
+- specific secret interaction completed.
+
+Do not encode these future combinations as dungeon-specific hard-coded managers.
