@@ -142,7 +142,21 @@ First advancement:
 - **Physically Blessed Novice**
 - **Magically Touched Novice**
 
-Possible next direction remains physical melee/ranged and magical melee/ranged, but exact jobs are not yet locked.
+Working Tier-1 class sheets:
+- `docs/classes/PHYSICALLY_BLESSED_NOVICE.md`
+- `docs/classes/MAGICALLY_TOUCHED_NOVICE.md`
+
+Current strong direction:
+- both Tier-1 branches introduce **Mana** as a simple shared resource;
+- specialized resources arrive on later classes where they reinforce identity;
+- Physically Blessed remains a broad STR/AGI melee generalist;
+- Magically Touched remains a broad INT/SPI magical generalist.
+
+Current candidate level-30 branching:
+- Physical: sword-and-board, rogue, ranger, two-handed melee DPS;
+- Magical: shield/buff healer-support, healing-focused healer, arcane wizard, occult caster.
+
+This four-plus-four split is still a working direction rather than locked final structure.
 
 ## Class identity
 
