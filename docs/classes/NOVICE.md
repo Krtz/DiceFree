@@ -43,16 +43,27 @@ At level 1:
 - Intelligence: **1**
 - Spirit: **1**
 
+On every Novice level-up:
+- +1 Vitality;
+- +1 Strength;
+- +1 Agility;
+- +1 Intelligence;
+- +1 Spirit.
+
 Starting HP direction:
 - **10 base HP + Vitality-derived HP bonus**
 
 Exact Vitality coefficient remains part of global stat balancing.
 
-## Basic attack scaling
+## Basic attack
+
+Novice's baseline basic attack is intentionally simple: **fists/unarmed attacks**.
+
+This avoids spending disproportionate animation/model effort on a class most players will only use briefly.
 
 Novice basic attacks scale from the **highest of all five primary attributes**.
 
-This allows early gear/stat changes to shape the Novice without forcing an early commitment to one future branch.
+The attack remains a simple physical/unarmed hit even when INT/SPI/etc. happens to be the highest stat; the adaptive stat decides scaling, not the attack's visual identity.
 
 Exact coefficient/basic-attack formula is still balance data.
 
@@ -70,7 +81,13 @@ Novice has exactly **four normal active skills**.
 
 Each normal skill can be raised to **skill level 10**.
 
-The exact skill-point acquisition cadence and UI are still to be defined.
+Skill-point rules:
+- a fresh level-1 Novice spawns with **1 unspent skill point**;
+- all four skills begin **unlearned / rank 0**;
+- rank 1 must be purchased with a skill point;
+- every character level grants **1 additional skill point**.
+
+The normal skill menu is therefore an explicit allocation system rather than automatic skill unlocks.
 
 All numerical formulas below are **current balance targets**, not immutable final numbers.
 
@@ -83,9 +100,15 @@ Identity:
 
 Current formula:
 - Damage = **Strength × 2**
-- Stun duration = **Skill Level × 0.2**
+- Stun duration = **Skill Level × 0.2 seconds**
 
-The duration unit is intended to be finalized during implementation/balance.
+So:
+- rank 1 = 0.2 s;
+- rank 10 = 2.0 s.
+
+The skill is melee-range regardless of equipped Novice weapon.
+
+Exact cooldown/damage tuning remains open.
 
 ### Intelligence skill — ranged magic sand
 
@@ -97,8 +120,13 @@ Identity:
 Current formula:
 - Damage = **Intelligence × 2**
 - Target attack miss chance increase = **Skill Level × 7.5%**
+- Current duration target: **~5 seconds** (10 seconds remains a possible tuning experiment)
 
-Debuff duration and exact stacking/refresh behavior remain open.
+The miss effect applies to attacks/skills tagged as **requiring accuracy**, which will primarily mean basic attacks in early Cornberg combat.
+
+At rank 10 this reaches 75% miss chance, intentionally leaving the ability potentially useful even in much later content if a player somehow brings a high-level Novice there.
+
+Exact duration/stacking/refresh behavior remains balance data.
 
 ### Agility skill — attack-speed buff
 
@@ -108,8 +136,13 @@ Identity:
 
 Current direction:
 - Attack Speed bonus = **10 + (Skill Level × 0.2 × Agility)%**
+- Current duration target: **~5 seconds**
 
-The exact interpretation/coefficient and duration are balance targets to verify in playtesting.
+The buff can target:
+- self;
+- allied units/players.
+
+The exact coefficient/duration remain balance targets to verify in playtesting.
 
 ### Spirit skill — heal
 
@@ -120,7 +153,15 @@ Identity:
 Current formula:
 - Heal = **Spirit × 10**
 
-Cooldown, cast time and targeting details remain to be balanced.
+Targeting:
+- self;
+- allies.
+
+Current behavior:
+- **instant cast**;
+- relatively long cooldown, consistent with the deliberately clunky Novice kit.
+
+Exact cooldown remains to be balanced.
 
 ## No normal passive
 
@@ -160,10 +201,39 @@ Example:
 
 This is a direct gameplay expression of the Echo/timeline concept.
 
-Open implementation questions:
-- what inventory/equipped state is copied into a newly-created branch manifestation;
-- how quest state is inherited vs manifestation-specific;
-- whether branch creation has any slot-management limits/costs later.
+### Branch creation behavior
+
+Advancement happens **in the current game/session**.
+
+When the player chooses a blessing:
+1. a new Tier-1 manifestation is created;
+2. the game immediately continues as that new manifestation at level 1;
+3. the parent Novice remains preserved as a playable slot at the branch point;
+4. the child inherits a snapshot/copy of the parent's current manifestation-specific progression state at that moment;
+5. after the fork, parent and child can diverge independently.
+
+### Gear duplication on branch
+
+Equipped gear is **duplicated** into the new manifestation when the branch is created.
+
+This is intentional.
+
+The original Novice keeps its equipped items and the child receives copies.
+
+All such gear remains account-bound under DiceFree's normal item-binding rules, and equipment requirements naturally limit how useful duplicated gear is to unrelated classes.
+
+### Quest/world-state inheritance
+
+The child manifestation continues from the same immediate game/world state as the parent at the fork point.
+
+Manifestation-specific state is therefore copied at branch creation and can diverge afterward.
+
+Echo-wide state remains shared as usual.
+
+Open:
+- exact total slot limits;
+- whether all carried inventory (not just equipped gear) is duplicated;
+- exact UI for visualizing parent/child timeline relationships.
 
 ## Design goal
 
