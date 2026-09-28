@@ -94,7 +94,16 @@ Target buffs/debuffs appear directly below/around this frame by default.
 
 A target-of-target frame is supported and is toggleable in options.
 
-Bosses can use a larger/dedicated boss presentation in the same broad area.
+Bosses use a larger/dedicated top-center presentation in the same broad area.
+
+Boss frames can show:
+- name;
+- level where meaningful;
+- large HP bar;
+- phase indicators where relevant;
+- cast bar;
+- important encounter statuses/mechanics;
+- multiple boss bars when an encounter genuinely has several active bosses.
 
 ### Minimap
 
@@ -115,6 +124,44 @@ Default:
 - can be hidden in options.
 
 Exact number of simultaneously pinned quests is not yet decided.
+
+## Boss mechanic warnings and telegraphs
+
+Important encounter mechanics should be communicated through **both world telegraphs and UI warnings** where appropriate.
+
+Default philosophy:
+- dangerous ground effects use obvious red danger/"ouch" circles, cones, lines or other world-space telegraphs;
+- major mechanics may also trigger large center-screen warning text;
+- audio/animation/cast bars should reinforce the mechanic;
+- warnings should be strong enough to understand, but not spammed for every trivial attack.
+
+## Quest markers and journal
+
+Quest NPCs use the familiar universal markers:
+- **!** = quest available;
+- **?** = quest turn-in / completion interaction.
+
+DiceFree does not need to reinvent these symbols just to be different.
+
+The quest journal:
+- stores active quests;
+- shows objectives/details;
+- lets players choose which quests are pinned to the HUD tracker.
+
+Default tracked count should stay modest (roughly 3–5 visible quests), while the journal can contain more.
+
+## Fog of war and shared vision
+
+Map/minimap visibility follows a Warcraft III-style fog-of-war model.
+
+Rules:
+- unexplored terrain is black/hidden;
+- terrain becomes permanently revealed on the map/minimap after the player has seen it;
+- static discovered geography/objects can remain visible afterward;
+- current dynamic activity/enemies/events require present vision;
+- party/allied players share vision.
+
+Exact vision radii, stealth interactions and whether every static POI stays visible are future tuning questions.
 
 ## Cast bars
 
@@ -173,6 +220,34 @@ Default direction:
 Exact thickness/segmentation is not final.
 
 XP remains a separate progression display rather than being overloaded as a class-resource bar.
+
+## Threat-state presentation
+
+Target/party UI should expose threat state with simple color/icon indicators.
+
+Default direction:
+- green/safe = not currently threatened / low threat;
+- yellow = rising/contested threat;
+- red = currently has aggro / primary threat.
+
+Exact colors and thresholds can be tuned later.
+
+The same underlying threat values can drive party-frame and target-frame indicators.
+
+Detailed numeric threat remains optional.
+
+## Low-health feedback
+
+Default low-health feedback should prioritize the player frame rather than covering the entire screen.
+
+Default behavior:
+- player 3D portrait/frame gains increasingly red/danger styling;
+- portrait/model can visibly appear hurt/injured;
+- current/max HP text becomes more red/emphasized as health drops.
+
+Optional:
+- bloody/red screen-edge vignette/border effect;
+- this effect is configurable/toggleable because it can become visually intense.
 
 ## World-space HP/nameplates
 
