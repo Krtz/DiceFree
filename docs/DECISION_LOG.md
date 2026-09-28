@@ -1203,3 +1203,54 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Default low-health warning centers on the player frame: redder frame/portrait treatment, hurt-looking model and increasingly red HP text.
 
 **Decision:** Optional bloody/red screen-edge vignette is supported and toggleable.
+
+
+## 2026-09-28 — Contextual mouse controls
+
+**Decision:** Classic Mouse uses Warcraft III-style contextual right-click for movement, attack and interaction.
+
+**Decision:** Left-click remains the primary selection/UI click.
+
+## 2026-09-28 — Selection safety
+
+**Decision:** Selection controls must be configurable between ARPG-like hero focus and more RTS-like unit selection.
+
+**Decision:** Accidental selection of allies/summons/other units must not prevent responsive emergency movement in combat.
+
+**Direction:** Framework should support selection locks/filters/modifier requirements and controlled-unit categories.
+
+## 2026-09-28 — Attack-Move / Stop / Hold
+
+**Decision:** Dedicated Attack-Move is required.
+
+**Decision:** Dedicated Stop and Hold Position commands are required.
+
+**Direction:** Classic defaults may use S for Stop and H for Hold, subject to rebinding/profile design.
+
+## 2026-09-28 — Context basic attack
+
+**Decision:** Right-clicking a hostile target commands a basic attack.
+
+**Decision:** A dedicated Warcraft III-style Attack command/button also exists.
+
+## 2026-09-28 — Input profiles
+
+**Decision:** Classic Mouse and Direct/WASD ship with different default keybind profiles.
+
+**Decision:** All bindings remain configurable.
+
+**Open:** Exact ability/interact bindings for each profile.
+
+## 2026-09-28 — Target cycling
+
+**Decision:** Default hostile target cycling supports Tab forward and Shift+Tab backward.
+
+**Decision:** Friendly/allied target cycling can have separate configurable bindings.
+
+## 2026-09-28 — Free camera and hero follow
+
+**Decision:** Camera can move independently of the hero, Warcraft III-style.
+
+**Decision:** Players can observe allies/other areas and control/send summons away from the hero.
+
+**Decision:** A dedicated action/hotkey returns/follows the hero, and optional hero-follow behavior is supported.
