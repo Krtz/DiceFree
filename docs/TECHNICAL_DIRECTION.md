@@ -116,6 +116,36 @@ Affix validity, item eligibility, socket/runeword/set data and proc effects shou
 
 Do not require handcrafted and randomized equipment to use separate combat/stat engines.
 
+### Persistence / save architecture
+
+Persistence has explicit ownership boundaries:
+- Echo/account-wide state;
+- per-class manifestation state;
+- transient session-instance state.
+
+Core requirements:
+- aggressive autosave of durable progression;
+- loading a class spawns at its registered resurrection point rather than exact quit coordinates;
+- active dungeon runs are transient and not persisted across quitting;
+- already-earned persistent XP/gold survive dungeon abandonment/quit;
+- advancement and bank/inventory transfers are atomic transactions;
+- stable IDs and versioned save schemas;
+- explicit save migrations;
+- unknown/missing content records preserved inertly rather than silently deleted;
+- rotating local backups;
+- cloud-save provider abstraction;
+- stable internal user/profile identity separate from platform IDs.
+
+Initial PC direction supports Steam Cloud, but gameplay code must not depend directly on Steam-specific persistence APIs.
+
+Prepare interfaces for future user/account/database services without requiring an MMO-style always-online backend.
+
+Multiplayer persistence separates:
+- host-authoritative live world presentation;
+- per-player durable credit for events/quests/world outcomes actually earned.
+
+See `docs/PERSISTENCE_AND_SAVES.md`.
+
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
