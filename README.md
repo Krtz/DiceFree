@@ -11,7 +11,7 @@ The game is intended to combine:
 
 ## Current status
 
-**Unity foundation and Cornberg traversal blockout.**
+**Unity foundation, preserved Cornberg blockout, and a one-Slime combat loop.**
 
 The first World 1 pocket is available in `Assets/_DiceFree/Scenes/Cornberg.unity`.
 Open it in Unity **6000.6.3f1** and press Play. Right-click moves in Classic mode;
@@ -19,7 +19,11 @@ F6 switches to WASD/Direct, the mouse wheel zooms, and V toggles the lookout.
 Arrow keys or middle-mouse drag pan, Q/E rotate, Home recenters, and F toggles follow.
 See [Cornberg blockout notes](docs/CORNBERG_BLOCKOUT.md) for scope, validation and known limitations.
 
-This pass contains placeholder geography and traversal, not combat, quests or progression.
+The eastern crop field now contains one neutral green Slime. Left-click/Tab selects;
+right-click an enemy or X attacks. R returns to Cornberg after death; the well heals
+nearby living actors. See [combat playtest notes](docs/CORNBERG_COMBAT.md) for controls,
+provisional tuning, architecture and validation. Art remains placeholder; quests,
+XP progression, Tier-1 classes and multiplayer are not implemented.
 
 ## Current high-level canon
 

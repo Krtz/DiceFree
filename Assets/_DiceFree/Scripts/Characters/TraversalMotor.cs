@@ -9,6 +9,7 @@ namespace DiceFree.Characters
         [SerializeField, Min(0.1f)] private float speed = 5f;
         private NavMeshAgent agent;
         private NavMeshPath candidatePath;
+        private bool motionAllowed = true;
         public float Speed => speed;
         public bool Ready => agent != null && agent.isOnNavMesh;
         public bool Travelling => Ready && agent.hasPath;
@@ -34,7 +35,7 @@ namespace DiceFree.Characters
 
         public bool MoveTo(Vector3 destination)
         {
-            if (!Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
+            if (!motionAllowed || !Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
                 return false;
             if (!agent.CalculatePath(hit.position, candidatePath) ||
                 candidatePath.status != NavMeshPathStatus.PathComplete)
@@ -50,13 +51,24 @@ namespace DiceFree.Characters
 
         public void MoveDirect(Vector3 direction, float deltaTime)
         {
-            if (!Ready) return;
+            if (!Ready || !motionAllowed) return;
             Stop();
             direction = Vector3.ClampMagnitude(Vector3.ProjectOnPlane(direction, Vector3.up), 1f);
             var start = agent.nextPosition;
             var end = start + direction * (speed * deltaTime);
             // Both schemes respect the same baked radius, slopes and natural boundaries.
             if (NavMesh.Raycast(start, end, out var hit, agent.areaMask)) end = hit.position;
+            // Direct movement also respects live unit footprints, not only the static bake.
+            var displacement = end - start;
+            var distance = displacement.magnitude;
+            if (distance > 0.001f)
+            {
+                foreach (var unit in Physics.SphereCastAll(start + Vector3.up * 0.8f, agent.radius,
+                    displacement.normalized, distance, 1 << 10, QueryTriggerInteraction.Ignore))
+                    if (unit.collider.transform.root != transform.root)
+                        distance = Mathf.Min(distance, Mathf.Max(0, unit.distance - 0.03f));
+                end = start + displacement.normalized * distance;
+            }
             agent.Move(end - start);
             if (direction.sqrMagnitude > 0.001f)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation,
@@ -64,5 +76,12 @@ namespace DiceFree.Characters
         }
 
         private void OnDisable() => Stop();
+        public void SetSpeed(float value) { speed = Mathf.Max(0.1f, value); if (agent != null) agent.speed = speed; }
+        public void SetMotionAllowed(bool value) { motionAllowed = value; if (!value) Stop(); }
+        public bool Teleport(Vector3 point)
+        {
+            if (!Ready || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;
+            Stop(); return agent.Warp(hit.position);
+        }
     }
 }

@@ -96,7 +96,10 @@ namespace DiceFree.EditorTools
             if(!SessionState.GetBool(Running,false)) return;
             if(state==PlayModeStateChange.EnteredPlayMode)
             {
-                motor=UnityEngine.Object.FindFirstObjectByType<TraversalMotor>();
+                motor=UnityEngine.Object.FindFirstObjectByType<TraversalInput>().GetComponent<TraversalMotor>();
+                // Traversal is an isolated regression pass; combat has a separate active-encounter suite.
+                foreach (var enemy in UnityEngine.Object.FindObjectsByType<DiceFree.AI.AggroBehaviour>(FindObjectsSortMode.None))
+                    enemy.gameObject.SetActive(false);
                 stage=SessionState.GetBool("DiceFree.ControlsOnly",false) ? Stops.Length : 0;
                 SessionState.SetBool("DiceFree.ControlsOnly",false);
                 commandSent=false; deadline=Time.realtimeSinceStartup+30;
@@ -236,7 +239,7 @@ namespace DiceFree.EditorTools
             camera.fieldOfView=65;
             Capture("great-tree-vista",camera);
         }
-        private static void Capture(string name,Camera camera)
+        internal static void Capture(string name,Camera camera)
         {
             Directory.CreateDirectory("Logs/Cornberg");
             var previous=RenderTexture.active;

@@ -130,6 +130,7 @@ smoke check reported no navigation/runtime errors. The standalone check caught
 and fixed a native-agent initialization ordering problem: the agent is serialized
 disabled and enabled in Start after world navigation registration.
 
-Next: review the walking times and service/field sightlines in this blockout,
-then implement one crop Slime with a basic attack and death/return-to-well loop.
-Keep that first combat increment small before adding the entire quest chain.
+The next increment is now implemented without regenerating this geography:
+see [Cornberg combat notes](CORNBERG_COMBAT.md) for the one-Slime attack,
+death/return/well loop, provisional values and validation. This document records
+the Phase 1 baseline; the combat notes describe the current playable scope.
