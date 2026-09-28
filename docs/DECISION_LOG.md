@@ -2220,3 +2220,58 @@ Framework supports:
 Materials may instead be purchasable for gold or obtained through authored content if needed later.
 
 **Decision:** Named gear does not automatically yield special content-specific salvage materials.
+
+
+## 2026-09-28 — Dungeon staging room
+
+**Decision:** First player entering a dungeon begins a shared **60-second staging-room countdown**.
+
+Other eligible party members entering during that minute join the same waiting room.
+
+**Decision:** The staging room includes a test dummy.
+
+**Decision:** The actual run, roster lock and equipment lock begin when the countdown expires.
+
+## 2026-09-28 — Dungeon death / self-respawn policy
+
+**Decision:** A dead dungeon player can be healer-resurrected until they choose self-respawn.
+
+**Decision:** Self-respawn destination is dungeon-specific.
+
+Supported cases include a dungeon-start/checkpoint spawn or the player's last registered resurrection point.
+
+## 2026-09-28 — Dungeon full wipe and abandonment
+
+**Decision:** Default full wipe resets the entire dungeon state: trash, bosses and run-local encounters.
+
+Explicit future exceptions are allowed.
+
+**Decision:** If the party abandons/leaves the active run, the run resets/destroys rather than remaining parked.
+
+## 2026-09-28 — Dungeon boss and trash reset rules
+
+**Decision:** Bosses reset fully after a failed/disengaged attempt.
+
+**Decision:** Dungeon trash normally has no timed respawn during an active attempt; it returns on a run reset.
+
+## 2026-09-28 — Dungeon loot-room completion
+
+**Decision:** Successful completion sends each participant to a private loot room.
+
+**Decision:** Reward choice must be made before leaving.
+
+**Decision:** A player disconnected in the loot room can reconnect back into it within a limited reconnect window. Exact duration remains open.
+
+## 2026-09-28 — Dungeon equipment and class lock
+
+**Decision:** Equipment remains changeable during the staging countdown and becomes locked when the active run starts.
+
+**Decision:** Ordinary consumables remain usable/manageable during the run.
+
+**Decision:** Class switching is unavailable during an active dungeon/raid run.
+
+## 2026-09-28 — Dungeon semantic events
+
+**Decision:** Dungeon/encounter milestones emit generic semantic events usable by quests, achievements, class requirements and secret unlocks.
+
+Examples include run start, boss defeat, completion, no-death completion and secret-room discovery.
