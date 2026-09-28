@@ -66,8 +66,11 @@ Each class save tracks its own **latest registered resurrection point**.
 
 Rules:
 - starting/loading that class normally spawns it at its latest registered resurrection point;
-- switching into another class in a safe town/session uses that other class's registered point;
-- one class changing its resurrection point does not change another class save's point.
+- class switching can only be initiated through a resurrection stone;
+- switching to another class uses that class save's own registered point;
+- one class changing its resurrection point does not change another class save's point;
+- when a new class save is first created by advancement, it **inherits the parent class's currently registered resurrection point**;
+- if a saved resurrection point is unavailable/invalid in the current game/session, **Cornberg** is the fallback.
 
 ## Manifestation-specific
 
@@ -114,6 +117,17 @@ Some resources can be always safe.
 Some can use carried/stored risk.
 
 The currency system should support this generically rather than hard-coding gold assumptions.
+
+## Switching and inventory
+
+Class inventories remain separate when switching manifestations.
+
+Switching at a resurrection stone:
+- does not automatically open the bank;
+- does not transfer carried items/equipment between classes;
+- does not pull items from the shared bank.
+
+If the newly selected class needs banked gear, the player must physically go to a bank and withdraw it under the normal rules.
 
 ## Shared bank
 
