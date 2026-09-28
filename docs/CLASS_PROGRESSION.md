@@ -179,6 +179,16 @@ The architecture must support arbitrary branch counts, convergence requirements 
 
 See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md` for multi-lineage requirements, visibility/discovery and class-web rules.
 
+### No direct class creation
+
+Unlocking/discovering a Way never creates it from the menu.
+
+A missing class save is always created through an eligible earlier class's actual advancement quest/event.
+
+This remains true when a much later-tier Echo-wide event unlocks an earlier-tier Way.
+
+If a class save is permanently deleted, recreate it by advancing into it again from an appropriate earlier class; Echo-wide discovery and milestones remain intact.
+
 ### Tier-1 skill-rank pattern
 
 Current Tier-1 direction:
@@ -233,7 +243,7 @@ A class may require:
 - class evidence combined with quests/items/achievements/discoveries;
 - nested AND/OR requirement expressions.
 
-The same resulting class can be reached through different parent manifestations while using different advancement quests/NPCs/locations.
+The same resulting class can be reached through different qualifying parent manifestations, but the target class normally uses the same advancement quest/NPC/location regardless of which parent supplies the timeline fork.
 
 A single prerequisite combination can also unlock multiple different convergence classes.
 
@@ -266,7 +276,7 @@ They should have:
 
 ## Open questions
 
-- archive/delete/recreate behavior for class save-states;
+- exact archive UI and permanent-delete confirmation UX;
 - exact secondary effect of each attribute;
 - universal vs class-specific Vitality coefficient;
 - exact second-tier classes;
