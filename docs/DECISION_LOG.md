@@ -1412,3 +1412,52 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** The same Novice can later choose another available branch, producing another manifestation.
 
 **Open:** exact inventory/equipment/quest-state inheritance and total slot limits.
+
+
+## 2026-09-28 — Novice skill-point cadence
+
+**Decision:** Fresh level-1 Novice starts with 1 unspent skill point and all four normal skills at rank 0.
+
+**Decision:** Rank 1 must be purchased.
+
+**Decision:** Novice gains 1 skill point per character level.
+
+## 2026-09-28 — Novice stat growth
+
+**Decision:** Novice gains +1 to each of VIT/STR/AGI/INT/SPI every level.
+
+## 2026-09-28 — Novice unarmed basic attack
+
+**Decision:** Novice's baseline basic attack is an unarmed/fist attack.
+
+**Decision:** It scales from the highest of all five attributes while remaining physically presented as a simple melee hit.
+
+## 2026-09-28 — Novice skill behavior refinements
+
+**Decision:** STR stun duration is skill level × 0.2 seconds, up to 2.0 seconds at rank 10, and remains melee-range.
+
+**Direction:** Magic Sand miss debuff currently targets ~5 seconds; 10 seconds may be tested.
+
+**Decision:** Magic Sand miss chance affects actions tagged as requiring accuracy.
+
+**Direction:** AGI attack-speed buff currently targets ~5 seconds and can target self or allies.
+
+**Decision:** SPI heal is instant and can target self or allies.
+
+## 2026-09-28 — Advancement is an in-session timeline fork
+
+**Decision:** Advancement occurs inside the current game/session and immediately continues play as the newly created advanced manifestation.
+
+**Decision:** The parent manifestation remains preserved at the branch point for later play.
+
+**Decision:** Manifestation-specific quest/world state is copied at branch creation and can diverge independently afterward.
+
+## 2026-09-28 — Equipped gear duplicates on advancement fork
+
+**Decision:** Equipped gear is duplicated into the new child manifestation.
+
+**Decision:** Parent keeps the originals; child receives copies.
+
+**Decision:** Duplicates follow normal account-bound rules and normal equipment requirements.
+
+**Open:** whether carried inventory beyond equipped gear is also duplicated.
