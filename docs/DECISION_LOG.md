@@ -1771,3 +1771,56 @@ Archive is presentation/organization only.
 **Decision:** Quest/event credit remains eligibility-based.
 
 **Open:** how guest quests interact with host-state NPCs/objects that have been removed or transformed.
+
+
+## 2026-09-28 — Way unlock does not allow direct class start
+
+**Decision:** Discovering/unlocking a class Echo-wide only makes its advancement available.
+
+**Decision:** A missing class save must always be created by loading an appropriate earlier/prerequisite class and completing the target class's advancement quest/event.
+
+**Example:** A Tier-5 event may unlock a Tier-1 Way, but the player then loads Novice and performs that Tier-1 advancement.
+
+## 2026-09-28 — Convergence classes share their advancement quest
+
+**Decision:** A convergence class normally has one target-class advancement quest/event regardless of which qualifying parent lineage is used.
+
+The parent lineage supplies the timeline snapshot, not a different version of the resulting class.
+
+## 2026-09-28 — Deleted class saves must be re-earned
+
+**Decision:** Permanent deletion removes only that class's local save-state.
+
+**Decision:** Echo-wide Way discovery, class milestones and unlock events remain.
+
+**Decision:** To recreate the class, the player must load an appropriate earlier/prerequisite class and advance into it again.
+
+## 2026-09-28 — Archive remains non-destructive
+
+**Decision:** Archived class saves remain fully valid and continue to count through their already-recorded Echo-wide milestones.
+
+Archive is presentation/organization only.
+
+## 2026-09-28 — Class switching in town
+
+**Decision:** Players can switch between existing class saves from a safe town.
+
+**Decision:** In multiplayer, the party/session remains intact during the switch.
+
+**Decision:** The newly selected class appears at that class save's own latest registered resurrection point.
+
+## 2026-09-28 — Per-class resurrection point
+
+**Decision:** Every class save stores its own latest registered resurrection point.
+
+**Decision:** Starting/loading that class normally spawns at that point.
+
+## 2026-09-28 — Host world state controls session presentation
+
+**Decision:** In multiplayer, the host's world/quest state determines the live world's physical/presentation state for all players.
+
+**Decision:** A guest retains their own manifestation-specific quest/world progression; joining the host does not overwrite it.
+
+**Decision:** Quest/event credit remains eligibility-based.
+
+**Open:** how guest quests interact with host-state NPCs/objects that have been removed or transformed.
