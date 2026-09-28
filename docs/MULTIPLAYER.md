@@ -149,19 +149,24 @@ Example:
 
 This follows the same general session logic as an action-RPG game where a boss already killed in the host's game cannot be killed again in that same game.
 
-### Guest quest progress when compatible
+### Guest quest/world progress when compatible
 
-Guests can still earn their own eligible quest progress when the host's physical world supports the required action.
+Guests can permanently progress their own timelines while playing in another player's hosted world.
 
 Examples:
 - if the host already finished a Slime-kill quest but Slimes still exist naturally, an eligible guest can kill them for their own quest;
-- if the needed NPC/object/event no longer exists in the host's world, that quest step is unavailable for that session.
+- if host and guest both participate in the event where a house burns down and both receive eligible event/world-state credit, **both players' own timelines record that outcome**;
+- either player can later host a game where their own timeline contains the burned house;
+- if a guest joins only after that event already happened, they merely see the host's burned house and do **not** automatically inherit the event.
 
 Rules:
-- joining never overwrites the guest's manifestation-specific quest/world progression;
-- quest/event credit remains eligibility-based;
-- host world state controls what can physically happen in the session;
-- no per-player contradictory version of the same world object is required by default.
+- host state determines the physical world currently shown;
+- guests persist XP, loot, quest progress, milestones and world/event outcomes they legitimately earn;
+- events can define persistence-recipient/credit policy;
+- ordinary cooperative progression should normally credit eligible participants rather than the host alone;
+- joining never blindly copies the host's timeline into the guest's save;
+- if the needed NPC/object/event no longer exists in the host's world, that quest step is unavailable for that session;
+- no per-player contradictory version of the same physical object is required inside one session.
 
 ## Steam
 
