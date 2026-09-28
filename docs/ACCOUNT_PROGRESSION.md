@@ -24,8 +24,28 @@ At branch creation:
 
 When the preserved parent is loaded later, it resumes immediately before the blessing/branch choice that created the child.
 
-Open:
-- exact slot cap.
+Design target:
+- manifestation slots are effectively unlimited for ordinary use rather than a small gameplay cap;
+- players should still have archive/delete/organization tools to keep a huge roster manageable;
+- practical storage/technical limits must not become intended class-progression gates.
+
+## Echo-wide class evidence
+
+Reaching meaningful class/tier milestones creates permanent Echo-wide evidence.
+
+Examples:
+- reached Tier 2 Wizard;
+- completed a specific class advancement;
+- discovered a hidden Way.
+
+These records:
+- can satisfy convergence/secret-class requirements;
+- survive deletion/cleanup of the manifestation that originally earned them;
+- are not the same as currently owning a manifestation of that class.
+
+Class/Way discovery is also Echo-wide once earned.
+
+See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md`.
 
 ## Manifestation-specific
 
@@ -93,7 +113,7 @@ Class progression, story execution and ordinary questing are usually manifestati
 
 ## Open
 
-- secret-class unlock sharing;
+- manifestation archive/delete UX;
 - achievements;
 - codex;
 - pets;
