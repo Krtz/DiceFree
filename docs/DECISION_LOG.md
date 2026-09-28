@@ -1604,3 +1604,67 @@ This is not yet locked because of class-count/content-production implications.
 **Decision:** Nature is explicitly a DiceFree element regardless of DiceBound's eventual exact roster.
 
 **Direction:** A later Nature Shaman descendant belongs somewhere in the broad esoteric/occult magical lineage.
+
+
+## 2026-09-28 — Class progression is a graph/web
+
+**Decision:** DiceFree class progression is not required to be a strict tree. It supports linear paths, splits and convergence.
+
+**Decision:** Some classes may not split at all (e.g. Priest -> High Priest -> Arch Priest), while others may branch heavily.
+
+## 2026-09-28 — Echo-wide class milestones
+
+**Decision:** Reaching meaningful class/tier milestones is permanently recorded Echo-wide.
+
+**Decision:** Deleting/cleaning up the manifestation that earned a milestone does not remove that milestone.
+
+## 2026-09-28 — Multi-lineage convergence requirements
+
+**Decision:** A class may require milestones from multiple separate manifestations/lineages.
+
+**Decision:** Requirement logic supports AND, OR and nested combinations plus non-class predicates such as quests, items, achievements and discoveries.
+
+## 2026-09-28 — Convergence routes
+
+**Decision:** The same convergence class may be entered from multiple qualifying parent lineages.
+
+**Decision:** Different parent routes may use different NPCs, quests, locations and advancement presentation while producing the same resulting class ID/kit.
+
+**Decision:** The same prerequisite combination may unlock multiple different convergence classes when appropriate.
+
+## 2026-09-28 — Secret class visibility modes
+
+**Decision:** Class visibility/disclosure is per class.
+
+Supported design modes include:
+- visible with explicit requirements;
+- visible/teased with hidden requirements or ???;
+- completely hidden until discovered/unlocked/become-able.
+
+## 2026-09-28 — Way discovery persistence
+
+**Decision:** Discovering/unlocking knowledge of a Way is Echo-wide and permanent.
+
+**Decision:** Becoming that class remains manifestation-specific and still requires an eligible advancement route.
+
+## 2026-09-28 — Higher-tier convergence
+
+**Decision:** Cross-lineage requirements may continue at higher tiers and are decided class-by-class.
+
+A convergence class may itself split, continue linearly, converge again or have no successor.
+
+## 2026-09-28 — Manifestation slot philosophy
+
+**Decision:** Manifestation slots should be effectively unlimited for ordinary play rather than intentionally capped as a progression constraint.
+
+**Decision:** Cleanup/organization/archive/delete tools are desirable for manageability.
+
+**Decision:** Removing a manifestation never removes permanent Echo-wide class milestones or discovered Ways.
+
+## 2026-09-28 — Class-web UI direction
+
+**Direction:** Do not force progression into one literal tree UI.
+
+Tier tabs, graph/web views, current-lineage views and discovered-Ways views are all valid approaches.
+
+**Decision:** Hidden classes must not accidentally leak through UI structure unless that class is intentionally teased.
