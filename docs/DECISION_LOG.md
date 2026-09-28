@@ -1117,3 +1117,48 @@ This file records decisions that are sufficiently settled to design around. It i
 ## 2026-09-28 — Interaction prompts
 
 **Decision:** Interaction prompts should appear near the relevant world object/NPC, with a subtle screen-space fallback where needed.
+
+
+## 2026-09-28 — Party-frame information
+
+**Decision:** Party frames default to portrait/class icon, name, level, HP bar/current-max, useful resource, important effects, threat indicator, resurrection sickness and a small cast bar.
+
+**Decision:** Party-frame cast bars are toggleable.
+
+## 2026-09-28 — Buff/debuff filtering
+
+**Decision:** Default effect filtering prioritizes important class buffs, harmful debuffs, encounter mechanics and effects the current character can actually remove.
+
+**Decision:** Cleanse/purge highlighting is capability-based, not healer-role-based.
+
+**Decision:** Players can opt into showing all effects.
+
+## 2026-09-28 — Minimap orientation
+
+**Decision:** Square minimap defaults to fixed north-up orientation.
+
+**Decision:** Rotating minimap mode is available as an option.
+
+## 2026-09-28 — Ground loot presentation
+
+**Decision:** Overworld loot is scarce/meaningful and should use a Warcraft III-like readable ground-drop presentation rather than Diablo-style loot spam assumptions.
+
+## 2026-09-28 — Carried gold HUD
+
+**Decision:** Carried gold has a small HUD display by default because it is exposed to death loss.
+
+**Decision:** Bank gold remains hidden from the persistent HUD.
+
+**Decision:** Carried-gold HUD display can be disabled.
+
+## 2026-09-28 — Chat / system / combat log
+
+**Direction:** Default chat/log presentation is a bottom-left fading panel with Chat/System/Combat tabs or modes.
+
+## 2026-09-28 — Character/inventory windows
+
+**Decision:** Character/inventory and similar interfaces are movable overlay windows over the live world rather than full-screen pause menus.
+
+## 2026-09-28 — Contextual cursor
+
+**Decision:** Mouse cursor uses Warcraft III-like contextual states for move, attack, talk, loot, interact and unavailable actions.
