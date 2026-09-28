@@ -23,6 +23,11 @@ Architecture requirements:
 - no assumption that sibling branches are implemented at the same time;
 - class definitions should be data-driven and independently registerable;
 - advancement edges/requirements should be data rather than switch/case ladders;
+- requirements must support composable AND/OR expressions and multiple predicate types;
+- class milestones/discovered Ways need durable Echo-wide stable IDs;
+- the graph must support convergence: multiple parents/evidence sets can lead to one class;
+- one prerequisite set may unlock multiple independent classes;
+- advancement route/presentation data must be separable from resulting class identity, so different NPCs/quests/locations can lead to the same class;
 - abilities should be reusable/composable building blocks rather than copied class-specific implementations;
 - resources (Mana, Rage, Combo Points, etc.) should use generic resource interfaces/components where practical;
 - effects, targeting, scaling and elements should be generic systems consumed by class data;
