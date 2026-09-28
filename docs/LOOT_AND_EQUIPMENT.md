@@ -20,6 +20,8 @@ Players can inspect all offers before choosing one.
 
 The chosen item can be kept/equipped or sent directly to the shared bank.
 
+The reward choice must be resolved before leaving the loot room.
+
 Unchosen rewards vanish.
 
 If the gear choices are undesirable, content may instead offer XP, gold or materials/resources.
@@ -349,7 +351,11 @@ This deliberately allows flexible overworld experimentation and does not try to 
 ### Dungeons / raids
 Equipment swapping is **disabled for the duration of an active dungeon/raid run**.
 
-Players choose/prep their equipment before the run begins.
+The lock begins when the dungeon's 60-second staging countdown finishes and the active run starts.
+
+Players may still change equipment during the staging/waiting room.
+
+Consumables remain usable/manageable during the run; the lock applies to equipped gear, not ordinary inventory consumption.
 
 This avoids encounter-by-encounter resistance/stat wardrobe swapping inside instanced progression content.
 
