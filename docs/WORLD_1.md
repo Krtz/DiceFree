@@ -846,3 +846,12 @@ Possible directions:
 The important point is that she has enough magical experience to recognize and later guide a Magically Touched Novice.
 
 Do not force a formal "wizard NPC" job onto her.
+
+
+## Novice respec in Cornberg
+
+The retired adventurer couple can help a **Novice** respec/reallocate Novice skill points.
+
+This is specifically a Novice service and is not a promise that later classes use the same respec system.
+
+Exact dialogue, cost and interaction flow remain open.
