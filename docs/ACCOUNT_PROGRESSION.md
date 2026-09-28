@@ -4,13 +4,15 @@ DiceFree distinguishes manifestation-specific progression from Echo/account prog
 
 ## Advancement creates manifestations
 
-Class advancement creates a **new manifestation slot** rather than overwriting the existing one.
+Class advancement creates a new **class manifestation/save-state** rather than overwriting the parent.
+
+The Echo has at most **one persistent save-state per class ID**.
 
 Example:
 - a level-10 Novice chooses Physically Blessed;
-- the level-10 Novice remains playable;
-- a new level-1 Physically Blessed Novice manifestation is created;
-- the same Novice can later branch into Magically Touched, creating another slot.
+- the Novice save remains playable;
+- the first Physically Blessed advancement creates its one level-1 Physically Blessed save-state;
+- the same Novice can later create the one Magically Touched save-state.
 
 This makes class branching a literal Echo/timeline mechanic.
 
@@ -24,10 +26,15 @@ At branch creation:
 
 When the preserved parent is loaded later, it resumes immediately before the blessing/branch choice that created the child.
 
-Design target:
-- manifestation slots are effectively unlimited for ordinary use rather than a small gameplay cap;
-- players should still have archive/delete/organization tools to keep a huge roster manageable;
-- practical storage/technical limits must not become intended class-progression gates.
+Roster model:
+- there is no small fixed character-slot cap;
+- roster capacity naturally follows the number of classes;
+- duplicate save-states for the same class are not created;
+- the class/Ways selection UI can be used to choose which class timeline to continue;
+- Archive is the preferred cleanup/organization mechanism;
+- deleting a class-local save must not remove Echo-wide milestones/discoveries.
+
+Open: exact recreation behavior after permanent deletion of an unlocked class save.
 
 ## Echo-wide class evidence
 
@@ -113,7 +120,7 @@ Class progression, story execution and ordinary questing are usually manifestati
 
 ## Open
 
-- manifestation archive/delete UX;
+- class-save archive/delete/recreate UX;
 - achievements;
 - codex;
 - pets;
