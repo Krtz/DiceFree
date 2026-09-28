@@ -2342,3 +2342,80 @@ Persistence protects against accidental loss/corruption, not deliberate local ro
 **Decision:** Merely joining after an event already happened does not copy that outcome into the guest's timeline.
 
 **Direction:** Event definitions can choose persistence recipients; ordinary co-op progression should normally credit eligible participants.
+
+
+## 2026-09-28 — Bob's house is canon now
+
+**Decision:** The repeated multiplayer persistence example becomes a real future sidequest/event: **Bob's house burns down**.
+
+Bob and his house will exist somewhere in World 1 content.
+
+Exact quest cause/reward/consequences remain intentionally open.
+
+The event is separate from Cornberg's locked abandoned-house mystery unless later explicitly connected.
+
+## 2026-09-28 — Multiple Echo profiles, hidden from normal flow
+
+**Decision:** One user may own multiple separate Echo profiles.
+
+**Decision:** Normal start/continue UX centers the current primary Echo.
+
+Creating/switching Echoes is a deliberate settings/profile-management action so new players do not accidentally create new Echoes.
+
+## 2026-09-28 — Internal user and Echo UUIDs
+
+**Decision:** DiceFree uses stable internal user IDs and Echo IDs.
+
+Steam/platform identity links to the internal user rather than becoming the gameplay save primary key.
+
+## 2026-09-28 — No separate DiceFree login requirement initially
+
+**Decision:** Steam PC release does not require a separate DiceFree email/password account.
+
+Identity architecture can attach additional providers later.
+
+## 2026-09-28 — Cloud conflict policy
+
+**Decision:** Divergent local/cloud Echo revisions are not automatically field-merged.
+
+Present revision information, let the user choose, and preserve backups where practical.
+
+## 2026-09-28 — Echo is the logical cloud revision unit
+
+**Decision:** An Echo profile syncs/version-controls as one coherent cloud revision even though its save package is internally chunked.
+
+## 2026-09-28 — Database is metadata/service-first
+
+**Decision:** Initial/future online database use should focus on users, linked identities, Echo IDs, cloud revision metadata and service metadata.
+
+Ordinary RPG state remains in versioned Echo save packages rather than requiring every gameplay field in an online database.
+
+## 2026-09-28 — Player save remains progression authority
+
+**Decision:** No server-authoritative progression requirement is planned for ordinary play.
+
+There are no leaderboards/economy/PvP integrity requirements driving such a system.
+
+## 2026-09-28 — Offline and LAN support
+
+**Decision:** Core game works offline.
+
+**Decision:** Architecture should support local-LAN multiplayer without requiring internet/cloud services.
+
+## 2026-09-28 — Recoverable Echo deletion
+
+**Direction:** Whole-Echo deletion uses explicit confirmation plus a limited recoverable local/cloud deletion period before permanent purge.
+
+Exact retention period remains open.
+
+## 2026-09-28 — Cross-platform identity readiness
+
+**Decision:** Internal identity/save architecture allows another platform/provider to be linked later.
+
+## 2026-09-28 — Internally chunked save package
+
+**Decision:** Each Echo remains one logical save/cloud revision but uses internal sections/chunks for manifestations, shared state, bank, migrations and diagnostics.
+
+## 2026-09-28 — Developer Profile Inspector
+
+**Decision:** Provide debug/developer-only profile inspection tooling for save versions, revisions, manifestations, backups, migrations, unresolved records, transactions and hidden item-budget/provenance data.
