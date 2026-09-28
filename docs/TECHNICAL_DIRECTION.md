@@ -60,7 +60,31 @@ Effects own explicit stacking and dispel metadata.
 
 Basic attacks use the same general action/effect pipeline so they can generate resources or class mechanics.
 
+Resource architecture must support:
+- multiple simultaneous resources;
+- owner-bound and target-bound resources;
+- independent persistence/reset/decay/regen policies;
+- composite multi-resource/HP/item costs.
+
+Ability runtime must support:
+- multiple charge-recharge models;
+- cast/channel behavior defined per ability;
+- movement/damage interruption policies;
+- optional pushback rather than a universal rule.
+
 Cooldown architecture must support individual cooldowns, arbitrary shared groups, optional GCD-like groups and exceptional cross-player shared cooldowns.
+
+Trigger/proc architecture must:
+- expose extensible semantic hooks;
+- retain action origin/context;
+- prevent accidental recursion by default;
+- allow explicitly bounded/controlled recursion for authored mechanics.
+
+Periodic effects support snapshot and dynamic scaling.
+
+Summon-origin events retain both summon source and owner attribution.
+
+Auras should be reusable effect emitters rather than separate one-off aura code.
 
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
