@@ -34,7 +34,13 @@ Roster model:
 - Archive is the preferred cleanup/organization mechanism;
 - deleting a class-local save must not remove Echo-wide milestones/discoveries.
 
-Open: exact recreation behavior after permanent deletion of an unlocked class save.
+Permanent deletion behavior:
+- Way discovery/unlocks remain Echo-wide;
+- Echo-wide milestones earned through that class remain;
+- the class save itself is gone;
+- recreating it requires advancing into that class again from an appropriate earlier-tier/prerequisite save.
+
+Archive remains the preferred routine cleanup mechanism.
 
 ## Echo-wide class evidence
 
@@ -53,6 +59,15 @@ These records:
 Class/Way discovery is also Echo-wide once earned.
 
 See `docs/CLASS_REQUIREMENTS_AND_DISCOVERY.md`.
+
+## Per-class resurrection point
+
+Each class save tracks its own **latest registered resurrection point**.
+
+Rules:
+- starting/loading that class normally spawns it at its latest registered resurrection point;
+- switching into another class in a safe town/session uses that other class's registered point;
+- one class changing its resurrection point does not change another class save's point.
 
 ## Manifestation-specific
 
