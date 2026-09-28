@@ -1254,3 +1254,47 @@ This file records decisions that are sufficiently settled to design around. It i
 **Decision:** Players can observe allies/other areas and control/send summons away from the hero.
 
 **Decision:** A dedicated action/hotkey returns/follows the hero, and optional hero-follow behavior is supported.
+
+
+## 2026-09-28 — Hero remains primary command focus
+
+**Decision:** The hero is the default primary controlled/selected unit.
+
+**Decision:** Targeting allies/enemies does not have to transfer primary command focus away from the hero.
+
+## 2026-09-28 — Summon control groups and drag selection
+
+**Decision:** Controllable summons/units support direct selection.
+
+**Decision:** Framework supports RTS-style control groups.
+
+**Decision:** Framework supports drag/box selection of multiple controlled units, with player options to disable or limit it.
+
+## 2026-09-28 — Three casting modes
+
+**Decision:** DiceFree supports three targeted-ability casting modes:
+1. Normal/confirm cast — press hotkey, preview targeting, click to cast.
+2. Semi Quick Cast — hold hotkey to preview, release to cast.
+3. Quick Cast — cast immediately on hotkey press.
+
+**Decision:** Casting style is configurable and should be capable of per-ability customization.
+
+## 2026-09-28 — Out-of-range casting
+
+**Decision:** If an otherwise valid cast target/location is out of range, the unit normally moves toward a valid casting position and executes the queued ability once in range.
+
+**Decision:** Individual abilities may explicitly override this.
+
+## 2026-09-28 — Self-cast input
+
+**Decision:** Eligible abilities support configurable self-cast input.
+
+**Direction:** Alt+ability is a good default candidate.
+
+**Decision:** Double-press-to-self-cast is supported as an option.
+
+## 2026-09-28 — Camera movement options
+
+**Decision:** Camera framework supports WC3-style edge scrolling, manual panning, zoom/rotation, hero recenter and persistent hero-follow.
+
+**Decision:** These behaviors are configurable, including disabling edge scrolling.
