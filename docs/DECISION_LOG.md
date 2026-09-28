@@ -1549,3 +1549,58 @@ Magical candidates:
 - occult caster.
 
 This is not yet locked because of class-count/content-production implications.
+
+
+## 2026-09-28 — Large class count is intentional
+
+**Decision:** A very large class tree is an explicit long-term goal, not a design failure to avoid.
+
+**Decision:** Development does not need symmetric branch completion. Different classes may have different numbers of implemented successors at a given time.
+
+**Architecture requirement:** advancement/class systems must support arbitrary branch counts and partially filled trees.
+
+## 2026-09-28 — Tier 1 skill-rank pattern
+
+**Working decision:** Physically Blessed Novice and Magically Touched Novice each use 5 skills with 6 ranks.
+
+**Decision:** Tier 1 starts with 1 skill point at level 1 and gains 1 per level, giving exactly 30 points by level 30.
+
+**Decision:** Novice skill ranks do not numerically carry into Tier 1; evolved abilities restart as Tier-1 skills.
+
+## 2026-09-28 — Physically Blessed working kit
+
+**Working direction:** five identities:
+- adaptive STR/AGI Heavy Strike with ordinary-resistance stun;
+- Guard/Brace defensive active;
+- Quickening attack-speed/tempo skill;
+- ground-targeted Arrow Rain physical AoE as Ranger foreshadowing;
+- broad Martial Aptitude passive.
+
+**Working decision:** Heavy Strike damage uses the higher of STR or AGI rather than splitting damage/stun formulas across different stats unless playtesting justifies the extra complexity.
+
+## 2026-09-28 — Magically Touched working kit
+
+**Working direction:** five identities:
+- evolved Magic Sand as Nature-element single-target damage/debuff;
+- Mend heal;
+- elemental/support buff rather than an early barrier;
+- Arcane-style AoE damage;
+- Mana Attunement passive increasing max Mana and Mana regeneration.
+
+**Direction:** Tier-2 barrier/buff support should emphasize prevention/enhancement, while the healing branch emphasizes healing/cleanse.
+
+## 2026-09-28 — Tier 1 Mana asymmetry
+
+**Decision:** Both Tier-1 classes use Mana as the introductory resource.
+
+**Direction:** Magically Touched has a larger pool, higher spell costs and stronger cost growth, and cares more about INT/Mana regeneration.
+
+**Direction:** Physically Blessed abilities cost less Mana and the class is less regeneration-dependent; low INT must not make it nonfunctional.
+
+## 2026-09-28 — DiceBound element inheritance
+
+**Decision:** DiceFree uses the full canonical DiceBound element roster as its baseline vocabulary, adapted for real-time combat rather than blindly copying DiceBound numbers.
+
+**Decision:** Nature is explicitly a DiceFree element regardless of DiceBound's eventual exact roster.
+
+**Direction:** A later Nature Shaman descendant belongs somewhere in the broad esoteric/occult magical lineage.
