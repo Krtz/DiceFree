@@ -103,6 +103,15 @@ Designer tooling should be able to:
 
 Item generation uses a gear-score/stat-budget model rather than arbitrary independent stat rolls.
 
+Item level is source/content-defined rather than scaled to the current player by default.
+
+Item budget/power diagnostics are development-only:
+- expose expected vs actual budget;
+- flag deliberate/accidental over-budget authored items;
+- never require runtime/player UI to present budget as an item-quality verdict.
+
+Runeword/socket architecture must allow ordered combinations on already-rare/magical items while retaining the base item's identity and existing affixes.
+
 Affix validity, item eligibility, socket/runeword/set data and proc effects should use stable IDs/tags and generic systems.
 
 Do not require handcrafted and randomized equipment to use separate combat/stat engines.
