@@ -154,6 +154,31 @@ See `docs/PERSISTENCE_AND_SAVES.md`.
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
+### Network authority / host migration
+
+Runtime networking should use a host-authoritative simulation:
+- clients submit intentions/commands;
+- host resolves authoritative combat/world/session results;
+- guest persistent saves consume validated authoritative outcomes.
+
+Solo/LAN/online should reuse the same core command/event/simulation paths where practical.
+
+**Host migration is required.**
+
+Do not architect session state so the original host is the only recoverable copy.
+
+Plan for:
+- replicated session snapshots/checkpoints;
+- host election/rebinding;
+- reconnect grace;
+- participant slot reservation;
+- live overworld state transfer;
+- active dungeon/run transfer;
+- safe fallback when exact live recovery is impossible;
+- preservation of already-committed durable player progression under failure.
+
+The implementation may choose snapshot/event-journal/replication details later.
+
 ### Multiplayer-aware
 DiceFree's intended session model is lobby/session co-op rather than MMO/open-world servers.
 
