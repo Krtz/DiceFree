@@ -14,10 +14,17 @@ Example:
 
 This makes class branching a literal Echo/timeline mechanic.
 
+At branch creation:
+- the player immediately continues the current game as the child manifestation;
+- equipped gear is duplicated into the child;
+- parent manifestation keeps the original gear;
+- manifestation-specific state is copied as a timeline snapshot;
+- parent and child diverge independently from that point;
+- Echo-wide systems remain shared.
+
 Open:
 - exact slot cap;
-- whether/which equipped items/inventory are copied into a new branch;
-- how manifestation-specific quest state initializes in the child branch.
+- whether carried inventory beyond equipped gear is duplicated.
 
 ## Manifestation-specific
 
