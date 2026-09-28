@@ -1824,3 +1824,36 @@ Archive is presentation/organization only.
 **Decision:** Quest/event credit remains eligibility-based.
 
 **Open:** how guest quests interact with host-state NPCs/objects that have been removed or transformed.
+
+
+## 2026-09-28 — Resurrection-stone-only class switching
+
+**Decision:** In-world class switching is available only through resurrection stones.
+
+**Decision:** Switching preserves the multiplayer session and loads the chosen existing class at that class save's own registered resurrection point.
+
+**Decision:** Class level does not restrict switching; co-op scaling is a separate concern.
+
+## 2026-09-28 — Advancement inherits resurrection point
+
+**Decision:** A newly-created class save inherits the parent class's currently registered resurrection point.
+
+**Decision:** If a class's remembered resurrection point is unavailable/invalid in the current game/session, Cornberg is the fallback.
+
+## 2026-09-28 — Switching does not transfer bank/inventory state
+
+**Decision:** Each class keeps its own carried inventory/equipment/currency.
+
+**Decision:** Switching classes does not automatically transfer items or open/use the shared bank.
+
+The player must visit a bank normally to withdraw shared items.
+
+## 2026-09-28 — Host-session quest availability
+
+**Decision:** The host's world state determines which NPCs, objects, bosses and events physically exist in the current multiplayer game.
+
+**Decision:** If a guest's quest requires something absent because of host progression, that quest step is simply unavailable in that session.
+
+**Decision:** The guest's own quest state remains unchanged and can be completed in another compatible game/session.
+
+**Decision:** When the host world still supports the required action, eligible guests may progress their own quests even if the host has already completed those quests.
