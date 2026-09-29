@@ -377,7 +377,7 @@ Different effect types can define separate crit eligibility:
 - healing;
 - summons.
 
-Exact crit formulas remain open.
+Ordinary resolution now follows the explicit-source, highest-multiplier first-success and action-wide raw-damage rules below. Crit-modifier composition and rare stacking exceptions remain open.
 
 ## Damage-over-time effects
 
@@ -965,4 +965,100 @@ Examples of valid authored crit rules include:
 - 50% chance to deal 2x damage;
 - 12.5% chance to deal 8x damage.
 
-There is currently no assumption that distinct crit-granting sources combine into one global Crit Chance/Crit Damage pair. Exact interaction between multiple simultaneous crit rules remains a separate design question.
+Distinct crit-granting sources do not combine into one global Crit Chance/Crit Damage pair. Ordinary multiple-rule resolution is specified below; exact modifier composition and rare stacking exceptions remain separate design questions.
+
+
+### Multiple crit rules
+
+An action may have multiple applicable explicit crit rules.
+
+Default resolution:
+1. collect all applicable crit rules;
+2. sort them by **crit multiplier from highest to lowest**;
+3. roll the highest-multiplier rule first;
+4. if it succeeds, use that crit result and stop;
+5. if it fails, roll the next rule;
+6. continue until one succeeds or all fail.
+
+Example:
+- 12.5% chance for 8x;
+- 50% chance for 2x.
+
+The 8x rule rolls first. If it succeeds, the 2x rule is not rolled. If it fails, the 2x rule may then roll.
+
+Crit rules are therefore not merged into one combined global crit chance.
+
+Rare authored exceptions may explicitly state that they stack with or multiply another crit result. Such behavior is not default and must be stated by the source.
+
+### Crit-rule modifiers
+
+A gameplay source may explicitly modify another eligible crit rule instead of creating a separate roll.
+
+Examples:
+- add percentage points to an existing crit rule's chance;
+- modify that rule's multiplier;
+- permit a normally ineligible effect category to use a specific crit rule.
+
+These interactions are opt-in and source-specific. No generic crit modifier is assumed unless the source explicitly defines what it modifies.
+
+
+### Crit modifier ordering and chance cap
+
+Explicit crit-rule modifiers resolve **before** crit rules are ordered for rolling.
+
+After all applicable explicit modifiers are applied:
+1. determine each rule's final crit chance;
+2. determine each rule's final crit multiplier/behavior;
+3. sort ordinary crit rules by final multiplier, highest first;
+4. roll in that order until the first success.
+
+Example:
+- Rule A: 12.5% at 8x;
+- Rule B: 50% at 2x;
+- explicit modifier changes Rule B to 10x;
+- Rule B now rolls before Rule A.
+
+Ordinary crit chance is clamped to **0-100%** after modifiers.
+
+Chance above 100% has no implicit extra meaning. Any overflow conversion, bonus roll, super-crit behavior or other >100% mechanic must be explicitly authored.
+
+### Crit placement in damage resolution
+
+By default, a successful crit modifies the **raw damage packet before Defense and elemental resistance**.
+
+Example:
+
+```
+100 raw damage
+2x crit
+= 200 raw critical damage
+then Defense mitigation
+then elemental resistance
+```
+
+Rare mechanics may explicitly override this placement, but such behavior must be stated by the source.
+
+
+### Equal-multiplier crit ordering
+
+Crit rules are primarily ordered by final modified multiplier, highest first.
+
+If multiple ordinary crit rules have the same final multiplier:
+1. an explicitly authored crit-rule priority may decide the order;
+2. otherwise use a **stable deterministic source-ID order**.
+
+This tie-break does not change the damage multiplier. It exists so provenance/on-crit ownership is deterministic when equal-multiplier rules compete for the first-success result.
+
+### Multi-packet actions
+
+By default, crit resolution is **action-wide**, not packet-by-packet.
+
+For an action containing multiple raw damage packets, resolve the action's applicable crit rule once. If it crits, apply that crit behavior to all eligible raw packets before their separate Defense/resistance resolution.
+
+A mechanic may explicitly opt into per-packet crit resolution instead.
+
+### Critical-hit event scope
+
+By default, a critical action emits **one critical-hit event per action**, not one event per damage packet.
+
+Explicit per-packet crit mechanics may define per-packet critical events when authored to do so.

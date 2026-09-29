@@ -45,7 +45,7 @@ namespace DiceFree.EditorTools
             Require(rolls.calls == 6, "Each permitted evaluation must use exactly one supplied roll.");
             Reject(() => new CriticalRule("", "rule", true, 0.5f, 2));
             Reject(() => new CriticalRule("source", "rule", true, float.NaN, 2));
-            Reject(() => new CriticalRule("source", "rule", true, 1.1f, 2));
+            Reject(() => new CriticalRule("source", "rule", true, float.PositiveInfinity, 2));
             Reject(() => new CriticalRule("source", "rule", true, 0.5f, 0));
             var valid = new CriticalRule("source", "rule", true, 0.5f, 2);
             foreach (var invalid in new[] { -0.1f, 1, float.NaN, float.PositiveInfinity })
@@ -56,6 +56,7 @@ namespace DiceFree.EditorTools
             CriticalResolver.Evaluate(valid, rolls); // A standalone result cannot mutate an ordinary attack.
             var after = DamageResolver.Calculate(player.Stats, enemy.Stats, attack);
             Require(before.raw == after.raw && before.mitigated == after.mitigated, "Crit evaluation changed ordinary damage.");
+            ActionCriticalValidation.Check(player, enemy);
             Debug.Log("EXPLICIT_CRIT_OK: absent/denied/zero grants, deterministic thresholds, provenance, validation and unchanged ordinary damage.");
         }
     }

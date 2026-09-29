@@ -3001,4 +3001,42 @@ Examples intentionally supported by the design:
 - 50% chance for 2x damage;
 - 12.5% chance for 8x damage.
 
-**Open:** how multiple simultaneous crit-granting sources interact is not yet decided.
+**Historical open question:** ordinary multiple-source resolution was subsequently settled in the entries below. Modifier composition and rare stacking exceptions remain open.
+
+
+## 2026-09-29 — Multiple crit-rule resolution
+
+**Decision:** Multiple applicable ordinary crit rules are rolled from highest multiplier to lowest multiplier.
+
+- highest multiplier rolls first;
+- if it succeeds, stop and use that crit result;
+- if it fails, roll the next rule;
+- rules are not merged into one combined crit chance.
+
+**Exception model:** A very rare source may explicitly state that it stacks with or multiplies another crit result. This is never implicit/default behavior.
+
+**Decision:** Explicit crit-rule modifiers are supported. A source may explicitly modify another eligible crit rule's chance, multiplier or permission rather than creating a new roll. Such interactions must be explicitly authored.
+
+
+## 2026-09-29 — Crit modifier order, raw-packet placement, and chance cap
+
+**Decision:** Explicit crit modifiers resolve before ordinary crit rules are sorted. Sorting uses the final modified multiplier.
+
+**Decision:** Default crit multiplication applies to the raw damage packet before Defense and elemental resistance.
+
+**Decision:** Ordinary crit chance is capped at 100%.
+
+Values above 100% do not automatically create extra rolls, overflow conversion, or super-crits. Such mechanics require an explicit authored exception.
+
+Rare sources may explicitly override the default crit placement in the damage pipeline.
+
+
+## 2026-09-30 — Crit ties and multi-packet scope
+
+**Decision:** Equal final crit multipliers use explicit authored priority when present; otherwise use stable deterministic source-ID order.
+
+**Decision:** Crit resolution is action-wide by default. Multi-packet actions share one crit result across eligible raw packets before each packet resolves its own mitigation/resistance.
+
+**Decision:** Default critical-hit signaling is one critical-hit event per action, not one per packet.
+
+Per-packet crit resolution/events remain possible only when explicitly authored.

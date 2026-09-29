@@ -667,4 +667,70 @@ Therefore:
 - healing does not automatically crit;
 - any of those may crit if a skill, passive, item or other effect explicitly says they can.
 
-Multiple simultaneous crit-rule interaction remains open; do not collapse authored crit rules into a global chance/multiplier without a later decision.
+Ordinary simultaneous crit rules follow the highest-multiplier, first-success policy below. Modifier composition and rare stacking exceptions remain open; rules never collapse into a global chance/multiplier.
+
+
+### Multiple explicit crit rules
+
+When several explicit crit rules apply to the same resolved action, ordinary crit resolution uses priority by multiplier:
+
+1. sort applicable crit rules from highest multiplier to lowest;
+2. roll the highest-multiplier rule first;
+3. on success, apply that rule and stop;
+4. on failure, continue to the next rule;
+5. if all fail, the action is non-critical.
+
+This is intentionally not a merged global crit chance.
+
+Rare authored rules may explicitly stack with or multiply another crit result, but such behavior must be stated by the source and is not part of default crit resolution.
+
+### Explicit crit-rule modification
+
+A source may explicitly alter another crit rule instead of adding its own independent roll.
+
+Examples include modifying chance, modifying multiplier, or granting crit permission to a normally ineligible effect.
+
+Such modifiers must declare their intended target/eligibility. There is no automatic global Crit Chance or Crit Damage stat.
+
+
+### Crit modifier resolution order
+
+Explicit crit-rule modifiers apply before crit-rule priority is determined.
+
+After modifiers, ordinary crit rules are sorted by their final multiplier and rolled highest-first.
+
+Ordinary crit chance is clamped to 0-100%. Values above 100% have no special default behavior; any overflow mechanic must be explicitly authored.
+
+### Crit position in the damage pipeline
+
+Default crit resolution modifies the raw damage packet before mitigation layers.
+
+Default order:
+1. construct raw damage packet;
+2. apply successful crit multiplier/behavior;
+3. apply Physical/Magical Defense;
+4. apply elemental resistance;
+5. apply resulting HP damage.
+
+Rare explicit mechanics may override where their crit behavior is applied.
+
+
+### Equal-multiplier crit tie-break
+
+Ordinary crit rules sort by final modified multiplier descending.
+
+For equal final multipliers:
+1. explicit authored crit priority, if present;
+2. otherwise stable deterministic source-ID order.
+
+This keeps provenance deterministic without inventing a gameplay advantage from equal multipliers.
+
+### Action-wide crit resolution
+
+Default crit resolution happens once per action.
+
+A multi-packet action shares one crit result across all eligible raw packets, which are then mitigated independently by their own Physical/Magical Defense and elemental resistance layers.
+
+Per-packet crit rolls require an explicit mechanic.
+
+Default critical-hit signaling is one critical-hit event per action. Explicit per-packet crit mechanics may opt into per-packet critical events.

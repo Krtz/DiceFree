@@ -218,8 +218,8 @@ advancement evaluation are not implemented. See issue #18.
 Health events and damage-resolution boundaries do not constitute the full effect
 framework. Physical/Magical Defense reduction and penetration are implemented;
 local saves are implemented in [CORNBERG_SAVES.md](CORNBERG_SAVES.md). Explicit
-single-rule crit evaluation is described below, but is not wired into damage or
-healing. Shields, Pure Damage, elemental penetration, CC, lifesteal, reflection,
+action-wide crit resolution now feeds raw damage through an explicit optional
+context; no current content grants crit. Healing crits, shields, Pure Damage, elemental penetration, CC, lifesteal, reflection,
 resource costs and network authority remain future work. Do not hook future proc
 chains directly into presentation callbacks.
 
@@ -239,9 +239,11 @@ permanent or passive Defense belongs in that reference remains OPEN.** Nothing i
 this slice assigns those future sources membership or implements them.
 
 `CriticalRule` is an immutable explicit grant with source ID, rule ID, permission,
-chance and a requested multiplier. Its constructor requires every value; it has
-no global/default multiplier. No rule means no permission and absolutely no roll.
-Denied permission and zero-chance grants also skip the roll source.
+finalized chance/multiplier and integer priority (default 0). It has no global or
+default multiplier. Caller-resolved modifiers supply finalized values before
+sorting; no modifier-composition formula is implemented here. Finite chance clamps
+to [0,1], retaining `UnclampedChance` for diagnostics. NaN/infinity remain invalid.
+No rule means no permission and no roll; denied and zero-chance grants also skip RNG.
 
 `CriticalResolver.Evaluate` accepts exactly one rule and an injected
 `ICriticalRollSource` returning a value in [0,1). Triggering uses roll < chance.
@@ -251,17 +253,35 @@ occurred, the chance/roll, trigger outcome and requested multiplier. Absent rule
 have null chance/roll/multiplier rather than an invented default. A missed rule
 still retains its authored provenance and requested multiplier for diagnostics.
 
-The result is deliberately separate from `DamageResolver`, `Health` and attack
-assets: it requests no damage application or ordering. Existing fists, both Slimes,
-well and regeneration remain entirely non-crit with unchanged balance. Future
-damage, periodic damage or healing callers may supply an explicitly authorized
-rule; no category grants permission on its own. This slice supports a multiplier
-payload only, not a general behavior/effect framework.
+`CriticalResolver.EvaluateAction` accepts applicable finalized rules. It filters
+denied rules, snapshots without mutating the caller's collection, sorts final
+multiplier descending, then priority descending for ties, then SourceId and RuleId
+ordinal ascending. Higher chance never wins tie priority. Each unique permitted
+source/rule identity must appear once; duplicate identities fail before RNG rather
+than creating ambiguous extra attempts. A zero-chance evaluation is recorded but
+does not roll. First success stops all remaining ordinary rules; all failures mean
+non-critical. Chances are never added, and ordinary multipliers never stack.
 
-**Multiple simultaneous crit-grant interaction and the ordering/application of
-critical outcomes remain OPEN.** There is no list/merge/priority/independent-roll
-policy, actor-wide crit stat pair or universal multiplier. No persistent crit state
-or save-schema change is introduced.
+`ActionCriticalResolution` is one immutable action-level result containing the
+winner and read-only evaluated-order telemetry. Its winner retains source/rule,
+clamped/unclamped chance, priority, roll and final requested multiplier. The caller
+resolves once and passes that same context to every eligible packet. There is no
+proc bus or packet-level critical event: a future action owner publishes once from
+this result. `CriticalResolver.Evaluate` remains the single-rule lower-level helper.
+
+`DamageResolver.Calculate` and `Hit` accept that optional action context. Packet
+construction produces `baseRaw`; a successful context multiplies it to `raw` before
+Defense and elemental resistance, then existing Health applies HP damage.
+`DamageResult.critical` references the same action result rather than resolving or
+signaling again. DamageResolver owns no RNG. Omitting the context or supplying a
+non-critical context preserves ordinary damage exactly. Fists, Crop/Road Slimes,
+well and regeneration have no authored crit rules; no balance data changes.
+
+Still **OPEN**: underlying Defense membership for future gear/permanent/passive
+sources; exact crit-modifier composition; rare explicitly stackable/multiplicative
+crit exceptions; full ability, DoT and healing integration; proc/on-crit framework.
+No such systems, override-placement behavior or save-schema changes are introduced.
+The multiplier payload is the only currently implemented crit behavior.
 
 Deterministic validation covers absent, denied and zero-chance grants without
 consuming a roll; below/exactly-at/above thresholds for 50%/2x and 12.5%/8x;
@@ -270,7 +290,7 @@ damage after standalone evaluation. Existing Defense coverage includes additive
 buff/shred/penetration, >100%, zero crossing, negative underlying values and
 Physical/Magical isolation. These run through `CornbergCombatValidation.Run`.
 
-Validation on 2026-09-30: focused secondary-stat/Defense and explicit-crit checks,
+Initial single-rule increment validation on 2026-09-30: focused secondary-stat/Defense and explicit-crit checks,
 combat/death/Return/well, Q1, Q2 with six reload checkpoints, all 13 traversal
 routes, fresh/injured/dead/legacy persistence, migration/recovery/backups/stale
 writers and Profile Inspector checks passed. The Windows development build
@@ -281,6 +301,41 @@ runtime/navigation errors: fresh revisions 1 → 2; completed-Q2 revisions 11 �
 (level 5/0 XP, no reward replay); migrated legacy revisions 6 → 7 (level 3/7 XP).
 Each profile retained its identity. These are startup/reload checks, not a manual
 standalone quest playthrough.
+
+### Action-wide ordinary crit extension
+
+The subsequent design sync uses `setup/unity-project` `f4cf13f`. Only COMBAT,
+STATS_AND_DAMAGE and DECISION_LOG were copied/reconciled; superseded statements
+that ordinary multi-rule behavior was open were corrected. Historical decisions
+remain identified as historical. No branch merge or rebase was used.
+
+`ActionCriticalValidation` adds deterministic highest-first success/stop,
+fallback, all-fail and reversed-input tests; equal-multiplier priority and ordinal
+SourceId/RuleId ties; finalized multiplier changes; 135%/negative chance clamping;
+and raw-before-mitigation tests. A 100-base-raw packet becomes 200 raw at 2x, then
+50 HP damage with 300 Defense and 50% resistance. Two synthetic 60/40 packets
+share one action result and one roll sequence, become 120/80 raw, then resolve
+their own channels/resistance. Packet calculation emits no critical event.
+Fixtures verify all existing active/inactive Cornberg actors' attacks against the
+pre-crit damage formula and against an explicit non-critical context.
+
+No actual multi-packet authoring, action scheduler, effect/proc bus, crit-rule
+modifier engine or rare stacking exception is introduced. A caller owns which
+finalized rules are applicable and which packets share its action context.
+
+Action-wide extension validation on 2026-09-30 passed: deterministic crit ordering,
+stop/fallback/all-fail, ties, chance caps, finalized-rule priority changes, raw
+placement and shared-packet semantics; existing stat/Defense and combat/death/
+Return/well checks; Q1; Q2 with all six reload checkpoints; all 13 traversal routes;
+fresh/injured/dead/legacy persistence, migration/recovery/stale-writer and Profile
+Inspector checks. Windows development build succeeded (171,967,201 bytes).
+Six isolated standalone startup/reload checks passed (two launches each for a
+fresh profile, completed-Q2 profile and legacy-v1 fixture), with no logged errors.
+Identity and progression survived reload: fresh level 1/0 XP, completed Q2 level
+5/0 XP, and migrated legacy level 3/7 XP. Revisions advanced on each launch;
+legacy saves migrated to schema 2. These are startup/reload smoke checks, not
+full standalone combat playthroughs.
+Scene, baked navigation, save schema and authored balance data are unchanged.
 
 ## Validation
 
