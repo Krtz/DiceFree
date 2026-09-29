@@ -2887,3 +2887,15 @@ Example:
 - 10 flat penetration -> 70 effective Defense.
 
 This is the default combat-resolution order.
+
+
+## 2026-09-29 — Defense penetration can create negative Defense
+
+**Decision:** Defense penetration is not clamped at zero.
+
+If penetration exceeds current Physical/Magical Defense, effective Defense becomes negative and uses the normal vulnerability curve.
+
+Example:
+- 5 Defense;
+- 10 flat penetration;
+- -5 effective Defense.
