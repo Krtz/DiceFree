@@ -2849,3 +2849,29 @@ Healing Received scaling from Spirit remains a separate open decision.
 This is intentionally **half** of Spirit's current Healing Done coefficient.
 
 **Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
+
+
+## 2026-09-29 — Physical/Magical Defense curve
+
+**Decision:** Physical and Magical Defense use the same current balance-default diminishing-return curve.
+
+```
+q = (abs(Defense) / 300)^0.7
+```
+
+Positive Defense:
+```
+DamageTakenMultiplier = 1 / (1 + q)
+```
+
+Negative Defense is symmetrical vulnerability:
+```
+DamageTakenMultiplier = 1 + q / (1 + q)
+```
+
+Current anchors:
+- +300 Defense = 50% mitigation;
+- -300 Defense = 150% damage taken;
+- extremely negative Defense approaches 200% damage taken from Defense alone.
+
+**Balance note:** the 300 scale and 0.7 exponent are working tuning defaults and may change after playtesting.
