@@ -61,11 +61,15 @@ Strength should remain a secondary contributor and should not replace class base
 
 ### Agility
 
-Current direction:
-- contributes a **very small amount of Attack Speed**;
-- contributes a **very small amount of Movement Speed**.
+Default secondary effects:
+- **1 Agility = +0.025% Attack Speed**;
+- Movement Speed contribution remains to be finalized.
 
-The coefficients should be intentionally small so high-Agility classes do not automatically become absurd machineguns or permanently outrun encounter design.
+The Attack Speed coefficient is intentionally tiny so high-Agility classes do not automatically become absurd machineguns.
+
+The coefficient is a default rather than an immutable universal constant. Classes/items/passives/effects may explicitly modify the Agility-to-Attack-Speed relationship.
+
+The Movement Speed coefficient should also remain intentionally small so Agility does not automatically let classes permanently outrun encounter design.
 
 Meaningful Attack Speed/Movement Speed increases should primarily come from:
 - gear;
