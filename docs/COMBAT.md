@@ -803,3 +803,25 @@ Example:
 Ordinary resistance bonuses/debuffs stack additively by default. Multiplicative/special stacking must be explicitly authored.
 
 Negative resistance remains uncapped.
+
+
+### Resistance percentage wording and >100% inversion
+
+Elemental resistance and elemental resistance penetration are always expressed as percentages in authored/player-facing text.
+
+Penetration values are percentage-point subtraction from matching resistance and stack additively by default.
+
+Explicit resistance-cap increases may raise the normal 75% cap, including beyond 100% if an unusual build/mechanic manages it.
+
+Matching elemental damage uses the resistance factor:
+
+```
+1 - effective resistance
+```
+
+Therefore:
+- 100% effective resistance negates matching elemental damage;
+- above 100%, the result becomes healing;
+- 105% effective resistance heals for 5% of the matching damage that would have resolved at 0% resistance.
+
+This behavior is intentionally allowed even though normal encounter design should not depend on players reaching >100% resistance.
