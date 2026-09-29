@@ -3040,3 +3040,20 @@ Rare sources may explicitly override the default crit placement in the damage pi
 **Decision:** Default critical-hit signaling is one critical-hit event per action, not one per packet.
 
 Per-packet crit resolution/events remain possible only when explicitly authored.
+
+
+## 2026-09-30 — Crit modifier restraint and provenance
+
+**Decision:** Crit-rule modifiers are supported but should be used sparingly.
+
+When used, modifier math must be explicit. Distinguish operations such as:
+- +percentage points vs percentage-of-existing chance;
+- +multiplier amount vs percentage-of-existing multiplier.
+
+Prefer simple authored crit rules when possible rather than unnecessary modifier layers.
+
+**Decision:** A critical action preserves both:
+- action/source provenance;
+- winning crit-rule/source provenance.
+
+These identities remain separate for future trigger logic.
