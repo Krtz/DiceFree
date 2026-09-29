@@ -3016,3 +3016,16 @@ Examples intentionally supported by the design:
 **Exception model:** A very rare source may explicitly state that it stacks with or multiplies another crit result. This is never implicit/default behavior.
 
 **Decision:** Explicit crit-rule modifiers are supported. A source may explicitly modify another eligible crit rule's chance, multiplier or permission rather than creating a new roll. Such interactions must be explicitly authored.
+
+
+## 2026-09-29 — Crit modifier order, raw-packet placement, and chance cap
+
+**Decision:** Explicit crit modifiers resolve before ordinary crit rules are sorted. Sorting uses the final modified multiplier.
+
+**Decision:** Default crit multiplication applies to the raw damage packet before Defense and elemental resistance.
+
+**Decision:** Ordinary crit chance is capped at 100%.
+
+Values above 100% do not automatically create extra rolls, overflow conversion, or super-crits. Such mechanics require an explicit authored exception.
+
+Rare sources may explicitly override the default crit placement in the damage pipeline.
