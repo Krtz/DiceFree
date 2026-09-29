@@ -880,3 +880,44 @@ Underlying Defense: 100
 120% penetration -> subtract 120
 Effective Defense before flat modifiers: -20
 ```
+
+
+### Percentage Defense buff stacking
+
+Multiple positive percentage Defense buffs stack **additively** against the underlying Defense value.
+
+Example:
+
+```
+Underlying Defense: 100
++20% Defense
++30% Defense
+= +50% total
+= 150 Defense before flat positive Defense buffs
+```
+
+### Percentage Defense reduction stacking
+
+Multiple percentage Defense reductions stack **additively** against the underlying positive Defense reference.
+
+Example:
+
+```
+Underlying Defense: 100
+50% reduction + 60% reduction = 110% total reduction
+Subtract 110 Defense
+```
+
+Percentage Defense reduction is not capped at 100%.
+
+### Percentage Defense penetration stacking
+
+Multiple percentage Defense penetration sources on the attacker stack **additively** against the same underlying positive Defense reference.
+
+Example:
+
+```
+20% penetration + 15% penetration = 35% total penetration
+```
+
+Percentage Defense penetration is not capped at 100%.

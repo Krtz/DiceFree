@@ -631,3 +631,14 @@ Percentage Defense reduction and percentage Defense penetration reference the ta
 Positive Defense buffs resolve percentage first, then flat.
 
 Percentage reduction/penetration may exceed 100% and can push final effective Defense below zero.
+
+
+### Defense percentage stacking
+
+Positive percentage Defense buffs stack additively.
+
+Percentage Defense reductions stack additively.
+
+Percentage Defense penetrations stack additively.
+
+All three use the relevant underlying Defense reference already defined by the Defense pipeline; reduction and penetration may exceed 100%.

@@ -55,6 +55,12 @@ namespace DiceFree.EditorTools
                 targetDefinition.baseAttributes = new AttributeValues(0);
                 targetDefinition.physicalDefense = targetDefinition.magicalDefense = 100;
                 attack.baseDamage = 100; attack.coefficient = 0; attack.element = null;
+                target.SetDefenseModifier("test.buff-a", new DefenseModifier { buffPercent = 0.2f });
+                target.SetDefenseModifier("test.buff-b", new DefenseModifier { buffPercent = 0.3f });
+                source.SetDefenseModifier("test.pen-a", new DefenseModifier { penetrationPercent = 0.2f });
+                source.SetDefenseModifier("test.pen-b", new DefenseModifier { penetrationPercent = 0.15f });
+                Equal(DamageResolver.Calculate(source, target, attack).defense, 115, "Additive positive buffs and percentage penetration use underlying Defense");
+                source.ResetTransientModifiers(); target.ResetTransientModifiers();
                 target.SetDefenseModifier("test.shred-a", new DefenseModifier { reductionPercent = 0.5f });
                 target.SetDefenseModifier("test.shred-b", new DefenseModifier { reductionPercent = 0.6f });
                 source.SetDefenseModifier("test.penetration", new DefenseModifier { penetrationFlat = 10 });

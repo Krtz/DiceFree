@@ -185,6 +185,11 @@ revisions 1 → 2, completed-Q2 revisions 11 → 12 (level 5/0 XP), legacy revis
 6 → 7 (level 3/7 XP). Identities and progression were retained. This is not a
 manual standalone playthrough; known editor SearchDatabase issue #17 remains.
 
+Follow-up design sync through `a8d845c` clarifies additive stacking for positive
+Defense buffs and percentage penetration as well as reductions. Runtime already
+uses this rule. An additional composed-source assertion and the full combat loop
+passed; this documentation/test-only follow-up changes no runtime or scene data.
+
 The settled -10% elemental baseline and 75% normal cap are represented in
 tuning data. They do not affect these no-element attacks. Final coefficients
 belong to [issue #11](https://github.com/Krtz/DiceFree/issues/11); the encounter,
