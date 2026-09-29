@@ -13,7 +13,7 @@ namespace DiceFree.Persistence
     }
     [Serializable] public sealed class EchoSave
     {
-        public int schemaVersion = 1;
+        public int schemaVersion = SaveMigrations.CurrentSchema;
         public string userId = Guid.NewGuid().ToString("D");
         public string echoId = Guid.NewGuid().ToString("D");
         public long revision;
@@ -26,8 +26,8 @@ namespace DiceFree.Persistence
         public int level = 1;
         public int xp;
         public string anchorId;
-        public float healthFraction = 1;
         public QuestProgress[] quests = Array.Empty<QuestProgress>();
+        public ResourceSaveValue[] resources = Array.Empty<ResourceSaveValue>();
     }
     [Serializable] internal sealed class SaveEnvelope
     {

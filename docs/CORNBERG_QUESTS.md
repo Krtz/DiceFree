@@ -90,8 +90,9 @@ aggro, leash, attack timing, return timing/fraction and well values are unchange
 - `QuestDefinition` contains stable ID, definition version, ordered kill
   objectives and reward. `QuestJournal` owns per-actor serializable progress:
   Available → Active stages → ReadyToTurnIn → Completed. Detached snapshots
-  contain stable quest ID/version, stage and count. Full save/load, migrations
-  and transactional persistence are deliberately not implemented.
+  contain stable quest ID/version, stage and count. The subsequent local save
+  slice adds disk persistence and a real v1-to-v2 migration; cross-domain
+  transactions remain future work. See [save notes](CORNBERG_SAVES.md).
 - `InteractionTarget` exposes a reusable authored approach point, range and
   interaction hook. `Interactor` handles approach/open/cancel and input.
   `QuestGiver` handles quest actions; UI remains in independent tracker,

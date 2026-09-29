@@ -25,6 +25,9 @@ namespace DiceFree.Persistence
         public string SavePath => store?.Path;
         public long Revision => save?.revision ?? 0;
         public bool Ready => ready;
+        public string MigrationStatus => store?.MigrationMessage;
+        public string RecoveryStatus => store?.RecoveryMessage;
+        public EchoSave CaptureProfile() => save == null ? null : JsonUtility.FromJson<EchoSave>(JsonUtility.ToJson(save));
         private string SectionId => "manifestation:" + actor.Stats.Definition.stableId;
         private IEnumerator Start()
         {
@@ -55,29 +58,25 @@ namespace DiceFree.Persistence
                 var section = save.sections.Find(value => value.id == SectionId);
                 if (section != null)
                 {
-                    if (section.version != 1) throw new NotSupportedException("Unsupported manifestation version; original preserved.");
+                    if (section.version != SaveMigrations.ManifestationVersion) throw new NotSupportedException("Unsupported manifestation version; original preserved.");
                     var state = JsonUtility.FromJson<ManifestationSave>(section.json);
                     if (state == null || state.classId != actor.Stats.Definition.stableId ||
-                        !xp.CanRestore(state.level, state.xp) || !journal.CanRestore(state.quests) ||
-                        float.IsNaN(state.healthFraction) || state.healthFraction < 0 || state.healthFraction > 1)
+                        !xp.CanRestore(state.level, state.xp) || !journal.CanRestore(state.quests))
                         throw new InvalidDataException("Invalid manifestation; original preserved.");
                     xp.RestoreState(state.level, state.xp);
                     journal.RestoreState(state.quests);
-                    if (!anchor.LoadAtAnchor(state.anchorId, state.healthFraction))
+                    if (!anchor.LoadAtAnchor(state.anchorId))
                         throw new InvalidOperationException("Saved/fallback resurrection point is not navigable.");
                 }
                 else if (existing) throw new InvalidDataException("Current manifestation missing; original Echo preserved.");
                 ready = true;
                 xp.Changed += MarkDirty; journal.Changed += MarkDirty;
-                actor.Health.Damaged += OnDamage; actor.Health.Healed += OnHeal; actor.Health.Restored += MarkDirty;
                 Status = store.RecoveryMessage ?? "Local autosave ready";
                 if (store.RecoveryMessage != null) Debug.LogWarning(store.RecoveryMessage);
                 MarkDirty();
             }
             catch (Exception error) { Fail(error); }
         }
-        private void OnDamage(CombatActor source, DamageResult damage) => MarkDirty();
-        private void OnHeal(float amount) => MarkDirty();
         private void MarkDirty()
         {
             if (!ready) return;
@@ -90,16 +89,21 @@ namespace DiceFree.Persistence
             if (!ready) return false;
             try
             {
+                var candidate = CaptureProfile();
+                var section = candidate.sections.Find(value => value.id == SectionId);
+                var preserved = section == null ? null : JsonUtility.FromJson<ManifestationSave>(section.json);
                 var state = new ManifestationSave {
                     classId = actor.Stats.Definition.stableId, level = xp.Level, xp = xp.CurrentXp,
                     quests = journal.CaptureState(), anchorId = anchor.AnchorId,
-                    healthFraction = actor.Health.Current / actor.Health.Maximum
+                    // No resources exist on the current actor. Preserve unresolved opted-in records inertly.
+                    resources = preserved?.resources ?? Array.Empty<ResourceSaveValue>()
                 };
-                var section = save.sections.Find(value => value.id == SectionId);
-                if (section == null) { section = new SaveSection { id = SectionId }; save.sections.Add(section); }
+                if (section == null) { section = new SaveSection { id = SectionId }; candidate.sections.Add(section); }
+                section.version = SaveMigrations.ManifestationVersion;
                 section.json = JsonUtility.ToJson(state);
-                save.revision++; save.writtenUtc = DateTime.UtcNow.ToString("O");
-                store.Commit(save);
+                candidate.revision++; candidate.writtenUtc = DateTime.UtcNow.ToString("O");
+                store.Commit(candidate);
+                save = candidate; // Diagnostics only advance after a successful commit.
                 dirty = false; Status = "Local save revision " + save.revision;
                 return true;
             }
@@ -117,7 +121,6 @@ namespace DiceFree.Persistence
         {
             if (xp != null) xp.Changed -= MarkDirty;
             if (journal != null) journal.Changed -= MarkDirty;
-            if (actor != null) { actor.Health.Damaged -= OnDamage; actor.Health.Healed -= OnHeal; actor.Health.Restored -= MarkDirty; }
         }
         private void OnGUI()
         {

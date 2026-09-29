@@ -102,6 +102,76 @@ When loading/starting a class manifestation:
 
 Quitting in the middle of a forest does not resume at the exact forest coordinate.
 
+## Load-state reset policy
+
+Loading a manifestation is a fresh combat/session start at its registered resurrection point, not a frame-perfect restoration of the previous session.
+
+### HP
+
+A loaded manifestation starts at **full HP**.
+
+This applies whether the previous save snapshot was alive or dead.
+
+Saved current HP is therefore not authoritative across a normal load.
+
+### Cooldowns
+
+Ordinary ability and consumable cooldowns reset on load.
+
+The framework may support explicitly persistent long-duration cooldowns later, but persistence must be opt-in rather than assumed.
+
+### Buffs / debuffs
+
+Ordinary timed buffs, debuffs, crowd control, poisons, temporary combat effects and similar session effects reset on load.
+
+If a world/seasonal/event state should continuously grant a buff, represent the underlying event/world source and re-apply the effect when appropriate rather than persisting the transient buff instance itself.
+
+Example:
+- an event can spawn/activate a hidden global aura source;
+- loading reconstructs world state;
+- the aura then applies the buff normally.
+
+### Resources
+
+Resources **reset on load by default** according to their authored reset/load policy.
+
+The resource framework must also support explicit persistence for unusual resources whose acquisition is intentionally durable/rare.
+
+Example:
+- a rare resource earned only from a difficult special kill may opt into persistence.
+
+Do not infer persistence merely because a value is called a resource.
+
+### Combat/session state
+
+Do not persist:
+- threat lists;
+- targets/selections;
+- aggro;
+- casts/channels;
+- projectiles;
+- ordinary temporary summons;
+- enemy current HP/state;
+- transient encounter state;
+- ordinary combat cooldowns;
+- ordinary temporary effects.
+
+### Persistent companions
+
+Manifestation-persistent companions reload with their owning manifestation at the resurrection point.
+
+Persist durable companion state such as:
+- stable identity;
+- equipment;
+- authored persistent traits/state.
+
+Reset moment-to-moment combat state such as:
+- current target;
+- threat;
+- casts;
+- temporary buffs/debuffs;
+- transient positioning/combat commands.
+
 ## Dungeon persistence
 
 Active dungeon/raid run state is **not persisted across quitting**.
@@ -140,6 +210,21 @@ Moving items/currency between manifestation inventory and Echo-wide bank must be
 A crash cannot duplicate or destroy an item through partial transfer.
 
 The same principle applies to other ownership-changing operations.
+
+## Timer clock domains
+
+Timed content should declare what clock it uses.
+
+Supported timing semantics should include:
+- **session/gameplay time** — advances only while the relevant session/content is active;
+- **played time** — advances while the player/profile is actively being played, according to authored rules;
+- **wall-clock time** — based on real-world time and can elapse while the game is closed.
+
+DiceFree does **not** currently plan to depend heavily on weekly/daily live-service events.
+
+Wall-clock support exists so unusual future content can use it without corrupting the general save model.
+
+Ordinary combat timers/cooldowns are not wall-clock persistent.
 
 ## Stable IDs and save versions
 
@@ -383,6 +468,27 @@ Useful information includes:
 This is **not** normal player-facing UI.
 
 It exists for Axel, developers and development agents/tools such as Codex to diagnose and safely evolve persistent data.
+
+## Quitting as escape / multiplayer leave semantics
+
+### Solo
+
+No combat logout timer is required.
+
+Because normal loading returns the manifestation to its registered resurrection point at full HP, quitting can function as an escape from danger.
+
+This is acceptable for a non-competitive game and does not require anti-abuse machinery.
+
+### Multiplayer
+
+Intentional **Leave Session** during combat should not become an instant invulnerability/escape exploit.
+
+Direction:
+- use the same or equivalent vulnerable exit/disconnect grace behavior as an unexpected disconnect;
+- the actor can remain present and vulnerable during the grace period;
+- persistence still protects already-earned durable progress.
+
+Exact multiplayer timing remains part of the reconnect/network implementation.
 
 ## Save-scumming / anti-cheat
 

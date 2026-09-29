@@ -154,6 +154,32 @@ See `docs/PERSISTENCE_AND_SAVES.md`.
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
 
+### Summon / controllable-unit architecture
+
+Use one ownership/control framework for summons, pets, companions, turrets, clones, charmed units and related actors.
+
+Requirements:
+- owner and controller are separate references;
+- no universal gameplay summon cap;
+- class/ability data defines active-count/lifetime/upkeep/replacement rules;
+- autonomous / directly-controlled / hybrid control models;
+- generic commands and stance layer;
+- selected unit can drive the shared command-grid UI;
+- authored/snapshot/dynamic/mixed stat inheritance;
+- owner-level-based level scaling; no independent summon XP/level track;
+- independent/shared/no resource models;
+- own threat plus configurable threat transfer/redirect;
+- temporary/combat/session/manifestation persistence scopes;
+- stable IDs for persistent companions;
+- optional companion equipment/inventory capability;
+- source + owner event attribution;
+- host-authoritative AI/state with client-issued control commands;
+- host migration/reconnect compatibility.
+
+Do not implement a separate pet combat engine.
+
+See `docs/SUMMONS_AND_COMPANIONS.md`.
+
 ### Enemy / encounter architecture
 
 Enemy content should be composition-first:

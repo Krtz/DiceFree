@@ -1,0 +1,4 @@
+{
+    "checksum": "4M09e3VgRkhq3x2JiwdruHlLy56JxjieCPGxM1EvgKY=",
+    "payload": "{\"schemaVersion\":1,\"userId\":\"e4e32355-2f07-464a-97e5-a2c55ff43281\",\"echoId\":\"afa0d1ca-5341-4631-9cf3-714a23e49924\",\"revision\":5,\"writtenUtc\":\"2026-09-29T05:46:58.7889115Z\",\"sections\":[{\"id\":\"manifestation:class.novice\",\"version\":1,\"json\":\"{\\\"classId\\\":\\\"class.novice\\\",\\\"level\\\":3,\\\"xp\\\":7,\\\"anchorId\\\":\\\"anchor.cornberg\\\",\\\"healthFraction\\\":0.4000000059604645,\\\"quests\\\":[{\\\"questId\\\":\\\"quest.cornberg.crop-slimes\\\",\\\"definitionVersion\\\":1,\\\"status\\\":3,\\\"stage\\\":1,\\\"count\\\":2},{\\\"questId\\\":\\\"quest.unresolved\\\",\\\"definitionVersion\\\":99,\\\"status\\\":1,\\\"stage\\\":41,\\\"count\\\":8}]}\"}]}"
+}

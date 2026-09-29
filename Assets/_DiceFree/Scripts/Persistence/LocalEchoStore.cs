@@ -12,7 +12,27 @@ namespace DiceFree.Persistence
     {
         public string Path { get; }
         public string RecoveryMessage { get; private set; }
+        public string MigrationMessage { get; private set; }
         public LocalEchoStore(string directory) => Path = System.IO.Path.Combine(directory, "primary-echo.json");
+        public SaveFileDiagnostics[] InspectCopies()
+        {
+            var result = new List<SaveFileDiagnostics>();
+            foreach (var suffix in new[] { "", ".bak1", ".bak2", ".bak3" })
+            {
+                var info = new SaveFileDiagnostics { path = Path + suffix, integrity = "Not present" };
+                info.exists = File.Exists(info.path);
+                if (info.exists)
+                    try
+                    {
+                        var value = Read(info.path);
+                        info.valid = true; info.integrity = "Checksum/header verified";
+                        info.schema = value.schemaVersion; info.revision = value.revision; info.writtenUtc = value.writtenUtc;
+                    }
+                    catch (Exception error) { info.integrity = error.Message; }
+                result.Add(info);
+            }
+            return result.ToArray();
+        }
         private static string Hash(string value)
         {
             using var sha = SHA256.Create();
@@ -26,7 +46,8 @@ namespace DiceFree.Persistence
             var save = JsonUtility.FromJson<EchoSave>(envelope.payload);
             if (save == null) throw new InvalidDataException("Empty Echo save.");
             // A future schema is not corruption: never roll it back to an older backup or overwrite it.
-            if (save.schemaVersion != 1) throw new NotSupportedException("Unsupported Echo schema " + save.schemaVersion);
+            if (save.schemaVersion != 1 && save.schemaVersion != SaveMigrations.CurrentSchema)
+                throw new NotSupportedException("Unsupported Echo schema " + save.schemaVersion);
             if (!Guid.TryParse(save.userId, out _) || !Guid.TryParse(save.echoId, out _) ||
                 save.revision < 1 || save.sections == null) throw new InvalidDataException("Invalid Echo header.");
             var ids = new HashSet<string>();
@@ -38,6 +59,7 @@ namespace DiceFree.Persistence
         public EchoSave Load()
         {
             RecoveryMessage = null;
+            MigrationMessage = null;
             bool found = false;
             foreach (var candidate in new[] { Path, Path + ".bak1", Path + ".bak2", Path + ".bak3" })
             {
@@ -47,7 +69,10 @@ namespace DiceFree.Persistence
                 {
                     var save = Read(candidate);
                     if (candidate != Path) RecoveryMessage = "Recovered Echo from " + candidate;
-                    return save;
+                    var migrated = SaveMigrations.Upgrade(save);
+                    if (migrated.schemaVersion != save.schemaVersion)
+                        MigrationMessage = $"Echo schema {save.schemaVersion} -> {migrated.schemaVersion}; pending next successful commit";
+                    return migrated;
                 }
                 catch (NotSupportedException) { throw; }
                 catch (Exception error) when (error is IOException || error is ArgumentException)
@@ -58,6 +83,8 @@ namespace DiceFree.Persistence
         }
         public void Commit(EchoSave save)
         {
+            if (save.schemaVersion != SaveMigrations.CurrentSchema)
+                throw new NotSupportedException("Only current-schema saves can be committed.");
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(Path));
             using var writeLock = new FileStream(Path + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             if (File.Exists(Path))
@@ -88,6 +115,7 @@ namespace DiceFree.Persistence
                 }
                 File.Replace(pending, Path, valid ? Path + ".bak1" : Path + ".corrupt-" + Guid.NewGuid().ToString("N"));
             }
+            if (MigrationMessage != null) MigrationMessage = MigrationMessage.Replace("pending next successful commit", "committed");
         }
     }
 }

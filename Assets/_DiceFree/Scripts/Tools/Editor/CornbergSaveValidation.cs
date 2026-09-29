@@ -24,6 +24,15 @@ namespace DiceFree.EditorTools
             try
             {
                 ValidateStore();
+                SaveMigrationValidation.Run();
+                var args = Environment.GetCommandLineArgs();
+                if (Array.IndexOf(args, "-diceFreeVerifyLegacyReload") >= 0)
+                {
+                    int index = Array.IndexOf(args, "-diceFreeSaveRoot");
+                    Require(index >= 0 && index + 1 < args.Length && Path.IsPathRooted(args[index + 1]), "Legacy test requires isolated root.");
+                    Directory.CreateDirectory(args[index + 1]);
+                    File.Copy(SaveMigrationValidation.Fixture, Path.Combine(args[index + 1], "primary-echo.json"));
+                }
                 CornbergValidation.ValidateNavigation();
                 SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
             }
@@ -89,7 +98,9 @@ namespace DiceFree.EditorTools
                 var journal = player.GetComponent<QuestJournal>();
                 var quest = journal.Definitions[0];
                 var args = Environment.GetCommandLineArgs();
-                bool reload = Array.IndexOf(args, "-diceFreeVerifyReload") >= 0;
+                bool deadReload = Array.IndexOf(args, "-diceFreeVerifyDeadReload") >= 0;
+                bool legacyReload = Array.IndexOf(args, "-diceFreeVerifyLegacyReload") >= 0;
+                bool reload = Array.IndexOf(args, "-diceFreeVerifyReload") >= 0 || deadReload || legacyReload;
                 if (!reload)
                 {
                     if (!File.Exists(persistence.SavePath))
@@ -136,13 +147,16 @@ namespace DiceFree.EditorTools
                     Require(!journal.TurnIn(quest), "Completed reward replayed after restore.");
                     records[0].count = 99;
                     Require(journal.GetProgress(quest.stableId).count == 2 && !journal.CanRestore(records), "Quest snapshot alias or invalid count accepted.");
+                    player.Health.ApplyDamage(null, new DamageResult { mitigated = 5 });
+                    Require(player.Alive && player.Health.Current < player.Health.Maximum, "Injured save fixture not injured.");
                     Require(persistence.Flush(), "Profile commit failed.");
                     // Exercise unknown-anchor fallback on the next real process launch.
                     var store = new LocalEchoStore(Path.GetDirectoryName(persistence.SavePath));
                     var save = store.Load();
                     var section = save.sections.Find(value => value.id == "manifestation:" + player.Stats.Definition.stableId);
                     var data = JsonUtility.FromJson<ManifestationSave>(section.json);
-                    data.anchorId = "anchor.removed-content"; data.healthFraction = 0;
+                    Require(!section.json.Contains("healthFraction"), "Transient HP was serialized.");
+                    data.anchorId = "anchor.removed-content";
                     section.json = JsonUtility.ToJson(data);
                     save.revision++; store.Commit(save);
                     // Prevent shutdown callback from replacing this deliberate test fixture.
@@ -156,11 +170,54 @@ namespace DiceFree.EditorTools
                     Require(journal.GetProgress("quest.unresolved").stage == 41, "Unresolved quest lost.");
                     Require(Vector3.Distance(player.transform.position, new Vector3(8, 0, 6)) < 1, "Load did not use Cornberg fallback.");
                     Require(player.Alive && !player.InCombat && player.GetComponent<BasicAttack>().Target == null, "Transient combat state survived load.");
-                    Require(Mathf.Abs(player.Health.Current - player.Health.Maximum * 0.5f) < 0.2f, "Saved death did not use the existing return fraction.");
-                    Require(player.GetComponent<RespawnAtAnchor>().LoadAtAnchor("anchor.cornberg", 0.4f) &&
-                        Mathf.Abs(player.Health.Current - player.Health.Maximum * 0.4f) < 0.01f, "Living HP fraction was not restored.");
+                    Require(Mathf.Approximately(player.Health.Current, player.Health.Maximum), "Loaded injured/dead/legacy manifestation was not full HP.");
+                    var enemy = UnityEngine.Object.FindAnyObjectByType<DiceFree.AI.AggroBehaviour>().GetComponent<CombatActor>();
+                    Require(enemy.Health.Current == enemy.Health.Maximum && !enemy.InCombat, "Enemy session state resumed.");
+                    var temporary = new GameObject("Validation registered anchor");
+                    temporary.transform.position = new Vector3(5, 0, -8);
+                    temporary.AddComponent<ResurrectionAnchor>().Configure("anchor.validation");
+                    var respawn = player.GetComponent<RespawnAtAnchor>();
+                    Require(player.Motor.Teleport(enemy.transform.position + Vector3.back), "Attack-reset fixture could not reach enemy.");
+                    var attack = player.GetComponent<BasicAttack>();
+                    attack.Order(enemy);
+                    player.GetComponent<TargetSelection>().Select(enemy);
+                    attack.SendMessage("Update"); // Exercise the real wind-up transition before applying load reset.
+                    Require(attack.Target == enemy && player.GetComponent<TargetSelection>().Selected == enemy && attack.CooldownRemaining > 0,
+                        "Load-reset fixture did not establish a target and cooldown.");
+                    Require(respawn.LoadAtAnchor("anchor.validation") && Vector3.Distance(player.transform.position, temporary.transform.position) < 1,
+                        "Registered anchor resolution failed.");
+                    Require(attack.Target == null && attack.CooldownRemaining == 0 && player.GetComponent<TargetSelection>().Selected == null,
+                        "Load retained attack/selection state.");
+                    temporary.transform.position = new Vector3(10000, 10000, 10000);
+                    Require(respawn.LoadAtAnchor("anchor.validation") && respawn.AnchorId == "anchor.cornberg", "Unnavigable saved anchor did not fall back.");
+                    Require(respawn.LoadAtAnchor("anchor.unavailable") && Vector3.Distance(player.transform.position, new Vector3(8,0,6)) < 1,
+                        "Fallback was replaced by the previous selected anchor.");
+                    UnityEngine.Object.DestroyImmediate(temporary);
                     Require(persistence.Flush(), "Reloaded save could not commit.");
-                    Debug.Log("SAVE_SECOND_PROCESS_OK");
+                    var inspection = ProfileInspection.Capture(persistence);
+                    Require(inspection.userId == persistence.CaptureProfile().userId && inspection.echoId == persistence.CaptureProfile().echoId &&
+                        inspection.schema == 2 && inspection.revision == persistence.Revision && inspection.level == 3 && inspection.xp == 7 &&
+                        inspection.anchorId == "anchor.cornberg" && inspection.files[0].valid && inspection.files[1].exists &&
+                        inspection.path == persistence.SavePath && inspection.autosaveReady && !string.IsNullOrEmpty(inspection.savedUtc) &&
+                        inspection.quests[0].status == QuestStatus.Completed && inspection.preserved.Length > 0,
+                        "Profile Inspector diagnostics do not match the loaded profile.");
+                    if (deadReload)
+                    {
+                        var competingStore = new LocalEchoStore(Path.GetDirectoryName(persistence.SavePath));
+                        var competing = competingStore.Load(); competing.revision++; competingStore.Commit(competing);
+                        long lastSuccessful = persistence.Revision;
+                        Require(!persistence.Flush(), "Stale runtime writer did not stop autosave.");
+                        inspection = ProfileInspection.Capture(persistence);
+                        Require(!inspection.autosaveReady && inspection.revision == lastSuccessful && inspection.status.Contains("Autosave stopped"),
+                            "Inspector hides stopped autosave or reports uncommitted revision as successful.");
+                    }
+                    if (!deadReload && !legacyReload)
+                    {
+                        player.Health.ApplyDamage(null, new DamageResult { mitigated = 10000 });
+                        Require(!player.Alive && persistence.Flush(), "Dead save fixture failed.");
+                        UnityEngine.Object.DestroyImmediate(persistence);
+                    }
+                    Debug.Log(legacyReload ? "SAVE_LEGACY_PROCESS_OK" : deadReload ? "SAVE_DEAD_RELOAD_OK" : "SAVE_SECOND_PROCESS_OK");
                 }
                 SessionState.SetBool(Running, false); EditorApplication.update -= Tick; EditorApplication.Exit(0);
             }

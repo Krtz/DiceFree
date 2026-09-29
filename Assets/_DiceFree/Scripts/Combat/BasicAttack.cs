@@ -11,6 +11,7 @@ namespace DiceFree.Combat
         public CombatActor Target { get; private set; }
         public string State { get; private set; } = "Idle";
         public int Hits { get; private set; }
+        public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
         public AttackDefinition Definition => actor.Stats.Definition.basicAttack;
         private void Awake() => actor = GetComponent<CombatActor>();
         private void OnDisable() => Cancel();

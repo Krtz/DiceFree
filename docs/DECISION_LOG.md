@@ -2557,3 +2557,143 @@ Specific encounters may explicitly preserve selected state across attempts.
 ## 2026-09-28 — Encounter debug harness
 
 **Decision:** Provide development tooling to spawn/test encounters, force phases/abilities/HP, inspect AI/threat/variables and simulate relevant party-count conditions.
+
+
+## 2026-09-29 — Owned units do not consume party slots
+
+**Decision:** Summons/pets/companions do not consume the normal four player slots.
+
+## 2026-09-29 — No universal summon cap
+
+**Decision:** DiceFree has no game-wide gameplay summon cap.
+
+Each class/ability defines its own constraints through active-count limits, lifetime or other authored rules.
+
+## 2026-09-29 — Autonomous, controllable and hybrid summons
+
+**Decision:** Owned units support autonomous AI, direct RTS-style control and hybrid stance/order control.
+
+## 2026-09-29 — Ownership and control can differ
+
+**Decision:** Owner and current controller are distinct.
+
+Control can be transferred temporarily without necessarily changing ownership.
+
+## 2026-09-29 — Summon selection and command UI
+
+**Decision:** Selecting a directly controllable owned unit uses the shared WC3-style command grid.
+
+**Direction:** F1 returns to hero; F2+ addresses/cycles controllable owned units, subject to final input tuning.
+
+## 2026-09-29 — Generic stances and orders
+
+**Decision:** Framework supports Aggressive / Defensive / Passive / Hold Position stances plus generic Move / Attack / Stop / Hold / Follow / Attack-Move orders where relevant.
+
+Units expose only applicable controls.
+
+## 2026-09-29 — Flexible summon stat inheritance
+
+**Decision:** Owned units can use authored, snapshot, dynamic or mixed owner-stat formulas.
+
+## 2026-09-29 — Summons share owner level
+
+**Decision:** Summons/companions do not have independent character levels or XP tracks.
+
+They use the owner's level for level-based scaling.
+
+Persistent companions may still have other non-level progression systems later.
+
+## 2026-09-29 — Summon resources
+
+**Decision:** Owned units may have their own resources, share owner resources or have none.
+
+## 2026-09-29 — Summon threat transfer support
+
+**Decision:** Owned units have independent threat entries by default.
+
+**Decision:** Content may transfer/redirect threat between owner and summon for authored mechanics such as tank pets.
+
+## 2026-09-29 — Summon death is not player death
+
+**Decision:** Normal summon death/despawn/revival is class/ability behavior and does not use player resurrection-stone rules by default.
+
+## 2026-09-29 — Summon persistence scopes
+
+**Decision:** Support temporary, combat-persistent, session-persistent and manifestation-persistent owned units.
+
+## 2026-09-29 — Persistent companion identity
+
+**Decision:** Disposable units can use runtime identity; persistent companions use stable persistent instance IDs.
+
+## 2026-09-29 — Companion equipment and optional inventory
+
+**Decision:** Framework permits equipment-capable companions using normal item/stat systems.
+
+**Decision:** No generic summon inventory is required, but authored companions may support one.
+
+## 2026-09-29 — Summon ally targeting
+
+**Decision:** Summons/companions are valid allies by default for heals/buffs, with semantic tag filters allowing abilities to include/exclude them.
+
+## 2026-09-29 — Summon credit attribution
+
+**Decision:** Normal XP/quest credit may resolve summon actions to the owner, while source-sensitive requirements can still inspect the summon itself.
+
+## 2026-09-29 — No special summon collision rule yet
+
+**Decision:** Summons use normal physical actor collision/pathing by default.
+
+Do not add special soft collision until real testing demonstrates a need.
+
+## 2026-09-29 — Networked summon authority
+
+**Decision:** Host owns authoritative summon AI/live state; clients send commands for units they control.
+
+Summon state participates in host migration/reconnect.
+
+
+## 2026-09-29 — Load at full HP
+
+**Decision:** Loading a manifestation at its registered resurrection point restores it to full HP regardless of saved living/dead HP state.
+
+## 2026-09-29 — Cooldowns reset on load
+
+**Decision:** Ordinary ability and consumable cooldowns reset on load.
+
+Explicit persistent long-duration cooldowns may exist later but must opt in.
+
+## 2026-09-29 — Buffs/debuffs reset on load
+
+**Decision:** Ordinary timed buffs/debuffs/effects reset on load.
+
+Persistent world/event buffs should be recreated from persistent world state/aura sources rather than by serializing transient effect instances.
+
+## 2026-09-29 — Resources reset by default on load
+
+**Decision:** Resources reset on load by default.
+
+**Decision:** Resource definitions can explicitly opt into persistence for rare/difficult-to-acquire resource mechanics.
+
+## 2026-09-29 — Combat state never resumes across load
+
+**Decision:** Threat, targets, aggro, casts, projectiles, enemy combat state and ordinary temporary summons are session state and reset on load.
+
+## 2026-09-29 — Persistent companions reload cleanly
+
+**Decision:** Manifestation-persistent companions reload with durable identity/equipment/traits, but their transient combat state resets.
+
+## 2026-09-29 — Timer clock domains
+
+**Decision:** Timed content can explicitly use session/gameplay time, played time or wall-clock time.
+
+DiceFree is not designed around weekly/live-service events, but wall-clock timing remains supported for future authored exceptions.
+
+## 2026-09-29 — Solo quit can escape danger
+
+**Decision:** No logout timer is required in solo.
+
+Loading at the resurrection point/full HP means quit/reload can function as an escape; this is acceptable.
+
+## 2026-09-29 — Multiplayer Leave Session uses vulnerable grace
+
+**Direction:** Intentional multiplayer leave during combat should use the same/equivalent vulnerable grace semantics as disconnect rather than instant disappearance.
