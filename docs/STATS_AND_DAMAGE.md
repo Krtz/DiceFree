@@ -99,7 +99,7 @@ It must still provide useful value to non-Mana classes.
 
 Default secondary effects currently settled:
 - **1 Spirit = +0.15% Healing Done**;
-- **1 Spirit = +0.75% Healing Received**.
+- **1 Spirit = +0.075% Healing Received**.
 
 These intentionally use different coefficients.
 
