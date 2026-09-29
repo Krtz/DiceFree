@@ -594,3 +594,22 @@ Example:
 ```
 5 Defense - 10 flat penetration = -5 effective Defense
 ```
+
+
+### Defense reduction vs penetration
+
+Defense reduction resolves before percentage and flat penetration.
+
+Default order:
+1. Defense reduction;
+2. percentage penetration;
+3. flat penetration;
+4. mitigation/vulnerability from final effective Defense.
+
+Example:
+```
+100 Defense
+-> -20 reduction = 80
+-> 20% penetration = 64
+-> 10 flat penetration = 54 effective Defense
+```
