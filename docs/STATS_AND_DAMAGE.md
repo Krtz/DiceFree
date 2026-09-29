@@ -770,7 +770,7 @@ Original Defense: 100
 Result after percentage reduction: -10 Defense
 ```
 
-If the target's original Defense is already negative, percentage Defense reduction does not apply. Negative base Defense is considered an unusual/content-authoring edge case rather than an intended baseline state.
+If the target's original Defense is already negative, percentage Defense reduction and percentage Defense penetration do not apply. Negative base Defense is considered an unusual/content-authoring edge case rather than an intended baseline state.
 
 Percentage penetration uses the same original positive Defense basis.
 
