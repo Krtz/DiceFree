@@ -691,3 +691,25 @@ A source may explicitly alter another crit rule instead of adding its own indepe
 Examples include modifying chance, modifying multiplier, or granting crit permission to a normally ineligible effect.
 
 Such modifiers must declare their intended target/eligibility. There is no automatic global Crit Chance or Crit Damage stat.
+
+
+### Crit modifier resolution order
+
+Explicit crit-rule modifiers apply before crit-rule priority is determined.
+
+After modifiers, ordinary crit rules are sorted by their final multiplier and rolled highest-first.
+
+Ordinary crit chance is clamped to 0-100%. Values above 100% have no special default behavior; any overflow mechanic must be explicitly authored.
+
+### Crit position in the damage pipeline
+
+Default crit resolution modifies the raw damage packet before mitigation layers.
+
+Default order:
+1. construct raw damage packet;
+2. apply successful crit multiplier/behavior;
+3. apply Physical/Magical Defense;
+4. apply elemental resistance;
+5. apply resulting HP damage.
+
+Rare explicit mechanics may override where their crit behavior is applied.
