@@ -1037,3 +1037,28 @@ then elemental resistance
 ```
 
 Rare mechanics may explicitly override this placement, but such behavior must be stated by the source.
+
+
+### Equal-multiplier crit ordering
+
+Crit rules are primarily ordered by final modified multiplier, highest first.
+
+If multiple ordinary crit rules have the same final multiplier:
+1. an explicitly authored crit-rule priority may decide the order;
+2. otherwise use a **stable deterministic source-ID order**.
+
+This tie-break does not change the damage multiplier. It exists so provenance/on-crit ownership is deterministic when equal-multiplier rules compete for the first-success result.
+
+### Multi-packet actions
+
+By default, crit resolution is **action-wide**, not packet-by-packet.
+
+For an action containing multiple raw damage packets, resolve the action's applicable crit rule once. If it crits, apply that crit behavior to all eligible raw packets before their separate Defense/resistance resolution.
+
+A mechanic may explicitly opt into per-packet crit resolution instead.
+
+### Critical-hit event scope
+
+By default, a critical action emits **one critical-hit event per action**, not one event per damage packet.
+
+Explicit per-packet crit mechanics may define per-packet critical events when authored to do so.
