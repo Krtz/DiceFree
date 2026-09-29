@@ -651,3 +651,20 @@ Temporary negative Defense effects do not alter the underlying Defense reference
 Defense math keeps fractional precision through intermediate calculations. Rounding is presentation-only unless a specific mechanic explicitly requires discrete values.
 
 The exact components that make up underlying Defense remain an open design question.
+
+
+### Explicit critical-hit rules
+
+DiceFree has no universal baseline crit chance or crit multiplier.
+
+An attack, heal, DoT tick or other resolved effect can crit only when an explicit gameplay source grants permission. The granting source defines that crit rule's chance and multiplier/behavior.
+
+Therefore:
+- baseline crit chance is 0%;
+- there is no default 150%, 200% or other global crit multiplier;
+- direct damage does not automatically crit;
+- DoTs do not automatically crit;
+- healing does not automatically crit;
+- any of those may crit if a skill, passive, item or other effect explicitly says they can.
+
+Multiple simultaneous crit-rule interaction remains open; do not collapse authored crit rules into a global chance/multiplier without a later decision.
