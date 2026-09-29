@@ -668,3 +668,26 @@ Therefore:
 - any of those may crit if a skill, passive, item or other effect explicitly says they can.
 
 Multiple simultaneous crit-rule interaction remains open; do not collapse authored crit rules into a global chance/multiplier without a later decision.
+
+
+### Multiple explicit crit rules
+
+When several explicit crit rules apply to the same resolved action, ordinary crit resolution uses priority by multiplier:
+
+1. sort applicable crit rules from highest multiplier to lowest;
+2. roll the highest-multiplier rule first;
+3. on success, apply that rule and stop;
+4. on failure, continue to the next rule;
+5. if all fail, the action is non-critical.
+
+This is intentionally not a merged global crit chance.
+
+Rare authored rules may explicitly stack with or multiply another crit result, but such behavior must be stated by the source and is not part of default crit resolution.
+
+### Explicit crit-rule modification
+
+A source may explicitly alter another crit rule instead of adding its own independent roll.
+
+Examples include modifying chance, modifying multiplier, or granting crit permission to a normally ineligible effect.
+
+Such modifiers must declare their intended target/eligibility. There is no automatic global Crit Chance or Crit Damage stat.
