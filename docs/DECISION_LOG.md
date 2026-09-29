@@ -2935,7 +2935,7 @@ Consequences:
 - example: 100 Defense with 50% reduction and 60% reduction becomes -10 before other modifiers;
 - flat Defense reduction can push Defense below zero;
 - percentage penetration also references original positive Defense;
-- if original/base Defense is negative, percentage Defense reduction does not apply;
+- if original/base Defense is negative, percentage Defense reduction and percentage Defense penetration do not apply;
 - negative base Defense is considered an unusual authoring edge case rather than a normal target state.
 
 Default conceptual order:
