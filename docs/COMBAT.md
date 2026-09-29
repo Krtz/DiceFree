@@ -713,3 +713,24 @@ Default order:
 5. apply resulting HP damage.
 
 Rare explicit mechanics may override where their crit behavior is applied.
+
+
+### Equal-multiplier crit tie-break
+
+Ordinary crit rules sort by final modified multiplier descending.
+
+For equal final multipliers:
+1. explicit authored crit priority, if present;
+2. otherwise stable deterministic source-ID order.
+
+This keeps provenance deterministic without inventing a gameplay advantage from equal multipliers.
+
+### Action-wide crit resolution
+
+Default crit resolution happens once per action.
+
+A multi-packet action shares one crit result across all eligible raw packets, which are then mitigated independently by their own Physical/Magical Defense and elemental resistance layers.
+
+Per-packet crit rolls require an explicit mechanic.
+
+Default critical-hit signaling is one critical-hit event per action. Explicit per-packet crit mechanics may opt into per-packet critical events.
