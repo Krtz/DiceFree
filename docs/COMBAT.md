@@ -734,3 +734,18 @@ A multi-packet action shares one crit result across all eligible raw packets, wh
 Per-packet crit rolls require an explicit mechanic.
 
 Default critical-hit signaling is one critical-hit event per action. Explicit per-packet crit mechanics may opt into per-packet critical events.
+
+
+### Crit modifier clarity and provenance
+
+Crit modifiers are an available but intentionally uncommon tool.
+
+Any modifier to crit chance or multiplier must explicitly define its operation, such as:
+- additive percentage points;
+- multiplicative change to existing chance;
+- additive multiplier amount;
+- multiplicative change to existing multiplier.
+
+Do not infer one meaning from ambiguous "+X% crit" wording.
+
+Critical resolution preserves both the originating action identity and the winning crit-rule/source identity. These are separate provenance fields for future action-trigger and source-trigger logic.
