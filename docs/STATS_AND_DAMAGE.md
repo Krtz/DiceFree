@@ -1091,3 +1091,36 @@ Example:
 - winning crit source: Ridiculous Hat of Explosions.
 
 These identities remain separate so future systems can distinguish "when this action crits" from "when this item/passive causes a crit".
+
+
+### Hit resolution before crit
+
+If an action can miss, hit/miss resolution occurs **before** crit resolution.
+
+A missed action:
+- does not roll crit rules;
+- does not consume crit RNG;
+- cannot produce a critical-hit result unless an explicit mechanic says otherwise.
+
+### Critical action vs critical damage dealt
+
+A successful crit roll and actual HP damage are separate facts.
+
+An action may count as having critically hit even if the resulting damage is fully prevented by:
+- immunity;
+- shields/absorbs;
+- another prevention layer.
+
+For trigger purposes, distinguish at least:
+- **critical action / critical hit occurred**;
+- **critical HP damage dealt**.
+
+Mechanics must state which fact they care about.
+
+### Crit inheritance
+
+Secondary effects/procs do **not** inherit the parent action's critical result by default.
+
+A proc, explosion, DoT application, secondary strike or other child effect resolves its own crit eligibility/rules.
+
+A source may explicitly state that a child effect inherits or copies the parent's crit result; this is an exception, not the default.
