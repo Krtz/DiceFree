@@ -753,3 +753,18 @@ Floating-number color indicates broad result/channel:
 Elements are communicated primarily with **element icons**, not by assigning a unique floating-text color to every element.
 
 This keeps Coffee/Donut/Math/etc. readable without creating an unusable rainbow.
+
+
+### Defense penetration order
+
+For Physical and Magical Defense, **percentage Defense penetration is applied before flat Defense penetration**.
+
+Example:
+
+```
+Target Defense: 100
+20% penetration -> 80
+10 flat penetration -> 70 effective Defense
+```
+
+This is the default ordering unless an explicitly unusual effect says otherwise.
