@@ -2924,3 +2924,24 @@ Full default order:
 3. percentage Defense penetration;
 4. flat Defense penetration;
 5. final mitigation/vulnerability calculation.
+
+
+## 2026-09-29 — Percentage Defense effects use original Defense
+
+**Decision:** Percentage Defense reduction and percentage Defense penetration are calculated from the target's original positive Defense value for the resolution, not from the intermediate remainder.
+
+Consequences:
+- multiple percentage Defense reductions are additive against original Defense;
+- example: 100 Defense with 50% reduction and 60% reduction becomes -10 before other modifiers;
+- flat Defense reduction can push Defense below zero;
+- percentage penetration also references original positive Defense;
+- if original/base Defense is negative, percentage Defense reduction does not apply;
+- negative base Defense is considered an unusual authoring edge case rather than a normal target state.
+
+Default conceptual order:
+1. original Defense;
+2. percentage reduction(s) from original Defense;
+3. flat reduction;
+4. percentage penetration from original Defense;
+5. flat penetration;
+6. mitigation/vulnerability curve.
