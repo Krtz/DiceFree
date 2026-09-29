@@ -582,3 +582,15 @@ Example:
 ```
 
 This applies symmetrically to Physical and Magical Defense unless a mechanic explicitly overrides the normal pipeline.
+
+
+### Penetration below zero
+
+Penetration is not clamped at zero Defense.
+
+If penetration exceeds the target's current Defense, effective Defense becomes negative and the normal negative-Defense vulnerability curve applies.
+
+Example:
+```
+5 Defense - 10 flat penetration = -5 effective Defense
+```
