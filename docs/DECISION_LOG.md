@@ -3102,3 +3102,21 @@ Example:
 **Decision:** Ordinary resistance bonuses/debuffs stack additively.
 
 **Reaffirmed:** Negative elemental resistance remains uncapped.
+
+
+## 2026-09-30 — Resistance percentage semantics and >100% inversion
+
+**Decision:** Elemental resistance and elemental resistance penetration are percentage mechanics and must always be written with explicit `%` notation.
+
+**Decision:** Elemental penetration values represent percentage points removed from matching resistance, not multiplicative reduction of the current resistance.
+
+**Decision:** Multiple elemental penetration sources stack additively.
+
+**Decision:** Explicit resistance-cap increases may raise the normal 75% cap and the framework permits caps above 100%.
+
+**Decision:** If effective matching elemental resistance exceeds 100%, matching elemental damage becomes healing.
+
+Example:
+- 105% Fire Resistance => matching Fire damage heals for 5% of the damage that would have resolved at 0% Fire Resistance.
+
+This is intentionally supported as a rare/emergent interaction rather than a normal balance target.
