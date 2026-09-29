@@ -3002,3 +3002,17 @@ Examples intentionally supported by the design:
 - 12.5% chance for 8x damage.
 
 **Open:** how multiple simultaneous crit-granting sources interact is not yet decided.
+
+
+## 2026-09-29 — Multiple crit-rule resolution
+
+**Decision:** Multiple applicable ordinary crit rules are rolled from highest multiplier to lowest multiplier.
+
+- highest multiplier rolls first;
+- if it succeeds, stop and use that crit result;
+- if it fails, roll the next rule;
+- rules are not merged into one combined crit chance.
+
+**Exception model:** A very rare source may explicitly state that it stacks with or multiplies another crit result. This is never implicit/default behavior.
+
+**Decision:** Explicit crit-rule modifiers are supported. A source may explicitly modify another eligible crit rule's chance, multiplier or permission rather than creating a new roll. Such interactions must be explicitly authored.
