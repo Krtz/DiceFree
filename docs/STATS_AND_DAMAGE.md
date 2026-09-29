@@ -1216,3 +1216,73 @@ Example:
 ```
 
 Special multiplicative or otherwise unusual stacking requires an explicitly authored mechanic.
+
+
+### Elemental resistance percentage semantics
+
+Elemental resistance and elemental resistance penetration are percentage-based mechanics.
+
+All authored/player-facing values must therefore be written with an explicit `%` sign.
+
+Examples:
+- `+30% Fire Resistance`;
+- `-20% Fire Resistance`;
+- `15% Fire Resistance Penetration`.
+
+For elemental resistance penetration, the numeric value represents **percentage points removed from matching resistance**, not a multiplicative percentage of the current resistance.
+
+Example:
+
+```
+Target Fire Resistance: 50%
+Attacker Fire Resistance Penetration: 20%
+
+50% - 20 percentage points = 30%
+```
+
+Do not author ambiguous text such as bare "20 Fire penetration" when the mechanic means 20%.
+
+Multiple matching penetration sources stack additively by default.
+
+Example:
+
+```
+15% + 10% + 5% Fire Resistance Penetration
+= 30% total Fire Resistance Penetration
+```
+
+### Resistance-cap increases and resistance above 100%
+
+The normal positive resistance cap is 75%, but explicit mechanics may raise the cap.
+
+Cap increases are percentage-point increases.
+
+Example:
+
+```
+Normal Fire Resistance cap: 75%
++10% Fire Resistance Cap
+= 85% Fire Resistance cap
+```
+
+The framework must permit an explicitly raised elemental resistance cap to exceed 100%, even though normal content should not generally be designed around reaching that state.
+
+When effective matching elemental resistance exceeds 100%, matching elemental damage changes sign and becomes healing.
+
+Default elemental damage resistance factor:
+
+```
+ResultMultiplier = 1 - EffectiveResistance
+```
+
+Examples:
+
+```
+75% resistance  -> 25% of otherwise-resolved matching damage
+100% resistance -> 0
+105% resistance -> -5%, therefore healing equal to 5% of the matching damage that would have resolved at 0% resistance
+```
+
+This is an emergent/highly unusual interaction, not a baseline progression target.
+
+Negative resistance remains uncapped in the opposite direction.
