@@ -749,3 +749,24 @@ Any modifier to crit chance or multiplier must explicitly define its operation, 
 Do not infer one meaning from ambiguous "+X% crit" wording.
 
 Critical resolution preserves both the originating action identity and the winning crit-rule/source identity. These are separate provenance fields for future action-trigger and source-trigger logic.
+
+
+### Hit-before-crit ordering
+
+For actions with accuracy/miss mechanics, resolve whether the action connects before evaluating crit rules.
+
+A miss consumes no crit roll by default.
+
+### Critical result vs HP damage
+
+Critical resolution and HP damage application are separate stages.
+
+A crit may occur even when later prevention reduces actual HP damage to zero. Trigger systems should be able to distinguish:
+- an action that critically resolved;
+- actual critical HP damage dealt.
+
+### Child-effect crit inheritance
+
+Triggered/secondary effects do not inherit the parent action's crit result by default.
+
+Each child effect requires its own explicit crit permission/rules unless an authored mechanic explicitly says it inherits or copies the parent crit.
