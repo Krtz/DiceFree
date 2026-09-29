@@ -2557,3 +2557,96 @@ Specific encounters may explicitly preserve selected state across attempts.
 ## 2026-09-28 — Encounter debug harness
 
 **Decision:** Provide development tooling to spawn/test encounters, force phases/abilities/HP, inspect AI/threat/variables and simulate relevant party-count conditions.
+
+
+## 2026-09-29 — Owned units do not consume party slots
+
+**Decision:** Summons/pets/companions do not consume the normal four player slots.
+
+## 2026-09-29 — No universal summon cap
+
+**Decision:** DiceFree has no game-wide gameplay summon cap.
+
+Each class/ability defines its own constraints through active-count limits, lifetime or other authored rules.
+
+## 2026-09-29 — Autonomous, controllable and hybrid summons
+
+**Decision:** Owned units support autonomous AI, direct RTS-style control and hybrid stance/order control.
+
+## 2026-09-29 — Ownership and control can differ
+
+**Decision:** Owner and current controller are distinct.
+
+Control can be transferred temporarily without necessarily changing ownership.
+
+## 2026-09-29 — Summon selection and command UI
+
+**Decision:** Selecting a directly controllable owned unit uses the shared WC3-style command grid.
+
+**Direction:** F1 returns to hero; F2+ addresses/cycles controllable owned units, subject to final input tuning.
+
+## 2026-09-29 — Generic stances and orders
+
+**Decision:** Framework supports Aggressive / Defensive / Passive / Hold Position stances plus generic Move / Attack / Stop / Hold / Follow / Attack-Move orders where relevant.
+
+Units expose only applicable controls.
+
+## 2026-09-29 — Flexible summon stat inheritance
+
+**Decision:** Owned units can use authored, snapshot, dynamic or mixed owner-stat formulas.
+
+## 2026-09-29 — Summons share owner level
+
+**Decision:** Summons/companions do not have independent character levels or XP tracks.
+
+They use the owner's level for level-based scaling.
+
+Persistent companions may still have other non-level progression systems later.
+
+## 2026-09-29 — Summon resources
+
+**Decision:** Owned units may have their own resources, share owner resources or have none.
+
+## 2026-09-29 — Summon threat transfer support
+
+**Decision:** Owned units have independent threat entries by default.
+
+**Decision:** Content may transfer/redirect threat between owner and summon for authored mechanics such as tank pets.
+
+## 2026-09-29 — Summon death is not player death
+
+**Decision:** Normal summon death/despawn/revival is class/ability behavior and does not use player resurrection-stone rules by default.
+
+## 2026-09-29 — Summon persistence scopes
+
+**Decision:** Support temporary, combat-persistent, session-persistent and manifestation-persistent owned units.
+
+## 2026-09-29 — Persistent companion identity
+
+**Decision:** Disposable units can use runtime identity; persistent companions use stable persistent instance IDs.
+
+## 2026-09-29 — Companion equipment and optional inventory
+
+**Decision:** Framework permits equipment-capable companions using normal item/stat systems.
+
+**Decision:** No generic summon inventory is required, but authored companions may support one.
+
+## 2026-09-29 — Summon ally targeting
+
+**Decision:** Summons/companions are valid allies by default for heals/buffs, with semantic tag filters allowing abilities to include/exclude them.
+
+## 2026-09-29 — Summon credit attribution
+
+**Decision:** Normal XP/quest credit may resolve summon actions to the owner, while source-sensitive requirements can still inspect the summon itself.
+
+## 2026-09-29 — No special summon collision rule yet
+
+**Decision:** Summons use normal physical actor collision/pathing by default.
+
+Do not add special soft collision until real testing demonstrates a need.
+
+## 2026-09-29 — Networked summon authority
+
+**Decision:** Host owns authoritative summon AI/live state; clients send commands for units they control.
+
+Summon state participates in host migration/reconnect.
