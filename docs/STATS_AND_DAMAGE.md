@@ -50,10 +50,14 @@ If no override is authored, use:
 
 ### Strength
 
-Current direction:
-- contributes a **small/modest amount of Physical Defense**.
+Default secondary effect:
+- **1 Strength = +0.2 Physical Defense**.
 
-Strength should not replace class base defense, equipment or defensive passives.
+This is a default coefficient rather than an immutable universal constant.
+
+Classes/items/passives/effects may explicitly modify the Strength-to-Physical-Defense relationship.
+
+Strength should remain a secondary contributor and should not replace class base defense, equipment or defensive passives.
 
 ### Agility
 
