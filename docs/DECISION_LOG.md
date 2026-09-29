@@ -2985,3 +2985,20 @@ They affect current/effective Defense only.
 **Decision:** Defense calculations preserve fractional values internally. Intermediate values are not rounded for gameplay resolution; UI may round for display.
 
 **Open:** Exact membership of the underlying Defense reference (for example whether gear/passive Defense is included alongside class base + attribute-derived Defense) remains intentionally undecided.
+
+
+## 2026-09-29 — Crit is explicitly authorized per source
+
+**Decision:** DiceFree has no universal baseline crit chance and no universal crit-damage multiplier.
+
+- baseline crit chance is 0%;
+- only an explicit skill/passive/item/effect can authorize a crit;
+- the authorizing source defines its chance and multiplier/behavior;
+- direct damage, DoTs, healing and other effect categories do not crit by default;
+- any of those categories may crit when explicitly enabled.
+
+Examples intentionally supported by the design:
+- 50% chance for 2x damage;
+- 12.5% chance for 8x damage.
+
+**Open:** how multiple simultaneous crit-granting sources interact is not yet decided.
