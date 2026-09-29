@@ -2840,3 +2840,12 @@ This is intentionally a very small passive contribution.
 Healing Received scaling from Spirit remains a separate open decision.
 
 **Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
+
+
+## 2026-09-29 — Default Spirit to Healing Received coefficient
+
+**Decision:** Default Spirit secondary scaling is **+0.75% Healing Received per SPI**.
+
+This is intentionally stronger than Spirit's Healing Done coefficient.
+
+**Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
