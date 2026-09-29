@@ -2791,3 +2791,12 @@ Exact formulas and rewards remain open.
 **Decision:** After the Cornberg vertical-slice PoC is sufficiently proven, build a focused cube-world traversal PoC before expanding full world production.
 
 The PoC determines whether seamless 90-degree cube-face traversal is practical/fun or should be represented with authored/streamed transitions.
+
+
+## 2026-09-29 — Default Strength to Physical Defense coefficient
+
+**Decision:** Default Strength secondary scaling is **+0.2 Physical Defense per STR**.
+
+This is a default coefficient, not a hard universal constant.
+
+Classes/items/passives/effects may explicitly override or modify it.
