@@ -837,3 +837,46 @@ The complete default Defense ordering is therefore:
 4. percentage Defense penetration, from original positive Defense;
 5. flat Defense penetration;
 6. evaluate final positive/negative Defense through the mitigation/vulnerability curve.
+
+
+### Underlying Defense reference for percentage reduction/penetration
+
+The percentage-reference Defense used by percentage Defense reduction and percentage Defense penetration is the target's **underlying Defense before temporary positive Defense buffs**.
+
+Example:
+
+```
+Underlying Defense: 100
+Temporary +50 Defense buff -> current Defense 150
+Enemy 20% Defense reduction -> subtract 20, not 30
+```
+
+Thus positive Defense buffs improve actual Defense without increasing the amount removed by enemy percentage reduction/penetration.
+
+### Positive Defense buff ordering
+
+When both percentage and flat positive Defense buffs apply, resolve:
+1. percentage positive Defense buffs;
+2. flat positive Defense buffs.
+
+Example:
+
+```
+Underlying Defense: 100
++20% Defense -> 120
++50 flat Defense -> 170 current Defense
+```
+
+### Percentage values above 100%
+
+Percentage Defense reduction and percentage Defense penetration are not capped at 100%.
+
+They may exceed 100% and push effective Defense below zero.
+
+Example:
+
+```
+Underlying Defense: 100
+120% penetration -> subtract 120
+Effective Defense before flat modifiers: -20
+```
