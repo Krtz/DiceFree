@@ -568,3 +568,17 @@ See `docs/STATS_AND_DAMAGE.md` for shield ordering, Pure Damage, lifesteal, refl
 - exact Resurrection Sickness math;
 - exact ??? level threshold;
 - in-combat gear swapping.
+
+
+### Defense penetration order
+
+Percentage Defense penetration resolves before flat Defense penetration.
+
+Example:
+```
+100 Defense
+-> 20% penetration = 80
+-> 10 flat penetration = 70 effective Defense
+```
+
+This applies symmetrically to Physical and Magical Defense unless a mechanic explicitly overrides the normal pipeline.
