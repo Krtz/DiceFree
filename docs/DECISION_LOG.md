@@ -2974,3 +2974,14 @@ Examples:
 - 20% and 15% penetration = 35% total penetration.
 
 Reduction and penetration remain allowed above 100%.
+
+
+## 2026-09-29 — Defense reference stability and fractional precision
+
+**Decision:** Temporary negative Defense effects never rewrite the underlying Defense reference used by percentage Defense calculations.
+
+They affect current/effective Defense only.
+
+**Decision:** Defense calculations preserve fractional values internally. Intermediate values are not rounded for gameplay resolution; UI may round for display.
+
+**Open:** Exact membership of the underlying Defense reference (for example whether gear/passive Defense is included alongside class base + attribute-derived Defense) remains intentionally undecided.
