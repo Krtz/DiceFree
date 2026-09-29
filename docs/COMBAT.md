@@ -613,3 +613,18 @@ Example:
 -> 20% penetration = 64
 -> 10 flat penetration = 54 effective Defense
 ```
+
+
+### Full Defense modifier ordering
+
+Percentage Defense reduction resolves before flat Defense reduction.
+
+Default Physical/Magical Defense pipeline:
+
+1. percentage Defense reduction;
+2. flat Defense reduction;
+3. percentage Defense penetration;
+4. flat Defense penetration;
+5. final mitigation/vulnerability curve.
+
+Reduction is target-state modification; penetration is attacker-specific.
