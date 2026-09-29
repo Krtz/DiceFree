@@ -358,3 +358,15 @@ Framework should support it as a flag/effect rather than making all units non-so
 - exact F-key summon capacity/mapping;
 - hostile/friendly target-cycle priority;
 - controller scheme.
+
+
+## Controller support
+
+Controller/gamepad input is a supported target.
+
+However:
+- **Classic mouse click-to-move remains the primary/reference control scheme** for encounter and interaction design;
+- Direct/WASD remains a first-class keyboard alternative;
+- controller support must map onto the same movement/combat/action systems rather than becoming a separate simplified game mode.
+
+Controller-specific targeting, command-grid navigation, ground targeting, summon/unit selection and UI navigation remain to be designed in smaller focused decisions.
