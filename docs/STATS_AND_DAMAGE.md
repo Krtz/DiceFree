@@ -755,19 +755,38 @@ Elements are communicated primarily with **element icons**, not by assigning a u
 This keeps Coffee/Donut/Math/etc. readable without creating an unusable rainbow.
 
 
-### Defense penetration order
+### Percentage reduction and penetration basis
 
-For Physical and Magical Defense, **percentage Defense penetration is applied before flat Defense penetration**.
+Percentage Defense reduction and percentage Defense penetration are both calculated from the target's **original positive Defense value for that resolution**, not from the already-reduced remainder.
+
+Multiple percentage reductions are therefore additive against that original value.
 
 Example:
 
 ```
-Target Defense: 100
-20% penetration -> 80
-10 flat penetration -> 70 effective Defense
+Original Defense: 100
+50% Defense reduction -> subtract 50
+60% Defense reduction -> subtract another 60
+Result after percentage reduction: -10 Defense
 ```
 
-This is the default ordering unless an explicitly unusual effect says otherwise.
+If the target's original Defense is already negative, percentage Defense reduction does not apply. Negative base Defense is considered an unusual/content-authoring edge case rather than an intended baseline state.
+
+Percentage penetration uses the same original positive Defense basis.
+
+Example:
+
+```
+Original Defense: 100
+50% reduction -> -50
+20% penetration -> -20
+10 flat penetration -> -10
+Final effective Defense = 20
+```
+
+Flat reduction and flat penetration may both push effective Defense below zero.
+
+Within each layer, percentage effects resolve before flat effects, but percentage values always reference the original positive Defense rather than the intermediate Defense remainder.
 
 
 ### Penetration below zero
@@ -791,43 +810,30 @@ Penetration is therefore not clamped at zero.
 
 Defense reduction resolves before penetration.
 
-Default order:
-1. target Defense reductions/debuffs;
-2. percentage Defense penetration;
-3. flat Defense penetration;
-4. evaluate the resulting positive/negative Defense through the normal mitigation/vulnerability curve.
+Default conceptual order:
+1. establish the target's original Defense for this resolution;
+2. subtract all percentage Defense reduction, each calculated from original positive Defense;
+3. subtract flat Defense reduction;
+4. subtract percentage Defense penetration, calculated from original positive Defense;
+5. subtract flat Defense penetration;
+6. evaluate the resulting positive/negative Defense through the normal mitigation/vulnerability curve.
 
-Example:
+Flat reduction and penetration may push Defense below zero.
 
-```
-100 Defense
--20 Defense reduction -> 80
-20% penetration -> 64
-10 flat penetration -> 54 effective Defense
-```
-
-Reduction changes the target's effective Defense for all relevant attackers; penetration remains attacker-specific.
+Reduction changes the target state for relevant attackers; penetration remains attacker-specific.
 
 
 ### Internal Defense-reduction order
 
 When an effect has both percentage and flat Physical/Magical Defense reduction, **percentage Defense reduction is applied before flat Defense reduction**.
 
+Percentage reductions do not compound on the intermediate remainder; each references original positive Defense.
+
 The complete default Defense ordering is therefore:
 
-1. base/current Defense before reduction;
-2. percentage Defense reduction;
+1. establish original Defense;
+2. percentage Defense reduction(s), additive from original positive Defense;
 3. flat Defense reduction;
-4. percentage Defense penetration;
+4. percentage Defense penetration, from original positive Defense;
 5. flat Defense penetration;
 6. evaluate final positive/negative Defense through the mitigation/vulnerability curve.
-
-Example:
-
-```
-100 Defense
-20% reduction -> 80
-10 flat reduction -> 70
-20% penetration -> 56
-10 flat penetration -> 46 effective Defense
-```
