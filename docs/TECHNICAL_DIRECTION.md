@@ -337,3 +337,26 @@ Before producing large quantities of wearable gear:
 ## Source control
 
 GitHub is the central project home. Git LFS is used for binary art/media.
+
+
+## Development sequence: Cornberg then cube-world proof
+
+Current prototype sequence:
+
+1. complete the Cornberg / World 1 starter vertical-slice PoC far enough to prove the core RPG loop;
+2. then create a **separate focused cube-world traversal PoC** before committing the full world architecture.
+
+The cube-world PoC should test the hard technical fantasy directly:
+- traversing/crossing a 90-degree cube edge;
+- local gravity/orientation transition;
+- Classic click-to-move/pathfinding;
+- Direct/WASD;
+- isometric camera behavior;
+- enemies/navigation/leashes;
+- projectiles;
+- ground-targeted AoEs;
+- multiplayer/network-state compatibility when that layer is ready.
+
+Do not expand Faces 2–6 into full content just to test cube traversal.
+
+The point of this PoC is to decide whether a genuinely seamless cube surface is practical and fun, or whether DiceFree should preserve the cube-world fantasy with authored/streamed transitions.

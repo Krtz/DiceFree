@@ -89,15 +89,15 @@ Movement keeps NavMeshAgent avoidance for path movement. Direct movement also
 sweeps against actor colliders to prevent walking through live unit footprints.
 Static terrain/building/stream constraints still come from the original bake.
 
-## Provisional tuning, not new canon
+## Settled Vitality defaults and provisional duel tuning
 
 The shared `Cornberg provisional tuning` asset and actor/attack assets under
 `Assets/_DiceFree/Settings/Combat/` expose balance values:
 
 | Parameter | Current PoC value |
 | --- | --- |
-| Novice HP | 10 base + 5 per VIT = 15 at level 1 |
-| Flat regeneration | 0.05 HP/s per VIT before healing received, also in combat |
+| Novice HP | 10 base + 15 per VIT = 25 at level 1 |
+| Flat regeneration | 0.1 HP/s per VIT before healing received, also in combat |
 | Physical / Magical Defense | base + 1 per STR / INT |
 | Defense multiplier | 100 / (100 + nonnegative Defense) |
 | AGI contribution | +0.5% attack speed and +0.1% movement speed per point |
@@ -108,6 +108,23 @@ The shared `Cornberg provisional tuning` asset and actor/attack assets under
 | Fist / Slime reach | 0.7 / 0.6 units beyond the two body radii |
 | Well | 4-unit radius; 5 HP/s before healing-received multiplier |
 | Return | after 1.5 s, on player acceptance, at 50% HP |
+
+The VIT defaults above are settled by #11; the former +5 HP / 0.05 HP/s values
+are obsolete. Novice has no exception. Each actor definition can independently
+override either coefficient. `ActorStats` accepts source-keyed `VitalityModifier`
+entries: effective coefficient = max(0, (base + additive deltas) × max(0, 1 +
+percentage deltas)). Removing a source removes its contribution. This is a small
+stat boundary, not an item/passive/effect framework. Other primary coefficients
+remain unchanged. Derived-stat changes notify Health/movement through `Changed`.
+Missing HP is preserved where possible; lowering maximum HP alone does not kill
+a living actor (minimum 1 HP), and dead actors stay dead. This edge policy remains
+provisional with the existing level-up HP policy under #11.
+
+Vitality increment validation: default/override/modifier math, in-combat regen,
+Q1 growth, combat/death/return/well and legacy migration/full-HP load passed.
+No Crop Slime, fist, well or return tuning changed to compensate for the larger
+Novice HP pool. Design docs were copied through `setup/unity-project` `cc674f5`;
+economy/controller/cube-world changes are documentation only.
 
 The settled -10% elemental baseline and 75% normal cap are represented in
 tuning data. They do not affect these no-element attacks. Final coefficients

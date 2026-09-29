@@ -16,8 +16,8 @@ namespace DiceFree.Combat
         public event Action<CombatActor, DamageResult> Damaged;
         public event Action<float> Healed;
         private void Awake() { stats = GetComponent<ActorStats>(); Current = Maximum; }
-        private void OnEnable() => stats.LevelChanged += RefreshMaximum;
-        private void OnDisable() => stats.LevelChanged -= RefreshMaximum;
+        private void OnEnable() => stats.Changed += RefreshMaximum;
+        private void OnDisable() => stats.Changed -= RefreshMaximum;
         private void Update() { if (Alive) Heal(stats.Regeneration * Time.deltaTime, false); }
         public float ApplyDamage(CombatActor source, DamageResult result)
         {
@@ -44,8 +44,8 @@ namespace DiceFree.Combat
         }
         public void RefreshMaximum(float previousMaximum)
         {
-            // Preserve missing HP on level-up; dead actors remain dead. This is not resurrection.
-            if (Alive) Current = Mathf.Clamp(Current + Maximum - previousMaximum, 0, Maximum);
+            // Preserve missing HP when possible; a maximum change itself is neither damage nor resurrection.
+            if (Alive) Current = Mathf.Clamp(Current + Maximum - previousMaximum, Mathf.Min(1, Maximum), Maximum);
         }
     }
 }

@@ -161,7 +161,8 @@ namespace DiceFree.EditorTools
         {
             var a=player.Stats.Attributes;
             Require(a.vitality==level&&a.strength==level&&a.agility==level&&a.intelligence==level&&a.spirit==level,"All five Novice stats must grow");
-            Require(player.Health.Maximum==10+5*level&&player.Health.Current>0&&player.Health.Current<=player.Health.Maximum,"Level-up HP bounds");
+            Require(player.Health.Maximum==10+15*level&&player.Health.Current>0&&player.Health.Current<=player.Health.Maximum,"Level-up HP bounds");
+            Require(Mathf.Approximately(player.Stats.Regeneration, 0.1f*level), "Level-up regeneration");
             Require(player.Stats.Definition.basicAttack.RawDamage(a)==1+2*level,"Fists must read post-level attributes");
         }
         private static void Focus()

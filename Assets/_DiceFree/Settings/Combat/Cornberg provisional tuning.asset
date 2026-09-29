@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0995bd091cbe27741b08375a1ac7fdc6, type: 3}
   m_Name: Cornberg provisional tuning
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.CombatTuning
-  hpPerVitality: 5
-  regenerationPerVitality: 0.05
+  hpPerVitality: 15
+  regenerationPerVitality: 0.1
   defensePerAttribute: 1
   defenseConstant: 100
   attackSpeedPerAgility: 0.005

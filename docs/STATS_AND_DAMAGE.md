@@ -31,13 +31,22 @@ Primary secondary effects:
 - maximum HP;
 - **flat HP regeneration**.
 
-Conceptually:
+Default baseline:
 
 ```
-Max HP = class base HP + (Vitality × class/universal coefficient) + modifiers
+Max HP = class base HP + (Vitality × 15 HP) + modifiers
+Base HP regeneration = Vitality × 0.1 HP/sec
 ```
 
-Exact coefficient model remains open.
+These are **default coefficients**, not immutable universal constants.
+
+Classes may explicitly override their Vitality-to-HP and Vitality-to-regeneration coefficients as part of class identity.
+
+Items, passives, buffs and other effects may also modify the effective coefficients or add independent flat/percentage HP and regeneration.
+
+If no override is authored, use:
+- **+15 maximum HP per Vitality**;
+- **+0.1 HP/sec per Vitality**.
 
 ### Strength
 
@@ -414,6 +423,8 @@ The precise mathematical ordering inside these buckets will be finalized during 
 ### HP regeneration
 
 Vitality provides flat HP regeneration.
+
+Default: **0.1 HP/sec per Vitality** unless class/content explicitly overrides the coefficient.
 
 HP regeneration is **always active**, including in combat.
 

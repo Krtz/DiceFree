@@ -6,8 +6,8 @@ namespace DiceFree.Combat
     public sealed class CombatTuning : ScriptableObject
     {
         [Header("Provisional coefficients - see docs/CORNBERG_COMBAT.md")]
-        [Min(0)] public float hpPerVitality = 5;
-        [Min(0)] public float regenerationPerVitality = 0.05f;
+        [Min(0)] public float hpPerVitality = 15;
+        [Min(0)] public float regenerationPerVitality = 0.1f;
         [Min(0)] public float defensePerAttribute = 1;
         [Min(1)] public float defenseConstant = 100;
         [Min(0)] public float attackSpeedPerAgility = 0.005f;

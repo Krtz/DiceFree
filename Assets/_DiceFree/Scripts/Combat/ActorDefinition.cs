@@ -25,6 +25,11 @@ namespace DiceFree.Combat
         [Min(0.1f)] public float moveSpeed = 5;
         public AttackDefinition basicAttack;
         public CombatTuning tuning;
+        public bool overrideVitalityHp, overrideVitalityRegeneration;
+        [Min(0)] public float hpPerVitality = 15;
+        [Min(0)] public float regenerationPerVitality = 0.1f;
+        public float VitalityHpCoefficient => overrideVitalityHp ? hpPerVitality : tuning.hpPerVitality;
+        public float VitalityRegenerationCoefficient => overrideVitalityRegeneration ? regenerationPerVitality : tuning.regenerationPerVitality;
         public ElementResistance[] resistances = Array.Empty<ElementResistance>();
     }
 }
