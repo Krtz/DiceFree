@@ -2744,3 +2744,50 @@ Exact formulas and rewards remain open.
 **Decision:** After the Cornberg vertical-slice PoC is sufficiently proven, build a focused cube-world traversal PoC before expanding full world production.
 
 The PoC determines whether seamless 90-degree cube-face traversal is practical/fun or should be represented with authored/streamed transitions.
+
+
+## 2026-09-29 — Default Vitality coefficients
+
+**Decision:** Default Vitality scaling is **+15 maximum HP per VIT** and **+0.1 HP/sec regeneration per VIT**.
+
+Classes may explicitly override either coefficient.
+
+Items/passives/effects may further modify the coefficients or add independent HP/regeneration.
+
+## 2026-09-29 — Early Cornberg economy anchors
+
+**Working targets:** Crop Slimes drop roughly **1-3 gold**.
+
+**Working Cornberg fixed-vendor examples:**
+- +1 damage sword: 100 gold;
+- +2 damage sword: 250 gold;
+- +3 damage sword: 450 gold;
+- basic low-stat defensive items also exist.
+
+**Decision:** Vendor inventories are fixed/authored.
+
+These values anchor early prototyping rather than defining the whole economy.
+
+## 2026-09-29 — Explicit-only blacksmith upgrades
+
+**Decision:** Blacksmith/item upgrading applies only to explicitly authored upgradeable items/recipes.
+
+**Direction:** Item upgrading is primarily a midgame-to-endgame system, not a universal early item-level upgrade mechanic.
+
+## 2026-09-29 — Optional mentor scaling
+
+**Decision:** Veteran/new-player scaling should use an optional mentor/assist mode rather than universal mandatory down-scaling.
+
+Exact formulas and rewards remain open.
+
+## 2026-09-29 — Controller support with mouse reference design
+
+**Decision:** Controller/gamepad support is a target.
+
+**Decision:** Classic mouse click-to-move remains DiceFree's primary/reference control and balance target.
+
+## 2026-09-29 — Prototype cube-world traversal after Cornberg
+
+**Decision:** After the Cornberg vertical-slice PoC is sufficiently proven, build a focused cube-world traversal PoC before expanding full world production.
+
+The PoC determines whether seamless 90-degree cube-face traversal is practical/fun or should be represented with authored/streamed transitions.
