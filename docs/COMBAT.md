@@ -770,3 +770,19 @@ A crit may occur even when later prevention reduces actual HP damage to zero. Tr
 Triggered/secondary effects do not inherit the parent action's crit result by default.
 
 Each child effect requires its own explicit crit permission/rules unless an authored mechanic explicitly says it inherits or copies the parent crit.
+
+
+### Elemental penetration in healing resolution
+
+When an elemental penetration effect explicitly applies to elemental healing, it works opposite to its damage behavior:
+
+- for damage, penetration lowers the target's effective matching resistance;
+- for healing, penetration raises the effective matching resistance used by that heal.
+
+Example: +10 percentage points of Fire penetration applied to a Fire heal treats the target as having +10 percentage points more Fire resistance for that heal.
+
+Effects must explicitly state whether their penetration applies to damage, healing, both, or another context.
+
+Actual resistance debuffs alter the target's resistance itself, so they affect matching elemental damage and matching elemental healing.
+
+Negative resistance remains uncapped. Elemental healing reaches zero at -100% effective matching resistance and becomes damage below -100%.
