@@ -576,7 +576,7 @@ Percentage Defense penetration resolves before flat Defense penetration, but per
 
 Flat penetration may push effective Defense below zero.
 
-If original Defense is negative, percentage Defense reduction does not apply; negative base Defense is not an intended normal content state.
+If original Defense is negative, percentage Defense reduction and percentage Defense penetration do not apply; negative base Defense is not an intended normal content state.
 
 
 ### Penetration below zero
