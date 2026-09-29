@@ -642,3 +642,12 @@ Percentage Defense reductions stack additively.
 Percentage Defense penetrations stack additively.
 
 All three use the relevant underlying Defense reference already defined by the Defense pipeline; reduction and penetration may exceed 100%.
+
+
+### Defense reference stability and precision
+
+Temporary negative Defense effects do not alter the underlying Defense reference; they affect only current/effective Defense.
+
+Defense math keeps fractional precision through intermediate calculations. Rounding is presentation-only unless a specific mechanic explicitly requires discrete values.
+
+The exact components that make up underlying Defense remain an open design question.
