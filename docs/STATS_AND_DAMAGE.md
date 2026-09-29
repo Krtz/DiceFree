@@ -966,3 +966,37 @@ Examples of valid authored crit rules include:
 - 12.5% chance to deal 8x damage.
 
 There is currently no assumption that distinct crit-granting sources combine into one global Crit Chance/Crit Damage pair. Exact interaction between multiple simultaneous crit rules remains a separate design question.
+
+
+### Multiple crit rules
+
+An action may have multiple applicable explicit crit rules.
+
+Default resolution:
+1. collect all applicable crit rules;
+2. sort them by **crit multiplier from highest to lowest**;
+3. roll the highest-multiplier rule first;
+4. if it succeeds, use that crit result and stop;
+5. if it fails, roll the next rule;
+6. continue until one succeeds or all fail.
+
+Example:
+- 12.5% chance for 8x;
+- 50% chance for 2x.
+
+The 8x rule rolls first. If it succeeds, the 2x rule is not rolled. If it fails, the 2x rule may then roll.
+
+Crit rules are therefore not merged into one combined global crit chance.
+
+Rare authored exceptions may explicitly state that they stack with or multiply another crit result. Such behavior is not default and must be stated by the source.
+
+### Crit-rule modifiers
+
+A gameplay source may explicitly modify another eligible crit rule instead of creating a separate roll.
+
+Examples:
+- add percentage points to an existing crit rule's chance;
+- modify that rule's multiplier;
+- permit a normally ineligible effect category to use a specific crit rule.
+
+These interactions are opt-in and source-specific. No generic crit modifier is assumed unless the source explicitly defines what it modifies.
