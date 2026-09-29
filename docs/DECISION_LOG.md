@@ -2650,3 +2650,50 @@ Do not add special soft collision until real testing demonstrates a need.
 **Decision:** Host owns authoritative summon AI/live state; clients send commands for units they control.
 
 Summon state participates in host migration/reconnect.
+
+
+## 2026-09-29 — Load at full HP
+
+**Decision:** Loading a manifestation at its registered resurrection point restores it to full HP regardless of saved living/dead HP state.
+
+## 2026-09-29 — Cooldowns reset on load
+
+**Decision:** Ordinary ability and consumable cooldowns reset on load.
+
+Explicit persistent long-duration cooldowns may exist later but must opt in.
+
+## 2026-09-29 — Buffs/debuffs reset on load
+
+**Decision:** Ordinary timed buffs/debuffs/effects reset on load.
+
+Persistent world/event buffs should be recreated from persistent world state/aura sources rather than by serializing transient effect instances.
+
+## 2026-09-29 — Resources reset by default on load
+
+**Decision:** Resources reset on load by default.
+
+**Decision:** Resource definitions can explicitly opt into persistence for rare/difficult-to-acquire resource mechanics.
+
+## 2026-09-29 — Combat state never resumes across load
+
+**Decision:** Threat, targets, aggro, casts, projectiles, enemy combat state and ordinary temporary summons are session state and reset on load.
+
+## 2026-09-29 — Persistent companions reload cleanly
+
+**Decision:** Manifestation-persistent companions reload with durable identity/equipment/traits, but their transient combat state resets.
+
+## 2026-09-29 — Timer clock domains
+
+**Decision:** Timed content can explicitly use session/gameplay time, played time or wall-clock time.
+
+DiceFree is not designed around weekly/live-service events, but wall-clock timing remains supported for future authored exceptions.
+
+## 2026-09-29 — Solo quit can escape danger
+
+**Decision:** No logout timer is required in solo.
+
+Loading at the resurrection point/full HP means quit/reload can function as an escape; this is acceptable.
+
+## 2026-09-29 — Multiplayer Leave Session uses vulnerable grace
+
+**Direction:** Intentional multiplayer leave during combat should use the same/equivalent vulnerable grace semantics as disconnect rather than instant disappearance.
