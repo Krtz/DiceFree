@@ -2831,3 +2831,12 @@ Movement Speed scaling from Agility remains open.
 This is intentionally a very small passive contribution.
 
 **Balance note:** this and the other current primary-attribute secondary coefficients are working/default tuning values, not immutable canon. Playtesting may change them while preserving the same stat-system architecture.
+
+
+## 2026-09-29 — Default Spirit to Healing Done coefficient
+
+**Decision:** Default Spirit secondary scaling is **+0.15% Healing Done per SPI**.
+
+Healing Received scaling from Spirit remains a separate open decision.
+
+**Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
