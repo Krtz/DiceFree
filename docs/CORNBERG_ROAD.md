@@ -109,7 +109,7 @@ Q1 → Q2 pacing and road readability before adding another quest/enemy mechanic
 
 Design documents were copied without merging through `setup/unity-project`
 `9193c2c`, including changes published during implementation. The newer STR/INT,
-AGI/SPI and Defense-curve/modifier decisions are preserved in design docs only;
-this patch adopts Vitality and deliberately retains the other existing provisional
-runtime coefficients. Their implementation is a separate small follow-up. Economy,
+AGI/SPI and Defense-curve/modifier decisions were initially preserved in design docs only;
+the Q2 patch adopted Vitality and retained the other provisional runtime coefficients.
+The subsequent [stat/Defense follow-up](CORNBERG_COMBAT.md) now adopts those defaults. Economy,
 controller and cube-world decisions likewise remain documentation-only here.

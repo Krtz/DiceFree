@@ -37,6 +37,9 @@ namespace DiceFree.Combat
             if (present && applied > 0) Healed?.Invoke(applied);
             return applied;
         }
+        // Environmental healing/regeneration uses Heal; an authored healer supplies its current stats here.
+        public float HealFrom(ActorStats source, float amount, bool present = true) =>
+            Heal(amount * (source == null ? 1 : source.HealingDone), present);
         public void Restore(float fraction = 1)
         {
             Current = Maximum * Mathf.Clamp(fraction, 0.01f, 1);

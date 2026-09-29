@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.CombatTuning
   hpPerVitality: 15
   regenerationPerVitality: 0.1
-  defensePerAttribute: 1
-  defenseConstant: 100
-  attackSpeedPerAgility: 0.005
-  moveSpeedPerAgility: 0.001
-  healingReceivedPerSpirit: 0.01
+  defensePerAttribute: 0.2
+  defenseConstant: 300
+  defenseExponent: 0.7
+  attackSpeedPerAgility: 0.00025
+  moveSpeedPerAgility: 0.0001
+  healingDonePerSpirit: 0.0015
+  healingReceivedPerSpirit: 0.00075
   defaultElementResistance: -0.1
   resistanceCap: 0.75

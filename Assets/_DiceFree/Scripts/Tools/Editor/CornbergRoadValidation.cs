@@ -151,11 +151,13 @@ namespace DiceFree.EditorTools
                 if (kill == 1)
                 {
                     object identity = road.GetEntityId(); float died = Time.time;
+                    road.Stats.SetDefenseModifier("test.respawn", new DefenseModifier { reductionFlat = 9 });
                     player.Motor.Teleport(giver.ApproachPosition);
                     while (!road.Alive) yield return null;
                     Require(Time.time - died >= road.GetComponent<OverworldRespawn>().Definition.delaySeconds - 0.2f &&
                         road.GetEntityId().Equals(identity) && CombatActor.All.Count == 3 && road.Health.Current == road.Health.Maximum &&
-                        !road.InCombat && !road.GetComponent<AggroBehaviour>().Returning && road.GetComponent<BasicAttack>().CooldownRemaining == 0,
+                        !road.InCombat && !road.GetComponent<AggroBehaviour>().Returning && road.GetComponent<BasicAttack>().CooldownRemaining == 0 &&
+                        road.Stats.DefenseModifiers(DamageChannel.Physical).reductionFlat == 0,
                         "Road timed respawn did not cleanly reuse the actor.");
                     // Same respawned actor must produce another valid report, separately from route tuning.
                     Fatal(road); Require(defeats == before + 2, "Respawn did not permit later defeat credit.");

@@ -160,3 +160,8 @@ It was deferred in the persistence increment and is now implemented by the
 [Q2 road slice](CORNBERG_ROAD.md). Q2 uses the existing version-2 quest records;
 older profiles acquire an unstarted Q2 record without changing Q1 or replaying
 rewards. No new save schema or migration is needed for this additive content.
+
+The subsequent stat/Defense slice also keeps schema v2. Runtime coefficient and
+Defense modifiers are transient; load resets them before restoring full HP.
+The load fixture explicitly seeds and checks removal of Vitality, secondary-stat
+and Defense modifiers, in addition to its existing target/cooldown checks.

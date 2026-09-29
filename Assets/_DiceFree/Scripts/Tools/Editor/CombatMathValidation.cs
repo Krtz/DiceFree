@@ -10,6 +10,7 @@ namespace DiceFree.EditorTools
         {
             var stats = player.Stats;
             CheckVitality(stats);
+            SecondaryStatsValidation.Check(player);
             Require(stats.Attributes.vitality == 1 && stats.Attributes.strength == 1 && stats.Attributes.agility == 1 &&
                 stats.Attributes.intelligence == 1 && stats.Attributes.spirit == 1, "Novice starting attributes.");
             var ten = AttributeValues.AtLevel(stats.Definition.baseAttributes, stats.Definition.growth, 10);

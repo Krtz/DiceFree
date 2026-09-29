@@ -25,6 +25,12 @@ namespace DiceFree.Combat
         [Min(0.1f)] public float moveSpeed = 5;
         public AttackDefinition basicAttack;
         public CombatTuning tuning;
+        public SecondaryCoefficientOverride[] secondaryOverrides = Array.Empty<SecondaryCoefficientOverride>();
+        public float SecondaryCoefficient(SecondaryStat stat)
+        {
+            foreach (var entry in secondaryOverrides) if (entry.stat == stat) return entry.coefficient;
+            return tuning.Coefficient(stat);
+        }
         public bool overrideVitalityHp, overrideVitalityRegeneration;
         [Min(0)] public float hpPerVitality = 15;
         [Min(0)] public float regenerationPerVitality = 0.1f;

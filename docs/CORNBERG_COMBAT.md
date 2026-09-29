@@ -91,7 +91,7 @@ Movement keeps NavMeshAgent avoidance for path movement. Direct movement also
 sweeps against actor colliders to prevent walking through live unit footprints.
 Static terrain/building/stream constraints still come from the original bake.
 
-## Settled Vitality defaults and provisional duel tuning
+## Settled stat defaults and provisional duel tuning
 
 The shared `Cornberg provisional tuning` asset and actor/attack assets under
 `Assets/_DiceFree/Settings/Combat/` expose balance values:
@@ -100,10 +100,10 @@ The shared `Cornberg provisional tuning` asset and actor/attack assets under
 | --- | --- |
 | Novice HP | 10 base + 15 per VIT = 25 at level 1 |
 | Flat regeneration | 0.1 HP/s per VIT before healing received, also in combat |
-| Physical / Magical Defense | base + 1 per STR / INT |
-| Defense multiplier | 100 / (100 + nonnegative Defense) |
-| AGI contribution | +0.5% attack speed and +0.1% movement speed per point |
-| SPI healing received | +1% per point |
+| Physical / Magical Defense | base + 0.2 per STR / INT |
+| Defense curve | q = (abs(Defense) / 300)^0.7; positive multiplier 1/(1+q), negative multiplier 2−1/(1+q) |
+| AGI contribution | +0.025% attack speed and +0.01% movement speed per point |
+| SPI healing done / received | +0.15% / +0.075% per point |
 | Fists | 1 + 2 × highest attribute; 1.1 s interval; 0.25 s wind-up |
 | Slime | 12 HP; 3 raw Physical damage; 1.7 s interval; 0.45 s wind-up |
 | Slime movement / awareness / leash | 3.4 units/s / 7 units / 13 units from home |
@@ -116,8 +116,9 @@ are obsolete. Novice has no exception. Each actor definition can independently
 override either coefficient. `ActorStats` accepts source-keyed `VitalityModifier`
 entries: effective coefficient = max(0, (base + additive deltas) × max(0, 1 +
 percentage deltas)). Removing a source removes its contribution. This is a small
-stat boundary, not an item/passive/effect framework. Other primary coefficients
-remain unchanged. Derived-stat changes notify Health/movement through `Changed`.
+stat boundary, not an item/passive/effect framework. The subsequent secondary-stat
+slice described below adopts the other settled coefficients. Derived-stat changes
+notify Health/movement through `Changed`.
 Missing HP is preserved where possible; lowering maximum HP alone does not kill
 a living actor (minimum 1 HP), and dead actors stay dead. This edge policy remains
 provisional with the existing level-up HP policy under #11.
@@ -127,6 +128,62 @@ Q1 growth, combat/death/return/well and legacy migration/full-HP load passed.
 No Crop Slime, fist, well or return tuning changed to compensate for the larger
 Novice HP pool. Design docs were copied through `setup/unity-project` `cc674f5`;
 economy/controller/cube-world changes are documentation only.
+
+### Secondary-stat and Defense follow-up
+
+The runtime now adopts the remaining defaults from design sync `9193c2c`.
+Percentage coefficients are stored as fractions: AGI attack speed `0.00025`,
+movement `0.0001`, SPI healing done `0.0015`, healing received `0.00075`.
+These replace the older provisional coefficients without changing either Slime's
+authored HP/damage/XP, fist base timing, the well rate or Return fraction.
+
+`SecondaryCoefficientOverride` entries let actor data override each relationship
+independently while absent entries inherit shared tuning. Source-keyed
+`SecondaryScalingModifier` entries use the same additive-then-percentage rule as
+Vitality. This is a coefficient seam, not a class/equipment/status framework.
+
+`DefenseMath` resolves the target's underlying Defense, then positive percentage
+and flat buffs, percentage and flat reductions, then the attacker's percentage
+and flat penetration. Every percentage reduction/penetration references positive
+underlying Defense before temporary buffs, never the intermediate remainder.
+Multiple reduction sources add; percentages may exceed 100%; flat effects may
+cross zero. Negative underlying Defense supplies a zero percentage reference.
+Physical and Magical channels remain independent and use the same tunable curve.
+At +300 Defense damage is halved; at −300 it is multiplied by 1.5; extreme negative
+Defense approaches 2× damage. Element resistance still resolves afterward.
+
+Transient source-keyed `DefenseModifier` records expose separate positive buff,
+reduction and penetration quantities (nonnegative magnitudes, percentage fields
+as fractions). Resolution reads buff/reduction fields from the target and
+penetration from the attacker. No current Cornberg content applies these effects;
+focused tests exercise the real damage pipeline with composed modifiers. Future
+effect owners can set/remove their own contributions without changing attacks.
+
+`Health.HealFrom` applies a healer's current Healing Done multiplier before the
+existing receiver multiplier, once each. Environmental well healing and passive
+regeneration continue using receiver scaling only; no healer class or ability is
+introduced. Excess healing is discarded and healing cannot resurrect.
+
+Transient coefficient/Defense records are not serialized. Full-HP load, enemy
+timed respawn and explicit enemy debug reset clear them. Future durable equipment
+or aura sources must reconstruct their contributions after load; this does not
+implement or decide a general effect-duration/death policy. Saves stay schema v2.
+Existing saves store level/XP, not derived Defense/speed/healing values, so loaded
+characters automatically use the current definitions without a schema migration.
+
+Secondary-stat validation on 2026-09-29 passed: coefficient percent conversion,
+independent override/modifier removal, curve anchors and symmetry, positive-buff
+ordering, additive shred above 100%, original-reference penetration, negative-base
+edge handling, physical/magical isolation and source/receiver healing exactly once.
+The existing combat/death/Return/well, Q1, Q2 (six reload checkpoints), all 13 routes,
+fresh/injured/dead/legacy saves, migration/recovery/stale-writer and Profile Inspector
+checks also passed. Load and timed enemy respawn explicitly test transient modifier
+cleanup. The scene, navigation, enemy/quest data and save schema are unchanged.
+Windows development build succeeded (171,961,822 bytes). Six isolated 12-second
+standalone startup/reload smokes passed without runtime/navigation errors: fresh
+revisions 1 → 2, completed-Q2 revisions 11 → 12 (level 5/0 XP), legacy revisions
+6 → 7 (level 3/7 XP). Identities and progression were retained. This is not a
+manual standalone playthrough; known editor SearchDatabase issue #17 remains.
 
 The settled -10% elemental baseline and 75% normal cap are represented in
 tuning data. They do not affect these no-element attacks. Final coefficients

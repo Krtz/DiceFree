@@ -184,8 +184,14 @@ namespace DiceFree.EditorTools
                     attack.SendMessage("Update"); // Exercise the real wind-up transition before applying load reset.
                     Require(attack.Target == enemy && player.GetComponent<TargetSelection>().Selected == enemy && attack.CooldownRemaining > 0,
                         "Load-reset fixture did not establish a target and cooldown.");
+                    player.Stats.SetSecondaryModifier("test.load", new SecondaryScalingModifier { stat = SecondaryStat.AttackSpeed, add = 1 });
+                    player.Stats.SetDefenseModifier("test.load", new DefenseModifier { buffFlat = 100 });
+                    player.Stats.SetVitalityModifier("test.load", new VitalityModifier { hpPerVitalityAdd = 10 });
                     Require(respawn.LoadAtAnchor("anchor.validation") && Vector3.Distance(player.transform.position, temporary.transform.position) < 1,
                         "Registered anchor resolution failed.");
+                    Require(player.Health.Maximum == 55 && player.Health.Current == 55 &&
+                        Mathf.Approximately(player.Stats.AttackSpeed, 1.00075f) && player.Stats.DefenseModifiers(DamageChannel.Physical).buffFlat == 0,
+                        "Load retained transient stat modifiers.");
                     Require(attack.Target == null && attack.CooldownRemaining == 0 && player.GetComponent<TargetSelection>().Selected == null,
                         "Load retained attack/selection state.");
                     temporary.transform.position = new Vector3(10000, 10000, 10000);

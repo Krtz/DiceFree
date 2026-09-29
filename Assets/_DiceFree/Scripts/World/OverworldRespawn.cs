@@ -24,6 +24,7 @@ namespace DiceFree.World
             if (!actor.Motor.Teleport(home)) { due = Time.time + 1; return; }
             transform.rotation = rotation;
             GetComponent<BasicAttack>()?.ResetForSpawn();
+            actor.Stats.ResetTransientModifiers();
             actor.Health.Restore(); // Subscribers clear AI state and the per-life defeat latch.
         }
         public void Configure(RespawnDefinition value) => definition = value;

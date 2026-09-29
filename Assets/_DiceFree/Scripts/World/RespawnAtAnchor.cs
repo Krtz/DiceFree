@@ -30,6 +30,7 @@ namespace DiceFree.World
             attack.ResetForSpawn();
             GetComponent<TargetSelection>()?.Select(null);
             GetComponent<Interactor>()?.Cancel();
+            actor.Stats.ResetTransientModifiers();
             actor.Health.Restore(); // Loading is a fresh session; combat Return retains its separate HP policy.
             return true;
         }

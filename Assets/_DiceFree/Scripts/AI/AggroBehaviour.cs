@@ -60,6 +60,7 @@ namespace DiceFree.AI
         {
             attack.Cancel();
             if (!actor.Motor.Teleport(home)) return false;
+            actor.Stats.ResetTransientModifiers();
             actor.Health.Restore(); Returning = false; return true;
         }
     }
