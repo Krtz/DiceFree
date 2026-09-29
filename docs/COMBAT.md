@@ -372,6 +372,26 @@ Periodic effects can choose their scaling model:
 
 Finite-duration DoTs/HoTs commonly default to snapshot unless content specifies otherwise, but both models are first-class.
 
+## Summons, pets and controllable units
+
+Owned combat units use a shared summon/companion framework.
+
+Important rules:
+- owned units do not consume player party slots;
+- there is no universal gameplay summon cap;
+- each ability/class defines its own quantity/lifetime limits;
+- autonomous, directly controllable and hybrid units are supported;
+- ownership and control are separate concepts and control can be transferred;
+- summons share the owner's **level** rather than leveling independently;
+- stats can be authored, snapshot-inherited, dynamically inherited or mixed;
+- owned units can have their own/shared/no resources;
+- own threat by default, with authored threat-transfer mechanics;
+- persistent companions can have stable IDs and equipment;
+- ally targeting is tag-filterable;
+- no special summon collision exception is assumed until playtesting demonstrates a need.
+
+See `docs/SUMMONS_AND_COMPANIONS.md`.
+
 ## Summon source attribution
 
 Summon actions retain both:
