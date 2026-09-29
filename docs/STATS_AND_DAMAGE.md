@@ -1000,3 +1000,40 @@ Examples:
 - permit a normally ineligible effect category to use a specific crit rule.
 
 These interactions are opt-in and source-specific. No generic crit modifier is assumed unless the source explicitly defines what it modifies.
+
+
+### Crit modifier ordering and chance cap
+
+Explicit crit-rule modifiers resolve **before** crit rules are ordered for rolling.
+
+After all applicable explicit modifiers are applied:
+1. determine each rule's final crit chance;
+2. determine each rule's final crit multiplier/behavior;
+3. sort ordinary crit rules by final multiplier, highest first;
+4. roll in that order until the first success.
+
+Example:
+- Rule A: 12.5% at 8x;
+- Rule B: 50% at 2x;
+- explicit modifier changes Rule B to 10x;
+- Rule B now rolls before Rule A.
+
+Ordinary crit chance is clamped to **0-100%** after modifiers.
+
+Chance above 100% has no implicit extra meaning. Any overflow conversion, bonus roll, super-crit behavior or other >100% mechanic must be explicitly authored.
+
+### Crit placement in damage resolution
+
+By default, a successful crit modifies the **raw damage packet before Defense and elemental resistance**.
+
+Example:
+
+```
+100 raw damage
+2x crit
+= 200 raw critical damage
+then Defense mitigation
+then elemental resistance
+```
+
+Rare mechanics may explicitly override this placement, but such behavior must be stated by the source.
