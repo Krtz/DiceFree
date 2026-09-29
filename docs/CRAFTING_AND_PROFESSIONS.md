@@ -72,3 +72,17 @@ Exact categories and cooldowns are designed with the consumables themselves.
 DiceFree will eventually support more currencies/resources than gold.
 
 Do not design the endgame currency ecosystem prematurely, but technical systems should support multiple currency types, carried/stored states, and individual death-loss rules.
+
+
+## Item upgrading
+
+NPC blacksmith upgrading is **not** a universal "raise any item's level" system.
+
+Only items/recipes explicitly authored as upgradeable can be upgraded.
+
+Direction:
+- upgrading is mainly a **midgame-to-endgame** system;
+- upgrade paths are handcrafted;
+- inputs/costs/results are explicit recipe/content data;
+- arbitrary early-game vendor gear does not automatically have an upgrade ladder;
+- the system can support memorable item evolution without requiring every item to remain relevant forever.
