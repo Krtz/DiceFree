@@ -116,13 +116,14 @@ Classes can use one or more primary attributes, and individual skills can use be
 
 Vitality contributes to maximum HP.
 
-Conceptually:
+Default baseline:
 
 ```
-Max HP = class base HP + (Vitality × HP coefficient) + other modifiers
+Max HP = class base HP + (Vitality × 15 HP) + other modifiers
+HP regeneration = Vitality × 0.1 HP/sec + other modifiers
 ```
 
-Open question: whether the Vitality coefficient is universal or class-specific.
+Classes can explicitly override these default Vitality coefficients. Items/effects can modify them further.
 
 ## Resources
 
