@@ -807,3 +807,27 @@ Example:
 ```
 
 Reduction changes the target's effective Defense for all relevant attackers; penetration remains attacker-specific.
+
+
+### Internal Defense-reduction order
+
+When an effect has both percentage and flat Physical/Magical Defense reduction, **percentage Defense reduction is applied before flat Defense reduction**.
+
+The complete default Defense ordering is therefore:
+
+1. base/current Defense before reduction;
+2. percentage Defense reduction;
+3. flat Defense reduction;
+4. percentage Defense penetration;
+5. flat Defense penetration;
+6. evaluate final positive/negative Defense through the mitigation/vulnerability curve.
+
+Example:
+
+```
+100 Defense
+20% reduction -> 80
+10 flat reduction -> 70
+20% penetration -> 56
+10 flat penetration -> 46 effective Defense
+```
