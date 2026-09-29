@@ -97,14 +97,13 @@ It must still provide useful value to non-Mana classes.
 
 ### Spirit
 
-Default secondary effect currently settled:
-- **1 Spirit = +0.15% Healing Done**.
+Default secondary effects currently settled:
+- **1 Spirit = +0.15% Healing Done**;
+- **1 Spirit = +0.75% Healing Received**.
 
-Healing Received scaling from Spirit remains to be finalized separately.
+These intentionally use different coefficients.
 
-These two effects may use different coefficients.
-
-The Healing Done coefficient is a balance default, not immutable canon. Classes/items/passives/effects may explicitly modify or override it.
+Both coefficients are balance defaults, not immutable canon. Classes/items/passives/effects may explicitly modify or override them.
 
 Spirit is the default/expected healer attribute, but not every healer must use Spirit as its primary attack attribute and not every tank/damage class must ignore Spirit.
 
