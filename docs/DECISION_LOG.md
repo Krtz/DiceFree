@@ -2822,3 +2822,12 @@ This is intentionally a very small passive contribution.
 Classes/items/passives/effects may explicitly override or modify it.
 
 Movement Speed scaling from Agility remains open.
+
+
+## 2026-09-29 — Default Agility to Movement Speed coefficient
+
+**Decision:** Default Agility secondary scaling is **+0.01% Movement Speed per AGI**.
+
+This is intentionally a very small passive contribution.
+
+**Balance note:** this and the other current primary-attribute secondary coefficients are working/default tuning values, not immutable canon. Playtesting may change them while preserving the same stat-system architecture.
