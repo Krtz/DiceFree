@@ -622,3 +622,12 @@ Default Physical/Magical Defense pipeline:
 Flat reduction and flat penetration can create negative effective Defense.
 
 Reduction is target-state modification; penetration is attacker-specific.
+
+
+### Underlying Defense for percentage shred/penetration
+
+Percentage Defense reduction and percentage Defense penetration reference the target's underlying Defense before temporary positive Defense buffs.
+
+Positive Defense buffs resolve percentage first, then flat.
+
+Percentage reduction/penetration may exceed 100% and can push final effective Defense below zero.
