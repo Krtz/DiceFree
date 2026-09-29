@@ -335,6 +335,16 @@ Identity and progression survived reload: fresh level 1/0 XP, completed Q2 level
 5/0 XP, and migrated legacy level 3/7 XP. Revisions advanced on each launch;
 legacy saves migrated to schema 2. These are startup/reload smoke checks, not
 full standalone combat playthroughs.
+Final remote verification found an additional append-only design update at
+`03eb2e0ca8e079fa0b47a7b723c176ce9a6a2718`; its additions to COMBAT,
+STATS_AND_DAMAGE and DECISION_LOG are preserved here too. They clarify separate
+originating-action provenance, hit-before-crit, critical resolution versus HP
+damage, explicit child-effect inheritance and elemental healing penetration.
+This increment retains winning-rule provenance and separates crit from damage,
+but does not yet add originating-action identity fields or hit/miss, child-effect
+or elemental-healing systems. Reusing a context means packets of the same action,
+not implicit inheritance by a child action. Those integrations must follow the
+new notes when implemented; no modifier composition formula was settled.
 Scene, baked navigation, save schema and authored balance data are unchanged.
 
 ## Validation

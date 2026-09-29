@@ -734,3 +734,55 @@ A multi-packet action shares one crit result across all eligible raw packets, wh
 Per-packet crit rolls require an explicit mechanic.
 
 Default critical-hit signaling is one critical-hit event per action. Explicit per-packet crit mechanics may opt into per-packet critical events.
+
+
+### Crit modifier clarity and provenance
+
+Crit modifiers are an available but intentionally uncommon tool.
+
+Any modifier to crit chance or multiplier must explicitly define its operation, such as:
+- additive percentage points;
+- multiplicative change to existing chance;
+- additive multiplier amount;
+- multiplicative change to existing multiplier.
+
+Do not infer one meaning from ambiguous "+X% crit" wording.
+
+Critical resolution preserves both the originating action identity and the winning crit-rule/source identity. These are separate provenance fields for future action-trigger and source-trigger logic.
+
+
+### Hit-before-crit ordering
+
+For actions with accuracy/miss mechanics, resolve whether the action connects before evaluating crit rules.
+
+A miss consumes no crit roll by default.
+
+### Critical result vs HP damage
+
+Critical resolution and HP damage application are separate stages.
+
+A crit may occur even when later prevention reduces actual HP damage to zero. Trigger systems should be able to distinguish:
+- an action that critically resolved;
+- actual critical HP damage dealt.
+
+### Child-effect crit inheritance
+
+Triggered/secondary effects do not inherit the parent action's crit result by default.
+
+Each child effect requires its own explicit crit permission/rules unless an authored mechanic explicitly says it inherits or copies the parent crit.
+
+
+### Elemental penetration in healing resolution
+
+When an elemental penetration effect explicitly applies to elemental healing, it works opposite to its damage behavior:
+
+- for damage, penetration lowers the target's effective matching resistance;
+- for healing, penetration raises the effective matching resistance used by that heal.
+
+Example: +10 percentage points of Fire penetration applied to a Fire heal treats the target as having +10 percentage points more Fire resistance for that heal.
+
+Effects must explicitly state whether their penetration applies to damage, healing, both, or another context.
+
+Actual resistance debuffs alter the target's resistance itself, so they affect matching elemental damage and matching elemental healing.
+
+Negative resistance remains uncapped. Elemental healing reaches zero at -100% effective matching resistance and becomes damage below -100%.

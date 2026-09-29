@@ -1062,3 +1062,109 @@ A mechanic may explicitly opt into per-packet crit resolution instead.
 By default, a critical action emits **one critical-hit event per action**, not one event per damage packet.
 
 Explicit per-packet crit mechanics may define per-packet critical events when authored to do so.
+
+
+### Crit modifier restraint and explicit math
+
+Crit-rule modifiers are supported by the design, but they should be used sparingly.
+
+When a source modifies crit chance or crit multiplier, the operation must be explicit rather than relying on ambiguous wording.
+
+Examples of distinct chance operations:
+- **+10 percentage points**: 25% -> 35%;
+- **+20% of existing chance**: 25% -> 30%.
+
+Examples of distinct multiplier operations:
+- **+0.5x multiplier**: 2x -> 2.5x;
+- **+50% of existing multiplier**: 2x -> 3x.
+
+There is no assumption that DiceFree needs to use all of these modifier forms in ordinary content. Prefer simple authored crit rules unless a modifier adds meaningful design value.
+
+### Crit provenance
+
+A critical action preserves both:
+- the **action/source context** that produced the resolved effect;
+- the **winning crit rule/source** that caused the critical result.
+
+Example:
+- action: Fireball;
+- winning crit source: Ridiculous Hat of Explosions.
+
+These identities remain separate so future systems can distinguish "when this action crits" from "when this item/passive causes a crit".
+
+
+### Hit resolution before crit
+
+If an action can miss, hit/miss resolution occurs **before** crit resolution.
+
+A missed action:
+- does not roll crit rules;
+- does not consume crit RNG;
+- cannot produce a critical-hit result unless an explicit mechanic says otherwise.
+
+### Critical action vs critical damage dealt
+
+A successful crit roll and actual HP damage are separate facts.
+
+An action may count as having critically hit even if the resulting damage is fully prevented by:
+- immunity;
+- shields/absorbs;
+- another prevention layer.
+
+For trigger purposes, distinguish at least:
+- **critical action / critical hit occurred**;
+- **critical HP damage dealt**.
+
+Mechanics must state which fact they care about.
+
+### Crit inheritance
+
+Secondary effects/procs do **not** inherit the parent action's critical result by default.
+
+A proc, explosion, DoT application, secondary strike or other child effect resolves its own crit eligibility/rules.
+
+A source may explicitly state that a child effect inherits or copies the parent's crit result; this is an exception, not the default.
+
+
+### Elemental penetration and healing
+
+Elemental penetration may apply to elemental healing when the authored effect says it does.
+
+For elemental healing, matching elemental penetration acts in the **opposite direction** from damage penetration: it increases the effective matching resistance used by the heal.
+
+Example:
+
+```
+Base Fire heal: 100
+Target Fire resistance: +50%
+Healer Fire penetration affecting healing: +10 percentage points
+Effective healing resistance: +60%
+Final heal: 160
+```
+
+This is contextual behavior, not an excuse for ambiguous wording. An authored effect must make clear whether its penetration affects:
+- damage;
+- healing;
+- both;
+- or another explicitly defined context.
+
+A real resistance debuff changes the target's resistance itself and therefore affects both matching elemental damage and matching elemental healing according to their normal formulas.
+
+Negative elemental resistance remains uncapped. Matching elemental healing uses:
+
+```
+Healing = Base Healing × (1 + effective matching resistance)
+```
+
+Therefore:
+- -50% resistance => 50% of base healing;
+- -100% resistance => 0 healing;
+- below -100% resistance => the result becomes damage.
+
+Example:
+
+```
+100 Fire heal against -150% effective Fire resistance
+= -50
+= 50 Fire-context healing-inversion damage
+```

@@ -3040,3 +3040,49 @@ Rare sources may explicitly override the default crit placement in the damage pi
 **Decision:** Default critical-hit signaling is one critical-hit event per action, not one per packet.
 
 Per-packet crit resolution/events remain possible only when explicitly authored.
+
+
+## 2026-09-30 — Crit modifier restraint and provenance
+
+**Decision:** Crit-rule modifiers are supported but should be used sparingly.
+
+When used, modifier math must be explicit. Distinguish operations such as:
+- +percentage points vs percentage-of-existing chance;
+- +multiplier amount vs percentage-of-existing multiplier.
+
+Prefer simple authored crit rules when possible rather than unnecessary modifier layers.
+
+**Decision:** A critical action preserves both:
+- action/source provenance;
+- winning crit-rule/source provenance.
+
+These identities remain separate for future trigger logic.
+
+
+## 2026-09-30 — Hit-before-crit, critical result vs damage, and inheritance
+
+**Decision:** Hit/miss resolution occurs before crit resolution. Misses do not consume crit rolls.
+
+**Decision:** A successful critical result is distinct from actual critical HP damage dealt. A crit can occur even if later mitigation/prevention results in zero HP damage.
+
+**Decision:** Secondary/child effects do not inherit parent crit results by default. Inheritance requires an explicit authored exception.
+
+
+## 2026-09-30 — Elemental penetration in healing
+
+**Decision:** Elemental penetration may affect elemental healing when the authored effect explicitly says it does.
+
+For healing it acts opposite to damage penetration:
+- damage penetration lowers effective matching resistance;
+- healing penetration raises effective matching resistance.
+
+Example:
+- target has +50% Fire resistance;
+- healer has +10 percentage points Fire penetration that applies to healing;
+- Fire heal resolves using +60% effective Fire resistance.
+
+**Decision:** Real resistance debuffs change target resistance itself and therefore affect both elemental damage and elemental healing.
+
+**Reaffirmed:** Negative elemental resistance is uncapped. At -100% matching resistance elemental healing becomes zero; below -100% it inverts into damage.
+
+**Design rule:** Penetration effects must state clearly which contexts they affect. Avoid ambiguous generic wording.
