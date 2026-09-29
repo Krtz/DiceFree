@@ -171,7 +171,7 @@ namespace DiceFree.EditorTools
                     Require(Vector3.Distance(player.transform.position, new Vector3(8, 0, 6)) < 1, "Load did not use Cornberg fallback.");
                     Require(player.Alive && !player.InCombat && player.GetComponent<BasicAttack>().Target == null, "Transient combat state survived load.");
                     Require(Mathf.Approximately(player.Health.Current, player.Health.Maximum), "Loaded injured/dead/legacy manifestation was not full HP.");
-                    var enemy = UnityEngine.Object.FindAnyObjectByType<DiceFree.AI.AggroBehaviour>().GetComponent<CombatActor>();
+                    var enemy = CombatValidationActors.Find("enemy.crop-slime");
                     Require(enemy.Health.Current == enemy.Health.Maximum && !enemy.InCombat, "Enemy session state resumed.");
                     var temporary = new GameObject("Validation registered anchor");
                     temporary.transform.position = new Vector3(5, 0, -8);

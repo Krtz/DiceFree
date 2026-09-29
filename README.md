@@ -26,7 +26,10 @@ provisional tuning, architecture and validation. Art remains placeholder;
 Tier-1 classes and multiplayer are not implemented. Timed Slime respawn, XP and
 the first 3+2 crop quest are now playable: right-click the farmer beside the
 fields, or press I nearby. See [Q1 progression notes](docs/CORNBERG_QUESTS.md).
-Local autosave retains level/XP, Q1 and the Cornberg resurrection anchor;
+After Q1, accept **Check the Road** from the farmer, investigate the northeast
+road marker, defeat three Road Slimes and return. The normal Q1 → Q2 route
+reaches approximately level 5. See [Q2 road notes](docs/CORNBERG_ROAD.md).
+Local autosave retains level/XP, Q1/Q2 and the Cornberg resurrection anchor;
 reopening resumes at that anchor. See [local save notes](docs/CORNBERG_SAVES.md)
 for full-HP loading, v1-to-v2 migration, the editor Profile Inspector and test isolation.
 

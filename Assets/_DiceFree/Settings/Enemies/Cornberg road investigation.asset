@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg road investigation
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestDefinition
+  stableId: quest.cornberg.investigate-road
+  title: Check the Road
+  version: 1
+  offer: These Slimes are behaving strangely. Check the marked bend along the northeast road, defeat three Road Slimes, then return.
+  locationHint: Speak to the farmer, then follow the northeast road to the trail marker.
+  stages:
+  - kind: 1
+    instruction: Reach the marked northeast road bend
+    contentId:
+    familyId:
+    areaId: area.cornberg.road-investigation
+    count: 1
+  - kind: 0
+    instruction: Defeat Road Slimes, then return to the farmer
+    contentId: enemy.road-slime
+    familyId: enemy-family.slime
+    areaId:
+    count: 3
+  completedQuestIds:
+  - quest.cornberg.crop-slimes
+  rewardXp: 50

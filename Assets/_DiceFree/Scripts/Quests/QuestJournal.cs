@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DiceFree.Combat;
 using DiceFree.Progression;
+using DiceFree.World;
 using UnityEngine;
 
 namespace DiceFree.Quests
@@ -23,18 +24,20 @@ namespace DiceFree.Quests
         [SerializeField] private QuestDefinition[] definitions;
         [SerializeField] private List<QuestProgress> progress = new();
         private KillCreditReceiver credit;
+        private CombatActor owner;
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public event Action Changed;
         private void Awake()
         {
             credit = GetComponent<KillCreditReceiver>();
+            owner = GetComponent<CombatActor>();
             foreach (var definition in definitions)
                 if (Find(definition.stableId) == null) progress.Add(new QuestProgress {
                     questId = definition.stableId, definitionVersion = definition.version
                 });
         }
-        private void OnEnable() => credit.Credited += OnCredit;
-        private void OnDisable() => credit.Credited -= OnCredit;
+        private void OnEnable() { credit.Credited += OnCredit; AreaEvents.Entered += OnArea; }
+        private void OnDisable() { credit.Credited -= OnCredit; AreaEvents.Entered -= OnArea; }
         private QuestProgress Find(string id) => progress.Find(value => value.questId == id);
         public QuestProgress GetProgress(string id) => Find(id)?.Copy();
         // Detached stable-ID records form the future persistence seam; no scene references or UI names.
@@ -69,22 +72,44 @@ namespace DiceFree.Quests
                 });
             Changed?.Invoke();
         }
-        public bool Accept(QuestDefinition definition)
+        public bool PrerequisitesMet(QuestDefinition definition)
+        {
+            foreach (var id in definition.completedQuestIds ?? Array.Empty<string>())
+            {
+                var required = Array.Find(definitions, value => value.stableId == id);
+                var state = Find(id);
+                if (required == null || state == null || state.definitionVersion != required.version || state.status != QuestStatus.Completed) return false;
+            }
+            return true;
+        }
+        public bool CanAccept(QuestDefinition definition)
         {
             if (definition == null || Array.IndexOf(definitions,definition) < 0) return false;
             var state = Find(definition.stableId);
-            if (state == null || state.definitionVersion != definition.version || state.status != QuestStatus.Available) return false;
+            return state != null && state.definitionVersion == definition.version && state.status == QuestStatus.Available && PrerequisitesMet(definition);
+        }
+        public bool Accept(QuestDefinition definition)
+        {
+            if (!CanAccept(definition)) return false;
+            var state = Find(definition.stableId);
             state.status = QuestStatus.Active; state.stage = state.count = 0; Changed?.Invoke(); return true;
         }
-        private void OnCredit(ActorDefeated defeat)
+        private void OnCredit(ActorDefeated defeat) => Advance(ObjectiveKind.Kill, defeat.contentId, defeat.familyId, null);
+        private void OnArea(AreaEntered entered)
+        {
+            if (entered.actor == owner) Advance(ObjectiveKind.ReachArea, null, null, entered.areaId);
+        }
+        private void Advance(ObjectiveKind kind, string content, string family, string area)
         {
             foreach (var definition in definitions)
             {
                 var state = Find(definition.stableId);
                 if (state.definitionVersion != definition.version || state.status != QuestStatus.Active) continue;
                 var objective = definition.stages[state.stage];
-                if ((!string.IsNullOrEmpty(objective.contentId) && objective.contentId != defeat.contentId) ||
-                    (!string.IsNullOrEmpty(objective.familyId) && objective.familyId != defeat.familyId)) continue;
+                if (objective.kind != kind ||
+                    (!string.IsNullOrEmpty(objective.contentId) && objective.contentId != content) ||
+                    (!string.IsNullOrEmpty(objective.familyId) && objective.familyId != family) ||
+                    (kind == ObjectiveKind.ReachArea && objective.areaId != area)) continue;
                 state.count++;
                 if (state.count >= objective.count)
                 {

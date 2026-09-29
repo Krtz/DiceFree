@@ -50,18 +50,28 @@ If no override is authored, use:
 
 ### Strength
 
-Current direction:
-- contributes a **small/modest amount of Physical Defense**.
+Default secondary effect:
+- **1 Strength = +0.2 Physical Defense**.
 
-Strength should not replace class base defense, equipment or defensive passives.
+This is a default coefficient rather than an immutable universal constant.
+
+Classes/items/passives/effects may explicitly modify the Strength-to-Physical-Defense relationship.
+
+Strength should remain a secondary contributor and should not replace class base defense, equipment or defensive passives.
 
 ### Agility
 
-Current direction:
-- contributes a **very small amount of Attack Speed**;
-- contributes a **very small amount of Movement Speed**.
+Default secondary effects:
+- **1 Agility = +0.025% Attack Speed**;
+- **1 Agility = +0.01% Movement Speed**.
 
-The coefficients should be intentionally small so high-Agility classes do not automatically become absurd machineguns or permanently outrun encounter design.
+The Attack Speed coefficient is intentionally tiny so high-Agility classes do not automatically become absurd machineguns.
+
+The coefficient is a default rather than an immutable universal constant. Classes/items/passives/effects may explicitly modify the Agility-to-Attack-Speed relationship.
+
+The Movement Speed coefficient is intentionally tiny so Agility does not automatically let classes permanently outrun encounter design.
+
+All numeric secondary-stat coefficients in this section are current balance defaults. They are expected to be tunable through playtesting and may change without altering the underlying stat architecture.
 
 Meaningful Attack Speed/Movement Speed increases should primarily come from:
 - gear;
@@ -74,8 +84,12 @@ Generic Evasion is not currently committed.
 
 ### Intelligence
 
-Current direction:
-- contributes a **small/modest amount of Magical Defense**.
+Default secondary effect:
+- **1 Intelligence = +0.2 Magical Defense**.
+
+This mirrors Strength -> Physical Defense.
+
+The coefficient is a default rather than an immutable universal constant. Classes/items/passives/effects may explicitly modify the Intelligence-to-Magical-Defense relationship.
 
 Intelligence can additionally interact with class resources where appropriate, but it does **not** universally mean Mana, resource regeneration or maximum resource.
 
@@ -83,11 +97,13 @@ It must still provide useful value to non-Mana classes.
 
 ### Spirit
 
-Current direction:
-- improves healing done;
-- improves healing received.
+Default secondary effects currently settled:
+- **1 Spirit = +0.15% Healing Done**;
+- **1 Spirit = +0.075% Healing Received**.
 
-These two effects can use different coefficients.
+These intentionally use different coefficients.
+
+Both coefficients are balance defaults, not immutable canon. Classes/items/passives/effects may explicitly modify or override them.
 
 Spirit is the default/expected healer attribute, but not every healer must use Spirit as its primary attack attribute and not every tank/damage class must ignore Spirit.
 
@@ -180,9 +196,38 @@ STR/INT can contribute modest amounts but are secondary sources.
 
 Each class defines its own starting Physical Defense and Magical Defense as part of its base stat package.
 
-Physical and Magical Defense use the **same general diminishing-return formula shape**, with different input values and modifiers per class/build.
+Physical and Magical Defense use the **same diminishing-return formula family**.
 
-Exact formula constants remain a balance problem.
+Current balance-default formula:
+
+```
+q = (abs(Defense) / 300)^0.7
+```
+
+For nonnegative Defense:
+
+```
+DamageTakenMultiplier = 1 / (1 + q)
+Mitigation = q / (1 + q)
+```
+
+For negative Defense, use the same curve symmetrically as vulnerability:
+
+```
+DamageTakenMultiplier = 1 + q / (1 + q)
+```
+
+Examples:
+- +10 Defense -> ~91.5% damage taken (~8.5% mitigation)
+- +100 Defense -> ~68.3% damage taken (~31.7% mitigation)
+- +300 Defense -> 50% damage taken
+- +1000 Defense -> ~30.1% damage taken (~69.9% mitigation)
+- -10 Defense -> ~108.5% damage taken
+- -100 Defense -> ~131.7% damage taken
+- -300 Defense -> 150% damage taken
+- extremely negative Defense approaches, but does not exceed, 200% damage taken from Defense alone.
+
+The constants `300` and exponent `0.7` are current balance defaults and may change through playtesting without changing the underlying Defense architecture.
 
 ## Elemental resistances
 
@@ -708,3 +753,130 @@ Floating-number color indicates broad result/channel:
 Elements are communicated primarily with **element icons**, not by assigning a unique floating-text color to every element.
 
 This keeps Coffee/Donut/Math/etc. readable without creating an unusable rainbow.
+
+
+### Percentage reduction and penetration basis
+
+Percentage Defense reduction and percentage Defense penetration are both calculated from the target's **original positive Defense value for that resolution**, not from the already-reduced remainder.
+
+Multiple percentage reductions are therefore additive against that original value.
+
+Example:
+
+```
+Original Defense: 100
+50% Defense reduction -> subtract 50
+60% Defense reduction -> subtract another 60
+Result after percentage reduction: -10 Defense
+```
+
+If the target's original Defense is already negative, percentage Defense reduction and percentage Defense penetration do not apply. Negative base Defense is considered an unusual/content-authoring edge case rather than an intended baseline state.
+
+Percentage penetration uses the same original positive Defense basis.
+
+Example:
+
+```
+Original Defense: 100
+50% reduction -> -50
+20% penetration -> -20
+10 flat penetration -> -10
+Final effective Defense = 20
+```
+
+Flat reduction and flat penetration may both push effective Defense below zero.
+
+Within each layer, percentage effects resolve before flat effects, but percentage values always reference the original positive Defense rather than the intermediate Defense remainder.
+
+
+### Penetration below zero
+
+Defense penetration may push effective Defense below zero.
+
+Example:
+
+```
+Target Defense: 5
+Flat penetration: 10
+Effective Defense: -5
+```
+
+Negative effective Defense then uses the normal negative-Defense vulnerability curve.
+
+Penetration is therefore not clamped at zero.
+
+
+### Defense reduction vs penetration order
+
+Defense reduction resolves before penetration.
+
+Default conceptual order:
+1. establish the target's original Defense for this resolution;
+2. subtract all percentage Defense reduction, each calculated from original positive Defense;
+3. subtract flat Defense reduction;
+4. subtract percentage Defense penetration, calculated from original positive Defense;
+5. subtract flat Defense penetration;
+6. evaluate the resulting positive/negative Defense through the normal mitigation/vulnerability curve.
+
+Flat reduction and penetration may push Defense below zero.
+
+Reduction changes the target state for relevant attackers; penetration remains attacker-specific.
+
+
+### Internal Defense-reduction order
+
+When an effect has both percentage and flat Physical/Magical Defense reduction, **percentage Defense reduction is applied before flat Defense reduction**.
+
+Percentage reductions do not compound on the intermediate remainder; each references original positive Defense.
+
+The complete default Defense ordering is therefore:
+
+1. establish original Defense;
+2. percentage Defense reduction(s), additive from original positive Defense;
+3. flat Defense reduction;
+4. percentage Defense penetration, from original positive Defense;
+5. flat Defense penetration;
+6. evaluate final positive/negative Defense through the mitigation/vulnerability curve.
+
+
+### Underlying Defense reference for percentage reduction/penetration
+
+The percentage-reference Defense used by percentage Defense reduction and percentage Defense penetration is the target's **underlying Defense before temporary positive Defense buffs**.
+
+Example:
+
+```
+Underlying Defense: 100
+Temporary +50 Defense buff -> current Defense 150
+Enemy 20% Defense reduction -> subtract 20, not 30
+```
+
+Thus positive Defense buffs improve actual Defense without increasing the amount removed by enemy percentage reduction/penetration.
+
+### Positive Defense buff ordering
+
+When both percentage and flat positive Defense buffs apply, resolve:
+1. percentage positive Defense buffs;
+2. flat positive Defense buffs.
+
+Example:
+
+```
+Underlying Defense: 100
++20% Defense -> 120
++50 flat Defense -> 170 current Defense
+```
+
+### Percentage values above 100%
+
+Percentage Defense reduction and percentage Defense penetration are not capped at 100%.
+
+They may exceed 100% and push effective Defense below zero.
+
+Example:
+
+```
+Underlying Defense: 100
+120% penetration -> subtract 120
+Effective Defense before flat modifiers: -20
+```

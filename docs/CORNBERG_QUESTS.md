@@ -2,8 +2,9 @@
 
 This increment extends the existing saved Cornberg scene on `poc/cornberg`.
 It preserves geography, navigation, duel balance, death/return and well healing.
-No merge to main, Q2, Tier-1 classes, saving, multiplayer, shops or other quests
-is included.
+This note describes the original Q1 slice. Local saving is covered in
+[CORNBERG_SAVES.md](CORNBERG_SAVES.md); the subsequent Q2 extension is covered in
+[CORNBERG_ROAD.md](CORNBERG_ROAD.md). No Tier-1 classes, multiplayer or shops are implemented.
 
 ## Play
 
@@ -87,7 +88,7 @@ aggro, leash, attack timing, return timing/fraction and well values are unchange
   XP and applies levels through `ActorStats`. Stat-change events update health
   and movement independently. Attacks read current attributes at hit time.
   Novice growth remains the existing data-defined +1 in all five attributes.
-- `QuestDefinition` contains stable ID, definition version, ordered kill
+- `QuestDefinition` contains stable ID, definition version, ordered semantic
   objectives and reward. `QuestJournal` owns per-actor serializable progress:
   Available → Active stages → ReadyToTurnIn → Completed. Detached snapshots
   contain stable quest ID/version, stage and count. The subsequent local save
@@ -146,4 +147,4 @@ through the subsequent [local save slice](CORNBERG_SAVES.md).
 Credit IDs/deduplication remain session-local, not network/save IDs.
 
 Continue playtesting the complete five-kill/return route and the save/reload flow.
-The save note records the next persistence step; Q2 remains unimplemented.
+Q2 now extends this flow through the [road investigation](CORNBERG_ROAD.md).

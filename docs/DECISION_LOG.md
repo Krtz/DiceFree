@@ -2791,3 +2791,171 @@ Exact formulas and rewards remain open.
 **Decision:** After the Cornberg vertical-slice PoC is sufficiently proven, build a focused cube-world traversal PoC before expanding full world production.
 
 The PoC determines whether seamless 90-degree cube-face traversal is practical/fun or should be represented with authored/streamed transitions.
+
+
+## 2026-09-29 — Default Strength to Physical Defense coefficient
+
+**Decision:** Default Strength secondary scaling is **+0.2 Physical Defense per STR**.
+
+This is a default coefficient, not a hard universal constant.
+
+Classes/items/passives/effects may explicitly override or modify it.
+
+
+## 2026-09-29 — Default Intelligence to Magical Defense coefficient
+
+**Decision:** Default Intelligence secondary scaling is **+0.2 Magical Defense per INT**.
+
+This mirrors Strength -> Physical Defense.
+
+This is a default coefficient, not a hard universal constant.
+
+Classes/items/passives/effects may explicitly override or modify it.
+
+
+## 2026-09-29 — Default Agility to Attack Speed coefficient
+
+**Decision:** Default Agility secondary scaling is **+0.025% Attack Speed per AGI**.
+
+This is intentionally a very small passive contribution.
+
+Classes/items/passives/effects may explicitly override or modify it.
+
+Movement Speed scaling from Agility remains open.
+
+
+## 2026-09-29 — Default Agility to Movement Speed coefficient
+
+**Decision:** Default Agility secondary scaling is **+0.01% Movement Speed per AGI**.
+
+This is intentionally a very small passive contribution.
+
+**Balance note:** this and the other current primary-attribute secondary coefficients are working/default tuning values, not immutable canon. Playtesting may change them while preserving the same stat-system architecture.
+
+
+## 2026-09-29 — Default Spirit to Healing Done coefficient
+
+**Decision:** Default Spirit secondary scaling is **+0.15% Healing Done per SPI**.
+
+Healing Received scaling from Spirit remains a separate open decision.
+
+**Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
+
+
+## 2026-09-29 — Default Spirit to Healing Received coefficient
+
+**Decision:** Default Spirit secondary scaling is **+0.075% Healing Received per SPI**.
+
+This is intentionally **half** of Spirit's current Healing Done coefficient.
+
+**Balance note:** this is a current tuning default and may change through playtesting without changing the stat architecture.
+
+
+## 2026-09-29 — Physical/Magical Defense curve
+
+**Decision:** Physical and Magical Defense use the same current balance-default diminishing-return curve.
+
+```
+q = (abs(Defense) / 300)^0.7
+```
+
+Positive Defense:
+```
+DamageTakenMultiplier = 1 / (1 + q)
+```
+
+Negative Defense is symmetrical vulnerability:
+```
+DamageTakenMultiplier = 1 + q / (1 + q)
+```
+
+Current anchors:
+- +300 Defense = 50% mitigation;
+- -300 Defense = 150% damage taken;
+- extremely negative Defense approaches 200% damage taken from Defense alone.
+
+**Balance note:** the 300 scale and 0.7 exponent are working tuning defaults and may change after playtesting.
+
+
+## 2026-09-29 — Defense penetration order
+
+**Decision:** Percentage Physical/Magical Defense penetration is applied before flat Defense penetration.
+
+Example:
+- 100 Defense;
+- 20% penetration -> 80;
+- 10 flat penetration -> 70 effective Defense.
+
+This is the default combat-resolution order.
+
+
+## 2026-09-29 — Defense penetration can create negative Defense
+
+**Decision:** Defense penetration is not clamped at zero.
+
+If penetration exceeds current Physical/Magical Defense, effective Defense becomes negative and uses the normal vulnerability curve.
+
+Example:
+- 5 Defense;
+- 10 flat penetration;
+- -5 effective Defense.
+
+
+## 2026-09-29 — Defense reduction resolves before penetration
+
+**Decision:** Physical/Magical Defense reduction/debuffs apply before attacker-specific penetration.
+
+Default order:
+1. Defense reduction;
+2. percentage penetration;
+3. flat penetration;
+4. evaluate final Defense through the mitigation/vulnerability curve.
+
+Example: 100 -> 80 after -20 reduction -> 64 after 20% penetration -> 54 after 10 flat penetration.
+
+
+## 2026-09-29 — Percentage Defense reduction before flat reduction
+
+**Decision:** Within the Defense-reduction layer, percentage reduction resolves before flat reduction.
+
+Full default order:
+1. percentage Defense reduction;
+2. flat Defense reduction;
+3. percentage Defense penetration;
+4. flat Defense penetration;
+5. final mitigation/vulnerability calculation.
+
+
+## 2026-09-29 — Percentage Defense effects use original Defense
+
+**Decision:** Percentage Defense reduction and percentage Defense penetration are calculated from the target's original positive Defense value for the resolution, not from the intermediate remainder.
+
+Consequences:
+- multiple percentage Defense reductions are additive against original Defense;
+- example: 100 Defense with 50% reduction and 60% reduction becomes -10 before other modifiers;
+- flat Defense reduction can push Defense below zero;
+- percentage penetration also references original positive Defense;
+- if original/base Defense is negative, percentage Defense reduction and percentage Defense penetration do not apply;
+- negative base Defense is considered an unusual authoring edge case rather than a normal target state.
+
+Default conceptual order:
+1. original Defense;
+2. percentage reduction(s) from original Defense;
+3. flat reduction;
+4. percentage penetration from original Defense;
+5. flat penetration;
+6. mitigation/vulnerability curve.
+
+
+## 2026-09-29 — Defense reference, positive buffs, and >100% shred
+
+**Decision:**
+- percentage Defense reduction/penetration use underlying Defense before temporary positive Defense buffs as their reference;
+- positive Defense buffs resolve percentage first, then flat;
+- percentage Defense reduction and penetration may exceed 100%.
+
+Example:
+- underlying Defense 100;
+- +20% Defense then +50 flat Defense => current Defense 170;
+- enemy 20% reduction still subtracts 20, because the reference is the underlying 100;
+- 120% penetration against underlying 100 subtracts 120 and can create negative effective Defense.

@@ -15,6 +15,8 @@ namespace DiceFree.Combat
         public Health Health { get; private set; }
         public TraversalMotor Motor { get; private set; }
         public float Radius => radius;
+        private string familyOverride;
+        public string FamilyId => familyOverride ?? Stats.Definition.familyId;
         public bool Alive => isActiveAndEnabled && Health != null && Health.Alive;
         public bool InCombat
         {
@@ -44,6 +46,6 @@ namespace DiceFree.Combat
         public bool IsHostileTo(CombatActor other) => Alive && other != null && other.Alive && other != this && faction != other.faction;
         public bool HasSightOf(CombatActor other) => !Physics.Linecast(transform.position + Vector3.up * 0.8f,
             other.transform.position + Vector3.up * 0.8f, 1 << 9, QueryTriggerInteraction.Ignore);
-        public void Configure(int team, float bodyRadius) { faction = team; radius = bodyRadius; }
+        public void Configure(int team, float bodyRadius, string family = null) { faction = team; radius = bodyRadius; familyOverride = family; }
     }
 }

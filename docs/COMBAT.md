@@ -568,3 +568,66 @@ See `docs/STATS_AND_DAMAGE.md` for shield ordering, Pure Damage, lifesteal, refl
 - exact Resurrection Sickness math;
 - exact ??? level threshold;
 - in-combat gear swapping.
+
+
+### Defense penetration basis and order
+
+Percentage Defense penetration resolves before flat Defense penetration, but percentage penetration is calculated from the target's **original positive Defense**, not from the already-reduced remainder.
+
+Flat penetration may push effective Defense below zero.
+
+If original Defense is negative, percentage Defense reduction and percentage Defense penetration do not apply; negative base Defense is not an intended normal content state.
+
+
+### Penetration below zero
+
+Penetration is not clamped at zero Defense.
+
+If penetration exceeds the target's current Defense, effective Defense becomes negative and the normal negative-Defense vulnerability curve applies.
+
+Example:
+```
+5 Defense - 10 flat penetration = -5 effective Defense
+```
+
+
+### Defense reduction vs penetration
+
+Defense reduction resolves before penetration.
+
+Percentage reduction and percentage penetration both reference the target's original positive Defense value for the resolution.
+
+Default conceptual order:
+1. establish original Defense;
+2. subtract percentage reduction(s), additive from original positive Defense;
+3. subtract flat reduction;
+4. subtract percentage penetration from original positive Defense;
+5. subtract flat penetration;
+6. apply mitigation/vulnerability from final effective Defense.
+
+
+### Full Defense modifier ordering
+
+Percentage Defense reduction resolves before flat Defense reduction.
+
+Default Physical/Magical Defense pipeline:
+
+1. establish original Defense;
+2. percentage Defense reduction(s), additive from original positive Defense;
+3. flat Defense reduction;
+4. percentage Defense penetration, calculated from original positive Defense;
+5. flat Defense penetration;
+6. final mitigation/vulnerability curve.
+
+Flat reduction and flat penetration can create negative effective Defense.
+
+Reduction is target-state modification; penetration is attacker-specific.
+
+
+### Underlying Defense for percentage shred/penetration
+
+Percentage Defense reduction and percentage Defense penetration reference the target's underlying Defense before temporary positive Defense buffs.
+
+Positive Defense buffs resolve percentage first, then flat.
+
+Percentage reduction/penetration may exceed 100% and can push final effective Defense below zero.

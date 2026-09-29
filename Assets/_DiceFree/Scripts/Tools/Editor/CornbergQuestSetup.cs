@@ -30,8 +30,8 @@ namespace DiceFree.EditorTools
                 value.offer="Those Slimes are ruining the crops. Clear three first, then two more, and come back to me.";
                 value.locationHint="Speak to the former swordswoman/farmer beside the eastern fields.";
                 value.stages=new[] {
-                    new KillObjective { contentId="enemy.crop-slime",count=3,instruction="Defeat crop Slimes" },
-                    new KillObjective { contentId="enemy.crop-slime",count=2,instruction="Defeat two more crop Slimes" }
+                    new QuestObjective { contentId="enemy.crop-slime",count=3,instruction="Defeat crop Slimes" },
+                    new QuestObjective { contentId="enemy.crop-slime",count=2,instruction="Defeat two more crop Slimes" }
                 };
             });
             var enemyData=enemy.GetComponent<ActorStats>().Definition;

@@ -14,18 +14,19 @@ namespace DiceFree.UI
         {
             if (interactor.Active is not QuestGiver giver) return;
             var actor=interactor.GetComponent<CombatActor>();
-            var state=actor.GetComponent<QuestJournal>().GetProgress(giver.Quest.stableId);
+            var quest = giver.CurrentQuest(actor);
+            var state=actor.GetComponent<QuestJournal>().GetProgress(quest.stableId);
             var r=Bounds; GUI.Box(r,GUIContent.none);
             GUI.Label(new Rect(r.x+12,r.y+8,346,25),giver.DisplayName);
-            GUI.Label(new Rect(r.x+12,r.y+36,346,68),giver.Quest.offer,new GUIStyle(GUI.skin.label){wordWrap=true});
-            if (state.definitionVersion != giver.Quest.version)
+            GUI.Label(new Rect(r.x+12,r.y+36,346,68),quest.offer,new GUIStyle(GUI.skin.label){wordWrap=true});
+            if (state.definitionVersion != quest.version)
             {
                 GUI.Label(new Rect(r.x+12,r.y+110,346,28), "Saved quest unavailable; progress preserved.");
                 if (GUI.Button(new Rect(r.x+250,r.y+145,108,28),"Close [Esc]")) interactor.Cancel();
                 return;
             }
-            if (state.status == QuestStatus.Available && GUI.Button(new Rect(r.x+12,r.y+110,220,28),"Accept: "+giver.Quest.title)) giver.Accept(actor);
-            if (state.status == QuestStatus.ReadyToTurnIn && GUI.Button(new Rect(r.x+12,r.y+110,220,28),$"Turn in · {giver.Quest.rewardXp} XP")) giver.TurnIn(actor);
+            if (state.status == QuestStatus.Available && GUI.Button(new Rect(r.x+12,r.y+110,220,28),"Accept: "+quest.title)) giver.Accept(actor, quest);
+            if (state.status == QuestStatus.ReadyToTurnIn && GUI.Button(new Rect(r.x+12,r.y+110,220,28),$"Turn in · {quest.rewardXp} XP")) giver.TurnIn(actor, quest);
             if (state.status == QuestStatus.Active) GUI.Label(new Rect(r.x+12,r.y+110,340,28),"Complete the current objectives, then return.");
             if (state.status == QuestStatus.Completed) GUI.Label(new Rect(r.x+12,r.y+110,340,28),"Quest completed. Thank you.");
             if (GUI.Button(new Rect(r.x+250,r.y+145,108,28),"Close [Esc]")) interactor.Cancel();

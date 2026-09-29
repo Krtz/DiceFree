@@ -38,7 +38,7 @@ namespace DiceFree.EditorTools
         {
             if (!SessionState.GetBool(Running,false) || state != PlayModeStateChange.EnteredPlayMode) return;
             player = UnityEngine.Object.FindFirstObjectByType<TraversalInput>().GetComponent<CombatActor>();
-            brain = UnityEngine.Object.FindFirstObjectByType<AggroBehaviour>(); enemy = brain.GetComponent<CombatActor>();
+            brain = CombatValidationActors.IsolateCropDuel(); enemy = brain.GetComponent<CombatActor>();
             fists = player.GetComponent<BasicAttack>(); bump = enemy.GetComponent<BasicAttack>(); selection = player.GetComponent<TargetSelection>();
             InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;

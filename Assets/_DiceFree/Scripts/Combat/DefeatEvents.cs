@@ -13,7 +13,7 @@ namespace DiceFree.Combat
         public ActorDefeated(long id, CombatActor defeated, CombatActor source, CombatActor owner)
         {
             sequence = id; victim = defeated; killer = source; creditOwner = owner;
-            contentId = defeated.Stats.Definition.stableId; familyId = defeated.Stats.Definition.familyId;
+            contentId = defeated.Stats.Definition.stableId; familyId = defeated.FamilyId;
             position = defeated.transform.position; experience = defeated.Stats.Definition.experienceReward;
         }
     }

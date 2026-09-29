@@ -3,6 +3,8 @@
 The following combat foundation now also supports timed respawn, XP/leveling
 and Q1. See [Cornberg quest/progression notes](CORNBERG_QUESTS.md) for the current
 five-kill starter flow, added components, provisional values and validation.
+The [Q2 road slice](CORNBERG_ROAD.md) adds a stronger authored Slime variant and
+investigation objective through the same combat/credit/respawn pipeline.
 The subsequent [local save slice](CORNBERG_SAVES.md) adds progression/quest/anchor
 persistence and records the newer design-document sync through `cb3afd1`.
 

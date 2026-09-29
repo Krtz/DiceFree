@@ -156,6 +156,7 @@ Known editor SearchDatabase issue #17 remains unchanged.
 
 Q2 is specified sufficiently by #6 / WORLD_1.md: investigate the road, defeat
 three fixed-level Road Slimes and return to the swordswoman, targeting level 5.
-It was inspected but not started in this increment; remaining quota was reserved
-for completing persistence validation. Next gameplay slice should reuse authored
-Slime variants and generic objective/credit/XP/respawn paths, without a dungeon.
+It was deferred in the persistence increment and is now implemented by the
+[Q2 road slice](CORNBERG_ROAD.md). Q2 uses the existing version-2 quest records;
+older profiles acquire an unstarted Q2 record without changing Q1 or replaying
+rewards. No new save schema or migration is needed for this additive content.

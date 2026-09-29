@@ -6,12 +6,17 @@ namespace DiceFree.UI
     public sealed class QuestTracker : HudWidget
     {
         [SerializeField] private QuestJournal journal;
-        public override Rect Bounds => new Rect(Screen.width-310,130,294,120);
+        private int VisibleCount
+        {
+            get { int count = 0; foreach (var quest in journal.Definitions) if (journal.PrerequisitesMet(quest)) count++; return count; }
+        }
+        public override Rect Bounds => new Rect(Screen.width-310,130,294,Mathf.Max(120,VisibleCount*70+16));
         private void OnGUI()
         {
             var r=Bounds; GUI.Box(r,GUIContent.none); float y=r.y+8;
             foreach (var quest in journal.Definitions)
             {
+                if (!journal.PrerequisitesMet(quest)) continue;
                 var state=journal.GetProgress(quest.stableId);
                 GUI.Label(new Rect(r.x+10,y,274,24),quest.title); y+=24;
                 if (state.definitionVersion != quest.version)

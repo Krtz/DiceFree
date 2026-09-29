@@ -45,7 +45,7 @@ namespace DiceFree.EditorTools
         {
             if(!SessionState.GetBool(Running,false)||state!=PlayModeStateChange.EnteredPlayMode)return;
             player=UnityEngine.Object.FindAnyObjectByType<TraversalInput>().GetComponent<CombatActor>();
-            brain=UnityEngine.Object.FindAnyObjectByType<AggroBehaviour>(); enemy=brain.GetComponent<CombatActor>();
+            brain=CombatValidationActors.IsolateCropDuel(); enemy=brain.GetComponent<CombatActor>();
             respawn=enemy.GetComponent<OverworldRespawn>(); xp=player.GetComponent<ExperienceProgression>();
             journal=player.GetComponent<QuestJournal>(); giver=UnityEngine.Object.FindAnyObjectByType<QuestGiver>();
             interactor=player.GetComponent<Interactor>(); questId=giver.Quest.stableId; actorId=enemy.GetEntityId();

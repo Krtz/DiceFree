@@ -14,6 +14,9 @@ namespace DiceFree.AI
         private float nextPath;
         public bool Returning { get; private set; }
         public Vector3 Home => home;
+        public float Awareness => awareness;
+        public float Leash => leash;
+        public void Configure(float awarenessRadius, float leashRadius) { awareness = awarenessRadius; leash = leashRadius; }
         public string State => !actor.Alive ? "Defeated" : Returning ? "Returning" : attack.Target != null ? "Aggro" : "Idle";
         private void Awake() { actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>(); home = transform.position; }
         private void OnEnable() { actor.Health.Damaged += OnDamaged; actor.Health.Restored += ClearState; }
