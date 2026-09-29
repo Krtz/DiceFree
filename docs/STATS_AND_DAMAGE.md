@@ -768,3 +768,20 @@ Target Defense: 100
 ```
 
 This is the default ordering unless an explicitly unusual effect says otherwise.
+
+
+### Penetration below zero
+
+Defense penetration may push effective Defense below zero.
+
+Example:
+
+```
+Target Defense: 5
+Flat penetration: 10
+Effective Defense: -5
+```
+
+Negative effective Defense then uses the normal negative-Defense vulnerability curve.
+
+Penetration is therefore not clamped at zero.
