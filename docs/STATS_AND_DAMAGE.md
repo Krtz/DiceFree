@@ -1062,3 +1062,32 @@ A mechanic may explicitly opt into per-packet crit resolution instead.
 By default, a critical action emits **one critical-hit event per action**, not one event per damage packet.
 
 Explicit per-packet crit mechanics may define per-packet critical events when authored to do so.
+
+
+### Crit modifier restraint and explicit math
+
+Crit-rule modifiers are supported by the design, but they should be used sparingly.
+
+When a source modifies crit chance or crit multiplier, the operation must be explicit rather than relying on ambiguous wording.
+
+Examples of distinct chance operations:
+- **+10 percentage points**: 25% -> 35%;
+- **+20% of existing chance**: 25% -> 30%.
+
+Examples of distinct multiplier operations:
+- **+0.5x multiplier**: 2x -> 2.5x;
+- **+50% of existing multiplier**: 2x -> 3x.
+
+There is no assumption that DiceFree needs to use all of these modifier forms in ordinary content. Prefer simple authored crit rules unless a modifier adds meaningful design value.
+
+### Crit provenance
+
+A critical action preserves both:
+- the **action/source context** that produced the resolved effect;
+- the **winning crit rule/source** that caused the critical result.
+
+Example:
+- action: Fireball;
+- winning crit source: Ridiculous Hat of Explosions.
+
+These identities remain separate so future systems can distinguish "when this action crits" from "when this item/passive causes a crit".
