@@ -785,3 +785,25 @@ Effective Defense: -5
 Negative effective Defense then uses the normal negative-Defense vulnerability curve.
 
 Penetration is therefore not clamped at zero.
+
+
+### Defense reduction vs penetration order
+
+Defense reduction resolves before penetration.
+
+Default order:
+1. target Defense reductions/debuffs;
+2. percentage Defense penetration;
+3. flat Defense penetration;
+4. evaluate the resulting positive/negative Defense through the normal mitigation/vulnerability curve.
+
+Example:
+
+```
+100 Defense
+-20 Defense reduction -> 80
+20% penetration -> 64
+10 flat penetration -> 54 effective Defense
+```
+
+Reduction changes the target's effective Defense for all relevant attackers; penetration remains attacker-specific.
