@@ -2899,3 +2899,16 @@ Example:
 - 5 Defense;
 - 10 flat penetration;
 - -5 effective Defense.
+
+
+## 2026-09-29 — Defense reduction resolves before penetration
+
+**Decision:** Physical/Magical Defense reduction/debuffs apply before attacker-specific penetration.
+
+Default order:
+1. Defense reduction;
+2. percentage penetration;
+3. flat penetration;
+4. evaluate final Defense through the mitigation/vulnerability curve.
+
+Example: 100 -> 80 after -20 reduction -> 64 after 20% penetration -> 54 after 10 flat penetration.
