@@ -2811,3 +2811,14 @@ This mirrors Strength -> Physical Defense.
 This is a default coefficient, not a hard universal constant.
 
 Classes/items/passives/effects may explicitly override or modify it.
+
+
+## 2026-09-29 — Default Agility to Attack Speed coefficient
+
+**Decision:** Default Agility secondary scaling is **+0.025% Attack Speed per AGI**.
+
+This is intentionally a very small passive contribution.
+
+Classes/items/passives/effects may explicitly override or modify it.
+
+Movement Speed scaling from Agility remains open.
