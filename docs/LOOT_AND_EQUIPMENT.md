@@ -385,6 +385,29 @@ Exact tradeable consumable/material categories remain open.
 
 There is no default direct gold-transfer or unrestricted material economy between players.
 
+## Early Cornberg economy anchors
+
+The overall DiceFree economy is not finalized, but Cornberg has working early-game anchors for prototyping.
+
+### Crop Slime gold
+
+The weakest Crop Slimes should yield roughly **1–3 carried gold** each.
+
+This is a working early-economy target and can be tuned after playtesting.
+
+### Cornberg general vendor
+
+Vendor inventories are **fixed/authored**, not procedurally regenerated.
+
+Current example starter weapon price ladder:
+- +1 damage sword: **100 gold**;
+- +2 damage sword: **250 gold**;
+- +3 damage sword: **450 gold**.
+
+Cornberg can also sell basic low-stat defensive equipment, for example an item with approximately **+1 Defense**. Exact defensive item/family/price remains to be authored.
+
+These values are economy anchors, not a final global pricing formula.
+
 ## Selling unwanted equipment
 
 There is **no general equipment salvage/disenchant system**.
