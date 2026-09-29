@@ -78,8 +78,12 @@ Generic Evasion is not currently committed.
 
 ### Intelligence
 
-Current direction:
-- contributes a **small/modest amount of Magical Defense**.
+Default secondary effect:
+- **1 Intelligence = +0.2 Magical Defense**.
+
+This mirrors Strength -> Physical Defense.
+
+The coefficient is a default rather than an immutable universal constant. Classes/items/passives/effects may explicitly modify the Intelligence-to-Magical-Defense relationship.
 
 Intelligence can additionally interact with class resources where appropriate, but it does **not** universally mean Mana, resource regeneration or maximum resource.
 
