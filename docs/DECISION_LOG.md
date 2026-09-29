@@ -3029,3 +3029,14 @@ Examples intentionally supported by the design:
 Values above 100% do not automatically create extra rolls, overflow conversion, or super-crits. Such mechanics require an explicit authored exception.
 
 Rare sources may explicitly override the default crit placement in the damage pipeline.
+
+
+## 2026-09-30 — Crit ties and multi-packet scope
+
+**Decision:** Equal final crit multipliers use explicit authored priority when present; otherwise use stable deterministic source-ID order.
+
+**Decision:** Crit resolution is action-wide by default. Multi-packet actions share one crit result across eligible raw packets before each packet resolves its own mitigation/resistance.
+
+**Decision:** Default critical-hit signaling is one critical-hit event per action, not one per packet.
+
+Per-packet crit resolution/events remain possible only when explicitly authored.
