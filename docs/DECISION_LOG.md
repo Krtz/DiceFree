@@ -3086,3 +3086,19 @@ Example:
 **Reaffirmed:** Negative elemental resistance is uncapped. At -100% matching resistance elemental healing becomes zero; below -100% it inverts into damage.
 
 **Design rule:** Penetration effects must state clearly which contexts they affect. Avoid ambiguous generic wording.
+
+
+## 2026-09-30 — Resistance overcap and additive stacking
+
+**Decision:** Elemental resistance stores an uncapped raw value; the normal cap applies only to effective positive resistance during resolution.
+
+**Decision:** Resistance debuffs/penetration operate on raw uncapped resistance before the cap.
+
+Example:
+- 110% raw Fire resistance;
+- -20 percentage-point debuff => 90% raw;
+- 75% normal cap => still 75% effective.
+
+**Decision:** Ordinary resistance bonuses/debuffs stack additively.
+
+**Reaffirmed:** Negative elemental resistance remains uncapped.
