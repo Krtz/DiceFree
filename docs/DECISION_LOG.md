@@ -3057,3 +3057,12 @@ Prefer simple authored crit rules when possible rather than unnecessary modifier
 - winning crit-rule/source provenance.
 
 These identities remain separate for future trigger logic.
+
+
+## 2026-09-30 — Hit-before-crit, critical result vs damage, and inheritance
+
+**Decision:** Hit/miss resolution occurs before crit resolution. Misses do not consume crit rolls.
+
+**Decision:** A successful critical result is distinct from actual critical HP damage dealt. A crit can occur even if later mitigation/prevention results in zero HP damage.
+
+**Decision:** Secondary/child effects do not inherit parent crit results by default. Inheritance requires an explicit authored exception.
