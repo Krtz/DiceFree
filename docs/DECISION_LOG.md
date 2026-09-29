@@ -2800,3 +2800,14 @@ The PoC determines whether seamless 90-degree cube-face traversal is practical/f
 This is a default coefficient, not a hard universal constant.
 
 Classes/items/passives/effects may explicitly override or modify it.
+
+
+## 2026-09-29 — Default Intelligence to Magical Defense coefficient
+
+**Decision:** Default Intelligence secondary scaling is **+0.2 Magical Defense per INT**.
+
+This mirrors Strength -> Physical Defense.
+
+This is a default coefficient, not a hard universal constant.
+
+Classes/items/passives/effects may explicitly override or modify it.
