@@ -1168,3 +1168,51 @@ Example:
 = -50
 = 50 Fire-context healing-inversion damage
 ```
+
+
+### Resistance overcap and modifier ordering
+
+Elemental resistance keeps its **raw uncapped value** internally.
+
+The normal resistance cap limits the **effective value used for resolution**, not the stored/raw resistance itself.
+
+Example:
+
+```
+Raw Fire resistance: 110%
+Normal cap: 75%
+Effective Fire resistance: 75%
+```
+
+If a -20 percentage-point Fire resistance debuff is applied:
+
+```
+110% raw - 20% = 90% raw
+Effective after 75% cap = 75%
+```
+
+Therefore overcapping resistance is meaningful: debuffs and penetration must first remove the excess before effective resistance drops below the cap.
+
+Default resistance resolution:
+1. establish raw resistance;
+2. apply ordinary resistance bonuses/debuffs additively;
+3. apply applicable resistance penetration/reduction to the uncapped raw value;
+4. apply the current resistance cap to obtain effective positive resistance;
+5. use that effective resistance in damage/healing resolution.
+
+Negative elemental resistance remains uncapped.
+
+### Resistance modifier stacking
+
+Ordinary elemental resistance bonuses and debuffs stack **additively** by default.
+
+Example:
+
+```
++30% Fire resistance
++20% Fire resistance
+-15% Fire resistance
+= +35% raw Fire resistance
+```
+
+Special multiplicative or otherwise unusual stacking requires an explicitly authored mechanic.
