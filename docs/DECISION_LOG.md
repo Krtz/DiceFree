@@ -2945,3 +2945,17 @@ Default conceptual order:
 4. percentage penetration from original Defense;
 5. flat penetration;
 6. mitigation/vulnerability curve.
+
+
+## 2026-09-29 — Defense reference, positive buffs, and >100% shred
+
+**Decision:**
+- percentage Defense reduction/penetration use underlying Defense before temporary positive Defense buffs as their reference;
+- positive Defense buffs resolve percentage first, then flat;
+- percentage Defense reduction and penetration may exceed 100%.
+
+Example:
+- underlying Defense 100;
+- +20% Defense then +50 flat Defense => current Defense 170;
+- enemy 20% reduction still subtracts 20, because the reference is the underlying 100;
+- 120% penetration against underlying 100 subtracts 120 and can create negative effective Defense.
