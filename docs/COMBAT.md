@@ -139,6 +139,17 @@ Examples:
 
 Resources are independently defined components/data rather than one universal resource enum or mandatory Mana field.
 
+### Load/reset defaults
+
+Normal save/load is not a combat-state resume:
+- manifestation loads at full HP;
+- ordinary combat/consumable cooldowns reset;
+- temporary buffs/debuffs reset;
+- threat/aggro/targets/casts/projectiles reset;
+- resources reset by default unless that resource explicitly opts into load persistence.
+
+The resource/effect frameworks must still allow explicit persistent exceptions for rare authored mechanics.
+
 ### Resource lifecycle
 
 Each resource defines its own lifecycle rules, including combinations of:
