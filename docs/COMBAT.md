@@ -570,18 +570,13 @@ See `docs/STATS_AND_DAMAGE.md` for shield ordering, Pure Damage, lifesteal, refl
 - in-combat gear swapping.
 
 
-### Defense penetration order
+### Defense penetration basis and order
 
-Percentage Defense penetration resolves before flat Defense penetration.
+Percentage Defense penetration resolves before flat Defense penetration, but percentage penetration is calculated from the target's **original positive Defense**, not from the already-reduced remainder.
 
-Example:
-```
-100 Defense
--> 20% penetration = 80
--> 10 flat penetration = 70 effective Defense
-```
+Flat penetration may push effective Defense below zero.
 
-This applies symmetrically to Physical and Magical Defense unless a mechanic explicitly overrides the normal pipeline.
+If original Defense is negative, percentage Defense reduction does not apply; negative base Defense is not an intended normal content state.
 
 
 ### Penetration below zero
@@ -598,21 +593,17 @@ Example:
 
 ### Defense reduction vs penetration
 
-Defense reduction resolves before percentage and flat penetration.
+Defense reduction resolves before penetration.
 
-Default order:
-1. Defense reduction;
-2. percentage penetration;
-3. flat penetration;
-4. mitigation/vulnerability from final effective Defense.
+Percentage reduction and percentage penetration both reference the target's original positive Defense value for the resolution.
 
-Example:
-```
-100 Defense
--> -20 reduction = 80
--> 20% penetration = 64
--> 10 flat penetration = 54 effective Defense
-```
+Default conceptual order:
+1. establish original Defense;
+2. subtract percentage reduction(s), additive from original positive Defense;
+3. subtract flat reduction;
+4. subtract percentage penetration from original positive Defense;
+5. subtract flat penetration;
+6. apply mitigation/vulnerability from final effective Defense.
 
 
 ### Full Defense modifier ordering
@@ -621,10 +612,13 @@ Percentage Defense reduction resolves before flat Defense reduction.
 
 Default Physical/Magical Defense pipeline:
 
-1. percentage Defense reduction;
-2. flat Defense reduction;
-3. percentage Defense penetration;
-4. flat Defense penetration;
-5. final mitigation/vulnerability curve.
+1. establish original Defense;
+2. percentage Defense reduction(s), additive from original positive Defense;
+3. flat Defense reduction;
+4. percentage Defense penetration, calculated from original positive Defense;
+5. flat Defense penetration;
+6. final mitigation/vulnerability curve.
+
+Flat reduction and flat penetration can create negative effective Defense.
 
 Reduction is target-state modification; penetration is attacker-specific.
