@@ -168,6 +168,18 @@ Exact level-gap formula remains a balance problem.
 
 ## Veteran + new-player co-op
 
+### Optional mentor scaling
+
+The preferred direction is **optional mentor scaling**, not mandatory universal down-scaling.
+
+A veteran can choose to enter an assist/mentor mode when playing with lower-level friends.
+
+Old content still remains naturally overpowerable when the veteran does not opt into mentor scaling.
+
+Exact mentor formulas, activation UX, reward handling and how it interacts with dungeons remain open.
+
+
+
 A core social goal is:
 
 **a veteran player should be able to meaningfully play with a new player without either character's progression being ruined.**
