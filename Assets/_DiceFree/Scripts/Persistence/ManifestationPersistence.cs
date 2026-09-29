@@ -1,0 +1,127 @@
+using System;
+using System.Collections;
+using System.IO;
+using DiceFree.Combat;
+using DiceFree.Progression;
+using DiceFree.Quests;
+using DiceFree.World;
+using UnityEngine;
+
+namespace DiceFree.Persistence
+{
+    [RequireComponent(typeof(ExperienceProgression), typeof(QuestJournal), typeof(RespawnAtAnchor))]
+    public sealed class ManifestationPersistence : MonoBehaviour
+    {
+        [SerializeField, Min(0)] private float debounceSeconds = 0.25f;
+        private ExperienceProgression xp;
+        private QuestJournal journal;
+        private CombatActor actor;
+        private RespawnAtAnchor anchor;
+        private LocalEchoStore store;
+        private EchoSave save;
+        private bool ready, dirty;
+        private float due;
+        public string Status { get; private set; } = "Persistence inactive";
+        public string SavePath => store?.Path;
+        public long Revision => save?.revision ?? 0;
+        public bool Ready => ready;
+        private string SectionId => "manifestation:" + actor.Stats.Definition.stableId;
+        private IEnumerator Start()
+        {
+            // Automated suites cannot touch player data. An explicit root opts isolated save tests in.
+            var args = Environment.GetCommandLineArgs();
+            int index = Array.IndexOf(args, "-diceFreeSaveRoot");
+            if (index < 0 && Application.isBatchMode) yield break;
+#if UNITY_EDITOR
+            if (index < 0 && UnityEditor.SessionState.GetBool("DiceFree.DisablePersistence", false)) yield break;
+#endif
+            if (index >= 0 && (index + 1 >= args.Length || !Path.IsPathRooted(args[index + 1])))
+            {
+                Debug.LogError("-diceFreeSaveRoot requires an absolute isolated directory; persistence disabled.");
+                yield break;
+            }
+            string root = index >= 0 && index + 1 < args.Length ? args[index + 1] :
+                Path.Combine(Application.persistentDataPath, Application.isEditor ? "EditorProfiles" : "Profiles");
+            xp = GetComponent<ExperienceProgression>(); journal = GetComponent<QuestJournal>();
+            actor = GetComponent<CombatActor>(); anchor = GetComponent<RespawnAtAnchor>();
+            store = new LocalEchoStore(root);
+            // All actors and the authored NavMesh must have completed Start before applying a saved spawn.
+            yield return null;
+            try
+            {
+                save = store.Load();
+                bool existing = save != null;
+                save ??= new EchoSave();
+                var section = save.sections.Find(value => value.id == SectionId);
+                if (section != null)
+                {
+                    if (section.version != 1) throw new NotSupportedException("Unsupported manifestation version; original preserved.");
+                    var state = JsonUtility.FromJson<ManifestationSave>(section.json);
+                    if (state == null || state.classId != actor.Stats.Definition.stableId ||
+                        !xp.CanRestore(state.level, state.xp) || !journal.CanRestore(state.quests) ||
+                        float.IsNaN(state.healthFraction) || state.healthFraction < 0 || state.healthFraction > 1)
+                        throw new InvalidDataException("Invalid manifestation; original preserved.");
+                    xp.RestoreState(state.level, state.xp);
+                    journal.RestoreState(state.quests);
+                    if (!anchor.LoadAtAnchor(state.anchorId, state.healthFraction))
+                        throw new InvalidOperationException("Saved/fallback resurrection point is not navigable.");
+                }
+                else if (existing) throw new InvalidDataException("Current manifestation missing; original Echo preserved.");
+                ready = true;
+                xp.Changed += MarkDirty; journal.Changed += MarkDirty;
+                actor.Health.Damaged += OnDamage; actor.Health.Healed += OnHeal; actor.Health.Restored += MarkDirty;
+                Status = store.RecoveryMessage ?? "Local autosave ready";
+                if (store.RecoveryMessage != null) Debug.LogWarning(store.RecoveryMessage);
+                MarkDirty();
+            }
+            catch (Exception error) { Fail(error); }
+        }
+        private void OnDamage(CombatActor source, DamageResult damage) => MarkDirty();
+        private void OnHeal(float amount) => MarkDirty();
+        private void MarkDirty()
+        {
+            if (!ready) return;
+            if (!dirty) due = Time.unscaledTime + debounceSeconds;
+            dirty = true;
+        }
+        private void LateUpdate() { if (ready && dirty && Time.unscaledTime >= due) Flush(); }
+        public bool Flush()
+        {
+            if (!ready) return false;
+            try
+            {
+                var state = new ManifestationSave {
+                    classId = actor.Stats.Definition.stableId, level = xp.Level, xp = xp.CurrentXp,
+                    quests = journal.CaptureState(), anchorId = anchor.AnchorId,
+                    healthFraction = actor.Health.Current / actor.Health.Maximum
+                };
+                var section = save.sections.Find(value => value.id == SectionId);
+                if (section == null) { section = new SaveSection { id = SectionId }; save.sections.Add(section); }
+                section.json = JsonUtility.ToJson(state);
+                save.revision++; save.writtenUtc = DateTime.UtcNow.ToString("O");
+                store.Commit(save);
+                dirty = false; Status = "Local save revision " + save.revision;
+                return true;
+            }
+            catch (Exception error) { Fail(error); return false; }
+        }
+        private void Fail(Exception error)
+        {
+            ready = false;
+            Status = "Autosave stopped: " + error.Message + " Existing save files preserved.";
+            Debug.LogWarning(Status);
+        }
+        private void OnApplicationPause(bool paused) { if (paused && ready) Flush(); }
+        private void OnApplicationQuit() { if (ready) Flush(); }
+        private void OnDestroy()
+        {
+            if (xp != null) xp.Changed -= MarkDirty;
+            if (journal != null) journal.Changed -= MarkDirty;
+            if (actor != null) { actor.Health.Damaged -= OnDamage; actor.Health.Healed -= OnHeal; actor.Health.Restored -= MarkDirty; }
+        }
+        private void OnGUI()
+        {
+            if (store != null && !ready) GUI.Box(new Rect(20, Screen.height / 2f, Screen.width - 40, 70), Status);
+        }
+    }
+}

@@ -26,6 +26,9 @@ provisional tuning, architecture and validation. Art remains placeholder;
 Tier-1 classes and multiplayer are not implemented. Timed Slime respawn, XP and
 the first 3+2 crop quest are now playable: right-click the farmer beside the
 fields, or press I nearby. See [Q1 progression notes](docs/CORNBERG_QUESTS.md).
+Local autosave retains level/XP, Q1 and the Cornberg resurrection anchor;
+reopening resumes at that anchor. See [local save notes](docs/CORNBERG_SAVES.md)
+for recovery, provisional reload HP behavior and test isolation.
 
 ## Current high-level canon
 

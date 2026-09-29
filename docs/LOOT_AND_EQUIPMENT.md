@@ -20,6 +20,8 @@ Players can inspect all offers before choosing one.
 
 The chosen item can be kept/equipped or sent directly to the shared bank.
 
+The reward choice must be resolved before leaving the loot room.
+
 Unchosen rewards vanish.
 
 If the gear choices are undesirable, content may instead offer XP, gold or materials/resources.
@@ -42,9 +44,116 @@ There is no temporary ownership/reservation window.
 
 ## Randomized and handcrafted gear
 
-DiceFree uses both:
-- randomized gear inspired by DiceBound's rolls/rarities/affixes;
-- more heavily handcrafted named gear with bespoke identity/effects.
+DiceFree uses both randomized and handcrafted gear, but **handcrafted gear should be the majority of meaningful equipment progression**, especially later/endgame.
+
+This is intentionally closer to the spirit of Twilight's Eve ORPG:
+- players should remember where important items come from;
+- dungeons/bosses/quests can have authored identities;
+- named gear can be designed around specific class/build opportunities;
+- procedural loot should not drown the game in disposable stat soup.
+
+### Randomized gear
+
+Randomized gear remains a real supported system inspired by DiceBound.
+
+It should be **deliberate about where it can drop and what pools are allowed**.
+
+Content can define:
+- which encounters/areas/modes may generate randomized items;
+- allowed slots/families;
+- item-level range;
+- rarity range;
+- affix/intrinsic pools;
+- element/theme/class-tag filters;
+- jackpot/special rules.
+
+Randomized drops are therefore authored loot-table decisions, not a universal "every monster sprays random gear" rule.
+
+### Randomization as an authoring tool
+
+The same generator should be usable by developers/designers to help create handcrafted equipment.
+
+Example workflow:
+1. request a level-35 Epic weapon constrained to an intended content/theme;
+2. generator produces a valid item using the real budget/affix system;
+3. designer rejects/rerolls weak or uninteresting results;
+4. designer accepts a promising roll;
+5. accepted roll is **frozen into a normal authored item definition**;
+6. designer can then edit name, art, intrinsic, stats, effects, requirements and flavor deliberately.
+
+The final handcrafted item does **not** need to remain procedurally rerolled at runtime.
+
+The randomizer is therefore both:
+- a controlled player-facing loot mechanic;
+- an internal content-authoring accelerator.
+
+## Item level, rarity and stat budget
+
+DiceFree uses a **gear-score/stat-budget model inspired by DiceBound**.
+
+Core direction:
+- item level contributes a base point/stat budget;
+- rarity modifies/increases the available budget and may unlock additional structural features;
+- Intrinsics, primary/secondary stats, affixes and other numeric bonuses consume budget according to weighted costs;
+- different stats can have different point costs;
+- item family/slot can influence valid budget distribution and intrinsic expectations.
+
+The exact formulas are balance data and remain open.
+
+### Item level is source-defined
+
+Item level comes from the authored content/source, not from the current player's level.
+
+Examples:
+- a level-35 dungeon drops roughly level-35 equipment even if a level-100 character clears it;
+- old content keeps its own progression identity;
+- player level does not silently upscale legacy loot.
+
+Specific content may deliberately define exceptions, but player scaling is not the default.
+
+### Budget is a design/debug metric, not a player truth
+
+The point budget exists to help designers, tooling and balancing.
+
+It is **not** a player-facing item-quality score and should not tell the player which item is "better."
+
+A high-budget item can still be niche, awkward or intentionally strange.
+
+Example:
+- +50 HP regeneration and 0 damage may consume more budget than +20 damage and +20 HP regeneration;
+- the latter may be more generally useful;
+- the former may enable a weird sustain build.
+
+Players should evaluate actual stats/effects and build fit.
+
+Budget totals, over-budget deltas and internal power diagnostics belong in **debug/designer views only**.
+
+Handcrafted content may intentionally exceed ordinary budget expectations. The tooling should report the deviation, not forbid it.
+
+A generated item should be reproducible/explainable from:
+- item level;
+- rarity;
+- base family/slot;
+- intrinsic package;
+- affix/effect choices;
+- budget spent.
+
+Handcrafted items may deliberately bend or override normal generation rules when the design calls for it.
+
+### Rarity is structural, not only numerical
+
+Higher rarity can do more than provide larger numbers or additional affixes.
+
+Rarity may unlock things such as:
+- more/larger affix budget;
+- additional Intrinsics;
+- special effect slots;
+- sockets;
+- unusual affix categories;
+- bespoke proc/effect permissions;
+- other rarity-specific structure.
+
+Exact rarity rules remain design/balance data.
 
 ## Equipment families
 
@@ -62,11 +171,124 @@ Families can strongly differentiate stat identity through Intrinsics and affixes
 - elemental penetration;
 - other derived stats.
 
+## Affix framework
+
+Affix pools are data-driven and filterable by semantic metadata such as:
+- item slot;
+- weapon/equipment family;
+- item level/tier;
+- rarity;
+- element/theme;
+- class/class-family tags;
+- intended role;
+- content/drop-source tags;
+- other authored constraints.
+
+Affixes have:
+- stable IDs;
+- valid-item predicates;
+- point/budget cost;
+- roll range/scaling rules;
+- optional weighting/rarity within a pool.
+
+### Affix weighting
+
+Support weighted affix pools.
+
+Exact weighting philosophy remains open; not every pool needs unequal weights.
+
+### Roll ranges
+
+Use a **hybrid** model:
+- formula/data-driven baseline scaling from item level/tier;
+- authored overrides/ranges when a particular item/content bracket needs deliberate tuning.
+
 ## Intrinsics
 
 Intrinsics are more important numerically than in DiceBound.
 
 They can provide significant fixed stat packages that strongly establish what an equipment family/item is "for" before randomized affixes are applied.
+
+## Handcrafted items
+
+Handcrafted equipment uses the same underlying item/effect/stat systems but is authored directly.
+
+A handcrafted item may lock:
+- stable item ID;
+- name;
+- visual/base art;
+- slot/family;
+- item level;
+- rarity;
+- Intrinsics;
+- exact stat rolls;
+- affixes;
+- proc/effect definitions;
+- eligibility requirements;
+- lore/flavor;
+- drop/source.
+
+It is **not** merely a generated item with a special label.
+
+Handcrafted gear can intentionally exceed or bend ordinary randomized-generation rules when appropriate, but such exceptions should be explicit in data.
+
+Designer/debug tooling should expose normal expected budget vs actual authored budget/delta so deliberate outliers are visible during development without exposing that number to players.
+
+## Sockets, socketables and runeword-like systems
+
+The equipment framework should support sockets even if socketable loot is not part of the earliest PoC.
+
+Sockets can accept authored modifier items such as gems/runes/other socketables.
+
+The framework should also support a **runeword-like system**:
+- specific socketable **ordered sequences** can produce authored additional effects;
+- **order matters**;
+- eligibility can depend on item family, socket count, tier or other tags;
+- runewords can activate on already-magical/rare/epic/etc. equipment — they do **not** require a plain/non-magical base item;
+- the base item remains itself and keeps its existing stats/affixes/effects;
+- the runeword adds to that item rather than transforming it into an unrelated replacement item;
+- the resulting effect uses the normal item/effect/proc framework rather than special hard-coded weapon logic.
+
+This means finding an excellent rare/epic item with a useful socket layout can be especially exciting because it can also host a runeword.
+
+### Socket removal / recovery services
+
+Socket changes are performed through authored NPC/services and have real cost/consequences.
+
+Framework direction supports at least two destructive service patterns:
+- preserve the **item**, remove/reset its socketables, and destroy the removed socketables permanently;
+- preserve/recover the **socketables**, but destroy the base item permanently.
+
+Exact NPCs, currencies/material costs and which services are available where remain content design.
+
+## Duplicate named items and unique-equipped rules
+
+Players may obtain multiple copies of the same named handcrafted item.
+
+There is no universal "you may only own one" rule.
+
+Because most equipment slots are singular, duplicate-equipping is naturally impossible for many item types.
+
+The framework should still support an explicit **Unique Equipped** limit for edge cases such as:
+- future multiple-ring-slot designs;
+- dual-wielding identical one-handed named weapons;
+- other items that can occupy multiple simultaneous eligible slots.
+
+This is an item-specific restriction, not a default rule.
+
+## Item sets
+
+Support authored item-set identity and threshold bonuses.
+
+Examples:
+- 2-piece;
+- 3-piece;
+- 4-piece;
+- other custom thresholds.
+
+Set bonuses use the normal ability/effect/proc/stat framework.
+
+Sets may be rare; support does not imply every content tier needs them.
 
 ## Equipment slots
 
@@ -109,15 +331,69 @@ Banked gold is safe.
 
 There is no durability system.
 
+## Identification
+
+Equipment drops **identified**.
+
+There is no default unidentified-item / identify-scroll loop.
+
+The game may introduce a special identification-like mechanic for a specific class/item/event later, but it is not part of normal loot friction.
+
 ## Equipment swapping
 
-Whether equipped gear can be changed during active combat is still unresolved.
+Equipment swapping rules depend on content context.
 
-Limited carried inventory reduces some swap abuse, but does not by itself decide the rule.
+### Overworld
+Gear may be swapped freely, **including during combat**.
+
+This deliberately allows flexible overworld experimentation and does not try to police every optimization.
+
+### Dungeons / raids
+Equipment swapping is **disabled for the duration of an active dungeon/raid run**.
+
+The lock begins when the dungeon's 60-second staging countdown finishes and the active run starts.
+
+Players may still change equipment during the staging/waiting room.
+
+Consumables remain usable/manageable during the run; the lock applies to equipped gear, not ordinary inventory consumption.
+
+This avoids encounter-by-encounter resistance/stat wardrobe swapping inside instanced progression content.
+
+Exact UI messaging and whether any exceptional dungeon mechanic can override this remain open.
 
 ## Binding
 
 All items are account-bound.
+
+## Player-to-player transfer policy
+
+There is **no general player-to-player gear trading**.
+
+Rules/direction:
+- equipment already picked up into a player's inventory is normally that player's item;
+- private dungeon rewards are personal;
+- free-for-all overworld drops can still be socially assigned before pickup ("you take it").
+
+The item framework should support **category-specific trade permission** for selected non-equipment items.
+
+Candidate intentionally tradeable categories include:
+- food;
+- potions;
+- similar ordinary consumables.
+
+Exact tradeable consumable/material categories remain open.
+
+There is no default direct gold-transfer or unrestricted material economy between players.
+
+## Selling unwanted equipment
+
+There is **no general equipment salvage/disenchant system**.
+
+Unwanted equipment is primarily sold to vendors for gold.
+
+If crafting/material acquisition needs another sink/source later, materials can be sold by NPCs for gold or introduced through authored content rather than requiring every unwanted item to become crafting dust.
+
+Named/handcrafted equipment does not automatically dismantle into special content-specific materials.
 
 ## NPC crafting
 
@@ -126,3 +402,61 @@ NPC crafters combine authored gear and resources into new authored equipment.
 ## Visible equipment
 
 Equipped gear should visibly affect the character wherever practical.
+
+
+## Equipment eligibility and tags
+
+Equipment eligibility uses semantic data requirements rather than maintaining giant per-item allowlists of every future class.
+
+Classes can expose capability/identity tags such as:
+- allowed weapon families;
+- shield use;
+- caster weapon access;
+- melee/ranged capability;
+- armor/equipment families;
+- tier/advancement metadata;
+- specific semantic class tags.
+
+Items can require:
+- one or more capability/taxonomy tags;
+- specific weapon/equipment families;
+- minimum tier/level where appropriate;
+- an exact class ID when a deliberately narrow class-specific item is desired;
+- **minimum primary attributes/stat values** such as Strength;
+- combinations of semantic requirements.
+
+Attribute/stat requirements are supported but need not be the dominant equipment-gating model.
+
+Specific classes remain valid eligibility predicates. Scalability does **not** remove the ability to make niche class-only gear.
+
+Requirements should use stable IDs/tags, not display-name parsing.
+
+
+## Item effects and procs
+
+Item effects use the same generic ability/effect/trigger/proc architecture as classes where practical.
+
+Equipment can therefore react to semantic events such as:
+- basic attacks;
+- hits/crits;
+- damage dealt/received;
+- healing;
+- resource changes;
+- kills;
+- effect application;
+- thorns/reflection;
+- other extensible triggers.
+
+Do not build a parallel one-off "item proc engine."
+
+## Generated-item provenance
+
+For generated items, retain enough structured provenance/debug data to understand how the item was produced:
+- generator ruleset/version where useful;
+- item level;
+- rarity;
+- selected pools;
+- budget available/spent;
+- chosen affixes/intrinsics/effects.
+
+A handcrafted item created from a generated candidate becomes an authored item with its own stable ID. Keeping the original generation seed/provenance for designer/debugging purposes is useful but should not constrain later manual edits.

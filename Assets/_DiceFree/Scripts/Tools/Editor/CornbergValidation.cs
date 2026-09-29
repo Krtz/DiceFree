@@ -75,6 +75,7 @@ namespace DiceFree.EditorTools
             try
             {
                 ValidateNavigation();
+                SessionState.SetBool("DiceFree.DisablePersistence", true);
                 SessionState.SetBool(Running,true);
                 EditorApplication.EnterPlaymode();
             }

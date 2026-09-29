@@ -14,6 +14,11 @@ namespace DiceFree.UI
             {
                 var state=journal.GetProgress(quest.stableId);
                 GUI.Label(new Rect(r.x+10,y,274,24),quest.title); y+=24;
+                if (state.definitionVersion != quest.version)
+                {
+                    GUI.Label(new Rect(r.x+10,y,274,46), "Saved quest version unavailable; progress preserved.");
+                    y += 46; continue;
+                }
                 var text=state.status switch {
                     QuestStatus.Available => "! " + quest.locationHint,
                     QuestStatus.ReadyToTurnIn => $"? {state.count}/{quest.stages[state.stage].count} complete · Return to the quest giver.",

@@ -140,9 +140,9 @@ from adding the enemy's family ID and XP reward.
 
 All NPC art, dialogue and HUD styling are placeholders. Spawn occupancy is not
 reserved; a nearby hero can draw fresh aggro after respawn. The timer pauses
-with game time and is not persisted across sessions. No quest/XP state is saved
-to disk yet. Credit IDs/deduplication are session-local, not network/save IDs.
+with game time and is not persisted across sessions. Quest/XP state now autosaves
+through the subsequent [local save slice](CORNBERG_SAVES.md).
+Credit IDs/deduplication remain session-local, not network/save IDs.
 
-Next: playtest the complete five-kill/return route and tune only the new pacing
-values. Then add a small versioned save/load slice for level/XP, Q1 state and
-the selected Cornberg anchor before introducing Q2.
+Continue playtesting the complete five-kill/return route and the save/reload flow.
+The save note records the next persistence step; Q2 remains unimplemented.

@@ -37,8 +37,179 @@ Architecture requirements:
 
 The goal is to make adding the 50th class mostly content/design work, not an architecture rewrite.
 
+### Quest/event architecture
+
+Quests consume semantic gameplay events through reusable objective definitions rather than inspecting UI/display strings.
+
+The framework should support:
+- Kill / Interact / ReachArea / Collect / TalkTo / UseItem / CompleteDungeon objectives;
+- nested AND/OR objective groups;
+- Echo-once, session-instance-once, timeline-once and repeatable scopes;
+- consumer-specific credit policies such as global, nearby, threat-participation and last-hit;
+- reusable NPC/world interaction actions with optional default action and multi-action menus.
+
+Combat/world event emitters provide facts; quest/XP/achievement consumers decide their own eligibility/credit policy.
+
+### Ability/effect architecture
+
+Abilities are composition-first:
+- reusable targeting, cost, cooldown, damage/heal, element, status, movement, summon, threat and resource primitives;
+- custom-code hooks remain available for genuinely unusual mechanics.
+
+Effects own explicit stacking and dispel metadata.
+
+Basic attacks use the same general action/effect pipeline so they can generate resources or class mechanics.
+
+Resource architecture must support:
+- multiple simultaneous resources;
+- owner-bound and target-bound resources;
+- independent persistence/reset/decay/regen policies;
+- composite multi-resource/HP/item costs.
+
+Ability runtime must support:
+- multiple charge-recharge models;
+- cast/channel behavior defined per ability;
+- movement/damage interruption policies;
+- optional pushback rather than a universal rule.
+
+Cooldown architecture must support individual cooldowns, arbitrary shared groups, optional GCD-like groups and exceptional cross-player shared cooldowns.
+
+Trigger/proc architecture must:
+- expose extensible semantic hooks;
+- retain action origin/context;
+- prevent accidental recursion by default;
+- allow explicitly bounded/controlled recursion for authored mechanics.
+
+Periodic effects support snapshot and dynamic scaling.
+
+Summon-origin events retain both summon source and owner attribution.
+
+Auras should be reusable effect emitters rather than separate one-off aura code.
+
+### Item/content authoring architecture
+
+Equipment should use a shared structured item model that supports both:
+- runtime randomized items;
+- fully handcrafted authored items.
+
+Random generation should expose the same constraints/budget logic to editor/design tooling.
+
+Designer tooling should be able to:
+- request candidates by level/rarity/slot/family/theme/drop-source;
+- generate/reroll valid candidates;
+- inspect budget allocation;
+- freeze an accepted candidate into a stable authored item asset/definition;
+- manually edit the frozen result afterward.
+
+Item generation uses a gear-score/stat-budget model rather than arbitrary independent stat rolls.
+
+Item level is source/content-defined rather than scaled to the current player by default.
+
+Item budget/power diagnostics are development-only:
+- expose expected vs actual budget;
+- flag deliberate/accidental over-budget authored items;
+- never require runtime/player UI to present budget as an item-quality verdict.
+
+Runeword/socket architecture must allow ordered combinations on already-rare/magical items while retaining the base item's identity and existing affixes.
+
+Affix validity, item eligibility, socket/runeword/set data and proc effects should use stable IDs/tags and generic systems.
+
+Do not require handcrafted and randomized equipment to use separate combat/stat engines.
+
+### Persistence / save architecture
+
+Persistence has explicit ownership boundaries:
+- Echo/account-wide state;
+- per-class manifestation state;
+- transient session-instance state.
+
+Core requirements:
+- aggressive autosave of durable progression;
+- loading a class spawns at its registered resurrection point rather than exact quit coordinates;
+- active dungeon runs are transient and not persisted across quitting;
+- already-earned persistent XP/gold survive dungeon abandonment/quit;
+- advancement and bank/inventory transfers are atomic transactions;
+- stable IDs and versioned save schemas;
+- explicit save migrations;
+- unknown/missing content records preserved inertly rather than silently deleted;
+- rotating local backups;
+- cloud-save provider abstraction;
+- stable internal user/Echo UUIDs separate from platform IDs;
+- multiple Echo profiles per user, with unobtrusive profile-management UX;
+- Echo-level logical cloud revisions with internally chunked save data;
+- explicit divergent-cloud conflict selection rather than unsafe field merging;
+- offline and LAN-capable operation without mandatory cloud/backend connectivity;
+- developer Profile Inspector tooling.
+
+Initial PC direction supports Steam Cloud, but gameplay code must not depend directly on Steam-specific persistence APIs.
+
+Prepare interfaces for future user/account/database services without requiring an MMO-style always-online backend.
+
+Multiplayer persistence separates:
+- host-authoritative live world presentation;
+- per-player durable credit for events/quests/world outcomes actually earned.
+
+See `docs/PERSISTENCE_AND_SAVES.md`.
+
 ### No future monolith
 Do not repeat the early DiceBound pattern of allowing one giant file to become the game.
+
+### Enemy / encounter architecture
+
+Enemy content should be composition-first:
+- reusable base archetypes;
+- authored variants/overrides;
+- fixed authored levels;
+- direct monster stats and/or five-attribute participation;
+- semantic tags;
+- reusable AI decision rules;
+- threat/target selectors;
+- home/leash/reset policies;
+- authored pack/patrol definitions;
+- reusable enemy modifiers.
+
+AI logic must support both trivial policies and complex nested conditional/weighted rules.
+
+Encounter definitions own fight-wide orchestration:
+- phases;
+- arena state;
+- hazards;
+- add waves;
+- doors/objects;
+- timers/enrage;
+- difficulty-mode overrides;
+- reset/completion state.
+
+Encounter reset must be deterministic/inspectable for multiplayer host migration and validation.
+
+Build developer encounter-test tooling early enough that bosses can be spawned, phase-forced and inspected without replaying full dungeons.
+
+See `docs/ENEMIES_AND_ENCOUNTERS.md`.
+
+### Network authority / host migration
+
+Runtime networking should use a host-authoritative simulation:
+- clients submit intentions/commands;
+- host resolves authoritative combat/world/session results;
+- guest persistent saves consume validated authoritative outcomes.
+
+Solo/LAN/online should reuse the same core command/event/simulation paths where practical.
+
+**Host migration is required.**
+
+Do not architect session state so the original host is the only recoverable copy.
+
+Plan for:
+- replicated session snapshots/checkpoints;
+- host election/rebinding;
+- reconnect grace;
+- participant slot reservation;
+- live overworld state transfer;
+- active dungeon/run transfer;
+- safe fallback when exact live recovery is impossible;
+- preservation of already-committed durable player progression under failure.
+
+The implementation may choose snapshot/event-journal/replication details later.
 
 ### Multiplayer-aware
 DiceFree's intended session model is lobby/session co-op rather than MMO/open-world servers.
@@ -63,11 +234,29 @@ The exact authority/network transport solution is not locked yet.
 
 ## Dungeon instance rule
 
-Starting a dungeon creates a closed run for its current participants.
+Dungeon lifecycle:
+1. first player enters physical entrance;
+2. shared staging room begins a 60-second countdown;
+3. other eligible party members may enter during staging;
+4. countdown expiry starts the active run;
+5. roster and equipped gear are locked;
+6. no mid-run joins;
+7. full party wipe normally resets the entire run;
+8. abandonment destroys/resets the active run;
+9. successful completion moves each participant to a private loot room.
 
-No mid-run joins.
+Dungeon data must be able to define:
+- internal/self-respawn checkpoint policy;
+- default whole-run reset plus explicit exceptional reset rules;
+- encounter/trash reset behavior;
+- loot-room reconnect window;
+- authored completion conditions.
 
-Full party wipe normally resets the entire run.
+Dungeon trash normally does not use timed overworld respawns during an active attempt.
+
+Boss encounter state must be cleanly resettable.
+
+Consumables stay functional during active runs even though equipped gear/class switching are locked.
 
 ## Party scaling
 

@@ -14,6 +14,20 @@ namespace DiceFree.World
         private float availableAt;
         public bool CanReturn => !actor.Health.Alive && Time.time >= availableAt;
         public string AnchorName => anchor == null ? "No anchor" : anchor.name;
+        public string AnchorId => anchor == null ? null : anchor.GetComponent<ResurrectionAnchor>()?.StableId;
+        public bool LoadAtAnchor(string id, float healthFraction)
+        {
+            var destination = anchor; // Authored Cornberg anchor is the fallback.
+            foreach (var candidate in FindObjectsByType<ResurrectionAnchor>())
+                if (candidate.StableId == id) { destination = candidate.transform; break; }
+            if (destination == null || !actor.Motor.Teleport(destination.position)) return false;
+            anchor = destination;
+            attack.ResetForSpawn();
+            GetComponent<TargetSelection>()?.Select(null);
+            GetComponent<Interactor>()?.Cancel();
+            actor.Health.Restore(healthFraction > 0 ? healthFraction : restoredFraction);
+            return true;
+        }
         private void Awake() { actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>(); }
         private void OnEnable() => actor.Health.Died += OnDeath;
         private void OnDisable() => actor.Health.Died -= OnDeath;

@@ -3,6 +3,8 @@
 The following combat foundation now also supports timed respawn, XP/leveling
 and Q1. See [Cornberg quest/progression notes](CORNBERG_QUESTS.md) for the current
 five-kill starter flow, added components, provisional values and validation.
+The subsequent [local save slice](CORNBERG_SAVES.md) adds progression/quest/anchor
+persistence and records the newer design-document sync through `cb3afd1`.
 
 This extends the saved Phase 1 Cornberg pocket on `poc/cornberg`. The latest six
 design-document changes from `setup/unity-project` at `a5879e9` were copied into
@@ -73,7 +75,8 @@ Attack-Move, Hold, allied/summon selection and ability casting remain deferred.
   This is intentionally not the full multi-source threat table from COMBAT.md.
 - `RespawnAtAnchor`, `HealingArea`: separate return and proximity-healing
   behaviours. Cornberg is the single available anchor. The arrival cinematic,
-  anchor-selection persistence and death penalties remain deferred.
+  additional-anchor selection and death penalties remain deferred. The current
+  anchor now persists through the local save slice.
 - Separate player, target, command and actor-feedback widgets: current/max HP,
   level, selected target, combat/action state, low-HP color, world labels,
   damage numbers and simple squash/wind-up/death feedback. Nameplate visibility
@@ -124,7 +127,8 @@ Advancement requirements must remain a separate composable condition model over
 Echo-wide progress: nested AND/OR predicates and multiple milestones from
 **different manifestations** may be required. Resulting class identity, route,
 discovery and eligibility must remain distinct. One persistent save per class
-and per-class resurrection points belong to the future persistence system.
+and per-class resurrection points now have a first local persistence slice;
+advancement and manifestation switching remain future work.
 An ancestry/display relationship must not substitute for
 eligibility. No single-parent prerequisite, fixed child count, tier width or
 eager requirement that all descendants exist is introduced. Mystic Knight and
@@ -169,8 +173,8 @@ for the saved scene and leaves existing assets' tuned values intact.
 
 ## Remaining risks and smallest next step
 
-The single-agent duel has no crowd-load, network, persistence or cube-edge
-validation. Direct collision uses local +Y sweeps; larger bodies and moving
+The single-agent duel has no crowd-load, network or cube-edge validation.
+Persistence validation is described in the save note. Direct collision uses local +Y sweeps; larger bodies and moving
 crowds need further navigation work. The runtime actor registry and IMGUI are
 small local-PoC implementations, not final large-session or shipping UI systems.
 The capsule Echo, ellipsoid Slime, squash feedback, and all environment art

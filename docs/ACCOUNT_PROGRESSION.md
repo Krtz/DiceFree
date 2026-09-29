@@ -156,3 +156,14 @@ Class progression, story execution and ordinary questing are usually manifestati
 - cosmetics;
 - difficulty unlocks;
 - exact slot count.
+
+
+## Save ownership / persistence
+
+Echo-wide and manifestation-specific data have explicit ownership even if stored in one physical save package.
+
+Loading a manifestation always returns it to its registered resurrection point rather than restoring an arbitrary world coordinate.
+
+Important operations such as advancement and bank/inventory transfer must be transactional/atomic.
+
+See `docs/PERSISTENCE_AND_SAVES.md`.

@@ -1957,3 +1957,603 @@ A representative offensive-spell target is roughly **10 Mana at rank 1 -> ~100 M
 **Decision:** Magically Touched becomes modestly smaller/frailer-looking than Novice.
 
 **Decision:** Tier 1 gets no dramatic magical glow effects or highly specialized class silhouettes; flashy identity comes later.
+
+
+## 2026-09-28 — Reusable quest objective framework
+
+**Decision:** Ordinary quests should be composed from reusable semantic objective types such as Kill, Interact, ReachArea, Collect, TalkTo, UseItem and CompleteDungeon, with AND/OR composition.
+
+Custom scripts remain an escape hatch for genuinely unusual quests.
+
+## 2026-09-28 — Quest persistence scopes
+
+**Decision:** Quest/event content can declare different scopes:
+- Echo-once;
+- session-instance once;
+- timeline/class-save once;
+- repeatable.
+
+Ordinary story/side quests normally use timeline scope unless authored otherwise.
+
+## 2026-09-28 — Configurable event / kill credit
+
+**Decision:** There is no universal kill-credit rule.
+
+Content can choose policies including:
+- global;
+- nearby;
+- threat/combat participation;
+- last hit.
+
+The authoritative death/event record supplies facts; individual quest/XP/achievement consumers decide credit.
+
+## 2026-09-28 — NPC interaction actions
+
+**Decision:** NPCs/world interactables expose semantic actions and can support an interaction menu.
+
+**Decision:** A default action may execute directly when appropriate.
+
+One NPC may therefore support combinations such as Talk / Quest / Shop / Bank / Respec / Advancement without duplicating the NPC.
+
+## 2026-09-28 — Effect stacking policy
+
+**Decision:** Effects define stacking/refresh behavior individually.
+
+Supported policy families include unique-per-source, refresh, replace-stronger, capped stacks, independent instances and strongest-wins.
+
+**Direction:** unique-per-source is a common/default pattern, not a universal restriction.
+
+## 2026-09-28 — Dispel hierarchy and effect tags
+
+**Decision:** The main dispel hierarchy is Weak Dispel / Strong Dispel / Undispellable.
+
+**Decision:** Semantic effect tags such as Poison, Curse, Disease, Bleed, Magic and CC are still supported for situational cleanses, consumables and specialized classes.
+
+## 2026-09-28 — Tag-driven equipment eligibility
+
+**Decision:** Equipment eligibility uses stable semantic tags/requirements for scalability.
+
+**Decision:** Exact class IDs remain valid requirements for intentionally niche/class-specific gear.
+
+## 2026-09-28 — Composable abilities with custom escape hatch
+
+**Decision:** Abilities should primarily compose generic targeting, resource, cooldown, damage/heal, elemental, status, movement, summon, threat and resource-generation primitives.
+
+**Decision:** Custom code remains available for genuinely unusual class mechanics.
+
+## 2026-09-28 — Cooldown philosophy
+
+**Decision:** No universal GCD by default.
+
+**Decision:** Framework supports arbitrary shared cooldown groups and optional class-specific/GCD-like groups.
+
+**Decision:** Exceptional mechanics may share a cooldown across different players.
+
+## 2026-09-28 — Basic attacks use common combat hooks
+
+**Decision:** Basic attacks use the common combat-action/effect pipeline where practical.
+
+This must support later mechanics such as generating Combo Points/resources from auto-attacks and spending them on skills.
+
+
+## 2026-09-28 — Multiple simultaneous class resources
+
+**Decision:** A class may use multiple resources at once.
+
+Examples include Energy + Combo Points or Mana + Souls.
+
+Resources are independently modeled rather than forced through one universal resource type.
+
+## 2026-09-28 — Resource lifecycle policies
+
+**Decision:** Each resource defines its own persistence/reset/decay/regeneration behavior.
+
+Resources may persist, reset on combat/death, decay, regenerate, or be action-generated according to content.
+
+## 2026-09-28 — Target-bound and owner-bound resources
+
+**Decision:** Framework supports both target-bound and player/owner-bound Combo-Point-style resources.
+
+## 2026-09-28 — Composite ability costs
+
+**Decision:** One ability may consume multiple resource types and/or HP/items/charges simultaneously.
+
+## 2026-09-28 — Ability charge recharge models
+
+**Decision:** Charged abilities support:
+- independent per-charge recharge;
+- sequential recharge;
+- one cooldown restoring all charges.
+
+## 2026-09-28 — Casting/channel policy
+
+**Decision:** Movement interruption, damage interruption, movement-while-casting, cast/channel type and related behavior are defined per ability.
+
+**Decision:** Spell pushback is supported but is not a universal default.
+
+## 2026-09-28 — Broad semantic trigger framework
+
+**Decision:** Combat/gameplay supports a broad extensible trigger vocabulary for classes/items/effects, including hit, crit, damage, healing, resource, effect, kill/death, cast, thorns and custom authored triggers.
+
+## 2026-09-28 — Proc recursion safety with intentional escape hatch
+
+**Decision:** Generated events carry origin/context and accidental proc recursion is prevented by default.
+
+**Decision:** Controlled recursion is explicitly allowed for future classes/items when authored with bounded rules.
+
+## 2026-09-28 — Snapshot and dynamic periodic effects
+
+**Decision:** DoTs/HoTs may either snapshot source state on application or dynamically recalculate on ticks.
+
+## 2026-09-28 — Summon source + owner attribution
+
+**Decision:** Summon events retain both immediate summon source and owning actor/player.
+
+Threat, quest credit, procs and logs can choose the appropriate attribution.
+
+## 2026-09-28 — Generic aura emitter model
+
+**Decision:** Auras are reusable effect emitters defined by source, range/shape, target filters and emitted effect.
+
+Existing effect stacking policies resolve overlapping aura contributions.
+
+
+## 2026-09-28 — Handcrafted gear is the primary loot identity
+
+**Decision:** Handcrafted equipment should make up the majority of meaningful gear progression, especially in later/endgame content.
+
+Randomized gear remains supported but should appear through deliberately authored sources/pools rather than universal random drops.
+
+## 2026-09-28 — Gear-score / stat-budget generation
+
+**Decision:** Item level and rarity contribute to a DiceBound-inspired point/stat budget.
+
+Stats, Intrinsics, affixes and numeric bonuses consume weighted portions of that budget.
+
+Exact budget formulas remain balance work.
+
+## 2026-09-28 — Randomizer as designer authoring tool
+
+**Decision:** The randomized-item generator is also an internal content-authoring tool.
+
+Designers can request/reroll constrained candidates and freeze a good roll into a stable handcrafted item, then manually edit it.
+
+## 2026-09-28 — Affix pool/filter architecture
+
+**Decision:** Affixes can be filtered by slot, family, tier/item level, rarity, element/theme, class tags, role and drop-source/content tags.
+
+**Decision:** Weighted affix pools are supported; exact use/weights are content-specific.
+
+**Decision:** Roll scaling uses a hybrid formula-driven baseline plus authored overrides.
+
+## 2026-09-28 — Rarity can change item structure
+
+**Decision:** Rarity is allowed to unlock structural item features, not merely bigger numbers.
+
+Possible features include extra Intrinsics, sockets, special effect slots or unusual affix categories.
+
+## 2026-09-28 — Handcrafted item framework
+
+**Decision:** Handcrafted items use the shared item/stat/effect framework but have deliberately fixed authored definitions.
+
+They may explicitly bend normal procedural generation constraints when the design calls for it.
+
+## 2026-09-28 — Sockets and runeword-like system support
+
+**Decision:** Equipment architecture supports sockets/socketables.
+
+**Direction:** Leave room for authored runeword-like combinations/sequences using the normal item/effect/proc framework.
+
+Exact runeword rules remain open.
+
+## 2026-09-28 — Item sets
+
+**Decision:** Support item sets and authored threshold bonuses such as 2/3/4-piece effects.
+
+## 2026-09-28 — Gear procs reuse combat trigger framework
+
+**Decision:** Equipment effects/procs use the generic combat trigger/effect architecture rather than a separate item-proc engine.
+
+## 2026-09-28 — Equipment stat requirements
+
+**Decision:** Items may require primary-stat thresholds in addition to class/tag/tier/family requirements.
+
+Stat requirements are supported but need not be common.
+
+## 2026-09-28 — Equipment swapping context
+
+**Decision:** Equipment can be swapped during overworld combat.
+
+**Decision:** Equipment swapping is disabled during active dungeon/raid runs.
+
+## 2026-09-28 — No normal unidentified-item loop
+
+**Decision:** Equipment drops identified.
+
+Identification is not a normal loot-management mechanic.
+
+
+## 2026-09-28 — Item level belongs to content source
+
+**Decision:** Item level is defined by the authored drop/source/content, not dynamically scaled to the player's current level by default.
+
+Old content therefore retains its progression identity.
+
+## 2026-09-28 — Gear budget is hidden balancing/debug data
+
+**Decision:** Gear-score/stat-budget totals are not player-facing item-quality ratings.
+
+Players judge actual stats/effects/build fit.
+
+**Decision:** Debug/designer tooling exposes expected budget, actual budget and over/under-budget deltas.
+
+**Decision:** Handcrafted items may intentionally exceed ordinary budget expectations.
+
+## 2026-09-28 — Runewords work on valuable existing gear
+
+**Decision:** Runeword-like effects can be created on magical/rare/epic/etc. socketed items.
+
+They do not require plain/non-magical bases.
+
+**Decision:** Rune/socketable order matters.
+
+**Decision:** The base item remains the same item and keeps its existing stats/affixes; the runeword adds an authored effect/package.
+
+## 2026-09-28 — Destructive socket services
+
+**Decision:** Socket removal/recovery is NPC/service-based and costs resources.
+
+Framework supports:
+- preserve item, destroy removed socketables;
+- preserve/recover socketables, destroy the base item.
+
+## 2026-09-28 — Duplicate named items
+
+**Decision:** Multiple copies of the same named item may be owned.
+
+**Decision:** Unique Equipped is optional item data for multi-slot/dual-wield edge cases, not a universal restriction.
+
+## 2026-09-28 — No general salvage system
+
+**Decision:** Unwanted equipment is sold for gold rather than salvaged/disenchanted into materials.
+
+Materials may instead be purchasable for gold or obtained through authored content if needed later.
+
+**Decision:** Named gear does not automatically yield special content-specific salvage materials.
+
+
+## 2026-09-28 — Dungeon staging room
+
+**Decision:** First player entering a dungeon begins a shared **60-second staging-room countdown**.
+
+Other eligible party members entering during that minute join the same waiting room.
+
+**Decision:** The staging room includes a test dummy.
+
+**Decision:** The actual run, roster lock and equipment lock begin when the countdown expires.
+
+## 2026-09-28 — Dungeon death / self-respawn policy
+
+**Decision:** A dead dungeon player can be healer-resurrected until they choose self-respawn.
+
+**Decision:** Self-respawn destination is dungeon-specific.
+
+Supported cases include a dungeon-start/checkpoint spawn or the player's last registered resurrection point.
+
+## 2026-09-28 — Dungeon full wipe and abandonment
+
+**Decision:** Default full wipe resets the entire dungeon state: trash, bosses and run-local encounters.
+
+Explicit future exceptions are allowed.
+
+**Decision:** If the party abandons/leaves the active run, the run resets/destroys rather than remaining parked.
+
+## 2026-09-28 — Dungeon boss and trash reset rules
+
+**Decision:** Bosses reset fully after a failed/disengaged attempt.
+
+**Decision:** Dungeon trash normally has no timed respawn during an active attempt; it returns on a run reset.
+
+## 2026-09-28 — Dungeon loot-room completion
+
+**Decision:** Successful completion sends each participant to a private loot room.
+
+**Decision:** Reward choice must be made before leaving.
+
+**Decision:** A player disconnected in the loot room can reconnect back into it within a limited reconnect window. Exact duration remains open.
+
+## 2026-09-28 — Dungeon equipment and class lock
+
+**Decision:** Equipment remains changeable during the staging countdown and becomes locked when the active run starts.
+
+**Decision:** Ordinary consumables remain usable/manageable during the run.
+
+**Decision:** Class switching is unavailable during an active dungeon/raid run.
+
+## 2026-09-28 — Dungeon semantic events
+
+**Decision:** Dungeon/encounter milestones emit generic semantic events usable by quests, achievements, class requirements and secret unlocks.
+
+Examples include run start, boss defeat, completion, no-death completion and secret-room discovery.
+
+
+## 2026-09-28 — Aggressive autosave
+
+**Decision:** Durable progression autosaves on meaningful state changes; no required traditional manual Save Game flow.
+
+## 2026-09-28 — Loading spawns at resurrection point
+
+**Decision:** Exact quit position is not the authoritative saved spawn.
+
+Loading a class places it at its latest registered resurrection point, with Cornberg fallback when required.
+
+## 2026-09-28 — Active dungeon runs are not persisted
+
+**Decision:** Quitting an active dungeon abandons the run.
+
+**Decision:** Persistent XP and gold already earned during the run remain saved.
+
+## 2026-09-28 — Echo vs manifestation save ownership
+
+**Decision:** Echo-wide state and per-class manifestation state have explicit ownership boundaries even if serialized together.
+
+Transient session/dungeon state is separate.
+
+## 2026-09-28 — Atomic advancement and bank operations
+
+**Decision:** Advancement/class creation is transactional.
+
+**Decision:** Inventory/bank ownership transfers are transactional.
+
+Crashes must not produce half-created classes, duplicated items or deleted items.
+
+## 2026-09-28 — Versioned saves and migrations
+
+**Decision:** Persistent references use stable IDs and explicit save/schema versions.
+
+**Decision:** Runtime changes use explicit migrations rather than assuming old saves match current data.
+
+## 2026-09-28 — Preserve unresolved save records
+
+**Decision:** Missing/unknown class/item/content references are preserved inertly where practical rather than silently deleted.
+
+## 2026-09-28 — Rotating local save backups
+
+**Decision:** Maintain automatic rotating backups of recent successful save revisions.
+
+## 2026-09-28 — Cloud/user architecture
+
+**Decision:** Prepare provider-neutral user/profile and cloud-save abstractions.
+
+Initial PC direction includes Steam Cloud.
+
+Gameplay systems must not depend directly on a platform-specific user ID or cloud API.
+
+## 2026-09-28 — No anti-save-scumming requirement
+
+**Decision:** DiceFree does not need anti-save-scumming/competitive save protection or leaderboard integrity systems.
+
+Persistence protects against accidental loss/corruption, not deliberate local rollback.
+
+## 2026-09-28 — Cooperative world progress persists to eligible guests
+
+**Decision:** Host state controls live world presentation, but eligible guests can permanently record quest/world outcomes they actually participate in.
+
+**Decision:** Merely joining after an event already happened does not copy that outcome into the guest's timeline.
+
+**Direction:** Event definitions can choose persistence recipients; ordinary co-op progression should normally credit eligible participants.
+
+
+## 2026-09-28 — Bob's house is canon now
+
+**Decision:** The repeated multiplayer persistence example becomes a real future sidequest/event: **Bob's house burns down**.
+
+Bob and his house will exist somewhere in World 1 content.
+
+Exact quest cause/reward/consequences remain intentionally open.
+
+The event is separate from Cornberg's locked abandoned-house mystery unless later explicitly connected.
+
+## 2026-09-28 — Multiple Echo profiles, hidden from normal flow
+
+**Decision:** One user may own multiple separate Echo profiles.
+
+**Decision:** Normal start/continue UX centers the current primary Echo.
+
+Creating/switching Echoes is a deliberate settings/profile-management action so new players do not accidentally create new Echoes.
+
+## 2026-09-28 — Internal user and Echo UUIDs
+
+**Decision:** DiceFree uses stable internal user IDs and Echo IDs.
+
+Steam/platform identity links to the internal user rather than becoming the gameplay save primary key.
+
+## 2026-09-28 — No separate DiceFree login requirement initially
+
+**Decision:** Steam PC release does not require a separate DiceFree email/password account.
+
+Identity architecture can attach additional providers later.
+
+## 2026-09-28 — Cloud conflict policy
+
+**Decision:** Divergent local/cloud Echo revisions are not automatically field-merged.
+
+Present revision information, let the user choose, and preserve backups where practical.
+
+## 2026-09-28 — Echo is the logical cloud revision unit
+
+**Decision:** An Echo profile syncs/version-controls as one coherent cloud revision even though its save package is internally chunked.
+
+## 2026-09-28 — Database is metadata/service-first
+
+**Decision:** Initial/future online database use should focus on users, linked identities, Echo IDs, cloud revision metadata and service metadata.
+
+Ordinary RPG state remains in versioned Echo save packages rather than requiring every gameplay field in an online database.
+
+## 2026-09-28 — Player save remains progression authority
+
+**Decision:** No server-authoritative progression requirement is planned for ordinary play.
+
+There are no leaderboards/economy/PvP integrity requirements driving such a system.
+
+## 2026-09-28 — Offline and LAN support
+
+**Decision:** Core game works offline.
+
+**Decision:** Architecture should support local-LAN multiplayer without requiring internet/cloud services.
+
+## 2026-09-28 — Recoverable Echo deletion
+
+**Direction:** Whole-Echo deletion uses explicit confirmation plus a limited recoverable local/cloud deletion period before permanent purge.
+
+Exact retention period remains open.
+
+## 2026-09-28 — Cross-platform identity readiness
+
+**Decision:** Internal identity/save architecture allows another platform/provider to be linked later.
+
+## 2026-09-28 — Internally chunked save package
+
+**Decision:** Each Echo remains one logical save/cloud revision but uses internal sections/chunks for manifestations, shared state, bank, migrations and diagnostics.
+
+## 2026-09-28 — Developer Profile Inspector
+
+**Decision:** Provide debug/developer-only profile inspection tooling for save versions, revisions, manifestations, backups, migrations, unresolved records, transactions and hidden item-budget/provenance data.
+
+
+## 2026-09-28 — Host-authoritative simulation
+
+**Decision:** Host is authoritative for live world/combat/session state, including guest combat state while connected.
+
+Clients submit intentions; authoritative outcomes drive persistence.
+
+**Decision:** Solo, LAN and online modes should reuse common gameplay command/event paths where practical.
+
+## 2026-09-28 — Host migration is required
+
+**Decision:** Host migration must exist for overworld sessions.
+
+The session should continue under another participant when the original host disconnects/crashes.
+
+**Direction:** Preserve live session state whenever recoverable and never discard already-earned durable progression simply because host migration failed.
+
+## 2026-09-28 — Dungeon host migration
+
+**Decision:** Host migration also applies to active dungeon/raid runs.
+
+A long run should not automatically fail because the original host disconnects.
+
+## 2026-09-28 — Disconnect grace and slot reservation
+
+**Decision:** Temporarily disconnected players remain represented in-world during a reconnect grace period and may still be harmed/killed.
+
+**Decision:** Reconnecting within the grace period resumes the same live actor.
+
+**Decision:** Dungeon roster slots remain reserved and cannot be replaced during that window.
+
+## 2026-09-28 — Pause rules
+
+**Decision:** Solo supports true pause.
+
+**Decision:** Multiplayer supports vote pause.
+
+Exact vote rules remain open.
+
+## 2026-09-28 — Public lobbies, LAN and direct connection
+
+**Decision:** DiceFree supports truly public stranger lobbies in addition to friends/invite-only games.
+
+**Decision:** Support LAN discovery and direct connection-style joining.
+
+LAN/private networking must not require internet/cloud availability and should work with normal local/private/virtual-LAN setups.
+
+## 2026-09-28 — Vote kick
+
+**Decision:** Multiplayer supports vote kick.
+
+Exact thresholds, host-target behavior and dungeon restrictions remain open.
+
+## 2026-09-28 — No ordinary equipment trading
+
+**Decision:** No general player-to-player equipment trading after pickup.
+
+FFA overworld drops can still be socially assigned before pickup.
+
+**Direction:** Framework supports explicitly tradeable item categories; food/potions are candidate tradeable consumables.
+
+**Decision:** No default direct gold transfer/unrestricted player economy.
+
+
+## 2026-09-28 — Enemy archetypes and authored variants
+
+**Decision:** Enemy definitions support reusable base archetypes plus authored variants/overrides.
+
+Keep composition readable; avoid deep opaque inheritance chains.
+
+## 2026-09-28 — Fixed enemy levels
+
+**Decision:** Enemies use fixed authored levels by default.
+
+There is no universal player-level scaling.
+
+## 2026-09-28 — Enemy stat flexibility
+
+**Decision:** Enemies may use the five primary attributes where useful and/or direct monster stats.
+
+Both feed the common combat pipeline.
+
+## 2026-09-28 — Semantic enemy roles/tags
+
+**Decision:** Enemy role/behavior metadata uses extensible semantic tags such as Melee, Ranged, Caster, Healer, Summoner, Ambusher, Elite and Boss.
+
+Tags do not themselves hard-code behavior.
+
+## 2026-09-28 — Scalable AI decision rules
+
+**Decision:** AI supports extremely simple rules such as nearest-target/basic attack as well as weighted conditional decision logic using nested AND/OR/NOT predicates.
+
+Complex future enemies/bosses may have very large authored condition sets.
+
+## 2026-09-28 — Threat and alternate targeting
+
+**Decision:** Highest threat is a normal target policy, not a universal restriction.
+
+Enemies may target by nearest/farthest/lowest HP/random/role/effect/fixation or other authored criteria.
+
+## 2026-09-28 — Authored leash/reset rules
+
+**Decision:** Overworld enemies define home/leash/reset behavior per archetype/enemy.
+
+Some overworld monsters can use special nonstandard leash/chase rules.
+
+## 2026-09-28 — Enemy packs / patrol groups
+
+**Decision:** Support authored pack definitions for composition, formation, patrol, linked aggro and shared reset behavior.
+
+## 2026-09-28 — Boss phase condition framework
+
+**Decision:** Boss/encounter phase transitions can use generic predicates such as HP, time, add deaths, world objects, player state and nested logical conditions.
+
+## 2026-09-28 — Encounter definitions own fight-wide mechanics
+
+**Decision:** Arena hazards, doors, add waves, timers, dialogue, encounter variables and fight completion/reset belong to encounter definitions rather than being crammed into boss actor code.
+
+## 2026-09-28 — Difficulty modes can change mechanics
+
+**Decision:** Harder difficulty modes can add/change encounter mechanics, phases, enemies, AI, hazards, timers and rewards rather than only scaling HP/damage.
+
+## 2026-09-28 — Reusable enemy modifiers
+
+**Decision:** Support reusable enemy modifiers that can alter stats, abilities, AI, effects, presentation and rewards.
+
+This does not imply ubiquitous random elite affixes.
+
+## 2026-09-28 — Encounter reset with explicit exceptions
+
+**Decision:** Default reset restores all authored encounter-local state.
+
+Specific encounters may explicitly preserve selected state across attempts.
+
+## 2026-09-28 — Encounter debug harness
+
+**Decision:** Provide development tooling to spawn/test encounters, force phases/abilities/HP, inspect AI/threat/variables and simulate relevant party-count conditions.

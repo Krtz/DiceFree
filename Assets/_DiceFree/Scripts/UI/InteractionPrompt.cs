@@ -18,7 +18,8 @@ namespace DiceFree.UI
             if (target is QuestGiver giver)
             {
                 var state=player.GetComponent<QuestJournal>().GetProgress(giver.Quest.stableId);
-                marker=state.status == QuestStatus.Available ? "! " : state.status == QuestStatus.ReadyToTurnIn ? "? " : "";
+                if (state.definitionVersion == giver.Quest.version)
+                    marker=state.status == QuestStatus.Available ? "! " : state.status == QuestStatus.ReadyToTurnIn ? "? " : "";
             }
             GUI.Box(new Rect(p.x-130,Screen.height-p.y-10,260,24),marker+target.DisplayName);
             if (target.CanInteract(player)) GUI.Label(new Rect(p.x-100,Screen.height-p.y+15,210,24),"I / right-click: talk");

@@ -16,6 +16,15 @@ namespace DiceFree.Progression
         public int Level => stats.Level;
         public event Action Changed;
         public event Action<int> LeveledUp;
+        public bool CanRestore(int level, int xp) => level >= 1 && level <= curve.levelLimit &&
+            xp >= 0 && (level == curve.levelLimit ? xp == 0 : xp < curve.ToNextLevel(level));
+        public void RestoreState(int level, int xp)
+        {
+            if (!CanRestore(level, xp)) throw new ArgumentException("Invalid saved level/XP.");
+            stats.SetLevel(level);
+            currentXp = xp;
+            Changed?.Invoke(); // Loading never grants XP or replays level-up rewards.
+        }
         private void Awake() { stats = GetComponent<ActorStats>(); credit = GetComponent<KillCreditReceiver>(); }
         private void OnEnable() => credit.Credited += OnCredit;
         private void OnDisable() => credit.Credited -= OnCredit;
