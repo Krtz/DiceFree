@@ -2912,3 +2912,15 @@ Default order:
 4. evaluate final Defense through the mitigation/vulnerability curve.
 
 Example: 100 -> 80 after -20 reduction -> 64 after 20% penetration -> 54 after 10 flat penetration.
+
+
+## 2026-09-29 — Percentage Defense reduction before flat reduction
+
+**Decision:** Within the Defense-reduction layer, percentage reduction resolves before flat reduction.
+
+Full default order:
+1. percentage Defense reduction;
+2. flat Defense reduction;
+3. percentage Defense penetration;
+4. flat Defense penetration;
+5. final mitigation/vulnerability calculation.
