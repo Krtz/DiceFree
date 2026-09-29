@@ -1124,3 +1124,47 @@ Secondary effects/procs do **not** inherit the parent action's critical result b
 A proc, explosion, DoT application, secondary strike or other child effect resolves its own crit eligibility/rules.
 
 A source may explicitly state that a child effect inherits or copies the parent's crit result; this is an exception, not the default.
+
+
+### Elemental penetration and healing
+
+Elemental penetration may apply to elemental healing when the authored effect says it does.
+
+For elemental healing, matching elemental penetration acts in the **opposite direction** from damage penetration: it increases the effective matching resistance used by the heal.
+
+Example:
+
+```
+Base Fire heal: 100
+Target Fire resistance: +50%
+Healer Fire penetration affecting healing: +10 percentage points
+Effective healing resistance: +60%
+Final heal: 160
+```
+
+This is contextual behavior, not an excuse for ambiguous wording. An authored effect must make clear whether its penetration affects:
+- damage;
+- healing;
+- both;
+- or another explicitly defined context.
+
+A real resistance debuff changes the target's resistance itself and therefore affects both matching elemental damage and matching elemental healing according to their normal formulas.
+
+Negative elemental resistance remains uncapped. Matching elemental healing uses:
+
+```
+Healing = Base Healing × (1 + effective matching resistance)
+```
+
+Therefore:
+- -50% resistance => 50% of base healing;
+- -100% resistance => 0 healing;
+- below -100% resistance => the result becomes damage.
+
+Example:
+
+```
+100 Fire heal against -150% effective Fire resistance
+= -50
+= 50 Fire-context healing-inversion damage
+```
