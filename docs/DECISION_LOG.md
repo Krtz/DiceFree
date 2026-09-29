@@ -2875,3 +2875,15 @@ Current anchors:
 - extremely negative Defense approaches 200% damage taken from Defense alone.
 
 **Balance note:** the 300 scale and 0.7 exponent are working tuning defaults and may change after playtesting.
+
+
+## 2026-09-29 — Defense penetration order
+
+**Decision:** Percentage Physical/Magical Defense penetration is applied before flat Defense penetration.
+
+Example:
+- 100 Defense;
+- 20% penetration -> 80;
+- 10 flat penetration -> 70 effective Defense.
+
+This is the default combat-resolution order.
