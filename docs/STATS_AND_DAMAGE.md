@@ -921,3 +921,29 @@ Example:
 ```
 
 Percentage Defense penetration is not capped at 100%.
+
+
+### Defense reference stability
+
+Temporary negative Defense effects do not rewrite the underlying Defense reference used for percentage calculations.
+
+They modify current/effective Defense only.
+
+Example: if the current underlying reference is 100 Defense, applying a temporary reduction does not cause later percentage effects to calculate from the reduced remainder.
+
+The exact composition of the underlying Defense reference remains intentionally open for later design review.
+
+### Defense precision
+
+Defense calculations retain fractional values internally.
+
+Example:
+
+```
+137 underlying Defense
+17% reduction = 23.29 Defense removed
+```
+
+Do not round intermediate Defense math for gameplay resolution.
+
+UI may round or format Defense values for readability.
