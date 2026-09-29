@@ -786,3 +786,20 @@ Effects must explicitly state whether their penetration applies to damage, heali
 Actual resistance debuffs alter the target's resistance itself, so they affect matching elemental damage and matching elemental healing.
 
 Negative resistance remains uncapped. Elemental healing reaches zero at -100% effective matching resistance and becomes damage below -100%.
+
+
+### Resistance overcap
+
+Elemental resistance retains an uncapped raw value. The normal positive resistance cap applies only when deriving the effective value used for resolution.
+
+Debuffs and penetration operate on uncapped raw resistance before the positive cap is applied.
+
+Example:
+- 110% raw Fire resistance;
+- -20 percentage-point Fire resistance debuff;
+- 90% raw remains;
+- with a 75% cap, effective Fire resistance is still 75%.
+
+Ordinary resistance bonuses/debuffs stack additively by default. Multiplicative/special stacking must be explicitly authored.
+
+Negative resistance remains uncapped.
