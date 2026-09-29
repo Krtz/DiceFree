@@ -2959,3 +2959,18 @@ Example:
 - +20% Defense then +50 flat Defense => current Defense 170;
 - enemy 20% reduction still subtracts 20, because the reference is the underlying 100;
 - 120% penetration against underlying 100 subtracts 120 and can create negative effective Defense.
+
+
+## 2026-09-29 — Additive Defense percentage stacking
+
+**Decision:**
+- multiple positive percentage Defense buffs stack additively;
+- multiple percentage Defense reductions stack additively;
+- multiple percentage Defense penetration sources stack additively.
+
+Examples:
+- +20% Defense and +30% Defense = +50% total;
+- 50% and 60% Defense reduction = 110% total reduction;
+- 20% and 15% penetration = 35% total penetration.
+
+Reduction and penetration remain allowed above 100%.
