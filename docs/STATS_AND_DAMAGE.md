@@ -196,9 +196,38 @@ STR/INT can contribute modest amounts but are secondary sources.
 
 Each class defines its own starting Physical Defense and Magical Defense as part of its base stat package.
 
-Physical and Magical Defense use the **same general diminishing-return formula shape**, with different input values and modifiers per class/build.
+Physical and Magical Defense use the **same diminishing-return formula family**.
 
-Exact formula constants remain a balance problem.
+Current balance-default formula:
+
+```
+q = (abs(Defense) / 300)^0.7
+```
+
+For nonnegative Defense:
+
+```
+DamageTakenMultiplier = 1 / (1 + q)
+Mitigation = q / (1 + q)
+```
+
+For negative Defense, use the same curve symmetrically as vulnerability:
+
+```
+DamageTakenMultiplier = 1 + q / (1 + q)
+```
+
+Examples:
+- +10 Defense -> ~91.5% damage taken (~8.5% mitigation)
+- +100 Defense -> ~68.3% damage taken (~31.7% mitigation)
+- +300 Defense -> 50% damage taken
+- +1000 Defense -> ~30.1% damage taken (~69.9% mitigation)
+- -10 Defense -> ~108.5% damage taken
+- -100 Defense -> ~131.7% damage taken
+- -300 Defense -> 150% damage taken
+- extremely negative Defense approaches, but does not exceed, 200% damage taken from Defense alone.
+
+The constants `300` and exponent `0.7` are current balance defaults and may change through playtesting without changing the underlying Defense architecture.
 
 ## Elemental resistances
 
