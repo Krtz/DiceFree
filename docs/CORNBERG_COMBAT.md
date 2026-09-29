@@ -215,11 +215,72 @@ eligibility. No single-parent prerequisite, fixed child count, tier width or
 eager requirement that all descendants exist is introduced. Mystic Knight and
 advancement evaluation are not implemented. See issue #18.
 
-Health events and damage-resolution boundaries are extension points, not claims
-that the full effect framework already exists. Shields, Pure Damage, crit,
-penetration, CC, lifesteal, reflection, resource costs, saving and network
-authority remain future work. Do not hook future proc chains directly into
-presentation callbacks.
+Health events and damage-resolution boundaries do not constitute the full effect
+framework. Physical/Magical Defense reduction and penetration are implemented;
+local saves are implemented in [CORNBERG_SAVES.md](CORNBERG_SAVES.md). Explicit
+single-rule crit evaluation is described below, but is not wired into damage or
+healing. Shields, Pure Damage, elemental penetration, CC, lifesteal, reflection,
+resource costs and network authority remain future work. Do not hook future proc
+chains directly into presentation callbacks.
+
+## Defense precision and explicit crit foundation
+
+Design documents were selectively copied through `setup/unity-project`
+`66d8f42` without merging. The existing Defense runtime already retains floating
+point fractions and recomputes effective Defense without mutating its reference.
+The added fixture verifies 137 minus 17% = 113.71; adding 13% penetration produces
+95.9, including repeated resolutions. Removing the reduction leaves 119.19 and
+the underlying reference remains 137 throughout. No intermediate rounding is used.
+
+`ActorStats.Defense(channel)` is the current reference-provider boundary: class
+base plus attribute-derived Defense, because no gear exists. `DefenseMath` accepts
+that reference independently of transient modifiers. **Whether future gear,
+permanent or passive Defense belongs in that reference remains OPEN.** Nothing in
+this slice assigns those future sources membership or implements them.
+
+`CriticalRule` is an immutable explicit grant with source ID, rule ID, permission,
+chance and a requested multiplier. Its constructor requires every value; it has
+no global/default multiplier. No rule means no permission and absolutely no roll.
+Denied permission and zero-chance grants also skip the roll source.
+
+`CriticalResolver.Evaluate` accepts exactly one rule and an injected
+`ICriticalRollSource` returning a value in [0,1). Triggering uses roll < chance.
+There is no hidden Unity/global RNG. Invalid authoring/roll values are rejected.
+`CriticalResolution` retains source/rule identity, permission, whether a roll
+occurred, the chance/roll, trigger outcome and requested multiplier. Absent rules
+have null chance/roll/multiplier rather than an invented default. A missed rule
+still retains its authored provenance and requested multiplier for diagnostics.
+
+The result is deliberately separate from `DamageResolver`, `Health` and attack
+assets: it requests no damage application or ordering. Existing fists, both Slimes,
+well and regeneration remain entirely non-crit with unchanged balance. Future
+damage, periodic damage or healing callers may supply an explicitly authorized
+rule; no category grants permission on its own. This slice supports a multiplier
+payload only, not a general behavior/effect framework.
+
+**Multiple simultaneous crit-grant interaction and the ordering/application of
+critical outcomes remain OPEN.** There is no list/merge/priority/independent-roll
+policy, actor-wide crit stat pair or universal multiplier. No persistent crit state
+or save-schema change is introduced.
+
+Deterministic validation covers absent, denied and zero-chance grants without
+consuming a roll; below/exactly-at/above thresholds for 50%/2x and 12.5%/8x;
+provenance on trigger/miss; invalid input rejection; and unchanged ordinary attack
+damage after standalone evaluation. Existing Defense coverage includes additive
+buff/shred/penetration, >100%, zero crossing, negative underlying values and
+Physical/Magical isolation. These run through `CornbergCombatValidation.Run`.
+
+Validation on 2026-09-30: focused secondary-stat/Defense and explicit-crit checks,
+combat/death/Return/well, Q1, Q2 with six reload checkpoints, all 13 traversal
+routes, fresh/injured/dead/legacy persistence, migration/recovery/backups/stale
+writers and Profile Inspector checks passed. The Windows development build
+succeeded (171,964,289 bytes). No scene, baked navigation, save schema or authored
+balance data changed. Existing editor SearchDatabase exception #17 remains.
+Six isolated 12-second standalone startup/reload smokes also passed with no
+runtime/navigation errors: fresh revisions 1 → 2; completed-Q2 revisions 11 → 12
+(level 5/0 XP, no reward replay); migrated legacy revisions 6 → 7 (level 3/7 XP).
+Each profile retained its identity. These are startup/reload checks, not a manual
+standalone quest playthrough.
 
 ## Validation
 

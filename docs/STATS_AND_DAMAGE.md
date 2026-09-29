@@ -921,3 +921,48 @@ Example:
 ```
 
 Percentage Defense penetration is not capped at 100%.
+
+
+### Defense reference stability
+
+Temporary negative Defense effects do not rewrite the underlying Defense reference used for percentage calculations.
+
+They modify current/effective Defense only.
+
+Example: if the current underlying reference is 100 Defense, applying a temporary reduction does not cause later percentage effects to calculate from the reduced remainder.
+
+The exact composition of the underlying Defense reference remains intentionally open for later design review.
+
+### Defense precision
+
+Defense calculations retain fractional values internally.
+
+Example:
+
+```
+137 underlying Defense
+17% reduction = 23.29 Defense removed
+```
+
+Do not round intermediate Defense math for gameplay resolution.
+
+UI may round or format Defense values for readability.
+
+
+## Critical-hit authorization
+
+Critical hits are **opt-in mechanics**, not a universal baseline stat.
+
+Default rules:
+- baseline crit chance is **0%**;
+- there is **no universal default crit-damage multiplier**;
+- an action/effect can crit only when an explicit source grants crit permission;
+- the source granting crit permission also defines the relevant crit chance and crit multiplier/behavior;
+- direct damage, periodic damage, healing and other effect categories do **not** gain crit permission merely because of their category;
+- DoTs, healing or any other normally non-critting effect may crit when an explicit skill/passive/item/effect grants permission.
+
+Examples of valid authored crit rules include:
+- 50% chance to deal 2x damage;
+- 12.5% chance to deal 8x damage.
+
+There is currently no assumption that distinct crit-granting sources combine into one global Crit Chance/Crit Damage pair. Exact interaction between multiple simultaneous crit rules remains a separate design question.

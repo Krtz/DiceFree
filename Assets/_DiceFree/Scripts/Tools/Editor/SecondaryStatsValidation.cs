@@ -36,6 +36,8 @@ namespace DiceFree.EditorTools
                 Equal(source.Defense(DamageChannel.Physical), 40, "Coefficient modifier removal");
 
                 var tuning = definition.tuning;
+                Equal(DefenseMath.Effective(137, new DefenseModifier { reductionPercent = 0.17f }, default),
+                    113.71f, "Fractional Defense must not round intermediate values");
                 Equal(DefenseMath.DamageMultiplier(0, tuning), 1, "Zero Defense");
                 Equal(DefenseMath.DamageMultiplier(300, tuning), 0.5f, "Positive Defense anchor");
                 Equal(DefenseMath.DamageMultiplier(-300, tuning), 1.5f, "Negative Defense anchor");
@@ -55,6 +57,16 @@ namespace DiceFree.EditorTools
                 targetDefinition.baseAttributes = new AttributeValues(0);
                 targetDefinition.physicalDefense = targetDefinition.magicalDefense = 100;
                 attack.baseDamage = 100; attack.coefficient = 0; attack.element = null;
+                targetDefinition.physicalDefense = 137;
+                target.SetDefenseModifier("test.fraction", new DefenseModifier { reductionPercent = 0.17f });
+                Equal(DamageResolver.Calculate(source, target, attack).defense, 113.71f, "Runtime retains fractional reduction");
+                source.SetDefenseModifier("test.fraction", new DefenseModifier { penetrationPercent = 0.13f });
+                Equal(DamageResolver.Calculate(source, target, attack).defense, 95.9f, "Later penetration uses stable reference");
+                Equal(DamageResolver.Calculate(source, target, attack).defense, 95.9f, "Repeated resolution cannot compound reductions");
+                Equal(target.Defense(DamageChannel.Physical), 137, "Temporary reductions mutated underlying reference");
+                target.RemoveDefenseModifier("test.fraction");
+                Equal(DamageResolver.Calculate(source, target, attack).defense, 119.19f, "Removing reduction restores current value without changing reference");
+                source.RemoveDefenseModifier("test.fraction"); targetDefinition.physicalDefense = 100;
                 target.SetDefenseModifier("test.buff-a", new DefenseModifier { buffPercent = 0.2f });
                 target.SetDefenseModifier("test.buff-b", new DefenseModifier { buffPercent = 0.3f });
                 source.SetDefenseModifier("test.pen-a", new DefenseModifier { penetrationPercent = 0.2f });

@@ -78,6 +78,9 @@ namespace DiceFree.Combat
         public float AttackSpeed => 1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed);
         public float HealingDone => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingDone);
         public float HealingReceived => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingReceived);
+        // Current underlying-reference provider: class base + attributes only.
+        // Gear/permanent/passive membership is OPEN; decide here later, not in DefenseMath.
+        // Temporary Defense modifiers must never be folded into this reference.
         public float Defense(DamageChannel channel) => channel == DamageChannel.Physical
             ? definition.physicalDefense + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
             : definition.magicalDefense + Attributes.intelligence * SecondaryCoefficient(SecondaryStat.MagicalDefense);
