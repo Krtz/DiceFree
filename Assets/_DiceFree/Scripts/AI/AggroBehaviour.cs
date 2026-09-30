@@ -8,6 +8,9 @@ namespace DiceFree.AI
     {
         [SerializeField, Min(1)] private float awareness = 7;
         [SerializeField, Min(1)] private float leash = 13;
+        [SerializeReference] private AutoAggroPolicy autoAggroPolicy = new();
+        public AutoAggroPolicy AutoAggroPolicy => autoAggroPolicy;
+        public void ConfigureAutoAggro(AutoAggroPolicy policy) => autoAggroPolicy = policy ?? new AutoAggroPolicy();
         private CombatActor actor;
         private BasicAttack attack;
         private Vector3 home;
@@ -47,7 +50,8 @@ namespace DiceFree.AI
             float distance = awareness;
             foreach (var candidate in CombatActor.All)
             {
-                if (!actor.IsHostileTo(candidate) || !actor.HasSightOf(candidate)) continue;
+                if (!actor.IsHostileTo(candidate) || !actor.HasSightOf(candidate) ||
+                    !autoAggroPolicy.Allows(actor, candidate)) continue;
                 var candidateDistance = Vector3.Distance(transform.position, candidate.transform.position);
                 if (candidateDistance < distance) { nearest = candidate; distance = candidateDistance; }
             }

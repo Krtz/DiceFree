@@ -1,5 +1,8 @@
 # Cornberg combat increment
 
+Proactive acquisition now also uses the provisional ten-level
+[trivial-enemy policy](CORNBERG_AGGRO.md); retaliation and existing targets are unchanged.
+
 The following combat foundation now also supports timed respawn, XP/leveling
 and Q1. See [Cornberg quest/progression notes](CORNBERG_QUESTS.md) for the current
 five-kill starter flow, added components, provisional values and validation.

@@ -7,6 +7,7 @@ namespace DiceFree.AI
     {
         public string familyId;
         public GameObject prefab;
+        [SerializeReference] public AutoAggroPolicy autoAggroPolicy = new();
         [Min(1)] public float awareness = 7, leash = 13;
         [Min(0.1f)] public float radius = 0.65f, height = 1.8f;
     }

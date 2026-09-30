@@ -24,6 +24,7 @@ namespace DiceFree.AI
             var archetype = definition.archetype;
             GetComponent<ActorStats>().Configure(definition.stats, definition.level);
             GetComponent<AggroBehaviour>().Configure(definition.Awareness, definition.Leash);
+            GetComponent<AggroBehaviour>().ConfigureAutoAggro(definition.AutoAggroPolicy);
             float radius = archetype.radius * definition.bodyScale, height = archetype.height * definition.bodyScale;
             GetComponent<CombatActor>().Configure(1, radius, archetype.familyId);
             var agent = GetComponent<NavMeshAgent>(); agent.radius = radius; agent.height = height;
