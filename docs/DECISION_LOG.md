@@ -3160,3 +3160,14 @@ Example:
 - effective Fire Resistance = 55%.
 
 Cap changes do not alter the stored/raw resistance value.
+
+
+## 2026-09-30 — Resistance-cap floor, healing cap, and no accidental resurrection
+
+**Decision:** Effective elemental Resistance Cap has a default floor of 0%.
+
+Cap reduction alone cannot create negative resistance/vulnerability.
+
+**Decision:** Elemental healing uses the same effective elemental Resistance Cap as damage after context-specific resistance/penetration math.
+
+**Decision:** Resistance-inversion HP restoration cannot resurrect dead targets by default. Resurrection requires an explicit resurrection/death-prevention mechanic.
