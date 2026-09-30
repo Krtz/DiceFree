@@ -176,9 +176,14 @@ The next main story implementation is Q4. Its core completion structure is now s
 - both Q4 paths award the same main quest reward;
 - completing one route completes Q4 and cannot duplicate the main reward;
 - incidental elite/dungeon/ordinary-kill rewards remain separate;
-- target pacing after Q4 is roughly level 9–10, with exact XP left to gameplay testing.
+- target pacing after Q4 is roughly level 9–10, with exact XP left to gameplay testing;
+- both alternatives are active simultaneously; the player never locks a route;
+- the elite must be killed after Q4 begins, just like the 30-kill route is non-retroactive;
+- quest guidance only says the elite is somewhere in the Slime Forest;
+- this first elite is deliberately a stat-check fight with no bespoke phase/split/pool/enrage mechanics;
+- satisfying either route sets Q4 ready-to-turn-in; the player returns to Cornberg for completion/reward.
 
-Implementation still needs the elite Slime specifics and clean multi-path quest semantics, but agents must not reintroduce the dungeon as a third Q4 route.
+Implementation still needs exact elite spawn/respawn/tuning and the specific Q4 giver/turn-in presentation, but agents must not reintroduce the dungeon as a third Q4 route.
 
 ## Trivial-enemy auto-aggro — complete
 
@@ -846,5 +851,5 @@ The latest completed implementation increment is trivial-enemy auto-aggro policy
 - **Runner status:** implemented with reusable acknowledged-conversation / TalkTo semantic credit and existing schema-v2 persistence
 - **Confirmed trivial aggro:** `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; provisional ten-level awareness suppression, authored always-aggro and policy extension seam; focused/regression/build/smoke validation passed
 - **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
-- **Q4 design now settled:** elite Slime OR 30 post-accept eligible non-crop Slime kills; dungeon is side content, dungeon Slime kills can count; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
-- **Next design need:** finish elite-Slime specifics and Q4 presentation/credit details; verify current road-speed implementation state before assigning coding work.
+- **Q4 design now settled:** both routes active simultaneously; elite Slime OR 30 post-accept eligible non-crop Slime kills; no retroactive elite/kill credit; dungeon is side content but eligible dungeon Slimes can count; elite guidance says somewhere in Slime Forest; elite is a stat check only; either route sets ready-to-turn-in back in Cornberg; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
+- **Next design need:** settle Q4 giver/turn-in NPC plus elite spawn/respawn/tuning and multiplayer/shared kill-credit details; verify current road-speed implementation state before assigning coding work.
