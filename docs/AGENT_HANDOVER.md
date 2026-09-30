@@ -140,40 +140,19 @@ Known working/implemented areas include:
 - stat / Defense / crit / element foundations
 - semantic quest credit/events direction
 
-## Latest known Codex work before usage-limit interruption
+## Confirmed Q3 implementation
 
-Last visible Codex update reported:
+Q3 is implemented and pushed on `poc/cornberg` in `4289854b096b790cbb8df847f7e4c8309b2033d7` (Add Cornberg Q3 named forest Slime progression).
 
-- Q3 content was authored.
-- The farmer offers Q3 after Q2.
-- The objective leads to the existing southern woodland clearing.
-- A larger fixed-level green Slime is used.
-- It uses shared combat, respawn, kill-credit and XP pipelines.
-- Its current display name and tuning are explicitly provisional.
-- Focused test work was exercising:
-  - the route;
-  - an actual duel;
-  - NPC acceptance/turn-in;
-  - four reload checkpoints.
-- Farmer conversation selection was fixed so finishing the latest quest no longer falls back to Q1.
+Farmer offers Q3 after Q2; ReachArea -> named forest Slime Kill -> return uses the existing woodland clearing and shared combat/respawn/credit/XP/persistence systems. Farmer conversation retains the latest completed offer. Name, location and tuning remain provisional; see `docs/CORNBERG_FOREST.md` on the implementation branch.
 
-**Important:** Codex hit its usage limit immediately after this report.
-
-The next implementation agent must inspect the latest `poc/cornberg` commits and issue comments to confirm exactly what was pushed/landed before continuing.
-
----
+Passed: focused Q3 with four reload checkpoints, Q1/Q2, combat, all 13 traversal routes, persistence/migration/recovery/stale-writer/Profile Inspector, Windows development build and eight isolated startup/reload smokes. No manual playthrough claimed. Issues #6/#15/#22 contain the implementation handoff. Navigation/save schema/existing balance preserved.
 
 # Current work in progress
 
-Primary active implementation direction:
-- verify Q3 landed state;
-- finish/validate Q3 if needed;
-- continue the next smallest coherent Cornberg progression beat.
-
-The current slice should keep using real game systems rather than quest-specific hacks.
+Q3 is complete, not recovery work. Next: runner returns after Q3; prove a reusable semantic TalkTo conversation with durable state. Do not implement Q4 yet. Q4 completion alternatives, counts, availability, reward parity and level/XP payout require explicit design decisions.
 
 ---
-
 # High-level game / narrative context
 
 DiceFree is an isometric co-op action RPG inspired strongly by Warcraft III custom ORPGs such as Twilight's Eve.
@@ -806,21 +785,12 @@ When entering a new chat/session:
 
 # Current recommended next implementation step
 
-At the time this handover file was created:
-
-1. Inspect latest `poc/cornberg` state.
-2. Confirm Q3 implementation and validation actually landed after the last Codex session.
-3. Finish/fix Q3 if necessary.
-4. Update this file with the confirmed Q3 commit and status.
-5. Continue with the next smallest Cornberg progression increment.
-
----
+Implement the runner returning after Q3: the weekly run could not reach the next settlement because excessive Slimes blocked the road. Use a small reusable TalkTo seam, preserve existing progression and stop before Q4.
 
 # Latest handover update
 
 - **Date:** 2026-09-30
 - **Branch updated:** `setup/unity-project`
-- **Purpose:** first durable agent handover
-- **Current implementation activity:** Cornberg Q3 / post-Q2 progression
-- **Last external Codex state:** Q3 authored and undergoing focused route/duel/NPC/reload validation when usage limit interrupted the session
-- **Next agent responsibility:** verify repository truth before assuming that work completed
+- **Purpose:** verify successful Q3 push and remove stale interruption/recovery state
+- **Confirmed implementation:** `4289854b096b790cbb8df847f7e4c8309b2033d7`
+- **Next:** Runner Returns, then resolve Q4 alternatives/rewards before implementation.
