@@ -45,7 +45,8 @@ namespace DiceFree.EditorTools
                 // A genuine pre-Q3 representation: schema/record v2, completed Q1/Q2, no Q3 record.
                 var actor = UnityEngine.Object.FindAnyObjectByType<TraversalInput>();
                 var definitions = actor.GetComponent<QuestJournal>().Definitions;
-                var prior = definitions.Where(q => q.stableId != "quest.cornberg.named-slime").Select(q => new QuestProgress {
+                var prior = definitions.Where(q => q.stableId == "quest.cornberg.crop-slimes" ||
+                    q.stableId == "quest.cornberg.investigate-road").Select(q => new QuestProgress {
                     questId = q.stableId, definitionVersion = q.version, status = QuestStatus.Completed,
                     stage = q.stages.Length - 1, count = q.stages.Last().count }).ToList();
                 prior.Add(new QuestProgress { questId = "quest.future-unknown", definitionVersion = 99, stage = 12, count = 9 });

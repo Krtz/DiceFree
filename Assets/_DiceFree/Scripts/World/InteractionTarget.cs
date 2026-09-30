@@ -10,7 +10,7 @@ namespace DiceFree.World
         [SerializeField] private Transform approachPoint;
         public string DisplayName => displayName;
         public Vector3 ApproachPosition => approachPoint != null ? approachPoint.position : transform.position;
-        public bool CanInteract(CombatActor actor) => isActiveAndEnabled && actor != null && actor.Alive &&
+        public virtual bool CanInteract(CombatActor actor) => isActiveAndEnabled && actor != null && actor.Alive &&
             Vector3.Distance(actor.transform.position,ApproachPosition) <= range &&
             !Physics.Linecast(actor.transform.position+Vector3.up,transform.position+Vector3.up,1<<9);
         public virtual void Interact(CombatActor actor) { }

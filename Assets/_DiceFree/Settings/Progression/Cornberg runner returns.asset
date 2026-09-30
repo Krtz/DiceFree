@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg runner returns
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestDefinition
+  stableId: story.cornberg.runner-returns
+  title: Runner Returns
+  version: 1
+  offer:
+  locationHint: Speak to Cornberg Runner by the village green, near the east road.
+  stages:
+  - kind: 2
+    instruction: Hear why the weekly runner returned
+    contentId: npc.cornberg.runner
+    familyId:
+    areaId:
+    conversationId: conversation.cornberg.runner-blocked-road
+    count: 1
+  completedQuestIds:
+  - quest.cornberg.named-slime
+  rewardXp: 0
+  acceptOnTalk: 1
+  completeOnObjectives: 1

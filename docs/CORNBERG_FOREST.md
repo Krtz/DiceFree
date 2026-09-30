@@ -111,6 +111,9 @@ not a claimed manual playthrough.
 
 ## Next smallest beat
 
+Runner Returns is now implemented separately; see [CORNBERG_RUNNER.md](CORNBERG_RUNNER.md).
+The following describes the boundary of the original Q3 increment.
+
 The specified next story beat is the runner returning without reaching the next
 town because Slimes blocked the road. A short real NPC conversation can prove a
 reusable semantic TalkTo objective/event next. Q4's exact alternative objectives,

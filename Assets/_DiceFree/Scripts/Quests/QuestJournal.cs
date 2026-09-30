@@ -36,8 +36,8 @@ namespace DiceFree.Quests
                     questId = definition.stableId, definitionVersion = definition.version
                 });
         }
-        private void OnEnable() { credit.Credited += OnCredit; AreaEvents.Entered += OnArea; }
-        private void OnDisable() { credit.Credited -= OnCredit; AreaEvents.Entered -= OnArea; }
+        private void OnEnable() { credit.Credited += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; }
+        private void OnDisable() { credit.Credited -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
         private QuestProgress Find(string id) => progress.Find(value => value.questId == id);
         public QuestProgress GetProgress(string id) => Find(id)?.Copy();
         // Detached stable-ID records form the future persistence seam; no scene references or UI names.
@@ -99,7 +99,20 @@ namespace DiceFree.Quests
         {
             if (entered.actor == owner) Advance(ObjectiveKind.ReachArea, null, null, entered.areaId);
         }
-        private void Advance(ObjectiveKind kind, string content, string family, string area)
+        private void OnTalk(ConversationCompleted fact)
+        {
+            if (fact.actor != owner) return;
+            foreach (var definition in definitions)
+            {
+                var first = definition.stages[0];
+                if (definition.acceptOnTalk && first.kind == ObjectiveKind.TalkTo &&
+                    first.contentId == fact.npcId &&
+                    (string.IsNullOrEmpty(first.conversationId) || first.conversationId == fact.conversationId) && CanAccept(definition))
+                    Accept(definition);
+            }
+            Advance(ObjectiveKind.TalkTo, fact.npcId, null, null, fact.conversationId);
+        }
+        private void Advance(ObjectiveKind kind, string content, string family, string area, string conversation = null)
         {
             foreach (var definition in definitions)
             {
@@ -109,12 +122,17 @@ namespace DiceFree.Quests
                 if (objective.kind != kind ||
                     (!string.IsNullOrEmpty(objective.contentId) && objective.contentId != content) ||
                     (!string.IsNullOrEmpty(objective.familyId) && objective.familyId != family) ||
-                    (kind == ObjectiveKind.ReachArea && objective.areaId != area)) continue;
+                    (kind == ObjectiveKind.ReachArea && objective.areaId != area) ||
+                    (kind == ObjectiveKind.TalkTo && !string.IsNullOrEmpty(objective.conversationId) && objective.conversationId != conversation)) continue;
                 state.count++;
                 if (state.count >= objective.count)
                 {
                     if (state.stage + 1 < definition.stages.Length) { state.stage++; state.count = 0; }
-                    else state.status = QuestStatus.ReadyToTurnIn;
+                    else
+                    {
+                        state.status = QuestStatus.ReadyToTurnIn;
+                        if (definition.completeOnObjectives) TurnIn(definition);
+                    }
                 }
                 Changed?.Invoke();
             }

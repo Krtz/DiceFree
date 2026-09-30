@@ -5,6 +5,8 @@ It preserves geography, navigation, duel balance, death/return and well healing.
 This note describes the original Q1 slice. Local saving is covered in
 [CORNBERG_SAVES.md](CORNBERG_SAVES.md); the subsequent Q2 extension is covered in
 [CORNBERG_ROAD.md](CORNBERG_ROAD.md). No Tier-1 classes, multiplayer or shops are implemented.
+Post-Q3 conversation content and the TalkTo extension are covered in
+[CORNBERG_RUNNER.md](CORNBERG_RUNNER.md).
 
 ## Play
 

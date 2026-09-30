@@ -12,6 +12,7 @@ namespace DiceFree.UI
         private void OnGUI()
         {
             if (Camera.main == null) return;
+            if (target is ConversationTarget conversation && !conversation.Available(player)) return;
             var p=Camera.main.WorldToScreenPoint(target.transform.position+Vector3.up*2.2f);
             if (p.z <= 0 || Vector3.Distance(player.transform.position,target.transform.position)>25) return;
             string marker="";

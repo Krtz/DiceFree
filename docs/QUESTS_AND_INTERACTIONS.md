@@ -187,3 +187,15 @@ Example in principle:
 - specific secret interaction completed.
 
 Do not encode these future combinations as dungeon-specific hard-coded managers.
+
+## Quest-marker and objective presentation
+
+Default quest-NPC presentation uses the classic readable convention:
+- **!** for an available quest;
+- **?** for a quest ready for relevant follow-up/turn-in.
+
+For now, normal quest objectives should plainly tell the player what to do.
+
+The quest framework should still allow individual authored quests to use intentionally vaguer clues/directions later, but vagueness is an exception rather than the default UX.
+
+Do not remove the classic markers in pursuit of a universally "immersive" quest presentation.
