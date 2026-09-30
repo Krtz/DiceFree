@@ -430,6 +430,10 @@ Somewhere in the starter forest is World 1's first dungeon.
 
 Theme: **Slimes**.
 
+The Slime dungeon is **side content / a sidequest**, not a required Q4 completion route.
+
+Its Slime kills may still count toward Q4's 30-kill alternative when Q4 is active and those enemies are eligible.
+
 It should be physically discovered through the forest rather than selected from a menu.
 
 The first version can be short.
@@ -769,15 +773,42 @@ Their failure simply confirms the local Slime problem is severe enough to disrup
 
 The village asks the Echo to reduce the Slime problem enough that normal travel can resume.
 
-Current concept: provide multiple valid ways to satisfy the objective, such as:
-- complete the Slime dungeon;
-- kill the dangerous elite Slime;
-- kill a large total number of Slimes (e.g. ~30 total);
-- potentially other equivalent objectives later.
+Q4 has **two equivalent completion paths**:
 
-This is a useful prototype for **multi-path quest completion**.
+1. **Kill the dangerous elite Slime.**
+2. **Kill 30 eligible Slimes after Q4 begins.**
 
-Exact alternatives/counts/reward parity are not locked.
+The Slime dungeon is **not** a Q4 completion path. It is separate side content / a sidequest.
+
+#### Mass-kill path
+
+The 30-kill route:
+- begins counting only after Q4 is active;
+- does **not** count earlier kills retroactively;
+- does **not** count the weakest crop-field Slimes;
+- does count the stronger non-crop Slimes in the starter region;
+- does count eligible Slimes killed inside the Slime dungeon.
+
+Exact eligible content IDs should be authored semantically rather than inferred from display names.
+
+#### Reward parity
+
+Q4's main quest reward is the **same regardless of which completion path is used**.
+
+The chosen route can still produce different incidental rewards:
+- the elite can have its own authored drops/XP;
+- ordinary Slime kills provide their normal drops/XP;
+- dungeon Slimes/dungeon completion can provide the dungeon's own separate rewards.
+
+Completing one Q4 route completes the quest; the player does not receive the main Q4 reward twice by later satisfying the other route.
+
+#### Progression target
+
+Current tuning intent is for a normal fresh Novice to end Q4 around **level 9–10**.
+
+Do not lock an exact Q4 XP payout yet. Final XP/reward values should be tuned from real gameplay pacing tests.
+
+This remains a useful prototype for **multi-path quest completion**.
 
 ### Quest 5 — Become Cornberg's runner
 
