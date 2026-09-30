@@ -219,7 +219,7 @@ Health events and damage-resolution boundaries do not constitute the full effect
 framework. Physical/Magical Defense reduction and penetration are implemented;
 local saves are implemented in [CORNBERG_SAVES.md](CORNBERG_SAVES.md). Explicit
 action-wide crit resolution now feeds raw damage through an explicit optional
-context; no current content grants crit. Healing crits, shields, Pure Damage, elemental penetration, CC, lifesteal, reflection,
+context; no current content grants crit. Healing crits, shields, Pure Damage, CC, lifesteal, reflection,
 resource costs and network authority remain future work. Do not hook future proc
 chains directly into presentation callbacks.
 
@@ -340,14 +340,71 @@ Final remote verification found an additional append-only design update at
 STATS_AND_DAMAGE and DECISION_LOG are preserved here too. They clarify separate
 originating-action provenance, hit-before-crit, critical resolution versus HP
 damage, explicit child-effect inheritance and elemental healing penetration.
-This increment retains winning-rule provenance and separates crit from damage,
-but does not yet add originating-action identity fields or hit/miss, child-effect
-or elemental-healing systems. Reusing a context means packets of the same action,
+That increment retained winning-rule provenance and separated crit from damage.
+The subsequent resistance increment below adds originating-action identity and
+pure elemental-healing math, but no hit/miss or child-effect systems. Reusing a context means packets of the same action,
 not implicit inheritance by a child action. Those integrations must follow the
 new notes when implemented; no modifier composition formula was settled.
 Scene, baked navigation, save schema and authored balance data are unchanged.
 
 ## Validation
+
+### Raw resistance and action provenance increment
+
+Relevant design additions through setup/unity-project `47b1115` were selectively
+reconciled into COMBAT, STATS_AND_DAMAGE and DECISION_LOG without merging histories.
+Newer resistance-inversion restoration decisions are preserved as design; this
+slice does not implement >100%-cap damage-to-healing application or cap modifiers.
+
+- `ActionProvenance` carries generic stable ActionId/SourceId separately from the
+  winning crit grant. `EvaluateAction` accepts it optionally for compatibility;
+  `ActionCriticalResolution.Origin` retains it even if no rule wins. Same-action
+  packets share it; child actions do not automatically inherit it. Existing crit
+  sorting, chance capping, RNG and winning-rule behavior are unchanged.
+- `ActorStats.RawResistance` preserves authored overcap and negative values, then
+  adds source-keyed target resistance modifiers. The existing `Resistance` query
+  remains a compatibility effective-damage query without source penetration.
+- `ResolveResistance` returns raw, applicable source penetration, pre-cap and
+  effective resistance. Damage subtracts matching penetration; healing adds it.
+  Only the positive cap is applied, after these operations. Normal cap remains
+  the existing 75% tuning value and default raw resistance remains -10%.
+- `ElementalModifier` identifies an element by stable ID and a percentage-point
+  delta. Real target modifiers always affect both contexts; penetration explicitly
+  records Damage, Healing or both. Contributions add deterministically by source
+  identity. Setting a source replaces its contribution; removal is supported.
+  Transient dictionaries clear through the existing load, enemy respawn and debug
+  reset paths, without serialization or a status-duration framework.
+- `DamageResult.elementalResistance` exposes the calculation alongside existing
+  final `resistance`. Crit still changes raw damage before Defense and resistance.
+- `ElementalHealingResult` is pure math: signed amount = base amount × (1 + effective
+  resistance). Positive Healing and positive InversionDamage views retain the
+  element and healing-resolution context, with no Physical/Magical channel or HP
+  mutation. Null-element healing stays unchanged. Well and regeneration do not
+  use this seam. Source/receiver healing scaling and actual inversion application
+  belong to future authored healing integration.
+
+Focused validation covers raw overcap, debuff buffering, penetration before cap,
+additive bonuses/debuffs, uncapped negatives, damage-only/healing-only/both
+penetration, healing inversion, non-elemental bypass, load transient reset and
+separate action/winner provenance across packets. Existing action-crit fixtures
+are unchanged and rerun. No scene, baked navigation, schema or balance asset is
+changed. On 2026-09-30 the focused elemental/provenance and unchanged crit tests,
+stat/Defense, combat/death/Return/well, Q1, Q2 with six reload checkpoints, all 13
+traversal routes, fresh/injured/dead/legacy persistence, migration, recovery,
+stale-writer and Profile Inspector checks passed. Windows development build
+succeeded (171,971,593 bytes). Known editor SearchDatabase startup issue #17 is
+unchanged and remains separately identified by the validation runner.
+Six isolated standalone startup/reload checks also passed: fresh, completed-Q2
+and legacy-v1 profiles, two launches each. Identity and level/XP persisted (1/0,
+5/0 and 3/7 respectively), revisions advanced, legacy migrated to schema 2 and
+no runtime errors were logged. These are startup/reload checks, not a full manual
+standalone playthrough.
+
+Still deferred: resistance-cap modifier framework, damage-to-healing application
+above 100% effective resistance, full elemental healing abilities/application,
+shields/immunity/procs, hit/miss and child-effect integration. Crit modifier
+composition, rare stackable crit semantics and future underlying Defense source
+membership remain open. No content receives new crit or resistance modifiers.
 
 Run with `-batchmode -projectPath <repo> -executeMethod <method> -logFile <path>`:
 

@@ -8,10 +8,12 @@ namespace DiceFree.Combat
     public sealed class ActionCriticalResolution
     {
         public CriticalResolution Winner { get; }
+        public ActionProvenance Origin { get; }
         public bool Triggered => Winner.triggered;
         public IReadOnlyList<CriticalResolution> Evaluated { get; }
-        internal ActionCriticalResolution(CriticalResolution winner, CriticalResolution[] evaluated)
+        internal ActionCriticalResolution(CriticalResolution winner, CriticalResolution[] evaluated, ActionProvenance origin)
         {
+            Origin = origin;
             Winner = winner; Evaluated = Array.AsReadOnly(evaluated);
         }
         public float ApplyToRaw(float raw) => Triggered ? raw * Winner.requestedMultiplier.Value : raw;

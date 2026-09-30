@@ -3086,3 +3086,48 @@ Example:
 **Reaffirmed:** Negative elemental resistance is uncapped. At -100% matching resistance elemental healing becomes zero; below -100% it inverts into damage.
 
 **Design rule:** Penetration effects must state clearly which contexts they affect. Avoid ambiguous generic wording.
+
+
+## 2026-09-30 — Resistance overcap and additive stacking
+
+**Decision:** Elemental resistance stores an uncapped raw value; the normal cap applies only to effective positive resistance during resolution.
+
+**Decision:** Resistance debuffs/penetration operate on raw uncapped resistance before the cap.
+
+Example:
+- 110% raw Fire resistance;
+- -20 percentage-point debuff => 90% raw;
+- 75% normal cap => still 75% effective.
+
+**Decision:** Ordinary resistance bonuses/debuffs stack additively.
+
+**Reaffirmed:** Negative elemental resistance remains uncapped.
+
+
+## 2026-09-30 — Resistance percentage semantics and >100% inversion
+
+**Decision:** Elemental resistance and elemental resistance penetration are percentage mechanics and must always be written with explicit `%` notation.
+
+**Decision:** Elemental penetration values represent percentage points removed from matching resistance, not multiplicative reduction of the current resistance.
+
+**Decision:** Multiple elemental penetration sources stack additively.
+
+**Decision:** Explicit resistance-cap increases may raise the normal 75% cap and the framework permits caps above 100%.
+
+**Decision:** If effective matching elemental resistance exceeds 100%, matching elemental damage becomes healing.
+
+Example:
+- 105% Fire Resistance => matching Fire damage heals for 5% of the damage that would have resolved at 0% Fire Resistance.
+
+This is intentionally supported as a rare/emergent interaction rather than a normal balance target.
+
+
+## 2026-09-30 — Damage-inversion healing semantics
+
+**Decision:** HP restoration caused by >100% effective elemental resistance is not modified by Healing Received.
+
+**Decision:** The target still counts as being hit by the originating elemental action, but does not count as taking damage.
+
+**Decision:** Resistance-inversion HP restoration is distinct from ordinary healing for trigger purposes unless an effect explicitly includes it.
+
+**Decision:** Damage shields do not consume capacity when the post-resistance result is healing rather than positive damage.

@@ -38,7 +38,7 @@ namespace DiceFree.Combat
                 throw new ArgumentOutOfRangeException(nameof(rolls), "Critical roll must be in [0, 1).");
             return new CriticalResolution(rule, roll);
         }
-        public static ActionCriticalResolution EvaluateAction(IEnumerable<CriticalRule> finalizedRules, ICriticalRollSource rolls)
+        public static ActionCriticalResolution EvaluateAction(IEnumerable<CriticalRule> finalizedRules, ICriticalRollSource rolls, ActionProvenance origin = null)
         {
             var ordered = new List<CriticalRule>();
             var identities = new HashSet<(string, string)>();
@@ -66,7 +66,7 @@ namespace DiceFree.Combat
                 var result = Evaluate(rule, rolls); evaluated.Add(result);
                 if (result.triggered) { winner = result; break; }
             }
-            return new ActionCriticalResolution(winner, evaluated.ToArray());
+            return new ActionCriticalResolution(winner, evaluated.ToArray(), origin);
         }
     }
 }

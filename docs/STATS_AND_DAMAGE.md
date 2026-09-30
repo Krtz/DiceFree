@@ -1168,3 +1168,147 @@ Example:
 = -50
 = 50 Fire-context healing-inversion damage
 ```
+
+
+### Resistance overcap and modifier ordering
+
+Elemental resistance keeps its **raw uncapped value** internally.
+
+The normal resistance cap limits the **effective value used for resolution**, not the stored/raw resistance itself.
+
+Example:
+
+```
+Raw Fire resistance: 110%
+Normal cap: 75%
+Effective Fire resistance: 75%
+```
+
+If a -20 percentage-point Fire resistance debuff is applied:
+
+```
+110% raw - 20% = 90% raw
+Effective after 75% cap = 75%
+```
+
+Therefore overcapping resistance is meaningful: debuffs and penetration must first remove the excess before effective resistance drops below the cap.
+
+Default resistance resolution:
+1. establish raw resistance;
+2. apply ordinary resistance bonuses/debuffs additively;
+3. apply applicable resistance penetration/reduction to the uncapped raw value;
+4. apply the current resistance cap to obtain effective positive resistance;
+5. use that effective resistance in damage/healing resolution.
+
+Negative elemental resistance remains uncapped.
+
+### Resistance modifier stacking
+
+Ordinary elemental resistance bonuses and debuffs stack **additively** by default.
+
+Example:
+
+```
++30% Fire resistance
++20% Fire resistance
+-15% Fire resistance
+= +35% raw Fire resistance
+```
+
+Special multiplicative or otherwise unusual stacking requires an explicitly authored mechanic.
+
+
+### Elemental resistance percentage semantics
+
+Elemental resistance and elemental resistance penetration are percentage-based mechanics.
+
+All authored/player-facing values must therefore be written with an explicit `%` sign.
+
+Examples:
+- `+30% Fire Resistance`;
+- `-20% Fire Resistance`;
+- `15% Fire Resistance Penetration`.
+
+For elemental resistance penetration, the numeric value represents **percentage points removed from matching resistance**, not a multiplicative percentage of the current resistance.
+
+Example:
+
+```
+Target Fire Resistance: 50%
+Attacker Fire Resistance Penetration: 20%
+
+50% - 20 percentage points = 30%
+```
+
+Do not author ambiguous text such as bare "20 Fire penetration" when the mechanic means 20%.
+
+Multiple matching penetration sources stack additively by default.
+
+Example:
+
+```
+15% + 10% + 5% Fire Resistance Penetration
+= 30% total Fire Resistance Penetration
+```
+
+### Resistance-cap increases and resistance above 100%
+
+The normal positive resistance cap is 75%, but explicit mechanics may raise the cap.
+
+Cap increases are percentage-point increases.
+
+Example:
+
+```
+Normal Fire Resistance cap: 75%
++10% Fire Resistance Cap
+= 85% Fire Resistance cap
+```
+
+The framework must permit an explicitly raised elemental resistance cap to exceed 100%, even though normal content should not generally be designed around reaching that state.
+
+When effective matching elemental resistance exceeds 100%, matching elemental damage changes sign and becomes healing.
+
+Default elemental damage resistance factor:
+
+```
+ResultMultiplier = 1 - EffectiveResistance
+```
+
+Examples:
+
+```
+75% resistance  -> 25% of otherwise-resolved matching damage
+100% resistance -> 0
+105% resistance -> -5%, therefore healing equal to 5% of the matching damage that would have resolved at 0% resistance
+```
+
+This is an emergent/highly unusual interaction, not a baseline progression target.
+
+Negative resistance remains uncapped in the opposite direction.
+
+
+### Damage-inversion healing semantics
+
+When effective elemental resistance above 100% inverts matching elemental damage into HP restoration, that restoration is a distinct **resistance-inversion** result.
+
+Default rules:
+- it is **not** multiplied by Healing Received;
+- it still counts as the entity being hit by the originating elemental action;
+- it does **not** count as taking damage;
+- it restores HP;
+- it is not automatically treated as an ordinary heal for generic "received a heal" triggers unless an effect explicitly includes resistance-inversion healing;
+- ordinary damage shields do not consume capacity because the post-resistance result is not positive damage.
+
+Example:
+
+```
+Damage entering resistance step: 100 Fire
+Effective Fire resistance: 105%
+Result: -5 damage
+=> restore 5 HP
+```
+
+The 5 HP restoration is not modified by Healing Received.
+
+This preserves the originating action/element context while keeping ordinary damage, healing and resistance-inversion restoration distinct for future trigger logic.

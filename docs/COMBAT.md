@@ -786,3 +786,56 @@ Effects must explicitly state whether their penetration applies to damage, heali
 Actual resistance debuffs alter the target's resistance itself, so they affect matching elemental damage and matching elemental healing.
 
 Negative resistance remains uncapped. Elemental healing reaches zero at -100% effective matching resistance and becomes damage below -100%.
+
+
+### Resistance overcap
+
+Elemental resistance retains an uncapped raw value. The normal positive resistance cap applies only when deriving the effective value used for resolution.
+
+Debuffs and penetration operate on uncapped raw resistance before the positive cap is applied.
+
+Example:
+- 110% raw Fire resistance;
+- -20 percentage-point Fire resistance debuff;
+- 90% raw remains;
+- with a 75% cap, effective Fire resistance is still 75%.
+
+Ordinary resistance bonuses/debuffs stack additively by default. Multiplicative/special stacking must be explicitly authored.
+
+Negative resistance remains uncapped.
+
+
+### Resistance percentage wording and >100% inversion
+
+Elemental resistance and elemental resistance penetration are always expressed as percentages in authored/player-facing text.
+
+Penetration values are percentage-point subtraction from matching resistance and stack additively by default.
+
+Explicit resistance-cap increases may raise the normal 75% cap, including beyond 100% if an unusual build/mechanic manages it.
+
+Matching elemental damage uses the resistance factor:
+
+```
+1 - effective resistance
+```
+
+Therefore:
+- 100% effective resistance negates matching elemental damage;
+- above 100%, the result becomes healing;
+- 105% effective resistance heals for 5% of the matching damage that would have resolved at 0% resistance.
+
+This behavior is intentionally allowed even though normal encounter design should not depend on players reaching >100% resistance.
+
+
+### Resistance-inversion result handling
+
+If elemental resistance above 100% turns incoming matching elemental damage into HP restoration:
+
+- Healing Received does not modify the amount;
+- the target still counts as having been hit by the originating elemental action;
+- the target did not take damage;
+- the result restores HP through a distinct resistance-inversion category;
+- it does not automatically satisfy generic ordinary-heal triggers;
+- damage shields do not consume capacity because the result reaching the shield stage is not positive damage.
+
+This is separate from authored healing and from elemental-healing inversion.

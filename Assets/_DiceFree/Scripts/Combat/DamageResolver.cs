@@ -6,6 +6,7 @@ namespace DiceFree.Combat
     {
         public float baseRaw, raw, defense, resistance, mitigated, applied;
         public ActionCriticalResolution critical;
+        public ElementalResistanceResolution elementalResistance;
         public DamageChannel channel;
         public ElementDefinition element;
     }
@@ -18,9 +19,10 @@ namespace DiceFree.Combat
             float baseRaw = attack.RawDamage(source.Attributes);
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
-            float resistance = target.Resistance(attack.element);
+            var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
+            float resistance = elemental.effective;
             return new DamageResult {
-                baseRaw = baseRaw, raw = raw, critical = critical, defense = defense, resistance = resistance, channel = attack.channel, element = attack.element,
+                baseRaw = baseRaw, raw = raw, critical = critical, defense = defense, resistance = resistance, elementalResistance = elemental, channel = attack.channel, element = attack.element,
                 mitigated = raw * DefenseMath.DamageMultiplier(defense, target.Definition.tuning) * (1 - resistance)
             };
         }

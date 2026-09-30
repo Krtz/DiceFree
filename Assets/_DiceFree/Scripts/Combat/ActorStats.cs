@@ -15,6 +15,28 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, VitalityModifier> vitalityModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, SecondaryScalingModifier> secondaryModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, DefenseModifier> defenseModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, ElementalModifier> resistanceModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, ElementalModifier> penetrationModifiers = new(StringComparer.Ordinal);
+        public void SetResistanceModifier(string sourceId, ElementalModifier value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || string.IsNullOrWhiteSpace(value.elementId)) throw new ArgumentException("Stable modifier identities required.");
+            if (value.contexts != (ElementalContext.Damage | ElementalContext.Healing)) throw new ArgumentException("Real resistance modifiers affect both contexts.");
+            resistanceModifiers[sourceId] = value;
+        }
+        public void SetPenetrationModifier(string sourceId, ElementalModifier value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || string.IsNullOrWhiteSpace(value.elementId)) throw new ArgumentException("Stable modifier identities required.");
+            penetrationModifiers[sourceId] = value;
+        }
+        public void RemoveResistanceModifier(string sourceId) => resistanceModifiers.Remove(sourceId);
+        public void RemovePenetrationModifier(string sourceId) => penetrationModifiers.Remove(sourceId);
+        public float Penetration(ElementDefinition element, ElementalContext context)
+        {
+            float result = 0;
+            foreach (var value in penetrationModifiers.Values)
+                if (element != null && value.elementId == element.stableId && (value.contexts & context) != 0) result += value.delta;
+            return result;
+        }
         public AttributeValues Attributes => AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
         public float MaximumHp => definition.baseHp + Attributes.vitality * VitalityCoefficient(false);
         public float Regeneration => Attributes.vitality * VitalityCoefficient(true);
@@ -72,7 +94,8 @@ namespace DiceFree.Combat
         public void ResetTransientModifiers()
         {
             float previous = MaximumHp;
-            vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear(); Changed?.Invoke(previous);
+            vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
+            resistanceModifiers.Clear(); penetrationModifiers.Clear(); Changed?.Invoke(previous);
         }
         public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed));
         public float AttackSpeed => 1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed);
@@ -84,14 +107,21 @@ namespace DiceFree.Combat
         public float Defense(DamageChannel channel) => channel == DamageChannel.Physical
             ? definition.physicalDefense + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
             : definition.magicalDefense + Attributes.intelligence * SecondaryCoefficient(SecondaryStat.MagicalDefense);
-        public float Resistance(ElementDefinition element)
+        public float RawResistance(ElementDefinition element)
         {
             if (element == null) return 0;
+            float raw = definition.tuning.defaultElementResistance;
             foreach (var entry in definition.resistances)
                 if (entry.element != null && entry.element.stableId == element.stableId)
-                    return Mathf.Min(entry.fraction, definition.tuning.resistanceCap);
-            return definition.tuning.defaultElementResistance;
+                { raw = entry.fraction; break; }
+            foreach (var value in resistanceModifiers.Values)
+                if (value.elementId == element.stableId) raw += value.delta;
+            return raw;
         }
+        public ElementalResistanceResolution ResolveResistance(ElementDefinition element, ElementalContext context, ActorStats source = null) =>
+            new ElementalResistanceResolution(RawResistance(element), element == null || source == null ? 0 : source.Penetration(element, context),
+                element == null ? 0 : definition.tuning.resistanceCap, context);
+        public float Resistance(ElementDefinition element) => ResolveResistance(element, ElementalContext.Damage).effective;
         public void Configure(ActorDefinition value, int actorLevel = 1) { definition = value; level = Mathf.Max(1, actorLevel); }
         public void SetLevel(int value)
         {
