@@ -156,12 +156,27 @@ Map/minimap visibility follows a Warcraft III-style fog-of-war model.
 
 Rules:
 - unexplored terrain is black/hidden;
-- terrain becomes permanently revealed on the map/minimap after the player has seen it;
+- reveal should be **fairly precise to where the manifestation has actually explored**, rather than unlocking huge rectangular/region chunks merely by entering an area;
+- terrain becomes permanently revealed on that manifestation's map/minimap after it has been seen;
+- **allied/party vision contributes to exploration while playing together**: terrain an ally genuinely reveals for the party can become explored for the current manifestation as well;
+- map exploration remains manifestation-specific overall; another manifestation does not automatically inherit the first manifestation's revealed terrain;
 - static discovered geography/objects can remain visible afterward;
 - current dynamic activity/enemies/events require present vision;
-- party/allied players share vision.
+- party/allied players share current vision.
 
-Exact vision radii, stealth interactions and whether every static POI stays visible are future tuning questions.
+### POI knowledge vs terrain reveal
+
+Terrain reveal and point-of-interest knowledge are separate concepts.
+
+Current direction:
+- a manifestation still has to explore its own terrain;
+- important POI **icons may be Echo-wide knowledge once discovered by any manifestation**, even while the surrounding terrain remains fogged for another manifestation;
+- exact POI categories that share this way remain open;
+- deliberately secret content can opt out of normal icon sharing/visibility.
+
+This allows the Echo to remember that a bank, dungeon entrance or other important place exists without magically revealing the entire route/terrain for every manifestation.
+
+Exact vision radii, stealth interactions, POI-sharing categories and static-marker rules remain tuning/design questions.
 
 ## Cast bars
 
