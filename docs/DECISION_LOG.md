@@ -3144,3 +3144,19 @@ A single action may both deal HP damage and restore HP through resistance invers
 If any packet deals actual HP damage, the target counts as having taken damage from the action.
 
 **Decision:** Resistance-inversion HP restoration is capped by missing HP. Excess is discarded by default.
+
+
+## 2026-09-30 — One element per packet and resistance-cap modifiers
+
+**Decision:** One damage packet may have at most one element. Multi-element actions use separate packets.
+
+**Decision:** Resistance-cap modifiers may be global or element-specific and stack additively in percentage points by default.
+
+**Decision:** Resistance-cap reductions are supported as a separate mechanic from raw resistance reduction.
+
+Example:
+- 110% raw Fire Resistance;
+- 55% effective Fire Resistance cap;
+- effective Fire Resistance = 55%.
+
+Cap changes do not alter the stored/raw resistance value.
