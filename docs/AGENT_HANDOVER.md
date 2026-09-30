@@ -150,7 +150,23 @@ Passed: focused Q3 with four reload checkpoints, Q1/Q2, combat, all 13 traversal
 
 # Current work in progress
 
-Q3 is complete, not recovery work. Next: runner returns after Q3; prove a reusable semantic TalkTo conversation with durable state. Do not implement Q4 yet. Q4 completion alternatives, counts, availability, reward parity and level/XP payout require explicit design decisions.
+Q3 and the Runner Returns bridge are complete on `poc/cornberg`.
+
+Runner Returns landed in `2de1a58703e845e1018bcdd5cfdf3f185f16a916` (`Add Runner Returns and reusable TalkTo story credit`).
+
+It adds:
+- provisional `Cornberg Runner` NPC after Q3;
+- stable NPC/conversation/story IDs;
+- reusable semantic `TalkTo` / acknowledged-conversation facts;
+- prerequisite gating;
+- conversation panel / explicit acknowledgment;
+- durable completion using existing schema v2;
+- focused reload/semantic regression validation;
+- `docs/CORNBERG_RUNNER.md`.
+
+The next main story implementation is Q4, but its completion alternatives/counts/reward parity/XP target are still design-open. Do not silently choose those rules.
+
+Until Q4 is settled, agents may work on another clearly settled, appropriately scoped Cornberg/POC system rather than inventing Q4 canon.
 
 ---
 # High-level game / narrative context
@@ -598,7 +614,11 @@ Rewards trigger automatically.
 
 Achievements are Echo-wide.
 
+Achievements are grouped into authored categories such as Exploration, Combat, Dungeons, Classes/Ways, Professions, Collections and Secrets.
+
 Hidden achievements are supported.
+
+Once a hidden achievement is earned/revealed, its normal name/description stays revealed. Do not keep completed hidden achievements mysteriously concealed by default.
 
 Achievement score/points exist as an overall completion/bragging metric.
 
@@ -608,15 +628,17 @@ Exact reward policy can vary by achievement.
 
 # Exploration / map
 
-Unlike Codex/achievements, **map exploration is manifestation-specific**.
+Unlike Codex/achievements, **map terrain exploration is manifestation-specific**.
 
 Every manifestation must explore the world for itself.
 
-Discovered POIs should appear on that manifestation's map.
+Reveal should be fairly precise to where that manifestation (or its currently allied party vision) has actually explored, not huge region-wide chunks.
 
-Some deliberately secret content may use special marker rules.
+Allied/party exploration can reveal terrain for the current manifestation while playing together.
 
-Fog/map reveal details remain open unless another doc settles them.
+Current direction: important discovered POI **icons may be Echo-wide knowledge** even when another manifestation has not uncovered the surrounding terrain. Exact icon-sharing categories remain open.
+
+Some deliberately secret content may opt out of normal marker sharing/visibility.
 
 ---
 
@@ -652,6 +674,8 @@ Mounts are generally:
 Road surfaces provide a movement-speed bonus simply for standing/moving on the road surface.
 
 Road speed stacks with mount speed.
+
+The road bonus remains active **in combat**.
 
 No need to detect whether travel direction follows the road spline.
 
@@ -785,12 +809,16 @@ When entering a new chat/session:
 
 # Current recommended next implementation step
 
-Implement the runner returning after Q3: the weekly run could not reach the next settlement because excessive Slimes blocked the road. Use a small reusable TalkTo seam, preserve existing progression and stop before Q4.
+Q4 is the next Cornberg story beat, but do not implement it until Axel settles its alternative completion paths, kill-count/progress rules, reward parity and XP/level target.
+
+A new agent should first verify `poc/cornberg` is still at or beyond Runner Returns commit `2de1a58703e845e1018bcdd5cfdf3f185f16a916`, confirm relevant issue comments/docs are synchronized, and then choose only a settled non-Q4 POC increment if Q4 remains blocked.
 
 # Latest handover update
 
 - **Date:** 2026-09-30
 - **Branch updated:** `setup/unity-project`
-- **Purpose:** verify successful Q3 push and remove stale interruption/recovery state
-- **Confirmed implementation:** `4289854b096b790cbb8df847f7e4c8309b2033d7`
-- **Next:** Runner Returns, then resolve Q4 alternatives/rewards before implementation.
+- **Confirmed Q3:** `4289854b096b790cbb8df847f7e4c8309b2033d7`
+- **Confirmed Runner Returns:** `2de1a58703e845e1018bcdd5cfdf3f185f16a916`
+- **Runner status:** implemented with reusable acknowledged-conversation / TalkTo semantic credit and existing schema-v2 persistence
+- **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
+- **Next:** settle Q4 alternatives/rewards/XP before implementing Q4; otherwise take another small settled Cornberg/POC increment.
