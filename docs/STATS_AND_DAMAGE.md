@@ -1312,3 +1312,43 @@ Result: -5 damage
 The 5 HP restoration is not modified by Healing Received.
 
 This preserves the originating action/element context while keeping ordinary damage, healing and resistance-inversion restoration distinct for future trigger logic.
+
+
+### Mixed elemental packet outcomes
+
+Damage packets resolve independently.
+
+A single action may therefore produce both HP damage and resistance-inversion HP restoration when different packets interact differently with the target's defenses/resistances.
+
+Example:
+
+```
+Packet A: Fire, effective Fire resistance 105% -> HP restoration
+Packet B: Ice, effective Ice resistance 20% -> HP damage
+```
+
+Both outcomes remain part of the same action, but they are recorded separately.
+
+Do not collapse mixed packet outcomes into one net "damage" value for trigger/telemetry purposes.
+
+Track at least:
+- actual HP damage dealt;
+- actual HP restored by resistance inversion;
+- net HP delta may be derived separately for presentation if useful.
+
+If any packet deals actual HP damage, the target counts as having taken damage from the action even if another packet restores HP.
+
+### Resistance-inversion overheal
+
+Resistance-inversion HP restoration is capped by missing HP.
+
+Example:
+
+```
+Missing HP: 3
+Resistance-inversion restoration: 20
+Actual HP restored: 3
+Excess: 17 lost
+```
+
+Excess resistance-inversion restoration is discarded by default unless an explicit future mechanic converts or uses it.
