@@ -65,6 +65,7 @@ Standing on an authored **road surface** grants a movement-speed bonus.
 The road bonus:
 - is determined by surface/location, not by checking whether the player's movement direction follows the road spline;
 - stacks with mount movement speed;
+- **continues to apply in combat**; entering combat does not suppress the road-surface movement bonus;
 - should be data-driven/tunable.
 
 Framework should allow different road/surface types to define different bonuses later if needed.
