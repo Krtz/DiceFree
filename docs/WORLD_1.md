@@ -791,6 +791,42 @@ The 30-kill route:
 
 Exact eligible content IDs should be authored semantically rather than inferred from display names.
 
+#### Simultaneous alternatives and timing
+
+Both Q4 alternatives are active **at the same time**. The player does not choose/lock a route up front.
+
+The journal should communicate the alternatives as an OR:
+- kill the dangerous elite Slime; **OR**
+- kill 30 eligible Slimes.
+
+Progress toward the 30-kill route can accumulate while the player searches for the elite. Killing the elite after Q4 begins immediately satisfies the Q4 field objective even if the 30-kill count is incomplete.
+
+Neither route is retroactive:
+- Slime kills before Q4 begins do not count toward 30;
+- killing the elite before Q4 begins does not satisfy Q4;
+- because the elite is repeatable/farmable, the player must kill it again after Q4 is active if using that route.
+
+#### Elite guidance and fight style
+
+Q4 should tell the player only that the dangerous elite Slime is **somewhere in the Slime Forest**.
+
+Do not give an exact map coordinate/marker as the default quest instruction unless later playtesting shows discovery is too opaque.
+
+For this first elite, the fight is intentionally a **stat check**, not a mechanics tutorial:
+- no required bespoke phases;
+- no splitting mechanic;
+- no special slime pools;
+- no scripted enrage;
+- no elaborate boss-style telegraphs beyond ordinary readable combat behavior.
+
+Exact level/stats remain balance data for gameplay testing.
+
+#### Turn-in
+
+Satisfying either field route does **not** auto-complete the quest.
+
+Q4 becomes **ready to turn in**, and the player returns to Cornberg to complete it and receive the shared main reward.
+
 #### Reward parity
 
 Q4's main quest reward is the **same regardless of which completion path is used**.
@@ -800,7 +836,7 @@ The chosen route can still produce different incidental rewards:
 - ordinary Slime kills provide their normal drops/XP;
 - dungeon Slimes/dungeon completion can provide the dungeon's own separate rewards.
 
-Completing one Q4 route completes the quest; the player does not receive the main Q4 reward twice by later satisfying the other route.
+Completing one Q4 route completes the quest objective; the player does not receive the main Q4 reward twice by later satisfying the other route.
 
 #### Progression target
 
