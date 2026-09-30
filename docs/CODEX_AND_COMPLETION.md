@@ -100,3 +100,30 @@ All Codex discovery and completion data is **Echo-wide** and shared across manif
 - Boss-mechanic observation should be driven by semantic encounter/mechanic events.
 - Drop discovery should be driven by actual reward/drop observation, not by opening a data table.
 - The Codex is a knowledge/completion system; it should not own combat, loot generation or encounter logic.
+
+## Achievements
+
+Achievements are **Echo-wide**.
+
+The achievement UI should organize achievements into authored categories rather than one undifferentiated list.
+
+Expected category examples include:
+- Exploration;
+- Combat;
+- Dungeons;
+- Classes / Ways;
+- Professions;
+- Collections;
+- Secrets;
+- other authored categories.
+
+The exact taxonomy can grow with the game; an achievement should carry stable category metadata rather than relying on display-name grouping.
+
+Hidden achievements are supported.
+
+While hidden, their normal identity/requirements may be concealed as authored. Once a hidden achievement is earned/revealed, it becomes a normal permanently revealed achievement: **revealed means revealed**. Do not keep its name/description mysteriously hidden after completion unless a completely separate authored mechanic explicitly calls for that.
+
+Achievements contribute to an overall **achievement score/points** value. The score is primarily a completion/bragging metric rather than generic player power.
+
+Individual achievements may additionally grant authored rewards such as titles, cosmetics, mounts, recipes, unlocks or other content where appropriate.
+
