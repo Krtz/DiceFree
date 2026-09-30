@@ -483,3 +483,17 @@ For generated items, retain enough structured provenance/debug data to understan
 - chosen affixes/intrinsics/effects.
 
 A handcrafted item created from a generated candidate becomes an authored item with its own stable ID. Keeping the original generation seed/provenance for designer/debugging purposes is useful but should not constrain later manual edits.
+
+## Early authored quest reward — Cornberg Q4
+
+Cornberg Q4 currently guarantees an authored **Hands/gloves** reward with **+5% Attack Speed** alongside XP and gold.
+
+Rules:
+- this is a fixed authored quest reward, not a randomized item roll;
+- both Q4 completion paths grant the same glove reward;
+- the reward can only be granted once per eligible Q4 completion;
+- exact item name, item level, rarity, art, flavor and any additional stats remain open;
+- the +5% Attack Speed property is settled.
+
+This is a useful early proof that quest rewards can award memorable handcrafted equipment rather than only currency/XP.
+
