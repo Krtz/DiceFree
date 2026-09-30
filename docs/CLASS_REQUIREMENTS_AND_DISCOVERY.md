@@ -294,3 +294,19 @@ Per-class visibility still applies:
 - fully hidden classes should not leak through graph layout, counters, empty slots or completion percentages unless deliberately designed to.
 
 Exact UI is not yet locked.
+
+## Visibility presentation refinements
+
+Class visibility is deliberately allowed to vary much more than a single global hidden/visible rule.
+
+Examples that the data/UI framework should support include:
+- visible class silhouette with the exact unlock requirements shown;
+- visible silhouette with cryptic requirements/hints;
+- a deliberately opaque large 3D question-mark presentation;
+- a class absent from the Ways screen until the player discovers **how** it can be unlocked;
+- a class absent from the selection/Ways UI until it has actually been unlocked;
+- other authored combinations of identity visibility and requirement disclosure.
+
+Do not infer that two hidden classes must use the same secrecy pattern.
+
+The presentation itself may be part of the mystery and should be authored per Way.
