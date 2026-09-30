@@ -839,3 +839,18 @@ If elemental resistance above 100% turns incoming matching elemental damage into
 - damage shields do not consume capacity because the result reaching the shield stage is not positive damage.
 
 This is separate from authored healing and from elemental-healing inversion.
+
+
+### Mixed packet damage and resistance healing
+
+Packets from one action resolve independently.
+
+One action may simultaneously:
+- deal HP damage through one packet;
+- restore HP through >100% elemental-resistance inversion on another packet.
+
+These are preserved as separate action outcomes rather than collapsed into a net damage number.
+
+If any packet deals actual HP damage, the action counts as having caused damage even if another packet restored HP.
+
+Resistance-inversion restoration is capped by missing HP. Excess is discarded unless an explicit mechanic says otherwise.
