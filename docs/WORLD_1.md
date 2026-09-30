@@ -838,10 +838,13 @@ Intended difficulty target:
 This is a tuning target, not an excuse for player-level scaling. The elite keeps a fixed authored level/stat block.
 
 The elite has a unique farmable shoe drop with:
-- **+1 DEF** (exact Defense channel/meaning still needs clarification because DiceFree has separate Physical and Magical Defense);
+- **+1 Physical Defense**;
+- **+1 Magical Defense**;
 - **+1% Movement Speed**.
 
-Exact shoe name, item level, rarity, art, and drop chance remain open.
+Drop chance: **20% per elite kill**.
+
+Exact shoe name, item level, rarity and art remain open.
 
 #### Multiplayer / party credit
 
@@ -856,7 +859,9 @@ For both routes:
 
 Use the reusable **Nearby** quest-credit policy rather than baking party sharing into enemy death logic.
 
-Exact nearby radius is authored/tunable and is not locked yet.
+Q4's Nearby credit radius is **50 meters**.
+
+Because 1 Unity world unit = 1 meter, this is a 50-unit world-space radius. It is deliberately generous so a co-op party can spread through a clearing/forest pocket without losing shared quest credit.
 
 #### Turn-in
 
@@ -864,9 +869,11 @@ Satisfying either field route does **not** auto-complete the quest.
 
 Q4 becomes **ready to turn in**, and the player returns to Cornberg to complete it and receive the shared main reward.
 
-Q4 is given/turned in by **a different ordinary Cornberg farmer**, not the weekly Runner and not the original former-swordswoman farmer.
+Q4 is given/turned in by **a different named Cornberg farmer**, not the weekly Runner and not the original former-swordswoman farmer.
 
-Exact farmer identity/name/presentation remains open.
+This farmer should already exist as ambient village flavor **before Q4**, saying occasional/random mundane lines as the player walks past. Q4 therefore promotes an already-familiar background villager into a quest role rather than spawning a disposable quest NPC.
+
+Exact farmer name, visual identity and bark lines remain open.
 
 #### Reward parity
 
