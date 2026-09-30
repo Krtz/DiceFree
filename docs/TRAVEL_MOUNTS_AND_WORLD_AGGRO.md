@@ -79,6 +79,12 @@ Initial working rule:
 
 This value is provisional.
 
+This suppresses only proactive awareness acquisition. Deliberate combat still
+works: attacked/damaged enemies retaliate normally, and a legitimately engaged
+target is not cancelled merely because the level gap crosses the threshold.
+Targetability, killing, XP and quest credit are unaffected. Hostility, line of
+sight, awareness radius and home/leash rules still apply.
+
 Build the aggro framework so threshold/scaling can later vary by:
 - absolute level difference;
 - proportional/scaled rules;

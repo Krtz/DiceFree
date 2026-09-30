@@ -168,6 +168,18 @@ The next main story implementation is Q4, but its completion alternatives/counts
 
 Until Q4 is settled, agents may work on another clearly settled, appropriately scoped Cornberg/POC system rather than inventing Q4 canon.
 
+## Trivial-enemy auto-aggro — complete
+
+Implemented and pushed on `poc/cornberg` in `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8` (Add configurable trivial-enemy auto-aggro policy).
+
+`AutoAggroPolicy` is a small serialized policy consulted only by proactive awareness scanning. Default `trivialLevelGap = 10` is explicitly provisional. Gaps 0-9 retain normal acquisition; gaps 10+ suppress it. `alwaysAutoAggro` is an authored exception. Archetypes supply defaults, variants can override, and standalone enemies can configure their own policy. A virtual eligibility method leaves a seam for future scaled policies or region/difficulty selection without implementing those systems now.
+
+Retaliation, existing targets, hostility/LOS/radius, leash/home, fixed enemy levels, kill/XP/quest credit and respawn are preserved. No scene/nav, existing balance, combat-math or save-schema change. See `docs/CORNBERG_AGGRO.md` on the implementation branch.
+
+Validation passed: real-AI gaps 0/9/10/20, live level changes, retaliation, explicit attack/kill/XP, always-aggro and custom thresholds, hostility/LOS/awareness, leash, reset/respawn and archetype/variant selection. Cornberg combat/death/Return/well, Q1, Q2 (six reloads), Q3 (four), Runner Returns (four), all 13 traversal routes, fresh/save-reload, storage/migration/recovery/backups/stale writers/Profile Inspector passed. Windows development build passed (171,990,466 bytes); two isolated standalone startup/reload smokes retained identity and completed runner at level 6/0 XP with no runtime errors. No manual playthrough claimed. Known SearchDatabase #17 remains separate.
+
+This delivers only the trivial-aggro slice of #35. Mounts, collection, road-speed surfaces, maps/achievements and the broader #28 encounter engine remain unimplemented. Q4 remains blocked on alternatives, kill-count/progress semantics, reward parity and XP/level payout. No new separate blocker was found.
+
 ---
 # High-level game / narrative context
 
@@ -811,7 +823,7 @@ When entering a new chat/session:
 
 Q4 is the next Cornberg story beat, but do not implement it until Axel settles its alternative completion paths, kill-count/progress rules, reward parity and XP/level target.
 
-A new agent should first verify `poc/cornberg` is still at or beyond Runner Returns commit `2de1a58703e845e1018bcdd5cfdf3f185f16a916`, confirm relevant issue comments/docs are synchronized, and then choose only a settled non-Q4 POC increment if Q4 remains blocked.
+The latest completed increment is trivial-enemy auto-aggro policy `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`. Next smallest step: playtest old-region travel near the provisional ten-level boundary and settle Q4's alternatives/counts/rewards before further story implementation. Do not silently start Q4, mounts or road-speed work.
 
 # Latest handover update
 
@@ -820,5 +832,6 @@ A new agent should first verify `poc/cornberg` is still at or beyond Runner Retu
 - **Confirmed Q3:** `4289854b096b790cbb8df847f7e4c8309b2033d7`
 - **Confirmed Runner Returns:** `2de1a58703e845e1018bcdd5cfdf3f185f16a916`
 - **Runner status:** implemented with reusable acknowledged-conversation / TalkTo semantic credit and existing schema-v2 persistence
+- **Confirmed trivial aggro:** `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; provisional ten-level awareness suppression, authored always-aggro and policy extension seam; focused/regression/build/smoke validation passed
 - **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
-- **Next:** settle Q4 alternatives/rewards/XP before implementing Q4; otherwise take another small settled Cornberg/POC increment.
+- **Next:** playtest the provisional aggro boundary; settle Q4 alternatives/progress/rewards/XP before implementing Q4. Remaining #35 mount/road work is outside this completed increment.
