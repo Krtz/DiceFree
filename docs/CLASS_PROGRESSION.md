@@ -282,3 +282,29 @@ They should have:
 - exact second-tier classes;
 - weapon categories as classes require them;
 - number of character slots.
+
+## Additional settled class-progression rules
+
+### Attribute growth
+
+Primary-attribute growth is determined by **class and gear**.
+
+Players do not receive a general pool of manual VIT/STR/AGI/INT/SPI points to distribute on level-up.
+
+This preserves strong authored class identity while still allowing build variation through gear, skills, effects and class choice.
+
+### Respec philosophy
+
+DiceFree does **not** need a broad always-available respec system as a core progression loop.
+
+The early Novice/onboarding stage may provide free respec support so players can learn the game and experiment before committing to later Ways.
+
+Later classes should not assume routine respec availability unless a particular class/content design explicitly needs it.
+
+### Advancement events
+
+Advancement quests/events are decided **case by case**.
+
+The first Tier 0 -> Tier 1 advancement is intentionally simple: the Novice is told to **go to the mountain** rather than completing a conventional bespoke class trial.
+
+Later advancements can use authored class-specific quests, trials, rituals, discoveries or other requirements as appropriate.
