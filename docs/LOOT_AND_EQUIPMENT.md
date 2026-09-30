@@ -497,3 +497,17 @@ Rules:
 
 This is a useful early proof that quest rewards can award memorable handcrafted equipment rather than only currency/XP.
 
+## Early elite drop — deep-forest Slime shoes
+
+The dangerous deep-forest Slime used by Cornberg Q4 has a unique repeatable/farmable shoe drop.
+
+Current stats:
+- **+1 DEF**;
+- **+1% Movement Speed**.
+
+Important clarification still required: DiceFree currently distinguishes **Physical Defense** and **Magical Defense**, so the exact mechanical meaning of `+1 DEF` must be settled before implementation. Do not invent a new generic Defense stat silently.
+
+Exact shoe name, item level, rarity, art, flavor and drop chance remain open.
+
+This item is separate from Q4's guaranteed +5% Attack Speed glove reward.
+
