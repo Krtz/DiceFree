@@ -1286,3 +1286,29 @@ Examples:
 This is an emergent/highly unusual interaction, not a baseline progression target.
 
 Negative resistance remains uncapped in the opposite direction.
+
+
+### Damage-inversion healing semantics
+
+When effective elemental resistance above 100% inverts matching elemental damage into HP restoration, that restoration is a distinct **resistance-inversion** result.
+
+Default rules:
+- it is **not** multiplied by Healing Received;
+- it still counts as the entity being hit by the originating elemental action;
+- it does **not** count as taking damage;
+- it restores HP;
+- it is not automatically treated as an ordinary heal for generic "received a heal" triggers unless an effect explicitly includes resistance-inversion healing;
+- ordinary damage shields do not consume capacity because the post-resistance result is not positive damage.
+
+Example:
+
+```
+Damage entering resistance step: 100 Fire
+Effective Fire resistance: 105%
+Result: -5 damage
+=> restore 5 HP
+```
+
+The 5 HP restoration is not modified by Healing Received.
+
+This preserves the originating action/element context while keeping ordinary damage, healing and resistance-inversion restoration distinct for future trigger logic.
