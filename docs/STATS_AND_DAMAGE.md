@@ -1453,3 +1453,49 @@ HP restoration created by >100% elemental resistance cannot resurrect a dead tar
 A dead target receiving an otherwise healing-producing elemental hit remains dead.
 
 Only an explicitly authored resurrection/death-prevention mechanic may restore a dead target to life.
+
+
+### Default hit and explicit miss chance
+
+Actions **hit by default** unless an explicit mechanic introduces miss chance.
+
+There is no universal hidden 95% hit chance or baseline accuracy tax.
+
+Assuming targeting, range, line-of-sight and other action-validity requirements succeed, an action with no miss mechanic connects.
+
+### Action-wide miss resolution
+
+Miss resolution is action-wide by default.
+
+For an action containing multiple packets:
+- roll miss once for the action;
+- if the action misses, all packets miss;
+- a missed action does not proceed to crit resolution and consumes no crit RNG.
+
+An explicitly authored mechanic may opt into per-projectile/per-packet hit rolls.
+
+### Miss chance modifier semantics
+
+Explicit miss chance is percentage-based and must be written with an explicit `%`.
+
+Ordinary miss-chance modifiers use additive percentage points by default.
+
+Example:
+
+```
+Base miss chance: 25%
++15% miss chance
+= 40% miss chance
+```
+
+Final ordinary miss chance is clamped to 0-100%.
+
+Example:
+
+```
+25% miss chance
+-50% miss chance
+=> 0%
+```
+
+No negative miss chance, overflow conversion or special >100% behavior exists by default. Any exception must be explicitly authored.
