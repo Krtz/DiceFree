@@ -1413,3 +1413,43 @@ Thus these are separate mechanics:
 - resistance-cap modification.
 
 All remain percentage-based and must be written with an explicit `%`.
+
+
+### Resistance-cap floor and elemental healing cap
+
+The effective elemental Resistance Cap has a default floor of **0%**.
+
+Cap reductions may remove the benefit of positive resistance, but they do not by themselves create elemental vulnerability.
+
+Example:
+
+```
+Base Fire Resistance Cap: 75%
+-100% Fire Resistance Cap
+=> final Fire Resistance Cap: 0%
+```
+
+If content wants the target to become vulnerable, it must reduce the target's raw resistance or otherwise explicitly create negative effective resistance.
+
+Elemental healing uses the **same effective resistance cap** as elemental damage.
+
+Example:
+
+```
+Raw Fire Resistance: 110%
+Fire Resistance Cap: 75%
+Effective Fire Resistance for Fire healing: 75%
+100 Fire healing -> 175 healing before other healing-specific modifiers
+```
+
+If the cap is explicitly raised to 105%, the same raw resistance may resolve at 105% for elemental healing.
+
+Healing penetration still modifies the raw-for-resolution resistance first, then the effective cap is applied.
+
+### Resistance-inversion restoration and death
+
+HP restoration created by >100% elemental resistance cannot resurrect a dead target by default.
+
+A dead target receiving an otherwise healing-producing elemental hit remains dead.
+
+Only an explicitly authored resurrection/death-prevention mechanic may restore a dead target to life.
