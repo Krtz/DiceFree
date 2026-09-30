@@ -821,11 +821,42 @@ For this first elite, the fight is intentionally a **stat check**, not a mechani
 
 Exact level/stats remain balance data for gameplay testing.
 
+#### Elite spawn and respawn
+
+The dangerous elite Slime uses a **fixed deep-forest clearing** rather than a wandering/patrol spawn.
+
+It is repeatable/farmable.
+
+Current respawn time is **7.5 minutes** after defeat.
+
+The 7.5-minute value is an authored Q4/elite rule, but can still be revisited during real gameplay tuning if it creates bad pacing.
+
+#### Multiplayer / party credit
+
+Q4 uses cooperative nearby credit.
+
+For both routes:
+- eligible nearby party members who currently have Q4 active receive qualifying progress from an eligible party member's kill;
+- this applies to ordinary eligible Slime kills for the 30-kill route;
+- it also applies to the elite Slime kill;
+- each recipient's own Q4 state remains authoritative and must be eligible/active;
+- pre-quest kills still do not count.
+
+Use the reusable **Nearby** quest-credit policy rather than baking party sharing into enemy death logic.
+
+Exact nearby radius is authored/tunable and is not locked yet.
+
 #### Turn-in
 
 Satisfying either field route does **not** auto-complete the quest.
 
 Q4 becomes **ready to turn in**, and the player returns to Cornberg to complete it and receive the shared main reward.
+
+The exact Q4 giver/turn-in NPC is not locked yet. Current candidates are:
+- the returning Cornberg Runner; or
+- another ordinary Cornberg farmer.
+
+Do not silently assign it back to the former swordswoman/farmer unless later design chooses that.
 
 #### Reward parity
 
@@ -837,6 +868,26 @@ The chosen route can still produce different incidental rewards:
 - dungeon Slimes/dungeon completion can provide the dungeon's own separate rewards.
 
 Completing one Q4 route completes the quest objective; the player does not receive the main Q4 reward twice by later satisfying the other route.
+
+#### Q4 main reward
+
+The shared Q4 turn-in reward is currently:
+- **XP** — exact amount tuned after gameplay testing;
+- **gold** — exact amount tuned after gameplay testing;
+- a guaranteed pair of **gloves with +5% Attack Speed**.
+
+The gloves are an authored quest reward, not a randomized roll.
+
+Exact glove:
+- name;
+- item level;
+- rarity;
+- art;
+- any additional stats/flavor
+
+remain open unless settled elsewhere.
+
+The +5% Attack Speed property itself is settled.
 
 #### Progression target
 
