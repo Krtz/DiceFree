@@ -3120,3 +3120,14 @@ Example:
 - 105% Fire Resistance => matching Fire damage heals for 5% of the damage that would have resolved at 0% Fire Resistance.
 
 This is intentionally supported as a rare/emergent interaction rather than a normal balance target.
+
+
+## 2026-09-30 — Damage-inversion healing semantics
+
+**Decision:** HP restoration caused by >100% effective elemental resistance is not modified by Healing Received.
+
+**Decision:** The target still counts as being hit by the originating elemental action, but does not count as taking damage.
+
+**Decision:** Resistance-inversion HP restoration is distinct from ordinary healing for trigger purposes unless an effect explicitly includes it.
+
+**Decision:** Damage shields do not consume capacity when the post-resistance result is healing rather than positive damage.
