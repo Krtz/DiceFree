@@ -883,3 +883,14 @@ Reducing the cap below 0% does not create vulnerability; raw/effective resistanc
 Elemental healing uses the same effective Resistance Cap as elemental damage after its context-specific resistance/penetration calculation.
 
 Resistance-inversion HP restoration from >100% elemental resistance does not resurrect dead targets unless an explicit resurrection mechanic says otherwise.
+
+
+### Default hit and action-wide miss resolution
+
+Actions hit by default unless an explicit source introduces miss chance. There is no universal hidden baseline miss chance.
+
+When miss chance exists, it resolves once per action by default. A miss causes all normal packets from that action to miss and crit resolution does not run.
+
+Explicit per-projectile/per-packet hit checks require an authored exception.
+
+Miss chance is expressed as an explicit percentage. Ordinary miss-chance modifiers stack additively in percentage points and the final chance is clamped to 0-100%.
