@@ -3171,3 +3171,14 @@ Cap reduction alone cannot create negative resistance/vulnerability.
 **Decision:** Elemental healing uses the same effective elemental Resistance Cap as damage after context-specific resistance/penetration math.
 
 **Decision:** Resistance-inversion HP restoration cannot resurrect dead targets by default. Resurrection requires an explicit resurrection/death-prevention mechanic.
+
+
+## 2026-09-30 — Default hit and miss-chance semantics
+
+**Decision:** Actions hit by default. There is no universal baseline miss chance.
+
+**Decision:** Miss resolution is action-wide by default. If an action misses, its packets miss and crit does not roll.
+
+**Decision:** Explicit miss chance/modifiers are percentages, use additive percentage points by default, and clamp to 0-100%.
+
+Per-packet/projectile miss rolls require an explicit authored exception.
