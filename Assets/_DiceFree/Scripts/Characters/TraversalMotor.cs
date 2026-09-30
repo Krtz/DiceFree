@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +12,13 @@ namespace DiceFree.Characters
         private NavMeshAgent agent;
         private NavMeshPath candidatePath;
         private bool motionAllowed = true;
-        public float Speed => speed;
+        private readonly SortedDictionary<string, float> speedFactors = new(StringComparer.Ordinal);
+        private float effectiveSpeed;
+        public float BaseSpeed => speed;
+        public float Speed { get { RefreshSpeed(); return effectiveSpeed; } }
+        public bool MotionAllowed => motionAllowed;
+        // Context providers refresh their own named contribution; inputs never calculate speed.
+        public event Action RefreshSpeedSources;
         public bool Ready => agent != null && agent.isOnNavMesh;
         public bool Travelling => Ready && agent.hasPath;
 
@@ -18,7 +26,7 @@ namespace DiceFree.Characters
         {
             candidatePath = new NavMeshPath();
             agent = GetComponent<NavMeshAgent>();
-            agent.speed = speed;
+            ApplySpeed();
             agent.acceleration = 35f;
             agent.angularSpeed = 720f;
             agent.stoppingDistance = 0.15f;
@@ -35,6 +43,7 @@ namespace DiceFree.Characters
 
         public bool MoveTo(Vector3 destination)
         {
+            RefreshSpeed();
             if (!motionAllowed || !Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
                 return false;
             if (!agent.CalculatePath(hit.position, candidatePath) ||
@@ -55,7 +64,7 @@ namespace DiceFree.Characters
             Stop();
             direction = Vector3.ClampMagnitude(Vector3.ProjectOnPlane(direction, Vector3.up), 1f);
             var start = agent.nextPosition;
-            var end = start + direction * (speed * deltaTime);
+            var end = start + direction * (Speed * deltaTime);
             // Both schemes respect the same baked radius, slopes and natural boundaries.
             if (NavMesh.Raycast(start, end, out var hit, agent.areaMask)) end = hit.position;
             // Direct movement also respects live unit footprints, not only the static bake.
@@ -76,12 +85,27 @@ namespace DiceFree.Characters
         }
 
         private void OnDisable() => Stop();
-        public void SetSpeed(float value) { speed = Mathf.Max(0.1f, value); if (agent != null) agent.speed = speed; }
-        public void SetMotionAllowed(bool value) { motionAllowed = value; if (!value) Stop(); }
+        private void Update() => RefreshSpeed();
+        public void SetSpeed(float value) { speed = Mathf.Max(0.1f, value); RefreshSpeed(); }
+        public void SetSpeedFactor(string sourceId, float factor)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(factor) || float.IsInfinity(factor) || factor <= 0)
+                throw new ArgumentException("A speed contribution needs a stable source and positive finite factor.");
+            speedFactors[sourceId] = factor; ApplySpeed();
+        }
+        public void RemoveSpeedFactor(string sourceId) { speedFactors.Remove(sourceId); ApplySpeed(); }
+        private void RefreshSpeed() { RefreshSpeedSources?.Invoke(); ApplySpeed(); }
+        private void ApplySpeed()
+        {
+            effectiveSpeed = speed;
+            foreach (var factor in speedFactors.Values) effectiveSpeed *= factor;
+            if (agent != null) agent.speed = effectiveSpeed;
+        }
+        public void SetMotionAllowed(bool value) { motionAllowed = value; if (!value) Stop(); RefreshSpeed(); }
         public bool Teleport(Vector3 point)
         {
             if (!Ready || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;
-            Stop(); return agent.Warp(hit.position);
+            Stop(); bool moved = agent.Warp(hit.position); RefreshSpeed(); return moved;
         }
     }
 }

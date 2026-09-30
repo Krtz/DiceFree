@@ -1,6 +1,7 @@
 using UnityEngine;
 using DiceFree.Characters;
 using DiceFree.Core;
+using DiceFree.World;
 
 namespace DiceFree.UI
 {
@@ -22,7 +23,10 @@ namespace DiceFree.UI
             GUI.Label(new Rect(28, 78, 385, 40), "F6: change mode   Space: stop   Wheel: zoom\nV: " +
                 (explorationCamera.LookingOut ? "return to isometric view" : "look toward the Great Tree"), body);
             GUI.Label(new Rect(28, 116, 385, 40), "Arrows / middle-drag: pan   Q/E: rotate\nHome: recenter   F: follow " + (explorationCamera.Following ? "ON" : "OFF"), body);
-            GUI.Label(new Rect(28, 156, 385, 22), input.Feedback, body);
+            var surface = input.GetComponent<SurfaceTravel>()?.Current;
+            GUI.Label(new Rect(28, 156, 385, 22), surface != null
+                ? $"{surface.Definition.displayName}: +{surface.Definition.speedBonusPercent:0.#}% movement speed"
+                : input.Feedback, body);
         }
         public void Configure(TraversalInput controls, ExplorationCamera camera) { input = controls; explorationCamera = camera; }
     }

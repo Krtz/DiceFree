@@ -1,5 +1,8 @@
 # Cornberg blockout — issue #15, Phase 1
 
+This note describes the original blockout. Current east-road travel bonuses are
+documented in [CORNBERG_SURFACES.md](CORNBERG_SURFACES.md).
+
 This is the first authored World 1 pocket, based on issues #6, #14, #15 and
 `WORLD_1.md`. It is not a separate mechanics room. East is +X, north is +Z;
 Cornberg's green is near the origin. The southwest mountain remains reachable

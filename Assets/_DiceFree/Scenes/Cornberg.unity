@@ -2494,6 +2494,7 @@ GameObject:
   - component: {fileID: 31112609}
   - component: {fileID: 31112611}
   - component: {fileID: 31112610}
+  - component: {fileID: 31112612}
   m_Layer: 2
   m_Name: Mountain to east road
   m_TagString: Untagged
@@ -2573,6 +2574,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31112608}
   m_Mesh: {fileID: 4300000, guid: b96912dcbadf4c0449e45027364dea0b, type: 2}
+--- !u!114 &31112612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31112608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.TravelSurface
+  stableId: surface-area.cornberg.east-road
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 31112611}
+  localRegion:
+    m_Center: {x: 72, y: 0, z: 25}
+    m_Extent: {x: 47, y: 5, z: 35}
+  heightTolerance: 0.75
 --- !u!1 &31129015
 GameObject:
   m_ObjectHideFlags: 0
@@ -111931,6 +111951,7 @@ GameObject:
   - component: {fileID: 1288724063}
   - component: {fileID: 1288724062}
   - component: {fileID: 1288724067}
+  - component: {fileID: 1288724068}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112217,6 +112238,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Persistence.ManifestationPersistence
   debounceSeconds: 0.25
+--- !u!114 &1288724068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515c50a69af42d84f94fa34e68cd4042, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.SurfaceTravel
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0
