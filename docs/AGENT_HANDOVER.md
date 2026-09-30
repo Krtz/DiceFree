@@ -195,9 +195,17 @@ Retaliation, existing targets, hostility/LOS/radius, leash/home, fixed enemy lev
 
 Validation passed: real-AI gaps 0/9/10/20, live level changes, retaliation, explicit attack/kill/XP, always-aggro and custom thresholds, hostility/LOS/awareness, leash, reset/respawn and archetype/variant selection. Cornberg combat/death/Return/well, Q1, Q2 (six reloads), Q3 (four), Runner Returns (four), all 13 traversal routes, fresh/save-reload, storage/migration/recovery/backups/stale writers/Profile Inspector passed. Windows development build passed (171,990,466 bytes); two isolated standalone startup/reload smokes retained identity and completed runner at level 6/0 XP with no runtime errors. No manual playthrough claimed. Known SearchDatabase #17 remains separate.
 
-This delivers only the trivial-aggro slice of #35. Mounts, collection, road-speed surfaces, maps/achievements and the broader #28 encounter engine remain unimplemented. Q4 remains blocked on alternatives, kill-count/progress semantics, reward parity and XP/level payout. No new separate blocker was found.
+This delivers only the trivial-aggro slice of #35. Mounts, collection, maps/achievements and the broader #28 encounter engine remain unimplemented. Road-speed surfaces are now implemented below. Q4 core route decisions have since been settled above; remaining authored details still need resolution. No new separate blocker was found.
 
 ---
+## Road/surface speed — complete
+
+Implemented on `poc/cornberg` in `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Existing east/forest road now grants a provisional **+15%** player movement speed. `TravelSurface` samples its readable mesh; player-only `SurfaceTravel` supplies a named factor. `ActorStats -> CombatActor -> TraversalMotor` retains the current baseline; effective speed is shared by Classic/NavMesh and Direct. Factor composition and overlap priority/stable-ID selection remain provisional, not final mount stacking design.
+
+Passed: focused road tests (real mouse/WASD, combat, live stats, enter/exit, overlaps, teleport, death/Return/load); all 13 traversal routes; combat/death/well; trivial aggro; Q1; Q2 (six reloads); Q3 and Runner Returns (four each). Windows development build: 171,996,594 bytes. Two isolated standalone startup/reload smokes: zero errors, identity/level 6/0 XP/completed Runner retained, revisions 9 -> 10. No human playthrough claimed. Known SearchDatabase #17 remains separate. Full storage/migration/recovery suite was not separately rerun because durable code is untouched.
+
+Scene adds only two components (33 lines); geography/nav/enemy tuning/save schema unchanged. See `docs/CORNBERG_SURFACES.md` on PoC for IDs, static-mesh limits and tests. Issues #35/#15 document the handoff. Trivial aggro is complete, mounts are not started, and Q4 is not implemented; preserve the newer Q4 decisions and resolve remaining authored details before its own patch.
+
 # High-level game / narrative context
 
 DiceFree is an isometric co-op action RPG inspired strongly by Warcraft III custom ORPGs such as Twilight's Eve.
@@ -840,7 +848,7 @@ When entering a new chat/session:
 
 Q4 is the next Cornberg story beat and its high-level completion rules are now settled. Before implementation, finish the remaining authored details for the dangerous elite Slime and the exact Q4 interaction/turn-in presentation. Preserve the two-path structure documented in `WORLD_1.md`.
 
-The latest completed implementation increment is trivial-enemy auto-aggro policy `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; road-speed work may be in progress externally. Verify branch truth before choosing the next implementation task.
+The latest completed implementation increment is road speed `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Next smallest step: playtest the provisional +15% road bonus and edge behavior; resolve remaining Q4 authored details before starting its separately scoped OR-objective slice. Do not silently start mounts.
 
 # Latest handover update
 
@@ -856,4 +864,6 @@ The latest completed implementation increment is trivial-enemy auto-aggro policy
 - **Q4 co-op credit:** eligible nearby party members with Q4 active share qualifying ordinary Slime kills and the elite kill; use authored Nearby credit policy, exact radius still open.
 - **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art/extra stats remain open.
 - **Q4 giver:** still deliberately open between the returning Runner and another ordinary Cornberg farmer.
-- **Next design need:** settle giver, nearby-credit radius, elite level/stats/reward/drop identity, and glove presentation metadata; verify current road-speed implementation state before assigning coding work.
+- **Next design need:** settle giver, nearby-credit radius, elite level/stats/reward/drop identity, and glove presentation metadata; road speed is complete and validated.
+
+- **Confirmed road speed:** `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`; +15% provisional, focused/regression/build/two standalone smokes green. Mount work remains unstarted.
