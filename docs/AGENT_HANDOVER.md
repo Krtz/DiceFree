@@ -852,4 +852,8 @@ The latest completed implementation increment is trivial-enemy auto-aggro policy
 - **Confirmed trivial aggro:** `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; provisional ten-level awareness suppression, authored always-aggro and policy extension seam; focused/regression/build/smoke validation passed
 - **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
 - **Q4 design now settled:** both routes active simultaneously; elite Slime OR 30 post-accept eligible non-crop Slime kills; no retroactive elite/kill credit; dungeon is side content but eligible dungeon Slimes can count; elite guidance says somewhere in Slime Forest; elite is a stat check only; either route sets ready-to-turn-in back in Cornberg; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
-- **Next design need:** settle Q4 giver/turn-in NPC plus elite spawn/respawn/tuning and multiplayer/shared kill-credit details; verify current road-speed implementation state before assigning coding work.
+- **Q4 elite:** fixed deep-forest clearing, repeatable/farmable, 7.5-minute respawn.
+- **Q4 co-op credit:** eligible nearby party members with Q4 active share qualifying ordinary Slime kills and the elite kill; use authored Nearby credit policy, exact radius still open.
+- **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art/extra stats remain open.
+- **Q4 giver:** still deliberately open between the returning Runner and another ordinary Cornberg farmer.
+- **Next design need:** settle giver, nearby-credit radius, elite level/stats/reward/drop identity, and glove presentation metadata; verify current road-speed implementation state before assigning coding work.
