@@ -872,3 +872,14 @@ Example:
 - Fire cap = 90%, other elemental caps = 80%.
 
 A cap debuff lowers the effective ceiling without changing raw resistance. For example, 110% raw Fire resistance with a 55% Fire cap resolves as 55% effective Fire resistance.
+
+
+### Resistance-cap floor and no inversion resurrection
+
+Elemental Resistance Cap bottoms out at 0% by default.
+
+Reducing the cap below 0% does not create vulnerability; raw/effective resistance must actually be reduced below 0% for vulnerability.
+
+Elemental healing uses the same effective Resistance Cap as elemental damage after its context-specific resistance/penetration calculation.
+
+Resistance-inversion HP restoration from >100% elemental resistance does not resurrect dead targets unless an explicit resurrection mechanic says otherwise.
