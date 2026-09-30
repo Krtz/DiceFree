@@ -164,9 +164,21 @@ It adds:
 - focused reload/semantic regression validation;
 - `docs/CORNBERG_RUNNER.md`.
 
-The next main story implementation is Q4, but its completion alternatives/counts/reward parity/XP target are still design-open. Do not silently choose those rules.
+The next main story implementation is Q4. Its core completion structure is now settled:
 
-Until Q4 is settled, agents may work on another clearly settled, appropriately scoped Cornberg/POC system rather than inventing Q4 canon.
+- path A: kill the dangerous elite Slime;
+- path B: kill 30 eligible Slimes after accepting Q4;
+- crop-field Slimes do not count;
+- stronger non-crop starter-region Slimes count;
+- eligible Slimes inside the Slime dungeon count;
+- pre-Q4 kills are not retroactive;
+- the Slime dungeon itself is side content / a sidequest, not a Q4 completion path;
+- both Q4 paths award the same main quest reward;
+- completing one route completes Q4 and cannot duplicate the main reward;
+- incidental elite/dungeon/ordinary-kill rewards remain separate;
+- target pacing after Q4 is roughly level 9–10, with exact XP left to gameplay testing.
+
+Implementation still needs the elite Slime specifics and clean multi-path quest semantics, but agents must not reintroduce the dungeon as a third Q4 route.
 
 ## Trivial-enemy auto-aggro — complete
 
@@ -821,9 +833,9 @@ When entering a new chat/session:
 
 # Current recommended next implementation step
 
-Q4 is the next Cornberg story beat, but do not implement it until Axel settles its alternative completion paths, kill-count/progress rules, reward parity and XP/level target.
+Q4 is the next Cornberg story beat and its high-level completion rules are now settled. Before implementation, finish the remaining authored details for the dangerous elite Slime and the exact Q4 interaction/turn-in presentation. Preserve the two-path structure documented in `WORLD_1.md`.
 
-The latest completed increment is trivial-enemy auto-aggro policy `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`. Next smallest step: playtest old-region travel near the provisional ten-level boundary and settle Q4's alternatives/counts/rewards before further story implementation. Do not silently start Q4, mounts or road-speed work.
+The latest completed implementation increment is trivial-enemy auto-aggro policy `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; road-speed work may be in progress externally. Verify branch truth before choosing the next implementation task.
 
 # Latest handover update
 
@@ -834,4 +846,5 @@ The latest completed increment is trivial-enemy auto-aggro policy `e6d5cefc9d594
 - **Runner status:** implemented with reusable acknowledged-conversation / TalkTo semantic credit and existing schema-v2 persistence
 - **Confirmed trivial aggro:** `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; provisional ten-level awareness suppression, authored always-aggro and policy extension seam; focused/regression/build/smoke validation passed
 - **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
-- **Next:** playtest the provisional aggro boundary; settle Q4 alternatives/progress/rewards/XP before implementing Q4. Remaining #35 mount/road work is outside this completed increment.
+- **Q4 design now settled:** elite Slime OR 30 post-accept eligible non-crop Slime kills; dungeon is side content, dungeon Slime kills can count; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
+- **Next design need:** finish elite-Slime specifics and Q4 presentation/credit details; verify current road-speed implementation state before assigning coding work.
