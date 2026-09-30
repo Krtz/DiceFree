@@ -831,6 +831,18 @@ Current respawn time is **7.5 minutes** after defeat.
 
 The 7.5-minute value is an authored Q4/elite rule, but can still be revisited during real gameplay tuning if it creates bad pacing.
 
+Intended difficulty target:
+- approximately **2–3 level-6 players**; or
+- approximately **one level-8–9 player**.
+
+This is a tuning target, not an excuse for player-level scaling. The elite keeps a fixed authored level/stat block.
+
+The elite has a unique farmable shoe drop with:
+- **+1 DEF** (exact Defense channel/meaning still needs clarification because DiceFree has separate Physical and Magical Defense);
+- **+1% Movement Speed**.
+
+Exact shoe name, item level, rarity, art, and drop chance remain open.
+
 #### Multiplayer / party credit
 
 Q4 uses cooperative nearby credit.
@@ -852,11 +864,9 @@ Satisfying either field route does **not** auto-complete the quest.
 
 Q4 becomes **ready to turn in**, and the player returns to Cornberg to complete it and receive the shared main reward.
 
-The exact Q4 giver/turn-in NPC is not locked yet. Current candidates are:
-- the returning Cornberg Runner; or
-- another ordinary Cornberg farmer.
+Q4 is given/turned in by **a different ordinary Cornberg farmer**, not the weekly Runner and not the original former-swordswoman farmer.
 
-Do not silently assign it back to the former swordswoman/farmer unless later design chooses that.
+Exact farmer identity/name/presentation remains open.
 
 #### Reward parity
 
@@ -899,11 +909,16 @@ This remains a useful prototype for **multi-path quest completion**.
 
 ### Quest 5 — Become Cornberg's runner
 
-After proving capable enough to handle the local danger, Cornberg asks the Echo to carry the village's news/message to the next settlement.
+The **weekly Runner gives MSQ5**.
+
+After what happened on the blocked road, the Runner is **too scared to attempt the trip to the next town again** and asks the Echo to go instead.
 
 The reason is simple:
-- the normal runner could not get through;
-- the Echo has demonstrated they can.
+- the Runner already failed to get through once because of the Slime surge;
+- that experience frightened them enough that they do not want to try again immediately;
+- the Echo has now demonstrated they can handle the local danger.
+
+The Runner's fear should read as ordinary human self-preservation, not cowardly comic relief unless later dialogue deliberately leans that way.
 
 No larger news hook is required.
 
