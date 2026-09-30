@@ -854,3 +854,21 @@ These are preserved as separate action outcomes rather than collapsed into a net
 If any packet deals actual HP damage, the action counts as having caused damage even if another packet restored HP.
 
 Resistance-inversion restoration is capped by missing HP. Excess is discarded unless an explicit mechanic says otherwise.
+
+
+### One element per packet and cap modifiers
+
+Each damage packet has at most one element. Multi-element actions use multiple packets.
+
+Resistance-cap modifiers are independent from raw resistance:
+- global cap modifiers can affect all elements;
+- element-specific cap modifiers affect one element;
+- cap bonuses/reductions stack additively by default.
+
+Example:
+- base cap 75%;
+- +5% all-element cap;
+- +10% Fire cap;
+- Fire cap = 90%, other elemental caps = 80%.
+
+A cap debuff lowers the effective ceiling without changing raw resistance. For example, 110% raw Fire resistance with a 55% Fire cap resolves as 55% effective Fire resistance.
