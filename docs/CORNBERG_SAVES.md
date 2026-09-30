@@ -165,3 +165,8 @@ The subsequent stat/Defense slice also keeps schema v2. Runtime coefficient and
 Defense modifiers are transient; load resets them before restoring full HP.
 The load fixture explicitly seeds and checks removal of Vitality, secondary-stat
 and Defense modifiers, in addition to its existing target/cooldown checks.
+
+Q3 also uses schema/manifestation v2 unchanged. Its focused suite starts from a
+pre-Q3 completed-Q2 profile, retains unknown records and checks actual scene
+reload at accepted/located/ready/completed states without reward replay. See
+[Cornberg forest notes](CORNBERG_FOREST.md).

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg named forest Slime
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestDefinition
+  stableId: quest.cornberg.named-slime
+  title: Named Slime
+  version: 1
+  offer: A larger Slime lurks in the southern forest clearing. Follow the east road, take the southern loop, defeat it, then return.
+  locationHint: East road, southern woodland loop. Return to the farmer afterward.
+  stages:
+  - kind: 1
+    instruction: Locate the southern forest clearing
+    contentId:
+    familyId:
+    areaId: area.cornberg.forest-clearing
+    count: 1
+  - kind: 0
+    instruction: Defeat the Named Forest Slime, then return to the farmer
+    contentId: enemy.named-forest-slime
+    familyId: enemy-family.slime
+    areaId:
+    count: 1
+  completedQuestIds:
+  - quest.cornberg.investigate-road
+  rewardXp: 35

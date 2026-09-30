@@ -24,7 +24,11 @@ namespace DiceFree.Quests
                 if (state != null && (state.status == QuestStatus.Active || state.status == QuestStatus.ReadyToTurnIn)) return value;
             }
             foreach (var value in Offers) if (journal.CanAccept(value)) return value;
-            return quest;
+            // When all offers are completed, keep the latest authored conversation visible.
+            var latest = quest;
+            foreach (var value in Offers)
+                if (journal.GetProgress(value.stableId)?.status == QuestStatus.Completed) latest = value;
+            return latest;
         }
         public bool Accept(CombatActor actor) => Accept(actor, CurrentQuest(actor));
         public bool TurnIn(CombatActor actor) => TurnIn(actor, CurrentQuest(actor));

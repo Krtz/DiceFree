@@ -88,6 +88,10 @@ No save clock, multiplayer credit, spawn occupancy reservation, inventory, Q3 or
 full encounter framework is introduced. The smallest next step is a playtest of
 Q1 → Q2 pacing and road readability before adding another quest/enemy mechanic.
 
+The subsequent [Q3 named forest Slime slice](CORNBERG_FOREST.md) now extends this
+route through a real farmer offer, existing forest clearing, authored stronger
+variant and return toward level 6. This note records the original Q2 increment.
+
 ## Validation results — 2026-09-29
 
 - Q2 Play Mode suite passed, including its six actual scene-reload checkpoints.

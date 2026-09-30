@@ -30,6 +30,7 @@ namespace DiceFree.EditorTools
         private static IEnumerator routine;
         private static float deadline;
         private static int defeats, entries;
+        private static int actorCount;
         private static readonly HashSet<long> defeatIds = new();
         static CornbergRoadValidation() => EditorApplication.playModeStateChanged += OnPlay;
         public static void Run()
@@ -63,7 +64,10 @@ namespace DiceFree.EditorTools
             while (persistence == null || !persistence.Ready);
             player = persistence.GetComponent<CombatActor>(); xp = player.GetComponent<ExperienceProgression>(); journal = player.GetComponent<QuestJournal>();
             crop = CombatValidationActors.Find("enemy.crop-slime"); road = CombatValidationActors.Find("enemy.road-slime");
-            giver = UnityEngine.Object.FindAnyObjectByType<QuestGiver>(); area = UnityEngine.Object.FindAnyObjectByType<ReachArea>();
+            giver = UnityEngine.Object.FindAnyObjectByType<QuestGiver>();
+            foreach (var candidate in UnityEngine.Object.FindObjectsByType<ReachArea>())
+                if (candidate.StableId == "area.cornberg.road-investigation") area = candidate;
+            actorCount = CombatActor.All.Count;
             q1 = giver.Quest;
             foreach (var definition in journal.Definitions) if (definition.stableId == "quest.cornberg.investigate-road") q2 = definition;
         }
@@ -155,7 +159,7 @@ namespace DiceFree.EditorTools
                     player.Motor.Teleport(giver.ApproachPosition);
                     while (!road.Alive) yield return null;
                     Require(Time.time - died >= road.GetComponent<OverworldRespawn>().Definition.delaySeconds - 0.2f &&
-                        road.GetEntityId().Equals(identity) && CombatActor.All.Count == 3 && road.Health.Current == road.Health.Maximum &&
+                        road.GetEntityId().Equals(identity) && CombatActor.All.Count == actorCount && road.Health.Current == road.Health.Maximum &&
                         !road.InCombat && !road.GetComponent<AggroBehaviour>().Returning && road.GetComponent<BasicAttack>().CooldownRemaining == 0 &&
                         road.Stats.DefenseModifiers(DamageChannel.Physical).reductionFlat == 0,
                         "Road timed respawn did not cleanly reuse the actor.");

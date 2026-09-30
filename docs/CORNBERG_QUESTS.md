@@ -148,3 +148,5 @@ Credit IDs/deduplication remain session-local, not network/save IDs.
 
 Continue playtesting the complete five-kill/return route and the save/reload flow.
 Q2 now extends this flow through the [road investigation](CORNBERG_ROAD.md).
+Q3 continues with the [named forest Slime](CORNBERG_FOREST.md), reusing the same
+semantic objective, NPC interaction, enemy and persistence boundaries.
