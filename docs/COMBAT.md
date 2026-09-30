@@ -825,3 +825,17 @@ Therefore:
 - 105% effective resistance heals for 5% of the matching damage that would have resolved at 0% resistance.
 
 This behavior is intentionally allowed even though normal encounter design should not depend on players reaching >100% resistance.
+
+
+### Resistance-inversion result handling
+
+If elemental resistance above 100% turns incoming matching elemental damage into HP restoration:
+
+- Healing Received does not modify the amount;
+- the target still counts as having been hit by the originating elemental action;
+- the target did not take damage;
+- the result restores HP through a distinct resistance-inversion category;
+- it does not automatically satisfy generic ordinary-heal triggers;
+- damage shields do not consume capacity because the result reaching the shield stage is not positive damage.
+
+This is separate from authored healing and from elemental-healing inversion.
