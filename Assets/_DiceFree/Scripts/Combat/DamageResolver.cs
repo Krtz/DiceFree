@@ -2,13 +2,20 @@ using UnityEngine;
 
 namespace DiceFree.Combat
 {
+    public enum PacketOutcome { NoHpChange, Damage, ResistanceRestoration, Miss }
     public struct DamageResult
     {
-        public float baseRaw, raw, defense, resistance, mitigated, applied;
+        public float baseRaw, raw, defense, afterDefense, resistance, mitigated, applied, restored;
+        public ActionResolution action;
         public ActionCriticalResolution critical;
         public ElementalResistanceResolution elementalResistance;
         public DamageChannel channel;
         public ElementDefinition element;
+        public bool Missed => action != null && action.Hit.missed;
+        public float DamagePotential => Missed ? 0 : Mathf.Max(0, mitigated);
+        public float RestorationPotential => Missed || element == null ? 0 : Mathf.Max(0, -mitigated);
+        public PacketOutcome Outcome => Missed ? PacketOutcome.Miss : RestorationPotential > 0
+            ? PacketOutcome.ResistanceRestoration : DamagePotential > 0 ? PacketOutcome.Damage : PacketOutcome.NoHpChange;
     }
 
     public static class DamageResolver
@@ -21,10 +28,20 @@ namespace DiceFree.Combat
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
             var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
             float resistance = elemental.effective;
+            float afterDefense = raw * DefenseMath.DamageMultiplier(defense, target.Definition.tuning);
             return new DamageResult {
                 baseRaw = baseRaw, raw = raw, critical = critical, defense = defense, resistance = resistance, elementalResistance = elemental, channel = attack.channel, element = attack.element,
-                mitigated = raw * DefenseMath.DamageMultiplier(defense, target.Definition.tuning) * (1 - resistance)
+                afterDefense = afterDefense, mitigated = afterDefense * (1 - resistance)
             };
+        }
+        public static DamageResult CalculatePacket(ActorStats source, ActorStats target, AttackDefinition attack, ActionResolution action)
+        {
+            if (action == null) throw new System.ArgumentNullException(nameof(action));
+            // A miss never constructs raw packets or consults mitigation, and cannot resolve crit here.
+            if (action.Hit.missed) return new DamageResult { action = action, channel = attack.channel, element = attack.element };
+            var result = Calculate(source, target, attack, action.Critical);
+            result.action = action;
+            return result;
         }
         public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null)
         {

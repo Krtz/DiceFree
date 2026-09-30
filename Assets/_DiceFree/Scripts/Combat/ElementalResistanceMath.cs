@@ -7,7 +7,7 @@ namespace DiceFree.Combat
 
     public readonly struct ElementalResistanceResolution
     {
-        public readonly float raw, penetration, preCap, effective;
+        public readonly float raw, penetration, preCap, cap, effective;
         public readonly ElementalContext context;
         public ElementalResistanceResolution(float raw, float penetration, float cap, ElementalContext context)
         {
@@ -15,7 +15,8 @@ namespace DiceFree.Combat
                 throw new ArgumentOutOfRangeException(nameof(context));
             this.raw = raw; this.penetration = penetration; this.context = context;
             preCap = raw + (context == ElementalContext.Damage ? -penetration : penetration);
-            effective = Math.Min(preCap, cap); // No negative floor. Cap policy supplied by caller.
+            this.cap = Math.Max(0, cap);
+            effective = Math.Min(preCap, this.cap); // No negative resistance floor or upper cap ceiling.
         }
     }
 

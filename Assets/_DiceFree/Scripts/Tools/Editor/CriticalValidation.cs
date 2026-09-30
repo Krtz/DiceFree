@@ -58,6 +58,8 @@ namespace DiceFree.EditorTools
             Require(before.raw == after.raw && before.mitigated == after.mitigated, "Crit evaluation changed ordinary damage.");
             ActionCriticalValidation.Check(player, enemy);
             ElementalValidation.Check(player, enemy);
+            ResistanceCapValidation.Check(player, enemy);
+            ActionHitValidation.Check(player, enemy);
             Debug.Log("EXPLICIT_CRIT_OK: absent/denied/zero grants, deterministic thresholds, provenance, validation and unchanged ordinary damage.");
         }
     }

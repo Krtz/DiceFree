@@ -70,6 +70,7 @@ namespace DiceFree.EditorTools
             var before=reports; var beforeCredit=credits;
             enemy.GetComponent<BasicAttack>().Order(player);
             player.GetComponent<TargetSelection>().Select(enemy);
+            enemy.Stats.SetResistanceCapModifier("test.respawn", ResistanceCapModifier.Global(.5f));
             enemy.Health.ApplyDamage(player,new DamageResult{raw=1000,mitigated=1000});
             enemy.Health.ApplyDamage(player,new DamageResult{raw=1000,mitigated=1000});
             Require(!enemy.Alive && reports==before+1 && credits==beforeCredit+1,"Death/credit emitted more than once");
@@ -83,6 +84,7 @@ namespace DiceFree.EditorTools
             }
             Require(Time.time-diedAt>=respawn.Definition.delaySeconds,"Early respawn");
             Require(enemy.Health.Current==enemy.Health.Maximum,"Respawn HP incomplete");
+            ResistanceCapValidation.RequireDefaultCap(enemy.Stats);
             Require(UnityEngine.AI.NavMesh.SamplePosition(brain.Home,out var home,2,1) &&
                 Vector3.Distance(enemy.transform.position,home.position)<0.1f,"Respawn moved away from authored ground point");
             Require(!brain.Returning && !enemy.InCombat && enemy.GetComponent<BasicAttack>().Target==null,"Stale respawn combat state");

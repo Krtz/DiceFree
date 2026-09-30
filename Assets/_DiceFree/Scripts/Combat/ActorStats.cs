@@ -17,6 +17,21 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, DefenseModifier> defenseModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, ElementalModifier> resistanceModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, ElementalModifier> penetrationModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, ResistanceCapModifier> capModifiers = new(StringComparer.Ordinal);
+        public void SetResistanceCapModifier(string sourceId, ResistanceCapModifier value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Stable modifier source required.");
+            capModifiers[sourceId] = value;
+        }
+        public void RemoveResistanceCapModifier(string sourceId) => capModifiers.Remove(sourceId);
+        public float ResistanceCap(ElementDefinition element)
+        {
+            if (element == null) return 0;
+            float cap = definition.tuning.resistanceCap;
+            foreach (var value in capModifiers.Values)
+                if (value.elementId == null || value.elementId == element.stableId) cap += value.delta;
+            return Mathf.Max(0, cap); // Cap reduction alone cannot create vulnerability; no upper ceiling.
+        }
         public void SetResistanceModifier(string sourceId, ElementalModifier value)
         {
             if (string.IsNullOrWhiteSpace(sourceId) || string.IsNullOrWhiteSpace(value.elementId)) throw new ArgumentException("Stable modifier identities required.");
@@ -95,7 +110,7 @@ namespace DiceFree.Combat
         {
             float previous = MaximumHp;
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
-            resistanceModifiers.Clear(); penetrationModifiers.Clear(); Changed?.Invoke(previous);
+            resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear(); Changed?.Invoke(previous);
         }
         public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed));
         public float AttackSpeed => 1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed);
@@ -120,7 +135,7 @@ namespace DiceFree.Combat
         }
         public ElementalResistanceResolution ResolveResistance(ElementDefinition element, ElementalContext context, ActorStats source = null) =>
             new ElementalResistanceResolution(RawResistance(element), element == null || source == null ? 0 : source.Penetration(element, context),
-                element == null ? 0 : definition.tuning.resistanceCap, context);
+                ResistanceCap(element), context);
         public float Resistance(ElementDefinition element) => ResolveResistance(element, ElementalContext.Damage).effective;
         public void Configure(ActorDefinition value, int actorLevel = 1) { definition = value; level = Mathf.Max(1, actorLevel); }
         public void SetLevel(int value)

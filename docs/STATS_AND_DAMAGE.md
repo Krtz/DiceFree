@@ -1312,3 +1312,190 @@ Result: -5 damage
 The 5 HP restoration is not modified by Healing Received.
 
 This preserves the originating action/element context while keeping ordinary damage, healing and resistance-inversion restoration distinct for future trigger logic.
+
+
+### Mixed elemental packet outcomes
+
+Damage packets resolve independently.
+
+A single action may therefore produce both HP damage and resistance-inversion HP restoration when different packets interact differently with the target's defenses/resistances.
+
+Example:
+
+```
+Packet A: Fire, effective Fire resistance 105% -> HP restoration
+Packet B: Ice, effective Ice resistance 20% -> HP damage
+```
+
+Both outcomes remain part of the same action, but they are recorded separately.
+
+Do not collapse mixed packet outcomes into one net "damage" value for trigger/telemetry purposes.
+
+Track at least:
+- actual HP damage dealt;
+- actual HP restored by resistance inversion;
+- net HP delta may be derived separately for presentation if useful.
+
+If any packet deals actual HP damage, the target counts as having taken damage from the action even if another packet restores HP.
+
+### Resistance-inversion overheal
+
+Resistance-inversion HP restoration is capped by missing HP.
+
+Example:
+
+```
+Missing HP: 3
+Resistance-inversion restoration: 20
+Actual HP restored: 3
+Excess: 17 lost
+```
+
+Excess resistance-inversion restoration is discarded by default unless an explicit future mechanic converts or uses it.
+
+
+### Element-per-packet rule and resistance-cap modifiers
+
+A single damage packet has at most **one element**.
+
+If an action deals multiple elemental portions, author them as separate packets.
+
+Example:
+
+```
+50 Fire damage
+50 Ice damage
+```
+
+is represented as:
+- one Fire packet;
+- one Ice packet.
+
+Do not model this as one packet carrying both Fire and Ice tags.
+
+This keeps resistance, inversion, element-specific triggers and mitigation independently resolvable per packet.
+
+### Resistance-cap modifiers
+
+Resistance-cap modifiers may be:
+- global to all elemental resistances;
+- specific to one element.
+
+They stack additively in percentage points by default.
+
+Example:
+
+```
+Base elemental resistance cap: 75%
++5% All Elemental Resistance Cap
++10% Fire Resistance Cap
+= 90% Fire Resistance Cap
+= 80% Ice Resistance Cap
+```
+
+Explicit effects may also **reduce** resistance cap.
+
+Resistance-cap reduction changes the maximum effective resistance but does not alter raw resistance.
+
+Example:
+
+```
+Raw Fire Resistance: 110%
+Base Fire Resistance Cap: 75%
+-20% Fire Resistance Cap
+Final Fire Resistance Cap: 55%
+Effective Fire Resistance: 55%
+```
+
+Thus these are separate mechanics:
+- raw resistance modification;
+- resistance penetration;
+- resistance-cap modification.
+
+All remain percentage-based and must be written with an explicit `%`.
+
+
+### Resistance-cap floor and elemental healing cap
+
+The effective elemental Resistance Cap has a default floor of **0%**.
+
+Cap reductions may remove the benefit of positive resistance, but they do not by themselves create elemental vulnerability.
+
+Example:
+
+```
+Base Fire Resistance Cap: 75%
+-100% Fire Resistance Cap
+=> final Fire Resistance Cap: 0%
+```
+
+If content wants the target to become vulnerable, it must reduce the target's raw resistance or otherwise explicitly create negative effective resistance.
+
+Elemental healing uses the **same effective resistance cap** as elemental damage.
+
+Example:
+
+```
+Raw Fire Resistance: 110%
+Fire Resistance Cap: 75%
+Effective Fire Resistance for Fire healing: 75%
+100 Fire healing -> 175 healing before other healing-specific modifiers
+```
+
+If the cap is explicitly raised to 105%, the same raw resistance may resolve at 105% for elemental healing.
+
+Healing penetration still modifies the raw-for-resolution resistance first, then the effective cap is applied.
+
+### Resistance-inversion restoration and death
+
+HP restoration created by >100% elemental resistance cannot resurrect a dead target by default.
+
+A dead target receiving an otherwise healing-producing elemental hit remains dead.
+
+Only an explicitly authored resurrection/death-prevention mechanic may restore a dead target to life.
+
+
+### Default hit and explicit miss chance
+
+Actions **hit by default** unless an explicit mechanic introduces miss chance.
+
+There is no universal hidden 95% hit chance or baseline accuracy tax.
+
+Assuming targeting, range, line-of-sight and other action-validity requirements succeed, an action with no miss mechanic connects.
+
+### Action-wide miss resolution
+
+Miss resolution is action-wide by default.
+
+For an action containing multiple packets:
+- roll miss once for the action;
+- if the action misses, all packets miss;
+- a missed action does not proceed to crit resolution and consumes no crit RNG.
+
+An explicitly authored mechanic may opt into per-projectile/per-packet hit rolls.
+
+### Miss chance modifier semantics
+
+Explicit miss chance is percentage-based and must be written with an explicit `%`.
+
+Ordinary miss-chance modifiers use additive percentage points by default.
+
+Example:
+
+```
+Base miss chance: 25%
++15% miss chance
+= 40% miss chance
+```
+
+Final ordinary miss chance is clamped to 0-100%.
+
+Example:
+
+```
+25% miss chance
+-50% miss chance
+=> 0%
+```
+
+No negative miss chance, overflow conversion or special >100% behavior exists by default. Any exception must be explicitly authored.

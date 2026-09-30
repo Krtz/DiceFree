@@ -66,8 +66,9 @@ Attack-Move, Hold, allied/summon selection and ability casting remain deferred.
 - `Health`: HP, regeneration, damage/heal/death/restore events, overkill and
   overheal clamping. Healing-received scaling applies once, including to
   regeneration. No healing resurrection. This pass uses non-elemental
-  environmental healing; elemental healing/inversion and source-side healer
-  bonuses are not implemented.
+  environmental healing. Source-side ordinary healing scaling and pure elemental
+  healing math are available; authored elemental-heal abilities are not.
+  Resistance-inversion restoration uses a separate unscaled HP path below.
 - `CombatActor`, `TargetSelection`, `BasicAttack`: actor identity/hostility,
   selection independent of commands, cancelable wind-up, repeating actions,
   range and world-solid line-of-sight checks, shared-motor approach. Cooldown
@@ -342,7 +343,8 @@ originating-action provenance, hit-before-crit, critical resolution versus HP
 damage, explicit child-effect inheritance and elemental healing penetration.
 That increment retained winning-rule provenance and separated crit from damage.
 The subsequent resistance increment below adds originating-action identity and
-pure elemental-healing math, but no hit/miss or child-effect systems. Reusing a context means packets of the same action,
+pure elemental-healing math. The cap/hit increment below adds the action-wide
+miss gate; child-effect systems remain deferred. Reusing a context means packets of the same action,
 not implicit inheritance by a child action. Those integrations must follow the
 new notes when implemented; no modifier composition formula was settled.
 Scene, baked navigation, save schema and authored balance data are unchanged.
@@ -353,8 +355,9 @@ Scene, baked navigation, save schema and authored balance data are unchanged.
 
 Relevant design additions through setup/unity-project `47b1115` were selectively
 reconciled into COMBAT, STATS_AND_DAMAGE and DECISION_LOG without merging histories.
-Newer resistance-inversion restoration decisions are preserved as design; this
-slice does not implement >100%-cap damage-to-healing application or cap modifiers.
+That slice preserved newer resistance-inversion restoration decisions as design.
+The subsequent cap/hit increment below implements cap modifiers and >100%
+resistance restoration without adding authored elemental content.
 
 - `ActionProvenance` carries generic stable ActionId/SourceId separately from the
   winning crit grant. `EvaluateAction` accepts it optionally for compatibility;
@@ -400,11 +403,86 @@ and legacy-v1 profiles, two launches each. Identity and level/XP persisted (1/0,
 no runtime errors were logged. These are startup/reload checks, not a full manual
 standalone playthrough.
 
-Still deferred: resistance-cap modifier framework, damage-to-healing application
-above 100% effective resistance, full elemental healing abilities/application,
-shields/immunity/procs, hit/miss and child-effect integration. Crit modifier
+Still deferred: full elemental healing abilities/application,
+shields/immunity/procs and child-effect integration. Crit modifier
 composition, rare stackable crit semantics and future underlying Defense source
 membership remain open. No content receives new crit or resistance modifiers.
+
+### Resistance caps, inversion application and action-wide hit/miss
+
+Design additions through `98f99174b13337ca3bf25895fef46d3d5c9e11c4` were
+selectively reconciled into COMBAT, STATS_AND_DAMAGE and DECISION_LOG. No branch
+histories were merged. Current content receives no miss/crit/cap rules.
+
+- `ResistanceCapModifier.Global` / `ForElement` express source-keyed percentage
+  point deltas. ActorStats adds global and matching-element contributions to the
+  normal 75% cap, floors the final cap at 0%, and applies no upper ceiling.
+  Setting a source replaces its contribution; removing it is supported. Raw
+  resistance is unchanged. Cap telemetry is included in resistance resolution.
+  The same cap serves damage and elemental healing after contextual penetration.
+  The tuning inspector no longer incorrectly restricts cap input to at most 100%.
+- Cap modifiers join existing transient cleanup; no save fields were added.
+  Tests exercise direct reset, anchor load, debug reset and real timed enemy
+  respawn. The persistence suite also seeds a cap contribution before load reset.
+- `DamageResult.afterDefense` records the amount reaching resistance. Signed
+  `mitigated` remains the post-resistance result. Positive `DamagePotential` and
+  `RestorationPotential`, plus `PacketOutcome`, separate damage, resistance
+  restoration, no HP change and miss. At 105% effective resistance, 100 entering
+  resistance produces 5 restoration potential; 120 raw reduced to 60 by Defense
+  produces 3. No pre-Defense inversion shortcut is used.
+- `Health.ApplyPacket` returns independent actual `applied` HP damage and
+  `restored` resistance restoration. It rejects dead-target restoration and
+  misses, clamps restoration to missing HP, and bypasses both Healing Done and
+  Healing Received. It never calls ordinary Heal or emits its Healed event.
+  `PacketResolved` reports a connected live-target packet, including restoration
+  and zero damage; `Damaged` fires only for actual positive HP damage. The legacy
+  `ApplyDamage`/`DamageResolver.Hit` return actual HP damage for existing callers.
+  Future shields can inspect DamagePotential (zero for restoration) before HP
+  application. No shield or proc framework is implemented.
+- One packet still has at most one element. Same-action packet results retain
+  separate actual damage/restoration quantities and action identity; consumers
+  must not substitute net HP change for damage-trigger facts. Below -100%
+  elemental-healing inversion remains its distinct pure math result, with actual
+  authored healing application deferred.
+- `MissChance` adds explicit percentage-point deltas, retains Unclamped and
+  clamps Effective to 0–100%. Non-finite inputs are rejected. There are no global
+  Accuracy/Evasion stats or default miss chance.
+- Call `ActionResolution.Resolve` once after target/range/LOS validity checks.
+  Its `ActionHitResolution` retains originating provenance, explicit chance and
+  optional roll. No rule and 0% miss consume no miss RNG; 100% miss is deterministic
+  and also consumes none. Intermediate chances use one injected [0,1) roll and
+  miss exactly when roll < chance. Miss skips crit evaluation entirely, leaving
+  Critical null; a hit invokes the existing ordinary crit resolver unchanged.
+- `DamageResolver.CalculatePacket` shares that immutable action result. A miss
+  returns before raw construction/mitigation, and Health rejects application.
+  Packets never reroll hit or crit. Existing direct Calculate/Hit APIs remain
+  default-hit entry points for Cornberg, whose validity/timing is unchanged.
+  Callers introducing miss mechanics must use the action gate and packet API.
+
+Focused tests cover caps, overcap, negatives, post-Defense inversion, unscaled
+restoration, missing-HP clamp, no resurrection, separate mixed packet outcomes,
+healing cap, all reset paths, default hit, additive miss clamping and boundaries,
+non-finite rejection, hit-before-crit RNG behavior and unchanged Cornberg damage.
+Existing action-critical and elemental fixtures remain unchanged and rerun.
+
+Open design questions remain crit modifier composition, rare crit stacking and
+future underlying Defense membership. Full abilities, elemental-healing HP
+application, shields/immunity/procs and per-projectile hit exceptions are outside
+this increment. Scene/navigation, save schema and authored balance data are
+unchanged; no ordinary content has been retuned.
+
+Validation on 2026-09-30: ACTION_HIT_OK, RESISTANCE_CAP_OK, existing ACTION_CRIT_OK,
+EXPLICIT_CRIT_OK, ELEMENTAL_OK and SECONDARY_STATS_OK all passed. Full combat,
+Q1 (seven lives, including cap cleanup on timed respawn), Q2 (six real reload
+checkpoints), all 13 traversal routes, fresh/injured/dead/legacy save runs,
+storage/migration/recovery/backups/stale-writer and Profile Inspector checks
+passed. Windows development build succeeded (171,976,778 bytes). The known
+editor SearchDatabase exception remains separately tracked as #17.
+Six isolated standalone startup/reload checks passed (two launches each for
+fresh, completed-Q2 and legacy-v1 profiles), with no logged runtime errors.
+Identity and progression persisted at level/XP 1/0, 5/0 and 3/7, revisions
+advanced, and legacy migrated to schema 2. These are startup/reload smoke checks,
+not a full manual standalone playthrough.
 
 Run with `-batchmode -projectPath <repo> -executeMethod <method> -logFile <path>`:
 

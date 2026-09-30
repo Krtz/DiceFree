@@ -839,3 +839,58 @@ If elemental resistance above 100% turns incoming matching elemental damage into
 - damage shields do not consume capacity because the result reaching the shield stage is not positive damage.
 
 This is separate from authored healing and from elemental-healing inversion.
+
+
+### Mixed packet damage and resistance healing
+
+Packets from one action resolve independently.
+
+One action may simultaneously:
+- deal HP damage through one packet;
+- restore HP through >100% elemental-resistance inversion on another packet.
+
+These are preserved as separate action outcomes rather than collapsed into a net damage number.
+
+If any packet deals actual HP damage, the action counts as having caused damage even if another packet restored HP.
+
+Resistance-inversion restoration is capped by missing HP. Excess is discarded unless an explicit mechanic says otherwise.
+
+
+### One element per packet and cap modifiers
+
+Each damage packet has at most one element. Multi-element actions use multiple packets.
+
+Resistance-cap modifiers are independent from raw resistance:
+- global cap modifiers can affect all elements;
+- element-specific cap modifiers affect one element;
+- cap bonuses/reductions stack additively by default.
+
+Example:
+- base cap 75%;
+- +5% all-element cap;
+- +10% Fire cap;
+- Fire cap = 90%, other elemental caps = 80%.
+
+A cap debuff lowers the effective ceiling without changing raw resistance. For example, 110% raw Fire resistance with a 55% Fire cap resolves as 55% effective Fire resistance.
+
+
+### Resistance-cap floor and no inversion resurrection
+
+Elemental Resistance Cap bottoms out at 0% by default.
+
+Reducing the cap below 0% does not create vulnerability; raw/effective resistance must actually be reduced below 0% for vulnerability.
+
+Elemental healing uses the same effective Resistance Cap as elemental damage after its context-specific resistance/penetration calculation.
+
+Resistance-inversion HP restoration from >100% elemental resistance does not resurrect dead targets unless an explicit resurrection mechanic says otherwise.
+
+
+### Default hit and action-wide miss resolution
+
+Actions hit by default unless an explicit source introduces miss chance. There is no universal hidden baseline miss chance.
+
+When miss chance exists, it resolves once per action by default. A miss causes all normal packets from that action to miss and crit resolution does not run.
+
+Explicit per-projectile/per-packet hit checks require an authored exception.
+
+Miss chance is expressed as an explicit percentage. Ordinary miss-chance modifiers stack additively in percentage points and the final chance is clamped to 0-100%.

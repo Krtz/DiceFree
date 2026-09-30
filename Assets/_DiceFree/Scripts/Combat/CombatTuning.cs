@@ -16,7 +16,7 @@ namespace DiceFree.Combat
         [Min(0)] public float healingDonePerSpirit = 0.0015f;
         [Min(0)] public float healingReceivedPerSpirit = 0.00075f;
         public float defaultElementResistance = -0.1f;
-        [Range(0, 1)] public float resistanceCap = 0.75f;
+        [Min(0), Tooltip("Normalized percentage: 0.75 = 75%. Explicit bonuses may exceed 100%.")] public float resistanceCap = 0.75f;
         public float Coefficient(SecondaryStat stat) => stat switch {
             SecondaryStat.PhysicalDefense or SecondaryStat.MagicalDefense => defensePerAttribute,
             SecondaryStat.AttackSpeed => attackSpeedPerAgility,

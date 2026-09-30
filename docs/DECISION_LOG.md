@@ -3131,3 +3131,54 @@ This is intentionally supported as a rare/emergent interaction rather than a nor
 **Decision:** Resistance-inversion HP restoration is distinct from ordinary healing for trigger purposes unless an effect explicitly includes it.
 
 **Decision:** Damage shields do not consume capacity when the post-resistance result is healing rather than positive damage.
+
+
+## 2026-09-30 — Mixed packet damage/healing outcomes
+
+**Decision:** Damage packets resolve independently.
+
+A single action may both deal HP damage and restore HP through resistance inversion when different packets resolve differently.
+
+**Decision:** Preserve actual HP damage and resistance-inversion HP restoration as separate totals/outcomes. Do not collapse them into a single net damage value for trigger logic.
+
+If any packet deals actual HP damage, the target counts as having taken damage from the action.
+
+**Decision:** Resistance-inversion HP restoration is capped by missing HP. Excess is discarded by default.
+
+
+## 2026-09-30 — One element per packet and resistance-cap modifiers
+
+**Decision:** One damage packet may have at most one element. Multi-element actions use separate packets.
+
+**Decision:** Resistance-cap modifiers may be global or element-specific and stack additively in percentage points by default.
+
+**Decision:** Resistance-cap reductions are supported as a separate mechanic from raw resistance reduction.
+
+Example:
+- 110% raw Fire Resistance;
+- 55% effective Fire Resistance cap;
+- effective Fire Resistance = 55%.
+
+Cap changes do not alter the stored/raw resistance value.
+
+
+## 2026-09-30 — Resistance-cap floor, healing cap, and no accidental resurrection
+
+**Decision:** Effective elemental Resistance Cap has a default floor of 0%.
+
+Cap reduction alone cannot create negative resistance/vulnerability.
+
+**Decision:** Elemental healing uses the same effective elemental Resistance Cap as damage after context-specific resistance/penetration math.
+
+**Decision:** Resistance-inversion HP restoration cannot resurrect dead targets by default. Resurrection requires an explicit resurrection/death-prevention mechanic.
+
+
+## 2026-09-30 — Default hit and miss-chance semantics
+
+**Decision:** Actions hit by default. There is no universal baseline miss chance.
+
+**Decision:** Miss resolution is action-wide by default. If an action misses, its packets miss and crit does not roll.
+
+**Decision:** Explicit miss chance/modifiers are percentages, use additive percentage points by default, and clamp to 0-100%.
+
+Per-packet/projectile miss rolls require an explicit authored exception.
