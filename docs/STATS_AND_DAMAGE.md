@@ -1352,3 +1352,64 @@ Excess: 17 lost
 ```
 
 Excess resistance-inversion restoration is discarded by default unless an explicit future mechanic converts or uses it.
+
+
+### Element-per-packet rule and resistance-cap modifiers
+
+A single damage packet has at most **one element**.
+
+If an action deals multiple elemental portions, author them as separate packets.
+
+Example:
+
+```
+50 Fire damage
+50 Ice damage
+```
+
+is represented as:
+- one Fire packet;
+- one Ice packet.
+
+Do not model this as one packet carrying both Fire and Ice tags.
+
+This keeps resistance, inversion, element-specific triggers and mitigation independently resolvable per packet.
+
+### Resistance-cap modifiers
+
+Resistance-cap modifiers may be:
+- global to all elemental resistances;
+- specific to one element.
+
+They stack additively in percentage points by default.
+
+Example:
+
+```
+Base elemental resistance cap: 75%
++5% All Elemental Resistance Cap
++10% Fire Resistance Cap
+= 90% Fire Resistance Cap
+= 80% Ice Resistance Cap
+```
+
+Explicit effects may also **reduce** resistance cap.
+
+Resistance-cap reduction changes the maximum effective resistance but does not alter raw resistance.
+
+Example:
+
+```
+Raw Fire Resistance: 110%
+Base Fire Resistance Cap: 75%
+-20% Fire Resistance Cap
+Final Fire Resistance Cap: 55%
+Effective Fire Resistance: 55%
+```
+
+Thus these are separate mechanics:
+- raw resistance modification;
+- resistance penetration;
+- resistance-cap modification.
+
+All remain percentage-based and must be written with an explicit `%`.
