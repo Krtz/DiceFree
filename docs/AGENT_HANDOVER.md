@@ -164,9 +164,26 @@ It adds:
 - focused reload/semantic regression validation;
 - `docs/CORNBERG_RUNNER.md`.
 
-The next main story implementation is Q4, but its completion alternatives/counts/reward parity/XP target are still design-open. Do not silently choose those rules.
+The next main story implementation is Q4. Its core completion structure is now settled:
 
-Until Q4 is settled, agents may work on another clearly settled, appropriately scoped Cornberg/POC system rather than inventing Q4 canon.
+- path A: kill the dangerous elite Slime;
+- path B: kill 30 eligible Slimes after accepting Q4;
+- crop-field Slimes do not count;
+- stronger non-crop starter-region Slimes count;
+- eligible Slimes inside the Slime dungeon count;
+- pre-Q4 kills are not retroactive;
+- the Slime dungeon itself is side content / a sidequest, not a Q4 completion path;
+- both Q4 paths award the same main quest reward;
+- completing one route completes Q4 and cannot duplicate the main reward;
+- incidental elite/dungeon/ordinary-kill rewards remain separate;
+- target pacing after Q4 is roughly level 9–10, with exact XP left to gameplay testing;
+- both alternatives are active simultaneously; the player never locks a route;
+- the elite must be killed after Q4 begins, just like the 30-kill route is non-retroactive;
+- quest guidance only says the elite is somewhere in the Slime Forest;
+- this first elite is deliberately a stat-check fight with no bespoke phase/split/pool/enrage mechanics;
+- satisfying either route sets Q4 ready-to-turn-in; the player returns to Cornberg for completion/reward.
+
+Implementation still needs exact elite spawn/respawn/tuning and the specific Q4 giver/turn-in presentation, but agents must not reintroduce the dungeon as a third Q4 route.
 
 ## Trivial-enemy auto-aggro — complete
 
@@ -178,9 +195,17 @@ Retaliation, existing targets, hostility/LOS/radius, leash/home, fixed enemy lev
 
 Validation passed: real-AI gaps 0/9/10/20, live level changes, retaliation, explicit attack/kill/XP, always-aggro and custom thresholds, hostility/LOS/awareness, leash, reset/respawn and archetype/variant selection. Cornberg combat/death/Return/well, Q1, Q2 (six reloads), Q3 (four), Runner Returns (four), all 13 traversal routes, fresh/save-reload, storage/migration/recovery/backups/stale writers/Profile Inspector passed. Windows development build passed (171,990,466 bytes); two isolated standalone startup/reload smokes retained identity and completed runner at level 6/0 XP with no runtime errors. No manual playthrough claimed. Known SearchDatabase #17 remains separate.
 
-This delivers only the trivial-aggro slice of #35. Mounts, collection, road-speed surfaces, maps/achievements and the broader #28 encounter engine remain unimplemented. Q4 remains blocked on alternatives, kill-count/progress semantics, reward parity and XP/level payout. No new separate blocker was found.
+This delivers only the trivial-aggro slice of #35. Mounts, collection, maps/achievements and the broader #28 encounter engine remain unimplemented. Road-speed surfaces are now implemented below. Q4 core route decisions have since been settled above; remaining authored details still need resolution. No new separate blocker was found.
 
 ---
+## Road/surface speed — complete
+
+Implemented on `poc/cornberg` in `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Existing east/forest road now grants a provisional **+15%** player movement speed. `TravelSurface` samples its readable mesh; player-only `SurfaceTravel` supplies a named factor. `ActorStats -> CombatActor -> TraversalMotor` retains the current baseline; effective speed is shared by Classic/NavMesh and Direct. Factor composition and overlap priority/stable-ID selection remain provisional, not final mount stacking design.
+
+Passed: focused road tests (real mouse/WASD, combat, live stats, enter/exit, overlaps, teleport, death/Return/load); all 13 traversal routes; combat/death/well; trivial aggro; Q1; Q2 (six reloads); Q3 and Runner Returns (four each). Windows development build: 171,996,594 bytes. Two isolated standalone startup/reload smokes: zero errors, identity/level 6/0 XP/completed Runner retained, revisions 9 -> 10. No human playthrough claimed. Known SearchDatabase #17 remains separate. Full storage/migration/recovery suite was not separately rerun because durable code is untouched.
+
+Scene adds only two components (33 lines); geography/nav/enemy tuning/save schema unchanged. See `docs/CORNBERG_SURFACES.md` on PoC for IDs, static-mesh limits and tests. Issues #35/#15 document the handoff. Trivial aggro is complete, mounts are not started, and Q4 is not implemented; preserve the newer Q4 decisions and resolve remaining authored details before its own patch.
+
 # High-level game / narrative context
 
 DiceFree is an isometric co-op action RPG inspired strongly by Warcraft III custom ORPGs such as Twilight's Eve.
@@ -821,9 +846,9 @@ When entering a new chat/session:
 
 # Current recommended next implementation step
 
-Q4 is the next Cornberg story beat, but do not implement it until Axel settles its alternative completion paths, kill-count/progress rules, reward parity and XP/level target.
+Q4 is the next Cornberg story beat and its high-level completion rules are now settled. Before implementation, finish the remaining authored details for the dangerous elite Slime and the exact Q4 interaction/turn-in presentation. Preserve the two-path structure documented in `WORLD_1.md`.
 
-The latest completed increment is trivial-enemy auto-aggro policy `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`. Next smallest step: playtest old-region travel near the provisional ten-level boundary and settle Q4's alternatives/counts/rewards before further story implementation. Do not silently start Q4, mounts or road-speed work.
+The latest completed implementation increment is road speed `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Next smallest step: playtest the provisional +15% road bonus and edge behavior; resolve remaining Q4 authored details before starting its separately scoped OR-objective slice. Do not silently start mounts.
 
 # Latest handover update
 
@@ -834,4 +859,11 @@ The latest completed increment is trivial-enemy auto-aggro policy `e6d5cefc9d594
 - **Runner status:** implemented with reusable acknowledged-conversation / TalkTo semantic credit and existing schema-v2 persistence
 - **Confirmed trivial aggro:** `e6d5cefc9d594b1ed2a8fc4cd9ed06a9da3ed7c8`; provisional ten-level awareness suppression, authored always-aggro and policy extension seam; focused/regression/build/smoke validation passed
 - **New design recorded:** achievement categories + permanent reveal after hidden achievements unlock; precise manifestation-specific map exploration with allied reveal; possible Echo-wide POI icon knowledge; road speed remains active in combat
-- **Next:** playtest the provisional aggro boundary; settle Q4 alternatives/progress/rewards/XP before implementing Q4. Remaining #35 mount/road work is outside this completed increment.
+- **Q4 design now settled:** both routes active simultaneously; elite Slime OR 30 post-accept eligible non-crop Slime kills; no retroactive elite/kill credit; dungeon is side content but eligible dungeon Slimes can count; elite guidance says somewhere in Slime Forest; elite is a stat check only; either route sets ready-to-turn-in back in Cornberg; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
+- **Q4 elite:** fixed deep-forest clearing, repeatable/farmable, 7.5-minute respawn.
+- **Q4 co-op credit:** eligible nearby party members with Q4 active share qualifying ordinary Slime kills and the elite kill; use authored Nearby credit policy, exact radius still open.
+- **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art/extra stats remain open.
+- **Q4 giver:** still deliberately open between the returning Runner and another ordinary Cornberg farmer.
+- **Next design need:** settle giver, nearby-credit radius, elite level/stats/reward/drop identity, and glove presentation metadata; road speed is complete and validated.
+
+- **Confirmed road speed:** `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`; +15% provisional, focused/regression/build/two standalone smokes green. Mount work remains unstarted.

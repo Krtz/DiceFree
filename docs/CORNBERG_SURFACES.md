@@ -106,7 +106,8 @@ The current small road query caches mesh arrays and allocates no new mesh per fr
 
 Trivial aggro remains complete. Issue #35 still includes mount ownership/access,
 mounting restrictions, mounted movement and mount-speed progression. Q4 remains
-blocked on alternatives/progress/rewards/XP design. Next smallest step: playtest
+unimplemented. New design updates during this work settled its two routes; see the
+latest handover for remaining authored details. Next smallest step: playtest
 the provisional road bonus at road edges/in combat; then scope a separate mount
 slice only after its composition/tuning requirements are explicit. Do not silently
 start mounts or Q4 from this patch.
