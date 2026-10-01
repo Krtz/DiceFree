@@ -1165,3 +1165,29 @@ Unity-green, not ready for integration**. Next safe action: launch this exact
 project normally from Unity Hub and confirm the Editor opens with the license
 recognized, then close it and retry batch validation. Do not reset licensing or
 reinstall based on this evidence alone.
+
+
+# Real Unity validation found serialization migration regressions
+
+Manual Unity validation finally ran successfully enough to execute
+`DiceFree.EditorTools.ArchitectureValidation.Run`, which logged:
+`DICEFRE_ARCHITECTURE_OK: 10 explicit first-party assemblies; all first-party C# owned; dependency graph acyclic and within policy.`
+
+However real Unity load exposed two integration blockers:
+
+1. **SerializeReference assembly migration**
+   - `EnemyVariantDefinition.autoAggroPolicy` uses `[SerializeReference]`.
+   - existing `Elite Forest Slime variant.asset` records the dynamic managed-reference type as:
+     `DiceFree.AI.AutoAggroPolicy, Assembly-CSharp`.
+   - after asmdef hardening the type is in `DiceFree.AI.Runtime`.
+   - Unity reports the managed reference as missing.
+   - serialized data must be preserved and migrated; do not clear it.
+
+2. **InteractionRegistry scene migration**
+   - existing Cornberg player object has `Interactor` but predates the new serialized `InteractionRegistry` component.
+   - Unity warns that it is creating the missing required component on load.
+   - resolve this explicitly rather than relying on implicit editor mutation every load.
+
+Next #36 cycle must audit all SerializeReference records affected by Assembly-CSharp -> asmdef moves, add a safe migration/compatibility path plus validation using Unity missing-managed-reference APIs, and explicitly resolve the InteractionRegistry scene migration. Re-run real Unity validation after the fixes before full gameplay/build/reload regression.
+
+Do not merge #36 yet.
