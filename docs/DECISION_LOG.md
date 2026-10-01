@@ -3204,3 +3204,23 @@ See:
 - ADR-0002
 - ADR-0003
 
+## 2026-10-01 — Equipment visual progression and non-human class forms
+
+**Decision:** The first custom sword should be humble Cornberg equipment: a chunky, practical piece of metal rather than ornate hero gear.
+
+**Decision:** Equipment rarity/progression may be reflected through geometry, materials and VFX. Higher-end/endgame gear can use glow/emissive effects, particles, trails and similar presentation where appropriate, while preserving combat readability.
+
+**Decision:** DiceFree classes/Ways are not restricted to human forms or one universal human rig. Advancement may transform the Echo's species/body form.
+
+Settled examples:
+- Tier-2 Ranger is a **Wood Elf**.
+- Tier-2 Wizard is a **High Elf**.
+
+Tentative examples, not locked:
+- Berserker may be an Orc.
+- A Tier-4 tank may be a Centaur.
+
+**Decision:** Equipped weapons do not need baseline sheathing. Always-held presentation is acceptable. Do not build sheath sockets/animations/state until a future feature explicitly needs them.
+
+**Decision:** Architecture hardening issue #36 should happen **immediately**, before MSQ5 and before further growth in abilities/resources/classes.
+
