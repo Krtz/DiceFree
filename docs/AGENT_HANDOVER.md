@@ -1097,3 +1097,27 @@ Architecture findings from actual PoC code:
 These are exactly the debts #36 must address deliberately. Do not rewrite MSQ5 behavior while doing so.
 
 Immediate next engineering step remains **#36 architecture hardening**. Use a dedicated refactor branch from the verified PoC head, migrate in reviewable stages, and do not merge to main.
+
+
+# Architecture branch review finding — validator fix required
+
+Reviewed pushed `refactor/architecture-hardening` at `090e5016082987d67b1d1a4ec968b56043e00057`.
+
+The assembly split itself is broadly coherent and the dependency cycle removals/persistence contract are useful, but **do not integrate yet**.
+
+Concrete blocker found in `DiceFree.EditorTools.ArchitectureValidation.ValidateDefinitions`:
+- the allowed dependency table permits `DiceFree.Application.Runtime -> DiceFree.UI.Runtime`;
+- the actual Application asmdef uses that edge;
+- a separate blanket condition rejects any non-Foundation runtime assembly that references UI;
+- therefore the real Editor architecture validator should fail on the intended graph once it can run.
+
+The prior offline manifest check does not replace executing/fixing the actual validator.
+
+Required next step on the same refactor branch:
+1. fix the validator policy contradiction;
+2. split unrelated `ITraversalUiState` out of `IDurableMutationCoordinator.cs` to keep Foundation contracts cohesive;
+3. re-audit asmdef/asmref ownership;
+4. run the real architecture validator and full Unity regressions/build/standalone reload once the editor/project lock/licensing environment allows;
+5. only then review for integration into `poc/cornberg`.
+
+Static actor/fact/travel-surface registries and the one-time InteractionRegistry scene bootstrap remain documented compatibility debt, not hidden completion claims.
