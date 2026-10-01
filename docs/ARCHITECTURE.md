@@ -343,6 +343,34 @@ A descendant Way may switch to another form/rig family entirely. Parent form ide
 
 A non-human class should not require cloning the combat, inventory, quest or persistence engines.
 
+### Physical footprint, reach, and navigation forgiveness
+
+Class/form collision footprint and attack reach are **separate authored concerns**.
+
+A larger body may have a larger gameplay hitbox/agent footprint, but it does not automatically gain longer basic-attack or melee-skill reach. Attack ranges remain authored by the class/attack/ability data.
+
+Likewise, a large playable form must not become progression-locked by ordinary world geometry simply because its ideal physical footprint cannot pass a doorway or narrow authored route.
+
+Production navigation should support deliberate **player-form forgiveness** where needed, for example through:
+- authored traversal clearance wider than decorative geometry;
+- local temporary agent/collision accommodation at known bottlenecks;
+- body-form-aware doorway/portal traversal;
+- other explicit accessibility helpers.
+
+Do not globally shrink all large-form hitboxes just to fit the world, and do not silently let the renderer clip through everything. Keep the normal form footprint meaningful, but ensure required player routes remain traversable for every intended playable form.
+
+### Transformation presentation
+
+Advancement may optionally specify a transformation presentation/effect.
+
+The gameplay/class fork must not require one universal transformation animation. An advancement can use:
+- an authored transformation sequence;
+- a flash/fade/model swap;
+- another bespoke presentation;
+- no special sequence at all.
+
+The transformation presentation is optional content layered over the advancement result, not the owner of class-state mutation.
+
 ## Scene architecture
 
 Cornberg is currently a vertical-slice PoC and does not need an immediate scene rewrite.
