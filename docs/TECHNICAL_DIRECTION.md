@@ -8,6 +8,12 @@ The initialized project uses **Unity 6000.6.3f1**, 3D URP, PC-first.
 
 ## Architecture principles
 
+The enforceable architecture contract is now `docs/ARCHITECTURE.md`.
+
+Material architectural changes should be recorded under `docs/adr/` rather than silently changing dependency direction. `TECHNICAL_DIRECTION.md` remains broader direction; `ARCHITECTURE.md` defines the working dependency/layer rules agents should actively check before implementation.
+
+The current Cornberg PoC has **no first-party Assembly Definition files yet**. This is accepted prototype debt, not the long-term target. Before the project expands substantially beyond Cornberg, migrate incrementally toward explicit domain/runtime, Editor and test assemblies according to ADR-0002.
+
 ### Data-driven content
 Classes, items, enemies, loot tables, regions, advancement requirements, dungeon rewards and crafting recipes should primarily be data definitions rather than hard-coded chains.
 
@@ -322,6 +328,23 @@ UI/
 Persistence/
 Tools/
 ```
+
+## 3D source-art and build-distribution pipeline
+
+Canonical pipeline: `docs/ART_PIPELINE.md`.
+
+Settled direction:
+- stylized/moderately exaggerated fantasy readability rather than realism;
+- slightly oversized equipment for the isometric camera;
+- first DCC proof is exactly one original one-handed sword, followed later by shield -> shoes -> hat;
+- editable native DCC sources live under repository-root `SourceArt/`, outside Unity `Assets/`;
+- Unity-ready exports live under `Assets/_DiceFree/Art/`;
+- native/exported binary art is tracked with Git LFS;
+- do not use a runtime-only Git branch;
+- player builds are build artifacts/releases, not source-controlled build folders;
+- keep one source repository unless measured scale/permissions/LFS/CI cost later justify a separate source-art repository.
+
+See ADR-0001 and ADR-0003.
 
 ## Character art pipeline
 
