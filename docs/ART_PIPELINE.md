@@ -237,8 +237,37 @@ Therefore the art/rig/equipment pipeline must eventually support:
 - non-biped body plans;
 - class-specific rigs or rig families where needed;
 - shared semantic equipment attachment concepts mapped onto different rig/socket layouts;
-- items whose appearance or fit can vary by class/form;
-- equipment restrictions when an item cannot meaningfully fit a body plan.
+- explicit equipment/form compatibility restrictions when an item's authored model does not fit a body plan.
+
+### One authored body presentation per class
+
+Each class/Way has **one authored body/sex presentation**.
+
+A class may be:
+- visibly male;
+- visibly female;
+- deliberately androgynous.
+
+There is no requirement to make male/female body variants of every class.
+
+The class form itself is part of the Way's identity.
+
+As the Echo advances into more specialized Ways, the model should generally become **more visually distinct in the direction of that class fantasy**. Early forms can remain closer to the blank-slate Echo; later forms can become increasingly species/body/silhouette specific.
+
+### Gear appearance does not auto-adapt between body forms
+
+An individual equipment appearance keeps its authored visual form.
+
+Do **not** build automatic body-form scaling, morphing, remeshing, alternate-mesh selection or "fit this same hat to every race" machinery as the default.
+
+Instead:
+- gameplay items/appearances declare compatible classes, form families or semantic eligibility;
+- a Ranger-compatible hat can be authored at Wood-Elf proportions;
+- a Centaur-compatible hat can be authored for that class/form;
+- descendants may inherit/use compatible equipment according to class/equipment rules;
+- incompatible forms simply cannot equip/use that appearance unless explicitly authored.
+
+This preserves deliberate silhouettes and prevents every piece of equipment from becoming a multi-rig content burden.
 
 Do not require every class to deform onto one universal human skeleton merely to simplify tooling.
 
