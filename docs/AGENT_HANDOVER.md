@@ -938,6 +938,11 @@ Additional settled class/form/equipment rules:
 - similar bodies should share rig/animation families where practical, while substantially different/non-biped forms may use separate families;
 - visible armor normally replaces the class form's baseline visual for that slot;
 - class form affects authored gameplay hitbox/physical/navigation footprint; body size is not presentation-only;
+- attack/basic-attack/ability reach remains separately authored from body footprint;
+- large player forms get authored navigation/clearance forgiveness where needed so required routes never soft-lock them;
+- descendant Ways inherit parent equipment-family permissions by default, with explicit add/remove/override support;
+- visible armor layering: Chest/Head/Hands/Legs/Feet replace baseline slot visuals; Shoulders and Back remain independent layers;
+- transformation presentation is optional per advancement and never owns the actual class/manifestation mutation;
 - ADR-0004 records the class-form/equipment-compatibility decision.
 
 Tracking:
