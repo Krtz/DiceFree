@@ -1513,3 +1513,23 @@ Example:
 ```
 
 No negative miss chance, overflow conversion or special >100% behavior exists by default. Any exception must be explicitly authored.
+
+
+## Class form and movement speed
+
+Movement Speed is class-authored/stat-derived gameplay data.
+
+Do not automatically infer movement speed from body shape, species, leg count, renderer dimensions or animation stride.
+
+A Centaur-like form can be fast if its class definition says so; a small form is not automatically faster or slower.
+
+Body footprint/hitbox and movement speed are separate authored properties.
+
+
+## Spatial hit volume and AoE
+
+Ordinary spatial AoE checks use the actor's authored gameplay hit volume.
+
+If any qualifying portion of that hit volume overlaps the AoE volume, the actor is hit/inside unless that specific effect explicitly defines a different rule.
+
+Do not reduce ordinary AoE eligibility to a center-point-only test, because different class forms may have meaningfully different physical footprints.
