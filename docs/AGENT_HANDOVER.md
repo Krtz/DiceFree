@@ -920,6 +920,10 @@ Settled:
 
 Do not mass-produce art until the sword proves scale/export/import/pivot/material/prefab validation conventions.
 
+Tracking:
+- **#36** architecture hardening / asmdef dependency enforcement;
+- **#37** first stylized sword / 3D pipeline proof.
+
 # Current recommended next implementation step
 
 Playtest Q4 and review the measured route pacing before changing balance. The elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Farmer presentation, elite exact tuning and 200 XP/100 gold remain provisional.
