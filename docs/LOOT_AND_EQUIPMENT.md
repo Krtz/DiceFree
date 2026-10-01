@@ -513,3 +513,49 @@ Exact shoe name, item level, rarity, art and flavor remain open.
 
 This item is separate from Q4's guaranteed +5% Attack Speed glove reward.
 
+
+
+## Equipment slot occupancy
+
+DiceFree keeps the same semantic equipment slot set across classes/forms:
+
+1. Head
+2. Shoulders
+3. Chest
+4. Hands
+5. Legs
+6. Feet
+7. Main Hand
+8. Off Hand
+9. Ring
+10. Amulet
+11. Back
+
+A class/form does not replace the slot model merely because its body plan is unusual.
+
+Items may occupy **multiple slots**.
+
+Canonical example:
+- a two-handed weapon occupies **Main Hand + Off Hand** while equipped.
+
+Implementation direction:
+- item data declares its primary/equip slot and all occupied slots;
+- equip validation must ensure every required slot is available;
+- equipping a multi-slot item unequips/conflicts with items occupying any required slot according to normal equip rules;
+- UI derives occupancy from item data rather than special-casing weapon names;
+- future unusual equipment may use the same occupancy mechanism if needed.
+
+## Equipment appearance compatibility
+
+Equipment appearance is authored, not automatically morphed to every class body.
+
+The same visual mesh should keep its designed proportions.
+
+Compatibility/restriction data decides which Ways/forms can equip/use that item or appearance.
+
+Examples:
+- a Ranger/Wood-Elf hat can be sized for that lineage and descendants;
+- a future Centaur hat can have different authored proportions;
+- these do not need to be one universal hat mesh dynamically resized across both forms.
+
+Prefer class/form-family compatibility tags and explicit exceptions over runtime mesh deformation machinery.
