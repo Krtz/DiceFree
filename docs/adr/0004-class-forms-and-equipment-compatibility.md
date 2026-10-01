@@ -19,13 +19,21 @@ A Way may be visibly male, visibly female or androgynous. There is no requiremen
 
 As lineages specialize, their body/model may become increasingly distinct in the direction of the class fantasy.
 
+A descendant Way may fully transform the body/species/form again rather than permanently inheriting its parent's species/rig.
+
 Gameplay identity and systems remain form-agnostic. Character presentation resolves through a class/form profile that maps semantic concepts to concrete visuals/rigs.
 
 The semantic equipment slot model remains shared across every form.
 
+Visible wearable equipment normally replaces the class form's baseline presentation for that occupied slot.
+
+Character form is not presentation-only: each form may author different gameplay collision/selection/navigation footprint dimensions appropriate to its body.
+
 Equipment appearances do not automatically morph, scale or swap meshes to fit arbitrary forms. Items/appearances use explicit class/form-family compatibility.
 
 Equipment may occupy multiple semantic slots. The first canonical case is a two-handed weapon occupying Main Hand and Off Hand.
+
+Equipping a multi-slot item automatically unequips conflicting equipment to carried inventory when capacity permits. If displaced gear cannot be retained safely, the equip fails atomically rather than dropping/destroying items.
 
 ## Consequences
 
@@ -39,5 +47,5 @@ Positive:
 Tradeoffs:
 - some visual items need lineage/form-specific versions;
 - cross-class equipment pools may be narrower;
-- rig families and semantic socket maps need deliberate authoring;
+- rig families, semantic socket maps and authored hitbox/footprint profiles need deliberate authoring;
 - animation/content reuse must be chosen where compatible rather than forced universally.
