@@ -29,11 +29,21 @@ Visible wearable equipment normally replaces the class form's baseline presentat
 
 Character form is not presentation-only: each form may author different gameplay collision/selection/navigation footprint dimensions appropriate to its body.
 
+Attack/basic-attack/ability reach remains separately authored and is not automatically derived from body size.
+
+Required world progression must remain accessible to every intended playable form. Large forms may use explicit navigation/clearance forgiveness at authored bottlenecks rather than being soft-locked by their normal footprint.
+
 Equipment appearances do not automatically morph, scale or swap meshes to fit arbitrary forms. Items/appearances use explicit class/form-family compatibility.
+
+Descendants inherit parent equipment-family compatibility/permissions by default, with explicit additions/removals/overrides allowed as the body/class identity changes.
 
 Equipment may occupy multiple semantic slots. The first canonical case is a two-handed weapon occupying Main Hand and Off Hand.
 
 Equipping a multi-slot item automatically unequips conflicting equipment to carried inventory when capacity permits. If displaced gear cannot be retained safely, the equip fails atomically rather than dropping/destroying items.
+
+Visible slot presentation follows authored layering: Chest/Head/Hands/Legs/Feet replace their baseline slot presentation; Shoulders and Back remain independent layers over the current torso/chest state.
+
+Advancement transformation presentation is optional per Way. The manifestation/class transition remains authoritative even when a bespoke visual transformation is used.
 
 ## Consequences
 
