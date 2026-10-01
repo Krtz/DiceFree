@@ -3238,3 +3238,15 @@ Tentative examples, not locked:
 
 **Decision:** Architecture hardening #36 is authorized as a substantial controlled refactor now, provided behavior remains equivalent, the migration is incremental/inspectable, and validation stays green.
 
+## 2026-10-01 — Descendant transformations, rig families, armor replacement and form hitboxes
+
+**Decision:** A descendant Way may fully transform species/body/form again. A parent class becoming a Wood Elf does not force all descendants to remain that form.
+
+**Decision:** Visible wearable armor normally replaces the class form's baseline presentation for the occupied slot rather than universally layering on top.
+
+**Decision:** Similar forms should share rig/animation families where practical. Human/High-Elf/Wood-Elf-like bodies may share a humanoid family; materially different forms may use different families; radically different/non-biped forms such as a possible Centaur use an appropriate separate rig.
+
+**Decision:** Equipping a multi-slot item automatically unequips conflicting gear to carried inventory when capacity permits. If displaced gear cannot be retained safely, the equip fails atomically rather than destroying/dropping items.
+
+**Decision:** Class/body size is not presentation-only. Different class forms may use different authored gameplay hitboxes/physical/navigation footprints. Do not derive these automatically from renderer bounds; they are explicit form data.
+
