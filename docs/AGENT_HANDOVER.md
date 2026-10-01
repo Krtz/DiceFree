@@ -138,6 +138,43 @@ Q4 pacing remains unchanged (elite: level 9/10 XP; mass route: level 13/30 XP).
 No manual playthrough is claimed; the known editor SearchDatabase #17 remains
 separate.
 
+## Issue #36 architecture hardening — review branch
+
+A controlled architecture-hardening branch was created from verified
+`poc/cornberg` `1b574291fafc6b90d2fac1365eb4931f4bd59fa0`, without merging setup
+or changing gameplay: `refactor/architecture-hardening` is pushed at
+`a68068b037e6439ced60132fa5966bc83f941b7a`. The implementation commits are
+`36ddd99` (full-source audit and selective canonical-doc sync), `128af0e`
+(Foundation durable-mutation contract), `9f8f10c` (assembly ownership), and
+`a68068b` (manifest-based architecture validator and runtime lifetime/discovery
+hardening). Review that branch before any integration; it is not merged into
+`poc/cornberg` or `main`.
+
+The current assembly DAG is Foundation -> Gameplay -> Items/World -> Quests/AI,
+with Persistence and UI as domain-facing leaves, Application composing runtime
+domains, and Editor referencing runtime only. Ten first-party assemblies and
+four asmrefs own all 130 first-party C# files; the validator is
+`DiceFree.EditorTools.ArchitectureValidation.Run`. Items no longer references
+concrete Persistence: rewards consume Foundation `IDurableMutationCoordinator`,
+implemented by `ManifestationPersistence`, preserving deferred atomic reward
+writes and rollback. Pre-refactor inter-assembly cycles are removed.
+
+`Interactor` uses a local `InteractionRegistry` and no longer scans targets on
+each input. A one-time compatibility bootstrap remains for the saved scene;
+anchor resolution now uses the authored provider. Actor/fact/travel-surface and
+HUD registries remain static compatibility seams but reset on subsystem
+registration; a fully instance-owned actor/fact/session composition root and an
+authored travel-surface provider remain documented debt. ContextualNpc routing,
+Runner Returns and Q5 behavior were not intentionally changed.
+
+Offline assembly-manifest/ownership/DAG checks passed and runtime plus Editor
+source groups compiled via Unity-bundled Roslyn. Unity editor menu validation,
+gameplay harnesses, Windows build and standalone reload could not be run: an
+existing Unity process already has the project open, and the attempted batch
+editor also reports Licensing Client IPC refusal. The existing editor was left
+untouched. This branch is therefore pushed for review but is not yet Unity-green.
+Scene, NavMesh, authored balance and save schema v4 are unchanged by the refactor.
+
 ## Previous completed increment: Cornberg Q4
 
 Implemented, validated and pushed on `poc/cornberg` in **39ebbf29c809bf08e7d4bc2626f80714159e85e5** (Add Cornberg Q4 surge alternatives elite and world loot).
