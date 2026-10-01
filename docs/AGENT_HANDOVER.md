@@ -932,7 +932,12 @@ Additional settled class/form/equipment rules:
 - equipment visuals do **not** auto-fit/morph across incompatible forms; by default an appearance is compatible with its authored class/form **and descendants**, with explicit descendant overrides allowed;
 - all forms keep the same 11 semantic equipment slots;
 - items may occupy multiple slots; two-handed weapons occupy Main Hand + Off Hand;
+- equipping multi-slot gear auto-unequips conflicts to inventory when capacity permits; otherwise the equip fails atomically;
 - use a general occupied-slot data model rather than scattered two-handed checks;
+- descendant Ways may fully transform body/species/rig again;
+- similar bodies should share rig/animation families where practical, while substantially different/non-biped forms may use separate families;
+- visible armor normally replaces the class form's baseline visual for that slot;
+- class form affects authored gameplay hitbox/physical/navigation footprint; body size is not presentation-only;
 - ADR-0004 records the class-form/equipment-compatibility decision.
 
 Tracking:
