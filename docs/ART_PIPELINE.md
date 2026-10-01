@@ -54,7 +54,11 @@ Model against a consistent ~1.8m human reference/mannequin unless the target cla
 
 Weapons are allowed to be **slightly oversized for isometric readability**.
 
-For the first one-handed sword, use roughly realistic one-handed proportions with a modest stylized exaggeration rather than a giant anime-sized weapon. Exact dimensions remain prototype tuning.
+For the first one-handed sword, use roughly realistic one-handed proportions with a modest stylized exaggeration rather than a giant anime-sized weapon.
+
+The first sword's fantasy is intentionally humble: **a chunky, practical piece of Cornberg metal** rather than ornate adventurer/hero gear. It should look locally made, sturdy and readable, not prestigious.
+
+Exact dimensions remain prototype tuning.
 
 ## Repository layout
 
@@ -199,6 +203,54 @@ Expected early concepts include:
 Do not lock production armor around the current capsule placeholder.
 
 The first sword can validate mesh/import/prefab conventions before the final humanoid rig exists; final held alignment waits for a real/shared character rig or a dedicated attachment-test rig.
+
+## Visual progression / rarity readability
+
+Equipment rarity and progression should be visible in presentation, not only in tooltip color.
+
+Direction:
+- early/common gear can be plain, practical and materially simple;
+- higher rarity may gain more distinctive silhouette, ornament, material treatment and authored detail;
+- endgame/high-end equipment may use **glow/emissive effects, particles, trails or other VFX** where appropriate;
+- visual escalation should reinforce rarity without making every higher-rarity item visually noisy;
+- geometry, materials and VFX can all participate; do not force rarity to be represented by only one of them.
+
+Keep gameplay readability first. VFX should not obscure telegraphs or combat state.
+
+## Character forms are not one humanoid race
+
+Do **not** architect DiceFree around every class sharing one human body.
+
+Class advancement may change the Echo's species/body form as part of class identity.
+
+Settled examples:
+- the Tier-2 **Ranger is a Wood Elf**;
+- the Tier-2 **Wizard is a High Elf**.
+
+Current possibilities, not yet locked:
+- Berserker may be an Orc;
+- a Tier-4 tank may be a Centaur.
+
+Therefore the art/rig/equipment pipeline must eventually support:
+- multiple humanoid proportions;
+- potentially non-human humanoids;
+- non-biped body plans;
+- class-specific rigs or rig families where needed;
+- shared semantic equipment attachment concepts mapped onto different rig/socket layouts;
+- items whose appearance or fit can vary by class/form;
+- equipment restrictions when an item cannot meaningfully fit a body plan.
+
+Do not require every class to deform onto one universal human skeleton merely to simplify tooling.
+
+Reuse rigs/animation families where it is genuinely compatible, but allow a class to own a radically different form.
+
+## Weapon state
+
+Do **not** plan a sheathing system as a baseline requirement.
+
+For the current direction, equipped weapons may simply remain visibly held while equipped.
+
+Do not create hip/back sheath sockets, draw/sheathe state machines, or sheathing animations unless a later feature explicitly needs them.
 
 ## Materials and textures
 
