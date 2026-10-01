@@ -553,6 +553,11 @@ The same visual mesh should keep its designed proportions.
 
 Compatibility/restriction data decides which Ways/forms can equip/use that item or appearance.
 
+Default lineage rule:
+- equipment authored for a class/form is usable by that class **and its descendants**;
+- descendants can explicitly opt out/override when a later transformation makes the appearance physically inappropriate;
+- unrelated lineages do not inherit compatibility automatically.
+
 Examples:
 - a Ranger/Wood-Elf hat can be sized for that lineage and descendants;
 - a future Centaur hat can have different authored proportions;
