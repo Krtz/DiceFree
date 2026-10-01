@@ -138,43 +138,31 @@ Q4 pacing remains unchanged (elite: level 9/10 XP; mass route: level 13/30 XP).
 No manual playthrough is claimed; the known editor SearchDatabase #17 remains
 separate.
 
-## Issue #36 architecture hardening — review branch
+## Issue #36 architecture hardening — finalization review branch
 
-A controlled architecture-hardening branch was created from verified
-`poc/cornberg` `1b574291fafc6b90d2fac1365eb4931f4bd59fa0`, without merging setup
-or changing gameplay: `refactor/architecture-hardening` is pushed at
-`a68068b037e6439ced60132fa5966bc83f941b7a`. The implementation commits are
-`36ddd99` (full-source audit and selective canonical-doc sync), `128af0e`
-(Foundation durable-mutation contract), `9f8f10c` (assembly ownership), and
-`a68068b` (manifest-based architecture validator and runtime lifetime/discovery
-hardening). Review that branch before any integration; it is not merged into
-`poc/cornberg` or `main`.
+The controlled refactor branch was created from verified PoC `1b574291fafc6b90d2fac1365eb4931f4bd59fa0` and remains separate from both `poc/cornberg` and `main`. The finalization review starts at `090e5016082987d67b1d1a4ec968b56043e00057`; latest authoritative setup used was `f5a1ad999f5047be0326d3224adc7de73cf2ac05`.
 
-The current assembly DAG is Foundation -> Gameplay -> Items/World -> Quests/AI,
-with Persistence and UI as domain-facing leaves, Application composing runtime
-domains, and Editor referencing runtime only. Ten first-party assemblies and
-four asmrefs own all 130 first-party C# files; the validator is
-`DiceFree.EditorTools.ArchitectureValidation.Run`. Items no longer references
-concrete Persistence: rewards consume Foundation `IDurableMutationCoordinator`,
-implemented by `ManifestationPersistence`, preserving deferred atomic reward
-writes and rollback. Pre-refactor inter-assembly cycles are removed.
+Review commits:
+- `25d50e94ff0806a18d3824fc0970c732fb7d9b40` — centralize/fix dependency policy and split Foundation contracts.
+- `b3085bd26ee0441e254ac019e284ae57fa67bf44` — finalize architecture review and dynamic interaction registration contract.
 
-`Interactor` uses a local `InteractionRegistry` and no longer scans targets on
-each input. A one-time compatibility bootstrap remains for the saved scene;
-anchor resolution now uses the authored provider. Actor/fact/travel-surface and
-HUD registries remain static compatibility seams but reset on subsystem
-registration; a fully instance-owned actor/fact/session composition root and an
-authored travel-surface provider remain documented debt. ContextualNpc routing,
-Runner Returns and Q5 behavior were not intentionally changed.
+Final pushed refactor SHA: `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
 
-Offline assembly-manifest/ownership/DAG checks passed and runtime plus Editor
-source groups compiled via Unity-bundled Roslyn. Unity editor menu validation,
-gameplay harnesses, Windows build and standalone reload could not be run: an
-existing Unity process already has the project open, and the attempted batch
-editor also reports Licensing Client IPC refusal. The existing editor was left
-untouched. This branch is therefore pushed for review but is not yet Unity-green.
-Scene, NavMesh, authored balance and save schema v4 are unchanged by the refactor.
+The validator defect is fixed: all first-party edge decisions now use one `Allowed` policy. This explicitly accepts Application -> UI/Persistence and Editor -> runtime while rejecting domain -> UI/Persistence/Application, runtime -> Editor, and all other unlisted first-party edges. Pure policy self-tests pass for the allowed and forbidden examples, A -> B -> A cycle detection, missing source ownership, and an invalid asmref target. The self-test helper is shared by the actual validator and was executed separately in an isolated .NET harness.
 
+Offline inspection of actual project files found 10 first-party assemblies, four resolving asmrefs, and 132 explicitly owned first-party C# files (91 runtime, 41 Editor). There is no Assembly-CSharp leakage, no first-party dependency cycle, no domain -> concrete Persistence/UI/Application edge, and no runtime -> UnityEditor edge. The assembly graph remains Foundation -> Gameplay -> Items/World -> Quests/AI; Persistence and UI depend on domain assemblies; Application composes runtime domains, Persistence, and UI; Editor references runtime. The actual graph omits allowed-but-unused edges such as AI -> World.
+
+Foundation now keeps `IDurableMutationCoordinator` and `ITraversalUiState` in separate focused files. Rewards still flow QuestJournal -> FixedRewardGrant -> the Foundation mutation contract, implemented by ManifestationPersistence; prevalidation, completion-before-reward-event reentrancy protection, deferred durable snapshots, rollback, and reward idempotency remain. Persistence schema v4 is unchanged.
+
+`FixedWorldDrop` and `WorldEquipmentPickup` remain in namespace `DiceFree.Items` while physically owned by Application. This is deliberate: namespace expresses item feature vocabulary and assembly ownership enforces dependency direction; renaming would create needless type/serialization churn.
+
+The local `InteractionRegistry` remains instance-owned. Existing authored targets get one startup compatibility bootstrap, never an input-time scan. Dynamic world-content factories must explicitly register/unregister root targets; child contextual actions are not catalog targets. Explicit unregister detaches the target; ordinary disable removes membership but preserves its binding for re-enable. Click and keyboard continue to query the same catalog.
+
+Compatibility static state intentionally remains: `CombatActor.All`, Defeat/Area/Conversation typed fact streams, `TravelSurface.Active`, and HUD pointer widget state. SubsystemRegistration resets session state; lifecycle handlers unsubscribe/remove disabled entries; destroyed HUD entries are pruned. Disabled actors are unregistered; dead enabled actors remain available for respawn but report not alive and have root colliders disabled until restore. Full instance-owned session/event publishers, actor registry, and authored travel-surface provider remain documented debt.
+
+Source-group Roslyn compilation passed for all ten assemblies, with only existing UAC0009 / FindFirstObjectByType deprecation and tooling warnings. Offline real-manifest inspection and policy self-tests passed. A fresh Unity batch attempt reloaded scripts but failed Licensing Client IPC initialization; `DiceFree.EditorTools.ArchitectureValidation.Run` did not execute. Gameplay/scene/content regressions, Windows build, and standalone Q4-completed/Q5-active reload are therefore pending. No Cornberg scene, NavMesh, gameplay content/balance, or save schema changed. Q1-Q5 behavior is intended to remain unchanged.
+
+**Readiness: case B — structurally reviewed, still blocked on Unity validation. Not ready for integration.** Do not merge this branch into PoC or main until Unity architecture validation, gameplay suites, Windows build, and standalone reload pass and Axel reviews the result.
 ## Previous completed increment: Cornberg Q4
 
 Implemented, validated and pushed on `poc/cornberg` in **39ebbf29c809bf08e7d4bc2626f80714159e85e5** (Add Cornberg Q4 surge alternatives elite and world loot).
@@ -194,11 +182,7 @@ Passed Q4 focused validation/seven reloads, both completion orders, partial+elit
 
 Initial elite placement overlapped the Road Slime and failed Q2; only the new elite moved to the separate clearing, then regressions passed. Scene changes are additive; geography/navigation and existing balance were preserved. See `docs/CORNBERG_Q4.md` on PoC. Issues **#6/#15/#22/#28/#24/#26** now contain SHA, scope, validation and pacing. Nothing merged.
 
-**Current next step:** issue #36 architecture hardening, preserving current
-behavior while enforcing module boundaries. After that, continue MSQ5 only when
-the next-settlement destination and delivery/reward continuation are authored.
-Q4 pacing remains available for Axel's human playtest review and must not be
-changed during architecture work.
+**Current next step:** finish #36 Unity validation on `refactor/architecture-hardening` after Licensing Client IPC is available. The branch is structurally reviewed but not ready for integration. After that review, continue MSQ5 only when the next-settlement destination and delivery/reward continuation are authored. Q4 pacing remains available for Axel's human playtest review and must not be changed during architecture work.
 
 ## Implemented foundation on Cornberg direction
 
@@ -1023,17 +1007,14 @@ Additional settled class/form/equipment rules:
 - ADR-0004 records the class-form/equipment-compatibility decision.
 
 Tracking:
-- **#36** architecture hardening / asmdef dependency enforcement — now the immediate next implementation and explicitly allowed to be a substantial controlled refactor;
+- **#36** architecture hardening / asmdef dependency enforcement — implementation and structural review are pushed; Unity validation is pending Licensing Client IPC and the branch is not yet ready for integration;
 - **#37** first stylized sword / 3D pipeline proof.
 
 # Current recommended next implementation step
 
-**Immediate next implementation step: issue #36 architecture hardening.** Axel explicitly wants the asmdef/dependency-boundary work done now, before MSQ5 or further abilities/resources/classes. Preserve all current behavior while moving toward the architecture contract incrementally and keeping the project green after each boundary.
+**Next step: restore a working licensed Unity batch/editor environment and finish #36 validation.** Run `DiceFree.EditorTools.ArchitectureValidation.Run`, then the required Q1-Q5, item/reward, persistence/recovery, combat/traversal, scene/content, Windows build, and isolated Q4-completed/Q5-active reload checks on `refactor/architecture-hardening`. The branch is structurally reviewed but is **not ready for integration** until those checks pass. Axel/ChatGPT should review the final diff before any integration decision. Do not start #37 sword work during this validation cycle.
 
-Q4 pacing remains pending human review: elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Do not rebalance it during architecture work.
-
-Latest completed gameplay implementation: **69efbe9775d4fe00af5fd66356c1ca4871f6c6fc**, the MSQ5 Runner departure bridge. Q4 remains at **39ebbf29c809bf08e7d4bc2626f80714159e85e5** with its measured route pacing unchanged. Issue #36 architecture hardening is the next engineering priority; do not begin next-settlement content before its destination/delivery design is authored.
-
+Q4 pacing remains unchanged and pending human playtest review: elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Do not rebalance it during architecture finalization.
 # Latest handover update
 
 - **Date:** 2026-10-01
@@ -1078,46 +1059,16 @@ Additional collision rules settled 2026-10-01:
 
 # Post-MSQ5 code review — 2026-10-01
 
-Verified remote implementation:
-- `poc/cornberg` head: `1b574291fafc6b90d2fac1365eb4931f4bd59fa0` (handover sync).
-- MSQ5 feature commit: `69efbe9775d4fe00af5fd66356c1ca4871f6c6fc`.
-- Q5 implementation matches the intended boundary: existing Runner, Q4-only prerequisite, no level gate, future semantic destination, Active endpoint, no reward/schema change, no invented next-town content.
-- `ContextualNpc` is a small explicit ordered-action router and is acceptable as the current interaction seam; preserve behavior through architecture hardening.
-- Q5 validation/docs/issues were pushed and broad regressions/build/reload smokes were reported green.
+Verified implementation state remains `poc/cornberg` `1b574291fafc6b90d2fac1365eb4931f4bd59fa0`. Q5 `quest.cornberg.become-runner` uses the existing `npc.cornberg.runner`, is gated only by completed Q4, and intentionally remains Active at `area.world1.next-settlement-arrival`. It has no reward or level-10 prerequisite. Q4 pacing/content remains unchanged.
 
-Architecture findings from actual PoC code:
-- there are still **zero first-party .asmdef/.asmref files** across 126 first-party C# files;
-- `QuestJournal` directly calls the static Items reward grant boundary;
-- `FixedRewardGrant` directly references concrete `ManifestationPersistence` to defer writes, confirming the known cross-domain persistence dependency;
-- `ManifestationPersistence` directly composes concrete Progression/Quests/World/Items components and owns storage plus runtime composition concerns;
-- `Interactor` still discovers world targets with `FindObjectsByType<InteractionTarget>()` on interact input;
-- `CombatActor` keeps a static global actor registry and computes combat state by scanning actors/actions;
-- current Editor setup/validation scripts remain in the same predefined Unity assembly because no asmdefs exist.
+The earlier issue #36 review found the validator/UI policy contradiction and requested the Foundation interface split. Both findings are fixed on the separate `refactor/architecture-hardening` branch described above. The finalization status and validation boundary are in the following handover section. Q1-Q5 gameplay and save schema v4 were preserved; no merge has occurred.
+# Architecture branch finalization — 2026-10-01
 
-These are exactly the debts #36 must address deliberately. Do not rewrite MSQ5 behavior while doing so.
-
-Immediate next engineering step remains **#36 architecture hardening**. Use a dedicated refactor branch from the verified PoC head, migrate in reviewable stages, and do not merge to main.
-
-
-# Architecture branch review finding — validator fix required
-
-Reviewed pushed `refactor/architecture-hardening` at `090e5016082987d67b1d1a4ec968b56043e00057`.
-
-The assembly split itself is broadly coherent and the dependency cycle removals/persistence contract are useful, but **do not integrate yet**.
-
-Concrete blocker found in `DiceFree.EditorTools.ArchitectureValidation.ValidateDefinitions`:
-- the allowed dependency table permits `DiceFree.Application.Runtime -> DiceFree.UI.Runtime`;
-- the actual Application asmdef uses that edge;
-- a separate blanket condition rejects any non-Foundation runtime assembly that references UI;
-- therefore the real Editor architecture validator should fail on the intended graph once it can run.
-
-The prior offline manifest check does not replace executing/fixing the actual validator.
-
-Required next step on the same refactor branch:
-1. fix the validator policy contradiction;
-2. split unrelated `ITraversalUiState` out of `IDurableMutationCoordinator.cs` to keep Foundation contracts cohesive;
-3. re-audit asmdef/asmref ownership;
-4. run the real architecture validator and full Unity regressions/build/standalone reload once the editor/project lock/licensing environment allows;
-5. only then review for integration into `poc/cornberg`.
-
-Static actor/fact/travel-surface registries and the one-time InteractionRegistry scene bootstrap remain documented compatibility debt, not hidden completion claims.
+- Final review-fix branch: `refactor/architecture-hardening`, `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
+- Review-fix commits: `25d50e94ff0806a18d3824fc0970c732fb7d9b40`, `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
+- Validator contradiction fixed; pure policy self-tests and offline real-manifest/source-ownership inspection passed (10 assemblies, 4 asmrefs, 132/132 sources owned, no cycles or forbidden first-party edges).
+- Foundation contracts split; reward/persistence decoupling and transaction semantics retained; interaction registration lifecycle documented and explicit for dynamic factories; remaining static session compatibility seams remain documented.
+- Source groups compile with existing warnings. Unity architecture validator and gameplay suites did not execute because Licensing Client IPC was refused. Windows build and standalone Q4-completed/Q5-active reload are pending.
+- Scene/NavMesh, Q1-Q5 behavior/content, authored balance, and schema v4 are unchanged.
+- **Readiness B:** structurally reviewed but not Unity-green and not ready for integration. Nothing merged.
+- **Next:** obtain working Unity licensing, run the full requested validation, then request Axel's review. Do not begin #37 before this cycle is complete.
