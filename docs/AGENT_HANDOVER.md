@@ -146,7 +146,7 @@ Review commits:
 - `25d50e94ff0806a18d3824fc0970c732fb7d9b40` — centralize/fix dependency policy and split Foundation contracts.
 - `b3085bd26ee0441e254ac019e284ae57fa67bf44` — finalize architecture review and dynamic interaction registration contract.
 
-Final pushed refactor SHA: `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
+Final implementation commit before handover-only sync: `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
 
 The validator defect is fixed: all first-party edge decisions now use one `Allowed` policy. This explicitly accepts Application -> UI/Persistence and Editor -> runtime while rejecting domain -> UI/Persistence/Application, runtime -> Editor, and all other unlisted first-party edges. Pure policy self-tests pass for the allowed and forbidden examples, A -> B -> A cycle detection, missing source ownership, and an invalid asmref target. The self-test helper is shared by the actual validator and was executed separately in an isolated .NET harness.
 
@@ -1064,7 +1064,7 @@ Verified implementation state remains `poc/cornberg` `1b574291fafc6b90d2fac1365e
 The earlier issue #36 review found the validator/UI policy contradiction and requested the Foundation interface split. Both findings are fixed on the separate `refactor/architecture-hardening` branch described above. The finalization status and validation boundary are in the following handover section. Q1-Q5 gameplay and save schema v4 were preserved; no merge has occurred.
 # Architecture branch finalization — 2026-10-01
 
-- Final review-fix branch: `refactor/architecture-hardening`, `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
+- Finalization implementation commit on `refactor/architecture-hardening` (before handover-only sync): `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
 - Review-fix commits: `25d50e94ff0806a18d3824fc0970c732fb7d9b40`, `b3085bd26ee0441e254ac019e284ae57fa67bf44`.
 - Validator contradiction fixed; pure policy self-tests and offline real-manifest/source-ownership inspection passed (10 assemblies, 4 asmrefs, 132/132 sources owned, no cycles or forbidden first-party edges).
 - Foundation contracts split; reward/persistence decoupling and transaction semantics retained; interaction registration lifecycle documented and explicit for dynamic factories; remaining static session compatibility seams remain documented.
