@@ -247,6 +247,27 @@ A descendant Way may fully redefine the body/species/form again. Visual inherita
 
 Body form can also carry authored gameplay footprint/collision data. Different class forms may use different hitbox/agent dimensions rather than treating size as presentation-only.
 
+Attack/basic-attack/ability reach remains separately authored and is not automatically derived from body size.
+
+Required world progression must remain accessible to every intended playable form. Large forms can use authored navigation/clearance forgiveness at bottlenecks rather than being locked out because of their footprint.
+
+### Equipment permission inheritance
+
+A descendant Way inherits its parent's allowed equipment/form-family permissions by default.
+
+A descendant may:
+- add new equipment families;
+- explicitly remove/restrict inherited families when its body/class identity changes;
+- override specific compatibility where an inherited appearance no longer fits.
+
+This mirrors visual-appearance inheritance: lineage compatibility is the default, explicit divergence is the exception.
+
+### Optional transformation presentation
+
+An advancement may optionally define a visual transformation presentation.
+
+The class/manifestation fork is authoritative; transformation VFX/animation are presentation layered on top and may be simple, bespoke, or absent.
+
 Weapon categories are created according to actual class needs rather than predefining every possible weapon.
 
 ## Fixed kits and advancement
