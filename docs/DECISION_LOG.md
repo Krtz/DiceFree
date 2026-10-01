@@ -3262,3 +3262,17 @@ Tentative examples, not locked:
 
 **Decision:** Way transformation presentation is optional per advancement. It may be bespoke, simple, or absent; gameplay advancement state does not depend on the effect.
 
+## 2026-10-01 — Body blocking, advancement gear preservation, and baseline exposure
+
+**Decision:** Larger class-form hitboxes are real combat volumes. Where enemy/projectile hit logic uses spatial collision/overlap, larger forms can be easier to hit.
+
+**Decision:** Player characters physically block one another.
+
+**Decision:** Enemies physically block players. There is no generic anti-stuck/anti-box-in escape rule; being surrounded is intentional positioning pressure and the player must fight/use authored tools to escape.
+
+**Decision:** This does not remove navigation forgiveness for required world routes. Doorway/route accessibility and combat body blocking are separate concerns.
+
+**Decision:** When advancement makes inherited equipped gear incompatible, preserve it atomically: move to the child inventory first, then the Echo-wide bank if inventory lacks room. If neither can safely retain all displaced items, abort advancement before mutation. Never destroy/drop gear because of a transformation.
+
+**Decision:** Empty equipment slots support both authored default clothing/armor and intentionally exposed body, chosen per class/form and slot.
+
