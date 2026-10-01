@@ -3224,3 +3224,17 @@ Tentative examples, not locked:
 
 **Decision:** Architecture hardening issue #36 should happen **immediately**, before MSQ5 and before further growth in abilities/resources/classes.
 
+## 2026-10-01 — Fixed class body presentations and multi-slot equipment
+
+**Decision:** Each class/Way has one authored body/sex presentation. A class may be visibly male, visibly female or androgynous. DiceFree does not require male/female variants of every class.
+
+**Decision:** As class lineages advance and specialize, their models should generally become increasingly distinct in the direction of the class fantasy.
+
+**Decision:** Equipment appearance does not automatically resize/remesh/morph itself across incompatible body forms. Gear remains visually authored at its intended proportions; class/form compatibility and restrictions determine who can equip/use it. Descendant access is controlled through ordinary compatibility/inheritance data.
+
+**Decision:** All playable forms retain the same semantic eleven equipment slots, including radical body plans.
+
+**Decision:** Equipment may occupy multiple slots. A two-handed weapon occupies **Main Hand + Off Hand**. Implement occupied slots as data rather than scattered two-handed special cases.
+
+**Decision:** Architecture hardening #36 is authorized as a substantial controlled refactor now, provided behavior remains equivalent, the migration is incremental/inspectable, and validation stays green.
+
