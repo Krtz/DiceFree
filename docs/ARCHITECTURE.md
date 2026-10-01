@@ -306,6 +306,8 @@ The long-term character presentation seam must be able to resolve a class/form p
 - rig/animator family;
 - semantic attachment/socket map;
 - equipment-appearance compatibility;
+- baseline per-slot visual presentation;
+- authored gameplay collision/selection/navigation footprint;
 - animation set/overrides;
 - body-specific presentation offsets;
 - future form-specific locomotion when genuinely necessary.
@@ -319,6 +321,8 @@ Equipment may occupy more than one semantic slot. The canonical early example is
 
 Model this as authored occupied-slot requirements rather than hard-coding "two-handed" checks throughout combat/UI/inventory.
 
+Visible wearable equipment normally replaces the form's baseline presentation for its occupied visible slot(s); empty slots fall back to the class form's baseline appearance.
+
 An equipment appearance does not automatically reshape itself for every body form. Compatibility is explicit data.
 
 Default lineage rule: an appearance authored for a class/form is compatible with that form and its descendants unless a descendant explicitly overrides compatibility because its body plan diverges. Unrelated forms do not silently inherit it.
@@ -329,11 +333,13 @@ Do not let gameplay systems query literal bone names.
 
 Use semantic attachment concepts which a rig/form adapter maps to concrete transforms.
 
-Rig reuse is encouraged for compatible humanoids, but architecture must permit:
-- Wood Elf and High Elf forms;
+Rig reuse is encouraged for compatible forms, but architecture must permit:
+- compatible Human / Wood Elf / High Elf-like forms sharing a humanoid rig family when practical;
 - different-sized humanoids;
-- Orc-like forms;
-- eventual non-biped forms such as a possible Centaur class.
+- separate Orc-like rig families when proportions/animation require it;
+- eventual non-biped forms such as a possible Centaur class with a different rig family.
+
+A descendant Way may switch to another form/rig family entirely. Parent form identity does not constrain all descendants permanently.
 
 A non-human class should not require cloning the combat, inventory, quest or persistence engines.
 
