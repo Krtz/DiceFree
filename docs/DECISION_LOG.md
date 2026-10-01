@@ -3276,3 +3276,17 @@ Tentative examples, not locked:
 
 **Decision:** Empty equipment slots support both authored default clothing/armor and intentionally exposed body, chosen per class/form and slot.
 
+## 2026-10-01 — Player blocking, Return ability, friendly projectiles, AoE overlap, and movement
+
+**Decision:** Player-vs-player collision is solid blocking with normal collision sliding. Walking into another player does not push/force-move them.
+
+**Decision:** There is no generic unstuck feature.
+
+**Decision:** DiceFree should instead have an explicit **Return to current revive point** ability/action with a target cooldown of roughly **10 minutes**. It returns to the manifestation's currently registered resurrection point. Cast/combat/interruption/cooldown-persistence details remain open.
+
+**Decision:** Friendly projectiles do not collide with allied player bodies by default.
+
+**Decision:** Ordinary AoE uses gameplay hit-volume overlap: if any qualifying part of the actor's authored hit volume overlaps the AoE, the actor is affected unless that effect explicitly uses another rule.
+
+**Decision:** Movement Speed remains class-authored/stat-derived and is not automatically inferred from body form, species, leg count or physical size.
+
