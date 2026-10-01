@@ -11,7 +11,7 @@ namespace DiceFree.World
         [SerializeField] private ContextualNpc context;
         private InteractionRegistry registry;
         protected virtual void OnEnable() { if (registry != null) registry.Register(this); }
-        protected virtual void OnDisable() { if (registry != null) registry.Unregister(this); }
+        protected virtual void OnDisable() { if (registry != null) registry.UnregisterForLifetime(this); }
         public InteractionTarget WorldTarget => context != null ? context : this;
         public virtual InteractionTarget Resolve(CombatActor actor) => Available(actor) ? this : null;
         public virtual bool Available(CombatActor actor) => isActiveAndEnabled && actor != null && actor.Alive;

@@ -22,6 +22,14 @@ namespace DiceFree.World
 
         public void Unregister(InteractionTarget target)
         {
+            if (target == null) return;
+            targets.Remove(target);
+            target.UnbindRegistry(this);
+        }
+
+        // Lifecycle removal keeps the binding so re-enabling the component restores membership.
+        internal void UnregisterForLifetime(InteractionTarget target)
+        {
             if (target != null) targets.Remove(target);
         }
 

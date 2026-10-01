@@ -369,6 +369,115 @@ the travel-surface catalog remains static with a session reset; these are the
 remaining discovery seams requiring explicit authored providers. They do not
 change current Cornberg movement, anchor selection or interaction behavior.
 
+## Issue #36 finalization review
+
+The review pass started from architecture branch `090e5016082987d67b1d1a4ec968b56043e00057`,
+verified against PoC `1b574291fafc6b90d2fac1365eb4931f4bd59fa0` and authoritative
+setup `f5a1ad999f5047be0326d3224adc7de73cf2ac05`.
+
+The review found and corrected a policy contradiction in
+`ArchitectureValidation.ValidateDefinitions`: an unconditional runtime-to-UI
+check rejected `DiceFree.Application.Runtime -> DiceFree.UI.Runtime`, although
+that edge is intentionally allowed by the target graph and present in the
+Application asmdef. Dependency checks now all use the single `Allowed` policy.
+The independent invariants remain: Editor is Editor-only, runtime asmdefs cannot
+reference UnityEditor, all first-party references must resolve, asmrefs must
+target known assemblies, every source must have explicit ownership, and the
+first-party graph must be acyclic.
+
+The validator also runs focused policy self-tests before inspecting project
+definitions. They cover the intended Application/UI and Application/Persistence
+edges, Quests-to-Items/World, Persistence-to-domain, and Editor-to-runtime
+edges; forbidden Gameplay/Items/World/Quests-to-UI/Persistence/Application edges
+and runtime-to-Editor edges; a synthetic A-to-B-to-A cycle; missing source
+ownership; and an invalid asmref target. The standalone menu command is
+`DiceFree/Validation/Architecture policy self-tests`. The same pure production
+policy helper was compiled and executed in an isolated .NET harness; all policy
+self-tests passed. The Unity menu/execute-method run is still blocked by
+Licensing Client IPC failure (see validation status below).
+
+Foundation was cleaned up: `IDurableMutationCoordinator.cs` now contains only
+the durable mutation contract, and the unchanged `ITraversalUiState` API is in
+its own `ITraversalUiState.cs`. The Foundation assembly has these two focused
+contracts and no higher DiceFree runtime dependency.
+
+The final assembly graph remains the ten explicit assemblies and four asmrefs
+recorded above. Independent file ownership inspection found 130 first-party C#
+files (90 runtime and 40 Editor), all owned by one of those assemblies; no
+Assembly-CSharp escape hatch remains. The actual allowed dependency matrix is
+the `Allowed` table in the Editor validator and the graph earlier in this note.
+The actual graph is acyclic. There are no domain-to-concrete-Persistence,
+domain-to-UI/Application, or runtime-to-Editor edges. `DiceFree.Editor` alone is
+Editor-only. The four asmrefs resolve to the intended Gameplay, UI, and
+Application assemblies.
+
+`FixedWorldDrop` and `WorldEquipmentPickup` are physically Application-owned
+while keeping `namespace DiceFree.Items`. This is intentional: assembly ownership
+enforces dependency direction, while the namespace expresses the stable item
+feature vocabulary used by callers and serialized/project-facing types. Renaming
+them would add type/serialization churn without improving the boundary, so the
+namespace stays unchanged.
+
+Dynamic world-content factories must explicitly call
+`InteractionRegistry.Register(rootTarget)` and `Unregister(rootTarget)` on the
+active local actor's registry. Root targets only are catalog entries; contextual
+child actions are not independently discoverable. Explicit factory unregistration
+detaches the target. Normal component disable removes catalog membership but
+retains its binding, so re-enabling that authored target restores membership.
+The one-time startup bootstrap remains solely for existing saved-scene content;
+neither click nor keyboard input scans the loaded world.
+
+The transaction boundary was rechecked: `QuestJournal` delegates turn-in to
+`FixedRewardGrant`, which consumes `IDurableMutationCoordinator`; concrete
+`ManifestationPersistence` implements that Foundation interface. Reward values
+are validated before mutation, quest completion is marked before reward events
+can re-enter, the synchronous reward scope defers snapshots, and failures restore
+quest/XP/gold/inventory runtime state. Items do not reference concrete
+Persistence. Persistence schema remains v4.
+
+Compatibility statics intentionally remain: `CombatActor.All`, the typed
+`DefeatEvents`, `AreaEvents`, and `ConversationEvents`, `TravelSurface.Active`,
+and HUD pointer-widget state. Their `SubsystemRegistration` hooks clear session
+membership, listeners, or sequence counters; `CombatActor.OnDisable`, target and
+surface lifecycle handlers, and HUD widget unregister/pruning remove disabled
+or destroyed entries. Dead actors remain registered while enabled for respawn,
+but report `Alive == false`, are not hostile/targetable under current actor
+queries, and have root colliders disabled; restore re-enables colliders. Actor
+registration rejects duplicates. Full instance-owned session/event registries
+remain documented follow-up debt; they were not needed to fix this review.
+
+### Finalization validation status
+
+* Offline manifest/source inspection: **passed** — 10 first-party assemblies,
+  four valid asmrefs, 132/132 first-party C# ownership (91 runtime and 41
+  Editor-only), no graph cycles, no
+  domain-to-concrete-Persistence/UI/Application edge, no runtime UnityEditor
+  reference. This is not the Unity architecture validator.
+* Source-group Roslyn compilation: **passed** for Foundation, Gameplay, Items,
+  World, Quests, AI, Persistence, UI, Application, and Editor after the new
+  Foundation file was included. Existing UAC0009 and Unity FindFirstObjectByType
+  obsolescence warnings remain. Two optional package metadata paths referenced
+  by the temporary Editor response file were absent; filtering those absent
+  external refs allowed the Editor source group to compile. This is not a Unity
+  import/build.
+* Unity `DiceFree.EditorTools.ArchitectureValidation.Run`: **blocked / not
+  executed**. A fresh batch process reloaded scripts, then failed to connect to
+  `LicenseClient-Axel` and hung during licensing initialization. Only the batch
+  process launched for this check was stopped; no user Editor process was
+  terminated. The policy self-tests compile, but their in-Unity execution is
+  pending.
+* Gameplay regressions, scene/Missing Script/content checks, Windows build, and
+  standalone Q4-completed/Q5-active reload: **not run**, because they depend on
+  Unity and the licensing block remains. No claim of Unity-green or integration
+  readiness is made.
+* No gameplay definitions, Q1-Q5 state/content, scene geography, NavMesh, or save
+  schema changed in this review. The interaction registry lifecycle binding
+  behavior was clarified without changing authored interaction selection.
+
+Remaining architecture debt is the explicitly resettable static compatibility
+state above, the one-time scene-target bootstrap, `TravelSurface.Active`, and
+authored anchor/travel-surface providers. No global service locator was added.
+
 At this stage the project has 130 first-party C# files: 90 runtime files and 40
 Editor-only files. All have `.asmdef`/`.asmref` ownership. Runtime ownership is
 Foundation (two low-level contracts), Gameplay (Combat, motor and Progression), Items,
