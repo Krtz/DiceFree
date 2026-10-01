@@ -929,7 +929,7 @@ Additional settled class/form/equipment rules:
 - each Way has **one authored body/sex presentation**: visibly male, visibly female or androgynous;
 - no requirement for male/female variants of every class;
 - forms generally become progressively more class-specific/distinct at later tiers;
-- equipment visuals do **not** auto-fit/morph across incompatible forms; use explicit class/form-family compatibility;
+- equipment visuals do **not** auto-fit/morph across incompatible forms; by default an appearance is compatible with its authored class/form **and descendants**, with explicit descendant overrides allowed;
 - all forms keep the same 11 semantic equipment slots;
 - items may occupy multiple slots; two-handed weapons occupy Main Hand + Off Hand;
 - use a general occupied-slot data model rather than scattered two-handed checks;
