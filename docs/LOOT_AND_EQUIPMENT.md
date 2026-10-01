@@ -564,8 +564,9 @@ The same visual mesh should keep its designed proportions.
 Compatibility/restriction data decides which Ways/forms can equip/use that item or appearance.
 
 Default lineage rule:
-- equipment authored for a class/form is usable by that class **and its descendants**;
-- descendants can explicitly opt out/override when a later transformation makes the appearance physically inappropriate;
+- equipment authored/allowed for a class/form is usable by that class **and its descendants**;
+- descendants inherit the parent's equipment-family permissions by default;
+- descendants may add permissions or explicitly opt out/override inherited permissions when a later transformation/class identity requires it;
 - unrelated lineages do not inherit compatibility automatically.
 
 Examples:
@@ -578,6 +579,13 @@ Prefer class/form-family compatibility tags and explicit exceptions over runtime
 ## Wearable visual replacement
 
 For visible armor slots, the equipped item's authored appearance normally **replaces** the class form's baseline visual for that slot rather than being universally layered on top.
+
+Layering convention:
+- Chest replaces baseline torso/chest;
+- Head, Hands, Legs and Feet replace their corresponding baseline presentation;
+- Shoulders layer independently over the current Chest;
+- Back layers independently over the current torso/Chest;
+- weapons/offhands remain independent equipped presentation.
 
 The class/form provides the underlying body and default/baseline presentation for empty slots.
 
