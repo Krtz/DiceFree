@@ -608,3 +608,57 @@ does not pre-create domain abstractions for the future forms, weapons, summons,
 Return ability, multiplayer, banks, dungeons, achievements or class tree. The
 refactor must leave those designs possible, but the audit does not make them
 current consumers.
+
+## SerializeReference assembly migration (2026-10-01)
+
+The assembly-boundary refactor moved the polymorphic `DiceFree.AI.AutoAggroPolicy`
+type from `Assembly-CSharp` to `DiceFree.AI.Runtime`. Unity persists the assembly,
+namespace and class of a `[SerializeReference]` object, so loading the old records
+without an explicit compatibility mapping produced missing managed references.
+
+| Old assembly | Type | New assembly | Affected persisted records | Migration method |
+| --- | --- | --- | --- | --- |
+| `Assembly-CSharp` | `DiceFree.AI.AutoAggroPolicy` | `DiceFree.AI.Runtime` | `Elite Forest Slime variant.asset` rid `6556558292968538112`; Cornberg Crop Slime `AggroBehaviour` rid `6556558292968538114`; Cornberg Elite Slime prefab override rid `6556558292968538113` | Unity `MovedFrom` compatibility on the moved type |
+
+Repository audit found three `[SerializeReference]` fields: the archetype and
+variant definitions plus `AggroBehaviour`. The only text-serialized
+managed-reference type record whose assembly still named `Assembly-CSharp` was
+`AutoAggroPolicy`, at the three records above. No other first-party managed
+reference type was moved by the asmdef cut.
+
+`AutoAggroPolicy` now declares its former identity with Unity's
+`MovedFrom(true, "DiceFree.AI", "Assembly-CSharp", "AutoAggroPolicy")` mapping.
+This lets Unity deserialize the original records without clearing/replacing them;
+the validator verifies the exact reference IDs and the authored values
+`alwaysAutoAggro == false` and `trivialLevelGap == 10`. The compatibility mapping
+must remain while any first-party or player-authored legacy record may exist.
+
+`ManagedReferenceValidation` is an Editor-only, fail-closed validation owner. It
+scans first-party ScriptableObjects, prefab components and scene components via
+`SerializationUtility.HasManagedReferencesWithMissingTypes` and reports the asset
+path, host, reference ID, missing assembly, namespace and class. It intentionally
+never calls either missing-reference clearing API. `ArchitectureValidation.Run`
+now invokes it; its standalone menu/execute entry is
+`DiceFree.EditorTools.ManagedReferenceValidation.Run`.
+
+Cornberg now deliberately contains exactly one `InteractionRegistry` on the
+existing `Echo - traversal placeholder` GameObject that already owns `Interactor`.
+The scene diff is thirteen added serialization lines only: one component-list
+entry and the component record with the existing `InteractionRegistry` MonoScript
+GUID. No transform, object, component removal, NavMesh, quest/item, or gameplay
+data changed.
+
+Unity 6000.6.3f1 executed both the real architecture command and the dedicated
+managed-reference command successfully. The architecture command logged
+`DICEFRE_ARCHITECTURE_OK`; the dedicated command logged
+`DICEFREE_MANAGED_REFERENCE_OK`. Cornberg loaded during both scans with no
+implicit `Creating missing InteractionRegistry` warning and no missing
+managed-reference error. The existing C# deprecation warnings remain unrelated.
+
+The broader asynchronous Q4/Q5/traversal suite was started with fresh isolated
+profiles. Trivial aggro reached its real `TRIVIAL_AGGRO_PLAYMODE_OK` marker; Q4
+reached all seven `SURGE_CHECKPOINT_OK` checkpoints. Unity then recompiled the
+unrelated, locally modified AI-package graph and interrupted the legacy harness
+before its final markers. Those package/project-setting edits are deliberately
+not part of this migration and were not modified or staged. Re-run the full suite
+from a settled project package state before integration review.
