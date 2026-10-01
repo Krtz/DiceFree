@@ -26,6 +26,8 @@ namespace DiceFree.Combat
     {
         private static long sequence;
         public static event Action<ActorDefeated> Reported;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetSessionLifetime() { sequence = 0; Reported = null; }
         internal static void Report(CombatActor victim, CombatActor killer, CombatActor owner) =>
             Reported?.Invoke(new ActorDefeated(++sequence, victim, killer, owner));
     }

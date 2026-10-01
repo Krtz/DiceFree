@@ -1,3 +1,4 @@
+using System;
 using DiceFree.Combat;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace DiceFree.World
     public sealed class RespawnAtAnchor : MonoBehaviour
     {
         [SerializeField] private Transform anchor;
+        [SerializeField] private ResurrectionAnchor[] registeredAnchors = Array.Empty<ResurrectionAnchor>();
         [SerializeField, Range(0.01f, 1)] private float restoredFraction = 0.5f;
         [SerializeField, Min(0)] private float delay = 1.5f;
         private CombatActor actor;
@@ -19,8 +21,10 @@ namespace DiceFree.World
         public bool LoadAtAnchor(string id)
         {
             var destination = fallbackAnchor; // Authored Cornberg anchor remains the fallback after selection.
-            foreach (var candidate in FindObjectsByType<ResurrectionAnchor>())
-                if (candidate.StableId == id) { destination = candidate.transform; break; }
+            var currentAnchor = anchor != null ? anchor.GetComponent<ResurrectionAnchor>() : null;
+            if (currentAnchor != null && currentAnchor.StableId == id) destination = currentAnchor.transform;
+            foreach (var candidate in registeredAnchors ?? Array.Empty<ResurrectionAnchor>())
+                if (candidate != null && candidate.StableId == id) { destination = candidate.transform; break; }
             if (destination == null || !actor.Motor.Teleport(destination.position))
             {
                 destination = fallbackAnchor;
@@ -45,5 +49,6 @@ namespace DiceFree.World
             return true;
         }
         public void Configure(Transform value) => anchor = value;
+        public void ConfigureRegisteredAnchors(params ResurrectionAnchor[] values) => registeredAnchors = values ?? Array.Empty<ResurrectionAnchor>();
     }
 }

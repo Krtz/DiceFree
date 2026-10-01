@@ -3,9 +3,11 @@
 **Branch:** `refactor/architecture-hardening`  
 **Audit base:** `poc/cornberg` `1b574291fafc6b90d2fac1365eb4931f4bd59fa0`  
 **Design contract:** `setup/unity-project` `db9bbec76ae7b42f7bbed06b952feeab481aef9b`  
-**Status:** source audit and migration plan; runtime has not yet been changed.
+**Status:** audit is complete; explicit assembly ownership and the durable
+mutation boundary are implemented. Registry/event lifetime hardening is partial;
+full Unity validation remains blocked by Editor licensing initialization.
 
-This audit was made against the actual PoC source and serialized project at the
+The baseline inventory below was made against the actual PoC source and serialized project at the
 base SHA above. The canonical architecture/design documents and ADRs in this
 branch are synchronized from the verified setup branch. No gameplay implementation
 or scene content was copied from setup.
@@ -129,38 +131,48 @@ Runtime mutable global/session state found:
 
 | State | Current use | Hardening decision |
 | --- | --- | --- |
-| `CombatActor.All` | awareness, targeting, area checks and validation | replace with an instance-owned actor registry with explicit register/unregister and test/session reset |
-| `DefeatEvents.Reported` | kill credit, quest credit, fixed world drops | replace with typed session-scoped defeat facts |
-| `AreaEvents.Entered` | quest area objectives | replace with typed session-scoped area facts |
-| `ConversationEvents.Completed` | story/TalkTo progression | replace with typed session-scoped conversation facts |
-| `TravelSurface.Active` | surface detection | replace with an authored World registry queried by the actor's `SurfaceTravel` component; duplicate entries must not accumulate |
-| `HudPointerBlocker` static widget list | input suppression over HUD | make the UI lifetime explicit and instance-owned; reset when UI/session closes |
-| `DefeatEvents`, `AreaEvents`, `ConversationEvents` static sequences | transient fact identity | move sequence allocation into the session-scoped fact owner so a new session/test has deterministic lifetime |
+| `CombatActor.All` | awareness, targeting, area checks and validation | remains a static compatibility registry; duplicate-safe registration and subsystem reset prevent cross-session leakage; conversion to explicit session ownership remains debt |
+| `DefeatEvents.Reported` | kill credit, quest credit, fixed world drops | remains a typed static fact stream; subscriber/sequence state resets at subsystem registration and listeners unsubscribe on disable |
+| `AreaEvents.Entered` | quest area objectives | remains a typed static fact stream; sequence/subscribers reset at subsystem registration |
+| `ConversationEvents.Completed` | story/TalkTo progression | remains a typed static fact stream; sequence/subscribers reset at subsystem registration |
+| `TravelSurface.Active` | surface detection | remains a duplicate-safe static registry with subsystem reset; explicit authored provider remains debt |
+| `HudPointerBlocker` static widget list | input suppression over HUD | duplicate-safe widget membership, dead-widget pruning and subsystem reset; instance ownership remains future cleanup |
+| `DefeatEvents`, `AreaEvents`, `ConversationEvents` static sequences | transient fact identity | reset at subsystem registration; moving sequence allocation into an explicit session owner remains future work |
 
-The three fact streams are separate typed concepts, not a generic global event bag.
-Use a small session-scoped owner/subscription boundary. It must unsubscribe on
-disable/dispose and reset when a play session ends, so Enter Play Mode without
-domain reload and repeated tests cannot retain listeners or stale actors. Facts
-remain semantic and retain stable actor/content/owner attribution.
+The three fact streams remain separate typed concepts, not a generic global event
+bag. They reset delegates and sequence identity at `SubsystemRegistration`, and
+subscribers use OnEnable/OnDisable pairing. This contains Enter Play Mode without
+domain reload and repeated-test leakage. Explicit session-owned event publishers
+remain a follow-up once local session composition exists; facts remain typed and
+retain stable actor/content/owner attribution.
 
 ## Discovery and `Find*` audit
 
 Runtime service-discovery calls found:
 
-* `World.Interactor` scans every `InteractionTarget` on each input request.
-  Replace this hot-path scan with an explicit instance-owned interaction registry.
-  Contextual NPC child actions remain actions, not separately registered world
-  targets; pointer and keyboard requests resolve through the same target and
-  authored order.
-* `World.RespawnAtAnchor` scans for resurrection anchors when resolving a spawn.
-  Replace with an anchor registry or authored provider with explicit lifetime.
-* `World.SurfaceTravel` scans the global active travel-surface list. Replace the
-  global list with a World-owned registry and retain per-surface source identity.
+* `World.Interactor` now queries its instance-owned `InteractionRegistry`; it
+  never scans the world in response to click or keyboard input. The registry
+  performs one startup compatibility bootstrap for pre-existing saved scenes,
+  then roots register/unregister over component lifetime. A clicked transient
+  target can explicitly join. Contextual NPC child actions remain excluded.
+  Fully authored registry injection is preferable once a scene/session
+  composition root exists.
+* `World.RespawnAtAnchor` resolves against its current serialized anchor plus an
+  authored `registeredAnchors` list; it no longer scans loaded objects. Future
+  anchors are added through that provider.
+* `World.SurfaceTravel` still queries the duplicate-safe static
+  `TravelSurface.Active` registry. It is cleared at subsystem registration; an
+  authored World provider remains debt.
 
 Editor setup/validation uses `Find*` extensively to locate test fixtures and
 scene-authoring targets. Those calls are intentional editor-only tooling, not
 runtime discovery. Keep them in the Editor assembly and make missing/duplicate
 fixtures fail clearly.
+
+The only remaining runtime `Find*` call is the one-time compatibility bootstrap
+inside `InteractionRegistry.RegisterExistingSceneTargets`; it runs when the
+local interaction component becomes enabled and never runs per input. It will be
+removed when all scenes/content factories author or inject their registry.
 
 Other reviewed calls:
 
@@ -298,6 +310,145 @@ Return, encounter, or networking implementation is warranted by this audit.
 
 Each stage is a separate reviewable commit and is compiled in Unity before the
 next assembly depends on it.
+
+## Implementation status at `9f8f10c` and current working stage
+
+The first explicit assembly stage is present: Foundation, Gameplay, Items, World,
+Quests, AI, Persistence, UI, Application and Editor each have an `.asmdef`; the
+Combat/Progression/Characters/Core shared folders use `.asmref` ownership. The
+three moved MonoBehaviour scripts retained their original `.meta` GUIDs:
+`TraversalMotor` is Gameplay; player input is Application; the fixed world-drop
+and pickup bridge is Application. `TraversalOverlay` keeps its old serialized
+field name while consuming a Foundation UI-state interface. No Cornberg scene
+file was edited.
+
+The checked asmdef references currently match the allowed graph above, plus
+external package references for Input System on UI/Application/Editor and URP on
+Editor. `FixedRewardGrant` depends on the Foundation durable-mutation contract,
+and `ManifestationPersistence` implements that contract. The Editor test guard
+passes persistence-disable intent through a process environment flag across
+play-mode domain reload; runtime persistence no longer imports `UnityEditor`.
+
+The new `DiceFree.EditorTools.ArchitectureValidation.Run` menu/execute-method
+entry point reads the actual asmdef/asmref files, checks module reference policy,
+cycles, Editor-only ownership, invalid references, UnityEditor leakage, and
+ownership for every first-party C# file below `Assets/_DiceFree`. It also rejects
+unclassified new first-party assemblies and validates GUID references against
+first-party and package assembly definitions. It has not yet been run inside
+Unity because the installed Licensing Client refuses batch IPC.
+
+The bundled Roslyn compiler successfully compiled the nine runtime source groups
+in dependency order, then the Editor source group against those generated
+assemblies. The only runtime warning was the existing `DEVELOPMENT_BUILD`
+conditional deprecation; the Editor group had existing `FindFirstObjectByType`
+deprecation warnings. This verifies source-level assembly cuts but does not
+replace Unity's import/build/test validation. Actor/fact/surface/UI static state
+and world interaction/anchor discovery remain to be hardened; they are not
+claimed complete by the assembly stage.
+
+The working hardening stage adds session-subsystem reset hooks for the legacy
+static CombatActor list, Defeat/Area/Conversation fact delegates and sequences,
+TravelSurface list, and HUD pointer-blocker widget list. Actor/surface membership
+is duplicate-safe; stale destroyed HUD widgets are removed. These remain static
+compatibility seams, but do not leak delegates, sequence identity, actors,
+surfaces or widgets between Enter Play Mode sessions, including when domain
+reload is disabled. A full instance-owned actor/session fact migration remains
+deferred because editor validation constructs actors outside the authored scene
+and the current runtime has no explicit session composition root to inject. This
+is tracked as remaining debt rather than represented as completed.
+
+`Interactor` now queries an instance-owned `InteractionRegistry`, not a global
+world scan on every input. The registry is attached to the local actor and owns
+root target registration/removal; contextual child actions are excluded. Existing
+saved scenes are bootstrapped once at session start for compatibility, and a
+directly clicked transient target can join that registry. This is a one-time
+composition scan, not a per-interaction scan. A future explicit world/session
+composition root should supply the catalog and dynamic target factories should
+register there directly. `RespawnAtAnchor` still scans for matching anchors, and
+the travel-surface catalog remains static with a session reset; these are the
+remaining discovery seams requiring explicit authored providers. They do not
+change current Cornberg movement, anchor selection or interaction behavior.
+
+At this stage the project has 130 first-party C# files: 90 runtime files and 40
+Editor-only files. All have `.asmdef`/`.asmref` ownership. Runtime ownership is
+Foundation (two low-level contracts), Gameplay (Combat, motor and Progression), Items,
+World, Quests, AI, Persistence, UI and Application. `TraversalMotor` retains its
+MonoScript GUID in Gameplay; input adapters retain theirs in Application. The
+world-drop/pickup bridge is Application-owned to keep the Items assembly from
+depending on World or Persistence. `DiceFree.Editor` is the only assembly with
+`includePlatforms: [Editor]`. Runtime source contains no `UnityEditor` imports.
+
+## Current dependency graph and cycle result
+
+The actual asmdef graph is acyclic and is enforced as:
+
+```mermaid
+graph TD
+  Foundation[Foundation.Runtime]
+  Gameplay[Gameplay.Runtime]
+  Items[Items.Runtime]
+  World[World.Runtime]
+  Quests[Quests.Runtime]
+  AI[AI.Runtime]
+  Persistence[Persistence.Runtime]
+  UI[UI.Runtime]
+  App[Application.Runtime]
+  Editor[Editor]
+  Gameplay --> Foundation
+  Items --> Foundation
+  Items --> Gameplay
+  World --> Foundation
+  World --> Gameplay
+  Quests --> Foundation
+  Quests --> Gameplay
+  Quests --> Items
+  Quests --> World
+  AI --> Foundation
+  AI --> Gameplay
+  Persistence --> Foundation
+  Persistence --> Gameplay
+  Persistence --> Items
+  Persistence --> World
+  Persistence --> Quests
+  UI --> Foundation
+  UI --> Gameplay
+  UI --> Items
+  UI --> World
+  UI --> Quests
+  UI --> AI
+  App --> Foundation
+  App --> Gameplay
+  App --> Items
+  App --> World
+  App --> Quests
+  App --> AI
+  App --> Persistence
+  App --> UI
+  Editor --> App
+  Editor --> Persistence
+  Editor --> UI
+  Editor --> AI
+  Editor --> Quests
+  Editor --> World
+  Editor --> Items
+  Editor --> Gameplay
+  Editor --> Foundation
+```
+
+The pre-refactor source cycles were Combat/Characters, Items/Persistence, and
+Characters/World (with World also depending on Gameplay). The runtime assembly
+cuts remove all three inter-assembly cycles: traversal motor is Gameplay-owned,
+player input is Application-owned, and world-drop/pickup orchestration is
+Application-owned. The remaining CombatActor-to-TraversalMotor reference is
+inside one Gameplay assembly and is an actor/motor relationship, not an assembly
+cycle. No assembly cycle remains.
+
+`QuestJournal -> FixedRewardGrant -> ManifestationPersistence` is now
+`QuestJournal -> FixedRewardGrant -> IDurableMutationCoordinator`; the concrete
+Persistence component implements the Foundation contract. The durable write
+deferral still spans one reward mutation, validates before applying, rolls runtime
+state back on downstream failure, and prevents reward replay. Save v4 and all
+record IDs/migrations are unchanged.
 
 ## Serialized asset risks
 

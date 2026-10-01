@@ -9,6 +9,8 @@ namespace DiceFree.Combat
     {
         private static readonly List<CombatActor> actors = new();
         public static IReadOnlyList<CombatActor> All => actors;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetSessionRegistry() => actors.Clear();
         [SerializeField] private int faction;
         [SerializeField, Min(0.1f)] private float radius = 0.45f;
         public ActorStats Stats { get; private set; }
@@ -37,7 +39,7 @@ namespace DiceFree.Combat
             Stats = GetComponent<ActorStats>(); Health = GetComponent<Health>(); Motor = GetComponent<TraversalMotor>();
         }
         private void Start() => Motor.SetSpeed(Stats.MoveSpeed);
-        private void OnEnable() { actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; Stats.Changed += OnLevel; }
+        private void OnEnable() { if (!actors.Contains(this)) actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; Stats.Changed += OnLevel; }
         private void OnDisable() { actors.Remove(this); Health.Died -= OnDeath; Health.Restored -= OnRestore; Stats.Changed -= OnLevel; }
         private void OnLevel(float previousMaximum) => Motor.SetSpeed(Stats.MoveSpeed);
         private void OnDeath() { Motor.SetMotionAllowed(false); SetColliders(false); }

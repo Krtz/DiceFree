@@ -3,17 +3,21 @@ using UnityEngine;
 
 namespace DiceFree.World
 {
-    [RequireComponent(typeof(CombatActor),typeof(BasicAttack))]
+    [RequireComponent(typeof(CombatActor),typeof(BasicAttack),typeof(InteractionRegistry))]
     public sealed class Interactor : MonoBehaviour
     {
         private CombatActor actor;
         private BasicAttack attack;
+        private InteractionRegistry registry;
         private InteractionTarget pending;
         public InteractionTarget Active { get; private set; }
         private void Awake()
         {
             actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>();
+            registry = GetComponent<InteractionRegistry>();
+            if (registry == null) registry = gameObject.AddComponent<InteractionRegistry>();
         }
+        private void OnEnable() { if (registry != null) registry.RegisterExistingSceneTargets(); }
         private void OnDisable() => Cancel();
         private void Update()
         {
@@ -30,6 +34,7 @@ namespace DiceFree.World
         {
             if (!actor.Alive || target == null) return false;
             target = target.WorldTarget;
+            if (!registry.Contains(target)) return false;
             if (!target.Available(actor)) return false;
             attack.Cancel(); Active = null; pending = null;
             if (!target.CanInteract(actor) && !actor.Motor.MoveTo(target.ApproachPosition)) return false;
@@ -38,13 +43,7 @@ namespace DiceFree.World
         public void Cancel() { pending = null; Active = null; }
         public bool InteractNearest()
         {
-            InteractionTarget nearest = null; float distance = float.PositiveInfinity;
-            foreach (var target in FindObjectsByType<InteractionTarget>())
-            {
-                if (target.WorldTarget != target) continue;
-                float d = (target.transform.position - transform.position).sqrMagnitude;
-                if (target.CanInteract(actor) && d < distance) { nearest = target; distance = d; }
-            }
+            var nearest = registry.NearestInRange(actor);
             return nearest != null && Order(nearest);
         }
         public bool ContextInteract(Ray ray)
@@ -52,7 +51,9 @@ namespace DiceFree.World
             if (!Physics.Raycast(ray,out var hit,1500,
                 (1<<8)|(1<<9)|(1<<10)|(1<<11),QueryTriggerInteraction.Ignore)) return false;
             var target = hit.collider.GetComponentInParent<InteractionTarget>();
-            return target != null && Order(target);
+            if (target == null) return false;
+            registry.Register(target.WorldTarget); // Explicitly clicked transient targets join this session catalog.
+            return Order(target);
         }
     }
 }

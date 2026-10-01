@@ -17,6 +17,8 @@ namespace DiceFree.World
     {
         private static long sequence;
         public static event Action<ConversationCompleted> Completed;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetSessionLifetime() { sequence = 0; Completed = null; }
         internal static void Report(string npc, string conversation, CombatActor actor) =>
             Completed?.Invoke(new ConversationCompleted(++sequence, npc, conversation, actor));
     }

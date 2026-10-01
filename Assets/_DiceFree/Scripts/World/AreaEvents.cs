@@ -17,6 +17,8 @@ namespace DiceFree.World
     {
         private static long sequence;
         public static event Action<AreaEntered> Entered;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetSessionLifetime() { sequence = 0; Entered = null; }
         internal static void Report(string id, CombatActor actor) => Entered?.Invoke(new AreaEntered(++sequence, id, actor));
     }
 }

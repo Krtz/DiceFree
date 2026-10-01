@@ -8,6 +8,8 @@ namespace DiceFree.World
     {
         private static readonly List<TravelSurface> active = new();
         public static IReadOnlyList<TravelSurface> Active => active;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetSessionRegistry() => active.Clear();
         [SerializeField] private string stableId;
         [SerializeField] private TravelSurfaceDefinition definition;
         [SerializeField] private MeshFilter footprint;
@@ -18,7 +20,7 @@ namespace DiceFree.World
         private int[] triangles;
         public string StableId => stableId;
         public TravelSurfaceDefinition Definition => definition;
-        private void OnEnable() { active.Add(this); }
+        private void OnEnable() { if (!active.Contains(this)) active.Add(this); }
         private void OnDisable() { active.Remove(this); }
         public bool Contains(Vector3 worldPosition)
         {

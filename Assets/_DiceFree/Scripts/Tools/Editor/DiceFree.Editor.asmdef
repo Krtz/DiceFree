@@ -11,7 +11,8 @@
     "DiceFree.Persistence.Runtime",
     "DiceFree.UI.Runtime",
     "DiceFree.Application.Runtime",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "Unity.RenderPipelines.Universal.Runtime"
   ],
   "includePlatforms": [
     "Editor"
