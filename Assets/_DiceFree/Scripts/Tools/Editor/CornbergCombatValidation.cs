@@ -30,7 +30,7 @@ namespace DiceFree.EditorTools
         [MenuItem("DiceFree/Validation/Run Cornberg combat loop (exits editor)")]
         public static void Run()
         {
-            SessionState.SetBool("DiceFree.DisablePersistence", true);
+            PersistenceTestGuard.DisableForNextPlay();
             try { CornbergValidation.ValidateNavigation(); SessionState.SetBool(Running,true); EditorApplication.EnterPlaymode(); }
             catch (Exception error) { Debug.LogException(error); EditorApplication.Exit(1); }
         }

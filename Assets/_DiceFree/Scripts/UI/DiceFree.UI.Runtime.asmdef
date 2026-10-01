@@ -1,0 +1,22 @@
+{
+  "name": "DiceFree.UI.Runtime",
+  "rootNamespace": "DiceFree.UI",
+  "references": [
+    "DiceFree.Foundation.Runtime",
+    "DiceFree.Gameplay.Runtime",
+    "DiceFree.Items.Runtime",
+    "DiceFree.World.Runtime",
+    "DiceFree.Quests.Runtime",
+    "DiceFree.AI.Runtime",
+    "Unity.InputSystem"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

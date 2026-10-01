@@ -1,0 +1,19 @@
+{
+  "name": "DiceFree.Quests.Runtime",
+  "rootNamespace": "DiceFree.Quests",
+  "references": [
+    "DiceFree.Foundation.Runtime",
+    "DiceFree.Gameplay.Runtime",
+    "DiceFree.Items.Runtime",
+    "DiceFree.World.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,16 @@
+{
+  "name": "DiceFree.Gameplay.Runtime",
+  "rootNamespace": "DiceFree.Gameplay",
+  "references": [
+    "DiceFree.Foundation.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

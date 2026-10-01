@@ -1,0 +1,27 @@
+{
+  "name": "DiceFree.Editor",
+  "rootNamespace": "DiceFree",
+  "references": [
+    "DiceFree.Foundation.Runtime",
+    "DiceFree.Gameplay.Runtime",
+    "DiceFree.Items.Runtime",
+    "DiceFree.World.Runtime",
+    "DiceFree.Quests.Runtime",
+    "DiceFree.AI.Runtime",
+    "DiceFree.Persistence.Runtime",
+    "DiceFree.UI.Runtime",
+    "DiceFree.Application.Runtime",
+    "Unity.InputSystem"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

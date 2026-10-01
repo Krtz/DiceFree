@@ -34,7 +34,7 @@ namespace DiceFree.EditorTools
         {
             try
             {
-                CornbergValidation.ValidateNavigation(); SessionState.SetBool("DiceFree.DisablePersistence", true);
+                CornbergValidation.ValidateNavigation(); PersistenceTestGuard.DisableForNextPlay();
                 SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
             }
             catch (Exception error) { Debug.LogException(error); EditorApplication.Exit(1); }

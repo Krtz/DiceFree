@@ -81,15 +81,15 @@ boundary leaks are:
 * `CombatActor` uses `TraversalMotor` while the traversal/input folder reaches
   back into Combat. These can stay in one Gameplay assembly; the input adapter's
   World/UI references must leave that assembly.
-* `TraversalMotor` queries World `SurfaceTravel`. Replace this direct dependency
-  with a low-level movement-speed contribution contract so Gameplay does not
-  reference World.
+* `World.SurfaceTravel` subscribes to the Gameplay `TraversalMotor` speed-source
+  refresh callback. This is a valid World-to-Gameplay edge; the motor itself does
+  not depend on World.
 * `Items.FixedRewardGrant -> Persistence.ManifestationPersistence` and
   `Persistence.ManifestationPersistence -> Items` form a concrete infrastructure
   back-reference cycle. This is the highest-priority dependency to remove.
-* `World` consumes Combat actors/health; this is a valid one-way World-to-Gameplay
-  dependency. `World.SurfaceTravel -> Characters.TraversalMotor` is the reverse
-  edge to remove.
+* `World` consumes Combat actors/health and `Characters.TraversalMotor`; these
+  are valid one-way World-to-Gameplay dependencies. The input adapters in
+  `Characters` are the reverse edge to remove because they reference UI and World.
 * `Quests` uses Combat, Progression and World; it must call an item/reward
   contract without making Items depend on Quests or Persistence.
 * `UI` is already a presentation leaf conceptually, but its references are not
@@ -262,12 +262,11 @@ is a leaf and may consume domain snapshot/state contracts, never the reverse.
 
 ### Difference from the documented target
 
-Actual code requires two explicit cuts that the high-level module names do not
-spell out: (1) the player input adapters currently in `Characters` are
+Actual code requires one explicit cut that the high-level module names do not
+spell out: the player input adapters currently in `Characters` are
 composition/presentation glue because they reference UI and World, while the
-motor remains Gameplay; and (2) the movement motor's surface-speed input needs a
-Foundation contract to keep World out of Gameplay. These are ownership refinements,
-not new gameplay abstractions. No class-form, equipment-compatibility, bank,
+motor remains Gameplay. This is an ownership refinement, not a new gameplay
+abstraction. No class-form, equipment-compatibility, bank,
 Return, encounter, or networking implementation is warranted by this audit.
 
 ## Migration stages

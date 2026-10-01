@@ -3,11 +3,12 @@ using UnityEngine.InputSystem;
 using DiceFree.UI;
 using DiceFree.Combat;
 using DiceFree.World;
+using DiceFree.Foundation;
 
 namespace DiceFree.Characters
 {
     [RequireComponent(typeof(TraversalMotor))]
-    public sealed class TraversalInput : MonoBehaviour
+    public sealed class TraversalInput : MonoBehaviour, ITraversalUiState
     {
         public enum ControlMode { Classic, Direct }
         [SerializeField] private Camera worldCamera;
@@ -18,9 +19,10 @@ namespace DiceFree.Characters
         private CombatInput combatInput;
         private Health health;
         private Interactor interactor;
-        private InputAction movement, click, changeMode, stop;
+        private InputAction movement, click, changeMode, stop, interact, closeInteraction;
         public ControlMode Mode => mode;
         public string Feedback { get; private set; } = "Follow the path into Cornberg.";
+        public string ModeLabel => mode == ControlMode.Classic ? "Classic · Right-click ground to move" : "Direct · WASD to move";
 
         private void Awake()
         {
@@ -33,15 +35,17 @@ namespace DiceFree.Characters
             click = new InputAction("Move destination", binding: "<Mouse>/rightButton");
             changeMode = new InputAction("Switch control mode", binding: "<Keyboard>/f6");
             stop = new InputAction("Stop", binding: "<Keyboard>/space");
+            interact = new InputAction("Interact", binding: "<Keyboard>/i");
+            closeInteraction = new InputAction("Close interaction", binding: "<Keyboard>/escape");
         }
 
-        private void OnEnable() { movement.Enable(); click.Enable(); changeMode.Enable(); stop.Enable(); }
+        private void OnEnable() { movement.Enable(); click.Enable(); changeMode.Enable(); stop.Enable(); interact.Enable(); closeInteraction.Enable(); }
         private void OnDisable()
         {
-            movement.Disable(); click.Disable(); changeMode.Disable(); stop.Disable();
+            movement.Disable(); click.Disable(); changeMode.Disable(); stop.Disable(); interact.Disable(); closeInteraction.Disable();
             if (motor != null) motor.Stop();
         }
-        private void OnDestroy() { movement.Dispose(); click.Dispose(); changeMode.Dispose(); stop.Dispose(); }
+        private void OnDestroy() { movement.Dispose(); click.Dispose(); changeMode.Dispose(); stop.Dispose(); interact.Dispose(); closeInteraction.Dispose(); }
         private void OnApplicationFocus(bool focused) { if (!focused) { motor.Stop(); attack?.Cancel(); } }
 
         private void Update()
@@ -55,6 +59,8 @@ namespace DiceFree.Characters
                 Feedback = mode == ControlMode.Classic ? "Right-click the ground to walk." : "WASD moves relative to the camera.";
             }
             if (stop.WasPressedThisFrame()) { motor.Stop(); attack?.Cancel(); interactor?.Cancel(); }
+            if (closeInteraction.WasPressedThisFrame()) interactor?.Cancel();
+            if (interact.WasPressedThisFrame()) interactor?.InteractNearest();
             if (mode == ControlMode.Direct)
             {
                 var input = movement.ReadValue<Vector2>();
@@ -65,7 +71,7 @@ namespace DiceFree.Characters
             if (click.WasPressedThisFrame() && Mouse.current != null &&
                      !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
             {
-                if (interactor != null && interactor.ContextInteract(Mouse.current.position.ReadValue())) return;
+                if (interactor != null && interactor.ContextInteract(worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue()))) return;
                 if (combatInput != null && combatInput.ContextAttack(Mouse.current.position.ReadValue())) { interactor?.Cancel(); return; }
                 if (mode != ControlMode.Classic) return;
                 var ray = worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());

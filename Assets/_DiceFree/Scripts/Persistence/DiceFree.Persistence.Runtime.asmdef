@@ -1,0 +1,20 @@
+{
+  "name": "DiceFree.Persistence.Runtime",
+  "rootNamespace": "DiceFree.Persistence",
+  "references": [
+    "DiceFree.Foundation.Runtime",
+    "DiceFree.Gameplay.Runtime",
+    "DiceFree.Items.Runtime",
+    "DiceFree.World.Runtime",
+    "DiceFree.Quests.Runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

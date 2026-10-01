@@ -128,7 +128,7 @@ namespace DiceFree.EditorTools
             Physics.SyncTransforms();
             Require(Physics.Raycast(camera.ScreenPointToRay(screen), out var clickHit, 1500, (1<<8)|(1<<9)|(1<<10)|(1<<11)), "Runner click collider");
             Debug.Log("DEPARTURE_CLICK_HIT " + clickHit.collider.name);
-            Require(player.GetComponent<Interactor>().ContextInteract(new Vector2(screen.x, screen.y)), "Click ray/approach");
+            Require(player.GetComponent<Interactor>().ContextInteract(camera.ScreenPointToRay(screen)), "Click ray/approach");
             while (player.GetComponent<Interactor>().Active != giver) yield return null;
             Require(giver.Accept(player) && !giver.Accept(player) && State.status == QuestStatus.Active, "Level-nine acceptance/idempotency");
             Require(player.Stats.Level == 9 && player.GetComponent<ExperienceProgression>().CurrentXp == 10 && player.GetComponent<GoldWallet>().Gold == 100 && player.GetComponent<CarriedInventory>().Items.Length == 1,

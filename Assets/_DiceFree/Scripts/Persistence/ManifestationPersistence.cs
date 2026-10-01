@@ -53,9 +53,7 @@ namespace DiceFree.Persistence
             var args = Environment.GetCommandLineArgs();
             int index = Array.IndexOf(args, "-diceFreeSaveRoot");
             if (index < 0 && Application.isBatchMode) yield break;
-#if UNITY_EDITOR
-            if (index < 0 && UnityEditor.SessionState.GetBool("DiceFree.DisablePersistence", false)) yield break;
-#endif
+            if (index < 0 && Environment.GetEnvironmentVariable("DICEFREE_DISABLE_PERSISTENCE") == "1") yield break;
             if (index >= 0 && (index + 1 >= args.Length || !Path.IsPathRooted(args[index + 1])))
             {
                 Debug.LogError("-diceFreeSaveRoot requires an absolute isolated directory; persistence disabled.");
