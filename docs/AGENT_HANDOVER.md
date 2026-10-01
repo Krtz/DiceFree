@@ -916,7 +916,12 @@ Settled:
 - keep one repository for now;
 - no runtime-only Git branch;
 - player/tester builds are release/build artifacts, not repo clones;
-- reconsider a separate art repo only after measured size, permission, LFS or CI pressure.
+- reconsider a separate art repo only after measured size, permission, LFS or CI pressure;
+- first sword should be humble/chunky Cornberg metal, not ornate hero gear;
+- rarity may escalate through geometry/materials/VFX; endgame gear may glow/use particles/trails while keeping combat readable;
+- no baseline weapon-sheathing system; held-all-the-time is acceptable;
+- class forms are not human-only: Tier-2 Ranger = Wood Elf and Tier-2 Wizard = High Elf; Berserker-as-Orc and a Tier-4 Centaur tank remain tentative;
+- character presentation must support multiple rig/form families and even non-biped forms through semantic socket/form adapters.
 
 Do not mass-produce art until the sword proves scale/export/import/pivot/material/prefab validation conventions.
 
@@ -926,9 +931,11 @@ Tracking:
 
 # Current recommended next implementation step
 
-Playtest Q4 and review the measured route pacing before changing balance. The elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Farmer presentation, elite exact tuning and 200 XP/100 gold remain provisional.
+**Immediate next implementation step: issue #36 architecture hardening.** Axel explicitly wants the asmdef/dependency-boundary work done now, before MSQ5 or further abilities/resources/classes. Preserve all current behavior while moving toward the architecture contract incrementally and keeping the project green after each boundary.
 
-Latest completed implementation: **39ebbf29c809bf08e7d4bc2626f80714159e85e5**, Q4 with reusable OR objectives, nearby quest credit, barks, reward integration and FFA shoe pickup. After playtest review, scope the smallest MSQ5/runner departure beat separately. Do not silently start the next town, dungeon, full item framework or mounts.
+Q4 pacing remains pending human review: elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Do not rebalance it during architecture work.
+
+Latest completed gameplay implementation: **39ebbf29c809bf08e7d4bc2626f80714159e85e5**, Q4 with reusable OR objectives, nearby quest credit, barks, reward integration and FFA shoe pickup. MSQ5 waits until architecture hardening is complete enough to safely resume feature growth.
 
 # Latest handover update
 
