@@ -1072,3 +1072,30 @@ The earlier issue #36 review found the validator/UI policy contradiction and req
 - Scene/NavMesh, Q1-Q5 behavior/content, authored balance, and schema v4 are unchanged.
 - **Readiness B:** structurally reviewed but not Unity-green and not ready for integration. Nothing merged.
 - **Next:** obtain working Unity licensing, run the full requested validation, then request Axel's review. Do not begin #37 before this cycle is complete.
+
+
+# Architecture follow-up review — code blockers cleared, Unity validation still pending
+
+Reviewed `refactor/architecture-hardening` at
+`0a9fb6435a3c02b71e0316fe0171bc74c0ce689c`.
+
+The previous validator-policy defect is fixed:
+- dependency policy is centralized in `AssemblyDependencyPolicy`;
+- Application -> UI/Persistence remains explicitly allowed;
+- domain -> UI/Persistence/Application remains forbidden by policy;
+- focused policy self-tests cover intended allowed/forbidden edges, cycles, source ownership and asmref validity;
+- `ITraversalUiState` was split out of `IDurableMutationCoordinator.cs`;
+- InteractionRegistry lifecycle registration/unregistration behavior was clarified and is coherent.
+
+No additional code-level architecture blocker was found in this review.
+
+The branch is still **not ready for integration** solely because Unity-dependent evidence is missing:
+- real in-Unity `ArchitectureValidation.Run`;
+- Q1-Q5 / item / persistence / combat / traversal regression suites;
+- Missing Script/content validation;
+- Windows development build;
+- isolated Q4-completed/Q5-active standalone reload.
+
+The repeated blocker is Unity Licensing Client IPC failure, not a known test failure.
+
+Next Codex cycle should focus on validation/environment recovery only. Do not continue architecture churn unless a real Unity validation run exposes a defect. Do not merge #36 or begin dependent gameplay-system growth before Unity-green evidence and final review.
