@@ -264,8 +264,9 @@ Instead:
 - gameplay items/appearances declare compatible classes, form families or semantic eligibility;
 - a Ranger-compatible hat can be authored at Wood-Elf proportions;
 - a Centaur-compatible hat can be authored for that class/form;
-- descendants may inherit/use compatible equipment according to class/equipment rules;
-- incompatible forms simply cannot equip/use that appearance unless explicitly authored.
+- equipment authored for a class/form family is **compatible with that form and its descendants by default**;
+- a descendant may explicitly narrow/override compatibility where its new body plan makes the inherited appearance unsuitable;
+- unrelated/incompatible forms cannot equip/use that appearance unless explicitly authored.
 
 This preserves deliberate silhouettes and prevents every piece of equipment from becoming a multi-rig content burden.
 
