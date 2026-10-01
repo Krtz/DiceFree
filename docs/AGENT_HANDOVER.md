@@ -114,7 +114,31 @@ Do not prematurely jump to:
 
 # Current implementation status
 
-## Latest completed increment: Cornberg Q4
+## Latest completed increment: MSQ5 Runner departure bridge
+
+Implemented and pushed on `poc/cornberg` in **69efbe9775d4fe00af5fd66356c1ca4871f6c6fc**. Q5 is
+`quest.cornberg.become-runner`; it uses the existing `npc.cornberg.runner` and
+requires only Q4 `quest.cornberg.break-slime-surge` completion. Level 10 is not a
+prerequisite. A reusable `ContextualNpc` provides one authored, deterministic
+interaction target that routes to the currently available story or quest action;
+the preserved Runner Returns conversation remains available in its prior phase.
+
+Q5 becomes Active with the future objective “Travel to the next settlement and
+deliver Cornberg's message,” keyed by `area.world1.next-settlement-arrival`. There
+is no matching Cornberg scene trigger, so it intentionally remains Active. The
+message is represented by quest state; no reward or save-schema change is made.
+No next-settlement lore, Q4 rebalance, mountain blessing, or advancement was
+added. See `docs/CORNBERG_MSQ5.md` on PoC.
+
+Focused Q5 and Runner Returns validation, Q1–Q4, item/equipment/gold, schema v1–v4
+migration/recovery, road speed, trivial aggro, combat/death/Return/well, all 13
+traversal routes in both control modes, legacy/item/dead reload checks, Windows
+development build and two standalone Q4-completed/Q5-active reload smokes passed.
+Q4 pacing remains unchanged (elite: level 9/10 XP; mass route: level 13/30 XP).
+No manual playthrough is claimed; the known editor SearchDatabase #17 remains
+separate.
+
+## Previous completed increment: Cornberg Q4
 
 Implemented, validated and pushed on `poc/cornberg` in **39ebbf29c809bf08e7d4bc2626f80714159e85e5** (Add Cornberg Q4 surge alternatives elite and world loot).
 
@@ -133,7 +157,11 @@ Passed Q4 focused validation/seven reloads, both completion orders, partial+elit
 
 Initial elite placement overlapped the Road Slime and failed Q2; only the new elite moved to the separate clearing, then regressions passed. Scene changes are additive; geography/navigation and existing balance were preserved. See `docs/CORNBERG_Q4.md` on PoC. Issues **#6/#15/#22/#28/#24/#26** now contain SHA, scope, validation and pacing. Nothing merged.
 
-**Current next step:** Axel's Q4 playtest/pacing review, especially the level-13 mass route. MSQ5 is a separate next content increment requiring its own scope; it is not implemented. Dungeon, mounts, networking and mature item/encounter systems remain out of scope.
+**Current next step:** issue #36 architecture hardening, preserving current
+behavior while enforcing module boundaries. After that, continue MSQ5 only when
+the next-settlement destination and delivery/reward continuation are authored.
+Q4 pacing remains available for Axel's human playtest review and must not be
+changed during architecture work.
 
 ## Implemented foundation on Cornberg direction
 
@@ -171,7 +199,10 @@ Passed: focused Q3 with four reload checkpoints, Q1/Q2, combat, all 13 traversal
 
 # Current work in progress
 
-Q1 through Q4, including Runner Returns, are complete on `poc/cornberg`. No implementation work remains in progress for this Q4 cycle. The sections below retain earlier increment history; the Q4 status above supersedes earlier future-work wording.
+Q1 through Q4, Runner Returns and the MSQ5 departure bridge are complete on
+`poc/cornberg`. Q5 is intentionally Active at the current world boundary. The
+sections below retain earlier increment history; the Q5 status above supersedes
+older future-work wording.
 
 Runner Returns landed in `2de1a58703e845e1018bcdd5cfdf3f185f16a916` (`Add Runner Returns and reusable TalkTo story credit`).
 
@@ -960,7 +991,7 @@ Tracking:
 
 Q4 pacing remains pending human review: elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Do not rebalance it during architecture work.
 
-Latest completed gameplay implementation: **39ebbf29c809bf08e7d4bc2626f80714159e85e5**, Q4 with reusable OR objectives, nearby quest credit, barks, reward integration and FFA shoe pickup. MSQ5 waits until architecture hardening is complete enough to safely resume feature growth.
+Latest completed gameplay implementation: **69efbe9775d4fe00af5fd66356c1ca4871f6c6fc**, the MSQ5 Runner departure bridge. Q4 remains at **39ebbf29c809bf08e7d4bc2626f80714159e85e5** with its measured route pacing unchanged. Issue #36 architecture hardening is the next engineering priority; do not begin next-settlement content before its destination/delivery design is authored.
 
 # Latest handover update
 
@@ -981,4 +1012,17 @@ Latest completed gameplay implementation: **39ebbf29c809bf08e7d4bc2626f80714159e
 - **Confirmed road speed:** `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`; +15% provisional, focused/regression/build/two standalone smokes green. Mount work remains unstarted.
 
 - **Confirmed item foundation:** `ba29d5a46f6f126bacb8b5fb5365196f98393423`; originally schema/records v3, now migrated to v4 by Q4.
-- **Confirmed Q4:** `39ebbf29c809bf08e7d4bc2626f80714159e85e5`; focused/regression/build/two standalone reload smokes green. Issues #6/#15/#22/#28/#24/#26 updated. MSQ5 is not implemented.
+- **Confirmed Q4:** `39ebbf29c809bf08e7d4bc2626f80714159e85e5`; focused/regression/build/two standalone reload smokes green. Issues #6/#15/#22/#28/#24/#26 updated. Q4 remains unchanged by MSQ5.
+
+# MSQ5 implementation handover — 2026-10-01
+
+- **Implementation branch/SHA:** `poc/cornberg`, `69efbe9775d4fe00af5fd66356c1ca4871f6c6fc` (Add MSQ5 Runner departure bridge).
+- **Stable IDs:** Q5 `quest.cornberg.become-runner`; existing Runner `npc.cornberg.runner`; unresolved future destination `area.world1.next-settlement-arrival`.
+- **Availability:** Q4 `quest.cornberg.break-slime-surge` Completed. There is no level-10 prerequisite.
+- **Interaction:** the Runner now has one discoverable `ContextualNpc` target with explicit available-action ordering. It preserves Runner Returns before Q4 and selects the Q5 action after Q4 completion; Q5 active conversation has no offer marker.
+- **Endpoint:** Q5 persists as Active because no destination ReachArea exists in Cornberg. It grants no acceptance/completion reward and does not fake arrival. No physical message item is created.
+- **Persistence:** save/manifestation schema v4 is unchanged; five focused Q5 reload checkpoints and two standalone reloads passed. Q4 state/reward and item instance remain exactly once.
+- **Validation/build:** focused Q5 and Runner Returns; Q1-Q4; item/equipment/gold; schema v1-v4 migration/recovery/backups/stale writers; road speed; trivial aggro; combat/death/Return/well; all 13 routes and both controls; legacy/item/dead reloads; Windows development build (172,039,389 bytes); two standalone startup/reload checks passed. No manual playthrough claimed. The known editor SearchDatabase #17 remains separate.
+- **Q4:** unchanged; measured level 9/10 XP via elite, level 13/30 XP via 30-Road-Slime route. No rebalancing.
+- **Issues:** #6/#15/#22 updated with implementation SHA, states, future destination, validation, unchanged Q4 pacing and deferred boundaries.
+- **Next:** issue #36 architecture hardening is the immediate engineering priority recorded in the current design direction. Q5 progression beyond Cornberg still needs the next-settlement destination and delivery/reward authoring; do not invent those details.
