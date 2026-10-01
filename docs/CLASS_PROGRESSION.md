@@ -243,6 +243,10 @@ The visual transformation should generally become more pronounced as the class l
 
 The form is part of the Way's authored identity, not a separate character-creator axis.
 
+A descendant Way may fully redefine the body/species/form again. Visual inheritance is not a promise that every descendant remains the same species as its parent; advancement can transform the Echo again when that is part of the new Way's identity.
+
+Body form can also carry authored gameplay footprint/collision data. Different class forms may use different hitbox/agent dimensions rather than treating size as presentation-only.
+
 Weapon categories are created according to actual class needs rather than predefining every possible weapon.
 
 ## Fixed kits and advancement
