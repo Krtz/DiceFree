@@ -6,12 +6,13 @@ using DiceFree.Progression;
 using DiceFree.Quests;
 using DiceFree.World;
 using DiceFree.Items;
+using DiceFree.Foundation;
 using UnityEngine;
 
 namespace DiceFree.Persistence
 {
     [RequireComponent(typeof(ExperienceProgression), typeof(QuestJournal), typeof(RespawnAtAnchor))]
-    public sealed class ManifestationPersistence : MonoBehaviour
+    public sealed class ManifestationPersistence : MonoBehaviour, IDurableMutationCoordinator
     {
         [SerializeField, Min(0)] private float debounceSeconds = 0.25f;
         private ExperienceProgression xp;
@@ -26,7 +27,7 @@ namespace DiceFree.Persistence
         private bool ready, dirty;
         private int mutationDepth;
         // Synchronous reward mutations publish several model events. Never persist their intermediate state.
-        public IDisposable DeferWrites()
+        public IDisposable DeferDurableWrites()
         {
             mutationDepth++;
             return new WriteScope(this);

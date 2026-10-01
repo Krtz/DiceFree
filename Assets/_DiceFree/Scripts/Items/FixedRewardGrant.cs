@@ -1,5 +1,5 @@
 using System;
-using DiceFree.Persistence;
+using DiceFree.Foundation;
 using DiceFree.Progression;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace DiceFree.Items
             int level = xp.Level, priorXp = xp.CurrentXp;
             long gold = wallet == null ? 0 : wallet.Gold;
             var items = inventory?.Items;
-            using var scope = recipient.GetComponent<ManifestationPersistence>()?.DeferWrites();
+            using var scope = recipient.GetComponent<IDurableMutationCoordinator>()?.DeferDurableWrites();
             try
             {
                 commit(); // Blocks repeated turn-in before any reward event is published.

@@ -314,7 +314,16 @@ is planned.
 
 ## Baseline and final validation plan
 
-Baseline is to be run on the exact audit-base branch before runtime changes:
+Baseline was started on the exact audit-base branch before runtime changes. Unity
+reloaded the existing script assemblies without compiler diagnostics. The batch
+editor then failed to complete its startup because IPC to `LicenseClient-Axel`
+was refused and licensing initialization timed out after about 75 seconds. The
+MSQ5 and other executable harnesses therefore did not run at baseline yet; this
+is an environment blocker, not a test failure. Re-run them once Unity licensing
+is available, and keep the blocked baseline status separate from post-refactor
+results.
+
+The baseline suite to run is:
 
 * Unity project compilation;
 * focused MSQ5 / `ContextualNpc`, Runner Returns, Q1–Q4;
