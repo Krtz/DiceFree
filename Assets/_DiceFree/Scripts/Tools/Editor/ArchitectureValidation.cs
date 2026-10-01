@@ -35,6 +35,7 @@ namespace DiceFree.EditorTools
             string scriptsRoot = Path.GetFullPath("Assets/_DiceFree/Scripts");
             var definitions = LoadDefinitions(scriptsRoot, errors);
             ValidateDefinitions(definitions, errors);
+            ManagedReferenceValidation.Validate(errors);
             ValidateOwnership(scriptsRoot, definitions, errors);
             if (errors.Count > 0)
                 throw new InvalidOperationException("DiceFree architecture validation failed:\n - " + string.Join("\n - ", errors));
