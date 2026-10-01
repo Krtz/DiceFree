@@ -92,6 +92,14 @@ All eligible manifestations in the relevant session/party receive credit regardl
 ### Nearby
 Eligible manifestations within an authored radius receive credit.
 
+Cornberg Q4 is an explicit early use of this policy:
+- eligible nearby party members with Q4 active share credit for qualifying non-crop Slime kills;
+- eligible nearby party members with Q4 active also share the dangerous elite Slime kill;
+- Q4 uses an authored **50-meter** Nearby radius;
+- other quests may use different Nearby radii;
+- 1 Unity world unit = 1 meter;
+- the event/death system must not hard-code Q4 or universal party sharing.
+
 ### Threat participation
 Eligible manifestations must have meaningfully participated in that enemy's combat through the threat/combat-participation model.
 

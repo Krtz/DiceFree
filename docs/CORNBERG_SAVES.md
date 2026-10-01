@@ -1,5 +1,10 @@
 # Cornberg local save slice
 
+Current schema is v3: see [item/equipment/gold persistence](CORNBERG_ITEMS.md).
+The v1-to-v2 section below records the historical migration; supported v1/v2
+records now upgrade to v3. Current Profile Inspector also shows carried gold,
+owned instance/definition IDs, equipment and unresolved item records.
+
 This covers the first two local slices of issue #26, following Q1. The design documents
 were reconciled from `setup/unity-project` through `4d98a69`. Existing Cornberg geography,
 navigation, combat tuning and Q1 remain intact. Two components were added to the

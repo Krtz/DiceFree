@@ -46,7 +46,7 @@ namespace DiceFree.Persistence
             var save = JsonUtility.FromJson<EchoSave>(envelope.payload);
             if (save == null) throw new InvalidDataException("Empty Echo save.");
             // A future schema is not corruption: never roll it back to an older backup or overwrite it.
-            if (save.schemaVersion != 1 && save.schemaVersion != SaveMigrations.CurrentSchema)
+            if (save.schemaVersion < 1 || save.schemaVersion > SaveMigrations.CurrentSchema)
                 throw new NotSupportedException("Unsupported Echo schema " + save.schemaVersion);
             if (!Guid.TryParse(save.userId, out _) || !Guid.TryParse(save.echoId, out _) ||
                 save.revision < 1 || save.sections == null) throw new InvalidDataException("Invalid Echo header.");

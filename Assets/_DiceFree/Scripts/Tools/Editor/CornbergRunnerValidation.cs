@@ -48,10 +48,10 @@ namespace DiceFree.EditorTools
                 records.Add(new QuestProgress { questId = "quest.future-runner-test", definitionVersion = 99, stage = 12, count = 9 });
                 var data = new ManifestationSave { classId = actor.GetComponent<ActorStats>().Definition.stableId,
                     level = 6, xp = 0, anchorId = "anchor.cornberg", quests = records.ToArray() };
-                var save = new EchoSave { revision = 1 }; echoId = save.echoId;
+                var save = new EchoSave { schemaVersion = 2, revision = 1 }; echoId = save.echoId;
                 save.sections.Add(new SaveSection { id = "manifestation:" + data.classId, version = 2, json = JsonUtility.ToJson(data) });
                 save.sections.Add(new SaveSection { id = "future-runner-section", version = 99, json = "{\"keep\":true}" });
-                store.Commit(save); SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
+                SaveMigrationValidation.WriteFixture(store.Path, save); SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
             }
             catch (Exception error) { Debug.LogException(error); EditorApplication.Exit(1); }
         }

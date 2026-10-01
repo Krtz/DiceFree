@@ -430,6 +430,10 @@ Somewhere in the starter forest is World 1's first dungeon.
 
 Theme: **Slimes**.
 
+The Slime dungeon is **side content / a sidequest**, not a required Q4 completion route.
+
+Its Slime kills may still count toward Q4's 30-kill alternative when Q4 is active and those enemies are eligible.
+
 It should be physically discovered through the forest rather than selected from a menu.
 
 The first version can be short.
@@ -769,23 +773,159 @@ Their failure simply confirms the local Slime problem is severe enough to disrup
 
 The village asks the Echo to reduce the Slime problem enough that normal travel can resume.
 
-Current concept: provide multiple valid ways to satisfy the objective, such as:
-- complete the Slime dungeon;
-- kill the dangerous elite Slime;
-- kill a large total number of Slimes (e.g. ~30 total);
-- potentially other equivalent objectives later.
+Q4 has **two equivalent completion paths**:
 
-This is a useful prototype for **multi-path quest completion**.
+1. **Kill the dangerous elite Slime.**
+2. **Kill 30 eligible Slimes after Q4 begins.**
 
-Exact alternatives/counts/reward parity are not locked.
+The Slime dungeon is **not** a Q4 completion path. It is separate side content / a sidequest.
+
+#### Mass-kill path
+
+The 30-kill route:
+- begins counting only after Q4 is active;
+- does **not** count earlier kills retroactively;
+- does **not** count the weakest crop-field Slimes;
+- does count the stronger non-crop Slimes in the starter region;
+- does count eligible Slimes killed inside the Slime dungeon.
+
+Exact eligible content IDs should be authored semantically rather than inferred from display names.
+
+#### Simultaneous alternatives and timing
+
+Both Q4 alternatives are active **at the same time**. The player does not choose/lock a route up front.
+
+The journal should communicate the alternatives as an OR:
+- kill the dangerous elite Slime; **OR**
+- kill 30 eligible Slimes.
+
+Progress toward the 30-kill route can accumulate while the player searches for the elite. Killing the elite after Q4 begins immediately satisfies the Q4 field objective even if the 30-kill count is incomplete.
+
+Neither route is retroactive:
+- Slime kills before Q4 begins do not count toward 30;
+- killing the elite before Q4 begins does not satisfy Q4;
+- because the elite is repeatable/farmable, the player must kill it again after Q4 is active if using that route.
+
+#### Elite guidance and fight style
+
+Q4 should tell the player only that the dangerous elite Slime is **somewhere in the Slime Forest**.
+
+Do not give an exact map coordinate/marker as the default quest instruction unless later playtesting shows discovery is too opaque.
+
+For this first elite, the fight is intentionally a **stat check**, not a mechanics tutorial:
+- no required bespoke phases;
+- no splitting mechanic;
+- no special slime pools;
+- no scripted enrage;
+- no elaborate boss-style telegraphs beyond ordinary readable combat behavior.
+
+Exact level/stats remain balance data for gameplay testing.
+
+#### Elite spawn and respawn
+
+The dangerous elite Slime uses a **fixed deep-forest clearing** rather than a wandering/patrol spawn.
+
+It is repeatable/farmable.
+
+Current respawn time is **7.5 minutes** after defeat.
+
+The 7.5-minute value is an authored Q4/elite rule, but can still be revisited during real gameplay tuning if it creates bad pacing.
+
+Intended difficulty target:
+- approximately **2–3 level-6 players**; or
+- approximately **one level-8–9 player**.
+
+This is a tuning target, not an excuse for player-level scaling. The elite keeps a fixed authored level/stat block.
+
+The elite has a unique farmable shoe drop with:
+- **+1 Physical Defense**;
+- **+1 Magical Defense**;
+- **+1% Movement Speed**.
+
+Drop chance: **20% per elite kill**.
+
+Exact shoe name, item level, rarity and art remain open.
+
+#### Multiplayer / party credit
+
+Q4 uses cooperative nearby credit.
+
+For both routes:
+- eligible nearby party members who currently have Q4 active receive qualifying progress from an eligible party member's kill;
+- this applies to ordinary eligible Slime kills for the 30-kill route;
+- it also applies to the elite Slime kill;
+- each recipient's own Q4 state remains authoritative and must be eligible/active;
+- pre-quest kills still do not count.
+
+Use the reusable **Nearby** quest-credit policy rather than baking party sharing into enemy death logic.
+
+Q4's Nearby credit radius is **50 meters**.
+
+Because 1 Unity world unit = 1 meter, this is a 50-unit world-space radius. It is deliberately generous so a co-op party can spread through a clearing/forest pocket without losing shared quest credit.
+
+#### Turn-in
+
+Satisfying either field route does **not** auto-complete the quest.
+
+Q4 becomes **ready to turn in**, and the player returns to Cornberg to complete it and receive the shared main reward.
+
+Q4 is given/turned in by **a different named Cornberg farmer**, not the weekly Runner and not the original former-swordswoman farmer.
+
+This farmer should already exist as ambient village flavor **before Q4**, saying occasional/random mundane lines as the player walks past. Q4 therefore promotes an already-familiar background villager into a quest role rather than spawning a disposable quest NPC.
+
+Exact farmer name, visual identity and bark lines remain open.
+
+#### Reward parity
+
+Q4's main quest reward is the **same regardless of which completion path is used**.
+
+The chosen route can still produce different incidental rewards:
+- the elite can have its own authored drops/XP;
+- ordinary Slime kills provide their normal drops/XP;
+- dungeon Slimes/dungeon completion can provide the dungeon's own separate rewards.
+
+Completing one Q4 route completes the quest objective; the player does not receive the main Q4 reward twice by later satisfying the other route.
+
+#### Q4 main reward
+
+The shared Q4 turn-in reward is currently:
+- **XP** — exact amount tuned after gameplay testing;
+- **gold** — exact amount tuned after gameplay testing;
+- a guaranteed pair of **gloves with +5% Attack Speed**.
+
+The gloves are an authored quest reward, not a randomized roll.
+
+Exact glove:
+- name;
+- item level;
+- rarity;
+- art;
+- flavor
+
+remain open unless settled elsewhere.
+
+The gloves grant +5% Attack Speed only; no additional gameplay stats.
+
+#### Progression target
+
+Current tuning intent is for a normal fresh Novice to end Q4 around **level 9–10**.
+
+Do not lock an exact Q4 XP payout yet. Final XP/reward values should be tuned from real gameplay pacing tests.
+
+This remains a useful prototype for **multi-path quest completion**.
 
 ### Quest 5 — Become Cornberg's runner
 
-After proving capable enough to handle the local danger, Cornberg asks the Echo to carry the village's news/message to the next settlement.
+The **weekly Runner gives MSQ5**.
+
+After what happened on the blocked road, the Runner is **too scared to attempt the trip to the next town again** and asks the Echo to go instead.
 
 The reason is simple:
-- the normal runner could not get through;
-- the Echo has demonstrated they can.
+- the Runner already failed to get through once because of the Slime surge;
+- that experience frightened them enough that they do not want to try again immediately;
+- the Echo has now demonstrated they can handle the local danger.
+
+The Runner's fear should read as ordinary human self-preservation, not cowardly comic relief unless later dialogue deliberately leans that way.
 
 No larger news hook is required.
 

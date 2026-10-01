@@ -111952,6 +111952,10 @@ GameObject:
   - component: {fileID: 1288724062}
   - component: {fileID: 1288724067}
   - component: {fileID: 1288724068}
+  - component: {fileID: 1288724072}
+  - component: {fileID: 1288724071}
+  - component: {fileID: 1288724070}
+  - component: {fileID: 1288724069}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112250,6 +112254,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515c50a69af42d84f94fa34e68cd4042, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.SurfaceTravel
+--- !u!114 &1288724069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22e66e8e439ee654babdf8cba90f1f91, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.InventoryPanel
+--- !u!114 &1288724070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554c546b81c054d40bb2bc6184a0d2bf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.GoldWallet
+--- !u!114 &1288724071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c252758505f4c86ca88eaeedbb9f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.Equipment
+--- !u!114 &1288724072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3b7dd45b39f054bbe077007a7490be, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.CarriedInventory
+  definitions:
+  - {fileID: 11400000, guid: c121e31e7a7355c4183c9543ddc9d7f3, type: 2}
+  - {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0

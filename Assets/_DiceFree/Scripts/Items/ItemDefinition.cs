@@ -1,0 +1,30 @@
+using System;
+using DiceFree.Combat;
+using UnityEngine;
+
+namespace DiceFree.Items
+{
+    public enum EquipmentSlot { Head, Shoulders, Chest, Hands, Legs, Feet, MainHand, OffHand, Ring, Amulet, Back }
+    [CreateAssetMenu(menuName = "DiceFree/Items/Handcrafted item")]
+    public sealed class ItemDefinition : ScriptableObject
+    {
+        public string stableId, displayName;
+        public EquipmentSlot slot;
+        [Min(1)] public int itemLevel = 1;
+        public string rarityId = "rarity.provisional";
+        public string sourceId;
+        [TextArea] public string flavor;
+        public EquipmentStats stats;
+    }
+    [Serializable] public sealed class ItemInstance
+    {
+        public string instanceId, definitionId;
+        public ItemInstance Copy() => new() { instanceId = instanceId, definitionId = definitionId };
+    }
+    [Serializable] public sealed class EquippedItem
+    {
+        // String preserves future unknown slots inertly without enum reinterpretation.
+        public string slotId, instanceId;
+        public EquippedItem Copy() => new() { slotId = slotId, instanceId = instanceId };
+    }
+}

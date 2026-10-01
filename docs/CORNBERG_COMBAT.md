@@ -236,11 +236,7 @@ The added fixture verifies 137 minus 17% = 113.71; adding 13% penetration produc
 95.9, including repeated resolutions. Removing the reduction leaves 119.19 and
 the underlying reference remains 137 throughout. No intermediate rounding is used.
 
-`ActorStats.Defense(channel)` is the current reference-provider boundary: class
-base plus attribute-derived Defense, because no gear exists. `DefenseMath` accepts
-that reference independently of transient modifiers. **Whether future gear,
-permanent or passive Defense belongs in that reference remains OPEN.** Nothing in
-this slice assigns those future sources membership or implements them.
+`ActorStats.Defense(channel)` now includes class base, attribute-derived and equipped gear Defense. Temporary modifiers remain separate. Other future permanent/passive source membership remains open. See `CORNBERG_ITEMS.md`.
 
 `CriticalRule` is an immutable explicit grant with source ID, rule ID, permission,
 finalized chance/multiplier and integer priority (default 0). It has no global or
@@ -281,7 +277,7 @@ signaling again. DamageResolver owns no RNG. Omitting the context or supplying a
 non-critical context preserves ordinary damage exactly. Fists, Crop/Road Slimes,
 well and regeneration have no authored crit rules; no balance data changes.
 
-Still **OPEN**: underlying Defense membership for future gear/permanent/passive
+Still **OPEN**: underlying Defense membership for future non-equipment permanent/passive
 sources; exact crit-modifier composition; rare explicitly stackable/multiplicative
 crit exceptions; full ability, DoT and healing integration; proc/on-crit framework.
 No such systems, override-placement behavior or save-schema changes are introduced.

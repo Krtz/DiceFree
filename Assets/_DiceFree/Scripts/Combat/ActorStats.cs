@@ -112,16 +112,37 @@ namespace DiceFree.Combat
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
             resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear(); Changed?.Invoke(previous);
         }
-        public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed));
-        public float AttackSpeed => 1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed);
+        private readonly SortedDictionary<string, EquipmentStats> equipment = new(StringComparer.Ordinal);
+        public void SetEquipmentContribution(string sourceId, EquipmentStats value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Equipment source required.");
+            equipment[sourceId] = value; Changed?.Invoke(MaximumHp);
+        }
+        public void RemoveEquipmentContribution(string sourceId)
+        { if (equipment.Remove(sourceId)) Changed?.Invoke(MaximumHp); }
+        private EquipmentStats EquipmentTotal
+        {
+            get
+            {
+                var total = new EquipmentStats();
+                foreach (var value in equipment.Values)
+                {
+                    total.physicalDefense += value.physicalDefense; total.magicalDefense += value.magicalDefense;
+                    total.attackSpeedPercent += value.attackSpeedPercent; total.movementSpeedPercent += value.movementSpeedPercent;
+                }
+                return total;
+            }
+        }
+        public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed)) * (1 + EquipmentTotal.movementSpeedPercent / 100f);
+        public float AttackSpeed => (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed)) * (1 + EquipmentTotal.attackSpeedPercent / 100f);
         public float HealingDone => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingDone);
         public float HealingReceived => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingReceived);
-        // Current underlying-reference provider: class base + attributes only.
-        // Gear/permanent/passive membership is OPEN; decide here later, not in DefenseMath.
+        // Underlying reference includes class, attributes and equipped gear.
+        // Other permanent/passive membership remains open; keep that policy here.
         // Temporary Defense modifiers must never be folded into this reference.
         public float Defense(DamageChannel channel) => channel == DamageChannel.Physical
-            ? definition.physicalDefense + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
-            : definition.magicalDefense + Attributes.intelligence * SecondaryCoefficient(SecondaryStat.MagicalDefense);
+            ? EquipmentTotal.physicalDefense + definition.physicalDefense + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
+            : EquipmentTotal.magicalDefense + definition.magicalDefense + Attributes.intelligence * SecondaryCoefficient(SecondaryStat.MagicalDefense);
         public float RawResistance(ElementDefinition element)
         {
             if (element == null) return 0;

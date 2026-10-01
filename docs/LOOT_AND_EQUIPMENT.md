@@ -483,3 +483,32 @@ For generated items, retain enough structured provenance/debug data to understan
 - chosen affixes/intrinsics/effects.
 
 A handcrafted item created from a generated candidate becomes an authored item with its own stable ID. Keeping the original generation seed/provenance for designer/debugging purposes is useful but should not constrain later manual edits.
+
+## Early authored quest reward — Cornberg Q4
+
+Cornberg Q4 currently guarantees an authored **Hands/gloves** reward with **+5% Attack Speed** alongside XP and gold.
+
+Rules:
+- this is a fixed authored quest reward, not a randomized item roll;
+- both Q4 completion paths grant the same glove reward;
+- the reward can only be granted once per eligible Q4 completion;
+- exact item name, item level, rarity, art and flavor remain open;
+- the gloves grant +5% Attack Speed only, with no other gameplay stats.
+
+This is a useful early proof that quest rewards can award memorable handcrafted equipment rather than only currency/XP.
+
+## Early elite drop — deep-forest Slime shoes
+
+The dangerous deep-forest Slime used by Cornberg Q4 has a unique repeatable/farmable shoe drop.
+
+Current stats:
+- **+1 Physical Defense**;
+- **+1 Magical Defense**;
+- **+1% Movement Speed**.
+
+Drop chance:
+- **20% per elite kill**.
+
+Exact shoe name, item level, rarity, art and flavor remain open.
+
+This item is separate from Q4's guaranteed +5% Attack Speed glove reward.

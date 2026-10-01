@@ -5,6 +5,7 @@ using DiceFree.Combat;
 using DiceFree.Progression;
 using DiceFree.Quests;
 using DiceFree.World;
+using DiceFree.Items;
 using UnityEngine;
 
 namespace DiceFree.Persistence
@@ -17,6 +18,9 @@ namespace DiceFree.Persistence
         private QuestJournal journal;
         private CombatActor actor;
         private RespawnAtAnchor anchor;
+        private CarriedInventory inventory;
+        private Equipment equipment;
+        private GoldWallet wallet;
         private LocalEchoStore store;
         private EchoSave save;
         private bool ready, dirty;
@@ -47,6 +51,7 @@ namespace DiceFree.Persistence
                 Path.Combine(Application.persistentDataPath, Application.isEditor ? "EditorProfiles" : "Profiles");
             xp = GetComponent<ExperienceProgression>(); journal = GetComponent<QuestJournal>();
             actor = GetComponent<CombatActor>(); anchor = GetComponent<RespawnAtAnchor>();
+            inventory = GetComponent<CarriedInventory>(); equipment = GetComponent<Equipment>(); wallet = GetComponent<GoldWallet>();
             store = new LocalEchoStore(root);
             // All actors and the authored NavMesh must have completed Start before applying a saved spawn.
             yield return null;
@@ -61,16 +66,20 @@ namespace DiceFree.Persistence
                     if (section.version != SaveMigrations.ManifestationVersion) throw new NotSupportedException("Unsupported manifestation version; original preserved.");
                     var state = JsonUtility.FromJson<ManifestationSave>(section.json);
                     if (state == null || state.classId != actor.Stats.Definition.stableId ||
-                        !xp.CanRestore(state.level, state.xp) || !journal.CanRestore(state.quests))
+                        !xp.CanRestore(state.level, state.xp) || !journal.CanRestore(state.quests) ||
+                        !CarriedInventory.Valid(state.inventory) || !Equipment.Valid(state.equipment, state.inventory) || state.gold < 0)
                         throw new InvalidDataException("Invalid manifestation; original preserved.");
                     xp.RestoreState(state.level, state.xp);
                     journal.RestoreState(state.quests);
+                    if (inventory == null || equipment == null || wallet == null) throw new InvalidOperationException("Manifestation item components missing.");
+                    inventory.Restore(state.inventory); equipment.Restore(state.equipment); wallet.Restore(state.gold);
                     if (!anchor.LoadAtAnchor(state.anchorId))
                         throw new InvalidOperationException("Saved/fallback resurrection point is not navigable.");
                 }
                 else if (existing) throw new InvalidDataException("Current manifestation missing; original Echo preserved.");
                 ready = true;
                 xp.Changed += MarkDirty; journal.Changed += MarkDirty;
+                inventory.Changed += MarkDirty; equipment.Changed += MarkDirty; wallet.Changed += MarkDirty;
                 Status = store.RecoveryMessage ?? "Local autosave ready";
                 if (store.RecoveryMessage != null) Debug.LogWarning(store.RecoveryMessage);
                 MarkDirty();
@@ -95,6 +104,7 @@ namespace DiceFree.Persistence
                 var state = new ManifestationSave {
                     classId = actor.Stats.Definition.stableId, level = xp.Level, xp = xp.CurrentXp,
                     quests = journal.CaptureState(), anchorId = anchor.AnchorId,
+                    inventory = inventory.Items, equipment = equipment.Slots, gold = wallet.Gold,
                     // No resources exist on the current actor. Preserve unresolved opted-in records inertly.
                     resources = preserved?.resources ?? Array.Empty<ResourceSaveValue>()
                 };
@@ -121,6 +131,9 @@ namespace DiceFree.Persistence
         {
             if (xp != null) xp.Changed -= MarkDirty;
             if (journal != null) journal.Changed -= MarkDirty;
+            if (inventory != null) inventory.Changed -= MarkDirty;
+            if (equipment != null) equipment.Changed -= MarkDirty;
+            if (wallet != null) wallet.Changed -= MarkDirty;
         }
         private void OnGUI()
         {

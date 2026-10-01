@@ -360,3 +360,25 @@ The cube-world PoC should test the hard technical fantasy directly:
 Do not expand Faces 2–6 into full content just to test cube traversal.
 
 The point of this PoC is to decide whether a genuinely seamless cube surface is practical and fun, or whether DiceFree should preserve the cube-world fantasy with authored/streamed transitions.
+
+## World scale and distance units
+
+DiceFree uses **meters** for authored/player-facing world distances.
+
+Engine convention:
+- **1 Unity world unit = 1 meter**.
+
+Therefore authored values such as:
+- interaction range;
+- aggro/awareness radius;
+- leash radius;
+- quest-credit radius;
+- ability range;
+- AoE radius;
+- travel distance
+
+should be interpreted and documented in meters unless a system explicitly says otherwise.
+
+Movement motors resolve physical speed in meters/second. Player-facing Move Speed uses the separate 10:1 presentation convention documented in `STATS_AND_DAMAGE.md` (50 Move Speed = 5 m/s).
+
+Do not introduce a second fantasy-distance conversion layer.

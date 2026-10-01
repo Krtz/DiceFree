@@ -6,6 +6,7 @@ using DiceFree.Persistence;
 using DiceFree.Progression;
 using DiceFree.Quests;
 using DiceFree.World;
+using DiceFree.Items;
 
 namespace DiceFree.EditorTools
 {
@@ -15,6 +16,9 @@ namespace DiceFree.EditorTools
         public string userId, echoId, classId, anchorId, path, savedUtc, status, migration, recovery;
         public int schema, level, xp;
         public long revision;
+        public long gold;
+        public ItemInstance[] inventory;
+        public EquippedItem[] equipment;
         public bool autosaveReady;
         public QuestProgress[] quests;
         public string[] preserved;
@@ -44,6 +48,12 @@ namespace DiceFree.EditorTools
                     }
                 }
             var quests = journal.CaptureState();
+            var carried = source.GetComponent<CarriedInventory>();
+            var equipped = source.GetComponent<Equipment>();
+            foreach (var item in carried.Items)
+                if (carried.Resolve(item.definitionId) == null) other.Add("Unresolved item: " + item.instanceId + " / " + item.definitionId);
+            foreach (var slot in equipped.Slots)
+                if (!equipped.IsResolved(slot)) other.Add("Inert equipment: " + slot.slotId + " / " + slot.instanceId);
             foreach (var quest in quests)
             {
                 bool resolved = false;
@@ -54,6 +64,7 @@ namespace DiceFree.EditorTools
             return new ProfileInspection {
                 userId = profile?.userId, echoId = profile?.echoId, schema = profile?.schemaVersion ?? 0,
                 revision = profile?.revision ?? 0, savedUtc = profile?.writtenUtc, classId = classId,
+                gold = source.GetComponent<GoldWallet>().Gold, inventory = carried.Items, equipment = equipped.Slots,
                 level = progression.Level, xp = progression.CurrentXp, anchorId = source.GetComponent<RespawnAtAnchor>().AnchorId,
                 path = source.SavePath, status = source.Status, autosaveReady = source.Ready,
                 migration = source.MigrationStatus, recovery = source.RecoveryStatus, quests = quests, preserved = other.ToArray(),

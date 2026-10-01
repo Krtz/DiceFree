@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DiceFree.Quests;
+using DiceFree.Items;
 
 namespace DiceFree.Persistence
 {
@@ -28,6 +29,9 @@ namespace DiceFree.Persistence
         public string anchorId;
         public QuestProgress[] quests = Array.Empty<QuestProgress>();
         public ResourceSaveValue[] resources = Array.Empty<ResourceSaveValue>();
+        public ItemInstance[] inventory = Array.Empty<ItemInstance>();
+        public EquippedItem[] equipment = Array.Empty<EquippedItem>();
+        public long gold;
     }
     [Serializable] internal sealed class SaveEnvelope
     {

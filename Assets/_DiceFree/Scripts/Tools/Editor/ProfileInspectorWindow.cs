@@ -30,6 +30,9 @@ namespace DiceFree.EditorTools
             Field("Last successful save UTC", snapshot.savedUtc); Field("Primary path", snapshot.path);
             Field("Manifestation", snapshot.classId); Field("Level / XP", snapshot.level + " / " + snapshot.xp);
             Field("Registered anchor", snapshot.anchorId); Field("Migration", snapshot.migration); Field("Recovery", snapshot.recovery);
+            Field("Carried gold / inventory count", snapshot.gold + " / " + snapshot.inventory.Length);
+            foreach (var item in snapshot.inventory) Field(item.instanceId, item.definitionId);
+            foreach (var slot in snapshot.equipment) Field("Equipped " + slot.slotId, slot.instanceId);
             EditorGUILayout.Space(); EditorGUILayout.LabelField("Quest state", EditorStyles.boldLabel);
             foreach (var quest in snapshot.quests)
                 Field(quest.questId, $"v{quest.definitionVersion}: {quest.status}, stage {quest.stage}, count {quest.count}");

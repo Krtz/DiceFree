@@ -204,7 +204,7 @@ namespace DiceFree.EditorTools
                     Require(persistence.Flush(), "Reloaded save could not commit.");
                     var inspection = ProfileInspection.Capture(persistence);
                     Require(inspection.userId == persistence.CaptureProfile().userId && inspection.echoId == persistence.CaptureProfile().echoId &&
-                        inspection.schema == 2 && inspection.revision == persistence.Revision && inspection.level == 3 && inspection.xp == 7 &&
+                        inspection.schema == SaveMigrations.CurrentSchema && inspection.revision == persistence.Revision && inspection.level == 3 && inspection.xp == 7 &&
                         inspection.anchorId == "anchor.cornberg" && inspection.files[0].valid && inspection.files[1].exists &&
                         inspection.path == persistence.SavePath && inspection.autosaveReady && !string.IsNullOrEmpty(inspection.savedUtc) &&
                         inspection.quests[0].status == QuestStatus.Completed && inspection.preserved.Length > 0,

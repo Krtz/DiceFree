@@ -10,8 +10,8 @@ namespace DiceFree.Persistence
     }
     public static class SaveMigrations
     {
-        public const int CurrentSchema = 2;
-        public const int ManifestationVersion = 2;
+        public const int CurrentSchema = 3;
+        public const int ManifestationVersion = 3;
         [Serializable] private sealed class ManifestationV1
         {
             public string classId;
@@ -22,7 +22,7 @@ namespace DiceFree.Persistence
         }
         public static EchoSave Upgrade(EchoSave source)
         {
-            if (source.schemaVersion != 1 && source.schemaVersion != CurrentSchema)
+            if (source.schemaVersion < 1 || source.schemaVersion > CurrentSchema)
                 throw new NotSupportedException("Unsupported Echo schema " + source.schemaVersion);
             // Never partially mutate the loaded source if any record fails migration.
             var result = JsonUtility.FromJson<EchoSave>(JsonUtility.ToJson(source));
@@ -31,7 +31,18 @@ namespace DiceFree.Persistence
             {
                 foreach (var section in result.sections)
                 {
-                    if (!section.id.StartsWith("manifestation:", StringComparison.Ordinal) || section.version != 1) continue;
+                    if (!section.id.StartsWith("manifestation:", StringComparison.Ordinal)) continue;
+                    if (section.version == 2)
+                    {
+                        var previous = JsonUtility.FromJson<ManifestationSave>(section.json);
+                        if (previous == null || section.id != "manifestation:" + previous.classId || previous.level < 1 || previous.xp < 0 || previous.quests == null)
+                            throw new SaveMigrationException("Invalid v2 manifestation " + section.id);
+                        previous.inventory = Array.Empty<DiceFree.Items.ItemInstance>();
+                        previous.equipment = Array.Empty<DiceFree.Items.EquippedItem>(); previous.gold = 0;
+                        section.json = JsonUtility.ToJson(previous); section.version = ManifestationVersion;
+                        continue;
+                    }
+                    if (section.version != 1) continue;
                     var old = JsonUtility.FromJson<ManifestationV1>(section.json);
                     if (old == null || string.IsNullOrEmpty(old.classId) || section.id != "manifestation:" + old.classId ||
                         old.level < 1 || old.xp < 0 || old.quests == null)
@@ -47,7 +58,7 @@ namespace DiceFree.Persistence
                 return result;
             }
             catch (SaveMigrationException) { throw; }
-            catch (Exception error) { throw new SaveMigrationException("Echo v1 -> v2 migration failed; original preserved.", error); }
+            catch (Exception error) { throw new SaveMigrationException("Echo migration to v3 failed; original preserved.", error); }
         }
     }
 }

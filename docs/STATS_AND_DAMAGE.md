@@ -71,6 +71,20 @@ The coefficient is a default rather than an immutable universal constant. Classe
 
 The Movement Speed coefficient is intentionally tiny so Agility does not automatically let classes permanently outrun encounter design.
 
+### Movement Speed display scale and physical speed
+
+DiceFree uses real-world metric distance conventions:
+- **1 Unity world unit = 1 meter**;
+- physical locomotion speed is resolved in **meters per second**.
+
+The player-facing **Move Speed** number uses a simple 10:1 presentation scale:
+- **10 Move Speed = 1 m/s**;
+- **50 Move Speed = 5 m/s**.
+
+Implementation may keep the motor's resolved physical speed internally in m/s while exposing/storing a player-facing Move Speed rating through the 10:1 conversion. Do not confuse a displayed Move Speed of 50 with 50 Unity units/second.
+
+Percentage Movement Speed modifiers apply to the resolved movement speed/rating consistently. For example, +1% Movement Speed increases a 50 Move Speed / 5 m/s baseline to 50.5 displayed Move Speed / 5.05 m/s.
+
 All numeric secondary-stat coefficients in this section are current balance defaults. They are expected to be tunable through playtesting and may change without altering the underlying stat architecture.
 
 Meaningful Attack Speed/Movement Speed increases should primarily come from:
@@ -931,7 +945,7 @@ They modify current/effective Defense only.
 
 Example: if the current underlying reference is 100 Defense, applying a temporary reduction does not cause later percentage effects to calculate from the reduced remainder.
 
-The exact composition of the underlying Defense reference remains intentionally open for later design review.
+Equipped gear Defense participates in underlying Defense alongside class base and attribute-derived Defense. Membership of other future permanent/passive sources remains open.
 
 ### Defense precision
 
