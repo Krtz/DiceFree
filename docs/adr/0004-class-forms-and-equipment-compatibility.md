@@ -31,7 +31,11 @@ Unequipped baseline presentation is authored per slot and may be default clothin
 
 Character form is not presentation-only: each form may author different gameplay collision/selection/navigation footprint dimensions appropriate to its body.
 
-Larger authored hit volumes may be easier targets for spatial enemy/projectile collision. Players physically block other players, and enemies physically block players. No generic anti-box-in escape is provided; combat encirclement is intentional.
+Larger authored hit volumes may be easier targets for spatial enemy/projectile collision. Players physically block other players with solid collision/sliding and no push-force behavior, and enemies physically block players. No generic anti-box-in escape is provided; combat encirclement is intentional.
+
+Friendly projectiles do not collide with allied player bodies by default.
+
+Ordinary AoE eligibility uses hit-volume overlap rather than center-point-only checks unless explicitly authored otherwise.
 
 Attack/basic-attack/ability reach remains separately authored and is not automatically derived from body size.
 
