@@ -27,7 +27,11 @@ The semantic equipment slot model remains shared across every form.
 
 Visible wearable equipment normally replaces the class form's baseline presentation for that occupied slot.
 
+Unequipped baseline presentation is authored per slot and may be default clothing/armor or intentionally exposed body.
+
 Character form is not presentation-only: each form may author different gameplay collision/selection/navigation footprint dimensions appropriate to its body.
+
+Larger authored hit volumes may be easier targets for spatial enemy/projectile collision. Players physically block other players, and enemies physically block players. No generic anti-box-in escape is provided; combat encirclement is intentional.
 
 Attack/basic-attack/ability reach remains separately authored and is not automatically derived from body size.
 
@@ -44,6 +48,8 @@ Equipping a multi-slot item automatically unequips conflicting equipment to carr
 Visible slot presentation follows authored layering: Chest/Head/Hands/Legs/Feet replace their baseline slot presentation; Shoulders and Back remain independent layers over the current torso/chest state.
 
 Advancement transformation presentation is optional per Way. The manifestation/class transition remains authoritative even when a bespoke visual transformation is used.
+
+Advancement gear reconciliation is atomic: incompatible equipped gear goes to the child inventory when possible, then the Echo-wide bank as fallback. If neither can retain all displaced items, advancement fails before mutation. The parent remains unchanged.
 
 ## Consequences
 
