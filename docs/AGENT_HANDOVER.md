@@ -1191,3 +1191,48 @@ However real Unity load exposed two integration blockers:
 Next #36 cycle must audit all SerializeReference records affected by Assembly-CSharp -> asmdef moves, add a safe migration/compatibility path plus validation using Unity missing-managed-reference APIs, and explicitly resolve the InteractionRegistry scene migration. Re-run real Unity validation after the fixes before full gameplay/build/reload regression.
 
 Do not merge #36 yet.
+
+## #36 serialization migration status (2026-10-01)
+
+The Unity-only validation gap exposed after the asmdef split is now addressed on
+`refactor/architecture-hardening` at `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`.
+The focused commits are:
+
+- `bfcb48a` - migrate managed references across the assembly split;
+- `b099531` - author one InteractionRegistry in the saved Cornberg scene;
+- `5db8aa4` - add fail-closed managed-reference validation;
+- `2ae2e9f` - document the migration audit and validation result.
+
+`AutoAggroPolicy` is the only first-party polymorphic managed-reference type moved
+by the new asmdefs. Three old `Assembly-CSharp` records exist: the Elite Forest
+Slime variant plus the Crop Slime and Elite Slime Cornberg records. The runtime
+class now carries Unity `MovedFrom` metadata for its former
+`Assembly-CSharp / DiceFree.AI / AutoAggroPolicy` identity. Unity resolves those
+records without clearing or recreating them; the dedicated validator checks the
+original managed-reference IDs and authored `alwaysAutoAggro=false`,
+`trivialLevelGap=10` values.
+
+The Editor-only `ManagedReferenceValidation` scans first-party ScriptableObjects,
+prefabs and scenes using Unity's missing-managed-reference APIs and fails with
+asset path, host, reference ID, assembly, namespace and class details. It never
+uses the clearing APIs. `ArchitectureValidation.Run` invokes it, and the dedicated
+entry point is `DiceFree.EditorTools.ManagedReferenceValidation.Run`.
+
+Cornberg now contains one explicit `InteractionRegistry` beside its existing
+`Interactor` on `Echo - traversal placeholder`; the serialized scene diff only
+adds the component list entry and its component record. No transforms, objects,
+NavMesh, quests, items or gameplay data changed.
+
+Unity 6000.6.3f1 successfully ran both real commands: architecture logged
+`DICEFRE_ARCHITECTURE_OK`, and the dedicated scan logged
+`DICEFREE_MANAGED_REFERENCE_OK`. Cornberg loaded without missing managed
+references or the prior implicit `Creating missing InteractionRegistry` warning.
+Trivial aggro reached its real Play Mode success marker. Q4 reached all seven
+checkpoint assertions before an unrelated local Unity AI package import triggered
+a domain reload and interrupted the legacy harness before its final marker.
+Those package/project-setting edits are not part of #36 and were left untouched.
+
+**Current next step:** once the local Unity package state is settled, rerun the
+full Q1-Q5, items/rewards, persistence, combat/traversal, build and standalone
+reload suite from isolated profiles. Do not merge #36 until that evidence is
+complete. Return #38, sword #37 and new gameplay work remain out of scope.
