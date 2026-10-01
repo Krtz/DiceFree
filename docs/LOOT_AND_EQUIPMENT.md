@@ -545,6 +545,16 @@ Implementation direction:
 - UI derives occupancy from item data rather than special-casing weapon names;
 - future unusual equipment may use the same occupancy mechanism if needed.
 
+When equipping an item that occupies slots currently used by other equipment:
+- automatically unequip the conflicting item(s) back into carried inventory **if inventory has room**;
+- perform the change atomically;
+- if all displaced items cannot be retained safely in inventory, reject the equip;
+- never destroy/drop/overwrite displaced gear as a side effect of equipping.
+
+Example:
+- player has a one-handed sword in Main Hand and shield in Off Hand;
+- equipping a two-handed sword automatically returns both conflicting items as needed to inventory and occupies Main Hand + Off Hand, provided inventory capacity permits.
+
 ## Equipment appearance compatibility
 
 Equipment appearance is authored, not automatically morphed to every class body.
@@ -564,3 +574,11 @@ Examples:
 - these do not need to be one universal hat mesh dynamically resized across both forms.
 
 Prefer class/form-family compatibility tags and explicit exceptions over runtime mesh deformation machinery.
+
+## Wearable visual replacement
+
+For visible armor slots, the equipped item's authored appearance normally **replaces** the class form's baseline visual for that slot rather than being universally layered on top.
+
+The class/form provides the underlying body and default/baseline presentation for empty slots.
+
+This remains a presentation rule; gameplay ownership/stats still come from the equipped item model.
