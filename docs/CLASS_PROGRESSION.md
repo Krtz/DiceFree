@@ -213,7 +213,22 @@ Each class defines:
 - fixed ability kit;
 - passive mechanics;
 - advancement quest;
-- visual identity.
+- visual identity;
+- **body/species/form identity where applicable**.
+
+A Way is allowed to transform the Echo substantially. Classes are not constrained to one human body or even one universal humanoid rig.
+
+Settled Tier-2 visual identities:
+- **Ranger -> Wood Elf**;
+- **Wizard -> High Elf**.
+
+Tentative future directions:
+- Berserker may be an Orc;
+- one Tier-4 tank may be a Centaur.
+
+Those tentative examples are not locked class canon yet.
+
+Architecture/art must support different proportions, rig families and potentially non-biped forms without making those classes hacks or exceptions bolted onto a human-only player architecture.
 
 Weapon categories are created according to actual class needs rather than predefining every possible weapon.
 
