@@ -283,6 +283,12 @@ Examples:
 
 The underlying body/form remains class-authored. Slots without visible equipment use that form's authored baseline presentation.
 
+That baseline is authored per slot and may be either:
+- default clothing/armor/accessory geometry; or
+- deliberately empty/exposed body.
+
+Support both. Do not require every class to wear a complete default outfit when unequipped.
+
 Layering convention:
 - Chest replaces the form's baseline chest/torso presentation;
 - Head replaces the baseline head-slot presentation;
@@ -376,6 +382,10 @@ Changing Way/body form may therefore change the gameplay hitbox. Balance consequ
 Hitbox/physical footprint does **not** automatically determine attack reach. A large form can have a large body while its attacks keep separately authored ranges.
 
 Playable forms must also receive navigation forgiveness where authored world bottlenecks would otherwise make a large body unable to continue required content. Preserve meaningful physical size in normal play, but design doors/routes/helpers so body choice never soft-locks progression.
+
+Larger authored hit volumes are allowed to be easier targets for spatial enemy/projectile collision. That is a real consequence of the form rather than something automatically normalized away.
+
+Players physically block other players, and enemies physically block players. Do not add a generic anti-boxing escape rule; combat encirclement is intentional gameplay pressure.
 
 ## Prefab boundary
 
