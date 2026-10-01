@@ -112065,6 +112065,7 @@ GameObject:
   - component: {fileID: 1288724063}
   - component: {fileID: 1288724062}
   - component: {fileID: 1288724067}
+  - component: {fileID: 1288724073}
   - component: {fileID: 1288724068}
   - component: {fileID: 1288724072}
   - component: {fileID: 1288724071}
@@ -112286,6 +112287,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d82f0fb48d64a04fb9e555f7ea62c11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.Interactor
+--- !u!114 &1288724073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b3ddca95564714a732c35dc40c52bc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.InteractionRegistry
 --- !u!114 &1288724063
 MonoBehaviour:
   m_ObjectHideFlags: 0
