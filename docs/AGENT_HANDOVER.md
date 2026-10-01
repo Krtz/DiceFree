@@ -1144,3 +1144,24 @@ once, and confirm that the Editor opens with its license recognized; then close
 that Editor and retry the prescribed batch validation. No reinstall or license
 reset is indicated by the available logs. Do not begin #37 until the required
 Unity evidence is green.
+
+
+# Post-popup Unity retry — licensing IPC still blocked (2026-10-01)
+
+After Axel reported accepting a Unity popup, a fresh environment check found no
+open Unity Editor. The Unity Hub processes and Licensing Client PID 22096 were
+still running. One new batch retry was made against the unchanged tested code
+SHA; it again reached `Scripting: successfully reloaded assembly` but failed
+before `ArchitectureValidation.Run` with `Connection to channel
+LicenseClient-Axel refused`, the 60-second initialization timeout, and
+`'com.unity.editor.headless' was not found.` Full log:
+`T:\TEMP\dicefree-architecture-validation-after-popup.log`. The retry's own
+headless Editor process was stopped; Hub and Licensing Client were left alone.
+
+The popup acceptance did not resolve the batch IPC failure. No code or project
+content changed. All Unity-dependent architecture/gameplay validation, Windows
+build, and standalone reload remain unexecuted; readiness remains **B: not
+Unity-green, not ready for integration**. Next safe action: launch this exact
+project normally from Unity Hub and confirm the Editor opens with the license
+recognized, then close it and retry batch validation. Do not reset licensing or
+reinstall based on this evidence alone.
