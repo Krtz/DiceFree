@@ -262,6 +262,18 @@ A descendant may:
 
 This mirrors visual-appearance inheritance: lineage compatibility is the default, explicit divergence is the exception.
 
+### Gear reconciliation during advancement
+
+If the new Way/form is incompatible with equipment currently worn by the parent snapshot, advancement reconciles it safely:
+1. keep compatible equipment equipped where normal slot/permission rules allow;
+2. unequip incompatible/conflicting items into the child manifestation's carried inventory when there is room;
+3. if carried inventory cannot safely retain them, send those items to the Echo-wide shared bank as a fallback;
+4. if neither destination can safely retain every displaced item, the advancement transaction must fail before mutation rather than destroy/drop/overwrite gear.
+
+This reconciliation is part of the atomic advancement/fork transaction.
+
+The parent manifestation remains unchanged with its own original equipment/state.
+
 ### Optional transformation presentation
 
 An advancement may optionally define a visual transformation presentation.
