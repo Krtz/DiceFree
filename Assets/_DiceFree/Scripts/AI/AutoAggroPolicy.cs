@@ -1,12 +1,14 @@
 using System;
 using DiceFree.Combat;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace DiceFree.AI
 {
     // Authored acquisition eligibility only, never threat cancellation or retaliation.
     // SerializeReference permits a future scaled policy without rewriting the AI loop.
     [Serializable]
+    [MovedFrom(true, sourceNamespace: "DiceFree.AI", sourceAssembly: "Assembly-CSharp", sourceClassName: "AutoAggroPolicy")]
     public class AutoAggroPolicy
     {
         public bool alwaysAutoAggro;
