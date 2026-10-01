@@ -379,16 +379,26 @@ This does not override the separate world-navigation-forgiveness rule above. Req
 
 Any future exception such as phasing, ghosting, knock-through, ally pass-through, blink, or unstoppable movement must be an explicitly authored mechanic rather than an implicit collision workaround.
 
+Dead actors do not body-block movement. Their live collision/occupancy should cease when they enter the dead state, even if a corpse visual remains.
+
+Friendly owned units such as summons, pets and companions physically block their owner and allied players by default, using the same solid-no-pushing principle unless an authored mechanic explicitly changes it.
+
+Ordinary friendly world NPCs (villagers, quest givers, vendors, etc.) also physically block players by default. World/scene authoring must provide enough clearance around service NPCs and required routes rather than solving congestion with universal pass-through.
+
 ### Return-to-revive gameplay ability
 
 Return-to-revive is an explicit gameplay/travel ability, not an engine recovery or unstuck path.
 
 Settled rules:
 - 10-second cast;
+- the caster is rooted while casting;
+- movement input/caster movement cancels the cast;
 - cannot begin while the actor has active aggro/threat;
 - incoming damage interrupts the cast;
 - disabled during active dungeon runs;
 - approximately 10-minute cooldown;
+- cooldown starts only after a successful Return;
+- interrupted/manual-canceled casts do not consume the cooldown;
 - cooldown resets on death, logout, and reload;
 - destination is the manifestation's registered revive point.
 
