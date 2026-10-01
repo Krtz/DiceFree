@@ -230,6 +230,19 @@ Those tentative examples are not locked class canon yet.
 
 Architecture/art must support different proportions, rig families and potentially non-biped forms without making those classes hacks or exceptions bolted onto a human-only player architecture.
 
+### Authored body presentation
+
+Each class has **one authored body/sex presentation** rather than player-selectable male/female variants for that Way.
+
+A class can be visibly male, visibly female or androgynous.
+
+The visual transformation should generally become more pronounced as the class lineage specializes:
+- Novice begins deliberately neutral/androgynous;
+- early branches can make modest directional changes;
+- later Ways can become strongly species-, body- and silhouette-specific.
+
+The form is part of the Way's authored identity, not a separate character-creator axis.
+
 Weapon categories are created according to actual class needs rather than predefining every possible weapon.
 
 ## Fixed kits and advancement
