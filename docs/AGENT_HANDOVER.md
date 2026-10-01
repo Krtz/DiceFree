@@ -977,7 +977,7 @@ Additional settled class/form/equipment rules:
 - larger authored form hitboxes are real combat volumes and may be easier for spatial enemy/projectile collision to hit;
 - players physically block other players with solid collision/sliding and **no pushing**; enemies physically block players;
 - no generic anti-box-in or unstuck escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
-- planned explicit **Return to current revive point** ability with ~10-minute target cooldown; exact cast/combat/interruption/cooldown-persistence semantics remain open;
+- explicit **Return to current revive point** ability direction is now settled: 10-second cast, cannot start with active aggro/threat, damage interrupts, disabled in active dungeons, ~10-minute cooldown, and cooldown resets on death/logout/reload rather than persisting;
 - friendly projectiles pass through allied player bodies by default;
 - ordinary AoE uses authored hit-volume overlap rather than actor-center-only checks;
 - movement speed is class-authored/stat-derived, never inferred automatically from body/species/leg count;
