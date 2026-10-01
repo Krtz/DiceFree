@@ -254,6 +254,8 @@ The class form itself is part of the Way's identity.
 
 As the Echo advances into more specialized Ways, the model should generally become **more visually distinct in the direction of that class fantasy**. Early forms can remain closer to the blank-slate Echo; later forms can become increasingly species/body/silhouette specific.
 
+A descendant Way may **fully transform the body/species again**. A Ranger becoming a Wood Elf does not permanently lock every descendant to that exact body. Later advancement may replace the form with something substantially different if that Way's identity calls for it.
+
 ### Gear appearance does not auto-adapt between body forms
 
 An individual equipment appearance keeps its authored visual form.
@@ -270,9 +272,30 @@ Instead:
 
 This preserves deliberate silhouettes and prevents every piece of equipment from becoming a multi-rig content burden.
 
+### Armor slot visual replacement
+
+Visible wearable equipment normally **replaces the class-form presentation for that equipment slot** rather than merely layering on top of a permanent class outfit.
+
+Examples:
+- equipped Chest replaces the visible chest clothing/armor presentation;
+- equipped Head replaces the visible head-slot equipment presentation;
+- equipped Feet replaces the visible footwear presentation.
+
+The underlying body/form remains class-authored. Slots without visible equipment use that form's authored baseline presentation.
+
+This does not require every body form to support every item; compatibility restrictions still decide what can be equipped.
+
 Do not require every class to deform onto one universal human skeleton merely to simplify tooling.
 
 Reuse rigs/animation families where it is genuinely compatible, but allow a class to own a radically different form.
+
+Default rig strategy:
+- visually/structurally similar forms should share a rig/animation family where practical;
+- Human / High Elf / Wood Elf-like humanoids may share a compatible humanoid family if testing proves it works cleanly;
+- materially different forms such as Orc-like bodies may use a different humanoid family when proportions/animation quality warrant it;
+- radically different/non-biped forms such as a possible Centaur use an appropriate separate rig family.
+
+Do not force universal-rig reuse when it damages silhouette or animation quality, and do not create a unique rig per class when an existing family genuinely fits.
 
 ## Weapon state
 
@@ -317,6 +340,22 @@ Visual meshes and gameplay collision are separate concerns.
 A weapon model does not automatically need a detailed MeshCollider.
 
 Combat hit/range logic should use authored combat rules/hit shapes, not triangle collision from decorative weapon geometry unless a future mechanic explicitly needs it.
+
+### Character form hitboxes
+
+Playable class forms are allowed to have **different gameplay hitboxes/physical footprints**.
+
+A larger or differently shaped body is not presentation-only.
+
+Each class/form profile should author collision/selection/navigation footprint data appropriate to its body, for example:
+- capsule/shape dimensions;
+- selection radius;
+- NavMesh/agent radius or equivalent traversal footprint where needed;
+- other body-space interaction measurements that genuinely depend on physical form.
+
+Do not derive gameplay collision automatically from renderer bounds or arbitrary mesh triangles. The hitbox/footprint is explicit authored gameplay data associated with the class form.
+
+Changing Way/body form may therefore change the gameplay hitbox. Balance consequences should be deliberate and testable.
 
 ## Prefab boundary
 
