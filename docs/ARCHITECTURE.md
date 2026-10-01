@@ -369,6 +369,8 @@ A larger authored player hitbox is a real gameplay tradeoff:
 
 Player characters **physically block one another** by default.
 
+Player-vs-player collision uses solid blocking with ordinary collision sliding. Players do not apply gameplay pushing/force-shoving to reposition one another merely by walking into each other.
+
 Enemies also physically block players according to their authored collision/footprint.
 
 There is **no generic anti-box-in escape rule**. Being surrounded/boxed by enemies is valid positioning pressure; the player fights or uses authored movement/control tools to escape.
@@ -485,6 +487,8 @@ Avoid class-specific/enemy-specific hard-coded branches when the behavior is rea
 
 Custom code remains valid for genuinely unusual mechanics.
 
+Spatial AoE overlap against actors uses the authored gameplay hit volume, not only the actor's center point, unless the specific effect explicitly defines a center-point rule. If any qualifying part of the gameplay hit volume overlaps the AoE, that actor is inside for ordinary AoE purposes.
+
 ## Persistence boundary
 
 Persistence is a storage concern, not the owner of gameplay rules.
@@ -515,6 +519,13 @@ client intent -> host simulation -> authoritative semantic outcome -> eligible d
 Design new gameplay rules so the host can own them later.
 
 Do not prematurely implement networking abstractions around every local method, but avoid rules that depend on "the local player is always the only actor."
+
+Friendly movement collision and friendly projectile filtering are separate policies:
+- party/player bodies may physically block movement;
+- friendly projectiles/attacks do **not** collide with or get consumed by allied player bodies by default;
+- an ability may explicitly opt into friendly-body collision if a future mechanic needs it.
+
+Do not infer projectile friendliness from physics layers alone; authoritative ability/targeting policy should remain able to decide eligibility.
 
 ## UI boundary
 
