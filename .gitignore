@@ -48,3 +48,12 @@ crashlytics-build.properties
 # Rider
 .idea/
 *.sln.iml
+
+# DCC temporary / backup files
+*.blend1
+*.blend2
+*.blend@
+*.blend~
+SourceArt/_Temp/
+SourceArt/_ExportsTemp/
+
