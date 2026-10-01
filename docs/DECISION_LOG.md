@@ -3250,3 +3250,15 @@ Tentative examples, not locked:
 
 **Decision:** Class/body size is not presentation-only. Different class forms may use different authored gameplay hitboxes/physical/navigation footprints. Do not derive these automatically from renderer bounds; they are explicit form data.
 
+## 2026-10-01 — Reach, navigation forgiveness, inherited gear and transformation presentation
+
+**Decision:** Class/body hitbox size does not automatically determine melee/basic-attack reach. Attack/ability ranges remain separately authored.
+
+**Decision:** Large playable forms receive authored navigation/clearance forgiveness when needed. Required progression must not become inaccessible merely because a class has a larger footprint.
+
+**Decision:** Descendant Ways inherit their parent's equipment-family permissions by default, with explicit additions/removals/overrides allowed.
+
+**Decision:** Visible armor layering uses slot semantics: Chest, Head, Hands, Legs and Feet replace their baseline slot visuals; Shoulders and Back layer independently over the current torso/chest presentation.
+
+**Decision:** Way transformation presentation is optional per advancement. It may be bespoke, simple, or absent; gameplay advancement state does not depend on the effect.
+
