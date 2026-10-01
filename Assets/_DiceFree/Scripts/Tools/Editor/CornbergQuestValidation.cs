@@ -47,7 +47,7 @@ namespace DiceFree.EditorTools
             player=UnityEngine.Object.FindAnyObjectByType<TraversalInput>().GetComponent<CombatActor>();
             brain=CombatValidationActors.IsolateCropDuel(); enemy=brain.GetComponent<CombatActor>();
             respawn=enemy.GetComponent<OverworldRespawn>(); xp=player.GetComponent<ExperienceProgression>();
-            journal=player.GetComponent<QuestJournal>(); giver=UnityEngine.Object.FindAnyObjectByType<QuestGiver>();
+            journal=player.GetComponent<QuestJournal>(); giver=CombatValidationActors.OriginalFarmer();
             interactor=player.GetComponent<Interactor>(); questId=giver.Quest.stableId; actorId=enemy.GetEntityId();
             InputSystem.settings.backgroundBehavior=InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;

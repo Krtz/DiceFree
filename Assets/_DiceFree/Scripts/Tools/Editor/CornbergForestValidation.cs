@@ -76,7 +76,7 @@ namespace DiceFree.EditorTools
             do { yield return null; persistence = UnityEngine.Object.FindAnyObjectByType<ManifestationPersistence>(); }
             while (persistence == null || !persistence.Ready);
             player = persistence.GetComponent<CombatActor>(); journal = player.GetComponent<QuestJournal>(); xp = player.GetComponent<ExperienceProgression>();
-            named = CombatValidationActors.Find("enemy.named-forest-slime"); giver = UnityEngine.Object.FindAnyObjectByType<QuestGiver>();
+            named = CombatValidationActors.Find("enemy.named-forest-slime"); giver = CombatValidationActors.OriginalFarmer();
             quest = journal.Definitions.Single(q => q.stableId == "quest.cornberg.named-slime");
             area = UnityEngine.Object.FindObjectsByType<ReachArea>().Single(a => a.StableId == "area.cornberg.forest-clearing");
         }

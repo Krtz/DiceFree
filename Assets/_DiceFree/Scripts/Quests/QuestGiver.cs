@@ -10,6 +10,20 @@ namespace DiceFree.Quests
     {
         [SerializeField] private QuestDefinition quest;
         [SerializeField] private QuestDefinition[] additionalQuests = Array.Empty<QuestDefinition>();
+        [SerializeField] private bool ambientOutsideQuest;
+        public bool HasConversation(CombatActor actor)
+        {
+            if (!ambientOutsideQuest) return true;
+            var journal = actor.GetComponent<QuestJournal>();
+            foreach (var value in Offers)
+            {
+                var state = journal.GetProgress(value.stableId);
+                if (journal.CanAccept(value) || state?.status == QuestStatus.Active || state?.status == QuestStatus.ReadyToTurnIn) return true;
+            }
+            return false;
+        }
+        public override bool CanInteract(CombatActor actor) => base.CanInteract(actor) && HasConversation(actor);
+        public void ConfigureAmbient(bool value) => ambientOutsideQuest = value;
         public QuestDefinition Quest => quest;
         public IEnumerable<QuestDefinition> Offers
         {

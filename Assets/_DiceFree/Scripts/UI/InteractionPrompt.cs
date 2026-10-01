@@ -20,7 +20,7 @@ namespace DiceFree.UI
             {
                 var quest = giver.CurrentQuest(player);
                 var state=player.GetComponent<QuestJournal>().GetProgress(quest.stableId);
-                if (state.definitionVersion == quest.version)
+                if (giver.HasConversation(player) && state.definitionVersion == quest.version)
                     marker=state.status == QuestStatus.Available ? "! " : state.status == QuestStatus.ReadyToTurnIn ? "? " : "";
             }
             GUI.Box(new Rect(p.x-130,Screen.height-p.y-10,260,24),marker+target.DisplayName);

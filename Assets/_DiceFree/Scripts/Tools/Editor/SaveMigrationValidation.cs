@@ -24,6 +24,7 @@ namespace DiceFree.EditorTools
         }
         public static void Run()
         {
+            ValidateV3();
             var directory = Path.Combine(Path.GetTempPath(), "DiceFree-migration-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(directory);
             var store = new LocalEchoStore(directory);
@@ -63,6 +64,31 @@ namespace DiceFree.EditorTools
             Require(ResourcePersistence.Resolve(ordinary, records) == 10 && ResourcePersistence.Resolve(durable, records) == 42,
                 "Resource reset/explicit persistence policy failed.");
             Debug.Log("SAVE_MIGRATION_OK: real v1 fixture, idempotent current schema, unknown records, original backup, failed migration and resource policy.");
+        }
+        private static void ValidateV3()
+        {
+            var directory = Path.Combine(Path.GetTempPath(), "DiceFree-v3-migration-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory); var store = new LocalEchoStore(directory);
+            File.Copy("Assets/_DiceFree/Tests/Fixtures/echo-v3.json", store.Path);
+            string original = File.ReadAllText(store.Path);
+            var old = JsonUtility.FromJson<EchoSave>(JsonUtility.FromJson<Envelope>(original).payload);
+            Require(old.schemaVersion == 3, "Genuine v3 fixture required");
+            var upgraded = store.Load();
+            Require(upgraded.schemaVersion == 4 && upgraded.echoId == old.echoId && upgraded.userId == old.userId, "v3 identity/schema");
+            foreach (var section in old.sections)
+            {
+                var next = upgraded.sections.Find(s => s.id == section.id);
+                if (section.version != 3 || !section.id.StartsWith("manifestation:"))
+                { Require(next.json == section.json && next.version == section.version, "Unknown section changed"); continue; }
+                var before = JsonUtility.FromJson<ManifestationSave>(section.json);
+                var after = JsonUtility.FromJson<ManifestationSave>(next.json);
+                Require(next.version == 4 && before.level == after.level && before.xp == after.xp && before.gold == after.gold, "v3 durable state");
+                Require(JsonUtility.ToJson(before) == JsonUtility.ToJson(after), "v3 ownership/equipment/resources/quests changed");
+                foreach (var quest in after.quests) Require(quest.alternatives != null && quest.alternatives.Length == 0, "v3 alternative defaults");
+            }
+            Require(File.ReadAllText(store.Path) == original && JsonUtility.ToJson(SaveMigrations.Upgrade(upgraded)) == JsonUtility.ToJson(upgraded), "v3 migration mutation/idempotency");
+            upgraded.revision++; store.Commit(upgraded); Require(File.ReadAllText(store.Path + ".bak1") == original, "v3 original backup");
+            Debug.Log("SAVE_V3_MIGRATION_OK: genuine item-bearing fixture, identity/unknowns, idempotency and original backup.");
         }
     }
 }

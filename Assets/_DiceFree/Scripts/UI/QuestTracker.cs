@@ -8,7 +8,7 @@ namespace DiceFree.UI
         [SerializeField] private QuestJournal journal;
         private int VisibleCount
         {
-            get { int count = 0; foreach (var quest in journal.Definitions) if (journal.PrerequisitesMet(quest)) count++; return count; }
+            get { int count = 0; foreach (var quest in journal.Definitions) if (journal.PrerequisitesMet(quest)) count += quest.stages[0].kind == ObjectiveKind.Any ? 2 : 1; return count; }
         }
         public override Rect Bounds => new Rect(Screen.width-310,130,294,Mathf.Max(120,VisibleCount*70+16));
         private void OnGUI()
@@ -28,9 +28,10 @@ namespace DiceFree.UI
                     QuestStatus.Available => "! " + quest.locationHint,
                     QuestStatus.ReadyToTurnIn => $"? {state.count}/{quest.stages[state.stage].count} complete · Return to the quest giver.",
                     QuestStatus.Completed => "Completed",
-                    _ => $"Stage {state.stage+1}: {state.count}/{quest.stages[state.stage].count} · {quest.stages[state.stage].instruction}"
+                    _ => ObjectiveProgress.Describe(quest.stages[state.stage], state)
                 };
-                GUI.Label(new Rect(r.x+10,y,274,46),text,new GUIStyle(GUI.skin.label){wordWrap=true}); y+=46;
+                float height = quest.stages[state.stage].kind == ObjectiveKind.Any ? 116 : 46;
+                GUI.Label(new Rect(r.x+10,y,274,height),text,new GUIStyle(GUI.skin.label){wordWrap=true}); y+=height;
             }
         }
         public void Configure(QuestJournal value) => journal=value;

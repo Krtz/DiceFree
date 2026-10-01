@@ -7,6 +7,8 @@ This note describes the original Q1 slice. Local saving is covered in
 [CORNBERG_ROAD.md](CORNBERG_ROAD.md). No Tier-1 classes, multiplayer or shops are implemented.
 Post-Q3 conversation content and the TalkTo extension are covered in
 [CORNBERG_RUNNER.md](CORNBERG_RUNNER.md).
+The additive Q4 ANY-objective, nearby-party credit and reward work is tracked in
+[CORNBERG_Q4.md](CORNBERG_Q4.md), including its current validation status.
 
 ## Play
 

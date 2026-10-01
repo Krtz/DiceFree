@@ -35,7 +35,10 @@ namespace DiceFree.EditorTools
             foreach (var slot in snapshot.equipment) Field("Equipped " + slot.slotId, slot.instanceId);
             EditorGUILayout.Space(); EditorGUILayout.LabelField("Quest state", EditorStyles.boldLabel);
             foreach (var quest in snapshot.quests)
+            {
                 Field(quest.questId, $"v{quest.definitionVersion}: {quest.status}, stage {quest.stage}, count {quest.count}");
+                foreach (var alternative in quest.alternatives) Field("  " + alternative.objectiveId, alternative.count.ToString());
+            }
             EditorGUILayout.Space(); EditorGUILayout.LabelField("Integrity / backups", EditorStyles.boldLabel);
             foreach (var file in snapshot.files)
                 Field(file.path, $"{file.integrity}; schema {file.schema}, revision {file.revision}, UTC {file.writtenUtc}");

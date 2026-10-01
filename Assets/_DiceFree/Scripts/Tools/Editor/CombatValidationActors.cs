@@ -6,6 +6,12 @@ namespace DiceFree.EditorTools
 {
     public static class CombatValidationActors
     {
+        public static DiceFree.Quests.QuestGiver OriginalFarmer()
+        {
+            foreach (var giver in Object.FindObjectsByType<DiceFree.Quests.QuestGiver>())
+                if (giver.Quest.stableId == "quest.cornberg.crop-slimes") return giver;
+            throw new System.InvalidOperationException("Missing Q1 farmer.");
+        }
         public static CombatActor Find(string contentId)
         {
             foreach (var actor in Object.FindObjectsByType<CombatActor>())

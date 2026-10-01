@@ -10,8 +10,8 @@ namespace DiceFree.Persistence
     }
     public static class SaveMigrations
     {
-        public const int CurrentSchema = 3;
-        public const int ManifestationVersion = 3;
+        public const int CurrentSchema = 4;
+        public const int ManifestationVersion = 4;
         [Serializable] private sealed class ManifestationV1
         {
             public string classId;
@@ -32,13 +32,21 @@ namespace DiceFree.Persistence
                 foreach (var section in result.sections)
                 {
                     if (!section.id.StartsWith("manifestation:", StringComparison.Ordinal)) continue;
-                    if (section.version == 2)
+                    if (section.version == 2 || section.version == 3)
                     {
                         var previous = JsonUtility.FromJson<ManifestationSave>(section.json);
                         if (previous == null || section.id != "manifestation:" + previous.classId || previous.level < 1 || previous.xp < 0 || previous.quests == null)
-                            throw new SaveMigrationException("Invalid v2 manifestation " + section.id);
-                        previous.inventory = Array.Empty<DiceFree.Items.ItemInstance>();
-                        previous.equipment = Array.Empty<DiceFree.Items.EquippedItem>(); previous.gold = 0;
+                            throw new SaveMigrationException("Invalid previous manifestation " + section.id);
+                        if (section.version == 2)
+                        {
+                            previous.inventory = Array.Empty<DiceFree.Items.ItemInstance>();
+                            previous.equipment = Array.Empty<DiceFree.Items.EquippedItem>(); previous.gold = 0;
+                        }
+                        foreach (var quest in previous.quests)
+                        {
+                            if (quest == null) throw new SaveMigrationException("Null previous quest record.");
+                            quest.alternatives = Array.Empty<ObjectiveCount>();
+                        }
                         section.json = JsonUtility.ToJson(previous); section.version = ManifestationVersion;
                         continue;
                     }
@@ -50,6 +58,11 @@ namespace DiceFree.Persistence
                     var current = new ManifestationSave {
                         classId = old.classId, level = old.level, xp = old.xp, anchorId = old.anchorId, quests = old.quests
                     };
+                    foreach (var quest in current.quests)
+                    {
+                        if (quest == null) throw new SaveMigrationException("Null v1 quest record.");
+                        quest.alternatives = Array.Empty<ObjectiveCount>();
+                    }
                     // HP was session state. It is deliberately retired, not translated into a resource.
                     section.json = JsonUtility.ToJson(current);
                     section.version = ManifestationVersion;
@@ -58,7 +71,7 @@ namespace DiceFree.Persistence
                 return result;
             }
             catch (SaveMigrationException) { throw; }
-            catch (Exception error) { throw new SaveMigrationException("Echo migration to v3 failed; original preserved.", error); }
+            catch (Exception error) { throw new SaveMigrationException("Echo migration to v4 failed; original preserved.", error); }
         }
     }
 }

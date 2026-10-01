@@ -123,7 +123,7 @@ namespace DiceFree.EditorTools
             string root = Path.Combine(Path.GetTempPath(), "DiceFree-item-migration-" + Guid.NewGuid().ToString("N")); Directory.CreateDirectory(root);
             var store = new LocalEchoStore(root); File.Copy("Assets/_DiceFree/Tests/Fixtures/echo-v2.json", store.Path);
             string original = File.ReadAllText(store.Path); var current = store.Load();
-            Require(current.schemaVersion == 3, "v2 fixture migration");
+            Require(current.schemaVersion == SaveMigrations.CurrentSchema, "v2 fixture migration");
             var state = JsonUtility.FromJson<ManifestationSave>(current.sections.First(s => s.id.StartsWith("manifestation:")).json);
             Require(state.inventory.Length == 0 && state.equipment.Length == 0 && state.gold == 0 && state.level == 6, "Migration defaults/progression");
             Require(File.ReadAllText(store.Path) == original && JsonUtility.ToJson(SaveMigrations.Upgrade(current)) == JsonUtility.ToJson(current), "Migration not safe/idempotent");

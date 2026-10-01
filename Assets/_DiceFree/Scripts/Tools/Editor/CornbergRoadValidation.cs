@@ -64,7 +64,7 @@ namespace DiceFree.EditorTools
             while (persistence == null || !persistence.Ready);
             player = persistence.GetComponent<CombatActor>(); xp = player.GetComponent<ExperienceProgression>(); journal = player.GetComponent<QuestJournal>();
             crop = CombatValidationActors.Find("enemy.crop-slime"); road = CombatValidationActors.Find("enemy.road-slime");
-            giver = UnityEngine.Object.FindAnyObjectByType<QuestGiver>();
+            giver = CombatValidationActors.OriginalFarmer();
             foreach (var candidate in UnityEngine.Object.FindObjectsByType<ReachArea>())
                 if (candidate.StableId == "area.cornberg.road-investigation") area = candidate;
             actorCount = CombatActor.All.Count;

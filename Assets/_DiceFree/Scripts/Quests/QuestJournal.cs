@@ -15,7 +15,13 @@ namespace DiceFree.Quests
         public int definitionVersion;
         public QuestStatus status;
         public int stage, count;
-        public QuestProgress Copy() => (QuestProgress)MemberwiseClone();
+        public ObjectiveCount[] alternatives = Array.Empty<ObjectiveCount>();
+        public QuestProgress Copy()
+        {
+            var copy = (QuestProgress)MemberwiseClone();
+            copy.alternatives = Array.ConvertAll(alternatives ?? Array.Empty<ObjectiveCount>(), value => value?.Copy());
+            return copy;
+        }
     }
 
     [DisallowMultipleComponent, RequireComponent(typeof(KillCreditReceiver), typeof(ExperienceProgression))]
@@ -23,21 +29,20 @@ namespace DiceFree.Quests
     {
         [SerializeField] private QuestDefinition[] definitions;
         [SerializeField] private List<QuestProgress> progress = new();
-        private KillCreditReceiver credit;
+        private readonly HashSet<long> credited = new();
         private CombatActor owner;
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public event Action Changed;
         private void Awake()
         {
-            credit = GetComponent<KillCreditReceiver>();
             owner = GetComponent<CombatActor>();
             foreach (var definition in definitions)
                 if (Find(definition.stableId) == null) progress.Add(new QuestProgress {
                     questId = definition.stableId, definitionVersion = definition.version
                 });
         }
-        private void OnEnable() { credit.Credited += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; }
-        private void OnDisable() { credit.Credited -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
+        private void OnEnable() { DefeatEvents.Reported += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; }
+        private void OnDisable() { DefeatEvents.Reported -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
         private QuestProgress Find(string id) => progress.Find(value => value.questId == id);
         public QuestProgress GetProgress(string id) => Find(id)?.Copy();
         // Detached stable-ID records form the future persistence seam; no scene references or UI names.
@@ -54,6 +59,7 @@ namespace DiceFree.Quests
                 if (definition == null || record.definitionVersion != definition.version) continue;
                 if (!Enum.IsDefined(typeof(QuestStatus), record.status) || record.stage < 0 ||
                     record.stage >= definition.stages.Length || record.count < 0) return false;
+                if (!ObjectiveProgress.Valid(definition.stages[record.stage], record)) return false;
                 if (record.status == QuestStatus.Available && (record.stage != 0 || record.count != 0)) return false;
                 if (record.status == QuestStatus.Active && record.count >= definition.stages[record.stage].count) return false;
                 if ((record.status == QuestStatus.ReadyToTurnIn || record.status == QuestStatus.Completed) &&
@@ -94,7 +100,13 @@ namespace DiceFree.Quests
             var state = Find(definition.stableId);
             state.status = QuestStatus.Active; state.stage = state.count = 0; Changed?.Invoke(); return true;
         }
-        private void OnCredit(ActorDefeated defeat) => Advance(ObjectiveKind.Kill, defeat.contentId, defeat.familyId, null);
+        private void OnCredit(ActorDefeated defeat)
+        {
+            if (!credited.Add(defeat.sequence)) return;
+            Advance(ObjectiveKind.Kill, defeat.contentId, defeat.familyId, null, null,
+                objective => QuestCreditPolicy.Eligible(objective, owner, defeat) &&
+                    (string.IsNullOrEmpty(objective.requiredTag) || defeat.HasTag(objective.requiredTag)));
+        }
         private void OnArea(AreaEntered entered)
         {
             if (entered.actor == owner) Advance(ObjectiveKind.ReachArea, null, null, entered.areaId);
@@ -112,22 +124,23 @@ namespace DiceFree.Quests
             }
             Advance(ObjectiveKind.TalkTo, fact.npcId, null, null, fact.conversationId);
         }
-        private void Advance(ObjectiveKind kind, string content, string family, string area, string conversation = null)
+        private void Advance(ObjectiveKind kind, string content, string family, string area, string conversation = null,
+            Func<QuestLeaf, bool> eligible = null)
         {
             foreach (var definition in definitions)
             {
                 var state = Find(definition.stableId);
                 if (state.definitionVersion != definition.version || state.status != QuestStatus.Active) continue;
                 var objective = definition.stages[state.stage];
-                if (objective.kind != kind ||
-                    (!string.IsNullOrEmpty(objective.contentId) && objective.contentId != content) ||
-                    (!string.IsNullOrEmpty(objective.familyId) && objective.familyId != family) ||
-                    (kind == ObjectiveKind.ReachArea && objective.areaId != area) ||
-                    (kind == ObjectiveKind.TalkTo && !string.IsNullOrEmpty(objective.conversationId) && objective.conversationId != conversation)) continue;
-                state.count++;
+                if (!ObjectiveProgress.Apply(objective, state, leaf => leaf.kind == kind &&
+                    (string.IsNullOrEmpty(leaf.contentId) || leaf.contentId == content) &&
+                    (string.IsNullOrEmpty(leaf.familyId) || leaf.familyId == family) &&
+                    (kind != ObjectiveKind.ReachArea || leaf.areaId == area) &&
+                    (kind != ObjectiveKind.TalkTo || string.IsNullOrEmpty(leaf.conversationId) || leaf.conversationId == conversation) &&
+                    (eligible == null || eligible(leaf)))) continue;
                 if (state.count >= objective.count)
                 {
-                    if (state.stage + 1 < definition.stages.Length) { state.stage++; state.count = 0; }
+                    if (state.stage + 1 < definition.stages.Length) { state.stage++; state.count = 0; state.alternatives = Array.Empty<ObjectiveCount>(); }
                     else
                     {
                         state.status = QuestStatus.ReadyToTurnIn;
@@ -142,8 +155,9 @@ namespace DiceFree.Quests
             if (definition == null || Array.IndexOf(definitions,definition) < 0) return false;
             var state = Find(definition.stableId);
             if (state == null || state.definitionVersion != definition.version || state.status != QuestStatus.ReadyToTurnIn) return false;
-            state.status = QuestStatus.Completed; // Commit state before publishing the reward/events.
-            GetComponent<ExperienceProgression>().Grant(definition.rewardXp);
+            if (!DiceFree.Items.FixedRewardGrant.TryGrant(gameObject, definition.rewardXp, definition.reward,
+                () => state.status = QuestStatus.Completed,
+                () => state.status = QuestStatus.ReadyToTurnIn)) return false;
             Changed?.Invoke(); return true;
         }
         public void Configure(params QuestDefinition[] values) => definitions = values;

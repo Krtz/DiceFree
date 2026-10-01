@@ -104,11 +104,10 @@ No human/manual playthrough is claimed. Exact known SearchDatabase #17 is separa
 
 ## Next boundary
 
-Q4 remains unimplemented. Next gameplay patch can connect its semantic OR objective,
-named farmer and elite to this grant/persistence boundary. It must atomically
-snapshot completed quest state with XP/gold/gloves, and separately author the
-20% shoe drop. This patch does not implement that content, multiplayer credit,
-ambient barks, mounts or the mature #24 equipment framework.
+The subsequent [Q4 slice](CORNBERG_Q4.md) connects semantic OR objectives,
+a named farmer and an elite to this grant/persistence boundary. It adds a fixed
+reward transaction and 20% free-for-all world shoe pickup. Its validation status
+is recorded separately. Mounts and the mature #24 equipment framework remain deferred.
 
 ## Verified results — 2026-10-01
 

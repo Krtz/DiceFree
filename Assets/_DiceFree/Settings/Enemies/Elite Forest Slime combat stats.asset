@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b18c870580841314f9fcb1788b8034f5, type: 3}
-  m_Name: Named Forest Slime combat stats
+  m_Name: Elite Forest Slime combat stats
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.ActorDefinition
-  stableId: enemy.named-forest-slime
-  displayName: Named Forest Slime
+  stableId: enemy.forest-elite-slime
+  displayName: Dangerous Forest Slime
   familyId: enemy-family.slime
   tags:
   - quest-credit.cornberg.surge-slime
-  experienceReward: 35
+  experienceReward: 80
   baseAttributes:
     vitality: 0
     strength: 0
@@ -30,11 +30,11 @@ MonoBehaviour:
     agility: 0
     intelligence: 0
     spirit: 0
-  baseHp: 60
+  baseHp: 240
   physicalDefense: 0
   magicalDefense: 0
   moveSpeed: 3.4
-  basicAttack: {fileID: 11400000, guid: 148357f0ea7b2e74d8168dccac6a7768, type: 2}
+  basicAttack: {fileID: 11400000, guid: 294750d2a9091354fb2ceb41d46f1f98, type: 2}
   tuning: {fileID: 11400000, guid: fae0d971f61fa81429fe4643a81e5cac, type: 2}
   secondaryOverrides: []
   overrideVitalityHp: 0

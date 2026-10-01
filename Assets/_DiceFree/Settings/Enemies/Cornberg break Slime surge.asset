@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg break Slime surge
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestDefinition
+  stableId: quest.cornberg.break-slime-surge
+  title: Break the Slime Surge
+  version: 1
+  offer: The runner couldn't get through. We need to thin these Slimes so the road is safer again. Defeat the dangerous Slime somewhere in the Slime Forest, or take down thirty of the stronger Slimes beyond the crop fields. Either will help. Then come back to me.
+  locationHint: Speak to Mira in Cornberg.
+  stages:
+  - kind: 3
+    objectiveId: surge.any
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    alternatives:
+    - kind: 0
+      objectiveId: surge.elite
+      requiredTag:
+      creditMode: 1
+      creditRadius: 50
+      instruction: Defeat the dangerous Slime somewhere in the Slime Forest
+      contentId: enemy.forest-elite-slime
+      familyId:
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 0
+      objectiveId: surge.population
+      requiredTag: quest-credit.cornberg.surge-slime
+      creditMode: 1
+      creditRadius: 50
+      instruction: Defeat stronger Slimes
+      contentId:
+      familyId:
+      areaId:
+      conversationId:
+      count: 30
+    instruction:
+    contentId:
+    familyId:
+    areaId:
+    conversationId:
+    count: 1
+  completedQuestIds:
+  - story.cornberg.runner-returns
+  rewardXp: 200
+  reward: {fileID: 11400000, guid: d1eaa91fb240ce0458b2e3bdfd7a9a56, type: 2}
+  acceptOnTalk: 0
+  completeOnObjectives: 0

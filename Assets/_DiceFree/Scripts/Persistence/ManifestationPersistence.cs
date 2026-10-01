@@ -24,6 +24,19 @@ namespace DiceFree.Persistence
         private LocalEchoStore store;
         private EchoSave save;
         private bool ready, dirty;
+        private int mutationDepth;
+        // Synchronous reward mutations publish several model events. Never persist their intermediate state.
+        public IDisposable DeferWrites()
+        {
+            mutationDepth++;
+            return new WriteScope(this);
+        }
+        private sealed class WriteScope : IDisposable
+        {
+            private ManifestationPersistence owner;
+            public WriteScope(ManifestationPersistence value) => owner = value;
+            public void Dispose() { if (owner == null) return; owner.mutationDepth--; owner = null; }
+        }
         private float due;
         public string Status { get; private set; } = "Persistence inactive";
         public string SavePath => store?.Path;
@@ -95,7 +108,7 @@ namespace DiceFree.Persistence
         private void LateUpdate() { if (ready && dirty && Time.unscaledTime >= due) Flush(); }
         public bool Flush()
         {
-            if (!ready) return false;
+            if (!ready || mutationDepth != 0) return false;
             try
             {
                 var candidate = CaptureProfile();

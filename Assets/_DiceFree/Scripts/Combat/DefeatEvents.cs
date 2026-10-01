@@ -10,11 +10,14 @@ namespace DiceFree.Combat
         public readonly CombatActor victim, killer, creditOwner;
         public readonly Vector3 position;
         public readonly int experience;
+        private readonly string[] tags;
+        public bool HasTag(string id) => tags != null && Array.IndexOf(tags, id) >= 0;
         public ActorDefeated(long id, CombatActor defeated, CombatActor source, CombatActor owner)
         {
             sequence = id; victim = defeated; killer = source; creditOwner = owner;
             contentId = defeated.Stats.Definition.stableId; familyId = defeated.FamilyId;
             position = defeated.transform.position; experience = defeated.Stats.Definition.experienceReward;
+            tags = (string[])(defeated.Stats.Definition.tags ?? Array.Empty<string>()).Clone();
         }
     }
 

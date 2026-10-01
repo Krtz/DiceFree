@@ -42,7 +42,7 @@ namespace DiceFree.EditorTools
                 CornbergValidation.ValidateNavigation();
                 var actor = UnityEngine.Object.FindAnyObjectByType<TraversalInput>();
                 // Old Q3 profile has no runner record. Preserve both opaque sections and unknown quests.
-                var records = actor.GetComponent<QuestJournal>().Definitions.Where(q => q.stableId != CornbergRunnerSetup.BeatId)
+                var records = actor.GetComponent<QuestJournal>().Definitions.Where(q => q.stableId != CornbergRunnerSetup.BeatId && q.stableId != CornbergSurgeSetup.QuestId)
                     .Select(q => new QuestProgress { questId = q.stableId, definitionVersion = q.version,
                         status = QuestStatus.Completed, stage = q.stages.Length - 1, count = q.stages.Last().count }).ToList();
                 records.Add(new QuestProgress { questId = "quest.future-runner-test", definitionVersion = 99, stage = 12, count = 9 });

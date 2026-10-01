@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 725469448b828504b9dc75290b943966, type: 3}
+  m_Name: Elite Forest Slime variant
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.AI.EnemyVariantDefinition
+  archetype: {fileID: 11400000, guid: 981cc7151c956154d9b7d66f5bf145cb, type: 2}
+  stats: {fileID: 11400000, guid: 15a6d62b244ec6246bad0b442465c1a3, type: 2}
+  level: 8
+  bodyScale: 2
+  overrideAwareness: 1
+  overrideLeash: 1
+  overrideAutoAggro: 0
+  autoAggroPolicy:
+    rid: 6556558292968538112
+  awareness: 8
+  leash: 16
+  references:
+    version: 2
+    RefIds:
+    - rid: 6556558292968538112
+      type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: Assembly-CSharp}
+      data:
+        alwaysAutoAggro: 0
+        trivialLevelGap: 10
