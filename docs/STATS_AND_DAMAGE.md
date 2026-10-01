@@ -391,7 +391,7 @@ Different effect types can define separate crit eligibility:
 - healing;
 - summons.
 
-Ordinary resolution now follows the explicit-source, highest-multiplier first-success and action-wide raw-damage rules below. Crit-modifier composition and rare stacking exceptions remain open.
+Exact crit formulas remain open.
 
 ## Damage-over-time effects
 
@@ -979,7 +979,7 @@ Examples of valid authored crit rules include:
 - 50% chance to deal 2x damage;
 - 12.5% chance to deal 8x damage.
 
-Distinct crit-granting sources do not combine into one global Crit Chance/Crit Damage pair. Ordinary multiple-rule resolution is specified below; exact modifier composition and rare stacking exceptions remain separate design questions.
+There is currently no assumption that distinct crit-granting sources combine into one global Crit Chance/Crit Damage pair. Exact interaction between multiple simultaneous crit rules remains a separate design question.
 
 
 ### Multiple crit rules
@@ -1513,3 +1513,23 @@ Example:
 ```
 
 No negative miss chance, overflow conversion or special >100% behavior exists by default. Any exception must be explicitly authored.
+
+
+## Class form and movement speed
+
+Movement Speed is class-authored/stat-derived gameplay data.
+
+Do not automatically infer movement speed from body shape, species, leg count, renderer dimensions or animation stride.
+
+A Centaur-like form can be fast if its class definition says so; a small form is not automatically faster or slower.
+
+Body footprint/hitbox and movement speed are separate authored properties.
+
+
+## Spatial hit volume and AoE
+
+Ordinary spatial AoE checks use the actor's authored gameplay hit volume.
+
+If any qualifying portion of that hit volume overlaps the AoE volume, the actor is hit/inside unless that specific effect explicitly defines a different rule.
+
+Do not reduce ordinary AoE eligibility to a center-point-only test, because different class forms may have meaningfully different physical footprints.

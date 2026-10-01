@@ -213,7 +213,72 @@ Each class defines:
 - fixed ability kit;
 - passive mechanics;
 - advancement quest;
-- visual identity.
+- visual identity;
+- **body/species/form identity where applicable**.
+
+A Way is allowed to transform the Echo substantially. Classes are not constrained to one human body or even one universal humanoid rig.
+
+Settled Tier-2 visual identities:
+- **Ranger -> Wood Elf**;
+- **Wizard -> High Elf**.
+
+Tentative future directions:
+- Berserker may be an Orc;
+- one Tier-4 tank may be a Centaur.
+
+Those tentative examples are not locked class canon yet.
+
+Architecture/art must support different proportions, rig families and potentially non-biped forms without making those classes hacks or exceptions bolted onto a human-only player architecture.
+
+### Authored body presentation
+
+Each class has **one authored body/sex presentation** rather than player-selectable male/female variants for that Way.
+
+A class can be visibly male, visibly female or androgynous.
+
+The visual transformation should generally become more pronounced as the class lineage specializes:
+- Novice begins deliberately neutral/androgynous;
+- early branches can make modest directional changes;
+- later Ways can become strongly species-, body- and silhouette-specific.
+
+The form is part of the Way's authored identity, not a separate character-creator axis.
+
+A descendant Way may fully redefine the body/species/form again. Visual inheritance is not a promise that every descendant remains the same species as its parent; advancement can transform the Echo again when that is part of the new Way's identity.
+
+Body form can also carry authored gameplay footprint/collision data. Different class forms may use different hitbox/agent dimensions rather than treating size as presentation-only.
+
+Attack/basic-attack/ability reach remains separately authored and is not automatically derived from body size.
+
+Required world progression must remain accessible to every intended playable form. Large forms can use authored navigation/clearance forgiveness at bottlenecks rather than being locked out because of their footprint.
+
+### Equipment permission inheritance
+
+A descendant Way inherits its parent's allowed equipment/form-family permissions by default.
+
+A descendant may:
+- add new equipment families;
+- explicitly remove/restrict inherited families when its body/class identity changes;
+- override specific compatibility where an inherited appearance no longer fits.
+
+This mirrors visual-appearance inheritance: lineage compatibility is the default, explicit divergence is the exception.
+
+### Gear reconciliation during advancement
+
+If the new Way/form is incompatible with equipment currently worn by the parent snapshot, advancement reconciles it safely:
+1. keep compatible equipment equipped where normal slot/permission rules allow;
+2. unequip incompatible/conflicting items into the child manifestation's carried inventory when there is room;
+3. if carried inventory cannot safely retain them, send those items to the Echo-wide shared bank as a fallback;
+4. if neither destination can safely retain every displaced item, the advancement transaction must fail before mutation rather than destroy/drop/overwrite gear.
+
+This reconciliation is part of the atomic advancement/fork transaction.
+
+The parent manifestation remains unchanged with its own original equipment/state.
+
+### Optional transformation presentation
+
+An advancement may optionally define a visual transformation presentation.
+
+The class/manifestation fork is authoritative; transformation VFX/animation are presentation layered on top and may be simple, bespoke, or absent.
 
 Weapon categories are created according to actual class needs rather than predefining every possible weapon.
 
@@ -282,3 +347,29 @@ They should have:
 - exact second-tier classes;
 - weapon categories as classes require them;
 - number of character slots.
+
+## Additional settled class-progression rules
+
+### Attribute growth
+
+Primary-attribute growth is determined by **class and gear**.
+
+Players do not receive a general pool of manual VIT/STR/AGI/INT/SPI points to distribute on level-up.
+
+This preserves strong authored class identity while still allowing build variation through gear, skills, effects and class choice.
+
+### Respec philosophy
+
+DiceFree does **not** need a broad always-available respec system as a core progression loop.
+
+The early Novice/onboarding stage may provide free respec support so players can learn the game and experiment before committing to later Ways.
+
+Later classes should not assume routine respec availability unless a particular class/content design explicitly needs it.
+
+### Advancement events
+
+Advancement quests/events are decided **case by case**.
+
+The first Tier 0 -> Tier 1 advancement is intentionally simple: the Novice is told to **go to the mountain** rather than completing a conventional bespoke class trial.
+
+Later advancements can use authored class-specific quests, trials, rituals, discoveries or other requirements as appropriate.

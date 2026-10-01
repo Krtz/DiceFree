@@ -114,6 +114,25 @@ This applies whether the previous save snapshot was alive or dead.
 
 Saved current HP is therefore not authoritative across a normal load.
 
+### Return-to-revive ability
+
+DiceFree includes an explicit player ability/action that returns the current manifestation to its **registered resurrection/revive point**.
+
+Settled behavior:
+- **10-second cast**;
+- cannot be started while the player has active aggro/threat;
+- taking damage interrupts the cast;
+- disabled during an active dungeon run;
+- target cooldown is roughly **10 minutes**;
+- the cooldown **resets on death, logout, and reload**;
+- the cooldown is therefore not part of durable manifestation persistence.
+
+This is distinct from an unstuck feature.
+
+The destination comes from the manifestation's current registered resurrection point rather than a hard-coded town.
+
+Do not persist this cooldown in save data unless the design is deliberately changed later.
+
 ### Cooldowns
 
 Ordinary ability and consumable cooldowns reset on load.

@@ -975,8 +975,12 @@ Additional settled class/form/equipment rules:
 - visible armor layering: Chest/Head/Hands/Legs/Feet replace baseline slot visuals; Shoulders and Back remain independent layers;
 - transformation presentation is optional per advancement and never owns the actual class/manifestation mutation;
 - larger authored form hitboxes are real combat volumes and may be easier for spatial enemy/projectile collision to hit;
-- players physically block other players; enemies physically block players;
-- no generic anti-box-in escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
+- players physically block other players with solid collision/sliding and **no pushing**; enemies physically block players;
+- no generic anti-box-in or unstuck escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
+- explicit **Return to current revive point** ability direction is now settled: 10-second rooted cast, movement/damage interrupt, cannot start with active aggro/threat, disabled in active dungeons, ~10-minute cooldown only on successful Return, canceled/interrupted casts do not consume it, and cooldown resets on death/logout/reload rather than persisting;
+- friendly projectiles pass through allied player bodies by default;
+- ordinary AoE uses authored hit-volume overlap rather than actor-center-only checks;
+- movement speed is class-authored/stat-derived, never inferred automatically from body/species/leg count;
 - advancement that invalidates equipped gear preserves it atomically: child inventory first, Echo-wide bank fallback, otherwise abort before mutation;
 - unequipped visual slots may show authored default clothing/armor or intentionally exposed body, per form/slot;
 - ADR-0004 records the class-form/equipment-compatibility decision.
@@ -1026,3 +1030,33 @@ Latest completed gameplay implementation: **69efbe9775d4fe00af5fd66356c1ca4871f6
 - **Q4:** unchanged; measured level 9/10 XP via elite, level 13/30 XP via 30-Road-Slime route. No rebalancing.
 - **Issues:** #6/#15/#22 updated with implementation SHA, states, future destination, validation, unchanged Q4 pacing and deferred boundaries.
 - **Next:** issue #36 architecture hardening is the immediate engineering priority recorded in the current design direction. Q5 progression beyond Cornberg still needs the next-settlement destination and delivery/reward authoring; do not invent those details.
+
+
+Additional collision rules settled 2026-10-01:
+- dead actors stop body-blocking immediately;
+- friendly summons/pets/companions block owners and allies by default;
+- ordinary friendly NPCs block players by default;
+- these use solid/no-push collision unless an authored exception says otherwise.
+
+
+# Post-MSQ5 code review — 2026-10-01
+
+Verified remote implementation:
+- `poc/cornberg` head: `1b574291fafc6b90d2fac1365eb4931f4bd59fa0` (handover sync).
+- MSQ5 feature commit: `69efbe9775d4fe00af5fd66356c1ca4871f6c6fc`.
+- Q5 implementation matches the intended boundary: existing Runner, Q4-only prerequisite, no level gate, future semantic destination, Active endpoint, no reward/schema change, no invented next-town content.
+- `ContextualNpc` is a small explicit ordered-action router and is acceptable as the current interaction seam; preserve behavior through architecture hardening.
+- Q5 validation/docs/issues were pushed and broad regressions/build/reload smokes were reported green.
+
+Architecture findings from actual PoC code:
+- there are still **zero first-party .asmdef/.asmref files** across 126 first-party C# files;
+- `QuestJournal` directly calls the static Items reward grant boundary;
+- `FixedRewardGrant` directly references concrete `ManifestationPersistence` to defer writes, confirming the known cross-domain persistence dependency;
+- `ManifestationPersistence` directly composes concrete Progression/Quests/World/Items components and owns storage plus runtime composition concerns;
+- `Interactor` still discovers world targets with `FindObjectsByType<InteractionTarget>()` on interact input;
+- `CombatActor` keeps a static global actor registry and computes combat state by scanning actors/actions;
+- current Editor setup/validation scripts remain in the same predefined Unity assembly because no asmdefs exist.
+
+These are exactly the debts #36 must address deliberately. Do not rewrite MSQ5 behavior while doing so.
+
+Immediate next engineering step remains **#36 architecture hardening**. Use a dedicated refactor branch from the verified PoC head, migrate in reviewable stages, and do not merge to main.

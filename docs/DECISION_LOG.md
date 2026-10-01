@@ -3001,7 +3001,7 @@ Examples intentionally supported by the design:
 - 50% chance for 2x damage;
 - 12.5% chance for 8x damage.
 
-**Historical open question:** ordinary multiple-source resolution was subsequently settled in the entries below. Modifier composition and rare stacking exceptions remain open.
+**Open:** how multiple simultaneous crit-granting sources interact is not yet decided.
 
 
 ## 2026-09-29 — Multiple crit-rule resolution
@@ -3182,3 +3182,143 @@ Cap reduction alone cannot create negative resistance/vulnerability.
 **Decision:** Explicit miss chance/modifiers are percentages, use additive percentage points by default, and clamp to 0-100%.
 
 Per-packet/projectile miss rolls require an explicit authored exception.
+
+## 2026-10-01 — Architecture contract, DCC source layout, and build distribution
+
+**Decision:** DiceFree now has an explicit architecture contract in `docs/ARCHITECTURE.md`. Significant architectural changes use ADRs under `docs/adr/`.
+
+**Decision:** The current lack of first-party Unity Assembly Definitions is accepted Cornberg PoC debt, but not the production target. Before substantial post-Cornberg expansion, migrate incrementally to explicit domain/runtime, Editor and test assemblies with one-way dependency rules.
+
+**Decision:** 3D art direction is stylized, moderately exaggerated fantasy readability, in the general readability space of Warcraft III / Magicka rather than photorealism. Equipment should be slightly oversized for isometric readability while remaining recognizably proportioned.
+
+**Decision:** Custom 3D production begins with exactly one original one-handed sword. After that pipeline is proven, intended validation order is shield -> shoes -> hat.
+
+**Decision:** Editable native DCC source files stay in the same Git repository for now, under repository-root `SourceArt/` outside Unity `Assets/`. Unity-ready exports live under `Assets/_DiceFree/Art/`. Both native/exported binary art use Git LFS.
+
+**Decision:** Do not create a "runtime-only" Git branch. Branches are development history, not player packaging. Playable builds are distributed as build artifacts/releases. A separate art-source repository is only reconsidered if measured size, permissions, LFS cost or CI checkout cost justify it.
+
+See:
+- `docs/ARCHITECTURE.md`
+- `docs/ART_PIPELINE.md`
+- ADR-0001
+- ADR-0002
+- ADR-0003
+
+## 2026-10-01 — Equipment visual progression and non-human class forms
+
+**Decision:** The first custom sword should be humble Cornberg equipment: a chunky, practical piece of metal rather than ornate hero gear.
+
+**Decision:** Equipment rarity/progression may be reflected through geometry, materials and VFX. Higher-end/endgame gear can use glow/emissive effects, particles, trails and similar presentation where appropriate, while preserving combat readability.
+
+**Decision:** DiceFree classes/Ways are not restricted to human forms or one universal human rig. Advancement may transform the Echo's species/body form.
+
+Settled examples:
+- Tier-2 Ranger is a **Wood Elf**.
+- Tier-2 Wizard is a **High Elf**.
+
+Tentative examples, not locked:
+- Berserker may be an Orc.
+- A Tier-4 tank may be a Centaur.
+
+**Decision:** Equipped weapons do not need baseline sheathing. Always-held presentation is acceptable. Do not build sheath sockets/animations/state until a future feature explicitly needs them.
+
+**Decision:** Architecture hardening issue #36 should happen **immediately**, before MSQ5 and before further growth in abilities/resources/classes.
+
+## 2026-10-01 — Fixed class body presentations and multi-slot equipment
+
+**Decision:** Each class/Way has one authored body/sex presentation. A class may be visibly male, visibly female or androgynous. DiceFree does not require male/female variants of every class.
+
+**Decision:** As class lineages advance and specialize, their models should generally become increasingly distinct in the direction of the class fantasy.
+
+**Decision:** Equipment appearance does not automatically resize/remesh/morph itself across incompatible body forms. Gear remains visually authored at its intended proportions; class/form compatibility and restrictions determine who can equip/use it. Descendant access is controlled through ordinary compatibility/inheritance data.
+
+**Decision:** All playable forms retain the same semantic eleven equipment slots, including radical body plans.
+
+**Decision:** Equipment may occupy multiple slots. A two-handed weapon occupies **Main Hand + Off Hand**. Implement occupied slots as data rather than scattered two-handed special cases.
+
+**Decision:** Architecture hardening #36 is authorized as a substantial controlled refactor now, provided behavior remains equivalent, the migration is incremental/inspectable, and validation stays green.
+
+## 2026-10-01 — Descendant transformations, rig families, armor replacement and form hitboxes
+
+**Decision:** A descendant Way may fully transform species/body/form again. A parent class becoming a Wood Elf does not force all descendants to remain that form.
+
+**Decision:** Visible wearable armor normally replaces the class form's baseline presentation for the occupied slot rather than universally layering on top.
+
+**Decision:** Similar forms should share rig/animation families where practical. Human/High-Elf/Wood-Elf-like bodies may share a humanoid family; materially different forms may use different families; radically different/non-biped forms such as a possible Centaur use an appropriate separate rig.
+
+**Decision:** Equipping a multi-slot item automatically unequips conflicting gear to carried inventory when capacity permits. If displaced gear cannot be retained safely, the equip fails atomically rather than destroying/dropping items.
+
+**Decision:** Class/body size is not presentation-only. Different class forms may use different authored gameplay hitboxes/physical/navigation footprints. Do not derive these automatically from renderer bounds; they are explicit form data.
+
+## 2026-10-01 — Reach, navigation forgiveness, inherited gear and transformation presentation
+
+**Decision:** Class/body hitbox size does not automatically determine melee/basic-attack reach. Attack/ability ranges remain separately authored.
+
+**Decision:** Large playable forms receive authored navigation/clearance forgiveness when needed. Required progression must not become inaccessible merely because a class has a larger footprint.
+
+**Decision:** Descendant Ways inherit their parent's equipment-family permissions by default, with explicit additions/removals/overrides allowed.
+
+**Decision:** Visible armor layering uses slot semantics: Chest, Head, Hands, Legs and Feet replace their baseline slot visuals; Shoulders and Back layer independently over the current torso/chest presentation.
+
+**Decision:** Way transformation presentation is optional per advancement. It may be bespoke, simple, or absent; gameplay advancement state does not depend on the effect.
+
+## 2026-10-01 — Body blocking, advancement gear preservation, and baseline exposure
+
+**Decision:** Larger class-form hitboxes are real combat volumes. Where enemy/projectile hit logic uses spatial collision/overlap, larger forms can be easier to hit.
+
+**Decision:** Player characters physically block one another.
+
+**Decision:** Enemies physically block players. There is no generic anti-stuck/anti-box-in escape rule; being surrounded is intentional positioning pressure and the player must fight/use authored tools to escape.
+
+**Decision:** This does not remove navigation forgiveness for required world routes. Doorway/route accessibility and combat body blocking are separate concerns.
+
+**Decision:** When advancement makes inherited equipped gear incompatible, preserve it atomically: move to the child inventory first, then the Echo-wide bank if inventory lacks room. If neither can safely retain all displaced items, abort advancement before mutation. Never destroy/drop gear because of a transformation.
+
+**Decision:** Empty equipment slots support both authored default clothing/armor and intentionally exposed body, chosen per class/form and slot.
+
+## 2026-10-01 — Player blocking, Return ability, friendly projectiles, AoE overlap, and movement
+
+**Decision:** Player-vs-player collision is solid blocking with normal collision sliding. Walking into another player does not push/force-move them.
+
+**Decision:** There is no generic unstuck feature.
+
+**Decision:** DiceFree should instead have an explicit **Return to current revive point** ability/action with a target cooldown of roughly **10 minutes**. It returns to the manifestation's currently registered resurrection point. Cast/combat/interruption/cooldown-persistence details remain open.
+
+**Decision:** Friendly projectiles do not collide with allied player bodies by default.
+
+**Decision:** Ordinary AoE uses gameplay hit-volume overlap: if any qualifying part of the actor's authored hit volume overlaps the AoE, the actor is affected unless that effect explicitly uses another rule.
+
+**Decision:** Movement Speed remains class-authored/stat-derived and is not automatically inferred from body form, species, leg count or physical size.
+
+## 2026-10-01 — Return-to-revive final core rules
+
+**Decision:** Return to current revive point has a **10-second cast**.
+
+**Decision:** Return cannot be started while the manifestation has active aggro/threat.
+
+**Decision:** Taking damage during the Return cast interrupts/cancels it.
+
+**Decision:** Return is disabled during an active dungeon run.
+
+**Decision:** Return targets the manifestation's currently registered revive point.
+
+**Decision:** Cooldown target is roughly **10 minutes**.
+
+**Decision:** Return cooldown resets on **death, logout, and reload**. It is not durably persisted.
+
+**Reaffirmed:** Return is not an unstuck feature and does not bypass ordinary player/enemy body blocking.
+
+## 2026-10-01 — Return rooting and friendly actor collision
+
+**Decision:** Return roots the caster for its 10-second cast. Movement cancels the cast.
+
+**Decision:** Return cooldown begins only after a successful teleport. Interrupted or manually canceled casts do not consume it.
+
+**Decision:** Dead actors stop body-blocking immediately, even if a corpse visual remains.
+
+**Decision:** Friendly summons/pets/companions physically block their owner and allied players by default.
+
+**Decision:** Ordinary friendly NPCs such as villagers, quest givers and vendors physically block players by default.
+
+**Reaffirmed:** Solid movement collision uses normal sliding with no pushing/force-shoving unless an explicit mechanic says otherwise.
+

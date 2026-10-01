@@ -8,6 +8,12 @@ The initialized project uses **Unity 6000.6.3f1**, 3D URP, PC-first.
 
 ## Architecture principles
 
+The enforceable architecture contract is now `docs/ARCHITECTURE.md`.
+
+Material architectural changes should be recorded under `docs/adr/` rather than silently changing dependency direction. `TECHNICAL_DIRECTION.md` remains broader direction; `ARCHITECTURE.md` defines the working dependency/layer rules agents should actively check before implementation.
+
+The current Cornberg PoC has **no first-party Assembly Definition files yet**. This is accepted prototype debt, not the long-term target. Before the project expands substantially beyond Cornberg, migrate incrementally toward explicit domain/runtime, Editor and test assemblies according to ADR-0002.
+
 ### Data-driven content
 Classes, items, enemies, loot tables, regions, advancement requirements, dungeon rewards and crafting recipes should primarily be data definitions rather than hard-coded chains.
 
@@ -250,6 +256,26 @@ Initial target:
 
 The networking architecture should support these rules without requiring a permanent dedicated-server backend.
 
+### Return-to-revive ability direction
+
+DiceFree should have an intentional player ability/action to **Return to the manifestation's current registered revive/resurrection point**.
+
+Current settled direction:
+- this is not an unstuck system;
+- it does not remove ordinary player/enemy body blocking;
+- it uses the manifestation's currently registered revive point;
+- cast time: **10 seconds**;
+- player is rooted while casting; movement cancels;
+- unavailable while the player has active aggro/threat;
+- taking damage during the cast interrupts/cancels it;
+- disabled once an active dungeon run has started;
+- cooldown target: roughly **10 minutes**;
+- cooldown begins only after successful completion; canceled/interrupted casts do not consume it;
+- the cooldown **resets on death, logout, and reload** rather than being durably persisted;
+- exact presentation and any additional cast-cancel conditions remain open.
+
+Keep this as an explicit gameplay/travel ability rather than hidden collision recovery logic.
+
 ## World/session structure
 
 The host/session contains the current overworld game state for the party.
@@ -323,6 +349,23 @@ Persistence/
 Tools/
 ```
 
+## 3D source-art and build-distribution pipeline
+
+Canonical pipeline: `docs/ART_PIPELINE.md`.
+
+Settled direction:
+- stylized/moderately exaggerated fantasy readability rather than realism;
+- slightly oversized equipment for the isometric camera;
+- first DCC proof is exactly one original one-handed sword, followed later by shield -> shoes -> hat;
+- editable native DCC sources live under repository-root `SourceArt/`, outside Unity `Assets/`;
+- Unity-ready exports live under `Assets/_DiceFree/Art/`;
+- native/exported binary art is tracked with Git LFS;
+- do not use a runtime-only Git branch;
+- player builds are build artifacts/releases, not source-controlled build folders;
+- keep one source repository unless measured scale/permissions/LFS/CI cost later justify a separate source-art repository.
+
+See ADR-0001 and ADR-0003.
+
 ## Character art pipeline
 
 Before producing large quantities of wearable gear:
@@ -382,3 +425,4 @@ should be interpreted and documented in meters unless a system explicitly says o
 Movement motors resolve physical speed in meters/second. Player-facing Move Speed uses the separate 10:1 presentation convention documented in `STATS_AND_DAMAGE.md` (50 Move Speed = 5 m/s).
 
 Do not introduce a second fantasy-distance conversion layer.
+

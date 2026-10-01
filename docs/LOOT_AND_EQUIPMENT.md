@@ -512,3 +512,98 @@ Drop chance:
 Exact shoe name, item level, rarity, art and flavor remain open.
 
 This item is separate from Q4's guaranteed +5% Attack Speed glove reward.
+
+
+
+## Equipment slot occupancy
+
+DiceFree keeps the same semantic equipment slot set across classes/forms:
+
+1. Head
+2. Shoulders
+3. Chest
+4. Hands
+5. Legs
+6. Feet
+7. Main Hand
+8. Off Hand
+9. Ring
+10. Amulet
+11. Back
+
+A class/form does not replace the slot model merely because its body plan is unusual.
+
+Items may occupy **multiple slots**.
+
+Canonical example:
+- a two-handed weapon occupies **Main Hand + Off Hand** while equipped.
+
+Implementation direction:
+- item data declares its primary/equip slot and all occupied slots;
+- equip validation must ensure every required slot is available;
+- equipping a multi-slot item unequips/conflicts with items occupying any required slot according to normal equip rules;
+- UI derives occupancy from item data rather than special-casing weapon names;
+- future unusual equipment may use the same occupancy mechanism if needed.
+
+When equipping an item that occupies slots currently used by other equipment:
+- automatically unequip the conflicting item(s) back into carried inventory **if inventory has room**;
+- perform the change atomically;
+- if all displaced items cannot be retained safely in inventory, reject the equip;
+- never destroy/drop/overwrite displaced gear as a side effect of equipping.
+
+Example:
+- player has a one-handed sword in Main Hand and shield in Off Hand;
+- equipping a two-handed sword automatically returns both conflicting items as needed to inventory and occupies Main Hand + Off Hand, provided inventory capacity permits.
+
+## Equipment appearance compatibility
+
+Equipment appearance is authored, not automatically morphed to every class body.
+
+The same visual mesh should keep its designed proportions.
+
+Compatibility/restriction data decides which Ways/forms can equip/use that item or appearance.
+
+Default lineage rule:
+- equipment authored/allowed for a class/form is usable by that class **and its descendants**;
+- descendants inherit the parent's equipment-family permissions by default;
+- descendants may add permissions or explicitly opt out/override inherited permissions when a later transformation/class identity requires it;
+- unrelated lineages do not inherit compatibility automatically.
+
+Examples:
+- a Ranger/Wood-Elf hat can be sized for that lineage and descendants;
+- a future Centaur hat can have different authored proportions;
+- these do not need to be one universal hat mesh dynamically resized across both forms.
+
+Prefer class/form-family compatibility tags and explicit exceptions over runtime mesh deformation machinery.
+
+## Wearable visual replacement
+
+For visible armor slots, the equipped item's authored appearance normally **replaces** the class form's baseline visual for that slot rather than being universally layered on top.
+
+Layering convention:
+- Chest replaces baseline torso/chest;
+- Head, Hands, Legs and Feet replace their corresponding baseline presentation;
+- Shoulders layer independently over the current Chest;
+- Back layers independently over the current torso/Chest;
+- weapons/offhands remain independent equipped presentation.
+
+The class/form provides the underlying body and default/baseline presentation for empty slots.
+
+A baseline slot can either have authored default clothing/armor or intentionally expose the underlying body. Both are supported per class/form and per slot.
+
+This remains a presentation rule; gameplay ownership/stats still come from the equipped item model.
+
+
+## Advancement equipment reconciliation
+
+A new Way may lose compatibility with gear inherited in the parent's snapshot.
+
+On advancement:
+- compatible gear may remain equipped;
+- incompatible/conflicting equipped gear is automatically unequipped into the child manifestation's carried inventory when capacity permits;
+- if carried inventory lacks capacity, the system may automatically deposit the displaced account-bound gear into the Echo-wide shared bank;
+- if neither inventory nor bank can safely retain all displaced items, advancement fails atomically before ownership/equipment mutation.
+
+Never destroy, drop into the world, or silently discard gear because a transformation changed equipment compatibility.
+
+The preserved parent manifestation keeps its original equipment and ownership state unchanged.
