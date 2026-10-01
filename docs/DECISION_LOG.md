@@ -3290,3 +3290,21 @@ Tentative examples, not locked:
 
 **Decision:** Movement Speed remains class-authored/stat-derived and is not automatically inferred from body form, species, leg count or physical size.
 
+## 2026-10-01 — Return-to-revive final core rules
+
+**Decision:** Return to current revive point has a **10-second cast**.
+
+**Decision:** Return cannot be started while the manifestation has active aggro/threat.
+
+**Decision:** Taking damage during the Return cast interrupts/cancels it.
+
+**Decision:** Return is disabled during an active dungeon run.
+
+**Decision:** Return targets the manifestation's currently registered revive point.
+
+**Decision:** Cooldown target is roughly **10 minutes**.
+
+**Decision:** Return cooldown resets on **death, logout, and reload**. It is not durably persisted.
+
+**Reaffirmed:** Return is not an unstuck feature and does not bypass ordinary player/enemy body blocking.
+
