@@ -264,8 +264,13 @@ Current settled direction:
 - this is not an unstuck system;
 - it does not remove ordinary player/enemy body blocking;
 - it uses the manifestation's currently registered revive point;
-- target cooldown direction is roughly **10 minutes**;
-- exact cast time, interruption/combat restrictions, cooldown persistence across relog/death, and presentation remain open design questions.
+- cast time: **10 seconds**;
+- unavailable while the player has active aggro/threat;
+- taking damage during the cast interrupts/cancels it;
+- disabled once an active dungeon run has started;
+- cooldown target: roughly **10 minutes**;
+- the cooldown **resets on death, logout, and reload** rather than being durably persisted;
+- exact presentation and any additional cast-cancel conditions remain open.
 
 Keep this as an explicit gameplay/travel ability rather than hidden collision recovery logic.
 
