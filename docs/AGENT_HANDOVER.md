@@ -1099,3 +1099,48 @@ The branch is still **not ready for integration** solely because Unity-dependent
 The repeated blocker is Unity Licensing Client IPC failure, not a known test failure.
 
 Next Codex cycle should focus on validation/environment recovery only. Do not continue architecture churn unless a real Unity validation run exposes a defect. Do not merge #36 or begin dependent gameplay-system growth before Unity-green evidence and final review.
+
+
+# Issue #36 validation-only retry — Unity licensing remains blocked (2026-10-01)
+
+The validation-only retry was performed against `refactor/architecture-hardening`
+`0a9fb6435a3c02b71e0316fe0171bc74c0ce689c`, using setup handover
+`1029a1f5c419e109ff7caa80cd89940291534969`. Unity Editor
+`6000.6.3f1` (`T:\TEMP\unity\6000.6.3f1\Editor\Unity.exe`) was not running
+before the retry, so no user-owned project lock was present. Unity Hub remained
+running (PIDs 3848, 12844, 20440, 22368, 23800, 27084); the Licensing Client
+remained running (PID 22096). No Hub or licensing process, license file, or
+preference was changed.
+
+The one retry ran:
+
+`Unity.exe -batchmode -nographics -projectPath T:\TEMP\DiceFree\DiceFree -executeMethod DiceFree.EditorTools.ArchitectureValidation.Run -logFile T:\TEMP\dicefree-architecture-validation-issue36-retry.log`
+
+Unity reached `Scripting: successfully reloaded assembly`, but did not reach the
+requested architecture method. The log records `Connection to channel
+LicenseClient-Axel refused`, a 60-second wait timeout, licensing initialization
+failure after 74.81 seconds, a relaunch of the Licensing Client, another refused
+reconnection, and `Error: 'com.unity.editor.headless' was not found.` The
+Licensing Client's own log at
+`C:\Users\Axel\AppData\Local\Unity\Unity.Licensing.Client.log` shows successful
+local entitlement resolution/activation through Unity Hub, so the precise
+failure is the Editor batch process not establishing its expected licensing IPC
+channel/entitlement; it is not evidence that the architecture validator failed.
+The known log from the previous attempt is
+`T:\TEMP\dicefree-architecture-validation-final.log` and records the same
+`LicenseClient-Axel` refusal and initialization timeout. The headless Unity
+process started for this retry was stopped after it remained blocked; no user
+Editor was terminated.
+
+Actual in-Unity architecture validation, Unity gameplay regressions, scene
+Missing Script/content validation, Windows development build, and standalone
+save/reload smoke remain **not executed**. Assembly reload alone is not being
+reported as a successful Unity compile/import validation. No code was changed;
+no scene, NavMesh, gameplay data, or schema v4 content was changed. The branch is
+still structurally reviewed, **not Unity-green, and not ready for integration**.
+
+Smallest safe user action: open Unity Hub, launch this DiceFree project normally
+once, and confirm that the Editor opens with its license recognized; then close
+that Editor and retry the prescribed batch validation. No reinstall or license
+reset is indicated by the available logs. Do not begin #37 until the required
+Unity evidence is green.
