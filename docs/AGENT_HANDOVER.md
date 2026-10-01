@@ -1191,3 +1191,38 @@ However real Unity load exposed two integration blockers:
 Next #36 cycle must audit all SerializeReference records affected by Assembly-CSharp -> asmdef moves, add a safe migration/compatibility path plus validation using Unity missing-managed-reference APIs, and explicitly resolve the InteractionRegistry scene migration. Re-run real Unity validation after the fixes before full gameplay/build/reload regression.
 
 Do not merge #36 yet.
+
+
+# Serialization migration fix verified in Unity
+
+Verified refactor branch:
+`refactor/architecture-hardening` at
+`2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`.
+
+Focused commits:
+- `bfcb48aebabe9b02619faf7423623a7437a35da9` — `AutoAggroPolicy` MovedFrom compatibility for Assembly-CSharp -> DiceFree.AI.Runtime.
+- `b0995315f37166b7bba23168cb195bc273b9420f` — explicitly author one InteractionRegistry on the existing Cornberg player.
+- `5db8aa40c76d39450d52bc75d0224bc4247d141c` — fail-closed managed-reference validation.
+- `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d` — migration documentation.
+
+Real Unity 6000.6.3f1 validation now confirms:
+- `DiceFree.EditorTools.ArchitectureValidation.Run` passes with `DICEFRE_ARCHITECTURE_OK`;
+- `ManagedReferenceValidation.Run` passes with `DICEFREE_MANAGED_REFERENCE_OK`;
+- Cornberg opens with no missing AutoAggroPolicy managed-reference errors;
+- Cornberg opens without the previous implicit "Creating missing InteractionRegistry" warning;
+- AutoAggroPolicy legacy managed-reference IDs and values are preserved;
+- audit found AutoAggroPolicy is the only first-party moved polymorphic managed-reference type;
+- the Cornberg scene change is only the explicit InteractionRegistry serialization (13 added lines), with no transform/geography/NavMesh/gameplay-content change;
+- Trivial Aggro validation reached `TRIVIAL_AGGRO_PLAYMODE_OK`;
+- Q4 reached all seven `SURGE_CHECKPOINT_OK` checkpoints.
+
+Full integration validation is still incomplete. A locally modified Unity AI package graph triggered a domain reload before the legacy Q4 harness emitted its final marker. Those local package/project-setting edits were not staged or committed.
+
+Still required before #36 integration:
+- settle/restore a clean package/project-settings state without discarding user work;
+- rerun full Q1-Q5, items/reward, persistence/recovery, combat/traversal, Missing Script/content validation;
+- Windows development build;
+- isolated Q4-completed/Q5-active standalone first-launch/reload smoke;
+- final review.
+
+Nothing is merged. Do not begin #37 until #36 is fully green and reviewed.
