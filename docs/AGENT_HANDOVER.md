@@ -883,6 +883,43 @@ When entering a new chat/session:
 
 ---
 
+# Architecture / 3D pipeline decisions — 2026-10-01
+
+Canonical:
+- `docs/ARCHITECTURE.md`
+- `docs/ART_PIPELINE.md`
+- `docs/adr/0001-repository-and-build-distribution.md`
+- `docs/adr/0002-runtime-modules-and-asmdefs.md`
+- `docs/adr/0003-3d-source-and-export-pipeline.md`
+
+Axel wants architecture enforced early so DiceFree does not grow into another monolith.
+
+Settled:
+- implementation agents must read/check `ARCHITECTURE.md`;
+- material architecture changes use ADRs;
+- current absence of first-party `.asmdef` files is explicit prototype debt; migrate incrementally before major post-Cornberg expansion;
+- gameplay domains should not depend on UI, Editor or concrete persistence implementations;
+- authored ScriptableObjects are definitions, not mutable player/session truth;
+- prefer typed semantic facts/commands and deterministic random/time seams;
+- production scene direction is prefab-first and additive where appropriate;
+- debugging and automated validation are architecture requirements;
+- current reward code's direct dependency on concrete persistence is a known boundary to clean up during asmdef hardening.
+
+3D/art:
+- stylized moderately exaggerated fantasy readability, broadly WC3/Magicka-like in feel but original;
+- equipment slightly oversized for isometric readability;
+- first custom model is exactly one one-handed sword; later shield, shoes, hat;
+- 1 Unity unit = 1 meter; DCC scenes metric;
+- native DCC source under repository-root `SourceArt/`, outside Unity `Assets/`;
+- Unity-ready exports under `Assets/_DiceFree/Art/`;
+- binary source/exports use Git LFS;
+- keep one repository for now;
+- no runtime-only Git branch;
+- player/tester builds are release/build artifacts, not repo clones;
+- reconsider a separate art repo only after measured size, permission, LFS or CI pressure.
+
+Do not mass-produce art until the sword proves scale/export/import/pivot/material/prefab validation conventions.
+
 # Current recommended next implementation step
 
 Playtest Q4 and review the measured route pacing before changing balance. The elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Farmer presentation, elite exact tuning and 200 XP/100 gold remain provisional.
