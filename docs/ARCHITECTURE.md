@@ -294,6 +294,35 @@ A scene should compose authored prefabs rather than duplicate large bespoke hier
 
 Use nested prefabs/variants carefully where inheritance is genuinely helpful.
 
+## Character form / rig architecture
+
+Do not make "the player" synonymous with one humanoid mesh or one human skeleton.
+
+Gameplay identity remains the manifestation/CombatActor/class state. Visual/animation body form is presentation authored by the current Way.
+
+The long-term character presentation seam must be able to resolve a class/form profile containing concepts such as:
+- body prefab / renderer set;
+- rig/animator family;
+- semantic attachment/socket map;
+- equipment-appearance compatibility;
+- animation set/overrides;
+- body-specific presentation offsets;
+- future form-specific locomotion when genuinely necessary.
+
+Gameplay equipment slots remain semantic (Head, Feet, Main Hand, etc.). A particular body form decides how or whether that slot is visually represented.
+
+Do not let gameplay systems query literal bone names.
+
+Use semantic attachment concepts which a rig/form adapter maps to concrete transforms.
+
+Rig reuse is encouraged for compatible humanoids, but architecture must permit:
+- Wood Elf and High Elf forms;
+- different-sized humanoids;
+- Orc-like forms;
+- eventual non-biped forms such as a possible Centaur class.
+
+A non-human class should not require cloning the combat, inventory, quest or persistence engines.
+
 ## Scene architecture
 
 Cornberg is currently a vertical-slice PoC and does not need an immediate scene rewrite.
