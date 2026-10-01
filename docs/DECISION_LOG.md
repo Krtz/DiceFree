@@ -3182,3 +3182,25 @@ Cap reduction alone cannot create negative resistance/vulnerability.
 **Decision:** Explicit miss chance/modifiers are percentages, use additive percentage points by default, and clamp to 0-100%.
 
 Per-packet/projectile miss rolls require an explicit authored exception.
+
+## 2026-10-01 — Architecture contract, DCC source layout, and build distribution
+
+**Decision:** DiceFree now has an explicit architecture contract in `docs/ARCHITECTURE.md`. Significant architectural changes use ADRs under `docs/adr/`.
+
+**Decision:** The current lack of first-party Unity Assembly Definitions is accepted Cornberg PoC debt, but not the production target. Before substantial post-Cornberg expansion, migrate incrementally to explicit domain/runtime, Editor and test assemblies with one-way dependency rules.
+
+**Decision:** 3D art direction is stylized, moderately exaggerated fantasy readability, in the general readability space of Warcraft III / Magicka rather than photorealism. Equipment should be slightly oversized for isometric readability while remaining recognizably proportioned.
+
+**Decision:** Custom 3D production begins with exactly one original one-handed sword. After that pipeline is proven, intended validation order is shield -> shoes -> hat.
+
+**Decision:** Editable native DCC source files stay in the same Git repository for now, under repository-root `SourceArt/` outside Unity `Assets/`. Unity-ready exports live under `Assets/_DiceFree/Art/`. Both native/exported binary art use Git LFS.
+
+**Decision:** Do not create a "runtime-only" Git branch. Branches are development history, not player packaging. Playable builds are distributed as build artifacts/releases. A separate art-source repository is only reconsidered if measured size, permissions, LFS cost or CI checkout cost justify it.
+
+See:
+- `docs/ARCHITECTURE.md`
+- `docs/ART_PIPELINE.md`
+- ADR-0001
+- ADR-0002
+- ADR-0003
+
