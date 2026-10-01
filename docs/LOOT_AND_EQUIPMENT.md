@@ -589,4 +589,21 @@ Layering convention:
 
 The class/form provides the underlying body and default/baseline presentation for empty slots.
 
+A baseline slot can either have authored default clothing/armor or intentionally expose the underlying body. Both are supported per class/form and per slot.
+
 This remains a presentation rule; gameplay ownership/stats still come from the equipped item model.
+
+
+## Advancement equipment reconciliation
+
+A new Way may lose compatibility with gear inherited in the parent's snapshot.
+
+On advancement:
+- compatible gear may remain equipped;
+- incompatible/conflicting equipped gear is automatically unequipped into the child manifestation's carried inventory when capacity permits;
+- if carried inventory lacks capacity, the system may automatically deposit the displaced account-bound gear into the Echo-wide shared bank;
+- if neither inventory nor bank can safely retain all displaced items, advancement fails atomically before ownership/equipment mutation.
+
+Never destroy, drop into the world, or silently discard gear because a transformation changed equipment compatibility.
+
+The preserved parent manifestation keeps its original equipment and ownership state unchanged.
