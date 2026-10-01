@@ -945,7 +945,7 @@ They modify current/effective Defense only.
 
 Example: if the current underlying reference is 100 Defense, applying a temporary reduction does not cause later percentage effects to calculate from the reduced remainder.
 
-The exact composition of the underlying Defense reference remains intentionally open for later design review.
+Equipped gear Defense participates in underlying Defense alongside class base and attribute-derived Defense. Membership of other future permanent/passive sources remains open.
 
 ### Defense precision
 

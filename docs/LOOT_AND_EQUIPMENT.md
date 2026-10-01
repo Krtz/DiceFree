@@ -492,8 +492,8 @@ Rules:
 - this is a fixed authored quest reward, not a randomized item roll;
 - both Q4 completion paths grant the same glove reward;
 - the reward can only be granted once per eligible Q4 completion;
-- exact item name, item level, rarity, art, flavor and any additional stats remain open;
-- the +5% Attack Speed property is settled.
+- exact item name, item level, rarity, art and flavor remain open;
+- the gloves grant +5% Attack Speed only, with no other gameplay stats.
 
 This is a useful early proof that quest rewards can award memorable handcrafted equipment rather than only currency/XP.
 

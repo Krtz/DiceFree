@@ -183,7 +183,7 @@ The next main story implementation is Q4. Its core completion structure is now s
 - this first elite is deliberately a stat-check fight with no bespoke phase/split/pool/enrage mechanics;
 - satisfying either route sets Q4 ready-to-turn-in; the player returns to Cornberg for completion/reward.
 
-Implementation still needs exact elite spawn/respawn/tuning and the specific Q4 giver/turn-in presentation, but agents must not reintroduce the dungeon as a third Q4 route.
+Q4 uses a fixed deep-forest clearing, 7.5-minute respawn, 50m nearby credit and a different named farmer already present as ambient flavor. Exact elite stats, XP/gold payouts and farmer presentation still need authoring/playtest. Do not reintroduce the dungeon as a third Q4 route.
 
 ## Trivial-enemy auto-aggro — complete
 
@@ -205,6 +205,24 @@ Implemented on `poc/cornberg` in `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Exi
 Passed: focused road tests (real mouse/WASD, combat, live stats, enter/exit, overlaps, teleport, death/Return/load); all 13 traversal routes; combat/death/well; trivial aggro; Q1; Q2 (six reloads); Q3 and Runner Returns (four each). Windows development build: 171,996,594 bytes. Two isolated standalone startup/reload smokes: zero errors, identity/level 6/0 XP/completed Runner retained, revisions 9 -> 10. No human playthrough claimed. Known SearchDatabase #17 remains separate. Full storage/migration/recovery suite was not separately rerun because durable code is untouched.
 
 Scene adds only two components (33 lines); geography/nav/enemy tuning/save schema unchanged. See `docs/CORNBERG_SURFACES.md` on PoC for IDs, static-mesh limits and tests. Issues #35/#15 document the handoff. Trivial aggro is complete, mounts are not started, and Q4 is not implemented; preserve the newer Q4 decisions and resolve remaining authored details before its own patch.
+
+## Handcrafted items / equipment / carried gold — complete
+
+Implemented and pushed on `poc/cornberg` in `ba29d5a46f6f126bacb8b5fb5365196f98393423` (Add durable handcrafted items equipment and carried gold).
+
+- Authored ItemDefinition with all eleven slots, fixed stat package and provisional metadata; owned GUID instances distinct from content IDs, duplicate definitions allowed.
+- Manifestation CarriedInventory, Equipment references and GoldWallet; fixed-item grant boundary; source-keyed equipment stats separate from transient effects; free overworld/combat swaps.
+- `item.cornberg.work-gloves`: provisional Cornberg Work Gloves, Hands, +5% Attack Speed only.
+- `item.cornberg.forest-shoes`: provisional Forest Travel Shoes, Feet, +1 Physical Defense, +1 Magical Defense, +1% Movement Speed. The later 20% drop is NOT implemented.
+- Gear Defense joins underlying Defense. Gear speed affects runtime stats, not AGI coefficients; road remains independent. 1 unit = 1m; displayed Move Speed = physical m/s ×10. No motor retune.
+- Inventory overlay uses provisional B (I remains interaction), data-derived labels, equip/unequip and explicitly development-only grants. New games start empty.
+- Echo/manifestation v3 migrations from supported v1/v2; old inventory/equipment/gold default empty/zero. Unknown sections/resources/quests remain preserved; missing item definitions/unknown slots round-trip inertly. Profile Inspector exposes new ownership/currency diagnostics.
+
+Passed: focused inventory/equipment/gold/stat/metric/road/death/Return/combat-swap and process reload checks; road; trivial aggro; combat/death/Return/well and math; all 13 traversal routes/both controls; Q1; Q2 (six reloads); Q3 and Runner (four each, including v2 migration); fresh/injured/dead/legacy persistence, migrations, recovery/backups/stale writers and Inspector. Windows development build: 172,013,950 bytes. Two isolated standalone smokes retained four instance IDs, three slot references (including inert test data) and 37 test gold, revisions 3 -> 4, no errors. No human playthrough claimed; exact known SearchDatabase #17 remains separate.
+
+Scene only adds four player components (55 lines); geography/navigation/enemy/quest tuning unchanged. See `docs/CORNBERG_ITEMS.md` on PoC. Issues #24/#26/#15 receive the handoff. #24 remains open: no generation/budgets/affixes/sockets/sets/procs, equipment art, vendors/bank/crafting or advanced eligibility. No Q4, elite, drop roll, ambient barks, mounts or networking implemented.
+
+Next smallest gameplay patch is Q4's OR objective/reward integration, using the now-durable grant boundary and ensuring quest completion/XP/gold/gloves are captured together. No item-foundation blocker remains. Farmer name/art/barks and exact elite level/stats/XP/gold require authored choices and tuning, not a new global policy. The 50m cooperative credit rule is settled; actual networking stays out of scope.
 
 # High-level game / narrative context
 
@@ -848,11 +866,11 @@ When entering a new chat/session:
 
 Q4 is the next Cornberg story beat and its high-level completion rules are now settled. Before implementation, finish the remaining authored details for the dangerous elite Slime and the exact Q4 interaction/turn-in presentation. Preserve the two-path structure documented in `WORLD_1.md`.
 
-The latest completed implementation increment is road speed `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`. Next smallest step: playtest the provisional +15% road bonus and edge behavior; resolve remaining Q4 authored details before starting its separately scoped OR-objective slice. Do not silently start mounts.
+The latest completed implementation increment is the item/equipment/gold foundation `ba29d5a46f6f126bacb8b5fb5365196f98393423`. Next: a separately authorized Q4 content patch using semantic OR objectives and the durable reward boundary. Do not expand into the full item framework or mounts.
 
 # Latest handover update
 
-- **Date:** 2026-09-30
+- **Date:** 2026-10-01
 - **Branch updated:** `setup/unity-project`
 - **Confirmed Q3:** `4289854b096b790cbb8df847f7e4c8309b2033d7`
 - **Confirmed Runner Returns:** `2de1a58703e845e1018bcdd5cfdf3f185f16a916`
@@ -862,8 +880,10 @@ The latest completed implementation increment is road speed `9f1d6f8634813cb8f2a
 - **Q4 design now settled:** both routes active simultaneously; elite Slime OR 30 post-accept eligible non-crop Slime kills; no retroactive elite/kill credit; dungeon is side content but eligible dungeon Slimes can count; elite guidance says somewhere in Slime Forest; elite is a stat check only; either route sets ready-to-turn-in back in Cornberg; same Q4 reward either route; target around level 9–10 with exact XP tuned by playtest.
 - **Q4 elite:** fixed deep-forest clearing, repeatable/farmable, 7.5-minute respawn.
 - **Q4 co-op credit:** eligible nearby party members with Q4 active share qualifying ordinary Slime kills and the elite kill using authored Nearby policy; Q4 radius is **50 meters**.
-- **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art/extra stats remain open.
-- **Q4 giver:** still deliberately open between the returning Runner and another ordinary Cornberg farmer.
-- **Next design need:** settle giver, nearby-credit radius, elite level/stats/reward/drop identity, and glove presentation metadata; road speed is complete and validated.
+- **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art remain provisional; no extra gameplay stats.
+- **Q4 giver:** a different named Cornberg farmer, present as ambient flavor before Q4; exact name/art/barks remain open.
+- **Next authoring need:** farmer presentation, fixed elite level/stats and XP/gold payouts. Nearby radius is settled at 50m; shoes have 20% drop chance in the future Q4 patch.
 
 - **Confirmed road speed:** `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`; +15% provisional, focused/regression/build/two standalone smokes green. Mount work remains unstarted.
+
+- **Confirmed item foundation:** `ba29d5a46f6f126bacb8b5fb5365196f98393423`; schema/records v3; full focused/regression/build/standalone coverage green. Q4 is not implemented.
