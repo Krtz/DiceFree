@@ -114,6 +114,27 @@ Do not prematurely jump to:
 
 # Current implementation status
 
+## Latest completed increment: Cornberg Q4
+
+Implemented, validated and pushed on `poc/cornberg` in **39ebbf29c809bf08e7d4bc2626f80714159e85e5** (Add Cornberg Q4 surge alternatives elite and world loot).
+
+- `quest.cornberg.break-slime-surge` follows completed `story.cornberg.runner-returns`.
+- Different farmer `npc.cornberg.surge-farmer`, provisionally **Mira**, stands near (12,0,-8) before/after Q4 with reusable proximity barks. Name/art/location/dialogue remain provisional.
+- Shallow semantic ANY objective: dangerous elite OR 30 eligible tagged Slimes, simultaneously active; no retroactive credit; ReadyToTurnIn then farmer reward. `quest-credit.cornberg.surge-slime` is on Road, Named Forest and elite definitions, not Crop Slime.
+- Nearby quest credit uses a provider-neutral local party seam and inclusive 50m Euclidean radius from defeat. Existing owner XP is unchanged; no networking.
+- `enemy.forest-elite-slime` uses the shared Slime archetype in the separate existing deep clearing near (77,0,53), without an exact quest marker. Provisional level 8, 240 HP, 12 damage, 1.6s interval, 0.5s windup, 0.6m reach, 3.4m/s, 8m awareness, 16m leash, 80 XP. Fixed 450s respawn.
+- Authored 20% shoe roll creates a transient FFA world pickup. Any valid nearby manifestation can claim a new owned instance; no killer reservation and no durable ownership until pickup.
+- Shared provisional reward: **200 XP, 100 gold, one `item.cornberg.work-gloves`**. Completion/reward mutation uses prevalidation, reentrancy guard and deferred persistence writes.
+- Schema/manifestation **v4** adds per-alternative counts. Supported v1/v2/v3 saves migrate; genuine item-bearing v3 fixture, unknown records, original backups and recovery remain covered. Profile Inspector shows alternative IDs/counts.
+- Measured from level 6/0 XP: elite route **level 9/10 XP**; 30 Road Slimes at unchanged 20 XP each **level 13/30 XP**. Do not silently suppress incidental XP to erase this difference.
+- Real combat fixtures: solo 6 loses, solo 8/9 win (~25/~52 HP left). Stationary two-level-6 math fixture wins in ~9.89s with ~23.68 tank HP; not a networked co-op playthrough.
+
+Passed Q4 focused validation/seven reloads, both completion orders, partial+elite, pre-accept exclusion, barks/range, 49/50/>50m party credit with no shared XP, reward prevalidation/reentrancy, non-killer pickup, per-life rolls and actual 450s respawn. Existing item/equipment/gold, separate reload, road speed, trivial aggro, combat/death/Return/well, Q1/Q2/Q3/Runner, all 13 traversal routes/both controls, persistence/migrations/recovery/backups/stale writers/Profile Inspector passed. Windows development build: **172,036,002 bytes**. Two isolated standalone startup/reload smokes passed: completed Q4, 100 gold, one glove/one shoe, stable GUIDs/XP, no runtime errors. No manual playthrough claimed; exact editor SearchDatabase #17 remains separate.
+
+Initial elite placement overlapped the Road Slime and failed Q2; only the new elite moved to the separate clearing, then regressions passed. Scene changes are additive; geography/navigation and existing balance were preserved. See `docs/CORNBERG_Q4.md` on PoC. Issues **#6/#15/#22/#28/#24/#26** now contain SHA, scope, validation and pacing. Nothing merged.
+
+**Current next step:** Axel's Q4 playtest/pacing review, especially the level-13 mass route. MSQ5 is a separate next content increment requiring its own scope; it is not implemented. Dungeon, mounts, networking and mature item/encounter systems remain out of scope.
+
 ## Implemented foundation on Cornberg direction
 
 Known working/implemented areas include:
@@ -150,7 +171,7 @@ Passed: focused Q3 with four reload checkpoints, Q1/Q2, combat, all 13 traversal
 
 # Current work in progress
 
-Q3 and the Runner Returns bridge are complete on `poc/cornberg`.
+Q1 through Q4, including Runner Returns, are complete on `poc/cornberg`. No implementation work remains in progress for this Q4 cycle. The sections below retain earlier increment history; the Q4 status above supersedes earlier future-work wording.
 
 Runner Returns landed in `2de1a58703e845e1018bcdd5cfdf3f185f16a916` (`Add Runner Returns and reusable TalkTo story credit`).
 
@@ -164,7 +185,7 @@ It adds:
 - focused reload/semantic regression validation;
 - `docs/CORNBERG_RUNNER.md`.
 
-The next main story implementation is Q4. Its core completion structure is now settled:
+Q4 is now implemented as recorded above. Its settled completion structure remains:
 
 - path A: kill the dangerous elite Slime;
 - path B: kill 30 eligible Slimes after accepting Q4;
@@ -864,9 +885,9 @@ When entering a new chat/session:
 
 # Current recommended next implementation step
 
-Q4 is the next Cornberg story beat and its high-level completion rules are now settled. Before implementation, finish the remaining authored details for the dangerous elite Slime and the exact Q4 interaction/turn-in presentation. Preserve the two-path structure documented in `WORLD_1.md`.
+Playtest Q4 and review the measured route pacing before changing balance. The elite route reaches level 9/10 XP and the 30-Road-Slime route reaches level 13/30 XP from level 6/0 XP. Farmer presentation, elite exact tuning and 200 XP/100 gold remain provisional.
 
-The latest completed implementation increment is the item/equipment/gold foundation `ba29d5a46f6f126bacb8b5fb5365196f98393423`. Next: a separately authorized Q4 content patch using semantic OR objectives and the durable reward boundary. Do not expand into the full item framework or mounts.
+Latest completed implementation: **39ebbf29c809bf08e7d4bc2626f80714159e85e5**, Q4 with reusable OR objectives, nearby quest credit, barks, reward integration and FFA shoe pickup. After playtest review, scope the smallest MSQ5/runner departure beat separately. Do not silently start the next town, dungeon, full item framework or mounts.
 
 # Latest handover update
 
@@ -882,8 +903,9 @@ The latest completed implementation increment is the item/equipment/gold foundat
 - **Q4 co-op credit:** eligible nearby party members with Q4 active share qualifying ordinary Slime kills and the elite kill using authored Nearby policy; Q4 radius is **50 meters**.
 - **Q4 reward:** XP + gold (amounts tuned by playtest) + guaranteed authored Hands/gloves with **+5% Attack Speed**. Glove name/item level/rarity/art remain provisional; no extra gameplay stats.
 - **Q4 giver:** a different named Cornberg farmer, present as ambient flavor before Q4; exact name/art/barks remain open.
-- **Next authoring need:** farmer presentation, fixed elite level/stats and XP/gold payouts. Nearby radius is settled at 50m; shoes have 20% drop chance in the future Q4 patch.
+- **Q4 authoring status:** provisional Mira/elite/rewards are implemented; 50m Nearby credit and 20% FFA shoe drops are validated. Next is playtest/pacing review, not reimplementation.
 
 - **Confirmed road speed:** `9f1d6f8634813cb8f2ab2a68e7c81121d8c5597f`; +15% provisional, focused/regression/build/two standalone smokes green. Mount work remains unstarted.
 
-- **Confirmed item foundation:** `ba29d5a46f6f126bacb8b5fb5365196f98393423`; schema/records v3; full focused/regression/build/standalone coverage green. Q4 is not implemented.
+- **Confirmed item foundation:** `ba29d5a46f6f126bacb8b5fb5365196f98393423`; originally schema/records v3, now migrated to v4 by Q4.
+- **Confirmed Q4:** `39ebbf29c809bf08e7d4bc2626f80714159e85e5`; focused/regression/build/two standalone reload smokes green. Issues #6/#15/#22/#28/#24/#26 updated. MSQ5 is not implemented.
