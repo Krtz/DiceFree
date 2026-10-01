@@ -379,6 +379,25 @@ This does not override the separate world-navigation-forgiveness rule above. Req
 
 Any future exception such as phasing, ghosting, knock-through, ally pass-through, blink, or unstoppable movement must be an explicitly authored mechanic rather than an implicit collision workaround.
 
+### Return-to-revive gameplay ability
+
+Return-to-revive is an explicit gameplay/travel ability, not an engine recovery or unstuck path.
+
+Settled rules:
+- 10-second cast;
+- cannot begin while the actor has active aggro/threat;
+- incoming damage interrupts the cast;
+- disabled during active dungeon runs;
+- approximately 10-minute cooldown;
+- cooldown resets on death, logout, and reload;
+- destination is the manifestation's registered revive point.
+
+Architectural consequences:
+- collision/navigation code must not call Return automatically;
+- the ability should consume existing combat/threat/cast-interruption and revive-point contracts rather than own duplicate versions;
+- dungeon/session policy decides whether the action is currently allowed;
+- the cooldown is transient/session-local state, not durable persistence.
+
 ### Transformation presentation
 
 Advancement may optionally specify a transformation presentation/effect.
