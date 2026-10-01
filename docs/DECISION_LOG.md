@@ -3308,3 +3308,17 @@ Tentative examples, not locked:
 
 **Reaffirmed:** Return is not an unstuck feature and does not bypass ordinary player/enemy body blocking.
 
+## 2026-10-01 — Return rooting and friendly actor collision
+
+**Decision:** Return roots the caster for its 10-second cast. Movement cancels the cast.
+
+**Decision:** Return cooldown begins only after a successful teleport. Interrupted or manually canceled casts do not consume it.
+
+**Decision:** Dead actors stop body-blocking immediately, even if a corpse visual remains.
+
+**Decision:** Friendly summons/pets/companions physically block their owner and allied players by default.
+
+**Decision:** Ordinary friendly NPCs such as villagers, quest givers and vendors physically block players by default.
+
+**Reaffirmed:** Solid movement collision uses normal sliding with no pushing/force-shoving unless an explicit mechanic says otherwise.
+
