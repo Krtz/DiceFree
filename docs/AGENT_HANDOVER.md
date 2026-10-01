@@ -975,8 +975,12 @@ Additional settled class/form/equipment rules:
 - visible armor layering: Chest/Head/Hands/Legs/Feet replace baseline slot visuals; Shoulders and Back remain independent layers;
 - transformation presentation is optional per advancement and never owns the actual class/manifestation mutation;
 - larger authored form hitboxes are real combat volumes and may be easier for spatial enemy/projectile collision to hit;
-- players physically block other players; enemies physically block players;
-- no generic anti-box-in escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
+- players physically block other players with solid collision/sliding and **no pushing**; enemies physically block players;
+- no generic anti-box-in or unstuck escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
+- planned explicit **Return to current revive point** ability with ~10-minute target cooldown; exact cast/combat/interruption/cooldown-persistence semantics remain open;
+- friendly projectiles pass through allied player bodies by default;
+- ordinary AoE uses authored hit-volume overlap rather than actor-center-only checks;
+- movement speed is class-authored/stat-derived, never inferred automatically from body/species/leg count;
 - advancement that invalidates equipped gear preserves it atomically: child inventory first, Echo-wide bank fallback, otherwise abort before mutation;
 - unequipped visual slots may show authored default clothing/armor or intentionally exposed body, per form/slot;
 - ADR-0004 records the class-form/equipment-compatibility decision.
