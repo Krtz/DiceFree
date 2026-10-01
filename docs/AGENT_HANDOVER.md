@@ -943,6 +943,11 @@ Additional settled class/form/equipment rules:
 - descendant Ways inherit parent equipment-family permissions by default, with explicit add/remove/override support;
 - visible armor layering: Chest/Head/Hands/Legs/Feet replace baseline slot visuals; Shoulders and Back remain independent layers;
 - transformation presentation is optional per advancement and never owns the actual class/manifestation mutation;
+- larger authored form hitboxes are real combat volumes and may be easier for spatial enemy/projectile collision to hit;
+- players physically block other players; enemies physically block players;
+- no generic anti-box-in escape rule: combat encirclement is intentional, while required world-route navigation forgiveness remains separate;
+- advancement that invalidates equipped gear preserves it atomically: child inventory first, Echo-wide bank fallback, otherwise abort before mutation;
+- unequipped visual slots may show authored default clothing/armor or intentionally exposed body, per form/slot;
 - ADR-0004 records the class-form/equipment-compatibility decision.
 
 Tracking:
