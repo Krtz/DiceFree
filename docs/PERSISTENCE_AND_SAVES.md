@@ -114,6 +114,16 @@ This applies whether the previous save snapshot was alive or dead.
 
 Saved current HP is therefore not authoritative across a normal load.
 
+### Return-to-revive ability
+
+Design direction includes an explicit player ability/action that returns the current manifestation to its **registered resurrection/revive point**, with a target cooldown of roughly **10 minutes**.
+
+This is distinct from an unstuck feature.
+
+Its exact durable cooldown semantics are **not settled yet**. Do not assume whether the cooldown resets on load or persists across sessions until that design choice is made.
+
+The destination comes from the manifestation's current registered resurrection point rather than a hard-coded town.
+
 ### Cooldowns
 
 Ordinary ability and consumable cooldowns reset on load.
