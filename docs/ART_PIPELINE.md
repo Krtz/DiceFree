@@ -283,6 +283,14 @@ Examples:
 
 The underlying body/form remains class-authored. Slots without visible equipment use that form's authored baseline presentation.
 
+Layering convention:
+- Chest replaces the form's baseline chest/torso presentation;
+- Head replaces the baseline head-slot presentation;
+- Hands, Legs and Feet replace their corresponding baseline slot presentation;
+- Shoulders layer independently over the current Chest presentation;
+- Back layers independently over the current torso/Chest presentation;
+- weapons/offhands remain independent held/equipped presentation.
+
 This does not require every body form to support every item; compatibility restrictions still decide what can be equipped.
 
 Do not require every class to deform onto one universal human skeleton merely to simplify tooling.
@@ -304,6 +312,14 @@ Do **not** plan a sheathing system as a baseline requirement.
 For the current direction, equipped weapons may simply remain visibly held while equipped.
 
 Do not create hip/back sheath sockets, draw/sheathe state machines, or sheathing animations unless a later feature explicitly needs them.
+
+## Advancement transformation presentation
+
+A Way may optionally have an authored visual transformation sequence/effect when the Echo advances into it.
+
+This is optional per advancement. It can range from a simple flash/fade/model swap to a bespoke transformation sequence.
+
+Do not require one universal transformation animation or VFX package for all Ways.
 
 ## Materials and textures
 
@@ -356,6 +372,10 @@ Each class/form profile should author collision/selection/navigation footprint d
 Do not derive gameplay collision automatically from renderer bounds or arbitrary mesh triangles. The hitbox/footprint is explicit authored gameplay data associated with the class form.
 
 Changing Way/body form may therefore change the gameplay hitbox. Balance consequences should be deliberate and testable.
+
+Hitbox/physical footprint does **not** automatically determine attack reach. A large form can have a large body while its attacks keep separately authored ranges.
+
+Playable forms must also receive navigation forgiveness where authored world bottlenecks would otherwise make a large body unable to continue required content. Preserve meaningful physical size in normal play, but design doors/routes/helpers so body choice never soft-locks progression.
 
 ## Prefab boundary
 
