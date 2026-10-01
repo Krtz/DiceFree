@@ -302,6 +302,7 @@ Gameplay identity remains the manifestation/CombatActor/class state. Visual/anim
 
 The long-term character presentation seam must be able to resolve a class/form profile containing concepts such as:
 - body prefab / renderer set;
+- one authored sex/body presentation for that class;
 - rig/animator family;
 - semantic attachment/socket map;
 - equipment-appearance compatibility;
@@ -309,7 +310,16 @@ The long-term character presentation seam must be able to resolve a class/form p
 - body-specific presentation offsets;
 - future form-specific locomotion when genuinely necessary.
 
-Gameplay equipment slots remain semantic (Head, Feet, Main Hand, etc.). A particular body form decides how or whether that slot is visually represented.
+Gameplay equipment slots remain semantic (Head, Feet, Main Hand, etc.). A particular body form decides how that slot is visually represented.
+
+The **slot set remains the same across forms**, including radical/non-biped forms. Do not create a parallel Centaur inventory/equipment engine.
+
+Equipment may occupy more than one semantic slot. The canonical early example is:
+- a two-handed weapon occupies both **Main Hand + Off Hand**.
+
+Model this as authored occupied-slot requirements rather than hard-coding "two-handed" checks throughout combat/UI/inventory.
+
+An equipment appearance does not automatically reshape itself for every body form. Compatibility is explicit data. If a mesh was authored for a Wood-Elf lineage, another radically different form does not silently scale/morph it; that form needs compatible authored equipment/appearance content.
 
 Do not let gameplay systems query literal bone names.
 
