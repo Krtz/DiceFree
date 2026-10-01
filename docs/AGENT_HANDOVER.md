@@ -1037,3 +1037,26 @@ Additional collision rules settled 2026-10-01:
 - friendly summons/pets/companions block owners and allies by default;
 - ordinary friendly NPCs block players by default;
 - these use solid/no-push collision unless an authored exception says otherwise.
+
+
+# Post-MSQ5 code review — 2026-10-01
+
+Verified remote implementation:
+- `poc/cornberg` head: `1b574291fafc6b90d2fac1365eb4931f4bd59fa0` (handover sync).
+- MSQ5 feature commit: `69efbe9775d4fe00af5fd66356c1ca4871f6c6fc`.
+- Q5 implementation matches the intended boundary: existing Runner, Q4-only prerequisite, no level gate, future semantic destination, Active endpoint, no reward/schema change, no invented next-town content.
+- `ContextualNpc` is a small explicit ordered-action router and is acceptable as the current interaction seam; preserve behavior through architecture hardening.
+- Q5 validation/docs/issues were pushed and broad regressions/build/reload smokes were reported green.
+
+Architecture findings from actual PoC code:
+- there are still **zero first-party .asmdef/.asmref files** across 126 first-party C# files;
+- `QuestJournal` directly calls the static Items reward grant boundary;
+- `FixedRewardGrant` directly references concrete `ManifestationPersistence` to defer writes, confirming the known cross-domain persistence dependency;
+- `ManifestationPersistence` directly composes concrete Progression/Quests/World/Items components and owns storage plus runtime composition concerns;
+- `Interactor` still discovers world targets with `FindObjectsByType<InteractionTarget>()` on interact input;
+- `CombatActor` keeps a static global actor registry and computes combat state by scanning actors/actions;
+- current Editor setup/validation scripts remain in the same predefined Unity assembly because no asmdefs exist.
+
+These are exactly the debts #36 must address deliberately. Do not rewrite MSQ5 behavior while doing so.
+
+Immediate next engineering step remains **#36 architecture hardening**. Use a dedicated refactor branch from the verified PoC head, migrate in reviewable stages, and do not merge to main.
