@@ -256,6 +256,19 @@ Initial target:
 
 The networking architecture should support these rules without requiring a permanent dedicated-server backend.
 
+### Return-to-revive ability direction
+
+DiceFree should have an intentional player ability/action to **Return to the manifestation's current registered revive/resurrection point**.
+
+Current settled direction:
+- this is not an unstuck system;
+- it does not remove ordinary player/enemy body blocking;
+- it uses the manifestation's currently registered revive point;
+- target cooldown direction is roughly **10 minutes**;
+- exact cast time, interruption/combat restrictions, cooldown persistence across relog/death, and presentation remain open design questions.
+
+Keep this as an explicit gameplay/travel ability rather than hidden collision recovery logic.
+
 ## World/session structure
 
 The host/session contains the current overworld game state for the party.
