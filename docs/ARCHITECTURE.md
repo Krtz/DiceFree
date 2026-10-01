@@ -321,7 +321,9 @@ Equipment may occupy more than one semantic slot. The canonical early example is
 
 Model this as authored occupied-slot requirements rather than hard-coding "two-handed" checks throughout combat/UI/inventory.
 
-Visible wearable equipment normally replaces the form's baseline presentation for its occupied visible slot(s); empty slots fall back to the class form's baseline appearance.
+Visible wearable equipment normally replaces the form's baseline presentation for its occupied visible slot(s); empty slots fall back to the class form's authored baseline appearance.
+
+A baseline slot is allowed to be intentionally **empty/exposed**. Class forms do not need fake default clothing in every visible slot. The class-form profile explicitly decides, slot by slot, whether the unequipped state shows default clothing/armor/accessory geometry or simply the underlying body.
 
 An equipment appearance does not automatically reshape itself for every body form. Compatibility is explicit data.
 
@@ -358,6 +360,22 @@ Production navigation should support deliberate **player-form forgiveness** wher
 - other explicit accessibility helpers.
 
 Do not globally shrink all large-form hitboxes just to fit the world, and do not silently let the renderer clip through everything. Keep the normal form footprint meaningful, but ensure required player routes remain traversable for every intended playable form.
+
+### Actor body blocking and hit-volume consequences
+
+A larger authored player hitbox is a real gameplay tradeoff:
+- enemies/projectiles that use spatial collision/overlap are allowed to hit the larger volume more easily;
+- authored attack/targeting rules still decide whether a particular action uses collision, explicit target selection, radius checks, or another method.
+
+Player characters **physically block one another** by default.
+
+Enemies also physically block players according to their authored collision/footprint.
+
+There is **no generic anti-box-in escape rule**. Being surrounded/boxed by enemies is valid positioning pressure; the player fights or uses authored movement/control tools to escape.
+
+This does not override the separate world-navigation-forgiveness rule above. Required doors/routes should accommodate intended forms, while combatant body blocking remains meaningful.
+
+Any future exception such as phasing, ghosting, knock-through, ally pass-through, blink, or unstoppable movement must be an explicitly authored mechanic rather than an implicit collision workaround.
 
 ### Transformation presentation
 
