@@ -925,8 +925,18 @@ Settled:
 
 Do not mass-produce art until the sword proves scale/export/import/pivot/material/prefab validation conventions.
 
+Additional settled class/form/equipment rules:
+- each Way has **one authored body/sex presentation**: visibly male, visibly female or androgynous;
+- no requirement for male/female variants of every class;
+- forms generally become progressively more class-specific/distinct at later tiers;
+- equipment visuals do **not** auto-fit/morph across incompatible forms; use explicit class/form-family compatibility;
+- all forms keep the same 11 semantic equipment slots;
+- items may occupy multiple slots; two-handed weapons occupy Main Hand + Off Hand;
+- use a general occupied-slot data model rather than scattered two-handed checks;
+- ADR-0004 records the class-form/equipment-compatibility decision.
+
 Tracking:
-- **#36** architecture hardening / asmdef dependency enforcement;
+- **#36** architecture hardening / asmdef dependency enforcement — now the immediate next implementation and explicitly allowed to be a substantial controlled refactor;
 - **#37** first stylized sword / 3D pipeline proof.
 
 # Current recommended next implementation step
