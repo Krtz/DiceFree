@@ -319,7 +319,11 @@ Equipment may occupy more than one semantic slot. The canonical early example is
 
 Model this as authored occupied-slot requirements rather than hard-coding "two-handed" checks throughout combat/UI/inventory.
 
-An equipment appearance does not automatically reshape itself for every body form. Compatibility is explicit data. If a mesh was authored for a Wood-Elf lineage, another radically different form does not silently scale/morph it; that form needs compatible authored equipment/appearance content.
+An equipment appearance does not automatically reshape itself for every body form. Compatibility is explicit data.
+
+Default lineage rule: an appearance authored for a class/form is compatible with that form and its descendants unless a descendant explicitly overrides compatibility because its body plan diverges. Unrelated forms do not silently inherit it.
+
+If a mesh was authored for a Wood-Elf lineage, another radically different form does not silently scale/morph it; that form needs compatible authored equipment/appearance content.
 
 Do not let gameplay systems query literal bone names.
 
