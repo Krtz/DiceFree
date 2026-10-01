@@ -30,6 +30,7 @@ namespace DiceFree.World
                 InteractionTarget nearest = null; float distance = float.PositiveInfinity;
                 foreach (var target in FindObjectsByType<InteractionTarget>())
                 {
+                    if (target.WorldTarget != target) continue;
                     float d = (target.transform.position-transform.position).sqrMagnitude;
                     if (target.CanInteract(actor) && d < distance) { nearest=target; distance=d; }
                 }
@@ -37,13 +38,16 @@ namespace DiceFree.World
             }
             if (pending != null && pending.CanInteract(actor))
             {
-                actor.Motor.Stop(); Active = pending; pending = null; Active.Interact(actor);
+                actor.Motor.Stop(); Active = pending.Resolve(actor); pending = null;
+                if (Active != null) Active.Interact(actor);
             }
             else if (pending != null && !actor.Motor.Travelling) pending = null;
         }
         public bool Order(InteractionTarget target)
         {
             if (!actor.Alive || target == null) return false;
+            target = target.WorldTarget;
+            if (!target.Available(actor)) return false;
             attack.Cancel(); Active = null; pending = null;
             if (!target.CanInteract(actor) && !actor.Motor.MoveTo(target.ApproachPosition)) return false;
             pending = target; return true;

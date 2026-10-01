@@ -19,10 +19,12 @@ namespace DiceFree.UI
             var state=actor.GetComponent<QuestJournal>().GetProgress(quest.stableId);
             var r=Bounds; GUI.Box(r,GUIContent.none);
             GUI.Label(new Rect(r.x+12,r.y+8,346,25),giver.DisplayName);
-            GUI.Label(new Rect(r.x+12,r.y+36,476,100),quest.offer,new GUIStyle(GUI.skin.label){wordWrap=true});
+            string dialogue = state.status == QuestStatus.Active && !string.IsNullOrEmpty(quest.activeDialogue) ? quest.activeDialogue : quest.offer;
+            GUI.Label(new Rect(r.x+12,r.y+36,476,100),dialogue,new GUIStyle(GUI.skin.label){wordWrap=true});
             string reward = quest.rewardXp + " XP";
             if (quest.reward != null) reward += " · " + quest.reward.gold + " gold · " + string.Join(", ", quest.reward.items.Select(item => item.displayName));
-            GUI.Label(new Rect(r.x+12,r.y+140,476,45),"Reward: " + reward,new GUIStyle(GUI.skin.label){wordWrap=true});
+            if (quest.rewardXp > 0 || quest.reward != null)
+                GUI.Label(new Rect(r.x+12,r.y+140,476,45),"Reward: " + reward,new GUIStyle(GUI.skin.label){wordWrap=true});
             if (state.definitionVersion != quest.version)
             {
                 GUI.Label(new Rect(r.x+12,r.y+185,476,28), "Saved quest unavailable; progress preserved.");
@@ -31,7 +33,7 @@ namespace DiceFree.UI
             }
             if (state.status == QuestStatus.Available && GUI.Button(new Rect(r.x+12,r.y+185,340,28),"Accept: "+quest.title)) giver.Accept(actor, quest);
             if (state.status == QuestStatus.ReadyToTurnIn && GUI.Button(new Rect(r.x+12,r.y+185,340,28),"Turn in")) giver.TurnIn(actor, quest);
-            if (state.status == QuestStatus.Active) GUI.Label(new Rect(r.x+12,r.y+185,476,28),"Complete the current objectives, then return.");
+            if (state.status == QuestStatus.Active) GUI.Label(new Rect(r.x+12,r.y+185,476,28),"Follow the current objective in your quest tracker.");
             if (state.status == QuestStatus.Completed) GUI.Label(new Rect(r.x+12,r.y+185,476,28),"Quest completed. Thank you.");
             if (GUI.Button(new Rect(r.x+380,r.y+222,108,28),"Close [Esc]")) interactor.Cancel();
         }

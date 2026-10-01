@@ -15,9 +15,9 @@ namespace DiceFree.World
         public string NpcId => npcId;
         public string ConversationId => conversationId;
         public string Dialogue => dialogue;
-        public bool Available(CombatActor actor)
+        public override bool Available(CombatActor actor)
         {
-            if (actor == null) return false;
+            if (!base.Available(actor)) return false;
             foreach (var component in GetComponents<MonoBehaviour>())
                 if (component is IConversationAvailability gate && !gate.Available(actor)) return false;
             return true;

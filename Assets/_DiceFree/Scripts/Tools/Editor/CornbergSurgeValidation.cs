@@ -61,7 +61,7 @@ namespace DiceFree.EditorTools
         private static void Unlock()
         {
             var records = journal.CaptureState();
-            foreach (var record in records.Where(r => r.questId != quest.stableId))
+            foreach (var record in records.Where(r => r.questId != quest.stableId && r.questId != CornbergDepartureSetup.QuestId))
             {
                 var definition = journal.Definitions.Single(d => d.stableId == record.questId);
                 record.status = QuestStatus.Completed; record.stage = definition.stages.Length - 1; record.count = definition.stages.Last().count;

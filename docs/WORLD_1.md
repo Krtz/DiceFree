@@ -918,6 +918,13 @@ This remains a useful prototype for **multi-path quest completion**.
 
 The **weekly Runner gives MSQ5**.
 
+MSQ5 becomes available after **Q4 is completed**, with no level-10 requirement.
+The Echo carries Cornberg's ordinary village message/news to the next settlement;
+active quest state represents the message until content explicitly requires an item.
+The next settlement and the quest's eventual completion/reward remain unauthored.
+The Cornberg departure bridge therefore ends with MSQ5 Active, not with a local
+arrival or turn-in. It does not gate the separate level-10 mountain call.
+
 After what happened on the blocked road, the Runner is **too scared to attempt the trip to the next town again** and asks the Echo to go instead.
 
 The reason is simple:

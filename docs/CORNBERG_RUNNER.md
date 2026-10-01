@@ -5,6 +5,12 @@ the settled WORLD_1 story: Cornberg's weekly runner tried to reach the next town
 could not get through because too many Slimes blocked the road, and returned.
 There is no unrelated news or larger threat.
 
+This note records the original Runner Returns slice. Q4 is now implemented in
+[CORNBERG_Q4.md](CORNBERG_Q4.md); the same Runner's post-Q4 contextual departure
+quest is described in [CORNBERG_MSQ5.md](CORNBERG_MSQ5.md). Original story data and
+acknowledgment behavior remain intact before Q4 completion. Current saves use v4;
+the v2 discussion below is the historical implementation baseline.
+
 ## Play and provisional presentation
 
 After turning in Q3, find **Cornberg Runner** beside the village green near the
@@ -102,14 +108,9 @@ The scene adds 244 lines and removes none; all 8,457 existing serialized IDs rem
 Navigation, save schema, persistence implementation, combat math and existing
 enemy/quest balance data are unchanged. Only the new runner definition is added.
 
-## Q4 decisions still required
+## Subsequent content
 
-- Which completion alternatives are authored: dungeon, elite, mass kills, others?
-- Which alternatives ship in the first Q4 slice; are all three available initially?
-- What exact kill count and eligible enemies, and does prior progress count?
-- What reward parity applies across alternatives; can only one reward be claimed?
-- What level/XP payout should Q4 target? The later approximate level-10 Q5 target
-  does not settle Q4's payout.
-
-WORLD_1's approximately 30 kills is an example, not a locked requirement. This
-increment deliberately implements none of these alternatives.
+The former Q4 design questions are resolved and implemented: simultaneous elite
+OR 30 eligible non-crop kills, post-accept credit only, one shared turn-in reward.
+Exact combat/reward tuning remains provisional. See CORNBERG_Q4.md for measured
+route pacing; this MSQ5 bridge does not rebalance either route.

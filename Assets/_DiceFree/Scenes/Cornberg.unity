@@ -17325,15 +17325,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79a07b1678efd354c8cab13eeb854bfe, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestGiver
   displayName: Former swordswoman / farmer
   range: 2.5
   approachPoint: {fileID: 1607886632}
+  context: {fileID: 0}
   quest: {fileID: 11400000, guid: 73ca99393a35ed440a762223280bf326, type: 2}
   additionalQuests:
   - {fileID: 11400000, guid: 2cd6385dca711dd4797b54efec4da990, type: 2}
   - {fileID: 11400000, guid: ba79719031897214baea62e64811ee63, type: 2}
+  ambientOutsideQuest: 0
 --- !u!23 &196815761
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34523,9 +34525,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 384842776}
-  - component: {fileID: 384842775}
-  - component: {fileID: 384842774}
   - component: {fileID: 384842773}
+  - component: {fileID: 384842777}
   m_Layer: 0
   m_Name: Cornberg Runner - placeholder
   m_TagString: Untagged
@@ -34545,41 +34546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62013bd95e3008341ab2f38ca5b6f5a3, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.InteractionPrompt
-  target: {fileID: 384842775}
+  target: {fileID: 384842777}
   player: {fileID: 1288724053}
---- !u!114 &384842774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384842772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f3561313fc3f448a3f0367c0b7f987, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestConversationGate
-  beat: {fileID: 11400000, guid: 3b9b4813d72f6e04f920ad819d8778e2, type: 2}
-  localPlayer: {fileID: 1288724053}
-  presentation: {fileID: 1579141318}
---- !u!114 &384842775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384842772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ba2d36045d4c14687473e4e9707b79, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.ConversationTarget
-  displayName: Cornberg Runner
-  range: 2.5
-  approachPoint: {fileID: 0}
-  npcId: npc.cornberg.runner
-  conversationId: conversation.cornberg.runner-blocked-road
-  dialogue: I set out on my usual weekly run to the next town, but I couldn't get through. There were too many Slimes along the road. I had to turn back to Cornberg.
 --- !u!4 &384842776
 Transform:
   m_ObjectHideFlags: 0
@@ -34594,8 +34562,30 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1579141322}
+  - {fileID: 1317076948}
+  - {fileID: 2087294694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384842777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384842772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd900a26a772d141aabcf745241f868, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.ContextualNpc
+  displayName: Cornberg Runner
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 0}
+  npcId: npc.cornberg.runner
+  actions:
+  - {fileID: 2087294693}
+  - {fileID: 1317076946}
 --- !u!1 &386423513
 GameObject:
   m_ObjectHideFlags: 0
@@ -112314,6 +112304,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba79719031897214baea62e64811ee63, type: 2}
   - {fileID: 11400000, guid: 3b9b4813d72f6e04f920ad819d8778e2, type: 2}
   - {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
+  - {fileID: 11400000, guid: 49c1a5309c1c07b488dbd1ba404d4f1c, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -114741,6 +114732,73 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316705641}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1317076945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317076948}
+  - component: {fileID: 1317076946}
+  - component: {fileID: 1317076947}
+  m_Layer: 0
+  m_Name: Runner Returns action
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1317076946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317076945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ba2d36045d4c14687473e4e9707b79, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.ConversationTarget
+  displayName: Cornberg Runner
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 384842777}
+  npcId: npc.cornberg.runner
+  conversationId: conversation.cornberg.runner-blocked-road
+  dialogue: I set out on my usual weekly run to the next town, but I couldn't get through. There were too many Slimes along the road. I had to turn back to Cornberg.
+--- !u!114 &1317076947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317076945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f3561313fc3f448a3f0367c0b7f987, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestConversationGate
+  beat: {fileID: 11400000, guid: 3b9b4813d72f6e04f920ad819d8778e2, type: 2}
+  localPlayer: {fileID: 1288724053}
+  presentation: {fileID: 1579141318}
+--- !u!4 &1317076948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317076945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 384842776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321059673
 GameObject:
   m_ObjectHideFlags: 0
@@ -182905,6 +182963,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086312785}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2087294692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087294694}
+  - component: {fileID: 2087294693}
+  m_Layer: 0
+  m_Name: Runner departure action
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2087294693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087294692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79a07b1678efd354c8cab13eeb854bfe, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestGiver
+  displayName: Cornberg Runner
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 384842777}
+  quest: {fileID: 11400000, guid: 49c1a5309c1c07b488dbd1ba404d4f1c, type: 2}
+  additionalQuests: []
+  ambientOutsideQuest: 1
+--- !u!4 &2087294694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087294692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 384842776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2089956443
 GameObject:
   m_ObjectHideFlags: 0

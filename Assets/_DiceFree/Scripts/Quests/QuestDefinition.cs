@@ -31,6 +31,7 @@ namespace DiceFree.Quests
         public string stableId, title;
         [Min(1)] public int version = 1;
         [TextArea] public string offer;
+        [TextArea] public string activeDialogue;
         public string locationHint;
         public QuestObjective[] stages;
         public string[] completedQuestIds = Array.Empty<string>();

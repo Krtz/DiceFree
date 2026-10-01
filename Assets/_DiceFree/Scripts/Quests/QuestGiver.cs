@@ -23,6 +23,7 @@ namespace DiceFree.Quests
             return false;
         }
         public override bool CanInteract(CombatActor actor) => base.CanInteract(actor) && HasConversation(actor);
+        public override bool Available(CombatActor actor) => base.Available(actor) && HasConversation(actor);
         public void ConfigureAmbient(bool value) => ambientOutsideQuest = value;
         public QuestDefinition Quest => quest;
         public IEnumerable<QuestDefinition> Offers
