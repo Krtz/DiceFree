@@ -1269,3 +1269,20 @@ Required contract:
 - save schema remains v4.
 
 This authorization exists only to enable the remaining focused #36 validation: route 12, dedicated Runner Returns, and ordinary second Editor save/reload. Existing CLI validation semantics must remain intact. Do not merge #36 or start #37 until those checks are run and reviewed.
+
+
+## Issue #36 manual validation tooling — 2026-10-03
+
+The approved narrow Editor-only save-root seam and three manual validation menu commands are implemented on `refactor/architecture-hardening` at `9be7b353068fd16d53f8a9daacc8b312f8b850fa`. The branch was based on `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`. No gameplay, quest, save-schema, NavMesh, scene, package, ProjectSettings, or assembly-graph changes were made. The only runtime-source edit is Editor-gated root selection in `ManifestationPersistence`; it does not reference UnityEditor.
+
+The injected root is `DICEFREE_EDITOR_SAVE_ROOT`. A valid `-diceFreeSaveRoot` CLI argument retains precedence; the Editor variable requires a fully qualified path, is cleared after returning to Edit Mode, and is ignored by player builds. Normal persistence still uses the existing EditorProfiles/Profiles locations when there is no explicit root. Save schema remains v4.
+
+From a normally opened Unity 6000.6.3f1 Editor, run these one at a time:
+
+1. `DiceFree/Validation/Issue 36/Route 12 - Return to mountain` — waits up to 90 real seconds and reports sampled path/corners plus periodic agent/motor diagnostics. Require `ISSUE36_ROUTE12_OK`.
+2. `DiceFree/Validation/Issue 36/Runner Returns - Dedicated harness` — uses the existing Runner assertions under a unique empty temporary root. Require `CORNBERG_RUNNER_PLAYMODE_OK` followed by `ISSUE36_RUNNER_OK`.
+3. `DiceFree/Validation/Issue 36/Save reload - Two phase` — creates a unique root, exits Play Mode after phase 1, then re-arms the same root and re-enters Play Mode for a real disk reload. Require `SAVE_FIRST_PROCESS_OK`, `SAVE_SECOND_PROCESS_OK`, and `ISSUE36_SAVE_RELOAD_OK`.
+
+Wait for script compilation/import to finish before starting. Each command leaves the Editor open, returns to Edit Mode, reports failures in the Console, and retains its temporary root for inspection. Send the Console markers or failure output back for review. Existing command-line entry points still use their original process-exit behavior. Offline Roslyn compilation of the modified Persistence and Editor groups passed; no manual Unity check ran during implementation.
+
+**Readiness: NOT integration-ready yet.** Route 12, dedicated Runner, and two-phase Editor save/reload remain pending Axel's licensed Editor run. Do not mark #36 Unity-green or merge it until those results are observed and reviewed. Nothing was merged; do not start #37.
