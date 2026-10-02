@@ -1238,3 +1238,14 @@ Still required before #36 integration:
 - final review.
 
 Nothing is merged. Do not begin #37 until #36 is fully green and reviewed.
+
+
+---
+
+## Issue #36 focused validation gap attempt — 2026-10-02
+
+A focused validation retry was attempted in a fresh disposable worktree at `T:\TEMP\DiceFree-final-gaps-20261002`, checked out at `refactor/architecture-hardening` SHA `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`. The worktree was clean and had no copied `Library`; the user's active worktree, including its package and ProjectSettings modifications, was left untouched. Unity was `6000.6.3f1` at `T:\TEMP\unity\6000.6.3f1\Editor\Unity.exe`.
+
+Unity could not start a validation method in either batch mode or a normal Editor process. Both attempts failed before `-executeMethod` ran with `Connection to channel LicenseClient-Axel refused`, a 60-second LicenseClient wait timeout, and licensing initialization failure. The batch log also ended with `Error: 'com.unity.editor.headless' was not found.` A scripting assembly reload appeared before the batch license failure, but this is not being counted as a successful import/compile or test. No route-12 diagnostic, full traversal rerun, dedicated Runner harness, or two-process Editor save/reload harness executed. Consequently there are no new gameplay assertions or checkpoint markers; route-12 path status/length/runtime state and process exit codes for those harnesses were not obtained. No code was changed or committed. Standalone clean exit remains unverified.
+
+Status: #36 remains structurally reviewed but Unity validation is blocked and the branch is not ready for integration review. Smallest safe next action: open this exact disposable project from the signed-in Windows Unity Hub/Editor session and verify Unity reports its license as recognized; then run the three focused harnesses from that licensed session (route 12 first, then Runner and second-process reload). No license reset, reinstall, or user-worktree cleanup is indicated. No merge was made.
