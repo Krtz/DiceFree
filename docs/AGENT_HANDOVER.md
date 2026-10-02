@@ -162,7 +162,7 @@ Compatibility static state intentionally remains: `CombatActor.All`, Defeat/Area
 
 ## Final Unity validation attempt — 2026-10-02
 
-Validation ran in the clean temporary worktree `T:\TEMP\DiceFree-validation-issue36-20261002` at `refactor/architecture-hardening` SHA `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`, using Unity 6000.6.3f1. The worktree was clean before Unity import. No code fixes were needed or made. Unity later wrote project/rendering-setting import changes in the disposable worktree; package manifest/lock and authored scene/NavMesh files were unchanged.
+Validation ran in the clean temporary worktree `T:\TEMP\DiceFree-validation-issue36-20261002` at `refactor/architecture-hardening` SHA `2ae2e9f63d048647b43dd1b5955b02fdfb2ff59d`, using Unity 6000.6.3f1. The worktree was clean before Unity import. No code fixes were needed or made. Unity later wrote project/rendering-setting import changes in the disposable worktree; package manifest/lock and authored scene/NavMesh files were unchanged. After collecting evidence, I reviewed and reverted those generated settings changes in the disposable worktree; its final Git status is clean. The user's active worktree was not changed.
 
 The real Editor commands passed: `ArchitectureValidation.Run` (`DICEFRE_ARCHITECTURE_OK`), `RunPolicySelfTests` (`DICEFRE_ARCH_POLICY_SELFTEST_OK`), and `ManagedReferenceValidation.Run` (`DICEFREE_MANAGED_REFERENCE_OK`). Cornberg validation found no Missing Script components or unresolved managed references. The authored player has one `InteractionRegistry` and one `Interactor`; the prior implicit registry-creation warning did not recur. The three `AutoAggroPolicy` managed-reference IDs and authored values remained valid.
 
