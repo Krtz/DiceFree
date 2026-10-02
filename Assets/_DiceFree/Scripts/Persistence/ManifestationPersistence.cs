@@ -39,6 +39,7 @@ namespace DiceFree.Persistence
             public void Dispose() { if (owner == null) return; owner.mutationDepth--; owner = null; }
         }
         private float due;
+        private const string EditorSaveRootVariable = "DICEFREE_EDITOR_SAVE_ROOT";
         public string Status { get; private set; } = "Persistence inactive";
         public string SavePath => store?.Path;
         public long Revision => save?.revision ?? 0;
@@ -49,18 +50,37 @@ namespace DiceFree.Persistence
         private string SectionId => "manifestation:" + actor.Stats.Definition.stableId;
         private IEnumerator Start()
         {
-            // Automated suites cannot touch player data. An explicit root opts isolated save tests in.
+            // Explicit validation roots always take precedence over normal/batch persistence.
             var args = Environment.GetCommandLineArgs();
             int index = Array.IndexOf(args, "-diceFreeSaveRoot");
-            if (index < 0 && Application.isBatchMode) yield break;
-            if (index < 0 && Environment.GetEnvironmentVariable("DICEFREE_DISABLE_PERSISTENCE") == "1") yield break;
-            if (index >= 0 && (index + 1 >= args.Length || !Path.IsPathRooted(args[index + 1])))
+            string root = null;
+            if (index >= 0)
             {
-                Debug.LogError("-diceFreeSaveRoot requires an absolute isolated directory; persistence disabled.");
-                yield break;
+                if (index + 1 >= args.Length || !Path.IsPathRooted(args[index + 1]))
+                {
+                    Debug.LogError("-diceFreeSaveRoot requires an absolute isolated directory; persistence disabled.");
+                    yield break;
+                }
+                root = args[index + 1];
             }
-            string root = index >= 0 && index + 1 < args.Length ? args[index + 1] :
-                Path.Combine(Application.persistentDataPath, Application.isEditor ? "EditorProfiles" : "Profiles");
+            else if (Application.isEditor)
+            {
+                var editorRoot = Environment.GetEnvironmentVariable(EditorSaveRootVariable);
+                if (!string.IsNullOrEmpty(editorRoot))
+                {
+                    if (!Path.IsPathFullyQualified(editorRoot))
+                    {
+                        Debug.LogError(EditorSaveRootVariable + " must be an absolute isolated directory; persistence disabled.");
+                        yield break;
+                    }
+                    root = editorRoot;
+                }
+            }
+
+            // Automated batch suites cannot touch player data unless an explicit root was supplied.
+            if (root == null && Application.isBatchMode) yield break;
+            if (root == null && Environment.GetEnvironmentVariable("DICEFREE_DISABLE_PERSISTENCE") == "1") yield break;
+            root ??= Path.Combine(Application.persistentDataPath, Application.isEditor ? "EditorProfiles" : "Profiles");
             xp = GetComponent<ExperienceProgression>(); journal = GetComponent<QuestJournal>();
             actor = GetComponent<CombatActor>(); anchor = GetComponent<RespawnAtAnchor>();
             inventory = GetComponent<CarriedInventory>(); equipment = GetComponent<Equipment>(); wallet = GetComponent<GoldWallet>();

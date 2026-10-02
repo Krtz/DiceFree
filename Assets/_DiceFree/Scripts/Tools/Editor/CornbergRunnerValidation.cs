@@ -20,6 +20,7 @@ namespace DiceFree.EditorTools
     public static class CornbergRunnerValidation
     {
         private const string Running = "DiceFree.RunnerValidation";
+        private const string Manual = "DiceFree.RunnerValidation.Manual";
         private static CombatActor player;
         private static ManifestationPersistence persistence;
         private static QuestJournal journal;
@@ -38,23 +39,44 @@ namespace DiceFree.EditorTools
             {
                 var args = Environment.GetCommandLineArgs(); int index = Array.IndexOf(args, "-diceFreeSaveRoot");
                 Require(index >= 0 && index + 1 < args.Length && Path.IsPathRooted(args[index + 1]), "Runner requires isolated root.");
-                var store = new LocalEchoStore(args[index + 1]); Require(store.Load() == null, "Runner requires fresh root.");
-                CornbergValidation.ValidateNavigation();
-                var actor = UnityEngine.Object.FindAnyObjectByType<TraversalInput>();
-                // Old Q3 profile has no runner record. Preserve both opaque sections and unknown quests.
-                var records = actor.GetComponent<QuestJournal>().Definitions.Where(q => q.stableId == "quest.cornberg.crop-slimes" ||
-                    q.stableId == "quest.cornberg.investigate-road" || q.stableId == "quest.cornberg.named-slime")
-                    .Select(q => new QuestProgress { questId = q.stableId, definitionVersion = q.version,
-                        status = QuestStatus.Completed, stage = q.stages.Length - 1, count = q.stages.Last().count }).ToList();
-                records.Add(new QuestProgress { questId = "quest.future-runner-test", definitionVersion = 99, stage = 12, count = 9 });
-                var data = new ManifestationSave { classId = actor.GetComponent<ActorStats>().Definition.stableId,
-                    level = 6, xp = 0, anchorId = "anchor.cornberg", quests = records.ToArray() };
-                var save = new EchoSave { schemaVersion = 2, revision = 1 }; echoId = save.echoId;
-                save.sections.Add(new SaveSection { id = "manifestation:" + data.classId, version = 2, json = JsonUtility.ToJson(data) });
-                save.sections.Add(new SaveSection { id = "future-runner-section", version = 99, json = "{\"keep\":true}" });
-                SaveMigrationValidation.WriteFixture(store.Path, save); SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
+                StartRun(index + 1 < args.Length ? args[index + 1] : null, false);
             }
             catch (Exception error) { Debug.LogException(error); EditorApplication.Exit(1); }
+        }
+
+        public static void RunManual(string isolatedRoot)
+        {
+            try { StartRun(isolatedRoot, true); }
+            catch (Exception error)
+            {
+                Debug.LogException(error);
+                Issue36ManualValidation.Fail("runner", "Runner Returns", error);
+            }
+        }
+
+        private static void StartRun(string isolatedRoot, bool manual)
+        {
+            Require(!string.IsNullOrWhiteSpace(isolatedRoot) &&
+                (manual ? Path.IsPathFullyQualified(isolatedRoot) : Path.IsPathRooted(isolatedRoot)), "Runner requires an absolute isolated root.");
+            var store = new LocalEchoStore(isolatedRoot); Require(store.Load() == null, "Runner requires fresh root.");
+            CornbergValidation.ValidateNavigation();
+            var actor = UnityEngine.Object.FindAnyObjectByType<TraversalInput>();
+            // Old Q3 profile has no runner record. Preserve both opaque sections and unknown quests.
+            var records = actor.GetComponent<QuestJournal>().Definitions.Where(q => q.stableId == "quest.cornberg.crop-slimes" ||
+                q.stableId == "quest.cornberg.investigate-road" || q.stableId == "quest.cornberg.named-slime")
+                .Select(q => new QuestProgress { questId = q.stableId, definitionVersion = q.version,
+                    status = QuestStatus.Completed, stage = q.stages.Length - 1, count = q.stages.Last().count }).ToList();
+            records.Add(new QuestProgress { questId = "quest.future-runner-test", definitionVersion = 99, stage = 12, count = 9 });
+            var data = new ManifestationSave { classId = actor.GetComponent<ActorStats>().Definition.stableId,
+                level = 6, xp = 0, anchorId = "anchor.cornberg", quests = records.ToArray() };
+            var save = new EchoSave { schemaVersion = 2, revision = 1 }; echoId = save.echoId;
+            save.sections.Add(new SaveSection { id = "manifestation:" + data.classId, version = 2, json = JsonUtility.ToJson(data) });
+            save.sections.Add(new SaveSection { id = "future-runner-section", version = 99, json = "{\"keep\":true}" });
+            SaveMigrationValidation.WriteFixture(store.Path, save);
+            if (manual) PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(isolatedRoot);
+            SessionState.SetBool(Manual, manual);
+            SessionState.SetBool(Running, true);
+            EditorApplication.EnterPlaymode();
         }
         private static void OnPlay(PlayModeStateChange state)
         {
@@ -161,8 +183,15 @@ namespace DiceFree.EditorTools
         }
         private static void Finish(int code)
         {
+            if (!SessionState.GetBool(Running, false)) return;
             SessionState.SetBool(Running, false); EditorApplication.update -= Tick; Application.logMessageReceived -= OnLog;
-            ConversationEvents.Completed -= OnConversation; Time.timeScale = 1; EditorApplication.Exit(code);
+            ConversationEvents.Completed -= OnConversation; Time.timeScale = 1;
+            if (SessionState.GetBool(Manual, false))
+            {
+                SessionState.SetBool(Manual, false);
+                Issue36ManualValidation.CompleteRunner(code);
+            }
+            else EditorApplication.Exit(code);
         }
     }
 }

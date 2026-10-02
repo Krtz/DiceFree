@@ -16,6 +16,8 @@ namespace DiceFree.EditorTools
     public static class CornbergSaveValidation
     {
         private const string Running = "DiceFree.SaveValidation";
+        private const string Manual = "DiceFree.SaveValidation.Manual";
+        private const string ManualPhase = "DiceFree.SaveValidation.ManualPhase";
         private static float deadline;
         private static bool autosaveRequested;
         static CornbergSaveValidation() => EditorApplication.playModeStateChanged += OnPlay;
@@ -34,9 +36,35 @@ namespace DiceFree.EditorTools
                     File.Copy(SaveMigrationValidation.Fixture, Path.Combine(args[index + 1], "primary-echo.json"));
                 }
                 CornbergValidation.ValidateNavigation();
+                SessionState.SetBool(Manual, false);
+                SessionState.SetInt(ManualPhase, 0);
                 SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
             }
             catch (Exception error) { Debug.LogException(error); EditorApplication.Exit(1); }
+        }
+
+        public static void RunManualPhase(string isolatedRoot, int phase)
+        {
+            try
+            {
+                Require(phase == 1 || phase == 2, "Manual save validation phase must be 1 or 2.");
+                Require(!string.IsNullOrWhiteSpace(isolatedRoot) && Path.IsPathFullyQualified(isolatedRoot),
+                    "Manual save validation requires an absolute isolated root.");
+                ValidateStore();
+                SaveMigrationValidation.Run();
+                CornbergValidation.ValidateNavigation();
+                PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(isolatedRoot);
+                SessionState.SetInt(ManualPhase, phase);
+                SessionState.SetBool(Manual, true);
+                SessionState.SetBool(Running, true);
+                Debug.Log("ISSUE36_SAVE_PHASE" + phase + "_START: " + isolatedRoot);
+                EditorApplication.EnterPlaymode();
+            }
+            catch (Exception error)
+            {
+                Debug.LogException(error);
+                Issue36ManualValidation.Fail("save", "Save reload phase " + phase, error);
+            }
         }
         private static void ValidateStore()
         {
@@ -81,7 +109,7 @@ namespace DiceFree.EditorTools
         {
             if (type != LogType.Exception && type != LogType.Error && type != LogType.Assert) return;
             if (stack.Contains("UnityEditor.Search.SearchDatabase")) return; // Existing issue #17 only.
-            SessionState.SetBool(Running, false); EditorApplication.update -= Tick; EditorApplication.Exit(1);
+            Finish(1);
         }
         private static void Tick()
         {
@@ -100,7 +128,9 @@ namespace DiceFree.EditorTools
                 var args = Environment.GetCommandLineArgs();
                 bool deadReload = Array.IndexOf(args, "-diceFreeVerifyDeadReload") >= 0;
                 bool legacyReload = Array.IndexOf(args, "-diceFreeVerifyLegacyReload") >= 0;
-                bool reload = Array.IndexOf(args, "-diceFreeVerifyReload") >= 0 || deadReload || legacyReload;
+                bool manual = SessionState.GetBool(Manual, false);
+                int manualPhase = SessionState.GetInt(ManualPhase, 0);
+                bool reload = (manual && manualPhase == 2) || Array.IndexOf(args, "-diceFreeVerifyReload") >= 0 || deadReload || legacyReload;
                 if (!reload)
                 {
                     if (!File.Exists(persistence.SavePath))
@@ -227,10 +257,25 @@ namespace DiceFree.EditorTools
                     }
                     Debug.Log(legacyReload ? "SAVE_LEGACY_PROCESS_OK" : deadReload ? "SAVE_DEAD_RELOAD_OK" : "SAVE_SECOND_PROCESS_OK");
                 }
-                SessionState.SetBool(Running, false); EditorApplication.update -= Tick; EditorApplication.Exit(0);
+                Finish(0);
             }
-            catch (Exception error)
-            { Debug.LogException(error); SessionState.SetBool(Running, false); EditorApplication.update -= Tick; EditorApplication.Exit(1); }
+            catch (Exception error) { Debug.LogException(error); Finish(1); }
+        }
+
+        private static void Finish(int code)
+        {
+            if (!SessionState.GetBool(Running, false)) return;
+            bool manual = SessionState.GetBool(Manual, false);
+            int phase = SessionState.GetInt(ManualPhase, 0);
+            SessionState.SetBool(Running, false);
+            EditorApplication.update -= Tick;
+            Application.logMessageReceived -= OnLog;
+            if (manual)
+            {
+                if (code == 0) Debug.Log("ISSUE36_SAVE_PHASE" + phase + "_OK");
+                Issue36ManualValidation.CompleteSavePhase(phase, code);
+            }
+            else EditorApplication.Exit(code);
         }
     }
 }
