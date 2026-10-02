@@ -1249,3 +1249,23 @@ A focused validation retry was attempted in a fresh disposable worktree at `T:\T
 Unity could not start a validation method in either batch mode or a normal Editor process. Both attempts failed before `-executeMethod` ran with `Connection to channel LicenseClient-Axel refused`, a 60-second LicenseClient wait timeout, and licensing initialization failure. The batch log also ended with `Error: 'com.unity.editor.headless' was not found.` A scripting assembly reload appeared before the batch license failure, but this is not being counted as a successful import/compile or test. No route-12 diagnostic, full traversal rerun, dedicated Runner harness, or two-process Editor save/reload harness executed. Consequently there are no new gameplay assertions or checkpoint markers; route-12 path status/length/runtime state and process exit codes for those harnesses were not obtained. No code was changed or committed. Standalone clean exit remains unverified.
 
 Status: #36 remains structurally reviewed but Unity validation is blocked and the branch is not ready for integration review. Smallest safe next action: open this exact disposable project from the signed-in Windows Unity Hub/Editor session and verify Unity reports its license as recognized; then run the three focused harnesses from that licensed session (route 12 first, then Runner and second-process reload). No license reset, reinstall, or user-worktree cleanup is indicated. No merge was made.
+
+
+## Issue #36 manual validation save-root seam approved
+
+The remaining #36 manual Runner/save-reload checks cannot be isolated safely from a normally opened Unity Editor using the existing process-argument-only `-diceFreeSaveRoot` mechanism, because menu commands cannot change the Editor process command line after launch.
+
+Approved narrow exception: add an **Editor-only save-root injection seam** in `ManifestationPersistence`, with no player-build behavior change.
+
+Required contract:
+- existing `-diceFreeSaveRoot` CLI behavior remains unchanged and has highest priority;
+- a separate manual-test override may be supplied through the existing environment-variable style used by Editor validation, so it survives Play Mode domain reload;
+- the manual override is honored only when `Application.isEditor` is true;
+- injected roots must be absolute and invalid values fail closed;
+- the Editor helper clears the override when returning to Edit Mode / after the harness;
+- no `UnityEditor` dependency enters runtime source;
+- normal Editor persistence behavior is unchanged when no override is present;
+- player builds ignore the override entirely;
+- save schema remains v4.
+
+This authorization exists only to enable the remaining focused #36 validation: route 12, dedicated Runner Returns, and ordinary second Editor save/reload. Existing CLI validation semantics must remain intact. Do not merge #36 or start #37 until those checks are run and reviewed.
