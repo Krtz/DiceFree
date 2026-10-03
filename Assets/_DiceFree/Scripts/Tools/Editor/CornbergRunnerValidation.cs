@@ -132,6 +132,7 @@ namespace DiceFree.EditorTools
             var early = new GameObject("Pre-prerequisite conversation fixture").AddComponent<ConversationTarget>();
             early.transform.position = player.transform.position;
             early.Configure(CornbergRunnerSetup.NpcId, CornbergRunnerSetup.ConversationId, "Fixture");
+            player.GetComponent<InteractionRegistry>().Register(early);
             for (var wait = Approach(early); wait.MoveNext();) yield return null;
             Require(early.Acknowledge(player), "Fixture conversation failed.");
             Require(State.status == QuestStatus.Available, "Pre-Q3 semantic event progressed beat.");
@@ -151,6 +152,7 @@ namespace DiceFree.EditorTools
             var other = new GameObject("Wrong conversation fixture").AddComponent<ConversationTarget>();
             other.transform.position = player.transform.position;
             other.Configure("npc.other", CornbergRunnerSetup.ConversationId, "Wrong NPC");
+            player.GetComponent<InteractionRegistry>().Register(other);
             for (var wait = Approach(other); wait.MoveNext();) yield return null;
             Require(other.Acknowledge(player) && State.status == QuestStatus.Available, "Wrong NPC advanced runner.");
             other.Configure(CornbergRunnerSetup.NpcId, "conversation.other", "Wrong conversation");
@@ -173,12 +175,17 @@ namespace DiceFree.EditorTools
         private static void Tick()
         {
             try { Require(Time.realtimeSinceStartup < deadline, "Runner validation timeout."); if (!routine.MoveNext()) Finish(0); }
-            catch (Exception error) { Debug.LogException(error); Finish(1); }
+            catch (Exception error)
+            {
+                if (SessionState.GetBool(Manual, false)) Issue36ManualValidation.RecordPipelineFailure(error.ToString());
+                Debug.LogException(error); Finish(1);
+            }
         }
         private static void OnLog(string message, string trace, LogType type)
         {
             if (type != LogType.Error && type != LogType.Exception) return;
             if (message.StartsWith("ArgumentOutOfRangeException") && trace.Contains("UnityEditor.Search.SearchDatabase")) return;
+            if (SessionState.GetBool(Manual, false)) Issue36ManualValidation.RecordPipelineFailure(message + (string.IsNullOrEmpty(trace) ? string.Empty : "\n" + trace));
             Finish(1);
         }
         private static void Finish(int code)

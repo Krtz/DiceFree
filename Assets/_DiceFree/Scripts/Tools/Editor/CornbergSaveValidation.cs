@@ -109,6 +109,7 @@ namespace DiceFree.EditorTools
         {
             if (type != LogType.Exception && type != LogType.Error && type != LogType.Assert) return;
             if (stack.Contains("UnityEditor.Search.SearchDatabase")) return; // Existing issue #17 only.
+            if (SessionState.GetBool(Manual, false)) Issue36ManualValidation.RecordPipelineFailure(message + (string.IsNullOrEmpty(stack) ? string.Empty : "\n" + stack));
             Finish(1);
         }
         private static void Tick()
@@ -205,8 +206,9 @@ namespace DiceFree.EditorTools
                     Require(enemy.Health.Current == enemy.Health.Maximum && !enemy.InCombat, "Enemy session state resumed.");
                     var temporary = new GameObject("Validation registered anchor");
                     temporary.transform.position = new Vector3(5, 0, -8);
-                    temporary.AddComponent<ResurrectionAnchor>().Configure("anchor.validation");
                     var respawn = player.GetComponent<RespawnAtAnchor>();
+                    respawn.ConfigureRegisteredAnchors(temporary.AddComponent<ResurrectionAnchor>());
+                    temporary.GetComponent<ResurrectionAnchor>().Configure("anchor.validation");
                     Require(player.Motor.Teleport(enemy.transform.position + Vector3.back), "Attack-reset fixture could not reach enemy.");
                     var attack = player.GetComponent<BasicAttack>();
                     attack.Order(enemy);
@@ -259,7 +261,11 @@ namespace DiceFree.EditorTools
                 }
                 Finish(0);
             }
-            catch (Exception error) { Debug.LogException(error); Finish(1); }
+            catch (Exception error)
+            {
+                if (SessionState.GetBool(Manual, false)) Issue36ManualValidation.RecordPipelineFailure(error.ToString());
+                Debug.LogException(error); Finish(1);
+            }
         }
 
         private static void Finish(int code)

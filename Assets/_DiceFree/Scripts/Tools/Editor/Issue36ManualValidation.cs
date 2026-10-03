@@ -17,6 +17,17 @@ namespace DiceFree.EditorTools
         private const string RootKey = "DiceFree.Issue36Manual.Root";
         private const string ResultKey = "DiceFree.Issue36Manual.Result";
         private const string PhaseKey = "DiceFree.Issue36Manual.SavePhase";
+        private const string PendingGitShaKey = "DiceFree.Issue36Manual.PendingGitSha";
+        private const string TaskIdKey = "DiceFree.Issue36Manual.TaskId";
+        private const string TaskNameKey = "DiceFree.Issue36Manual.TaskName";
+        private const string TaskKindKey = "DiceFree.Issue36Manual.TaskKind";
+        private const string TaskRootKey = "DiceFree.Issue36Manual.TaskRoot";
+        private const string TaskStatusKey = "DiceFree.Issue36Manual.TaskStatus";
+        private const string TaskMarkerKey = "DiceFree.Issue36Manual.TaskMarker";
+        private const string TaskErrorKey = "DiceFree.Issue36Manual.TaskError";
+        private const string TaskGitShaKey = "DiceFree.Issue36Manual.TaskGitSha";
+        private const string TaskStartedTicksKey = "DiceFree.Issue36Manual.TaskStartedTicks";
+        private const string TaskEndedTicksKey = "DiceFree.Issue36Manual.TaskEndedTicks";
 
         private static TraversalMotor motor;
         private static NavMeshAgent agent;
@@ -25,7 +36,96 @@ namespace DiceFree.EditorTools
         private static float routeLength, routeStarted, nextRouteLog;
         private static bool routePrepared, routeFinished;
 
-        static Issue36ManualValidation() => EditorApplication.playModeStateChanged += OnPlayModeChanged;
+        static Issue36ManualValidation()
+        {
+            EditorApplication.playModeStateChanged += OnPlayModeChanged;
+            EditorApplication.update += TickSavePhaseTransition;
+        }
+
+        internal static bool IsPipelineValidationBusy() =>
+            !string.IsNullOrEmpty(SessionState.GetString(ActiveKey, string.Empty)) ||
+            EditorApplication.isPlayingOrWillChangePlaymode;
+
+        internal static void StartFromPipeline(string kind, string testGitSha)
+        {
+            if (IsPipelineValidationBusy()) throw new InvalidOperationException("Another Issue 36 check or Play Mode transition is already active.");
+            SessionState.SetString(PendingGitShaKey, testGitSha ?? string.Empty);
+            switch (kind)
+            {
+                case "route12": RunRoute12(); break;
+                case "runner": RunRunner(); break;
+                case "save": RunSaveReload(); break;
+                default: throw new ArgumentOutOfRangeException(nameof(kind), kind, "Unknown Issue 36 validation.");
+            }
+        }
+
+        internal static object GetPipelineTaskStatus(string requestedTaskId)
+        {
+            TickSavePhaseTransition();
+            string taskId = SessionState.GetString(TaskIdKey, string.Empty);
+            if (!string.IsNullOrEmpty(requestedTaskId) && !string.Equals(taskId, requestedTaskId, StringComparison.Ordinal))
+                return new { success = false, status = "not_found", validation = string.Empty, taskId = requestedTaskId,
+                    finalMarker = (string)null, elapsedSeconds = 0d, error = "No current or most recently completed task has this ID.",
+                    temporarySaveRoot = (string)null, logPath = Application.consoleLogPath, testedGitSha = string.Empty, phase = 0 };
+
+            string status = SessionState.GetString(TaskStatusKey, "idle");
+            long startTicks = ParseTicks(SessionState.GetString(TaskStartedTicksKey, string.Empty));
+            long endTicks = ParseTicks(SessionState.GetString(TaskEndedTicksKey, string.Empty));
+            long elapsedTicks = startTicks == 0 ? 0 : Math.Max(0, (endTicks == 0 ? DateTime.UtcNow.Ticks : endTicks) - startTicks);
+            bool? success = status == "passed" ? true : status == "failed" ? false : (bool?)null;
+            return new
+            {
+                success,
+                status,
+                validation = SessionState.GetString(TaskNameKey, string.Empty),
+                taskId,
+                finalMarker = SessionState.GetString(TaskMarkerKey, string.Empty),
+                elapsedSeconds = TimeSpan.FromTicks(elapsedTicks).TotalSeconds,
+                error = SessionState.GetString(TaskErrorKey, string.Empty),
+                temporarySaveRoot = SessionState.GetString(TaskRootKey, string.Empty),
+                logPath = Application.consoleLogPath,
+                testedGitSha = SessionState.GetString(TaskGitShaKey, string.Empty),
+                phase = SessionState.GetInt(PhaseKey, 0),
+                editorIsPlaying = EditorApplication.isPlaying,
+                editorIsChangingPlayMode = EditorApplication.isPlayingOrWillChangePlaymode,
+                orchestrationState = SessionState.GetString(ResultKey, string.Empty),
+                validationActive = SessionState.GetString(ActiveKey, string.Empty)
+            };
+        }
+
+        private static long ParseTicks(string value) => long.TryParse(value, out var ticks) ? ticks : 0;
+
+        private static void BeginTask(string displayName, string kind, string root)
+        {
+            var now = DateTime.UtcNow.Ticks;
+            SessionState.SetString(TaskIdKey, Guid.NewGuid().ToString("N"));
+            SessionState.SetString(TaskNameKey, displayName);
+            SessionState.SetString(TaskKindKey, kind);
+            SessionState.SetString(TaskRootKey, root ?? string.Empty);
+            SessionState.SetString(TaskStatusKey, "running");
+            SessionState.SetString(TaskMarkerKey, string.Empty);
+            SessionState.SetString(TaskErrorKey, string.Empty);
+            SessionState.SetString(TaskGitShaKey, SessionState.GetString(PendingGitShaKey, string.Empty));
+            SessionState.SetString(PendingGitShaKey, string.Empty);
+            SessionState.SetString(TaskStartedTicksKey, now.ToString());
+            SessionState.SetString(TaskEndedTicksKey, string.Empty);
+        }
+
+        private static void UpdateTask(string status, string marker, string error)
+        {
+            if (string.IsNullOrEmpty(SessionState.GetString(TaskIdKey, string.Empty))) return;
+            SessionState.SetString(TaskStatusKey, status);
+            SessionState.SetString(TaskMarkerKey, marker ?? string.Empty);
+            SessionState.SetString(TaskErrorKey, error ?? string.Empty);
+            if (status == "passed" || status == "failed")
+                SessionState.SetString(TaskEndedTicksKey, DateTime.UtcNow.Ticks.ToString());
+        }
+
+        internal static void RecordPipelineFailure(string error)
+        {
+            if (string.IsNullOrEmpty(SessionState.GetString(TaskIdKey, string.Empty))) return;
+            SessionState.SetString(TaskErrorKey, error ?? string.Empty);
+        }
 
         [MenuItem("DiceFree/Validation/Issue 36/Route 12 - Return to mountain")]
         private static void RunRoute12()
@@ -88,6 +188,7 @@ namespace DiceFree.EditorTools
             SessionState.SetString(ActiveKey, kind);
             SessionState.SetString(RootKey, root ?? string.Empty);
             SessionState.SetString(ResultKey, string.Empty);
+            BeginTask(displayName, kind, root);
             routePrepared = routeFinished = false;
             Debug.Log("ISSUE36_MANUAL_START: " + displayName + (string.IsNullOrEmpty(root) ? string.Empty : " | isolated root: " + root));
         }
@@ -116,12 +217,30 @@ namespace DiceFree.EditorTools
             var result = SessionState.GetString(ResultKey, string.Empty);
             if (kind == "save" && result == "phase1-ok")
             {
-                SessionState.SetString(ResultKey, string.Empty);
-                EditorApplication.delayCall += StartSaveReloadPhase2;
+                SessionState.SetString(ResultKey, "phase2-starting");
                 return;
             }
 
             if (result == "complete" || result == "failed") Cleanup(kind);
+        }
+
+        private static void TickSavePhaseTransition()
+        {
+            if (SessionState.GetString(ActiveKey, string.Empty) != "save" ||
+                EditorApplication.isPlayingOrWillChangePlaymode) return;
+            var result = SessionState.GetString(ResultKey, string.Empty);
+            if (result == "phase2-starting")
+            {
+                StartSaveReloadPhase2();
+                return;
+            }
+            bool phaseOneCompleted = result == "phase1-ok" ||
+                (result.Length == 0 && SessionState.GetInt(PhaseKey, 0) == 1 &&
+                 SessionState.GetString(TaskMarkerKey, string.Empty) == "SAVE_FIRST_PROCESS_OK" &&
+                 SessionState.GetString(TaskStatusKey, string.Empty) == "running" &&
+                 File.Exists(new LocalEchoStore(SessionState.GetString(RootKey, string.Empty)).Path));
+            if (!phaseOneCompleted) return;
+            SessionState.SetString(ResultKey, "phase2-starting");
         }
 
         private static void StartRoute12()
@@ -224,11 +343,13 @@ namespace DiceFree.EditorTools
                 Debug.Log("ISSUE36_ROUTE12_OK: elapsed=" + (Time.realtimeSinceStartup - routeStarted).ToString("F2") +
                     "s; pathLength=" + routeLength.ToString("F2") + "m; " + state);
                 SessionState.SetString(ResultKey, "complete");
+                UpdateTask("passed", "ISSUE36_ROUTE12_OK", string.Empty);
             }
             else
             {
                 Debug.LogError("ISSUE36_ROUTE12_FAIL: " + reason + "; pathLength=" + routeLength.ToString("F2") + "m; " + state);
                 SessionState.SetString(ResultKey, "failed");
+                UpdateTask("failed", "ISSUE36_ROUTE12_FAIL", reason);
             }
             EditorApplication.ExitPlaymode();
         }
@@ -236,7 +357,7 @@ namespace DiceFree.EditorTools
         private static void StartSaveReloadPhase2()
         {
             if (SessionState.GetString(ActiveKey, string.Empty) != "save" ||
-                SessionState.GetString(ResultKey, string.Empty) != string.Empty) return;
+                SessionState.GetInt(PhaseKey, 0) != 1) return;
             try
             {
                 var root = SessionState.GetString(RootKey, string.Empty);
@@ -255,11 +376,13 @@ namespace DiceFree.EditorTools
             {
                 Debug.Log("ISSUE36_RUNNER_OK: " + SessionState.GetString(RootKey, string.Empty));
                 SessionState.SetString(ResultKey, "complete");
+                UpdateTask("passed", "ISSUE36_RUNNER_OK", string.Empty);
             }
             else
             {
                 Debug.LogError("ISSUE36_RUNNER_FAIL: dedicated Runner validation failed; root=" + SessionState.GetString(RootKey, string.Empty));
                 SessionState.SetString(ResultKey, "failed");
+                UpdateTask("failed", "ISSUE36_RUNNER_FAIL", SessionState.GetString(TaskErrorKey, "Dedicated Runner assertion failed; inspect the Editor log."));
             }
             EditorApplication.ExitPlaymode();
         }
@@ -270,6 +393,7 @@ namespace DiceFree.EditorTools
             {
                 Debug.LogError("ISSUE36_SAVE_RELOAD_FAIL: phase=" + phase + "; root=" + SessionState.GetString(RootKey, string.Empty));
                 SessionState.SetString(ResultKey, "failed");
+                UpdateTask("failed", "ISSUE36_SAVE_RELOAD_FAIL", SessionState.GetString(TaskErrorKey, "Save/reload assertion failed; inspect the Editor log."));
                 EditorApplication.ExitPlaymode();
                 return;
             }
@@ -278,11 +402,13 @@ namespace DiceFree.EditorTools
             {
                 Debug.Log("ISSUE36_SAVE_PHASE1_OK: " + SessionState.GetString(RootKey, string.Empty));
                 SessionState.SetString(ResultKey, "phase1-ok");
+                SessionState.SetString(TaskMarkerKey, "SAVE_FIRST_PROCESS_OK");
             }
             else
             {
                 Debug.Log("ISSUE36_SAVE_RELOAD_OK: " + SessionState.GetString(RootKey, string.Empty));
                 SessionState.SetString(ResultKey, "complete");
+                UpdateTask("passed", "ISSUE36_SAVE_RELOAD_OK", string.Empty);
             }
             EditorApplication.ExitPlaymode();
         }
@@ -300,6 +426,9 @@ namespace DiceFree.EditorTools
             }
             Debug.LogError(marker + ": " + testName + " setup/orchestration failure; root=" + root);
             SessionState.SetString(ResultKey, "failed");
+            if (string.IsNullOrEmpty(SessionState.GetString(TaskIdKey, string.Empty))) BeginTask(testName, expectedKind, root);
+            UpdateTask("failed", marker, error == null ? testName + " failed; inspect the Editor log." : error.ToString());
+            SessionState.SetString(PendingGitShaKey, string.Empty);
             if (EditorApplication.isPlayingOrWillChangePlaymode) EditorApplication.ExitPlaymode();
             else if (!string.IsNullOrEmpty(kind)) Cleanup(kind);
         }
