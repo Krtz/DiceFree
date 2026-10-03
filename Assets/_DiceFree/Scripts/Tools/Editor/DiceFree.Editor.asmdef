@@ -12,7 +12,8 @@
     "DiceFree.UI.Runtime",
     "DiceFree.Application.Runtime",
     "Unity.InputSystem",
-    "Unity.RenderPipelines.Universal.Runtime"
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.Pipeline.Attributes"
   ],
   "includePlatforms": [
     "Editor"
