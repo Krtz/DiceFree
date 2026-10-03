@@ -1165,3 +1165,26 @@ Unity-green, not ready for integration**. Next safe action: launch this exact
 project normally from Unity Hub and confirm the Editor opens with the license
 recognized, then close it and retry batch validation. Do not reset licensing or
 reinstall based on this evidence alone.
+
+# Unity CLI + Pipeline automation bridge (2026-10-03)
+
+Unity CLI `1.0.0-beta.12` is installed and authenticated; Unity Personal license
+is active, and Unity Editor `6000.6.3f1` was opened through Unity CLI and
+reported ready with `com.unity.pipeline` connected. Agent validation/build work
+must use the connected CLI + Pipeline path described in
+[`UNITY_AUTOMATION.md`](UNITY_AUTOMATION.md); do not ask Axel to click Unity
+validation menus unless the official route is unavailable or requires a
+one-time authentication/consent action. The project-local Unity CLI and
+Pipeline skills are installed under `.agents/skills/`, and the official Codex
+MCP integration is configured for this project.
+
+The Editor-only Pipeline command surface includes architecture validation,
+policy self-tests, managed-reference validation, Route 12, dedicated Runner,
+two-phase save/reload, and task status. Connected Editor runs passed the three
+architecture checks and all three Issue #36 focused checks. Runner/save test
+fixtures were explicitly registered in their Editor harnesses; no gameplay or
+save-schema code changed. The save/reload task crosses Edit/Play Mode by an
+idempotent SessionState-backed phase transition and returns machine-readable
+results. Implementation commits: `9d9fb5a` (Pipeline package) and `df9189d` (validation command surface). The final branch head also includes this documentation update.
+Nothing has been merged; #36 remains open pending integration review.
+

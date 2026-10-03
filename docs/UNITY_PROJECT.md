@@ -25,6 +25,10 @@ The template's tutorial, sample input actions, collaboration integration,
 IDE integrations, navigation, Timeline, test framework, and Visual Scripting
 were not included as direct dependencies. Add tooling when it is actually needed.
 
+Agents should use the connected Unity CLI + Pipeline workflow for Editor
+validation and builds. See [UNITY_AUTOMATION.md](UNITY_AUTOMATION.md) for
+prerequisites, commands, isolated save roots, and the DiceFree command surface.
+
 The template's PC and Mobile renderers, quality levels, and volume settings are
 retained under `_DiceFree/Settings`. PC remains the initial target; the Mobile
 quality preset does not imply a commitment to mobile development.

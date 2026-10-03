@@ -426,3 +426,10 @@ Movement motors resolve physical speed in meters/second. Player-facing Move Spee
 
 Do not introduce a second fantasy-distance conversion layer.
 
+
+## Unity agent automation
+
+Use the connected Unity CLI + Pipeline Editor for validation and build work.
+The project command surface, isolated save-root behavior, authentication rules,
+and structured Issue #36 task workflow are documented in
+[`UNITY_AUTOMATION.md`](UNITY_AUTOMATION.md).
