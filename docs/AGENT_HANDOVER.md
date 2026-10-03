@@ -1326,3 +1326,26 @@ Agent rule: use Unity CLI + Pipeline for Unity validation/build work. Do not ask
 Axel to click Unity validation menus unless the official route is unavailable or
 requires a one-time authentication/consent action. Never reset a working Unity
 license or ask for credentials in chat.
+
+# Final pre-integration Windows build — 2026-10-03
+
+The exact refactor candidate `189e59f2b9db7a5662d23f4783eb54209182b0b1`
+passed a connected-Editor Windows 64-bit Development Build with Unity
+`6000.6.3f1` and Pipeline connected. The Cornberg build output was
+`Builds/Cornberg/DiceFree.exe` (667,136 bytes); the complete output directory
+was 185,214,789 bytes across 328 files. Build result: succeeded, zero errors,
+five warnings, and no build exception. Warnings concern existing prebaked mesh
+collision, absent runtime Pipeline config (Pipeline remains disabled in the
+player), deprecated `DEVELOPMENT_BUILD` usage, and two stripped debug shaders.
+
+Player inspection found `ManifestationPersistence` in
+`DiceFree.Persistence.Runtime.dll`; no `DiceFree.Editor.dll` was included, and
+the first-party player assemblies contain no `UnityEditor` or
+`Unity.Pipeline` reference. `DICEFREE_EDITOR_SAVE_ROOT` remains behind
+`Application.isEditor`; player persistence continues to use its normal Profiles
+path. Save schema remains v4. No source code was changed for this build.
+Unity-generated rendering/quality settings changes were reverted in the
+disposable validation checkout; scene/NavMesh and package files were unchanged.
+
+Issue #36 is Unity-green and ready for integration review. It remains open and
+unmerged; nothing was merged and #37 was not started.
