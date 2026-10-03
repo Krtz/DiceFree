@@ -1286,3 +1286,43 @@ From a normally opened Unity 6000.6.3f1 Editor, run these one at a time:
 Wait for script compilation/import to finish before starting. Each command leaves the Editor open, returns to Edit Mode, reports failures in the Console, and retains its temporary root for inspection. Send the Console markers or failure output back for review. Existing command-line entry points still use their original process-exit behavior. Offline Roslyn compilation of the modified Persistence and Editor groups passed; no manual Unity check ran during implementation.
 
 **Readiness: NOT integration-ready yet.** Route 12, dedicated Runner, and two-phase Editor save/reload remain pending Axel's licensed Editor run. Do not mark #36 Unity-green or merge it until those results are observed and reviewed. Nothing was merged; do not start #37.
+
+# Unity CLI + Pipeline automation for agents — 2026-10-03
+
+The active implementation branch is `refactor/architecture-hardening` at
+`189e59f2b9db7a5662d23f4783eb54209182b0b1`. Unity CLI `1.0.0-beta.12` is
+installed and authenticated, Unity Personal licensing is active, and Unity
+Editor `6000.6.3f1` was opened and waited on through Unity CLI. `com.unity.pipeline`
+`0.8.0-exp.1` is installed in DiceFree and the connected Pipeline server was
+reachable on localhost. Codex MCP was configured through `unity mcp configure
+codex`; the project-local official Unity CLI and Pipeline skills are committed
+under `.agents/skills/`.
+
+Use `docs/UNITY_AUTOMATION.md` on the refactor branch as the command reference.
+The callable checks are `dicefree.architecture.validate`,
+`dicefree.architecture.policy`, `dicefree.managed-references.validate`,
+`dicefree.issue36.route12`, `dicefree.issue36.runner`,
+`dicefree.issue36.save-reload`, and `dicefree.issue36.status`. The three Issue
+#36 checks use connected Editor Play Mode orchestration and structured results;
+no menu click is needed. CLI/Pipeline results on the exact SHA above:
+
+- `DICEFRE_ARCHITECTURE_OK`
+- `DICEFRE_ARCH_POLICY_SELFTEST_OK`
+- `DICEFREE_MANAGED_REFERENCE_OK`
+- `ISSUE36_ROUTE12_OK`
+- `ISSUE36_RUNNER_OK`
+- `ISSUE36_SAVE_RELOAD_OK`
+
+The Route 12 diagnostic completed in about 11.4 seconds. Runner and save/reload
+used unique isolated roots under the OS temp directory; the two save phases used
+the same root and passed across a full Play Mode exit/re-entry. Test fixtures
+were explicitly registered in Editor harnesses; no gameplay/runtime behavior,
+scene/NavMesh, or save schema changed. Source recompile passed with zero errors
+and warnings. No build was run during this infrastructure pass. Issue #36 is
+now ready for integration review, but remains open and unmerged pending review.
+Do not start #37.
+
+Agent rule: use Unity CLI + Pipeline for Unity validation/build work. Do not ask
+Axel to click Unity validation menus unless the official route is unavailable or
+requires a one-time authentication/consent action. Never reset a working Unity
+license or ask for credentials in chat.
