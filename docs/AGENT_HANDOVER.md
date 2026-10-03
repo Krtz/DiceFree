@@ -1369,3 +1369,23 @@ Settled roadmap/design decisions:
 - this does not remove the optional level-200 Novice commitment path.
 
 Canonical docs updated: `docs/ART_PIPELINE.md` and `docs/classes/NOVICE.md`.
+
+## Issue #36 integrated into Cornberg PoC — 2026-10-03
+
+`refactor/architecture-hardening` was integrated into `poc/cornberg` by a
+history-preserving fast-forward through reviewed code SHA
+`189e59f2b9db7a5662d23f4783eb54209182b0b1`. The PoC head is now
+`d3e47e97450001685cf2e3f244633d03a1e20f99`; its only commit after the reviewed
+code tip reconciles documentation (`ART_PIPELINE.md`, `classes/NOVICE.md`, and
+the handover). `UNITY_AUTOMATION.md` and architecture/technical-direction
+docs from #36 remain in the integrated branch.
+
+The integrated candidate passed connected Unity `6000.6.3f1` validation:
+architecture, architecture-policy self-tests, managed references, Route 12,
+Runner Returns, and two-phase save/reload. The Windows x64 Development Build
+also passed on the exact code tip with zero errors. Issue #36 is closed. No
+main merge was performed; #37 and Novice model work have not started.
+
+Keep the next art sequence sword -> actual Novice model -> shield -> shoes ->
+hat. The ordinary first advancement target remains level 10 in roughly 30
+minutes or less, and the normal Novice path should not approach an hour.
