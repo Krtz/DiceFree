@@ -1357,3 +1357,15 @@ DiceFree runtime assemblies.
 
 Issue #36 is Unity-green and ready for integration review. It remains open and
 unmerged; nothing was merged and #37 was not started.
+
+
+## Post-#36 art/progression sequencing update
+
+Settled roadmap/design decisions:
+- after issue #37 proves the first one-handed sword asset/export/import pipeline, the **actual Novice class body/model** is the next 3D proof before shield, shoes and hat;
+- the Novice model should establish the first real rig/socket/body-form baseline and prove the sword attached to an actual character rather than a capsule/mannequin;
+- subsequent shield/shoes/hat work should then validate offhand and wearable slot behavior against that real Novice body;
+- normal Novice pacing is intentionally short: target **level 10 in roughly 30 minutes or less**, and do not let the ordinary first-advancement path drift toward an hour;
+- this does not remove the optional level-200 Novice commitment path.
+
+Canonical docs updated: `docs/ART_PIPELINE.md` and `docs/classes/NOVICE.md`.
