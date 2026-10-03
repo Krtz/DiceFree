@@ -1188,3 +1188,34 @@ idempotent SessionState-backed phase transition and returns machine-readable
 results. Implementation commits: `9d9fb5a` (Pipeline package) and `df9189d` (validation command surface). The final branch head also includes this documentation update.
 Nothing has been merged; #36 remains open pending integration review.
 
+## Issue #36 integration follow-up — 2026-10-03
+
+The reviewed `refactor/architecture-hardening` candidate
+`189e59f2b9db7a5662d23f4783eb54209182b0b1` is a direct descendant of the
+previous `poc/cornberg` head `1b574291fafc6b90d2fac1365eb4931f4bd59fa0`
+(19 commits ahead, zero behind). Integration preserves that history by
+fast-forward; it does not squash or create an unnecessary merge commit.
+
+On the connected Unity `6000.6.3f1` Editor at this integrated code SHA, the
+architecture validator, architecture policy self-tests, managed-reference
+validator, Route 12, Runner Returns, and two-phase save/reload all passed:
+`DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`,
+`DICEFREE_MANAGED_REFERENCE_OK`, `ISSUE36_ROUTE12_OK`,
+`ISSUE36_RUNNER_OK`, and `ISSUE36_SAVE_RELOAD_OK`. The previously recorded
+Windows x64 Development Build also passed on this exact code SHA with zero
+errors. The follow-up PoC commit carries documentation updates only.
+
+The current canonical art proof order is sword, actual Novice body/model,
+shield, shoes, then hat. The actual Novice model should establish the real rig,
+sockets, body scale and baseline presentation before more wearables are made.
+The normal first-advancement path targets level 10 in roughly 30 minutes or
+less and should not approach an hour; the optional level-200 Novice path stays
+available. The current `ART_PIPELINE.md` and `classes/NOVICE.md` reflect the
+latest setup decisions. `UNITY_AUTOMATION.md` from the reviewed #36 candidate
+is retained; setup's newer handover refers to it but does not contain a newer
+copy. Architecture and technical-direction docs from #36 remain unchanged.
+
+This follow-up supersedes earlier pending-integration status above. Issue #36
+is closed after the integrated checks passed. No main merge was performed and
+#37 or Novice modeling work has not started.
+

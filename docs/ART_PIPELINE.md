@@ -30,17 +30,23 @@ Do not mass-produce equipment yet.
 Validate the pipeline in this order:
 
 1. one original one-handed sword;
-2. one shield;
-3. one pair of shoes;
-4. one hat.
+2. the actual Novice class body/model and baseline presentation;
+3. one shield;
+4. one pair of shoes;
+5. one hat.
 
-Only the sword is authorized as the first model.
+Only the sword is authorized as the first model. After the sword pipeline itself is proven, the Novice body is the next proof before producing the remaining equipment.
+
+This order is intentional: the sword proves rigid-prop authoring/import in isolation, while the Novice model then proves the real character/equipment boundary before more wearables are authored.
 
 Each step should expose a new pipeline problem before larger production:
 - sword: rigid held prop / grip / silhouette / import;
-- shield: second rigid attachment orientation;
-- shoes: paired wearable/foot alignment and later rig implications;
-- hat: head attachment/character silhouette.
+- Novice body: real rig, semantic sockets, body scale, baseline clothing slots, weapon attachment, and the first item-on-character preview;
+- shield: second rigid attachment orientation on the proven character rig;
+- shoes: paired wearable/foot alignment and slot replacement on the actual body;
+- hat: head attachment, slot replacement and character silhouette.
+
+Do not mass-produce shield/shoes/hat against a placeholder capsule or mannequin if the real Novice rig can be proven first.
 
 ## World scale
 
