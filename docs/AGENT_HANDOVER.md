@@ -1347,5 +1347,13 @@ path. Save schema remains v4. No source code was changed for this build.
 Unity-generated rendering/quality settings changes were reverted in the
 disposable validation checkout; scene/NavMesh and package files were unchanged.
 
+Clarification from the final managed-file inspection: Unity's Development
+player output does include package-owned `Unity.Pipeline` support assemblies,
+because that package declares player-capable runtime support. No DiceFree
+first-party player assembly references those assemblies, and the BuildReport
+warned that no RuntimePipelineConfig asset exists, so Pipeline is disabled in
+the player. This does not add a dependency from the Editor command bridge to
+DiceFree runtime assemblies.
+
 Issue #36 is Unity-green and ready for integration review. It remains open and
 unmerged; nothing was merged and #37 was not started.
