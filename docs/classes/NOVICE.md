@@ -14,6 +14,17 @@ The purpose of the level 1-10 Novice kit is to let the player sample several bro
 
 Novice should be functional but deliberately weaker and less specialized than Tier 1+ classes.
 
+## Intended early-game pacing
+
+The normal first-playthrough Novice phase is deliberately short.
+
+Current target:
+- a new player should normally reach **level 10 in about 30 minutes or less**;
+- the ordinary Novice introduction should **not approach an hour** before the first blessing/advancement opportunity;
+- the exact quest/XP tuning may move during playtesting, but the intended experience is a brisk tutorial/identity-sampling phase rather than a long Tier-0 campaign.
+
+Players may still deliberately refuse advancement and continue leveling Novice toward the level-200 secret path. The short pacing target applies to the normal route to the first advancement, not to the optional long-term Novice challenge.
+
 ## Starting presentation
 
 The Echo begins with:
