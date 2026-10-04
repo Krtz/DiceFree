@@ -1521,10 +1521,47 @@ Next campaign phase: create issue #41 and independent branch `art/41-novice-shoe
 
 ## #41 Novice shoes / feet-slot replacement prototype — 2026-10-04
 
-Issue #41 was created at https://github.com/Krtz/DiceFree/issues/41. Its local implementation branch is `art/41-novice-shoes`, based directly on post-#39 `poc/cornberg` SHA `74eef143731ac74a501f4ceb293c7e404000a3b1`. The scoped implementation commit is `0d68761` (`Prove Novice footwear slot replacement`). The work is locally committed; the shell push failed because this environment could not connect to `github.com:443`. Verify and push the branch when connectivity is available. The issue remains open and nothing was merged.
+Issue #41 was created at https://github.com/Krtz/DiceFree/issues/41. Its local implementation branch is `art/41-novice-shoes`, based directly on post-#39 `poc/cornberg` SHA `74eef143731ac74a501f4ceb293c7e404000a3b1`. The scoped implementation commit is `0d68761` (`Prove Novice footwear slot replacement`). This implementation branch is pushed at `0d6876160d11b76eb3ebf99d3c093b37f6347a1d`; the issue remains open and the branch unmerged. The issue remains open and nothing was merged.
 
 The Novice source now separates baseline foot geometry into `Novice_BaselineFeet`; the prototype shoe fixture disables that skinned renderer while a left/right shoe pair is parented beneath the actual imported Humanoid foot bones. Removing the fixture restores the baseline renderer. The anchors have 0.00000 m measured alignment error. Sampling Locomotion moved both foot bones by 0.14180 m and the attachments remained aligned. This demonstrates the first Feet-slot replacement behavior only; it is not a general wearable system. The authored body profile remains independent of renderer bounds and gameplay does not consume it.
 
 Unity 6000.6.3f1 passed `DICEFRE_SHOES_PIPELINE_OK`, `DICEFRE_SHOES_PREVIEW_OK`, `DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, `DICEFREE_MANAGED_REFERENCE_OK`, and `DICEFRE_SHOES_PLAYER_BUILD_OK`. The Windows x64 Development Build succeeded with zero errors and three warnings. Executable: `%TEMP%/DiceFree-Shoes-Issue41/NoviceShoesValidation.exe`, 184,456,429 bytes total BuildReport output. Blender 5.2.2 LTS generated reproducible shoes with fingerprint `0860ba9384b5f9935000766d6edf938b007869f750abc0abe719ab5044f86d09`. Unity import reports 288 vertices / 432 triangles / 4 MeshFilters / 2 materials; source generation reports 224 vertices / 432 triangles. LFS covers both DCC source files, both FBX exports, and the shoe preview; `git lfs fsck --objects --pointers` passed locally. Preview is `Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png`.
 
-Next is the independent hat/head-slot prototype, based on post-#39 `poc/cornberg`, not on shield or shoes. Do not begin until the #41 branch push is restored; preserve the local commit and verify remote state first. `main` and `poc/cornberg` remain unchanged by #40/#41.
+Next is the independent hat/head-slot prototype, based on post-#39 `poc/cornberg`, not on shield or shoes. The independent hat/head-slot prototype is now tracked by #42 on `art/42-novice-hat`; its checkpoint is below. `main` and `poc/cornberg` remain unchanged by #40/#41.
+
+## #42 Novice hat / empty Head-slot prototype — 2026-10-04
+
+Issue [#42](https://github.com/Krtz/DiceFree/issues/42) is implemented on
+independent branch `art/42-novice-hat`, based directly on post-#39
+`poc/cornberg` SHA `74eef143731ac74a501f4ceb293c7e404000a3b1`. Current
+pushed branch SHA: `5953e6eb9d4fafa185350a6d6996962e8d842be4`. It remains open
+and unmerged.
+
+Blender 5.2.2 LTS generated one simple cap prototype. Two clean source/export
+runs matched geometry fingerprint
+`6532649e582a3bfcd79f497d299d823daa3a7760270005de7ece8ded1605ee4a`; counts
+are 264 vertices, 524 triangles, two meshes, and two materials. The rigid export
+uses an identity root as its attachment pivot; the Unity presentation parents
+directly under the valid Humanoid Avatar Head bone with local zero/identity/unit
+scale. Validation proves the normal baseline has no head-worn item, the cap
+follows a sampled Head pose, and removing it returns to the empty baseline.
+This is an isolated presentation fixture, not a general wearable system, and
+does not change Novice starting equipment.
+
+Connected Unity 6000.6.3f1 compilation succeeded with no compile errors. Passed
+`DICEFRE_NOVICE_HAT_PIPELINE_OK`,
+`DICEFRE_NOVICE_HAT_PREVIEW_OK`, `DICEFRE_ARCHITECTURE_OK`,
+`DICEFRE_ARCH_POLICY_SELFTEST_OK`, `DICEFREE_MANAGED_REFERENCE_OK`, and
+`DICEFRE_NOVICE_HAT_PLAYER_BUILD_OK`. The Windows x64 Development Build
+reported zero errors and three warnings; executable 667,136 bytes, total output
+184,445,373 bytes. `git lfs fsck --objects --pointers` passed for the Blender
+source, FBX, and preview. Preview:
+`Assets/_DiceFree/Art/Validation/Previews/NoviceHat_Unity.png`. Source and
+proof notes are in `SourceArt/Characters/NoviceHat/README.md` and
+`docs/ART_PIPELINE.md`.
+
+No gameplay change was made. Nothing from #40, #41, or #42 was merged to
+`poc/cornberg` or `main`. Next authorized independent campaign phase: create
+a dedicated issue and branch from the post-#39 PoC to put the accepted Novice
+presentation on the actual Cornberg player actor; retain gameplay movement,
+collision, combat, interaction, quest state, persistence, and camera authority.
