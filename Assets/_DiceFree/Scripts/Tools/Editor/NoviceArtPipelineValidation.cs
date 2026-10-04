@@ -141,6 +141,7 @@ namespace DiceFree.EditorTools
             slotRoot.SetParent(instance.transform, false);
             new GameObject("BaselineTShirtSlot").transform.SetParent(slotRoot, false);
             new GameObject("BaselineUnderwearSlot").transform.SetParent(slotRoot, false);
+            new GameObject("BaselineFeetSlot").transform.SetParent(slotRoot, false);
 
             PrefabUtility.SaveAsPrefabAsset(instance, PrefabPath);
             UnityEngine.Object.DestroyImmediate(instance);
@@ -180,9 +181,9 @@ namespace DiceFree.EditorTools
             Require(animator != null && animator.avatar != null && animator.avatar.isValid && animator.avatar.isHuman,
                 "Presentation prefab does not contain a valid Humanoid Avatar.");
             var skin = prefab.GetComponentsInChildren<SkinnedMeshRenderer>(true).ToArray();
-            Require(skin.Length == 4, "Expected separate body skin, face details, T-shirt and underwear skinned meshes; got " + skin.Length + ".");
-            Require(skin.Any(r => r.name == "Novice_BodySkin") && skin.Any(r => r.name == "Novice_FaceDetails") && skin.Any(r => r.name == "Novice_Baseline_TShirt") && skin.Any(r => r.name == "Novice_Baseline_Underwear"),
-                "Body skin, readable face details, baseline T-shirt and underwear must remain separate presentation meshes.");
+            Require(skin.Length == 5, "Expected separate body skin, face details, T-shirt, underwear and baseline-feet skinned meshes; got " + skin.Length + ".");
+            Require(skin.Any(r => r.name == "Novice_BodySkin") && skin.Any(r => r.name == "Novice_FaceDetails") && skin.Any(r => r.name == "Novice_Baseline_TShirt") && skin.Any(r => r.name == "Novice_Baseline_Underwear") && skin.Any(r => r.name == "Novice_BaselineFeet"),
+                "Body skin, readable face details, baseline T-shirt, underwear and feet must remain separate presentation meshes.");
             foreach (var renderer in skin)
             {
                 Require(renderer.sharedMesh != null && renderer.sharedMesh.vertexCount > 0, renderer.name + " has no mesh.");
@@ -213,6 +214,8 @@ namespace DiceFree.EditorTools
                 " localRotationQuaternion=" + prefabWeaponSocket.localRotation);
             Require(prefab.transform.Find("BaselineVisualSlots/BaselineTShirtSlot") != null && prefab.transform.Find("BaselineVisualSlots/BaselineUnderwearSlot") != null,
                 "Separate baseline clothing slot roots are missing.");
+            Require(prefab.transform.Find("BaselineVisualSlots/BaselineFeetSlot") != null,
+                "The separate baseline-feet presentation slot root is missing.");
             var clips = ImportedClips().ToArray();
             foreach (string part in new[] { "Idle", "Locomotion", "UnarmedAttack" })
                 Require(clips.Any(c => c.name.Contains(part) && c.length > 0.1f), "Animation clip is missing or empty: " + part);

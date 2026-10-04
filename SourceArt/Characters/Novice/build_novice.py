@@ -167,7 +167,12 @@ def build_model():
         add(skin_parts, side + "Hand", side + "Hand", lambda s=sign: uv_ellipsoid("Hand", (s * 0.515, 0, 1.025), (0.064, 0.052, 0.074), skin))
         add(skin_parts, side + "Thigh", side + "UpLeg", lambda s=sign: capsule_segment("Thigh", (s * 0.105, 0, 0.91), (s * 0.12, 0, 0.55), 0.088, 0.095, skin))
         add(skin_parts, side + "LowerLeg", side + "Leg", lambda s=sign: capsule_segment("LowerLeg", (s * 0.12, 0, 0.60), (s * 0.12, 0, 0.18), 0.066, 0.073, skin))
-        add(skin_parts, side + "Foot", side + "Foot", lambda s=sign: uv_ellipsoid("Foot", (s * 0.12, 0.085, 0.105), (0.081, 0.15, 0.066), skin))
+    # Keep unequipped feet as a separate skinned baseline visual so a later
+    # footwear presentation can replace them without duplicating foot surfaces.
+    baseline_feet_parts = []
+    for side, sign in (("Left", -1), ("Right", 1)):
+        add(baseline_feet_parts, side + "BaselineFoot", side + "Foot",
+            lambda s=sign: uv_ellipsoid(side + "BaselineFoot", (s * 0.12, 0.085, 0.105), (0.081, 0.15, 0.066), skin))
     face_parts = []
     for side, sign in (("Left", -1), ("Right", 1)):
         add(face_parts, side + "Eye", "Head", lambda s=sign: uv_ellipsoid("Eye", (s * 0.047, 0.108, 1.65), (0.021, 0.010, 0.014), eye, 12, 8))
@@ -184,12 +189,13 @@ def build_model():
         add(shorts_parts, side + "ShortLeg", side + "UpLeg", lambda s=sign: capsule_segment("ShortLeg", (s * 0.095, 0, 0.91), (s * 0.105, 0, 0.79), 0.091, 0.12, cloth))
 
     skin_obj = make_skinned_family("Novice_BodySkin", skin_parts, rig, rig_defs,
-        ["Head", "Neck", "LeftForeArm", "LeftHand", "RightForeArm", "RightHand", "LeftUpLeg", "LeftLeg", "LeftFoot", "RightUpLeg", "RightLeg", "RightFoot"])
+        ["Head", "Neck", "LeftForeArm", "LeftHand", "RightForeArm", "RightHand", "LeftUpLeg", "LeftLeg", "RightUpLeg", "RightLeg"])
     face_obj = make_skinned_family("Novice_FaceDetails", face_parts, rig, rig_defs, ["Head"])
     shirt_obj = make_skinned_family("Novice_Baseline_TShirt", shirt_parts, rig, rig_defs, ["Spine", "Chest", "LeftArm", "RightArm"])
     shorts_obj = make_skinned_family("Novice_Baseline_Underwear", shorts_parts, rig, rig_defs, ["Hips", "LeftUpLeg", "RightUpLeg"])
+    feet_obj = make_skinned_family("Novice_BaselineFeet", baseline_feet_parts, rig, rig_defs, ["LeftFoot", "RightFoot"])
     # Preserve separate slot objects while sharing one armature and authored groups.
-    for obj in (skin_obj, face_obj, shirt_obj, shorts_obj):
+    for obj in (skin_obj, face_obj, shirt_obj, shorts_obj, feet_obj):
         obj["presentation_slot"] = "Baseline" if obj != skin_obj else "Body"
 
     # DCC socket empties are authoring/reference helpers only. The FBX export
@@ -218,7 +224,7 @@ def build_model():
         socket.parent_bone = bone
         socket.location = local
 
-    return rig, (skin_obj, face_obj, shirt_obj, shorts_obj)
+    return rig, (skin_obj, face_obj, shirt_obj, shorts_obj, feet_obj)
 
 
 def key_pose(rig, name, poses, frame_start, frame_end):
@@ -311,7 +317,7 @@ def main():
         "heightMeters": 1.78,
         "bodyWidthMeters": 0.42,
         "authoredGameplayCapsule": {"heightMeters": 1.72, "radiusMeters": 0.28, "centerMeters": [0, 0, 0.86]},
-        "clothingSlots": ["BaselineTShirt", "BaselineUnderwear"],
+        "clothingSlots": ["BaselineTShirt", "BaselineUnderwear", "BaselineFeet"],
         "animationActions": [action.name for action in actions],
         "vertices": vertices,
         "triangles": triangles,

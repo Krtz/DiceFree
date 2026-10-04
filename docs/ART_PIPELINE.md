@@ -567,6 +567,20 @@ Once the first sword pipeline is proven, add editor validation for:
 
 Later character/wearable validation should check rig/bone/socket contracts.
 
+## Novice footwear replacement prototype
+
+The first feet-slot proof keeps `Novice_BaselineFeet` as a separate skinned
+renderer bound to the imported `LeftFoot` and `RightFoot` bones. The shoe fixture
+disables that baseline renderer and parents its left/right shoe groups beneath
+their matching foot bones; removing the fixture restores the baseline renderer.
+The Editor validator checks both DCC attachment anchors against the foot bones,
+samples Locomotion to confirm both feet move with the shoes, verifies the
+baseline/equipped toggle, and rejects presentation colliders. This is a focused
+replacement proof, not a general wearable system. The prototype shoe source and
+export live under `SourceArt/Characters/NoviceShoes` and
+`Assets/_DiceFree/Art/Characters/NoviceShoes`; the isolated preview is
+`Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity`.
+
 ## Research basis
 
 This pipeline follows current Unity/GitHub/Blender guidance:

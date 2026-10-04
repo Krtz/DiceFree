@@ -17,16 +17,17 @@
   },
   "clothingSlots": [
     "BaselineTShirt",
-    "BaselineUnderwear"
+    "BaselineUnderwear",
+    "BaselineFeet"
   ],
   "animationActions": [
     "Novice|Idle",
     "Novice|Locomotion",
     "Novice|UnarmedAttack"
   ],
-  "vertices": 24988,
-  "triangles": 49936,
-  "meshObjects": 4,
+  "vertices": 25036,
+  "triangles": 50024,
+  "meshObjects": 5,
   "materialNames": [
     "Novice_Baseline_Tee",
     "Novice_Baseline_Underwear",
