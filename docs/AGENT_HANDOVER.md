@@ -1481,3 +1481,28 @@ is requested at this checkpoint. This is prototype approval, not a claim of
 finished production art. Issue #39 remains open. This approval does not authorize
 starting the shield, shoes, or hat; the next work should follow an explicit
 scope decision.
+
+
+## #39 integrated and closed — 2026-10-04
+
+Issue #39's accepted prototype branch `art/39-novice-body-rig` at
+`74eef143731ac74a501f4ceb293c7e404000a3b1` was exactly two commits ahead
+of, and zero behind, `poc/cornberg` at
+`5dfbf45ab2fc2226e881d9c4c138a13f76b1b75b`. It was integrated by
+fast-forward only. The resulting `poc/cornberg` is
+`74eef143731ac74a501f4ceb293c7e404000a3b1`.
+
+Post-integration connected Unity 6000.6.3f1 checks on the resulting tip passed:
+`DICEFRE_NOVICE_PIPELINE_OK`, `DICEFRE_ARCHITECTURE_OK`,
+`DICEFRE_ARCH_POLICY_SELFTEST_OK`, and
+`DICEFREE_MANAGED_REFERENCE_OK`. The exact tip had already passed the
+Windows x64 Development Build and `DICEFRE_NOVICE_PLAYER_BUILD_OK`; no
+second build was needed after the pure fast-forward. Axel approved the current
+visual as a good prototype skeleton, with potential development later and no
+visual revision requested. Issue #39 was closed completed. No merge to
+`main` occurred. No gameplay or starting-equipment behavior changed.
+
+The next independent art proof is the Cornberg-ish shield / Novice left-hand
+offhand presentation contract. It must use a dedicated issue and branch from
+this post-#39 PoC tip, remain open/unmerged, and prove identity-local attachment
+and orientation without changing the Novice skeleton or gameplay.
