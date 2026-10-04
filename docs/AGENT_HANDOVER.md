@@ -1565,3 +1565,17 @@ No gameplay change was made. Nothing from #40, #41, or #42 was merged to
 a dedicated issue and branch from the post-#39 PoC to put the accepted Novice
 presentation on the actual Cornberg player actor; retain gameplay movement,
 collision, combat, interaction, quest state, persistence, and camera authority.
+
+## #43 Novice presentation in Cornberg — 2026-10-05
+
+Issue [#43](https://github.com/Krtz/DiceFree/issues/43) is implemented on the independent branch `art/43-novice-cornberg`, based on the post-#39 `poc/cornberg` SHA `74eef143731ac74a501f4ceb293c7e404000a3b1`. Pushed implementation SHA: `b407ee36a4ed1fcb505f7914d2f0f596ebeea032`. Issue #43 remains open and the branch is unmerged.
+
+The accepted `NovicePresentation` prefab is now a child of the existing Cornberg player root. The previous placeholder body/facing visuals are inactive. The existing root continues to own movement, NavMesh, collision, combat, input, interaction, and camera behavior; the authored gameplay capsule remains 1.8 m high / 0.45 m radius, with one root collider. A small actor-state presentation driver maps NavMesh velocity to the Novice Animator, triggers the existing basic-attack presentation on wind-up, and pauses/restores the visual through death/revive. Novice remains unequipped; no gameplay, quest, save, or progression rules changed.
+
+Connected Unity 6000.6.3f1 compile/import succeeded. The focused presentation check, architecture validation, architecture policy self-test, and managed-reference validation passed: `DICEFRE_NOVICE_CORNBERG_PRESENTATION_OK`, `DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, and `DICEFREE_MANAGED_REFERENCE_OK`. Runtime smoke checks moved the real actor through NavMesh paths, observed locomotion speed in the Animator, confirmed a real BasicAttack order landed hits, and confirmed death/revive disables/restores the authored capsule and presentation. The actual authored camera reference was retained and the reproducible gameplay-context preview was captured at `Assets/_DiceFree/Art/Validation/Previews/CornbergNovicePlayer_Unity.png`.
+
+A Windows x64 Development Build passed: `T:/TEMP/DiceFree-Issue43-Cornberg-Development/DiceFree.exe` (667,136-byte executable; 186,690,477-byte total build output; zero errors; five warnings: existing collision-bake configuration, Pipeline disabled in player, deprecated `DEVELOPMENT_BUILD` usage, and two stripped URP debug shaders). The preview is Git LFS-managed and `git lfs fsck --objects --pointers` passed.
+
+Input limitation: the connected Unity input simulator reported F6/W events as sent, but they did not reach the game's InputActions. Therefore this checkpoint does not claim direct WASD or pointer click-to-move event verification. A later validation request timed out and the connected Editor bridge stopped responding; earlier feature/architecture/policy/managed-reference checks and the build had passed. Issue #43 records this explicitly and remains open for follow-up.
+
+Next campaign phase: create a dedicated Novice level 1–10 pacing audit issue and branch directly from the reviewed post-#39 `poc/cornberg` tip. Separate deterministic progression math from any estimated real-time duration; do not rebalance unless canonical intent and evidence support a narrow change. #40–#43 remain independent, open, and unmerged. No work has merged to `main`.
