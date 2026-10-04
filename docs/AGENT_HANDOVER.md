@@ -1470,3 +1470,14 @@ sword asset, or main branch changed. Shield/shoes/hat work has not started.
 The updated preview is
 `Assets/_DiceFree/Art/Validation/Previews/NoviceCharacter_Unity.png` and is
 ready for Axel/ChatGPT visual review.
+
+
+## Novice prototype visual approval — 2026-10-04
+
+Axel reviewed the current Novice preview on `art/39-novice-body-rig` at
+`74eef143731ac74a501f4ceb293c7e404000a3b1` and approved the character as a
+good prototype skeleton. It may be developed further later; no visual revision
+is requested at this checkpoint. This is prototype approval, not a claim of
+finished production art. Issue #39 remains open. This approval does not authorize
+starting the shield, shoes, or hat; the next work should follow an explicit
+scope decision.
