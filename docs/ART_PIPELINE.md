@@ -567,6 +567,26 @@ Once the first sword pipeline is proven, add editor validation for:
 
 Later character/wearable validation should check rig/bone/socket contracts.
 
+## Novice Head wearable prototype
+
+The Novice hat proof establishes an intentionally empty baseline Head slot. Its
+editable Blender source is in `SourceArt/Characters/NoviceHat/`; the reproducible
+export script produces a two-mesh crown/band FBX. The imported FBX root is the
+attachment pivot, and the crown geometry is positioned above that origin.
+Unity-authored URP/Lit materials use ordinary backface culling. The rigid-prop
+import disables animation, cameras, lights, blend shapes, embedded materials,
+and generated colliders.
+
+The consumer parents the identity-root `NoviceHatPresentation` directly to the
+valid Humanoid Avatar's semantic Head bone using local position zero, identity
+rotation, and unit scale. The isolated preview validates the empty baseline,
+equipped state, removal back to empty, and attachment following a sampled Head
+pose. This demonstrates one simple presentation fixture; it is not a general
+wearable system and does not affect Novice starting equipment. Rebuild,
+validation, preview capture, and the isolated Windows development build are
+available as `dicefree.art.hat.prepare`, `dicefree.art.hat.validate`,
+`dicefree.art.hat.capture-preview`, and `dicefree.art.hat.build-windows`.
+
 ## Research basis
 
 This pipeline follows current Unity/GitHub/Blender guidance:
