@@ -16655,7 +16655,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e24d720c6fee0c4882d4bdfa87ab086, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.ResurrectionAnchor
   stableId: anchor.cornberg
 --- !u!1 &193409770
@@ -17311,7 +17311,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62013bd95e3008341ab2f38ca5b6f5a3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.InteractionPrompt
   target: {fileID: 196815760}
   player: {fileID: 1288724053}
@@ -32015,7 +32015,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ff5f17330c1554499c657fdbf737fdb, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.PlayerCombatPanel
   player: {fileID: 1288724053}
   well: {fileID: 1178909242}
@@ -32319,6 +32319,73 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365803039}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &365897621
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1288724049}
+    m_Modifications:
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777455550924223822, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_Name
+      value: NovicePresentation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+--- !u!4 &365897622 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+  m_PrefabInstance: {fileID: 365897621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &365897623 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3910513047922800014, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+  m_PrefabInstance: {fileID: 365897621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &366009671
 GameObject:
   m_ObjectHideFlags: 0
@@ -38328,7 +38395,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5a7e1af7d6ff174bb71d8c39c58d65b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Core.ExplorationCamera
   target: {fileID: 1288724049}
   distance: 34
@@ -38395,7 +38462,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
@@ -40923,7 +40990,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ef210def23b1d94eb083d399a3a0763, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.TraversalOverlay
   input: {fileID: 1288724050}
   explorationCamera: {fileID: 434306579}
@@ -43593,7 +43660,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f4655dce5740d54ea5f1efc58c6a3d5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.CombatCommandsPanel
   player: {fileID: 1288724053}
   encounter: {fileID: 611103065}
@@ -51601,7 +51668,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 6556558292968538114
-      type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: Assembly-CSharp}
+      type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
         trivialLevelGap: 10
@@ -51615,7 +51682,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8d0ba2a56038ab42a8b2524ed0334d6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.ActorFeedback
   visual: {fileID: 132333037}
   nameplates: 0
@@ -51653,7 +51720,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45275c0a396ad184a9cf67b84357c1cf, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.BasicAttack
 --- !u!114 &611103069
 MonoBehaviour:
@@ -51665,7 +51732,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c791327e0258ea459fc755767e37e98, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.CombatActor
   faction: 1
   radius: 0.65
@@ -51679,7 +51746,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc9dc78639a4442459758a894354996a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.Health
 --- !u!114 &611103071
 MonoBehaviour:
@@ -51691,7 +51758,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f2f38359e91ea045b43b19c3938d2c9, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.ActorStats
   definition: {fileID: 11400000, guid: 2d91c6f4bb4c39043bcc15dbd65555f3, type: 2}
   level: 1
@@ -51705,7 +51772,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b258cb360bd134045a7481fa126f9b80, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Characters.TraversalMotor
   speed: 5
 --- !u!195 &611103073
@@ -51756,7 +51823,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba043c70ee585654f8f4724ea79a1c2a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.OverworldRespawn
   definition: {fileID: 11400000, guid: 062a532d3a11ab04fa7157cf6334c51a, type: 2}
 --- !u!114 &611103076
@@ -51769,7 +51836,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e373d0d36018d44aa5c3346b2479691, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.DefeatReporter
   creditOwner: {fileID: 0}
 --- !u!114 &611103077
@@ -87643,7 +87710,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09993f0029a63464b87e6dd763ddfcac, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.WorldNavigation
   data: {fileID: 23800000, guid: e04081bae79f8de47b1455b8517bb3e0, type: 2}
 --- !u!4 &994601834
@@ -93885,7 +93952,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 592c976cd869f71468edc1d65c3611bf, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.QuestInteractionPanel
   interactor: {fileID: 1288724062}
 --- !u!4 &1066475809
@@ -102823,7 +102890,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25182509f13aeaf4ca0938c45fff61ef, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.HealingArea
   radius: 4
   hpPerSecond: 5
@@ -112071,6 +112138,7 @@ GameObject:
   - component: {fileID: 1288724071}
   - component: {fileID: 1288724070}
   - component: {fileID: 1288724069}
+  - component: {fileID: 1288724074}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112093,6 +112161,7 @@ Transform:
   m_Children:
   - {fileID: 1907416050}
   - {fileID: 1707476011}
+  - {fileID: 365897622}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288724050
@@ -112105,7 +112174,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d703f1686e55434cbb50fa4c5c28ae5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Characters.TraversalInput
   worldCamera: {fileID: 434306580}
   destinationMarker: {fileID: 2062942550}
@@ -112120,7 +112189,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b258cb360bd134045a7481fa126f9b80, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Characters.TraversalMotor
   speed: 5
 --- !u!195 &1288724052
@@ -112155,7 +112224,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c791327e0258ea459fc755767e37e98, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.CombatActor
   faction: 0
   radius: 0.45
@@ -112169,7 +112238,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93b1f544f91a7384a9ff9f678a503b89, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.TargetSelection
   scope: 35
 --- !u!114 &1288724055
@@ -112182,9 +112251,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 430187dd5fbd523469ee587fbe9f006b, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.RespawnAtAnchor
   anchor: {fileID: 192245232}
+  registeredAnchors: []
   restoredFraction: 0.5
   delay: 1.5
 --- !u!114 &1288724056
@@ -112197,9 +112267,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8d0ba2a56038ab42a8b2524ed0334d6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.ActorFeedback
-  visual: {fileID: 1907416050}
+  visual: {fileID: 365897622}
   nameplates: 0
   floatingNumbers: 1
 --- !u!114 &1288724057
@@ -112212,7 +112282,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ef131686a97c074f9baa33dd8d41c65, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Characters.CombatInput
 --- !u!136 &1288724058
 CapsuleCollider:
@@ -112247,7 +112317,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45275c0a396ad184a9cf67b84357c1cf, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.BasicAttack
 --- !u!114 &1288724060
 MonoBehaviour:
@@ -112259,7 +112329,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc9dc78639a4442459758a894354996a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.Health
 --- !u!114 &1288724061
 MonoBehaviour:
@@ -112271,7 +112341,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f2f38359e91ea045b43b19c3938d2c9, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.ActorStats
   definition: {fileID: 11400000, guid: 8a62b7c38167e1c4984262db7f09d0e8, type: 2}
   level: 1
@@ -112285,20 +112355,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d82f0fb48d64a04fb9e555f7ea62c11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.Interactor
---- !u!114 &1288724073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288724048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0b3ddca95564714a732c35dc40c52bc, type: 3}
   m_Name:
-  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.InteractionRegistry
+  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.Interactor
 --- !u!114 &1288724063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112329,7 +112387,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6045dcb5d73c8c747a3cd4122cee02d3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Progression.ExperienceProgression
   curve: {fileID: 11400000, guid: 29095b7bcb451c2498d411d38da72fe5, type: 2}
   currentXp: 0
@@ -112343,7 +112401,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 498d4bf40b79a784da21fc9f6404738a, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.KillCreditReceiver
 --- !u!114 &1288724066
 MonoBehaviour:
@@ -112355,7 +112413,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e373d0d36018d44aa5c3346b2479691, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.DefeatReporter
   creditOwner: {fileID: 0}
 --- !u!114 &1288724067
@@ -112368,7 +112426,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60ae8df7063b0c84f8c14faba47f9c85, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Persistence.ManifestationPersistence
   debounceSeconds: 0.25
 --- !u!114 &1288724068
@@ -112434,6 +112492,32 @@ MonoBehaviour:
   definitions:
   - {fileID: 11400000, guid: c121e31e7a7355c4183c9543ddc9d7f3, type: 2}
   - {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
+--- !u!114 &1288724073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b3ddca95564714a732c35dc40c52bc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.InteractionRegistry
+--- !u!114 &1288724074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3959c206818349188e49b21673f0bd6c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.NovicePresentationDriver
+  visualRoot: {fileID: 365897622}
+  animator: {fileID: 365897623}
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0
@@ -112855,7 +112939,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 526e28d34d7fdbc448779d46bac83439, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.ExperienceBar
   progression: {fileID: 1288724064}
 --- !u!4 &1301701498
@@ -136822,6 +136906,7 @@ MonoBehaviour:
   displayName: Mira
   range: 2.5
   approachPoint: {fileID: 0}
+  context: {fileID: 0}
   quest: {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
   additionalQuests: []
   ambientOutsideQuest: 1
@@ -148743,7 +148828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1707476011
 Transform:
   m_ObjectHideFlags: 0
@@ -160627,7 +160712,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29eb26dd9a0a0ad4bb64ccf1be475fd6, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.QuestTracker
   journal: {fileID: 1288724063}
 --- !u!4 &1850240249
@@ -166584,7 +166669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1907416050
 Transform:
   m_ObjectHideFlags: 0
@@ -176512,7 +176597,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaa61f5e9137f6041b88b486f8f1d392, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.UI.TargetFrame
   selection: {fileID: 1288724054}
 --- !u!4 &2021082893
