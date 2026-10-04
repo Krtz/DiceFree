@@ -1578,6 +1578,8 @@ A Windows x64 Development Build passed: `T:/TEMP/DiceFree-Issue43-Cornberg-Devel
 
 Input limitation: the connected Unity input simulator reported F6/W events as sent, but they did not reach the game's InputActions. Therefore this checkpoint does not claim direct WASD or pointer click-to-move event verification. A later validation request timed out and the connected Editor bridge stopped responding; earlier feature/architecture/policy/managed-reference checks and the build had passed. Issue #43 records this explicitly and remains open for follow-up.
 
+Follow-up bridge diagnosis on 2026-10-05: Unity CLI still discovers the same `6000.6.3f1` Editor as `ready`, and `recompile_status` reports `up_to_date`. However, `dicefree.art.novice.cornberg.validate` returned `COMMAND_FAILED` after 180 seconds because its Pipeline main-thread operation timed out at 60 seconds; read-only `editor_status`, `list_open_scenes`, and `runtime_status` requests independently timed out at the same main-thread gate. This is an Editor/Pipeline responsiveness failure, not a failing gameplay assertion. No Editor restart or code change was made. Direct WASD, pointer click-to-move, and end-to-end NPC interaction remain unverified; resume those checks only after the connected Editor API responds.
+
 Next campaign phase: create a dedicated Novice level 1–10 pacing audit issue and branch directly from the reviewed post-#39 `poc/cornberg` tip. Separate deterministic progression math from any estimated real-time duration; do not rebalance unless canonical intent and evidence support a narrow change. #40–#43 remain independent, open, and unmerged. No work has merged to `main`.
 ## #44 Novice level 1–10 pacing audit — 2026-10-05
 
