@@ -1506,3 +1506,14 @@ The next independent art proof is the Cornberg-ish shield / Novice left-hand
 offhand presentation contract. It must use a dedicated issue and branch from
 this post-#39 PoC tip, remain open/unmerged, and prove identity-local attachment
 and orientation without changing the Novice skeleton or gameplay.
+
+
+## #40 shield / Novice offhand prototype — 2026-10-04
+
+Issue [#40](https://github.com/Krtz/DiceFree/issues/40) is implemented on the independent branch `art/40-shield-offhand`, based on post-#39 `poc/cornberg` SHA `74eef143731ac74a501f4ceb293c7e404000a3b1`. Current branch SHA: `2ae98469fffd8d7865bbddbe3c0797089e4d9c15`. The issue remains open and unmerged.
+
+A single humble heater-style Cornberg shield proves the Novice `LeftHandOffhand` contract. Blender 5.2.2 LTS source/export rebuilds matched geometry fingerprint `6f4d0e258c28e8177cd36f92dbbd2df5f34e39c739183c9cd3164de61bce4849`. Unity measured `0.61 × 0.75 × 0.39 m`, 472 vertices, 256 triangles, 4 MeshFilters and 4 materials. DCC-authored Grip/ShieldFront survive FBX import. The Novice presentation owns the hand-relative socket orientation; the shield preview attaches at local identity with 0.00000 m grip error and 0.000° orientation error. Locomotion sampling confirms the socket moves with its hand while the anchors remain aligned.
+
+Passed: `DICEFRE_SHIELD_PIPELINE_OK`, `DICEFRE_SHIELD_PREVIEW_OK`, `DICEFRE_SHIELD_PLAYER_BUILD_OK`, architecture, policy self-tests and managed-reference validation. Isolated Windows x64 Development Build: 667,136-byte executable, 184,456,621 bytes across 328 files, zero errors and three Unity shader-stripping warnings. Git LFS covers the new .blend, .fbx and preview; `git lfs fsck --objects --pointers` passed. Preview: `Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png`. No gameplay or Novice starting-equipment change. No merge to PoC or main.
+
+Next campaign phase: create issue #41 and independent branch `art/41-novice-shoes` from the post-#39 PoC tip `74eef143731ac74a501f4ceb293c7e404000a3b1`. Prove real Feet-slot replacement (baseline visible feet hidden while equipped shoes are active; removing the fixture restores baseline), including both feet following locomotion. Hat remains after shoes. The order stays shield -> shoes -> hat for the independent proofs; only #39 was integrated into PoC.
