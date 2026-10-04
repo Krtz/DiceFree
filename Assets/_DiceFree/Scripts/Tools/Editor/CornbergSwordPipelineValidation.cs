@@ -19,13 +19,19 @@ namespace DiceFree.EditorTools
         private const string MaterialRoot = "Assets/_DiceFree/Art/Weapons/CornbergFieldSword/Materials";
         private const string PrefabPath = "Assets/_DiceFree/Art/Weapons/CornbergFieldSword/Prefabs/CornbergFieldSwordPresentation.prefab";
         private const string ScenePath = "Assets/_DiceFree/Art/Validation/Scenes/CornbergSwordPipelinePreview.unity";
+        private const string PreviewPath = "Assets/_DiceFree/Art/Validation/Previews/CornbergSword_Unity.png";
         private const string ArtRoot = "Assets/_DiceFree/Art";
+        private const string SourceRoot = "SourceArt/Weapons/CornbergFieldSword";
+        private static object lastDetails;
 
         [CliCommand("dicefree.art.sword.prepare", "Import the Cornberg sword and create its URP presentation prefab and isolated preview scene.", Tags = new[] { "art", "dicefree/art" })]
         private static object Prepare() => Run("sword-pipeline-prepare", "DICEFRE_SWORD_PIPELINE_PREPARED", PrepareAssets);
 
         [CliCommand("dicefree.art.sword.validate", "Validate the Cornberg sword source import, URP prefab boundary, and dedicated preview scene.", Tags = new[] { "tests", "dicefree/art" })]
         private static object Validate() => Run("sword-pipeline", "DICEFRE_SWORD_PIPELINE_OK", ValidateAssets);
+
+        [CliCommand("dicefree.art.sword.capture-preview", "Render the dedicated Cornberg sword preview camera to its checked-in PNG.", Tags = new[] { "art", "capture", "dicefree/art" })]
+        private static object CapturePreview() => Run("sword-preview-capture", "DICEFRE_SWORD_PREVIEW_OK", CapturePreviewAsset);
 
         [CliCommand("dicefree.art.sword.build-windows", "Build the isolated sword preview as a Windows Development player without changing gameplay scenes or build settings.", Tags = new[] { "builds", "dicefree/art" })]
         private static object BuildWindows() => BuildWindowsPlayer();
@@ -34,6 +40,7 @@ namespace DiceFree.EditorTools
         {
             var timer = Stopwatch.StartNew();
             string error = null;
+            lastDetails = null;
             try
             {
                 action();
@@ -56,6 +63,7 @@ namespace DiceFree.EditorTools
                 modelPath = ModelPath,
                 prefabPath = PrefabPath,
                 previewScenePath = ScenePath,
+                details = lastDetails,
                 testedGitSha = GitHead()
             };
         }
@@ -66,19 +74,20 @@ namespace DiceFree.EditorTools
             EnsureFolder(MaterialRoot);
             EnsureFolder("Assets/_DiceFree/Art/Weapons/CornbergFieldSword/Prefabs");
             EnsureFolder("Assets/_DiceFree/Art/Validation/Scenes");
+            EnsureFolder("Assets/_DiceFree/Art/Validation/Previews");
 
             AssetDatabase.ImportAsset(ModelPath, ImportAssetOptions.ForceSynchronousImport);
             var importer = AssetImporter.GetAtPath(ModelPath) as ModelImporter;
             Require(importer != null, "Unity could not create a ModelImporter for " + ModelPath);
-            bool reimport = false;
-            if (importer.importAnimation) { importer.importAnimation = false; reimport = true; }
-            if (importer.materialImportMode != ModelImporterMaterialImportMode.None) { importer.materialImportMode = ModelImporterMaterialImportMode.None; reimport = true; }
-            if (!Mathf.Approximately(importer.globalScale, 1f)) { importer.globalScale = 1f; reimport = true; }
-            if (reimport) importer.SaveAndReimport();
+            ConfigureImporter(importer);
             AssetDatabase.ImportAsset(ModelPath, ImportAssetOptions.ForceSynchronousImport);
 
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath);
             Require(model != null, "Imported FBX is not available as a GameObject.");
+            ValidateSourceFiles();
+            RequireExpectedImportedParts(model);
+            FindUniqueTransform(model.transform, "Grip");
+            FindUniqueTransform(model.transform, "Tip");
             Bounds modelBounds = MeasureBounds(model);
             UnityEngine.Debug.Log("DICEFRE_SWORD_IMPORTED_BOUNDS size=" + modelBounds.size + " min=" + modelBounds.min + " max=" + modelBounds.max);
             foreach (var filter in model.GetComponentsInChildren<MeshFilter>(true).Where(f => f.sharedMesh != null))
@@ -109,12 +118,8 @@ namespace DiceFree.EditorTools
                     renderer.sharedMaterials = Enumerable.Repeat(steel, Math.Max(1, renderer.sharedMaterials.Length)).ToArray();
             }
 
-            var grip = new GameObject("Grip");
-            grip.transform.SetParent(root.transform, false);
-            grip.transform.localPosition = Vector3.zero;
-            var tip = new GameObject("Tip");
-            tip.transform.SetParent(root.transform, false);
-            tip.transform.localPosition = new Vector3(0f, 0f, modelBounds.max.z);
+            CopyImportedAnchorToWrapper(root.transform, visual.transform, "Grip");
+            CopyImportedAnchorToWrapper(root.transform, visual.transform, "Tip");
 
             PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
             UnityEngine.Object.DestroyImmediate(root);
@@ -130,9 +135,17 @@ namespace DiceFree.EditorTools
             Require(!importer.importAnimation, "Sword FBX unexpectedly imports animation.");
             Require(importer.materialImportMode == ModelImporterMaterialImportMode.None, "Sword FBX unexpectedly imports materials; presentation materials must be authored in Unity.");
             Require(Mathf.Approximately(importer.globalScale, 1f), "Sword FBX global import scale must remain 1.");
+            Require(!importer.importCameras && !importer.importLights && !importer.importBlendShapes,
+                "Rigid sword import must exclude cameras, lights and blend shapes.");
+            Require(!importer.addCollider, "Sword FBX importer must not generate a collider.");
+            AnimationClip[] importedClips = AssetDatabase.LoadAllAssetsAtPath(ModelPath).OfType<AnimationClip>().ToArray();
+            Require(importedClips.Length == 0,
+                "Rigid sword FBX unexpectedly contains imported animation clips.");
 
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath);
             Require(model != null, "Sword FBX model asset is missing.");
+            ValidateSourceFiles();
+            RequireExpectedImportedParts(model);
             Bounds bounds = MeasureBounds(model);
             UnityEngine.Debug.Log("DICEFRE_SWORD_BOUNDS size=" + bounds.size + " min=" + bounds.min + " max=" + bounds.max);
             Require(bounds.size.z >= 0.9f && bounds.size.z <= 1.25f, "Expected roughly one metre of sword along local +Z; got bounds " + bounds.size + ". Check Blender FBX axis conversion.");
@@ -146,14 +159,34 @@ namespace DiceFree.EditorTools
             var visualRoot = prefab.transform.Find("CornbergFieldSword_Visual");
             Require(visualRoot != null && Quaternion.Angle(visualRoot.localRotation, model.transform.localRotation) < 0.1f,
                 "Presentation prefab must preserve the FBX importer root rotation that maps the DCC axis to Unity +Z.");
-            Require(prefab.transform.Find("Grip") != null && prefab.transform.Find("Tip") != null, "Prefab must expose Grip and Tip anchors.");
+            Transform importedGrip = FindUniqueTransform(visualRoot, "Grip");
+            Transform importedTip = FindUniqueTransform(visualRoot, "Tip");
+            Transform wrapperGrip = prefab.transform.Find("Grip");
+            Transform wrapperTip = prefab.transform.Find("Tip");
+            Require(wrapperGrip != null && wrapperTip != null, "Prefab must expose pass-through Grip and Tip aliases.");
+            Vector3 importedGripRoot = prefab.transform.InverseTransformPoint(importedGrip.position);
+            Vector3 importedTipRoot = prefab.transform.InverseTransformPoint(importedTip.position);
+            Vector3 wrapperGripRoot = prefab.transform.InverseTransformPoint(wrapperGrip.position);
+            Vector3 wrapperTipRoot = prefab.transform.InverseTransformPoint(wrapperTip.position);
+            Require(Vector3.Distance(importedGripRoot, wrapperGripRoot) <= 0.001f && Vector3.Distance(importedTipRoot, wrapperTipRoot) <= 0.001f,
+                "Presentation aliases must match the FBX-authored semantic anchors.");
+            Require(importedGripRoot.magnitude <= 0.01f, "Imported FBX Grip must match the root pivot; got " + importedGripRoot + ".");
+            Require(Vector3.Distance(importedTipRoot, new Vector3(0f, 0f, 0.905f)) <= 0.015f,
+                "Imported FBX Tip must be about 0.905 m forward along local +Z; got " + importedTipRoot + ".");
+            Require(Vector3.Dot(importedTipRoot - importedGripRoot, Vector3.forward) > 0.90f,
+                "Imported FBX Tip must lie forward of Grip along local +Z.");
             Require(prefab.GetComponentInChildren<Collider>(true) == null, "Presentation prefab must not add a gameplay hit collider.");
+            Require(prefab.GetComponentInChildren<Animator>(true) == null && prefab.GetComponentInChildren<Animation>(true) == null,
+                "Rigid sword presentation unexpectedly contains an animation component.");
             var renderers = prefab.GetComponentsInChildren<Renderer>(true);
             Require(renderers.Length >= 3, "Expected blade, hilt and grip renderers in the prefab.");
             foreach (var renderer in renderers)
                 foreach (var material in renderer.sharedMaterials)
                     Require(material != null && material.shader != null && material.shader.name == "Universal Render Pipeline/Lit",
                         "All sword parts need explicit URP/Lit materials; bad material on " + renderer.name);
+            foreach (var material in renderers.SelectMany(renderer => renderer.sharedMaterials).Where(material => material != null).Distinct())
+                Require(material.HasProperty("_Cull") && Mathf.Approximately(material.GetFloat("_Cull"), (float)UnityEngine.Rendering.CullMode.Back),
+                    "Sword materials must use standard single-sided URP backface culling: " + material.name);
 
             var scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath);
             Require(scene != null, "Dedicated sword presentation preview scene is missing.");
@@ -170,6 +203,43 @@ namespace DiceFree.EditorTools
                     "Preview scene must include the clearly named 1.8 m non-character scale reference.");
             }
             finally { EditorSceneManager.CloseScene(openedScene, true); }
+
+            var filters = model.GetComponentsInChildren<MeshFilter>(true).Where(filter => filter.sharedMesh != null).ToArray();
+            int vertices = filters.Sum(filter => filter.sharedMesh.vertexCount);
+            int triangles = filters.Sum(filter => filter.sharedMesh.triangles.Length / 3);
+            int uniqueMaterials = prefab.GetComponentsInChildren<Renderer>(true)
+                .SelectMany(renderer => renderer.sharedMaterials).Where(material => material != null)
+                .Distinct().Count();
+            Require(filters.Length > 0 && vertices > 0 && triangles > 0, "Imported sword mesh counts must be nonzero.");
+            Require(filters.Length <= 64 && vertices <= 1000000 && triangles <= 1000000,
+                "Imported sword mesh counts are implausibly large for a single rigid prop; this is a gross-import sanity guard, not a content budget.");
+            foreach (var filter in filters)
+            {
+                Vector3[] normals = filter.sharedMesh.normals;
+                Require(normals.Length == filter.sharedMesh.vertexCount && normals.All(normal => normal.sqrMagnitude > 0.000001f),
+                    "Mesh normals are missing or degenerate on " + filter.name + ". Keep normal backface culling enabled and fix the source geometry.");
+            }
+            Require(uniqueMaterials > 0, "Sword presentation has no assigned materials.");
+            lastDetails = new
+            {
+                dimensionsMeters = new { x = bounds.size.x, y = bounds.size.y, z = bounds.size.z },
+                meshFilterCount = filters.Length,
+                vertexCount = vertices,
+                triangleCount = triangles,
+                uniqueMaterialCount = uniqueMaterials,
+                sourceGripBlender = new[] { 0f, 0f, 0f },
+                sourceTipBlender = new[] { 0f, 0.905f, 0f },
+                importedGripUnity = new[] { importedGripRoot.x, importedGripRoot.y, importedGripRoot.z },
+                importedTipUnity = new[] { importedTipRoot.x, importedTipRoot.y, importedTipRoot.z },
+                wrapperGripUnity = new[] { wrapperGripRoot.x, wrapperGripRoot.y, wrapperGripRoot.z },
+                wrapperTipUnity = new[] { wrapperTipRoot.x, wrapperTipRoot.y, wrapperTipRoot.z },
+                importedVisualRootEulerDegrees = new[] { visualRoot.localRotation.eulerAngles.x, visualRoot.localRotation.eulerAngles.y, visualRoot.localRotation.eulerAngles.z },
+                importer = new { globalScale = importer.globalScale, animation = importer.importAnimation, animationClipCount = importedClips.Length, normals = importer.importNormals.ToString(), camera = importer.importCameras, lights = importer.importLights, blendShapes = importer.importBlendShapes, collider = importer.addCollider, embeddedMaterials = importer.materialImportMode.ToString() },
+                materialCullMode = "Back",
+                meshPartNames = filters.Select(filter => filter.name).ToArray()
+            };
+            UnityEngine.Debug.Log("DICEFRE_SWORD_MESH_STATS vertices=" + vertices + " triangles=" + triangles + " meshFilters=" + filters.Length + " uniqueMaterials=" + uniqueMaterials + " dimensions=" + bounds.size);
+            UnityEngine.Debug.Log("DICEFRE_SWORD_ANCHORS importedGrip=" + importedGripRoot + " importedTip=" + importedTipRoot + " wrapperGrip=" + wrapperGripRoot + " wrapperTip=" + wrapperTipRoot);
         }
 
         private static void CreatePreviewScene()
@@ -215,6 +285,103 @@ namespace DiceFree.EditorTools
             AssetDatabase.SaveAssets();
         }
 
+        private static void CapturePreviewAsset()
+        {
+            ValidateAssets();
+            Scene previewScene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Additive);
+            RenderTexture target = null;
+            Texture2D image = null;
+            Camera camera = null;
+            RenderTexture priorTarget = null;
+            RenderTexture priorActive = RenderTexture.active;
+            try
+            {
+                camera = previewScene.GetRootGameObjects()
+                    .Select(root => root.GetComponent<Camera>())
+                    .FirstOrDefault(candidate => candidate != null);
+                Require(camera != null, "Sword preview scene has no camera to capture.");
+                const int width = 1280;
+                const int height = 800;
+                target = new RenderTexture(width, height, 24);
+                priorTarget = camera.targetTexture;
+                camera.targetTexture = target;
+                camera.Render();
+                RenderTexture.active = target;
+                image = new Texture2D(width, height, TextureFormat.RGB24, false);
+                image.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+                image.Apply();
+
+                string outputPath = ProjectAssetFullPath(PreviewPath);
+                Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+                File.WriteAllBytes(outputPath, image.EncodeToPNG());
+                AssetDatabase.ImportAsset(PreviewPath, ImportAssetOptions.ForceUpdate);
+                AssetDatabase.SaveAssets();
+                lastDetails = new { previewPath = PreviewPath, width, height, captureMethod = "dedicated preview-scene Camera.Render into a fixed-size RenderTexture" };
+            }
+            finally
+            {
+                if (camera != null) camera.targetTexture = priorTarget;
+                RenderTexture.active = priorActive;
+                if (target != null) { target.Release(); UnityEngine.Object.DestroyImmediate(target); }
+                if (image != null) UnityEngine.Object.DestroyImmediate(image);
+                EditorSceneManager.CloseScene(previewScene, true);
+            }
+        }
+
+        private static void ConfigureImporter(ModelImporter importer)
+        {
+            bool changed = false;
+            if (!Mathf.Approximately(importer.globalScale, 1f)) { importer.globalScale = 1f; changed = true; }
+            if (importer.importAnimation) { importer.importAnimation = false; changed = true; }
+            if (importer.materialImportMode != ModelImporterMaterialImportMode.None) { importer.materialImportMode = ModelImporterMaterialImportMode.None; changed = true; }
+            if (importer.importCameras) { importer.importCameras = false; changed = true; }
+            if (importer.importLights) { importer.importLights = false; changed = true; }
+            if (importer.importBlendShapes) { importer.importBlendShapes = false; changed = true; }
+            if (importer.addCollider) { importer.addCollider = false; changed = true; }
+            if (importer.importNormals != ModelImporterNormals.Import) { importer.importNormals = ModelImporterNormals.Import; changed = true; }
+            if (changed) importer.SaveAndReimport();
+        }
+
+        private static void ValidateSourceFiles()
+        {
+            Require(File.Exists(ProjectAssetFullPath(SourceRoot + "/CornbergFieldSword.blend")), "Editable Blender source is missing or misnamed.");
+            Require(File.Exists(ProjectAssetFullPath(SourceRoot + "/build_cornberg_field_sword.py")), "Sword source/export script is missing or misnamed.");
+            Require(File.Exists(ProjectAssetFullPath(ModelPath)), "Unity FBX export is missing.");
+            Require(Path.GetFileNameWithoutExtension(ModelPath) == "CornbergFieldSword", "FBX name must match CornbergFieldSword source identity.");
+        }
+
+        private static void RequireExpectedImportedParts(GameObject model)
+        {
+            string[] names = model.GetComponentsInChildren<MeshFilter>(true).Where(filter => filter.sharedMesh != null)
+                .Select(filter => filter.name).ToArray();
+            string[] requiredParts = { "CornbergFieldSword_Blade", "CornbergFieldSword_Hilt", "CornbergFieldSword_Grip" };
+            Require(names.Length == requiredParts.Length && requiredParts.All(part => names.Count(name => name == part) == 1),
+                "Imported sword must preserve exactly one each of its Blade, Hilt and Grip mesh parts. Found: " + string.Join(", ", names));
+        }
+
+        private static Transform FindUniqueTransform(Transform root, string name)
+        {
+            Transform[] matches = root.GetComponentsInChildren<Transform>(true).Where(transform => transform.name == name).ToArray();
+            Require(matches.Length == 1, "Expected exactly one imported " + name + " anchor under " + root.name + "; found " + matches.Length + ".");
+            return matches[0];
+        }
+
+        private static void CopyImportedAnchorToWrapper(Transform wrapperRoot, Transform importedVisual, string name)
+        {
+            Transform imported = FindUniqueTransform(importedVisual, name);
+            var alias = new GameObject(name);
+            alias.transform.SetParent(wrapperRoot, false);
+            alias.transform.localPosition = wrapperRoot.InverseTransformPoint(imported.position);
+            alias.transform.localRotation = Quaternion.Inverse(wrapperRoot.rotation) * imported.rotation;
+            alias.transform.localScale = Vector3.one;
+        }
+
+        private static string ProjectAssetFullPath(string relativePath)
+        {
+            string projectRoot = Directory.GetParent(Application.dataPath).FullName;
+            return Path.GetFullPath(Path.Combine(projectRoot, relativePath.Replace('/', Path.DirectorySeparatorChar)));
+        }
+
         private static object BuildWindowsPlayer()
         {
             var timer = Stopwatch.StartNew();
@@ -252,6 +419,7 @@ namespace DiceFree.EditorTools
                     totalOutputBytes = outputBytes,
                     warnings = report.summary.totalWarnings,
                     errors = report.summary.totalErrors,
+                    details = lastDetails,
                     testedGitSha = GitHead()
                 };
             }
@@ -289,9 +457,9 @@ namespace DiceFree.EditorTools
             material.SetColor("_BaseColor", color);
             material.SetFloat("_Metallic", metallic);
             material.SetFloat("_Smoothness", smoothness);
-            // The stylized low-poly faces have no separate backface geometry;
-            // keep the compact blade and forged quillons readable from either side.
-            if (material.HasProperty("_Cull")) material.SetFloat("_Cull", (float)UnityEngine.Rendering.CullMode.Off);
+            // Keep standard URP backface culling. Missing/inverted faces must be
+            // fixed in the source mesh rather than hidden by double-sided shading.
+            if (material.HasProperty("_Cull")) material.SetFloat("_Cull", (float)UnityEngine.Rendering.CullMode.Back);
             EditorUtility.SetDirty(material);
             return material;
         }

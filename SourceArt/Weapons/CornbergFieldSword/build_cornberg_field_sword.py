@@ -71,6 +71,22 @@ def triangulate_ngons(mesh):
     mesh.update()
 
 
+def validate_closed_export_meshes(collection):
+    """Fail the export if a rigid sword mesh has open/non-manifold edges."""
+    for obj in (item for item in collection.objects if item.type == "MESH"):
+        bm = bmesh.new()
+        try:
+            bm.from_mesh(obj.data)
+            open_edges = [edge for edge in bm.edges if not edge.is_manifold]
+            if open_edges:
+                raise RuntimeError("%s has %d open or non-manifold edges" % (obj.name, len(open_edges)))
+            signed_volume = bm.calc_volume(signed=True)
+            if signed_volume <= 0.0:
+                raise RuntimeError("%s does not have outward-facing closed surface normals (signed volume %f)" % (obj.name, signed_volume))
+        finally:
+            bm.free()
+
+
 def set_origin_at_root(obj):
     bpy.context.scene.cursor.location = (0.0, 0.0, 0.0)
     bpy.ops.object.select_all(action="DESELECT")
@@ -171,6 +187,11 @@ def make_blade(steel, edge, collection):
     verts.append((0.0, 0.905, 0.0))
     faces = []
     material_ids = []
+    # Close the blade's root cross-section beneath the guard. Backface culling
+    # remains enabled in Unity, so the rigid blade is a closed solid surface.
+    root_ring = tuple(range(len(across))) + tuple(range(len(across) * 2 - 1, len(across) - 1, -1))
+    faces.append(root_ring)
+    material_ids.append(0)
     row_count = len(rows)
     for r in range(row_count - 1):
         for side in range(2):
@@ -203,6 +224,7 @@ def make_blade(steel, edge, collection):
         material_ids.append(1)
     mesh = bpy.data.meshes.new("CornbergBladeMesh")
     mesh.from_pydata(verts, [], faces)
+    triangulate_ngons(mesh)
     mesh.materials.append(steel)
     mesh.materials.append(edge)
     recalculate_normals(mesh)
@@ -300,7 +322,11 @@ def geometry_fingerprint(collection):
         for vertex in obj.data.vertices:
             digest.update(("%.6f,%.6f,%.6f\n" % tuple(vertex.co)).encode("ascii"))
         for polygon in obj.data.polygons:
-            digest.update(("%d:%s\n" % (polygon.material_index, ",".join(str(i) for i in polygon.vertices))).encode("ascii"))
+            digest.update(("%d:%s:%s\n" % (
+                polygon.material_index,
+                ",".join(str(i) for i in polygon.vertices),
+                ",".join("%.6f" % component for component in polygon.normal),
+            )).encode("ascii"))
     return digest.hexdigest()
 
 
@@ -345,6 +371,8 @@ def main():
         obj.scale = (1.0, 1.0, 1.0)
     add_empty("Grip", root, (0.0, 0.0, 0.0), export_collection)
     tip_anchor = add_empty("Tip", root, (0.0, 0.905, 0.0), export_collection)
+
+    validate_closed_export_meshes(export_collection)
 
     add_preview_stage(preview_collection, preview_mat)
     add_camera_and_lights(preview_collection)

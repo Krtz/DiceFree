@@ -182,6 +182,50 @@ Working FBX orientation target:
 
 The exact exporter preset should be proven with the first sword and then frozen into tooling.
 
+### Cornberg Field Sword pipeline proof
+
+The first rigid-prop proof is the single `CornbergFieldSword` asset under
+`SourceArt/Weapons/CornbergFieldSword/`. Its editable Blender 5.2.2 LTS source
+and `build_cornberg_field_sword.py` generate the FBX, source preview and a
+geometry fingerprint. Two clean rebuilds matched at
+`26dc5d60219a37e71dc2836d30f9fb8e19345fde2520e370a8710348cbc788d6`; the
+fingerprint covers mesh names, vertices, face indices, material assignments and
+polygon normals. FBX container bytes may vary. The working invocation is:
+
+```powershell
+blender --background --python SourceArt/Weapons/CornbergFieldSword/build_cornberg_field_sword.py
+```
+
+The export uses metric units, FBX forward `-Z`, up `Y`, and Unity scale 1. The
+editable Blender sword points along local `+Y`; the export-only half-turn and
+FBX basis conversion make the Unity blade point along local `+Z`. Unity 6000.6.3f1
+imports an approximately 270-degree X-axis conversion on the visual child. The
+presentation prefab root stays identity at the hand grip and retains that child
+conversion.
+
+The Blender-authored `Grip` and `Tip` empties are canonical. Unity must find
+these anchors in the imported FBX, validate Grip at the root and Tip about
+0.905 m along local `+Z`, then copy their transforms to wrapper aliases. Bounds
+are not a source for semantic anchor positions. The tested imported sword is
+`0.3485 × 0.0961 × 1.1015 m`, with 1,028 vertices, 502 triangles, 3 MeshFilters
+and 4 unique Unity presentation materials. These are a baseline, not an
+optimization budget.
+
+For this closed rigid prop, the generator checks every exported mesh for
+manifold edges and positive signed volume; Unity imports authored normals and
+uses ordinary URP backface culling. Do not disable culling to hide bad faces.
+The import disables animation/clips, embedded materials, cameras, lights, blend
+shapes and generated colliders. It uses scale 1 and authors the four URP/Lit
+presentation materials in Unity.
+
+The focused connected-Editor commands are `dicefree.art.sword.prepare`,
+`dicefree.art.sword.validate`, `dicefree.art.sword.capture-preview` and
+`dicefree.art.sword.build-windows`. Preview capture uses the isolated preview
+scene camera, its labelled 1.8 m scale rod, and a fixed 1280×800 RenderTexture;
+it writes `Assets/_DiceFree/Art/Validation/Previews/CornbergSword_Unity.png`.
+The Windows Development build contains only that preview scene. This proves
+the first sword path, not a universal importer preset or a character socket.
+
 ## Rigid weapon convention
 
 For rigid one-handed weapons:
