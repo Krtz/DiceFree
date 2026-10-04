@@ -132,7 +132,13 @@ namespace DiceFree.EditorTools
             Quaternion weaponSocketLocalRotation = Quaternion.Inverse(rightHand.rotation) *
                 (instance.transform.rotation * weaponForwardInCharacterSpace);
             CreateSocket(rightHand, "RightHandWeapon", new Vector3(0f, 0.025f, 0f), weaponSocketLocalRotation);
-            CreateSocket(leftHand, "LeftHandOffhand", new Vector3(0f, 0.025f, 0f), Quaternion.identity);
+            // The authored Novice faces Blender +Y, which the tested FBX basis
+            // maps to Unity local -Z. Keep the shield's front socket aligned
+            // with that actual character-forward direction.
+            Quaternion offhandForwardInCharacterSpace = Quaternion.LookRotation(Vector3.back, Vector3.up);
+            Quaternion offhandSocketLocalRotation = Quaternion.Inverse(leftHand.rotation) *
+                (instance.transform.rotation * offhandForwardInCharacterSpace);
+            CreateSocket(leftHand, "LeftHandOffhand", new Vector3(0f, 0.025f, 0f), offhandSocketLocalRotation);
             // The humanoid Head and Foot bones themselves are the canonical
             // semantic anchors. Keep their required names unique; later wearable
             // assets can carry their own small offsets from these bone origins.
@@ -211,6 +217,14 @@ namespace DiceFree.EditorTools
             UnityEngine.Debug.Log("DICEFRE_NOVICE_SOCKET_AUTHORING localPosition=" + prefabWeaponSocket.localPosition +
                 " localRotation=" + prefabWeaponSocket.localRotation.eulerAngles +
                 " localRotationQuaternion=" + prefabWeaponSocket.localRotation);
+            var prefabLeftHand = FindBone(prefab.transform, "LeftHand");
+            var prefabOffhandSocket = prefab.GetComponentsInChildren<Transform>(true).Single(t => t.name == "LeftHandOffhand");
+            float offhandForwardError = Vector3.Angle(prefabOffhandSocket.forward, -prefab.transform.forward);
+            Require(Vector3.Distance(prefabOffhandSocket.localPosition, new Vector3(0f, 0.025f, 0f)) <= 0.0001f &&
+                prefabOffhandSocket.parent == prefabLeftHand && offhandForwardError <= 0.1f,
+                "LeftHandOffhand must keep its hand-relative grip point while its authored forward axis matches character forward; angle=" + offhandForwardError + " degrees.");
+            UnityEngine.Debug.Log("DICEFRE_NOVICE_OFFHAND_SOCKET forwardErrorDeg=" + offhandForwardError.ToString("F3") +
+                " localPosition=" + prefabOffhandSocket.localPosition + " localRotation=" + prefabOffhandSocket.localRotation.eulerAngles);
             Require(prefab.transform.Find("BaselineVisualSlots/BaselineTShirtSlot") != null && prefab.transform.Find("BaselineVisualSlots/BaselineUnderwearSlot") != null,
                 "Separate baseline clothing slot roots are missing.");
             var clips = ImportedClips().ToArray();

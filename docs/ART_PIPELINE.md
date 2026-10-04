@@ -577,3 +577,11 @@ This pipeline follows current Unity/GitHub/Blender guidance:
 - Unity recommends prefab-first, modular content and version-control-friendly project organization.
 - Git LFS is appropriate for large binary source/media files.
 - GitHub Releases/build artifacts are the distribution mechanism for playable binaries rather than source branches.
+
+## Cornberg shield / offhand prototype
+
+The Cornberg round shield is a separate presentation-only prototype. Its source and measured Unity proof are documented in `SourceArt/Weapons/CornbergRoundShield/README.md`. The checked-in source generator was run twice with Blender 5.2.2 LTS and produced the same geometry fingerprint (`6f4d0e258c28e8177cd36f92dbbd2df5f34e39c739183c9cd3164de61bce4849`). The imported model measures `0.61 × 0.75 × 0.39 m`, with 472 imported vertices across 4 MeshFilters and 256 triangles; these are prototype baseline measurements, not production budgets.
+
+For this prototype, Blender authors the shield surface toward source local `-Y`, which Unity imports as presentation local `+Z`. The FBX-authored `Grip` and `ShieldFront` are canonical and are passed through as wrapper aliases. The reusable Novice `LeftHandOffhand` child of the imported LeftHand bone owns the required orientation. Attaching the shield presentation at local zero, identity rotation and unit scale yields coincident Grip/socket positions and aligns Grip-to-ShieldFront with socket forward. The Editor validator also samples Locomotion and verifies that the socket and attached anchors follow the animated hand.
+
+The offhand change only authors a character-presentation socket transform. The shield preview is an isolated validation fixture and does not equip shields in gameplay or alter Novice starting equipment. `dicefree.art.shield.prepare`, `dicefree.art.shield.validate`, `dicefree.art.shield.capture-preview` and `dicefree.art.shield.build-windows` exercise this prototype. The current preview pair is captured into `Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png`; it shows the unequipped Novice beside the shield attachment fixture.
