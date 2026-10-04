@@ -1428,3 +1428,16 @@ and `SourceArt/Weapons/CornbergFieldSword/Previews/CornbergFieldSword_Isometric.
 No Novice model or shield/shoes/hat work has started. After this sword is
 accepted, the next art proof remains the actual Novice body/model, then shield,
 shoes and hat. Nothing was merged to `main`.
+
+
+## #37 accepted and integrated; #39 Novice prototype checkpoint — 2026-10-04
+
+Axel accepted the Cornberg Field Sword from `art/37-sword-pipeline` as-is for the prototype pipeline proof. It remains intentionally prototype-quality; no silhouette revision was requested. The proof met its DCC/export/import/material/prefab/validation goal. `poc/cornberg` was fast-forwarded to sword SHA `5dfbf45ab2fc2226e881d9c4c138a13f76b1b75b`; the post-integration sword, architecture, policy and managed-reference checks passed. Issue #37 was closed. Nothing was merged to `main`.
+
+Issue [#39](https://github.com/Krtz/DiceFree/issues/39) now tracks the actual Novice body/rig proof. Its dedicated branch is `art/39-novice-body-rig`, currently at `0c4f1c8e7d3f48b66e2d31c24142c7af130c1eb8`, based on the integrated PoC sword tip. Blender 5.2.2 LTS source/export rebuilt reproducibly with fingerprint `1d7e493c997fba1772259697670299e020d68f42f8be2a9a6f96de2edb5dfa97`. Unity imported a valid Humanoid Avatar and three animation clips. The prototype has separable T-shirt/underwear skinned meshes, the five required hand/head/foot references, a separate authored 1.72 m gameplay capsule profile, and a Cornberg sword attachment fixture. Novice validation, reproducible preview capture, architecture, policy, managed-reference checks, and an isolated Windows x64 Development Build passed. The build reported zero errors and three warnings. Git LFS object verification passed.
+
+The captured preview is `Assets/_DiceFree/Art/Validation/Previews/NoviceCharacter_Unity.png`. The prototype is ready for Axel/ChatGPT review; issue #39 remains open and unmerged. No Novice gameplay or starting-equipment behavior changed. No shield, shoes, or hat work has started.
+
+Current art order remains: accepted sword proof -> Novice body/rig proof -> shield -> shoes -> hat. The ordinary Novice first-advancement pacing target remains level 10 in roughly 30 minutes or less; progression/pacing is outside #39.
+
+The connected licensed Editor compiled the project and ran the validation commands. The local Unity CLI shell did not discover the Pipeline instance in this session; this does not invalidate the connected-Editor results. No main merge was made.
