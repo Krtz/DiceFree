@@ -1441,3 +1441,32 @@ The captured preview is `Assets/_DiceFree/Art/Validation/Previews/NoviceCharacte
 Current art order remains: accepted sword proof -> Novice body/rig proof -> shield -> shoes -> hat. The ordinary Novice first-advancement pacing target remains level 10 in roughly 30 minutes or less; progression/pacing is outside #39.
 
 The connected licensed Editor compiled the project and ran the validation commands. The local Unity CLI shell did not discover the Pipeline instance in this session; this does not invalidate the connected-Editor results. No main merge was made.
+
+
+## Issue #39 socket/skinning review follow-up — 2026-10-04
+
+The focused review fixes are on `art/39-novice-body-rig` at
+`74eef14` (based on starting SHA `0c4f1c8`). The reusable
+`NovicePresentation` prefab now owns the right-hand weapon attachment
+orientation, calculated through the imported RightHand bind pose. Its local
+socket position is (0, 0.025, 0); the preview no longer applies a correction,
+and the sword attaches with local identity. Connected Editor validation measured
+0.00000 m Grip error and 0.000 degrees Grip-to-Tip/socket-forward error.
+
+The DCC socket empties are now explicitly reference helpers excluded by the
+ARMATURE/MESH FBX export. Unity presentation sockets are derived from imported
+Humanoid bones; the body-profile JSON no longer suggests the DCC references are
+exported semantic sockets. The validator samples Locomotion and bakes the
+instantiated body skinned mesh: 14,443 of 14,448 vertices changed, with 0.17577
+m maximum displacement. The corrected preview capture and Novice pipeline,
+architecture, policy, and managed-reference checks passed.
+
+The Windows x64 Development Build passed with zero errors and three warnings
+(Pipeline runtime config disabled in player; two stripped debug shaders). The
+prototype mesh remains 24,988 vertices / 49,936 triangles across four skinned
+meshes; no optimization was attempted. LFS object/pointer verification passed.
+Issue #39 remains open and unmerged. No gameplay/starting-equipment behavior,
+sword asset, or main branch changed. Shield/shoes/hat work has not started.
+The updated preview is
+`Assets/_DiceFree/Art/Validation/Previews/NoviceCharacter_Unity.png` and is
+ready for Axel/ChatGPT visual review.
