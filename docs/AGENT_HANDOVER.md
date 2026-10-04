@@ -1389,3 +1389,42 @@ main merge was performed; #37 and Novice model work have not started.
 Keep the next art sequence sword -> actual Novice model -> shield -> shoes ->
 hat. The ordinary first advancement target remains level 10 in roughly 30
 minutes or less, and the normal Novice path should not approach an hour.
+
+## Issue #37 sword pipeline review pass — 2026-10-04
+
+The first-sword review/fix pass is on `art/37-sword-pipeline`. It started from
+`7994a3b6ec7c20584230415480cf378163180904`; current review candidate is
+`5dfbf45ab2fc2226e881d9c4c138a13f76b1b75b`. It remains separate from
+`poc/cornberg` and `main`.
+
+The Blender-authored `Grip` and `Tip` anchors are now required in the imported
+FBX and are the canonical source. The Unity presentation wrapper copies their
+transforms into aliases; validation confirms Grip at the pivot and Tip at about
+0.905 m along local +Z. No bounds-derived semantic Tip remains. The generator
+closes the blade root and validates manifold edges plus positive signed volume.
+Unity uses imported normals and normal URP backface culling. Import settings
+disable animation/clips, embedded materials, cameras, lights, blend shapes and
+generated colliders; use scale 1; and retain imported normals.
+
+On Unity 6000.6.3f1, the current import measures `0.3485 × 0.0961 × 1.1015 m`,
+with 1,028 vertices, 502 triangles, 3 MeshFilters and 4 unique materials. Two
+clean Blender 5.2.2 LTS runs matched geometry fingerprint
+`26dc5d60219a37e71dc2836d30f9fb8e19345fde2520e370a8710348cbc788d6`.
+`dicefree.art.sword.capture-preview` reproducibly writes the isolated Unity
+preview PNG at 1280×800; the Blender isometric preview remains available too.
+
+Connected-Editor checks passed on the review candidate: sword validator,
+architecture validator, architecture policy self-tests, managed-reference
+validator, preview capture and Windows x64 Development Build. BuildReport:
+667,136-byte executable, 182,994,829-byte output, 0 errors and 1 warning. The
+warning is Unity Pipeline reporting that no `RuntimePipelineConfig` asset
+exists, so Pipeline is disabled in the player; the sword command bridge is in
+`DiceFree.Editor`. Git LFS 3.7.1 `fsck --objects --pointers` passed for the
+staged `.blend`, `.fbx` and both committed previews.
+
+Issue #37 remains open and unmerged. Axel/ChatGPT visual review is still
+pending; inspect `Assets/_DiceFree/Art/Validation/Previews/CornbergSword_Unity.png`
+and `SourceArt/Weapons/CornbergFieldSword/Previews/CornbergFieldSword_Isometric.png`.
+No Novice model or shield/shoes/hat work has started. After this sword is
+accepted, the next art proof remains the actual Novice body/model, then shield,
+shoes and hat. Nothing was merged to `main`.
