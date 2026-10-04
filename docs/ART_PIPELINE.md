@@ -226,6 +226,44 @@ it writes `Assets/_DiceFree/Art/Validation/Previews/CornbergSword_Unity.png`.
 The Windows Development build contains only that preview scene. This proves
 the first sword path, not a universal importer preset or a character socket.
 
+## First character-rig prototype: Novice (#39)
+
+The first character proof uses editable source `SourceArt/Characters/Novice/Novice.blend`
+and `build_novice.py`, with the Unity export at
+`Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx`. The tested DCC was
+Blender 5.2.2 LTS. Two clean script runs matched geometry fingerprint
+`1d7e493c997fba1772259697670299e020d68f42f8be2a9a6f96de2edb5dfa97`; the FBX
+container bytes may vary. Source axes are metric, Z-up and +Y-forward; Unity's
+ModelImporter handles the FBX basis conversion. The tested Unity import has
+local bounds `1.15 × 1.75 × 0.37 m`, 24,988 vertices, 49,936 triangles, four
+skinned mesh renderers and four unique materials.
+
+Unity imports the Novice as a Humanoid and creates a valid Avatar from the
+model. Animation import is enabled; the tested FBX supplies Idle, Locomotion
+and UnarmedAttack clips. The presentation prefab keeps body skin, face details,
+baseline T-shirt and baseline underwear as separate skinned mesh objects. The
+T-shirt and underwear also have distinct baseline slot roots. This is a
+prototype arrangement, not a complete wearable-slot system.
+
+The current semantic anchors are `RightHandWeapon` and `LeftHandOffhand` child
+transforms on their hand bones. The humanoid `Head`, `LeftFoot` and `RightFoot`
+bones themselves are the canonical anchors for those names; wearable-specific
+offsets belong on the attached item or its presentation adapter. The validation
+fixture attaches the accepted Cornberg sword at `RightHandWeapon` and aligns
+its canonical Grip within 3 cm. This fixture does not change the Novice's
+unequipped starting state. The presentation prefab contains no gameplay
+collider; `novice_body_profile.json` separately records the authored prototype
+capsule (1.72 m height, 0.28 m radius, center at 0.86 m), independently of
+render bounds.
+
+The focused Editor/Pipeline commands are `dicefree.art.novice.prepare`,
+`dicefree.art.novice.validate`, `dicefree.art.novice.capture-preview` and
+`dicefree.art.novice.build-windows`. The isolated camera preview at
+`Assets/_DiceFree/Art/Validation/Previews/NoviceCharacter_Unity.png` shows the
+baseline model beside the sword attachment fixture. The scene is excluded from
+normal gameplay build settings. These details are established for this first
+humanoid prototype only; they do not prescribe a universal rig for other forms.
+
 ## Rigid weapon convention
 
 For rigid one-handed weapons:

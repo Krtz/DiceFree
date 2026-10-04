@@ -1,0 +1,43 @@
+{
+  "name": "Novice",
+  "source": "Novice.blend",
+  "export": "Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx",
+  "units": "meters",
+  "sourceAxes": "Z up, +Y forward",
+  "heightMeters": 1.78,
+  "bodyWidthMeters": 0.42,
+  "authoredGameplayCapsule": {
+    "heightMeters": 1.72,
+    "radiusMeters": 0.28,
+    "centerMeters": [
+      0,
+      0,
+      0.86
+    ]
+  },
+  "clothingSlots": [
+    "BaselineTShirt",
+    "BaselineUnderwear"
+  ],
+  "sockets": [
+    "RightHandWeapon",
+    "LeftHandOffhand",
+    "Head",
+    "LeftFoot",
+    "RightFoot"
+  ],
+  "animationActions": [
+    "Novice|Idle",
+    "Novice|Locomotion",
+    "Novice|UnarmedAttack"
+  ],
+  "vertices": 24988,
+  "triangles": 49936,
+  "meshObjects": 4,
+  "materialNames": [
+    "Novice_Baseline_Tee",
+    "Novice_Baseline_Underwear",
+    "Novice_Eyes",
+    "Novice_Skin"
+  ]
+}
