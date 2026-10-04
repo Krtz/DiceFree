@@ -245,16 +245,38 @@ baseline T-shirt and baseline underwear as separate skinned mesh objects. The
 T-shirt and underwear also have distinct baseline slot roots. This is a
 prototype arrangement, not a complete wearable-slot system.
 
-The current semantic anchors are `RightHandWeapon` and `LeftHandOffhand` child
-transforms on their hand bones. The humanoid `Head`, `LeftFoot` and `RightFoot`
-bones themselves are the canonical anchors for those names; wearable-specific
-offsets belong on the attached item or its presentation adapter. The validation
-fixture attaches the accepted Cornberg sword at `RightHandWeapon` and aligns
-its canonical Grip within 3 cm. This fixture does not change the Novice's
-unequipped starting state. The presentation prefab contains no gameplay
-collider; `novice_body_profile.json` separately records the authored prototype
-capsule (1.72 m height, 0.28 m radius, center at 0.86 m), independently of
-render bounds.
+The Blender `RightHandWeapon`, `LeftHandOffhand`, `Head`, `LeftFoot` and
+`RightFoot` empties are authoring/reference helpers only. The FBX export
+intentionally selects only armature and mesh object types, so the empties are
+not exported. Unity derives the presentation socket contract from the imported
+Humanoid bones: `RightHandWeapon` and `LeftHandOffhand` are child transforms on
+the matching hand bones; `Head`, `LeftFoot` and `RightFoot` use the matching
+Humanoid bones as canonical references. The right-hand socket is authored at
+local position `(0, 0.025, 0)`. Its rotation is calculated from the intended
+character-space sword presentation basis and the imported `RightHand`
+bind-pose rotation, then stored in the reusable presentation prefab. A consumer
+can attach `CornbergFieldSwordPresentation` at local position zero, identity
+rotation and unit scale. Validation checks both Grip-to-socket distance and
+the angle between the sword's canonical Grip-to-Tip axis and socket forward;
+the preview uses no scene-specific socket or sword rotation override.
+
+The validation fixture attaches the accepted Cornberg sword through this
+contract. It does not change the Novice's unequipped starting state. Blender's
+helper empties are not the source of runtime attachment transforms; imported
+bones and the Unity presentation prefab are. The presentation prefab contains
+no gameplay collider. `novice_body_profile.json` separately records an authored
+prototype capsule (1.72 m height, 0.28 m radius, center at 0.86 m), independently
+of render bounds. This proves data separation only; current Cornberg gameplay
+does not consume the JSON. Baseline T-shirt/underwear meshes remain separate,
+with empty slot roots as markers; this is a prototype arrangement, not a
+working wearable replacement system.
+
+The Editor validator samples the imported Locomotion clip and checks both a
+Humanoid bone rotation and a baked body `SkinnedMeshRenderer` mesh. It
+requires multiple baked vertex positions to move by a meaningful distance,
+proving animation-to-bone-to-skin propagation. The prototype baseline is
+24,988 imported vertices and 49,936 triangles across four skinned renderers;
+this is recorded evidence, not a production optimization budget.
 
 The focused Editor/Pipeline commands are `dicefree.art.novice.prepare`,
 `dicefree.art.novice.validate`, `dicefree.art.novice.capture-preview` and

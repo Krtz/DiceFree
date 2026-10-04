@@ -125,7 +125,13 @@ namespace DiceFree.EditorTools
 
             Transform rightHand = FindBone(instance.transform, "RightHand");
             Transform leftHand = FindBone(instance.transform, "LeftHand");
-            CreateSocket(rightHand, "RightHandWeapon", new Vector3(0f, 0.025f, 0f), Quaternion.identity);
+            // Preserve the intended character-space bind-pose presentation, but
+            // convert it through the imported hand bind rotation. The prefab
+            // socket, rather than the preview scene, owns the final orientation.
+            Quaternion weaponForwardInCharacterSpace = Quaternion.Euler(-135f, 0f, 0f);
+            Quaternion weaponSocketLocalRotation = Quaternion.Inverse(rightHand.rotation) *
+                (instance.transform.rotation * weaponForwardInCharacterSpace);
+            CreateSocket(rightHand, "RightHandWeapon", new Vector3(0f, 0.025f, 0f), weaponSocketLocalRotation);
             CreateSocket(leftHand, "LeftHandOffhand", new Vector3(0f, 0.025f, 0f), Quaternion.identity);
             // The humanoid Head and Foot bones themselves are the canonical
             // semantic anchors. Keep their required names unique; later wearable
@@ -167,6 +173,9 @@ namespace DiceFree.EditorTools
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath);
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(PrefabPath);
             Require(model != null && prefab != null, "Imported model or presentation prefab could not be loaded.");
+            var importedTransforms = model.GetComponentsInChildren<Transform>(true);
+            Require(!importedTransforms.Any(t => t.name == "RightHandWeapon" || t.name == "LeftHandOffhand"),
+                "DCC reference socket empties are helpers only and must not be exported in the FBX.");
             var animator = prefab.GetComponent<Animator>();
             Require(animator != null && animator.avatar != null && animator.avatar.isValid && animator.avatar.isHuman,
                 "Presentation prefab does not contain a valid Humanoid Avatar.");
@@ -194,6 +203,14 @@ namespace DiceFree.EditorTools
                 Require(socket.Length == 1, "Required semantic socket must be unique: " + pair.Key + " count=" + socket.Length);
                 Require(socket[0].parent != null && socket[0].parent.name == pair.Value, pair.Key + " must be directly rig-relative to " + pair.Value + ".");
             }
+            var prefabWeaponSocket = prefab.GetComponentsInChildren<Transform>(true).Single(t => t.name == "RightHandWeapon");
+            Require(prefabWeaponSocket.localPosition == new Vector3(0f, 0.025f, 0f),
+                "RightHandWeapon local position no longer matches the authored hand-grip offset.");
+            Require(Quaternion.Angle(prefabWeaponSocket.localRotation, Quaternion.identity) > 1f,
+                "RightHandWeapon must own the non-identity bind-pose orientation needed by the sword.");
+            UnityEngine.Debug.Log("DICEFRE_NOVICE_SOCKET_AUTHORING localPosition=" + prefabWeaponSocket.localPosition +
+                " localRotation=" + prefabWeaponSocket.localRotation.eulerAngles +
+                " localRotationQuaternion=" + prefabWeaponSocket.localRotation);
             Require(prefab.transform.Find("BaselineVisualSlots/BaselineTShirtSlot") != null && prefab.transform.Find("BaselineVisualSlots/BaselineUnderwearSlot") != null,
                 "Separate baseline clothing slot roots are missing.");
             var clips = ImportedClips().ToArray();
@@ -210,20 +227,66 @@ namespace DiceFree.EditorTools
                 Require(sword != null, "Sword fixture is not attached to the second Novice presentation.");
                 var weaponSocket = presentations[1].GetComponentsInChildren<Transform>(true).Single(t => t.name == "RightHandWeapon");
                 var grip = sword.transform.Find("Grip");
+                var tip = sword.transform.Find("Tip");
                 Require(grip != null, "Sword presentation wrapper has no canonical Grip alias.");
-                Require(Vector3.Distance(grip.position, weaponSocket.position) <= 0.03f, "Sword Grip does not align with the RightHandWeapon socket.");
+                Require(tip != null, "Sword presentation wrapper has no canonical Tip alias.");
+                Require(Vector3.Distance(sword.transform.localPosition, Vector3.zero) <= 0.0001f &&
+                    Quaternion.Angle(sword.transform.localRotation, Quaternion.identity) <= 0.01f &&
+                    Vector3.Distance(sword.transform.localScale, Vector3.one) <= 0.0001f,
+                    "Preview sword must use the semantic socket contract with local position zero, rotation identity and scale one.");
+                float gripError = Vector3.Distance(grip.position, weaponSocket.position);
+                Require(gripError <= 0.03f, "Sword Grip does not align with the RightHandWeapon socket; distance=" + gripError + "m.");
+                float orientationError = Vector3.Angle(weaponSocket.forward, (tip.position - grip.position).normalized);
+                Require(orientationError <= 5f,
+                    "Sword Grip-to-Tip direction does not follow RightHandWeapon forward; angle=" + orientationError + " degrees.");
+                UnityEngine.Debug.Log("DICEFRE_NOVICE_SWORD_SOCKET gripErrorM=" + gripError.ToString("F5") +
+                    " gripTipSocketForwardErrorDeg=" + orientationError.ToString("F3") +
+                    " localPosition=" + sword.transform.localPosition + " localRotation=" + sword.transform.localRotation.eulerAngles +
+                    " localScale=" + sword.transform.localScale);
 
                 var locomotion = clips.First(c => c.name.Contains("Locomotion"));
                 var animatedArm = FindBone(presentations[0], "LeftArm");
                 Quaternion restRotation = animatedArm.localRotation;
+                // Bake the scene instance that AnimationMode samples, rather
+                // than the prefab asset's source component transforms.
+                var bodySkin = presentations[0].GetComponentsInChildren<SkinnedMeshRenderer>(true)
+                    .First(r => r.name == "Novice_BodySkin");
+                var restMesh = new Mesh { name = "NoviceSkinRestValidation" };
+                var animatedMesh = new Mesh { name = "NoviceSkinAnimatedValidation" };
                 try
                 {
+                    bodySkin.BakeMesh(restMesh);
+                    var restVertices = restMesh.vertices;
                     AnimationMode.StartAnimationMode();
+                    AnimationMode.BeginSampling();
                     AnimationMode.SampleAnimationClip(presentations[0].gameObject, locomotion, locomotion.length * 0.5f);
+                    AnimationMode.EndSampling();
                     Require(Quaternion.Angle(restRotation, animatedArm.localRotation) > 0.5f,
                         "Locomotion clip imported but did not animate the humanoid arm bone.");
+                    bodySkin.BakeMesh(animatedMesh);
+                    var animatedVertices = animatedMesh.vertices;
+                    Require(restVertices.Length == animatedVertices.Length, "Baked skinned mesh vertex count changed during animation sampling.");
+                    int deformedVertices = 0;
+                    float maximumVertexDelta = 0f;
+                    for (int i = 0; i < restVertices.Length; i++)
+                    {
+                        float delta = Vector3.Distance(restVertices[i], animatedVertices[i]);
+                        if (delta > 0.001f) deformedVertices++;
+                        if (delta > maximumVertexDelta) maximumVertexDelta = delta;
+                    }
+                    Require(deformedVertices >= 10 && maximumVertexDelta >= 0.01f,
+                        "Locomotion moved bones but produced no meaningful baked skinned-mesh deformation; changedVertices=" +
+                        deformedVertices + " maxDelta=" + maximumVertexDelta + "m.");
+                    UnityEngine.Debug.Log("DICEFRE_NOVICE_SKIN_DEFORMATION_OK renderer=" + bodySkin.name +
+                        " changedVertices=" + deformedVertices + "/" + restVertices.Length +
+                        " maxDeltaM=" + maximumVertexDelta.ToString("F5"));
                 }
-                finally { AnimationMode.StopAnimationMode(); }
+                finally
+                {
+                    if (AnimationMode.InAnimationMode()) AnimationMode.StopAnimationMode();
+                    UnityEngine.Object.DestroyImmediate(restMesh);
+                    UnityEngine.Object.DestroyImmediate(animatedMesh);
+                }
             }
             finally { EditorSceneManager.CloseScene(path, true); }
 
@@ -284,10 +347,6 @@ namespace DiceFree.EditorTools
                 swordNovice.transform.position = new Vector3(0.67f, 0f, 0f);
                 swordNovice.transform.rotation = Quaternion.identity;
                 var socket = swordNovice.GetComponentsInChildren<Transform>(true).Single(t => t.name == "RightHandWeapon");
-                // The humanoid hand bone's FBX bind rotation is not the sword's
-                // presentation rotation. Keep the Grip at the socket while
-                // orienting the blade forward and slightly upward for review.
-                socket.rotation = swordNovice.transform.rotation * Quaternion.Euler(-135f, 0f, 0f);
                 var swordPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(SwordPath);
                 Require(swordPrefab != null, "Accepted Cornberg Field Sword presentation prefab is missing.");
                 var sword = (GameObject)PrefabUtility.InstantiatePrefab(swordPrefab, scene);

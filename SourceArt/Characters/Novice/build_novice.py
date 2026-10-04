@@ -192,7 +192,9 @@ def build_model():
     for obj in (skin_obj, face_obj, shirt_obj, shorts_obj):
         obj["presentation_slot"] = "Baseline" if obj != skin_obj else "Body"
 
-    # Small bone-attached hand socket helpers survive FBX as named empty transforms.
+    # DCC socket empties are authoring/reference helpers only. The FBX export
+    # intentionally includes ARMATURE and MESH objects only; Unity derives its
+    # semantic presentation sockets from the imported humanoid bones.
     for side, sign in (("Left", -1), ("Right", 1)):
         socket = bpy.data.objects.new("RightHandWeapon" if side == "Right" else "LeftHandOffhand", None)
         bpy.context.collection.objects.link(socket)
@@ -310,7 +312,6 @@ def main():
         "bodyWidthMeters": 0.42,
         "authoredGameplayCapsule": {"heightMeters": 1.72, "radiusMeters": 0.28, "centerMeters": [0, 0, 0.86]},
         "clothingSlots": ["BaselineTShirt", "BaselineUnderwear"],
-        "sockets": ["RightHandWeapon", "LeftHandOffhand", "Head", "LeftFoot", "RightFoot"],
         "animationActions": [action.name for action in actions],
         "vertices": vertices,
         "triangles": triangles,

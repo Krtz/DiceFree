@@ -19,13 +19,6 @@
     "BaselineTShirt",
     "BaselineUnderwear"
   ],
-  "sockets": [
-    "RightHandWeapon",
-    "LeftHandOffhand",
-    "Head",
-    "LeftFoot",
-    "RightFoot"
-  ],
   "animationActions": [
     "Novice|Idle",
     "Novice|Locomotion",
