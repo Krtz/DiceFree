@@ -1,5 +1,29 @@
 # DiceFree Agent Handover
 
+## Issue #46 Farmer's Pants implementation - 2026-10-05 (implemented; final validation below)
+
+Working on `art/46-farmers-pants` from verified clean glove head
+`e7ce68909307159737fa83b57cd503a1f7a25389`; issue #46 and #43/#45 bodies and
+comments inspected. No merge is authorized. Settled item is
+`item.cornberg.farmers-pants`, **Farmer's Pants**, Legs, exactly +1 Physical
+Defense and +1 Vitality. Prototype only: existing explicit development grants,
+no vendor/quest/dungeon/drop balance or startup grant.
+
+The existing equipment stat package lacked primary attributes. Use a generic all-five AttributeValues contribution through ActorStats equipment sources; existing
+Vitality HP/regeneration and highest-attribute attack formulas apply normally.
+Preserve missing HP on maximum changes; no independent extra bonus. Extend the
+#45 EquipmentPresentation binding with authored baseline visuals and exact
+active-state restoration; gloves retain empty baseline replacement lists.
+Blender source/export uses the unchanged, previously repaired Novice rig.
+Two builds match geometry/weights fingerprint
+`8a22ff06453727d91ecfa992c8832944ebd7f882fc2c4eb630be28486174e22d`.
+No additional skeleton/weight repair is currently required. Existing clips
+rotate thighs but have no independent knee articulation; add a separately
+labelled synthetic knee-flex check. Feet art remains on its separate unmerged
+branch, so coexistence uses authored test-only foot-socket fixtures.
+Unity import, focused pants runtime/reload validation, glove regressions, preview and architecture gates passed. Windows build succeeded with logged diagnostics; see FARMERS_PANTS_VALIDATION.md. Human art approval/cloth polish remain provisional.
+
+
 ## Issue #45 implementation and validation - 2026-10-05
 
 Branch `art/45-cornberg-work-gloves` starts at `b407ee3` (the same head as
@@ -1267,4 +1291,3 @@ copy. Architecture and technical-direction docs from #36 remain unchanged.
 This follow-up supersedes earlier pending-integration status above. Issue #36
 is closed after the integrated checks passed. No main merge was performed and
 #37 or Novice modeling work has not started.
-

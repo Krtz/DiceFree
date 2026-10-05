@@ -607,3 +607,20 @@ On advancement:
 Never destroy, drop into the world, or silently discard gear because a transformation changed equipment compatibility.
 
 The preserved parent manifestation keeps its original equipment and ownership state unchanged.
+
+## Farmer's Pants lower-body prototype (#46)
+
+`item.cornberg.farmers-pants` / **Farmer's Pants** occupies Legs and grants
+exactly +1 Physical Defense and +1 Vitality. No other ordinary stat, movement
+modifier, magical defense, proc, socket or hidden bonus. Humble worn canvas,
+earthy palette, practical slightly baggy silhouette for the Novice. This is a
+prototype/test definition; vendor/quest/dungeon acquisition remains undecided.
+Only the existing explicit development grant is exposed for testing.
+
+EquipmentStats uses a zero-default AttributeValues contribution for Vitality,
+Strength, Agility, Intelligence and Spirit. ActorStats sums every equipped
+source generically; InventoryPanel displays each nonzero primary attribute.
+Existing glove/shoe definitions omit this field and therefore contribute zero.
+Pants author only Vitality=1. Default Novice coefficients yield +15 maximum HP
+and +0.1 HP/sec regeneration. Changes preserve missing HP. Saves still store
+item definition IDs; this does not change the durable save schema.

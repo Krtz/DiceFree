@@ -1,0 +1,24 @@
+{
+  "itemId": "item.cornberg.farmers-pants",
+  "slot": "Legs",
+  "units": "meters",
+  "blenderVersion": "5.2.2 LTS",
+  "noviceSourceSha256": "1b64cf2281621b5e5af84b8bbff49416a01eeab987845149cc06df0a26d810d1",
+  "geometryWeightsSha256": "8a22ff06453727d91ecfa992c8832944ebd7f882fc2c4eb630be28486174e22d",
+  "closedOutwardMeshes": true,
+  "weightedBones": [
+    "Hips",
+    "LeftUpLeg",
+    "LeftLeg",
+    "RightUpLeg",
+    "RightLeg"
+  ],
+  "vertices": 19532,
+  "triangles": 39048,
+  "meshes": [
+    "FarmersPants_Canvas",
+    "LeftPantsHem",
+    "RightPantsHem",
+    "PantsWaistband"
+  ]
+}

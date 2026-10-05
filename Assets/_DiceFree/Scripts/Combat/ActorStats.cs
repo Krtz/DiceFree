@@ -52,7 +52,15 @@ namespace DiceFree.Combat
                 if (element != null && value.elementId == element.stableId && (value.contexts & context) != 0) result += value.delta;
             return result;
         }
-        public AttributeValues Attributes => AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
+        public AttributeValues Attributes
+        {
+            get
+            {
+                var values = AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
+                values += EquipmentTotal.attributes;
+                return values;
+            }
+        }
         public float MaximumHp => definition.baseHp + Attributes.vitality * VitalityCoefficient(false);
         public float Regeneration => Attributes.vitality * VitalityCoefficient(true);
         private float VitalityCoefficient(bool regeneration)
@@ -116,10 +124,14 @@ namespace DiceFree.Combat
         public void SetEquipmentContribution(string sourceId, EquipmentStats value)
         {
             if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Equipment source required.");
-            equipment[sourceId] = value; Changed?.Invoke(MaximumHp);
+            float previous = MaximumHp;
+            equipment[sourceId] = value; Changed?.Invoke(previous);
         }
         public void RemoveEquipmentContribution(string sourceId)
-        { if (equipment.Remove(sourceId)) Changed?.Invoke(MaximumHp); }
+        {
+            float previous = MaximumHp;
+            if (equipment.Remove(sourceId)) Changed?.Invoke(previous);
+        }
         private EquipmentStats EquipmentTotal
         {
             get
@@ -127,6 +139,7 @@ namespace DiceFree.Combat
                 var total = new EquipmentStats();
                 foreach (var value in equipment.Values)
                 {
+                    total.attributes += value.attributes;
                     total.physicalDefense += value.physicalDefense; total.magicalDefense += value.magicalDefense;
                     total.attackSpeedPercent += value.attackSpeedPercent; total.movementSpeedPercent += value.movementSpeedPercent;
                 }

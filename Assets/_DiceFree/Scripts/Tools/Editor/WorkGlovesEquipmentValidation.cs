@@ -100,7 +100,7 @@ namespace DiceFree.EditorTools
 
         private static void Visible(bool expected)
         {
-            Require(presentation.Bindings.Single().visuals.All(g => g.activeSelf == expected), "Equipment/presentation visibility mismatch.");
+            Require(presentation.Bindings.Single(b => b.slot == EquipmentSlot.Hands).visuals.All(g => g.activeSelf == expected), "Equipment/presentation visibility mismatch.");
         }
 
         private static IEnumerator Reload()
@@ -118,7 +118,7 @@ namespace DiceFree.EditorTools
             Require(inventory.Items.Length == 0 && equipment.Slots.Length == 0, "Fresh profile was not empty."); Visible(false);
             var definition = inventory.Resolve(ItemId);
             Require(definition.slot == EquipmentSlot.Hands && definition.stats.attackSpeedPercent == 5f &&
-                definition.stats.physicalDefense == 0 && definition.stats.magicalDefense == 0 && definition.stats.movementSpeedPercent == 0,
+                definition.stats.attributes.vitality == 0 && definition.stats.attributes.strength == 0 && definition.stats.attributes.agility == 0 && definition.stats.attributes.intelligence == 0 && definition.stats.attributes.spirit == 0 && definition.stats.physicalDefense == 0 && definition.stats.magicalDefense == 0 && definition.stats.movementSpeedPercent == 0,
                 "Gloves must have exactly +5% Attack Speed and no other stats.");
             var journal = player.GetComponent<QuestJournal>();
             var quest = journal.Definitions.Single(q => q.stableId == "quest.cornberg.break-slime-surge");
@@ -144,7 +144,7 @@ namespace DiceFree.EditorTools
             var stats = player.GetComponent<ActorStats>();
             float speed = stats.AttackSpeed, move = stats.MoveSpeed, physical = stats.Defense(DamageChannel.Physical), magical = stats.Defense(DamageChannel.Magical);
             var novice = player.GetComponent<NovicePresentationDriver>().VisualRoot;
-            var baseline = novice.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(r => !r.transform.IsChildOf(presentation.Bindings.Single().visuals.Single().transform)).ToArray();
+            var baseline = novice.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(r => !r.transform.IsChildOf(presentation.Bindings.Single(b => b.slot == EquipmentSlot.Hands).visuals.Single().transform)).ToArray();
             var meshes = baseline.Select(r => r.sharedMesh).ToArray();
             var materials = baseline.Select(r => r.sharedMaterials).ToArray();
             var states = baseline.Select(r => r.enabled).ToArray();
@@ -162,7 +162,7 @@ namespace DiceFree.EditorTools
             presentation.enabled = false; Visible(false);
             presentation.enabled = true; Visible(true);
             var driver = player.GetComponent<NovicePresentationDriver>(); driver.enabled = false;
-            ValidateSkin(novice.gameObject, presentation.Bindings.Single().visuals.Single()); driver.enabled = true;
+            ValidateSkin(novice.gameObject, presentation.Bindings.Single(b => b.slot == EquipmentSlot.Hands).visuals.Single()); driver.enabled = true;
             Debug.Log("WORK_GLOVES_EQUIP_STATS_BASELINE_OK multiplier=1.05 noExtraStats=true baselineMeshesUnchanged=true");
             for (var reload = Reload(); reload.MoveNext();) yield return null;
             Require(inventory.Items.Length == 1 && inventory.Items.Single().instanceId == id && equipment.Slots.Single().instanceId == id, "Equipped reload lost identity/state.");

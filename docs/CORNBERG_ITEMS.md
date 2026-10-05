@@ -155,3 +155,20 @@ Two isolated 12-second standalone startup/reload smokes passed: schema 3,
 revisions 3 -> 4, the same four owned instance IDs, three equipped references
 (including inert unknown data), 37 test gold and zero runtime errors.
 These are automated smoke checks, not a manual playthrough.
+
+## Farmer's Pants prototype (#46)
+
+Settled definition: `item.cornberg.farmers-pants`, **Farmer's Pants**, Legs,
+exactly **+1 Physical Defense and +1 Vitality**. All other authored stats are
+zero; no proc/socket/movement modifier/hidden bonus. Item level 1 and
+`rarity.provisional` are test metadata, with source `prototype.test`. Acquisition
+is limited to the existing explicit Editor/Development inventory grant button;
+fresh games remain empty. No vendor, quest or dungeon balance is invented.
+
+Vitality is reconstructed from the equipped definition through existing stat
+sources and adds to class/level Vitality. HP/regeneration and any adaptive
+highest-attribute attack derive from the normal existing formulas; these are
+consequences of Vitality, not separate item bonuses. No save-schema change.
+Pants replace only the authored baseline underwear object and share the actual
+Novice skeleton. Unequip/disable restores captured baseline active states.
+Hands and Feet remain independent presentation bindings.

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Farmer's Pants
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.cornberg.farmers-pants
+  displayName: Farmer's Pants
+  slot: 4
+  itemLevel: 1
+  rarityId: rarity.provisional
+  sourceId: prototype.test
+  flavor: 
+  stats:
+    attributes:
+      vitality: 1
+      strength: 0
+      agility: 0
+      intelligence: 0
+      spirit: 0
+    physicalDefense: 1
+    magicalDefense: 0
+    attackSpeedPercent: 0
+    movementSpeedPercent: 0

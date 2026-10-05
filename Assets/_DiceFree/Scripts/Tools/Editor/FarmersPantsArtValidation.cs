@@ -12,21 +12,21 @@ using Unity.Pipeline.Commands;
 
 namespace DiceFree.EditorTools
 {
-    internal static class WorkGlovesArtValidation
+    internal static class FarmersPantsArtValidation
     {
-        internal const string ItemId = "item.cornberg.work-gloves";
+        internal const string ItemId = "item.cornberg.farmers-pants";
         internal const string ScenePath = "Assets/_DiceFree/Scenes/Cornberg.unity";
-        internal const string PreviewPath = "Assets/_DiceFree/Art/Validation/Previews/CornbergWorkGloves_Unity.png";
-        private const string ArtRoot = "Assets/_DiceFree/Art/Characters/CornbergWorkGloves";
-        private const string ModelPath = ArtRoot + "/Models/CornbergWorkGloves.fbx";
-        private const string PrefabPath = ArtRoot + "/Prefabs/CornbergWorkGlovesPresentation.prefab";
+        internal const string PreviewPath = "Assets/_DiceFree/Art/Validation/Previews/FarmersPants_Unity.png";
+        private const string ArtRoot = "Assets/_DiceFree/Art/Characters/FarmersPants";
+        private const string ModelPath = ArtRoot + "/Models/FarmersPants.fbx";
+        private const string PrefabPath = ArtRoot + "/Prefabs/FarmersPantsPresentation.prefab";
 
-        [CliCommand("dicefree.art.gloves.prepare", "Import the work gloves and bind them to the actual Cornberg Novice rig.")]
-        private static object PrepareCommand() => Run(Prepare, "WORK_GLOVES_PREPARED");
-        [CliCommand("dicefree.art.gloves.validate", "Validate source/import, hand weights, animation propagation and baseline preservation.")]
-        private static object ValidateCommand() => Run(Validate, "WORK_GLOVES_ART_OK");
-        [CliCommand("dicefree.art.gloves.capture-preview", "Capture baseline, equipped idle, locomotion and attack Novice fixtures.")]
-        private static object PreviewCommand() => Run(CapturePreview, "WORK_GLOVES_PREVIEW_OK");
+        [CliCommand("dicefree.art.pants.prepare", "Import the farmer pants and bind them to the actual Cornberg Novice rig.")]
+        private static object PrepareCommand() => Run(Prepare, "FARMERS_PANTS_PREPARED");
+        [CliCommand("dicefree.art.pants.validate", "Validate source/import, lower-body weights, animation propagation and baseline preservation.")]
+        private static object ValidateCommand() => Run(Validate, "FARMERS_PANTS_ART_OK");
+        [CliCommand("dicefree.art.pants.capture-preview", "Capture baseline, equipped idle, locomotion and attack Novice fixtures.")]
+        private static object PreviewCommand() => Run(CapturePreview, "FARMERS_PANTS_PREVIEW_OK");
 
         private static object Run(Action action, string marker)
         {
@@ -51,14 +51,14 @@ namespace DiceFree.EditorTools
             importer.isReadable = true;
             importer.SaveAndReimport();
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath);
-            var wrapper = new GameObject("CornbergWorkGlovesPresentation");
+            var wrapper = new GameObject("FarmersPantsPresentation");
             var imported = (GameObject)PrefabUtility.InstantiatePrefab(model);
             imported.transform.SetParent(wrapper.transform, false);
-            var leather = Material("WorkGloves_WornLeather", new Color(.37f, .22f, .105f));
-            var canvas = Material("WorkGloves_CanvasCuff", new Color(.58f, .44f, .26f));
+            var leather = Material("FarmersPants_DustyCanvas", new Color(.34f, .30f, .21f));
+            var canvas = Material("FarmersPants_WornHem", new Color(.43f, .37f, .25f));
             foreach (var r in imported.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
-                r.sharedMaterials = new[] { r.name.EndsWith("Cuff", StringComparison.Ordinal) ? canvas : leather };
+                r.sharedMaterials = new[] { r.name == "FarmersPants_Canvas" ? leather : canvas };
                 r.updateWhenOffscreen = true;
             }
             PrefabUtility.SaveAsPrefabAsset(wrapper, PrefabPath);
@@ -66,19 +66,28 @@ namespace DiceFree.EditorTools
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var player = Player(scene);
             var novice = player.GetComponent<NovicePresentationDriver>().VisualRoot;
-            var old = novice.Find("CornbergWorkGloves");
+            var old = novice.Find("FarmersPants");
             if (old != null) UnityEngine.Object.DestroyImmediate(old.gameObject);
-            var gloves = Bind(novice);
-            var binding = player.GetComponent<EquipmentPresentation>() ?? player.AddComponent<EquipmentPresentation>();
-            binding.Configure(binding.Bindings.Where(b => b.slot != EquipmentSlot.Hands).Concat(new[] { new EquipmentPresentation.Binding { slot = EquipmentSlot.Hands,
-                definition = player.GetComponent<CarriedInventory>().Resolve(ItemId), visuals = new[] { gloves } } }).ToArray());
-            gloves.SetActive(false);
+            var pants = Bind(novice);
+            var inventory = player.GetComponent<CarriedInventory>();
+            const string itemPath = "Assets/_DiceFree/Settings/Items/Farmer's Pants.asset";
+            var definition = AssetDatabase.LoadAssetAtPath<ItemDefinition>(itemPath);
+            if (definition == null) { definition = ScriptableObject.CreateInstance<ItemDefinition>(); AssetDatabase.CreateAsset(definition, itemPath); }
+            definition.stableId = ItemId; definition.displayName = "Farmer's Pants";
+            definition.slot = EquipmentSlot.Legs; definition.sourceId = "prototype.test";
+            definition.stats = new EquipmentStats { physicalDefense = 1, attributes = new AttributeValues { vitality = 1 } };
+            EditorUtility.SetDirty(definition);
+            inventory.Configure(inventory.Definitions.Where(d => d.stableId != ItemId).Concat(new[] { definition }).ToArray());
+            var binding = player.GetComponent<EquipmentPresentation>();
+            binding.Configure(binding.Bindings.Where(b => b.slot != EquipmentSlot.Legs).Concat(new[] { new EquipmentPresentation.Binding { slot = EquipmentSlot.Legs,
+                definition = definition, visuals = new[] { pants }, baselineVisuals = new[] { BaselineLegs(novice) } } }).ToArray());
+            pants.SetActive(false);
             EditorSceneManager.MarkSceneDirty(scene);
-            Require(EditorSceneManager.SaveScene(scene), "Could not save glove binding.");
+            Require(EditorSceneManager.SaveScene(scene), "Could not save pants binding.");
             AssetDatabase.SaveAssets();
         }
 
-        internal static GameObject Bind(Transform novice) => EquipmentArtAuthoring.Bind(novice, PrefabPath, "CornbergWorkGloves");
+        internal static GameObject Bind(Transform novice) => EquipmentArtAuthoring.Bind(novice, PrefabPath, "FarmersPants");
 
         private static Material Material(string name, Color color)
         {
@@ -94,101 +103,98 @@ namespace DiceFree.EditorTools
 
         private static void Validate()
         {
-            foreach (string file in new[] { "build_work_gloves.py", "CornbergWorkGloves.blend", "export_manifest.json" })
-                Require(File.Exists("SourceArt/Characters/CornbergWorkGloves/" + file), "Missing source " + file);
+            foreach (string file in new[] { "build_farmers_pants.py", "FarmersPants.blend", "export_manifest.json" })
+                Require(File.Exists("SourceArt/Characters/FarmersPants/" + file), "Missing source " + file);
             var importer = (ModelImporter)AssetImporter.GetAtPath(ModelPath);
             Require(importer.globalScale == 1 && !importer.importAnimation && !importer.addCollider && !importer.importCameras &&
                 !importer.importLights && !importer.importBlendShapes && importer.materialImportMode == ModelImporterMaterialImportMode.None,
-                "Unexpected glove importer configuration.");
-            Require(!AssetDatabase.LoadAllAssetsAtPath(ModelPath).OfType<AnimationClip>().Any(), "Gloves imported animation.");
+                "Unexpected pants importer configuration.");
+            Require(!AssetDatabase.LoadAllAssetsAtPath(ModelPath).OfType<AnimationClip>().Any(), "Pants imported animation.");
             var scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
             var player = Player(scene);
-            var binding = player.GetComponent<EquipmentPresentation>().Bindings.Single(b => b.slot == EquipmentSlot.Hands);
-            Require(binding.slot == EquipmentSlot.Hands && binding.definition.stableId == ItemId, "Wrong authored item/slot binding.");
-            var gloves = binding.visuals.Single();
-            Require(!gloves.activeSelf, "Saved baseline must have no visible gloves.");
+            var binding = player.GetComponent<EquipmentPresentation>().Bindings.Single(b => b.slot == EquipmentSlot.Legs);
+            Require(binding.slot == EquipmentSlot.Legs && binding.definition.stableId == ItemId, "Wrong authored item/slot binding.");
+            var pants = binding.visuals.Single();
+            Require(!pants.activeSelf, "Saved baseline must have no visible pants.");
             var novice = player.GetComponent<NovicePresentationDriver>().VisualRoot;
             var body = novice.GetComponentsInChildren<SkinnedMeshRenderer>(true).Single(r => r.name == "Novice_BodySkin");
             Require(body.enabled && novice.GetComponentsInChildren<SkinnedMeshRenderer>(true).Count(r => r.name.StartsWith("Novice_", StringComparison.Ordinal)) == 4,
                 "The four original Novice baseline meshes must be preserved.");
-            Require(gloves.GetComponentsInChildren<Collider>(true).Length == 0 && gloves.GetComponentsInChildren<Animator>(true).Length == 0,
-                "Gloves must share the Novice Animator and add no gameplay collider.");
+            Require(pants.GetComponentsInChildren<Collider>(true).Length == 0 && pants.GetComponentsInChildren<Animator>(true).Length == 0,
+                "Pants must share the Novice Animator and add no gameplay collider.");
             var clone = UnityEngine.Object.Instantiate(novice.gameObject);
             try
             {
-                var shell = clone.transform.Find("CornbergWorkGloves").gameObject;
+                var shell = clone.transform.Find("FarmersPants").gameObject;
                 shell.SetActive(true);
                 ValidateSkin(clone, shell);
             }
             finally { UnityEngine.Object.DestroyImmediate(clone); }
         }
 
+        internal static GameObject BaselineLegs(Transform novice) => novice.GetComponentsInChildren<SkinnedMeshRenderer>(true)
+            .Single(r => r.name == "Novice_Baseline_Underwear").gameObject;
+
         internal static void ValidateSkin(GameObject novice, GameObject shell)
         {
             var animator = novice.GetComponentInChildren<Animator>();
             animator.Rebind(); animator.Update(0);
             var skins = shell.GetComponentsInChildren<SkinnedMeshRenderer>(true);
-            Require(skins.Length == 4, "Expected leather and cuff for each hand.");
-            var body = novice.GetComponentsInChildren<SkinnedMeshRenderer>(true).Single(r => r.name == "Novice_BodySkin");
+            Require(skins.Length == 4, "Expected canvas, waistband and two hems.");
+            var allowed = new[] { HumanBodyBones.Hips, HumanBodyBones.LeftUpperLeg, HumanBodyBones.LeftLowerLeg,
+                HumanBodyBones.RightUpperLeg, HumanBodyBones.RightLowerLeg }.Select(animator.GetBoneTransform).ToArray();
             foreach (var skin in skins)
             {
-                string side = skin.name.StartsWith("Left", StringComparison.Ordinal) ? "Left" : "Right";
-                var hand = animator.GetBoneTransform(side == "Left" ? HumanBodyBones.LeftHand : HumanBodyBones.RightHand);
-                var foreArmName = side + "ForeArm";
                 var weights = skin.sharedMesh.boneWeights;
-                bool leather = skin.name.EndsWith("Leather", StringComparison.Ordinal);
-                bool cuff = skin.name.EndsWith("Cuff", StringComparison.Ordinal);
-                Require(leather || cuff, "Unexpected glove mesh " + skin.name);
-                Require(leather ? skin.bones.Contains(hand) : skin.bones.Any(b => b != null && b.name == foreArmName),
-                    "Wrong primary glove binding " + skin.name);
-                Require(weights.All(w =>
-                    (w.weight0 == 0 || skin.bones[w.boneIndex0] == hand || skin.bones[w.boneIndex0].name == foreArmName) &&
-                    (w.weight1 == 0 || skin.bones[w.boneIndex1] == hand || skin.bones[w.boneIndex1].name == foreArmName) &&
-                    w.weight2 == 0 && w.weight3 == 0), "Wrong weighted hand binding " + skin.name);
-                Require(weights.Length == skin.sharedMesh.vertexCount && weights.All(w => Mathf.Abs(w.weight0 + w.weight1 + w.weight2 + w.weight3 - 1) < .0001f), "Invalid skin weights.");
-                Require(skin.sharedMesh.normals.Length == skin.sharedMesh.vertexCount && skin.sharedMesh.normals.All(n => n.sqrMagnitude > .0001f), "Invalid glove normals.");
-                Require(skin.sharedMaterials.All(m => m != null && m.shader.name == "Universal Render Pipeline/Lit" && m.GetFloat("_Cull") == 2), "Invalid glove material.");
+                Require(weights.Length == skin.sharedMesh.vertexCount, "Missing weights.");
+                Require(weights.All(w => Mathf.Abs(w.weight0+w.weight1+w.weight2+w.weight3-1) < .0001f), "Unnormalized weights.");
+                foreach (var w in weights)
+                {
+                    var indices = new[] { w.boneIndex0, w.boneIndex1, w.boneIndex2, w.boneIndex3 };
+                    var values = new[] { w.weight0, w.weight1, w.weight2, w.weight3 };
+                    for (int i=0; i<4; i++) if (values[i] > 0) Require(allowed.Contains(skin.bones[indices[i]]), "Foreign weighted bone.");
+                }
+                Require(skin.sharedMesh.normals.Length == skin.sharedMesh.vertexCount && skin.sharedMesh.normals.All(n => n.sqrMagnitude > .0001f), "Invalid normals.");
+                Require(skin.sharedMaterials.All(m => m != null && m.shader.name == "Universal Render Pipeline/Lit" && m.GetFloat("_Cull") == 2), "Invalid canvas material.");
             }
+            var canvas = skins.Single(r => r.name == "FarmersPants_Canvas");
+            Require(allowed.All(b => canvas.bones.Contains(b)), "Canvas must bind real pelvis/thigh/knee chain.");
             foreach (string clipName in new[] { "Idle", "Locomotion", "UnarmedAttack" })
             {
                 var clip = Clips().Single(c => c.name.EndsWith(clipName, StringComparison.Ordinal));
                 Vector3[] first = null;
-                for (int sample = 0; sample < 5; sample++)
+                for (int sample=0; sample<5; sample++)
                 {
-                    SamplePose(novice, clip, sample / 5f);
+                    SamplePose(novice, clip, sample/5f);
                     var all = skins.SelectMany(WorldVertices).ToArray();
                     if (first == null) first = all;
-                    foreach (var skin in skins)
-                    {
-                        var vertices = WorldVertices(skin);
-                        var hand = animator.GetBoneTransform(skin.name.StartsWith("Left", StringComparison.Ordinal) ? HumanBodyBones.LeftHand : HumanBodyBones.RightHand);
-                        Require(vertices.All(v => Vector3.Distance(v, hand.position) < .22f), "Glove detached from hand in " + clipName);
-                    }
                     foreach (var side in new[] { "Left", "Right" })
                     {
-                        var hand = animator.GetBoneTransform(side == "Left" ? HumanBodyBones.LeftHand : HumanBodyBones.RightHand);
-                        var palm = skins.Single(r => r.name == side + "GloveLeather");
-                        float handError = Vector3.Distance(HandCentroid(body, hand), HandCentroid(palm, hand));
-                        Require(handError < .04f, side + " glove does not cover the actual skinned hand in " + clipName + ": " + handError + "m");
+                        var upper = animator.GetBoneTransform(side == "Left" ? HumanBodyBones.LeftUpperLeg : HumanBodyBones.RightUpperLeg);
+                        var knee = animator.GetBoneTransform(side == "Left" ? HumanBodyBones.LeftLowerLeg : HumanBodyBones.RightLowerLeg);
+                        var foot = animator.GetBoneTransform(side == "Left" ? HumanBodyBones.LeftFoot : HumanBodyBones.RightFoot);
+                        var hem = skins.Single(r => r.name == side+"PantsHem");
+                        var center = WorldVertices(hem).Aggregate(Vector3.zero,(sum,v)=>sum+v)/hem.sharedMesh.vertexCount;
+                        Require(Vector3.Distance(center,foot.position) < .11f, "Hem detached from ankle in "+clipName);
+                        var vertices = WorldVertices(canvas);
+                        Require(vertices.Any(v => Vector3.Distance(v,knee.position) < .16f), "No canvas around actual knee.");
+                        Require(vertices.Any(v => Vector3.Distance(v,upper.position) < .17f), "No canvas around actual thigh.");
                     }
-                    if (sample == 2 && clipName != "Idle")
-                        Require(all.Zip(first, Vector3.Distance).Max() > .005f, "Glove skin did not follow " + clipName);
+                    if (sample == 2 && clipName == "Locomotion")
+                        Require(all.Zip(first,Vector3.Distance).Max() > .02f, "Pants do not deform with locomotion.");
                 }
-                Debug.Log("WORK_GLOVES_POSES_OK " + clipName + " samples=5 bothHands=true skinHandCentroidError<0.04m");
+                Debug.Log("FARMERS_PANTS_POSES_OK "+clipName+" samples=5 realPelvisThighKnee=true");
             }
-            Debug.Log("WORK_GLOVES_UNITY_MESH_STATS vertices=" + skins.Sum(r => r.sharedMesh.vertexCount) + " triangles=" + skins.Sum(r => r.sharedMesh.triangles.Length / 3));
+            // The existing clips rotate thighs but do not articulate knees independently.
+            SamplePose(novice, Clips().Single(c => c.name.EndsWith("Idle",StringComparison.Ordinal)),0);
+            var leftKnee = animator.GetBoneTransform(HumanBodyBones.LeftLowerLeg);
+            var leftHem = skins.Single(r => r.name == "LeftPantsHem");
+            var before = WorldVertices(leftHem);
+            leftKnee.localRotation *= Quaternion.Euler(25,0,0);
+            Require(WorldVertices(leftHem).Zip(before,Vector3.Distance).Max() > .05f, "Knee flex did not propagate.");
+            Debug.Log("FARMERS_PANTS_KNEE_FLEX_OK degrees=25 synthetic=true");
+            Debug.Log("FARMERS_PANTS_UNITY_MESH_STATS vertices="+skins.Sum(r=>r.sharedMesh.vertexCount)+" triangles="+skins.Sum(r=>r.sharedMesh.triangles.Length/3));
         }
-
-        private static Vector3 HandCentroid(SkinnedMeshRenderer skin, Transform hand)
-        {
-            int index = Array.IndexOf(skin.bones, hand);
-            var weights = skin.sharedMesh.boneWeights;
-            var vertices = WorldVertices(skin);
-            var selected = vertices.Where((v, i) => weights[i].boneIndex0 == index && weights[i].weight0 > .99f).ToArray();
-            Require(selected.Length > 10, "Actual hand skin has no meaningful matching hand weights: " + skin.name);
-            return selected.Aggregate(Vector3.zero, (sum, v) => sum + v) / selected.Length;
-        }
-
         internal static AnimationClip[] Clips() => AssetDatabase.LoadAllAssetsAtPath("Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx")
             .OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__", StringComparison.Ordinal)).ToArray();
 
@@ -222,25 +228,25 @@ namespace DiceFree.EditorTools
                 for (int i = 0; i < poses.Length; i++)
                 {
                     var novice = (GameObject)PrefabUtility.InstantiatePrefab(prefab, scene);
-                    if (i > 0) Bind(novice.transform);
+                    if (i > 0) { Bind(novice.transform); BaselineLegs(novice.transform).SetActive(false); }
                     novice.transform.position = new Vector3((1.5f - i) * 1.45f, 0, 0);
                     novice.transform.rotation = Quaternion.Euler(0, 20, 0);
                     novice.GetComponent<Animator>().Rebind();
                     novice.GetComponent<Animator>().Update(0);
                     SamplePose(novice, Clips().Single(c => c.name.EndsWith(i == 0 ? "Idle" : poses[i], StringComparison.Ordinal)), i < 2 ? 0 : .5f);
                     var label = new GameObject("Pose label").AddComponent<TextMesh>();
-                    label.text = i == 0 ? "UNEQUIPPED" : "GLOVES\n" + poses[i].Replace("UnarmedAttack", "ATTACK").ToUpperInvariant();
+                    label.text = i == 0 ? "UNEQUIPPED" : "PANTS\n" + poses[i].Replace("UnarmedAttack", "ATTACK").ToUpperInvariant();
                     label.fontSize = 40; label.characterSize = .025f; label.anchor = TextAnchor.MiddleCenter;
                     label.transform.position = novice.transform.position + new Vector3(0, -.32f, -.15f);
                     label.transform.rotation = Quaternion.Euler(30, 0, 0);
                 }
-                var light = new GameObject("Glove preview key").AddComponent<Light>();
+                var light = new GameObject("Pants preview key").AddComponent<Light>();
                 light.type = LightType.Directional; light.intensity = 1.5f;
                 light.transform.rotation = Quaternion.Euler(35, -30, 0);
-                var fill = new GameObject("Glove preview fill").AddComponent<Light>();
+                var fill = new GameObject("Pants preview fill").AddComponent<Light>();
                 fill.type = LightType.Directional; fill.intensity = .9f;
                 fill.transform.rotation = Quaternion.Euler(25, 160, 0);
-                var camera = new GameObject("Glove preview camera").AddComponent<Camera>();
+                var camera = new GameObject("Pants preview camera").AddComponent<Camera>();
                 camera.orthographic = true; camera.orthographicSize = 1.85f;
                 camera.transform.position = new Vector3(0, 3.8f, 6);
                 camera.transform.LookAt(new Vector3(0, .85f, 0));
@@ -257,11 +263,13 @@ namespace DiceFree.EditorTools
             finally
             {
                 RenderTexture.active = previous;
-                target.Release(); UnityEngine.Object.DestroyImmediate(target); UnityEngine.Object.DestroyImmediate(image);
                 EditorSceneManager.CloseScene(scene, true);
+                target.Release(); UnityEngine.Object.DestroyImmediate(target); UnityEngine.Object.DestroyImmediate(image);
             }
         }
 
         internal static void Require(bool condition, string message) { if (!condition) throw new InvalidOperationException(message); }
     }
 }
+
+

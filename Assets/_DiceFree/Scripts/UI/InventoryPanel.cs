@@ -33,6 +33,11 @@ namespace DiceFree.UI
                 if (definition != null)
                 {
                     var s = definition.stats;
+                    if (s.attributes.vitality != 0) GUILayout.Label($"{s.attributes.vitality:+0.##;-0.##} Vitality");
+                    if (s.attributes.strength != 0) GUILayout.Label($"{s.attributes.strength:+0.##;-0.##} Strength");
+                    if (s.attributes.agility != 0) GUILayout.Label($"{s.attributes.agility:+0.##;-0.##} Agility");
+                    if (s.attributes.intelligence != 0) GUILayout.Label($"{s.attributes.intelligence:+0.##;-0.##} Intelligence");
+                    if (s.attributes.spirit != 0) GUILayout.Label($"{s.attributes.spirit:+0.##;-0.##} Spirit");
                     if (s.attackSpeedPercent != 0) GUILayout.Label($"{s.attackSpeedPercent:+0.##;-0.##}% Attack Speed");
                     if (s.physicalDefense != 0) GUILayout.Label($"{s.physicalDefense:+0.##;-0.##} Physical Defense");
                     if (s.magicalDefense != 0) GUILayout.Label($"{s.magicalDefense:+0.##;-0.##} Magical Defense");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DiceFree.Items;
 using UnityEngine;
 
@@ -14,17 +15,20 @@ namespace DiceFree.UI
             public EquipmentSlot slot;
             public ItemDefinition definition;
             public GameObject[] visuals = Array.Empty<GameObject>();
+            public GameObject[] baselineVisuals = Array.Empty<GameObject>();
         }
 
         [SerializeField] private Binding[] bindings = Array.Empty<Binding>();
         private Equipment equipment;
         private CarriedInventory inventory;
+        private readonly Dictionary<GameObject, bool> baselineStates = new();
         public Binding[] Bindings => bindings;
 
         private void Awake()
         {
             equipment = GetComponent<Equipment>();
             inventory = GetComponent<CarriedInventory>();
+            CaptureBaseline();
         }
 
         private void OnEnable()
@@ -37,17 +41,22 @@ namespace DiceFree.UI
         {
             equipment.Changed -= Refresh;
             foreach (var binding in bindings) SetVisible(binding, false);
+            RestoreBaseline();
         }
 
         public void Configure(Binding[] values)
         {
             foreach (var binding in bindings) SetVisible(binding, false);
+            RestoreBaseline();
+            baselineStates.Clear();
             bindings = values ?? Array.Empty<Binding>();
+            CaptureBaseline();
             if (isActiveAndEnabled && equipment != null) Refresh();
         }
 
         private void Refresh()
         {
+            RestoreBaseline();
             foreach (var binding in bindings)
             {
                 bool visible = false;
@@ -59,7 +68,23 @@ namespace DiceFree.UI
                         visible |= item != null && string.Equals(item.definitionId, binding.definition.stableId, StringComparison.Ordinal);
                     }
                 SetVisible(binding, visible);
+                if (visible)
+                    foreach (var visual in binding.baselineVisuals)
+                        if (visual != null) visual.SetActive(false);
             }
+        }
+
+        private void CaptureBaseline()
+        {
+            foreach (var binding in bindings)
+                foreach (var visual in binding.baselineVisuals)
+                    if (visual != null && !baselineStates.ContainsKey(visual)) baselineStates.Add(visual, visual.activeSelf);
+        }
+
+        private void RestoreBaseline()
+        {
+            foreach (var state in baselineStates)
+                if (state.Key != null) state.Key.SetActive(state.Value);
         }
 
         private static void SetVisible(Binding binding, bool visible)
