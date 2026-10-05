@@ -1,5 +1,15 @@
 # Novice Character Pipeline Prototype
 
+Issue #45 corrects nearest-bone weighting to compare mesh vertices and bones in
+the same character space. The old joined mesh origin offset produced incorrect
+weights (including hands that did not follow their actual bones). The existing
+source was migrated without changing mesh coordinates/topology/materials or the
+four baseline objects; the corrected `build_novice.py` also reproduces the fixed
+calculation. Evidence and the idempotent migration are in
+`../CornbergWorkGloves/novice_weight_repair.json` and
+`../CornbergWorkGloves/repair_novice_skin_weights.py`. Animation deformation is
+intentionally corrected; baseline geometry is retained exactly.
+
 This is the first DiceFree humanoid-rig and character-presentation proof, not final production art. It establishes one androgynous, blank-slate Echo with a simple T-shirt and baseline underwear presentation. The normal Novice starts without equipped gear; the sword is present only in a validation fixture.
 
 `Novice.blend` is the editable Blender source. `build_novice.py` reconstructs the source, writes a humanoid FBX to `Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx`, and writes the authored collision profile and source counts. Blender units are metric, Z-up and +Y-forward; Unity import is responsible for the axis conversion. Run with Blender 5.2.2 LTS:

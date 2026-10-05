@@ -1,5 +1,13 @@
 # Cornberg Q4 implementation
 
+Issue #45 adds visible Cornberg work gloves to the existing guaranteed reward.
+Q4 eligibility, objectives, reward transaction, **200 XP / 100 gold / one glove**,
+and +5% Attack Speed only remain unchanged. Quest completion does not equip the
+appearance; the player must equip the owned instance in Hands. Appearance reads
+stable item/equipment state, never quest state. The focused issue #45 harness
+checks turn-in/reload cannot regrant, and equipped/unequipped reloads preserve
+the same glove instance ID. See [CORNBERG_ITEMS.md](CORNBERG_ITEMS.md).
+
 Implemented and validated on `poc/cornberg` on 2026-10-01.
 
 ## Content

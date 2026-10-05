@@ -21,6 +21,7 @@ namespace DiceFree.EditorTools
     public static class CornbergSurgeValidation
     {
         private const string Running = "DiceFree.SurgeValidation";
+        private const string Pipeline = "DiceFree.SurgeValidation.Pipeline";
         private static CombatActor player, road, elite, crop;
         private static QuestJournal journal;
         private static QuestDefinition quest;
@@ -31,6 +32,13 @@ namespace DiceFree.EditorTools
         private static QuestProgress State => journal.GetProgress(CornbergSurgeSetup.QuestId);
         private sealed class Roll : IRandomSource { public double value; public int calls; public double NextUnit() { calls++; return value; } }
         static CornbergSurgeValidation() => EditorApplication.playModeStateChanged += OnPlay;
+        internal static void RunFromPipeline(string root)
+        {
+            PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(root);
+            CornbergValidation.ValidateNavigation();
+            SessionState.SetBool(Pipeline, true);
+            SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
+        }
         public static void Run()
         {
             CornbergValidation.ValidateNavigation();
@@ -260,7 +268,12 @@ namespace DiceFree.EditorTools
         }
         private static void Finish(int code)
         {
-            SessionState.SetBool(Running, false); EditorApplication.update -= Tick; Application.logMessageReceived -= OnLog; Time.timeScale = 1; EditorApplication.Exit(code);
+            SessionState.SetBool(Running, false); EditorApplication.update -= Tick; Application.logMessageReceived -= OnLog; Time.timeScale = 1;
+            if (SessionState.GetBool(Pipeline, false))
+            {
+                SessionState.SetBool(Pipeline, false); WorkGlovesRegressionValidation.Complete(code); EditorApplication.ExitPlaymode();
+            }
+            else EditorApplication.Exit(code);
         }
     }
 }

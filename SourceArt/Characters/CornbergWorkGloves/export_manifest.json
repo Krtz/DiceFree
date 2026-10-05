@@ -1,0 +1,16 @@
+{
+  "itemId": "item.cornberg.work-gloves",
+  "slot": "Hands",
+  "units": "meters",
+  "noviceSourceSha256": "1b64cf2281621b5e5af84b8bbff49416a01eeab987845149cc06df0a26d810d1",
+  "geometryWeightsSha256": "dfc8d252050dcf08149f94e13eaf9e52a15eda5f715f82ba1c3dc01935b80e10",
+  "closedOutwardMeshes": true,
+  "vertices": 6480,
+  "triangles": 12944,
+  "meshes": [
+    "LeftGloveLeather",
+    "LeftGloveCuff",
+    "RightGloveLeather",
+    "RightGloveCuff"
+  ]
+}

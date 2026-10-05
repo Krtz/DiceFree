@@ -1,5 +1,28 @@
 # Cornberg handcrafted item foundation
 
+## Visible work gloves - issue #45
+
+`item.cornberg.work-gloves` now has a paired worn-leather/canvas glove appearance
+on the actual Cornberg Novice. A small `EquipmentPresentation` UI component
+maps the authored Hands slot and `ItemDefinition` stable ID to the glove visual.
+It resolves the equipped owned instance through the existing inventory/equipment
+model and reacts to `Equipment.Changed`. It does not infer appearance from Q4,
+names, or item array positions. Future appearances can use another authored
+binding; no mature transmog/form-compatibility system is introduced.
+
+The meshes share the actual Novice hand/forearm bones and Animator. They overlay
+the baseline hands, so removing gloves reveals the same baseline mesh/material/
+enabled state without destructive body segmentation. Presentation adds no
+collider, actor, gameplay movement, reward or stat logic. Gameplay authority
+remains on the existing root.
+
+The item definition and formula are unchanged: authored `attackSpeedPercent: 5`
+uses percentage points and produces exactly a **1.05 multiplier**, with zero
+Defense or movement bonuses. Q4 still awards one owned instance plus its existing
+200 XP/100 gold. Current save schema and instance/equipment records are unchanged.
+See [source and reproduction notes](../SourceArt/Characters/CornbergWorkGloves/README.md)
+for the necessary geometry-preserving Novice skin-weight correction and preview.
+
 This prerequisite for Q4 adds items, carried gold and equipment, not Q4 or an
 elite/drop system. Open Inventory with **B** or its button (I remains interaction). Development builds
 and the editor expose explicit grant buttons; each click creates another copy.

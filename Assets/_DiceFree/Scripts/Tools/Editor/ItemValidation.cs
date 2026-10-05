@@ -15,8 +15,16 @@ namespace DiceFree.EditorTools
     [InitializeOnLoad] public static class ItemValidation
     {
         private const string Running = "DiceFree.ItemValidation";
+        private const string Pipeline = "DiceFree.ItemValidation.Pipeline";
         private static float deadline;
         static ItemValidation() => EditorApplication.playModeStateChanged += OnPlay;
+        internal static void RunFromPipeline(string root)
+        {
+            PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(root);
+            CornbergValidation.ValidateNavigation(); ValidateV2();
+            SessionState.SetBool(Pipeline, true);
+            SessionState.SetBool(Running, true); EditorApplication.EnterPlaymode();
+        }
         public static void Run()
         {
             try
@@ -130,6 +138,14 @@ namespace DiceFree.EditorTools
             current.revision++; store.Commit(current); Require(File.ReadAllText(store.Path + ".bak1") == original, "v2 original backup");
             Debug.Log("ITEM_V2_MIGRATION_OK");
         }
-        private static void Finish(int code) { SessionState.SetBool(Running, false); EditorApplication.update -= Tick; Application.logMessageReceived -= OnLog; EditorApplication.Exit(code); }
+        private static void Finish(int code)
+        {
+            SessionState.SetBool(Running, false); EditorApplication.update -= Tick; Application.logMessageReceived -= OnLog;
+            if (SessionState.GetBool(Pipeline, false))
+            {
+                SessionState.SetBool(Pipeline, false); WorkGlovesRegressionValidation.Complete(code); EditorApplication.ExitPlaymode();
+            }
+            else EditorApplication.Exit(code);
+        }
     }
 }

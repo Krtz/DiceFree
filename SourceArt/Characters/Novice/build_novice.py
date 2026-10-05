@@ -129,7 +129,9 @@ def make_skinned_family(name, parts, rig, bone_defs, weighted_bones):
     groups = {bone: combined.vertex_groups.new(name=bone) for bone in weighted_bones}
     for vertex in combined.data.vertices:
         best_name, best_distance = None, float("inf")
-        point = Vector(vertex.co)
+        # Joined primitives retain the first part's translated object origin.
+        # Bone definitions are character-space, so compare in that same space.
+        point = combined.matrix_world @ vertex.co
         for bone_name in weighted_bones:
             head, tail, _ = bone_defs[bone_name]
             start, end = Vector(head), Vector(tail)

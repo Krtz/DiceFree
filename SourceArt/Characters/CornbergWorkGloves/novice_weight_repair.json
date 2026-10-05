@@ -1,0 +1,6 @@
+{
+  "baselineGeometryBefore": "dda3889c96feec8cdb589f7e49bfed095dc36e9c689493497579d4cf2d7f42ad",
+  "baselineGeometryAfter": "dda3889c96feec8cdb589f7e49bfed095dc36e9c689493497579d4cf2d7f42ad",
+  "geometryUnchanged": true,
+  "correction": "mesh-local vertex transformed to character-space before nearest-bone weighting"
+}

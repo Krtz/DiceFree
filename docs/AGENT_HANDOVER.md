@@ -1,5 +1,54 @@
 # DiceFree Agent Handover
 
+## Issue #45 implementation and validation - 2026-10-05
+
+Branch `art/45-cornberg-work-gloves` starts at `b407ee3` (the same head as
+`art/43-novice-cornberg`). Issue #45 and its empty comment list were inspected,
+as were the separate shoe/hat branches; neither branch is merged.
+
+Pose review found a concrete pre-existing Novice skinning defect before fixing
+it: `make_skinned_family` compares mesh-local `vertex.co` to character-space
+bone endpoints. Joined meshes retain the first part's translated origin, so
+the nearest-bone assignment is wrong. Actual hand bones move away from visible
+baseline hands, and locomotion splits the head. A coordinate-space correction
+is necessary for gloves to follow the real hands. Preserve the original mesh
+geometry/materials/clothing objects and gameplay root; fix skin weights only.
+No Q4 reward or attack-speed formula defect was found or changed.
+
+Implemented paired worn-leather/canvas skinned glove overlays, reproducible
+Blender source/export, Unity materials/wrapper and an authored Cornberg binding.
+The small UI `EquipmentPresentation` seam maps slot plus stable ItemDefinition
+ID to visuals, responds to equipment changes and preserves the four baseline
+renderers. No quest/name parsing, runtime bone-name lookup, extra Animator,
+collider, save schema or gameplay-authority change. Empty Hands remain bare.
+
+Validated: two matching Blender exports, closed/outward meshes, clean Unity
+compile/import, five samples each of idle/locomotion/attack on both hands,
+actual skinned-hand/glove centroid error below 4 cm, equip/unequip and disable/
+re-enable, exactly 1.05 attack multiplier and no extra stats, Q4 exactly-one
+reward, equipped/unequipped reload with stable GUID, unresolved-item inertness
+and equipped-item removal. Existing item and full Q4 harnesses passed (both
+routes, seven reloads and real 450-second respawn); existing two-phase save/
+migration/recovery, architecture, policy, managed-reference, Novice pipeline
+and Cornberg player-root checks passed. No assertions were weakened.
+
+Windows x64 Development build: 187,073,485 bytes, zero errors, two existing
+warnings (no runtime Pipeline config and InventoryPanel UAC0009). Output is
+`%TEMP%/DiceFree-Novice-Cornberg-Issue43/DiceFree.exe`, using the existing build
+command. A 29.5-second isolated standalone startup/reload smoke passed with
+schema 4, revision 2 -> 3, four owned instances, three equipment references,
+the same equipped Hands GUID and 37 gold, with no runtime errors. No manual
+playthrough or standalone visual inspection is claimed.
+
+Unity review PNG:
+`Assets/_DiceFree/Art/Validation/Previews/CornbergWorkGloves_Unity.png`.
+Detailed reproduction, repair evidence and limitations are in
+`SourceArt/Characters/CornbergWorkGloves/README.md` and
+`docs/WORK_GLOVES_VALIDATION.md`. Next: Axel reviews the art and the necessary
+skin-weight correction on this focused branch. Issue #45 stays open; nothing
+is merged. Human art approval, animation/clothing polish and production mesh
+optimization remain provisional. Shoe/hat branches remain separate.
+
 ## Purpose
 
 This is the operational handover document for any ChatGPT/Codex/other agent working on DiceFree.

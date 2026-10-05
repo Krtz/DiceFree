@@ -1,5 +1,32 @@
 # DiceFree 3D Art and DCC Pipeline
 
+## Cornberg Work Gloves proof (#45)
+
+`SourceArt/Characters/CornbergWorkGloves/` contains the Blender 5.2.2 source,
+reproducible generator, export manifest and geometry-preserving Novice weight
+repair evidence. Runtime exports/materials/wrapper are under
+`Assets/_DiceFree/Art/Characters/CornbergWorkGloves/`. Read the
+[source README](../SourceArt/Characters/CornbergWorkGloves/README.md) for commands,
+fingerprints and the discovered mesh-local versus character-space skin-weight
+defect. The canonical Novice generator now compares in character space; original
+geometry, material assignments, four baseline objects and rig remain intact.
+
+This proof uses two leather shells and two canvas cuffs skinned to the actual
+Novice hands/forearms. The scene's authored renderer bone references share the
+existing Animator; the duplicate export skeleton is not a runtime rig. The
+paired overlay avoids segmenting the body, and unequipping restores the exact
+baseline renderer state. Import disables clips/cameras/lights/blend shapes/
+colliders, retains normals and uses Unity-authored URP/Lit materials with normal
+backface culling. Equipment authority remains on the gameplay root.
+
+Connected commands: `dicefree.art.gloves.prepare`, `.validate`,
+`.capture-preview`, `.equipment-test` and `.status`. Existing regression harnesses
+are exposed as `dicefree.art.gloves.regression --suite items|q4` and
+`.regression-status`, using isolated temporary saves and retaining their existing
+assertions. The preview PNG is
+`Assets/_DiceFree/Art/Validation/Previews/CornbergWorkGloves_Unity.png`.
+It is human-review evidence, not a manual gameplay playthrough.
+
 This document defines the working 3D-content pipeline for DiceFree.
 
 It is intentionally small enough for the current project while establishing conventions before large quantities of weapons, armor and characters exist.
