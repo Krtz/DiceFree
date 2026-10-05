@@ -431,3 +431,9 @@ POC does **not** need:
 - UI edit-mode UX;
 - precise XP-bar styling;
 - exact system/menu button set.
+
+## Options prototype (issue #47)
+
+The visible top-right Options/System button opens a modular OnGUI Controls page. Rows show friendly action labels and current bindings with Rebind and Reset buttons; movement and camera composites expose individual parts. Capture offers Cancel and reserves Escape. Invalid controls and duplicate bindings produce feedback without applying changes. Reset-all restores the current prototype defaults. Audio and Graphics are disabled future placeholders.
+
+OptionsPanel registers through HudWidget/HudPointerBlocker. While Options or capture is active, gameplay owners and other HUD commands are blocked. Closing the overlay or capture suppresses input for the current frame so its key/click does not also command gameplay. Inventory is treated as an Escape-closeable modal before interactions and target clearing. Settings load/save/recovery feedback is visible on the page. The overlay does not pause AI or world simulation.

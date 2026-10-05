@@ -17,6 +17,7 @@ namespace DiceFree.UI
         public static bool CoversPointer(Vector2 screenPoint) => Panel.Contains(new Vector2(screenPoint.x, Screen.height - screenPoint.y));
         private void OnGUI()
         {
+            if (DiceFree.Foundation.ControlBindings.BlockGameplay) return;
             title ??= new GUIStyle(GUI.skin.label) { fontSize = 19, fontStyle = FontStyle.Bold };
             body ??= new GUIStyle(GUI.skin.label) { fontSize = 13, wordWrap = true };
             GUI.Box(Panel, GUIContent.none);

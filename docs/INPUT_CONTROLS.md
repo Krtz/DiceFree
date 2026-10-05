@@ -370,3 +370,11 @@ However:
 - controller support must map onto the same movement/combat/action systems rather than becoming a separate simplified game mode.
 
 Controller-specific targeting, command-grid navigation, ground targeting, summon/unit selection and UI navigation remain to be designed in smaller focused decisions.
+
+## Implemented Options / Controls v1 (issue #47)
+
+The existing prototype defaults are preserved: direct movement W/A/S/D; contextual move/attack/interact right mouse; target selection left mouse; switch style F6; stop Space; interact I; cycle hostile Tab (Shift reverses); attack selected X; return to Revive Point R; inventory B. Camera defaults remain arrows to pan, middle mouse drag, wheel zoom, Q/E rotate, Home recenter, F follow, and V vista.
+
+`ControlBindings` defines and registers native Input System actions; TraversalInput, CombatInput, ExplorationCamera and InventoryPanel retain their enable/disable and gameplay responsibilities. The Options Controls page edits native binding overrides and propagates them to existing and future action owners. W/A/S/D, arrow and Q/E composite parts are individually listed. Keyboard keys and mouse buttons are accepted; pointer delta and wheel zoom remain raw non-rebindable internals. Shift reverse cycling remains the existing fixed modifier.
+
+Escape is reserved in v1. Its single route is: cancel active capture; close Options or inventory modal; close interaction; clear selected combat target; otherwise open Options. Each press takes only one route. Options blocks gameplay input and HUD/world commands while open; this is an input overlay, not a simulation pause. Current movement and attack orders are stopped when opening it. Reset-one rejects a default already used elsewhere; reset-all always restores the exact catalog. Control-style switching does not overwrite custom bindings. Future control profiles and ability layouts above remain design direction.

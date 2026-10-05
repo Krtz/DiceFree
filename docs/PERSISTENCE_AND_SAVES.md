@@ -524,3 +524,9 @@ Not goals:
 - competitive anti-cheat;
 - leaderboards;
 - policing how someone plays their own save.
+
+## Local user controls settings (issue #47)
+
+Control bindings live in `Application.persistentDataPath/user-controls-v1.json`, separately from Echo progression. The version-1 DTO contains stable catalog entry IDs and native Input System override paths. No Echo schema or manifestation records changed. ControlsComposition loads settings before scene gameplay Awake/OnEnable, then saves successful user binding changes.
+
+LocalControlSettingsStore validates the whole candidate before applying overrides. Missing/corrupt/invalid files restore defaults, with recovery from `.bak` when valid. A newer version uses defaults, preserves the file and makes edits session-only. Load is silent with respect to save notifications. Writes use an exclusive `.lock`, flushed `.pending` file and atomic replacement with `.bak`; failures leave the prior primary available and report feedback. These files belong to local user preferences across Echoes. Cloud sync and additional settings categories are outside v1.

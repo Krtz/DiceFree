@@ -1,5 +1,39 @@
 # DiceFree Agent Handover
 
+## Issue #47 Options / persistent keybindings - 2026-10-05 (ready for review)
+
+Branch `feature/47-options-keybinds` is a focused, unmerged prototype based on
+`6fd6beaada0767d1e5c37a1a7c365c5e6ee84368`. Issue #47 remains open; no merge
+is authorized. The feature adds a real in-game Options / Controls page, a shared
+Unity Input System binding catalog used by the existing focused input owners,
+runtime native binding overrides (including WASD composite parts), explicit
+conflict rejection, reset-one/reset-all, and one deterministic Escape routing
+policy. Escape itself is reserved in v1.
+
+User bindings persist separately from Echo/manifestation progress in
+`Application.persistentDataPath/user-controls-v1.json`. The versioned local
+store uses checksum validation, a flushed pending file, atomic replacement and a
+backup. Missing/corrupt/invalid settings restore defaults; a valid backup can
+recover a corrupt primary; a newer version is preserved and treated read-only
+for that session. Loading does not fire save notifications or mutate the Echo
+save schema.
+
+The Options overlay is prototype OnGUI and intentionally modular/replaceable.
+It is reachable by a visible system button and Escape, blocks gameplay/pointer
+commands while open or capturing, shows friendly binding labels, supports
+interactive rebind/cancel/reset, and displays persistence/conflict feedback.
+Audio/Graphics are placeholders only; final styling, controller rebinding,
+ability hotkeys and separate Classic/WASD profiles remain future work.
+
+Live validation passed in Unity 6000.6.3f1:
+`DICEFREE_CONTROL_SETTINGS_BOUNDARIES_OK`, `DICEFREE_CONTROLS_OK`,
+`DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, and
+`DICEFREE_MANAGED_REFERENCE_OK`. Windows Development build passed at
+188,442,716 bytes with zero errors. See
+[OPTIONS_KEYBINDINGS_VALIDATION.md](OPTIONS_KEYBINDINGS_VALIDATION.md).
+Next: Axel performs a quick human UX/readability pass, then decide whether to
+integrate #47. Nothing is merged.
+
 ## Issue #46 Farmer's Pants implementation - 2026-10-05 (pushed for review)
 
 Working on `art/46-farmers-pants` from verified clean glove head
@@ -1303,3 +1337,9 @@ copy. Architecture and technical-direction docs from #36 remain unchanged.
 This follow-up supersedes earlier pending-integration status above. Issue #36
 is closed after the integrated checks passed. No main merge was performed and
 #37 or Novice modeling work has not started.
+
+## Issue #47 Options / native keybindings - 2026-10-05
+
+Existing worktree `T:\TEMP\DiceFree-Options47`, branch `feature/47-options-keybinds`; preserve prior edits. Shared Foundation ControlBindings owns defaults/overrides and action registration; existing input owners retain gameplay behavior. UI OptionsPanel uses central EscapeRouting policy, native interactive capture, conflicts/resets and HUD input blocking. ControlsComposition loads the separate versioned LocalControlSettingsStore before gameplay actions. Echo schema is unchanged. Audio/Graphics are disabled placeholders.
+
+See `docs/OPTIONS_KEYBINDINGS_VALIDATION.md` for focused Pipeline commands and manual checklist. This worker performed direct Unity-assembly compiler checks; its Windows token cannot discover the Editor's Pipeline instance. Runtime validation must come from the orchestrator session. Settings boundary validator runs in Edit Mode; native event validator uses isolated Play Mode and requires stopping afterwards. Clean incidental URP/ProjectAuditor/ShaderGraph churn before commit. Commit/push only `feature/47-options-keybinds`; do not merge or close issue #47.

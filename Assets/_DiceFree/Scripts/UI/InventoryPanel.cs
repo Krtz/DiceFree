@@ -1,3 +1,4 @@
+using DiceFree.Foundation;
 using System.Linq;
 using DiceFree.Characters;
 using DiceFree.Combat;
@@ -13,15 +14,22 @@ namespace DiceFree.UI
         private Equipment equipment;
         private GoldWallet wallet;
         private bool open;
+        private InputAction toggle;
+        public bool IsOpen => open;
+        public void Close() => open=false;
+        protected override void OnEnable() { base.OnEnable(); toggle.Enable(); }
+        protected override void OnDisable() { toggle.Disable(); base.OnDisable(); }
+        private void OnDestroy() => ControlBindings.Release(toggle);
         private Vector2 scroll;
         public override Rect Bounds => open ? new Rect(20, 200, 470, 360) : new Rect(20, 200, 160, 28);
-        private void Awake() { inventory = GetComponent<CarriedInventory>(); equipment = GetComponent<Equipment>(); wallet = GetComponent<GoldWallet>(); }
-        private void Update() { if (Keyboard.current?.bKey.wasPressedThisFrame == true) open = !open; }
+        private void Awake() { toggle=ControlBindings.Create("inventory"); inventory = GetComponent<CarriedInventory>(); equipment = GetComponent<Equipment>(); wallet = GetComponent<GoldWallet>(); }
+        private void Update() { if (!ControlBindings.BlockGameplay && toggle.WasPressedThisFrame()) open = !open; }
         private void OnGUI()
         {
-            if (!open) { if (GUI.Button(Bounds, "Inventory [B]")) open = true; return; }
+            if (ControlBindings.BlockGameplay) return;
+            if (!open) { if (GUI.Button(Bounds, "Inventory [" + toggle.GetBindingDisplayString() + "]")) open = true; return; }
             GUILayout.BeginArea(Bounds, GUI.skin.box);
-            if (GUILayout.Button("Close inventory [B]")) open = false;
+            if (GUILayout.Button("Close inventory [" + toggle.GetBindingDisplayString() + "]")) open = false;
             GUILayout.Label($"Gold: {wallet.Gold}   Move Speed: {MovementUnits.DisplaySpeed(GetComponent<TraversalMotor>().Speed):0.##}");
             scroll = GUILayout.BeginScrollView(scroll);
             foreach (var item in inventory.Items)

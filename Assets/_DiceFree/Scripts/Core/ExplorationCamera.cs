@@ -1,3 +1,4 @@
+using DiceFree.Foundation;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,17 +24,14 @@ namespace DiceFree.Core
         private void Awake()
         {
             viewCamera = GetComponent<Camera>();
-            zoom = new InputAction("Zoom", InputActionType.Value, "<Mouse>/scroll/y");
-            vista = new InputAction("Look toward World 1", binding: "<Keyboard>/v");
-            pan = new InputAction("Camera pan", InputActionType.Value);
-            pan.AddCompositeBinding("2DVector").With("Up", "<Keyboard>/upArrow")
-                .With("Down", "<Keyboard>/downArrow").With("Left", "<Keyboard>/leftArrow").With("Right", "<Keyboard>/rightArrow");
-            drag = new InputAction("Camera drag", binding: "<Mouse>/middleButton");
-            pointerDelta = new InputAction("Camera pointer delta", InputActionType.Value, "<Mouse>/delta");
-            recenter = new InputAction("Recenter", binding: "<Keyboard>/home");
-            followToggle = new InputAction("Toggle follow", binding: "<Keyboard>/f");
-            rotate = new InputAction("Rotate camera", InputActionType.Value);
-            rotate.AddCompositeBinding("1DAxis").With("Negative", "<Keyboard>/q").With("Positive", "<Keyboard>/e");
+            zoom = ControlBindings.Create("zoom");
+            vista = ControlBindings.Create("vista");
+            pan = ControlBindings.Create("pan");
+            drag = ControlBindings.Create("drag");
+            pointerDelta = ControlBindings.Create("pointerDelta");
+            recenter = ControlBindings.Create("recenter");
+            followToggle = ControlBindings.Create("followToggle");
+            rotate = ControlBindings.Create("rotate");
         }
         private void OnEnable()
         {
@@ -47,11 +45,12 @@ namespace DiceFree.Core
         }
         private void OnDestroy()
         {
-            zoom.Dispose(); vista.Dispose(); pan.Dispose(); drag.Dispose(); pointerDelta.Dispose();
-            recenter.Dispose(); followToggle.Dispose(); rotate.Dispose();
+            ControlBindings.Release(zoom); ControlBindings.Release(vista); ControlBindings.Release(pan); ControlBindings.Release(drag); ControlBindings.Release(pointerDelta);
+            ControlBindings.Release(recenter); ControlBindings.Release(followToggle); ControlBindings.Release(rotate);
         }
         private void LateUpdate()
         {
+            if (ControlBindings.BlockGameplay) return;
             if (target == null) return;
             if (!initialized) anchor = target.position;
             if (followToggle.WasPressedThisFrame()) following = !following;

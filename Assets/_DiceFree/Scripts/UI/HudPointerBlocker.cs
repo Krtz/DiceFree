@@ -12,6 +12,7 @@ namespace DiceFree.UI
         public static void Unregister(HudWidget widget) => widgets.Remove(widget);
         public static bool Covers(Vector2 screenPoint)
         {
+            if (DiceFree.Foundation.ControlBindings.BlockGameplay) return true;
             if (TraversalOverlay.CoversPointer(screenPoint)) return true;
             var point = new Vector2(screenPoint.x, Screen.height - screenPoint.y);
             for (int i = widgets.Count - 1; i >= 0; i--)

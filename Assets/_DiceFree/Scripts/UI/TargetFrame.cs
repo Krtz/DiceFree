@@ -9,6 +9,7 @@ namespace DiceFree.UI
         public override Rect Bounds => new Rect(Screen.width * 0.5f - 145, 16, 290, 92);
         private void OnGUI()
         {
+            if (DiceFree.Foundation.ControlBindings.BlockGameplay) return;
             var r = Bounds; var target = selection.Selected;
             GUI.Box(r, GUIContent.none);
             if (target == null) { GUI.Label(new Rect(r.x+10,r.y+10,270,24), "No target · Slime in the eastern crops"); return; }

@@ -1,7 +1,9 @@
 {
   "name": "DiceFree.Foundation.Runtime",
   "rootNamespace": "DiceFree.Foundation",
-  "references": [],
+  "references": [
+    "Unity.InputSystem"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,

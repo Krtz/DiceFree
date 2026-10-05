@@ -13,6 +13,7 @@ namespace DiceFree.UI
         public override Rect Bounds => new Rect(16,Screen.height-16,Screen.width-32,16);
         private void OnGUI()
         {
+            if (DiceFree.Foundation.ControlBindings.BlockGameplay) return;
             var rect = Bounds; GUI.Box(rect,GUIContent.none);
             var old = GUI.color; GUI.color = new Color(0.4f,0.55f,1);
             GUI.DrawTexture(new Rect(rect.x,rect.y,rect.width*progression.CurrentXp/progression.RequiredXp,rect.height),Texture2D.whiteTexture);

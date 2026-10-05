@@ -1,3 +1,4 @@
+using DiceFree.Foundation;
 using DiceFree.Combat;
 using DiceFree.UI;
 using DiceFree.World;
@@ -11,24 +12,24 @@ namespace DiceFree.Characters
     {
         private TargetSelection selection;
         private BasicAttack attack;
-        private InputAction select, cycle, attackSelected, clear, respawn;
+        private InputAction select, cycle, attackSelected, respawn;
         private void Awake()
         {
             selection = GetComponent<TargetSelection>(); attack = GetComponent<BasicAttack>();
-            select = new InputAction("Select target", binding: "<Mouse>/leftButton");
-            cycle = new InputAction("Cycle hostile", binding: "<Keyboard>/tab");
-            attackSelected = new InputAction("Attack selected", binding: "<Keyboard>/x");
-            clear = new InputAction("Clear target", binding: "<Keyboard>/escape");
-            respawn = new InputAction("Return to anchor", binding: "<Keyboard>/r");
+            select = ControlBindings.Create("select");
+            cycle = ControlBindings.Create("cycle");
+            attackSelected = ControlBindings.Create("attackSelected");
+
+            respawn = ControlBindings.Create("respawn");
         }
-        private void OnEnable() { select.Enable(); cycle.Enable(); attackSelected.Enable(); clear.Enable(); respawn.Enable(); }
-        private void OnDisable() { select.Disable(); cycle.Disable(); attackSelected.Disable(); clear.Disable(); respawn.Disable(); }
-        private void OnDestroy() { select.Dispose(); cycle.Dispose(); attackSelected.Dispose(); clear.Dispose(); respawn.Dispose(); }
+        private void OnEnable() { select.Enable(); cycle.Enable(); attackSelected.Enable();  respawn.Enable(); }
+        private void OnDisable() { select.Disable(); cycle.Disable(); attackSelected.Disable();  respawn.Disable(); }
+        private void OnDestroy() { ControlBindings.Release(select); ControlBindings.Release(cycle); ControlBindings.Release(attackSelected);  ControlBindings.Release(respawn); }
         private void Update()
         {
+            if (ControlBindings.BlockGameplay) return;
             if (respawn.WasPressedThisFrame()) GetComponent<RespawnAtAnchor>()?.Return();
             if (cycle.WasPressedThisFrame()) selection.Cycle(Keyboard.current != null && Keyboard.current.shiftKey.isPressed);
-            if (clear.WasPressedThisFrame()) { selection.Select(null); attack.Cancel(); }
             if (select.WasPressedThisFrame() && Mouse.current != null && !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
                 selection.Select(Pick(Mouse.current.position.ReadValue()));
             if (attackSelected.WasPressedThisFrame()) { GetComponent<Interactor>()?.Cancel(); attack.Order(selection.Selected); }
