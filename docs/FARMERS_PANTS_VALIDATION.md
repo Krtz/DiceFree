@@ -17,14 +17,20 @@ Unity 6000.6.3f1. The separate glove Editor on 7800 was not targeted.
 | Glove regression | `WORK_GLOVES_ART_OK`, `WORK_GLOVES_EQUIPMENT_OK`; original Q4 reward/equip/stat/reload assertions retained, binding selected by Hands slot |
 | Architecture | `DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, `DICEFREE_MANAGED_REFERENCE_OK`; rerun after final changes |
 | Preview | `FARMERS_PANTS_PREVIEW_OK`; regenerated and visually inspected PNG at `Assets/_DiceFree/Art/Validation/Previews/FarmersPants_Unity.png` |
-| Windows Development | `DICEFRE_NOVICE_CORNBERG_PLAYER_BUILD_OK result=Succeeded`; 188,417,911 bytes; output `%TEMP%/DiceFree-Novice-Cornberg-Issue43/DiceFree.exe` |
+| Existing item/Q4 regressions | Existing harnesses returned passed for items and q4; assertions retained |
+| Novice/player boundary | `DICEFRE_NOVICE_PIPELINE_OK`, `DICEFRE_NOVICE_CORNBERG_PRESENTATION_OK` on implementation `7f77b79724b2135674ca248548552f4c6d9289a1` |
+| Windows Development | Final structured CLI response: `DICEFRE_NOVICE_CORNBERG_PLAYER_BUILD_OK`, 188,417,911 bytes, zero errors, one warning; output `%TEMP%/DiceFree-Novice-Cornberg-Issue43/DiceFree.exe` |
 
-Build response exceeded the CLI 30-second limit. Editor log confirms final
-success. Build summary reports four errors and five warnings: Pipeline main
-thread request timeouts occurred while the synchronous build was busy; retained
-warnings include missing runtime Pipeline configuration and DEVELOPMENT_BUILD
-UAC0009. This is build evidence, not a standalone playthrough or clean zero-error
-build claim. Logs and build output remain local and excluded from the commit.
+The first build response exceeded the CLI 30-second limit and recorded Pipeline
+request timeouts while busy. A follow-up overlapped script compilation and was
+rejected. After compilation completed, the final build ran with `--timeout 600`
+and no overlapping Editor requests; its structured response succeeded with zero
+errors and one warning. This supersedes the earlier diagnostic build result.
+No standalone playthrough is claimed. Logs and build output remain local and
+excluded from the commit. Regenerated source/export containers, preview and
+scene IDs plus incidental Unity settings were backed up under ignored
+`Logs/Issue46-Regenerated-Snapshot/` before restoring the pushed assets; the
+geometry/weights fingerprint remained unchanged.
 An incidental preview attempt during Play Mode was rejected; the final preview
 was subsequently regenerated successfully in Edit Mode.
 

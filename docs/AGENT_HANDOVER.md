@@ -1,6 +1,6 @@
 # DiceFree Agent Handover
 
-## Issue #46 Farmer's Pants implementation - 2026-10-05 (implemented; final validation below)
+## Issue #46 Farmer's Pants implementation - 2026-10-05 (pushed for review)
 
 Working on `art/46-farmers-pants` from verified clean glove head
 `e7ce68909307159737fa83b57cd503a1f7a25389`; issue #46 and #43/#45 bodies and
@@ -21,7 +21,19 @@ No additional skeleton/weight repair is currently required. Existing clips
 rotate thighs but have no independent knee articulation; add a separately
 labelled synthetic knee-flex check. Feet art remains on its separate unmerged
 branch, so coexistence uses authored test-only foot-socket fixtures.
-Unity import, focused pants runtime/reload validation, glove regressions, preview and architecture gates passed. Windows build succeeded with logged diagnostics; see FARMERS_PANTS_VALIDATION.md. Human art approval/cloth polish remain provisional.
+Implementation is pushed at `7f77b79724b2135674ca248548552f4c6d9289a1`.
+Unity import, focused pants runtime/reload validation, glove regressions,
+existing item/Q4 suites, Novice pipeline/player-root, preview and architecture
+gates passed. Final Windows Development build: 188,417,911 bytes, zero errors,
+one warning. Earlier bridge-timeout/compile-overlap build attempts are
+superseded by the successful structured response. See
+[validation evidence](FARMERS_PANTS_VALIDATION.md) and
+[source reproduction](../SourceArt/Characters/FarmersPants/README.md).
+Regenerated containers/scene IDs and incidental Unity settings were preserved
+in an ignored local snapshot, then restored to the pushed assets.
+Next: human preview/cloth review. Feet uses test fixtures, knee articulation
+includes a labelled synthetic check, and production optimization/cross-form
+fitting remain provisional. Issue #46 remains open; nothing is merged.
 
 
 ## Issue #45 implementation and validation - 2026-10-05

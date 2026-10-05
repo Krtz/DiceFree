@@ -605,18 +605,6 @@ This pipeline follows current Unity/GitHub/Blender guidance:
 - Git LFS is appropriate for large binary source/media files.
 - GitHub Releases/build artifacts are the distribution mechanism for playable binaries rather than source branches.
 
-## Farmer's Pants (#46)
-
-Rebuild with `T:\TEMP\blender.exe --background --python
-SourceArt/Characters/FarmersPants/build_farmers_pants.py` (one command).
-The source blend and export_manifest.json retain Novice source provenance and
-geometry/weight fingerprint. Unity commands `dicefree.art.pants.prepare`,
-`validate`, `capture-preview`, `equipment-test` and `status` use explicit
-`--project-path T:\TEMP\DiceFree-FarmersPants`; this Editor is on port 7801.
-EquipmentArtAuthoring shares the glove rig-binding implementation. Bindings
-may replace authored baseline objects and restore their original active states.
-See FARMERS_PANTS_VALIDATION.md for evidence and prototype limitations.
-
 ## Farmer's Pants lower-body proof (#46)
 
 `SourceArt/Characters/FarmersPants/` contains Blender 5.2.2 source, deterministic
