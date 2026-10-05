@@ -10,7 +10,8 @@
     "DiceFree.AI.Runtime",
     "DiceFree.Persistence.Runtime",
     "DiceFree.UI.Runtime",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "DiceFree.Input.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

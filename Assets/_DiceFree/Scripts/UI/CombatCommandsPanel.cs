@@ -12,6 +12,7 @@ namespace DiceFree.UI
         public override Rect Bounds => new Rect(Screen.width - 330, Screen.height - 162, 314, 146);
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             var r = Bounds; GUI.Box(r, GUIContent.none);
             GUI.Label(new Rect(r.x+10,r.y+6,294,22), "Cornberg combat PoC · provisional tuning");
             GUI.enabled = player.Alive;

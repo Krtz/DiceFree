@@ -11,15 +11,16 @@ namespace DiceFree.EditorTools
             new Dictionary<string, string[]>(StringComparer.Ordinal)
             {
                 ["DiceFree.Foundation.Runtime"] = Array.Empty<string>(),
+                ["DiceFree.Input.Runtime"] = Array.Empty<string>(),
                 ["DiceFree.Gameplay.Runtime"] = new[] { "DiceFree.Foundation.Runtime" },
                 ["DiceFree.Items.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime" },
                 ["DiceFree.World.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime" },
                 ["DiceFree.Quests.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime" },
                 ["DiceFree.AI.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.World.Runtime" },
                 ["DiceFree.Persistence.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime" },
-                ["DiceFree.UI.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime" },
-                ["DiceFree.Application.Runtime"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime", "DiceFree.Persistence.Runtime", "DiceFree.UI.Runtime" },
-                ["DiceFree.Editor"] = new[] { "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime", "DiceFree.Persistence.Runtime", "DiceFree.UI.Runtime", "DiceFree.Application.Runtime" }
+                ["DiceFree.UI.Runtime"] = new[] { "DiceFree.Input.Runtime", "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime" },
+                ["DiceFree.Application.Runtime"] = new[] { "DiceFree.Input.Runtime", "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime", "DiceFree.Persistence.Runtime", "DiceFree.UI.Runtime" },
+                ["DiceFree.Editor"] = new[] { "DiceFree.Input.Runtime", "DiceFree.Foundation.Runtime", "DiceFree.Gameplay.Runtime", "DiceFree.Items.Runtime", "DiceFree.World.Runtime", "DiceFree.Quests.Runtime", "DiceFree.AI.Runtime", "DiceFree.Persistence.Runtime", "DiceFree.UI.Runtime", "DiceFree.Application.Runtime" }
             };
 
         internal static bool DependencyAllowed(string source, string target) =>
@@ -50,6 +51,10 @@ namespace DiceFree.EditorTools
             foreach (var runtime in Allowed.Keys.Where(name => name != "DiceFree.Editor"))
                 RequireAllowed("DiceFree.Editor", runtime);
 
+            RequireAllowed("DiceFree.UI.Runtime", "DiceFree.Input.Runtime");
+            RequireAllowed("DiceFree.Application.Runtime", "DiceFree.Input.Runtime");
+            RequireForbidden("DiceFree.Gameplay.Runtime", "DiceFree.Input.Runtime");
+            RequireForbidden("DiceFree.Input.Runtime", "DiceFree.UI.Runtime");
             RequireForbidden("DiceFree.Gameplay.Runtime", "DiceFree.UI.Runtime");
             RequireForbidden("DiceFree.Gameplay.Runtime", "DiceFree.Persistence.Runtime");
             RequireForbidden("DiceFree.Items.Runtime", "DiceFree.Persistence.Runtime");

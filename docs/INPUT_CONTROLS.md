@@ -1,5 +1,79 @@
 # Input and Controls
 
+## Current prototype implementation (#48, 2026-10-05)
+
+The current Cornberg prototype now has one shared Unity Input System source of truth instead of separate hard-coded `InputAction` instances in traversal, combat, camera, and inventory code.
+
+Implementation lives on the focused, unmerged branch `feature/48-options-keybinds`:
+
+- canonical authored asset: `Assets/_DiceFree/Resources/DiceFreeControls.inputactions`;
+- runtime assembly: `DiceFree.Input.Runtime`;
+- `InputBindings` owns one runtime clone of the authored asset, binding overrides, modal suppression, conflict reporting, and interactive rebinding;
+- `BindingSettingsStore` persists only user/install control settings under `Application.persistentDataPath/Settings/bindings.json`, with pending/backup files and no Echo-save/schema coupling;
+- `InputRuntimeHost` composes the persistent input/options lifetime before scene load;
+- `OptionsPanel` is a lightweight IMGUI prototype, not the final production settings UI.
+
+Current Options behavior:
+
+- open with **F10** or the visible HUD **Options** button;
+- **Escape closes Options only while Options is open**;
+- closed-state Escape remains available to existing gameplay-context actions such as interaction/target clearing;
+- opening Options disables the Gameplay and Camera action maps while leaving the UI map active;
+- the world is not globally paused, but player gameplay/camera input is suppressed and active player commands are canceled;
+- HUD widgets hide behind the modal and pointer/gameplay clicks are blocked underneath it;
+- interactive rebinding accepts keyboard keys and mouse buttons;
+- **Backspace** cancels an active rebind so Escape itself remains a legal gameplay binding;
+- duplicate/shared bindings are allowed and displayed as explicit conflict feedback instead of being silently rejected;
+- **Reset all controls to defaults** removes binding overrides and persists that reset.
+
+First-pass rebindable controls:
+
+- Direct Move Up / Down / Left / Right;
+- Move destination / click-to-move;
+- Switch control mode;
+- Stop;
+- Interact;
+- Close interaction;
+- Select target;
+- Cycle hostile;
+- Attack selected;
+- Clear target;
+- Return to anchor;
+- Inventory;
+- Look toward World 1;
+- Camera Pan Up / Down / Left / Right;
+- Camera drag;
+- Recenter;
+- Toggle follow;
+- Rotate camera Left / Right;
+- Options menu toggle.
+
+Mouse-wheel zoom, raw pointer delta, and the dedicated **Close Options = Escape** binding remain fixed in this first prototype pass. Controller/gamepad rebinding is still future work.
+
+Current prototype defaults remain:
+
+- WASD direct movement;
+- right mouse = move destination/context action;
+- F6 = switch control mode;
+- Space = stop;
+- I = interact;
+- Escape = close interaction / clear target contextually;
+- left mouse = select target;
+- Tab = cycle hostile;
+- X = attack selected;
+- R = return to anchor;
+- B = inventory;
+- V = look toward World 1;
+- arrow keys = camera pan;
+- middle mouse = camera drag;
+- Home = recenter;
+- F = toggle follow;
+- Q / E = rotate camera;
+- F10 = Options;
+- Escape = close Options while open.
+
+This implementation does **not** settle the future Classic-vs-Direct default ability profiles, casting modes, summon control scheme, controller layout, or final visual settings-menu UX described below.
+
 ## Philosophy
 
 DiceFree supports two first-class movement/control styles:

@@ -39,6 +39,7 @@ namespace DiceFree.UI
         }
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             if (Camera.main == null) return;
             var p = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2.1f);
             if (p.z <= 0) return;

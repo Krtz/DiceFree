@@ -11,6 +11,7 @@ namespace DiceFree.UI
         [SerializeField] private CombatActor player;
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             if (Camera.main == null) return;
             var action = target.Resolve(player);
             if (action == null) return;

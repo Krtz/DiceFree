@@ -8,7 +8,8 @@
     "DiceFree.World.Runtime",
     "DiceFree.Quests.Runtime",
     "DiceFree.AI.Runtime",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "DiceFree.Input.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

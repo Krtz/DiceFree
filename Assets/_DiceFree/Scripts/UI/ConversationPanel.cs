@@ -11,6 +11,7 @@ namespace DiceFree.UI
             ? new Rect(Screen.width / 2 - 205, Screen.height - 380, 410, 200) : new Rect();
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             if (interactor.Active is not ConversationTarget target) return;
             var r = Bounds; GUI.Box(r, GUIContent.none);
             GUI.Label(new Rect(r.x + 12, r.y + 8, 386, 25), target.DisplayName);

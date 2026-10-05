@@ -13,6 +13,7 @@ namespace DiceFree.UI
             ? new Rect(Screen.width/2-250,Screen.height-390,500,260) : new Rect();
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             if (interactor.Active is not QuestGiver giver) return;
             var actor=interactor.GetComponent<CombatActor>();
             var quest = giver.CurrentQuest(actor);

@@ -13,6 +13,7 @@ namespace DiceFree.UI
         public override Rect Bounds => new Rect(Screen.width-310,130,294,Mathf.Max(120,VisibleCount*70+16));
         private void OnGUI()
         {
+            if (HudPointerBlocker.ModalOpen) return;
             var r=Bounds; GUI.Box(r,GUIContent.none); float y=r.y+8;
             foreach (var quest in journal.Definitions)
             {

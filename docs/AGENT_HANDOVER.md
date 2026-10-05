@@ -1,5 +1,32 @@
 # DiceFree Agent Handover
 
+## Issue #48 Options / persistent key rebinding - 2026-10-05 (review-ready)
+
+Working branch: `feature/48-options-keybinds`, based on the reviewed Farmer's Pants validation head `6fd6beaada0767d1e5c37a1a7c365c5e6ee84368`. Issue #48 remains open. **No merge is authorized.**
+
+The Cornberg prototype now uses a shared authored Unity Input System asset at `Assets/_DiceFree/Resources/DiceFreeControls.inputactions` instead of independent hard-coded action definitions in traversal/combat/camera/inventory code. A new dependency-light `DiceFree.Input.Runtime` assembly owns `InputBindings` and `BindingSettingsStore`. UI/Application/Editor may depend on Input; gameplay/foundation do not gain a UI dependency.
+
+`InputRuntimeHost` composes one persistent runtime binding service + `OptionsPanel`. F10 or the visible HUD button opens Options; Escape closes it only while open. Gameplay and Camera maps are disabled under the modal while UI stays active. Existing gameplay Escape defaults are preserved while the menu is closed. Active traversal/attack/interaction commands are canceled when suppression begins, and HUD widgets/pointer actions are blocked behind Options.
+
+Keyboard/mouse actions exposed in this first pass include WASD composite parts, move destination, mode switch, stop, interaction, targeting/attack/clear/return/inventory, camera pan/drag/recenter/follow/rotation/look, and the Options toggle. Interactive rebinding uses Unity Input System APIs, Backspace cancels capture, shared bindings are allowed with explicit conflict text, and Reset Defaults persists. Zoom, raw pointer delta, and fixed Escape-to-close-Options remain non-rebindable for now.
+
+Overrides persist outside Echo saves at `Application.persistentDataPath/Settings/bindings.json` with lock/pending/backup handling. Corrupt primary settings recover from backup; no gameplay save-schema change was made.
+
+Final automated evidence on the cleaned implementation tree:
+
+- `DICEFREE_CONTROLS_ASSET_OK`
+- `DICEFREE_CONTROLS_OK`
+- `DICEFREE_CONTROLS_PLAYMODE_OK` (F10 open, modal suppression, interactive Interact -> J rebind, live J action firing, gameplay resume, Escape behavior, reset defaults)
+- `ISSUE36_ROUTE12_OK`
+- `DICEFRE_ARCHITECTURE_OK`
+- `DICEFRE_ARCH_POLICY_SELFTEST_OK`
+- `DICEFREE_MANAGED_REFERENCE_OK`
+- Windows Development build `DICEFRE_NOVICE_CORNBERG_PLAYER_BUILD_OK`: **187,323,162 bytes**, **0 errors**, **4 warnings**.
+
+Detailed evidence: [OPTIONS_KEYBINDS_VALIDATION.md](OPTIONS_KEYBINDS_VALIDATION.md). Canonical behavior: [INPUT_CONTROLS.md](INPUT_CONTROLS.md).
+
+Human review is still required for Options layout/labels/rebinding feel. Audio/graphics options, controller rebinding, final control profiles, and production menu UI are explicitly out of scope. Nothing is merged.
+
 ## Issue #46 Farmer's Pants implementation - 2026-10-05 (pushed for review)
 
 Working on `art/46-farmers-pants` from verified clean glove head
