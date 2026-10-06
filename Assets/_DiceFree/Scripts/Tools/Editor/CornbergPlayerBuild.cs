@@ -24,7 +24,9 @@ namespace DiceFree.EditorTools
             PlayerSettings.defaultScreenHeight = 800;
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
-                scenes = new[] { CornbergSceneBuilder.ScenePath },
+                scenes = System.Array.ConvertAll(
+                    System.Array.FindAll(EditorBuildSettings.scenes, value => value.enabled),
+                    value => value.path),
                 locationPathName = "Builds/Cornberg/DiceFree.exe",
                 target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.Development

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using DiceFree.Advancement;
 using DiceFree.Characters;
 using DiceFree.Combat;
 using DiceFree.Persistence;
@@ -191,6 +192,11 @@ namespace DiceFree.EditorTools
                     section.json = JsonUtility.ToJson(data);
                     save.revision++; store.Commit(save);
                     // Prevent shutdown callback from replacing this deliberate test fixture.
+                    // #50 makes advancement depend on persistence, so remove its presentation/controller first.
+                    var advancementPanel = player.GetComponent<AdvancementPanel>();
+                    if (advancementPanel != null) UnityEngine.Object.DestroyImmediate(advancementPanel);
+                    var advancement = player.GetComponent<AdvancementController>();
+                    if (advancement != null) UnityEngine.Object.DestroyImmediate(advancement);
                     UnityEngine.Object.DestroyImmediate(persistence);
                     Debug.Log("SAVE_FIRST_PROCESS_OK");
                 }
@@ -255,6 +261,10 @@ namespace DiceFree.EditorTools
                     {
                         player.Health.ApplyDamage(null, new DamageResult { mitigated = 10000 });
                         Require(!player.Alive && persistence.Flush(), "Dead save fixture failed.");
+                        var advancementPanel = player.GetComponent<AdvancementPanel>();
+                        if (advancementPanel != null) UnityEngine.Object.DestroyImmediate(advancementPanel);
+                        var advancement = player.GetComponent<AdvancementController>();
+                        if (advancement != null) UnityEngine.Object.DestroyImmediate(advancement);
                         UnityEngine.Object.DestroyImmediate(persistence);
                     }
                     Debug.Log(legacyReload ? "SAVE_LEGACY_PROCESS_OK" : deadReload ? "SAVE_DEAD_RELOAD_OK" : "SAVE_SECOND_PROCESS_OK");

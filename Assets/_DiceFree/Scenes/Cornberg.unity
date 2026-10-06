@@ -112298,6 +112298,8 @@ GameObject:
   - component: {fileID: 1288724078}
   - component: {fileID: 1288724077}
   - component: {fileID: 1288724076}
+  - component: {fileID: 1288724082}
+  - component: {fileID: 1288724081}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112588,6 +112590,7 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Persistence.ManifestationPersistence
   debounceSeconds: 0.25
+  classCatalog: {fileID: 11400000, guid: 3bcc34f14a616ff41a92a42d3cd19fd4, type: 2}
 --- !u!114 &1288724068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112773,6 +112776,35 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9d6804c9c6aded94bb252d3a0855bd17, type: 2}
   - {fileID: 11400000, guid: a42726ca326b4a2439d7b51cc19163f4, type: 2}
   - {fileID: 11400000, guid: 6225552e227601d48a5d9cc27d329b03, type: 2}
+--- !u!114 &1288724081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e556e2ab62745498832899fb8ccbfa, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.AdvancementPanel
+  controller: {fileID: 1288724082}
+--- !u!114 &1288724082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0b1cc43f356d545a75d85386af6753, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.AdvancementController
+  classCatalog: {fileID: 11400000, guid: 3bcc34f14a616ff41a92a42d3cd19fd4, type: 2}
+  advancements:
+  - {fileID: 11400000, guid: 123e15b653cb14d4eb0760d07afc1526, type: 2}
+  - {fileID: 11400000, guid: cc052526909043944862b2d3cf040000, type: 2}
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0

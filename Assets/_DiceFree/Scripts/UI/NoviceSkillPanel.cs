@@ -44,6 +44,7 @@ namespace DiceFree.UI
 
         private void Update()
         {
+            if (progression != null && !progression.ActiveForCurrentClass) { open = false; return; }
             if (bindings == null || bindings.Suppressed || toggle == null) return;
             if (toggle.WasPressedThisFrame()) open = !open;
         }
@@ -52,7 +53,7 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
-            if (progression == null || HudPointerBlocker.ModalOpen) return;
+            if (progression == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen) return;
 
             string key = InputBindings.Display(toggle);
             if (GUI.Button(ClosedBounds, "Skills [" + key + "] — " + progression.UnspentPoints + " point(s) available"))

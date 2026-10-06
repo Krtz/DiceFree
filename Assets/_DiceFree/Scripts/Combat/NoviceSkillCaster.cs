@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using DiceFree.Foundation;
 using DiceFree.Skills;
 using UnityEngine;
 
 namespace DiceFree.Combat
 {
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(TargetSelection), typeof(NoviceSkillProgression))]
-    public sealed class NoviceSkillCaster : MonoBehaviour
+    public sealed class NoviceSkillCaster : MonoBehaviour, IManifestationSessionState
     {
         private readonly Dictionary<string, float> readyAt = new(StringComparer.Ordinal);
         private CombatActor actor;
@@ -29,10 +30,11 @@ namespace DiceFree.Combat
             return Mathf.Max(0, time - Time.time);
         }
 
-        public bool CastSlot(int slot) => Cast(progression.ActiveAtSlot(slot));
+        public bool CastSlot(int slot) => progression.ActiveForCurrentClass && Cast(progression.ActiveAtSlot(slot));
 
         public bool Cast(NoviceSkillDefinition definition, CombatActor requestedTarget = null)
         {
+            if (!progression.ActiveForCurrentClass) return Fail("Novice skills are inactive for this manifestation.");
             if (definition == null || !definition.Active) return Fail("No active skill in that slot.");
             int rank = progression.Rank(definition.stableId);
             if (rank <= 0) return Fail(definition.displayName + " is unlearned.");
@@ -93,6 +95,8 @@ namespace DiceFree.Combat
             readyAt.Clear();
             Feedback = "";
         }
+
+        public void ResetForManifestationLoad() => ResetCooldowns();
 
         private CombatActor ResolveSupportTarget(CombatActor requested)
         {

@@ -36,14 +36,14 @@ namespace DiceFree.UI
 
         private void Update()
         {
-            if (bindings == null || bindings.Suppressed || progression == null || caster == null) return;
+            if (bindings == null || bindings.Suppressed || progression == null || caster == null || !progression.ActiveForCurrentClass) return;
             for (int i = 0; i < slots.Length; i++)
                 if (slots[i].WasPressedThisFrame()) caster.CastSlot(i);
         }
 
         private void OnGUI()
         {
-            if (progression == null || caster == null || HudPointerBlocker.ModalOpen) return;
+            if (progression == null || caster == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen) return;
 
             var r = Bounds;
             GUI.Box(r, GUIContent.none);

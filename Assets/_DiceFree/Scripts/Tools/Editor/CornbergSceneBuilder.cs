@@ -57,7 +57,7 @@ namespace DiceFree.EditorTools
             var input=player.AddComponent<TraversalInput>(); input.Configure(camera,marker.transform);
             new GameObject("Traversal controls").AddComponent<TraversalOverlay>().Configure(input,follow);
             EditorSceneManager.SaveScene(scene,ScenePath);
-            EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene(ScenePath,true)};
+            ConfigureBuildScenes();
             AssetDatabase.SaveAssets();
             Debug.Log("CORNBERG_BUILD_OK");
         }
@@ -102,6 +102,15 @@ namespace DiceFree.EditorTools
                 value.stringValue=entry.Item2;
             }
             manager.ApplyModifiedProperties();
+        }
+
+        private static void ConfigureBuildScenes()
+        {
+            const string startMenu = "Assets/_DiceFree/Scenes/StartMenu.unity";
+            bool hasStartMenu = AssetDatabase.LoadAssetAtPath<SceneAsset>(startMenu) != null;
+            EditorBuildSettings.scenes = hasStartMenu
+                ? new[] { new EditorBuildSettingsScene(startMenu, true), new EditorBuildSettingsScene(ScenePath, true) }
+                : new[] { new EditorBuildSettingsScene(ScenePath, true) };
         }
 
         private static void Lighting()

@@ -7,8 +7,9 @@ using UnityEngine;
 namespace DiceFree.Skills
 {
     [DisallowMultipleComponent, RequireComponent(typeof(ExperienceProgression), typeof(ActorStats))]
-    public sealed class NoviceSkillProgression : MonoBehaviour
+    public sealed class NoviceSkillProgression : MonoBehaviour, IClassSkillState
     {
+        public const string ClassStableId = "class.novice";
         public const string PassiveStableId = "skill.novice.all-stat-passive";
         private const string PassiveAttributeSource = "class-skill:" + PassiveStableId;
 
@@ -17,12 +18,15 @@ namespace DiceFree.Skills
         private readonly SortedDictionary<string, int> ranks = new(StringComparer.Ordinal);
         private ExperienceProgression xp;
         private ActorStats stats;
+        private bool classActive;
 
+        public string ClassId => ClassStableId;
+        public bool ActiveForCurrentClass => classActive;
         public event Action Changed;
         public event Action SkillPointAvailable;
 
         public IReadOnlyList<NoviceSkillDefinition> Definitions => definitions;
-        public int TotalPoints => xp == null ? 0 : xp.Level;
+        public int TotalPoints => !classActive || xp == null ? 0 : xp.Level;
         public int SpentPoints
         {
             get
@@ -38,6 +42,7 @@ namespace DiceFree.Skills
         {
             xp = GetComponent<ExperienceProgression>();
             stats = GetComponent<ActorStats>();
+            classActive = stats.Definition != null && stats.Definition.stableId == ClassStableId;
             ValidateDefinitions();
             ApplyPassive();
         }
@@ -90,7 +95,7 @@ namespace DiceFree.Skills
         public bool Spend(string stableId)
         {
             var definition = Definition(stableId);
-            if (definition == null || UnspentPoints <= 0) return false;
+            if (!classActive || definition == null || UnspentPoints <= 0) return false;
             int current = Rank(stableId);
             if (current >= definition.maxRank) return false;
             ranks[stableId] = current + 1;
@@ -140,6 +145,7 @@ namespace DiceFree.Skills
 
         public SkillRankState[] CaptureState()
         {
+            if (!classActive) return Array.Empty<SkillRankState>();
             var result = new SkillRankState[ranks.Count];
             int index = 0;
             foreach (var pair in ranks) result[index++] = new SkillRankState(pair.Key, pair.Value);
@@ -148,13 +154,28 @@ namespace DiceFree.Skills
 
         private void OnLevel(int _)
         {
+            if (!classActive) return;
             Changed?.Invoke();
             SkillPointAvailable?.Invoke();
+        }
+
+        public void SetClassActive(bool active)
+        {
+            if (classActive == active) return;
+            classActive = active;
+            if (!active) ranks.Clear();
+            ApplyPassive();
+            Changed?.Invoke();
         }
 
         private void ApplyPassive()
         {
             if (stats == null) return;
+            if (!classActive)
+            {
+                stats.RemoveAttributeContribution(PassiveAttributeSource);
+                return;
+            }
             int rank = Rank(PassiveStableId);
             if (rank <= 0) stats.RemoveAttributeContribution(PassiveAttributeSource);
             else stats.SetAttributeContribution(PassiveAttributeSource, new AttributeValues(rank));

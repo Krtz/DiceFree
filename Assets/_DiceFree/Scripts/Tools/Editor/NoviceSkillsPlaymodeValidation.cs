@@ -70,6 +70,9 @@ namespace DiceFree.EditorTools
         private static object Status()
         {
             string status = SessionState.GetString(Prefix + "status", "idle");
+            if (status == "running" && SessionState.GetInt(Prefix + "phase", 0) == 2 &&
+                !EditorApplication.isPlayingOrWillChangePlaymode)
+                BeginPhaseTwo();
             return new
             {
                 status,
@@ -111,18 +114,24 @@ namespace DiceFree.EditorTools
                 {
                     // PersistenceTestGuard also clears editor-only overrides on EnteredEditMode.
                     // Reapply this harness root on the next editor tick so callback ordering cannot erase it.
-                    EditorApplication.delayCall += () =>
-                    {
-                        PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(SessionState.GetString(Prefix + "root", ""));
-                        EditorSceneManager.OpenScene(CornbergSceneBuilder.ScenePath);
-                        EditorApplication.EnterPlaymode();
-                    };
+                    EditorApplication.delayCall += BeginPhaseTwo;
                 }
                 else
                 {
                     CleanupRoot();
                 }
             }
+        }
+
+        private static void BeginPhaseTwo()
+        {
+            if (SessionState.GetString(Prefix + "status", "") != "running" ||
+                SessionState.GetInt(Prefix + "phase", 0) != 2 ||
+                EditorApplication.isPlayingOrWillChangePlaymode)
+                return;
+            PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(SessionState.GetString(Prefix + "root", ""));
+            EditorSceneManager.OpenScene(CornbergSceneBuilder.ScenePath);
+            EditorApplication.EnterPlaymode();
         }
 
         private static void Tick()

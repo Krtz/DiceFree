@@ -258,11 +258,17 @@ When data structures change:
 - migrations are explicit/testable;
 - a save is not assumed to magically match current runtime data.
 
-### Current prototype schema (#49, 2026-10-06)
+### Current prototype schema (#49 + #50, 2026-10-06)
 
 The current local Echo format is **schema v5** with **manifestation record v5**.
 
-The v5 increment adds manifestation-specific `classSkills` records as stable skill ID + rank pairs. This is deliberately separate from transient combat state: ordinary ability cooldowns, stun, accuracy penalties and temporary attack-speed buffs still reset on load.
+The v5 increment adds manifestation-specific `classSkills` records as stable skill ID + rank pairs. #50 keeps that schema and adds an optional Echo-level `echo:manifestations` section (record version 1) containing the active class ID plus parent -> child branch history. Older v5 saves without this roster section remain valid: runtime derives the current class from the available manifestation and writes roster metadata on the next successful commit.
+
+The start menu reads this same Echo file before gameplay. Choosing an existing manifestation commits only the active-roster choice in a new atomic Echo revision, then Cornberg loads that class section. Unknown/unresolved manifestation sections remain preserved; the menu surfaces unresolved classes as unavailable instead of deleting them.
+
+Class advancement now commits the preserved parent manifestation, newly-created child manifestation and updated roster in one Echo revision before the live actor switches class. Copied child inventory receives new item-instance IDs and equipped references are remapped, preventing parent and child timelines from claiming the same owned instance identity.
+
+Transient combat state remains separate: ordinary ability cooldowns, stun, accuracy penalties and temporary attack-speed buffs still reset on load.
 
 Compatibility rules currently proven by validation:
 - v1-v4 Echo saves migrate explicitly to v5;

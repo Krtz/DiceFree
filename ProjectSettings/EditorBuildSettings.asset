@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_DiceFree/Scenes/StartMenu.unity
+    guid: 32c3ae6bb212b7f4bb65ddf29ed45da6
+  - enabled: 1
     path: Assets/_DiceFree/Scenes/Cornberg.unity
     guid: 74ec406dace83b44e84b5846d9f72c51
   m_configObjects: {}

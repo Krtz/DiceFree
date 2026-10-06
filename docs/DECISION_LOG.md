@@ -3322,3 +3322,16 @@ Tentative examples, not locked:
 
 **Reaffirmed:** Solid movement collision uses normal sliding with no pushing/force-shoving unless an explicit mechanic says otherwise.
 
+
+
+## 2026-10-06 — Start menu owns normal manifestation selection
+
+**Decision:** DiceFree boots through a dedicated start menu. A fresh Echo starts as Novice; an existing Echo chooses among its saved class manifestations before entering the world.
+
+**Decision:** Do not expose arbitrary live manifestation swapping as ordinary in-world gameplay. In-world advancement creates a new child manifestation; selecting an already-existing manifestation is normally a load/start-menu operation.
+
+**Decision:** Store active manifestation and parent/child branch history as additive Echo-level roster metadata while each class continues to own one independent manifestation section.
+
+**Decision:** Advancement copies owned inventory into the child with new item-instance IDs and remaps equipped references. Parent and child timelines must not claim the same item instance identity.
+
+See ADR 0005 and docs/ADVANCEMENT_VALIDATION.md.

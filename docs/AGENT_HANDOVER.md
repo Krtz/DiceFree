@@ -1363,3 +1363,55 @@ Windows x64 Development Build passed: `DICEFRE_NOVICE_CORNBERG_PLAYER_BUILD_OK`,
 Still provisional/out of scope: final names for the three non-Magic-Sand actives, final cooldown/balance values, skill VFX/audio/animation/icons, production HUD/editor, retired-adventurer respec presentation, and the undefined level-200 secret.
 
 Tooling note for this machine: Desktop Commander Remote was restarted non-elevated to avoid Unity's Administrator warning. In that normal remote process environment `PROGRAMDATA` was absent; Unity Package Manager 24.18.0 crashes in `getLocalConfigFolder()` when that variable is missing. Supplying `PROGRAMDATA=C:\ProgramData` only to the Unity CLI/Editor process tree restored UPM/Pipeline without changing Windows globally.
+
+
+# Issue #50 — manifestation advancement fork + start menu (2026-10-06)
+
+Current review branch: `feature/50-advancement`, based directly on completed #49 commit `63593b1ff979b7c545edd81c718f34469a91947e`. Nothing is merged to `poc/cornberg` or `main`.
+
+Implemented:
+- data-driven current three-class catalog;
+- data-driven level-10 Novice edges to Physically Blessed and Magically Touched;
+- Tier-1 actor shells with settled base/growth attributes only (real kits/models/Mana remain future slices);
+- Echo-level `echo:manifestations` roster v1 inside existing schema v5;
+- atomic parent-preserving class fork;
+- child level 1 / XP 0 / reset target-class skill state;
+- snapshot of manifestation-owned quests/world state, anchor, gold, inventory and equipment;
+- child item instance-ID regeneration with equipped-reference remap;
+- duplicate target-class creation rejection;
+- independent parent/child divergence and preserved-parent second branching;
+- class-skill runtime seam so Novice-specific passive/UI/casting deactivates on non-Novice shells;
+- shared save-root policy for gameplay persistence + menu;
+- dedicated `StartMenu` scene as build scene 0;
+- fresh-profile `Start as Novice`;
+- existing-Echo manifestation list with saved levels, last-active marker and transactional selection;
+- unresolved class saves surface unavailable rather than being deleted;
+- normal in-world UI only creates new advancements; arbitrary live manifestation switching is not exposed.
+
+ADR: `docs/adr/0005-manifestation-roster-and-load-selection.md`.
+Detailed evidence: `docs/ADVANCEMENT_VALIDATION.md`.
+
+Validation passed:
+`DICEFREE_ADVANCEMENT_AUTHORED_OK`,
+`DICEFREE_ADVANCEMENT_DATA_OK`,
+`DICEFREE_ADVANCEMENT_PLAYMODE_OK`,
+`DICEFREE_NOVICE_SKILLS_PLAYMODE_OK`,
+`DICEFREE_CONTROLS_PLAYMODE_OK`,
+`DICEFRE_ARCHITECTURE_OK`,
+`DICEFRE_ARCH_POLICY_SELFTEST_OK`,
+`DICEFREE_MANAGED_REFERENCE_OK`,
+items regression,
+Q4 regression,
+`ISSUE36_ROUTE12_OK`,
+`ISSUE36_RUNNER_OK`,
+and `ISSUE36_SAVE_RELOAD_OK`.
+
+The #50 Play Mode harness now starts from the real StartMenu on an empty isolated root, enters Cornberg through `Start as Novice`, creates both Tier-1 branches, proves independent timeline state, exits, boots StartMenu again, verifies all three saved levels/active marker, chooses Physical through the menu, and proves Cornberg loads the selected Physical save.
+
+Windows x64 Development Build passed: `DICEFREE_ADVANCEMENT_PLAYER_BUILD_OK`, 188,534,398 bytes, 0 errors, 5 existing prototype/build-environment warnings, StartMenu scene 0 + Cornberg scene 1.
+
+Built-player smoke test also passed outside the Editor: fresh isolated save visibly booted the menu; clicking `Start as Novice` entered Cornberg as level-1 Novice and wrote the save; relaunching visibly showed `Choose a manifestation`, Novice level 1, last-active marker and `Play Novice`.
+
+Legacy save regression needed one harness-only adjustment: #50 makes `AdvancementController` require `ManifestationPersistence`, so the test removes its temporary advancement UI/controller before intentionally destroying persistence. The original save-test semantics remain intact.
+
+Still out of scope: final blessing ritual/quest presentation, real Tier-1 kits/Mana/models/basic attacks/equipment permissions, final title/menu art, class preview cards, archive/delete/recreate UI, multiple-Echo selector, production HUD and multiplayer.

@@ -59,6 +59,29 @@ Example after the first split:
 
 The class/Ways UI can serve as the start-game selector for these class save-states.
 
+### Current prototype implementation (#50, 2026-10-06)
+
+The first manifestation-fork foundation is implemented on `feature/50-advancement`, stacked on the completed #49 Novice-skill branch.
+
+Current prototype behavior:
+- the player build boots into a dedicated `StartMenu` scene before Cornberg;
+- a fresh save offers `Start as Novice` and then enters Cornberg as the initial level-1 Novice manifestation;
+- an existing Echo lists every saved manifestation with class name and saved level, marks the last-active manifestation, and lets the player choose which existing class timeline to load;
+- an unresolved/missing class definition remains visible as unavailable rather than silently deleting its save section;
+- choosing an existing manifestation updates only Echo-level active-roster metadata transactionally, then Cornberg loads that saved class state;
+- class switching is not exposed as an arbitrary in-world gameplay button; the start menu is the normal load-time selector;
+- level-10+ Novice exposes two data-driven advancement edges: Physically Blessed Novice and Magically Touched Novice;
+- advancement commits the preserved parent and new child in one Echo revision before changing the live actor;
+- the child starts at level 1 / 0 XP and class skill ranks reset instead of numerically carrying Novice ranks;
+- manifestation-owned quests/world state, anchor, carried gold, inventory and equipment snapshot into the child;
+- copied child items receive new instance IDs and equipped references are remapped, so parent/child timelines do not claim the same item instance identity;
+- parent and child then diverge independently and the preserved Novice can later create the other first branch;
+- duplicate creation of an already-existing target class is rejected without overwriting it;
+- an additive version-1 `echo:manifestations` roster section stores active class and branch history while the overall save/manifestation schema remains v5;
+- current Tier-1 actor assets are intentional **class shells** with the settled starting/growth attributes; final models, Mana, attacks and skill kits belong to the upcoming class implementation slices rather than #50.
+
+The start-menu presentation is deliberately functional/prototype-grade. Final title art, character cards, archive/delete UX and richer class preview presentation remain future UI work.
+
 This one-save-per-class model is part of the Echo/timeline fantasy.
 
 Open:
