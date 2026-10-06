@@ -1,0 +1,69 @@
+using DiceFree.Combat;
+using DiceFree.Input;
+using DiceFree.Skills;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace DiceFree.UI
+{
+    public sealed class NoviceSkillBar : HudWidget
+    {
+        [SerializeField] private NoviceSkillProgression progression;
+        [SerializeField] private NoviceSkillCaster caster;
+
+        private InputBindings bindings;
+        private InputAction[] slots;
+
+        public override Rect Bounds => new Rect(Screen.width - 430, Screen.height - 250, 414, 78);
+
+        public void Configure(NoviceSkillProgression value, NoviceSkillCaster skillCaster)
+        {
+            progression = value;
+            caster = skillCaster;
+        }
+
+        private void Awake()
+        {
+            bindings = InputBindings.Current;
+            slots = new[]
+            {
+                bindings.Action("Gameplay/Novice skill 1"),
+                bindings.Action("Gameplay/Novice skill 2"),
+                bindings.Action("Gameplay/Novice skill 3"),
+                bindings.Action("Gameplay/Novice skill 4")
+            };
+        }
+
+        private void Update()
+        {
+            if (bindings == null || bindings.Suppressed || progression == null || caster == null) return;
+            for (int i = 0; i < slots.Length; i++)
+                if (slots[i].WasPressedThisFrame()) caster.CastSlot(i);
+        }
+
+        private void OnGUI()
+        {
+            if (progression == null || caster == null || HudPointerBlocker.ModalOpen) return;
+
+            var r = Bounds;
+            GUI.Box(r, GUIContent.none);
+            GUI.Label(new Rect(r.x + 8, r.y + 4, r.width - 16, 20),
+                string.IsNullOrEmpty(caster.Feedback) ? "Novice skills" : caster.Feedback);
+
+            const float gap = 4;
+            float width = (r.width - 16 - gap * 3) / 4;
+            for (int i = 0; i < 4; i++)
+            {
+                var definition = progression.ActiveAtSlot(i);
+                if (definition == null) continue;
+                int rank = progression.Rank(definition.stableId);
+                float remaining = caster.CooldownRemaining(definition);
+                string key = InputBindings.Display(slots[i]);
+                string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
+                if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
+                var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
+                if (GUI.Button(button, label)) caster.Cast(definition);
+            }
+        }
+    }
+}

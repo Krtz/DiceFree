@@ -258,6 +258,20 @@ When data structures change:
 - migrations are explicit/testable;
 - a save is not assumed to magically match current runtime data.
 
+### Current prototype schema (#49, 2026-10-06)
+
+The current local Echo format is **schema v5** with **manifestation record v5**.
+
+The v5 increment adds manifestation-specific `classSkills` records as stable skill ID + rank pairs. This is deliberately separate from transient combat state: ordinary ability cooldowns, stun, accuracy penalties and temporary attack-speed buffs still reset on load.
+
+Compatibility rules currently proven by validation:
+- v1-v4 Echo saves migrate explicitly to v5;
+- older Novice manifestations receive an empty skill allocation rather than fabricated learned skills;
+- v4 Q4 alternative-objective progress is preserved during the v4 -> v5 migration;
+- v3 item/inventory/equipment/gold/resource/quest state remains intact while the new skill field defaults empty;
+- unknown sections and unresolved content remain opaque/inert and round-trip unchanged;
+- migration is detached/idempotent, and the original pre-migration revision is retained as a backup after the first successful v5 commit.
+
 ## Unknown/missing content safety
 
 If a save references content that the current build cannot resolve:

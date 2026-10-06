@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DiceFree.Quests;
 using DiceFree.Items;
+using DiceFree.Skills;
 
 namespace DiceFree.Persistence
 {
@@ -31,6 +32,7 @@ namespace DiceFree.Persistence
         public ResourceSaveValue[] resources = Array.Empty<ResourceSaveValue>();
         public ItemInstance[] inventory = Array.Empty<ItemInstance>();
         public EquippedItem[] equipment = Array.Empty<EquippedItem>();
+        public SkillRankState[] classSkills = Array.Empty<SkillRankState>();
         public long gold;
     }
     [Serializable] internal sealed class SaveEnvelope

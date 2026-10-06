@@ -18,6 +18,8 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, ElementalModifier> resistanceModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, ElementalModifier> penetrationModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, ResistanceCapModifier> capModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, AttributeValues> attributeContributions = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, float> attackSpeedPercentModifiers = new(StringComparer.Ordinal);
         public void SetResistanceCapModifier(string sourceId, ResistanceCapModifier value)
         {
             if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Stable modifier source required.");
@@ -58,6 +60,7 @@ namespace DiceFree.Combat
             {
                 var values = AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
                 values += EquipmentTotal.attributes;
+                foreach (var contribution in attributeContributions.Values) values += contribution;
                 return values;
             }
         }
@@ -85,6 +88,29 @@ namespace DiceFree.Combat
         {
             float previous = MaximumHp;
             if (vitalityModifiers.Remove(sourceId)) Changed?.Invoke(previous);
+        }
+        public void SetAttributeContribution(string sourceId, AttributeValues value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Attribute contribution requires source identity.");
+            float previous = MaximumHp;
+            attributeContributions[sourceId] = value;
+            Changed?.Invoke(previous);
+        }
+        public void RemoveAttributeContribution(string sourceId)
+        {
+            float previous = MaximumHp;
+            if (attributeContributions.Remove(sourceId)) Changed?.Invoke(previous);
+        }
+        public void SetAttackSpeedPercentModifier(string sourceId, float percent)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent < 0)
+                throw new ArgumentException("Attack-speed modifier requires a stable source and finite non-negative percent.");
+            attackSpeedPercentModifiers[sourceId] = percent;
+            Changed?.Invoke(MaximumHp);
+        }
+        public void RemoveAttackSpeedPercentModifier(string sourceId)
+        {
+            if (attackSpeedPercentModifiers.Remove(sourceId)) Changed?.Invoke(MaximumHp);
         }
         public float SecondaryCoefficient(SecondaryStat stat)
         {
@@ -118,7 +144,8 @@ namespace DiceFree.Combat
         {
             float previous = MaximumHp;
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
-            resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear(); Changed?.Invoke(previous);
+            resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear();
+            attackSpeedPercentModifiers.Clear(); Changed?.Invoke(previous);
         }
         private readonly SortedDictionary<string, EquipmentStats> equipment = new(StringComparer.Ordinal);
         public void SetEquipmentContribution(string sourceId, EquipmentStats value)
@@ -147,7 +174,18 @@ namespace DiceFree.Combat
             }
         }
         public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed)) * (1 + EquipmentTotal.movementSpeedPercent / 100f);
-        public float AttackSpeed => (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed)) * (1 + EquipmentTotal.attackSpeedPercent / 100f);
+        private float TemporaryAttackSpeedPercent
+        {
+            get
+            {
+                float total = 0;
+                foreach (float percent in attackSpeedPercentModifiers.Values) total += percent;
+                return total;
+            }
+        }
+        public float AttackSpeed => (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed))
+                                    * (1 + EquipmentTotal.attackSpeedPercent / 100f)
+                                    * (1 + TemporaryAttackSpeedPercent / 100f);
         public float HealingDone => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingDone);
         public float HealingReceived => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingReceived);
         // Underlying reference includes class, attributes and equipped gear.

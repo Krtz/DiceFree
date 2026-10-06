@@ -1,10 +1,10 @@
 # Input and Controls
 
-## Current prototype implementation (#48, 2026-10-05)
+## Current prototype implementation (#48 + #49, through 2026-10-06)
 
 The current Cornberg prototype now has one shared Unity Input System source of truth instead of separate hard-coded `InputAction` instances in traversal, combat, camera, and inventory code.
 
-Implementation lives on the focused, unmerged branch `feature/48-options-keybinds`:
+The shared input/settings foundation originated on `feature/48-options-keybinds`; the current Novice-skill work is stacked on it on the still-unmerged `feature/49-novice-skills` branch:
 
 - canonical authored asset: `Assets/_DiceFree/Resources/DiceFreeControls.inputactions`;
 - runtime assembly: `DiceFree.Input.Runtime`;
@@ -46,7 +46,9 @@ First-pass rebindable controls:
 - Recenter;
 - Toggle follow;
 - Rotate camera Left / Right;
-- Options menu toggle.
+- Options menu toggle;
+- Novice skill slots 1 / 2 / 3 / 4;
+- Novice skill-allocation menu.
 
 Mouse-wheel zoom, raw pointer delta, and the dedicated **Close Options = Escape** binding remain fixed in this first prototype pass. Controller/gamepad rebinding is still future work.
 
@@ -70,6 +72,8 @@ Current prototype defaults remain:
 - F = toggle follow;
 - Q / E = rotate camera;
 - F10 = Options;
+- 1 / 2 / 3 / 4 = Novice active skill slots;
+- K = Novice skill-allocation menu;
 - Escape = close Options while open.
 
 This implementation does **not** settle the future Classic-vs-Direct default ability profiles, casting modes, summon control scheme, controller layout, or final visual settings-menu UX described below.

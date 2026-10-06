@@ -12,6 +12,7 @@ namespace DiceFree.Combat
         public string displayName;
         public DamageChannel channel;
         public ElementDefinition element;
+        public bool requiresAccuracy;
         public AttributeScaling scaling;
         public AttributeValues weights;
         [Min(0)] public float baseDamage = 1;

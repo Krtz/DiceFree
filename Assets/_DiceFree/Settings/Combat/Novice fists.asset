@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Fists
   channel: 0
   element: {fileID: 0}
+  requiresAccuracy: 1
   scaling: 1
   weights:
     vitality: 0

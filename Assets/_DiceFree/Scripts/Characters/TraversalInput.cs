@@ -20,6 +20,7 @@ namespace DiceFree.Characters
         private BasicAttack attack;
         private CombatInput combatInput;
         private Health health;
+        private CombatActor actor;
         private Interactor interactor;
         private InputBindings bindings;
         private InputAction movement, click, changeMode, stop, interact, closeInteraction;
@@ -34,6 +35,7 @@ namespace DiceFree.Characters
             attack = GetComponent<BasicAttack>();
             combatInput = GetComponent<CombatInput>();
             health = GetComponent<Health>();
+            actor = GetComponent<CombatActor>();
             interactor = GetComponent<Interactor>();
 
             bindings = InputBindings.Current;
@@ -74,7 +76,7 @@ namespace DiceFree.Characters
                 return;
             }
 
-            if (bindings.Suppressed)
+            if (bindings.Suppressed || (actor != null && !actor.CanAct))
             {
                 destinationMarker.gameObject.SetActive(false);
                 return;

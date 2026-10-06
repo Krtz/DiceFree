@@ -1330,3 +1330,36 @@ copy. Architecture and technical-direction docs from #36 remain unchanged.
 This follow-up supersedes earlier pending-integration status above. Issue #36
 is closed after the integrated checks passed. No main merge was performed and
 #37 or Novice modeling work has not started.
+
+
+# Issue #49 — complete Novice skill kit implementation (2026-10-06)
+
+Current review branch: `feature/49-novice-skills`, stacked directly on review-ready #48 base `e0c26b5c3cb195147918075a5f9dc86931566707`. Nothing is merged to `poc/cornberg` or `main`.
+
+Implemented the complete currently designed Tier-0 Novice systems slice:
+- four rank-0..10 actives plus the 160-rank all-stat passive;
+- one available skill point at level 1 / total available points equal current Novice level;
+- STR x2 melee damage + rank x0.2s stun, bypassing ordinary stun resistance but not hard immunity;
+- Magic Sand INT x2 + rank x7.5% miss chance for explicit accuracy-tagged actions for 5s;
+- AGI self/ally attack-speed buff `10 + rank x 0.2 x AGI` percent for 5s;
+- SPI self/ally instant heal `SPI x 10` through ordinary healing modifiers, no resurrection;
+- stable-effect refresh/replace semantics for Magic Sand and the AGI buff;
+- provisional cooldowns 10s / 12s / 15s / 20s;
+- explicit `requiresAccuracy` tagging on existing basic attacks plus a dedicated accuracy resolver; no hidden universal miss roll;
+- source-keyed temporary attack-speed modifiers, authored stun resistance/hard immunity, and source-keyed movement blocking for stun;
+- friendly target retention for support casts while hostile cycling/context attacks remain hostile-only;
+- canonical #48 input asset extended with 1-4 skill slots and K skill-allocation menu, using the existing rebinding/settings service;
+- lightweight Novice skill bar/allocation UI and point-available notification;
+- free-respec progression operation; NPC/service presentation is not authored yet;
+- schema/manifestation **v5** adds stable-ID `classSkills` rank records. v1-v4 migrate explicitly; old manifests receive an empty allocation; v4 Q4 alternatives and v3 item-bearing durable state are preserved; unknown sections remain opaque.
+
+Focused validation passed in connected Unity 6000.6.3f1:
+`DICEFREE_NOVICE_SKILLS_AUTHORED_OK`, `DICEFREE_NOVICE_SKILLS_DATA_OK`, `DICEFREE_NOVICE_SKILLS_PLAYMODE_OK`, `DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, `DICEFREE_MANAGED_REFERENCE_OK`, `DICEFREE_CONTROLS_OK`, `DICEFREE_CONTROLS_PLAYMODE_OK`, and `DICEFRE_NOVICE_CORNBERG_PRESENTATION_OK`.
+
+Existing regressions passed: items, Q4 surge/reward/elite/world-drop, `ISSUE36_ROUTE12_OK`, `ISSUE36_RUNNER_OK`, and `ISSUE36_SAVE_RELOAD_OK`. The #49 Play Mode harness uses real Cornberg actors and a two-phase isolated save/reload; it proves all four casts, support targeting, stun resistance/immunity behavior, deterministic Magic Sand accuracy boundaries, refresh-not-stack effects, passive/skill-point accounting, v5 persistence/reload and free respec.
+
+Windows x64 Development Build passed: `DICEFRE_NOVICE_CORNBERG_PLAYER_BUILD_OK`, 188,493,665 bytes total, 0 errors, 5 existing prototype/build-environment warnings. Detailed evidence: `docs/NOVICE_SKILLS_VALIDATION.md`.
+
+Still provisional/out of scope: final names for the three non-Magic-Sand actives, final cooldown/balance values, skill VFX/audio/animation/icons, production HUD/editor, retired-adventurer respec presentation, and the undefined level-200 secret.
+
+Tooling note for this machine: Desktop Commander Remote was restarted non-elevated to avoid Unity's Administrator warning. In that normal remote process environment `PROGRAMDATA` was absent; Unity Package Manager 24.18.0 crashes in `getLocalConfigFolder()` when that variable is missing. Supplying `PROGRAMDATA=C:\ProgramData` only to the Unity CLI/Editor process tree restored UPM/Pipeline without changing Windows globally.

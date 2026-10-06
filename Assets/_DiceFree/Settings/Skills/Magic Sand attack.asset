@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a500e69374414b44d8ea417ad4ceea7b, type: 3}
-  m_Name: Crop Slime bump
-  m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Combat.AttackDefinition
-  stableId: attack.crop-slime.bump
-  displayName: Bump
-  channel: 0
+  m_Name: Magic Sand attack
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.AttackDefinition
+  stableId: attack.novice.magic-sand
+  displayName: Magic Sand attack
+  channel: 1
   element: {fileID: 0}
-  requiresAccuracy: 1
+  requiresAccuracy: 0
   scaling: 0
   weights:
     vitality: 0
     strength: 0
     agility: 0
-    intelligence: 0
+    intelligence: 1
     spirit: 0
-  baseDamage: 3
-  coefficient: 0
-  interval: 1.7
-  windup: 0.45
-  reach: 0.6
+  baseDamage: 0
+  coefficient: 2
+  interval: 1.1
+  windup: 0.25
+  reach: 0.7

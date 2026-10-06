@@ -10,10 +10,14 @@ namespace DiceFree.Combat
         private CombatActor owner;
         public CombatActor Selected { get; private set; }
         private void Awake() => owner = GetComponent<CombatActor>();
-        private void Update() { if (!Valid(Selected)) Selected = null; }
-        public bool Valid(CombatActor target) => owner.IsHostileTo(target) &&
+        private void Update() { if (Selected != null && !ValidSelection(Selected)) Selected = null; }
+        public bool Valid(CombatActor target) => ValidHostile(target);
+        public bool ValidHostile(CombatActor target) => owner.IsHostileTo(target) && InScope(target);
+        public bool ValidFriendly(CombatActor target) => owner.IsFriendlyTo(target) && target != owner && InScope(target);
+        public bool ValidSelection(CombatActor target) => target != null && target != owner && target.Alive && InScope(target);
+        public void Select(CombatActor target) => Selected = ValidSelection(target) ? target : null;
+        private bool InScope(CombatActor target) => target != null &&
             Vector3.Distance(transform.position, target.transform.position) <= scope;
-        public void Select(CombatActor target) => Selected = Valid(target) ? target : null;
         public void Cycle(bool backwards)
         {
             var candidates = new List<CombatActor>();

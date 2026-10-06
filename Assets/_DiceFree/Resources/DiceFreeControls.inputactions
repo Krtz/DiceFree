@@ -122,6 +122,42 @@
                                          "type":  "Button",
                                          "initialStateCheck":  false,
                                          "processors":  ""
+                                     },
+                                     {
+                                         "name":  "Novice skill 1",
+                                         "type":  "Button",
+                                         "id":  "08b4034b-38c1-43ba-8b2e-2189771c08ec",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "Novice skill 2",
+                                         "type":  "Button",
+                                         "id":  "ce0ba606-44e6-4d18-b1a1-0a4449246c63",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "Novice skill 3",
+                                         "type":  "Button",
+                                         "id":  "209c6503-00e4-430e-8f9c-74d922d0d68b",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "Novice skill 4",
+                                         "type":  "Button",
+                                         "id":  "c5863132-b765-4172-bc76-c6c32c58fcbc",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
                                      }
                                  ],
                      "bindings":  [
@@ -311,6 +347,50 @@
                                           "name":  "",
                                           "path":  "\u003cKeyboard\u003e/shift",
                                           "action":  "Cycle reverse"
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "c0a38694-0540-43eb-8824-d2bf53733cf0",
+                                          "path":  "\u003cKeyboard\u003e/1",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "",
+                                          "action":  "Novice skill 1",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "6bae1054-e2df-4e6d-85f5-601995bed848",
+                                          "path":  "\u003cKeyboard\u003e/2",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "",
+                                          "action":  "Novice skill 2",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "5cce2869-51d5-41e2-a61f-d91e970d3e96",
+                                          "path":  "\u003cKeyboard\u003e/3",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "",
+                                          "action":  "Novice skill 3",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "515de70f-468f-4116-834b-9f0bab0df766",
+                                          "path":  "\u003cKeyboard\u003e/4",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "",
+                                          "action":  "Novice skill 4",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
                                       }
                                   ],
                      "name":  "Gameplay",
@@ -569,6 +649,15 @@
                                          "type":  "Button",
                                          "initialStateCheck":  false,
                                          "processors":  ""
+                                     },
+                                     {
+                                         "name":  "Novice skills menu",
+                                         "type":  "Button",
+                                         "id":  "2b9d9312-9d78-4c12-8e27-144776547f32",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
                                      }
                                  ],
                      "bindings":  [
@@ -593,6 +682,17 @@
                                           "name":  "",
                                           "path":  "\u003cKeyboard\u003e/escape",
                                           "action":  "Close options"
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "4c655e80-b655-4fb4-8a41-348dd081da63",
+                                          "path":  "\u003cKeyboard\u003e/k",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "",
+                                          "action":  "Novice skills menu",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
                                       }
                                   ],
                      "name":  "UI",

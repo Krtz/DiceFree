@@ -1,9 +1,8 @@
 # Cornberg local save slice
 
-Current schema is v4: see [Q4 alternative progress](CORNBERG_Q4.md).
+Current schema is **v5** with manifestation record v5. The v5 increment adds durable manifestation-specific Novice skill ranks; Q4 alternative progress from v4 remains preserved. See [PERSISTENCE_AND_SAVES.md](PERSISTENCE_AND_SAVES.md) and [classes/NOVICE.md](classes/NOVICE.md).
 Item/equipment/gold ownership remains as described in [CORNBERG_ITEMS.md](CORNBERG_ITEMS.md).
-The v1-to-v2 section below records the historical migration; supported v1/v2
-records now upgrade to v4, as do v3 item-bearing records. Current Profile Inspector also shows carried gold,
+The v1-to-v2 section below records the historical migration; supported v1-v4 records now upgrade to v5, including v3 item-bearing records. Older manifestations receive an empty `classSkills` allocation. Current Profile Inspector also shows carried gold,
 owned instance/definition IDs, equipment and unresolved item records.
 
 This covers the first two local slices of issue #26, following Q1. The design documents
@@ -27,8 +26,7 @@ Loading always starts at **full HP**, whether the player saved injured or dead,
 as settled in [issue #29](https://github.com/Krtz/DiceFree/issues/29). Loading is
 separate from the existing combat Return action, which still restores 50% HP.
 Ordinary cooldowns, effects and combat state are not saved. Current attack timers,
-commands and selected targets are cleared; enemy sessions start fresh. Ability,
-consumable, status-effect and summon systems are not implemented merely to reset them.
+commands and selected targets are cleared; enemy sessions start fresh. The implemented Novice skill cooldowns, stun, Magic Sand accuracy penalty and temporary attack-speed buff are deliberately transient and reset on load/restore. Consumable and summon systems remain future work.
 
 Resources reset by default. `ResourceLoadRule` / `ResourcePersistence` provide a
 small tested opt-in policy seam: only an explicitly persistent resource is captured;

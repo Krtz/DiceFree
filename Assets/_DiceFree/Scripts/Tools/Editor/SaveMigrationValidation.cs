@@ -74,7 +74,7 @@ namespace DiceFree.EditorTools
             var old = JsonUtility.FromJson<EchoSave>(JsonUtility.FromJson<Envelope>(original).payload);
             Require(old.schemaVersion == 3, "Genuine v3 fixture required");
             var upgraded = store.Load();
-            Require(upgraded.schemaVersion == 4 && upgraded.echoId == old.echoId && upgraded.userId == old.userId, "v3 identity/schema");
+            Require(upgraded.schemaVersion == SaveMigrations.CurrentSchema && upgraded.echoId == old.echoId && upgraded.userId == old.userId, "v3 identity/schema");
             foreach (var section in old.sections)
             {
                 var next = upgraded.sections.Find(s => s.id == section.id);
@@ -82,7 +82,8 @@ namespace DiceFree.EditorTools
                 { Require(next.json == section.json && next.version == section.version, "Unknown section changed"); continue; }
                 var before = JsonUtility.FromJson<ManifestationSave>(section.json);
                 var after = JsonUtility.FromJson<ManifestationSave>(next.json);
-                Require(next.version == 4 && before.level == after.level && before.xp == after.xp && before.gold == after.gold, "v3 durable state");
+                Require(next.version == SaveMigrations.ManifestationVersion && before.level == after.level && before.xp == after.xp && before.gold == after.gold, "v3 durable state");
+                Require(after.classSkills != null && after.classSkills.Length == 0, "v3 migration did not initialize empty class skills.");
                 Require(JsonUtility.ToJson(before) == JsonUtility.ToJson(after), "v3 ownership/equipment/resources/quests changed");
                 foreach (var quest in after.quests) Require(quest.alternatives != null && quest.alternatives.Length == 0, "v3 alternative defaults");
             }

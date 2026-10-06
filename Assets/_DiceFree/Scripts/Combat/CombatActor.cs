@@ -13,13 +13,16 @@ namespace DiceFree.Combat
         private static void ResetSessionRegistry() => actors.Clear();
         [SerializeField] private int faction;
         [SerializeField, Min(0.1f)] private float radius = 0.45f;
+        public int Faction => faction;
         public ActorStats Stats { get; private set; }
         public Health Health { get; private set; }
         public TraversalMotor Motor { get; private set; }
+        public CombatStatusController Effects { get; private set; }
         public float Radius => radius;
         private string familyOverride;
         public string FamilyId => familyOverride ?? Stats.Definition.familyId;
         public bool Alive => isActiveAndEnabled && Health != null && Health.Alive;
+        public bool CanAct => Alive && (Effects == null || !Effects.Stunned);
         public bool InCombat
         {
             get
@@ -37,6 +40,7 @@ namespace DiceFree.Combat
         private void Awake()
         {
             Stats = GetComponent<ActorStats>(); Health = GetComponent<Health>(); Motor = GetComponent<TraversalMotor>();
+            Effects = GetComponent<CombatStatusController>();
         }
         private void Start() => Motor.SetSpeed(Stats.MoveSpeed);
         private void OnEnable() { if (!actors.Contains(this)) actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; Stats.Changed += OnLevel; }
@@ -46,6 +50,7 @@ namespace DiceFree.Combat
         private void OnRestore() { Motor.SetMotionAllowed(true); SetColliders(true); }
         private void SetColliders(bool value) { foreach (var collider in GetComponents<Collider>()) collider.enabled = value; }
         public bool IsHostileTo(CombatActor other) => Alive && other != null && other.Alive && other != this && faction != other.faction;
+        public bool IsFriendlyTo(CombatActor other) => Alive && other != null && other.Alive && faction == other.faction;
         public bool HasSightOf(CombatActor other) => !Physics.Linecast(transform.position + Vector3.up * 0.8f,
             other.transform.position + Vector3.up * 0.8f, 1 << 9, QueryTriggerInteraction.Ignore);
         public void Configure(int team, float bodyRadius, string family = null) { faction = team; radius = bodyRadius; familyOverride = family; }

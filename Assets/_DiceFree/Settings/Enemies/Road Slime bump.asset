@@ -16,6 +16,7 @@ MonoBehaviour:
   displayName: Bump
   channel: 0
   element: {fileID: 0}
+  requiresAccuracy: 1
   scaling: 0
   weights:
     vitality: 0

@@ -12,11 +12,12 @@ namespace DiceFree.Characters
         private NavMeshAgent agent;
         private NavMeshPath candidatePath;
         private bool motionAllowed = true;
+        private readonly HashSet<string> motionBlocks = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> speedFactors = new(StringComparer.Ordinal);
         private float effectiveSpeed;
         public float BaseSpeed => speed;
         public float Speed { get { RefreshSpeed(); return effectiveSpeed; } }
-        public bool MotionAllowed => motionAllowed;
+        public bool MotionAllowed => motionAllowed && motionBlocks.Count == 0;
         // Context providers refresh their own named contribution; inputs never calculate speed.
         public event Action RefreshSpeedSources;
         public bool Ready => agent != null && agent.isOnNavMesh;
@@ -44,7 +45,7 @@ namespace DiceFree.Characters
         public bool MoveTo(Vector3 destination)
         {
             RefreshSpeed();
-            if (!motionAllowed || !Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
+            if (!MotionAllowed || !Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
                 return false;
             if (!agent.CalculatePath(hit.position, candidatePath) ||
                 candidatePath.status != NavMeshPathStatus.PathComplete)
@@ -60,7 +61,7 @@ namespace DiceFree.Characters
 
         public void MoveDirect(Vector3 direction, float deltaTime)
         {
-            if (!Ready || !motionAllowed) return;
+            if (!Ready || !MotionAllowed) return;
             Stop();
             direction = Vector3.ClampMagnitude(Vector3.ProjectOnPlane(direction, Vector3.up), 1f);
             var start = agent.nextPosition;
@@ -101,7 +102,13 @@ namespace DiceFree.Characters
             foreach (var factor in speedFactors.Values) effectiveSpeed *= factor;
             if (agent != null) agent.speed = effectiveSpeed;
         }
-        public void SetMotionAllowed(bool value) { motionAllowed = value; if (!value) Stop(); RefreshSpeed(); }
+        public void SetMotionAllowed(bool value) { motionAllowed = value; if (!MotionAllowed) Stop(); RefreshSpeed(); }
+        public void SetMotionBlocked(string sourceId, bool blocked)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Motion block requires a stable source.");
+            if (blocked) motionBlocks.Add(sourceId); else motionBlocks.Remove(sourceId);
+            if (!MotionAllowed) Stop();
+        }
         public bool Teleport(Vector3 point)
         {
             if (!Ready || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;

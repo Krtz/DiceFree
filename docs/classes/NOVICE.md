@@ -103,6 +103,25 @@ The normal skill menu is therefore an explicit allocation system rather than aut
 
 All numerical formulas below are **current balance targets**, not immutable final numbers.
 
+### Current prototype implementation (#49, 2026-10-06)
+
+The Tier-0 kit is implemented on `feature/49-novice-skills`, stacked on the shared #48 input foundation.
+
+Current prototype behavior:
+- active skills use the canonical shared Input System actions on **1 / 2 / 3 / 4**;
+- **K** opens the Novice allocation panel and a level-up notification exposes newly available points;
+- the four actives start at rank 0, level 1 has one unspent point, and total available points equal current Novice level;
+- the all-stat passive uses stable skill ID `skill.novice.all-stat-passive`, grants +1 to all five primary attributes per rank, and caps at 160;
+- provisional cooldowns are 10s STR stun, 12s Magic Sand, 15s AGI buff, and 20s SPI heal;
+- Magic Sand and the AGI buff use stable effect IDs: recasting the same effect refreshes/replaces its value and duration rather than creating duplicate stacks;
+- basic attacks are explicitly tagged as actions that require accuracy; the four Novice skill attacks are not implicitly accuracy-gated;
+- a normal left-click target can now remain a friendly unit for support casting, while Tab cycling and context/basic-attack validation remain hostile-only;
+- support skills use the selected friendly target when valid and otherwise fall back to self;
+- ordinary skill cooldowns and temporary stun/miss/attack-speed effects remain session state and reset on load/restore;
+- Novice skill ranks are durable manifestation state in save/manifestation **v5**, keyed by stable skill ID; v1-v4 saves migrate with an empty allocation without rewriting unknown sections;
+- the runtime free-respec seam exists and refunds all known Novice ranks; the retired-adventurer NPC/service presentation is still separate future content;
+- the level-200 secret remains intentionally unimplemented because its actual skill design is still open.
+
 ### Strength skill — melee stun
 
 Identity:

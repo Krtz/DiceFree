@@ -92,7 +92,7 @@ namespace DiceFree.EditorTools
             EditorSceneManager.LoadSceneInPlayMode(CornbergSceneBuilder.ScenePath, new LoadSceneParameters(LoadSceneMode.Single));
             for (var wait = Bind(); wait.MoveNext();) yield return null;
             var profile = persistence.CaptureProfile();
-            Require(profile.echoId == identity && profile.schemaVersion == 4 && profile.sections.Single(s => s.id == "unknown:departure").json == "opaque", "Identity/schema/unknown section");
+            Require(profile.echoId == identity && profile.schemaVersion == SaveMigrations.CurrentSchema && profile.sections.Single(s => s.id == "unknown:departure").json == "opaque", "Identity/schema/unknown section");
             Require(journal.GetProgress("quest.future.departure-test").stage == 17, "Unknown quest lost");
             Require(JsonUtility.ToJson(State) == quests && JsonUtility.ToJson(journal.GetProgress(q4.stableId)) == surge, "Quest reload altered state");
             Require(player.Stats.Level == level && player.GetComponent<ExperienceProgression>().CurrentXp == xp && player.GetComponent<GoldWallet>().Gold == gold &&

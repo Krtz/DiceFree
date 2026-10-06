@@ -49840,8 +49840,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 590827357}
   m_SourcePrefab: {fileID: 100100000, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+--- !u!1 &590827356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+  m_PrefabInstance: {fileID: 590827355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &590827357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590827356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c65655fc4b4de1b5c65b1e505936dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.CombatStatusController
+  stunResistance: 0
+  stunImmune: 0
 --- !u!1 &592795139
 GameObject:
   m_ObjectHideFlags: 0
@@ -51757,6 +51779,7 @@ GameObject:
   - component: {fileID: 611103076}
   - component: {fileID: 611103075}
   - component: {fileID: 611103077}
+  - component: {fileID: 611103078}
   m_Layer: 10
   m_Name: Crop Slime - combat placeholder
   m_TagString: Untagged
@@ -51971,6 +51994,20 @@ MonoBehaviour:
   visual: {fileID: 132333037}
   baseScale: {x: 1.4, y: 0.85, z: 1.4}
   basePosition: {x: 0, y: 0.48, z: 0}
+--- !u!114 &611103078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611103064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c65655fc4b4de1b5c65b1e505936dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.CombatStatusController
+  stunResistance: 0
+  stunImmune: 0
 --- !u!1 &612790801
 GameObject:
   m_ObjectHideFlags: 0
@@ -112256,6 +112293,11 @@ GameObject:
   - component: {fileID: 1288724069}
   - component: {fileID: 1288724074}
   - component: {fileID: 1288724075}
+  - component: {fileID: 1288724080}
+  - component: {fileID: 1288724079}
+  - component: {fileID: 1288724078}
+  - component: {fileID: 1288724077}
+  - component: {fileID: 1288724076}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112660,6 +112702,77 @@ MonoBehaviour:
     - {fileID: 9212687634839805920}
     baselineVisuals:
     - {fileID: 1651157072}
+--- !u!114 &1288724076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76bda726b290f7a42bd50ff374045678, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.NoviceSkillPanel
+  progression: {fileID: 1288724080}
+--- !u!114 &1288724077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc056611960f0fd4a95473b6bec59c17, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.NoviceSkillBar
+  progression: {fileID: 1288724080}
+  caster: {fileID: 1288724079}
+--- !u!114 &1288724078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c65655fc4b4de1b5c65b1e505936dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.CombatStatusController
+  stunResistance: 0
+  stunImmune: 0
+--- !u!114 &1288724079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55a0c688f8b472eb5db4aa7d036d24a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.NoviceSkillCaster
+--- !u!114 &1288724080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071164fddbf44a26b5553f76fa688528, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.NoviceSkillProgression
+  definitions:
+  - {fileID: 11400000, guid: c619563f54c7ead48ac190986106838e, type: 2}
+  - {fileID: 11400000, guid: c3e45a5ba78638049b99973d8ed09cf2, type: 2}
+  - {fileID: 11400000, guid: 9d6804c9c6aded94bb252d3a0855bd17, type: 2}
+  - {fileID: 11400000, guid: a42726ca326b4a2439d7b51cc19163f4, type: 2}
+  - {fileID: 11400000, guid: 6225552e227601d48a5d9cc27d329b03, type: 2}
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0
@@ -124453,8 +124566,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1425290226}
   m_SourcePrefab: {fileID: 100100000, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+--- !u!1 &1425290225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+  m_PrefabInstance: {fileID: 1425290224}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1425290226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425290225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c65655fc4b4de1b5c65b1e505936dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.CombatStatusController
+  stunResistance: 0
+  stunImmune: 0
 --- !u!1 &1426402463
 GameObject:
   m_ObjectHideFlags: 0
@@ -161736,6 +161871,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1858105529}
+    - targetCorrespondingSourceObject: {fileID: 4478824252043016396, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1858105530}
   m_SourcePrefab: {fileID: 100100000, guid: d2e76a238328c3b419fa540cc3928ea2, type: 3}
 --- !u!1 &1858105528 stripped
 GameObject:
@@ -161756,6 +161894,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.FixedWorldDrop
   item: {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
   chance: 0.2
+--- !u!114 &1858105530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858105528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c65655fc4b4de1b5c65b1e505936dc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.CombatStatusController
+  stunResistance: 0
+  stunImmune: 0
 --- !u!1 &1858976164
 GameObject:
   m_ObjectHideFlags: 0

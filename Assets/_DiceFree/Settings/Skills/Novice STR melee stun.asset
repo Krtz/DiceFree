@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c9c29716c34807885386aa976e0593, type: 3}
+  m_Name: Novice STR melee stun
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.NoviceSkillDefinition
+  stableId: skill.novice.strength-melee-stun
+  displayName: STR melee stun (provisional)
+  kind: 0
+  maxRank: 10
+  cooldownSeconds: 10
+  range: 0.7
+  durationSeconds: 0
+  attack: {fileID: 11400000, guid: 36b3891e5ba2fb747afe397ff4d926b8, type: 2}

@@ -16,7 +16,10 @@ namespace DiceFree.UI
             GUI.Label(new Rect(r.x+10,r.y+6,270,24), $"{target.Stats.Definition.displayName} · Level {target.Stats.Level}");
             Hp(new Rect(r.x+10,r.y+32,270,24), target.Health.Current, target.Health.Maximum);
             var attack = target.GetComponent<BasicAttack>();
-            GUI.Label(new Rect(r.x+10,r.y+62,270,24), $"{attack.Definition.element?.displayName ?? "No element"} · {attack.State}");
+            string detail = attack?.Definition == null
+                ? "Friendly / non-attacking target"
+                : $"{attack.Definition.element?.displayName ?? "No element"} — {attack.State}";
+            GUI.Label(new Rect(r.x+10,r.y+62,270,24), detail);
         }
         public void Configure(TargetSelection value) => selection = value;
     }
