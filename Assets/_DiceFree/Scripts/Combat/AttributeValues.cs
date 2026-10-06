@@ -25,5 +25,15 @@ namespace DiceFree.Combat
         };
         public float Weighted(AttributeValues weights) => vitality * weights.vitality + strength * weights.strength +
             agility * weights.agility + intelligence * weights.intelligence + spirit * weights.spirit;
+        public float HighestSelected(AttributeValues weights)
+        {
+            float highest = float.NegativeInfinity;
+            if (weights.vitality > 0) highest = Mathf.Max(highest, vitality * weights.vitality);
+            if (weights.strength > 0) highest = Mathf.Max(highest, strength * weights.strength);
+            if (weights.agility > 0) highest = Mathf.Max(highest, agility * weights.agility);
+            if (weights.intelligence > 0) highest = Mathf.Max(highest, intelligence * weights.intelligence);
+            if (weights.spirit > 0) highest = Mathf.Max(highest, spirit * weights.spirit);
+            return float.IsNegativeInfinity(highest) ? Highest : highest;
+        }
     }
 }

@@ -176,9 +176,32 @@ Large class count is an intentional long-term goal rather than a reason to colla
 
 Development does **not** require symmetric completion. One Tier-2 class may initially have one implemented successor while another has several. The tree can grow unevenly over time as long as implemented paths are coherent and the architecture does not assume equal branch counts.
 
+## Current prototype implementation (#51, 2026-10-07)
+
+`feature/51-physically-blessed` turns the #50 shell into a complete playable Tier-1 manifestation. The values below are **prototype balance values**, not immutable class canon.
+
+Current implementation:
+- dedicated Physically Blessed presentation derived from the accepted Novice humanoid family, scaled slightly larger/stronger while retaining the shared animation rig;
+- level-1 primary attributes **12 VIT / 12 STR / 12 AGI / 5 INT / 5 SPI** with the documented average growth;
+- adaptive physical basic attack uses the **higher of STR or AGI**, base damage 1, coefficient **1.4**, interval **1.05 s**, wind-up **0.24 s**, and normal accuracy rules;
+- class Mana profile uses **60 base maximum + 1 per INT** and **4 base regeneration/s + 0.1 per SPI**. Level-1 Physical therefore starts at **65 Mana** with **4.5 Mana/s** regeneration;
+- Mana is authored with an explicit **Persist** load policy. Current Mana is manifestation-local durable state; ordinary skill cooldowns and temporary buffs remain transient;
+- level 1 begins with one Physical skill point, one additional point is available per class level, and each of the five skills caps at rank 6;
+- Physical skill ranks persist only on `class.physically-blessed-novice` and remain independent from the preserved Novice manifestation;
+- StartMenu loading restores the Physical class, its skill allocation, persisted Mana and dedicated visual presentation.
+
+Prototype skill tuning:
+- **Heavy Strike** — 6 s cooldown; 5 Mana at rank 1, +1 per additional rank; damage coefficient 1.5 at rank 1, +0.2/rank; ordinary-resistance stun from 0.4 s at rank 1 to 1.4 s at rank 6.
+- **Guard** — 16 s cooldown; 3 s duration; 8 Mana at rank 1, +2/rank; reduces both Physical and Magical incoming damage by 15% at rank 1 through 40% at rank 6. Reapplication refreshes/replaces the same stable effect rather than duplicate-stacking.
+- **Quickening** — 14 s cooldown; 5 s duration; 6 Mana at rank 1, +2/rank; +12% Attack Speed / +4% Movement Speed at rank 1, reaching +32% / +9% at rank 6.
+- **Arrow Rain** — ground-targeted within 12 m; 12 s cooldown; 10 Mana at rank 1, +3/rank; 3 m radius; three waves 0.35 s apart; per-wave coefficient 0.50 at rank 1, +0.08/rank. It manifests spectral arrows and does not require a bow.
+- **Martial Aptitude** — passive; +5% basic-attack damage and +1.5 Physical Defense per rank, reaching +30% and +9 at rank 6.
+
+The current UI is still prototype presentation: four active slots use the shared 1–4 bindings, Martial Aptitude is passive, the allocation panel remains lightweight IMGUI, and the Mana bar is a reusable first version rather than the final HUD.
+
 ## Open questions
 
-- exact damage coefficients;
+- exact final damage coefficients;
 - exact Quickening values;
 - exact Martial Aptitude values;
 - base HP/defenses/movement;

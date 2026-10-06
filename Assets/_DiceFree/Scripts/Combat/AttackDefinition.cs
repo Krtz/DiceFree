@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DiceFree.Combat
 {
     public enum DamageChannel { Physical, Magical }
-    public enum AttributeScaling { Weighted, Highest }
+    public enum AttributeScaling { Weighted, Highest, HighestSelected }
 
     [CreateAssetMenu(menuName = "DiceFree/Combat/Basic attack")]
     public sealed class AttackDefinition : ScriptableObject
@@ -20,7 +20,17 @@ namespace DiceFree.Combat
         [Min(0.1f)] public float interval = 1.1f;
         [Min(0)] public float windup = 0.25f;
         [Min(0.1f)] public float reach = 0.7f;
-        public float RawDamage(AttributeValues attributes) => Mathf.Max(0, baseDamage + coefficient *
-            (scaling == AttributeScaling.Highest ? attributes.Highest : attributes.Weighted(weights)));
+        public float RawDamage(AttributeValues attributes) => RawDamage(attributes, coefficient);
+
+        public float RawDamage(AttributeValues attributes, float coefficientOverride)
+        {
+            float scaled = scaling switch
+            {
+                AttributeScaling.Highest => attributes.Highest,
+                AttributeScaling.HighestSelected => attributes.HighestSelected(weights),
+                _ => attributes.Weighted(weights)
+            };
+            return Mathf.Max(0, baseDamage + Mathf.Max(0, coefficientOverride) * scaled);
+        }
     }
 }

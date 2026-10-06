@@ -1415,3 +1415,51 @@ Built-player smoke test also passed outside the Editor: fresh isolated save visi
 Legacy save regression needed one harness-only adjustment: #50 makes `AdvancementController` require `ManifestationPersistence`, so the test removes its temporary advancement UI/controller before intentionally destroying persistence. The original save-test semantics remain intact.
 
 Still out of scope: final blessing ritual/quest presentation, real Tier-1 kits/Mana/models/basic attacks/equipment permissions, final title/menu art, class preview cards, archive/delete/recreate UI, multiple-Echo selector, production HUD and multiplayer.
+
+
+# Issue #51 — Physically Blessed Novice complete playable Tier-1 (2026-10-07)
+
+Current review branch: `feature/51-physically-blessed`, stacked directly on #50 commit `66160948e615b15feb2732c306f0cd57c29b02ad`. Nothing is merged to `poc/cornberg` or `main`.
+
+Physically Blessed Novice is now a real playable manifestation rather than the #50 shell:
+- dedicated slightly larger/stronger Novice-family presentation prefab with shared humanoid rig and no gameplay colliders/root motion;
+- level-1 stats 12 VIT / 12 STR / 12 AGI / 5 INT / 5 SPI and documented average growth;
+- adaptive physical basic attack from the higher of STR/AGI;
+- reusable class-resource runtime/persistence framework;
+- Physical Mana: maximum `60 + INT`, regeneration/s `4 + 0.1 x SPI`, explicit Persist policy;
+- five six-rank Physical skills with one class skill point per Physical level;
+- Heavy Strike, Guard, Quickening, ground-targeted three-wave Arrow Rain, and passive Martial Aptitude;
+- source-keyed movement-speed, incoming-damage, basic-attack-damage and Physical-Defense modifier seams;
+- prototype Physical skill bar/allocation panel/resource bar using the shared 1-4 input actions;
+- class-presentation switching across manifestation activation;
+- Physical skill ranks + Mana capture/restore through manifestation state while cooldowns/buffs remain transient.
+
+Important defect caught by the #51 Play Mode gate: `ClassResourceProfile` was initially a second ScriptableObject type inside `ResourceDefinition.cs`, producing a runtime-unloadable asset with `m_Script: {fileID: 0}`. It was split into its own correctly named script and the Physical Mana asset now has a real MonoScript reference. Cold Editor restart + rerun passed.
+
+Focused validation passed:
+`DICEFREE_PHYSICAL_AUTHORED_OK`,
+`DICEFREE_PHYSICAL_DATA_OK`,
+`DICEFREE_PHYSICAL_PLAYMODE_OK`,
+`DICEFRE_ARCHITECTURE_OK`,
+`DICEFRE_ARCH_POLICY_SELFTEST_OK`,
+`DICEFREE_MANAGED_REFERENCE_OK`,
+and `DICEFREE_CONTROLS_OK`.
+
+The dedicated Physical Play Mode harness proves real advancement from level-10 Novice, dedicated model activation, Mana, five-point level-5 allocation, Martial Aptitude, all four active casts against real Cornberg hostiles, ordinary-resistance Heavy Strike stun, Guard dual-channel mitigation, Quickening Attack/Movement Speed, multi-target/multi-wave Arrow Rain, save, StartMenu selection and Physical reload with class ranks/Mana/model intact and cooldowns reset.
+
+Existing regressions also passed:
+`DICEFREE_ADVANCEMENT_PLAYMODE_OK`,
+`DICEFREE_NOVICE_SKILLS_PLAYMODE_OK`,
+`DICEFREE_CONTROLS_PLAYMODE_OK`,
+`ISSUE36_SAVE_RELOAD_OK`,
+items,
+Q4,
+`ISSUE36_ROUTE12_OK`,
+and `ISSUE36_RUNNER_OK`.
+
+Windows x64 Development build passed:
+`DICEFREE_PHYSICAL_PLAYER_BUILD_OK`, 188,590,953 bytes, 0 errors, 5 existing prototype/build-environment warnings, StartMenu scene 0 + Cornberg scene 1.
+
+Detailed evidence: `docs/PHYSICALLY_BLESSED_VALIDATION.md`.
+
+Still provisional/out of scope: final numerical balance, bespoke skill icons/VFX/audio/animations, full weapon-family permission rules, production HUD, level-30 descendant implementations and Magically Touched Novice.

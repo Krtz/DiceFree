@@ -20,6 +20,10 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, ResistanceCapModifier> capModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, AttributeValues> attributeContributions = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> attackSpeedPercentModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, float> movementSpeedPercentModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, DamageTakenModifier> damageTakenModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, float> basicAttackDamagePercentContributions = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, float> physicalDefenseContributions = new(StringComparer.Ordinal);
         public void SetResistanceCapModifier(string sourceId, ResistanceCapModifier value)
         {
             if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Stable modifier source required.");
@@ -112,6 +116,57 @@ namespace DiceFree.Combat
         {
             if (attackSpeedPercentModifiers.Remove(sourceId)) Changed?.Invoke(MaximumHp);
         }
+        public void SetMovementSpeedPercentModifier(string sourceId, float percent)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent < 0)
+                throw new ArgumentException("Movement-speed modifier requires a stable source and finite non-negative percent.");
+            movementSpeedPercentModifiers[sourceId] = percent;
+            Changed?.Invoke(MaximumHp);
+        }
+        public void RemoveMovementSpeedPercentModifier(string sourceId)
+        {
+            if (movementSpeedPercentModifiers.Remove(sourceId)) Changed?.Invoke(MaximumHp);
+        }
+        public void SetDamageTakenModifier(string sourceId, DamageTakenModifier value)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId)) throw new ArgumentException("Damage-taken modifier requires stable source identity.");
+            damageTakenModifiers[sourceId] = value;
+        }
+        public void RemoveDamageTakenModifier(string sourceId) => damageTakenModifiers.Remove(sourceId);
+        public float IncomingDamageMultiplier(DamageChannel channel)
+        {
+            float multiplier = 1f;
+            foreach (var modifier in damageTakenModifiers.Values)
+                if (modifier.channel == channel) multiplier *= 1f - modifier.reductionFraction;
+            return Mathf.Clamp(multiplier, 0.01f, 4f);
+        }
+        public void SetBasicAttackDamagePercentContribution(string sourceId, float percent)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent < 0)
+                throw new ArgumentException("Basic-attack contribution requires stable finite non-negative data.");
+            basicAttackDamagePercentContributions[sourceId] = percent;
+        }
+        public void RemoveBasicAttackDamagePercentContribution(string sourceId) => basicAttackDamagePercentContributions.Remove(sourceId);
+        public float BasicAttackDamageMultiplier
+        {
+            get
+            {
+                float percent = 0;
+                foreach (float value in basicAttackDamagePercentContributions.Values) percent += value;
+                return Mathf.Max(0, 1 + percent / 100f);
+            }
+        }
+        public void SetPhysicalDefenseContribution(string sourceId, float amount)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(amount) || float.IsInfinity(amount) || amount < 0)
+                throw new ArgumentException("Physical-defense contribution requires stable finite non-negative data.");
+            physicalDefenseContributions[sourceId] = amount;
+        }
+        public void RemovePhysicalDefenseContribution(string sourceId) => physicalDefenseContributions.Remove(sourceId);
+        private float PhysicalDefenseContribution
+        {
+            get { float total = 0; foreach (float value in physicalDefenseContributions.Values) total += value; return total; }
+        }
         public float SecondaryCoefficient(SecondaryStat stat)
         {
             float coefficient = definition.SecondaryCoefficient(stat), percent = 0;
@@ -145,7 +200,7 @@ namespace DiceFree.Combat
             float previous = MaximumHp;
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
             resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear();
-            attackSpeedPercentModifiers.Clear(); Changed?.Invoke(previous);
+            attackSpeedPercentModifiers.Clear(); movementSpeedPercentModifiers.Clear(); damageTakenModifiers.Clear(); Changed?.Invoke(previous);
         }
         private readonly SortedDictionary<string, EquipmentStats> equipment = new(StringComparer.Ordinal);
         public void SetEquipmentContribution(string sourceId, EquipmentStats value)
@@ -173,7 +228,13 @@ namespace DiceFree.Combat
                 return total;
             }
         }
-        public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed)) * (1 + EquipmentTotal.movementSpeedPercent / 100f);
+        private float TemporaryMovementSpeedPercent
+        {
+            get { float total = 0; foreach (float percent in movementSpeedPercentModifiers.Values) total += percent; return total; }
+        }
+        public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed))
+                                  * (1 + EquipmentTotal.movementSpeedPercent / 100f)
+                                  * (1 + TemporaryMovementSpeedPercent / 100f);
         private float TemporaryAttackSpeedPercent
         {
             get
@@ -192,7 +253,7 @@ namespace DiceFree.Combat
         // Other permanent/passive membership remains open; keep that policy here.
         // Temporary Defense modifiers must never be folded into this reference.
         public float Defense(DamageChannel channel) => channel == DamageChannel.Physical
-            ? EquipmentTotal.physicalDefense + definition.physicalDefense + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
+            ? EquipmentTotal.physicalDefense + definition.physicalDefense + PhysicalDefenseContribution + Attributes.strength * SecondaryCoefficient(SecondaryStat.PhysicalDefense)
             : EquipmentTotal.magicalDefense + definition.magicalDefense + Attributes.intelligence * SecondaryCoefficient(SecondaryStat.MagicalDefense);
         public float RawResistance(ElementDefinition element)
         {

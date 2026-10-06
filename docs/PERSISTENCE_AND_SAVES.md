@@ -152,14 +152,17 @@ Example:
 
 ### Resources
 
-Resources **reset on load by default** according to their authored reset/load policy.
+Resource retention is **authored per class/resource profile**. Reset-on-load remains the safe default direction for ordinary transient resources, while a profile can explicitly opt into persistence when its current value belongs to manifestation state.
 
-The resource framework must also support explicit persistence for unusual resources whose acquisition is intentionally durable/rare.
+The first real implementation is Physically Blessed Mana (#51):
+- `resource.mana` is activated only while the Physically Blessed manifestation is live;
+- its class profile explicitly uses `Persist`;
+- current Mana is stored in that manifestation's existing `resources` records and restored/clamped against the class's current maximum;
+- regeneration and spending update the runtime value, while successful persistence/shutdown captures the current amount;
+- switching to another manifestation deactivates Physical Mana without leaking its value into the other class;
+- unknown/unimplemented resource records remain opaque and are preserved across saves.
 
-Example:
-- a rare resource earned only from a difficult special kill may opt into persistence.
-
-Do not infer persistence merely because a value is called a resource.
+Future resources may instead use ResetOnLoad. Do not infer persistence merely because a value is called a resource; the authored retention policy is authoritative.
 
 ### Combat/session state
 

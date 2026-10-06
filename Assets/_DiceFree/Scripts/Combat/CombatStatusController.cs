@@ -19,6 +19,8 @@ namespace DiceFree.Combat
 
         private readonly SortedDictionary<string, TimedValue> accuracyPenalties = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, TimedValue> attackSpeedBuffs = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, TimedValue> movementSpeedBuffs = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, TimedValue> damageReductionBuffs = new(StringComparer.Ordinal);
         private readonly List<string> expired = new();
         private CombatActor actor;
         private float stunnedUntil;
@@ -101,13 +103,43 @@ namespace DiceFree.Combat
             actor.Stats.SetAttackSpeedPercentModifier("status:" + effectId, percent);
         }
 
+        public void ApplyMovementSpeedBuff(string effectId, float percent, float durationSeconds)
+        {
+            ValidateEffect(effectId, durationSeconds);
+            if (float.IsNaN(percent) || float.IsInfinity(percent) || percent < 0)
+                throw new ArgumentOutOfRangeException(nameof(percent));
+            movementSpeedBuffs[effectId] = new TimedValue(percent, Time.time + durationSeconds);
+            actor.Stats.SetMovementSpeedPercentModifier("status:" + effectId, percent);
+        }
+
+        public void ApplyDamageReduction(string effectId, float fraction, float durationSeconds)
+        {
+            ValidateEffect(effectId, durationSeconds);
+            if (float.IsNaN(fraction) || float.IsInfinity(fraction) || fraction < 0 || fraction >= 1)
+                throw new ArgumentOutOfRangeException(nameof(fraction));
+            damageReductionBuffs[effectId] = new TimedValue(fraction, Time.time + durationSeconds);
+            actor.Stats.SetDamageTakenModifier("status:" + effectId + ":physical", new DamageTakenModifier(DamageChannel.Physical, fraction));
+            actor.Stats.SetDamageTakenModifier("status:" + effectId + ":magical", new DamageTakenModifier(DamageChannel.Magical, fraction));
+        }
+
         public void ClearTransient()
         {
             if (actor != null)
+            {
                 foreach (var effectId in attackSpeedBuffs.Keys)
                     actor.Stats.RemoveAttackSpeedPercentModifier("status:" + effectId);
+                foreach (var effectId in movementSpeedBuffs.Keys)
+                    actor.Stats.RemoveMovementSpeedPercentModifier("status:" + effectId);
+                foreach (var effectId in damageReductionBuffs.Keys)
+                {
+                    actor.Stats.RemoveDamageTakenModifier("status:" + effectId + ":physical");
+                    actor.Stats.RemoveDamageTakenModifier("status:" + effectId + ":magical");
+                }
+            }
             accuracyPenalties.Clear();
             attackSpeedBuffs.Clear();
+            movementSpeedBuffs.Clear();
+            damageReductionBuffs.Clear();
             stunnedUntil = 0;
             SyncStunBlock();
         }
@@ -127,6 +159,25 @@ namespace DiceFree.Combat
             {
                 attackSpeedBuffs.Remove(id);
                 actor?.Stats.RemoveAttackSpeedPercentModifier("status:" + id);
+            }
+
+            expired.Clear();
+            foreach (var pair in movementSpeedBuffs)
+                if (now >= pair.Value.until) expired.Add(pair.Key);
+            foreach (string id in expired)
+            {
+                movementSpeedBuffs.Remove(id);
+                actor?.Stats.RemoveMovementSpeedPercentModifier("status:" + id);
+            }
+
+            expired.Clear();
+            foreach (var pair in damageReductionBuffs)
+                if (now >= pair.Value.until) expired.Add(pair.Key);
+            foreach (string id in expired)
+            {
+                damageReductionBuffs.Remove(id);
+                actor?.Stats.RemoveDamageTakenModifier("status:" + id + ":physical");
+                actor?.Stats.RemoveDamageTakenModifier("status:" + id + ":magical");
             }
         }
 

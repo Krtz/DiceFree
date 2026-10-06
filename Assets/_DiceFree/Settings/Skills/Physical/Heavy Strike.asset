@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e77fe44c716ed4b97af0b3d75fff1e, type: 3}
+  m_Name: Heavy Strike
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.PhysicalSkillDefinition
+  stableId: skill.physical.heavy-strike
+  displayName: Heavy Strike
+  kind: 0
+  maxRank: 6
+  cooldownSeconds: 6
+  durationSeconds: 0
+  range: 0.7
+  manaBase: 5
+  manaPerAdditionalRank: 1
+  attack: {fileID: 11400000, guid: 3f6a699c454018c4ea3b729aed9c1122, type: 2}
+  damageCoefficientRank1: 1.5
+  damageCoefficientPerAdditionalRank: 0.2
+  arrowRadius: 3
+  arrowHitCount: 3
+  arrowHitInterval: 0.35

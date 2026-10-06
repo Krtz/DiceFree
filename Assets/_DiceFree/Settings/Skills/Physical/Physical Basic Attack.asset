@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a500e69374414b44d8ea417ad4ceea7b, type: 3}
+  m_Name: Physical Basic Attack
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.AttackDefinition
+  stableId: attack.physical.basic
+  displayName: Adaptive Strike
+  channel: 0
+  element: {fileID: 0}
+  requiresAccuracy: 1
+  scaling: 2
+  weights:
+    vitality: 0
+    strength: 1
+    agility: 1
+    intelligence: 0
+    spirit: 0
+  baseDamage: 1
+  coefficient: 1.4
+  interval: 1.05
+  windup: 0.24
+  reach: 0.7

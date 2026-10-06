@@ -26,6 +26,7 @@ namespace DiceFree.Characters
         private InputAction movement, click, changeMode, stop, interact, closeInteraction;
 
         public ControlMode Mode => mode;
+        public Camera WorldCamera => worldCamera;
         public string Feedback { get; private set; } = "Follow the path into Cornberg.";
         public string ModeLabel => mode == ControlMode.Classic ? "Classic · Right-click ground to move" : "Direct · WASD to move";
 
@@ -142,6 +143,17 @@ namespace DiceFree.Characters
             }
 
             destinationMarker.gameObject.SetActive(mode == ControlMode.Classic && motor.Travelling);
+        }
+
+        public bool TryWorldPoint(Vector2 screenPoint, out Vector3 point)
+        {
+            point = default;
+            if (worldCamera == null) return false;
+            var ray = worldCamera.ScreenPointToRay(screenPoint);
+            if (!Physics.Raycast(ray, out var hit, 1500f, (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore) ||
+                hit.collider.gameObject.layer != 8) return false;
+            point = hit.point;
+            return true;
         }
 
         public void Configure(Camera camera, Transform marker)

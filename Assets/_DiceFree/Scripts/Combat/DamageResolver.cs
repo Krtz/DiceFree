@@ -21,9 +21,11 @@ namespace DiceFree.Combat
     public static class DamageResolver
     {
         // Explicit construction/mitigation/application boundaries for future effects and telemetry.
-        public static DamageResult Calculate(ActorStats source, ActorStats target, AttackDefinition attack, ActionCriticalResolution critical = null)
+        public static DamageResult Calculate(ActorStats source, ActorStats target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null)
         {
-            float baseRaw = attack.RawDamage(source.Attributes);
+            float baseRaw = coefficientOverride.HasValue ? attack.RawDamage(source.Attributes, coefficientOverride.Value) : attack.RawDamage(source.Attributes);
+            if (source.Definition != null && object.ReferenceEquals(source.Definition.basicAttack, attack))
+                baseRaw *= source.BasicAttackDamageMultiplier;
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
             var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
@@ -31,7 +33,7 @@ namespace DiceFree.Combat
             float afterDefense = raw * DefenseMath.DamageMultiplier(defense, target.Definition.tuning);
             return new DamageResult {
                 baseRaw = baseRaw, raw = raw, critical = critical, defense = defense, resistance = resistance, elementalResistance = elemental, channel = attack.channel, element = attack.element,
-                afterDefense = afterDefense, mitigated = afterDefense * (1 - resistance)
+                afterDefense = afterDefense, mitigated = afterDefense * (1 - resistance) * target.IncomingDamageMultiplier(attack.channel)
             };
         }
         public static DamageResult CalculatePacket(ActorStats source, ActorStats target, AttackDefinition attack, ActionResolution action)
@@ -43,10 +45,10 @@ namespace DiceFree.Combat
             result.action = action;
             return result;
         }
-        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null)
+        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null)
         {
             if (!source.IsHostileTo(target)) return 0;
-            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical));
+            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride));
         }
     }
 }

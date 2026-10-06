@@ -1,0 +1,104 @@
+using DiceFree.Combat;
+using DiceFree.Input;
+using DiceFree.Skills;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace DiceFree.UI
+{
+    public sealed class PhysicalSkillBar : HudWidget
+    {
+        [SerializeField] private PhysicalSkillProgression progression;
+        [SerializeField] private PhysicalSkillCaster caster;
+        [SerializeField] private Camera worldCamera;
+
+        private InputBindings bindings;
+        private InputAction[] slots;
+
+        public override Rect Bounds => new Rect(Screen.width - 430, Screen.height - 250, 414, 78);
+
+        public void Configure(PhysicalSkillProgression value, PhysicalSkillCaster skillCaster, Camera camera)
+        {
+            progression = value;
+            caster = skillCaster;
+            worldCamera = camera;
+        }
+
+        private void Awake()
+        {
+            bindings = InputBindings.Current;
+            slots = new[]
+            {
+                bindings.Action("Gameplay/Novice skill 1"),
+                bindings.Action("Gameplay/Novice skill 2"),
+                bindings.Action("Gameplay/Novice skill 3"),
+                bindings.Action("Gameplay/Novice skill 4")
+            };
+        }
+
+        private void Update()
+        {
+            if (bindings == null || bindings.Suppressed || progression == null || caster == null ||
+                !progression.ActiveForCurrentClass) return;
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (!slots[i].WasPressedThisFrame()) continue;
+                var definition = progression.ActiveAtSlot(i);
+                if (definition == null) continue;
+                if (definition.kind == PhysicalSkillKind.ArrowRain)
+                {
+                    if (Mouse.current != null && TryWorldPoint(Mouse.current.position.ReadValue(), out var point))
+                        caster.CastArrowRain(definition, point);
+                }
+                else caster.Cast(definition);
+            }
+        }
+
+        private void OnGUI()
+        {
+            if (progression == null || caster == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen)
+                return;
+
+            var r = Bounds;
+            GUI.Box(r, GUIContent.none);
+            GUI.Label(new Rect(r.x + 8, r.y + 4, r.width - 16, 20),
+                string.IsNullOrEmpty(caster.Feedback) ? "Physically Blessed skills" : caster.Feedback);
+
+            const float gap = 4;
+            float width = (r.width - 16 - gap * 3) / 4;
+            for (int i = 0; i < 4; i++)
+            {
+                var definition = progression.ActiveAtSlot(i);
+                if (definition == null) continue;
+                int rank = progression.Rank(definition.stableId);
+                float remaining = caster.CooldownRemaining(definition);
+                string key = InputBindings.Display(slots[i]);
+                string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
+                if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
+                if (definition.kind == PhysicalSkillKind.ArrowRain) label += "\n(cursor ground)";
+                var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
+                if (!GUI.Button(button, label)) continue;
+
+                if (definition.kind == PhysicalSkillKind.ArrowRain)
+                {
+                    if (Mouse.current != null && TryWorldPoint(Mouse.current.position.ReadValue(), out var point))
+                        caster.CastArrowRain(definition, point);
+                }
+                else caster.Cast(definition);
+            }
+        }
+
+        private bool TryWorldPoint(Vector2 screenPoint, out Vector3 point)
+        {
+            point = default;
+            var camera = worldCamera != null ? worldCamera : Camera.main;
+            if (camera == null) return false;
+            var ray = camera.ScreenPointToRay(screenPoint);
+            if (!Physics.Raycast(ray, out var hit, 1500f, (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore) ||
+                hit.collider.gameObject.layer != 8) return false;
+            point = hit.point;
+            return true;
+        }
+    }
+}

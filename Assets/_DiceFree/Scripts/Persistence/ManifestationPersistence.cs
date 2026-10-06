@@ -25,6 +25,7 @@ namespace DiceFree.Persistence
         private CarriedInventory inventory;
         private Equipment equipment;
         private GoldWallet wallet;
+        private ActorResourceController resources;
         private IClassSkillState[] skillStates = Array.Empty<IClassSkillState>();
         private IManifestationSessionState[] sessionState = Array.Empty<IManifestationSessionState>();
         private LocalEchoStore store;
@@ -145,6 +146,7 @@ namespace DiceFree.Persistence
             inventory = GetComponent<CarriedInventory>();
             equipment = GetComponent<Equipment>();
             wallet = GetComponent<GoldWallet>();
+            resources = GetComponent<ActorResourceController>();
 
             var skills = new List<IClassSkillState>();
             var transient = new List<IManifestationSessionState>();
@@ -165,6 +167,7 @@ namespace DiceFree.Persistence
             inventory.Changed += MarkDirty;
             equipment.Changed += MarkDirty;
             wallet.Changed += MarkDirty;
+            if (resources != null) resources.DurableChanged += MarkDirty;
             foreach (var skill in skillStates) skill.Changed += MarkDirty;
         }
 
@@ -175,6 +178,7 @@ namespace DiceFree.Persistence
             if (inventory != null) inventory.Changed -= MarkDirty;
             if (equipment != null) equipment.Changed -= MarkDirty;
             if (wallet != null) wallet.Changed -= MarkDirty;
+            if (resources != null) resources.DurableChanged -= MarkDirty;
             foreach (var skill in skillStates) skill.Changed -= MarkDirty;
         }
 
@@ -226,6 +230,9 @@ namespace DiceFree.Persistence
             var skillState = FindSkillState(definition.stableId);
             if (skillState != null && !skillState.CanRestore(savedSkills, state.level))
                 throw new InvalidDataException("Invalid class skill state; original preserved.");
+            if (resources != null && !resources.CanRestoreForClass(definition.stableId,
+                    ToRuntimeResources(state.resources), definition, state.level))
+                throw new InvalidDataException("Invalid class resource state; original preserved.");
         }
 
         private void ApplyState(ActorDefinition definition, ManifestationSave state)
@@ -236,6 +243,7 @@ namespace DiceFree.Persistence
 
             var skillState = FindSkillState(definition.stableId);
             skillState?.RestoreState(state.classSkills ?? Array.Empty<SkillRankState>());
+            resources?.RestoreForClass(definition.stableId, ToRuntimeResources(state.resources));
 
             journal.RestoreState(state.quests);
             inventory.Restore(state.inventory);
@@ -263,9 +271,28 @@ namespace DiceFree.Persistence
                 classSkills = skillState != null
                     ? skillState.CaptureState()
                     : preserved?.classSkills ?? Array.Empty<SkillRankState>(),
-                // Resource systems are still future work. Preserve opted-in/unresolved records inertly.
-                resources = preserved?.resources ?? Array.Empty<ResourceSaveValue>()
+                resources = resources != null
+                    ? ToSaveResources(resources.CaptureForActive(ToRuntimeResources(preserved?.resources)))
+                    : preserved?.resources ?? Array.Empty<ResourceSaveValue>()
             };
+        }
+
+        private static RuntimeResourceValue[] ToRuntimeResources(ResourceSaveValue[] saved)
+        {
+            if (saved == null || saved.Length == 0) return Array.Empty<RuntimeResourceValue>();
+            var result = new RuntimeResourceValue[saved.Length];
+            for (int i = 0; i < saved.Length; i++)
+                result[i] = saved[i] == null ? null : new RuntimeResourceValue { resourceId = saved[i].resourceId, value = saved[i].value };
+            return result;
+        }
+
+        private static ResourceSaveValue[] ToSaveResources(RuntimeResourceValue[] runtime)
+        {
+            if (runtime == null || runtime.Length == 0) return Array.Empty<ResourceSaveValue>();
+            var result = new ResourceSaveValue[runtime.Length];
+            for (int i = 0; i < runtime.Length; i++)
+                result[i] = runtime[i] == null ? null : new ResourceSaveValue { resourceId = runtime[i].resourceId, value = runtime[i].value };
+            return result;
         }
 
         public bool TryForkAndActivate(ActorDefinition targetDefinition, out string error)
