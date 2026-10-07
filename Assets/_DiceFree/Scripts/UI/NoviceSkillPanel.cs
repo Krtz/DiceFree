@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace DiceFree.UI
 {
-    public sealed class NoviceSkillPanel : HudWidget
+    public sealed class NoviceSkillPanel : CustomizableHudWidget
     {
         [SerializeField] private NoviceSkillProgression progression;
 
@@ -15,8 +15,12 @@ namespace DiceFree.UI
         private float notifiedUntil;
         private Vector2 scroll;
 
+        public override string LayoutId => "skill-selection-novice";
+        public override string DisplayName => "Novice Skills";
+        public override Rect DefaultNormalizedBounds => new(0.68f, 0.35f, 0.30f, 0.34f);
+        public override Vector2 MinimumPixelSize => new(360f, 230f);
         public override bool BlocksPointer => open;
-        public override Rect Bounds => open
+        private Rect LegacyBounds => open
             ? new Rect(Mathf.Max(12, Screen.width - 490), Mathf.Max(12, Screen.height - 630), 474, 330)
             : default;
 
@@ -61,7 +65,7 @@ namespace DiceFree.UI
             if (!open) return;
 
             var r = Bounds;
-            GUI.Box(r, GUIContent.none);
+            DrawPanel(r);
             GUI.Label(new Rect(r.x + 10, r.y + 8, r.width - 90, 22),
                 "Novice skill allocation — " + progression.UnspentPoints + " unspent");
             if (GUI.Button(new Rect(r.xMax - 72, r.y + 6, 62, 24), "Close")) open = false;
