@@ -16,6 +16,19 @@ Dungeon size is content-specific:
 
 No raid lockouts.
 
+### Session occupancy
+
+A hosted session may have **at most one live occupancy per stable dungeon ID**.
+
+- the same dungeon cannot run in two simultaneous copies for two parties;
+- a second party/player is blocked while that dungeon is staged or active;
+- different dungeon IDs may be occupied simultaneously;
+- overworld/world-face maps are not exclusive and may contain players at the same time;
+- abandon/reset/completion releases the dungeon occupancy;
+- stale-lock recovery exists for failed cleanup/crashes.
+
+This is a game-design rule, not merely a current networking limitation.
+
 ## Entrances
 
 Dungeons have physical world entrances.
@@ -32,7 +45,9 @@ Recommended level/difficulty can normally be shown, but secret content may delib
 
 ### Staging / waiting room
 
-The first eligible player who enters a dungeon is moved into that dungeon's **staging room**.
+The first eligible player who enters a free dungeon claims that dungeon's session occupancy and is moved into its **staging room**.
+
+If that stable dungeon ID is already occupied by another party/run, entry is refused rather than creating another copy.
 
 Rules:
 - a **60-second countdown** begins when the first player enters;
@@ -226,6 +241,18 @@ High-level characters can normally return to old dungeons and overpower them.
 There is no automatic universal down-sync for old content.
 
 Selected content may later use sync/mentor rules where helping lower-level players or preserving encounter design benefits from it.
+
+## Conditional routes / run variants
+
+Dungeons can evaluate authored conditions before the active run begins and snapshot the result for that run.
+
+Conditions may include average participating player level, class composition, quest/world state, Echo-wide discovery, keys/items or achievements.
+
+A variant may change blockers/routes, rooms, enemies, bosses, mechanics and loot.
+
+Initial Slime Dungeon example: average participating player level >= 50 can remove/open blocking trees to reveal the Slime Regent route with different loot. The basic first Slime Boss still has only Slime Slam and Divide; Slime Queen / Slime King remain later high-level hard-boss content.
+
+See `docs/adr/0006-world-faces-and-single-occupancy-dungeons.md`.
 
 ## Difficulty modes
 

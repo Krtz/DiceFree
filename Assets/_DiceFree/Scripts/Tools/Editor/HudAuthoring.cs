@@ -75,6 +75,8 @@ namespace DiceFree.EditorTools
             stats.Configure(actor);
             Ensure<AbilityBarSource>(playerObject);
             Ensure<GenericActionBar>(playerObject);
+            Ensure<DiceFree.Gameplay.CodexProgression>(playerObject);
+            Ensure<CodexPanel>(playerObject);
             Ensure<HudMenuStrip>(playerObject);
 
             var minimap = Ensure<MinimapHud>(playerObject);

@@ -28,6 +28,7 @@ namespace DiceFree.Persistence
         private ActorResourceController resources;
         private IClassSkillState[] skillStates = Array.Empty<IClassSkillState>();
         private IManifestationSessionState[] sessionState = Array.Empty<IManifestationSessionState>();
+        private IEchoWideDurableState[] echoWideState = Array.Empty<IEchoWideDurableState>();
         private LocalEchoStore store;
         private EchoSave save;
         private bool ready, dirty;
@@ -106,6 +107,8 @@ namespace DiceFree.Persistence
                 bool existing = save != null;
                 save ??= new EchoSave();
 
+                RestoreEchoWideState(save);
+
                 string sceneDefaultClassId = CurrentClassId;
                 var roster = ManifestationRoster.Read(save, sceneDefaultClassId);
                 var activeDefinition = ResolveClass(roster.activeClassId, actor.Stats.Definition);
@@ -150,13 +153,16 @@ namespace DiceFree.Persistence
 
             var skills = new List<IClassSkillState>();
             var transient = new List<IManifestationSessionState>();
+            var echo = new List<IEchoWideDurableState>();
             foreach (var behaviour in GetComponents<MonoBehaviour>())
             {
                 if (behaviour is IClassSkillState skill) skills.Add(skill);
                 if (behaviour is IManifestationSessionState state) transient.Add(state);
+                if (behaviour is IEchoWideDurableState durable) echo.Add(durable);
             }
             skillStates = skills.ToArray();
             sessionState = transient.ToArray();
+            echoWideState = echo.ToArray();
             classCatalog?.Validate();
         }
 
@@ -169,6 +175,7 @@ namespace DiceFree.Persistence
             wallet.Changed += MarkDirty;
             if (resources != null) resources.DurableChanged += MarkDirty;
             foreach (var skill in skillStates) skill.Changed += MarkDirty;
+            foreach (var durable in echoWideState) durable.Changed += MarkDirty;
         }
 
         private void UnsubscribeDurableState()
@@ -180,6 +187,56 @@ namespace DiceFree.Persistence
             if (wallet != null) wallet.Changed -= MarkDirty;
             if (resources != null) resources.DurableChanged -= MarkDirty;
             foreach (var skill in skillStates) skill.Changed -= MarkDirty;
+            foreach (var durable in echoWideState) durable.Changed -= MarkDirty;
+        }
+
+        private void RestoreEchoWideState(EchoSave profile)
+        {
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var durable in echoWideState)
+            {
+                if (durable == null) continue;
+                if (string.IsNullOrWhiteSpace(durable.SectionId))
+                    throw new InvalidDataException("Echo-wide durable state has no section ID.");
+                if (!seen.Add(durable.SectionId))
+                    throw new InvalidDataException("Duplicate Echo-wide durable section: " + durable.SectionId);
+
+                var section = profile.sections.Find(value =>
+                    value != null && value.id == durable.SectionId);
+                if (section == null)
+                {
+                    durable.ResetToDefault();
+                    continue;
+                }
+
+                durable.RestoreJson(section.version, section.json);
+            }
+        }
+
+        private void CaptureEchoWideState(EchoSave profile)
+        {
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var durable in echoWideState)
+            {
+                if (durable == null) continue;
+                if (string.IsNullOrWhiteSpace(durable.SectionId) || !seen.Add(durable.SectionId))
+                    throw new InvalidDataException("Invalid or duplicate Echo-wide durable section ID.");
+
+                var section = profile.sections.Find(value =>
+                    value != null && value.id == durable.SectionId);
+                if (section == null)
+                {
+                    section = new SaveSection { id = durable.SectionId };
+                    profile.sections.Add(section);
+                }
+
+                section.version = durable.Version;
+                section.json = durable.CaptureJson();
+            }
         }
 
         private IClassSkillState FindSkillState(string classId)
@@ -320,6 +377,7 @@ namespace DiceFree.Persistence
                 var child = ManifestationProfileTransactions.CreateChildSnapshot(parent, targetDefinition.stableId);
                 ValidateState(targetDefinition, child);
                 ManifestationProfileTransactions.CommitFork(candidate, parent, child, CurrentClassId);
+                CaptureEchoWideState(candidate);
 
                 candidate.revision++;
                 candidate.writtenUtc = DateTime.UtcNow.ToString("O");
@@ -362,6 +420,7 @@ namespace DiceFree.Persistence
                 var target = ManifestationRoster.ReadManifestation(candidate, classId);
                 ValidateState(targetDefinition, target);
                 ManifestationProfileTransactions.SelectExisting(candidate, current, CurrentClassId, classId);
+                CaptureEchoWideState(candidate);
                 candidate.revision++;
                 candidate.writtenUtc = DateTime.UtcNow.ToString("O");
                 store.Commit(candidate);
@@ -408,6 +467,7 @@ namespace DiceFree.Persistence
                 var state = CaptureCurrentState(preserved);
                 ValidateState(actor.Stats.Definition, state);
                 ManifestationProfileTransactions.RecordActive(candidate, state, CurrentClassId);
+                CaptureEchoWideState(candidate);
 
                 candidate.revision++;
                 candidate.writtenUtc = DateTime.UtcNow.ToString("O");

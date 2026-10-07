@@ -38515,6 +38515,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Core.ExplorationCamera
   target: {fileID: 1288724049}
   distance: 40
+  minimumDistance: 14
+  maximumDistance: 78
+  zoomSensitivity: 0.085
   pitch: 52
   yaw: 45
 --- !u!20 &434306580
@@ -112322,6 +112325,9 @@ GameObject:
   - component: {fileID: 1288724097}
   - component: {fileID: 1288724096}
   - component: {fileID: 1288724104}
+  - component: {fileID: 1288724107}
+  - component: {fileID: 1288724106}
+  - component: {fileID: 1288724105}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -113092,6 +113098,7 @@ MonoBehaviour:
   player: {fileID: 1288724053}
   progression: {fileID: 1288724064}
   basicAttack: {fileID: 1288724059}
+  motor: {fileID: 1288724051}
 --- !u!114 &1288724101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113151,7 +113158,50 @@ MonoBehaviour:
   noviceSkills: {fileID: 0}
   physicalSkills: {fileID: 0}
   magicalSkills: {fileID: 0}
+  codex: {fileID: 0}
   options: {fileID: 0}
+--- !u!114 &1288724105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5a3e513a159cf4fbb79b654b4eb9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.DeathRespawnHud
+  player: {fileID: 1288724053}
+  respawn: {fileID: 1288724055}
+--- !u!114 &1288724106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c93031631e324f498e2fde477dd211d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.CodexPanel
+  codex: {fileID: 0}
+--- !u!114 &1288724107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b5dbf9b56497644a527222ebe15b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Gameplay.CodexProgression
+  state:
+    monsters: []
+    dungeons: []
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace DiceFree.UI
         private PhysicalSkillPanel physical;
         private MagicalSkillPanel magical;
         private OptionsPanel options;
+        private CodexPanel codex;
         private SkillTargetingController targeting;
         private Interactor interactor;
 
@@ -23,6 +24,7 @@ namespace DiceFree.UI
             physical = GetComponent<PhysicalSkillPanel>();
             magical = GetComponent<MagicalSkillPanel>();
             options = FindAnyObjectByType<OptionsPanel>();
+            codex = GetComponent<CodexPanel>();
             targeting = GetComponent<SkillTargetingController>();
             interactor = GetComponent<Interactor>();
         }
@@ -63,6 +65,12 @@ namespace DiceFree.UI
             if (options != null && options.Open)
             {
                 options.Close();
+                closedSomething = true;
+            }
+
+            if (codex != null && codex.Open)
+            {
+                codex.Close();
                 closedSomething = true;
             }
 

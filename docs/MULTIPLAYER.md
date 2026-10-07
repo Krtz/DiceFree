@@ -29,6 +29,16 @@ Guest save ownership remains separate from live simulation authority. After auth
 
 Solo, LAN and online multiplayer should share the same gameplay command/event paths where practical. Do not maintain an unrelated "single-player combat engine" and "multiplayer combat engine."
 
+## World-map concurrency
+
+The cube overworld is implemented as six separate world-face maps/scenes while being presented as one connected world.
+
+Players in the same hosted session may occupy different world faces at the same time. World faces are not exclusive session instances.
+
+Crossing an authored face edge uses a hidden cube-rotation/load transition and moves only that participant to the linked face/location; it does not globally change the whole party's map.
+
+See `docs/adr/0006-world-faces-and-single-occupancy-dungeons.md`.
+
 ## Joining started sessions
 
 Players may join an already-started overworld session.
@@ -98,9 +108,11 @@ Preserve the active run state where recoverable; use safe recovery behavior rath
 
 ## Dungeon joins
 
-Dungeon participation uses a staging phase.
+Dungeon participation uses a staging phase and a **single occupancy per stable dungeon ID**.
 
-When the first party member enters:
+There are no simultaneous per-party copies of the same dungeon inside one hosted session. If that dungeon ID is occupied by another party/run, entry is blocked. Different dungeon IDs may still be active at the same time.
+
+When the first party member enters a free dungeon:
 - that player enters the shared dungeon waiting room;
 - a 60-second countdown begins;
 - other eligible party members may enter the same waiting room during that window.

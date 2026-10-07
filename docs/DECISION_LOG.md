@@ -3335,3 +3335,41 @@ Tentative examples, not locked:
 **Decision:** Advancement copies owned inventory into the child with new item-instance IDs and remaps equipped references. Parent and child timelines must not claim the same item instance identity.
 
 See ADR 0005 and docs/ADVANCEMENT_VALIDATION.md.
+
+## 2026-10-07 — Six world faces are separate maps behind one cube-world illusion
+
+**Decision:** The six exterior faces of the Dice are authored as six separate maps/scenes.
+
+Crossing a face edge uses a hidden load/transition with a cube-rotation presentation. Players in one hosted session may occupy different world faces at the same time; changing face is participant-local, not a global party scene swap.
+
+See `docs/adr/0006-world-faces-and-single-occupancy-dungeons.md`.
+
+## 2026-10-07 — Dungeons have one live occupancy per stable dungeon ID
+
+**Decision:** Do not create simultaneous per-party copies of the same dungeon in one hosted session.
+
+If `dungeon.slime` is occupied, another party/player is blocked from entering that dungeon until the occupancy is released. Different dungeon IDs may be active simultaneously.
+
+Occupancies use ownership/lease identity and stale-lock recovery.
+
+## 2026-10-07 — Dungeon variants are condition-driven and snapshotted
+
+**Decision:** Dungeons support reusable authored conditions such as average party level, class composition, world/quest/Echo state, items and achievements.
+
+Matched rules snapshot enabled routes/bosses/loot/tags when the run begins rather than continuously reshaping an active run.
+
+Initial Slime Dungeon proof: average participating player level >= 50 enables the Slime Regent route and distinct loot.
+
+## 2026-10-07 — First Slime Boss scope
+
+**Decision:** The first low-level Slime Boss has exactly two attacks: **Slime Slam** and **Divide**.
+
+The Slime Regent is a conditional higher-level route/boss. Slime Queen / Slime King remain later high-level hard-boss content.
+
+## 2026-10-07 — Codex becomes first-class Echo-wide durable state
+
+**Decision:** Codex state is Echo-wide, versioned and saved in `echo:codex` through a generic Echo-wide durable-state contract.
+
+Monster kills, observed drops, witnessed mechanics and dungeon completion data are recorded from semantic gameplay events. Undiscovered content is absent rather than shown as spoiler placeholders.
+
+See `docs/CODEX.md`.

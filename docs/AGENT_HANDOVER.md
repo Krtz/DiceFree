@@ -785,6 +785,8 @@ Authored enemies can always aggro regardless of level difference:
 
 # Codex
 
+Canonical design: `docs/CODEX.md`.
+
 Codex progression is Echo-wide.
 
 ## Monster discovery
@@ -1498,3 +1500,34 @@ Final Windows x64 Development build passed on the strict targeting/caster code: 
 Detailed evidence: `docs/MAGICALLY_TOUCHED_VALIDATION.md`. Casting controls: `docs/INPUT_CONTROLS.md`. Class sheet: `docs/classes/MAGICALLY_TOUCHED_NOVICE.md`.
 
 Next intended major milestone after #52 review/merge: proper generic HUD, then first slime dungeon vertical slice, then narrow two-player multiplayer PoC.
+
+---
+
+## 2026-10-07 world/dungeon/Codex foundation checkpoint
+
+Active stacked branch: `feature/54-world-dungeon-codex` (based on unmerged #53).
+
+Implemented foundation:
+- six-face world represented by separate map definitions/edge links;
+- session participant map registry supporting different players on different world faces;
+- single live occupancy per stable dungeon ID with lease ownership and stale-lock recovery;
+- different dungeon IDs can be occupied simultaneously;
+- reusable dungeon condition evaluator and snapshotted run variants;
+- authored `dungeon.slime` definition with average-party-level >= 50 Slime Regent route;
+- generic `IEchoWideDurableState` persistence contract;
+- Echo-wide `CodexProgression` section `echo:codex` v1;
+- semantic gameplay event vocabulary for monster/drop/mechanic/dungeon discovery;
+- functional movable Codex HUD panel;
+- Codex button added to HUD menu strip;
+- canonical docs in `docs/CODEX.md`, `docs/SLIME_DUNGEON.md`, and ADR 0006.
+
+First Slime Boss scope is locked to **Slime Slam + Divide only**.
+
+Slime Regent is a conditional higher-level route/boss. Slime Queen / Slime King remain later high-level hard-boss content.
+
+Validation markers reached before checkpoint:
+- `DICEFREE_WORLD_CODEX_OK`;
+- `DICEFREE_HUD_DATA_OK` with 12 customizable HUD widgets;
+- `ISSUE36_SAVE_RELOAD_OK`.
+
+Do not merge the stacked branch without Axel's explicit approval. Next implementation target is the physical Slime Dungeon scene/blockout and reusable entrance/map-transition runtime.

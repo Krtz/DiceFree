@@ -11,6 +11,7 @@ namespace DiceFree.UI
         [SerializeField] private NoviceSkillPanel noviceSkills;
         [SerializeField] private PhysicalSkillPanel physicalSkills;
         [SerializeField] private MagicalSkillPanel magicalSkills;
+        [SerializeField] private CodexPanel codex;
         [SerializeField] private OptionsPanel options;
 
         public override string LayoutId => "menu-strip";
@@ -25,6 +26,7 @@ namespace DiceFree.UI
             noviceSkills ??= GetComponent<NoviceSkillPanel>();
             physicalSkills ??= GetComponent<PhysicalSkillPanel>();
             magicalSkills ??= GetComponent<MagicalSkillPanel>();
+            codex ??= GetComponent<CodexPanel>();
             options ??= FindAnyObjectByType<OptionsPanel>();
         }
 
@@ -36,11 +38,12 @@ namespace DiceFree.UI
             DrawPanel(panel);
             Rect inner = Inner(panel);
             float gap = Theme.gap;
-            float height = (inner.height - gap * 2) / 3f;
+            float height = (inner.height - gap * 3) / 4f;
 
             var inventoryRect = new Rect(inner.x, inner.y, inner.width, height);
             var skillsRect = new Rect(inner.x, inventoryRect.yMax + gap, inner.width, height);
-            var optionsRect = new Rect(inner.x, skillsRect.yMax + gap, inner.width, height);
+            var codexRect = new Rect(inner.x, skillsRect.yMax + gap, inner.width, height);
+            var optionsRect = new Rect(inner.x, codexRect.yMax + gap, inner.width, height);
 
             bool editing = HudLayoutManager.Current?.EditMode ?? false;
             GUI.enabled = !editing;
@@ -48,6 +51,8 @@ namespace DiceFree.UI
                 inventory?.Show();
             if (GUI.Button(skillsRect, new GUIContent("★", "Skills [K]")))
                 ShowSkills();
+            if (GUI.Button(codexRect, new GUIContent("C", "Codex")))
+                codex?.Show();
             if (GUI.Button(optionsRect, new GUIContent("⚙", "Options [F10]")))
                 options?.Show();
             GUI.enabled = true;
