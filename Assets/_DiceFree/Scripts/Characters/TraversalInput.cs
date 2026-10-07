@@ -19,6 +19,7 @@ namespace DiceFree.Characters
         private TraversalMotor motor;
         private BasicAttack attack;
         private CombatInput combatInput;
+        private SkillTargetingController skillTargeting;
         private Health health;
         private CombatActor actor;
         private Interactor interactor;
@@ -35,6 +36,7 @@ namespace DiceFree.Characters
             motor = GetComponent<TraversalMotor>();
             attack = GetComponent<BasicAttack>();
             combatInput = GetComponent<CombatInput>();
+            skillTargeting = GetComponent<SkillTargetingController>();
             health = GetComponent<Health>();
             actor = GetComponent<CombatActor>();
             interactor = GetComponent<Interactor>();
@@ -99,7 +101,9 @@ namespace DiceFree.Characters
                 interactor?.Cancel();
             }
 
-            if (closeInteraction.WasPressedThisFrame()) interactor?.Cancel();
+            if (closeInteraction.WasPressedThisFrame() &&
+                (skillTargeting == null || !skillTargeting.InputConsumedThisFrame))
+                interactor?.Cancel();
             if (interact.WasPressedThisFrame()) interactor?.InteractNearest();
 
             if (mode == ControlMode.Direct)
@@ -115,7 +119,8 @@ namespace DiceFree.Characters
                 }
             }
 
-            if (click.WasPressedThisFrame() && Mouse.current != null &&
+            if ((skillTargeting == null || (!skillTargeting.Active && !skillTargeting.InputConsumedThisFrame)) &&
+                click.WasPressedThisFrame() && Mouse.current != null &&
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
             {
                 if (interactor != null && interactor.ContextInteract(worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue()))) return;

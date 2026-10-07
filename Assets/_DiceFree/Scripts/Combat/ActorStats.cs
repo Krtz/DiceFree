@@ -118,8 +118,8 @@ namespace DiceFree.Combat
         }
         public void SetMovementSpeedPercentModifier(string sourceId, float percent)
         {
-            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent < 0)
-                throw new ArgumentException("Movement-speed modifier requires a stable source and finite non-negative percent.");
+            if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent <= -95)
+                throw new ArgumentException("Movement-speed modifier requires a stable source and a finite percent above -95.");
             movementSpeedPercentModifiers[sourceId] = percent;
             Changed?.Invoke(MaximumHp);
         }
@@ -234,7 +234,7 @@ namespace DiceFree.Combat
         }
         public float MoveSpeed => definition.moveSpeed * (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.MoveSpeed))
                                   * (1 + EquipmentTotal.movementSpeedPercent / 100f)
-                                  * (1 + TemporaryMovementSpeedPercent / 100f);
+                                  * Mathf.Max(0.05f, 1 + TemporaryMovementSpeedPercent / 100f);
         private float TemporaryAttackSpeedPercent
         {
             get

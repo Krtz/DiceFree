@@ -65,9 +65,11 @@ namespace DiceFree.EditorTools
             progression.Configure(new[] { strength, sand, agility, spirit, passive });
             var caster = Ensure<NoviceSkillCaster>(player);
             Ensure<CombatStatusController>(player);
+            var targeting = Ensure<SkillTargetingController>(player);
+            targeting.Configure(traversal.WorldCamera);
 
             var bar = Ensure<NoviceSkillBar>(player);
-            bar.Configure(progression, caster);
+            bar.Configure(progression, caster, targeting);
             var panel = Ensure<NoviceSkillPanel>(player);
             panel.Configure(progression);
 

@@ -12,6 +12,7 @@ namespace DiceFree.Characters
     {
         private TargetSelection selection;
         private BasicAttack attack;
+        private SkillTargetingController skillTargeting;
         private InputBindings bindings;
         private InputAction select, cycle, attackSelected, clear, respawn;
 
@@ -19,6 +20,7 @@ namespace DiceFree.Characters
         {
             selection = GetComponent<TargetSelection>();
             attack = GetComponent<BasicAttack>();
+            skillTargeting = GetComponent<SkillTargetingController>();
             bindings = InputBindings.Current;
             select = bindings.Action("Gameplay/Select target");
             cycle = bindings.Action("Gameplay/Cycle hostile");
@@ -30,6 +32,7 @@ namespace DiceFree.Characters
         private void Update()
         {
             if (bindings.Suppressed) return;
+            if (skillTargeting != null && (skillTargeting.Active || skillTargeting.InputConsumedThisFrame)) return;
 
             if (respawn.WasPressedThisFrame()) GetComponent<RespawnAtAnchor>()?.Return();
             if (cycle.WasPressedThisFrame())

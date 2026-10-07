@@ -10,6 +10,7 @@ namespace DiceFree.UI
     {
         [SerializeField] private PhysicalSkillProgression progression;
         [SerializeField] private PhysicalSkillCaster caster;
+        [SerializeField] private SkillTargetingController targeting;
         [SerializeField] private Camera worldCamera;
 
         private InputBindings bindings;
@@ -17,15 +18,21 @@ namespace DiceFree.UI
 
         public override Rect Bounds => new Rect(Screen.width - 430, Screen.height - 250, 414, 78);
 
-        public void Configure(PhysicalSkillProgression value, PhysicalSkillCaster skillCaster, Camera camera)
+        public void Configure(
+            PhysicalSkillProgression value,
+            PhysicalSkillCaster skillCaster,
+            Camera camera,
+            SkillTargetingController targeter = null)
         {
             progression = value;
             caster = skillCaster;
             worldCamera = camera;
+            targeting = targeter != null ? targeter : GetComponent<SkillTargetingController>();
         }
 
         private void Awake()
         {
+            targeting ??= GetComponent<SkillTargetingController>();
             bindings = InputBindings.Current;
             slots = new[]
             {
@@ -42,28 +49,45 @@ namespace DiceFree.UI
                 !progression.ActiveForCurrentClass) return;
 
             for (int i = 0; i < slots.Length; i++)
+                if (slots[i].WasPressedThisFrame())
+                    Prepare(progression.ActiveAtSlot(i));
+        }
+
+        private void Prepare(PhysicalSkillDefinition definition)
+        {
+            if (definition == null || !caster.CanPrepare(definition)) return;
+
+            switch (definition.kind)
             {
-                if (!slots[i].WasPressedThisFrame()) continue;
-                var definition = progression.ActiveAtSlot(i);
-                if (definition == null) continue;
-                if (definition.kind == PhysicalSkillKind.ArrowRain)
-                {
-                    if (Mouse.current != null && TryWorldPoint(Mouse.current.position.ReadValue(), out var point))
-                        caster.CastArrowRain(definition, point);
-                }
-                else caster.Cast(definition);
+                case PhysicalSkillKind.HeavyStrike:
+                    targeting?.BeginHostile(
+                        definition.displayName,
+                        target => caster.Cast(definition, target));
+                    break;
+                case PhysicalSkillKind.ArrowRain:
+                    targeting?.BeginGround(
+                        definition.displayName,
+                        point => caster.CastArrowRain(definition, point));
+                    break;
+                case PhysicalSkillKind.Guard:
+                case PhysicalSkillKind.Quickening:
+                    targeting?.Cancel();
+                    caster.Cast(definition);
+                    break;
             }
         }
 
         private void OnGUI()
         {
-            if (progression == null || caster == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen)
-                return;
+            if (progression == null || caster == null || !progression.ActiveForCurrentClass ||
+                HudPointerBlocker.ModalOpen) return;
 
             var r = Bounds;
             GUI.Box(r, GUIContent.none);
             GUI.Label(new Rect(r.x + 8, r.y + 4, r.width - 16, 20),
-                string.IsNullOrEmpty(caster.Feedback) ? "Physically Blessed skills" : caster.Feedback);
+                targeting != null && targeting.Active
+                    ? targeting.SkillLabel + " — choose target"
+                    : string.IsNullOrEmpty(caster.Feedback) ? "Physically Blessed skills" : caster.Feedback);
 
             const float gap = 4;
             float width = (r.width - 16 - gap * 3) / 4;
@@ -76,29 +100,9 @@ namespace DiceFree.UI
                 string key = InputBindings.Display(slots[i]);
                 string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
                 if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
-                if (definition.kind == PhysicalSkillKind.ArrowRain) label += "\n(cursor ground)";
                 var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
-                if (!GUI.Button(button, label)) continue;
-
-                if (definition.kind == PhysicalSkillKind.ArrowRain)
-                {
-                    if (Mouse.current != null && TryWorldPoint(Mouse.current.position.ReadValue(), out var point))
-                        caster.CastArrowRain(definition, point);
-                }
-                else caster.Cast(definition);
+                if (GUI.Button(button, label)) Prepare(definition);
             }
-        }
-
-        private bool TryWorldPoint(Vector2 screenPoint, out Vector3 point)
-        {
-            point = default;
-            var camera = worldCamera != null ? worldCamera : Camera.main;
-            if (camera == null) return false;
-            var ray = camera.ScreenPointToRay(screenPoint);
-            if (!Physics.Raycast(ray, out var hit, 1500f, (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore) ||
-                hit.collider.gameObject.layer != 8) return false;
-            point = hit.point;
-            return true;
         }
     }
 }

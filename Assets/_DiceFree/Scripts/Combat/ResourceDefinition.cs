@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace DiceFree.Combat
 {
+    public static class ResourceIds
+    {
+        public const string Mana = "resource.mana";
+    }
+
     public enum ResourceRetentionPolicy
     {
         ResetOnLoad,

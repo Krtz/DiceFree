@@ -6,12 +6,11 @@ using UnityEngine;
 
 namespace DiceFree.Combat
 {
-    [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(TargetSelection), typeof(NoviceSkillProgression))]
+    [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(NoviceSkillProgression))]
     public sealed class NoviceSkillCaster : MonoBehaviour, IManifestationSessionState
     {
         private readonly Dictionary<string, float> readyAt = new(StringComparer.Ordinal);
         private CombatActor actor;
-        private TargetSelection selection;
         private NoviceSkillProgression progression;
 
         public string Feedback { get; private set; } = "";
@@ -20,7 +19,6 @@ namespace DiceFree.Combat
         private void Awake()
         {
             actor = GetComponent<CombatActor>();
-            selection = GetComponent<TargetSelection>();
             progression = GetComponent<NoviceSkillProgression>();
         }
 
@@ -30,9 +28,9 @@ namespace DiceFree.Combat
             return Mathf.Max(0, time - Time.time);
         }
 
-        public bool CastSlot(int slot) => progression.ActiveForCurrentClass && Cast(progression.ActiveAtSlot(slot));
+        public bool CastSlot(int slot) => Fail("Choose a target for the skill first.");
 
-        public bool Cast(NoviceSkillDefinition definition, CombatActor requestedTarget = null)
+        public bool CanPrepare(NoviceSkillDefinition definition)
         {
             if (!progression.ActiveForCurrentClass) return Fail("Novice skills are inactive for this manifestation.");
             if (definition == null || !definition.Active) return Fail("No active skill in that slot.");
@@ -40,11 +38,18 @@ namespace DiceFree.Combat
             if (rank <= 0) return Fail(definition.displayName + " is unlearned.");
             if (!actor.CanAct) return Fail("Cannot use skills right now.");
             if (CooldownRemaining(definition) > 0) return Fail(definition.displayName + " is cooling down.");
+            return true;
+        }
+
+        public bool Cast(NoviceSkillDefinition definition, CombatActor requestedTarget = null)
+        {
+            if (!CanPrepare(definition)) return false;
+            int rank = progression.Rank(definition.stableId);
 
             bool hostile = definition.kind == NoviceSkillKind.StrengthMeleeStun || definition.kind == NoviceSkillKind.MagicSand;
             CombatActor target = hostile
-                ? (requestedTarget ?? selection.Selected)
-                : ResolveSupportTarget(requestedTarget ?? selection.Selected);
+                ? requestedTarget
+                : ResolveSupportTarget(requestedTarget);
             if (hostile && !actor.IsHostileTo(target)) return Fail("Select a hostile target.");
             if (!hostile && !actor.IsFriendlyTo(target)) return Fail("No valid friendly target.");
             if (!InRange(target, definition.range)) return Fail("Target is out of range.");
@@ -100,8 +105,7 @@ namespace DiceFree.Combat
 
         private CombatActor ResolveSupportTarget(CombatActor requested)
         {
-            if (requested != null && actor.IsFriendlyTo(requested)) return requested;
-            return actor;
+            return requested != null && actor.IsFriendlyTo(requested) ? requested : null;
         }
 
         private bool InRange(CombatActor target, float authoredRange)

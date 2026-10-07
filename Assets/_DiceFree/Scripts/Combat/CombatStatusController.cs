@@ -14,13 +14,28 @@ namespace DiceFree.Combat
             public TimedValue(float amount, float expiresAt) { value = amount; until = expiresAt; }
         }
 
+        private readonly struct TimedAttackAugment
+        {
+            public readonly AttackDefinition attack;
+            public readonly float coefficient;
+            public readonly float until;
+            public TimedAttackAugment(AttackDefinition definition, float coefficientOverride, float expiresAt)
+            {
+                attack = definition;
+                coefficient = coefficientOverride;
+                until = expiresAt;
+            }
+        }
+
         [SerializeField, Range(0, 1)] private float stunResistance;
         [SerializeField] private bool stunImmune;
 
         private readonly SortedDictionary<string, TimedValue> accuracyPenalties = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, TimedValue> attackSpeedBuffs = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, TimedValue> movementSpeedBuffs = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, TimedValue> movementSpeedDebuffs = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, TimedValue> damageReductionBuffs = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, TimedAttackAugment> basicAttackAugments = new(StringComparer.Ordinal);
         private readonly List<string> expired = new();
         private CombatActor actor;
         private float stunnedUntil;
@@ -122,6 +137,36 @@ namespace DiceFree.Combat
             actor.Stats.SetDamageTakenModifier("status:" + effectId + ":magical", new DamageTakenModifier(DamageChannel.Magical, fraction));
         }
 
+        public void ApplyMovementSpeedDebuff(string effectId, float slowPercent, float durationSeconds)
+        {
+            ValidateEffect(effectId, durationSeconds);
+            if (float.IsNaN(slowPercent) || float.IsInfinity(slowPercent) || slowPercent < 0 || slowPercent >= 95)
+                throw new ArgumentOutOfRangeException(nameof(slowPercent));
+            movementSpeedDebuffs[effectId] = new TimedValue(slowPercent, Time.time + durationSeconds);
+            actor.Stats.SetMovementSpeedPercentModifier("status:" + effectId, -slowPercent);
+        }
+
+        public void ApplyBasicAttackAugment(
+            string effectId,
+            AttackDefinition attack,
+            float coefficient,
+            float durationSeconds)
+        {
+            ValidateEffect(effectId, durationSeconds);
+            if (attack == null || float.IsNaN(coefficient) || float.IsInfinity(coefficient) || coefficient < 0)
+                throw new ArgumentException("Basic-attack augment requires attack data and a finite non-negative coefficient.");
+            basicAttackAugments[effectId] = new TimedAttackAugment(attack, coefficient, Time.time + durationSeconds);
+        }
+
+        public void ResolveBasicAttackAugments(CombatActor source, CombatActor target)
+        {
+            if (source == null || target == null || source != actor || !source.IsHostileTo(target)) return;
+            CleanupExpired();
+            foreach (var augment in basicAttackAugments.Values)
+                if (augment.attack != null)
+                    DamageResolver.Hit(source, target, augment.attack, null, augment.coefficient);
+        }
+
         public void ClearTransient()
         {
             if (actor != null)
@@ -129,6 +174,8 @@ namespace DiceFree.Combat
                 foreach (var effectId in attackSpeedBuffs.Keys)
                     actor.Stats.RemoveAttackSpeedPercentModifier("status:" + effectId);
                 foreach (var effectId in movementSpeedBuffs.Keys)
+                    actor.Stats.RemoveMovementSpeedPercentModifier("status:" + effectId);
+                foreach (var effectId in movementSpeedDebuffs.Keys)
                     actor.Stats.RemoveMovementSpeedPercentModifier("status:" + effectId);
                 foreach (var effectId in damageReductionBuffs.Keys)
                 {
@@ -139,7 +186,9 @@ namespace DiceFree.Combat
             accuracyPenalties.Clear();
             attackSpeedBuffs.Clear();
             movementSpeedBuffs.Clear();
+            movementSpeedDebuffs.Clear();
             damageReductionBuffs.Clear();
+            basicAttackAugments.Clear();
             stunnedUntil = 0;
             SyncStunBlock();
         }
@@ -171,6 +220,15 @@ namespace DiceFree.Combat
             }
 
             expired.Clear();
+            foreach (var pair in movementSpeedDebuffs)
+                if (now >= pair.Value.until) expired.Add(pair.Key);
+            foreach (string id in expired)
+            {
+                movementSpeedDebuffs.Remove(id);
+                actor?.Stats.RemoveMovementSpeedPercentModifier("status:" + id);
+            }
+
+            expired.Clear();
             foreach (var pair in damageReductionBuffs)
                 if (now >= pair.Value.until) expired.Add(pair.Key);
             foreach (string id in expired)
@@ -179,6 +237,11 @@ namespace DiceFree.Combat
                 actor?.Stats.RemoveDamageTakenModifier("status:" + id + ":physical");
                 actor?.Stats.RemoveDamageTakenModifier("status:" + id + ":magical");
             }
+
+            expired.Clear();
+            foreach (var pair in basicAttackAugments)
+                if (now >= pair.Value.until) expired.Add(pair.Key);
+            foreach (string id in expired) basicAttackAugments.Remove(id);
         }
 
         private void SyncStunBlock()

@@ -111,7 +111,12 @@ namespace DiceFree.Characters
         }
         public bool Teleport(Vector3 point)
         {
-            if (!Ready || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;
+            // Persistence/start-menu restoration can request the authored spawn before this component's Start.
+            // Enabling the already-configured agent here removes that script-order dependency while keeping
+            // ordinary scene startup unchanged.
+            if (agent == null) return false;
+            if (!agent.enabled) agent.enabled = true;
+            if (!agent.isOnNavMesh || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;
             Stop(); bool moved = agent.Warp(hit.position); RefreshSpeed(); return moved;
         }
     }

@@ -28,6 +28,8 @@ namespace DiceFree.EditorTools
         private const string TaskGitShaKey = "DiceFree.Issue36Manual.TaskGitSha";
         private const string TaskStartedTicksKey = "DiceFree.Issue36Manual.TaskStartedTicks";
         private const string TaskEndedTicksKey = "DiceFree.Issue36Manual.TaskEndedTicks";
+        private const string SavePriorFastPlayEnabledKey = "DiceFree.Issue36Manual.SavePriorFastPlayEnabled";
+        private const string SavePriorFastPlayOptionsKey = "DiceFree.Issue36Manual.SavePriorFastPlayOptions";
 
         private static TraversalMotor motor;
         private static NavMeshAgent agent;
@@ -164,6 +166,11 @@ namespace DiceFree.EditorTools
             {
                 var root = CreateFreshRoot("SaveReload");
                 Begin("Save reload - Two phase", "save", root);
+                // This validator explicitly proves a fresh player-like save/reload lifecycle.
+                // Do not let the developer's Fast Play (no domain/scene reload) state leak between its phases.
+                SessionState.SetBool(SavePriorFastPlayEnabledKey, EditorSettings.enterPlayModeOptionsEnabled);
+                SessionState.SetInt(SavePriorFastPlayOptionsKey, (int)EditorSettings.enterPlayModeOptions);
+                EditorSettings.enterPlayModeOptionsEnabled = false;
                 SessionState.SetInt(PhaseKey, 1);
                 CornbergSaveValidation.RunManualPhase(root, 1);
             }
@@ -436,6 +443,17 @@ namespace DiceFree.EditorTools
         private static void Cleanup(string kind)
         {
             var root = SessionState.GetString(RootKey, string.Empty);
+            if (kind == "save")
+            {
+                EditorSettings.enterPlayModeOptions =
+                    (EnterPlayModeOptions)SessionState.GetInt(
+                        SavePriorFastPlayOptionsKey,
+                        (int)EditorSettings.enterPlayModeOptions);
+                EditorSettings.enterPlayModeOptionsEnabled =
+                    SessionState.GetBool(
+                        SavePriorFastPlayEnabledKey,
+                        EditorSettings.enterPlayModeOptionsEnabled);
+            }
             PersistenceTestGuard.ClearValidationOverrides();
             SessionState.SetBool("DiceFree.Issue36Manual.RouteRunning", false);
             SessionState.SetBool("DiceFree.RunnerValidation", false);

@@ -1463,3 +1463,38 @@ Windows x64 Development build passed:
 Detailed evidence: `docs/PHYSICALLY_BLESSED_VALIDATION.md`.
 
 Still provisional/out of scope: final numerical balance, bespoke skill icons/VFX/audio/animations, full weapon-family permission rules, production HUD, level-30 descendant implementations and Magically Touched Novice.
+
+
+# Issue #52 — Magically Touched Novice + shared confirm-cast targeting (2026-10-07)
+
+Integration base: `poc/cornberg` is already fast-forwarded through completed #51 commit `77716b2f4a7b102407bd582862fd5c3231c74bac`. Current review branch is `feature/52-magically-touched`; do not merge without Axel's explicit instruction.
+
+Magically Touched Novice is now a complete playable first-tier manifestation:
+- dedicated slightly smaller/frailer Novice-family presentation;
+- level-1 10 VIT / 5 STR / 5 AGI / 13 INT / 13 SPI with documented growth;
+- ranged magical basic attack scaling from higher INT/SPI;
+- class-specific persisted Mana profile: 80 + 2*INT + SPI maximum, 5 + 0.15*INT + 0.15*SPI regeneration/s;
+- five six-rank skills: Magic Sand, Mend, Fire Elemental Imbuement, Ice Burst, Mana Attunement;
+- reusable Nature/Fire/Ice elemental assets and source-keyed basic-attack augment/movement-speed/Mana-aura seams;
+- strongest-wins Mana-regeneration aura semantics;
+- full three-manifestation Novice/Physical/Magical save + StartMenu coexistence.
+
+User playtest feedback changed casting UX during #52. Skills must not auto-cast on the ordinary selected target. Shared `SkillTargetingController` now provides normal/confirm casting across all current classes:
+- targeted hotkey enters hostile/friendly/ground reticle mode;
+- left click confirms;
+- RMB/Escape cancels without resource/cooldown;
+- selection/basic attack remains independent;
+- movement/ordinary selection input is suppressed for the confirmation/cancel frame;
+- casters themselves no longer fall back to `TargetSelection.Selected` or implicit self-targeting for targeted support abilities.
+Self-only Physical Guard/Quickening remain immediate.
+
+Final focused/regression evidence on the hardened code:
+`DICEFREE_MAGICAL_AUTHORED_OK`, `DICEFREE_MAGICAL_DATA_OK`, `DICEFREE_MAGICAL_PLAYMODE_OK`, `DICEFREE_SKILL_TARGETING_OK`, `DICEFREE_PHYSICAL_PLAYMODE_OK`, `DICEFREE_NOVICE_SKILLS_PLAYMODE_OK`, `DICEFREE_ADVANCEMENT_PLAYMODE_OK`, `DICEFREE_CONTROLS_PLAYMODE_OK`, `ISSUE36_SAVE_RELOAD_OK`, `ISSUE36_ROUTE12_OK`, `ISSUE36_RUNNER_OK`, items, Q4, `DICEFRE_ARCHITECTURE_OK`, `DICEFRE_ARCH_POLICY_SELFTEST_OK`, `DICEFREE_MANAGED_REFERENCE_OK`.
+
+The remote Play Mode harnesses can inherit Editor pause/scaled-time state. Magical, Physical, controls and Novice harnesses now explicitly restore the needed normal Play Mode state where appropriate. An intermittent Magical validation timeout was an inherited Editor pause/time-scale problem, not an Ice Burst gameplay deadlock. A one-off Novice AGI validator failure was not reproducible in a clean session; after harness hardening, the suite passed again.
+
+Final Windows x64 Development build passed on the strict targeting/caster code: `DICEFREE_MAGICAL_PLAYER_BUILD_OK`, 188,638,878 bytes, 0 errors, 5 existing Unity 6.6 editor-tool deprecation/build-environment warnings, StartMenu scene 0 + Cornberg scene 1.
+
+Detailed evidence: `docs/MAGICALLY_TOUCHED_VALIDATION.md`. Casting controls: `docs/INPUT_CONTROLS.md`. Class sheet: `docs/classes/MAGICALLY_TOUCHED_NOVICE.md`.
+
+Next intended major milestone after #52 review/merge: proper generic HUD, then first slime dungeon vertical slice, then narrow two-player multiplayer PoC.

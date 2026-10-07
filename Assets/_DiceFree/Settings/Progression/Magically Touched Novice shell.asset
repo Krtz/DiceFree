@@ -33,7 +33,7 @@ MonoBehaviour:
   physicalDefense: 0
   magicalDefense: 0
   moveSpeed: 5
-  basicAttack: {fileID: 11400000, guid: c5fcdb36fc1640a40a6d5ac933de4fd9, type: 2}
+  basicAttack: {fileID: 11400000, guid: 287b8fd7af51efa4f8a2a8cbe8567644, type: 2}
   tuning: {fileID: 11400000, guid: fae0d971f61fa81429fe4643a81e5cac, type: 2}
   secondaryOverrides: []
   overrideVitalityHp: 0

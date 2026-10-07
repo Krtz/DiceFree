@@ -98,6 +98,8 @@ namespace DiceFree.EditorTools
 
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
+                EditorApplication.isPaused = false;
+                Time.timeScale = 1f;
                 deadline = Time.realtimeSinceStartup + 20f;
                 if (!runningTick)
                 {
@@ -259,7 +261,7 @@ namespace DiceFree.EditorTools
             var agility = skills.Definition(NoviceSkillsAuthoring.AgilityId);
             float baseAttackSpeed = enemy.Stats.AttackSpeed;
             float bonus = agility.AttackSpeedBonusPercent(player.Stats.Attributes, 1);
-            NoviceSkillsValidation.Require(caster.Cast(agility), "AGI support buff failed to use selected ally.");
+            NoviceSkillsValidation.Require(caster.Cast(agility, enemy), "AGI support buff failed on explicit ally target.");
             Approximately(enemy.Stats.AttackSpeed, baseAttackSpeed * (1 + bonus / 100f), "AGI ally attack-speed buff");
             enemy.Effects.ApplyAttackSpeedBuff(agility.stableId, bonus, agility.durationSeconds);
             Approximately(enemy.Stats.AttackSpeed, baseAttackSpeed * (1 + bonus / 100f), "AGI refresh-not-stack semantics");
@@ -275,7 +277,7 @@ namespace DiceFree.EditorTools
             var spirit = skills.Definition(NoviceSkillsAuthoring.SpiritId);
             float expectedHeal = spirit.HealAmount(player.Stats.Attributes, 1) *
                                  player.Stats.HealingDone * enemy.Stats.HealingReceived;
-            NoviceSkillsValidation.Require(caster.Cast(spirit), "SPI heal failed to use selected ally.");
+            NoviceSkillsValidation.Require(caster.Cast(spirit, enemy), "SPI heal failed on explicit ally target.");
             Approximately(enemy.Health.Current,
                 Mathf.Min(enemy.Health.Maximum, wounded + expectedHeal), "SPI ally heal");
 

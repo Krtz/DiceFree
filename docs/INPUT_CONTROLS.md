@@ -1,10 +1,10 @@
 # Input and Controls
 
-## Current prototype implementation (#48 + #49, through 2026-10-06)
+## Current prototype implementation (#48 + #49 + #52 targeting, through 2026-10-07)
 
 The current Cornberg prototype now has one shared Unity Input System source of truth instead of separate hard-coded `InputAction` instances in traversal, combat, camera, and inventory code.
 
-The shared input/settings foundation originated on `feature/48-options-keybinds`; the current Novice-skill work is stacked on it on the still-unmerged `feature/49-novice-skills` branch:
+The shared input/settings foundation originated on `feature/48-options-keybinds`; the Novice/advancement/Physical stack is now integrated through `poc/cornberg` at `77716b2`, while the current targeted-casting work is part of `feature/52-magically-touched`:
 
 - canonical authored asset: `Assets/_DiceFree/Resources/DiceFreeControls.inputactions`;
 - runtime assembly: `DiceFree.Input.Runtime`;
@@ -76,7 +76,7 @@ Current prototype defaults remain:
 - K = Novice skill-allocation menu;
 - Escape = close Options while open.
 
-This implementation does **not** settle the future Classic-vs-Direct default ability profiles, casting modes, summon control scheme, controller layout, or final visual settings-menu UX described below.
+The current playable classes now use **Normal / confirm cast** as the implemented prototype casting mode. Pressing a targeted ability hotkey enters a separate targeting state rather than consuming the ordinary selected target: hostile-unit, friendly-unit, and ground reticles are supported; left-click confirms; right-click or Escape cancels without spending resources or starting cooldown. Ordinary target selection remains useful for basic attacks/Tab targeting but no longer causes a skill to auto-cast merely because a unit was already selected. Self-only actives such as Guard and Quickening still cast immediately. Semi-quick/quick cast configuration, final range/area preview art, queued move-into-range casting, summon control scheme, controller layout, and final settings UX remain future work.
 
 ## Philosophy
 

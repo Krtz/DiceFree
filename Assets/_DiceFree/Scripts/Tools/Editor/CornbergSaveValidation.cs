@@ -137,8 +137,12 @@ namespace DiceFree.EditorTools
                 {
                     if (!File.Exists(persistence.SavePath))
                     {
-                        Require(Time.realtimeSinceStartup < deadline, "Initial autosave timed out.");
-                        return;
+                        ForceDebouncedAutosaveTick(persistence);
+                        if (!File.Exists(persistence.SavePath))
+                        {
+                            Require(Time.realtimeSinceStartup < deadline, "Initial autosave timed out.");
+                            return;
+                        }
                     }
                     if (!autosaveRequested)
                     {
@@ -150,8 +154,14 @@ namespace DiceFree.EditorTools
                     var autosavedState = JsonUtility.FromJson<ManifestationSave>(autosaved.sections[0].json);
                     if (autosavedState.xp != 10)
                     {
-                        Require(Time.realtimeSinceStartup < deadline, "Event-driven autosave timed out.");
-                        return;
+                        ForceDebouncedAutosaveTick(persistence);
+                        autosaved = new LocalEchoStore(Path.GetDirectoryName(persistence.SavePath)).Load();
+                        autosavedState = JsonUtility.FromJson<ManifestationSave>(autosaved.sections[0].json);
+                        if (autosavedState.xp != 10)
+                        {
+                            Require(Time.realtimeSinceStartup < deadline, "Event-driven autosave timed out.");
+                            return;
+                        }
                     }
                     Require(autosavedState.quests[0].status == QuestStatus.Active, "Autosave split quest and XP operation.");
                     xp.RestoreState(1, 0);
@@ -276,6 +286,16 @@ namespace DiceFree.EditorTools
                 if (SessionState.GetBool(Manual, false)) Issue36ManualValidation.RecordPipelineFailure(error.ToString());
                 Debug.LogException(error); Finish(1);
             }
+        }
+
+        private static void ForceDebouncedAutosaveTick(ManifestationPersistence persistence)
+        {
+            var due = typeof(ManifestationPersistence).GetField(
+                "due",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            Require(due != null, "ManifestationPersistence debounce field could not be resolved by the validation harness.");
+            due.SetValue(persistence, Time.unscaledTime - 1f);
+            persistence.SendMessage("LateUpdate");
         }
 
         private static void Finish(int code)

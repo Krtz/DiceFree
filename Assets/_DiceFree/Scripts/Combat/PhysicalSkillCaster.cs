@@ -10,13 +10,12 @@ namespace DiceFree.Combat
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(PhysicalSkillProgression), typeof(ActorResourceController))]
     public sealed class PhysicalSkillCaster : MonoBehaviour, IManifestationSessionState
     {
-        public const string ManaResourceId = "resource.mana";
+        public const string ManaResourceId = ResourceIds.Mana;
 
         private readonly Dictionary<string, float> readyAt = new(StringComparer.Ordinal);
         private CombatActor actor;
         private PhysicalSkillProgression progression;
         private ActorResourceController resources;
-        private TargetSelection selection;
         private CombatStatusController effects;
         private BasicAttack basicAttack;
 
@@ -27,7 +26,6 @@ namespace DiceFree.Combat
             actor = GetComponent<CombatActor>();
             progression = GetComponent<PhysicalSkillProgression>();
             resources = GetComponent<ActorResourceController>();
-            selection = GetComponent<TargetSelection>();
             effects = GetComponent<CombatStatusController>();
             basicAttack = GetComponent<BasicAttack>();
         }
@@ -37,14 +35,9 @@ namespace DiceFree.Combat
                 ? 0
                 : Mathf.Max(0, at - Time.time);
 
-        public bool CastSlot(int slot)
-        {
-            var definition = progression.ActiveAtSlot(slot);
-            if (definition == null) return Fail("No Physical skill in that slot.");
-            if (definition.kind == PhysicalSkillKind.ArrowRain)
-                return Fail("Arrow Rain needs a ground point.");
-            return Cast(definition, selection == null ? null : selection.Selected);
-        }
+        public bool CastSlot(int slot) => Fail("Choose a target for the skill first.");
+
+        public bool CanPrepare(PhysicalSkillDefinition definition) => CanBegin(definition, out _);
 
         public bool Cast(PhysicalSkillDefinition definition, CombatActor requestedTarget = null)
         {
@@ -53,7 +46,7 @@ namespace DiceFree.Combat
             switch (definition.kind)
             {
                 case PhysicalSkillKind.HeavyStrike:
-                    return HeavyStrike(definition, rank, requestedTarget ?? selection?.Selected);
+                    return HeavyStrike(definition, rank, requestedTarget);
                 case PhysicalSkillKind.Guard:
                     return Guard(definition, rank);
                 case PhysicalSkillKind.Quickening:

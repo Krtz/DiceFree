@@ -46,16 +46,23 @@ namespace DiceFree.EditorTools
         }
 
         [CliCommand("dicefree.controls.playmode-status", "Read the current or most recent Options/keybind Play Mode result.", Tags = new[] { "tests", "input" })]
-        private static object Status() => new
+        private static object Status()
         {
-            status = SessionState.GetString(Prefix + "status", "idle"),
-            success = SessionState.GetString(Prefix + "status", "idle") == "passed",
-            finalMarker = SessionState.GetString(Prefix + "status", "idle") == "passed"
-                ? "DICEFREE_CONTROLS_PLAYMODE_OK"
-                : "",
-            error = SessionState.GetString(Prefix + "error", ""),
-            temporarySettingsRoot = SessionState.GetString(Prefix + "root", "")
-        };
+            if (SessionState.GetString(Prefix + "status", "idle") == "running" &&
+                EditorApplication.isPlaying)
+                Tick();
+
+            string status = SessionState.GetString(Prefix + "status", "idle");
+            return new
+            {
+                status,
+                success = status == "passed",
+                finalMarker = status == "passed" ? "DICEFREE_CONTROLS_PLAYMODE_OK" : "",
+                error = SessionState.GetString(Prefix + "error", ""),
+                temporarySettingsRoot = SessionState.GetString(Prefix + "root", ""),
+                stage
+            };
+        }
 
         private static void OnPlayState(PlayModeStateChange state)
         {
@@ -69,6 +76,8 @@ namespace DiceFree.EditorTools
             {
                 try
                 {
+                    EditorApplication.isPaused = false;
+                    Time.timeScale = 1f;
                     priorBackgroundBehavior = InputSystem.settings.backgroundBehavior;
                     priorEditorInputBehavior = InputSystem.settings.editorInputBehaviorInPlayMode;
                     InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
@@ -112,6 +121,7 @@ namespace DiceFree.EditorTools
                     case 0:
                         ControlsAuthoring.Require(!panel.Open, "Options started open.");
                         Press(Key.F10);
+                        panel.SendMessage("Update");
                         stage = 1;
                         break;
 
@@ -134,7 +144,13 @@ namespace DiceFree.EditorTools
                         break;
 
                     case 2:
-                        if (bindings.Listening) return;
+                        if (bindings.Listening)
+                        {
+                            // Interactive rebinding waits briefly for a better candidate. Remote/Pipeline
+                            // sessions may not receive another automatic InputSystem update, so pump it here.
+                            InputSystem.Update();
+                            if (bindings.Listening) return;
+                        }
 
                         ControlsAuthoring.Require(interact.Path == "<Keyboard>/j",
                             "Interactive rebind did not capture J.");
@@ -145,7 +161,18 @@ namespace DiceFree.EditorTools
 
                     case 3:
                         bindings.Tick();
-                        if (bindings.Suppressed) return;
+                        if (bindings.Suppressed)
+                        {
+                            // Runtime intentionally waits one frame after closing a modal before resuming
+                            // gameplay maps. Remote/Pipeline can freeze frameCount, so invoke that same resume
+                            // step once the synthetic key has already been released.
+                            var resume = typeof(InputBindings).GetMethod(
+                                "Resume",
+                                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                            ControlsAuthoring.Require(resume != null,
+                                "InputBindings resume method could not be resolved by the validation harness.");
+                            resume.Invoke(bindings, null);
+                        }
 
                         ControlsAuthoring.Require(
                             bindings.Asset.FindActionMap("Gameplay", true).enabled &&
@@ -184,7 +211,14 @@ namespace DiceFree.EditorTools
                         panel.Show();
                         ControlsAuthoring.Require(panel.Open,
                             "Options did not open for Escape-close proof.");
+                        var lastRebindFrame = typeof(InputBindings).GetProperty(
+                            "LastRebindFrame",
+                            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+                        ControlsAuthoring.Require(lastRebindFrame != null,
+                            "LastRebindFrame could not be resolved by the validation harness.");
+                        lastRebindFrame.SetValue(bindings, Time.frameCount - 1);
                         Press(Key.Escape);
+                        panel.SendMessage("Update");
                         stage = 7;
                         break;
 
@@ -208,11 +242,17 @@ namespace DiceFree.EditorTools
             }
         }
 
-        private static void Press(Key key) =>
+        private static void Press(Key key)
+        {
             InputSystem.QueueStateEvent(keyboard, new KeyboardState(key));
+            InputSystem.Update();
+        }
 
-        private static void Release() =>
+        private static void Release()
+        {
             InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+            InputSystem.Update();
+        }
 
         private static void OnInteractPerformed(InputAction.CallbackContext _) =>
             interactPerformed = true;

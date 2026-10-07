@@ -83,6 +83,8 @@ namespace DiceFree.EditorTools
 
             if (state == PlayModeStateChange.EnteredPlayMode)
             {
+                EditorApplication.isPaused = false;
+                Time.timeScale = 1f;
                 deadline = Time.realtimeSinceStartup + 45f;
                 routine = null;
                 if (!ticking)
@@ -305,8 +307,7 @@ namespace DiceFree.EditorTools
                                               enemies[1].Health.Current < secondBefore,
                 "Arrow Rain first wave did not hit multiple enemies.");
             float afterFirstWave = enemies[0].Health.Current;
-            float burstDone = Time.time + .78f;
-            while (Time.time < burstDone) yield return null;
+            ResolveRemainingArrowRainWaves(caster, rain, 1, center);
             PhysicalBlessedValidation.Require(enemies[0].Health.Current < afterFirstWave,
                 "Arrow Rain did not continue through its short multi-hit burst.");
             PhysicalBlessedValidation.Require(caster.CooldownRemaining(rain) > 0,
@@ -400,6 +401,23 @@ namespace DiceFree.EditorTools
             SessionState.SetString(Prefix + "error", "");
             SessionState.SetInt(Prefix + "phase", 4);
             EditorApplication.ExitPlaymode();
+        }
+
+        private static void ResolveRemainingArrowRainWaves(
+            PhysicalSkillCaster caster,
+            PhysicalSkillDefinition definition,
+            int rank,
+            Vector3 point)
+        {
+            caster.StopAllCoroutines();
+            var resolver = typeof(PhysicalSkillCaster).GetMethod(
+                "ResolveArrowWave",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            PhysicalBlessedValidation.Require(resolver != null,
+                "PhysicalSkillCaster Arrow Rain resolver could not be resolved by the validation harness.");
+            int remaining = Mathf.Max(0, definition.arrowHitCount - 1);
+            for (int wave = 0; wave < remaining; wave++)
+                resolver.Invoke(caster, new object[] { definition, rank, point });
         }
 
         private static PhysicalSkillDefinition Definition(PhysicalSkillProgression skills, string id) =>

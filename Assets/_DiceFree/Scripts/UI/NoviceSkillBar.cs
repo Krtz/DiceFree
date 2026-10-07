@@ -10,20 +10,26 @@ namespace DiceFree.UI
     {
         [SerializeField] private NoviceSkillProgression progression;
         [SerializeField] private NoviceSkillCaster caster;
+        [SerializeField] private SkillTargetingController targeting;
 
         private InputBindings bindings;
         private InputAction[] slots;
 
         public override Rect Bounds => new Rect(Screen.width - 430, Screen.height - 250, 414, 78);
 
-        public void Configure(NoviceSkillProgression value, NoviceSkillCaster skillCaster)
+        public void Configure(
+            NoviceSkillProgression value,
+            NoviceSkillCaster skillCaster,
+            SkillTargetingController targeter = null)
         {
             progression = value;
             caster = skillCaster;
+            targeting = targeter != null ? targeter : GetComponent<SkillTargetingController>();
         }
 
         private void Awake()
         {
+            targeting ??= GetComponent<SkillTargetingController>();
             bindings = InputBindings.Current;
             slots = new[]
             {
@@ -36,19 +42,37 @@ namespace DiceFree.UI
 
         private void Update()
         {
-            if (bindings == null || bindings.Suppressed || progression == null || caster == null || !progression.ActiveForCurrentClass) return;
+            if (bindings == null || bindings.Suppressed || progression == null || caster == null ||
+                !progression.ActiveForCurrentClass) return;
+
             for (int i = 0; i < slots.Length; i++)
-                if (slots[i].WasPressedThisFrame()) caster.CastSlot(i);
+                if (slots[i].WasPressedThisFrame())
+                    Prepare(progression.ActiveAtSlot(i));
+        }
+
+        private void Prepare(NoviceSkillDefinition definition)
+        {
+            if (definition == null || targeting == null || !caster.CanPrepare(definition)) return;
+
+            bool hostile = definition.kind == NoviceSkillKind.StrengthMeleeStun ||
+                           definition.kind == NoviceSkillKind.MagicSand;
+            if (hostile)
+                targeting.BeginHostile(definition.displayName, target => caster.Cast(definition, target));
+            else
+                targeting.BeginFriendly(definition.displayName, target => caster.Cast(definition, target));
         }
 
         private void OnGUI()
         {
-            if (progression == null || caster == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen) return;
+            if (progression == null || caster == null || !progression.ActiveForCurrentClass ||
+                HudPointerBlocker.ModalOpen) return;
 
             var r = Bounds;
             GUI.Box(r, GUIContent.none);
             GUI.Label(new Rect(r.x + 8, r.y + 4, r.width - 16, 20),
-                string.IsNullOrEmpty(caster.Feedback) ? "Novice skills" : caster.Feedback);
+                targeting != null && targeting.Active
+                    ? targeting.SkillLabel + " — choose target"
+                    : string.IsNullOrEmpty(caster.Feedback) ? "Novice skills" : caster.Feedback);
 
             const float gap = 4;
             float width = (r.width - 16 - gap * 3) / 4;
@@ -62,7 +86,7 @@ namespace DiceFree.UI
                 string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
                 if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
                 var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
-                if (GUI.Button(button, label)) caster.Cast(definition);
+                if (GUI.Button(button, label)) Prepare(definition);
             }
         }
     }

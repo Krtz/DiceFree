@@ -57,7 +57,12 @@ namespace DiceFree.Combat
                 var resolution = AccuracyResolver.Resolve(actor, Definition);
                 var packet = DamageResolver.CalculatePacket(actor.Stats, Target.Stats, Definition, resolution);
                 Target.Health.ApplyPacket(actor, packet);
-                if (packet.Missed) Misses++; else Hits++;
+                if (packet.Missed) Misses++;
+                else
+                {
+                    Hits++;
+                    actor.Effects?.ResolveBasicAttackAugments(actor, Target);
+                }
                 State = packet.Missed ? "Miss" : "Recovery";
             }
             else if (Time.time >= readyAt)

@@ -2,7 +2,9 @@
 
 ## Status
 
-**Working Tier 1 direction.** Exact skills, coefficients, mana costs and equipment lists are not yet final.
+**Implemented prototype Tier 1 on `feature/52-magically-touched`.** The class is playable through the real Novice advancement/start-menu flow, has its dedicated presentation, Mana economy, ranged basic attack, five-skill progression, persistence, and automated combat/save/reload coverage. Exact coefficients, costs, art polish and equipment permissions remain balance/content work rather than final release values.
+
+Current implemented casting UX is normal/confirm cast: pressing a targeted skill enters a WC3/League/Dota-style targeting reticle and does **not** auto-cast on the currently selected unit. Left-click confirms; right-click or Escape cancels without spending Mana or starting cooldown. Ground skills use a ground reticle. Guard and Quickening remain immediate self-casts because they require no external target.
 
 ## Identity
 
@@ -187,14 +189,12 @@ A **Nature Shaman** is explicitly desired as a later descendant somewhere in thi
 
 Development does not need symmetrical breadth at every tier; some branches may receive more successors earlier than others.
 
-## Open questions
+## Remaining open questions
 
-- exact passive/no-passive rule;
-- exact four active abilities;
-- which Novice abilities evolve into this kit;
-- basic attack and weapon/focus identity;
-- base HP/defenses/movement;
-- equipment permissions;
-- Mana pool/regeneration/cost model;
-- final names and exact distinction between the two healer branches;
-- exact identity boundary between Arcane and Occult.
+The playable Tier-1 prototype has settled the current five-skill structure, Magic Sand lineage, ranged higher-INT/SPI basic attack and provisional Mana model. Still open:
+- final numerical balance for Mana, damage/healing coefficients, cooldowns and durations;
+- final weapon/focus families and equipment permissions;
+- production icons/VFX/audio/animations and HUD presentation;
+- whether any Tier-1 names change before content lock;
+- final names and exact distinction between the two healer descendants;
+- exact identity boundary between later Arcane and Occult branches.

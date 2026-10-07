@@ -112307,6 +112307,12 @@ GameObject:
   - component: {fileID: 1288724085}
   - component: {fileID: 1288724084}
   - component: {fileID: 1288724083}
+  - component: {fileID: 1288724094}
+  - component: {fileID: 1288724093}
+  - component: {fileID: 1288724092}
+  - component: {fileID: 1288724091}
+  - component: {fileID: 1288724090}
+  - component: {fileID: 1288724095}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -112331,6 +112337,7 @@ Transform:
   - {fileID: 1707476011}
   - {fileID: 365897622}
   - {fileID: 1609161111}
+  - {fileID: 1621371690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288724050
@@ -112740,6 +112747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.NoviceSkillBar
   progression: {fileID: 1288724080}
   caster: {fileID: 1288724079}
+  targeting: {fileID: 0}
 --- !u!114 &1288724078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112832,6 +112840,9 @@ MonoBehaviour:
   - classId: class.physically-blessed-novice
     visualRoot: {fileID: 1609161111}
     animator: {fileID: 1609161112}
+  - classId: class.magically-touched-novice
+    visualRoot: {fileID: 1621371690}
+    animator: {fileID: 1621371691}
 --- !u!114 &1288724084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112845,7 +112856,6 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.ResourceBar
   resources: {fileID: 1288724089}
-  physical: {fileID: 1288724088}
 --- !u!114 &1288724085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112873,6 +112883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.PhysicalSkillBar
   progression: {fileID: 1288724088}
   caster: {fileID: 1288724087}
+  targeting: {fileID: 0}
   worldCamera: {fileID: 434306580}
 --- !u!114 &1288724087
 MonoBehaviour:
@@ -112918,6 +112929,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ActorResourceController
   profiles:
   - {fileID: 11400000, guid: 5230fae6f1fedd746a22173b23caa3eb, type: 2}
+  - {fileID: 11400000, guid: ffc1ec3bd00be4f4a90096449c83bea7, type: 2}
+--- !u!114 &1288724090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e62f1bc71f9b0540b938777bc4167d2, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.MagicalSkillPanel
+  progression: {fileID: 1288724093}
+--- !u!114 &1288724091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8c70ee55f3bca49a7e7667e4ec7efd, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.MagicalSkillBar
+  progression: {fileID: 1288724093}
+  caster: {fileID: 1288724092}
+  targeting: {fileID: 1288724095}
+  worldCamera: {fileID: 434306580}
+--- !u!114 &1288724092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355ec342aa7b2564d8bb33783219e77d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.MagicalSkillCaster
+--- !u!114 &1288724093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feee06dc29f887b43adcc90c065e0d25, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.MagicalSkillProgression
+  definitions:
+  - {fileID: 11400000, guid: 7b6a9ac6036092a45a3a626e4f6a6616, type: 2}
+  - {fileID: 11400000, guid: b448ead5b34be894e969e8ccd6e1b356, type: 2}
+  - {fileID: 11400000, guid: 36673383ea8593d46950f15e8fbc71c3, type: 2}
+  - {fileID: 11400000, guid: 35327bb565a5d0c4b9a3c1959e463395, type: 2}
+  - {fileID: 11400000, guid: 9aa40a7fec5f32f4abdc5f387c79bbd4, type: 2}
+--- !u!114 &1288724094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117792711c0a65d498b3eebebc8e2dfe, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ResourceRegenerationAura
+--- !u!114 &1288724095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32affe6869b364742bd8acf67a44eb19, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.SkillTargetingController
+  worldCamera: {fileID: 434306580}
 --- !u!1 &1291290211
 GameObject:
   m_ObjectHideFlags: 0
@@ -141854,6 +141950,77 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620235267}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1621371689
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1288724049}
+    m_Modifications:
+    - target: {fileID: 8395600826513239861, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_Name
+      value: MagicallyTouchedPresentation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395600826513239861, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+--- !u!4 &1621371690 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9207885230205859215, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+  m_PrefabInstance: {fileID: 1621371689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1621371691 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2965855651512823797, guid: 75b4ef5cc50beca48a97a84d32994fbf, type: 3}
+  m_PrefabInstance: {fileID: 1621371689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1621575487
 GameObject:
   m_ObjectHideFlags: 0

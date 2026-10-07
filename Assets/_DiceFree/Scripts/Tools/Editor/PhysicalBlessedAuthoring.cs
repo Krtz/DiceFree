@@ -117,9 +117,12 @@ namespace DiceFree.EditorTools
 
             var caster = Ensure<PhysicalSkillCaster>(playerObject);
             EditorUtility.SetDirty(caster);
+            var targeting = Ensure<SkillTargetingController>(playerObject);
+            targeting.Configure(player.WorldCamera);
+            EditorUtility.SetDirty(targeting);
 
             var bar = Ensure<PhysicalSkillBar>(playerObject);
-            bar.Configure(progression, caster, player.WorldCamera);
+            bar.Configure(progression, caster, player.WorldCamera, targeting);
             EditorUtility.SetDirty(bar);
 
             var panel = Ensure<PhysicalSkillPanel>(playerObject);
@@ -127,7 +130,7 @@ namespace DiceFree.EditorTools
             EditorUtility.SetDirty(panel);
 
             var resourceBar = Ensure<ResourceBar>(playerObject);
-            resourceBar.Configure(resourceController, progression);
+            resourceBar.Configure(resourceController);
             EditorUtility.SetDirty(resourceBar);
 
             var noviceVisual = player.transform.Find("NovicePresentation");

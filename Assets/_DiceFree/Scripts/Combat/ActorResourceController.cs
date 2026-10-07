@@ -13,7 +13,10 @@ namespace DiceFree.Combat
 
         private readonly Dictionary<string, float> current = new(StringComparer.Ordinal);
         private readonly Dictionary<string, ClassResourceProfile> active = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, SortedDictionary<string, float>> maximumFlatModifiers = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, SortedDictionary<string, float>> regenerationFlatModifiers = new(StringComparer.Ordinal);
         private ActorStats stats;
+        private CombatActor actor;
 
         public string ActiveClassId { get; private set; }
         public IReadOnlyList<ClassResourceProfile> Profiles => profiles;
@@ -23,12 +26,14 @@ namespace DiceFree.Combat
         private void Awake()
         {
             stats = GetComponent<ActorStats>();
+            actor = GetComponent<CombatActor>();
             ValidateProfiles();
         }
 
         private void OnEnable()
         {
             if (stats == null) stats = GetComponent<ActorStats>();
+            if (actor == null) actor = GetComponent<CombatActor>();
             stats.Changed += OnStatsChanged;
         }
 
@@ -66,10 +71,22 @@ namespace DiceFree.Combat
             current.TryGetValue(resourceId, out float value) ? value : 0;
 
         public float Maximum(string resourceId) =>
-            active.TryGetValue(resourceId, out var profile) ? profile.Maximum(stats.Attributes) : 0;
+            active.TryGetValue(resourceId, out var profile)
+                ? Mathf.Max(0, profile.Maximum(stats.Attributes) + ModifierTotal(maximumFlatModifiers, resourceId))
+                : 0;
 
         public float Regeneration(string resourceId) =>
-            active.TryGetValue(resourceId, out var profile) ? profile.Regeneration(stats.Attributes) : 0;
+            active.TryGetValue(resourceId, out var profile)
+                ? Mathf.Max(0, profile.Regeneration(stats.Attributes) +
+                               ModifierTotal(regenerationFlatModifiers, resourceId) +
+                               ResourceRegenerationAura.StrongestFor(actor, resourceId))
+                : 0;
+
+        public void SetMaximumFlatModifier(string resourceId, string sourceId, float amount) =>
+            SetModifier(maximumFlatModifiers, resourceId, sourceId, amount);
+
+        public void SetRegenerationFlatModifier(string resourceId, string sourceId, float amount) =>
+            SetModifier(regenerationFlatModifiers, resourceId, sourceId, amount);
 
         public bool CanSpend(string resourceId, float amount) =>
             amount >= 0 && Has(resourceId) && Current(resourceId) + 0.0001f >= amount;
@@ -130,8 +147,10 @@ namespace DiceFree.Combat
                     return false;
                 if (!known.TryGetValue(record.resourceId, out var profile)) continue; // opaque future/unknown record
                 if (profile.loadPolicy != ResourceRetentionPolicy.Persist) continue;
-                var attributes = AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
-                if (record.value < 0 || record.value > profile.Maximum(attributes) + 0.001f) return false;
+                // Upper bounds are intentionally not rejected here: class-skill-derived maximum modifiers
+                // are restored before resources, and balance changes may legitimately lower a later maximum.
+                // RestoreForClass clamps the durable value against the live authored maximum.
+                if (record.value < 0) return false;
             }
             return true;
         }
@@ -184,6 +203,46 @@ namespace DiceFree.Combat
 
         private IEnumerable<ClassResourceProfile> ProfilesForClass(string classId) =>
             profiles.Where(value => value != null && value.classId == classId);
+
+        private void SetModifier(
+            Dictionary<string, SortedDictionary<string, float>> modifiers,
+            string resourceId,
+            string sourceId,
+            float amount)
+        {
+            if (string.IsNullOrWhiteSpace(resourceId) || string.IsNullOrWhiteSpace(sourceId) ||
+                float.IsNaN(amount) || float.IsInfinity(amount) || amount < 0)
+                throw new ArgumentException("Resource modifier requires stable resource/source IDs and a finite non-negative amount.");
+
+            if (!modifiers.TryGetValue(resourceId, out var bySource))
+            {
+                if (Mathf.Approximately(amount, 0)) return;
+                bySource = new SortedDictionary<string, float>(StringComparer.Ordinal);
+                modifiers[resourceId] = bySource;
+            }
+
+            if (Mathf.Approximately(amount, 0))
+            {
+                bySource.Remove(sourceId);
+                if (bySource.Count == 0) modifiers.Remove(resourceId);
+            }
+            else bySource[sourceId] = amount;
+
+            if (!Has(resourceId)) return;
+            float maximum = Maximum(resourceId);
+            if (Current(resourceId) > maximum) current[resourceId] = maximum;
+            Changed?.Invoke(resourceId, Current(resourceId), maximum);
+        }
+
+        private static float ModifierTotal(
+            Dictionary<string, SortedDictionary<string, float>> modifiers,
+            string resourceId)
+        {
+            if (!modifiers.TryGetValue(resourceId, out var bySource)) return 0;
+            float total = 0;
+            foreach (float amount in bySource.Values) total += amount;
+            return total;
+        }
 
         private void ValidateProfiles()
         {

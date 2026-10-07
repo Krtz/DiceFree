@@ -78,7 +78,7 @@ Current prototype behavior:
 - parent and child then diverge independently and the preserved Novice can later create the other first branch;
 - duplicate creation of an already-existing target class is rejected without overwriting it;
 - an additive version-1 `echo:manifestations` roster section stores active class and branch history while the overall save/manifestation schema remains v5;
-- current Tier-1 actor assets are intentional **class shells** with the settled starting/growth attributes; final models, Mana, attacks and skill kits belong to the upcoming class implementation slices rather than #50.
+- #50 originally authored Tier-1 actor shells; both first branches are now real playable manifestations: Physically Blessed was completed in #51 and integrated into `poc/cornberg` at `77716b2`, while Magically Touched is implemented on review branch `feature/52-magically-touched` with its dedicated presentation, Mana economy, five-skill kit, persistence and confirm-cast targeting.
 
 The start-menu presentation is deliberately functional/prototype-grade. Final title art, character cards, archive/delete UX and richer class preview presentation remain future UI work.
 
