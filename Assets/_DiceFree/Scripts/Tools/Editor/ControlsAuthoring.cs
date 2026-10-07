@@ -37,7 +37,7 @@ namespace DiceFree.EditorTools
                 Button(gameplay, "Select target", "<Mouse>/leftButton");
                 Button(gameplay, "Cycle hostile", "<Keyboard>/tab");
                 Button(gameplay, "Attack selected", "<Keyboard>/x");
-                Button(gameplay, "Clear target", "<Keyboard>/escape");
+                Button(gameplay, "Clear target", "<Keyboard>/backspace");
                 Button(gameplay, "Return to anchor", "<Keyboard>/r");
                 Button(gameplay, "Inventory", "<Keyboard>/b");
 
@@ -84,7 +84,7 @@ namespace DiceFree.EditorTools
                 "DiceFreeControls is missing required maps.");
             AssetDatabase.SaveAssets();
 
-            Debug.Log("DICEFREE_CONTROLS_ASSET_OK: Gameplay/Camera/UI maps authored; F10 Options, fixed Escape close, shared gameplay Escape defaults preserved.");
+            Debug.Log("DICEFREE_CONTROLS_ASSET_OK: Gameplay/Camera/UI maps authored; Escape is UI/interaction cancel only, Stop remains Space, Clear Target defaults to Backspace.");
             return new { success = true, finalMarker = "DICEFREE_CONTROLS_ASSET_OK", assetPath = AssetPath };
         }
 

@@ -15,6 +15,11 @@ namespace DiceFree.Items
         private readonly HashSet<string> applied = new(StringComparer.Ordinal);
         public event Action Changed;
         public EquippedItem[] Slots => slots.Select(s => s.Copy()).ToArray();
+        public bool IsEquipped(string instanceId) =>
+            !string.IsNullOrWhiteSpace(instanceId) && slots.Any(s => s.instanceId == instanceId);
+        public ItemInstance[] BagItems => inventory == null
+            ? Array.Empty<ItemInstance>()
+            : inventory.Items.Where(item => !IsEquipped(item.instanceId)).ToArray();
         private void Awake() { inventory = GetComponent<CarriedInventory>(); stats = GetComponent<ActorStats>(); }
         private void OnEnable() { inventory.Changed += OnInventoryChanged; Refresh(); }
         private void OnDisable() { inventory.Changed -= OnInventoryChanged; ClearContributions(); }

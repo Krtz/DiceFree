@@ -21,9 +21,18 @@ namespace DiceFree.Combat
     public static class DamageResolver
     {
         // Explicit construction/mitigation/application boundaries for future effects and telemetry.
-        public static DamageResult Calculate(ActorStats source, ActorStats target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null)
+        public static DamageResult Calculate(
+            ActorStats source,
+            ActorStats target,
+            AttackDefinition attack,
+            ActionCriticalResolution critical = null,
+            float? coefficientOverride = null,
+            float rawMultiplier = 1f)
         {
-            float baseRaw = coefficientOverride.HasValue ? attack.RawDamage(source.Attributes, coefficientOverride.Value) : attack.RawDamage(source.Attributes);
+            float baseRaw = coefficientOverride.HasValue
+                ? attack.RawDamage(source.Attributes, coefficientOverride.Value)
+                : attack.RawDamage(source.Attributes);
+            baseRaw *= Mathf.Max(0f, rawMultiplier);
             if (source.Definition != null && object.ReferenceEquals(source.Definition.basicAttack, attack))
                 baseRaw *= source.BasicAttackDamageMultiplier;
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
@@ -36,12 +45,17 @@ namespace DiceFree.Combat
                 afterDefense = afterDefense, mitigated = afterDefense * (1 - resistance) * target.IncomingDamageMultiplier(attack.channel)
             };
         }
-        public static DamageResult CalculatePacket(ActorStats source, ActorStats target, AttackDefinition attack, ActionResolution action)
+        public static DamageResult CalculatePacket(
+            ActorStats source,
+            ActorStats target,
+            AttackDefinition attack,
+            ActionResolution action,
+            float rawMultiplier = 1f)
         {
             if (action == null) throw new System.ArgumentNullException(nameof(action));
             // A miss never constructs raw packets or consults mitigation, and cannot resolve crit here.
             if (action.Hit.missed) return new DamageResult { action = action, channel = attack.channel, element = attack.element };
-            var result = Calculate(source, target, attack, action.Critical);
+            var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier);
             result.action = action;
             return result;
         }

@@ -3,38 +3,67 @@ using UnityEngine;
 
 namespace DiceFree.UI
 {
-    public sealed class QuestTracker : HudWidget
+    public sealed class QuestTracker : CustomizableHudWidget
     {
         [SerializeField] private QuestJournal journal;
-        private int VisibleCount
-        {
-            get { int count = 0; foreach (var quest in journal.Definitions) if (journal.PrerequisitesMet(quest)) count += quest.stages[0].kind == ObjectiveKind.Any ? 2 : 1; return count; }
-        }
-        public override Rect Bounds => new Rect(Screen.width-310,130,294,Mathf.Max(120,VisibleCount*70+16));
+        private Vector2 scroll;
+
+        public override string LayoutId => "quests";
+        public override string DisplayName => "Quest Tracker";
+        public override Rect DefaultNormalizedBounds => new(0.79f, 0.30f, 0.195f, 0.25f);
+        public override Vector2 MinimumPixelSize => new(225, 150);
+
         private void OnGUI()
         {
-            if (HudPointerBlocker.ModalOpen) return;
-            var r=Bounds; GUI.Box(r,GUIContent.none); float y=r.y+8;
+            if (journal == null || HudPointerBlocker.ModalOpen) return;
+
+            Rect panel = Bounds;
+            DrawPanel(panel);
+            Rect inner = Inner(panel);
+
+            float header = Mathf.Clamp(inner.height * 0.12f, 20, 30);
+            var headerRect = new Rect(inner.x, inner.y, inner.width, header);
+            HudChrome.DrawHeader(headerRect, Theme, "Quests");
+
+            GUILayout.BeginArea(new Rect(inner.x, inner.y + header, inner.width, inner.height - header));
+            scroll = GUILayout.BeginScrollView(scroll, false, false);
+
             foreach (var quest in journal.Definitions)
             {
                 if (!journal.PrerequisitesMet(quest)) continue;
-                var state=journal.GetProgress(quest.stableId);
-                GUI.Label(new Rect(r.x+10,y,274,24),quest.title); y+=24;
+                var state = journal.GetProgress(quest.stableId);
+                GUILayout.Label(quest.title, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
+
                 if (state.definitionVersion != quest.version)
                 {
-                    GUI.Label(new Rect(r.x+10,y,274,46), "Saved quest version unavailable; progress preserved.");
-                    y += 46; continue;
+                    GUILayout.Label(
+                        "Saved quest version unavailable; progress preserved.",
+                        new GUIStyle(GUI.skin.label) { wordWrap = true });
+                    GUILayout.Space(4);
+                    continue;
                 }
-                var text=state.status switch {
-                    QuestStatus.Available => "! " + quest.locationHint,
-                    QuestStatus.ReadyToTurnIn => $"? {state.count}/{quest.stages[state.stage].count} complete · Return to the quest giver.",
-                    QuestStatus.Completed => "Completed",
-                    _ => ObjectiveProgress.Describe(quest.stages[state.stage], state)
-                };
-                float height = quest.stages[state.stage].kind == ObjectiveKind.Any ? 116 : 46;
-                GUI.Label(new Rect(r.x+10,y,274,height),text,new GUIStyle(GUI.skin.label){wordWrap=true}); y+=height;
+
+                string text;
+                if (state.status == QuestStatus.Available)
+                    text = "! " + quest.locationHint;
+                else if (state.status == QuestStatus.Completed)
+                    text = "Completed";
+                else
+                {
+                    int stageIndex = Mathf.Clamp(state.stage, 0, Mathf.Max(0, quest.stages.Length - 1));
+                    text = state.status == QuestStatus.ReadyToTurnIn
+                        ? $"? {state.count}/{quest.stages[stageIndex].count} complete · Return to the quest giver."
+                        : ObjectiveProgress.Describe(quest.stages[stageIndex], state);
+                }
+
+                GUILayout.Label(text, new GUIStyle(GUI.skin.label) { wordWrap = true });
+                GUILayout.Space(4);
             }
+
+            GUILayout.EndScrollView();
+            GUILayout.EndArea();
         }
-        public void Configure(QuestJournal value) => journal=value;
+
+        public void Configure(QuestJournal value) => journal = value;
     }
 }

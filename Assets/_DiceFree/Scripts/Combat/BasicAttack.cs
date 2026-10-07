@@ -55,7 +55,12 @@ namespace DiceFree.Combat
                 if (Time.time < impactAt) return;
                 winding = false;
                 var resolution = AccuracyResolver.Resolve(actor, Definition);
-                var packet = DamageResolver.CalculatePacket(actor.Stats, Target.Stats, Definition, resolution);
+                var packet = DamageResolver.CalculatePacket(
+                    actor.Stats,
+                    Target.Stats,
+                    Definition,
+                    resolution,
+                    Definition.RollDamageMultiplier());
                 Target.Health.ApplyPacket(actor, packet);
                 if (packet.Missed) Misses++;
                 else

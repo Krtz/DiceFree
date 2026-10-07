@@ -57,9 +57,15 @@ namespace DiceFree.UI
             bool hostile = definition.kind == NoviceSkillKind.StrengthMeleeStun ||
                            definition.kind == NoviceSkillKind.MagicSand;
             if (hostile)
-                targeting.BeginHostile(definition.displayName, target => caster.Cast(definition, target));
+                targeting.BeginHostile(
+                    definition.displayName,
+                    target => caster.Cast(definition, target),
+                    definition.range);
             else
-                targeting.BeginFriendly(definition.displayName, target => caster.Cast(definition, target));
+                targeting.BeginFriendly(
+                    definition.displayName,
+                    target => caster.Cast(definition, target),
+                    definition.range);
         }
 
         private void OnGUI()

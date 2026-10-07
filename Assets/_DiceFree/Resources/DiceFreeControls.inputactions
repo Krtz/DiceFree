@@ -1,4 +1,4 @@
-{
+﻿{
     "controlSchemes":  [
 
                        ],
@@ -312,7 +312,7 @@
                                           "isPartOfComposite":  false,
                                           "processors":  "",
                                           "name":  "",
-                                          "path":  "\u003cKeyboard\u003e/escape",
+                                          "path":  "\u003cKeyboard\u003e/backspace",
                                           "action":  "Clear target"
                                       },
                                       {

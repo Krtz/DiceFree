@@ -62,18 +62,21 @@ namespace DiceFree.UI
                 case MagicalSkillKind.MagicSand:
                     targeting.BeginHostile(
                         definition.displayName,
-                        target => caster.Cast(definition, target));
+                        target => caster.Cast(definition, target),
+                        definition.range);
                     break;
                 case MagicalSkillKind.Mend:
                 case MagicalSkillKind.FireImbuement:
                     targeting.BeginFriendly(
                         definition.displayName,
-                        target => caster.Cast(definition, target));
+                        target => caster.Cast(definition, target),
+                        definition.range);
                     break;
                 case MagicalSkillKind.IceBurst:
                     targeting.BeginGround(
                         definition.displayName,
-                        point => caster.CastIceBurst(definition, point));
+                        point => caster.CastIceBurst(definition, point),
+                        definition.range);
                     break;
             }
         }

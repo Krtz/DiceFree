@@ -70,6 +70,8 @@ namespace DiceFree.Combat
         }
         public float MaximumHp => definition.baseHp + Attributes.vitality * VitalityCoefficient(false);
         public float Regeneration => Attributes.vitality * VitalityCoefficient(true);
+        public float HpPerVitality => VitalityCoefficient(false);
+        public float RegenerationPerVitality => VitalityCoefficient(true);
         private float VitalityCoefficient(bool regeneration)
         {
             float coefficient = regeneration ? definition.VitalityRegenerationCoefficient : definition.VitalityHpCoefficient;

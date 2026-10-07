@@ -43,7 +43,7 @@ namespace DiceFree.EditorTools
                     Default(bindings, "Gameplay/Select target", null, "<Mouse>/leftButton");
                     Default(bindings, "Gameplay/Cycle hostile", null, "<Keyboard>/tab");
                     Default(bindings, "Gameplay/Attack selected", null, "<Keyboard>/x");
-                    Default(bindings, "Gameplay/Clear target", null, "<Keyboard>/escape");
+                    Default(bindings, "Gameplay/Clear target", null, "<Keyboard>/backspace");
                     Default(bindings, "Gameplay/Return to anchor", null, "<Keyboard>/r");
                     Default(bindings, "Gameplay/Inventory", null, "<Keyboard>/b");
                     Default(bindings, "Camera/Look toward World 1", null, "<Keyboard>/v");
@@ -109,9 +109,10 @@ namespace DiceFree.EditorTools
                     Default(defaults, "Gameplay/Direct movement", "Up", "<Keyboard>/w");
                     Default(defaults, "Gameplay/Move destination", null, "<Mouse>/rightButton");
                     ControlsAuthoring.Require(Entry(defaults, "Gameplay/Close interaction").Path == "<Keyboard>/escape" &&
-                                            Entry(defaults, "Gameplay/Clear target").Path == "<Keyboard>/escape" &&
-                                            defaults.Action("UI/Close options").bindings[0].effectivePath == "<Keyboard>/escape",
-                        "Closed-state Escape gameplay defaults changed.");
+                                            Entry(defaults, "Gameplay/Clear target").Path == "<Keyboard>/backspace" &&
+                                            defaults.Action("UI/Close options").bindings[0].effectivePath == "<Keyboard>/escape" &&
+                                            Entry(defaults, "Gameplay/Stop").Path == "<Keyboard>/space",
+                        "Escape/Stop gameplay defaults changed.");
                     Debug.Log("DICEFREE_CONTROLS_PERSIST_RESET_ESCAPE_OK");
                 }
 

@@ -5,6 +5,7 @@ namespace DiceFree.UI
     public abstract class HudWidget : MonoBehaviour
     {
         public abstract Rect Bounds { get; }
+        public virtual bool BlocksPointer => true;
         protected virtual void OnEnable() => HudPointerBlocker.Register(this);
         protected virtual void OnDisable() => HudPointerBlocker.Unregister(this);
         protected static void Hp(Rect rect, float current, float maximum)

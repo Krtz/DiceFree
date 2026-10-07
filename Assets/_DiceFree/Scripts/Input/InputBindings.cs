@@ -89,6 +89,7 @@ namespace DiceFree.Input
 
         public static string Display(InputAction action, int bindingIndex = 0)
         {
+            if (action == null || bindingIndex < 0 || bindingIndex >= action.bindings.Count) return "";
             string path = action.bindings[bindingIndex].effectivePath;
             return string.IsNullOrEmpty(path)
                 ? ""

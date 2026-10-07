@@ -47,9 +47,9 @@ namespace DiceFree.EditorTools
             Shape("Facing",PrimitiveType.Sphere,player.transform.position+new Vector3(0,1.2f,0.4f),
                 Vector3.one*0.2f,Dark,player.transform,false);
             var camera = new GameObject("Exploration camera",typeof(Camera),typeof(AudioListener)).GetComponent<Camera>();
-            camera.tag="MainCamera"; camera.fieldOfView=55; camera.nearClipPlane=0.2f; camera.farClipPlane=1500;
-            camera.transform.rotation=Quaternion.Euler(42,45,0);
-            camera.transform.position=player.transform.position+Vector3.up*1.5f-camera.transform.forward*34;
+            camera.tag="MainCamera"; camera.fieldOfView=50; camera.nearClipPlane=0.2f; camera.farClipPlane=1500;
+            camera.transform.rotation=Quaternion.Euler(52,45,0);
+            camera.transform.position=player.transform.position+Vector3.up*1.5f-camera.transform.forward*40;
             camera.GetUniversalAdditionalCameraData().renderPostProcessing=true;
             var follow=camera.gameObject.AddComponent<ExplorationCamera>(); follow.Configure(player.transform);
             var marker=Shape("Move destination",PrimitiveType.Cylinder,Vector3.zero,new Vector3(0.8f,0.035f,0.8f),Glow,null,false);

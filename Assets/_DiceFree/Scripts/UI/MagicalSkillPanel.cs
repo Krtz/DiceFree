@@ -14,10 +14,14 @@ namespace DiceFree.UI
         private float notifiedUntil;
         private Vector2 scroll;
 
-        private Rect ClosedBounds => new Rect(Screen.width - 330, Screen.height - 286, 314, 28);
+        public override bool BlocksPointer => open;
         public override Rect Bounds => open
             ? new Rect(Mathf.Max(12, Screen.width - 490), Mathf.Max(12, Screen.height - 630), 474, 350)
-            : ClosedBounds;
+            : default;
+
+        public bool Open => open;
+        public void Show() { if (progression != null && progression.ActiveForCurrentClass) open = true; }
+        public void Close() => open = false;
 
         public void Configure(MagicalSkillProgression value) => progression = value;
 
@@ -53,14 +57,6 @@ namespace DiceFree.UI
             if (progression == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen) return;
 
             string key = InputBindings.Display(toggle);
-            if (GUI.Button(ClosedBounds,
-                    "Skills [" + key + "] — " + progression.UnspentPoints + " point(s) available"))
-                open = !open;
-
-            if (Time.unscaledTime < notifiedUntil)
-                GUI.Label(new Rect(ClosedBounds.x, ClosedBounds.y - 24, ClosedBounds.width, 22),
-                    "Level up! Tier-1 skill point available.");
-
             if (!open) return;
             var r = Bounds;
             GUI.Box(r, GUIContent.none);

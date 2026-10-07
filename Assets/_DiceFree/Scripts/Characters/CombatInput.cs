@@ -14,6 +14,8 @@ namespace DiceFree.Characters
         private BasicAttack attack;
         private SkillTargetingController skillTargeting;
         private InputBindings bindings;
+        private GameplayPreferences gameplayPreferences;
+        private CombatActor actor;
         private InputAction select, cycle, attackSelected, clear, respawn;
 
         private void Awake()
@@ -21,12 +23,36 @@ namespace DiceFree.Characters
             selection = GetComponent<TargetSelection>();
             attack = GetComponent<BasicAttack>();
             skillTargeting = GetComponent<SkillTargetingController>();
+            actor = GetComponent<CombatActor>();
+            gameplayPreferences = GameplayPreferences.Current;
             bindings = InputBindings.Current;
             select = bindings.Action("Gameplay/Select target");
             cycle = bindings.Action("Gameplay/Cycle hostile");
             attackSelected = bindings.Action("Gameplay/Attack selected");
             clear = bindings.Action("Gameplay/Clear target");
             respawn = bindings.Action("Gameplay/Return to anchor");
+        }
+
+        private void OnEnable()
+        {
+            if (actor != null && actor.Health != null) actor.Health.Damaged += OnDamaged;
+        }
+
+        private void OnDisable()
+        {
+            if (actor != null && actor.Health != null) actor.Health.Damaged -= OnDamaged;
+        }
+
+        private void OnDamaged(CombatActor source, DamageResult result)
+        {
+            if (gameplayPreferences == null || !gameplayPreferences.AutoRetaliate) return;
+            if (source == null || actor == null || !actor.IsHostileTo(source)) return;
+            if (attack == null || attack.Target != null) return;
+            if (skillTargeting != null && skillTargeting.Active) return;
+
+            selection.Select(source);
+            GetComponent<Interactor>()?.Cancel();
+            attack.Order(source);
         }
 
         private void Update()

@@ -62,12 +62,14 @@ namespace DiceFree.UI
                 case PhysicalSkillKind.HeavyStrike:
                     targeting?.BeginHostile(
                         definition.displayName,
-                        target => caster.Cast(definition, target));
+                        target => caster.Cast(definition, target),
+                        definition.range);
                     break;
                 case PhysicalSkillKind.ArrowRain:
                     targeting?.BeginGround(
                         definition.displayName,
-                        point => caster.CastArrowRain(definition, point));
+                        point => caster.CastArrowRain(definition, point),
+                        definition.range);
                     break;
                 case PhysicalSkillKind.Guard:
                 case PhysicalSkillKind.Quickening:

@@ -8,8 +8,11 @@ namespace DiceFree.Core
     public sealed class ExplorationCamera : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        [SerializeField] private float distance = 34f;
-        [SerializeField] private float pitch = 42f;
+        [SerializeField] private float distance = 40f;
+        [SerializeField, Min(1f)] private float minimumDistance = 14f;
+        [SerializeField, Min(1f)] private float maximumDistance = 78f;
+        [SerializeField, Min(0.001f)] private float zoomSensitivity = 0.085f;
+        [SerializeField] private float pitch = 52f;
         [SerializeField] private float yaw = 45f;
 
         private Vector3 velocity;
@@ -20,6 +23,7 @@ namespace DiceFree.Core
         private bool lookingOut;
         private bool initialized;
         private Camera viewCamera;
+        private CameraOcclusionFader occlusionFader;
 
         public bool LookingOut => lookingOut;
         public bool Following => following;
@@ -27,6 +31,8 @@ namespace DiceFree.Core
         private void Awake()
         {
             viewCamera = GetComponent<Camera>();
+            occlusionFader = GetComponent<CameraOcclusionFader>() ??
+                             gameObject.AddComponent<CameraOcclusionFader>();
             bindings = InputBindings.Current;
             zoom = bindings.Action("Camera/Zoom");
             vista = bindings.Action("Camera/Look toward World 1");
@@ -64,16 +70,19 @@ namespace DiceFree.Core
             if (following) anchor = target.position;
             if (vista.WasPressedThisFrame()) lookingOut = !lookingOut;
 
-            distance = Mathf.Clamp(distance - zoom.ReadValue<float>() * 0.025f, 22f, 58f);
-            viewCamera.fieldOfView = Mathf.Lerp(viewCamera.fieldOfView, lookingOut ? 65f : 55f, 8f * Time.deltaTime);
+            distance = Mathf.Clamp(
+                distance - zoom.ReadValue<float>() * zoomSensitivity,
+                minimumDistance,
+                maximumDistance);
+            viewCamera.fieldOfView = Mathf.Lerp(viewCamera.fieldOfView, lookingOut ? 65f : 50f, 8f * Time.deltaTime);
 
             var rotation = Quaternion.Euler(lookingOut ? 10f : pitch, yaw, 0f);
             var focus = anchor + Vector3.up * (lookingOut ? 6f : 1.5f);
             var desired = focus - rotation * Vector3.forward * distance;
-            var delta = desired - focus;
-            if (Physics.SphereCast(focus, 0.3f, delta.normalized, out var obstruction, distance, 1 << 9,
-                    QueryTriggerInteraction.Ignore))
-                desired = focus + delta.normalized * Mathf.Max(2f, obstruction.distance - 0.3f);
+
+            // Preserve the player's chosen camera distance. Geometry between the camera and
+            // focus fades instead of forcing an unwanted zoom-in.
+            occlusionFader?.UpdateOcclusion(focus, desired);
 
             transform.position = initialized
                 ? Vector3.SmoothDamp(transform.position, desired, ref velocity, 0.13f)
@@ -85,5 +94,13 @@ namespace DiceFree.Core
         }
 
         public void Configure(Transform follow) => target = follow;
+
+        public void ConfigureZoom(float minimum, float maximum, float sensitivity)
+        {
+            minimumDistance = Mathf.Max(1f, minimum);
+            maximumDistance = Mathf.Max(minimumDistance, maximum);
+            zoomSensitivity = Mathf.Max(0.001f, sensitivity);
+            distance = Mathf.Clamp(distance, minimumDistance, maximumDistance);
+        }
     }
 }

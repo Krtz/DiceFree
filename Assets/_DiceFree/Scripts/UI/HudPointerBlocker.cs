@@ -19,6 +19,7 @@ namespace DiceFree.UI
             for (int i = widgets.Count - 1; i >= 0; i--)
             {
                 if (widgets[i] == null) { widgets.RemoveAt(i); continue; }
+                if (!widgets[i].BlocksPointer) continue;
                 if (widgets[i].Bounds.Contains(point)) return true;
             }
             return false;

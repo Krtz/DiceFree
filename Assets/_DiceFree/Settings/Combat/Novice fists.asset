@@ -26,6 +26,8 @@ MonoBehaviour:
     spirit: 0
   baseDamage: 1
   coefficient: 2
+  minimumDamageMultiplier: 0.85
+  maximumDamageMultiplier: 1.15
   interval: 1.1
   windup: 0.25
   reach: 0.7

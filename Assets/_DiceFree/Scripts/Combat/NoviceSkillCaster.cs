@@ -12,6 +12,7 @@ namespace DiceFree.Combat
         private readonly Dictionary<string, float> readyAt = new(StringComparer.Ordinal);
         private CombatActor actor;
         private NoviceSkillProgression progression;
+        private NoviceCombatVfx vfx;
 
         public string Feedback { get; private set; } = "";
         public event Action<NoviceSkillDefinition> Casted;
@@ -20,6 +21,7 @@ namespace DiceFree.Combat
         {
             actor = GetComponent<CombatActor>();
             progression = GetComponent<NoviceSkillProgression>();
+            vfx = GetComponent<NoviceCombatVfx>() ?? gameObject.AddComponent<NoviceCombatVfx>();
         }
 
         public float CooldownRemaining(NoviceSkillDefinition definition)
@@ -64,6 +66,7 @@ namespace DiceFree.Combat
             {
                 case NoviceSkillKind.StrengthMeleeStun:
                     if (definition.attack == null) return Fail("Strength skill attack data is missing.");
+                    vfx?.PlayMeleeStun(actor, target);
                     DamageResolver.Hit(actor, target, definition.attack);
                     if (target.Alive)
                         target.Effects.TryApplyStun(definition.StunDuration(rank), true);
@@ -71,6 +74,7 @@ namespace DiceFree.Combat
 
                 case NoviceSkillKind.MagicSand:
                     if (definition.attack == null) return Fail("Magic Sand attack data is missing.");
+                    vfx?.PlayMagicSand(actor, target);
                     DamageResolver.Hit(actor, target, definition.attack);
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(definition.stableId, definition.MagicSandMissChance(rank), definition.durationSeconds);
@@ -79,10 +83,12 @@ namespace DiceFree.Combat
                 case NoviceSkillKind.AgilityAttackSpeedBuff:
                     target.Effects.ApplyAttackSpeedBuff(definition.stableId,
                         definition.AttackSpeedBonusPercent(actor.Stats.Attributes, rank), definition.durationSeconds);
+                    vfx?.PlayAttackSpeedGlow(target, definition.durationSeconds);
                     break;
 
                 case NoviceSkillKind.SpiritHeal:
-                    target.Health.HealFrom(actor.Stats, definition.HealAmount(actor.Stats.Attributes, rank));
+                    if (target.Health.HealFrom(actor.Stats, definition.HealAmount(actor.Stats.Attributes, rank)) > 0)
+                        vfx?.PlayHealLight(target);
                     break;
 
                 default:
