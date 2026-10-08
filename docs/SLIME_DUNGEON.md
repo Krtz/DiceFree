@@ -1,6 +1,6 @@
 # First Slime Dungeon
 
-Status: initial vertical-slice design target.
+Status: **design approved for implementation** as a playable vertical slice. Balance targets remain provisional; the scene/runtime/editor tooling can now be authored on this feature branch.
 
 ## Purpose
 
@@ -15,7 +15,8 @@ World Face 1 / Cornberg-side entrance -> staging -> approach -> mandatory minibo
 ## Session rules
 
 - Physical entrance in the overworld.
-- Separate Unity map/scene: `SlimeDungeon`.
+- **Shared waiting/staging room with a target practice dummy.** The first entrant claims dungeon occupancy and starts the 60-second clock; subsequent eligible party members join the same waiting room. Players can practice attacks against the dummy, adjust gear, and prepare during staging. When the timer expires, the participant roster, gear and class lock and the dungeon run begins. Consumables remain usable during the run. The staging room is real dungeon infrastructure, not a loading screen.
+- Separate Unity map/scene: `SlimeDungeon` (plus reusable reward scene).
 - Stable dungeon ID: `dungeon.slime`.
 - One live occupancy for `dungeon.slime` per hosted session.
 - If another party/run already owns it, entry is blocked.
@@ -25,7 +26,7 @@ World Face 1 / Cornberg-side entrance -> staging -> approach -> mandatory minibo
 
 ## Authored layout direction (Axel's draw.io map, 2026-10-08)
 
-Use Axel's provided `Slime dungeon.drawio` forest layout as the spatial source of truth when authoring the scene. **No interior scene/blockout implementation is authorized yet.** The diagram uses tree walls/woodland partitions, not a sequence of enclosed cave rooms.
+Use the available forest layout diagram/screenshot from Axel's earlier dungeon design as spatial guidance when authoring the scene. **Scene/blockout implementation is now authorized.** The diagram uses tree walls/woodland partitions, not enclosed cave rooms. Do not assume the editable `.drawio` source exists on disk unless verified.
 
 Mandatory standard route:
 1. **Entrance** at the southern end of the left-hand lane; the existing 60-second staging lifecycle still applies.
@@ -33,7 +34,7 @@ Mandatory standard route:
 3. **Mandatory Big Slime miniboss** in the northwestern clearing. Defeating it unlocks the central puzzle room; players cannot skip the miniboss.
 4. **Puzzle room** in the central lane. A large central tree is surrounded by **five green rings**. Players lure five slimes using normal enemy aggro, one at a time, into **any empty ring**. Maintain **three free slimes** while unsolved, replacing captured or killed ones. Captured slimes lock in place, become invulnerable, and face the tree; killed slimes respawn and those losing aggro return to their starting spots. Once five rings are occupied, **the tree grows and opens the normal boss route**; free slimes disappear and spawning stops. A high-level variant introduces **one blue slime among the three available at a time**: capturing **five blue slimes** (not just any five) opens **both the normal and secret Regent routes**. There is **no release/reset of captured slimes**: if any ordinary slime fills a ring, the secret solution is unavailable for this run, although normal completion still works. The room unlocks only after the miniboss dies.
 5. **Main Slime Boss** in the northeastern clearing.
-6. **Private reward room and return** after completion. The reward room is its **own separate reusable Unity scene**, entered after victory rather than being physically attached to the boss arena; it must be reusable for future dungeons with different reward pools. After resolving the individual reward choice, return the player to this dungeon's physical entrance in the overworld. The scene's theme, naming, interaction layout and variants are still to be designed.
+6. **Private reward room and return** after completion. The reward room is its **own separate reusable Unity scene**, entered after victory rather than being physically attached to the boss arena; it must be reusable for future dungeons with different reward pools. After resolving the individual reward choice, return the player to this dungeon's physical entrance in the overworld. Use **one shared neutral reward-room appearance for now**, but author the scene/controller so **future per-dungeon décor/visual variants** can be configured without copying the underlying reward logic. Naming and presentation details remain flexible.
 
 A **southern/eastern Slime Regent arena** branches off the central lane behind enchanted trees/roots. Its barrier should open **only when the high-level puzzle is solved with five blue slimes**, not merely when the level condition is met. Keep this route visually secret and condition-gated. After entering the secret branch, the Regent can be fought without defeating the regular boss first; defeating **either** final boss unlocks the reward room. Defeating either end boss ends further combat progression; after a roughly 15-second countdown the party is moved to the reward room, so both cannot be fought in one run.
 
@@ -87,7 +88,7 @@ Working stable ID: `boss.slime`.
 
 ### Main-boss Divide pressure: aggressive tiny slime spawns
 
-During Divide, the **normal boss and Regent spawn one small aggressive slime every 2 seconds**, with **no cap on how many are alive simultaneously**. The Regent's small slimes have more HP and deal more damage than the normal boss's adds. Spawning stops when Divide ends, but already spawned adds remain until killed. The miniboss creates no such adds. This remains part of Divide, not an additional regular-boss attack. Performance and balance need playtesting; do not silently introduce a cap. EXP/gold rewards from these spawned adds are undecided.
+During Divide, the **normal boss and Regent spawn one small aggressive slime every 2 seconds**, with **no cap on how many are alive simultaneously**. The Regent's small slimes have more HP and deal more damage than the normal boss's adds. Spawning stops when Divide ends, but already spawned adds remain until killed. The miniboss creates no such adds. This remains part of Divide, not an additional regular-boss attack. Performance and balance need playtesting; do not silently introduce a cap. **Spawned Divide adds award no EXP or gold** so prolonged phases cannot be used to farm.
 
 ### Introductory puzzle: five slimes around the tree
 
@@ -103,8 +104,8 @@ During Divide, the **normal boss and Regent spawn one small aggressive slime eve
 - **Captured slimes can never be released or replaced during the run.** In a level-50+ run, capturing even one ordinary slime makes the all-blue secret solution impossible for that attempt; finishing the remaining rings with any colors opens only the normal route. This is intentional, not a puzzle reset opportunity.
 - As soon as the puzzle completes, **stop spawning and make all leftover free/roaming puzzle slimes disappear**. No way to repair or restart a mixed-color puzzle before leaving the dungeon.
 - Capture order never needs to be simultaneous and any blue slime fits any ring.
-- **Puzzle slime defeats grant no EXP**, including repeat kills of replenishing green or blue slimes; their gold drops remain to be decided.
-- **Finishing the five-ring puzzle awards an EXP chunk**. Exact amount and whether the secret all-blue completion yields a different amount are deferred until balancing.
+- **Puzzle slime defeats grant zero EXP and zero gold**, including repeat kills of replenishing green or blue slimes. No other item loot either; repeated kills must not permit farming.
+- **Finishing the five-ring puzzle awards an EXP chunk** to each participating player. The **five-blue-slime secret completion awards more puzzle-completion EXP** than ordinary completion. Both absolute numbers are deferred until balancing.
 - Purpose: test the reusable dungeon-puzzle system and introduce players to simple enemy-positioning puzzles before harder later dungeon mechanics. Fine detail of the tree growth animation, ring feedback, slime replenishment delay and wipe/reset handling remains to be tuned.
 
 ## High-level conditional route: Slime Regent
@@ -157,7 +158,7 @@ The **Slime Regent** is a higher-level optional route/boss, but is not the final
 - Chosen equipment becomes durable through the successful completion/reward flow.
 - Observing offered/awarded dungeon reward items feeds Echo-wide Codex loot discovery; monster-drop sightings should not be fabricated for monsters with no drops.
 
-The **item identities and numeric bonuses above are current first-playtest design targets, explicitly open to rebalancing**, not yet implemented item assets/drop definitions. **No additional special effects or Intrinsics are intended for these four items for now beyond their listed stats**; adapt any equipment-schema requirements without introducing unapproved effects. The normal reward-room roll is **75% one option / 25% two**, with a separate **5% rare Tophat override**. Exact fixed bonus EXP/gold amounts for both final bosses are **deliberately deferred until balancing**. Ordinary green approach slimes grant normal EXP and gold, whereas repeatedly killed puzzle slimes grant no EXP. Puzzle-slime gold and Divide-add EXP/gold are yet to be decided. Slime Regent-exclusive equipment remains to be designed.
+The **item identities and numeric bonuses above are current first-playtest design targets, explicitly open to rebalancing**, not yet implemented item assets/drop definitions. **No additional special effects or Intrinsics are intended for these four items for now beyond their listed stats**; adapt any equipment-schema requirements without introducing unapproved effects. The normal reward-room roll is **75% one option / 25% two**, with a separate **5% rare Tophat override**. Exact fixed bonus EXP/gold amounts for both final bosses are **deliberately deferred until balancing**. Ordinary green approach slimes grant normal EXP and gold; **puzzle slimes and spawned Divide adds grant no EXP or gold**. **Puzzle completion grants EXP, with a higher amount for the all-blue solution**; the exact values are deferred. Slime Regent-exclusive equipment remains to be designed.
 
 ## Codex events exercised by this dungeon
 
