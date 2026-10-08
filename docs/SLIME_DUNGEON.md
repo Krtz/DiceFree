@@ -139,14 +139,22 @@ The **Slime Regent** is a higher-level optional route/boss, but is not the final
 ## EXP, gold and dungeon-completion loot
 
 - Defeating the miniboss and **either the normal Slime Boss or the Slime Regent** grants EXP and gold. Every participating player receives **their own full EXP and full gold reward**; neither award is divided among party members.
-- Defeating **either** final boss **immediately completes the dungeon** and starts an approximately **15-second countdown**. Players **can move freely and cast abilities, including Resurrection on fallen allies** during this window; this is not a frozen victory cutscene. **At expiry, living/revived party members transfer to the private reward room, while anyone still dead is sent to the Cornberg respawn point instead and receives no end-of-dungeon reward.** No deferred equipment, reward-room bonus EXP or reward-room bonus gold is offered to dead players. Whether already-earned boss-defeat EXP/gold awarded earlier in the run is affected is a separate rule not yet decided. Both final bosses cannot be defeated in the same run. Exact UI and whether the countdown can be skipped remain to be decided.
+- Defeating **either** final boss **immediately completes the dungeon** and starts an approximately **15-second countdown**. Players **can move freely and cast abilities, including Resurrection on fallen allies** during this window; this is not a frozen victory cutscene. **At expiry, living/revived party members transfer to the private reward room, while anyone still dead is sent to the Cornberg respawn point instead and receives no end-of-dungeon reward.** No deferred equipment, reward-room bonus EXP or reward-room bonus gold is offered to dead players. **EXP and gold already earned from defeated enemies or bosses are retained**, even if the player is dead at transfer time; dying only forfeits the final reward-room choice. Both final bosses cannot be defeated in the same run. Exact UI and whether the countdown can be skipped remain to be decided.
 - **No equipment or item loot drops during the dungeon**, including from bosses. All item/equipment rewards are awarded only **after dungeon completion in the private reward room**.
-- Each eligible player is offered **up to two independently rolled equipment rewards** from the appropriate dungeon reward pool and may **choose exactly one**. As an alternative, they may **decline both equipment options and choose bonus EXP and gold together**. The bonus payout amount and probability of getting one versus two gear options still need tuning. Preserve the independent per-player rolls/no-smart-loot contract.
-- Normal Slime Boss and optional Slime Regent content may affect the authored **reward-room pools**, not spawn world loot from those bosses.
+- Each eligible player is offered **one or two independently rolled equipment rewards** from the appropriate dungeon reward pool and may **choose exactly one**. The probability of one versus two normal options still needs tuning.
+- **Rare lucky drop override:** if the rare **Slimy Tophat** is rolled, it is **the only equipment option** offered; there is no second normal equipment item alongside it. The drop chance and special-roll resolution details are yet to be set.
+- Instead of equipment, the eligible player can **decline the item offer and choose bonus EXP and gold together**. These are fixed authored amounts **per final boss choice**: normal Slime Boss and Slime Regent each have their own amounts (yet to be specified), rather than a single universally fixed payout.
+- Preserve **independent rolls per player** and **no smart loot**: items can be offered regardless of which class can equip them.
+- **Normal Slime Boss reward pool (provisional item identities; stats and exact properties to design):**
+  - **Slime Orb** — offhand, can be equipped by **Magically Touched** characters.
+  - **Slime Shield** — offhand, can be equipped by **Physically Blessed** characters.
+  - **Slimy Farmer's Gloves** — gloves, **equippable by everyone**.
+  - **Slimy Tophat** — hat, **equippable by everyone**, the rare lucky drop; when rolled it overrides the usual one/two-item equipment offer.
+- **Slime Regent reward pool:** a **distinct authored table** that nevertheless **includes all normal Slime Boss items**, plus exclusive Regent items not yet designed. Specific probabilities, exclusives, and Intrinsics remain TBD. Neither final boss drops items during combat; all rolls happen at the end reward room.
 - Chosen equipment becomes durable through the successful completion/reward flow.
 - Observing offered/awarded dungeon reward items feeds Echo-wide Codex loot discovery; monster-drop sightings should not be fabricated for monsters with no drops.
 
-Exact equipment pool contents, bonus EXP/gold amounts, whether trash grants ordinary EXP/gold, and whether the Regent changes only the gear pool or also the bonus EXP/gold amounts remain to be decided.
+The **item identities above are approved design candidates**, not finalized stats or implemented drop definitions. Remaining balance decisions include item stats/Intrinsics, the lucky-drop chance, odds of one versus two normal equipment options, exact fixed bonus EXP/gold amounts for each final boss, and whether trash grants ordinary EXP/gold.
 
 ## Codex events exercised by this dungeon
 
@@ -168,7 +176,7 @@ Exact equipment pool contents, bonus EXP/gold amounts, whether trash grants ordi
 - if a boss encounter disengages without a full party wipe, that boss encounter resets; a **full-party wipe always terminates the dungeon run** as described below;
 - **any full-party wipe in this Slime Dungeon ends the run and sends every party member to the Cornberg respawn point** (including wipes in the puzzle room), resetting the instance and releasing its occupancy; no restart/checkpoint inside the dungeon;
 - abandon destroys/resets the run and releases occupancy;
-- defeating either final boss begins the ~15-second transition to the private reward room; completed/finished cleanup releases occupancy, with the exact release point relative to reward claims still subject to session-flow implementation;
+- defeating either final boss begins the ~15-second transition to the private reward room; **after an eligible player resolves their individual reward choice, automatically return that player to the physical Slime Dungeon entrance in the overworld** (not the Cornberg respawn point). Players still dead at countdown expiry go to Cornberg instead, with no reward room visit. Completed/finished cleanup releases occupancy, with exact release timing still subject to session-flow implementation;
 - stale-lock recovery exists for failed cleanup/crashes.
 
 ## Not in the first blockout
