@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/Cornberg.unity
     guid: 74ec406dace83b44e84b5846d9f72c51
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/NoviceMountainTrial.unity
+    guid: 2ed6cb14e801d7f449b43f91804195fc
   m_configObjects: {}

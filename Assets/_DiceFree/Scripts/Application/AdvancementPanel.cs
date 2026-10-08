@@ -18,6 +18,8 @@ namespace DiceFree.Advancement
         private void OnGUI()
         {
             if (controller == null || controller.CurrentClass == null) return;
+            var trial = GetComponent<DiceFree.World.MountainTrialTraveller>();
+            if (trial != null && !trial.InsideTrial) return;
 
             var available = controller.Definitions.Where(controller.CanAdvance).ToArray();
             if (available.Length == 0) return;

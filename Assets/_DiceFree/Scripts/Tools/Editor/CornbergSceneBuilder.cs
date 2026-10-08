@@ -76,7 +76,7 @@ namespace DiceFree.EditorTools
         {
             Physics.SyncTransforms();
             var sources=new List<NavMeshBuildSource>(); var obstacles=new List<NavMeshBuildSource>();
-            var bounds=new Bounds(new Vector3(35,15,14),new Vector3(220,100,155));
+            var bounds=new Bounds(new Vector3(95,18,70),new Vector3(340,100,270));
             NavMeshBuilder.CollectSources(bounds,1<<8,NavMeshCollectGeometry.PhysicsColliders,0,new List<NavMeshBuildMarkup>(),sources);
             NavMeshBuilder.CollectSources(bounds,1<<9,NavMeshCollectGeometry.PhysicsColliders,1,new List<NavMeshBuildMarkup>(),obstacles);
             sources.AddRange(obstacles);

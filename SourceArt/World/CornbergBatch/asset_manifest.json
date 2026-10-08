@@ -1,0 +1,245 @@
+[
+  {
+    "type": "Trees",
+    "name": "Tree_Pine",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Pine.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Pine.fbx",
+    "objects": 3,
+    "scale_m": 4.5,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Spruce",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Spruce.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Spruce.fbx",
+    "objects": 3,
+    "scale_m": 3.8,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Oak",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Oak.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Oak.fbx",
+    "objects": 3,
+    "scale_m": 3.1,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Birch",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Birch.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Birch.fbx",
+    "objects": 4,
+    "scale_m": 4.3,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Maple",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Maple.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Maple.fbx",
+    "objects": 3,
+    "scale_m": 3.0,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Willow",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Willow.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Willow.fbx",
+    "objects": 3,
+    "scale_m": 3.2,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Twisted",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Twisted.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Twisted.fbx",
+    "objects": 3,
+    "scale_m": 3.4,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Aspen",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Aspen.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Aspen.fbx",
+    "objects": 3,
+    "scale_m": 5.2,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "Trees",
+    "name": "Tree_Cypress",
+    "blend": "SourceArt/World/CornbergBatch/Tree_Cypress.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Cypress.fbx",
+    "objects": 3,
+    "scale_m": 4.4,
+    "notes": "Recolor Foliage/LeafAccent materials in Unity; shared bark/filler geometry."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Farmer",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Farmer.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Farmer.fbx",
+    "objects": 6,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Merchant",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Merchant.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Merchant.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Banker",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Banker.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Banker.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Alchemist",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Alchemist.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Alchemist.fbx",
+    "objects": 7,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Blacksmith",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Blacksmith.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Blacksmith.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Villager",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Villager.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Villager.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Guard",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Guard.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Guard.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "NPCs",
+    "name": "NPC_Herbalist",
+    "blend": "SourceArt/World/CornbergBatch/NPC_Herbalist.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Herbalist.fbx",
+    "objects": 5,
+    "scale_m": 2.05,
+    "notes": "Generic stylized static 3D NPC role kit; currently not rigged. Preserve unique Tier-2 couple."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Crop",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Crop.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Crop.fbx",
+    "objects": 4,
+    "scale_m": 0.33,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Meadow",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Meadow.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Meadow.fbx",
+    "objects": 5,
+    "scale_m": 0.78,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Road",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Road.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Road.fbx",
+    "objects": 6,
+    "scale_m": 1.05,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Forest",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Forest.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Forest.fbx",
+    "objects": 6,
+    "scale_m": 1.38,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Amber",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Amber.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Amber.fbx",
+    "objects": 6,
+    "scale_m": 1.14,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Elite",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Elite.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Elite.fbx",
+    "objects": 6,
+    "scale_m": 1.88,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Boss",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Boss.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Boss.fbx",
+    "objects": 6,
+    "scale_m": 2.65,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_Regent",
+    "blend": "SourceArt/World/CornbergBatch/Slime_Regent.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_Regent.fbx",
+    "objects": 6,
+    "scale_m": 3.35,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Slimes",
+    "name": "Slime_RoyalFuture",
+    "blend": "SourceArt/World/CornbergBatch/Slime_RoyalFuture.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Slimes/Slime_RoyalFuture.fbx",
+    "objects": 6,
+    "scale_m": 4.0,
+    "notes": "Real 3D semi-transparent gel shell with interior floating contents; later tiers larger and more complex."
+  },
+  {
+    "type": "Mountain",
+    "name": "CornbergAdvancementMountain",
+    "blend": "SourceArt/World/CornbergBatch/CornbergAdvancementMountain.blend",
+    "fbx": "Assets/_DiceFree/Art/World/CornbergBatch/Mountain/CornbergAdvancementMountain.fbx",
+    "objects": 10,
+    "scale_m": 13.0,
+    "notes": "Separate DoorLeft/DoorRight transforms; open at level 10; destination must be its own advancement map."
+  }
+]

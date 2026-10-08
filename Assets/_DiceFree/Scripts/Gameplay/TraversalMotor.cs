@@ -109,6 +109,22 @@ namespace DiceFree.Characters
             if (blocked) motionBlocks.Add(sourceId); else motionBlocks.Remove(sourceId);
             if (!MotionAllowed) Stop();
         }
+        /// <summary>Relocate the same agent between independently baked map NavMeshes.</summary>
+        public bool TeleportAcrossMaps(Vector3 point)
+        {
+            if (agent == null || !NavMesh.SamplePosition(point, out var hit, 3f, agent.areaMask))
+                return false;
+
+            // Warp alone can fail when the destination polygon belongs to a new scene.
+            Stop();
+            if (agent.enabled) agent.enabled = false;
+            transform.position = hit.position;
+            agent.enabled = true;
+            bool ready = agent.isOnNavMesh;
+            RefreshSpeed();
+            return ready;
+        }
+
         public bool Teleport(Vector3 point)
         {
             // Persistence/start-menu restoration can request the authored spawn before this component's Start.

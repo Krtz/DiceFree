@@ -623,3 +623,6 @@ root change. Commands: `dicefree.art.pants.prepare`, `.validate`,
 `Assets/_DiceFree/Art/Validation/Previews/FarmersPants_Unity.png`.
 Existing clips have no independent knee flex; validation separately labels a
 synthetic joint-flex check. Human cloth/art approval remains provisional.
+
+## Cornberg 3D world batch (2026-10-08)
+`SourceArt/World/CornbergBatch/` contains 27 editable Blender .blend model sources (9 trees, 8 generic NPC roles, 9 transparent slime variants, opening mountain) and a manifest. Paired .fbx exports and recolorable URP materials are actually integrated in Cornberg via the reproducible `SourceArt/build_cornberg_batch.py` pipeline. Full details and limitations are in `docs/CORNBERG_ART_BATCH.md`. The Slime Dungeon interior is expressly postponed for co-design.
