@@ -31,7 +31,7 @@ Mandatory standard route:
 1. **Entrance** at the southern end of the left-hand lane; the existing 60-second staging lifecycle still applies.
 2. **Trash mobs** in the left-hand woodland approach.
 3. **Mandatory Big Slime miniboss** in the northwestern clearing. Defeating it unlocks the central puzzle room; players cannot skip the miniboss.
-4. **Puzzle room** in the central lane. A large central tree is surrounded by **five green rings**. Players lure **five slimes** into the rings using normal enemy aggro, **one at a time, with no simultaneous-positioning requirement**. Any slime that reaches a qualifying ring becomes locked in place, invulnerable, and turns to face the central tree. If an uncaptured slime is killed, another spawns so the puzzle can always be retried. The exact completion effect, spawn distribution and ring assignment are still to be co-designed. The room unlocks only after the miniboss dies.
+4. **Puzzle room** in the central lane. A large central tree is surrounded by **five green rings**. Players lure **five slimes** using normal enemy aggro, one at a time, into **any empty ring**. Three uncaptured slimes spawn at a time and are replenished as needed until the fifth ring is filled. Captured slimes lock in place, become invulnerable, and face the tree; killed slimes respawn and slimes that lose aggro return to their starting spots. After all five rings are filled, **the tree grows and magically opens the door toward the boss**, and puzzle slimes stop spawning. The room unlocks only after the miniboss dies.
 5. **Main Slime Boss** in the northeastern clearing.
 6. **Private reward room and return** after completion. Their exact placement/geometry is not yet marked on Axel's map and must be agreed before scene authoring.
 
@@ -78,17 +78,18 @@ Working stable ID: `boss.slime`.
 
 ### Main-boss Divide pressure: aggressive tiny slime spawns
 
-Only the **main boss** adds this complication: while its three larger fragments creep toward one another (and do not chase players), they spawn **tiny aggressive slimes** that attack players. The mandatory miniboss does **not** spawn these attackers during Divide, keeping the introductory encounter simpler. This is part of the main boss's Divide mechanic, not a third boss attack. Spawn frequency, number caps, and whether remaining attackers disappear or persist after Divide are still to be tuned.
+Only the **main boss** adds this complication: while its three larger fragments creep toward one another (and do not chase players), they spawn **tiny aggressive slimes** that attack players. The mandatory miniboss does **not** spawn these attackers during Divide, keeping the introductory encounter simpler. This is part of the main boss's Divide mechanic, not a third boss attack. **Tiny attacking slimes remain in the arena after Divide resolves until the players kill them.** Spawn frequency and number caps still need tuning.
 
 ### Introductory puzzle: five slimes around the tree
 
 - **Room centerpiece:** one big tree with **five distinct green rings** placed around it.
-- Slimes spawn in the room; use **ordinary aggro** to lure them toward the central tree. No bait or special luring action.
-- A slime reaching a qualifying empty ring is **automatically captured**: it becomes invulnerable, cannot move, and **faces the tree**.
-- Fill all **five** rings with five slimes. Each stays captured, so players can solve it **sequentially**, without coordinating simultaneous arrivals. The exact ring-matching requirements (if any) are undecided.
-- A slime killed before capture **respawns/replenishes automatically**, preventing accidental damage from making the puzzle impossible.
-- The tree's activation presentation, how it unlocks the next area, slime-spawn timing, and puzzle reset behavior remain to be defined together.
-- Purpose: test the reusable dungeon-puzzle system and introduce players to simple enemy-positioning puzzles before harder later dungeon mechanics.
+- Maintain **three uncaptured slimes at a time** as available puzzle actors; replenish the pool as slimes are captured or killed while the puzzle is unsolved.
+- Use **ordinary aggro** to lure any of these slimes toward the central tree; no bait, special luring action or slime-to-ring matching. **Any slime works in any empty ring.**
+- A slime stepping into an empty ring is **automatically captured**: it becomes invulnerable, cannot move, and **faces the tree**.
+- Fill all **five** rings; captured slimes stay put, allowing completion **one slime at a time** without synchronized player positioning. A failed/killed uncaptured slime can be replaced automatically.
+- A puzzle slime that **loses aggro** before reaching a ring simply **returns to its starting position**, so it can be pulled again.
+- When the **fifth ring** is occupied, the **tree grows and magically opens the door** leading onward to the main boss. Stop **all new puzzle-slime spawning** immediately upon success. Whether leftover roaming puzzle slimes despawn or remain after success is not yet decided.
+- Purpose: test the reusable dungeon-puzzle system and introduce players to simple enemy-positioning puzzles before harder later dungeon mechanics. Fine detail of the tree growth animation, ring feedback, slime replenishment delay and wipe/reset handling remains to be tuned.
 
 ## High-level conditional route: Slime Regent
 
