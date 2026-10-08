@@ -23,57 +23,58 @@ World Face 1 / Cornberg-side entrance -> staging -> short dungeon -> Slime Boss 
 - Other players may remain on any overworld face simultaneously.
 - Default staging countdown: 60 seconds.
 
-## Initial layout
+## Authored layout direction (Axel's draw.io map, 2026-10-08)
 
-The first blockout should stay compact:
+Use Axel's provided `Slime dungeon.drawio` forest layout as the spatial source of truth when authoring the scene. **No interior scene/blockout implementation is authorized yet.** The diagram uses tree walls/woodland partitions, not a sequence of enclosed cave rooms.
 
-1. **Staging room / cave mouth**
-   - test dummy;
-   - final equipment preparation;
-   - visible route into the dungeon after run start.
+Mandatory standard route:
+1. **Entrance** at the southern end of the left-hand lane; the existing 60-second staging lifecycle still applies.
+2. **Trash mobs** in the left-hand woodland approach.
+3. **Mandatory Big Slime miniboss** in the northwestern clearing. Defeating it unlocks the central puzzle room; players cannot skip the miniboss.
+4. **Puzzle room** in the central lane. Actual puzzle mechanic and the exact opening/locking behavior remain to be designed with Axel.
+5. **Main Slime Boss** in the northeastern clearing.
+6. **Private reward room and return** after completion. Their exact placement/geometry is not yet marked on Axel's map and must be agreed before scene authoring.
 
-2. **Slime approach**
-   - 2–3 small slime encounters;
-   - teach target selection, AoE and positioning without a major mechanic.
+A **southern/eastern Slime Regent arena** branches off the central lane behind trees that disappear when the run's high-level condition is met. Keep this route visually secret and condition-gated. The Regent is not a replacement for the standard boss. The final sequence/requirement for clearing optional Regent content is not yet settled.
 
-3. **Short traversal / split path space**
-   - establishes enough physical room for the later conditional Regent route;
-   - ordinary low-level path remains obvious.
+Retain dense, diverse natural tree boundaries, with isometric readability, traversable corridors and room for Slam landing telegraphs. Do not silently invent additional mandatory encounters, puzzles, doors, or rewards.
 
-4. **Slime Boss arena**
-   - compact readable arena;
-   - boss has exactly two attacks in the first version.
+## Boss encounter teaching progression (decisions 2026-10-08)
 
-5. **Private loot room**
-   - one reward choice per eligible participant;
-   - reward must be resolved before normal exit.
+Two slime encounters teach the **same two mechanics**. The mandatory miniboss teaches an easier form, and the larger main boss escalates it. These are the only two authored attack types for the first main boss: **Slime Slam** and **Divide**. No puddle/trail third attack.
 
-6. **Exit**
-   - returns to the authored world destination.
+### Shared Slime Slam: player-targeted jump
 
-Do not inflate the first blockout with extra rooms just to make it feel like a 'real dungeon'. The vertical slice exists to validate the complete system.
+- A circular ground danger area appears **at a player's position**.
+- The slime jumps into the air, then lands in that indicated circle; the target must run away from the telegraphed landing spot.
+- The miniboss uses the weaker, smaller version; the main boss uses a stronger, larger circular area.
+- Exact telegraph timing, damage and repeat frequency remain open.
+- Seeing the move discovers Codex mechanic `mechanic.slime-slam`.
 
-## First Slime Boss
+### Mandatory miniboss: Big Slime
+
+- Visually a big slime, less imposing than the main boss.
+- Has the smaller/weaker player-targeted jumping Slam.
+- **Divide** produces **two** smaller slimes at opposite sides of the arena that slowly approach each other.
+- Players must kill **at least one** before the two meet.
+- On success, the surviving slime is the boss-like combatant and **resumes attacking**; it is not an additional target that must be killed to finish the split mechanic.
+- On failure, the two fuse and the miniboss heals by **the sum of the two slimes' remaining HP**. Exactly how fragment HP is budgeted versus boss HP remains to be specified.
+- Defeating the miniboss opens access to the puzzle room.
+- Award EXP and gold on boss defeat. No equipment/item drops.
+
+### Main Slime Boss
 
 Working stable ID: `boss.slime`.
 
-The first Slime Boss has exactly two attacks:
+- A **larger slime with a distinctive hat or similar visual feature**.
+- Uses the same player-targeted jump Slam, but with a larger danger circle and stronger damage.
+- **Divide** produces **three** smaller slimes; players must kill **at least two** before the divided slimes reunite.
+- On success, the remaining slime stays boss-like and **resumes attacking**, rather than requiring players to kill every fragment.
+- The exact main-boss failed-reunion healing rule is not confirmed yet; do not assume it automatically matches the miniboss until Axel confirms.
+- Award EXP and gold on boss defeat. No equipment/item drops.
+- Seeing Divide discovers Codex mechanic `mechanic.divide`.
 
-### 1. Slime Slam
-
-- clear telegraph;
-- physical impact around/in front of the boss depending on final animation;
-- teaches moving out of a readable danger area;
-- witnessing it discovers the Codex mechanic `mechanic.slime-slam`.
-
-### 2. Divide
-
-- boss divides/spawns smaller slimes;
-- the mechanic should change target priority rather than merely add visual clutter;
-- exact recombine/heal tuning is a later encounter-balance decision;
-- witnessing it discovers the Codex mechanic `mechanic.divide`.
-
-No puddle/trail attack in this first boss version.
+**Boss rewards:** Each participating player gets **full EXP**, rather than shared/split EXP. Gold distribution still needs confirmation (separate full award vs shared/split). Gear/item rewards remain exclusively in the dungeon-end private reward room.
 
 ## High-level conditional route: Slime Regent
 
@@ -97,23 +98,21 @@ The **Slime Regent** is a higher-level optional route/boss, but is not the final
 
 **Slime Queen / Slime King** remain later higher-level hard-boss content.
 
-## Loot
+## EXP, gold and dungeon-completion loot
 
-Normal Slime Boss and Slime Regent use distinct authored loot definitions.
+- Defeating the miniboss and main boss grants EXP and gold. Each participating player gets their **own full EXP**, never a divided party share; gold distribution is still open.
+- **No equipment or item loot drops during the dungeon**, including from bosses. All item/equipment rewards are awarded only **after dungeon completion in the private reward room**.
+- Each eligible player independently chooses a reward in the private loot room; preserve the existing independent-roll/no-smart-loot contract.
+- Normal Slime Boss and optional Slime Regent content may affect the authored **reward-room pools**, not spawn world loot from those bosses.
+- Chosen equipment becomes durable through the successful completion/reward flow.
+- Observing offered/awarded dungeon reward items feeds Echo-wide Codex loot discovery; monster-drop sightings should not be fabricated for monsters with no drops.
 
-Initial vertical-slice requirement:
-
-- normal completion reaches a private loot room;
-- chosen equipment reward becomes durable only through the successful completion/reward flow;
-- observed dungeon loot feeds Echo-wide Codex discovery;
-- Regent route can supply a different reward pool without creating a separate dungeon ID.
-
-Exact item list is still to be designed.
+Exact reward items, whether trash grants ordinary EXP/gold, gold payout distribution, and the Regent reward-room offer rules remain to be decided.
 
 ## Codex events exercised by this dungeon
 
 - exact slime monster kill;
-- monster drop observed;
+- dungeon reward item observed (no monster item drops in this dungeon);
 - Slime Slam witnessed;
 - Divide witnessed;
 - dungeon wipe;
