@@ -29,11 +29,11 @@ Use Axel's provided `Slime dungeon.drawio` forest layout as the spatial source o
 
 Mandatory standard route:
 1. **Entrance** at the southern end of the left-hand lane; the existing 60-second staging lifecycle still applies.
-2. **Trash mobs** in the left-hand woodland approach.
+2. **Trash mobs** in the left-hand woodland approach: **ordinary green slimes only** for the first playable version. They grant **normal overworld-style EXP and gold** when defeated, but **no equipment/item drops**. No stronger trash variants yet.
 3. **Mandatory Big Slime miniboss** in the northwestern clearing. Defeating it unlocks the central puzzle room; players cannot skip the miniboss.
 4. **Puzzle room** in the central lane. A large central tree is surrounded by **five green rings**. Players lure five slimes using normal enemy aggro, one at a time, into **any empty ring**. Maintain **three free slimes** while unsolved, replacing captured or killed ones. Captured slimes lock in place, become invulnerable, and face the tree; killed slimes respawn and those losing aggro return to their starting spots. Once five rings are occupied, **the tree grows and opens the normal boss route**; free slimes disappear and spawning stops. A high-level variant introduces **one blue slime among the three available at a time**: capturing **five blue slimes** (not just any five) opens **both the normal and secret Regent routes**. There is **no release/reset of captured slimes**: if any ordinary slime fills a ring, the secret solution is unavailable for this run, although normal completion still works. The room unlocks only after the miniboss dies.
 5. **Main Slime Boss** in the northeastern clearing.
-6. **Private reward room and return** after completion. Their exact placement/geometry is not yet marked on Axel's map and must be agreed before scene authoring.
+6. **Private reward room and return** after completion. The reward room is its **own separate reusable Unity scene**, entered after victory rather than being physically attached to the boss arena; it must be reusable for future dungeons with different reward pools. After resolving the individual reward choice, return the player to this dungeon's physical entrance in the overworld. The scene's theme, naming, interaction layout and variants are still to be designed.
 
 A **southern/eastern Slime Regent arena** branches off the central lane behind enchanted trees/roots. Its barrier should open **only when the high-level puzzle is solved with five blue slimes**, not merely when the level condition is met. Keep this route visually secret and condition-gated. After entering the secret branch, the Regent can be fought without defeating the regular boss first; defeating **either** final boss unlocks the reward room. Defeating either end boss ends further combat progression; after a roughly 15-second countdown the party is moved to the reward room, so both cannot be fought in one run.
 
@@ -60,6 +60,7 @@ Two slime encounters teach the **same two mechanics**. The mandatory miniboss te
 - Players must kill **at least one** before the two meet.
 - On success, the surviving slime is the boss-like combatant and **resumes attacking at exactly the miniboss HP recorded immediately before Divide**. Killing the fragment does not itself reduce boss HP, and the final fragment is not an additional kill requirement.
 - On failure, the two fuse and the miniboss heals by **the sum of the two slimes' remaining HP**. Exactly how fragment HP is budgeted versus boss HP remains to be specified; normal boss max-HP limit applies unless future design says otherwise.
+- **Initial Divide reunion target: approximately 10 seconds**, to be tuned with actual playtesting; achieve via arena separation/movement rather than hard-coding an untested speed.
 - Defeating the miniboss opens access to the puzzle room.
 - Award EXP and gold on boss defeat. No equipment/item drops.
 
@@ -71,7 +72,7 @@ Working stable ID: `boss.slime`.
 - Uses the same player-targeted jump Slam, but with a larger danger circle and stronger damage.
 - **Divide** produces **three** smaller slimes; players must kill **at least two** before the divided slimes reunite.
 - On success, the remaining slime stays boss-like and **resumes attacking at exactly the boss HP recorded immediately before Divide**. Players do not need to kill every fragment, and defeated fragments do not directly reduce boss HP.
-- On failed Divide/reunion, the boss heals by **the combined remaining HP of its three fragments**, matching the miniboss's heal rule. Fragment HP budgets, how the three recombine, and exact proximity/timing remain to be tuned.
+- On failed Divide/reunion, the boss heals by **the combined remaining HP of its three fragments**, matching the miniboss's heal rule. Fragment HP budgets and how the three recombine remain to be tuned. **Initial Divide reunion target: approximately 12 seconds**, subject to playtesting.
 - Award EXP and gold on boss defeat. No equipment/item drops.
 - Seeing Divide discovers Codex mechanic `mechanic.divide`.
 
@@ -86,7 +87,7 @@ Working stable ID: `boss.slime`.
 
 ### Main-boss Divide pressure: aggressive tiny slime spawns
 
-Only the **main boss** adds this complication: while its three larger fragments creep toward one another (and do not chase players), they spawn **tiny aggressive slimes** that attack players. The mandatory miniboss does **not** spawn these attackers during Divide, keeping the introductory encounter simpler. This is part of the main boss's Divide mechanic, not a third boss attack. **Tiny attacking slimes remain in the arena after Divide resolves until the players kill them.** Spawn frequency and number caps still need tuning.
+During Divide, the **normal boss and Regent spawn one small aggressive slime every 2 seconds**, with **no cap on how many are alive simultaneously**. The Regent's small slimes have more HP and deal more damage than the normal boss's adds. Spawning stops when Divide ends, but already spawned adds remain until killed. The miniboss creates no such adds. This remains part of Divide, not an additional regular-boss attack. Performance and balance need playtesting; do not silently introduce a cap. EXP/gold rewards from these spawned adds are undecided.
 
 ### Introductory puzzle: five slimes around the tree
 
@@ -102,6 +103,8 @@ Only the **main boss** adds this complication: while its three larger fragments 
 - **Captured slimes can never be released or replaced during the run.** In a level-50+ run, capturing even one ordinary slime makes the all-blue secret solution impossible for that attempt; finishing the remaining rings with any colors opens only the normal route. This is intentional, not a puzzle reset opportunity.
 - As soon as the puzzle completes, **stop spawning and make all leftover free/roaming puzzle slimes disappear**. No way to repair or restart a mixed-color puzzle before leaving the dungeon.
 - Capture order never needs to be simultaneous and any blue slime fits any ring.
+- **Puzzle slime defeats grant no EXP**, including repeat kills of replenishing green or blue slimes; their gold drops remain to be decided.
+- **Finishing the five-ring puzzle awards an EXP chunk**. Exact amount and whether the secret all-blue completion yields a different amount are deferred until balancing.
 - Purpose: test the reusable dungeon-puzzle system and introduce players to simple enemy-positioning puzzles before harder later dungeon mechanics. Fine detail of the tree growth animation, ring feedback, slime replenishment delay and wipe/reset handling remains to be tuned.
 
 ## High-level conditional route: Slime Regent
@@ -128,7 +131,7 @@ The **Slime Regent** is a higher-level optional route/boss, but is not the final
 
 - **Appearance:** larger even than the regular top-hatted Slime Boss; wears a **crown** and has **visible gold floating inside its translucent gel body**.
 - **Larger Slam:** retains the player-targeted jump-and-circular-telegraph Slime Slam, but the Regent's AoE is even bigger. Keep the existing starting 3-second warning duration as a playtest baseline unless this encounter needs separate tuning.
-- **Four-way Divide:** splits into **four major slimes** creeping toward one another. The party must kill **at least three before they reunite**; the remaining one reforms into the Regent. It also spawns **tougher aggressive small slimes with both higher HP and higher damage** than the regular Slime Boss's Divide (precise scaling and spawn frequency TBD). The small adds follow the established rule of staying active until killed after Divide resolves. The Regent Divides at **70% and 30% HP**, each threshold triggering **only once per boss fight** even if the Regent heals back across it. On success, the sole surviving fragment reforms into the Regent with **exactly the HP it had immediately before Divide**, just like the two smaller boss encounters; killing the fragments doesn't reduce that stored boss HP. If all four fragments reunite before the party kills three, the Regent **heals by the sum of their remaining HP**, capped by normal boss max HP unless later design changes the cap. The proportion of Regent max HP given to each fragment still needs tuning.
+- **Four-way Divide:** splits into **four major slimes** creeping toward one another. The party must kill **at least three before they reunite**; the remaining one reforms into the Regent. It also spawns **tougher aggressive small slimes with both higher HP and higher damage** than the regular Slime Boss's Divide (precise scaling and spawn frequency TBD). The small adds follow the established rule of staying active until killed after Divide resolves. The Regent Divides at **70% and 30% HP**, each threshold triggering **only once per boss fight** even if the Regent heals back across it. On success, the sole surviving fragment reforms into the Regent with **exactly the HP it had immediately before Divide**, just like the two smaller boss encounters; killing the fragments doesn't reduce that stored boss HP. If all four fragments reunite before the party kills three, the Regent **heals by the sum of their remaining HP**, capped by normal boss max HP unless later design changes the cap. The proportion of Regent max HP given to each fragment still needs tuning. **Initial Divide reunion target: approximately 15 seconds**, subject to gameplay testing.
 - **Rolling Attack:** selects the **furthest-away living player when the attack starts** and locks onto that player's **position at the start**, then rolls toward that fixed position without homing/tracking later player movements. It leaves a **damaging slime trail** persisting **5 seconds**. Roll telegraph, damage, travel speed and collision/pathing are yet to be tuned.
 - **Bouncing Attack:** at cast start, snapshots each participating player's position and places a **smaller AoE circle** at each marked location. The Regent then **bounces between these marked locations one after another**, not simultaneously; players can move away from the static marked circles. Exact player/marker ordering, solo behavior, timing per bounce and damage are still to be tuned.
 - The Regent's roll/trail and bouncing abilities are **Regent-only additional attacks**. The regular Slime Boss retains only Slam and Divide in the first release.
@@ -154,7 +157,7 @@ The **Slime Regent** is a higher-level optional route/boss, but is not the final
 - Chosen equipment becomes durable through the successful completion/reward flow.
 - Observing offered/awarded dungeon reward items feeds Echo-wide Codex loot discovery; monster-drop sightings should not be fabricated for monsters with no drops.
 
-The **item identities and numeric bonuses above are current first-playtest design targets, explicitly open to rebalancing**, not yet implemented item assets/drop definitions. **No additional special effects or Intrinsics are intended for these four items for now beyond their listed stats**; adapt any equipment-schema requirements without introducing unapproved effects. The normal reward-room roll is **75% one option / 25% two**, with a separate **5% rare Tophat override**. Exact fixed bonus EXP/gold amounts for both final bosses are **deliberately deferred until balancing**. Remaining decisions include whether trash grants ordinary EXP/gold and Slime Regent-exclusive equipment.
+The **item identities and numeric bonuses above are current first-playtest design targets, explicitly open to rebalancing**, not yet implemented item assets/drop definitions. **No additional special effects or Intrinsics are intended for these four items for now beyond their listed stats**; adapt any equipment-schema requirements without introducing unapproved effects. The normal reward-room roll is **75% one option / 25% two**, with a separate **5% rare Tophat override**. Exact fixed bonus EXP/gold amounts for both final bosses are **deliberately deferred until balancing**. Ordinary green approach slimes grant normal EXP and gold, whereas repeatedly killed puzzle slimes grant no EXP. Puzzle-slime gold and Divide-add EXP/gold are yet to be decided. Slime Regent-exclusive equipment remains to be designed.
 
 ## Codex events exercised by this dungeon
 
