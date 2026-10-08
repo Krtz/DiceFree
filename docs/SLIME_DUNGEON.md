@@ -37,7 +37,7 @@ Mandatory standard route:
 
 A **southern/eastern Slime Regent arena** branches off the central lane behind enchanted trees/roots. Its barrier should open **only when the high-level puzzle is solved with five blue slimes**, not merely when the level condition is met. Keep this route visually secret and condition-gated. After entering the secret branch, the Regent can be fought without defeating the regular boss first; defeating **either** final boss unlocks the reward room. Defeating either end boss ends further combat progression; after a roughly 15-second countdown the party is moved to the reward room, so both cannot be fought in one run.
 
-Retain dense, diverse natural tree boundaries, with isometric readability, traversable corridors and room for Slam landing telegraphs. Do not silently invent additional mandatory encounters, puzzles, doors, or rewards.
+Retain dense, diverse natural tree boundaries, with isometric readability, traversable corridors and room for Slam landing telegraphs. **Art palette exception:** trees at the **bottom/southern edge of the puzzle area are blue**, while **all other trees throughout the dungeon are green**. The central puzzle tree is green before activation and **turns blue only after the five-blue-slime secret solution**. Keep the distinction between these permanently blue trees and the central tree's dynamic transformation. Do not silently invent additional mandatory encounters, puzzles, doors, or rewards.
 
 ## Boss encounter teaching progression (decisions 2026-10-08)
 
@@ -67,7 +67,7 @@ Two slime encounters teach the **same two mechanics**. The mandatory miniboss te
 
 Working stable ID: `boss.slime`.
 
-- A **larger slime with a distinctive hat or similar visual feature**.
+- A **larger translucent slime wearing a top hat**, visually more impressive than the miniboss.
 - Uses the same player-targeted jump Slam, but with a larger danger circle and stronger damage.
 - **Divide** produces **three** smaller slimes; players must kill **at least two** before the divided slimes reunite.
 - On success, the remaining slime stays boss-like and **resumes attacking at exactly the boss HP recorded immediately before Divide**. Players do not need to kill every fragment, and defeated fragments do not directly reduce boss HP.
@@ -92,13 +92,13 @@ Only the **main boss** adds this complication: while its three larger fragments 
 
 - **Room centerpiece:** one big tree with **five distinct green rings** placed around it.
 - Maintain **three free (uncaptured) slimes at all times** while the puzzle is unsolved: when a free slime is captured or killed, spawn a replacement so three free ones are available again. Do not count the permanently captured slimes toward the three.
-- **High-level secret variant:** while the party meets the average-level gate, ensure **one of the three free slimes is blue** (and replenish a blue one after capturing it so collecting five blue slimes is possible). The other free slimes remain ordinary. The high-level threshold is confirmed as average participating player level **>= 50** (level 50 itself qualifies), calculated at run start. Blue slimes share the basic movement and normal aggro behavior of ordinary puzzle slimes but have **substantially more HP**; the exact multiplier remains to be balanced.
+- **High-level secret variant:** when average party level at run start is **>= 50**, ensure **exactly one of the three available free slimes is blue** (and replenish a blue one after capturing or killing it so collecting five blue slimes remains possible). The other two free slimes are ordinary green slimes. **Blue slimes have 25x the HP of ordinary green puzzle slimes** but share their normal movement, aggro, attacks, and capture behavior. **Purpose:** players may use AoE damage to kill ordinary green slimes before they approach the central tree, whereas the blue slimes survive those AoEs and can be lured into rings. This is a combat/puzzle interaction, not merely a generic tougher variant.
 - Use **ordinary aggro** to lure any of these slimes toward the central tree; no bait, special luring action or slime-to-ring matching. **Any slime works in any empty ring.**
 - A slime stepping into an empty ring is **automatically captured**: it becomes invulnerable, cannot move, and **faces the tree**.
 - Fill all **five** rings; captured slimes stay put, allowing completion **one slime at a time** without synchronized player positioning. A failed/killed uncaptured slime can be replaced automatically.
 - A puzzle slime that **loses aggro** before reaching a ring simply **returns to its starting position**, so it can be pulled again.
 - **Ordinary completion:** when any five slimes occupy the five rings, the **tree grows and magically opens the normal door** to the Slime Boss.
-- **Secret completion (high-level only):** when **all five captured slimes are blue**, the tree performs the **same growth/magical opening** as the ordinary solution and additionally **changes color** to visibly announce the secret result; both the normal route and the secret Slime Regent route open. The exact new tree/glow/ring color needs art direction. Merely meeting the level threshold does *not* open the Regent barrier.
+- **Secret completion (high-level only):** when **all five captured slimes are blue**, the central tree performs the **same growth/magical opening** as the ordinary solution but **turns blue**; both the normal route and the secret Slime Regent route open. The five green ring colors do not change as part of this effect. The blue trees already at the southern/bottom edge of the puzzle area are static level art, distinct from the transforming central tree. Merely meeting the level threshold does *not* open the Regent barrier.
 - **Captured slimes can never be released or replaced during the run.** In a level-50+ run, capturing even one ordinary slime makes the all-blue secret solution impossible for that attempt; finishing the remaining rings with any colors opens only the normal route. This is intentional, not a puzzle reset opportunity.
 - As soon as the puzzle completes, **stop spawning and make all leftover free/roaming puzzle slimes disappear**. No way to repair or restart a mixed-color puzzle before leaving the dungeon.
 - Capture order never needs to be simultaneous and any blue slime fits any ring.
@@ -124,12 +124,22 @@ The **high-level puzzle variant eligibility** is snapshotted when the run begins
 
 The **Slime Regent** is a higher-level optional route/boss, but is not the final hard slime boss concept. Once the five-blue-slime puzzle has opened the secret barrier, **players can fight the Regent immediately without first defeating the regular Slime Boss**. Defeating **either** the Regent or the normal Slime Boss satisfies the final-boss requirement for access to the reward room; they are alternatives, not mandatory successive fights. Killing the first final boss immediately triggers dungeon completion and a roughly **15-second reward-room countdown**; the other end boss cannot be fought during the same run.
 
+### Slime Regent appearance and mechanics (authored direction)
+
+- **Appearance:** larger even than the regular top-hatted Slime Boss; wears a **crown** and has **visible gold floating inside its translucent gel body**.
+- **Larger Slam:** retains the player-targeted jump-and-circular-telegraph Slime Slam, but the Regent's AoE is even bigger. Keep the existing starting 3-second warning duration as a playtest baseline unless this encounter needs separate tuning.
+- **Four-way Divide:** uses the familiar creeping-toward-reunion Divide, but **splits into four major slimes**. The number required to kill before reunion, add spawns, phase thresholds, and exact fragment HP portions need explicit confirmation; do not automatically assume all the regular boss tuning applies.
+- **Rolling Attack:** selects the **furthest-away living player** as its target and rolls toward them, leaving a **damaging slime trail** that persists for **5 seconds**. Whether the roll aims at the player's snapshotted position or actively tracks them, its telegraph and pathing remain to be decided.
+- **Bouncing Attack:** an escalation of Slam, with a **smaller AoE circle centered on each participating player's position at cast start**. Those marked locations become bounce landing hazards; exact sequencing/simultaneity, number of bounces and timing remain open.
+- The Regent's roll/trail and bouncing abilities are **Regent-only additional attacks**. The regular Slime Boss retains only Slam and Divide in the first release.
+- These abilities should add challenge while remaining readable in both solo and multiplayer play. Exact values and counterplay remain for encounter design/playtesting.
+
 **Slime Queen / Slime King** remain later higher-level hard-boss content.
 
 ## EXP, gold and dungeon-completion loot
 
 - Defeating the miniboss and **either the normal Slime Boss or the Slime Regent** grants EXP and gold. Every participating player receives **their own full EXP and full gold reward**; neither award is divided among party members.
-- Defeating **either** final boss **immediately completes the dungeon** and starts an approximately **15-second countdown**, after which the participating party transfers to the private reward room. Handling any individually dead party members at completion still needs confirmation. Both final bosses cannot be defeated in the same run. Exact UI and whether the countdown can be skipped remain to be decided.
+- Defeating **either** final boss **immediately completes the dungeon** and starts an approximately **15-second countdown**, after which the participating party transfers to the private reward room. During the countdown, players **can move freely and cast abilities, including Resurrection on fallen allies**; this is not a frozen victory cutscene. Handling any still-dead party members at transfer time needs confirmation. Both final bosses cannot be defeated in the same run. Exact UI and whether the countdown can be skipped remain to be decided.
 - **No equipment or item loot drops during the dungeon**, including from bosses. All item/equipment rewards are awarded only **after dungeon completion in the private reward room**.
 - Each eligible player independently chooses a reward in the private loot room; preserve the existing independent-roll/no-smart-loot contract.
 - Normal Slime Boss and optional Slime Regent content may affect the authored **reward-room pools**, not spawn world loot from those bosses.
@@ -170,7 +180,7 @@ Exact reward items, whether trash grants ordinary EXP/gold, and the Regent rewar
 - final loot tables;
 - final Codex art;
 - multiple simultaneous copies of Slime Dungeon;
-- extra boss attacks beyond Slime Slam and Divide.
+- extra attacks beyond Slime Slam and Divide **for the regular main Slime Boss** (Regent-specific Rolling and Bouncing are separate higher-level encounter mechanics).
 
 ## Definition already authored
 
