@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18c870580841314f9fcb1788b8034f5, type: 3}
+  m_Name: Slime Boss
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ActorDefinition
+  stableId: boss.slime
+  displayName: Slime Boss
+  familyId: enemy-family.slime
+  tags: []
+  experienceReward: 0
+  baseAttributes:
+    vitality: 0
+    strength: 0
+    agility: 0
+    intelligence: 0
+    spirit: 0
+  growth:
+    vitality: 0
+    strength: 0
+    agility: 0
+    intelligence: 0
+    spirit: 0
+  baseHp: 420
+  physicalDefense: 0
+  magicalDefense: 0
+  moveSpeed: 3.2
+  basicAttack: {fileID: 11400000, guid: c6f905d9da4529146a2eff557b1a5c15, type: 2}
+  tuning: {fileID: 11400000, guid: fae0d971f61fa81429fe4643a81e5cac, type: 2}
+  secondaryOverrides: []
+  overrideVitalityHp: 0
+  overrideVitalityRegeneration: 0
+  hpPerVitality: 15
+  regenerationPerVitality: 0.1
+  resistances: []

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4fde1ae02e5274684b50494c40324f, type: 3}
+  m_Name: Slime playtest tuning
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.SlimeDungeonTuning
+  stagingSeconds: 60
+  victorySeconds: 15
+  slamWarning: 3
+  slamInterval: 6
+  minibossHp: 160
+  bossHp: 420
+  regentHp: 1600
+  fragmentHpFraction: 0.12
+  trashHp: 28
+  puzzleHp: 20
+  addHp: 14
+  regentAddHp: 35
+  reunionRadius: 7
+  minibossReunion: 10
+  bossReunion: 12
+  regentReunion: 15
+  minibossSlamRadius: 2.5
+  bossSlamRadius: 4
+  regentSlamRadius: 5
+  slam: {fileID: 11400000, guid: 55dc6da775084e446b5583bba5be8e3c, type: 2}
+  regentSlam: {fileID: 11400000, guid: b90c438a78f4995449d2d0b85630c5fb, type: 2}
+  addAttack: {fileID: 11400000, guid: a0a9db4d5f4da9a47a02b71231d4b366, type: 2}
+  regentAddAttack: {fileID: 11400000, guid: d7a9e870c188d0d4589d3150aaab8611, type: 2}
+  green: {fileID: 11400000, guid: 508727d50de31ba499fea8e946da5a87, type: 2}
+  puzzleGreen: {fileID: 11400000, guid: ba3fb340630b11947859382bfb7cdec4, type: 2}
+  blue: {fileID: 11400000, guid: 2fc49afaacac67f4a928cc7234e10304, type: 2}
+  miniboss: {fileID: 11400000, guid: f71d87d80def7e248bcfbc2008f91412, type: 2}
+  boss: {fileID: 11400000, guid: 69f8511c9b3fcc74b9923e7881fc6dd7, type: 2}
+  regent: {fileID: 11400000, guid: ca8e9af6865ab314aba9dc6acd9e53d6, type: 2}
+  fragment: {fileID: 11400000, guid: eba31783dba6f7a488c3d1c016465e9f, type: 2}
+  add: {fileID: 11400000, guid: 4bc2b6ba6ab42af4bb813e6f6249f512, type: 2}
+  regentAdd: {fileID: 11400000, guid: 1e49a951f23ec5c4d831a13769e125fc, type: 2}
+  dummy: {fileID: 11400000, guid: 8a0ef759cafc7624ebcf61d5cab3f23d, type: 2}
+  slimeTemplate: {fileID: 1489753813022825386, guid: 5e9c3e6d8f4a90640a3db003e6c227ab, type: 3}
+  bossPresentation: {fileID: 5467704520990194972, guid: bec8a8566a6d7b944ab511571f0ad95f, type: 3}
+  regentPresentation: {fileID: 2357389051042949706, guid: 47122db3d83ec854aa8a4de03d7acab9, type: 3}
+  trashXp: 4
+  trashGold: 2
+  minibossXp: 30
+  minibossGold: 15
+  bossXp: 70
+  bossGold: 35
+  regentXp: 140
+  regentGold: 70
+  puzzleXp: 30
+  bluePuzzleXp: 80
+  bonusXp: 50
+  bonusGold: 25
+  regentBonusXp: 100
+  regentBonusGold: 50
+  normalRewards: {fileID: 11400000, guid: 297eaeb157b43774fb734736cd2573f4, type: 2}
+  regentRewards: {fileID: 11400000, guid: e6b6109ea2a3ce34e9fbc743b2ae9ee1, type: 2}

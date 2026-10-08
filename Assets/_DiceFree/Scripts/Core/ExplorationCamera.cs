@@ -24,6 +24,9 @@ namespace DiceFree.Core
         private bool initialized;
         private Camera viewCamera;
         private CameraOcclusionFader occlusionFader;
+        private Rect mapBounds = new(-56, -44, 181, 116);
+        public void ConfigureMapBounds(Rect bounds) => mapBounds = bounds;
+        public void RecenterForTravel(Transform follow) { target = follow; following = true; lookingOut = false; initialized = false; velocity = Vector3.zero; }
 
         public bool LookingOut => lookingOut;
         public bool Following => following;
@@ -63,8 +66,8 @@ namespace DiceFree.Core
                 following = false;
                 var basis = Quaternion.Euler(0, yaw, 0);
                 anchor += basis * new Vector3(panInput.x, 0, panInput.y);
-                anchor.x = Mathf.Clamp(anchor.x, -56, 125);
-                anchor.z = Mathf.Clamp(anchor.z, -44, 72);
+                anchor.x = Mathf.Clamp(anchor.x, mapBounds.xMin, mapBounds.xMax);
+                anchor.z = Mathf.Clamp(anchor.z, mapBounds.yMin, mapBounds.yMax);
             }
 
             if (following) anchor = target.position;

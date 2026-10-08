@@ -13,6 +13,7 @@ namespace DiceFree.Items
         [Min(1)] public int itemLevel = 1;
         public string rarityId = "rarity.provisional";
         public string sourceId;
+        public string[] allowedClassIds = Array.Empty<string>();
         [TextArea] public string flavor;
         public EquipmentStats stats;
     }

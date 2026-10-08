@@ -7,6 +7,8 @@ namespace DiceFree.Combat
     public sealed class Health : MonoBehaviour
     {
         private ActorStats stats;
+        public bool Invulnerable { get; set; }
+        public void SetEncounterHp(float value) => Current = Mathf.Clamp(value, 1, Maximum);
         public float Current { get; private set; }
         public float Maximum => stats.MaximumHp;
         public bool Alive => Current > 0;
@@ -25,7 +27,7 @@ namespace DiceFree.Combat
         public DamageResult ApplyPacket(CombatActor source, DamageResult result)
         {
             result.applied = result.restored = 0;
-            if (!Alive || result.Missed) return result;
+            if (!Alive || Invulnerable || result.Missed) return result;
             if (result.Outcome == PacketOutcome.ResistanceRestoration)
             {
                 // Not Heal(): no Healing Done/Received, ordinary-heal event or resurrection.

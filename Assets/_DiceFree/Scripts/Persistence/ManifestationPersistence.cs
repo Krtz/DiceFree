@@ -294,6 +294,8 @@ namespace DiceFree.Persistence
 
         private void ApplyState(ActorDefinition definition, ManifestationSave state)
         {
+            bool keepDungeonPosition = GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.InsideDungeon == true;
+            Vector3 dungeonPosition = transform.position;
             ValidateState(definition, state);
             SetActiveDefinition(definition);
             xp.RestoreState(state.level, state.xp);
@@ -308,6 +310,8 @@ namespace DiceFree.Persistence
             wallet.Restore(state.gold);
             if (!anchor.LoadAtAnchor(state.anchorId))
                 throw new InvalidOperationException("Saved/fallback resurrection point is not navigable.");
+            if (keepDungeonPosition && !actor.Motor.TeleportAcrossMaps(dungeonPosition))
+                throw new InvalidOperationException("Could not preserve staging position after class preparation.");
 
             foreach (var transient in sessionState) transient.ResetForManifestationLoad();
         }
@@ -354,6 +358,7 @@ namespace DiceFree.Persistence
 
         public bool TryForkAndActivate(ActorDefinition targetDefinition, out string error)
         {
+            if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) { error = "Class is locked during this dungeon run."; return false; }
             error = null;
             if (!ready) return Reject("Persistence is not ready.", out error);
             if (mutationDepth != 0) return Reject("A durable mutation is already in progress.", out error);
@@ -398,6 +403,7 @@ namespace DiceFree.Persistence
 
         public bool TryActivateExisting(string classId, out string error)
         {
+            if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) { error = "Class is locked during this dungeon run."; return false; }
             error = null;
             if (!ready) return Reject("Persistence is not ready.", out error);
             if (mutationDepth != 0) return Reject("A durable mutation is already in progress.", out error);

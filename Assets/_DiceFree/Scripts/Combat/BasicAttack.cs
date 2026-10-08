@@ -60,7 +60,8 @@ namespace DiceFree.Combat
                     Target.Stats,
                     Definition,
                     resolution,
-                    Definition.RollDamageMultiplier());
+                    Definition.RollDamageMultiplier(),
+                    Random.Range(0f, actor.Stats.BasicAttackMaximumBonus));
                 Target.Health.ApplyPacket(actor, packet);
                 if (packet.Missed) Misses++;
                 else

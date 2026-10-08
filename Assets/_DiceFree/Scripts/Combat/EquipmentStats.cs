@@ -7,6 +7,7 @@ namespace DiceFree.Combat
         public AttributeValues attributes;
         public float physicalDefense, magicalDefense;
         public float attackSpeedPercent, movementSpeedPercent;
+        public float regeneration, basicAttackMaximumBonus;
     }
     public static class MovementUnits
     {

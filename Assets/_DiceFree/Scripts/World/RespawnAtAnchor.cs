@@ -77,6 +77,8 @@ namespace DiceFree.World
         public bool Return()
         {
             if (!CanReturn) return false;
+            var dungeonReturn = GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.DeathReturnHandler;
+            if (dungeonReturn != null) return dungeonReturn();
 
             // Runtime death-return should never strand the player. Prefer the selected/authored
             // anchor, then the authored fallback, then the scene-entry position captured at Awake.

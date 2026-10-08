@@ -68,8 +68,11 @@ namespace DiceFree.Combat
                 return values;
             }
         }
-        public float MaximumHp => definition.baseHp + Attributes.vitality * VitalityCoefficient(false);
-        public float Regeneration => Attributes.vitality * VitalityCoefficient(true);
+        private float? encounterMaximumHp;
+        public void SetEncounterMaximumHp(float value) { float previous = MaximumHp; encounterMaximumHp = Mathf.Max(1, value); Changed?.Invoke(previous); }
+        public float MaximumHp => encounterMaximumHp ?? (definition.baseHp + Attributes.vitality * VitalityCoefficient(false));
+        public float Regeneration => Attributes.vitality * VitalityCoefficient(true) + EquipmentTotal.regeneration;
+        public float BasicAttackMaximumBonus => EquipmentTotal.basicAttackMaximumBonus;
         public float HpPerVitality => VitalityCoefficient(false);
         public float RegenerationPerVitality => VitalityCoefficient(true);
         private float VitalityCoefficient(bool regeneration)
@@ -224,6 +227,8 @@ namespace DiceFree.Combat
                 foreach (var value in equipment.Values)
                 {
                     total.attributes += value.attributes;
+                    total.regeneration += value.regeneration;
+                    total.basicAttackMaximumBonus += value.basicAttackMaximumBonus;
                     total.physicalDefense += value.physicalDefense; total.magicalDefense += value.magicalDefense;
                     total.attackSpeedPercent += value.attackSpeedPercent; total.movementSpeedPercent += value.movementSpeedPercent;
                 }

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371c339cbaf5a16448bb09319458d262, type: 3}
+  m_Name: Normal Slime rewards
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardPool
+  stableId: loot.slime
+  rare: {fileID: 11400000, guid: b688bab5c1961174caaf5ea4e6ebe9ac, type: 2}
+  items:
+  - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
+  - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
+  - {fileID: 11400000, guid: 2a8274656d6b65049804a4cd08dc172f, type: 2}
+  visualVariant: {fileID: 0}

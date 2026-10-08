@@ -25,21 +25,26 @@ namespace DiceFree.Items
         private void OnDisable() { inventory.Changed -= OnInventoryChanged; ClearContributions(); }
         public bool Equip(string instanceId, EquipmentSlot slot)
         {
+            if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) return false;
             var item = inventory.Find(instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
             if (definition == null || definition.slot != slot || !Enum.IsDefined(typeof(EquipmentSlot), slot)) return false;
+            if (definition.allowedClassIds != null && definition.allowedClassIds.Length > 0 &&
+                !definition.allowedClassIds.Contains(stats.Definition.stableId)) return false;
             slots.RemoveAll(s => s.slotId == slot.ToString() || s.instanceId == instanceId);
             slots.Add(new EquippedItem { slotId = slot.ToString(), instanceId = instanceId });
             Refresh(); Changed?.Invoke(); return true;
         }
         public bool Unequip(string slotId)
         {
+            if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) return false;
             if (slots.RemoveAll(s => s.slotId == slotId) == 0) return false;
             Refresh(); Changed?.Invoke(); return true;
         }
         public bool IsResolved(EquippedItem slot)
         {
             var item = inventory.Find(slot.instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
-            return definition != null && definition.slot.ToString() == slot.slotId;
+            return definition != null && definition.slot.ToString() == slot.slotId &&
+                (definition.allowedClassIds == null || definition.allowedClassIds.Length == 0 || definition.allowedClassIds.Contains(stats.Definition.stableId));
         }
         private void OnInventoryChanged()
         {
