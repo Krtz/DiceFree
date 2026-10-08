@@ -63,8 +63,8 @@ namespace DiceFree.UI
             {
                 Vector2 range = basicAttack.Definition.RawDamageRange(attributes)
                                 * stats.BasicAttackDamageMultiplier;
-                attackMin = range.x;
-                attackMax = range.y;
+                attackMin = range.x + stats.BasicAttackFlatBonus;
+                attackMax = range.y + stats.BasicAttackFlatBonus;
                 attackMax += stats.BasicAttackMaximumBonus * stats.BasicAttackDamageMultiplier;
 
                 float interval = Mathf.Max(

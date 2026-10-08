@@ -48691,6 +48691,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6963904441469251572, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6670471139228956546}
+    - targetCorrespondingSourceObject: {fileID: 4953321239502999743, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689263082}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
 --- !u!4 &365897622 stripped
@@ -83002,6 +83005,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e38ffb499ea6622479409fcc6ef3d598, type: 3}
   m_PrefabInstance: {fileID: 660957121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &660997518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
+  m_PrefabInstance: {fileID: 1627046694}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &661436254
 GameObject:
@@ -126541,6 +126549,11 @@ Transform:
   - {fileID: 1540830056}
   m_Father: {fileID: 1638591190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &998095316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4953321239502999743, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+  m_PrefabInstance: {fileID: 365897621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &999516514
 GameObject:
   m_ObjectHideFlags: 0
@@ -160913,6 +160926,7 @@ GameObject:
   - component: {fileID: 1288724106}
   - component: {fileID: 1288724105}
   - component: {fileID: 1288724108}
+  - component: {fileID: 1288724109}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -161274,6 +161288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
   - {fileID: 11400000, guid: 2a8274656d6b65049804a4cd08dc172f, type: 2}
   - {fileID: 11400000, guid: b688bab5c1961174caaf5ea4e6ebe9ac, type: 2}
+  - {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
 --- !u!114 &1288724073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161324,6 +161339,11 @@ MonoBehaviour:
     - {fileID: 9212687634839805920}
     baselineVisuals:
     - {fileID: 1651157072}
+  - slot: 6
+    definition: {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
+    visuals:
+    - {fileID: 1689263083}
+    baselineVisuals: []
 --- !u!114 &1288724076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161803,6 +161823,18 @@ MonoBehaviour:
   m_Script: {fileID: 286646210}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.World.MountainTrialTraveller
+--- !u!114 &1288724109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58bb8f54d2e82104298326fafa7ba4d8, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.UI.ShopPanel
 --- !u!1001 &1288937607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -203606,7 +203638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3949976684013099286, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
       propertyPath: m_Layer
@@ -203631,13 +203663,62 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627046697}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627046696}
   m_SourcePrefab: {fileID: 100100000, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
 --- !u!4 &1627046695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 377ff53eb426f7944ba542ba37e0a101, type: 3}
   m_PrefabInstance: {fileID: 1627046694}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &1627046696
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660997518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.65
+  m_Height: 2.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!114 &1627046697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660997518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af4da895307ab54dbb53b10b3ff1450, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Items.ItemShop
+  displayName: Cornberg Merchant
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 0}
+  offers:
+  - item: {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
+    goldPrice: 15
+    provisionalPrice: 1
 --- !u!1 &1627600075
 GameObject:
   m_ObjectHideFlags: 0
@@ -211558,6 +211639,77 @@ Transform:
   - {fileID: 540252421}
   m_Father: {fileID: 1638591190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1689263081
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 998095316}
+    m_Modifications:
+    - target: {fileID: 831017657399018050, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_Name
+      value: BronzeDagger
+      objectReference: {fileID: 0}
+    - target: {fileID: 831017657399018050, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+--- !u!4 &1689263082 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1258945984942856968, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+  m_PrefabInstance: {fileID: 1689263081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1689263083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 831017657399018050, guid: ac5d37643454f214799c4fdca074f092, type: 3}
+  m_PrefabInstance: {fileID: 1689263081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1690365808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -237014,6 +237166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904093695}
   - component: {fileID: 1904093694}
+  - component: {fileID: 1904093696}
   m_Layer: 0
   m_Name: Warm afternoon sun
   m_TagString: Untagged
@@ -237101,6 +237254,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1904093696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904093693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &1904214505
 GameObject:
   m_ObjectHideFlags: 0

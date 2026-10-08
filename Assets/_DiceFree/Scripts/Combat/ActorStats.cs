@@ -73,6 +73,7 @@ namespace DiceFree.Combat
         public float MaximumHp => encounterMaximumHp ?? (definition.baseHp + Attributes.vitality * VitalityCoefficient(false));
         public float Regeneration => Attributes.vitality * VitalityCoefficient(true) + EquipmentTotal.regeneration;
         public float BasicAttackMaximumBonus => EquipmentTotal.basicAttackMaximumBonus;
+        public float BasicAttackFlatBonus => EquipmentTotal.basicAttackFlatBonus;
         public float HpPerVitality => VitalityCoefficient(false);
         public float RegenerationPerVitality => VitalityCoefficient(true);
         private float VitalityCoefficient(bool regeneration)
@@ -229,6 +230,7 @@ namespace DiceFree.Combat
                     total.attributes += value.attributes;
                     total.regeneration += value.regeneration;
                     total.basicAttackMaximumBonus += value.basicAttackMaximumBonus;
+                    total.basicAttackFlatBonus += value.basicAttackFlatBonus;
                     total.physicalDefense += value.physicalDefense; total.magicalDefense += value.magicalDefense;
                     total.attackSpeedPercent += value.attackSpeedPercent; total.movementSpeedPercent += value.movementSpeedPercent;
                 }

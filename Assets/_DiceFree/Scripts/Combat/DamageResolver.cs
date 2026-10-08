@@ -39,6 +39,8 @@ namespace DiceFree.Combat
                 // A stat-only upper-end bonus; skills never inherit this equipment term.
                 baseRaw += Mathf.Clamp(basicAttackBonus, 0, source.BasicAttackMaximumBonus);
                 baseRaw *= source.BasicAttackDamageMultiplier;
+                // Flat authored basic-attack damage follows attribute/percentage scaling.
+                baseRaw += source.BasicAttackFlatBonus;
             }
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));

@@ -28,6 +28,7 @@ namespace DiceFree.UI
             Append(text, stats.magicalDefense, "Magical Defense");
             Append(text, stats.attackSpeedPercent, "% Attack Speed");
             Append(text, stats.movementSpeedPercent, "% Move Speed");
+            Append(text, stats.basicAttackFlatBonus, "Basic Attack Damage (min and max)");
 
             if (!string.IsNullOrWhiteSpace(definition.flavor))
                 text.AppendLine().AppendLine().Append(definition.flavor.Trim());
