@@ -31,7 +31,7 @@ Mandatory standard route:
 1. **Entrance** at the southern end of the left-hand lane; the existing 60-second staging lifecycle still applies.
 2. **Trash mobs** in the left-hand woodland approach.
 3. **Mandatory Big Slime miniboss** in the northwestern clearing. Defeating it unlocks the central puzzle room; players cannot skip the miniboss.
-4. **Puzzle room** in the central lane. The current proposed introductory puzzle is to **aggro spawned slimes and lure them into a central zone**; trigger and success feedback, number of slimes, and solo/party handling still need co-design. The room unlocks only after the miniboss dies.
+4. **Puzzle room** in the central lane. A large central tree is surrounded by **five green rings**. Players lure **five slimes** into the rings using normal enemy aggro, **one at a time, with no simultaneous-positioning requirement**. Any slime that reaches a qualifying ring becomes locked in place, invulnerable, and turns to face the central tree. If an uncaptured slime is killed, another spawns so the puzzle can always be retried. The exact completion effect, spawn distribution and ring assignment are still to be co-designed. The room unlocks only after the miniboss dies.
 5. **Main Slime Boss** in the northeastern clearing.
 6. **Private reward room and return** after completion. Their exact placement/geometry is not yet marked on Axel's map and must be agreed before scene authoring.
 
@@ -76,9 +76,19 @@ Working stable ID: `boss.slime`.
 
 **Boss rewards:** Each participating player gets their own **full EXP and full gold reward**; neither is split among party members. Gear/item rewards remain exclusively in the dungeon-end private reward room.
 
-### Tentative escalation: aggressive tiny slime spawns during Divide
+### Main-boss Divide pressure: aggressive tiny slime spawns
 
-The divided large fragments creep toward one another, rather than actively chasing/attacking players. Axel proposed that they **might spawn smaller aggressive slimes while creeping**. Those tiny slimes would attack players and create pressure while the party races to kill required fragments. Treat this as a design candidate to confirm, including which boss uses it, spawn frequency, whether tiny slimes despawn after Divide, and avoiding uncontrolled snowballing. Do not treat this as a finalized extra boss attack type.
+Only the **main boss** adds this complication: while its three larger fragments creep toward one another (and do not chase players), they spawn **tiny aggressive slimes** that attack players. The mandatory miniboss does **not** spawn these attackers during Divide, keeping the introductory encounter simpler. This is part of the main boss's Divide mechanic, not a third boss attack. Spawn frequency, number caps, and whether remaining attackers disappear or persist after Divide are still to be tuned.
+
+### Introductory puzzle: five slimes around the tree
+
+- **Room centerpiece:** one big tree with **five distinct green rings** placed around it.
+- Slimes spawn in the room; use **ordinary aggro** to lure them toward the central tree. No bait or special luring action.
+- A slime reaching a qualifying empty ring is **automatically captured**: it becomes invulnerable, cannot move, and **faces the tree**.
+- Fill all **five** rings with five slimes. Each stays captured, so players can solve it **sequentially**, without coordinating simultaneous arrivals. The exact ring-matching requirements (if any) are undecided.
+- A slime killed before capture **respawns/replenishes automatically**, preventing accidental damage from making the puzzle impossible.
+- The tree's activation presentation, how it unlocks the next area, slime-spawn timing, and puzzle reset behavior remain to be defined together.
+- Purpose: test the reusable dungeon-puzzle system and introduce players to simple enemy-positioning puzzles before harder later dungeon mechanics.
 
 ## High-level conditional route: Slime Regent
 
