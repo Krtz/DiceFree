@@ -13,7 +13,8 @@ namespace DiceFree.UI
         None,
         HostileUnit,
         FriendlyUnit,
-        Ground
+        Ground,
+        AttackMove
     }
 
     [DefaultExecutionOrder(-40)]
@@ -49,6 +50,11 @@ namespace DiceFree.UI
         public float CastRange => castRange;
 
         public void Configure(Camera camera) => worldCamera = camera;
+        public void BeginAttackMove(Func<CombatActor,bool> unit, Func<Vector3,bool> ground)
+        {
+            BeginGround("Attack",ground);
+            Mode=SkillTargetingMode.AttackMove;unitConfirm=unit;Feedback="Click an enemy or ground to attack-move.";
+        }
 
         private void Awake()
         {
@@ -166,7 +172,7 @@ namespace DiceFree.UI
 
             if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
             {
-                Consume();
+                if(Mode!=SkillTargetingMode.AttackMove)Consume();
                 Cancel();
                 return;
             }
@@ -187,6 +193,13 @@ namespace DiceFree.UI
                 Feedback = Mode == SkillTargetingMode.Ground
                     ? "Choose reachable ground."
                     : "That is not a valid target.";
+                return;
+            }
+
+            if(Mode==SkillTargetingMode.AttackMove)
+            {
+                bool ordered=HoveredActor!=null ? unitConfirm!=null&&unitConfirm(HoveredActor) : groundConfirm!=null&&groundConfirm(HoveredGroundPoint);
+                if(ordered)Cancel();else Feedback="Cannot reach that target.";
                 return;
             }
 
@@ -338,7 +351,7 @@ namespace DiceFree.UI
 
         private bool ValidUnitForMode(CombatActor candidate) => Mode switch
         {
-            SkillTargetingMode.HostileUnit => owner.IsHostileTo(candidate),
+            SkillTargetingMode.HostileUnit or SkillTargetingMode.AttackMove => owner.IsHostileTo(candidate),
             SkillTargetingMode.FriendlyUnit => owner.IsFriendlyTo(candidate),
             _ => false
         };
@@ -355,6 +368,13 @@ namespace DiceFree.UI
         {
             HoveredActor = null;
             HoverValid = false;
+
+            if(Mode==SkillTargetingMode.AttackMove)
+            {
+                HoveredActor=PickActor(pointer);
+                if(HoveredActor!=null){HoverValid=owner.IsHostileTo(HoveredActor);return;}
+                HoverValid=TryGroundPoint(pointer,out var ground);HoveredGroundPoint=ground;return;
+            }
 
             if (Mode == SkillTargetingMode.Ground)
             {
@@ -486,6 +506,7 @@ namespace DiceFree.UI
                 SkillTargetingMode.HostileUnit => "Click hostile",
                 SkillTargetingMode.FriendlyUnit => "Click ally / self",
                 SkillTargetingMode.Ground => "Click ground",
+                SkillTargetingMode.AttackMove => "Click enemy / attack-move ground",
                 _ => ""
             };
 

@@ -75,8 +75,8 @@ namespace DiceFree.EditorTools
                     var input=UnityEngine.Object.FindFirstObjectByType<TraversalInput>();if(input==null)return;player=input.GetComponent<CombatActor>();
                     if(!player.Motor.Ready||!player.GetComponent<ManifestationPersistence>().Ready)return;
                     player.GetComponent<ExperienceProgression>().RestoreState(testRegent?50:5,0);player.Health.Restore();
-                    var portal=UnityEngine.Object.FindFirstObjectByType<DungeonPortal>();Require(portal!=null,"Cornberg portal missing");
-                    Require(player.Motor.Teleport(portal.transform.position+Vector3.back*1.5f),"Portal approach navigation");
+                    var portal=UnityEngine.Object.FindObjectsByType<DungeonPortal>().Single(p=>p.isActiveAndEnabled);Require(portal!=null,"Cornberg portal missing");
+                    Require(player.Motor.Teleport(portal.ApproachPosition+Vector3.back*1.5f),"Portal approach navigation");
                     portal.Interact(player);Require(SlimeDungeonRun.Current!=null,"Interactable portal failed to enter");phase=1;return;
                 }
                 var run=SlimeDungeonRun.Current;
@@ -115,7 +115,7 @@ namespace DiceFree.EditorTools
                 }
                 if(phase==4)
                 {
-                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==2,"Miniboss two-way Divide missing");Kill(fragments[0]);phase=5;return;
+                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==2&&fragments.All(f=>f.Actor.Health.Maximum==300),"Miniboss two-way Divide must use 300 HP fragments");Require(Mathf.Approximately(boss.transform.localScale.x,2.3f*3),"Miniboss actual scale must be 3x");Kill(fragments[0]);phase=5;return;
                 }
                 if(phase==5)
                 {
@@ -153,7 +153,7 @@ namespace DiceFree.EditorTools
                 }
                 if(phase==11)
                 {
-                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==(testRegent?4:3),"Final boss Divide count");actionAt=Time.time+2.4f;phase=12;return;
+                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==(testRegent?4:3)&&fragments.All(f=>Mathf.Approximately(f.Actor.Health.Maximum,testRegent?1600f:300f)),"Final boss Divide count / expected fragment health");Require(Mathf.Approximately(boss.Actor.Health.Maximum,testRegent?16000f:3000f),"Actual final boss HP incorrect");actionAt=Time.time+2.4f;phase=12;return;
                 }
                 if(phase==12)
                 {

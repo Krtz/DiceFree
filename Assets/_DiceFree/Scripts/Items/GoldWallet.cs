@@ -6,6 +6,9 @@ namespace DiceFree.Items
     {
         public long Gold { get; private set; }
         public event Action Changed;
+        public bool CreditWithoutNotification(long amount) {if(amount<0||Gold>long.MaxValue-amount)return false;Gold+=amount;return true;}
+        public bool DebitWithoutNotification(long amount){if(!CanSpend(amount))return false;Gold-=amount;return true;}
+        public void NotifyChanged()=>Changed?.Invoke();
         public void Grant(long amount) { if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount)); Gold = checked(Gold + amount); Changed?.Invoke(); }
         public bool CanSpend(long amount) => amount >= 0 && Gold >= amount;
         public bool Spend(long amount) { if (!CanSpend(amount)) return false; Gold -= amount; Changed?.Invoke(); return true; }

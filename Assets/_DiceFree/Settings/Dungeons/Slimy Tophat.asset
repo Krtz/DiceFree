@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
   stableId: item.slime.slimy-tophat
   displayName: Slimy Tophat
+  icon: {fileID: 21300000, guid: f7f6ab58f7e242744ac516dcbe97f25d, type: 3}
   slot: 0
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: dungeon.slime
   allowedClassIds: []
-  flavor:
+  flavor: 
   stats:
     attributes:
       vitality: 1
@@ -33,3 +34,4 @@ MonoBehaviour:
     movementSpeedPercent: 0
     regeneration: 10
     basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

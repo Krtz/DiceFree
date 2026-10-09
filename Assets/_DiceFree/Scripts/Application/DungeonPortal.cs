@@ -14,7 +14,7 @@ namespace DiceFree.Dungeons
             if (!CanInteract(actor)) return;
             var run=SlimeDungeonRun.Current;
             if(run==null) run=new GameObject("Host dungeon session").AddComponent<SlimeDungeonRun>();
-            Feedback=run.Enter(actor,definition,tuning,transform.position);
+            Feedback=run.Enter(actor,definition,tuning,ApproachPosition);
             feedbackUntil=Time.unscaledTime+5;
         }
         void OnGUI(){if(Time.unscaledTime<feedbackUntil)GUI.Box(new Rect(15,150,420,30),Feedback);}

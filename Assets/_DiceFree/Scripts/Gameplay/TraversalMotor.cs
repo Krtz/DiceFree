@@ -74,7 +74,7 @@ namespace DiceFree.Characters
             if (distance > 0.001f)
             {
                 foreach (var unit in Physics.SphereCastAll(start + Vector3.up * 0.8f, agent.radius,
-                    displacement.normalized, distance, 1 << 10, QueryTriggerInteraction.Ignore))
+                    displacement.normalized, distance, (1 << 9) | (1 << 10) | (1 << 11), QueryTriggerInteraction.Ignore))
                     if (unit.collider.transform.root != transform.root)
                         distance = Mathf.Min(distance, Mathf.Max(0, unit.distance - 0.03f));
                 end = start + displacement.normalized * distance;

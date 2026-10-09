@@ -206,3 +206,12 @@ The **item identities and numeric bonuses above are current first-playtest desig
 - boss `boss.slime-regent`;
 - loot `loot.slime-regent`;
 - tag `secret.slime-regent`.
+
+## 2026-10-09 follow-up — secret Regent superboss balance (provisional)
+
+- The normal Slime Boss now has **3,000 maximum HP**; its Divide fragments and the mandatory miniboss's Divide fragments each have a fixed **300 maximum HP**.
+- The **Slime Regent** now has **16,000 maximum HP**, unlocked only via the already-authored level-50 five-blue puzzle. This is intentionally a secret high-level challenge, not a normal-level boss.
+- Each Regent Divide fragment has **10% of the Regent's maximum HP** at spawn, i.e. **1,600 HP** for the current 16,000-HP Regent. Four fragments appear, of which at least three must be defeated before reunion; two Divide phases at 70% and 30% boss HP remain.
+- The existing **15-second Regent reunion window** is unchanged pending an actual high-level party balance playtest. This implies at least 4,800 fragment HP must be cleared per successful Divide, alongside attacking adds; a solo character may not be able to pass this damage check. Do not silently turn down fragment HP to make the automated test pass.
+- The changes above supersede the earlier provisional paragraph stating all fragments are proportional to every boss's max HP. Normal/miniboss fragments are now intentionally flat 300 HP; only Regent is proportional.
+- Implementation: `SlimeDungeonTuning.regentFragmentHpFraction` and the conditional fragment maximum HP in `DungeonSlime.Divide()`; `Slime Regent.asset` and `Slime playtest tuning.asset` updated; editor validation assertions changed. **The fresh real Regent-route isolated-save Play Mode test passed on 2026-10-09 with 16,000 Regent HP and 1,600 per Divide fragment** (`dicefree.slime.playtest --regent true`, phase 14); manual level-50 damage-check balancing remains necessary.

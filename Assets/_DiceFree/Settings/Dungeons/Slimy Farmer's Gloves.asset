@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
   stableId: item.slime.slimy-farmers-gloves
   displayName: Slimy Farmer's Gloves
+  icon: {fileID: 21300000, guid: 26f6b4a9e7abe3d4ea24a4f8a82b62a0, type: 3}
   slot: 3
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: dungeon.slime
   allowedClassIds: []
-  flavor:
+  flavor: 
   stats:
     attributes:
       vitality: 0
@@ -33,3 +34,4 @@ MonoBehaviour:
     movementSpeedPercent: 0
     regeneration: 0
     basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

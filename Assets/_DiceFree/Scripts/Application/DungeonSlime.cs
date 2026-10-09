@@ -21,16 +21,16 @@ namespace DiceFree.Dungeons
         public Vector3 LastImpactPosition {get;private set;}
         public int ThresholdsConsumed {get;private set;}
         bool busy,ceased,engaged;float nextAttack;Vector3 home;
-        Transform visual;float visualHeight;
+        Transform visual;float visualHeight;Vector3 visualScale;
         readonly List<GameObject> markers=new();
         readonly List<DungeonSlime> fragments=new();
         readonly List<DungeonSlime> adds=new();
         public void Initialize(SlimeDungeonRun run,SlimeRole role,bool blue)
         {
             Run=run;Role=role;Blue=blue;Actor=GetComponent<CombatActor>();home=transform.position;
-            visual=transform.Find("Presentation");if(visual!=null)visualHeight=visual.localPosition.y;
+            visual=transform.Find("Presentation");if(visual!=null){visualHeight=visual.localPosition.y;visualScale=visual.localScale;}
             Actor.Health.Died+=Died;
-            if(role==SlimeRole.Dummy){GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;}
+            if(role==SlimeRole.Dummy){Actor.Health.Invulnerable=true;GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;Actor.Motor.SetMotionBlocked("practice.dummy",true);}
             if(IsBoss||role==SlimeRole.Fragment){GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;}
             if(role==SlimeRole.Puzzle||role==SlimeRole.Add)GetComponent<AggroBehaviour>().ConfigureAutoAggro(new AutoAggroPolicy{alwaysAutoAggro=true});
             if(blue)Tint(new Color(.16f,.45f,.95f));
@@ -67,14 +67,17 @@ namespace DiceFree.Dungeons
             busy=true;Run.Witness(BossId,"mechanic.slime-slam");Actor.Motor.Stop();
             var mark=TrackMarker(destination,radius,new Color(1,.2f,.07f,.7f));
             float start=Time.time;float warning=Run.Tuning.slamWarning;
-            while(Time.time-start<warning){if(visual!=null)visual.localPosition=new Vector3(0,visualHeight+Mathf.Sin((Time.time-start)/warning*Mathf.PI)*2,0);yield return null;}
+            while(Time.time-start<warning){if(visual!=null){float progress=(Time.time-start)/warning;visual.localPosition=new Vector3(0,visualHeight+Mathf.Sin(progress*Mathf.PI)*2,0);visual.localScale=Vector3.Scale(visualScale,progress<.45f?new Vector3(1.2f,.65f,1.2f):new Vector3(.8f,1.5f,.8f));}yield return null;}
             if(visual!=null)visual.localPosition=new Vector3(0,visualHeight,0);
-            Actor.Motor.Teleport(destination);HitCircle(destination,radius);Destroy(mark);busy=false;
+            Actor.Motor.Teleport(destination);HitCircle(destination,radius);Destroy(mark);
+            yield return VisualTransition(new Vector3(1.45f,.45f,1.45f),Vector3.one,.4f);busy=false;
         }
         IEnumerator Divide()
         {
-            busy=true;Dividing=true;Actor.Motor.Stop();Run.Witness(BossId,"mechanic.divide");
+            busy=true;Actor.Motor.Stop();Run.Witness(BossId,"mechanic.divide");
             float stored=Actor.Health.Current;Actor.Health.Invulnerable=true;
+            yield return VisualTransition(Vector3.one,new Vector3(1.5f,.45f,1.5f),.5f);
+            Dividing=true;
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=false;
             foreach(var c in GetComponents<Collider>())c.enabled=false;
             int count=Role==SlimeRole.Miniboss?2:Role==SlimeRole.Boss?3:4;
@@ -84,8 +87,11 @@ namespace DiceFree.Dungeons
             {
                 float angle=i*Mathf.PI*2/count;var spawn=center+new Vector3(Mathf.Cos(angle),0,Mathf.Sin(angle))*Run.Tuning.reunionRadius;
                 if(NavMesh.SamplePosition(spawn,out var sample,3,NavMesh.AllAreas))spawn=sample.position;
-                var f=Run.Spawn(Run.Tuning.fragment,spawn,.9f,SlimeRole.Fragment);
-                f.Actor.Stats.SetEncounterMaximumHp(Actor.Health.Maximum*Run.Tuning.fragmentHpFraction);f.Actor.Health.Restore();
+                var f=Run.Spawn(Run.Tuning.fragment,spawn,1.6f,SlimeRole.Fragment);
+                // The secret Regent's divided form scales with its own encounter health.
+                // Ordinary boss and miniboss fragments remain a flat 300 HP.
+                float fragmentHp=Role==SlimeRole.Regent?Actor.Health.Maximum*Run.Tuning.regentFragmentHpFraction:Run.Tuning.bossFragmentHp;
+                f.Actor.Stats.SetEncounterMaximumHp(fragmentHp);f.Actor.Health.Restore();
                 fragments.Add(f);
                 // The stat contribution survives CombatActor.Start; setting only Motor.speed here
                 // would be overwritten on the fragment's first frame.
@@ -112,7 +118,13 @@ namespace DiceFree.Dungeons
             Actor.Health.SetEncounterHp(hp);Actor.Health.Invulnerable=false;
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=true;
             foreach(var c in GetComponents<Collider>())c.enabled=true;
-            Actor.Motor.Teleport(center);Dividing=false;busy=false;nextAttack=Time.time+2;
+            Actor.Motor.Teleport(center);yield return VisualTransition(new Vector3(.5f,1.6f,.5f),Vector3.one,.5f);Dividing=false;busy=false;nextAttack=Time.time+2;
+        }
+        IEnumerator VisualTransition(Vector3 from,Vector3 to,float seconds)
+        {
+            float start=Time.time;
+            while(Time.time-start<seconds){if(visual!=null)visual.localScale=Vector3.Scale(visualScale,Vector3.Lerp(from,to,(Time.time-start)/seconds));yield return null;}
+            if(visual!=null)visual.localScale=Vector3.Scale(visualScale,to);
         }
         IEnumerator Roll(CombatActor[] players)
         {
@@ -176,7 +188,7 @@ namespace DiceFree.Dungeons
             foreach(var a in adds)if(a!=null)Destroy(a.gameObject);adds.Clear();
             ThresholdsConsumed=0;Dividing=busy=engaged=false;Actor.Health.Invulnerable=false;Actor.Health.Restore();Actor.Motor.Teleport(home);
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=true;foreach(var c in GetComponents<Collider>())c.enabled=true;
-            if(visual!=null)visual.localPosition=new Vector3(0,visualHeight,0);
+            if(visual!=null){visual.localPosition=new Vector3(0,visualHeight,0);visual.localScale=visualScale;}
         }
         void Died(){if(Role==SlimeRole.Dummy){Actor.Health.Restore();return;}Run.Killed(this);if(!IsBoss)Destroy(gameObject,1);}
         void OnDestroy(){foreach(var m in markers)if(m!=null)Destroy(m);foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);if(Actor!=null)Actor.Health.Died-=Died;}

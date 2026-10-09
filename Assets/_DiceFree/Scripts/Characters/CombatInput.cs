@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace DiceFree.Characters
 {
     [RequireComponent(typeof(TargetSelection), typeof(BasicAttack))]
-    public sealed class CombatInput : MonoBehaviour
+    public sealed class CombatInput : MonoBehaviour, DiceFree.Foundation.IManifestationSessionState
     {
         private TargetSelection selection;
         private BasicAttack attack;
@@ -17,6 +17,37 @@ namespace DiceFree.Characters
         private GameplayPreferences gameplayPreferences;
         private CombatActor actor;
         private InputAction select, cycle, attackSelected, clear, respawn;
+        public bool AttackMoving {get;private set;}
+        private Vector3 attackMoveDestination;
+        public void CancelAttackMove()=>AttackMoving=false;
+        public void ResetForManifestationLoad()=>CancelAttackMove();
+        public bool OrderAttackMove(Vector3 point)
+        {
+            if(!actor.CanAct)return false;
+            attack.Cancel();GetComponent<Interactor>()?.Cancel();
+            if(!actor.Motor.MoveTo(point))return false;
+            attackMoveDestination=point;AttackMoving=true;return true;
+        }
+        public void BeginAttackTargeting()
+        {
+            if(!actor.CanAct||skillTargeting==null)return;
+            CancelAttackMove();attack.Cancel();GetComponent<Interactor>()?.Cancel();
+            skillTargeting.BeginAttackMove(target=>{selection.Select(target);return attack.Order(target);},OrderAttackMove);
+        }
+        private void StepAttackMove()
+        {
+            if(!AttackMoving||!actor.CanAct)return;
+            if(attack.Target!=null)return;
+            CombatActor nearest=null;float best=36;
+            foreach(var enemy in CombatActor.All)
+            {
+                float d=(enemy.transform.position-transform.position).sqrMagnitude;
+                if(d<best&&actor.IsHostileTo(enemy)&&actor.HasSightOf(enemy)){best=d;nearest=enemy;}
+            }
+            if(nearest!=null){selection.Select(nearest);attack.Order(nearest);return;}
+            if(Vector3.ProjectOnPlane(transform.position-attackMoveDestination,Vector3.up).sqrMagnitude<.25f){CancelAttackMove();return;}
+            if(!actor.Motor.Travelling&&!actor.Motor.MoveTo(attackMoveDestination))CancelAttackMove();
+        }
 
         private void Awake()
         {
@@ -26,6 +57,7 @@ namespace DiceFree.Characters
             actor = GetComponent<CombatActor>();
             gameplayPreferences = GameplayPreferences.Current;
             bindings = InputBindings.Current;
+            bindings.SuppressionStarted+=CancelAttackMove;
             select = bindings.Action("Gameplay/Select target");
             cycle = bindings.Action("Gameplay/Cycle hostile");
             attackSelected = bindings.Action("Gameplay/Attack selected");
@@ -40,8 +72,10 @@ namespace DiceFree.Characters
 
         private void OnDisable()
         {
+            CancelAttackMove();
             if (actor != null && actor.Health != null) actor.Health.Damaged -= OnDamaged;
         }
+        private void OnDestroy(){if(bindings!=null)bindings.SuppressionStarted-=CancelAttackMove;}
 
         private void OnDamaged(CombatActor source, DamageResult result)
         {
@@ -57,14 +91,16 @@ namespace DiceFree.Characters
 
         private void Update()
         {
-            if (bindings.Suppressed) return;
+            if (bindings.Suppressed || !actor.Alive) {CancelAttackMove();return;}
             if (skillTargeting != null && (skillTargeting.Active || skillTargeting.InputConsumedThisFrame)) return;
+            if(AttackMoving&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){CancelAttackMove();attack.Cancel();return;}
 
             if (respawn.WasPressedThisFrame()) GetComponent<RespawnAtAnchor>()?.Return();
             if (cycle.WasPressedThisFrame())
                 selection.Cycle(Keyboard.current != null && Keyboard.current.shiftKey.isPressed);
             if (clear.WasPressedThisFrame())
             {
+                CancelAttackMove();
                 selection.Select(null);
                 attack.Cancel();
             }
@@ -73,9 +109,9 @@ namespace DiceFree.Characters
                 selection.Select(Pick(Mouse.current.position.ReadValue()));
             if (attackSelected.WasPressedThisFrame())
             {
-                GetComponent<Interactor>()?.Cancel();
-                attack.Order(selection.Selected);
+                BeginAttackTargeting();
             }
+            StepAttackMove();
         }
 
         private CombatActor Pick(Vector2 screenPoint)
@@ -89,6 +125,7 @@ namespace DiceFree.Characters
 
         public bool ContextAttack(Vector2 point)
         {
+            CancelAttackMove();
             if (bindings.Suppressed) return false;
             var target = Pick(point);
             if (!selection.Valid(target)) return false;

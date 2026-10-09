@@ -57,6 +57,9 @@ namespace DiceFree.UI
         private void Refresh()
         {
             RestoreBaseline();
+            // Resolve all item visuals before suppression. A later binding must not reactivate
+            // an earlier item's baseline (or hide a newly selected same-slot item).
+            var selected = new List<Binding>();
             foreach (var binding in bindings)
             {
                 bool visible = false;
@@ -68,10 +71,11 @@ namespace DiceFree.UI
                         visible |= item != null && string.Equals(item.definitionId, binding.definition.stableId, StringComparison.Ordinal);
                     }
                 SetVisible(binding, visible);
-                if (visible)
-                    foreach (var visual in binding.baselineVisuals)
-                        if (visual != null) visual.SetActive(false);
+                if (visible) selected.Add(binding);
             }
+            foreach (var binding in selected)
+                foreach (var visual in binding.baselineVisuals)
+                    if (visual != null && !selected.Exists(b => Array.IndexOf(b.visuals, visual) >= 0)) visual.SetActive(false);
         }
 
         private void CaptureBaseline()

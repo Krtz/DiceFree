@@ -65,6 +65,7 @@ namespace DiceFree.Characters
 
         private void SuppressCommands()
         {
+            combatInput?.CancelAttackMove();
             motor?.Stop();
             attack?.Cancel();
             interactor?.Cancel();
@@ -96,6 +97,7 @@ namespace DiceFree.Characters
 
             if (stop.WasPressedThisFrame())
             {
+                combatInput?.CancelAttackMove();
                 motor.Stop();
                 attack?.Cancel();
                 interactor?.Cancel();
@@ -104,7 +106,7 @@ namespace DiceFree.Characters
             if (closeInteraction.WasPressedThisFrame() &&
                 (skillTargeting == null || !skillTargeting.InputConsumedThisFrame))
                 interactor?.Cancel();
-            if (interact.WasPressedThisFrame()) interactor?.InteractNearest();
+            if (interact.WasPressedThisFrame()) {combatInput?.CancelAttackMove();interactor?.InteractNearest();}
 
             if (mode == ControlMode.Direct)
             {
@@ -113,6 +115,7 @@ namespace DiceFree.Characters
                 var right = Vector3.ProjectOnPlane(worldCamera.transform.right, Vector3.up).normalized;
                 if (input.sqrMagnitude > 0.001f)
                 {
+                    combatInput?.CancelAttackMove();
                     interactor?.Cancel();
                     attack?.Cancel();
                     motor.MoveDirect(forward * input.y + right * input.x, Time.deltaTime);
@@ -123,6 +126,7 @@ namespace DiceFree.Characters
                 click.WasPressedThisFrame() && Mouse.current != null &&
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
             {
+                combatInput?.CancelAttackMove();
                 if (interactor != null && interactor.ContextInteract(worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue()))) return;
                 if (combatInput != null && combatInput.ContextAttack(Mouse.current.position.ReadValue()))
                 {

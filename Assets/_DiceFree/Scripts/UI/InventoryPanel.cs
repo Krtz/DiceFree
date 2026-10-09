@@ -131,7 +131,7 @@ namespace DiceFree.UI
                     GUI.Label(slotRect, new GUIContent("", tooltip), GUIStyle.none);
                 }
 
-                if (!string.IsNullOrEmpty(label))
+                if (!ItemIconGUI.Draw(slotRect, definition) && !string.IsNullOrEmpty(label))
                     GUI.Label(slotRect, label, HudChrome.SlotTextStyle(theme, true));
             }
             GUI.EndScrollView();

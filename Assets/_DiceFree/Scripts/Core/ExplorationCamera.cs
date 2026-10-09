@@ -11,7 +11,7 @@ namespace DiceFree.Core
         [SerializeField] private float distance = 40f;
         [SerializeField, Min(1f)] private float minimumDistance = 14f;
         [SerializeField, Min(1f)] private float maximumDistance = 78f;
-        [SerializeField, Min(0.001f)] private float zoomSensitivity = 0.085f;
+        [SerializeField, Min(0.001f)] private float zoomSensitivity = 0.60f;
         [SerializeField] private float pitch = 52f;
         [SerializeField] private float yaw = 45f;
 

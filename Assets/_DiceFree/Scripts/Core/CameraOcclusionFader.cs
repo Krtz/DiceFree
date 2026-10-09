@@ -38,6 +38,19 @@ namespace DiceFree.Core
 
                 foreach (var hit in hits)
                     Collect(hit.collider);
+
+                var ray = new Ray(focus, delta / distance);
+                foreach (var tree in TreeCameraOccluder.Active)
+                {
+                    bool blocks = false;
+                    foreach (var mesh in tree.Renderers)
+                    {
+                        if (mesh == null || !mesh.enabled) continue;
+                        var bounds = mesh.bounds; bounds.Expand(castRadius * 2);
+                        if (bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
+                    }
+                    if (blocks) foreach (var mesh in tree.Renderers) if (mesh != null) visibleThisFrame.Add(mesh);
+                }
             }
 
             foreach (var renderer in visibleThisFrame)
@@ -73,7 +86,17 @@ namespace DiceFree.Core
 
         private void Fade(Renderer renderer)
         {
-            if (renderer == null || faded.ContainsKey(renderer)) return;
+            if (renderer == null) return;
+            if(faded.TryGetValue(renderer,out var prior))
+            {
+                var current=renderer.sharedMaterials;bool unchanged=current.Length==prior.transparentCopies.Length;
+                for(int i=0;unchanged&&i<current.Length;i++)unchanged=current[i]==prior.transparentCopies[i];
+                if(unchanged)return;
+                // Puzzle enchantment or other authored appearance changes can happen while ghosted.
+                renderer.sharedMaterials=ResolveOriginals(renderer,prior);
+                foreach(var copy in prior.transparentCopies)if(copy!=null)Destroy(copy);
+                faded.Remove(renderer);
+            }
 
             Material[] originals = renderer.sharedMaterials;
             var copies = new Material[originals.Length];
@@ -129,15 +152,24 @@ namespace DiceFree.Core
         {
             if (renderer == null)
             {
+                if (faded.TryGetValue(renderer, out var dead))
+                    foreach (var material in dead.transparentCopies) if (material != null) Destroy(material);
                 faded.Remove(renderer);
                 return;
             }
 
             if (!faded.TryGetValue(renderer, out var state)) return;
-            renderer.sharedMaterials = state.originals;
+            renderer.sharedMaterials = ResolveOriginals(renderer,state);
             foreach (var material in state.transparentCopies)
                 if (material != null) Destroy(material);
             faded.Remove(renderer);
+        }
+        private static Material[] ResolveOriginals(Renderer renderer,FadeState state)
+        {
+            var current=renderer.sharedMaterials;
+            for(int i=0;i<current.Length;i++)
+                if(i<state.transparentCopies.Length&&current[i]==state.transparentCopies[i])current[i]=state.originals[i];
+            return current;
         }
 
         private void OnDisable()

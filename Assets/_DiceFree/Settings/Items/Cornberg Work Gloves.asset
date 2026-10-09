@@ -14,13 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.ItemDefinition
   stableId: item.cornberg.work-gloves
   displayName: Cornberg Work Gloves
+  icon: {fileID: 21300000, guid: 2b0eda9d2cf3e6640a2b7d03995aa84e, type: 3}
   slot: 3
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: quest.cornberg.q4
-  flavor:
+  allowedClassIds: []
+  flavor: 
   stats:
+    attributes:
+      vitality: 0
+      strength: 0
+      agility: 0
+      intelligence: 0
+      spirit: 0
     physicalDefense: 0
     magicalDefense: 0
     attackSpeedPercent: 5
     movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

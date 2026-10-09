@@ -1,10 +1,12 @@
 using DiceFree.Quests;
+using System.Linq;
 using UnityEngine;
 
 namespace DiceFree.UI
 {
     public sealed class QuestTracker : CustomizableHudWidget
     {
+        public QuestDefinition[] TrackedQuests=>journal==null?System.Array.Empty<QuestDefinition>():journal.Definitions.Where(q=>journal.PrerequisitesMet(q)&&journal.GetProgress(q.stableId)?.status!=QuestStatus.Completed).ToArray();
         [SerializeField] private QuestJournal journal;
         private Vector2 scroll;
 
@@ -28,10 +30,11 @@ namespace DiceFree.UI
             GUILayout.BeginArea(new Rect(inner.x, inner.y + header, inner.width, inner.height - header));
             scroll = GUILayout.BeginScrollView(scroll, false, false);
 
-            foreach (var quest in journal.Definitions)
+            foreach (var quest in TrackedQuests)
             {
                 if (!journal.PrerequisitesMet(quest)) continue;
                 var state = journal.GetProgress(quest.stableId);
+                if(state==null||state.status==QuestStatus.Completed)continue;
                 GUILayout.Label(quest.title, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
 
                 if (state.definitionVersion != quest.version)

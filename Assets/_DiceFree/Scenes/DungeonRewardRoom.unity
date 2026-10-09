@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09993f0029a63464b87e6dd763ddfcac, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.WorldNavigation
   data: {fileID: 23800000, guid: 726be70c9fce4334081f93619cfbfab2, type: 2}
 --- !u!114 &1231653462
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7346a0ab9c19c224599aaa52f365901b, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardRoom
   variantAnchor: {fileID: 1250273925}
 --- !u!4 &1231653463

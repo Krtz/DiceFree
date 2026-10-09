@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DiceFree.Combat;
 using DiceFree.Items;
 using DiceFree.Progression;
+using DiceFree.UI;
 using UnityEngine;
 namespace DiceFree.Dungeons
 {
@@ -30,11 +31,21 @@ namespace DiceFree.Dungeons
             foreach(var c in choices)
             {
                 if(c.resolved)continue;
-                GUI.Box(new Rect(15,y,390,130),c.actor.name+" — choose your private reward");
-                for(int i=0;i<c.items.Length;i++)if(GUI.Button(new Rect(25,y+30+i*28,370,25),c.items[i].displayName))Choose(c.actor,i);
-                if(GUI.Button(new Rect(25,y+95,370,25),$"Instead: {c.xp} bonus EXP + {c.gold} gold"))Choose(c.actor,-1);
-                y+=140;
+                int height=70+c.items.Length*44;
+                GUI.Box(new Rect(15,y,390,height),c.actor.name+" — choose your private reward");
+                for(int i=0;i<c.items.Length;i++)
+                {
+                    var item=c.items[i];
+                    var row=new Rect(25,y+30+i*44,370,40);
+                    if(GUI.Button(row,new GUIContent("",HudTooltip.Item(item))))Choose(c.actor,i);
+                    var iconRect=new Rect(row.x+2,row.y+2,36,36);
+                    if(!ItemIconGUI.Draw(iconRect,item))GUI.Label(iconRect,item.displayName.Substring(0,Mathf.Min(3,item.displayName.Length)));
+                    GUI.Label(new Rect(row.x+44,row.y+8,row.width-48,25),item.displayName);
+                }
+                if(GUI.Button(new Rect(25,y+35+c.items.Length*44,370,25),$"Instead: {c.xp} bonus EXP + {c.gold} gold"))Choose(c.actor,-1);
+                y+=height+10;
             }
+            HudTooltip.DrawCurrent();
         }
     }
 }

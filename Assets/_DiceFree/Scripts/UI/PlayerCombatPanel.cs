@@ -20,7 +20,7 @@ namespace DiceFree.UI
                 player.InCombat ? "IN COMBAT" : "Exploring · Cornberg anchor available";
             GUI.Label(new Rect(r.x+10,r.y+58,410,22), state);
             GUI.Label(new Rect(r.x+10,r.y+80,410,22), "Fists: " + player.GetComponent<BasicAttack>().State);
-            GUI.Label(new Rect(r.x+10,r.y+102,410,38), "Left-click / Tab: target   Right-click enemy / X: attack\nWASD / ground move / Space: cancel attack   Esc: clear");
+            GUI.Label(new Rect(r.x+10,r.y+102,410,38), "Left-click / Tab: target   X: attack reticle\nRight-click: move/interact/attack   Esc: cancel");
         }
         public void Configure(CombatActor actor, HealingArea area) { player = actor; well = area; }
     }

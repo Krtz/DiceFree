@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Quests.QuestDefinition
   stableId: quest.cornberg.crop-slimes
   title: Crop Slimes
-  offer: Those Slimes are ruining the crops. Clear three first, then two more, and come back to me.
-  locationHint: Speak to the former swordswoman/farmer beside the eastern fields.
+  offer: Those Slimes are ruining the northern fields, north of Cornberg. Follow the north path, clear three first, then two more, and come back to me.
+  locationHint: Follow the north path to the northern fields north of Cornberg. Return to the former swordswoman/farmer in town.
   stages:
-  - instruction: Defeat crop Slimes
+  - instruction: Defeat crop Slimes north of Cornberg
     contentId: enemy.crop-slime
     familyId: 
     count: 3
-  - instruction: Defeat two more crop Slimes
+  - instruction: Defeat two more crop Slimes north of Cornberg
     contentId: enemy.crop-slime
     familyId: 
     count: 2

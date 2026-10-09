@@ -29,11 +29,13 @@ MonoBehaviour:
     agility: 0
     intelligence: 0
     spirit: 0
-  baseHp: 1600
+  baseHp: 16000
   physicalDefense: 0
   magicalDefense: 0
   moveSpeed: 3.2
   basicAttack: {fileID: 11400000, guid: c6f905d9da4529146a2eff557b1a5c15, type: 2}
+  basicAttackMinimumOffset: 0
+  basicAttackMaximumOffset: 0
   tuning: {fileID: 11400000, guid: fae0d971f61fa81429fe4643a81e5cac, type: 2}
   secondaryOverrides: []
   overrideVitalityHp: 0

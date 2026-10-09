@@ -16,6 +16,8 @@ namespace DiceFree.Dungeons
     public sealed class SlimeDungeonRun : MonoBehaviour
     {
         public static SlimeDungeonRun Current {get;private set;}
+        void OnEnable()=>DiceFree.UI.HudPointerBlocker.OverlayCovers+=CoversPointer;
+        void OnDisable()=>DiceFree.UI.HudPointerBlocker.OverlayCovers-=CoversPointer;
         private static SessionMapRegistry registry=new();
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetHost(){Current=null;registry=new();}
@@ -40,6 +42,14 @@ namespace DiceFree.Dungeons
         readonly List<GameObject> spawned=new();
         Vector3 entrance; float stagingEnd, started, completionEnd;
         bool loading, regentVictory, exiting;
+        public CombatActor Initiator { get; private set; }
+        public bool StagingReady => !loading && definition != null && !Active && !Completing && !exiting;
+        public bool StartNow(CombatActor requester)
+        {
+            if (!StagingReady || requester == null || requester != Initiator || !Living.Contains(requester)) return false;
+            Begin();
+            return Active;
+        }
         SlimeTreePuzzle puzzle; GameObject stagingGate,puzzleGate,bossGate,secretGate;
         public string Enter(CombatActor actor,DungeonDefinition data,SlimeDungeonTuning tuning,Vector3 returnPoint)
         {
@@ -59,7 +69,7 @@ namespace DiceFree.Dungeons
             loadout.DeathReturnHandler=()=>{withdrawn.Add(actor);ReturnPlayer(actor,false);return true;};
             if(definition==null)
             {
-                definition=data; Tuning=tuning; entrance=returnPoint;lease=state;
+                Initiator=actor;definition=data; Tuning=tuning; entrance=returnPoint;lease=state;
                 stagingEnd=Time.time+data.stagingSeconds; Current=this; StartCoroutine(Load());
             }
             else if(!loading) Relocate(actor,Origin+new Vector3(8,0,5));
@@ -75,7 +85,10 @@ namespace DiceFree.Dungeons
             bossGate=Find("Normal route gate").gameObject;secretGate=Find("Enchanted Regent barrier").gameObject;
             puzzle=Find("Five ring puzzle").GetComponent<SlimeTreePuzzle>();puzzle.Run=this;
             foreach(var actor in Participants) Relocate(actor,Origin+new Vector3(8,0,5));
-            Spawn(Tuning.dummy,Origin+new Vector3(8,0,10),1.1f,SlimeRole.Dummy);
+            var dummy=Spawn(Tuning.dummy,Origin+new Vector3(8,0,10),1.8f,SlimeRole.Dummy);
+            var label=new GameObject("Practice dummy label");label.transform.SetParent(dummy.transform,false);label.transform.localPosition=Vector3.up*2;
+            var text=label.AddComponent<TextMesh>();text.text="PRACTICE TARGET\nInvulnerable / no rewards";text.characterSize=.025f;text.fontSize=32;text.anchor=TextAnchor.MiddleCenter;
+            if(Camera.main!=null)label.transform.rotation=Camera.main.transform.rotation;
             loading=false;
         }
         void Update()
@@ -92,6 +105,7 @@ namespace DiceFree.Dungeons
         }
         void Begin()
         {
+            if(!StagingReady)return;
             var context=new DungeonConditionContext{participants=Participants.Select(a=>new DungeonParticipantSnapshot{participantId=a.GetEntityId().ToString(),level=a.Stats.Level,classId=a.Stats.Definition.stableId}).ToArray()};
             var variant=DungeonConditionEvaluator.Evaluate(definition,context);
             if(!registry.TryBeginDungeon(definition.stableId,lease.leaseToken,variant,DateTime.UtcNow,out lease,out var error))throw new InvalidOperationException(error);
@@ -100,7 +114,7 @@ namespace DiceFree.Dungeons
             foreach(var s in spawned.ToArray())if(s!=null && s.GetComponent<DungeonSlime>()?.Role==SlimeRole.Dummy)Destroy(s);
             stagingGate.SetActive(false);Status="Defeat Big Slime in the northwest clearing";
             for(int i=0;i<6;i++)Spawn(Tuning.green,Origin+new Vector3(7+(i%2)*4,0,24+i*5),1,SlimeRole.Trash);
-            Spawn(Tuning.miniboss,Origin+new Vector3(12,0,76),2.3f,SlimeRole.Miniboss);
+            Spawn(Tuning.miniboss,Origin+new Vector3(12,0,76),Tuning.minibossScale,SlimeRole.Miniboss);
         }
         public DungeonSlime Spawn(ActorDefinition stats,Vector3 at,float size,SlimeRole role,bool blue=false)
         {
@@ -110,8 +124,11 @@ namespace DiceFree.Dungeons
             obj.transform.localScale=Vector3.one*size;
             var model=role==SlimeRole.Boss?Tuning.bossPresentation:role==SlimeRole.Regent?Tuning.regentPresentation:null;
             if(model!=null){var old=obj.transform.Find("Presentation");if(old!=null){old.gameObject.SetActive(false);Destroy(old.gameObject);}var visual=Instantiate(model,obj.transform);visual.name="Presentation";visual.transform.localPosition=Vector3.zero;}
+            if(role==SlimeRole.Dummy){var old=obj.transform.Find("Presentation");if(old!=null){old.name="Retired slime presentation";old.gameObject.SetActive(false);Destroy(old.gameObject);}PracticeDummyVisual.Create(obj.transform);
+                var hitbox=obj.GetComponent<CapsuleCollider>();hitbox.height=2;hitbox.center=Vector3.up;}
             var actor=obj.GetComponent<CombatActor>();actor.Stats.Configure(stats);actor.Health.Restore();actor.Configure(1,.65f*size,stats.familyId);
             var slime=obj.AddComponent<DungeonSlime>();slime.Initialize(this,role,blue);spawned.Add(obj);
+            obj.AddComponent<SlimeVisualMotion>();
             return slime;
         }
         public IEnumerable<CombatActor> Living=>Participants.Where(a=>a!=null&&a.Alive&&!withdrawn.Contains(a));
@@ -176,6 +193,7 @@ namespace DiceFree.Dungeons
         public void ObserveReward(CombatActor a,ItemDefinition item)=>playerEvents[a].Publish(new DropObservedEvent(definition.stableId,item.stableId,true));
         public void Drop(CombatActor a,ItemDefinition item){var inv=a.GetComponent<CarriedInventory>();inv.Configure(inv.Definitions.Concat(new[]{item}).Distinct().ToArray());inv.Grant(item.stableId);}
         public void Abandon()=>StartCoroutine(ExitAll(false));
+        public void ReleaseForSessionExit(){if(definition!=null)registry.ReleaseDungeon(definition.stableId,lease.leaseToken,"world.face.1",out _);exiting=true;Active=false;Completing=false;}
         IEnumerator ExitAll(bool entranceReturn)
         {
             if(exiting)yield break;exiting=true;Active=false;Completing=false;
@@ -198,7 +216,13 @@ namespace DiceFree.Dungeons
             camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19994,96,108):new Rect(-56,-44,181,116));
             camera.RecenterForTravel(actor.transform);
         }
-        void OnGUI(){if(definition==null||exiting)return;GUI.Box(new Rect(15,80,540,65),Status);if(!loading&&GUI.Button(new Rect(25,115,150,25),"Abandon dungeon"))Abandon();}
+        public static bool CoversPointer(Vector2 screenPoint)
+        {
+            return Current!=null && Current.definition!=null && !Current.exiting && new Rect(15,80,540,65).Contains(new Vector2(screenPoint.x,Screen.height-screenPoint.y));
+        }
+        void OnGUI(){if(definition==null||exiting||DiceFree.UI.HudPointerBlocker.ModalOpen)return;GUI.Box(new Rect(15,80,540,65),Status);if(!loading&&GUI.Button(new Rect(25,115,150,25),"Abandon dungeon"))Abandon();
+            if(StagingReady){var local=FindFirstObjectByType<DiceFree.Characters.CombatInput>();GUI.enabled=local!=null&&local.GetComponent<CombatActor>()==Initiator&&Initiator.Alive;
+                if(GUI.Button(new Rect(185,115,150,25),"Start Now"))StartNow(local.GetComponent<CombatActor>());GUI.enabled=true;}}
         void OnDestroy(){if(Current==this)Current=null;foreach(var a in Participants)if(a!=null){a.Health.Died-=deathHandlers[a];var state=a.GetComponent<RunLoadoutLock>();if(state.Owner==this){state.Locked=false;state.InsideDungeon=false;state.DeathReturnHandler=null;state.Owner=null;}}}
     }
 }

@@ -20,7 +20,7 @@ namespace DiceFree.World
         public virtual bool CanInteract(CombatActor actor) => Available(actor) &&
             (context == null || context.Resolve(actor) == this) &&
             Vector3.Distance(actor.transform.position,ApproachPosition) <= range &&
-            !Physics.Linecast(actor.transform.position+Vector3.up,transform.position+Vector3.up,1<<9);
+            !Physics.Linecast(actor.transform.position+Vector3.up,ApproachPosition+Vector3.up,1<<9);
         public virtual void Interact(CombatActor actor) { }
         internal void BindRegistry(InteractionRegistry owner) { registry = owner; }
         internal void UnbindRegistry(InteractionRegistry owner) { if (registry == owner) registry = null; }

@@ -105,16 +105,18 @@ namespace DiceFree.EditorTools
         private static void Fields(Transform parent)
         {
             var fields=Group("05 - Corn fields and pasture",parent);
-            foreach(float z in new[]{-12f,15f})
+            // Northern meadow (east of the stream, north of the houses); no farmland in town.
+            const float z=55f;
+            foreach(float x in new[]{20f,44f})
             {
-                Box("Tilled field",new Vector3(47,0.03f,z),new Vector3(21,0.08f,12),Soil,fields,false);
+                Box("Tilled field",new Vector3(x,0.03f,z),new Vector3(21,0.08f,12),Soil,fields,false);
                 for(int row=0;row<6;row++)
                 for(int col=0;col<10;col++)
-                    Shape("Crop placeholder",PrimitiveType.Cube,new Vector3(38+col*1.9f,0.48f,z-4.8f+row*1.8f),
+                    Shape("Crop placeholder",PrimitiveType.Cube,new Vector3(x-9f+col*1.9f,0.48f,z-4.8f+row*1.8f),
                         new Vector3(0.35f,0.9f,0.35f),Crop,fields,false);
                 for(int i=0;i<8;i++)
-                    Box("Field fence post",new Vector3(36+i*3,0.55f,z-6.5f),new Vector3(0.2f,1.1f,0.2f),Timber,fields,false);
-                Box("Field fence rail",new Vector3(46.5f,0.75f,z-6.5f),new Vector3(21,0.15f,0.15f),Timber,fields,false);
+                    Box("Field fence post",new Vector3(x-11f+i*3f,0.55f,z-6.5f),new Vector3(0.2f,1.1f,0.2f),Timber,fields,false);
+                Box("Field fence rail",new Vector3(x-0.5f,0.75f,z-6.5f),new Vector3(21,0.15f,0.15f),Timber,fields,false);
             }
         }
     }

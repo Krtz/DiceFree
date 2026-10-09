@@ -25,6 +25,7 @@ namespace DiceFree.Combat
         [Min(0)] public float physicalDefense, magicalDefense;
         [Min(0.1f)] public float moveSpeed = 5;
         public AttackDefinition basicAttack;
+        public float basicAttackMinimumOffset, basicAttackMaximumOffset;
         public CombatTuning tuning;
         public SecondaryCoefficientOverride[] secondaryOverrides = Array.Empty<SecondaryCoefficientOverride>();
         public float SecondaryCoefficient(SecondaryStat stat)

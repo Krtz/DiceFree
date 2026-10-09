@@ -41,7 +41,7 @@ namespace DiceFree.World
             {
                 var target = targets[i];
                 if (target == null) { targets.RemoveAt(i); continue; }
-                float candidateDistance = (target.transform.position - actor.transform.position).sqrMagnitude;
+                float candidateDistance = (target.ApproachPosition - actor.transform.position).sqrMagnitude;
                 if (candidateDistance < distance && target.CanInteract(actor))
                 { nearest = target; distance = candidateDistance; }
             }

@@ -131,12 +131,13 @@ namespace DiceFree.UI
                 var rect = new Rect(x, y + i * (height + gap), width, height);
                 string label = SlotAbbreviation(slot);
                 string tooltip = slot.ToString();
+                ItemDefinition definition = null;
 
                 var equipped = equipment?.Slots.FirstOrDefault(value => value.slotId == slot.ToString());
                 if (equipped != null && inventory != null)
                 {
                     var item = inventory.Find(equipped.instanceId);
-                    var definition = item == null ? null : inventory.Resolve(item.definitionId);
+                    definition = item == null ? null : inventory.Resolve(item.definitionId);
                     if (definition != null)
                     {
                         label = definition.displayName.Length <= 3
@@ -163,7 +164,8 @@ namespace DiceFree.UI
                     GUI.Label(rect, new GUIContent("", finalTooltip), GUIStyle.none);
                 }
 
-                GUI.Label(rect, label, HudChrome.SlotTextStyle(Theme, true));
+                if (!ItemIconGUI.Draw(rect, definition))
+                    GUI.Label(rect, label, HudChrome.SlotTextStyle(Theme, true));
             }
         }
 

@@ -10,6 +10,9 @@ namespace DiceFree.UI
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private Vector2 scroll;
+        public System.Func<bool> ReturnToStartMenu {get;set;}
+        private bool confirmReturn;private string returnFeedback="";
+        public bool RequestReturnToStartMenu(){bool saved=ReturnToStartMenu?.Invoke()==true;if(!saved)returnFeedback="Could not save progress. Return cancelled.";return saved;}
 
         public bool Open { get; private set; }
         private Rect ButtonBounds => new Rect(Mathf.Max(10, Screen.width - 54), Mathf.Max(10, Screen.height - 54), 44, 44);
@@ -38,6 +41,7 @@ namespace DiceFree.UI
             if (bindings == null) return;
             bindings.CancelRebind();
             Open = false;
+            confirmReturn=false;
             bindings.SetModal(false);
         }
 
@@ -84,6 +88,12 @@ namespace DiceFree.UI
             GUILayout.Label("Options — Controls");
             if (!bindings.Listening && GUILayout.Button("Close [Escape]", GUILayout.Width(130))) Close();
             GUILayout.EndHorizontal();
+            if(ReturnToStartMenu!=null)
+            {
+                if(!confirmReturn&&GUILayout.Button("Save and Return to Start Menu"))confirmReturn=true;
+                if(confirmReturn){GUILayout.Label("Save progress and leave this session? Active dungeon runs will end.");GUILayout.BeginHorizontal();if(GUILayout.Button("Save and Return"))RequestReturnToStartMenu();if(GUILayout.Button("Cancel"))confirmReturn=false;GUILayout.EndHorizontal();}
+                if(!string.IsNullOrEmpty(returnFeedback))GUILayout.Label(returnFeedback);
+            }
 
             if (bindings.Listening)
             {

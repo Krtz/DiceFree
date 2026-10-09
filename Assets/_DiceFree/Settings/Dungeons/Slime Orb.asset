@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
   stableId: item.slime.slime-orb
   displayName: Slime Orb
+  icon: {fileID: 21300000, guid: 71633a54fe73a434a84509909cb08320, type: 3}
   slot: 7
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: dungeon.slime
   allowedClassIds:
   - class.magically-touched-novice
-  flavor:
+  flavor: 
   stats:
     attributes:
       vitality: 2
@@ -34,3 +35,4 @@ MonoBehaviour:
     movementSpeedPercent: 0
     regeneration: 0
     basicAttackMaximumBonus: 1
+    basicAttackFlatBonus: 0

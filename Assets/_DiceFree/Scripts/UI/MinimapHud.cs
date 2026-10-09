@@ -20,6 +20,8 @@ namespace DiceFree.UI
         public override float LockedAspectRatio => 1f;
 
         public void Configure(CombatActor actor) => player = actor;
+        public float WorldRadius=>worldRadius;
+        public void Zoom(float factor){worldRadius=Mathf.Clamp(worldRadius*factor,8,60);if(mapCamera!=null)mapCamera.orthographicSize=worldRadius;}
 
         private void Awake()
         {
@@ -83,15 +85,37 @@ namespace DiceFree.UI
             else
                 GUI.Box(mapRect, "Map");
 
+            DrawCompass(mapRect);
             GUI.Label(
                 mapRect,
-                "▲",
+                "+",
                 new GUIStyle(GUI.skin.label)
                 {
                     alignment = TextAnchor.MiddleCenter,
                     fontStyle = FontStyle.Bold,
                     fontSize = Mathf.RoundToInt(Mathf.Clamp(mapRect.height * 0.08f, 12, 24))
                 });
+            if(GUI.Button(new Rect(mapRect.xMax-52,mapRect.yMax-26,24,24),"+"))Zoom(.8f);
+            if(GUI.Button(new Rect(mapRect.xMax-26,mapRect.yMax-26,24,24),"-"))Zoom(1.25f);
+        }
+
+        // ASCII labels and a drawn arrow avoid font-dependent compass glyphs.
+        private static void DrawCompass(Rect map)
+        {
+            float size = Mathf.Clamp(map.width * .12f, 18, 30);
+            var style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter,
+                fontStyle = FontStyle.Bold, fontSize = Mathf.RoundToInt(size * .65f) };
+            style.normal.textColor = Color.white;
+            void Label(string text, Rect rect) { GUI.Box(rect, GUIContent.none); GUI.Label(rect, text, style); }
+            Label("N", new Rect(map.center.x-size/2, map.y+2, size, size));
+            Label("S", new Rect(map.center.x-size/2, map.yMax-size-2, size, size));
+            Label("W", new Rect(map.x+2, map.center.y-size/2, size, size));
+            Label("E", new Rect(map.xMax-size-2, map.center.y-size/2, size, size));
+            var old = GUI.color; GUI.color = new Color(1, .85f, .35f);
+            GUI.DrawTexture(new Rect(map.center.x-1, map.y+size+6, 2, 10), Texture2D.whiteTexture);
+            for (int row=0; row<5; row++)
+                GUI.DrawTexture(new Rect(map.center.x-row, map.y+size+3+row, 1+row*2, 1), Texture2D.whiteTexture);
+            GUI.color = old;
         }
     }
 }

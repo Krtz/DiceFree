@@ -27,11 +27,11 @@ namespace DiceFree.EditorTools
             var respawn=Asset<RespawnDefinition>("Ordinary overworld respawn",_=>{});
             var quest=Asset<QuestDefinition>("Cornberg crop Slimes",value=> {
                 value.stableId="quest.cornberg.crop-slimes"; value.title="Crop Slimes"; value.rewardXp=20;
-                value.offer="Those Slimes are ruining the crops. Clear three first, then two more, and come back to me.";
-                value.locationHint="Speak to the former swordswoman/farmer beside the eastern fields.";
+                value.offer="Those Slimes are ruining the northern fields, north of Cornberg. Follow the north path, clear three first, then two more, and come back to me.";
+                value.locationHint="Follow the north path to the northern fields north of Cornberg. Return to the former swordswoman/farmer in town.";
                 value.stages=new[] {
-                    new QuestObjective { contentId="enemy.crop-slime",count=3,instruction="Defeat crop Slimes" },
-                    new QuestObjective { contentId="enemy.crop-slime",count=2,instruction="Defeat two more crop Slimes" }
+                    new QuestObjective { contentId="enemy.crop-slime",count=3,instruction="Defeat crop Slimes north of Cornberg" },
+                    new QuestObjective { contentId="enemy.crop-slime",count=2,instruction="Defeat two more crop Slimes north of Cornberg" }
                 };
             });
             var enemyData=enemy.GetComponent<ActorStats>().Definition;

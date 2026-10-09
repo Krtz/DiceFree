@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
   stableId: item.cornberg.farmers-pants
   displayName: Farmer's Pants
+  icon: {fileID: 21300000, guid: a09480646e650a74cb2ebc8e99371898, type: 3}
   slot: 4
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: prototype.test
+  allowedClassIds: []
   flavor: 
   stats:
     attributes:
@@ -30,3 +32,6 @@ MonoBehaviour:
     magicalDefense: 0
     attackSpeedPercent: 0
     movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

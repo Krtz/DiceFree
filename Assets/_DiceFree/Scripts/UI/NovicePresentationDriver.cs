@@ -25,6 +25,7 @@ namespace DiceFree.UI
         private bool hasPreviousPosition;
         private Transform leftUpperArm;
         private Transform rightUpperArm;
+        private Transform leftLowerArm,rightLowerArm;
 
         public Transform VisualRoot => visualRoot;
         public Animator VisualAnimator => animator;
@@ -87,7 +88,11 @@ namespace DiceFree.UI
             wasWinding = winding;
 
             bool attacking = winding || animator.GetCurrentAnimatorStateInfo(0).IsName("UnarmedAttack");
-            if (!attacking) ApplyLocomotionArmSwing(speed);
+            if (!attacking)
+            {
+                if(speed<=.03f)ApplyRelaxedIdleArms();
+                else ApplyLocomotionArmSwing(speed);
+            }
         }
 
         private float ResolveMovementSpeed()
@@ -148,6 +153,20 @@ namespace DiceFree.UI
             rightUpperArm = animator != null && animator.isHuman
                 ? animator.GetBoneTransform(HumanBodyBones.RightUpperArm)
                 : null;
+            leftLowerArm=animator!=null&&animator.isHuman?animator.GetBoneTransform(HumanBodyBones.LeftLowerArm):null;
+            rightLowerArm=animator!=null&&animator.isHuman?animator.GetBoneTransform(HumanBodyBones.RightLowerArm):null;
+        }
+        private void ApplyRelaxedIdleArms()
+        {
+            float breath=Mathf.Sin(Time.time*1.6f);
+            RelaxArm(leftUpperArm,leftLowerArm,transform.TransformDirection(new Vector3(-.24f,-1,.08f+breath*.035f)));
+            RelaxArm(rightUpperArm,rightLowerArm,transform.TransformDirection(new Vector3(.24f,-1,.08f-breath*.035f)));
+        }
+        private static void RelaxArm(Transform upper,Transform lower,Vector3 desired)
+        {
+            if(upper==null||lower==null)return;
+            var current=lower.position-upper.position;
+            if(current.sqrMagnitude>.000001f)upper.rotation=Quaternion.FromToRotation(current,desired)*upper.rotation;
         }
 
         private void ApplyLocomotionArmSwing(float speed)

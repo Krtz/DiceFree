@@ -28,7 +28,8 @@ namespace DiceFree.Combat
             ActionCriticalResolution critical = null,
             float? coefficientOverride = null,
             float rawMultiplier = 1f,
-            float basicAttackBonus = 0f)
+            float basicAttackBonus = 0f,
+            float basicAttackRangeOffset = 0f)
         {
             float baseRaw = coefficientOverride.HasValue
                 ? attack.RawDamage(source.Attributes, coefficientOverride.Value)
@@ -41,6 +42,7 @@ namespace DiceFree.Combat
                 baseRaw *= source.BasicAttackDamageMultiplier;
                 // Flat authored basic-attack damage follows attribute/percentage scaling.
                 baseRaw += source.BasicAttackFlatBonus;
+                baseRaw=Mathf.Max(0,baseRaw+Mathf.Clamp(basicAttackRangeOffset,source.Definition.basicAttackMinimumOffset,source.Definition.basicAttackMaximumOffset));
             }
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
@@ -58,12 +60,13 @@ namespace DiceFree.Combat
             AttackDefinition attack,
             ActionResolution action,
             float rawMultiplier = 1f,
-            float basicAttackBonus = 0f)
+            float basicAttackBonus = 0f,
+            float basicAttackRangeOffset = 0f)
         {
             if (action == null) throw new System.ArgumentNullException(nameof(action));
             // A miss never constructs raw packets or consults mitigation, and cannot resolve crit here.
             if (action.Hit.missed) return new DamageResult { action = action, channel = attack.channel, element = attack.element };
-            var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier, basicAttackBonus);
+            var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier, basicAttackBonus,basicAttackRangeOffset);
             result.action = action;
             return result;
         }

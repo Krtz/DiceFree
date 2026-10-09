@@ -14,13 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Items.ItemDefinition
   stableId: item.cornberg.forest-shoes
   displayName: Forest Travel Shoes
+  icon: {fileID: 21300000, guid: 6b7b8b32d31056d4fbd36fd4a2de0056, type: 3}
   slot: 5
   itemLevel: 1
   rarityId: rarity.provisional
   sourceId: enemy.cornberg.deep-forest-elite
-  flavor:
+  allowedClassIds: []
+  flavor: 
   stats:
+    attributes:
+      vitality: 0
+      strength: 0
+      agility: 0
+      intelligence: 0
+      spirit: 0
     physicalDefense: 1
     magicalDefense: 1
     attackSpeedPercent: 0
     movementSpeedPercent: 1
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

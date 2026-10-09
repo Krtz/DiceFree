@@ -66,6 +66,8 @@ namespace DiceFree.UI
                 attackMin = range.x + stats.BasicAttackFlatBonus;
                 attackMax = range.y + stats.BasicAttackFlatBonus;
                 attackMax += stats.BasicAttackMaximumBonus * stats.BasicAttackDamageMultiplier;
+                attackMin=Mathf.Max(0,attackMin+stats.Definition.basicAttackMinimumOffset);
+                attackMax=Mathf.Max(0,attackMax+stats.Definition.basicAttackMaximumOffset);
 
                 float interval = Mathf.Max(
                     basicAttack.Definition.interval,

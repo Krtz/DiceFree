@@ -16,6 +16,7 @@ namespace DiceFree.UI
         private CodexPanel codex;
         private SkillTargetingController targeting;
         private Interactor interactor;
+        private QuestJournalPanel journal;
 
         private void Awake()
         {
@@ -27,6 +28,7 @@ namespace DiceFree.UI
             codex = GetComponent<CodexPanel>();
             targeting = GetComponent<SkillTargetingController>();
             interactor = GetComponent<Interactor>();
+            journal=GetComponent<QuestJournalPanel>();
         }
 
         private void Update()
@@ -37,6 +39,7 @@ namespace DiceFree.UI
             if (targeting != null && (targeting.Active || targeting.InputConsumedThisFrame)) return;
 
             bool closedSomething = false;
+            if(journal!=null&&journal.Open){journal.Close();closedSomething=true;}
 
             if (inventory != null && inventory.IsOpen)
             {
