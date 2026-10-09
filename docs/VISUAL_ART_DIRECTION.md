@@ -78,3 +78,27 @@ Direct user responses to visual-interview Round 1, October 9, 2026.
 - Distinguish theatrical magic from gameplay signals: boss effects must not obscure Slime Slam targeting rings, Divide fragments, five capture rings or route gates.
 - Early-game visual escalation still applies: miniboss clearing simple, main boss arena grander, hidden high-level Regent most elaborate.
 - These are approved planning decisions, not an instruction to start redesigning the scenes during the interview.
+
+## Round 4 — Characters, monsters, equipment & Blender (approved 2026-10-09)
+43. Character proportions and visual styles vary by class and race; do not enforce one shared body proportion.
+44. Level-1 Novice looks like an ordinary villager wearing simple clothing.
+45. Every advancement should establish a noticeable new visual identity, with escalating spectacle in later tiers.
+46. Every class eventually gets its **own distinct model**; reuse of underlying rigs/technical components is acceptable only when the resulting models remain distinct.
+47. Playable races may be unusual creative reinterpretations when suitable, while preserving identity and clarity.
+48. Equipment styles can mix, with a clear increase in complexity/spectacle as progression advances.
+49. Actual item identity matters more than rarity alone; do not make every rare item follow an identical glow/color rule.
+50. Some legendary/endgame equipment can transform visually under authored conditions, including animated forms or effects.
+51. Appearance customization/transmog has higher priority than strict visual mirroring of every currently equipped item. Preserve functional gear/stats and existing appearance systems.
+52. Most background NPCs may use generic models; important NPCs deserve individual models.
+53. Important NPC art (custom model, distinctive clothing/equipment, animation, visual history) scales with narrative significance.
+54. Low-level monster art direction varies by monster family.
+55. Higher-level monster evolution varies by family: size, features, accessories, mutations, effects and animations can be used selectively.
+56. Blender workflow is flexible: original meshes, kitbashing and modifying permitted licensed assets are all valid.
+57. First character art pass should improve **all three currently playable character presentations** (Novice, Physically Blessed Novice and Magically Touched Novice), not Novice alone.
+
+### Future class-representative NPCs — approved vision
+- Later, aim for **one recognizable NPC representative per playable class**, visually embodying that class.
+- These NPCs are the expected principal quest-givers/mentors for advancement into the corresponding classes.
+- Exceptions are explicitly permitted; secret classes may use entirely different discovery or advancement routes and should not be forced into the standard NPC pattern.
+- This is a future narrative, class-content, quest and character-art goal; do not retroactively add all representatives to Cornberg or mechanically change existing advancement without separate planning.
+- Maintain prior progression rule: humble first-tier appearance, distinctive presentation at every advancement, increasingly epic later tiers.
