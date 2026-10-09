@@ -31,3 +31,27 @@ Round 2: Cornberg architecture, landmarks, northern farmlands, eastern forest, t
 
 ## Source
 Direct user responses to visual-interview Round 1, October 9, 2026.
+
+## Round 2 — Cornberg and surroundings (approved 2026-10-09)
+13. Architecture: no unified style; each building may differ, intentionally.
+14. Cornberg stays a small, cozy farming hamlet.
+15. Central landmark: a distinctive well or fountain; prioritize upgrading the existing slightly magical healing well rather than inventing a competing landmark.
+16. Surrounding landscape: no fixed preference.
+17. Custom-build important structures in Blender, using licensed asset bases when appropriate.
+18. Northern farms: realistic agricultural countryside.
+19. Eastern Slime Forest: colorful, slightly magical atmosphere.
+20. Slimes themselves are the only unusual features in early-game surroundings. Keep incidental magical scenery subtle; convey slight enchantment through color, lighting and the slimes rather than overt unrelated supernatural objects.
+21. Roads and paths vary with location and traffic.
+22. Prominent river, bridges and banks.
+23. Terrain elevation varies by area.
+24. Gradually combine NPC walking, professions, daily routines and ambient life.
+25. Discovery mixes landmarks, roads, clues, NPC hints and hidden exploration, without obvious map markers everywhere.
+26. Creative environmental storytelling encouraged; preserve established lore and quests.
+27. Small visual changes tied to quest completion.
+
+### Cornberg lore and gameplay constraints
+- The existing village well is slightly magical, heals nearby living characters, and contributes to unusually large/healthy local crops (confirmed by Axel). Preserve existing healing/respawn functionality and enhance this established landmark, not replace its lore.
+- Cornberg combat and healing-well rules are documented in docs/CORNBERG_COMBAT.md.
+- Retain northern fields, crop slime quest, forest routes and their gameplay semantics when beautifying.
+- Follow the approved Round 1 early-to-late visual escalation: beautiful starter scenery without endgame visual complexity.
+- Round 3 will address Slime Dungeon environments, bosses, puzzle visuals and loot.
