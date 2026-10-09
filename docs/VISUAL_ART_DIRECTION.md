@@ -55,3 +55,26 @@ Direct user responses to visual-interview Round 1, October 9, 2026.
 - Retain northern fields, crop slime quest, forest routes and their gameplay semantics when beautifying.
 - Follow the approved Round 1 early-to-late visual escalation: beautiful starter scenery without endgame visual complexity.
 - Round 3 will address Slime Dungeon environments, bosses, puzzle visuals and loot.
+
+## Round 3 — Slime Dungeon visual direction (approved 2026-10-09)
+28. Entry atmosphere: deceptively peaceful forest hiding secrets.
+29. Compared with overworld: similar forest, but denser and more impressive; it should remain recognizable rather than a wholly unrelated biome.
+30. Boundaries: deliberately mix dense trees, roots, vegetation, stone and other natural formations room by room.
+31. Paths: natural tracks with rocks, plants and fallen branches; keep traversal/readability.
+32. Mandatory Big Slime miniboss arena: simple natural woodland clearing, not an ornate boss stage.
+33. Five-ring puzzle centerpiece: twisted tree with roots reaching toward the rings.
+34. Puzzle rings: glowing circular markings integrated into grass and earth.
+35. Completion: normal and five-blue-slime secret solutions have different visual intensities; secret should feel more dramatic without changing mechanical rules.
+36. Normal top-hatted Slime Boss arena: majestic natural amphitheater formed by trees.
+37. Main boss tone: comical but surprisingly dangerous; preserve characteristic top hat.
+38. Secret Regent route/arena: dramatic royal slime domain.
+39. Slime Regent: royal, majestic, visually distinct accessories.
+40. Boss VFX: escalating/different approaches for miniboss, normal boss and Regent; telegraph readability remains authoritative.
+41. Shared private reward scene: magical sanctuary outside normal space; preserve reusability and future per-dungeon decorative variants.
+42. Major scenery/geometry redesign authorized IF dungeon mechanics, accessible routes, interactions, puzzle logic, staging, boss danger cues, secret route and reward/return lifecycle all remain correct.
+
+### Implementation guardrails
+- Respect canonical docs/SLIME_DUNGEON.md: mandatory Big Slime; five-ring tree puzzle; blue/green slime conditions and permanently blue southern trees; mutually exclusive normal boss or Regent; 15-second post-victory transition; no extra mechanics from cosmetic effects.
+- Distinguish theatrical magic from gameplay signals: boss effects must not obscure Slime Slam targeting rings, Divide fragments, five capture rings or route gates.
+- Early-game visual escalation still applies: miniboss clearing simple, main boss arena grander, hidden high-level Regent most elaborate.
+- These are approved planning decisions, not an instruction to start redesigning the scenes during the interview.
