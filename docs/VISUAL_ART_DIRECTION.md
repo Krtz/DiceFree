@@ -102,3 +102,27 @@ Direct user responses to visual-interview Round 1, October 9, 2026.
 - Exceptions are explicitly permitted; secret classes may use entirely different discovery or advancement routes and should not be forced into the standard NPC pattern.
 - This is a future narrative, class-content, quest and character-art goal; do not retroactively add all representatives to Cornberg or mechanically change existing advancement without separate planning.
 - Maintain prior progression rule: humble first-tier appearance, distinctive presentation at every advancement, increasingly epic later tiers.
+
+## Round 5 — Lighting, weather, animation, VFX and graphics (approved 2026-10-09)
+58. Cinematic lighting that can change dramatically by location.
+59. A slower, atmospheric day/night cycle.
+60. Weather authored specifically for each region rather than assuming identical global weather.
+61. Lighting transitions vary with location and story importance.
+62. Fog treatment is biome-specific.
+63. Environmental animation favors subtle foliage sway and water movement.
+64. High-quality, unique animations for each playable class.
+65. Combat animation should be fluid, flashy and cinematic while preserving control responsiveness.
+66. Spell effects combine tier progression, elemental identity and class-specific visual language, always subject to combat readability.
+67. **Default boss-danger communication: extremely clear FFXIV-style ground telegraphs.** Specific bosses or harder content may intentionally change, shorten or otherwise adapt telegraphs when separately authored; these are deliberate mechanics, not an excuse for unreadable baseline warnings.
+68. Screen-space effects must be configurable, with an explicitly minimal-effects mode.
+69. Water should be high-quality in appearance while remaining lightweight for isometric gameplay.
+70. Graphics menu: named presets PLUS individually adjustable advanced settings.
+71. First animation/VFX priority: upgrade all three currently playable class presentations (Novice, Physically Blessed Novice, Magically Touched Novice).
+72. Visual overhaul can span multiple substantial milestones; do not arbitrarily constrain ambition to a quick polish pass.
+
+### Technical/planning consequences
+- Cinematic art direction must accommodate a scalable render-cost profile; design effects for graceful reduction on lower settings.
+- Keep gameplay telegraphs distinct from decorative VFX and retain visibility under fog, weather, nighttime, high spell density and minimum postprocessing.
+- Slow day/night progression and region-authored weather remain planned features; not claims that they already exist.
+- Unique animation per class is an end-state art requirement; reusable rigs/animation infrastructure remain permitted.
+- Interview Round 6 covers asset selection, production sequencing, review and source-control workflow.
