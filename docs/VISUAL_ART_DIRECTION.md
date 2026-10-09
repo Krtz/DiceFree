@@ -126,3 +126,29 @@ Direct user responses to visual-interview Round 1, October 9, 2026.
 - Slow day/night progression and region-authored weather remain planned features; not claims that they already exist.
 - Unique animation per class is an end-state art requirement; reusable rigs/animation infrastructure remain permitted.
 - Interview Round 6 covers asset selection, production sequencing, review and source-control workflow.
+
+## Round 6 — Asset selection, production workflow and approval (approved 2026-10-09)
+73. Decide asset reuse versus Blender modeling case by case based on quality, effort and editability.
+74. Freely mix assets and art styles across packs; visual contrasts are part of Diceworld lore.
+75. Extensive freedom to remodel, combine, recolor and animate licensed models.
+76. Give balanced initial attention to playable class models, important Cornberg structures/well, dungeon bosses/puzzle tree and special equipment.
+77. Evaluate each existing handmade Blender asset on its individual merits; neither automatic retention nor automatic replacement.
+78. Keep source/original third-party assets separately; put adapted DiceFree versions in the project with traceability and licenses.
+79. Review with screenshots, occasional playable checks and milestone demonstrations.
+80. Within approved design, art decisions may be made independently without case-by-case permission.
+81. Small landmark relocations permitted if existing functionality and navigation are verified.
+82. First milestone should provide a small, polished representative sample of every area/workstream rather than finish one area first.
+83. Afterward prioritize the changes with the biggest visual impact.
+84. Evolve the existing Blender/Unity art pipeline incrementally, not build a new pipeline before visible work.
+85. Finish each committed asset to polished quality before moving on; avoid vast inventories of unfinished placeholders.
+86. Improve animation systems as needed to achieve high-quality individual class animation.
+87. Make graphics preset scalability a first-class requirement from day one.
+88. Roadmap should combine umbrella milestone, focused area/character issues and separate environment, character, animation and rendering workstreams.
+89. Merge into main only after each milestone is validated AND personally approved by Axel.
+90. Success means balanced, convincing improvement: strong screenshots, production-quality Cornberg/dungeon, distinctive classes and monsters, and a lively lit/animated world.
+
+### Production governance
+- Planning phase ONLY until user separately authorizes implementation. Creating docs and GitHub planning issues is approved, but importing/modifying scene content is not.
+- Use milestone gates: scope -> curate with license/compliance -> small finished sample -> screenshot/playtest -> automated regressions -> explicit approval -> merge.
+- Never claim remote or manual visual tests were performed when only data/automated tests ran.
+- Preserve source files, manifests, Blender files and modified Unity exports with clear provenance.
