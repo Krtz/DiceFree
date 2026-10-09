@@ -1,0 +1,8 @@
+{
+  "name": "CornbergHealingWell",
+  "authored": "Original procedural Blender model",
+  "source": "CornbergHealingWell.blend",
+  "export": "CornbergHealingWell.fbx",
+  "placement": "not integrated; standalone art proof",
+  "mesh_count": 103
+}
