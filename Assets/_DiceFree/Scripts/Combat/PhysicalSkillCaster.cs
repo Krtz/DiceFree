@@ -69,6 +69,7 @@ namespace DiceFree.Combat
 
             basicAttack?.Cancel();
             actor.Motor.Stop();
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalArrowArea, groundPoint, definition.arrowRadius);
             StartCoroutine(ArrowRainRoutine(definition, rank, groundPoint));
             Feedback = definition.displayName;
             return true;
@@ -87,6 +88,7 @@ namespace DiceFree.Combat
             actor.Motor.Stop();
             Face(target.transform.position);
             float applied = DamageResolver.Hit(actor, target, definition.attack, null, definition.DamageCoefficient(rank));
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalHeavy, target.transform.position);
             if (applied > 0)
                 target.Effects?.TryApplyStun(definition.HeavyStunSeconds(rank), false);
             Feedback = definition.displayName;
@@ -98,6 +100,7 @@ namespace DiceFree.Combat
             if (effects == null) return Fail("Status controller is unavailable.");
             if (!CommitCostAndCooldown(definition, rank)) return false;
             effects.ApplyDamageReduction(definition.stableId, definition.GuardReduction(rank), definition.durationSeconds);
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalGuard, transform.position);
             Feedback = definition.displayName;
             return true;
         }
@@ -108,6 +111,7 @@ namespace DiceFree.Combat
             if (!CommitCostAndCooldown(definition, rank)) return false;
             effects.ApplyAttackSpeedBuff(definition.stableId, definition.QuickeningAttackSpeedPercent(rank), definition.durationSeconds);
             effects.ApplyMovementSpeedBuff(definition.stableId, definition.QuickeningMoveSpeedPercent(rank), definition.durationSeconds);
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalQuickening, transform.position);
             Feedback = definition.displayName;
             return true;
         }
@@ -119,6 +123,7 @@ namespace DiceFree.Combat
             {
                 ResolveArrowWave(definition, rank, point);
                 SpawnArrowRainVisual(point, definition.arrowRadius, wave);
+                EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalArrowHit, point);
                 if (wave + 1 < hits && definition.arrowHitInterval > 0)
                     yield return new WaitForSeconds(definition.arrowHitInterval);
             }

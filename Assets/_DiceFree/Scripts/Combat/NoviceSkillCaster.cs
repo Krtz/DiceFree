@@ -67,6 +67,7 @@ namespace DiceFree.Combat
                 case NoviceSkillKind.StrengthMeleeStun:
                     if (definition.attack == null) return Fail("Strength skill attack data is missing.");
                     vfx?.PlayMeleeStun(actor, target);
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceStrike, target.transform.position);
                     DamageResolver.Hit(actor, target, definition.attack);
                     if (target.Alive)
                         target.Effects.TryApplyStun(definition.StunDuration(rank), true);
@@ -75,6 +76,7 @@ namespace DiceFree.Combat
                 case NoviceSkillKind.MagicSand:
                     if (definition.attack == null) return Fail("Magic Sand attack data is missing.");
                     vfx?.PlayMagicSand(actor, target);
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceSand, target.transform.position);
                     DamageResolver.Hit(actor, target, definition.attack);
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(definition.stableId, definition.MagicSandMissChance(rank), definition.durationSeconds);
@@ -84,11 +86,12 @@ namespace DiceFree.Combat
                     target.Effects.ApplyAttackSpeedBuff(definition.stableId,
                         definition.AttackSpeedBonusPercent(actor.Stats.Attributes, rank), definition.durationSeconds);
                     vfx?.PlayAttackSpeedGlow(target, definition.durationSeconds);
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceHaste, target.transform.position);
                     break;
 
                 case NoviceSkillKind.SpiritHeal:
                     if (target.Health.HealFrom(actor.Stats, definition.HealAmount(actor.Stats.Attributes, rank)) > 0)
-                        vfx?.PlayHealLight(target);
+                        { vfx?.PlayHealLight(target); EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceHeal, target.transform.position); }
                     break;
 
                 default:

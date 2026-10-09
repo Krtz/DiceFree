@@ -74,6 +74,7 @@ namespace DiceFree.Combat
             switch (definition.kind)
             {
                 case MagicalSkillKind.MagicSand:
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalSand, target.transform.position);
                     if (definition.attack == null) return FailAfterSpend("Magic Sand attack data is missing.", cost);
                     DamageResolver.Hit(actor, target, definition.attack, null, definition.DamageCoefficient(rank));
                     if (target.Alive)
@@ -84,10 +85,12 @@ namespace DiceFree.Combat
                     break;
 
                 case MagicalSkillKind.Mend:
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalMend, target.transform.position);
                     target.Health.HealFrom(actor.Stats, definition.HealAmount(actor.Stats.Attributes, rank));
                     break;
 
                 case MagicalSkillKind.FireImbuement:
+                    EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalFire, target.transform.position);
                     if (definition.secondaryAttack == null)
                         return FailAfterSpend("Fire Imbuement attack data is missing.", cost);
                     target.Effects.ApplyBasicAttackAugment(
@@ -136,7 +139,7 @@ namespace DiceFree.Combat
 
         private IEnumerator IceBurst(MagicalSkillDefinition definition, int rank, Vector3 point)
         {
-            SpawnIceVisual(point, definition.iceRadius, false);
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalIceWarning, point, definition.iceRadius);
             if (definition.iceDelaySeconds > 0)
                 yield return new WaitForSeconds(definition.iceDelaySeconds);
             ResolveIceBurst(definition, rank, point);
@@ -159,7 +162,7 @@ namespace DiceFree.Combat
                         definition.slowDurationSeconds);
             }
 
-            SpawnIceVisual(point, definition.iceRadius, true);
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalIceImpact, point, definition.iceRadius);
             Feedback = definition.displayName + " exploded.";
         }
 
