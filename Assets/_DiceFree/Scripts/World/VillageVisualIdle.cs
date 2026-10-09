@@ -25,12 +25,15 @@ namespace DiceFree.World
             if (visual == null || visual == transform || !visual.IsChildOf(transform)) return;
             position = visual.localPosition; rotation = visual.localRotation; scale = visual.localScale; captured = true;
         }
-        public void Sample(float seconds)
+        public void Sample(float seconds) => SamplePose(seconds,
+            wander != null && wander.enabled && wander.Walking, Time.deltaTime);
+        /// <summary>Same motion with explicit state, for safe isolated Editor pose reviews.</summary>
+        public void SamplePose(float seconds, bool walking, float dt)
         {
+            if (!captured || visual == null) Capture();
             if (!captured || visual == null) return;
             float phase = seconds + (uint)seed % 1009 * .173f;
-            bool walking = wander != null && wander.enabled && wander.Walking;
-            locomotion = Mathf.MoveTowards(locomotion, walking ? 1f : 0f, Mathf.Max(0, Time.deltaTime) * 3.5f);
+            locomotion = Mathf.MoveTowards(locomotion, walking ? 1f : 0f, Mathf.Max(0, dt) * 3.5f);
             float breath = Mathf.Sin(phase * 1.65f);
             float glance = Mathf.Pow(Mathf.Max(0, Mathf.Sin(phase * .27f)), 8) * Mathf.Sin(phase * .63f) * 2.1f;
             float gait = seconds * 10.0f + (uint)seed % 13;

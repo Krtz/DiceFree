@@ -390815,6 +390815,7 @@ GameObject:
   - component: {fileID: 1627046696}
   - component: {fileID: 919132147560218232}
   - component: {fileID: 919132147560218233}
+  - component: {fileID: 919132147560218234}
   m_Layer: 11
   m_Name: NPCs/NPC_Merchant - 3D
   m_TagString: Untagged
@@ -390838,6 +390839,7 @@ MonoBehaviour:
   seed: -167745529
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132147560218233
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -390854,6 +390856,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.024193794, y: 0.96000004, z: 0.05287901}
   m_TimeToStationary: 0.5
+--- !u!114 &919132147560218234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147560218231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 2
+  phaseSeed: 1474407594
 --- !u!1 &919132147970958440
 GameObject:
   m_ObjectHideFlags: 0
@@ -390867,6 +390883,7 @@ GameObject:
   - component: {fileID: 919132147970958441}
   - component: {fileID: 919132147970958444}
   - component: {fileID: 919132147970958443}
+  - component: {fileID: 919132147970958445}
   m_Layer: 11
   m_Name: NPCs/NPC_Farmer - 3D
   m_TagString: Untagged
@@ -390907,6 +390924,7 @@ MonoBehaviour:
   seed: -754082781
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132147970958443
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -390946,6 +390964,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: -0.05424393, y: 0.96000004, z: 0.0024975538}
+--- !u!114 &919132147970958445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147970958440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 0
+  phaseSeed: -1802347875
 --- !u!1 &919132148259810136
 GameObject:
   m_ObjectHideFlags: 0
@@ -390959,6 +390991,7 @@ GameObject:
   - component: {fileID: 919132148259810139}
   - component: {fileID: 919132148259810138}
   - component: {fileID: 919132148259810140}
+  - component: {fileID: 919132148259810141}
   m_Layer: 11
   m_Name: NPCs/NPC_Blacksmith - 3D
   m_TagString: Untagged
@@ -390982,6 +391015,7 @@ MonoBehaviour:
   seed: 169918140
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132148259810138
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391040,6 +391074,20 @@ MonoBehaviour:
   npcId: npc.cornberg-blacksmith
   conversationId: conversation.blacksmith.greeting
   dialogue: Welcome to the forge. Mind the hot hearth behind me.
+--- !u!114 &919132148259810141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148259810136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 5
+  phaseSeed: -817746173
 --- !u!1 &919132148441227970
 GameObject:
   m_ObjectHideFlags: 0
@@ -391052,6 +391100,7 @@ GameObject:
   - component: {fileID: 919132148441227971}
   - component: {fileID: 919132148441227973}
   - component: {fileID: 919132148441227972}
+  - component: {fileID: 919132148441227974}
   m_Layer: 11
   m_Name: NPCs/NPC_Alchemist - 3D
   m_TagString: Untagged
@@ -391075,6 +391124,7 @@ MonoBehaviour:
   seed: 97254484
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132148441227972
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391114,6 +391164,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: -0.00091706216, y: 0.9599999, z: 0.025202755}
+--- !u!114 &919132148441227974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148441227970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 4
+  phaseSeed: -1425200031
 --- !u!1 &919132148549414463
 GameObject:
   m_ObjectHideFlags: 0
@@ -391127,6 +391191,7 @@ GameObject:
   - component: {fileID: 919132148549414464}
   - component: {fileID: 919132148549414467}
   - component: {fileID: 919132148549414466}
+  - component: {fileID: 919132148549414468}
   m_Layer: 11
   m_Name: NPCs/NPC_Villager - 3D
   m_TagString: Untagged
@@ -391167,6 +391232,7 @@ MonoBehaviour:
   seed: -1789922401
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132148549414466
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391206,6 +391272,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.0013574089, y: 0.96000004, z: 0.0123008415}
+--- !u!114 &919132148549414468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148549414463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 1
+  phaseSeed: 1208504584
 --- !u!1 &919132148852157193
 GameObject:
   m_ObjectHideFlags: 0
@@ -391219,6 +391299,7 @@ GameObject:
   - component: {fileID: 919132148852157194}
   - component: {fileID: 919132148852157197}
   - component: {fileID: 919132148852157196}
+  - component: {fileID: 919132148852157198}
   m_Layer: 11
   m_Name: NPCs/NPC_Herbalist - 3D
   m_TagString: Untagged
@@ -391259,6 +391340,7 @@ MonoBehaviour:
   seed: 2019919002
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132148852157196
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391298,6 +391380,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: -0.012902844, y: 0.96000004, z: 0.0097871}
+--- !u!114 &919132148852157198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148852157193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 7
+  phaseSeed: 2011640769
 --- !u!1 &919132148975350033
 GameObject:
   m_ObjectHideFlags: 0
@@ -391311,6 +391407,7 @@ GameObject:
   - component: {fileID: 919132148975350036}
   - component: {fileID: 919132148975350035}
   - component: {fileID: 919132148975350037}
+  - component: {fileID: 919132148975350038}
   m_Layer: 11
   m_Name: NPCs/NPC_Banker - 3D
   m_TagString: Untagged
@@ -391334,6 +391431,7 @@ MonoBehaviour:
   seed: -218494162
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132148975350035
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391389,6 +391487,20 @@ MonoBehaviour:
   range: 2.5
   approachPoint: {fileID: 2039604457}
   context: {fileID: 0}
+--- !u!114 &919132148975350038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148975350033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 3
+  phaseSeed: -313001261
 --- !u!1 &919132149357247487
 GameObject:
   m_ObjectHideFlags: 0
@@ -391402,6 +391514,7 @@ GameObject:
   - component: {fileID: 919132149357247488}
   - component: {fileID: 919132149357247491}
   - component: {fileID: 919132149357247490}
+  - component: {fileID: 919132149357247492}
   m_Layer: 11
   m_Name: NPCs/NPC_Farmer - 3D
   m_TagString: Untagged
@@ -391442,6 +391555,7 @@ MonoBehaviour:
   seed: -828177068
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132149357247490
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391481,6 +391595,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: -0.05424205, y: 0.96000004, z: 0.0024978854}
+--- !u!114 &919132149357247492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149357247487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 0
+  phaseSeed: -1849530756
 --- !u!1 &919132149516507134
 GameObject:
   m_ObjectHideFlags: 0
@@ -391493,6 +391621,7 @@ GameObject:
   - component: {fileID: 919132149516507135}
   - component: {fileID: 919132149516507137}
   - component: {fileID: 919132149516507136}
+  - component: {fileID: 919132149516507138}
   m_Layer: 11
   m_Name: NPCs/NPC_Guard - 3D
   m_TagString: Untagged
@@ -391516,6 +391645,7 @@ MonoBehaviour:
   seed: 70930706
   swayDegrees: 2
   bobMeters: 0.015
+  walkSwingDegrees: 4.2
 --- !u!208 &919132149516507136
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -391555,6 +391685,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.06573598, y: 0.96000004, z: 0.027495801}
+--- !u!114 &919132149516507138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149516507134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e502b7d11a0d29a4ebc8e8ee9c7efd02, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.VillageCharacterGestures
+  role: 6
+  phaseSeed: -2091423677
 --- !u!33 &927166829417301762
 MeshFilter:
   m_ObjectHideFlags: 0
