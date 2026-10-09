@@ -1,0 +1,404 @@
+{
+  "generator": "SourceArt/build_visual_batch_01.py",
+  "author": "Original procedural Blender geometry; no third-party assets used",
+  "status": "standalone source models only - not integrated into scenes",
+  "asset_count": 66,
+  "items": [
+    {
+      "name": "tree_01",
+      "meshes": 8,
+      "source": "tree_01.blend",
+      "fbx": "tree_01.fbx"
+    },
+    {
+      "name": "tree_02",
+      "meshes": 9,
+      "source": "tree_02.blend",
+      "fbx": "tree_02.fbx"
+    },
+    {
+      "name": "tree_03",
+      "meshes": 10,
+      "source": "tree_03.blend",
+      "fbx": "tree_03.fbx"
+    },
+    {
+      "name": "tree_04",
+      "meshes": 8,
+      "source": "tree_04.blend",
+      "fbx": "tree_04.fbx"
+    },
+    {
+      "name": "tree_05",
+      "meshes": 9,
+      "source": "tree_05.blend",
+      "fbx": "tree_05.fbx"
+    },
+    {
+      "name": "tree_06",
+      "meshes": 10,
+      "source": "tree_06.blend",
+      "fbx": "tree_06.fbx"
+    },
+    {
+      "name": "tree_07",
+      "meshes": 8,
+      "source": "tree_07.blend",
+      "fbx": "tree_07.fbx"
+    },
+    {
+      "name": "tree_08",
+      "meshes": 9,
+      "source": "tree_08.blend",
+      "fbx": "tree_08.fbx"
+    },
+    {
+      "name": "pine_01",
+      "meshes": 6,
+      "source": "pine_01.blend",
+      "fbx": "pine_01.fbx"
+    },
+    {
+      "name": "pine_02",
+      "meshes": 6,
+      "source": "pine_02.blend",
+      "fbx": "pine_02.fbx"
+    },
+    {
+      "name": "pine_03",
+      "meshes": 6,
+      "source": "pine_03.blend",
+      "fbx": "pine_03.fbx"
+    },
+    {
+      "name": "pine_04",
+      "meshes": 6,
+      "source": "pine_04.blend",
+      "fbx": "pine_04.fbx"
+    },
+    {
+      "name": "rock_01",
+      "meshes": 3,
+      "source": "rock_01.blend",
+      "fbx": "rock_01.fbx"
+    },
+    {
+      "name": "rock_02",
+      "meshes": 4,
+      "source": "rock_02.blend",
+      "fbx": "rock_02.fbx"
+    },
+    {
+      "name": "rock_03",
+      "meshes": 5,
+      "source": "rock_03.blend",
+      "fbx": "rock_03.fbx"
+    },
+    {
+      "name": "rock_04",
+      "meshes": 3,
+      "source": "rock_04.blend",
+      "fbx": "rock_04.fbx"
+    },
+    {
+      "name": "rock_05",
+      "meshes": 4,
+      "source": "rock_05.blend",
+      "fbx": "rock_05.fbx"
+    },
+    {
+      "name": "stump_01",
+      "meshes": 5,
+      "source": "stump_01.blend",
+      "fbx": "stump_01.fbx"
+    },
+    {
+      "name": "stump_02",
+      "meshes": 5,
+      "source": "stump_02.blend",
+      "fbx": "stump_02.fbx"
+    },
+    {
+      "name": "stump_03",
+      "meshes": 5,
+      "source": "stump_03.blend",
+      "fbx": "stump_03.fbx"
+    },
+    {
+      "name": "log_01",
+      "meshes": 3,
+      "source": "log_01.blend",
+      "fbx": "log_01.fbx"
+    },
+    {
+      "name": "log_02",
+      "meshes": 3,
+      "source": "log_02.blend",
+      "fbx": "log_02.fbx"
+    },
+    {
+      "name": "log_03",
+      "meshes": 3,
+      "source": "log_03.blend",
+      "fbx": "log_03.fbx"
+    },
+    {
+      "name": "crate_01",
+      "meshes": 7,
+      "source": "crate_01.blend",
+      "fbx": "crate_01.fbx"
+    },
+    {
+      "name": "crate_02",
+      "meshes": 7,
+      "source": "crate_02.blend",
+      "fbx": "crate_02.fbx"
+    },
+    {
+      "name": "crate_03",
+      "meshes": 7,
+      "source": "crate_03.blend",
+      "fbx": "crate_03.fbx"
+    },
+    {
+      "name": "crate_04",
+      "meshes": 7,
+      "source": "crate_04.blend",
+      "fbx": "crate_04.fbx"
+    },
+    {
+      "name": "barrel_01",
+      "meshes": 4,
+      "source": "barrel_01.blend",
+      "fbx": "barrel_01.fbx"
+    },
+    {
+      "name": "barrel_02",
+      "meshes": 4,
+      "source": "barrel_02.blend",
+      "fbx": "barrel_02.fbx"
+    },
+    {
+      "name": "barrel_03",
+      "meshes": 4,
+      "source": "barrel_03.blend",
+      "fbx": "barrel_03.fbx"
+    },
+    {
+      "name": "barrel_04",
+      "meshes": 4,
+      "source": "barrel_04.blend",
+      "fbx": "barrel_04.fbx"
+    },
+    {
+      "name": "cart_01",
+      "meshes": 9,
+      "source": "cart_01.blend",
+      "fbx": "cart_01.fbx"
+    },
+    {
+      "name": "cart_02",
+      "meshes": 9,
+      "source": "cart_02.blend",
+      "fbx": "cart_02.fbx"
+    },
+    {
+      "name": "fence_01",
+      "meshes": 5,
+      "source": "fence_01.blend",
+      "fbx": "fence_01.fbx"
+    },
+    {
+      "name": "fence_02",
+      "meshes": 5,
+      "source": "fence_02.blend",
+      "fbx": "fence_02.fbx"
+    },
+    {
+      "name": "fence_03",
+      "meshes": 5,
+      "source": "fence_03.blend",
+      "fbx": "fence_03.fbx"
+    },
+    {
+      "name": "fence_04",
+      "meshes": 5,
+      "source": "fence_04.blend",
+      "fbx": "fence_04.fbx"
+    },
+    {
+      "name": "sign_01",
+      "meshes": 3,
+      "source": "sign_01.blend",
+      "fbx": "sign_01.fbx"
+    },
+    {
+      "name": "sign_02",
+      "meshes": 3,
+      "source": "sign_02.blend",
+      "fbx": "sign_02.fbx"
+    },
+    {
+      "name": "sign_03",
+      "meshes": 3,
+      "source": "sign_03.blend",
+      "fbx": "sign_03.fbx"
+    },
+    {
+      "name": "wheat_01",
+      "meshes": 54,
+      "source": "wheat_01.blend",
+      "fbx": "wheat_01.fbx"
+    },
+    {
+      "name": "wheat_02",
+      "meshes": 54,
+      "source": "wheat_02.blend",
+      "fbx": "wheat_02.fbx"
+    },
+    {
+      "name": "wheat_03",
+      "meshes": 54,
+      "source": "wheat_03.blend",
+      "fbx": "wheat_03.fbx"
+    },
+    {
+      "name": "wheat_04",
+      "meshes": 54,
+      "source": "wheat_04.blend",
+      "fbx": "wheat_04.fbx"
+    },
+    {
+      "name": "wheat_05",
+      "meshes": 54,
+      "source": "wheat_05.blend",
+      "fbx": "wheat_05.fbx"
+    },
+    {
+      "name": "mushroom_01",
+      "meshes": 8,
+      "source": "mushroom_01.blend",
+      "fbx": "mushroom_01.fbx"
+    },
+    {
+      "name": "mushroom_02",
+      "meshes": 10,
+      "source": "mushroom_02.blend",
+      "fbx": "mushroom_02.fbx"
+    },
+    {
+      "name": "mushroom_03",
+      "meshes": 12,
+      "source": "mushroom_03.blend",
+      "fbx": "mushroom_03.fbx"
+    },
+    {
+      "name": "mushroom_04",
+      "meshes": 8,
+      "source": "mushroom_04.blend",
+      "fbx": "mushroom_04.fbx"
+    },
+    {
+      "name": "lantern_01",
+      "meshes": 7,
+      "source": "lantern_01.blend",
+      "fbx": "lantern_01.fbx"
+    },
+    {
+      "name": "lantern_02",
+      "meshes": 7,
+      "source": "lantern_02.blend",
+      "fbx": "lantern_02.fbx"
+    },
+    {
+      "name": "lantern_03",
+      "meshes": 7,
+      "source": "lantern_03.blend",
+      "fbx": "lantern_03.fbx"
+    },
+    {
+      "name": "anvil_01",
+      "meshes": 3,
+      "source": "anvil_01.blend",
+      "fbx": "anvil_01.fbx"
+    },
+    {
+      "name": "anvil_02",
+      "meshes": 3,
+      "source": "anvil_02.blend",
+      "fbx": "anvil_02.fbx"
+    },
+    {
+      "name": "hay_01",
+      "meshes": 3,
+      "source": "hay_01.blend",
+      "fbx": "hay_01.fbx"
+    },
+    {
+      "name": "hay_02",
+      "meshes": 3,
+      "source": "hay_02.blend",
+      "fbx": "hay_02.fbx"
+    },
+    {
+      "name": "hay_03",
+      "meshes": 3,
+      "source": "hay_03.blend",
+      "fbx": "hay_03.fbx"
+    },
+    {
+      "name": "bridge_01",
+      "meshes": 17,
+      "source": "bridge_01.blend",
+      "fbx": "bridge_01.fbx"
+    },
+    {
+      "name": "bridge_02",
+      "meshes": 17,
+      "source": "bridge_02.blend",
+      "fbx": "bridge_02.fbx"
+    },
+    {
+      "name": "slimejar_01",
+      "meshes": 3,
+      "source": "slimejar_01.blend",
+      "fbx": "slimejar_01.fbx"
+    },
+    {
+      "name": "slimejar_02",
+      "meshes": 3,
+      "source": "slimejar_02.blend",
+      "fbx": "slimejar_02.fbx"
+    },
+    {
+      "name": "slimejar_03",
+      "meshes": 3,
+      "source": "slimejar_03.blend",
+      "fbx": "slimejar_03.fbx"
+    },
+    {
+      "name": "root_01",
+      "meshes": 6,
+      "source": "root_01.blend",
+      "fbx": "root_01.fbx"
+    },
+    {
+      "name": "root_02",
+      "meshes": 6,
+      "source": "root_02.blend",
+      "fbx": "root_02.fbx"
+    },
+    {
+      "name": "altar_01",
+      "meshes": 7,
+      "source": "altar_01.blend",
+      "fbx": "altar_01.fbx"
+    },
+    {
+      "name": "altar_02",
+      "meshes": 7,
+      "source": "altar_02.blend",
+      "fbx": "altar_02.fbx"
+    }
+  ]
+}
