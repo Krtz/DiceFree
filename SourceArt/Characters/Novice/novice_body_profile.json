@@ -24,13 +24,18 @@
     "Novice|Locomotion",
     "Novice|UnarmedAttack"
   ],
-  "vertices": 24988,
-  "triangles": 49936,
+  "vertices": 34624,
+  "triangles": 68824,
   "meshObjects": 4,
   "materialNames": [
     "Novice_Baseline_Tee",
-    "Novice_Baseline_Underwear",
+    "Novice_Chestnut_Hair",
+    "Novice_Dull_Brass",
     "Novice_Eyes",
-    "Novice_Skin"
+    "Novice_Leather",
+    "Novice_Skin",
+    "Novice_Travel_Trousers",
+    "Novice_Travel_Vest",
+    "Novice_Warm_Scarf"
   ]
 }

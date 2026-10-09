@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -109,13 +109,21 @@ namespace DiceFree.EditorTools
                 ["Novice_Skin"] = CreateMaterial("Novice_Skin", new Color(0.66f, 0.48f, 0.36f), 0.24f),
                 ["Novice_Baseline_Tee"] = CreateMaterial("Novice_Baseline_Tee", new Color(0.22f, 0.39f, 0.41f), 0.30f),
                 ["Novice_Baseline_Underwear"] = CreateMaterial("Novice_Baseline_Underwear", new Color(0.29f, 0.25f, 0.24f), 0.34f),
-                ["Novice_Eyes"] = CreateMaterial("Novice_Eyes", new Color(0.08f, 0.07f, 0.065f), 0.38f)
+                ["Novice_Eyes"] = CreateMaterial("Novice_Eyes", new Color(0.08f, 0.07f, 0.065f), 0.38f),
+                ["Novice_Chestnut_Hair"] = CreateMaterial("Novice_Chestnut_Hair", new Color(0.19f, 0.095f, 0.053f), 0.23f),
+                ["Novice_Travel_Vest"] = CreateMaterial("Novice_Travel_Vest", new Color(0.36f, 0.30f, 0.245f), 0.08f),
+                ["Novice_Leather"] = CreateMaterial("Novice_Leather", new Color(0.25f, 0.145f, 0.09f), 0.24f),
+                ["Novice_Travel_Trousers"] = CreateMaterial("Novice_Travel_Trousers", new Color(0.26f, 0.285f, 0.235f), 0.08f),
+                ["Novice_Warm_Scarf"] = CreateMaterial("Novice_Warm_Scarf", new Color(0.60f, 0.28f, 0.15f), 0.08f),
+                ["Novice_Dull_Brass"] = CreateMaterial("Novice_Dull_Brass", new Color(0.67f, 0.51f, 0.27f), 0.48f)
             };
             var instance = (GameObject)PrefabUtility.InstantiatePrefab(imported);
             instance.name = "NovicePresentation";
             foreach (var renderer in instance.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
-                renderer.sharedMaterials = renderer.sharedMaterials.Select(old => ResolveMaterial(renderer, old, materials)).ToArray();
+                var slots = renderer.sharedMaterials;
+                renderer.sharedMaterials = Enumerable.Range(0, slots.Length)
+                    .Select(index => ResolveMaterial(renderer, slots[index], index, materials)).ToArray();
             }
             var controller = CreateController(clips);
             var instanceAnimator = instance.GetComponent<Animator>();
@@ -454,13 +462,25 @@ namespace DiceFree.EditorTools
             return controller;
         }
 
-        private static Material ResolveMaterial(SkinnedMeshRenderer renderer, Material old, Dictionary<string, Material> materials)
+        // The canonical Blender build documents stable submesh material ordering.
+        // Using renderer + slot avoids Unity's FBX "None" material importer erasing source names.
+        private static Material ResolveMaterial(SkinnedMeshRenderer renderer, Material old, int slot,
+            Dictionary<string, Material> materials)
         {
-            string name = old != null ? old.name : string.Empty;
-            if (renderer.name.IndexOf("FaceDetails", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("Eyes", StringComparison.OrdinalIgnoreCase) >= 0) return materials["Novice_Eyes"];
-            if (renderer.name.IndexOf("TShirt", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("Tee", StringComparison.OrdinalIgnoreCase) >= 0) return materials["Novice_Baseline_Tee"];
-            if (renderer.name.IndexOf("Underwear", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("Underwear", StringComparison.OrdinalIgnoreCase) >= 0) return materials["Novice_Baseline_Underwear"];
-            return materials["Novice_Skin"];
+            string[] ordered;
+            switch (renderer.name)
+            {
+                case "Novice_BodySkin": ordered = new[] { "Novice_Skin" }; break;
+                case "Novice_FaceDetails": ordered = new[] { "Novice_Eyes", "Novice_Chestnut_Hair" }; break;
+                case "Novice_Baseline_TShirt": ordered = new[] {
+                    "Novice_Baseline_Tee", "Novice_Travel_Vest", "Novice_Warm_Scarf", "Novice_Leather", "Novice_Dull_Brass" }; break;
+                case "Novice_Baseline_Underwear": ordered = new[] {
+                    "Novice_Travel_Trousers", "Novice_Leather", "Novice_Travel_Vest" }; break;
+                default: throw new InvalidOperationException("Unexpected Novice mesh: " + renderer.name);
+            }
+            if (slot >= ordered.Length)
+                throw new InvalidOperationException("Unexpected Novice material slot " + slot + " on " + renderer.name);
+            return materials[ordered[slot]];
         }
 
         private static Material CreateMaterial(string name, Color color, float smoothness)
@@ -540,3 +560,5 @@ namespace DiceFree.EditorTools
         private static void Require(bool condition, string message) { if (!condition) throw new InvalidOperationException(message); }
     }
 }
+
+

@@ -1,4 +1,4 @@
-"""Build the DiceFree Novice character source, humanoid rig and FBX export.
+﻿"""Build the DiceFree Novice character source, humanoid rig and FBX export.
 
 Run from the repository root with Blender 5.2.2 LTS:
     blender --background --python SourceArt/Characters/Novice/build_novice.py
@@ -68,6 +68,34 @@ def capsule_segment(name, start, end, width, depth, mat, segments=14, rings=8):
     return obj
 
 
+def fitted_garment(name, material, lower, upper, waist, chest, shoulder, back_depth=.125):
+    """Editable sculpted tailoring, not a spherical placeholder. Smooth 64x32 quad shell."""
+    rings, slices = 32, 64
+    vertices, faces = [], []
+    for row in range(rings+1):
+        t=row/rings
+        radius_x = waist*(1-t)+shoulder*t + (chest-(waist+shoulder)*.5)*math.sin(math.pi*t)
+        radius_y = back_depth + .012*math.sin(math.pi*t)
+        for j in range(slices):
+            a=2*math.pi*j/slices
+            fold=.0020*math.sin(a*9+t*15)*math.sin(math.pi*t)
+            x=(radius_x+fold)*math.cos(a)
+            y=.013+(radius_y+fold)*math.sin(a)
+            z=lower+(upper-lower)*t+.003*math.cos(a*4+t*12)*math.sin(math.pi*t)
+            vertices.append((x,y,z))
+    for row in range(rings):
+        for j in range(slices):
+            n=row*slices+j
+            nxt=row*slices+(j+1)%slices
+            faces.append((n,nxt,nxt+slices,n+slices))
+    mesh=bpy.data.meshes.new(name+"_Mesh")
+    mesh.from_pydata(vertices,[],faces);mesh.update()
+    obj=bpy.data.objects.new(name,mesh)
+    bpy.context.collection.objects.link(obj);mesh.materials.append(material)
+    for poly in mesh.polygons:poly.use_smooth=True
+    return obj
+
+
 def make_rig():
     arm_data = bpy.data.armatures.new("Novice_Humanoid_Rig")
     rig = bpy.data.objects.new("Novice_Armature", arm_data)
@@ -118,14 +146,17 @@ def make_skinned_family(name, parts, rig, bone_defs, weighted_bones):
     combined = bpy.context.object
     combined.name = name
     combined.data.name = name + "_Mesh"
-    # Fuse overlapping authoring forms so the prototype reads as continuous
-    # clothing/body surfaces instead of separate primitive capsules.
-    remesh = combined.modifiers.new("PrototypeSurfaceUnion", "REMESH")
-    remesh.mode = "VOXEL"
-    remesh.voxel_size = 0.012
-    remesh.use_smooth_shade = True
-    bpy.context.view_layer.objects.active = combined
-    bpy.ops.object.modifier_apply(modifier=remesh.name)
+    # Preserve individually authored fabric, leather, hair and metal surface colors.
+    # Blender's voxel remesher discards material indices; use it only for
+    # single-material anatomical skin, never for multi-material clothing.
+    distinct_materials = {mat.name for mat in combined.data.materials}
+    if len(distinct_materials) == 1:
+        remesh = combined.modifiers.new("AnatomicalSurfaceUnion", "REMESH")
+        remesh.mode = "VOXEL"
+        remesh.voxel_size = 0.012
+        remesh.use_smooth_shade = True
+        bpy.context.view_layer.objects.active = combined
+        bpy.ops.object.modifier_apply(modifier=remesh.name)
     groups = {bone: combined.vertex_groups.new(name=bone) for bone in weighted_bones}
     for vertex in combined.data.vertices:
         best_name, best_distance = None, float("inf")
@@ -155,6 +186,12 @@ def build_model():
     shirt = material("Novice_Baseline_Tee", (0.22, 0.39, 0.41), 0.78)
     cloth = material("Novice_Baseline_Underwear", (0.29, 0.25, 0.24), 0.82)
     eye = material("Novice_Eyes", (0.08, 0.07, 0.065), 0.42)
+    hair = material("Novice_Chestnut_Hair", (0.19, 0.095, 0.053), 0.67)
+    leather = material("Novice_Leather", (0.24, 0.14, 0.088), 0.73)
+    vest = material("Novice_Travel_Vest", (0.35, 0.30, 0.245), 0.89)
+    pants = material("Novice_Travel_Trousers", (0.25, 0.285, 0.23), 0.88)
+    scarf = material("Novice_Warm_Scarf", (0.56, 0.265, 0.155), 0.93)
+    brass = material("Novice_Dull_Brass", (0.62, 0.46, 0.20), 0.39)
     rig, rig_defs = make_rig()
 
     skin_parts = []
@@ -162,6 +199,7 @@ def build_model():
         family.append((label, bone, fn))
 
     add(skin_parts, "Head", "Head", lambda: uv_ellipsoid("Head", (0, 0.006, 1.63), (0.128, 0.116, 0.158), skin, 20, 12))
+    add(skin_parts, "Nose", "Head", lambda: uv_ellipsoid("Nose", (0, 0.118, 1.619), (.021,.028,.027), skin, 20, 14))
     add(skin_parts, "Neck", "Neck", lambda: uv_ellipsoid("Neck", (0, 0, 1.425), (0.066, 0.065, 0.105), skin))
     for side, sign in (("Left", -1), ("Right", 1)):
         add(skin_parts, side + "Ear", "Head", lambda s=sign: uv_ellipsoid("Ear", (s * 0.132, 0, 1.63), (0.025, 0.035, 0.045), skin, 12, 8))
@@ -173,23 +211,49 @@ def build_model():
     face_parts = []
     for side, sign in (("Left", -1), ("Right", 1)):
         add(face_parts, side + "Eye", "Head", lambda s=sign: uv_ellipsoid("Eye", (s * 0.047, 0.108, 1.65), (0.021, 0.010, 0.014), eye, 12, 8))
-    add(face_parts, "Mouth", "Head", lambda: uv_ellipsoid("Mouth", (0, 0.112, 1.600), (0.018, 0.009, 0.005), eye, 12, 8))
+    add(face_parts, "Mouth", "Head", lambda: uv_ellipsoid("Mouth", (0, 0.114, 1.571), (0.024, 0.009, 0.005), eye, 16, 12))
+    # Distinct, gently tousled hair—not a helmet-shaped bald mannequin.
+    add(face_parts, "HairCrown", "Head", lambda: uv_ellipsoid("HairCrown", (0,-.016,1.745),(.130,.115,.079),hair,36,22))
+    add(face_parts, "HairBack", "Head", lambda: uv_ellipsoid("HairBack", (0,-.080,1.690),(.117,.047,.096),hair,30,18))
+    add(face_parts, "HairLeftFringe", "Head", lambda: capsule_segment("HairLeftFringe",(-.091,.086,1.760),(-.041,.121,1.698),.035,.029,hair,24,14))
+    add(face_parts, "HairSideSweep", "Head", lambda: capsule_segment("HairSideSweep",(.012,.097,1.774),(.074,.099,1.737),.034,.024,hair,24,14))
+    for side,sign in (("Left",-1),("Right",1)):
+        add(face_parts,side+"Eyebrow","Head",lambda t=sign: uv_ellipsoid("Eyebrow",(t*.052,.117,1.677),(.029,.011,.008),hair,22,12))
+        add(face_parts,side+"TempleHair","Head",lambda t=sign: uv_ellipsoid("TempleHair",(t*.121,-.009,1.698),(.020,.054,.074),hair,22,14))
 
     shirt_parts = []
     add(shirt_parts, "TShirt_Torso", "Chest", lambda: uv_ellipsoid("TShirt_Torso", (0, 0, 1.225), (0.215, 0.135, 0.24), shirt, 20, 12))
     add(shirt_parts, "TShirt_Lower", "Spine", lambda: uv_ellipsoid("TShirt_Lower", (0, 0, 1.075), (0.202, 0.128, 0.155), shirt, 18, 10))
     for side, sign in (("Left", -1), ("Right", 1)):
         add(shirt_parts, side + "Sleeve", side + "Arm", lambda s=sign: capsule_segment("Sleeve", (s * 0.12, 0, 1.35), (s * 0.35, 0, 1.205), 0.086, 0.094, shirt))
+    # Practical layered clothing with handcrafted accents: vest, scarf, worn leather
+    # shoulder strap and satchel. All are skinned to the same functioning Humanoid.
+    add(shirt_parts,"CanvasTravelVest","Chest",lambda: fitted_garment("CanvasTravelVest",vest,.99,1.405,.19,.223,.143,.151))
+    add(shirt_parts,"ScarfNeckWrap","Chest",lambda: uv_ellipsoid("ScarfNeckWrap",(0,.007,1.425),(.140,.125,.039),scarf,40,22))
+    add(shirt_parts,"ScarfFold","Chest",lambda: capsule_segment("ScarfFold",(-.055,.129,1.429),(.033,.143,1.380),.031,.019,scarf,24,16))
+    add(shirt_parts,"SatchelDiagonalStrap","Chest",lambda: capsule_segment("SatchelDiagonalStrap",(-.163,.205,1.367),(.185,.205,1.047),.022,.017,leather,30,18))
+    add(shirt_parts,"UtilityBelt","Spine",lambda: uv_ellipsoid("UtilityBelt",(0,.018,1.014),(.221,.178,.039),leather,48,18))
+    add(shirt_parts,"BeltBrassBuckle","Spine",lambda: uv_ellipsoid("BeltBrassBuckle",(0,.193,1.014),(.037,.014,.030),brass,28,16))
+    add(shirt_parts,"SideSatchelBody","Spine",lambda: uv_ellipsoid("SideSatchelBody",(.235,-.032,.977),(.114,.071,.127),leather,32,22))
+    add(shirt_parts,"SatchelFlap","Spine",lambda: uv_ellipsoid("SatchelFlap",(.235,.005,1.038),(.111,.051,.049),vest,32,18))
+    add(shirt_parts,"SatchelClasp","Spine",lambda: uv_ellipsoid("SatchelClasp",(.236,.053,1.015),(.018,.009,.022),brass,20,14))
+    for z in (1.19,1.12):
+        add(shirt_parts,"VestButton_"+str(z),"Chest",lambda zz=z:uv_ellipsoid("VestButton",(0,.164,zz),(.014,.011,.014),brass,20,12))
     shorts_parts = []
-    add(shorts_parts, "Underwear_Shorts", "Hips", lambda: uv_ellipsoid("Underwear_Shorts", (0, -0.002, 0.90), (0.19, 0.118, 0.135), cloth, 18, 10))
-    for side, sign in (("Left", -1), ("Right", 1)):
-        add(shorts_parts, side + "ShortLeg", side + "UpLeg", lambda s=sign: capsule_segment("ShortLeg", (s * 0.095, 0, 0.91), (s * 0.105, 0, 0.79), 0.091, 0.12, cloth))
-
+    # Long, tapered trousers and worn boots replace the un-dressed prototype legs.
+    add(shorts_parts,"TrousersHip","Hips",lambda: fitted_garment("TrousersHip",pants,.775,1.027,.185,.205,.178,.139))
+    for side,sign in (("Left",-1),("Right",1)):
+        add(shorts_parts,side+"TravelTrouserUpper",side+"UpLeg",lambda t=sign: capsule_segment("TrouserUpper",(t*.105,0,.87),(t*.12,0,.535),.096,.101,pants,28,18))
+        add(shorts_parts,side+"TravelTrouserLower",side+"Leg",lambda t=sign: capsule_segment("TrouserLower",(t*.12,0,.58),(t*.12,0,.202),.077,.083,pants,28,18))
+        add(shorts_parts,side+"WornBootCuff",side+"Leg",lambda t=sign:uv_ellipsoid("BootCuff",(t*.12,.008,.285),(.084,.090,.052),leather,30,18))
+        add(shorts_parts,side+"BootUpper",side+"Leg",lambda t=sign:capsule_segment("BootUpper",(t*.12,.009,.28),(t*.12,.022,.125),.077,.086,leather,32,20))
+        add(shorts_parts,side+"BootFoot",side+"Foot",lambda t=sign:uv_ellipsoid("BootFoot",(t*.12,.096,.093),(.087,.162,.075),leather,40,24))
+        add(shorts_parts,side+"BootSole",side+"Foot",lambda t=sign:uv_ellipsoid("BootSole",(t*.12,.102,.050),(.089,.167,.018),vest,38,16))
     skin_obj = make_skinned_family("Novice_BodySkin", skin_parts, rig, rig_defs,
         ["Head", "Neck", "LeftForeArm", "LeftHand", "RightForeArm", "RightHand", "LeftUpLeg", "LeftLeg", "LeftFoot", "RightUpLeg", "RightLeg", "RightFoot"])
     face_obj = make_skinned_family("Novice_FaceDetails", face_parts, rig, rig_defs, ["Head"])
     shirt_obj = make_skinned_family("Novice_Baseline_TShirt", shirt_parts, rig, rig_defs, ["Spine", "Chest", "LeftArm", "RightArm"])
-    shorts_obj = make_skinned_family("Novice_Baseline_Underwear", shorts_parts, rig, rig_defs, ["Hips", "LeftUpLeg", "RightUpLeg"])
+    shorts_obj = make_skinned_family("Novice_Baseline_Underwear", shorts_parts, rig, rig_defs, ["Hips", "LeftUpLeg", "RightUpLeg", "LeftLeg", "RightLeg", "LeftFoot", "RightFoot"])
     # Preserve separate slot objects while sharing one armature and authored groups.
     for obj in (skin_obj, face_obj, shirt_obj, shorts_obj):
         obj["presentation_slot"] = "Baseline" if obj != skin_obj else "Body"
@@ -224,34 +288,53 @@ def build_model():
 
 
 def key_pose(rig, name, poses, frame_start, frame_end):
-    scene = bpy.context.scene
-    action = bpy.data.actions.new(name)
+    scene=bpy.context.scene
+    action=bpy.data.actions.new(name)
     rig.animation_data_create()
-    rig.animation_data.action = action
-    for frame, values in poses:
+    rig.animation_data.action=action
+    affected=("Head","Neck","Spine","Chest","LeftArm","RightArm","LeftForeArm",
+              "RightForeArm","LeftUpLeg","RightUpLeg","LeftLeg","RightLeg","LeftFoot","RightFoot")
+    for frame,values in poses:
         scene.frame_set(frame)
-        for bone_name in ("LeftArm", "RightArm", "LeftForeArm", "RightForeArm", "LeftUpLeg", "RightUpLeg"):
-            bone = rig.pose.bones.get(bone_name)
-            bone.rotation_mode = "XYZ"
-            bone.rotation_euler = values.get(bone_name, (0.0, 0.0, 0.0))
-            bone.keyframe_insert(data_path="rotation_euler", frame=frame, group=bone_name)
-    action.use_fake_user = True
-    scene.frame_start, scene.frame_end = frame_start, frame_end
-    rig.animation_data.action = None
+        for name_ in affected:
+            bone=rig.pose.bones.get(name_)
+            bone.rotation_mode="XYZ"
+            bone.rotation_euler=values.get(name_,(0.0,0.0,0.0))
+            bone.keyframe_insert(data_path="rotation_euler",frame=frame,group=name_)
+    action.use_fake_user=True
+    scene.frame_start,scene.frame_end=frame_start,frame_end
+    rig.animation_data.action=None
     return action
 
 
 def build_actions(rig):
-    idle = {"LeftArm": (0, 0, -0.06), "RightArm": (0, 0, 0.06)}
-    walk_a = {"LeftArm": (-0.16, 0, -0.08), "RightArm": (0.16, 0, 0.08), "LeftUpLeg": (0.20, 0, 0), "RightUpLeg": (-0.20, 0, 0)}
-    walk_b = {"LeftArm": (0.16, 0, -0.08), "RightArm": (-0.16, 0, 0.08), "LeftUpLeg": (-0.20, 0, 0), "RightUpLeg": (0.20, 0, 0)}
-    attack = {"RightArm": (-0.55, 0, -0.28), "RightForeArm": (-0.48, 0, 0)}
-    actions = [
-        key_pose(rig, "Novice|Idle", [(1, idle), (31, idle)], 1, 31),
-        key_pose(rig, "Novice|Locomotion", [(1, walk_a), (7, walk_b), (13, walk_a)], 1, 13),
-        key_pose(rig, "Novice|UnarmedAttack", [(1, {}), (7, attack), (13, {})], 1, 13),
+    # A small-town adventurer. Curious, alert, optimistic; not a heroic parade stance.
+    idle_a={"LeftArm":(-.07,0,-.09),"RightArm":(-.05,0,.09),
+            "Spine":(.016,0,.012),"Head":(-.025,0,-.06)}
+    idle_b={"LeftArm":(-.075,0,-.08),"RightArm":(-.035,0,.08),
+            "Spine":(-.01,0,-.010),"Head":(.015,.09,.06)}
+    idle_c={"LeftArm":(-.055,0,-.10),"RightArm":(-.065,0,.07),
+            "Spine":(.014,0,.025),"Head":(-.01,-.12,.06)}
+    # Natural contralateral arm swing, knee recovery and a little shoulder twist.
+    walk_a={"LeftArm":(.37,0,-.075),"RightArm":(-.39,0,.075),
+            "LeftUpLeg":(-.36,0,0),"RightUpLeg":(.36,0,0),
+            "LeftLeg":(.14,0,0),"RightLeg":(.09,0,0),
+            "Chest":(.012,0,-.055),"Head":(-.022,0,.018)}
+    walk_b={"LeftArm":(-.38,0,-.075),"RightArm":(.37,0,.075),
+            "LeftUpLeg":(.36,0,0),"RightUpLeg":(-.36,0,0),
+            "LeftLeg":(.09,0,0),"RightLeg":(.14,0,0),
+            "Chest":(.012,0,.055),"Head":(-.022,0,-.018)}
+    recovery={"LeftArm":(.09,0,-.08),"RightArm":(-.11,0,.08),
+              "LeftUpLeg":(-.04,0,0),"RightUpLeg":(.04,0,0),"Chest":(.02,0,0)}
+    windup={"RightArm":(.19,-.28,.18),"RightForeArm":(-.36,0,.05),
+            "LeftArm":(-.11,0,-.19),"Spine":(.04,0,-.10)}
+    hit={"RightArm":(-.78,.12,-.29),"RightForeArm":(-.51,0,0),
+         "LeftArm":(-.15,0,-.18),"Chest":(.11,0,.10),"Head":(-.07,0,.06)}
+    return [
+        key_pose(rig,"Novice|Idle",[(1,idle_a),(15,idle_b),(31,idle_a),(49,idle_c),(73,idle_a)],1,73),
+        key_pose(rig,"Novice|Locomotion",[(1,walk_a),(7,recovery),(13,walk_b),(19,recovery),(25,walk_a)],1,25),
+        key_pose(rig,"Novice|UnarmedAttack",[(1,idle_a),(5,windup),(10,hit),(15,recovery),(22,idle_a)],1,22)
     ]
-    return actions
 
 
 def fingerprint(objects):
@@ -330,3 +413,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
