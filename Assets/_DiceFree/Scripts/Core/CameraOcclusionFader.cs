@@ -7,7 +7,7 @@ namespace DiceFree.Core
     [DisallowMultipleComponent]
     public sealed class CameraOcclusionFader : MonoBehaviour
     {
-        [SerializeField, Range(0.05f, 0.95f)] private float fadedAlpha = 0.22f;
+        [SerializeField, Range(0.05f, 0.95f)] private float fadedAlpha = 0.58f;
         [SerializeField, Min(0.05f)] private float castRadius = 0.42f;
         [SerializeField] private LayerMask obstructionMask = 1 << 9;
 
@@ -37,11 +37,20 @@ namespace DiceFree.Core
                     QueryTriggerInteraction.Ignore);
 
                 foreach (var hit in hits)
+                {
+                    // Trees far along the camera ray are still part of the forest.
+                    // Only the few nearest the player may become see-through.
+                    Vector3 point=hit.collider.bounds.center;
+                    if(new Vector2(point.x-focus.x,point.z-focus.z).sqrMagnitude>64f)
+                        continue;
                     Collect(hit.collider);
+                }
 
                 var ray = new Ray(focus, delta / distance);
                 foreach (var tree in TreeCameraOccluder.Active)
                 {
+                    if(tree==null||new Vector2(tree.transform.position.x-focus.x,
+                        tree.transform.position.z-focus.z).sqrMagnitude>64f)continue;
                     bool blocks = false;
                     foreach (var mesh in tree.Renderers)
                     {
@@ -49,12 +58,16 @@ namespace DiceFree.Core
                         var bounds = mesh.bounds; bounds.Expand(castRadius * 2);
                         if (bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
                     }
-                    if (blocks) foreach (var mesh in tree.Renderers) if (mesh != null) visibleThisFrame.Add(mesh);
+                    if (blocks) foreach (var mesh in tree.Renderers)
+                        if(mesh!=null && (mesh.name.Contains("Foliage")||
+                            mesh.name.Contains("LeafAccent")||mesh.name.Contains("Crown")||
+                            mesh.name.Contains("Canopy"))) visibleThisFrame.Add(mesh);
                 }
             }
 
             foreach (var renderer in visibleThisFrame)
-                Fade(renderer);
+                if(!renderer.name.Contains("Bark")&&!renderer.name.Contains("Trunk"))
+                    Fade(renderer);
 
             var restore = new List<Renderer>();
             foreach (var pair in faded)

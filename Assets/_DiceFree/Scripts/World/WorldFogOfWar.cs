@@ -20,6 +20,10 @@ namespace DiceFree.World
         [SerializeField] private int maskWidth = 160;
         [SerializeField] private int maskHeight = 90;
         private bool[] explored;
+        private bool[] blocked;
+        private bool[] visibleCells;
+        private int blockersCount;
+        public int BlockingObjectsCount => blockersCount;
         private Texture2D screenMask;
         private Color32[] pixels;
         private int columns, rows;
@@ -51,6 +55,9 @@ namespace DiceFree.World
             columns = Mathf.CeilToInt((mapMax.x - mapMin.x) / Mathf.Max(.5f,cellSize));
             rows = Mathf.CeilToInt((mapMax.y - mapMin.y) / Mathf.Max(.5f,cellSize));
             explored = new bool[columns*rows];
+            blocked = new bool[columns*rows];
+            visibleCells = new bool[columns*rows];
+            if(Application.isPlaying) RebuildObstructions();
             maskWidth = Mathf.Clamp(maskWidth,80,320);
             maskHeight = Mathf.Clamp(maskHeight,45,180);
             pixels = new Color32[maskWidth*maskHeight];
@@ -65,17 +72,97 @@ namespace DiceFree.World
 
         public bool IsVisible(Vector3 location)
         {
-            if (revealer == null) return true;
+            if(revealer==null)return true;
             float dx=location.x-revealer.position.x;
             float dz=location.z-revealer.position.z;
-            return dx*dx+dz*dz<=visionRadius*visionRadius;
+            if(dx*dx+dz*dz>visionRadius*visionRadius)return false;
+            int x=Mathf.FloorToInt((location.x-mapMin.x)/cellSize);
+            int z=Mathf.FloorToInt((location.z-mapMin.y)/cellSize);
+            if(visibleCells==null||x<0||z<0||x>=columns||z>=rows)return false;
+            return visibleCells[z*columns+x];
         }
+
+        private void RebuildObstructions()
+        {
+            System.Array.Clear(blocked,0,blocked.Length);
+            blockersCount=0;
+            // The physical gameplay colliders are the source of truth: no phantom
+            // forest visibility blockers once trees are actually deactivated.
+            // House walls are boxes; only the narrow wooden tree trunks block vision,
+            // never the broad decorative canopies.
+            foreach(var collider in FindObjectsByType<Collider>(FindObjectsSortMode.None))
+            {
+                if(collider==null||!collider.enabled||collider.isTrigger||
+                   !collider.gameObject.activeInHierarchy)continue;
+                bool wall=collider.name=="Timber and lime walls";
+                bool trunk=collider.name=="Playtest trunk collision" || collider.name=="Trunk";
+                if(!wall&&!trunk)continue;
+                Bounds box=collider.bounds;
+                if(box.size.y<.5f)continue;
+                int left=Mathf.Max(0,Mathf.FloorToInt((box.min.x-mapMin.x)/cellSize));
+                int right=Mathf.Min(columns-1,Mathf.FloorToInt((box.max.x-mapMin.x)/cellSize));
+                int low=Mathf.Max(0,Mathf.FloorToInt((box.min.z-mapMin.y)/cellSize));
+                int high=Mathf.Min(rows-1,Mathf.FloorToInt((box.max.z-mapMin.y)/cellSize));
+                for(int z=low;z<=high;z++)
+                for(int x=left;x<=right;x++)
+                {
+                    // Solid rectangles intersecting a grid cell block its sight ray.
+                    // Even slender tree trunks must occupy at least one fog cell.
+                    blocked[z*columns+x]=true;
+                }
+                blockersCount++;
+            }
+        }
+
+        private bool HasLineOfSight(int x0,int z0,int x1,int z1)
+        {
+            // Discrete supercover ray from the player to target grid cell.
+            // The first occupied cell is visible (near face of house/tree), but cells
+            // BEHIND it are not. This is independent of camera position/zoom.
+            int dx=Mathf.Abs(x1-x0),dz=Mathf.Abs(z1-z0);
+            int stepX=x0<x1?1:-1,stepZ=z0<z1?1:-1;
+            int err=dx-dz, x=x0,z=z0;
+            int limit=dx+dz+2;
+            for(int i=0;i<limit;i++)
+            {
+                if(x==x1&&z==z1)return true;
+                if((x!=x0||z!=z0)&&x>=0&&z>=0&&x<columns&&z<rows &&
+                   blocked[z*columns+x])return false;
+                int e2=err*2;
+                if(e2>-dz){err-=dz;x+=stepX;}
+                if(e2<dx){err+=dx;z+=stepZ;}
+            }
+            return false;
+        }
+
+        private void RefreshVisibility()
+        {
+            if(revealer==null||visibleCells==null)return;
+            System.Array.Clear(visibleCells,0,visibleCells.Length);
+            Vector3 eye=revealer.position;
+            int cx=Mathf.FloorToInt((eye.x-mapMin.x)/cellSize);
+            int cz=Mathf.FloorToInt((eye.z-mapMin.y)/cellSize);
+            int radius=Mathf.CeilToInt(visionRadius/cellSize)+1;
+            for(int z=Mathf.Max(0,cz-radius);z<=Mathf.Min(rows-1,cz+radius);z++)
+            for(int x=Mathf.Max(0,cx-radius);x<=Mathf.Min(columns-1,cx+radius);x++)
+            {
+                float dx=mapMin.x+(x+.5f)*cellSize-eye.x;
+                float dz=mapMin.y+(z+.5f)*cellSize-eye.z;
+                if(dx*dx+dz*dz>visionRadius*visionRadius)continue;
+                if(!HasLineOfSight(cx,cz,x,z))continue;
+                int index=z*columns+x;
+                visibleCells[index]=true;
+                if(!explored[index]){explored[index]=true;ExploredCellCount++;}
+            }
+        }
+        public void RefreshVisionNow() => RefreshVisibility();
         public byte OpacityAt(Vector3 position)
         {
             if (revealer == null) return 0;
             float dx=position.x-revealer.position.x;
             float dz=position.z-revealer.position.z;
             float r=Mathf.Sqrt(dx*dx+dz*dz);
+            if(!IsVisible(position))return IsExplored(position)?(byte)155:(byte)245;
             if(r<=visionRadius-2f)return 0;
             byte outside=IsExplored(position)?(byte)155:(byte)245;
             if(r>=visionRadius+1f)return outside;
@@ -90,34 +177,18 @@ namespace DiceFree.World
             return x>=0&&z>=0&&x<columns&&z<rows&&explored[z*columns+x];
         }
 
-        private void MarkExplored()
-        {
-            if (revealer==null||!initialized)return;
-            Vector3 point=revealer.position;
-            int cx=Mathf.FloorToInt((point.x-mapMin.x)/cellSize);
-            int cz=Mathf.FloorToInt((point.z-mapMin.y)/cellSize);
-            int radius=Mathf.CeilToInt(visionRadius/cellSize)+1;
-            for(int z=Mathf.Max(0,cz-radius);z<=Mathf.Min(rows-1,cz+radius);z++)
-            for(int x=Mathf.Max(0,cx-radius);x<=Mathf.Min(columns-1,cx+radius);x++)
-            {
-                float wx=mapMin.x+(x+.5f)*cellSize-point.x;
-                float wz=mapMin.y+(z+.5f)*cellSize-point.z;
-                if(wx*wx+wz*wz>visionRadius*visionRadius)continue;
-                int index=z*columns+x;
-                if(explored[index])continue;
-                explored[index]=true;
-                ExploredCellCount++;
-            }
-        }
-
         private void LateUpdate()
         {
             if(!Application.isPlaying||!initialized||worldCamera==null||revealer==null)return;
-            MarkExplored();
-            if(Time.unscaledTime<nextRefresh &&
+            if(Time.unscaledTime<nextRefresh)return;
+            if(lastWidth==Screen.width&&lastHeight==Screen.height&&
                 lastCameraRotation==worldCamera.transform.rotation &&
                 (worldCamera.transform.position-lastEye).sqrMagnitude<.00001f &&
-                (revealer.position-lastTarget).sqrMagnitude<.0001f) return;
+                (revealer.position-lastTarget).sqrMagnitude<.0001f)
+            {nextRefresh=Time.unscaledTime+refreshSeconds;return;}
+            // LOS and exploration are recomputed together so blocked regions aren't
+            // accidentally marked explored by a simple circular distance test.
+            RefreshVisibility();
             nextRefresh=Time.unscaledTime+refreshSeconds;
             lastWidth=Screen.width;lastHeight=Screen.height;
             lastCameraRotation=worldCamera.transform.rotation;
@@ -135,17 +206,7 @@ namespace DiceFree.World
                 if(ground.Raycast(ray,out float distance)&&distance>=0)
                 {
                     Vector3 hit=ray.GetPoint(distance);
-                    float dx=hit.x-lastTarget.x;
-                    float dz=hit.z-lastTarget.z;
-                    float r=Mathf.Sqrt(dx*dx+dz*dz);
-                    // Fade in over 3 metres at the edge of current vision.
-                    if(r<=visionRadius-2f)alpha=0;
-                    else if(r<visionRadius+1f)
-                    {
-                        float t=Mathf.SmoothStep(0,1,(r-visionRadius+2f)/3f);
-                        alpha=(byte)Mathf.RoundToInt(t*(IsExplored(hit)?155:245));
-                    }
-                    else alpha=IsExplored(hit)?(byte)155:(byte)245;
+                    alpha=OpacityAt(hit);
                 }
                 pixels[y*maskWidth+x]=new Color32(9,14,22,alpha);
             }

@@ -19,7 +19,9 @@ var pairs=new[]{
  ("Bridge",new Vector3(-16,0,26),28f),
  ("South",new Vector3(13,0,-22),28f),
  ("RoadSlimes",new Vector3(94,0,15),49f),
- ("East",new Vector3(162,0,114),70f)
+ ("East",new Vector3(162,0,114),70f),
+ ("TwoShopFronts",new Vector3(7,0,-11),24f),
+ ("ForestEntry",new Vector3(84,0,34),38f)
 };
 foreach(var tuple in pairs){
 var target=tuple.Item2;
@@ -27,7 +29,7 @@ var go=new GameObject("Temporary capture camera");
 SceneManager.MoveGameObjectToScene(go,scene);
 var camera=go.AddComponent<Camera>();
 camera.orthographic=true;camera.orthographicSize=tuple.Item3*.63f;
-camera.transform.position=target+new Vector3(38f,47f,-38f);
+camera.transform.position=target+(tuple.Item1=="TwoShopFronts" ? new Vector3(-19f,32f,34f) : new Vector3(38f,47f,-38f));
 camera.transform.LookAt(target);
 var rt=new RenderTexture(1280,720,24);
 camera.targetTexture=rt;camera.Render();

@@ -43,11 +43,17 @@ try{
 var scene=EditorSceneManager.OpenScene(ScenePath,OpenSceneMode.Single);
 var fog=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<WorldFogOfWar>(true)).Single();
 var player=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<TraversalInput>(true)).First();
-if(!fog.IsVisible(player.transform.position)||fog.IsVisible(player.transform.position+Vector3.right*100))
- throw new InvalidOperationException("Fog visibility wrong");
-if(fog.VisionRadius<15||fog.VisionRadius>35)throw new InvalidOperationException("Fog radius wrong");
-return new{success=true,scene=ScenePath,visibilityRadius=fog.VisionRadius,mainPlayer=player.name,
- currentPlayerVisible=true,distantRegionHidden=true};
+var serialized=new SerializedObject(fog);
+var configuredPlayer=serialized.FindProperty("revealer").objectReferenceValue as Transform;
+var configuredCamera=serialized.FindProperty("worldCamera").objectReferenceValue as Camera;
+if(configuredPlayer!=player.transform||configuredCamera==null)
+ throw new InvalidOperationException("Fog serialized player/camera bindings are broken");
+if(fog.VisionRadius<15||fog.VisionRadius>35)
+ throw new InvalidOperationException("Fog radius wrong");
+// Actual visibility, occlusion and explored cells are checked in Play Mode by
+// dicefree.fog.los.runtime-test; the Edit Mode cache is intentionally not running.
+return new{success=true,scene=ScenePath,visibilityRadius=fog.VisionRadius,
+ mainPlayer=player.name,cameraConfigured=true,editorBindingsValid=true};
 }finally{EditorSceneManager.RestoreSceneManagerSetup(prior);}
 }
 }
