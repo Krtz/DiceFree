@@ -33,6 +33,8 @@ MonoBehaviour:
   physicalDefense: 0
   magicalDefense: 0
   moveSpeed: 5
+  basicAttackMinimumOffset: -4
+  basicAttackMaximumOffset: 4
   basicAttack: {fileID: 11400000, guid: 287b8fd7af51efa4f8a2a8cbe8567644, type: 2}
   tuning: {fileID: 11400000, guid: fae0d971f61fa81429fe4643a81e5cac, type: 2}
   secondaryOverrides: []

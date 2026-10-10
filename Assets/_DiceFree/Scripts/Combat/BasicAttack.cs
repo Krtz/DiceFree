@@ -76,6 +76,7 @@ namespace DiceFree.Combat
             {
                 winding = true; State = "Wind-up";
                 impactAt = Time.time + Definition.windup / actor.Stats.AttackSpeed;
+                MagicalBasicMissileVfx.Launch(actor, Target, impactAt - Time.time);
                 readyAt = Time.time + Mathf.Max(Definition.interval, Definition.windup) / actor.Stats.AttackSpeed;
             }
             else State = "Recovery";

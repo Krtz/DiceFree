@@ -15,13 +15,14 @@ MonoBehaviour:
   stagingSeconds: 60
   victorySeconds: 15
   slamWarning: 3
-  slamInterval: 6
+  slamInterval: 4.5
   minibossHp: 800
   bossHp: 3000
   regentHp: 16000
   fragmentHpFraction: 0.12
   bossFragmentHp: 300
   regentFragmentHpFraction: 0.1
+  minibossFragmentHpFraction: 0.1
   minibossScale: 6.8999996
   minibossFragmentReferenceHp: 160
   bossFragmentReferenceHp: 420

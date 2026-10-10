@@ -14,7 +14,7 @@ namespace DiceFree.Combat
         {
             NoviceStrike, NoviceSand, NoviceHaste, NoviceHeal,
             PhysicalHeavy, PhysicalGuard, PhysicalQuickening, PhysicalArrowArea, PhysicalArrowHit,
-            MagicalSand, MagicalMend, MagicalFire, MagicalIceWarning, MagicalIceImpact
+            MagicalSand, MagicalMend, MagicalFire, MagicalIceWarning, MagicalIceImpact, MagicalAutoImpact
         }
 
         private static Material sparkMaterial;
@@ -105,12 +105,14 @@ namespace DiceFree.Combat
                 case Cue.MagicalFire: color = new Color(1f, .39f, .16f); break;
                 case Cue.MagicalIceWarning: case Cue.MagicalIceImpact:
                     color = new Color(.37f, .84f, 1f); break;
+                case Cue.MagicalAutoImpact:
+                    color = new Color(.67f, .49f, 1f); break;
                 default: color = new Color(1f, .88f, .67f); break;
             }
 
             var root = new GameObject("Skill VFX - " + cue);
             root.transform.position = point;
-            int amount = cue == Cue.MagicalIceWarning ? 7 : area ? 24 : magic ? 19 : physical ? 15 : 9;
+            int amount = cue == Cue.MagicalAutoImpact ? 10 : cue == Cue.MagicalIceWarning ? 7 : area ? 24 : magic ? 19 : physical ? 15 : cue == Cue.NoviceSand ? 16 : 9;
             float height = area ? .15f : support ? 1.05f : .85f;
             float spread = Mathf.Max(.15f, area ? range : support ? .28f : .20f);
             CreateBurst(root.transform, color, height, spread, amount, magic ? .85f : .55f,
@@ -127,6 +129,8 @@ namespace DiceFree.Combat
                 CreateRing(root.transform, color, range, .08f, cue == Cue.PhysicalArrowArea ? .72f : .32f, true);
             else if (cue == Cue.PhysicalHeavy)
                 CreateRing(root.transform, color, .63f, .085f, .32f, true);
+            else if (cue == Cue.MagicalAutoImpact)
+                CreateRing(root.transform, color, .26f, .045f, .21f);
 
             CreateSignature(root.transform, cue, color, range);
             if (Application.isPlaying)
@@ -136,7 +140,21 @@ namespace DiceFree.Combat
         // Skill-specific shapes add identity without spending later-tier spectacle.
         private static void CreateSignature(Transform root, Cue cue, Color tint, float range)
         {
-            if (cue == Cue.PhysicalHeavy)
+            if (cue == Cue.NoviceSand)
+            {
+                // A little miniature golden sand-twister, not a high-tier magical cyclone.
+                var points = new Vector3[24];
+                for(int i = 0; i < points.Length; i++)
+                {
+                    float t = i / (float)(points.Length - 1);
+                    float a = t * Mathf.PI * 3.8f;
+                    float radius = .20f * (1f - t * .5f);
+                    points[i] = new Vector3(Mathf.Cos(a) * radius, .36f + t * .84f,
+                        Mathf.Sin(a) * radius);
+                }
+                CreateStroke(root, "Magic Sand golden spiral", points, tint, .035f, .4f, false);
+            }
+            else if (cue == Cue.PhysicalHeavy)
             {
                 var pts = new Vector3[19];
                 for (int i=0;i<pts.Length;i++)

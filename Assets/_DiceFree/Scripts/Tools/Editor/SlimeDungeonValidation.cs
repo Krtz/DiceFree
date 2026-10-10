@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using DiceFree.Dungeons;
@@ -31,6 +31,11 @@ namespace DiceFree.EditorTools
             Require(d!=null&&t!=null&&d.stagingSeconds==60,"Missing authored definition or 60-second staging");
             Require(t.blue.baseHp==25*t.puzzleGreen.baseHp,"Blue HP must be exactly 25x");
             Require(t.bossPresentation!=null&&t.regentPresentation!=null,"Existing boss art not wired");
+            Require(Mathf.Abs(t.slamInterval-4.5f)<.001f,"Slam must recur every 4.5 seconds");
+            Require(Mathf.Abs(t.minibossFragmentHpFraction-.10f)<.001f &&
+                Mathf.Abs(t.miniboss.baseHp-800)<.01f,"Miniboss fragments must have 10% of 800 HP");
+            Require(t.miniboss.basicAttack!=null&&t.boss.basicAttack!=null&&
+                t.regent.basicAttack!=null,"All three bosses need a melee autoattack definition");
             var registry=new SessionMapRegistry();Require(registry.TryClaimDungeonStaging(d.stableId,"party-a","a",DateTime.UtcNow,out var first,out _),"First claim");
             Require(registry.TryClaimDungeonStaging(d.stableId,"party-a","b",DateTime.UtcNow,out var joined,out _)&&joined.leaseToken==first.leaseToken,"Party must share occupancy");
             Require(!registry.TryClaimDungeonStaging(d.stableId,"party-b","c",DateTime.UtcNow,out _,out _),"Other party must be refused");
@@ -111,11 +116,19 @@ namespace DiceFree.EditorTools
                     if(!run.Active)return;Require(player.GetComponent<RunLoadoutLock>().Locked,"Run loadout did not lock");Require(run.SecretEligible==testRegent,"Variant not snapshotted correctly");
                     Require(!player.GetComponent<Equipment>().Equip(testItem,EquipmentSlot.Hands),"Active run gear mutation allowed");Require(!player.GetComponent<ManifestationPersistence>().TryActivateExisting("class.novice",out _),"Active class mutation allowed");
                     if(testWipe){player.Health.Invulnerable=false;player.Health.ApplyDamage(null,new DamageResult{mitigated=player.Health.Maximum*2});phase=20;return;}
-                    boss=Slimes().Single(s=>s.Role==SlimeRole.Miniboss);player.Motor.Teleport(boss.transform.position+Vector3.back*3);boss.Actor.Health.SetEncounterHp(boss.Actor.Health.Maximum*.69f);storedHp=boss.Actor.Health.Current;phase=4;return;
+                    boss=Slimes().Single(s=>s.Role==SlimeRole.Miniboss);player.Motor.Teleport(boss.transform.position+Vector3.back*3);
+                    actionAt=Time.time+4.5f;phase=23;return;
+                }
+                if(phase==23)
+                {
+                    if(boss.BossBumpAttempts==0&&Time.time<actionAt)return;
+                    Require(boss.BossBumpAttempts>0,"Big Slime should autoattack at close range between specials");
+                    boss.Actor.Health.SetEncounterHp(boss.Actor.Health.Maximum*.69f);
+                    storedHp=boss.Actor.Health.Current;phase=4;return;
                 }
                 if(phase==4)
                 {
-                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==2&&fragments.All(f=>f.Actor.Health.Maximum==300),"Miniboss two-way Divide must use 300 HP fragments");Require(Mathf.Approximately(boss.transform.localScale.x,2.3f*3),"Miniboss actual scale must be 3x");Kill(fragments[0]);phase=5;return;
+                    if(!boss.Dividing)return;var fragments=Slimes().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Require(fragments.Length==2&&fragments.All(f=>Mathf.Approximately(f.Actor.Health.Maximum,boss.Actor.Health.Maximum*.10f)),"Miniboss two-way Divide must use 10% parent HP fragments");Require(Mathf.Approximately(boss.transform.localScale.x,2.3f*3),"Miniboss actual scale must be 3x");Kill(fragments[0]);phase=5;return;
                 }
                 if(phase==5)
                 {
@@ -149,7 +162,15 @@ namespace DiceFree.EditorTools
                     var puzzle=UnityEngine.Object.FindFirstObjectByType<SlimeTreePuzzle>();if(puzzle.Filled<captureCount)return;
                     if(captureCount<5){phase=9;return;}
                     Require(run.PuzzleSolved&&run.SecretSolved==testRegent,"Puzzle branch result");Require(!Slimes().Any(s=>s.Role==SlimeRole.Puzzle&&!s.Captured),"Free slimes remained after solve");
-                    boss=Slimes().Single(s=>s.Role==(testRegent?SlimeRole.Regent:SlimeRole.Boss));player.Motor.Teleport(boss.transform.position+Vector3.back*4);boss.Actor.Health.SetEncounterHp(boss.Actor.Health.Maximum*.69f);storedHp=boss.Actor.Health.Current;phase=11;return;
+                    boss=Slimes().Single(s=>s.Role==(testRegent?SlimeRole.Regent:SlimeRole.Boss));Require(player.Motor.Teleport(boss.transform.position+Vector3.back*2.6f),"Boss melee approach teleport failed");
+                    actionAt=Time.time+4.5f;phase=24;return;
+                }
+                if(phase==24)
+                {
+                    if(boss.BossBumpAttempts==0&&Time.time<actionAt)return;
+                    Require(boss.BossBumpAttempts>0,(testRegent?"Slime Regent":"Slime Boss")+" should autoattack between specials; range="+Vector3.Distance(player.transform.position,boss.transform.position)+" allowed="+(boss.Actor.Radius+player.Radius+boss.Actor.Stats.Definition.basicAttack.reach)+" sight="+boss.Actor.HasSightOf(player));
+                    boss.Actor.Health.SetEncounterHp(boss.Actor.Health.Maximum*.69f);
+                    storedHp=boss.Actor.Health.Current;phase=11;return;
                 }
                 if(phase==11)
                 {

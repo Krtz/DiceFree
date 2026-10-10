@@ -80,6 +80,8 @@ namespace DiceFree.EditorTools
                 DamageChannel.Magical, null, AttributeScaling.HighestSelected,
                 new AttributeValues { intelligence = 1, spirit = 1 },
                 baseDamage: 1, coefficient: 1.25f, interval: 1.15f, windup: 0.3f, reach: 8, requiresAccuracy: true);
+            magical.basicAttackMinimumOffset = -4f;
+            magical.basicAttackMaximumOffset = 4f;
             magical.basicAttack = basic;
             EditorUtility.SetDirty(magical);
 

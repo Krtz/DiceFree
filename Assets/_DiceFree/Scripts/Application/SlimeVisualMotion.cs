@@ -103,7 +103,7 @@ namespace DiceFree.Dungeons
             float planarSpeed = new Vector2(delta.x, delta.z).magnitude / Mathf.Max(dt, .001f);
             // Teleports must not produce a 20-metre cartoon hop.
             if (delta.magnitude > 1.3f) planarSpeed = 0f;
-            Sample(Time.time, planarSpeed, dt, attack == null ? null : attack.State,
+            Sample(Time.time, planarSpeed, dt, dungeon != null && dungeon.IsBoss ? dungeon.BossBumpState : attack == null ? null : attack.State,
                 actor == null || actor.Alive);
         }
 

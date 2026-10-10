@@ -54,11 +54,12 @@ namespace DiceFree.Combat
 
         private IEnumerator MagicSandRoutine(CombatActor source, CombatActor target)
         {
-            const int grainCount = 10;
+            const int grainCount = 18;
             Vector3 start = source.transform.position + Vector3.up * 1.15f +
                             source.transform.forward * 0.25f;
-            float duration = 0.30f;
+            float duration = 0.38f;
             float started = Time.time;
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceSand, source.transform.position);
 
             var grains = new GameObject[grainCount];
             var offsets = new Vector3[grainCount];
@@ -67,9 +68,9 @@ namespace DiceFree.Combat
             for (int i = 0; i < grainCount; i++)
             {
                 offsets[i] = new Vector3(
+                    UnityEngine.Random.Range(-0.16f, 0.16f),
                     UnityEngine.Random.Range(-0.10f, 0.10f),
-                    UnityEngine.Random.Range(-0.07f, 0.07f),
-                    UnityEngine.Random.Range(-0.10f, 0.10f));
+                    UnityEngine.Random.Range(-0.16f, 0.16f));
                 phase[i] = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
                 float scale = UnityEngine.Random.Range(0.032f, 0.055f);
                 float warmth = UnityEngine.Random.Range(0f, 0.08f);
@@ -85,14 +86,18 @@ namespace DiceFree.Combat
                 float t = Mathf.Clamp01((Time.time - started) / duration);
                 Vector3 end = target.transform.position + Vector3.up * 0.85f;
                 Vector3 center = Vector3.Lerp(start, end, t);
-                center.y += Mathf.Sin(t * Mathf.PI) * 0.20f;
+                center.y += Mathf.Sin(t * Mathf.PI) * 0.32f;
+                // Dust spirals gently around the projectile's center, not a static grain clump.
 
                 for (int i = 0; i < grainCount; i++)
                 {
                     if (grains[i] == null) continue;
                     float flutter = Mathf.Sin(t * 20f + phase[i]) * 0.018f;
                     Vector3 clump = offsets[i] + new Vector3(flutter, flutter * 0.5f, -flutter);
-                    grains[i].transform.position = center + clump;
+                    float orbit = t * 10f + phase[i];
+                    grains[i].transform.position = center + clump +
+                        new Vector3(Mathf.Cos(orbit) * .09f, Mathf.Sin(orbit * 1.25f) * .05f,
+                            Mathf.Sin(orbit) * .09f);
                 }
 
                 yield return null;
@@ -105,11 +110,13 @@ namespace DiceFree.Combat
             for (int i = 0; i < grainCount; i++)
                 if (grains[i] != null) Destroy(grains[i]);
 
+            EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceSand,
+                hit - Vector3.up * .85f);
             StartCoroutine(PulseRoutine(
                 hit,
                 new Color(0.95f, 0.72f, 0.28f, 1f),
-                0.16f,
-                0.18f));
+                0.25f,
+                0.24f));
         }
 
         private IEnumerator MeleeImpactRoutine(CombatActor target)

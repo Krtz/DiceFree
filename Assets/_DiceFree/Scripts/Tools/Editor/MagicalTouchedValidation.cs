@@ -21,6 +21,9 @@ namespace DiceFree.EditorTools
                 "Magical class definition is missing/wrong.");
             Attributes(magical.baseAttributes, 10, 5, 5, 13, 13, "Magical base stats");
             Attributes(magical.growth, 1, .5f, .5f, 2, 2, "Magical growth");
+            Require(Near(magical.basicAttackMinimumOffset,-4) &&
+                Near(magical.basicAttackMaximumOffset,4),
+                "Magically Touched basic attacks must vary from -4 to +4");
 
             var basic = AssetDatabase.LoadAssetAtPath<AttackDefinition>(MagicalTouchedAuthoring.BasicAttackPath);
             Require(basic != null && magical.basicAttack == basic &&

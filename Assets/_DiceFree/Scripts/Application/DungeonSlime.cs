@@ -20,7 +20,10 @@ namespace DiceFree.Dungeons
         public Vector3 LastCastSnapshot {get;private set;}
         public Vector3 LastImpactPosition {get;private set;}
         public int ThresholdsConsumed {get;private set;}
-        bool busy,ceased,engaged;float nextAttack;Vector3 home;
+        bool busy,ceased,engaged,bossBumpWinding;float nextAttack,nextBump;Vector3 home;
+        public string BossBumpState {get;private set;} = "Idle";
+        public int BossBumpHits {get;private set;}
+        public int BossBumpAttempts {get;private set;}
         Transform visual;float visualHeight;Vector3 visualScale;
         readonly List<GameObject> markers=new();
         readonly List<DungeonSlime> fragments=new();
@@ -51,14 +54,51 @@ namespace DiceFree.Dungeons
             if(!IsBoss)return;
             var living=Run.Living.ToArray();if(living.Length==0)return;
             if(engaged&&living.All(p=>Vector3.Distance(p.transform.position,home)>24)){ResetEncounter();return;}
-            if(!engaged){if(living.All(p=>Vector3.Distance(p.transform.position,home)>12))return;engaged=true;nextAttack=Time.time+2;}
+            if(!engaged){if(living.All(p=>Vector3.Distance(p.transform.position,home)>12))return;engaged=true;nextAttack=Time.time+2;nextBump=Time.time+.5f;}
             if(busy)return;
             float ratio=Actor.Health.Current/Actor.Health.Maximum;
             if(ThresholdsConsumed==0&&ratio<=.7f||ThresholdsConsumed==1&&ratio<=.3f){ThresholdsConsumed++;StartCoroutine(Divide());return;}
-            if(Time.time<nextAttack)return;
+            if(bossBumpWinding)return;
+            if(Time.time<nextAttack){TryBossBump(living);return;}
             nextAttack=Time.time+Run.Tuning.slamInterval;
             if(Role==SlimeRole.Regent){int attack=Random.Range(0,3);if(attack==1){StartCoroutine(Roll(living));return;}if(attack==2){StartCoroutine(Bounce(living));return;}}
             StartCoroutine(Slam(living[Random.Range(0,living.Length)].transform.position,Radius));
+        }
+        // A separate grounded melee attack between telegraphed specials.
+        // Never uses BasicAttack.MoveTo: miniboss and bosses stay in their authored arena.
+        void TryBossBump(CombatActor[] living)
+        {
+            if(Time.time<nextBump||busy||bossBumpWinding)return;
+            var definition=Actor.Stats.Definition.basicAttack;
+            if(definition==null)return;
+            var victim=living.Where(p=>p!=null&&p.Alive&&Actor.IsHostileTo(p))
+                .OrderBy(p=>(p.transform.position-transform.position).sqrMagnitude)
+                .FirstOrDefault(p=>Vector3.Distance(transform.position,p.transform.position)<=
+                    Actor.Radius+p.Radius+definition.reach && Actor.HasSightOf(p));
+            if(victim!=null){BossBumpAttempts++;StartCoroutine(BossBump(victim,definition));}
+        }
+        IEnumerator BossBump(CombatActor victim, AttackDefinition definition)
+        {
+            bossBumpWinding=true;BossBumpState="Wind-up";
+            nextBump=Time.time+Mathf.Max(1.35f,definition.interval);
+            yield return new WaitForSeconds(Mathf.Max(.18f,definition.windup));
+            if(!busy&&Run!=null&&Run.Active&&Actor.Alive&&Actor.CanAct&&
+               victim!=null&&victim.Alive&&Actor.IsHostileTo(victim)&&
+               Vector3.Distance(transform.position,victim.transform.position)<=
+                   Actor.Radius+victim.Radius+definition.reach+.1f)
+            {
+                var hit=AccuracyResolver.Resolve(Actor,definition);
+                var packet=DamageResolver.CalculatePacket(Actor.Stats,victim.Stats,
+                    definition,hit,definition.RollDamageMultiplier(),
+                    Random.Range(0f,Actor.Stats.BasicAttackMaximumBonus),
+                    Random.Range(Actor.Stats.Definition.basicAttackMinimumOffset,
+                        Actor.Stats.Definition.basicAttackMaximumOffset));
+                victim.Health.ApplyPacket(Actor,packet);
+                if(!packet.Missed)BossBumpHits++;
+                BossBumpState=packet.Missed?"Miss":"Recovery";
+            }
+            else BossBumpState="Idle";
+            bossBumpWinding=false;
         }
         float Radius=>Role==SlimeRole.Miniboss?Run.Tuning.minibossSlamRadius:Role==SlimeRole.Regent?Run.Tuning.regentSlamRadius:Run.Tuning.bossSlamRadius;
         string BossId=>Role==SlimeRole.Miniboss?"boss.big-slime":Role==SlimeRole.Regent?"boss.slime-regent":"boss.slime";
@@ -89,8 +129,13 @@ namespace DiceFree.Dungeons
                 if(NavMesh.SamplePosition(spawn,out var sample,3,NavMesh.AllAreas))spawn=sample.position;
                 var f=Run.Spawn(Run.Tuning.fragment,spawn,1.6f,SlimeRole.Fragment);
                 // The secret Regent's divided form scales with its own encounter health.
-                // Ordinary boss and miniboss fragments remain a flat 300 HP.
-                float fragmentHp=Role==SlimeRole.Regent?Actor.Health.Maximum*Run.Tuning.regentFragmentHpFraction:Run.Tuning.bossFragmentHp;
+                // Mini-boss fragments each have 10% of Big Slime's MAX HP.
+                // Final boss stays at 300 HP; Regent retains its own 10% ratio.
+                float fragmentHp=Role==SlimeRole.Miniboss
+                    ? Actor.Health.Maximum*Run.Tuning.minibossFragmentHpFraction
+                    : Role==SlimeRole.Regent
+                        ? Actor.Health.Maximum*Run.Tuning.regentFragmentHpFraction
+                        : Run.Tuning.bossFragmentHp;
                 f.Actor.Stats.SetEncounterMaximumHp(fragmentHp);f.Actor.Health.Restore();
                 fragments.Add(f);
                 // The stat contribution survives CombatActor.Start; setting only Motor.speed here
@@ -180,13 +225,13 @@ namespace DiceFree.Dungeons
                 var props=new MaterialPropertyBlock();r.GetPropertyBlock(props);props.SetColor("_BaseColor",color);r.SetPropertyBlock(props);
             }
         }
-        public void Cease(){ceased=true;StopAllCoroutines();foreach(var m in markers)if(m!=null)Destroy(m);markers.Clear();Actor.Health.Invulnerable=true;GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;Actor.Motor.Stop();foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);}
+        public void Cease(){ceased=true;bossBumpWinding=false;BossBumpState="Idle";StopAllCoroutines();foreach(var m in markers)if(m!=null)Destroy(m);markers.Clear();Actor.Health.Invulnerable=true;GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;Actor.Motor.Stop();foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);}
         public void ResetEncounter()
         {
             StopAllCoroutines();foreach(var m in markers)if(m!=null)Destroy(m);markers.Clear();
             foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);fragments.Clear();
             foreach(var a in adds)if(a!=null)Destroy(a.gameObject);adds.Clear();
-            ThresholdsConsumed=0;Dividing=busy=engaged=false;Actor.Health.Invulnerable=false;Actor.Health.Restore();Actor.Motor.Teleport(home);
+            ThresholdsConsumed=0;Dividing=busy=engaged=bossBumpWinding=false;BossBumpState="Idle";nextBump=0;Actor.Health.Invulnerable=false;Actor.Health.Restore();Actor.Motor.Teleport(home);
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=true;foreach(var c in GetComponents<Collider>())c.enabled=true;
             if(visual!=null){visual.localPosition=new Vector3(0,visualHeight,0);visual.localScale=visualScale;}
         }
