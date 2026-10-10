@@ -138,7 +138,8 @@ namespace DiceFree.UI
         public Rect Resolve(CustomizableHudWidget widget)
         {
             if (widget == null) return default;
-            Rect normalized = Entry(widget.LayoutId)?.Rect ?? widget.DefaultNormalizedBounds;
+            Rect normalized = Entry(widget.LayoutGroupId)?.Rect ??
+                Entry(widget.LayoutId)?.Rect ?? widget.DefaultNormalizedBounds;
             normalized = SanitizeNormalized(normalized, widget.MinimumPixelSize, widget.LockedAspectRatio);
             return ToPixels(normalized);
         }
@@ -214,11 +215,11 @@ namespace DiceFree.UI
 
         private LayoutEntry EnsureEntry(CustomizableHudWidget widget)
         {
-            var entry = Entry(widget.LayoutId);
+            var entry = Entry(widget.LayoutGroupId);
             if (entry != null) return entry;
-
-            entry = new LayoutEntry { id = widget.LayoutId };
-            entry.Set(widget.DefaultNormalizedBounds);
+            Rect previous = Entry(widget.LayoutId)?.Rect ?? widget.DefaultNormalizedBounds;
+            entry = new LayoutEntry { id = widget.LayoutGroupId };
+            entry.Set(previous);
             document.widgets.Add(entry);
             return entry;
         }
@@ -291,7 +292,8 @@ namespace DiceFree.UI
 
             foreach (var widget in widgets.ToArray())
             {
-                if (widget == null || !widget.isActiveAndEnabled) continue;
+                if (widget == null || !widget.isActiveAndEnabled ||
+                    !widget.ShowInLayoutEditor) continue;
                 Rect rect = Resolve(widget);
                 DrawOutline(rect, widget.DisplayName, theme);
 
@@ -302,21 +304,21 @@ namespace DiceFree.UI
                 {
                     if (grip.Contains(mouse))
                     {
-                        activeResize = widget.LayoutId;
+                        activeResize = widget.LayoutGroupId;
                         activeDrag = null;
                         evt.Use();
                     }
                     else if (rect.Contains(mouse))
                     {
-                        activeDrag = widget.LayoutId;
+                        activeDrag = widget.LayoutGroupId;
                         activeResize = null;
                         dragOffset = mouse - rect.position;
                         evt.Use();
                     }
                 }
 
-                bool dragging = activeDrag == widget.LayoutId;
-                bool resizing = activeResize == widget.LayoutId;
+                bool dragging = activeDrag == widget.LayoutGroupId;
+                bool resizing = activeResize == widget.LayoutGroupId;
                 if (evt.type == EventType.MouseDrag && evt.button == 0 && (dragging || resizing))
                 {
                     if (dragging)

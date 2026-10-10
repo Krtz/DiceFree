@@ -36,10 +36,13 @@ namespace DiceFree.UI
             return text.ToString();
         }
 
-        public static void DrawCurrent()
+        public static void DrawCurrent() =>
+            DrawAt(GUI.tooltip,Event.current.mousePosition);
+
+        public static void DrawAt(string tooltip,Vector2 position)
         {
-            string tooltip = GUI.tooltip;
-            if (string.IsNullOrWhiteSpace(tooltip)) return;
+            if (string.IsNullOrWhiteSpace(tooltip) ||
+                Event.current.type!=EventType.Repaint) return;
 
             var content = new GUIContent(tooltip);
             HudThemeMetrics theme =
@@ -53,14 +56,17 @@ namespace DiceFree.UI
                 normal = { textColor = theme.textTint }
             };
 
-            float width = Mathf.Min(340f, Mathf.Max(190f, style.CalcSize(content).x + 20f));
-            float height = Mathf.Min(270f, style.CalcHeight(content, width) + 8f);
-            var mouse = Event.current.mousePosition;
-            float x = Mathf.Min(Screen.width - width - 8, mouse.x + 18);
-            float y = Mathf.Min(Screen.height - height - 8, mouse.y + 18);
+            float width = Mathf.Min(400f, Mathf.Max(235f, style.CalcSize(content).x + 22f));
+            float height = Mathf.Min(Screen.height - 20f,
+                Mathf.Min(470f, style.CalcHeight(content, width - 12f) + 14f));
+            float x = Mathf.Max(8,Mathf.Min(Screen.width - width - 8, position.x + 18));
+            float y = Mathf.Max(8,Mathf.Min(Screen.height - height - 8, position.y + 18));
             var rect = new Rect(x, y, width, height);
+            int oldDepth=GUI.depth;
+            GUI.depth=-180;
             HudChrome.DrawPanel(rect, theme);
             GUI.Label(rect, content, style);
+            GUI.depth=oldDepth;
         }
 
         private static void Append(StringBuilder text, float value, string label)

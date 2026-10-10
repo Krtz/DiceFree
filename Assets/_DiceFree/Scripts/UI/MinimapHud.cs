@@ -14,6 +14,7 @@ namespace DiceFree.UI
         private Camera mapCamera;
         private RenderTexture mapTexture;
         private WorldFogOfWar fog;
+        private IMinimapNavigator navigation;
         private Texture2D fogMap;
         private Color32[] fogPixels;
         private float nextFogRefresh;
@@ -32,6 +33,9 @@ namespace DiceFree.UI
         private void Awake()
         {
             if (player == null) player = GetComponent<CombatActor>();
+            foreach(var behaviour in GetComponents<MonoBehaviour>())
+                if(behaviour is IMinimapNavigator navigator)
+                {navigation=navigator;break;}
             CreateCamera();
             fog = FindFirstObjectByType<WorldFogOfWar>();
             fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
@@ -86,7 +90,9 @@ namespace DiceFree.UI
             mapCamera.farClipPlane = 100f;
             mapCamera.clearFlags = CameraClearFlags.SolidColor;
             mapCamera.backgroundColor = new Color(0.025f, 0.035f, 0.025f, 1f);
-            mapCamera.cullingMask = ~(1 << PortraitLayer);
+            // The minimap applies its own fog mask, so exclude the world fog
+            // mesh from the minimap camera to avoid drawing the fog twice.
+            mapCamera.cullingMask = ~((1 << PortraitLayer) | (1 << 2));
             mapCamera.depth = -20;
 
             mapTexture = new RenderTexture(384, 384, 16, RenderTextureFormat.ARGB32)
@@ -96,6 +102,32 @@ namespace DiceFree.UI
             };
             mapTexture.Create();
             mapCamera.targetTexture = mapTexture;
+        }
+
+        /// <summary>Map north is world +Z; supports any movable/resized map rectangle.</summary>
+        public static Vector3 WorldPointForMapClick(Vector3 playerPosition,
+            float radius, Rect mapRect, Vector2 guiPoint)
+        {
+            float u=Mathf.Clamp01((guiPoint.x-mapRect.x)/mapRect.width);
+            float v=Mathf.Clamp01((guiPoint.y-mapRect.y)/mapRect.height);
+            return new Vector3(playerPosition.x+(u-.5f)*radius*2f,
+                playerPosition.y,playerPosition.z+(.5f-v)*radius*2f);
+        }
+
+        public bool TryMoveFromMapClick(Rect mapRect, Vector2 guiPoint)
+        {
+            if(player==null||navigation==null||!mapRect.Contains(guiPoint) ||
+                HudPointerBlocker.ModalOpen ||
+                (HudLayoutManager.Current?.EditMode ?? false))
+                return false;
+            Vector3 destination=WorldPointForMapClick(
+                player.transform.position,worldRadius,mapRect,guiPoint);
+            // The minimap is a top-down image of the world: sample the actual
+            // ground below the requested XZ before seeking a NavMesh path.
+            if(!Physics.Raycast(destination+Vector3.up*80f,Vector3.down,
+                out var ground,160f,1<<8,QueryTriggerInteraction.Ignore))
+                return false;
+            return navigation.TryMoveFromMinimap(ground.point);
         }
 
         private void OnGUI()
@@ -127,8 +159,23 @@ namespace DiceFree.UI
                     fontStyle = FontStyle.Bold,
                     fontSize = Mathf.RoundToInt(Mathf.Clamp(mapRect.height * 0.08f, 12, 24))
                 });
-            if(GUI.Button(new Rect(mapRect.xMax-52,mapRect.yMax-26,24,24),"+"))Zoom(.8f);
-            if(GUI.Button(new Rect(mapRect.xMax-26,mapRect.yMax-26,24,24),"-"))Zoom(1.25f);
+            var plus=new Rect(mapRect.xMax-52,mapRect.yMax-26,24,24);
+            var minus=new Rect(mapRect.xMax-26,mapRect.yMax-26,24,24);
+            if(GUI.Button(plus,"+"))Zoom(.8f);
+            if(GUI.Button(minus,"-"))Zoom(1.25f);
+
+            // Left or right-click on the actual map image issues movement.
+            // Keep zoom buttons interactive and never move in HUD Edit Mode.
+            var evt=Event.current;
+            if(evt.type==EventType.MouseDown && (evt.button==0||evt.button==1) &&
+                mapRect.Contains(evt.mousePosition) &&
+                !plus.Contains(evt.mousePosition) &&
+                !minus.Contains(evt.mousePosition) &&
+                !(HudLayoutManager.Current?.EditMode ?? false))
+            {
+                TryMoveFromMapClick(mapRect,evt.mousePosition);
+                evt.Use(); // A minimap click must never leak to world interactions.
+            }
         }
 
         // ASCII labels and a drawn arrow avoid font-dependent compass glyphs.

@@ -9,7 +9,7 @@ using DiceFree.Input;
 namespace DiceFree.Characters
 {
     [RequireComponent(typeof(TraversalMotor))]
-    public sealed class TraversalInput : MonoBehaviour, ITraversalUiState
+    public sealed class TraversalInput : MonoBehaviour, ITraversalUiState, IMinimapNavigator
     {
         public enum ControlMode { Classic, Direct }
         [SerializeField] private Camera worldCamera;
@@ -29,7 +29,7 @@ namespace DiceFree.Characters
         public ControlMode Mode => mode;
         public Camera WorldCamera => worldCamera;
         public string Feedback { get; private set; } = "Follow the path into Cornberg.";
-        public string ModeLabel => mode == ControlMode.Classic ? "Classic · Right-click ground to move" : "Direct · WASD to move";
+        public string ModeLabel => mode == ControlMode.Classic ? "Classic Â· Right-click ground to move" : "Direct Â· WASD to move";
 
         private void Awake()
         {
@@ -152,6 +152,48 @@ namespace DiceFree.Characters
             }
 
             destinationMarker.gameObject.SetActive(mode == ControlMode.Classic && motor.Travelling);
+        }
+
+        /// <summary>
+        /// Issue exactly the same NavMesh path command as a normal ground click,
+        /// but with the target translated from the minimap's north-up projection.
+        /// Does not teleport and works in either control mode.
+        /// </summary>
+        public bool TryMoveFromMinimap(Vector3 worldPoint)
+        {
+            if (motor == null || bindings == null || bindings.Suppressed ||
+                (health != null && !health.Alive) ||
+                (actor != null && !actor.CanAct) ||
+                (skillTargeting != null && skillTargeting.Active) ||
+                HudPointerBlocker.ModalOpen ||
+                (HudLayoutManager.Current?.EditMode ?? false))
+                return false;
+
+            // Snap the proposed map point to the same walkable NavMesh as
+            // ordinary movement. The actual route must be fully reachable.
+            if (!UnityEngine.AI.NavMesh.SamplePosition(worldPoint, out var nearby,
+                    2f, UnityEngine.AI.NavMesh.AllAreas))
+            {
+                Feedback = "No walkable ground at that minimap location.";
+                return false;
+            }
+            // Cancel movement-blocking orders BEFORE issuing the new NavMesh route.
+            // In particular, CancelAttackMove and Interactor.Cancel may reset paths.
+            combatInput?.CancelAttackMove();
+            interactor?.Cancel();
+            attack?.Cancel();
+            if (!motor.MoveTo(nearby.position))
+            {
+                Feedback = "No walkable path to that minimap location.";
+                return false;
+            }
+            if (destinationMarker != null)
+            {
+                destinationMarker.position=nearby.position+Vector3.up*.08f;
+                destinationMarker.gameObject.SetActive(true);
+            }
+            Feedback="";
+            return true;
         }
 
         public bool TryWorldPoint(Vector2 screenPoint, out Vector3 point)

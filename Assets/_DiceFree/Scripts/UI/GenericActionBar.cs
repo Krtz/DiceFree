@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DiceFree.UI
 {
     public sealed class GenericActionBar : CustomizableHudWidget
     {
         [SerializeField] private AbilityBarSource source;
+        private string hoveredSkillTooltip;
+        private Vector2 tooltipPointer;
 
         public override string LayoutId => "action-bar";
         public override string DisplayName => "Action Bar";
@@ -31,6 +34,16 @@ namespace DiceFree.UI
         {
             if (source == null || HudPointerBlocker.ModalOpen) return;
 
+            hoveredSkillTooltip=null;
+            tooltipPointer=Event.current.mousePosition;
+            if(Mouse.current!=null)
+            {
+                Vector2 device=Mouse.current.position.ReadValue();
+                Vector2 ui=new Vector2(device.x,Screen.height-device.y);
+                // Mouse Input System can update without an IMGUI mouse event.
+                if(ui.x>=0&&ui.x<=Screen.width&&ui.y>=0&&ui.y<=Screen.height)
+                    tooltipPointer=ui;
+            }
             Rect panel = Bounds;
             DrawPanel(panel);
             Rect inner = Inner(panel);
@@ -53,6 +66,13 @@ namespace DiceFree.UI
                 else
                     DrawEmpty(rect, index);
             }
+            if(!(HudLayoutManager.Current?.EditMode ?? false))
+            {
+                if(!string.IsNullOrWhiteSpace(hoveredSkillTooltip))
+                    HudTooltip.DrawAt(hoveredSkillTooltip,tooltipPointer);
+                else
+                    HudTooltip.DrawCurrent();
+            }
         }
 
         private void DrawAbility(Rect rect, int slot)
@@ -66,7 +86,10 @@ namespace DiceFree.UI
 
             bool interactable = view.learned && view.cooldown <= 0.001f &&
                                 !(HudLayoutManager.Current?.EditMode ?? false);
-            bool hovered = rect.Contains(Event.current.mousePosition);
+            bool hovered = rect.Contains(tooltipPointer) ||
+                rect.Contains(Event.current.mousePosition);
+            if(hovered)
+                hoveredSkillTooltip=view.tooltip;
             HudChrome.DrawSlot(rect, Theme, view.learned, hovered);
 
             string compactName = view.name.Length > 12
@@ -78,9 +101,10 @@ namespace DiceFree.UI
 
             var previous = GUI.enabled;
             GUI.enabled = interactable;
-            if (GUI.Button(rect, GUIContent.none, GUIStyle.none)) source.Activate(slot);
+            if (GUI.Button(rect, new GUIContent("",view.tooltip), GUIStyle.none)) source.Activate(slot);
             GUI.enabled = previous;
-            GUI.Label(rect, label, HudChrome.SlotTextStyle(Theme, true));
+            GUI.Label(rect, new GUIContent(label, view.tooltip),
+                HudChrome.SlotTextStyle(Theme, true));
 
             if (view.rank > 0)
             {
@@ -108,6 +132,8 @@ namespace DiceFree.UI
                         fontSize = Mathf.RoundToInt(Mathf.Clamp(rect.height * 0.25f, 11, 20))
                     });
             }
+            // Tooltips work even when the button is on cooldown or unlearned.
+            GUI.Label(rect, new GUIContent("", view.tooltip), GUIStyle.none);
         }
 
         private void DrawEmpty(Rect rect, int index)

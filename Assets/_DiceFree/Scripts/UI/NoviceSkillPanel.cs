@@ -16,7 +16,10 @@ namespace DiceFree.UI
         private Vector2 scroll;
 
         public override string LayoutId => "skill-selection-novice";
-        public override string DisplayName => "Novice Skills";
+        public override string DisplayName => "Skills";
+        public override string LayoutGroupId => "skills";
+        public override bool ShowInLayoutEditor => progression != null &&
+            progression.ActiveForCurrentClass;
         public override Rect DefaultNormalizedBounds => new(0.68f, 0.35f, 0.30f, 0.34f);
         public override Vector2 MinimumPixelSize => new(360f, 230f);
         public override bool BlocksPointer => open;
@@ -78,16 +81,21 @@ namespace DiceFree.UI
                 if (definition == null) continue;
                 int rank = progression.Rank(definition.stableId);
                 GUILayout.BeginHorizontal(GUI.skin.box);
-                GUILayout.Label(definition.displayName + "\nRank " + rank + "/" + definition.maxRank,
+                string details = SkillTooltips.Describe(definition, rank);
+                GUILayout.Label(new GUIContent(definition.displayName +
+                    "\nRank " + rank + "/" + definition.maxRank, details),
                     GUILayout.Width(300), GUILayout.Height(42));
                 GUI.enabled = progression.UnspentPoints > 0 && rank < definition.maxRank;
-                if (GUILayout.Button("+1", GUILayout.Width(70), GUILayout.Height(38)))
+                if (GUILayout.Button(new GUIContent("+1", details),
+                    GUILayout.Width(70), GUILayout.Height(38)))
                     progression.Spend(definition.stableId);
                 GUI.enabled = true;
                 GUILayout.EndHorizontal();
             }
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+            if(!(HudLayoutManager.Current?.EditMode ?? false))
+                HudTooltip.DrawCurrent();
         }
     }
 }

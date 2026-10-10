@@ -6,6 +6,9 @@ namespace DiceFree.UI
     {
         public abstract string LayoutId { get; }
         public virtual string DisplayName => LayoutId;
+        // Separate concrete panels may share one movable class-skills layout.
+        public virtual string LayoutGroupId => LayoutId;
+        public virtual bool ShowInLayoutEditor => true;
         public abstract Rect DefaultNormalizedBounds { get; }
         public virtual Vector2 MinimumPixelSize => new(120, 60);
         public virtual float LockedAspectRatio => 0f;

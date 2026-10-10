@@ -17,8 +17,9 @@ namespace DiceFree.UI
             public readonly int maxRank;
             public readonly float cooldown;
             public readonly bool learned;
+            public readonly string tooltip;
 
-            public SlotView(string name, string key, int rank, int maxRank, float cooldown, bool learned)
+            public SlotView(string name, string key, int rank, int maxRank, float cooldown, bool learned, string tooltip)
             {
                 this.name = name;
                 this.key = key;
@@ -26,6 +27,7 @@ namespace DiceFree.UI
                 this.maxRank = maxRank;
                 this.cooldown = cooldown;
                 this.learned = learned;
+                this.tooltip = tooltip;
             }
 
             public bool Exists => !string.IsNullOrEmpty(name);
@@ -83,7 +85,8 @@ namespace DiceFree.UI
                     rank,
                     definition.maxRank,
                     noviceCaster?.CooldownRemaining(definition) ?? 0,
-                    rank > 0);
+                    rank > 0,
+                    SkillTooltips.Describe(definition, rank, key));
             }
 
             if (classId == PhysicalSkillProgression.ClassStableId && physical != null)
@@ -97,7 +100,8 @@ namespace DiceFree.UI
                     rank,
                     definition.maxRank,
                     physicalCaster?.CooldownRemaining(definition) ?? 0,
-                    rank > 0);
+                    rank > 0,
+                    SkillTooltips.Describe(definition, rank, key));
             }
 
             if (classId == MagicalSkillProgression.ClassStableId && magical != null)
@@ -111,7 +115,8 @@ namespace DiceFree.UI
                     rank,
                     definition.maxRank,
                     magicalCaster?.CooldownRemaining(definition) ?? 0,
-                    rank > 0);
+                    rank > 0,
+                    SkillTooltips.Describe(definition, rank, key));
             }
 
             return default;

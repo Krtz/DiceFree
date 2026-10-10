@@ -92,8 +92,10 @@ namespace DiceFree.UI
                 string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
                 if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
                 var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
-                if (GUI.Button(button, label)) Prepare(definition);
+                if (GUI.Button(button, new GUIContent(label,
+                    SkillTooltips.Describe(definition,rank,key)))) Prepare(definition);
             }
+            HudTooltip.DrawCurrent();
         }
     }
 }
