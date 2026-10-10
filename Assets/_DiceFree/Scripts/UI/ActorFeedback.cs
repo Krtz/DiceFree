@@ -14,6 +14,7 @@ namespace DiceFree.UI
         private CombatActor actor;
         private BasicAttack attack;
         private OverworldRespawn respawn;
+        private WorldFogOfWar fog;
         private Vector3 normalScale;
         private string lastHit;
         private float hitUntil;
@@ -21,6 +22,7 @@ namespace DiceFree.UI
         {
             actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>();
             respawn = GetComponent<OverworldRespawn>();
+            fog = FindFirstObjectByType<WorldFogOfWar>();
             normalScale = visual.localScale;
         }
         private void OnEnable() => actor.Health.Damaged += OnDamage;
@@ -40,6 +42,8 @@ namespace DiceFree.UI
         private void OnGUI()
         {
             if (HudPointerBlocker.ModalOpen) return;
+            if (fog == null) fog=FindFirstObjectByType<WorldFogOfWar>();
+            if (fog != null && !fog.IsVisible(transform.position)) return;
             if (Camera.main == null) return;
             var p = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2.1f);
             if (p.z <= 0) return;

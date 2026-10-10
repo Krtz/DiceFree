@@ -1,4 +1,5 @@
 using DiceFree.Combat;
+using DiceFree.World;
 using UnityEngine;
 
 namespace DiceFree.UI
@@ -12,6 +13,11 @@ namespace DiceFree.UI
 
         private Camera mapCamera;
         private RenderTexture mapTexture;
+        private WorldFogOfWar fog;
+        private Texture2D fogMap;
+        private Color32[] fogPixels;
+        private float nextFogRefresh;
+        private const int FogResolution = 96;
 
         public override string LayoutId => "minimap";
         public override string DisplayName => "Minimap";
@@ -27,10 +33,18 @@ namespace DiceFree.UI
         {
             if (player == null) player = GetComponent<CombatActor>();
             CreateCamera();
+            fog = FindFirstObjectByType<WorldFogOfWar>();
+            fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
+            {
+                name="Minimap exploration mask",filterMode=FilterMode.Bilinear,
+                wrapMode=TextureWrapMode.Clamp
+            };
+            fogPixels = new Color32[FogResolution*FogResolution];
         }
 
         private void OnDestroy()
         {
+            if(fogMap!=null)Destroy(fogMap);
             if (mapTexture != null)
             {
                 mapTexture.Release();
@@ -44,6 +58,22 @@ namespace DiceFree.UI
             if (mapCamera == null || player == null) return;
             mapCamera.transform.position = player.transform.position + Vector3.up * 45f;
             mapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+            if(fog == null)fog = FindFirstObjectByType<WorldFogOfWar>();
+            if(fog!=null && fogMap!=null && Time.unscaledTime>=nextFogRefresh)
+            {
+                nextFogRefresh=Time.unscaledTime+.16f;
+                Vector3 center=player.transform.position;
+                for(int y=0;y<FogResolution;y++)
+                for(int x=0;x<FogResolution;x++)
+                {
+                    float dx=((x+.5f)/FogResolution*2f-1f)*worldRadius;
+                    float dz=((y+.5f)/FogResolution*2f-1f)*worldRadius;
+                    byte alpha=fog.OpacityAt(center+new Vector3(dx,0,dz));
+                    fogPixels[y*FogResolution+x]=new Color32(6,12,19,alpha);
+                }
+                fogMap.SetPixels32(fogPixels);
+                fogMap.Apply(false,false);
+            }
         }
 
         private void CreateCamera()
@@ -84,6 +114,8 @@ namespace DiceFree.UI
                 GUI.DrawTexture(mapRect, mapTexture, ScaleMode.StretchToFill, false);
             else
                 GUI.Box(mapRect, "Map");
+            if(fog!=null && fogMap!=null)
+                GUI.DrawTexture(mapRect,fogMap,ScaleMode.StretchToFill,true);
 
             DrawCompass(mapRect);
             GUI.Label(
