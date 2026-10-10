@@ -17,7 +17,7 @@ namespace DiceFree.UI
         private Texture2D fogMap;
         private Color32[] fogPixels;
         private float nextFogRefresh;
-        private const int FogResolution = 96;
+        private const int FogResolution = 192;
 
         public override string LayoutId => "minimap";
         public override string DisplayName => "Minimap";
@@ -68,7 +68,7 @@ namespace DiceFree.UI
                 {
                     float dx=((x+.5f)/FogResolution*2f-1f)*worldRadius;
                     float dz=((y+.5f)/FogResolution*2f-1f)*worldRadius;
-                    byte alpha=fog.OpacityAt(center+new Vector3(dx,0,dz));
+                    byte alpha=fog.SmoothedOpacityAt(center+new Vector3(dx,0,dz));
                     fogPixels[y*FogResolution+x]=new Color32(6,12,19,alpha);
                 }
                 fogMap.SetPixels32(fogPixels);
