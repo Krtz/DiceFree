@@ -110,7 +110,7 @@ namespace DiceFree.EditorTools
             if(plane==null || plane.sharedMaterial==null ||
                plane.sharedMaterial.shader.name!="DiceFree/WorldFogOverlay")
                 throw new InvalidOperationException("World fog shader not applied");
-            if(plane.GetComponent<Collider>()!=null || plane.gameObject.layer!=2)
+            if(plane.GetComponent<Collider>()!=null || plane.gameObject.layer!=29)
                 throw new InvalidOperationException("Fog blocks gameplay raycasts");
             return new{success=true,worldSpace=true,
                 width=fog.FogTextureWidth,height=fog.FogTextureHeight,

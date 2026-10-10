@@ -21,6 +21,17 @@ namespace DiceFree.Items
             var item = new ItemInstance { instanceId = Guid.NewGuid().ToString("D"), definitionId = definitionId };
             owned.Add(item); Changed?.Invoke(); return item.Copy();
         }
+        /// <summary>Recover a world-dropped item without changing its unique identity.</summary>
+        public bool RestoreDroppedItem(ItemInstance item)
+        {
+            if(item==null || !Guid.TryParse(item.instanceId,out _) ||
+               Resolve(item.definitionId)==null ||
+               owned.Any(i=>i.instanceId==item.instanceId))return false;
+            owned.Add(item.Copy());
+            Changed?.Invoke();
+            return true;
+        }
+
         public bool Remove(string instanceId)
         {
             int index = owned.FindIndex(i => i.instanceId == instanceId);

@@ -42,6 +42,10 @@ namespace DiceFree.Characters
             orders=queue;
             if(GetComponent<PlayerAudioDirector>()==null)
                 gameObject.AddComponent<PlayerAudioDirector>();
+            if(GetComponent<DiceFree.Items.WorldDroppedItemLedger>()==null)
+                gameObject.AddComponent<DiceFree.Items.WorldDroppedItemLedger>();
+            if(GetComponent<DiceFree.Items.PlayerItemDropper>()==null)
+                gameObject.AddComponent<DiceFree.Items.PlayerItemDropper>();
             skillTargeting = GetComponent<SkillTargetingController>();
             health = GetComponent<Health>();
             actor = GetComponent<CombatActor>();

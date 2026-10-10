@@ -90,9 +90,9 @@ namespace DiceFree.UI
             mapCamera.farClipPlane = 100f;
             mapCamera.clearFlags = CameraClearFlags.SolidColor;
             mapCamera.backgroundColor = new Color(0.025f, 0.035f, 0.025f, 1f);
-            // The minimap applies its own fog mask, so exclude the world fog
-            // mesh from the minimap camera to avoid drawing the fog twice.
-            mapCamera.cullingMask = ~((1 << PortraitLayer) | (1 << 2));
+            // Exclude ONLY the dedicated world-fog renderer and portrait clones.
+            // Decorative roads, bridges and vegetation legitimately use layer 2.
+            mapCamera.cullingMask = ~((1 << PortraitLayer) | (1 << 29));
             mapCamera.depth = -20;
 
             mapTexture = new RenderTexture(384, 384, 16, RenderTextureFormat.ARGB32)

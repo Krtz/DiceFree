@@ -176,6 +176,73 @@ namespace DiceFree.EditorTools
             return new{success=true,attackMoveFinished=true,deferredNextCommandRan=finished};
         }
 
+        [CliCommand("dicefree.commands.attack-move.targeting-regression",
+            "Reproduce X then Shift-click while movement is already queued.")]
+        public static object AttackMoveTargetingRegression()
+        {
+            Require(EditorApplication.isPlaying,"Play Mode required");
+            var player=UnityEngine.Object.FindFirstObjectByType<TraversalInput>();
+            var queue=player.GetComponent<PlayerCommandQueue>();
+            var combat=player.GetComponent<CombatInput>();
+            var targeter=player.GetComponent<SkillTargetingController>();
+            Vector3 first=player.transform.position+new Vector3(2f,0,0);
+            Vector3 second=player.transform.position+new Vector3(2f,0,2f);
+            bool one=NavMesh.SamplePosition(first,out var a,1.5f,NavMesh.AllAreas);
+            bool two=NavMesh.SamplePosition(second,out var b,1.5f,NavMesh.AllAreas);
+            Require(one&&two,"No nearby navigable waypoints");
+            queue.ClearOrders();
+            Require(queue.SubmitMove(a.position,false),"First movement cannot queue");
+            Require(queue.PendingOrders==1,"Missing first waypoint");
+            // Simulate pressing X BEFORE holding Shift to confirm, which used
+            // to clear the pending walk in CombatInput.BeginAttackTargeting.
+            combat.BeginAttackTargeting();
+            Require(queue.PendingOrders==1,
+                "Starting attack-move targeting erased a queued walk");
+            Require(targeter.Active&&targeter.Mode==SkillTargetingMode.AttackMove,
+                "Attack-move cursor did not activate");
+            Require(targeter.QueueAttackMoveFromTargeting(b.position),
+                "Shift+click could not append attack-move");
+            Require(queue.PendingOrders==2 && !targeter.Active,
+                "Attack-move did not append in order or failed to exit targeting");
+            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastX",b.position.x);
+            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastZ",b.position.z);
+            return new{success=true,movementPreserved=true,
+                queuedAttackMove=true,totalOrders=2};
+        }
+
+        [CliCommand("dicefree.commands.attack-move.targeting-status",
+            "Confirm queued walk followed by Shift attack-move reaches both targets.")]
+        public static object AttackMoveTargetingStatus()
+        {
+            Require(EditorApplication.isPlaying,"Play Mode required");
+            var player=UnityEngine.Object.FindFirstObjectByType<TraversalInput>();
+            var queue=player.GetComponent<PlayerCommandQueue>();
+            var combat=player.GetComponent<CombatInput>();
+            float x=SessionState.GetFloat("DiceFree.QueuedAttackMove.LastX",0);
+            float z=SessionState.GetFloat("DiceFree.QueuedAttackMove.LastZ",0);
+            float d=Vector2.Distance(new Vector2(player.transform.position.x,
+                player.transform.position.z),new Vector2(x,z));
+            var motor=player.GetComponent<TraversalMotor>();
+            var agent=player.GetComponent<NavMeshAgent>();
+            var orderField=typeof(PlayerCommandQueue).GetField("current",
+                System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance);
+            var current=orderField?.GetValue(queue);
+            var input=DiceFree.Input.InputBindings.Current;
+            Require(d<.95f&&!queue.HasOrders&&!combat.AttackMoving,
+                "Queued X+Shift attack-move stalled: dist="+d+
+                " pending="+queue.PendingOrders+" current="+(current?.ToString()??"none")+
+                " motor="+motor.Travelling+" ready="+motor.Ready+
+                " agentPath="+agent.hasPath+" pendingPath="+agent.pathPending+
+                " agentStopped="+agent.isStopped+" navDst="+agent.destination+
+                " player="+player.transform.position+" speed="+agent.speed+
+                " canAct="+player.GetComponent<DiceFree.Combat.CombatActor>().CanAct+
+                " suppressed="+input.Suppressed+" timeScale="+Time.timeScale+
+                " playPaused="+EditorApplication.isPaused);
+            return new{success=true,walkThenAttackMove=true,
+                remainingDistance=d};
+        }
+
         [CliCommand("dicefree.commands.audio.catalog-check",
             "Check the selected imported AudioClips exist as assets.")]
         public static object CatalogCheck()

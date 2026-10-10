@@ -32,12 +32,12 @@ namespace DiceFree.Characters
         public void BeginAttackTargeting()
         {
             if(!actor.CanAct||skillTargeting==null)return;
-            bool shift=Keyboard.current!=null && Keyboard.current.shiftKey.isPressed;
-            if(!shift)
-            {
-                orders?.ClearOrders();
-                CancelAttackMove();attack.Cancel();GetComponent<Interactor>()?.Cancel();
-            }
+            // Starting the targeting cursor is not issuing the order.
+            // In WC3 you may press X first, THEN hold Shift when choosing
+            // the target, so preserve the queue until confirmation.
+            CancelAttackMove();
+            attack.Cancel();
+            GetComponent<Interactor>()?.Cancel();
             skillTargeting.BeginAttackMove(target=>{selection.Select(target);return attack.Order(target);},OrderAttackMove);
         }
         private void StepAttackMove()

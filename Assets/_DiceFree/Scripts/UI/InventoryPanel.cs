@@ -17,6 +17,10 @@ namespace DiceFree.UI
         private CarriedInventory inventory;
         private Equipment equipment;
         private GoldWallet wallet;
+        private IInventoryItemActions bagActions;
+        private string selectedItemId;
+        private string itemFeedback="";
+        private Rect contextBounds;
         private TraversalMotor motor;
         private InputBindings bindings;
         private InputAction toggle;
@@ -35,6 +39,9 @@ namespace DiceFree.UI
             inventory = GetComponent<CarriedInventory>();
             equipment = GetComponent<Equipment>();
             wallet = GetComponent<GoldWallet>();
+            foreach(var behaviour in GetComponents<MonoBehaviour>())
+                if(behaviour is IInventoryItemActions actions)
+                {bagActions=actions;break;}
             motor = GetComponent<TraversalMotor>();
             bindings = InputBindings.Current;
             toggle = bindings.Action("Gameplay/Inventory");
@@ -42,11 +49,15 @@ namespace DiceFree.UI
 
         private void Update()
         {
-            if (!bindings.Suppressed && toggle.WasPressedThisFrame()) open = !open;
+            if (!bindings.Suppressed && toggle.WasPressedThisFrame())
+            {
+                open=!open;
+                if(!open)selectedItemId=null;
+            }
         }
 
         public void Show() => open = true;
-        public void Close() => open = false;
+        public void Close() { open=false; selectedItemId=null; }
 
         private void OnGUI()
         {
@@ -71,7 +82,10 @@ namespace DiceFree.UI
             string binding = InputBindings.Display(toggle);
             var closeRect = new Rect(header.xMax - 112f, header.y + 3f, 108f, header.height - 6f);
             if (GUI.Button(closeRect, "Close [" + binding + "]", HudChrome.HeaderButtonStyle(theme)))
+            {
                 open = false;
+                selectedItemId = null;
+            }
 
             float debugHeight = 0f;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
@@ -123,8 +137,27 @@ namespace DiceFree.UI
 
                 if (occupied && definition != null)
                 {
+                    // Detect right-click inside the scroll view's own coordinates.
+                    // The popup is drawn after EndScrollView in screen coordinates.
+                    if(Event.current.type==EventType.MouseDown &&
+                       Event.current.button==1 &&
+                       slotRect.Contains(Event.current.mousePosition))
+                    {
+                        selectedItemId=items[index].instanceId;
+                        contextBounds=new Rect(
+                            Mathf.Clamp(viewport.x+slotRect.x-scroll.x+24f,
+                                bounds.x+8,bounds.xMax-166),
+                            Mathf.Clamp(viewport.y+slotRect.y-scroll.y+16f,
+                                bounds.y+36,bounds.yMax-122),158f,114f);
+                        Event.current.Use();
+                    }
                     if (GUI.Button(slotRect, new GUIContent("", tooltip), GUIStyle.none))
-                        equipment.Equip(items[index].instanceId, definition.slot);
+                    {
+                        if(equipment.Equip(items[index].instanceId, definition.slot))
+                            itemFeedback="Equipped "+definition.displayName+".";
+                        else itemFeedback="Cannot equip "+definition.displayName+".";
+                        selectedItemId=null;
+                    }
                 }
                 else
                 {
@@ -150,7 +183,63 @@ namespace DiceFree.UI
             GUILayout.EndArea();
 #endif
 
-            HudTooltip.DrawCurrent();
+            if(!string.IsNullOrEmpty(itemFeedback))
+                GUI.Label(new Rect(inner.x,header.yMax+3,inner.width,22),itemFeedback);
+
+            DrawItemContext(theme);
+            if(selectedItemId==null)HudTooltip.DrawCurrent();
+        }
+
+        public bool RunItemAction(string instanceId,string action,out string message)
+        {
+            message="";
+            var item=inventory.Find(instanceId);
+            var def=item!=null?inventory.Resolve(item.definitionId):null;
+            if(item==null||def==null)
+            {message="Item no longer exists.";return false;}
+            switch(action)
+            {
+                case "Equip":
+                    if(equipment.Equip(instanceId,def.slot))
+                    {message="Equipped "+def.displayName+".";return true;}
+                    message="You cannot equip this item.";return false;
+                case "Drop":
+                case "Send to Bank":
+                    if(bagActions==null)
+                        foreach(var behaviour in GetComponents<MonoBehaviour>())
+                            if(behaviour is IInventoryItemActions actions)
+                            {bagActions=actions;break;}
+                    if(bagActions==null)
+                    {message="Bag item actions are unavailable.";return false;}
+                    return bagActions.Perform(instanceId,action,out message);
+                default:
+                    message="Unknown inventory action.";return false;
+            }
+        }
+
+        private void DrawItemContext(HudThemeMetrics theme)
+        {
+            if(string.IsNullOrEmpty(selectedItemId))return;
+            var item=inventory.Find(selectedItemId);
+            if(item==null){selectedItemId=null;return;}
+            HudChrome.DrawPanel(contextBounds,theme);
+            const float height=32f;
+            for(int i=0;i<3;i++)
+            {
+                string action=i==0?"Equip":i==1?"Drop":"Send to Bank";
+                var rect=new Rect(contextBounds.x+7,contextBounds.y+7+i*height,
+                    contextBounds.width-14,height-2);
+                if(GUI.Button(rect,action))
+                {
+                    RunItemAction(selectedItemId,action,out itemFeedback);
+                    selectedItemId=null;
+                    return;
+                }
+            }
+            // Click outside the popup closes it; never eats the global input.
+            if(Event.current.type==EventType.MouseDown &&
+               !contextBounds.Contains(Event.current.mousePosition))
+                selectedItemId=null;
         }
 
         private static string ShortName(string value)

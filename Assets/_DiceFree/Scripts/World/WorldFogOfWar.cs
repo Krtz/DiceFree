@@ -99,7 +99,8 @@ namespace DiceFree.World
             runtimeMaterial.SetTexture(FogTexId, fogTexture);
 
             overlay = new GameObject("World-aligned fog surface (runtime)");
-            overlay.layer = 2; // Ignore Raycast: fog must never capture movement or combat clicks.
+            overlay.layer = 29; // Dedicated fog-render layer, no collider: safe to exclude on minimap
+            // without hiding all the decorative roads/trees on Ignore Raycast (layer 2).
             overlay.transform.SetParent(transform, false);
             overlay.transform.localPosition = Vector3.zero;
             overlay.transform.localRotation = Quaternion.identity;

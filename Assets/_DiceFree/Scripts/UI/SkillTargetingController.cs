@@ -95,6 +95,19 @@ namespace DiceFree.UI
             if (!focused) Cancel();
         }
 
+        /// <summary>
+        /// Confirm a queued attack-move after entering targeting (e.g. pressing X).
+        /// Targeting must not discard previously Shift-queued movement.
+        /// </summary>
+        public bool QueueAttackMoveFromTargeting(Vector3 point)
+        {
+            if(Mode!=SkillTargetingMode.AttackMove || groundConfirm==null ||
+               Orders==null)return false;
+            if(!Orders.SubmitAttackMove(point,groundConfirm,true))return false;
+            Cancel();
+            return true;
+        }
+
         public void BeginHostile(
             string skillLabel,
             Func<CombatActor, bool> confirm,
@@ -201,7 +214,13 @@ namespace DiceFree.UI
                 return;
             }
 
-            if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame)
+            // A shifted right-click in attack-move targeting is a queued
+            // ground attack-move, NOT a cancel. Unshifted right-click cancels.
+            bool shiftedAttackRightClick = Mode == SkillTargetingMode.AttackMove &&
+                ShiftHeld && Mouse.current != null &&
+                Mouse.current.rightButton.wasPressedThisFrame;
+            if (Mouse.current != null && Mouse.current.rightButton.wasPressedThisFrame &&
+                !shiftedAttackRightClick)
             {
                 if(Mode!=SkillTargetingMode.AttackMove)Consume();
                 Cancel();
@@ -214,7 +233,8 @@ namespace DiceFree.UI
             Vector2 pointer = Mouse.current.position.ReadValue();
             UpdateHover(pointer);
 
-            if (!Mouse.current.leftButton.wasPressedThisFrame ||
+            if ((!Mouse.current.leftButton.wasPressedThisFrame &&
+                 !shiftedAttackRightClick) ||
                 HudPointerBlocker.Covers(pointer))
                 return;
 
@@ -234,7 +254,7 @@ namespace DiceFree.UI
                     SkillTargetingMode.AttackMove =>
                         HoveredActor!=null
                             ? Orders.SubmitAttackTarget(HoveredActor,unitConfirm,true)
-                            : Orders.SubmitAttackMove(HoveredGroundPoint,groundConfirm,true),
+                            : QueueAttackMoveFromTargeting(HoveredGroundPoint),
                     SkillTargetingMode.Ground =>
                         Orders.SubmitGround(HoveredGroundPoint,castRange,groundConfirm,true),
                     SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit =>
