@@ -9,6 +9,7 @@ namespace DiceFree.UI
     {
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
+        private IPlayerAudioSettings audioSettings;
         private Vector2 scroll;
         public System.Func<bool> ReturnToStartMenu {get;set;}
         private bool confirmReturn;private string returnFeedback="";
@@ -22,6 +23,8 @@ namespace DiceFree.UI
         {
             bindings = InputBindings.Current;
             gameplayPreferences = GameplayPreferences.Current;
+            foreach(var component in GetComponents<MonoBehaviour>())
+                if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
         }
 
         protected override void OnDisable()
@@ -40,6 +43,7 @@ namespace DiceFree.UI
         {
             if (bindings == null) return;
             bindings.CancelRebind();
+            PlayerPrefs.Save();
             Open = false;
             confirmReturn=false;
             bindings.SetModal(false);
@@ -107,6 +111,27 @@ namespace DiceFree.UI
                             "Gameplay and camera controls are paused while this menu is open.");
 
             GUILayout.Space(8);
+            if(audioSettings==null)
+                foreach(var component in GetComponents<MonoBehaviour>())
+                    if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
+            if(audioSettings!=null)
+            {
+                GUILayout.Label("Audio");
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Sound effects",GUILayout.Width(135));
+                float sfx=GUILayout.HorizontalSlider(audioSettings.SfxLevel,0f,1f);
+                GUILayout.Label((int)(sfx*100)+"%",GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Ambience",GUILayout.Width(135));
+                float ambient=GUILayout.HorizontalSlider(audioSettings.AmbientLevel,0f,1f);
+                GUILayout.Label((int)(ambient*100)+"%",GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                if(!Mathf.Approximately(sfx,audioSettings.SfxLevel) ||
+                   !Mathf.Approximately(ambient,audioSettings.AmbientLevel))
+                    audioSettings.SetLevels(sfx,ambient);
+                GUILayout.Space(8);
+            }
             GUILayout.Label("Gameplay");
             bool autoRetaliate = GUILayout.Toggle(
                 gameplayPreferences.AutoRetaliate,

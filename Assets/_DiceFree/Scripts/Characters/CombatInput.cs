@@ -16,6 +16,7 @@ namespace DiceFree.Characters
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private CombatActor actor;
+        private IQueuedOrders orders;
         private InputAction select, cycle, attackSelected, clear, respawn;
         public bool AttackMoving {get;private set;}
         private Vector3 attackMoveDestination;
@@ -31,7 +32,12 @@ namespace DiceFree.Characters
         public void BeginAttackTargeting()
         {
             if(!actor.CanAct||skillTargeting==null)return;
-            CancelAttackMove();attack.Cancel();GetComponent<Interactor>()?.Cancel();
+            bool shift=Keyboard.current!=null && Keyboard.current.shiftKey.isPressed;
+            if(!shift)
+            {
+                orders?.ClearOrders();
+                CancelAttackMove();attack.Cancel();GetComponent<Interactor>()?.Cancel();
+            }
             skillTargeting.BeginAttackMove(target=>{selection.Select(target);return attack.Order(target);},OrderAttackMove);
         }
         private void StepAttackMove()
@@ -57,6 +63,8 @@ namespace DiceFree.Characters
             actor = GetComponent<CombatActor>();
             gameplayPreferences = GameplayPreferences.Current;
             bindings = InputBindings.Current;
+            foreach(var item in GetComponents<MonoBehaviour>())
+                if(item is IQueuedOrders found){orders=found;break;}
             bindings.SuppressionStarted+=CancelAttackMove;
             select = bindings.Action("Gameplay/Select target");
             cycle = bindings.Action("Gameplay/Cycle hostile");
@@ -100,6 +108,7 @@ namespace DiceFree.Characters
                 selection.Cycle(Keyboard.current != null && Keyboard.current.shiftKey.isPressed);
             if (clear.WasPressedThisFrame())
             {
+                orders?.ClearOrders();
                 CancelAttackMove();
                 selection.Select(null);
                 attack.Cancel();
@@ -109,6 +118,9 @@ namespace DiceFree.Characters
                 selection.Select(Pick(Mouse.current.position.ReadValue()));
             if (attackSelected.WasPressedThisFrame())
             {
+                if(orders==null)
+                    foreach(var item in GetComponents<MonoBehaviour>())
+                        if(item is IQueuedOrders found){orders=found;break;}
                 BeginAttackTargeting();
             }
             StepAttackMove();
@@ -125,10 +137,21 @@ namespace DiceFree.Characters
 
         public bool ContextAttack(Vector2 point)
         {
+            if(bindings.Suppressed)return false;
+            var target=Pick(point);
+            if(!selection.Valid(target))return false;
+            bool append=Keyboard.current!=null&&Keyboard.current.shiftKey.isPressed;
+            if(orders==null)
+                foreach(var item in GetComponents<MonoBehaviour>())
+                    if(item is IQueuedOrders found){orders=found;break;}
+            if(append && orders!=null)
+                return orders.SubmitAttackTarget(target,t=>
+                {
+                    selection.Select(t);
+                    return attack.Order(t);
+                },true);
+            orders?.ClearOrders();
             CancelAttackMove();
-            if (bindings.Suppressed) return false;
-            var target = Pick(point);
-            if (!selection.Valid(target)) return false;
             selection.Select(target);
             return attack.Order(target);
         }

@@ -19,6 +19,7 @@ namespace DiceFree.Characters
         private TraversalMotor motor;
         private BasicAttack attack;
         private CombatInput combatInput;
+        private IQueuedOrders orders;
         private SkillTargetingController skillTargeting;
         private Health health;
         private CombatActor actor;
@@ -36,6 +37,11 @@ namespace DiceFree.Characters
             motor = GetComponent<TraversalMotor>();
             attack = GetComponent<BasicAttack>();
             combatInput = GetComponent<CombatInput>();
+            var queue=GetComponent<PlayerCommandQueue>();
+            if(queue==null)queue=gameObject.AddComponent<PlayerCommandQueue>();
+            orders=queue;
+            if(GetComponent<PlayerAudioDirector>()==null)
+                gameObject.AddComponent<PlayerAudioDirector>();
             skillTargeting = GetComponent<SkillTargetingController>();
             health = GetComponent<Health>();
             actor = GetComponent<CombatActor>();
@@ -65,6 +71,7 @@ namespace DiceFree.Characters
 
         private void SuppressCommands()
         {
+            orders?.ClearOrders();
             combatInput?.CancelAttackMove();
             motor?.Stop();
             attack?.Cancel();
@@ -88,6 +95,7 @@ namespace DiceFree.Characters
 
             if (changeMode.WasPressedThisFrame())
             {
+                orders?.ClearOrders();
                 mode = mode == ControlMode.Classic ? ControlMode.Direct : ControlMode.Classic;
                 motor.Stop();
                 attack?.Cancel();
@@ -97,6 +105,7 @@ namespace DiceFree.Characters
 
             if (stop.WasPressedThisFrame())
             {
+                orders?.ClearOrders();
                 combatInput?.CancelAttackMove();
                 motor.Stop();
                 attack?.Cancel();
@@ -115,6 +124,7 @@ namespace DiceFree.Characters
                 var right = Vector3.ProjectOnPlane(worldCamera.transform.right, Vector3.up).normalized;
                 if (input.sqrMagnitude > 0.001f)
                 {
+                    orders?.ClearOrders();
                     combatInput?.CancelAttackMove();
                     interactor?.Cancel();
                     attack?.Cancel();
@@ -126,6 +136,24 @@ namespace DiceFree.Characters
                 click.WasPressedThisFrame() && Mouse.current != null &&
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
             {
+                bool shift=Keyboard.current!=null && Keyboard.current.shiftKey.isPressed;
+                if(shift && mode==ControlMode.Classic)
+                {
+                    if(combatInput!=null &&
+                       combatInput.ContextAttack(Mouse.current.position.ReadValue()))
+                    {
+                        Feedback="Shift queued attack ("+orders.PendingOrders+")";
+                        return;
+                    }
+                    var queuedRay=worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+                    if(Physics.Raycast(queuedRay,out var queuedHit,1500f,
+                        (1<<8)|(1<<9),QueryTriggerInteraction.Ignore) &&
+                       queuedHit.collider.gameObject.layer==8 &&
+                       orders!=null && orders.SubmitMove(queuedHit.point,true))
+                        Feedback="Shift queued move ("+orders.PendingOrders+")";
+                    return;
+                }
+                orders?.ClearOrders();
                 combatInput?.CancelAttackMove();
                 if (interactor != null && interactor.ContextInteract(worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue()))) return;
                 if (combatInput != null && combatInput.ContextAttack(Mouse.current.position.ReadValue()))
@@ -159,7 +187,10 @@ namespace DiceFree.Characters
         /// but with the target translated from the minimap's north-up projection.
         /// Does not teleport and works in either control mode.
         /// </summary>
-        public bool TryMoveFromMinimap(Vector3 worldPoint)
+        public bool TryMoveFromMinimap(Vector3 worldPoint) =>
+            TryMoveFromMinimap(worldPoint,false);
+
+        public bool TryMoveFromMinimap(Vector3 worldPoint,bool append)
         {
             if (motor == null || bindings == null || bindings.Suppressed ||
                 (health != null && !health.Alive) ||
@@ -177,6 +208,13 @@ namespace DiceFree.Characters
                 Feedback = "No walkable ground at that minimap location.";
                 return false;
             }
+            if(append && orders!=null)
+            {
+                bool queued=orders.SubmitMove(nearby.position,true);
+                if(queued) Feedback="Shift queued move ("+orders.PendingOrders+")";
+                return queued;
+            }
+            orders?.ClearOrders();
             // Cancel movement-blocking orders BEFORE issuing the new NavMesh route.
             // In particular, CancelAttackMove and Interactor.Cancel may reset paths.
             combatInput?.CancelAttackMove();

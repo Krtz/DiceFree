@@ -20,6 +20,7 @@ namespace DiceFree.Combat
         private BasicAttack basicAttack;
 
         public string Feedback { get; private set; } = "";
+        public event Action<PhysicalSkillDefinition> Casted;
 
         private void Awake()
         {
@@ -181,6 +182,7 @@ namespace DiceFree.Combat
             if (!resources.TrySpend(ManaResourceId, definition.ManaCost(rank)))
                 return Fail("Not enough Mana.");
             readyAt[definition.stableId] = Time.time + definition.cooldownSeconds;
+            Casted?.Invoke(definition);
             return true;
         }
 

@@ -7,6 +7,7 @@ namespace DiceFree.UI
     {
         [SerializeField] private AbilityBarSource source;
         private string hoveredSkillTooltip;
+        private IQueuedOrders queuedOrders;
         private Vector2 tooltipPointer;
 
         public override string LayoutId => "action-bar";
@@ -17,6 +18,8 @@ namespace DiceFree.UI
         private void Awake()
         {
             if (source == null) source = GetComponent<AbilityBarSource>();
+            foreach(var component in GetComponents<MonoBehaviour>())
+                if(component is IQueuedOrders queue){queuedOrders=queue;break;}
         }
 
         private void Update()
@@ -44,8 +47,15 @@ namespace DiceFree.UI
                 if(ui.x>=0&&ui.x<=Screen.width&&ui.y>=0&&ui.y<=Screen.height)
                     tooltipPointer=ui;
             }
+            if(queuedOrders==null)
+                foreach(var component in GetComponents<MonoBehaviour>())
+                    if(component is IQueuedOrders queue){queuedOrders=queue;break;}
             Rect panel = Bounds;
             DrawPanel(panel);
+            if(queuedOrders!=null && queuedOrders.PendingOrders>0)
+                GUI.Label(new Rect(panel.x+12,panel.y-21,panel.width-20,20),
+                    "Queued orders: "+queuedOrders.PendingOrders+
+                    "   (Shift+click to append; Stop to clear)");
             Rect inner = Inner(panel);
             float gap = Theme.gap;
             float cellWidth = (inner.width - gap * 5) / 6f;

@@ -26,6 +26,7 @@ namespace DiceFree.UI
 
         private CombatActor owner;
         private InputBindings bindings;
+        private IQueuedOrders orders;
         private GameplayPreferences preferences;
         private Func<CombatActor, bool> unitConfirm;
         private Func<Vector3, bool> groundConfirm;
@@ -49,6 +50,19 @@ namespace DiceFree.UI
         public bool HoverValid { get; private set; }
         public float CastRange => castRange;
 
+        private IQueuedOrders Orders
+        {
+            get
+            {
+                if(orders!=null)return orders;
+                foreach(var component in GetComponents<MonoBehaviour>())
+                    if(component is IQueuedOrders found){orders=found;break;}
+                return orders;
+            }
+        }
+        private static bool ShiftHeld => Keyboard.current!=null &&
+            Keyboard.current.shiftKey.isPressed;
+
         public void Configure(Camera camera) => worldCamera = camera;
         public void BeginAttackMove(Func<CombatActor,bool> unit, Func<Vector3,bool> ground)
         {
@@ -59,6 +73,8 @@ namespace DiceFree.UI
         private void Awake()
         {
             owner = GetComponent<CombatActor>();
+            foreach(var component in GetComponents<MonoBehaviour>())
+                if(component is IQueuedOrders found) { orders=found; break; }
             bindings = InputBindings.Current;
             preferences = GameplayPreferences.Current;
             bindings.SuppressionStarted += Cancel;
@@ -160,8 +176,10 @@ namespace DiceFree.UI
                 owner == null || !owner.Alive) return false;
             Consume();
             ClearPending(true);
-            bool cast = unitConfirm(owner);
-            if (cast) Cancel();
+            bool cast=ShiftHeld && Orders!=null
+                ? Orders.SubmitUnit(owner,castRange,unitConfirm,true)
+                : unitConfirm(owner);
+            if(cast)Cancel();
             else Feedback = "Self-cast rejected. Choose a valid target.";
             return cast;
         }
@@ -209,6 +227,25 @@ namespace DiceFree.UI
                 return;
             }
 
+            if(ShiftHeld && Orders!=null)
+            {
+                bool queued = Mode switch
+                {
+                    SkillTargetingMode.AttackMove =>
+                        HoveredActor!=null
+                            ? Orders.SubmitAttackTarget(HoveredActor,unitConfirm,true)
+                            : Orders.SubmitAttackMove(HoveredGroundPoint,groundConfirm,true),
+                    SkillTargetingMode.Ground =>
+                        Orders.SubmitGround(HoveredGroundPoint,castRange,groundConfirm,true),
+                    SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit =>
+                        Orders.SubmitUnit(HoveredActor,castRange,unitConfirm,true),
+                    _ => false
+                };
+                if(queued)Cancel();
+                else Feedback="Cannot add this command to the queue.";
+                return;
+            }
+            Orders?.ClearOrders();
             if(Mode==SkillTargetingMode.AttackMove)
             {
                 bool ordered=HoveredActor!=null ? unitConfirm!=null&&unitConfirm(HoveredActor) : groundConfirm!=null&&groundConfirm(HoveredGroundPoint);

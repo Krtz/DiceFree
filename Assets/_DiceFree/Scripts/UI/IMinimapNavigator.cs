@@ -9,5 +9,6 @@ namespace DiceFree.UI
     public interface IMinimapNavigator
     {
         bool TryMoveFromMinimap(Vector3 worldPoint);
+        bool TryMoveFromMinimap(Vector3 worldPoint,bool append);
     }
 }

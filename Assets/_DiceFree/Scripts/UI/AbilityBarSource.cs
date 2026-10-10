@@ -34,6 +34,7 @@ namespace DiceFree.UI
         }
 
         private ActorStats stats;
+        private IQueuedOrders orders;
         private SkillTargetingController targeting;
         private NoviceSkillProgression novice;
         private PhysicalSkillProgression physical;
@@ -47,6 +48,8 @@ namespace DiceFree.UI
         private void Awake()
         {
             stats = GetComponent<ActorStats>();
+            foreach(var component in GetComponents<MonoBehaviour>())
+                if(component is IQueuedOrders found){orders=found;break;}
             targeting = GetComponent<SkillTargetingController>();
             novice = GetComponent<NoviceSkillProgression>();
             physical = GetComponent<PhysicalSkillProgression>();
@@ -122,6 +125,19 @@ namespace DiceFree.UI
             return default;
         }
 
+        private static bool ShiftHeld => Keyboard.current!=null &&
+            Keyboard.current.shiftKey.isPressed;
+        private IQueuedOrders Orders
+        {
+            get
+            {
+                if(orders!=null)return orders;
+                foreach(var component in GetComponents<MonoBehaviour>())
+                    if(component is IQueuedOrders found){orders=found;break;}
+                return orders;
+            }
+        }
+
         public bool Activate(int slot)
         {
             if (slot < 0 || slot >= 4 || stats?.Definition == null || targeting == null) return false;
@@ -168,6 +184,9 @@ namespace DiceFree.UI
                         return true;
                     case PhysicalSkillKind.Guard:
                     case PhysicalSkillKind.Quickening:
+                        if(ShiftHeld && Orders!=null)
+                            return Orders.SubmitAction(()=>physicalCaster.Cast(definition),true);
+                        Orders?.ClearOrders();
                         targeting.Cancel();
                         return physicalCaster.Cast(definition);
                     default:

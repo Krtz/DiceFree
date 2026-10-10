@@ -127,7 +127,9 @@ namespace DiceFree.UI
             if(!Physics.Raycast(destination+Vector3.up*80f,Vector3.down,
                 out var ground,160f,1<<8,QueryTriggerInteraction.Ignore))
                 return false;
-            return navigation.TryMoveFromMinimap(ground.point);
+            bool append=UnityEngine.InputSystem.Keyboard.current!=null &&
+                UnityEngine.InputSystem.Keyboard.current.shiftKey.isPressed;
+            return navigation.TryMoveFromMinimap(ground.point,append);
         }
 
         private void OnGUI()
