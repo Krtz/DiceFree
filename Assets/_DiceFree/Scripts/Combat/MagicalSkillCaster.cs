@@ -76,7 +76,8 @@ namespace DiceFree.Combat
                 case MagicalSkillKind.MagicSand:
                     EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalSand, target.transform.position);
                     if (definition.attack == null) return FailAfterSpend("Magic Sand attack data is missing.", cost);
-                    DamageResolver.Hit(actor, target, definition.attack, null, definition.DamageCoefficient(rank));
+                    DamageResolver.Hit(actor, target, definition.attack, null,
+                        definition.DamageCoefficient(rank), skillFlatDamage: 10f * rank);
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(
                             EffectId(definition),

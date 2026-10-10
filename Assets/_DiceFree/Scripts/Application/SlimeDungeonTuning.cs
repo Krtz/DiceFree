@@ -6,7 +6,7 @@ namespace DiceFree.Dungeons
     [CreateAssetMenu(menuName="DiceFree/Dungeons/Slime playtest tuning")]
     public sealed class SlimeDungeonTuning : ScriptableObject
     {
-        public float stagingSeconds=60, victorySeconds=15, slamWarning=3, slamInterval=4.5f;
+        public float stagingSeconds=60, victorySeconds=15, slamWarning=3, slamInterval=10f;
         public float minibossHp=800, bossHp=3000, regentHp=16000, fragmentHpFraction=.12f;
         public float bossFragmentHp=300, regentFragmentHpFraction=.10f, minibossFragmentHpFraction=.10f, minibossScale=6.9f;
         // Preserve fragment durability when increasing only parent encounter health.

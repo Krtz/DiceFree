@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DiceFree.Combat;
 using DiceFree.Items;
+using DiceFree.World;
 using DiceFree.Progression;
 using DiceFree.UI;
 using UnityEngine;
@@ -8,44 +9,54 @@ namespace DiceFree.Dungeons
 {
     public sealed class DungeonRewardRoom : MonoBehaviour
     {
-        sealed class Choice{public CombatActor actor;public ItemDefinition[] items;public SlimeDungeonRun run;public int xp,gold;public bool resolved;}
+        sealed class Choice{public CombatActor actor;public ItemDefinition[] items;public SlimeDungeonRun run;public int xp,gold;public bool resolved;public readonly List<GameObject> chests=new();}
         readonly List<Choice> choices=new();
         public int Pending=>choices.FindAll(c=>!c.resolved).Count;
         public Transform variantAnchor;
         public void Offer(CombatActor actor,DungeonRewardPool pool,SlimeDungeonRun run,int xp,int gold)
         {
-            var offer=pool.Roll();choices.Add(new Choice{actor=actor,items=offer,run=run,xp=xp,gold=gold});
+            var offer=pool.Roll();
+            var choice = new Choice{actor=actor,items=offer,run=run,xp=xp,gold=gold};
+            choices.Add(choice);
             foreach(var item in offer)run.ObserveReward(actor,item);
             if(pool.visualVariant!=null&&variantAnchor.childCount==0)Instantiate(pool.visualVariant,variantAnchor);
+            // The player sees one actual treasure chest for each offered item, plus
+            // a different chest containing the experience/gold alternative.
+            // Chests are private to their owner, and the first claim resolves all.
+            int count=offer.Length+1;
+            for(int i=0;i<count;i++)
+            {
+                int option=i==offer.Length?-1:i;
+                string label=option==-1?"Bonus: "+xp+" EXP + "+gold+" gold":offer[i].displayName;
+                Vector3 offset=new Vector3((i-(count-1)*.5f)*2.05f,0f,3.1f+(choices.Count-1)*2.25f);
+                GameObject chest=WorldLootVisual.Create(actor.transform.position+offset,
+                    "Reward chest - "+label,.85f);
+                var pickup=chest.AddComponent<DungeonRewardChest>();
+                pickup.Configure(this,actor,option,label);
+                choice.chests.Add(chest);
+                actor.GetComponent<InteractionRegistry>()?.Register(pickup);
+            }
         }
+        public bool HasChoice(CombatActor actor) =>
+            choices.Exists(c=>c.actor==actor&&!c.resolved);
+
         public bool Choose(CombatActor actor,int option)
         {
             var c=choices.Find(v=>v.actor==actor&&!v.resolved);if(c==null||option < -1||option>=c.items.Length)return false;
             if(option==-1){actor.GetComponent<ExperienceProgression>()?.Grant(c.xp);actor.GetComponent<GoldWallet>()?.Grant(c.gold);}
             else c.run.Drop(actor,c.items[option]);
-            c.resolved=true;c.run.ReturnPlayer(actor,true);if(Pending==0)c.run.Finish();return true;
+            c.resolved=true;
+            foreach(var chest in c.chests)if(chest!=null)Destroy(chest);
+            c.run.ReturnPlayer(actor,true);
+            if(Pending==0)c.run.Finish();
+            return true;
         }
         void OnGUI()
         {
-            int y=160;
-            foreach(var c in choices)
-            {
-                if(c.resolved)continue;
-                int height=70+c.items.Length*44;
-                GUI.Box(new Rect(15,y,390,height),c.actor.name+" — choose your private reward");
-                for(int i=0;i<c.items.Length;i++)
-                {
-                    var item=c.items[i];
-                    var row=new Rect(25,y+30+i*44,370,40);
-                    if(GUI.Button(row,new GUIContent("",HudTooltip.Item(item))))Choose(c.actor,i);
-                    var iconRect=new Rect(row.x+2,row.y+2,36,36);
-                    if(!ItemIconGUI.Draw(iconRect,item))GUI.Label(iconRect,item.displayName.Substring(0,Mathf.Min(3,item.displayName.Length)));
-                    GUI.Label(new Rect(row.x+44,row.y+8,row.width-48,25),item.displayName);
-                }
-                if(GUI.Button(new Rect(25,y+35+c.items.Length*44,370,25),$"Instead: {c.xp} bonus EXP + {c.gold} gold"))Choose(c.actor,-1);
-                y+=height+10;
-            }
-            HudTooltip.DrawCurrent();
+            // The reward is a real world interaction, not a menu of buttons.
+            if(Pending==0)return;
+            GUI.Box(new Rect(15,80,445,57),
+                "Treasure room: choose ONE chest to claim.\nRight-click a chest or press interact nearby; you will return to Cornberg.");
         }
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   stagingSeconds: 60
   victorySeconds: 15
   slamWarning: 3
-  slamInterval: 4.5
+  slamInterval: 10
   minibossHp: 800
   bossHp: 3000
   regentHp: 16000

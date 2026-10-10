@@ -85,6 +85,22 @@ namespace DiceFree.UI
             else
                 GUI.Label(portraitImageRect, "3D character",
                     new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
+            var targeting = player.GetComponent<SkillTargetingController>();
+            if (targeting != null && targeting.Mode == SkillTargetingMode.FriendlyUnit &&
+                !(HudLayoutManager.Current?.EditMode ?? false))
+            {
+                if (GUI.Button(portraitImageRect, new GUIContent("",
+                        "Cast " + targeting.SkillLabel + " on yourself"), GUIStyle.none))
+                    targeting.ConfirmSelfFromPortrait();
+                GUI.Label(new Rect(portraitImageRect.x+4,portraitImageRect.y+3,
+                        portraitImageRect.width-8,21),"CLICK FOR SELF",
+                    new GUIStyle(GUI.skin.label)
+                    {
+                        alignment=TextAnchor.UpperCenter,
+                        fontStyle=FontStyle.Bold,
+                        normal={textColor=new Color(.71f,1f,.76f)}
+                    });
+            }
 
             DrawEquipmentColumn(inner.x, inner.y, slotWidth, portraitRect.height, LeftSlots);
             DrawEquipmentColumn(inner.xMax - slotWidth, inner.y, slotWidth, portraitRect.height, RightSlots);

@@ -31,7 +31,7 @@ namespace DiceFree.EditorTools
             Require(d!=null&&t!=null&&d.stagingSeconds==60,"Missing authored definition or 60-second staging");
             Require(t.blue.baseHp==25*t.puzzleGreen.baseHp,"Blue HP must be exactly 25x");
             Require(t.bossPresentation!=null&&t.regentPresentation!=null,"Existing boss art not wired");
-            Require(Mathf.Abs(t.slamInterval-4.5f)<.001f,"Slam must recur every 4.5 seconds");
+            Require(Mathf.Abs(t.slamInterval-10f)<.001f,"Slam must recur every 10 seconds");
             Require(Mathf.Abs(t.minibossFragmentHpFraction-.10f)<.001f &&
                 Mathf.Abs(t.miniboss.baseHp-800)<.01f,"Miniboss fragments must have 10% of 800 HP");
             Require(t.miniboss.basicAttack!=null&&t.boss.basicAttack!=null&&
@@ -189,7 +189,24 @@ namespace DiceFree.EditorTools
                 if(phase==14)
                 {
                     var room=UnityEngine.Object.FindFirstObjectByType<DungeonRewardRoom>();if(room==null||room.Pending==0)return;Require(player.transform.position.x>29000,"Reward scene transfer missing");Require(!player.GetComponent<RunLoadoutLock>().Locked,"Completion loadout remained locked");
-                    int before=player.GetComponent<CarriedInventory>().Items.Length;Require(room.Choose(player,testRegent?-1:0),"Independent reward choice failed");if(!testRegent)Require(player.GetComponent<CarriedInventory>().Items.Length==before+1,"Reward item not granted");Require(player.transform.position.x<1000,"Entrance return failed");Require(!player.GetComponent<RunLoadoutLock>().Locked,"Return did not unlock");Pass();
+                    var chests=UnityEngine.Object.FindObjectsByType<DungeonRewardChest>(FindObjectsSortMode.None)
+                        .Where(c=>c.Available(player)).ToArray();
+                    Require(chests.Length>=2,"Every reward item and the EXP/gold alternative need physical chests");
+                    Require(chests.All(c=>c.GetComponent<BoxCollider>()!=null&&
+                        c.GetComponentsInChildren<Renderer>(true).Length>0),
+                        "Physical reward chest is missing its mesh or interactable collider");
+                    var chosen=chests.First(c=>testRegent?c.DisplayName.StartsWith("Bonus:")
+                        :!c.DisplayName.StartsWith("Bonus:"));
+                    Require(player.Motor.Teleport(chosen.transform.position+Vector3.back*1.25f),
+                        "Reward chest approach lacks navigation");
+                    Require(chosen.CanInteract(player),"Reward chest is not interactable from nearby");
+                    int before=player.GetComponent<CarriedInventory>().Items.Length;
+                    chosen.Interact(player);
+                    Require(!room.HasChoice(player),"Taking a chest must consume the other choices");
+                    if(!testRegent)Require(player.GetComponent<CarriedInventory>().Items.Length==before+1,
+                        "Reward item not granted");
+                    Require(player.transform.position.x<1000,"Entrance return failed");
+                    Require(!player.GetComponent<RunLoadoutLock>().Locked,"Return did not unlock");Pass();
                 }
                 if(phase==15)
                 {

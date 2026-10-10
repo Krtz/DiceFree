@@ -153,6 +153,19 @@ namespace DiceFree.UI
 
         public void ResetForManifestationLoad() => Cancel();
 
+        /// <summary>Cast a pending friendly skill by clicking the 3D character portrait.</summary>
+        public bool ConfirmSelfFromPortrait()
+        {
+            if (Mode != SkillTargetingMode.FriendlyUnit || unitConfirm == null ||
+                owner == null || !owner.Alive) return false;
+            Consume();
+            ClearPending(true);
+            bool cast = unitConfirm(owner);
+            if (cast) Cancel();
+            else Feedback = "Self-cast rejected. Choose a valid target.";
+            return cast;
+        }
+
         private void Update()
         {
             if (!Active) return;

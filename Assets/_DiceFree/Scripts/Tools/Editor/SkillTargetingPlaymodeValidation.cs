@@ -34,8 +34,15 @@ namespace DiceFree.EditorTools
         [CliCommand("dicefree.targeting.playmode-test",
             "Validate WC3/League-style skill targeting: key enters reticle, explicit click confirms, RMB/Esc cancel and selected targets do not auto-cast.",
             Tags = new[] { "tests", "input", "skills" })]
-        private static object Start()
+        private static object Start() => StartCore(false);
+
+        [CliCommand("dicefree.targeting.self-test",
+            "Verify friendly Mend cast on player through HUD portrait action.")]
+        private static object SelfTest() => StartCore(true);
+
+        private static object StartCore(bool selfOnly)
         {
+            SessionState.SetBool(Prefix + "selfOnly", selfOnly);
             MagicalTouchedValidation.Require(
                 !EditorApplication.isPlayingOrWillChangePlaymode,
                 "Skill targeting validation requires idle Edit Mode.");
@@ -154,7 +161,8 @@ namespace DiceFree.EditorTools
             skills.RestoreState(new[]
             {
                 new SkillRankState(MagicalTouchedAuthoring.SandId, 1),
-                new SkillRankState(MagicalTouchedAuthoring.IceId, 1)
+                new SkillRankState(MagicalTouchedAuthoring.IceId, 1),
+                new SkillRankState(MagicalTouchedAuthoring.MendId, 1)
             });
             resources.RefillAll();
             yield return null;
@@ -252,6 +260,25 @@ namespace DiceFree.EditorTools
                 !targeting.Active &&
                 Mathf.Approximately(resources.Current(ResourceIds.Mana), groundMana),
                 "Escape did not cancel targeting without spending Mana.");
+
+            if (SessionState.GetBool(Prefix + "selfOnly", false))
+            {
+                resources.RefillAll();
+                var mend = skills.Definitions.First(value =>
+                    value.stableId == MagicalTouchedAuthoring.MendId);
+                float selfMana = resources.Current(ResourceIds.Mana);
+                targeting.BeginFriendly("Mend", target => caster.Cast(mend, target), mend.range);
+                MagicalTouchedValidation.Require(targeting.Mode == SkillTargetingMode.FriendlyUnit,
+                    "Mend did not begin friendly-unit targeting.");
+                MagicalTouchedValidation.Require(targeting.ConfirmSelfFromPortrait(),
+                    "Clicking the 3D portrait did not confirm self-target.");
+                MagicalTouchedValidation.Require(!targeting.Active &&
+                    resources.Current(ResourceIds.Mana) < selfMana &&
+                    caster.CooldownRemaining(mend) > 0,
+                    "Portrait self-target cast failed to consume mana or start cooldown.");
+                Debug.Log("DICEFREE_PORTRAIT_SELF_CAST_OK");
+                yield break;
+            }
 
             Press(Key.Digit4);
             bar.SendMessage("Update");

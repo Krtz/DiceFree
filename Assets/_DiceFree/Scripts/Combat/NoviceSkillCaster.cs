@@ -77,7 +77,8 @@ namespace DiceFree.Combat
                     if (definition.attack == null) return Fail("Magic Sand attack data is missing.");
                     vfx?.PlayMagicSand(actor, target);
                     EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceSand, target.transform.position);
-                    DamageResolver.Hit(actor, target, definition.attack);
+                    DamageResolver.Hit(actor, target, definition.attack,
+                        skillFlatDamage: 10f * rank);
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(definition.stableId, definition.MagicSandMissChance(rank), definition.durationSeconds);
                     break;

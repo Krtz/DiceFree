@@ -29,12 +29,14 @@ namespace DiceFree.Combat
             float? coefficientOverride = null,
             float rawMultiplier = 1f,
             float basicAttackBonus = 0f,
-            float basicAttackRangeOffset = 0f)
+            float basicAttackRangeOffset = 0f,
+            float skillFlatDamage = 0f)
         {
             float baseRaw = coefficientOverride.HasValue
                 ? attack.RawDamage(source.Attributes, coefficientOverride.Value)
                 : attack.RawDamage(source.Attributes);
             baseRaw *= Mathf.Max(0f, rawMultiplier);
+            baseRaw += Mathf.Max(0f, skillFlatDamage);
             if (source.Definition != null && object.ReferenceEquals(source.Definition.basicAttack, attack))
             {
                 // A stat-only upper-end bonus; skills never inherit this equipment term.
@@ -70,10 +72,10 @@ namespace DiceFree.Combat
             result.action = action;
             return result;
         }
-        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null)
+        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null, float skillFlatDamage = 0f)
         {
             if (!source.IsHostileTo(target)) return 0;
-            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride));
+            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride, skillFlatDamage: skillFlatDamage));
         }
     }
 }

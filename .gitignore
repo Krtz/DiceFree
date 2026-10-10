@@ -48,3 +48,5 @@ crashlytics-build.properties
 # Rider
 .idea/
 *.sln.iml
+# Licensed third-party Unity Asset Store chest: local use, no raw redistribution in public repo.
+/Assets/_DiceFree/Resources/WorldLoot/TreasureChest*

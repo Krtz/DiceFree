@@ -25,10 +25,8 @@ namespace DiceFree.Items
             if (fact.victim != actor || rolled || item == null) return;
             rolled = true; random ??= new SeededRandomSource(Guid.NewGuid().GetHashCode()); RollCount++;
             if (random.NextUnit() >= chance) return;
-            var root = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            root.name = "World equipment: " + item.stableId; root.layer = 11;
-            root.transform.position = fact.position + Vector3.up * 0.3f;
-            root.transform.localScale = new Vector3(0.5f, 0.3f, 0.5f);
+            var root = WorldLootVisual.Create(fact.position,
+                "World equipment chest: " + item.stableId,.70f);
             var pickup = root.AddComponent<WorldEquipmentPickup>(); pickup.Configure(item);
             Dropped?.Invoke(pickup);
         }

@@ -106,10 +106,36 @@ namespace DiceFree.Dungeons
         {
             busy=true;Run.Witness(BossId,"mechanic.slime-slam");Actor.Motor.Stop();
             var mark=TrackMarker(destination,radius,new Color(1,.2f,.07f,.7f));
+            // Telegraph stays rooted, then the BODY visibly flies along the ground path
+            // toward the circle. Gameplay root teleports only on landing, preserving
+            // NavMesh, collision, and the original damage moment.
+            Vector3 launch=transform.position;
             float start=Time.time;float warning=Run.Tuning.slamWarning;
-            while(Time.time-start<warning){if(visual!=null){float progress=(Time.time-start)/warning;visual.localPosition=new Vector3(0,visualHeight+Mathf.Sin(progress*Mathf.PI)*2,0);visual.localScale=Vector3.Scale(visualScale,progress<.45f?new Vector3(1.2f,.65f,1.2f):new Vector3(.8f,1.5f,.8f));}yield return null;}
-            if(visual!=null)visual.localPosition=new Vector3(0,visualHeight,0);
-            Actor.Motor.Teleport(destination);HitCircle(destination,radius);Destroy(mark);
+            float charge=Mathf.Min(.6f,warning*.27f);
+            while(Time.time-start<warning)
+            {
+                float elapsed=Time.time-start;
+                float progress=Mathf.Clamp01((elapsed-charge)/Mathf.Max(.1f,warning-charge));
+                float eased=progress*progress*(3f-2f*progress);
+                if(visual!=null)
+                {
+                    Vector3 horizontal=Vector3.Lerp(launch,destination,eased)-launch;
+                    // The presentation's local offset compensates for any actor rotation.
+                    Vector3 displacement=transform.InverseTransformVector(horizontal);
+                    float arc=Mathf.Sin(progress*Mathf.PI)*Mathf.Clamp(2.3f+
+                        Vector3.Distance(launch,destination)*.22f,2.3f,5.5f);
+                    visual.localPosition=new Vector3(displacement.x,
+                        visualHeight+arc,displacement.z);
+                    visual.localScale=Vector3.Scale(visualScale,
+                        elapsed<charge?new Vector3(1.18f,.70f,1.18f):
+                        new Vector3(.86f,1.13f,.86f));
+                }
+                yield return null;
+            }
+            // Swap root and visual on the same frame so landing is continuous.
+            Actor.Motor.Teleport(destination);
+            if(visual!=null){visual.localPosition=new Vector3(0,visualHeight,0);visual.localScale=visualScale;}
+            HitCircle(destination,radius);Destroy(mark);
             yield return VisualTransition(new Vector3(1.45f,.45f,1.45f),Vector3.one,.4f);busy=false;
         }
         IEnumerator Divide()
