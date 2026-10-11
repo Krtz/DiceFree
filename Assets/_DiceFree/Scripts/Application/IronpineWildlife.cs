@@ -263,6 +263,7 @@ namespace DiceFree.Ironpine
         {
             attack.Cancel(); actor.Motor.Stop();
             howling = specialPending = true;
+            GetComponent<IronpineCreaturePresentation>()?.PlayAction("Howl", 1.2f);
             specialEnds = Time.time + 1.2f;
         }
         private void StartLeap()
@@ -284,6 +285,7 @@ namespace DiceFree.Ironpine
             lockedImpact = found.position;
             ShowWarning(IsAlpha ? 2.5f : 1.25f);
             lunging = !IsAlpha; pouncing = IsAlpha; specialPending = true;
+            GetComponent<IronpineCreaturePresentation>()?.PlayAction("Pounce", IsAlpha ? 1.4f : 1.1f);
             specialEnds = Time.time + (IsAlpha ? .9f : .7f);
             nextSpecial = Time.time + (IsAlpha ? 16f : kind == WildlifeKind.DarkWolf ? 10f : 11f);
         }
@@ -409,6 +411,7 @@ namespace DiceFree.Ironpine
             actor.Motor.Stop();
             if (Time.time < nextBite) return;
             nextBite = Time.time + 2.8f;
+            GetComponent<IronpineCreaturePresentation>()?.PlayAction("QuillShot", .65f);
             IronpineQuill.Launch(actor, target, actor.Stats.Definition.basicAttack);
             Observe("homing-quill");
         }

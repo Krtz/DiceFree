@@ -36,15 +36,17 @@
 - A UnityEditor.Search.SearchDatabase startup `ArgumentOutOfRangeException` was logged during isolated Play Mode but the wildlife smoke marker was reached. This is separate editor search-index startup noise.
 - Additional combat/quest/Codex end-to-end playtesting was **not** completed in this first pass. In particular, correct howl reinforcement, Bleed probability, 8-second projectile trajectories, party sharing and Alpha escape must be checked under real movement.
 
-## Visual/audio state and remaining work
+## Visual/audio state (updated October 12)
 
-Current Grey/Dark/Alpha models and three Quillrat palettes are **procedurally authored 3D placeholders**, intentionally created without unlicensed third-party assets. The leap now has a red landing ring and arcing visual travel; idle bobbing is basic. Full authored quadruped skeleton animations (sniffing, sitting, scratching, foraging, grooming and hit/death animation), wolf howls/animal sound recordings, footfalls, sound falloff, hit VFX and detailed creature material polish are **not implemented yet**. Do not call these features complete. The 1.2s howl interruption currently uses the existing `CombatActor.CanAct` hard-disable path; if future silence/incapacitation differs from stun, extend it in the shared status system.
+Three independently authored Blender source models (Wolf, Quillrat, and AlphaWolf), each with a 15-bone rig and 10 actual animation actions, are **installed in all 22 Ironpine enemies**. Grey/Dark wolf coat variants and Moss/Amber/Slate quillrats have distinct imported URP materials, eye/face/subcoat/coat and quill colors. Real NavMesh Walk/Run, idle behaviors, melee Bite, howl, pounce/lunge, quill shot, Hurt and Death are driven by the wildlife/CombatActor code. Scoped spatial audio uses optional locally licensed wolf recordings with original generated fallbacks. Blender previews, source-art commands, licensing safeguards, rig motion and Play Mode evidence: **`docs/IRONPINE_CREATURE_ART.md`**.
+
+This is playable rigged creature art, but does not certify final visual quality, professionally recorded howls or complete combat playtesting. The howl interruption still uses `CombatActor.CanAct`, and sound/animation polish remains relevant.
 
 Important engineering follow-ups before calling wildlife shippable:
 1. Playtest attack cadence and tactical telegraphs with actual Novice/Tier 1 characters and full party.
 2. Verify Bleed tick math, interruption and target-loss edge cases across deaths, player reconnects and despawns.
 3. Confirm XP/Codex group credit, especially multiplayer and per-player sight tests.
-4. Author real creature rigging, body/leg/head animations and restrained positional audio.
+4. Polish the installed real creature rigs/animations and spatial sound, especially foot sliding, full 3D gameplay view and natural non-placeholder quillrat/howl recordings.
 5. QA scene placement, road bypasses, fog, tree collisions, FPS, navmesh roaming and out-of-sight respawn across multiple local cameras.
 6. Verify ordinary HP/damage/XP calibration against the intended level-12–20 difficulty; numerical multipliers are wired, absolute balance provisional.
 

@@ -50,3 +50,6 @@ crashlytics-build.properties
 *.sln.iml
 # Licensed third-party Unity Asset Store chest: local use, no raw redistribution in public repo.
 /Assets/_DiceFree/Resources/WorldLoot/TreasureChest*
+
+# Locally licensed Asset Store creature sounds; never distribute raw files in public repo
+Assets/_DiceFree/Resources/Audio/IronpineLicensed/

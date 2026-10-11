@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using DiceFree.Ironpine;
 using UnityEditor;
@@ -58,6 +58,9 @@ namespace DiceFree.EditorTools
                     a.Actor.Motor.Ready && a.Actor.Stats.Definition != null), "uninitialized actor/navmesh");
                 Check(animals.All(a => a.GetComponent<DiceFree.Items.FixedWorldDrop>() == null),
                     "wildlife unexpectedly carries an item drop component");
+                Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>()?.ModelAnimator?.runtimeAnimatorController != null), "missing live rig animation controller");
+                Check(animals.All(a => a.GetComponent<IronpineCreatureAudio>() != null && a.GetComponent<AudioSource>() != null), "missing live spatial animal audio");
+                Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>().ModelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>().Length >= 3), "missing live skinned model");
                 var alpha = animals.Single(a => a.Kind == WildlifeKind.AlphaWolf).Actor;
                 Check(alpha.Stats.Level == 20 && alpha.Health.Current > 0, "alpha not level 20/alive");
                 Debug.Log("IRONPINE_WILDLIFE_PLAYMODE_OK: 22 living actors, correct species quotas, " +

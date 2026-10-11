@@ -1,0 +1,110 @@
+[
+  {
+    "species": "Wolf",
+    "vertices": 2420,
+    "triangles": 4264,
+    "bones": [
+      "Root",
+      "Torso",
+      "Neck",
+      "Head",
+      "Jaw",
+      "Tail",
+      "TailTip",
+      "FrontLUpper",
+      "FrontLLower",
+      "FrontRUpper",
+      "FrontRLower",
+      "HindLUpper",
+      "HindLLower",
+      "HindRUpper",
+      "HindRLower"
+    ],
+    "animation_actions": [
+      "Wolf|Idle",
+      "Wolf|Walk",
+      "Wolf|Run",
+      "Wolf|Bite",
+      "Wolf|Howl",
+      "Wolf|Pounce",
+      "Wolf|Sniff",
+      "Wolf|Scratch",
+      "Wolf|Hurt",
+      "Wolf|Death"
+    ],
+    "source": "T:\\TEMP\\DiceFree-Options\\SourceArt\\Creatures\\Ironpine\\Wolf.blend",
+    "export": "T:\\TEMP\\DiceFree-Options\\Assets\\_DiceFree\\Art\\Creatures\\Ironpine\\Wolf.fbx"
+  },
+  {
+    "species": "Quillrat",
+    "vertices": 3195,
+    "triangles": 5526,
+    "bones": [
+      "Root",
+      "Torso",
+      "Neck",
+      "Head",
+      "Jaw",
+      "Tail",
+      "TailTip",
+      "FrontLUpper",
+      "FrontLLower",
+      "FrontRUpper",
+      "FrontRLower",
+      "HindLUpper",
+      "HindLLower",
+      "HindRUpper",
+      "HindRLower"
+    ],
+    "animation_actions": [
+      "Quillrat|Idle",
+      "Quillrat|Walk",
+      "Quillrat|Run",
+      "Quillrat|Bite",
+      "Quillrat|QuillShot",
+      "Quillrat|Scurry",
+      "Quillrat|Forage",
+      "Quillrat|Scratch",
+      "Quillrat|Hurt",
+      "Quillrat|Death"
+    ],
+    "source": "T:\\TEMP\\DiceFree-Options\\SourceArt\\Creatures\\Ironpine\\Quillrat.blend",
+    "export": "T:\\TEMP\\DiceFree-Options\\Assets\\_DiceFree\\Art\\Creatures\\Ironpine\\Quillrat.fbx"
+  },
+  {
+    "species": "AlphaWolf",
+    "vertices": 2646,
+    "triangles": 4568,
+    "bones": [
+      "Root",
+      "Torso",
+      "Neck",
+      "Head",
+      "Jaw",
+      "Tail",
+      "TailTip",
+      "FrontLUpper",
+      "FrontLLower",
+      "FrontRUpper",
+      "FrontRLower",
+      "HindLUpper",
+      "HindLLower",
+      "HindRUpper",
+      "HindRLower"
+    ],
+    "animation_actions": [
+      "AlphaWolf|Idle",
+      "AlphaWolf|Walk",
+      "AlphaWolf|Run",
+      "AlphaWolf|Bite",
+      "AlphaWolf|Howl",
+      "AlphaWolf|Pounce",
+      "AlphaWolf|Sniff",
+      "AlphaWolf|Scratch",
+      "AlphaWolf|Hurt",
+      "AlphaWolf|Death"
+    ],
+    "source": "T:\\TEMP\\DiceFree-Options\\SourceArt\\Creatures\\Ironpine\\AlphaWolf.blend",
+    "export": "T:\\TEMP\\DiceFree-Options\\Assets\\_DiceFree\\Art\\Creatures\\Ironpine\\AlphaWolf.fbx"
+  }
+]
