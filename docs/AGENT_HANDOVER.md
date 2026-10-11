@@ -1531,3 +1531,7 @@ Validation markers reached before checkpoint:
 - `ISSUE36_SAVE_RELOAD_OK`.
 
 Do not merge the stacked branch without Axel's explicit approval. Next implementation target is the physical Slime Dungeon scene/blockout and reusable entrance/map-transition runtime.
+
+## 2026-10-12 — Ironpine Wildlife v1.4 first playable pass
+
+The Ironpine Forest now has authored 22 wildlife slots (10 Quillrats, 7 Grey Wolves, 4 Dark Wolves and one Alpha) on `feature/visual-overhaul-vis00`, with wildlife AI, combat, homing quills, Bleed, howl/Frenzy, telegraphed leap, roaming, respawns, local party credit and Codex hooks. See `docs/IRONPINE_WILDLIFE_IMPLEMENTATION.md` for complete details, verification and remaining polish. Isolated Unity compile, scene count validator, Play Mode startup smoke, and Ironpine original route validator passed; focused combat/party correctness playtests still pending. The models are procedural placeholders; animal audio and full authored animations are not yet built. Do not merge main without approval. Preserve unrelated modified `ProjectSettings/PackageManagerSettings.asset`.
