@@ -1,4 +1,7 @@
 # DiceFree quadratic XP curve — design proposal 2026-10-12
+
+> **Decision implemented (2026-10-13):** The chosen curve is `30 + 3 × (Level−1)²`. This document records pre-implementation alternatives; the current code, safe-save upgrade and Cornberg balance findings are detailed in [Quadratic XP implementation](QUADRATIC_XP_IMPLEMENTATION.md).
+
 Status: **PROPOSAL / DISCUSSION ONLY**. The user likes a quadratic XP requirement because manifestations reset level at each advancement. **No code, asset or balance changes approved yet.**
 
 ## Current verified curve
