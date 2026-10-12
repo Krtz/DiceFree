@@ -14,7 +14,7 @@ namespace DiceFree.Ironpine
     // Lives on a real CombatActor: all attacks and kills use the ordinary DiceFree combat authority.
     // No hidden wolf summons, loot tables, or character-level scaling.
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(BasicAttack))]
-    public sealed class IronpineWildlife : MonoBehaviour
+    public sealed class IronpineWildlife : MonoBehaviour, IActiveThreatSource
     {
         [SerializeField] private WildlifeKind kind;
         [SerializeField] private Transform model;
@@ -39,6 +39,9 @@ namespace DiceFree.Ironpine
         // Optional licensed creature visual; AI and collision stay unchanged.
         public void UseVisualModel(Transform visual) { if(visual!=null) model=visual; }
         public CombatActor Actor => actor;
+        public bool Threatens(CombatActor possibleTarget) =>
+            actor!=null && actor.Alive && possibleTarget!=null &&
+            target==possibleTarget;
         public bool IsBiting => attack != null && attack.Target != null && attack.State == "Wind-up";
         public void Configure(WildlifeKind species, Transform visual, Vector3[] sites, Vector3[] grounds = null)
         {

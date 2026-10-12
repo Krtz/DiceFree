@@ -169,6 +169,7 @@ namespace DiceFree.Persistence
         private void SubscribeDurableState()
         {
             xp.Changed += MarkDirty;
+            if(anchor!=null)anchor.AnchorChanged+=MarkDirty;
             journal.Changed += MarkDirty;
             inventory.Changed += MarkDirty;
             equipment.Changed += MarkDirty;
@@ -181,6 +182,7 @@ namespace DiceFree.Persistence
         private void UnsubscribeDurableState()
         {
             if (xp != null) xp.Changed -= MarkDirty;
+            if (anchor != null) anchor.AnchorChanged -= MarkDirty;
             if (journal != null) journal.Changed -= MarkDirty;
             if (inventory != null) inventory.Changed -= MarkDirty;
             if (equipment != null) equipment.Changed -= MarkDirty;

@@ -1,4 +1,5 @@
 using DiceFree.Combat;
+using DiceFree.World;
 using DiceFree.Input;
 using DiceFree.Skills;
 using UnityEngine;
@@ -49,10 +50,21 @@ namespace DiceFree.UI
         private MagicalSkillCaster magicalCaster;
         private InputBindings bindings;
         private InputAction[] actions;
+        private ISharedCombatCommands combatInput;
+        private Interactor interactor;
+        private ReturnHomeAbility returnHome;
+        private CombatActor actor;
 
         private void Awake()
         {
             stats = GetComponent<ActorStats>();
+            actor = GetComponent<CombatActor>();
+            foreach(var component in GetComponents<MonoBehaviour>())
+                if(component is ISharedCombatCommands commands)
+                {combatInput=commands;break;}
+            interactor=GetComponent<Interactor>();
+            returnHome=GetComponent<ReturnHomeAbility>();
+            if(returnHome==null)returnHome=gameObject.AddComponent<ReturnHomeAbility>();
             foreach(var component in GetComponents<MonoBehaviour>())
                 if(component is IQueuedOrders found){orders=found;break;}
             targeting = GetComponent<SkillTargetingController>();
@@ -73,12 +85,16 @@ namespace DiceFree.UI
             };
         }
 
+        public bool HomeCasting => returnHome!=null && returnHome.Casting;
+        public float HomeCastRemaining => returnHome?.CastRemaining??0f;
+
         public bool WasPressedThisFrame(int slot) =>
             slot >= 0 && slot < actions.Length && actions[slot].WasPressedThisFrame();
 
         public SlotView View(int slot)
         {
-            if (slot < 0 || slot >= 4 || stats?.Definition == null) return default;
+            if (slot < 0 || slot >= 7 || stats?.Definition == null) return default;
+            if(slot>=4)return SharedView(slot);
             string classId = stats.Definition.stableId;
             string key = InputBindings.Display(actions[slot]);
 
@@ -136,6 +152,30 @@ namespace DiceFree.UI
             return default;
         }
 
+        private SlotView SharedView(int slot)
+        {
+            string name=slot==4?"Attack / Attack Move":
+                slot==5?"Interact":"Return to Revive Stone";
+            string key=slot==4?InputBindings.Display(bindings.Action("Gameplay/Attack selected")):
+                slot==5?InputBindings.Display(bindings.Action("Gameplay/Interact")):
+                InputBindings.Display(bindings.Action("Gameplay/Return to anchor"));
+            string iconId=slot==4?"attack-command":slot==5?"interact":"return-home";
+            float cooldown=slot==6?returnHome?.CooldownRemaining??0f:0f;
+            string description=slot==4?
+                "Attack a selected enemy or choose an enemy/ground destination. Shift queues attacks and attack-move orders. Works on the minimap.":
+                slot==5?
+                "Interact with the nearest available NPC, chest, loot or world object.":
+                "A shared Echo skill. Cast for 10 seconds to teleport to your last activated Dice revive stone. 10 minute cooldown. Interrupted by movement or damage; unavailable in combat or dungeons. No healing.";
+            if(slot==6 && returnHome!=null)
+            {
+                description+=" Destination: "+GetComponent<RespawnAtAnchor>()?.AnchorName+".";
+                if(returnHome.Casting)description+=" Casting: "+returnHome.CastRemaining.ToString("0.0")+"s.";
+            }
+            return new SlotView(name,key,1,1,cooldown,true,
+                name+" ["+key+"]\n"+description,
+                SkillIconLibrary.Get(iconId),iconId);
+        }
+
         private static bool ShiftHeld => Keyboard.current!=null &&
             Keyboard.current.shiftKey.isPressed;
         private IQueuedOrders Orders
@@ -151,7 +191,20 @@ namespace DiceFree.UI
 
         public bool Activate(int slot)
         {
-            if (slot < 0 || slot >= 4 || stats?.Definition == null || targeting == null) return false;
+            if (slot < 0 || slot >= 7 || stats?.Definition == null || targeting == null) return false;
+            if(slot!=6 && returnHome!=null && returnHome.Casting)
+                returnHome.Cancel();
+            if(slot==4)
+            {
+                combatInput?.BeginAttackTargeting();
+                return combatInput!=null && actor!=null && actor.CanAct;
+            }
+            if(slot==5)
+            {
+                combatInput?.CancelAttackMove();
+                return interactor!=null && interactor.InteractNearest();
+            }
+            if(slot==6)return returnHome!=null && returnHome.TryBegin();
             string classId = stats.Definition.stableId;
 
             if (classId == NoviceSkillProgression.ClassStableId && novice != null && noviceCaster != null)

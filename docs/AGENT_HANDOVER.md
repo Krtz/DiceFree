@@ -1560,3 +1560,7 @@ Indexed 30 newly downloaded UI Asset Store packs; existing local catalog now has
 
 ## 2026-10-12 follow-up playtest
 See docs/OCT12_FOREST_PLAYTEST_FOLLOWUP.md for wolf visual forward orientation, doubled Alpha scale, improved enemy target facing and walking animations, 23 obsolete Ironpine slimes disabled, scoped high-tree collider cleanup, and five audio volume sliders. Preserve unrelated local changes; main remains unmerged.
+
+## 2026-10-12 — shared actions, Return Home, new world design
+
+See docs/SHARED_SKILLBAR_AND_RETURN_HOME.md: 4 class + 3 shared action slots, Attack/Attack Move X, Interact I, Return Home R (10s rooted cast/10m cooldown/no death heal, damage/movement/threat/dungeon restrictions, death/reload reset), three Battle Skill Icon pack artworks installed locally, 17 total, fallback original icons. Anchors autoactivate on approach and publish durable home ID; active wildlife aggro veto. Verified compile and isolated Play Mode. New art rule docs/ASSET_FIRST_ART_POLICY.md. Village 2, Tier II and Wolf Dungeon are a user-decision draft only in docs/WORLD1_VILLAGE2_TIER2_WOLF_DUNGEON_INTERVIEW.md; no world/class/dungeon content built. Keep local licensed art and unrelated project changes untouched.

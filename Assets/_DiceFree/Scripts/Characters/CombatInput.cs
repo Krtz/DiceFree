@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace DiceFree.Characters
 {
     [RequireComponent(typeof(TargetSelection), typeof(BasicAttack))]
-    public sealed class CombatInput : MonoBehaviour, DiceFree.Foundation.IManifestationSessionState
+    public sealed class CombatInput : MonoBehaviour, DiceFree.Foundation.IManifestationSessionState, ISharedCombatCommands
     {
         private TargetSelection selection;
         private BasicAttack attack;
@@ -32,6 +32,7 @@ namespace DiceFree.Characters
         public void BeginAttackTargeting()
         {
             if(!actor.CanAct||skillTargeting==null)return;
+            GetComponent<ReturnHomeAbility>()?.Cancel();
             // Starting the targeting cursor is not issuing the order.
             // In WC3 you may press X first, THEN hold Shift when choosing
             // the target, so preserve the queue until confirmation.
@@ -71,6 +72,7 @@ namespace DiceFree.Characters
             cycle = bindings.Action("Gameplay/Cycle hostile");
             attackSelected = bindings.Action("Gameplay/Attack selected");
             clear = bindings.Action("Gameplay/Clear target");
+            // R is Return Home when alive; the death HUD still owns R on death.
             respawn = bindings.Action("Gameplay/Return to anchor");
         }
 
@@ -100,11 +102,21 @@ namespace DiceFree.Characters
 
         private void Update()
         {
-            if (bindings.Suppressed || !actor.Alive) {CancelAttackMove();return;}
+            if (bindings.Suppressed) {CancelAttackMove();return;}
+            if (!actor.Alive)
+            {
+                CancelAttackMove();
+                // Keep the original R death-respawn binding; living R now
+                // starts the separate shared Return Home travel ability.
+                if(respawn.WasPressedThisFrame())
+                    GetComponent<RespawnAtAnchor>()?.Return();
+                return;
+            }
             if (skillTargeting != null && (skillTargeting.Active || skillTargeting.InputConsumedThisFrame)) return;
             if(AttackMoving&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){CancelAttackMove();attack.Cancel();return;}
 
-            if (respawn.WasPressedThisFrame()) GetComponent<RespawnAtAnchor>()?.Return();
+            if (respawn.WasPressedThisFrame())
+                GetComponent<ReturnHomeAbility>()?.TryBegin();
             if (cycle.WasPressedThisFrame())
                 selection.Cycle(Keyboard.current != null && Keyboard.current.shiftKey.isPressed);
             if (clear.WasPressedThisFrame())

@@ -18,6 +18,45 @@ namespace DiceFree.World
         private Transform fallbackAnchor;
         private Vector3 emergencyFallbackPosition;
         private bool emergencyFallbackReady;
+        private float nextAnchorCheck;
+        public event Action AnchorChanged;
+        public bool HasHomeAnchor => anchor != null || fallbackAnchor != null;
+
+        // A revive stone is activated by reaching it, not by dying. This
+        // authoring contract also works for future villages and other maps.
+        public bool Activate(ResurrectionAnchor stone)
+        {
+            if(stone==null || !stone.isActiveAndEnabled ||
+               string.IsNullOrEmpty(stone.StableId))return false;
+            if(anchor==stone.transform)return true;
+            anchor=stone.transform;
+            AnchorChanged?.Invoke();
+            return true;
+        }
+        private void Update()
+        {
+            if(actor==null || !actor.Alive || Time.time<nextAnchorCheck)return;
+            nextAnchorCheck=Time.time+.5f;
+            foreach(var stone in FindObjectsByType<ResurrectionAnchor>(
+                FindObjectsSortMode.None))
+            {
+                if(stone==null || !stone.isActiveAndEnabled)continue;
+                if(Vector3.ProjectOnPlane(stone.transform.position-transform.position,
+                    Vector3.up).sqrMagnitude<=12.25f)
+                    Activate(stone);
+            }
+        }
+
+        // Travel only. Does not heal, reset stats, or invoke death return.
+        public bool TeleportHome()
+        {
+            if(actor==null || !actor.Alive)return false;
+            var lockout=GetComponent<DiceFree.Foundation.RunLoadoutLock>();
+            if(lockout!=null && lockout.InsideDungeon)return false;
+            bool moved=TryTeleport(anchor);
+            if(!moved && fallbackAnchor!=anchor)moved=TryTeleport(fallbackAnchor);
+            return moved;
+        }
 
         public bool CanReturn => actor != null && !actor.Health.Alive && Time.time >= availableAt;
         public float SecondsUntilReturn => actor == null || actor.Health == null || actor.Health.Alive
@@ -40,6 +79,15 @@ namespace DiceFree.World
                 if (candidate != null && candidate.StableId == id)
                 {
                     destination = candidate.transform;
+                    break;
+                }
+            // Newly authored village stones need not be manually listed
+            // in each actor prefab, but their saved stable IDs still resolve.
+            foreach(var candidate in FindObjectsByType<ResurrectionAnchor>(
+                FindObjectsSortMode.None))
+                if(candidate!=null && candidate.StableId==id)
+                {
+                    destination=candidate.transform;
                     break;
                 }
 

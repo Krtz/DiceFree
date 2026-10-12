@@ -53,3 +53,7 @@ To reconfigure imported textures, use the Unity menu **DiceFree → UI → Refre
 - Actual desktop Game-view art legibility and layout should still be checked by the user at their selected HUD scale.
 
 Do not merge to main without explicit approval. Preserve unrelated local soft VFX resources, package settings and ShaderGraph settings. The original generated Magic Sand/Heal/Stun/Strike art from earlier in the conversation is available as a separate direction if preferred later, but the installed first pass uses the user's existing ability-art pack.
+
+## Later update — shared command icons (2026-10-12)
+
+The asset library now contains **17 locally installed ability art PNGs**, including three more from the same Battle Skill Icon pack for shared action slots: Attack / Attack Move (slot 5), Interact (slot 6), and Return to Revive Stone (slot 7). All three use pack artwork when available and distinct original fallback symbols otherwise. The prior 14 art mappings remain unchanged. See `docs/SHARED_SKILLBAR_AND_RETURN_HOME.md` for implementation and validated travel behavior.

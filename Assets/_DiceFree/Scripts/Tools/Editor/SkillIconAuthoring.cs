@@ -23,6 +23,7 @@ namespace DiceFree.EditorTools
                 .Cast<PhysicalSkillKind>().Select(SkillIconLibrary.Key))
             .Concat(Enum.GetValues(typeof(MagicalSkillKind))
                 .Cast<MagicalSkillKind>().Select(SkillIconLibrary.Key))
+            .Concat(new[]{"attack-command","interact","return-home"})
             .Distinct(StringComparer.Ordinal);
 
         [MenuItem("DiceFree/UI/Refresh local ability icons")]
@@ -63,7 +64,7 @@ namespace DiceFree.EditorTools
         public static object Validate()
         {
             var keys=AllKeys().ToArray();
-            Require(keys.Length==14,"expected 14 distinct active and passive skill icons");
+            Require(keys.Length==17,"expected 14 distinct active and passive skill icons");
             var textures=new HashSet<Texture2D>();
             foreach(var key in keys)
             {

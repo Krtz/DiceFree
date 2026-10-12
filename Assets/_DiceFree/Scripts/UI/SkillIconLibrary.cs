@@ -65,6 +65,9 @@ namespace DiceFree.UI
             };
             Color focus=key switch
             {
+                "attack-command" => new Color(.90f,.67f,.27f),
+                "interact" => new Color(.55f,.90f,.76f),
+                "return-home" => new Color(.52f,.52f,.98f),
                 "novice-stun" => new Color(.93f,.70f,.22f),
                 "magic-sand" => new Color(.85f,.63f,.29f),
                 "novice-quickness" => new Color(.22f,.91f,.70f),
@@ -131,6 +134,16 @@ namespace DiceFree.UI
             }
             switch(key)
             {
+                case "attack-command":
+                    Stroke(16,15,46,45,5);Stroke(21,39,39,20,4);
+                    Dot(45,45,7);break;
+                case "interact":
+                    Ring(22);Dot(31,34,8);
+                    for(int i=0;i<4;i++)Dot(19+i*8,47,4);
+                    break;
+                case "return-home":
+                    Ring(23);Ring(13);
+                    Dot(32,32,7);break;
                 case "novice-heal":
                 case "mend":
                     Ring(23);

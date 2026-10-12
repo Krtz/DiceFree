@@ -97,6 +97,18 @@ namespace DiceFree.Characters
                 return;
             }
 
+            // Return Home is a rooted channel. Inputting movement or Stop
+            // cancels it before executing the normal movement command.
+            var homeSkill=GetComponent<ReturnHomeAbility>();
+            if(homeSkill!=null && homeSkill.Casting)
+            {
+                bool moving=movement.ReadValue<Vector2>().sqrMagnitude>.001f ||
+                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                    interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
+                if(moving)homeSkill.Cancel();
+                else return;
+            }
+
             if (changeMode.WasPressedThisFrame())
             {
                 orders?.ClearOrders();
