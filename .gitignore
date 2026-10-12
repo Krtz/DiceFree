@@ -63,3 +63,6 @@ Assets/_DiceFree/Resources/Audio/IronpineLicensed/
 /Assets/_DiceFree/Resources/IronpineLicensedWolf.meta
 /Assets/_DiceFree/Resources/UiThemesLicensed/
 /Assets/_DiceFree/Resources/UiThemesLicensed.meta
+# Original Unity Asset Store Battle Skill Icon artwork remains local; do not publish raw PNGs
+/Assets/_DiceFree/Resources/AbilityIconsLicensed/
+/Assets/_DiceFree/Resources/AbilityIconsLicensed.meta

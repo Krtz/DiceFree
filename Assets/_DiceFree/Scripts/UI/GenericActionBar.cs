@@ -102,29 +102,60 @@ namespace DiceFree.UI
                 hoveredSkillTooltip=view.tooltip;
             HudChrome.DrawSlot(rect, Theme, view.learned, hovered);
 
-            string compactName = view.name.Length > 12
-                ? view.name.Substring(0, 11) + "…"
-                : view.name;
-            string label = string.IsNullOrEmpty(view.key)
-                ? compactName
-                : "[" + view.key + "]\n" + compactName;
+            // Draw the actual ability art before the interaction layer, not a
+            // text-only button. Icons are tied to skill definitions in the
+            // source rather than slot number (so class changes remain correct).
+            Rect imageRect = new(rect.x + 3f, rect.y + 3f,
+                Mathf.Max(1f, rect.width - 6f), Mathf.Max(1f, rect.height - 6f));
+            if (view.icon != null)
+            {
+                Color tint=GUI.color;
+                GUI.color=view.learned ? Color.white :
+                    new Color(.43f,.45f,.48f,.79f);
+                GUI.DrawTexture(imageRect, view.icon, ScaleMode.StretchToFill, true);
+                GUI.color=tint;
+            }
+            else
+                GUI.Label(rect, view.name,HudChrome.SlotTextStyle(Theme,true));
 
-            var previous = GUI.enabled;
-            GUI.enabled = interactable;
-            if (GUI.Button(rect, new GUIContent("",view.tooltip), GUIStyle.none)) source.Activate(slot);
-            GUI.enabled = previous;
-            GUI.Label(rect, new GUIContent(label, view.tooltip),
-                HudChrome.SlotTextStyle(Theme, true));
+            // Hotkeys/ranks are compact corner overlays so they don't cover
+            // the ability artwork, unlike the old two-line skill names.
+            if (!string.IsNullOrEmpty(view.key))
+            {
+                float w=Mathf.Min(rect.width-4f,
+                    Mathf.Max(19f, 9f+view.key.Length*8f));
+                Rect badge=new(rect.x+2,rect.y+2,w,19);
+                HudChrome.Fill(badge,new Color(.025f,.029f,.045f,.90f));
+                GUI.Label(badge,view.key,new GUIStyle(GUI.skin.label)
+                {
+                    fontStyle=FontStyle.Bold,
+                    alignment=TextAnchor.MiddleCenter,
+                    fontSize=11,
+                    normal={textColor=Color.white}
+                });
+            }
 
             if (view.rank > 0)
             {
-                var rankStyle = new GUIStyle(GUI.skin.label)
-                {
-                    alignment = TextAnchor.LowerRight,
-                    fontSize = Mathf.Max(9, GUI.skin.label.fontSize - 1)
-                };
-                GUI.Label(rect, view.rank + "/" + view.maxRank + " ", rankStyle);
+                Rect rankBadge=new(rect.xMax-37,rect.yMax-19,35,17);
+                HudChrome.Fill(rankBadge,new Color(.015f,.021f,.035f,.84f));
+                GUI.Label(rankBadge,view.rank+"/"+view.maxRank,
+                    new GUIStyle(GUI.skin.label)
+                    {
+                        fontStyle=FontStyle.Bold,
+                        alignment=TextAnchor.MiddleCenter,
+                        fontSize=10,
+                        normal={textColor=Color.white}
+                    });
             }
+
+            // Keep the clickable hit area independent from the art and from
+            // the skill's cooldown mask.
+            bool previous = GUI.enabled;
+            GUI.enabled = interactable;
+            if (GUI.Button(rect, new GUIContent("",view.tooltip), GUIStyle.none))
+                source.Activate(slot);
+            GUI.enabled = previous;
 
             if (view.cooldown > 0)
             {

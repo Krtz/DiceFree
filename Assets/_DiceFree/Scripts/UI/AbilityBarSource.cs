@@ -18,8 +18,11 @@ namespace DiceFree.UI
             public readonly float cooldown;
             public readonly bool learned;
             public readonly string tooltip;
+            public readonly Texture2D icon;
+            public readonly string iconKey;
 
-            public SlotView(string name, string key, int rank, int maxRank, float cooldown, bool learned, string tooltip)
+            public SlotView(string name, string key, int rank, int maxRank, float cooldown,
+                bool learned, string tooltip, Texture2D icon, string iconKey)
             {
                 this.name = name;
                 this.key = key;
@@ -28,6 +31,8 @@ namespace DiceFree.UI
                 this.cooldown = cooldown;
                 this.learned = learned;
                 this.tooltip = tooltip;
+                this.icon = icon;
+                this.iconKey = iconKey;
             }
 
             public bool Exists => !string.IsNullOrEmpty(name);
@@ -89,7 +94,9 @@ namespace DiceFree.UI
                     definition.maxRank,
                     noviceCaster?.CooldownRemaining(definition) ?? 0,
                     rank > 0,
-                    SkillTooltips.Describe(definition, rank, key));
+                    SkillTooltips.Describe(definition, rank, key),
+                    SkillIconLibrary.Get(definition.kind),
+                    SkillIconLibrary.Key(definition.kind));
             }
 
             if (classId == PhysicalSkillProgression.ClassStableId && physical != null)
@@ -104,7 +111,9 @@ namespace DiceFree.UI
                     definition.maxRank,
                     physicalCaster?.CooldownRemaining(definition) ?? 0,
                     rank > 0,
-                    SkillTooltips.Describe(definition, rank, key));
+                    SkillTooltips.Describe(definition, rank, key),
+                    SkillIconLibrary.Get(definition.kind),
+                    SkillIconLibrary.Key(definition.kind));
             }
 
             if (classId == MagicalSkillProgression.ClassStableId && magical != null)
@@ -119,7 +128,9 @@ namespace DiceFree.UI
                     definition.maxRank,
                     magicalCaster?.CooldownRemaining(definition) ?? 0,
                     rank > 0,
-                    SkillTooltips.Describe(definition, rank, key));
+                    SkillTooltips.Describe(definition, rank, key),
+                    SkillIconLibrary.Get(definition.kind),
+                    SkillIconLibrary.Key(definition.kind));
             }
 
             return default;
