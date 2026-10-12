@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Starter XP curve
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.Progression.ExperienceCurve
   firstThreshold: 30
-  thresholdGrowth: 10
+  quadraticCoefficient: 3
   levelLimit: 200
