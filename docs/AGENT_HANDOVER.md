@@ -1577,3 +1577,8 @@ Novice, Physical and Magical now display their original four active skills in sl
 - XP ladder is still the provisional linear 30+10*(current level-1) curve, with 200 cap and reset on class advancement. Ironpine enemy kill XP is high vs these requirements; **audit only**, no XP changes. See docs/XP_LADDER_AUDIT_OCT12.md.
 - Village 2 **design started**, not scene-authored. Review actual packs, safe arrival, Runner MSQ, revive stone, and Alpha proximity in docs/VILLAGE2_STARTING_PLAN.md. User input needed on village identity, safety and size. Do not invent theme or lock quest content before approval.
 - Preserve unrelated user VFX and Unity project settings; main not merged.
+
+## 2026-10-12 — Trimery identity and quadratic XP proposal
+
+User canonized Village 2 as **Trimery**, lumber exporter to the Big City. Direct trade road is blocked by an unspecified event; players must detour through Biome 3 quilboar territory to reach the Big City. Later Big City quest reopens Trimery's direct road. Distinguish Ironpine animal quillrats from humanoid quilboars. Existing reserved location near X223/Z149, plus Alpha roaming ground nearby, creates a village safety question. See docs/TRIMERY_DESIGN_V01.md and top of docs/VILLAGE2_STARTING_PLAN.md. **No Unity world changes yet.**
+User proposes changing provisional linear XP to quadratic (example a*Level^2). Recommendation to discuss is 30+b*(L-1)^2, b≈1 starter. Never change actual curve or XP awards until user approves coefficients and progression/save migration plan. See docs/QUADRATIC_XP_PROPOSAL.md. Existing + quota slot and wolf tuning code remains on feature/visual-overhaul-vis00; unrelated local files preserved.

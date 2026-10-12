@@ -2,6 +2,10 @@
 
 **Status: Village 2 design STARTED; no authored buildings, NPCs, or quests yet.** Waiting for player choice on the village identity before committing geography or importing packs. Previous Cornberg and Ironpine map remain unchanged.
 
+## 2026-10-12 — CONFIRMED Village 2 concept overrides older placeholder names
+
+Village 2 is now officially **Trimery**, a working lumber settlement that exports timber to the Big City. Its direct road to the city is blocked by an as-yet-undecided event, so the player must go through **Biome 3's humanoid quilboars** to reach the Big City. A later quest in the Big City reopens the direct Trimery trade road. This supersedes provisional Timberwatch, Mossford and Briarhold identities below; retain those only as historical inspiration. **See `docs/TRIMERY_DESIGN_V01.md` for canonical design details and open questions.**
+
 ## What exists and is settled
 
 - Reserved World 1 location: village approach clearing at approximately **X223, Z149**, northeast of the Ironpine winding road. The last authored path segment comes from **X208,Z130**. `docs/IRONPINE_FOREST_IMPLEMENTATION.md` and `docs/WORLD1_VILLAGE2_TIER2_WOLF_DUNGEON_INTERVIEW.md` document the existing approach.
