@@ -36,6 +36,8 @@ namespace DiceFree.Ironpine
         private int huntingIndex;
         private string familyId;
         public WildlifeKind Kind => kind;
+        // Optional licensed creature visual; AI and collision stay unchanged.
+        public void UseVisualModel(Transform visual) { if(visual!=null) model=visual; }
         public CombatActor Actor => actor;
         public bool IsBiting => attack != null && attack.Target != null && attack.State == "Wind-up";
         public void Configure(WildlifeKind species, Transform visual, Vector3[] sites, Vector3[] grounds = null)

@@ -189,25 +189,43 @@ namespace DiceFree.EditorTools
             Vector3 second=player.transform.position+new Vector3(2f,0,2f);
             bool one=NavMesh.SamplePosition(first,out var a,1.5f,NavMesh.AllAreas);
             bool two=NavMesh.SamplePosition(second,out var b,1.5f,NavMesh.AllAreas);
-            Require(one&&two,"No nearby navigable waypoints");
+            Vector3 third=player.transform.position+new Vector3(0f,0,3.2f);
+            bool three=NavMesh.SamplePosition(third,out var c,1.5f,NavMesh.AllAreas);
+            Require(one&&two&&three,"No nearby navigable waypoints");
             queue.ClearOrders();
             Require(queue.SubmitMove(a.position,false),"First movement cannot queue");
             Require(queue.PendingOrders==1,"Missing first waypoint");
+            // Dispatch the FIRST command before pressing X: targeting must not
+            // cancel active NavMesh movement, not just preserve list length.
+            queue.SendMessage("Update",SendMessageOptions.DontRequireReceiver);
+            Require(player.GetComponent<TraversalMotor>().Travelling,
+                "First movement never began before pressing X");
             // Simulate pressing X BEFORE holding Shift to confirm, which used
             // to clear the pending walk in CombatInput.BeginAttackTargeting.
             combat.BeginAttackTargeting();
             Require(queue.PendingOrders==1,
                 "Starting attack-move targeting erased a queued walk");
+            Require(player.GetComponent<TraversalMotor>().Travelling,
+                "Pressing X cancelled the currently executing movement");
             Require(targeter.Active&&targeter.Mode==SkillTargetingMode.AttackMove,
                 "Attack-move cursor did not activate");
             Require(targeter.QueueAttackMoveFromTargeting(b.position),
                 "Shift+click could not append attack-move");
             Require(queue.PendingOrders==2 && !targeter.Active,
                 "Attack-move did not append in order or failed to exit targeting");
-            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastX",b.position.x);
-            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastZ",b.position.z);
+            // Enter X targeting a second time: the existing queued attack-move
+            // must remain and a second Shift-confirmed one must append after it.
+            combat.BeginAttackTargeting();
+            Require(queue.PendingOrders==2 && targeter.Active,
+                "Pressing X again cancelled prior queued actions");
+            Require(targeter.QueueAttackMoveFromTargeting(c.position),
+                "Could not append consecutive attack-move");
+            Require(queue.PendingOrders==3 && !targeter.Active,
+                "Consecutive attack-moves were not preserved in order");
+            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastX",c.position.x);
+            SessionState.SetFloat("DiceFree.QueuedAttackMove.LastZ",c.position.z);
             return new{success=true,movementPreserved=true,
-                queuedAttackMove=true,totalOrders=2};
+                queuedAttackMove=true,consecutiveAttackMove=true,totalOrders=3};
         }
 
         [CliCommand("dicefree.commands.attack-move.targeting-status",

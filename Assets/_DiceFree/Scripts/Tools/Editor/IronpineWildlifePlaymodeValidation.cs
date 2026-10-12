@@ -61,6 +61,15 @@ namespace DiceFree.EditorTools
                 Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>()?.ModelAnimator?.runtimeAnimatorController != null), "missing live rig animation controller");
                 Check(animals.All(a => a.GetComponent<IronpineCreatureAudio>() != null && a.GetComponent<AudioSource>() != null), "missing live spatial animal audio");
                 Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>().ModelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>().Length >= 3), "missing live skinned model");
+                if (Resources.Load<GameObject>("IronpineLicensedWolf/RealisticWolf") != null)
+                {
+                    Check(animals.Where(a => a.Kind != WildlifeKind.Quillrat).All(a =>
+                        a.transform.Find("Realistic furry wolf licensed visual") != null),
+                        "licensed wolf was not substituted on all wolf actors");
+                    var alphaWolf = animals.Single(a => a.Kind == WildlifeKind.AlphaWolf);
+                    Check(alphaWolf.GetComponentsInChildren<Light>(true).Count(l => l.name == "Faint red eye ember") >= 2,
+                        "alpha red eye glow missing");
+                }
                 var alpha = animals.Single(a => a.Kind == WildlifeKind.AlphaWolf).Actor;
                 Check(alpha.Stats.Level == 20 && alpha.Health.Current > 0, "alpha not level 20/alive");
                 Debug.Log("IRONPINE_WILDLIFE_PLAYMODE_OK: 22 living actors, correct species quotas, " +

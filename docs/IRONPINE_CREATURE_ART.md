@@ -62,3 +62,8 @@ Run the generator after editing the meshes:
 ```
 
 Never merge to main without approval; preserve unrelated `ProjectSettings/PackageManagerSettings.asset` modifications.
+
+
+## Optional realistic wolf replacement (2026-10-12)
+
+Per user approval, on the original Windows PC, the Grey, Dark and Alpha wolf visual models now swap at runtime to the **Realistic Furry Wolf FREE** pack from Rip Vertices Studio, using its original rig and ten animations, including its own WolfHowl_New and Jump_New. The Alpha is larger, darker and has faint red eyes. Quillrats remain our original Blender rigs and art. The original Wolf, Dark and Alpha Blender meshes remain the **redistributable fallback** for open-source clones that do not have the licensed art. The vendor assets themselves and generated licensed resource prefab are gitignored, and cannot be redistributed as raw source. Full code, validation and scene fixes: `docs/IRONPINE_OCT12_WOLF_BRIDGE_QOL.md`.

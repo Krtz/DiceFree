@@ -53,3 +53,11 @@ crashlytics-build.properties
 
 # Locally licensed Asset Store creature sounds; never distribute raw files in public repo
 Assets/_DiceFree/Resources/Audio/IronpineLicensed/
+
+/Assets/Wolf/
+
+# Generated from optional licensed wolf package, available locally only
+/Assets/_DiceFree/Resources/IronpineLicensedWolf/
+
+/Assets/Wolf.meta
+/Assets/_DiceFree/Resources/IronpineLicensedWolf.meta

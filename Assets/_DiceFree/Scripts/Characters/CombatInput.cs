@@ -35,9 +35,10 @@ namespace DiceFree.Characters
             // Starting the targeting cursor is not issuing the order.
             // In WC3 you may press X first, THEN hold Shift when choosing
             // the target, so preserve the queue until confirmation.
-            CancelAttackMove();
-            attack.Cancel();
-            GetComponent<Interactor>()?.Cancel();
+            // X only arms the attack-move targeting cursor. It MUST NOT stop
+            // the currently executing move/attack or erase its queued successors.
+            // Cancellation belongs to the destination confirmation (unshifted)
+            // or to an explicit Escape/Stop command.
             skillTargeting.BeginAttackMove(target=>{selection.Select(target);return attack.Order(target);},OrderAttackMove);
         }
         private void StepAttackMove()

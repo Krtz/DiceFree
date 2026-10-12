@@ -90,13 +90,25 @@ def tree(name,shape,seed):
                 uv("EvergreenNeedles",endpoint,(length*.37,length*.34,.30 if shape!="Cypress" else .49),
                    accent if (i+k)%4==0 else leaf,8,5)
     elif shape=="Willow":
-        for i in range(7):
-            a=i*math.tau/7
-            x=math.cos(a)*2.1;y=math.sin(a)*1.8
-            cylinder("WillowBranch",(0,0,2.6),(x,y,4.1),.15,.07,bark)
-            for j in range(5):
-                dx=x+(j-2)*.19
-                uv("WillowDrape",(dx,y,2.55+j*.14),(.34,.29,1.03),accent if j%3==0 else leaf,9,6)
+        # Each bough ends INSIDE a leafy anchor crown. Hanging willow clusters
+        # begin at the bough tip; avoid detached canopy pods below bare spokes.
+        uv("WillowCentralCrown",(0,0,3.48),(1.04,.96,.72),leaf,14,9)
+        for i in range(9):
+            a=i*math.tau/9
+            x=math.cos(a)*1.81;y=math.sin(a)*1.59
+            endpoint=Vector((x,y,3.91))
+            cylinder("WillowBranch",(0,0,3.36),endpoint,.115,.048,bark)
+            uv("WillowBranchFoliage",(x*.78,y*.78,3.80),(.65,.57,.43),
+               accent if i%3==0 else leaf,12,8)
+            tangent=Vector((-math.sin(a),math.cos(a),0))
+            for j in range(4):
+                lateral=(j-1.5)*.25
+                tip=endpoint+tangent*lateral
+                h=0.70+(j%3)*.12
+                uv("WillowDrape",(tip.x,tip.y,3.91-h*.73),
+                   (.30,.33,h),accent if (i+j)%4==0 else leaf,10,7)
+        # Close the gaps where diagonal spokes meet the crown.
+        uv("WillowTopCrown",(0,0,3.95),(.86,.89,.46),accent,12,8)
     else:
         crowns={"Oak":(2.2,2.3,1.30),"Birch":(1.05,1.4,.75),"Maple":(2.1,2.0,1.1),
                 "Twisted":(1.5,1.2,.68),"Aspen":(.82,1.10,.65)}[shape]

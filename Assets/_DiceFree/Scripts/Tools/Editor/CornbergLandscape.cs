@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static DiceFree.EditorTools.BlockoutShapes;
 
@@ -6,7 +7,7 @@ namespace DiceFree.EditorTools
 {
     internal static class CornbergLandscape
     {
-        internal static readonly Vector2[] Road = { new(-45,-33), new(-32,-24), new(-17,-9), new(0,0), new(25,0), new(54,6), new(72,18), new(95,34), new(117,48) };
+        internal static readonly Vector2[] Road = { new(-45,-33), new(-36,-29), new(-30,-22), new(-26,-15), new(-26,-9), new(-23.59f,-9), new(-14.61f,-9), new(-12,-9), new(0,0), new(25,0), new(54,6), new(72,18), new(95,34), new(117,48) };
         internal static readonly Vector2[] NorthLoop = { new(63,12), new(64,35), new(76,47), new(91,46), new(95,34) };
         internal static readonly Vector2[] SouthLoop = { new(73,19), new(83,-3), new(103,1), new(109,26), new(95,34) };
         internal static float StreamX(float z) => -18f + Mathf.Sin(z * 0.065f) * 2f;
@@ -39,6 +40,12 @@ namespace DiceFree.EditorTools
             Bridge(-9, terrain); Bridge(26, terrain);
             var paths = Group("02 - Arrival and connected forest paths", parent);
             Trail("Mountain to east road", Road, 4.6f, paths);
+            // Rebuilding the Cornberg scene must preserve the authored, split
+            // south approach that meets the timber bridge on both ends.
+            var bridgeAligned=AssetDatabase.LoadAssetAtPath<Mesh>(
+                "Assets/_DiceFree/Settings/Ironpine/Southern bridge aligned road.asset");
+            if(bridgeAligned!=null)
+                paths.Find("Mountain to east road").GetComponent<MeshFilter>().sharedMesh=bridgeAligned;
             Trail("North woodland loop", NorthLoop, 3.1f, paths);
             Trail("South woodland loop", SouthLoop, 3.1f, paths);
             Trail("Dungeon approach", new[] { new Vector2(76,47), new Vector2(80,56) }, 3.5f, paths);
