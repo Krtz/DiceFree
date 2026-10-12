@@ -84,7 +84,7 @@ namespace DiceFree.UI
                     cellWidth,
                     cellHeight);
 
-                if (index < 5 || (index >= 6 && index <= 8))
+                if (index < 5 || index >= 9)
                     DrawAbility(rect, index);
                 else
                     DrawEmpty(rect, index);
@@ -184,7 +184,7 @@ namespace DiceFree.UI
                 source.Activate(slot);
             GUI.enabled = previous;
 
-            if (slot==8 && source.HomeCasting)
+            if (slot==11 && source.HomeCasting)
             {
                 HudChrome.Fill(rect,new Color(.12f,.27f,.46f,.40f));
                 GUI.Label(rect,source.HomeCastRemaining.ToString("0.0")+"s",

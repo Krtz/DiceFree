@@ -1569,3 +1569,11 @@ See docs/SHARED_SKILLBAR_AND_RETURN_HOME.md: 4 class + 3 shared action slots, At
 
 User requested fixed shared commands in slots 7/8/9, not 5/6/7.
 Novice, Physical and Magical now display their original four active skills in slots 1–4 and their class passive/aura in slot 5; slot 6 and 10–12 stay empty. A green '+' upgrade control overlays any active/passive skill with unused point budget; upgrades call the existing class progression Spend methods and preserve saves/rank caps. The separate skill allocation windows are retired (components kept for scene compatibility) and old keybind hidden. Tooltip preview is source-derived. See docs/ACTION_BAR_INLINE_SKILL_LEVELING.md. Unity compilation 0 errors/warnings; isolated Play Mode successfully exercised all 3 class skill allocations and fixed commands (marker DICEFREE_ACTIONBAR_REVAMP_PLAYMODE_OK); 17 local artwork textures still validated. Preserve all unrelated local files and do not merge to main without user approval.
+
+## 2026-10-12 — Slot positions 10-12, Ironpine wolf balance, XP ladder audit, Village 2 discovery
+
+- Per user, shared Attack/Interact/Return to Revive Stone moved **from 7-9 to 10-12** (1-based). First four active class icons and slot-5 passive remain; slots 6-9 are now reserved for later skills. Unity compilation and isolated all-three-class action bar Play Mode tests pass.
+- Every Grey and Dark Wolf max HP multiplier doubled 12x -> 24x baseline, Alpha 65x -> 130x. Wolf basic bite/lunge/pounce damage +50%; Hunting Frenzy remains an extra +20% relative buff by scaling its contribution 20->30 alongside base 50. Quillrat HP, quill damage, XP/loot and 22-creature composition unchanged. Unity Play Mode passes strict stats multipliers for all 22 animals.
+- XP ladder is still the provisional linear 30+10*(current level-1) curve, with 200 cap and reset on class advancement. Ironpine enemy kill XP is high vs these requirements; **audit only**, no XP changes. See docs/XP_LADDER_AUDIT_OCT12.md.
+- Village 2 **design started**, not scene-authored. Review actual packs, safe arrival, Runner MSQ, revive stone, and Alpha proximity in docs/VILLAGE2_STARTING_PLAN.md. User input needed on village identity, safety and size. Do not invent theme or lock quest content before approval.
+- Preserve unrelated user VFX and Unity project settings; main not merged.

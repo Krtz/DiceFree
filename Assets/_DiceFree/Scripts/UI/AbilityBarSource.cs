@@ -165,9 +165,9 @@ namespace DiceFree.UI
 
         public SlotView View(int slot)
         {
-            if (slot < 0 || slot >= 9 || stats?.Definition == null) return default;
-            if(slot>=6)return SharedView(slot);
-            if(slot==5)return default;
+            if (slot < 0 || slot >= 12 || stats?.Definition == null) return default;
+            if(slot>=9)return SharedView(slot);
+            if(slot>=5)return default; // 6-9 reserved for future class skills.
             if(slot==4)return PassiveView();
 
             string classId = stats.Definition.stableId;
@@ -268,19 +268,19 @@ namespace DiceFree.UI
 
         private SlotView SharedView(int slot)
         {
-            string name=slot==6?"Attack / Attack Move":
-                slot==7?"Interact":"Return to Revive Stone";
-            string key=slot==6?InputBindings.Display(bindings.Action("Gameplay/Attack selected")):
-                slot==7?InputBindings.Display(bindings.Action("Gameplay/Interact")):
+            string name=slot==9?"Attack / Attack Move":
+                slot==10?"Interact":"Return to Revive Stone";
+            string key=slot==9?InputBindings.Display(bindings.Action("Gameplay/Attack selected")):
+                slot==10?InputBindings.Display(bindings.Action("Gameplay/Interact")):
                 InputBindings.Display(bindings.Action("Gameplay/Return to anchor"));
-            string iconId=slot==6?"attack-command":slot==7?"interact":"return-home";
-            float cooldown=slot==8?returnHome?.CooldownRemaining??0f:0f;
-            string description=slot==6?
+            string iconId=slot==9?"attack-command":slot==10?"interact":"return-home";
+            float cooldown=slot==11?returnHome?.CooldownRemaining??0f:0f;
+            string description=slot==9?
                 "Attack a selected enemy or choose an enemy/ground destination. Shift queues attacks and attack-move orders. Works on the minimap.":
-                slot==7?
+                slot==10?
                 "Interact with the nearest available NPC, chest, loot or world object.":
                 "A shared Echo skill. Cast for 10 seconds to teleport to your last activated Dice revive stone. 10 minute cooldown. Interrupted by movement or damage; unavailable in combat or dungeons. No healing.";
-            if(slot==8 && returnHome!=null)
+            if(slot==11 && returnHome!=null)
             {
                 description+=" Destination: "+GetComponent<RespawnAtAnchor>()?.AnchorName+".";
                 if(returnHome.Casting)description+=" Casting: "+returnHome.CastRemaining.ToString("0.0")+"s.";
@@ -305,21 +305,21 @@ namespace DiceFree.UI
 
         public bool Activate(int slot)
         {
-            if (slot < 0 || slot >= 9 || stats?.Definition == null || targeting == null) return false;
-            if(slot==4 || slot==5)return false; // Passive display / reserved skill slot.
-            if(slot!=8 && returnHome!=null && returnHome.Casting)
+            if (slot < 0 || slot >= 12 || stats?.Definition == null || targeting == null) return false;
+            if(slot>=4 && slot<=8)return false; // Passive and four reserved class-skill slots.
+            if(slot!=11 && returnHome!=null && returnHome.Casting)
                 returnHome.Cancel();
-            if(slot==6)
+            if(slot==9)
             {
                 combatInput?.BeginAttackTargeting();
                 return combatInput!=null && actor!=null && actor.CanAct;
             }
-            if(slot==7)
+            if(slot==10)
             {
                 combatInput?.CancelAttackMove();
                 return interactor!=null && interactor.InteractNearest();
             }
-            if(slot==8)return returnHome!=null && returnHome.TryBegin();
+            if(slot==11)return returnHome!=null && returnHome.TryBegin();
             string classId = stats.Definition.stableId;
 
             if (classId == NoviceSkillProgression.ClassStableId && novice != null && noviceCaster != null)

@@ -70,6 +70,25 @@ namespace DiceFree.EditorTools
                     Check(alphaWolf.GetComponentsInChildren<Light>(true).Count(l => l.name == "Faint red eye ember") >= 2,
                         "alpha red eye glow missing");
                 }
+                // Balance contract: doubling applies to every wolf type,
+                // including the roaming Alpha; quillrats remain unchanged.
+                foreach(var animal in animals)
+                {
+                    bool wolf=animal.Kind!=WildlifeKind.Quillrat;
+                    float expectedRatio=animal.Kind==WildlifeKind.Quillrat?7f:
+                        animal.Kind==WildlifeKind.AlphaWolf?130f:24f;
+                    var stats=animal.Actor.Stats;
+                    float baseline=stats.Definition.baseHp+
+                        stats.Attributes.vitality*stats.HpPerVitality;
+                    Check(Mathf.Abs(stats.MaximumHp-baseline*expectedRatio)<
+                        Mathf.Max(1f,baseline*expectedRatio*.01f),
+                        "incorrect HP multiplier for "+animal.name+
+                        " expected "+expectedRatio+"x; got "+stats.MaximumHp);
+                    Check(Mathf.Approximately(stats.BasicAttackDamageMultiplier,
+                        wolf?1.5f:1f),
+                        "incorrect bite damage multiplier for "+animal.name);
+                }
+                Debug.Log("IRONPINE_WOLF_BALANCE_OK: 12 ordinary wolves + 1 Alpha have doubled HP / +50% damage; quillrats unchanged.");
                 var alpha = animals.Single(a => a.Kind == WildlifeKind.AlphaWolf).Actor;
                 Check(alpha.Stats.Level == 20 && alpha.Health.Current > 0, "alpha not level 20/alive");
                 Debug.Log("IRONPINE_WILDLIFE_PLAYMODE_OK: 22 living actors, correct species quotas, " +

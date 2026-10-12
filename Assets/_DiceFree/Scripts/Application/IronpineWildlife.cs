@@ -63,11 +63,18 @@ namespace DiceFree.Ironpine
             attack.enabled = kind != WildlifeKind.Quillrat;
             actor.Configure(1, kind == WildlifeKind.AlphaWolf ? .75f :
                 kind == WildlifeKind.Quillrat ? .35f : .52f, familyId);
-            // Playtest tuning: wildlife was dying before basic attack patterns
-            // could be learned. Scale all three wolf types and quillrats 10x.
-            float multiplier = kind == WildlifeKind.Quillrat ? 7.0f :
-                kind == WildlifeKind.AlphaWolf ? 65.0f : 12.0f;
+            // Balance pass: every wolf has 2x its prior maximum HP and 50%
+            // more bite/lunge/pounce damage. Quillrats stay exactly as before.
+            // This source affects basic attacks and specials that use bite damage.
+            const float quillratHp = 7f;
+            const float ordinaryWolfHp = 24f; // 12 * 2
+            const float alphaWolfHp = 130f; // 65 * 2
+            float multiplier = kind == WildlifeKind.Quillrat ? quillratHp :
+                kind == WildlifeKind.AlphaWolf ? alphaWolfHp : ordinaryWolfHp;
             actor.Stats.SetEncounterMaximumHp(actor.Stats.MaximumHp * multiplier);
+            if (kind != WildlifeKind.Quillrat)
+                actor.Stats.SetBasicAttackDamagePercentContribution(
+                    "ironpine.wolf-balance", 50f);
             nextHowl = Time.time + 7f;
             nextSpecial = Time.time + 6f;
             nextWander = Time.time + UnityEngine.Random.Range(4f, 10f);
@@ -398,7 +405,9 @@ namespace DiceFree.Ironpine
         private void ApplyFrenzy(float seconds)
         {
             frenzyUntil = Time.time + seconds;
-            actor.Stats.SetBasicAttackDamagePercentContribution("ironpine.frenzy", 20f);
+            // Preserve the +20% Hunting Frenzy multiplier after the baseline
+            // +50% wolf damage change: (1 + .50 + .30) = 1.5 * 1.2.
+            actor.Stats.SetBasicAttackDamagePercentContribution("ironpine.frenzy", 30f);
             actor.Effects?.ApplyMovementSpeedBuff("ironpine.frenzy", 15f, seconds);
         }
         private void EndFrenzy()

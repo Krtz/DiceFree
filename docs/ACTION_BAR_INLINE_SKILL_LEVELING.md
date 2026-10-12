@@ -11,10 +11,10 @@ The existing movable/scalable `GenericActionBar` remains a two-row, six-column a
 | 1–4 | Four current active class skills | Cast/cursor-target through existing abilities; hotkeys 1–4 (remappable) |
 | 5 | Current class passive/aura | **Never casts**, but always shows skill artwork, rank, passive marker, and complete rank-dependent hover description |
 | 6 | Future class skill / another aura / passive | Intentionally empty until designed |
-| 7 | Attack / Attack Move | Original X command (including Shift queue and minimap targeting) |
-| 8 | Interact | Original I command |
-| 9 | Return to Revive Stone | Original R living-Return spell, 10s rooted cast and 10m cooldown |
-| 10–12 | Future actions | Empty (no misleading placeholder key numerals) |
+| 10 | Attack / Attack Move | Original X command (including Shift queue and minimap targeting) |
+| 11 | Interact | Original I command |
+| 12 | Return to Revive Stone | Original R living-Return spell, 10s rooted cast and 10m cooldown |
+| 7–9 | Future class or utility skills | Intentionally empty until designed |
 
 This preserves the three playable classes' original data-driven active identities and skill definitions:
 - Novice: STR Melee Stun, Magic Sand, AGI Attack Speed Buff, SPI Heal, plus *All-Stat Passive* in slot 5.
@@ -30,7 +30,7 @@ The class-specific icons use the previously installed 17 locally licensed Battle
 - Click **+** to spend one point and learn/upgrade exactly that skill. The icon's rank display updates immediately; the green point-count reminder above the action bar decreases.
 - Hovering **+** previews the NEXT rank using the actual `SkillTooltips.Describe` curves; hovering anywhere else on the icon still shows the current skill's properties and current rank. Passive and aura descriptions work even at rank zero.
 - Upgrade clicks and regular skill casts have distinct, non-overlapping IMGUI hit regions; buying an upgrade **cannot accidentally cast** the skill.
-- Passive icon is not a cast button and does not respond to active ability hotkeys. Shared command slots cannot upgrade or consume points.
+- Passive icon is not a cast button and does not respond to active ability hotkeys. Shared command slots 10–12 cannot upgrade or consume points.
 - Maximum rank hides the **+**; when no unspent points remain, all **+** markers and the available-point reminder disappear.
 - Existing Novice/Physical/Magical standalone skill allocation window components are retained solely for backward serialization compatibility but **no longer open, block pointer input, or appear in the HUD editor**. The obsolete `Novice skills menu` input action is retained for existing input binding saves but hidden from the Options keybind list.
 - Class-specific tooltips no longer tell the player to use the old skill-allocation window.

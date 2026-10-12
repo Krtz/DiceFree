@@ -106,11 +106,11 @@ namespace DiceFree.EditorTools
             Require(passive.Exists && passive.passive &&
                 passive.icon!=null && !string.IsNullOrEmpty(passive.tooltip),
                 "Passive/aura must have its own visible icon and tooltip");
-            Require(!source.View(5).Exists &&
-                source.View(6).iconKey=="attack-command" &&
-                source.View(7).iconKey=="interact" &&
-                source.View(8).iconKey=="return-home",
-                "Shared commands must be in slots 7-9, leaving slot 6 for future skills");
+            Require(Enumerable.Range(5,4).All(slot=>!source.View(slot).Exists) &&
+                source.View(9).iconKey=="attack-command" &&
+                source.View(10).iconKey=="interact" &&
+                source.View(11).iconKey=="return-home",
+                "Shared commands must occupy slots 10-12; slots 6-9 reserved");
             Require(view.Exists&&!string.IsNullOrWhiteSpace(view.tooltip),
                 "Action bar skill tooltip is missing in Play Mode");
             return new{success=true,unifiedSkillsWidgets=activeSkillWindows.Length,
