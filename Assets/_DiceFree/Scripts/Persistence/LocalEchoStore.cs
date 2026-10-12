@@ -69,6 +69,18 @@ namespace DiceFree.Persistence
                 {
                     var save = Read(candidate);
                     if (candidate != Path) RecoveryMessage = "Recovered Echo from " + candidate;
+                    // Preserve the original verified bytes permanently before
+                    // the first quadratic migration, alongside rotating backups.
+                    // Never overwrite an existing pre-quadratic safety copy.
+                    if (save.schemaVersion < SaveMigrations.CurrentSchema)
+                    {
+                        string safetyCopy = Path + ".pre-quadratic-original";
+                        if (!File.Exists(safetyCopy))
+                        {
+                            File.Copy(candidate, safetyCopy);
+                            Read(safetyCopy); // Checksum/integrity verified.
+                        }
+                    }
                     var migrated = SaveMigrations.Upgrade(save);
                     if (migrated.schemaVersion != save.schemaVersion)
                         MigrationMessage = $"Echo schema {save.schemaVersion} -> {migrated.schemaVersion}; pending next successful commit";
