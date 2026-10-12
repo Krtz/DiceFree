@@ -1,5 +1,8 @@
 # DiceFree XP ladder audit — 2026-10-12
 
+> **Historical audit, before quadratic XP implementation.** The live feature branch now uses `30 + 3 × (Level−1)²` with schema-v6 save migration; see [the new implementation and balance audit](QUADRATIC_XP_IMPLEMENTATION.md). Figures below document the *previous* linear curve.
+
+
 **Status:** Read-only balance audit. No XP curve or XP rewards changed in this combat/UI patch.
 
 ## Current source of truth
