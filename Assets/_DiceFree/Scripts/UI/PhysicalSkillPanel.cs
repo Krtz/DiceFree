@@ -17,17 +17,18 @@ namespace DiceFree.UI
         public override string LayoutId => "skill-selection-physical";
         public override string DisplayName => "Skills";
         public override string LayoutGroupId => "skills";
-        public override bool ShowInLayoutEditor => progression != null &&
-            progression.ActiveForCurrentClass;
+        // Allocation lives in the action bar; preserve this legacy component
+        // for existing serialized scenes without exposing a second menu.
+        public override bool ShowInLayoutEditor => false;
         public override Rect DefaultNormalizedBounds => new(0.68f, 0.35f, 0.30f, 0.36f);
         public override Vector2 MinimumPixelSize => new(360f, 230f);
-        public override bool BlocksPointer => open;
+        public override bool BlocksPointer => false;
         private Rect LegacyBounds => open
             ? new Rect(Mathf.Max(12, Screen.width - 490), Mathf.Max(12, Screen.height - 630), 474, 350)
             : default;
 
-        public bool Open => open;
-        public void Show() { if (progression != null && progression.ActiveForCurrentClass) open = true; }
+        public bool Open => false;
+        public void Show() { } // Moved to in-bar '+' skill upgrades.
         public void Close() => open = false;
 
         public void Configure(PhysicalSkillProgression value) => progression = value;
@@ -52,48 +53,17 @@ namespace DiceFree.UI
 
         private void Update()
         {
-            if (progression != null && !progression.ActiveForCurrentClass) { open = false; return; }
-            if (bindings == null || bindings.Suppressed || toggle == null) return;
-            if (toggle.WasPressedThisFrame()) open = !open;
+            // Legacy skill-menu binding intentionally does nothing.
+            // Rank-ups happen only on the 12-slot action bar.
+            open=false;
         }
 
         private void Notify() => notifiedUntil = Time.unscaledTime + 8f;
 
         private void OnGUI()
         {
-            if (progression == null || !progression.ActiveForCurrentClass || HudPointerBlocker.ModalOpen) return;
-
-            string key = InputBindings.Display(toggle);
-            if (!open) return;
-            var r = Bounds;
-            DrawPanel(r);
-            GUI.Label(new Rect(r.x + 10, r.y + 8, r.width - 90, 22),
-                "Physically Blessed — " + progression.UnspentPoints + " unspent");
-            if (GUI.Button(new Rect(r.xMax - 72, r.y + 6, 62, 24), "Close")) open = false;
-
-            var view = new Rect(r.x + 8, r.y + 36, r.width - 16, r.height - 44);
-            GUILayout.BeginArea(view);
-            scroll = GUILayout.BeginScrollView(scroll);
-            foreach (var definition in progression.Definitions)
-            {
-                if (definition == null) continue;
-                int rank = progression.Rank(definition.stableId);
-                GUILayout.BeginHorizontal(GUI.skin.box);
-                string details = SkillTooltips.Describe(definition, rank);
-                GUILayout.Label(new GUIContent(definition.displayName +
-                    "\nRank " + rank + "/" + definition.maxRank, details),
-                    GUILayout.Width(300), GUILayout.Height(42));
-                GUI.enabled = progression.UnspentPoints > 0 && rank < definition.maxRank;
-                if (GUILayout.Button(new GUIContent("+1", details),
-                    GUILayout.Width(70), GUILayout.Height(38)))
-                    progression.Spend(definition.stableId);
-                GUI.enabled = true;
-                GUILayout.EndHorizontal();
-            }
-            GUILayout.EndScrollView();
-            GUILayout.EndArea();
-            if(!(HudLayoutManager.Current?.EditMode ?? false))
-                HudTooltip.DrawCurrent();
+            // No second skill allocation pop-up. The primary action bar now
+            // contains active skills, auras/passives and all upgrade controls.
         }
     }
 }

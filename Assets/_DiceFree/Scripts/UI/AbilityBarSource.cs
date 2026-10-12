@@ -1,3 +1,4 @@
+using System.Linq;
 using DiceFree.Combat;
 using DiceFree.World;
 using DiceFree.Input;
@@ -21,9 +22,12 @@ namespace DiceFree.UI
             public readonly string tooltip;
             public readonly Texture2D icon;
             public readonly string iconKey;
+            public readonly bool passive;
+            public readonly bool canUpgrade;
 
             public SlotView(string name, string key, int rank, int maxRank, float cooldown,
-                bool learned, string tooltip, Texture2D icon, string iconKey)
+                bool learned, string tooltip, Texture2D icon, string iconKey,
+                bool passive=false, bool canUpgrade=false)
             {
                 this.name = name;
                 this.key = key;
@@ -34,6 +38,8 @@ namespace DiceFree.UI
                 this.tooltip = tooltip;
                 this.icon = icon;
                 this.iconKey = iconKey;
+                this.passive = passive;
+                this.canUpgrade = canUpgrade;
             }
 
             public bool Exists => !string.IsNullOrEmpty(name);
@@ -85,6 +91,72 @@ namespace DiceFree.UI
             };
         }
 
+        public int UnspentPoints
+        {
+            get
+            {
+                string id=stats?.Definition?.stableId;
+                if(id==NoviceSkillProgression.ClassStableId)return novice?.UnspentPoints??0;
+                if(id==PhysicalSkillProgression.ClassStableId)return physical?.UnspentPoints??0;
+                if(id==MagicalSkillProgression.ClassStableId)return magical?.UnspentPoints??0;
+                return 0;
+            }
+        }
+
+        public bool CanUpgrade(int slot) => View(slot).canUpgrade;
+        public bool Upgrade(int slot)
+        {
+            if(slot<0 || slot>4 || !CanUpgrade(slot))return false;
+            string id=stats?.Definition?.stableId;
+            if(id==NoviceSkillProgression.ClassStableId)
+            {
+                var skill=slot==4?novice.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    novice.ActiveAtSlot(slot);
+                return skill!=null && novice.Spend(skill.stableId);
+            }
+            if(id==PhysicalSkillProgression.ClassStableId)
+            {
+                var skill=slot==4?physical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    physical.ActiveAtSlot(slot);
+                return skill!=null && physical.Spend(skill.stableId);
+            }
+            if(id==MagicalSkillProgression.ClassStableId)
+            {
+                var skill=slot==4?magical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    magical.ActiveAtSlot(slot);
+                return skill!=null && magical.Spend(skill.stableId);
+            }
+            return false;
+        }
+
+        public string UpgradeTooltip(int slot)
+        {
+            if(!CanUpgrade(slot))return "";
+            string id=stats?.Definition?.stableId;
+            if(id==NoviceSkillProgression.ClassStableId)
+            {
+                var def=slot==4?novice.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    novice.ActiveAtSlot(slot);
+                return def==null?"":("Spend 1 skill point (next rank)\n"+
+                    SkillTooltips.Describe(def,novice.Rank(def.stableId)+1));
+            }
+            if(id==PhysicalSkillProgression.ClassStableId)
+            {
+                var def=slot==4?physical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    physical.ActiveAtSlot(slot);
+                return def==null?"":("Spend 1 skill point (next rank)\n"+
+                    SkillTooltips.Describe(def,physical.Rank(def.stableId)+1));
+            }
+            if(id==MagicalSkillProgression.ClassStableId)
+            {
+                var def=slot==4?magical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active):
+                    magical.ActiveAtSlot(slot);
+                return def==null?"":("Spend 1 skill point (next rank)\n"+
+                    SkillTooltips.Describe(def,magical.Rank(def.stableId)+1));
+            }
+            return "";
+        }
+
         public bool HomeCasting => returnHome!=null && returnHome.Casting;
         public float HomeCastRemaining => returnHome?.CastRemaining??0f;
 
@@ -93,8 +165,11 @@ namespace DiceFree.UI
 
         public SlotView View(int slot)
         {
-            if (slot < 0 || slot >= 7 || stats?.Definition == null) return default;
-            if(slot>=4)return SharedView(slot);
+            if (slot < 0 || slot >= 9 || stats?.Definition == null) return default;
+            if(slot>=6)return SharedView(slot);
+            if(slot==5)return default;
+            if(slot==4)return PassiveView();
+
             string classId = stats.Definition.stableId;
             string key = InputBindings.Display(actions[slot]);
 
@@ -112,7 +187,8 @@ namespace DiceFree.UI
                     rank > 0,
                     SkillTooltips.Describe(definition, rank, key),
                     SkillIconLibrary.Get(definition.kind),
-                    SkillIconLibrary.Key(definition.kind));
+                    SkillIconLibrary.Key(definition.kind),false,
+                    rank < definition.maxRank && novice.UnspentPoints > 0);
             }
 
             if (classId == PhysicalSkillProgression.ClassStableId && physical != null)
@@ -129,7 +205,8 @@ namespace DiceFree.UI
                     rank > 0,
                     SkillTooltips.Describe(definition, rank, key),
                     SkillIconLibrary.Get(definition.kind),
-                    SkillIconLibrary.Key(definition.kind));
+                    SkillIconLibrary.Key(definition.kind),false,
+                    rank < definition.maxRank && physical.UnspentPoints > 0);
             }
 
             if (classId == MagicalSkillProgression.ClassStableId && magical != null)
@@ -146,27 +223,64 @@ namespace DiceFree.UI
                     rank > 0,
                     SkillTooltips.Describe(definition, rank, key),
                     SkillIconLibrary.Get(definition.kind),
-                    SkillIconLibrary.Key(definition.kind));
+                    SkillIconLibrary.Key(definition.kind),false,
+                    rank < definition.maxRank && magical.UnspentPoints > 0);
             }
 
             return default;
         }
 
+        private SlotView PassiveView()
+        {
+            string id=stats.Definition.stableId;
+            if(id==NoviceSkillProgression.ClassStableId && novice!=null)
+            {
+                var def=novice.Definitions.FirstOrDefault(x=>x!=null&&!x.Active);
+                if(def==null)return default;
+                int rank=novice.Rank(def.stableId);
+                return new SlotView(def.displayName,"",rank,def.maxRank,0,rank>0,
+                    SkillTooltips.Describe(def,rank),
+                    SkillIconLibrary.Get(def.kind),SkillIconLibrary.Key(def.kind),
+                    true,rank<def.maxRank&&novice.UnspentPoints>0);
+            }
+            if(id==PhysicalSkillProgression.ClassStableId && physical!=null)
+            {
+                var def=physical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active);
+                if(def==null)return default;
+                int rank=physical.Rank(def.stableId);
+                return new SlotView(def.displayName,"",rank,def.maxRank,0,rank>0,
+                    SkillTooltips.Describe(def,rank),
+                    SkillIconLibrary.Get(def.kind),SkillIconLibrary.Key(def.kind),
+                    true,rank<def.maxRank&&physical.UnspentPoints>0);
+            }
+            if(id==MagicalSkillProgression.ClassStableId && magical!=null)
+            {
+                var def=magical.Definitions.FirstOrDefault(x=>x!=null&&!x.Active);
+                if(def==null)return default;
+                int rank=magical.Rank(def.stableId);
+                return new SlotView(def.displayName,"",rank,def.maxRank,0,rank>0,
+                    SkillTooltips.Describe(def,rank),
+                    SkillIconLibrary.Get(def.kind),SkillIconLibrary.Key(def.kind),
+                    true,rank<def.maxRank&&magical.UnspentPoints>0);
+            }
+            return default;
+        }
+
         private SlotView SharedView(int slot)
         {
-            string name=slot==4?"Attack / Attack Move":
-                slot==5?"Interact":"Return to Revive Stone";
-            string key=slot==4?InputBindings.Display(bindings.Action("Gameplay/Attack selected")):
-                slot==5?InputBindings.Display(bindings.Action("Gameplay/Interact")):
+            string name=slot==6?"Attack / Attack Move":
+                slot==7?"Interact":"Return to Revive Stone";
+            string key=slot==6?InputBindings.Display(bindings.Action("Gameplay/Attack selected")):
+                slot==7?InputBindings.Display(bindings.Action("Gameplay/Interact")):
                 InputBindings.Display(bindings.Action("Gameplay/Return to anchor"));
-            string iconId=slot==4?"attack-command":slot==5?"interact":"return-home";
-            float cooldown=slot==6?returnHome?.CooldownRemaining??0f:0f;
-            string description=slot==4?
+            string iconId=slot==6?"attack-command":slot==7?"interact":"return-home";
+            float cooldown=slot==8?returnHome?.CooldownRemaining??0f:0f;
+            string description=slot==6?
                 "Attack a selected enemy or choose an enemy/ground destination. Shift queues attacks and attack-move orders. Works on the minimap.":
-                slot==5?
+                slot==7?
                 "Interact with the nearest available NPC, chest, loot or world object.":
                 "A shared Echo skill. Cast for 10 seconds to teleport to your last activated Dice revive stone. 10 minute cooldown. Interrupted by movement or damage; unavailable in combat or dungeons. No healing.";
-            if(slot==6 && returnHome!=null)
+            if(slot==8 && returnHome!=null)
             {
                 description+=" Destination: "+GetComponent<RespawnAtAnchor>()?.AnchorName+".";
                 if(returnHome.Casting)description+=" Casting: "+returnHome.CastRemaining.ToString("0.0")+"s.";
@@ -191,20 +305,21 @@ namespace DiceFree.UI
 
         public bool Activate(int slot)
         {
-            if (slot < 0 || slot >= 7 || stats?.Definition == null || targeting == null) return false;
-            if(slot!=6 && returnHome!=null && returnHome.Casting)
+            if (slot < 0 || slot >= 9 || stats?.Definition == null || targeting == null) return false;
+            if(slot==4 || slot==5)return false; // Passive display / reserved skill slot.
+            if(slot!=8 && returnHome!=null && returnHome.Casting)
                 returnHome.Cancel();
-            if(slot==4)
+            if(slot==6)
             {
                 combatInput?.BeginAttackTargeting();
                 return combatInput!=null && actor!=null && actor.CanAct;
             }
-            if(slot==5)
+            if(slot==7)
             {
                 combatInput?.CancelAttackMove();
                 return interactor!=null && interactor.InteractNearest();
             }
-            if(slot==6)return returnHome!=null && returnHome.TryBegin();
+            if(slot==8)return returnHome!=null && returnHome.TryBegin();
             string classId = stats.Definition.stableId;
 
             if (classId == NoviceSkillProgression.ClassStableId && novice != null && noviceCaster != null)

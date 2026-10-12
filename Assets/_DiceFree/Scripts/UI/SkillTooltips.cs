@@ -45,7 +45,7 @@ namespace DiceFree.UI
             if(skill.Active) Extras(s,skill.range,skill.cooldownSeconds,skill.durationSeconds,
                 skill.kind==NoviceSkillKind.MagicSand ||
                 skill.kind==NoviceSkillKind.AgilityAttackSpeedBuff);
-            Next(s,rank,skill.maxRank,"Hover in the Skills window before spending a point.");
+            Next(s,rank,skill.maxRank,"Spend skill points using the + button on the action bar.");
             return s.ToString().TrimEnd();
         }
 

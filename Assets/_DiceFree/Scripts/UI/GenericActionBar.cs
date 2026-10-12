@@ -52,8 +52,21 @@ namespace DiceFree.UI
                     if(component is IQueuedOrders queue){queuedOrders=queue;break;}
             Rect panel = Bounds;
             DrawPanel(panel);
+            if(source.UnspentPoints>0)
+            {
+                Rect label=new(panel.x+12f,panel.y-23f,panel.width-24f,21f);
+                HudChrome.Fill(label,new Color(.10f,.23f,.15f,.96f));
+                GUI.Label(label,"+"+source.UnspentPoints+
+                    " skill point"+(source.UnspentPoints==1?"":"s")+
+                    " available — use + on a skill",
+                    new GUIStyle(GUI.skin.label)
+                    {
+                        fontStyle=FontStyle.Bold,alignment=TextAnchor.MiddleCenter,
+                        fontSize=11,normal={textColor=new Color(.85f,1f,.72f)}
+                    });
+            }
             if(queuedOrders!=null && queuedOrders.PendingOrders>0)
-                GUI.Label(new Rect(panel.x+12,panel.y-21,panel.width-20,20),
+                GUI.Label(new Rect(panel.x+12,source.UnspentPoints>0?panel.y-45:panel.y-21,panel.width-20,20),
                     "Queued orders: "+queuedOrders.PendingOrders+
                     "   (Shift+click to append; Stop to clear)");
             Rect inner = Inner(panel);
@@ -71,7 +84,7 @@ namespace DiceFree.UI
                     cellWidth,
                     cellHeight);
 
-                if (index < 7)
+                if (index < 5 || (index >= 6 && index <= 8))
                     DrawAbility(rect, index);
                 else
                     DrawEmpty(rect, index);
@@ -94,7 +107,8 @@ namespace DiceFree.UI
                 return;
             }
 
-            bool interactable = view.learned && view.cooldown <= 0.001f &&
+            bool interactable = !view.passive && view.learned &&
+                                view.cooldown <= 0.001f &&
                                 !(HudLayoutManager.Current?.EditMode ?? false);
             bool hovered = rect.Contains(tooltipPointer) ||
                 rect.Contains(Event.current.mousePosition);
@@ -135,7 +149,7 @@ namespace DiceFree.UI
                 });
             }
 
-            if (view.rank > 0)
+            if (slot<5)
             {
                 Rect rankBadge=new(rect.xMax-37,rect.yMax-19,35,17);
                 HudChrome.Fill(rankBadge,new Color(.015f,.021f,.035f,.84f));
@@ -153,11 +167,24 @@ namespace DiceFree.UI
             // the skill's cooldown mask.
             bool previous = GUI.enabled;
             GUI.enabled = interactable;
-            if (GUI.Button(rect, new GUIContent("",view.tooltip), GUIStyle.none))
+            // The upgrade hotspot must NOT overlap the regular action
+            // button: IMGUI claims mouse-down for the first matching button.
+            // Reserve the top-right 28x27 area for '+' when it is available.
+            if(view.canUpgrade)
+            {
+                Rect actionBody=new(rect.x,rect.y,
+                    Mathf.Max(0f,rect.width-28f),rect.height);
+                Rect actionCorner=new(rect.xMax-28f,rect.y+27f,
+                    28f,Mathf.Max(0f,rect.height-27f));
+                if(GUI.Button(actionBody,new GUIContent("",view.tooltip),GUIStyle.none) ||
+                   GUI.Button(actionCorner,new GUIContent("",view.tooltip),GUIStyle.none))
+                    source.Activate(slot);
+            }
+            else if(GUI.Button(rect,new GUIContent("",view.tooltip),GUIStyle.none))
                 source.Activate(slot);
             GUI.enabled = previous;
 
-            if (slot==6 && source.HomeCasting)
+            if (slot==8 && source.HomeCasting)
             {
                 HudChrome.Fill(rect,new Color(.12f,.27f,.46f,.40f));
                 GUI.Label(rect,source.HomeCastRemaining.ToString("0.0")+"s",
@@ -185,6 +212,48 @@ namespace DiceFree.UI
                         fontSize = Mathf.RoundToInt(Mathf.Clamp(rect.height * 0.25f, 11, 20))
                     });
             }
+            // Passives always remain visible/readable, but are not clickable
+            // actions. Their benefits still use the current source-of-truth
+            // rank curves in the same tooltips as active skills.
+            if (view.passive)
+            {
+                // A compact passive marker leaves the top-right '+' clear
+                // even at the HUD's minimum scale and size.
+                float badgeWidth=view.canUpgrade?Mathf.Min(27f,rect.width-31f):
+                    Mathf.Min(46f,rect.width-4f);
+                Rect passiveBadge=new(rect.x+2f,rect.y+2f,
+                    Mathf.Max(12f,badgeWidth),17f);
+                HudChrome.Fill(passiveBadge,new Color(.06f,.10f,.22f,.9f));
+                GUI.Label(passiveBadge,view.canUpgrade?"PASS":"PASSIVE",
+                    new GUIStyle(GUI.skin.label)
+                    {
+                        alignment=TextAnchor.MiddleCenter,
+                        fontSize=8,fontStyle=FontStyle.Bold,
+                        normal={textColor=new Color(.73f,.85f,1f)}
+                    });
+            }
+            // This comes AFTER the main transparent slot button: IMGUI
+            // processes controls in drawing order, so + gets its own hit area
+            // and never fires the ability below when clicked.
+            if(view.canUpgrade && !(HudLayoutManager.Current?.EditMode ?? false))
+            {
+                Rect plus=new(rect.xMax-27f,rect.y+2f,25f,23f);
+                bool over=plus.Contains(tooltipPointer) ||
+                    plus.Contains(Event.current.mousePosition);
+                string details=source.UpgradeTooltip(slot);
+                if(over)hoveredSkillTooltip=details;
+                HudChrome.Fill(plus,over?new Color(.28f,.58f,.16f,.98f):
+                    new Color(.17f,.43f,.13f,.98f));
+                if(GUI.Button(plus,new GUIContent("+",details),
+                    new GUIStyle(GUI.skin.button)
+                    {
+                        fontStyle=FontStyle.Bold,
+                        fontSize=18,
+                        alignment=TextAnchor.MiddleCenter,
+                        normal={textColor=Color.white}
+                    }))
+                    source.Upgrade(slot);
+            }
             // Tooltips work even when the button is on cooldown or unlearned.
             GUI.Label(rect, new GUIContent("", view.tooltip), GUIStyle.none);
         }
@@ -193,9 +262,8 @@ namespace DiceFree.UI
         {
             bool hovered = rect.Contains(Event.current.mousePosition);
             HudChrome.DrawSlot(rect, Theme, false, hovered);
-            string label = index < 6 ? "" : (index - 5).ToString();
-            if (!string.IsNullOrEmpty(label))
-                GUI.Label(rect, label, HudChrome.SlotTextStyle(Theme, true));
+            // Future class/utility slots are deliberately left blank.
+            // They cannot be mistaken for an equipped action.
         }
     }
 }

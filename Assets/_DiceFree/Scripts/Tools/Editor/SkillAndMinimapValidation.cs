@@ -67,13 +67,13 @@ namespace DiceFree.EditorTools
                 "Skill panels missing from scene");
             foreach(var panel in new CustomizableHudWidget[]
                 {novicePanel,magicPanel,physicalPanel})
-                Require(panel.DisplayName=="Skills"&&panel.LayoutGroupId=="skills",
-                    "All classes must share the Skills panel layout.");
+                Require(!panel.ShowInLayoutEditor && !panel.BlocksPointer,
+                    "Legacy skill menu must be retired in favor of on-bar upgrades.");
             Require(new[]{novicePanel.LayoutId,magicPanel.LayoutId,
                 physicalPanel.LayoutId}.Distinct().Count()==3,
                 "Concrete skill panels still need independent component identities.");
             return new{success=true,tooltipDefinitions=novice.Length+magic.Length+
-                physical.Length,sharedEditorWindow="Skills",
+                physical.Length,upgradeUi="In action bar",
                 concreteClassPanels=3};
         }
 
@@ -100,10 +100,17 @@ namespace DiceFree.EditorTools
                 FindObjectsInactive.Include,FindObjectsSortMode.None)
                 .Where(w=>(w is NoviceSkillPanel || w is PhysicalSkillPanel ||
                     w is MagicalSkillPanel) && w.ShowInLayoutEditor).ToArray();
-            Require(activeSkillWindows.Length==1 &&
-                activeSkillWindows[0].LayoutGroupId=="skills" &&
-                activeSkillWindows[0].DisplayName=="Skills",
-                "HUD editor must show exactly one unified Skills window");
+            Require(activeSkillWindows.Length==0,
+                "Legacy skill allocation windows should not be visible anymore");
+            var passive=source.View(4);
+            Require(passive.Exists && passive.passive &&
+                passive.icon!=null && !string.IsNullOrEmpty(passive.tooltip),
+                "Passive/aura must have its own visible icon and tooltip");
+            Require(!source.View(5).Exists &&
+                source.View(6).iconKey=="attack-command" &&
+                source.View(7).iconKey=="interact" &&
+                source.View(8).iconKey=="return-home",
+                "Shared commands must be in slots 7-9, leaving slot 6 for future skills");
             Require(view.Exists&&!string.IsNullOrWhiteSpace(view.tooltip),
                 "Action bar skill tooltip is missing in Play Mode");
             return new{success=true,unifiedSkillsWidgets=activeSkillWindows.Length,

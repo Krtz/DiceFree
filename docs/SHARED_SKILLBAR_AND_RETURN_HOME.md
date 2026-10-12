@@ -2,21 +2,21 @@
 
 Branch: `feature/visual-overhaul-vis00`; implementation completed on user request.
 
-## Shared action-bar layout
+## Shared action-bar layout (updated with Action Bar v2)
 
-The existing movable **12-slot** `GenericActionBar` continues to show the four available class-specific active skills in slots 1–4. Three shared abilities occupy:
+The movable **12-slot** `GenericActionBar` has four active class skills in slots 1–4, a passive/aura in slot 5 with a rank-dependent tooltip, and a reserved slot 6. Three permanent shared actions occupy **slots 7–9**:
 
-| Slot | Action | Binding | Art from locally licensed Battle Skill Icon pack |
+| Slot | Action | Binding | Local Battle Skill Icon pack artwork |
 |---|---|---|---|
-| 5 | **Attack / Attack Move** | X | `S_Forward_steel_attack.png` |
-| 6 | **Interact** | I | `S_fullsight.png` |
-| 7 | **Return to Revive Stone** | R when alive | `S_Blue_Hole.png` |
+| 7 | **Attack / Attack Move** | X | `S_Forward_steel_attack.png` |
+| 8 | **Interact** | I | `S_fullsight.png` |
+| 9 | **Return to Revive Stone** | R when alive | `S_Blue_Hole.png` |
 
-The remaining five action slots remain available for future class-specific skills or other universal commands. The UI shows hotkeys, icon art, cooldown shading, hover tooltips and the Return cast countdown. Slot 5 delegates to the **same** player combat cursor as X, supporting hostile targeting, ground attack-move, Shift-queued commands and minimap targets. Slot 6 uses the same nearby world interaction function as I. Both preserve their established commands instead of introducing UI-only duplicate gameplay.
+Slots 10–12 remain empty for future abilities. The action bar shows hotkeys, art, cooldown shading, hover tooltips and the Return cast countdown. Slot 7 delegates to the **same** player combat cursor as X, supporting selected/ground targeting, Shift-queued attack moves and minimap targeting. Slot 8 uses the existing nearby object/NPC/chest interaction system.
 
-All three icons are original vendor PNGs installed **locally only** in gitignored `Assets/_DiceFree/Resources/AbilityIconsLicensed/`. The public repo contains `SkillIconLibrary` mappings and original code-drawn fallback sigils, not redistributed art.
+**Skill allocation is now done in the action bar:** green '+' upgrade controls appear over learnable active skills and passives, with the normal class skill-point budget. No separate skill-allocation popup. See `docs/ACTION_BAR_INLINE_SKILL_LEVELING.md` for the complete update.
 
-The UI/Assembly-CSharp boundary is handled via `ISharedCombatCommands` on the existing `CombatInput`, rather than directly coupling the UI assembly to player-input classes.
+All three icon PNGs are installed **locally only** under gitignored `Assets/_DiceFree/Resources/AbilityIconsLicensed/`; portable code-generated alternatives remain. The UI/Assembly-CSharp boundary uses `ISharedCombatCommands`, rather than referencing character-specific input from a UI assembly.
 
 ## Return to Revive Stone (GitHub issue #38 is authoritative)
 

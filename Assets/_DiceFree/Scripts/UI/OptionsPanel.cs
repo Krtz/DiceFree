@@ -190,6 +190,10 @@ namespace DiceFree.UI
             string lastMap=null;
             foreach(var entry in bindings.Entries)
             {
+                // Kept in the input asset for old profiles, but the obsolete
+                // allocation window is no longer a gameplay control.
+                if(entry.Map=="UI" && entry.Label.StartsWith("Novice skills menu"))
+                    continue;
                 if(entry.Map!=lastMap)
                 {
                     lastMap=entry.Map;
