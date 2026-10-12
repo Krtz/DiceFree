@@ -141,14 +141,14 @@ namespace DiceFree.EditorTools
                         if(interactor.Active!=giver)return;
                         InputSystem.QueueStateEvent(mouse,new MouseState());
                         Require(giver.TurnIn(player)&&!giver.TurnIn(player),"Turn-in/reward must happen once");
-                        Require(xp.Level==3&&xp.CurrentXp==0&&journal.GetProgress(questId).status==QuestStatus.Completed,"Turn-in level-three target");
+                        Require(xp.Level==3&&xp.CurrentXp==7&&journal.GetProgress(questId).status==QuestStatus.Completed,"Turn-in level-three target");
                         CheckLevel(3);
                         Require(journal.CaptureState()[0].questId==questId,"Persistence record missing stable quest ID");
-                        Debug.Log("CORNBERG_Q1_TURNIN_OK: 2/2, return interaction, one reward -> level 3."); stage++; break;
+                        Debug.Log("CORNBERG_Q1_TURNIN_OK: 2/2, return interaction, one reward -> level 3 with 7 XP on quadratic curve."); stage++; break;
                     case 4:
                         if(!Respawned())return;
                         Kill();
-                        Require(xp.CurrentXp==10&&journal.GetProgress(questId).status==QuestStatus.Completed&&journal.GetProgress(questId).count==2,"Completed quest must not restart; kills still grant XP");
+                        Require(xp.CurrentXp==17&&journal.GetProgress(questId).status==QuestStatus.Completed&&journal.GetProgress(questId).count==2,"Completed quest must not restart; kills still grant XP");
                         Require(reports==7&&credits==7,"Repeated lives lost/duplicated defeat credit");
                         player.Health.ApplyDamage(enemy,new DamageResult{raw=1000,mitigated=1000});
                         xp.Grant(xp.RequiredXp-xp.CurrentXp);
