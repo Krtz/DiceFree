@@ -1,5 +1,8 @@
 # Cornberg Q2: investigate the road
 
+> **Quadratic XP update (2026-10-13):** Under `30+3×(Level−1)²`, Q1 ends L3/7 XP and the isolated fresh-Q2 fixture ends L5/11 XP. Q2's actual quest and enemy reward XP remain 50 and 20. Historical progression figures below use the previous linear curve; see [quadratic implementation](QUADRATIC_XP_IMPLEMENTATION.md).
+
+
 This extends the saved Cornberg scene on `poc/cornberg`, without rebuilding its
 geography or navigation. Complete Q1 and speak to the same former swordswoman /
 farmer. Accept **Check the Road**, reach the trail marker on the northeast road,
