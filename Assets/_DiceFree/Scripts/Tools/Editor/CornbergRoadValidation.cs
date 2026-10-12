@@ -111,9 +111,9 @@ namespace DiceFree.EditorTools
             player.Motor.Teleport(giver.ApproachPosition); yield return null;
             Require(giver.Accept(player, q1), "Q1 acceptance failed.");
             for (int i = 0; i < 5; i++) { crop.GetComponent<AggroBehaviour>().ResetEncounter(); Fatal(crop); }
-            Require(giver.TurnIn(player, q1) && xp.Level == 3 && xp.CurrentXp == 0 && journal.CanAccept(q2), "Q1 -> Q2 unlock/XP failed.");
+            Require(giver.TurnIn(player, q1) && xp.Level == 3 && xp.CurrentXp == 7 && journal.CanAccept(q2), "Q1 -> Q2 unlock/XP failed.");
             Fatal(road);
-            Require(xp.CurrentXp == 20 && State.count == 0 && defeats == 1, "Road XP outside quest/duplicate corpse credit failed.");
+            Require(xp.CurrentXp == 27 && State.count == 0 && defeats == 1, "Road XP outside quest/duplicate corpse credit failed.");
             road.GetComponent<AggroBehaviour>().ResetEncounter(); xp.RestoreState(3, 0); // Separate pre-quest XP check from fresh-route balance.
             Require(giver.Accept(player, q2) && !giver.Accept(player, q2) && State.stage == 0, "Q2 acceptance or pre-entry history failed.");
             for (var wait = Checkpoint("accepted"); wait.MoveNext();) yield return null;
@@ -151,7 +151,7 @@ namespace DiceFree.EditorTools
                 else Fatal(road);
                 road.Health.ApplyDamage(player, new DamageResult { mitigated = 10000 });
                 Require(defeats == before + 1 && State.count == kill, "Road kill credited more than once.");
-                Require((kill < 3 && xp.Level == 3 && xp.CurrentXp == 20 * kill) || (kill == 3 && xp.Level == 4 && xp.CurrentXp == 10), "Road XP duplicated/lost.");
+                Require((kill < 3 && xp.Level == 3 && xp.CurrentXp == 20 * kill) || (kill == 3 && xp.Level == 4 && xp.CurrentXp == 18), "Road XP duplicated/lost.");
                 if (kill == 1)
                 {
                     object identity = road.GetEntityId(); float died = Time.time;
@@ -175,11 +175,11 @@ namespace DiceFree.EditorTools
             var interaction = player.GetComponent<Interactor>(); interaction.Order(giver);
             while (interaction.Active != giver) yield return null;
             Require(giver.CurrentQuest(player) == q2 && giver.TurnIn(player, q2) && !giver.TurnIn(player, q2), "Q2 turn-in not once-only.");
-            Require(xp.Level == 5 && xp.CurrentXp == 0 && player.Health.Maximum == 85, "Q1 -> Q2 route did not reach level five.");
+            Require(xp.Level == 5 && xp.CurrentXp == 11 && player.Health.Maximum == 85, "Q1 -> Q2 route did not reach level five.");
             for (var wait = Checkpoint("completed"); wait.MoveNext();) yield return null;
-            Require(!journal.TurnIn(q2) && !journal.Accept(q2) && xp.Level == 5 && xp.CurrentXp == 0, "Completed Q2 replayed after reload.");
+            Require(!journal.TurnIn(q2) && !journal.Accept(q2) && xp.Level == 5 && xp.CurrentXp == 11, "Completed Q2 replayed after reload.");
             Fatal(road);
-            Require(xp.CurrentXp == 20 && State.status == QuestStatus.Completed && State.count == 3, "Post-quest road XP/progress failed.");
+            Require(xp.CurrentXp == 31 && State.status == QuestStatus.Completed && State.count == 3, "Post-quest road XP/progress failed.");
             Debug.Log("CORNBERG_Q2_PLAYMODE_OK: unlock, semantic area, variants, duel, credit/XP, respawn, level five and six scene-reload checkpoints.");
         }
         private static void Tick()
