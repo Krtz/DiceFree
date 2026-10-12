@@ -117,6 +117,16 @@ namespace DiceFree.UI
         public const string Obsidian = "obsidian";
         public const string Minimal = "minimal";
 
+        private static HudThemeMetrics Pack(string id, string name,
+            HudFrameStyle frame, Color accent)
+        {
+            var panel=new Color(accent.r*.095f,accent.g*.082f,accent.b*.073f,.93f);
+            var header=new Color(accent.r*.28f,accent.g*.20f,accent.b*.18f,.98f);
+            var slot=new Color(accent.r*.055f,accent.g*.048f,accent.b*.040f,.97f);
+            return new HudThemeMetrics(id,name,frame,4f,5f,3f,3f,
+                panel,accent,slot,header,new Color(.95f,.93f,.87f,1f));
+        }
+
         private static readonly HudThemeMetrics[] themes =
         {
             new(
@@ -172,7 +182,68 @@ namespace DiceFree.UI
                 new Color(0.74f, 0.76f, 0.80f, 0.92f),
                 new Color(0.015f, 0.015f, 0.018f, 0.78f),
                 new Color(0.05f, 0.05f, 0.055f, 0.80f),
-                new Color(0.93f, 0.93f, 0.94f, 1f))
+                new Color(0.93f, 0.93f, 0.94f, 1f)),
+
+            Pack("pack-bloodlines-dark-ui","Bloodlines",
+                HudFrameStyle.Obsidian,new Color(0.80f,0.18f,0.22f,1f)),
+            Pack("pack-game-input-controller-icons-free","Controller",
+                HudFrameStyle.Minimal,new Color(0.38f,0.67f,0.91f,1f)),
+            Pack("pack-dark-brown-gui-kit","Dark Brown",
+                HudFrameStyle.Ironwood,new Color(0.63f,0.42f,0.25f,1f)),
+            Pack("pack-fantasy-wooden-gui-free","Fantasy Wood",
+                HudFrameStyle.Ironwood,new Color(0.78f,0.54f,0.24f,1f)),
+            Pack("pack-free-rpg-fantasy-spell-icons","RPG Spell Icons",
+                HudFrameStyle.Arcane,new Color(0.68f,0.43f,0.98f,1f)),
+            Pack("pack-battle-skill-icon","Battle Skills",
+                HudFrameStyle.Ironwood,new Color(0.91f,0.43f,0.25f,1f)),
+            Pack("pack-basic-ui-elements-concrete","Concrete",
+                HudFrameStyle.Stone,new Color(0.72f,0.71f,0.66f,1f)),
+            Pack("pack-basic-ui-elements-metal","Metal",
+                HudFrameStyle.Obsidian,new Color(0.71f,0.75f,0.79f,1f)),
+            Pack("pack-camo-ui-elements-woodland","Woodland Camo",
+                HudFrameStyle.Ironwood,new Color(0.43f,0.60f,0.34f,1f)),
+            Pack("pack-steampunkui","Steampunk",
+                HudFrameStyle.Ironwood,new Color(0.80f,0.56f,0.23f,1f)),
+            Pack("pack-pixel-hud-ui-free-kit","Pixel HUD",
+                HudFrameStyle.Minimal,new Color(0.55f,0.65f,0.83f,1f)),
+            Pack("pack-2d-rpg-button-7","RPG Buttons",
+                HudFrameStyle.Ironwood,new Color(0.87f,0.64f,0.28f,1f)),
+            Pack("pack-simple-ui-elements","Simple Elements",
+                HudFrameStyle.Stone,new Color(0.73f,0.75f,0.80f,1f)),
+            Pack("pack-color-manager","Color Manager",
+                HudFrameStyle.Arcane,new Color(0.39f,0.83f,0.78f,1f)),
+            Pack("pack-simple-fantasy-gui","Simple Fantasy",
+                HudFrameStyle.Stone,new Color(0.89f,0.69f,0.30f,1f)),
+            Pack("pack-elemental-meters","Elemental Meters",
+                HudFrameStyle.Arcane,new Color(0.38f,0.79f,0.91f,1f)),
+            Pack("pack-sweet-land-gui","Sweet Land",
+                HudFrameStyle.Stone,new Color(0.97f,0.73f,0.43f,1f)),
+            Pack("pack-gui-parts","GUI Parts",
+                HudFrameStyle.Stone,new Color(0.85f,0.66f,0.35f,1f)),
+            Pack("pack-spellbook-preface","Spellbook",
+                HudFrameStyle.Ironwood,new Color(0.71f,0.43f,0.19f,1f)),
+            Pack("pack-stone-ui","Stone UI",
+                HudFrameStyle.Stone,new Color(0.69f,0.71f,0.74f,1f)),
+            Pack("pack-adventure-ui-kit","Adventure",
+                HudFrameStyle.Ironwood,new Color(0.95f,0.63f,0.26f,1f)),
+            Pack("pack-colorful-ui-kit","Colorful",
+                HudFrameStyle.Arcane,new Color(0.43f,0.77f,0.97f,1f)),
+            Pack("pack-jelly-pack-ui","Jelly",
+                HudFrameStyle.Arcane,new Color(0.94f,0.52f,0.84f,1f)),
+            Pack("pack-soft-touch-ui-kit-demo","Soft Touch",
+                HudFrameStyle.Minimal,new Color(0.61f,0.78f,0.91f,1f)),
+            Pack("pack-spooky-horror-ui-kit","Spooky Horror",
+                HudFrameStyle.Obsidian,new Color(0.81f,0.23f,0.30f,1f)),
+            Pack("pack-magic-spells-40-fantasy-icons-512x512-hd","Magic Spell Icons",
+                HudFrameStyle.Arcane,new Color(0.59f,0.43f,0.96f,1f)),
+            Pack("pack-shields-40-fantasy-icons-512x512-hd","Shields",
+                HudFrameStyle.Obsidian,new Color(0.61f,0.73f,0.88f,1f)),
+            Pack("pack-wooden-gui-ui-animation-extension","Animated Wood",
+                HudFrameStyle.Ironwood,new Color(0.77f,0.51f,0.30f,1f)),
+            Pack("pack-ui-examples-ugui-sample-project","Unity Examples",
+                HudFrameStyle.Minimal,new Color(0.45f,0.77f,0.86f,1f)),
+            Pack("pack-free-ui-pack","Free UI",
+                HudFrameStyle.Stone,new Color(0.40f,0.84f,0.75f,1f))
         };
 
         public static HudThemeMetrics[] All => themes.ToArray();

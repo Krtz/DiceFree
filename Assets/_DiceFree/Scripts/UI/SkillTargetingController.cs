@@ -99,6 +99,25 @@ namespace DiceFree.UI
         /// Confirm a queued attack-move after entering targeting (e.g. pressing X).
         /// Targeting must not discard previously Shift-queued movement.
         /// </summary>
+        public bool ConfirmAttackMoveFromMinimap(Vector3 point, bool append)
+        {
+            if(Mode != SkillTargetingMode.AttackMove || groundConfirm==null ||
+               Orders==null)return false;
+            bool succeeded;
+            if(append)
+                succeeded=Orders.SubmitAttackMove(point,groundConfirm,true);
+            else
+            {
+                // Same as clicking ground in the normal world view:
+                // replace prior orders only when the destination is confirmed.
+                Orders.ClearOrders();
+                succeeded=groundConfirm(point);
+            }
+            if(succeeded)Cancel();
+            else Feedback="Cannot reach that point from the minimap.";
+            return succeeded;
+        }
+
         public bool QueueAttackMoveFromTargeting(Vector3 point)
         {
             if(Mode!=SkillTargetingMode.AttackMove || groundConfirm==null ||

@@ -15,6 +15,7 @@ namespace DiceFree.UI
         private RenderTexture mapTexture;
         private WorldFogOfWar fog;
         private IMinimapNavigator navigation;
+        private SkillTargetingController targeting;
         private Texture2D fogMap;
         private Color32[] fogPixels;
         private float nextFogRefresh;
@@ -36,6 +37,7 @@ namespace DiceFree.UI
             foreach(var behaviour in GetComponents<MonoBehaviour>())
                 if(behaviour is IMinimapNavigator navigator)
                 {navigation=navigator;break;}
+            targeting = GetComponent<SkillTargetingController>();
             CreateCamera();
             fog = FindFirstObjectByType<WorldFogOfWar>();
             fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
@@ -129,7 +131,23 @@ namespace DiceFree.UI
                 return false;
             bool append=UnityEngine.InputSystem.Keyboard.current!=null &&
                 UnityEngine.InputSystem.Keyboard.current.shiftKey.isPressed;
-            return navigation.TryMoveFromMinimap(ground.point,append);
+            // While X is armed the minimap is another legitimate attack-move
+            // ground picker. Shift appends; ordinary click replaces orders.
+            return TryIssueWorldPoint(ground.point,append);
+        }
+
+        /// <summary>
+        /// Confirm a minimap point using the same command mode as the world click.
+        /// Public for deterministic playtest coverage of Shift-queued map orders.
+        /// </summary>
+        public bool TryIssueWorldPoint(Vector3 worldPoint, bool append)
+        {
+            if(player==null || navigation==null || HudPointerBlocker.ModalOpen ||
+               (HudLayoutManager.Current?.EditMode ?? false))return false;
+            if(targeting==null)targeting=GetComponent<SkillTargetingController>();
+            if(targeting!=null && targeting.Mode==SkillTargetingMode.AttackMove)
+                return targeting.ConfirmAttackMoveFromMinimap(worldPoint,append);
+            return navigation.TryMoveFromMinimap(worldPoint,append);
         }
 
         private void OnGUI()
@@ -141,7 +159,10 @@ namespace DiceFree.UI
             Rect inner = Inner(panel);
             float header = Mathf.Clamp(inner.height * 0.10f, 18, 28);
             var headerRect = new Rect(inner.x, inner.y, inner.width, header);
-            HudChrome.DrawHeader(headerRect, Theme, "Cornberg");
+            bool isAttackMap=targeting!=null &&
+                targeting.Mode==SkillTargetingMode.AttackMove;
+            HudChrome.DrawHeader(headerRect, Theme,
+                isAttackMap?"Cornberg  /  ATTACK-MOVE":"Cornberg");
 
             var mapRect = new Rect(inner.x, inner.y + header, inner.width, inner.height - header);
             if (mapTexture != null)
@@ -152,6 +173,8 @@ namespace DiceFree.UI
                 GUI.DrawTexture(mapRect,fogMap,ScaleMode.StretchToFill,true);
 
             DrawCompass(mapRect);
+            if(isAttackMap)
+                HudChrome.Border(mapRect,2f,new Color(.94f,.30f,.18f,.88f));
             GUI.Label(
                 mapRect,
                 "+",

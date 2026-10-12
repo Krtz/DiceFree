@@ -6,6 +6,21 @@ namespace DiceFree.UI
     {
         public static void DrawPanel(Rect rect, HudThemeMetrics theme)
         {
+            var supplied=HudThemeArtwork.Panel(theme.id);
+            if(supplied!=null)
+            {
+                var original=GUI.color;
+                GUI.color=new Color(1f,1f,1f,.82f);
+                GUI.DrawTexture(rect,supplied,ScaleMode.StretchToFill,true);
+                GUI.color=original;
+                // Maintain accessible white text over highly decorative pack art.
+                Fill(new Rect(rect.x+theme.border,rect.y+theme.border,
+                    Mathf.Max(0,rect.width-2*theme.border),
+                    Mathf.Max(0,rect.height-2*theme.border)),
+                    new Color(theme.panelTint.r,theme.panelTint.g,theme.panelTint.b,.72f));
+                Border(rect,Mathf.Max(2f,theme.border),theme.accentTint);
+                return;
+            }
             switch (theme.frameStyle)
             {
                 case HudFrameStyle.Minimal:
@@ -74,6 +89,15 @@ namespace DiceFree.UI
 
             Fill(rect, new Color(edge.r, edge.g, edge.b, occupied ? 0.82f : 0.48f));
             Fill(Inset(rect, Mathf.Max(1f, theme.border * 0.55f)), theme.slotTint);
+            var slotArt=HudThemeArtwork.Slot(theme.id);
+            if(slotArt!=null)
+            {
+                Color old=GUI.color;
+                GUI.color=new Color(1f,1f,1f,occupied?.30f:.15f);
+                GUI.DrawTexture(Inset(rect,Mathf.Max(2f,theme.border)),slotArt,
+                    ScaleMode.ScaleToFit,true);
+                GUI.color=old;
+            }
 
             if (theme.frameStyle == HudFrameStyle.Arcane && occupied)
                 Border(Inset(rect, 3f), 1f, new Color(edge.r, edge.g, edge.b, 0.48f));

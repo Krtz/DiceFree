@@ -7,194 +7,208 @@ namespace DiceFree.UI
     [DefaultExecutionOrder(-10000)]
     public sealed class OptionsPanel : HudWidget
     {
+        public enum OptionsTab { Gameplay, Audio, HUD, Keybinds, Session }
+        public OptionsTab SelectedTab { get; private set; } = OptionsTab.Gameplay;
+        private readonly Vector2[] tabScroll = new Vector2[5];
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private IPlayerAudioSettings audioSettings;
-        private Vector2 scroll;
-        public System.Func<bool> ReturnToStartMenu {get;set;}
-        private bool confirmReturn;private string returnFeedback="";
-        public bool RequestReturnToStartMenu(){bool saved=ReturnToStartMenu?.Invoke()==true;if(!saved)returnFeedback="Could not save progress. Return cancelled.";return saved;}
-
+        public System.Func<bool> ReturnToStartMenu { get; set; }
+        private bool confirmReturn;
+        private string returnFeedback = "";
+        public bool RequestReturnToStartMenu()
+        {
+            bool saved = ReturnToStartMenu?.Invoke()==true;
+            if(!saved)returnFeedback="Could not save progress. Return cancelled.";
+            return saved;
+        }
         public bool Open { get; private set; }
-        private Rect ButtonBounds => new Rect(Mathf.Max(10, Screen.width - 54), Mathf.Max(10, Screen.height - 54), 44, 44);
-        public override Rect Bounds => Open ? new Rect(0, 0, Screen.width, Screen.height) : ButtonBounds;
-
+        private Rect ButtonBounds => new Rect(Mathf.Max(10,Screen.width-54),
+            Mathf.Max(10,Screen.height-54),44,44);
+        public override Rect Bounds => Open
+            ? new Rect(0,0,Screen.width,Screen.height) : ButtonBounds;
         private void Awake()
         {
-            bindings = InputBindings.Current;
-            gameplayPreferences = GameplayPreferences.Current;
+            bindings=InputBindings.Current;
+            gameplayPreferences=GameplayPreferences.Current;
             foreach(var component in GetComponents<MonoBehaviour>())
                 if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
         }
-
-        protected override void OnDisable()
-        {
-            Close();
-            base.OnDisable();
-        }
-
+        protected override void OnDisable(){Close();base.OnDisable();}
         public void Show()
         {
-            Open = true;
-            bindings.SetModal(true);
+            Open=true;bindings.SetModal(true);
         }
-
+        public void SelectTab(OptionsTab tab)
+        {
+            if(bindings.Listening)bindings.CancelRebind();
+            SelectedTab=tab;
+        }
         public void Close()
         {
-            if (bindings == null) return;
+            if(bindings==null)return;
             bindings.CancelRebind();
             PlayerPrefs.Save();
-            Open = false;
-            confirmReturn=false;
+            Open=false;confirmReturn=false;
             bindings.SetModal(false);
         }
-
         private void Update()
         {
             bindings.Tick();
-            if (bindings.Listening || bindings.LastRebindFrame == Time.frameCount) return;
-
-            if (Open && bindings.Action("UI/Close options").WasPressedThisFrame())
-            {
-                Close();
-                return;
-            }
-
-            if (bindings.Action("UI/Options menu toggle").WasPressedThisFrame())
-            {
-                if (Open) Close();
-                else Show();
-            }
+            if(bindings.Listening||bindings.LastRebindFrame==Time.frameCount)return;
+            if(Open&&bindings.Action("UI/Close options").WasPressedThisFrame())
+            {Close();return;}
+            if(bindings.Action("UI/Options menu toggle").WasPressedThisFrame())
+            {if(Open)Close();else Show();}
         }
-
         private void OnGUI()
         {
-            GUI.depth = -100;
-            if (!Open)
+            GUI.depth=-100;
+            if(!Open)
             {
-                // The customizable HUD owns the visible launcher; keep this fallback only for legacy scenes.
-                if (HudLayoutManager.Current == null &&
-                    GUI.Button(
-                        ButtonBounds,
-                        new GUIContent("⚙", "Options [" +
-                            InputBindings.Display(bindings.Action("UI/Options menu toggle")) + "]")))
+                if(HudLayoutManager.Current==null && GUI.Button(ButtonBounds,"Options"))
                     Show();
                 return;
             }
-
-            GUI.Box(Bounds, GUIContent.none);
-            float width = Mathf.Min(760, Screen.width - 24);
-            float height = Mathf.Max(120, Screen.height - 24);
-            var panel = new Rect((Screen.width - width) / 2, 12, width, height);
-
-            GUILayout.BeginArea(panel, GUI.skin.box);
+            HudChrome.Fill(Bounds,new Color(.015f,.020f,.030f,.92f));
+            float width=Mathf.Min(920,Screen.width-24);
+            float height=Mathf.Max(150,Screen.height-24);
+            Rect panel=new((Screen.width-width)*.5f,12,width,height);
+            var hudTheme=HudLayoutManager.Current?.Theme ?? HudThemes.Get(HudThemes.CompactStone);
+            HudChrome.DrawPanel(panel,hudTheme);
+            var inside=new Rect(panel.x+10,panel.y+10,
+                Mathf.Max(0,panel.width-20),Mathf.Max(0,panel.height-20));
+            GUILayout.BeginArea(inside);
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Options — Controls");
-            if (!bindings.Listening && GUILayout.Button("Close [Escape]", GUILayout.Width(130))) Close();
+            GUILayout.Label("DiceFree  /  Options",GUILayout.ExpandWidth(true));
+            if(!bindings.Listening && GUILayout.Button("Close [Escape]",GUILayout.Width(140)))Close();
             GUILayout.EndHorizontal();
-            if(ReturnToStartMenu!=null)
-            {
-                if(!confirmReturn&&GUILayout.Button("Save and Return to Start Menu"))confirmReturn=true;
-                if(confirmReturn){GUILayout.Label("Save progress and leave this session? Active dungeon runs will end.");GUILayout.BeginHorizontal();if(GUILayout.Button("Save and Return"))RequestReturnToStartMenu();if(GUILayout.Button("Cancel"))confirmReturn=false;GUILayout.EndHorizontal();}
-                if(!string.IsNullOrEmpty(returnFeedback))GUILayout.Label(returnFeedback);
-            }
-
-            if (bindings.Listening)
-            {
-                GUILayout.Label("Listening: " + bindings.ListeningLabel +
-                                ". Press a keyboard key or mouse button. Backspace cancels.");
-                if (GUILayout.Button("Cancel rebinding")) bindings.CancelRebind();
-            }
-
-            GUILayout.Label(bindings.Status);
-            GUILayout.Label("Shared bindings are allowed and are highlighted below. " +
-                            "Gameplay and camera controls are paused while this menu is open.");
-
             GUILayout.Space(8);
+            GUILayout.BeginHorizontal();
+            foreach(OptionsTab tab in System.Enum.GetValues(typeof(OptionsTab)))
+            {
+                bool active=tab==SelectedTab;
+                if(GUILayout.Toggle(active,tab==OptionsTab.HUD?"HUD / Themes":tab.ToString(),
+                        "Button",GUILayout.MinHeight(34))&&!active)
+                    SelectTab(tab);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.Space(8);
+            int n=(int)SelectedTab;
+            tabScroll[n]=GUILayout.BeginScrollView(tabScroll[n],GUILayout.ExpandHeight(true));
+            switch(SelectedTab)
+            {
+                case OptionsTab.Gameplay: DrawGameplay();break;
+                case OptionsTab.Audio: DrawAudio();break;
+                case OptionsTab.HUD:
+                    if(HudLayoutManager.Current!=null)
+                        DrawHudSettings(HudLayoutManager.Current);
+                    else GUILayout.Label("HUD is not yet initialized.");
+                    break;
+                case OptionsTab.Keybinds: DrawKeybinds(panel.width);break;
+                case OptionsTab.Session: DrawSession();break;
+            }
+            GUILayout.EndScrollView();
+            GUILayout.EndArea();
+        }
+        private void DrawGameplay()
+        {
+            GUILayout.Label("Gameplay");
+            bool retaliate=GUILayout.Toggle(gameplayPreferences.AutoRetaliate,
+                "Auto retaliate when attacked");
+            if(retaliate!=gameplayPreferences.AutoRetaliate)
+                gameplayPreferences.SetAutoRetaliate(retaliate);
+            GUILayout.Label("Only retaliates while you aren't already attacking a selected target.");
+            GUILayout.Space(12);
+            GUILayout.Label("When a targeted skill is out of range:");
+            GUILayout.BeginHorizontal();
+            bool follow=gameplayPreferences.OutOfRangeSkillBehavior ==
+                OutOfRangeSkillBehavior.WalkIntoRange;
+            if(GUILayout.Toggle(follow,"Walk into cast range","Button")&&!follow)
+                gameplayPreferences.SetOutOfRangeSkillBehavior(OutOfRangeSkillBehavior.WalkIntoRange);
+            bool stay=gameplayPreferences.OutOfRangeSkillBehavior ==
+                OutOfRangeSkillBehavior.DoNothing;
+            if(GUILayout.Toggle(stay,"Do nothing","Button")&&!stay)
+                gameplayPreferences.SetOutOfRangeSkillBehavior(OutOfRangeSkillBehavior.DoNothing);
+            GUILayout.EndHorizontal();
+            bool showRange=GUILayout.Toggle(gameplayPreferences.ShowCastRange,
+                "Show cast range when targeting a skill");
+            if(showRange!=gameplayPreferences.ShowCastRange)
+                gameplayPreferences.SetShowCastRange(showRange);
+        }
+        private void DrawAudio()
+        {
+            GUILayout.Label("Audio");
             if(audioSettings==null)
                 foreach(var component in GetComponents<MonoBehaviour>())
                     if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
-            if(audioSettings!=null)
+            if(audioSettings==null){GUILayout.Label("Audio mixer not available.");return;}
+            GUILayout.Space(6);
+            GUILayout.Label("Sound effects");
+            float sfx=GUILayout.HorizontalSlider(audioSettings.SfxLevel,0f,1f);
+            GUILayout.Label(Mathf.RoundToInt(sfx*100)+"%");
+            GUILayout.Space(12);
+            GUILayout.Label("Ambience");
+            float ambient=GUILayout.HorizontalSlider(audioSettings.AmbientLevel,0f,1f);
+            GUILayout.Label(Mathf.RoundToInt(ambient*100)+"%");
+            if(!Mathf.Approximately(sfx,audioSettings.SfxLevel) ||
+               !Mathf.Approximately(ambient,audioSettings.AmbientLevel))
+                audioSettings.SetLevels(sfx,ambient);
+        }
+        private void DrawKeybinds(float width)
+        {
+            GUILayout.Label("Keybinds");
+            GUILayout.Label("Shared bindings are allowed and flagged below. "+
+                "Gameplay and camera controls are paused while Options is open.");
+            if(bindings.Listening)
             {
-                GUILayout.Label("Audio");
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Sound effects",GUILayout.Width(135));
-                float sfx=GUILayout.HorizontalSlider(audioSettings.SfxLevel,0f,1f);
-                GUILayout.Label((int)(sfx*100)+"%",GUILayout.Width(50));
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Ambience",GUILayout.Width(135));
-                float ambient=GUILayout.HorizontalSlider(audioSettings.AmbientLevel,0f,1f);
-                GUILayout.Label((int)(ambient*100)+"%",GUILayout.Width(50));
-                GUILayout.EndHorizontal();
-                if(!Mathf.Approximately(sfx,audioSettings.SfxLevel) ||
-                   !Mathf.Approximately(ambient,audioSettings.AmbientLevel))
-                    audioSettings.SetLevels(sfx,ambient);
-                GUILayout.Space(8);
+                GUILayout.Label("Listening: "+bindings.ListeningLabel+
+                    ". Press a keyboard key or mouse button; Backspace cancels.");
+                if(GUILayout.Button("Cancel rebinding"))bindings.CancelRebind();
             }
-            GUILayout.Label("Gameplay");
-            bool autoRetaliate = GUILayout.Toggle(
-                gameplayPreferences.AutoRetaliate,
-                "Auto retaliate when attacked");
-            if (autoRetaliate != gameplayPreferences.AutoRetaliate)
-                gameplayPreferences.SetAutoRetaliate(autoRetaliate);
-            GUILayout.Label("Defaults to on. It only retaliates while you are not already attacking a chosen target.");
-
-            GUILayout.Space(4);
-            GUILayout.Label("When a targeted skill is out of range:");
-            GUILayout.BeginHorizontal();
-            bool walkIntoRange = gameplayPreferences.OutOfRangeSkillBehavior ==
-                                 OutOfRangeSkillBehavior.WalkIntoRange;
-            if (GUILayout.Toggle(walkIntoRange, "Walk into cast range", "Button") && !walkIntoRange)
-                gameplayPreferences.SetOutOfRangeSkillBehavior(OutOfRangeSkillBehavior.WalkIntoRange);
-
-            bool doNothing = gameplayPreferences.OutOfRangeSkillBehavior ==
-                             OutOfRangeSkillBehavior.DoNothing;
-            if (GUILayout.Toggle(doNothing, "Do nothing", "Button") && !doNothing)
-                gameplayPreferences.SetOutOfRangeSkillBehavior(OutOfRangeSkillBehavior.DoNothing);
-            GUILayout.EndHorizontal();
-
-            bool showCastRange = GUILayout.Toggle(
-                gameplayPreferences.ShowCastRange,
-                "Show cast range while targeting a skill");
-            if (showCastRange != gameplayPreferences.ShowCastRange)
-                gameplayPreferences.SetShowCastRange(showCastRange);
-
-            var hud = HudLayoutManager.Current;
-            if (hud != null)
+            GUILayout.Label(bindings.Status);
+            GUILayout.Space(7);
+            string lastMap=null;
+            foreach(var entry in bindings.Entries)
             {
-                GUILayout.Space(8);
-                DrawHudSettings(hud);
-            }
-
-            scroll = GUILayout.BeginScrollView(scroll);
-            string lastMap = null;
-            foreach (var entry in bindings.Entries)
-            {
-                if (entry.Map != lastMap)
+                if(entry.Map!=lastMap)
                 {
-                    lastMap = entry.Map;
-                    GUILayout.Space(8);
-                    GUILayout.Label(lastMap);
+                    lastMap=entry.Map;
+                    GUILayout.Space(11);GUILayout.Label(lastMap);
                 }
-
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(entry.Label, GUILayout.Width(Mathf.Min(340, panel.width * 0.50f)));
-                GUI.enabled = !bindings.Listening;
-                if (GUILayout.Button(entry.Display.Length == 0 ? "Unbound" : entry.Display))
+                GUILayout.Label(entry.Label,GUILayout.Width(Mathf.Min(380,width*.53f)));
+                GUI.enabled=!bindings.Listening;
+                if(GUILayout.Button(entry.Display.Length==0?"Unbound":entry.Display))
                     bindings.BeginRebind(entry);
-                GUI.enabled = true;
+                GUI.enabled=true;
                 GUILayout.EndHorizontal();
-
-                string conflict = bindings.Conflict(entry);
-                if (conflict.Length > 0) GUILayout.Label(conflict);
+                string conflict=bindings.Conflict(entry);
+                if(conflict.Length>0)GUILayout.Label(conflict);
             }
-            GUILayout.EndScrollView();
-
-            GUI.enabled = !bindings.Listening;
-            if (GUILayout.Button("Reset all controls to defaults")) bindings.ResetDefaults();
-            GUI.enabled = true;
-            GUILayout.EndArea();
+            GUILayout.Space(10);
+            GUI.enabled=!bindings.Listening;
+            if(GUILayout.Button("Reset ALL keybinds to defaults"))
+                bindings.ResetDefaults();
+            GUI.enabled=true;
+        }
+        private void DrawSession()
+        {
+            GUILayout.Label("Session");
+            GUILayout.Label("Your progress is saved before returning to the start menu.");
+            if(ReturnToStartMenu==null)
+            {GUILayout.Label("Return to Start Menu is unavailable in this scene.");return;}
+            if(!confirmReturn && GUILayout.Button("Save and Return to Start Menu"))
+                confirmReturn=true;
+            if(confirmReturn)
+            {
+                GUILayout.Label("Save progress and leave? Active dungeon runs will end.");
+                GUILayout.BeginHorizontal();
+                if(GUILayout.Button("Save and Return"))RequestReturnToStartMenu();
+                if(GUILayout.Button("Cancel"))confirmReturn=false;
+                GUILayout.EndHorizontal();
+            }
+            if(!string.IsNullOrEmpty(returnFeedback))GUILayout.Label(returnFeedback);
         }
 
         private void DrawHudSettings(HudLayoutManager hud)
@@ -202,14 +216,18 @@ namespace DiceFree.UI
             GUILayout.Label("HUD");
             GUILayout.Label("Theme");
 
-            GUILayout.BeginHorizontal();
-            foreach (var theme in HudThemes.All)
-            {
-                bool selected = theme.id == hud.ThemeId;
-                bool pressed = GUILayout.Toggle(selected, theme.displayName, "Button");
-                if (pressed && !selected) hud.SetTheme(theme.id);
-            }
-            GUILayout.EndHorizontal();
+            var themes = HudThemes.All;
+            int selectedIndex = System.Array.FindIndex(themes, theme => theme.id == hud.ThemeId);
+            if (selectedIndex < 0) selectedIndex = 0;
+            int nextIndex = GUILayout.SelectionGrid(selectedIndex,
+                System.Array.ConvertAll(themes, theme => theme.displayName),
+                Mathf.Clamp(Mathf.FloorToInt((Screen.width - 80f) / 175f), 2, 5),
+                GUILayout.MinHeight(Mathf.CeilToInt(themes.Length / 4f) * 29f));
+            if (nextIndex >= 0 && nextIndex < themes.Length &&
+                nextIndex != selectedIndex) hud.SetTheme(themes[nextIndex].id);
+            GUILayout.Label(HudThemeArtwork.HasArt(hud.ThemeId)
+                ? "Using locally installed UI pack artwork for this theme."
+                : "Using DiceFree's built-in procedural frame artwork.");
 
             GUILayout.Space(3);
             GUILayout.BeginHorizontal();

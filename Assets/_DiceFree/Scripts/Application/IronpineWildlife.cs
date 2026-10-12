@@ -60,8 +60,10 @@ namespace DiceFree.Ironpine
             attack.enabled = kind != WildlifeKind.Quillrat;
             actor.Configure(1, kind == WildlifeKind.AlphaWolf ? .75f :
                 kind == WildlifeKind.Quillrat ? .35f : .52f, familyId);
-            float multiplier = kind == WildlifeKind.Quillrat ? .70f :
-                kind == WildlifeKind.AlphaWolf ? 6.50f : 1.20f;
+            // Playtest tuning: wildlife was dying before basic attack patterns
+            // could be learned. Scale all three wolf types and quillrats 10x.
+            float multiplier = kind == WildlifeKind.Quillrat ? 7.0f :
+                kind == WildlifeKind.AlphaWolf ? 65.0f : 12.0f;
             actor.Stats.SetEncounterMaximumHp(actor.Stats.MaximumHp * multiplier);
             nextHowl = Time.time + 7f;
             nextSpecial = Time.time + 6f;
