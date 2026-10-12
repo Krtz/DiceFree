@@ -17,7 +17,7 @@ namespace DiceFree.EditorTools
 {
     public static class NoviceSkillsValidation
     {
-        [CliCommand("dicefree.novice-skills.validate", "Validate authored Novice skill data, input, scene wiring and v4->v5 save migration.", Tags = new[] { "tests", "skills" })]
+        [CliCommand("dicefree.novice-skills.validate", "Validate authored Novice skill data, input, scene wiring and v4->v6 save migration.", Tags = new[] { "tests", "skills" })]
         public static object Run()
         {
             Require(!EditorApplication.isPlaying, "Novice skill validation requires Edit Mode.");
@@ -104,17 +104,17 @@ namespace DiceFree.EditorTools
                 json = legacyJson
             });
             var upgraded = SaveMigrations.Upgrade(legacy);
-            Require(upgraded.schemaVersion == 5, "Echo schema did not migrate v4 -> v5.");
+            Require(upgraded.schemaVersion == 6, "Echo schema did not migrate v4 -> v6.");
             var section = upgraded.sections.Single(value => value.id == "manifestation:class.novice");
-            Require(section.version == 5, "Manifestation record did not migrate v4 -> v5.");
+            Require(section.version == 6, "Manifestation record did not migrate v4 -> v6.");
             var migrated = JsonUtility.FromJson<ManifestationSave>(section.json);
             Require(migrated.classSkills != null && migrated.classSkills.Length == 0, "Legacy v4 migration did not initialize empty class skills.");
-            Require(migrated.gold == 123, "v4 -> v5 migration changed gold.");
+            Require(migrated.gold == 123, "v4 -> v6 migration changed gold.");
             Require(migrated.quests.Length == 1 && migrated.quests[0].alternatives.Length == 1 &&
                     migrated.quests[0].alternatives[0].count == 7,
-                "v4 -> v5 migration changed existing Q4-style alternative progress.");
+                "v4 -> v6 migration changed existing Q4-style alternative progress.");
 
-            Debug.Log("DICEFREE_NOVICE_SKILLS_DATA_OK: formulas, rank caps, explicit accuracy tags, 1-4/K bindings, Cornberg composition and schema v5 migration passed.");
+            Debug.Log("DICEFREE_NOVICE_SKILLS_DATA_OK: formulas, rank caps, explicit accuracy tags, 1-4/K bindings, Cornberg composition and schema v6 migration passed.");
             return new
             {
                 success = true,
