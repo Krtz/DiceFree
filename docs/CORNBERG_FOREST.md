@@ -1,5 +1,8 @@
 # Cornberg Q3 — Named Slime
 
+> **Quadratic XP update (2026-10-13):** The named-slime Q3 turn-in now grants **43 XP**, not 35, so 35 kill XP + 43 quest XP still takes a fresh L5/0 character to L6/0. Historical values below reflect the previous linear curve; see [quadratic implementation](QUADRATIC_XP_IMPLEMENTATION.md).
+
+
 Q3 is the next starter beat specified by issue #6 and WORLD_1.md: locate a named
 forest Slime, defeat it, return to the former swordswoman/farmer, and reach roughly
 level 6. It follows Q2 and precedes the runner's return. This increment implements
