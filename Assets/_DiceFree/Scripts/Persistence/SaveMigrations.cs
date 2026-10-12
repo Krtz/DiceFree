@@ -11,8 +11,8 @@ namespace DiceFree.Persistence
     }
     public static class SaveMigrations
     {
-        public const int CurrentSchema = 5;
-        public const int ManifestationVersion = 5;
+        public const int CurrentSchema = 6;
+        public const int ManifestationVersion = 6;
         [Serializable] private sealed class ManifestationV1
         {
             public string classId;
@@ -21,6 +21,31 @@ namespace DiceFree.Persistence
             public float healthFraction;
             public QuestProgress[] quests;
         }
+        // Each old save contains progress WITHIN a level, not lifetime XP.
+        // Preserve the same fraction of the next level when upgrading all
+        // manifestations, including inactive classes in the Echo roster.
+        // These historical constants must never change in a later balance pass.
+        public static int RebaseLegacyXp(int level, int oldXp)
+        {
+            if (level < 1 || level > 200 || oldXp < 0)
+                throw new SaveMigrationException("Invalid legacy XP/level; original save preserved.");
+            if (level == 200)
+            {
+                if (oldXp != 0)
+                    throw new SaveMigrationException("Max-level manifestation cannot have XP.");
+                return 0;
+            }
+            long priorThreshold = 30L + 10L * (level - 1);
+            if (oldXp >= priorThreshold)
+                throw new SaveMigrationException("Legacy XP exceeds its historical level threshold.");
+            long step = level - 1;
+            long nextThreshold = 30L + 3L * step * step;
+            // Nearest whole XP maintains progress even for higher-level
+            // characters while never manufacturing a free level-up.
+            return (int)System.Math.Min(nextThreshold - 1,
+                ((long)oldXp * nextThreshold + priorThreshold / 2) / priorThreshold);
+        }
+
         public static EchoSave Upgrade(EchoSave source)
         {
             if (source.schemaVersion < 1 || source.schemaVersion > CurrentSchema)
@@ -33,7 +58,7 @@ namespace DiceFree.Persistence
                 foreach (var section in result.sections)
                 {
                     if (!section.id.StartsWith("manifestation:", StringComparison.Ordinal)) continue;
-                    if (section.version >= 2 && section.version <= 4)
+                    if (section.version >= 2 && section.version <= 5)
                     {
                         var previous = JsonUtility.FromJson<ManifestationSave>(section.json);
                         if (previous == null || section.id != "manifestation:" + previous.classId || previous.level < 1 || previous.xp < 0 || previous.quests == null)
@@ -52,6 +77,7 @@ namespace DiceFree.Persistence
                                 quest.alternatives = Array.Empty<ObjectiveCount>();
                             }
                         }
+                        previous.xp = RebaseLegacyXp(previous.level, previous.xp);
                         section.json = JsonUtility.ToJson(previous); section.version = ManifestationVersion;
                         continue;
                     }
@@ -61,7 +87,7 @@ namespace DiceFree.Persistence
                         old.level < 1 || old.xp < 0 || old.quests == null)
                         throw new SaveMigrationException("Invalid v1 manifestation " + section.id);
                     var current = new ManifestationSave {
-                        classId = old.classId, level = old.level, xp = old.xp, anchorId = old.anchorId, quests = old.quests,
+                        classId = old.classId, level = old.level, xp = RebaseLegacyXp(old.level, old.xp), anchorId = old.anchorId, quests = old.quests,
                         classSkills = Array.Empty<SkillRankState>()
                     };
                     foreach (var quest in current.quests)
@@ -77,7 +103,7 @@ namespace DiceFree.Persistence
                 return result;
             }
             catch (SaveMigrationException) { throw; }
-            catch (Exception error) { throw new SaveMigrationException("Echo migration to v5 failed; original preserved.", error); }
+            catch (Exception error) { throw new SaveMigrationException("Echo migration to v6 failed; original preserved.", error); }
         }
     }
 }
