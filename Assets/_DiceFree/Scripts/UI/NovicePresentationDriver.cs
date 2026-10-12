@@ -20,6 +20,7 @@ namespace DiceFree.UI
         private BasicAttack attack;
         private NavMeshAgent agent;
         private bool wasWinding;
+        private float stalledWalkFor, stalledIdleFor;
         private bool wasAlive;
         private Vector3 previousPosition;
         private bool hasPreviousPosition;
@@ -82,6 +83,29 @@ namespace DiceFree.UI
 
             LastDrivenSpeed = speed;
             animator.SetFloat(SpeedId, speed, 0.06f, Mathf.Max(0.0001f, Time.deltaTime));
+            // Some manifestation controllers occasionally remain in Idle after
+            // movement resumes (or in Walk after stopping). Only intervene
+            // after persistent movement-state mismatch, never during attacks.
+            bool moving = speed > .25f;
+            stalledWalkFor = moving ? stalledWalkFor + Time.deltaTime : 0f;
+            stalledIdleFor = !moving ? stalledIdleFor + Time.deltaTime : 0f;
+            if (!animator.IsInTransition(0) &&
+                (attack == null || attack.State != "Wind-up"))
+            {
+                var state = animator.GetCurrentAnimatorStateInfo(0);
+                if (stalledWalkFor >= .24f && state.IsName("Idle") &&
+                    animator.HasState(0, Animator.StringToHash("Base Layer.Locomotion")))
+                {
+                    animator.CrossFade("Base Layer.Locomotion", .12f, 0);
+                    stalledWalkFor = 0f;
+                }
+                else if (stalledIdleFor >= .32f && state.IsName("Locomotion") &&
+                         animator.HasState(0, IdleId))
+                {
+                    animator.CrossFade("Base Layer.Idle", .12f, 0);
+                    stalledIdleFor = 0f;
+                }
+            }
 
             bool winding = attack != null && attack.State == "Wind-up";
             if (winding && !wasWinding) animator.SetTrigger(AttackId);

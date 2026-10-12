@@ -1557,3 +1557,6 @@ The user explicitly approved use of the locally downloaded **Realistic Furry Wol
 ## 2026-10-12 — Ironpine HP, URP quillrats, minimap attack-move, UI themes
 
 Indexed 30 newly downloaded UI Asset Store packs; existing local catalog now has 240. Details in docs/UI_ASSET_THEME_CATALOG.md. Added 30 pack theme presets to five original themes; 28 original pack skins installed locally and gitignored, two procedural-only. HUD chrome now uses the optional pack panel/slot textures; all fallback on clones. Options reorganized into Gameplay, Audio, HUD/Themes, Keybinds, Session tabs. Converted all 30 Quillrat palettes to URP Lit. Increased quillrat HP from .70x to 7x, ordinary wolves from 1.2x to 12x, Alpha from 6.5x to 65x. X attack-move now works through minimap; Shift appends. Editor-side validation and isolated Play Mode minimap/HP probes pass. Preserve other local package/ShaderGraph settings and third-party audio metas; do not merge main without approval.
+
+## 2026-10-12 follow-up playtest
+See docs/OCT12_FOREST_PLAYTEST_FOLLOWUP.md for wolf visual forward orientation, doubled Alpha scale, improved enemy target facing and walking animations, 23 obsolete Ironpine slimes disabled, scoped high-tree collider cleanup, and five audio volume sliders. Preserve unrelated local changes; main remains unmerged.

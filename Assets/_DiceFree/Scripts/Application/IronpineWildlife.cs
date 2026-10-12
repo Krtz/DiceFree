@@ -158,6 +158,10 @@ namespace DiceFree.Ironpine
             }
             if (target == null || !actor.CanAct) return;
             EnsureBleedReceiver(target);
+            // Every Ironpine enemy orients toward its combat target before
+            // acting. During locomotion the NavMeshAgent owns body heading;
+            // when stationary the face remains on the attacked enemy.
+            if (!actor.Motor.Travelling) FaceCombatTarget(target);
             if (IsWolf)
             {
                 if (Time.time >= nextHowl && (IsAlpha || NearbyResponders() > 0))
@@ -266,6 +270,7 @@ namespace DiceFree.Ironpine
         private void StartHowl()
         {
             attack.Cancel(); actor.Motor.Stop();
+            FaceCombatTarget(target);
             howling = specialPending = true;
             GetComponent<IronpineCreaturePresentation>()?.PlayAction("Howl", 1.2f);
             specialEnds = Time.time + 1.2f;
@@ -274,6 +279,7 @@ namespace DiceFree.Ironpine
         {
             if (target == null) return;
             attack.Cancel(); actor.Motor.Stop();
+            FaceCombatTarget(target);
             var position = target.transform.position;
             if (IsAlpha)
             {
@@ -398,6 +404,16 @@ namespace DiceFree.Ironpine
             frenzyUntil = 0;
             actor?.Stats.RemoveBasicAttackDamagePercentContribution("ironpine.frenzy");
         }
+        private void FaceCombatTarget(CombatActor opponent)
+        {
+            if (opponent == null) return;
+            Vector3 facing = opponent.transform.position - transform.position;
+            facing.y = 0;
+            if (facing.sqrMagnitude < .0004f) return;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                Quaternion.LookRotation(facing), 900f * Time.deltaTime);
+        }
+
         private void QuillratCombat()
         {
             float distance = Vector3.Distance(transform.position, target.transform.position);
@@ -413,6 +429,7 @@ namespace DiceFree.Ironpine
             if (distance > 15f || !actor.HasSightOf(target))
             { if (Time.time >= nextPath) { nextPath = Time.time + .4f; actor.Motor.MoveTo(target.transform.position); } return; }
             actor.Motor.Stop();
+            FaceCombatTarget(target);
             if (Time.time < nextBite) return;
             nextBite = Time.time + 2.8f;
             GetComponent<IronpineCreaturePresentation>()?.PlayAction("QuillShot", .65f);

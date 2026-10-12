@@ -21,6 +21,8 @@ namespace DiceFree.Ironpine
         private bool windingLastFrame;
         private bool dead;
         private float woundedFlashUntil;
+        private Vector3 priorPosition;
+        private bool hasPriorPosition;
 
         public Animator ModelAnimator => modelAnimator;
         public string CurrentState => current;
@@ -41,6 +43,7 @@ namespace DiceFree.Ironpine
             basicAttack = GetComponent<BasicAttack>();
             nav = GetComponent<NavMeshAgent>();
             nextIdleBehavior = Time.time + UnityEngine.Random.Range(7f, 16f);
+            priorPosition = transform.position; hasPriorPosition = true;
         }
         private void OnEnable()
         {
@@ -101,7 +104,12 @@ namespace DiceFree.Ironpine
                 return;
             }
             if (dead) Restored();
-            if (Time.time < lockedUntil) return;
+            if (Time.time < lockedUntil)
+            {
+                priorPosition = transform.position;
+                hasPriorPosition = true;
+                return;
+            }
             bool winding = basicAttack != null && basicAttack.State == "Wind-up";
             if (winding && !windingLastFrame)
             {
@@ -112,6 +120,14 @@ namespace DiceFree.Ironpine
             windingLastFrame = winding;
             float speed = nav != null && nav.enabled && nav.isOnNavMesh
                 ? nav.velocity.magnitude : 0f;
+            if(hasPriorPosition && Time.deltaTime > .0001f)
+            {
+                float moved = Vector3.ProjectOnPlane(transform.position-priorPosition,
+                    Vector3.up).magnitude / Time.deltaTime;
+                if(moved < 18f) speed = Mathf.Max(speed,moved);
+            }
+            priorPosition = transform.position;
+            hasPriorPosition = true;
             if (speed > 3.4f)
             {
                 nextIdleBehavior = Time.time + UnityEngine.Random.Range(6f, 14f);

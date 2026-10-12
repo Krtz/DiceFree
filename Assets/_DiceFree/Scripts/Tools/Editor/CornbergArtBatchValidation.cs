@@ -62,10 +62,14 @@ namespace DiceFree.EditorTools
                 .Where(a=>a.Definition!=null && a.Definition.stableId.Contains("slime")).ToArray();
             int crops=actors.Count(a=>a.Definition.stableId=="enemy.crop-slime");
             Require(crops>=5, "Expected crops in both Cornberg fields.");
-            Require(actors.Length>=30, "Expanded slime forest is under-populated.");
+            Require(actors.Count(a=>a.gameObject.activeInHierarchy)>=15,
+                "Cornberg quest slimes are under-populated.");
+            Require(!actors.Any(a=>a.gameObject.activeInHierarchy &&
+                a.name.StartsWith("Woodland Road Slime - ",StringComparison.Ordinal)),
+                "Prototype slimes returned to Ironpine wildlife territory.");
             int modelledSlimes = actors.Count(a=>a.GetComponentsInChildren<MeshRenderer>(true)
                 .Any(r=>r.gameObject.name.Contains("Gel", StringComparison.OrdinalIgnoreCase)));
-            Require(modelledSlimes>=27,
+            Require(modelledSlimes>=20,
                 "Slime 3D visuals under count " + modelledSlimes + "/" + actors.Length +
                 ": renderers=" + string.Join(",", actors.Take(3)
                     .SelectMany(a=>a.GetComponentsInChildren<Renderer>(true))

@@ -37,12 +37,14 @@ namespace DiceFree.Ironpine
                 var visual=UnityEngine.Object.Instantiate(source,parent,false);
                 visual.name="Realistic furry wolf licensed visual";
                 visual.transform.localPosition=old.transform.localPosition;
-                visual.transform.localRotation=Quaternion.Euler(0,180,0);
+                // Vendor bones confirm head +Z / tail -Z. A 180 yaw here made
+                // wolves chase backward and bite with their rears.
+                visual.transform.localRotation=Quaternion.identity;
                 // The pack's wolf is roughly 0.9m high. Preserve readable
                 // gameplay proportions, making the alpha visibly larger.
                 float size=wolf.Kind switch
                 {
-                    WildlifeKind.AlphaWolf=>2.35f,
+                    WildlifeKind.AlphaWolf=>4.70f, // double the prior Alpha scale
                     WildlifeKind.DarkWolf=>1.74f,
                     _=>1.62f
                 };

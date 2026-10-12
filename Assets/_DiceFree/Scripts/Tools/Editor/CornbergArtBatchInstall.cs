@@ -347,19 +347,9 @@ namespace DiceFree.EditorTools
                 AttachSlimeVisual(o,"Slime_Crop");
                 count++;
             }
-            var random=new System.Random(4711);
-            for(int i=0;i<23;i++)
-            {
-                float x=126+(float)random.NextDouble()*106;
-                float z=22+(float)random.NextDouble()*140;
-                if (Mathf.Abs(x-170)<4 && z>55) x+=9;
-                var o=UnityEngine.Object.Instantiate(template.gameObject);
-                o.name="Woodland Road Slime - "+(i+1);
-                o.transform.SetParent(actors,true);
-                o.transform.position=CornbergLandscape.Ground(x,z);
-                AttachSlimeVisual(o,i%5==0?"Slime_Forest": "Slime_Road");
-                count++;
-            }
+            // Since Ironpine now has authored wolves/quillrats, the 23 old
+            // prototype road slimes must never respawn there on scene rebuild.
+            // Existing local/crop/quest slimes are deliberately preserved.
             return count;
         }
 

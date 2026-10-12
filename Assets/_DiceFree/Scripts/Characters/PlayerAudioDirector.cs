@@ -19,18 +19,34 @@ namespace DiceFree.Characters
         [SerializeField, Range(0f,1f)] private float footstepsVolume=.14f;
         private AudioSource effects,footsteps,ambience;
         private float sfxGain=1f, ambientGain=1f;
+        private float masterGain=1f, stepGain=1f, wildlifeGain=1f;
+        public static float WildlifeGain { get; private set; }=1f;
+        public float MasterLevel => masterGain;
         public float SfxLevel => sfxGain;
         public float AmbientLevel => ambientGain;
+        public float FootstepsLevel => stepGain;
+        public float WildlifeLevel => wildlifeGain;
 
-        public void SetLevels(float sfx,float ambient)
+        public void SetLevels(float sfx,float ambient) =>
+            SetExtendedLevels(masterGain,sfx,ambient,stepGain,wildlifeGain);
+        public void SetExtendedLevels(float master,float sfx,float ambient,
+            float footstep,float wildlife)
         {
+            masterGain=Mathf.Clamp01(master);
             sfxGain=Mathf.Clamp01(sfx);
             ambientGain=Mathf.Clamp01(ambient);
+            stepGain=Mathf.Clamp01(footstep);
+            wildlifeGain=Mathf.Clamp01(wildlife);
+            WildlifeGain=wildlifeGain;
+            AudioListener.volume=masterGain;
             if(effects!=null)effects.volume=effectsVolume*sfxGain;
-            if(footsteps!=null)footsteps.volume=footstepsVolume*sfxGain;
+            if(footsteps!=null)footsteps.volume=footstepsVolume*sfxGain*stepGain;
             if(ambience!=null)ambience.volume=ambientVolume*ambientGain;
+            PlayerPrefs.SetFloat("DiceFree.Audio.Master",masterGain);
             PlayerPrefs.SetFloat("DiceFree.Audio.Sfx",sfxGain);
             PlayerPrefs.SetFloat("DiceFree.Audio.Ambient",ambientGain);
+            PlayerPrefs.SetFloat("DiceFree.Audio.Footsteps",stepGain);
+            PlayerPrefs.SetFloat("DiceFree.Audio.Wildlife",wildlifeGain);
         }
         private Health health;
         private BasicAttack basicAttack;
@@ -72,8 +88,12 @@ namespace DiceFree.Characters
             footsteps=CreateSource(gameObject,"DiceFree Footsteps",false,footstepsVolume);
             ambience=CreateSource(gameObject,"DiceFree Ambient",true,ambientVolume);
             ambience.clip=Get("CornbergBirds");
-            SetLevels(PlayerPrefs.GetFloat("DiceFree.Audio.Sfx",1f),
-                PlayerPrefs.GetFloat("DiceFree.Audio.Ambient",1f));
+            SetExtendedLevels(
+                PlayerPrefs.GetFloat("DiceFree.Audio.Master",1f),
+                PlayerPrefs.GetFloat("DiceFree.Audio.Sfx",1f),
+                PlayerPrefs.GetFloat("DiceFree.Audio.Ambient",1f),
+                PlayerPrefs.GetFloat("DiceFree.Audio.Footsteps",1f),
+                PlayerPrefs.GetFloat("DiceFree.Audio.Wildlife",1f));
             health=GetComponent<Health>();
             basicAttack=GetComponent<BasicAttack>();
             novice=GetComponent<NoviceSkillCaster>();

@@ -34,6 +34,7 @@ namespace DiceFree.Ironpine
         public void Cue(string action)
         {
             if (!isActiveAndEnabled || source==null || Time.time<nextAllow) return;
+            source.volume=.62f*DiceFree.Characters.PlayerAudioDirector.WildlifeGain;
             bool rat=kind==WildlifeKind.Quillrat;
             AudioClip clip=null;
             float volume=.40f;

@@ -136,24 +136,43 @@ namespace DiceFree.UI
             if(showRange!=gameplayPreferences.ShowCastRange)
                 gameplayPreferences.SetShowCastRange(showRange);
         }
+        private static float AudioSlider(string label,float value)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label,GUILayout.Width(160));
+            float result=GUILayout.HorizontalSlider(value,0f,1f,
+                GUILayout.MinWidth(120),GUILayout.ExpandWidth(true));
+            GUILayout.Label(Mathf.RoundToInt(result*100f)+"%",GUILayout.Width(52));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12);
+            return result;
+        }
         private void DrawAudio()
         {
-            GUILayout.Label("Audio");
+            GUILayout.Label("Audio Mixer");
+            // The options UI is often on the HUD root while AudioDirector is
+            // on the player. Looking only on this GameObject hid the controls.
             if(audioSettings==null)
-                foreach(var component in GetComponents<MonoBehaviour>())
-                    if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
-            if(audioSettings==null){GUILayout.Label("Audio mixer not available.");return;}
-            GUILayout.Space(6);
-            GUILayout.Label("Sound effects");
-            float sfx=GUILayout.HorizontalSlider(audioSettings.SfxLevel,0f,1f);
-            GUILayout.Label(Mathf.RoundToInt(sfx*100)+"%");
-            GUILayout.Space(12);
-            GUILayout.Label("Ambience");
-            float ambient=GUILayout.HorizontalSlider(audioSettings.AmbientLevel,0f,1f);
-            GUILayout.Label(Mathf.RoundToInt(ambient*100)+"%");
-            if(!Mathf.Approximately(sfx,audioSettings.SfxLevel) ||
-               !Mathf.Approximately(ambient,audioSettings.AmbientLevel))
-                audioSettings.SetLevels(sfx,ambient);
+                foreach(var candidate in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+                    if(candidate is IPlayerAudioSettings source){audioSettings=source;break;}
+            if(audioSettings==null)
+            {
+                GUILayout.Label("Audio sources are unavailable in this scene.");
+                return;
+            }
+            GUILayout.Label("Changes apply immediately and are saved for future sessions.");
+            GUILayout.Space(8);
+            float master=AudioSlider("Master volume",audioSettings.MasterLevel);
+            float effects=AudioSlider("Sound effects",audioSettings.SfxLevel);
+            float steps=AudioSlider("Footsteps",audioSettings.FootstepsLevel);
+            float ambient=AudioSlider("Environment / ambience",audioSettings.AmbientLevel);
+            float wildlife=AudioSlider("Wildlife sounds",audioSettings.WildlifeLevel);
+            if(!Mathf.Approximately(master,audioSettings.MasterLevel) ||
+               !Mathf.Approximately(effects,audioSettings.SfxLevel) ||
+               !Mathf.Approximately(steps,audioSettings.FootstepsLevel) ||
+               !Mathf.Approximately(ambient,audioSettings.AmbientLevel) ||
+               !Mathf.Approximately(wildlife,audioSettings.WildlifeLevel))
+                audioSettings.SetExtendedLevels(master,effects,ambient,steps,wildlife);
         }
         private void DrawKeybinds(float width)
         {
