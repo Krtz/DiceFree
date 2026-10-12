@@ -148,7 +148,7 @@ namespace DiceFree.EditorTools
             Require(!reentered && !partialWrite, "Partial save/reentrant reward");
             Require(player.GetComponent<GoldWallet>().Gold == 100 && player.GetComponent<CarriedInventory>().Items.Count(i => i.definitionId == "item.cornberg.work-gloves") == 1, "Main reward");
             Debug.Log($"SURGE_PACING_MASS level={player.Stats.Level} xp={player.GetComponent<ExperienceProgression>().CurrentXp}; 30x20 + 200 quest XP; 100 gold");
-            Require(player.Stats.Level == 13 && player.GetComponent<ExperienceProgression>().CurrentXp == 30, "Mass XP exactly once");
+            Require(player.Stats.Level == 10 && player.GetComponent<ExperienceProgression>().CurrentXp == 158, "Mass XP exactly once");
             for (var wait = Checkpoint("completed"); wait.MoveNext();) yield return null;
             Require(!journal.TurnIn(quest), "Reload replay");
             player.GetComponent<CarriedInventory>().Restore(Array.Empty<ItemInstance>());
@@ -164,7 +164,7 @@ namespace DiceFree.EditorTools
             player.Motor.Teleport(farmer.ApproachPosition); yield return null;
             Require(farmer.TurnIn(player), "Elite reward");
             Debug.Log($"SURGE_PACING_ELITE level={player.Stats.Level} xp={player.GetComponent<ExperienceProgression>().CurrentXp}; 80 elite + 200 quest XP");
-            Require(player.Stats.Level == 9 && player.GetComponent<ExperienceProgression>().CurrentXp == 10 &&
+            Require(player.Stats.Level == 8 && player.GetComponent<ExperienceProgression>().CurrentXp == 37 &&
                 player.GetComponent<GoldWallet>().Gold == 100 && player.GetComponent<CarriedInventory>().Items.Length == 1, "Elite same main reward");
             var owned = player.GetComponent<CarriedInventory>().Items.Length;
             roll.value = .199; WorldEquipmentPickup pickup = null; drop.Dropped += value => pickup = value;
