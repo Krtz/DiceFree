@@ -1,5 +1,8 @@
 # Cornberg Q4 implementation
 
+> **Quadratic XP update (2026-10-13):** With rewards unchanged, a fresh L6/0 character following the Q4 elite path finishes at L8/37 XP; the 30-Road-Slime route finishes L10/158 XP. The older pacing table below used the previous linear curve; see [quadratic implementation](QUADRATIC_XP_IMPLEMENTATION.md).
+
+
 Issue #45 adds visible Cornberg work gloves to the existing guaranteed reward.
 Q4 eligibility, objectives, reward transaction, **200 XP / 100 gold / one glove**,
 and +5% Attack Speed only remain unchanged. Quest completion does not equip the
