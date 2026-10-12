@@ -57,7 +57,7 @@ namespace DiceFree.EditorTools
             }
             var quest = Asset<QuestDefinition>("Cornberg named forest Slime", value => {
                 value.stableId = "quest.cornberg.named-slime"; value.title = "Named Slime";
-                value.completedQuestIds = new[] { q2.stableId }; value.rewardXp = 35;
+                value.completedQuestIds = new[] { q2.stableId }; value.rewardXp = 43;
                 value.offer = "A larger Slime lurks in the southern forest clearing. Follow the east road, take the southern loop, defeat it, then return.";
                 value.locationHint = "East road, southern woodland loop. Return to the farmer afterward.";
                 value.stages = new[] {
