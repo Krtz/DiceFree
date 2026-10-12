@@ -98,6 +98,9 @@ namespace DiceFree.Combat
             actor.GetComponent<BasicAttack>()?.Cancel();
             actor.Motor.Stop();
             SyncStunBlock();
+            var visual=GetComponent<StunSpiralVisual>();
+            if(visual==null)visual=gameObject.AddComponent<StunSpiralVisual>();
+            visual.ShowUntil(stunnedUntil);
             return true;
         }
 
@@ -190,6 +193,7 @@ namespace DiceFree.Combat
             damageReductionBuffs.Clear();
             basicAttackAugments.Clear();
             stunnedUntil = 0;
+            GetComponent<StunSpiralVisual>()?.Clear();
             SyncStunBlock();
         }
 

@@ -73,10 +73,16 @@ namespace DiceFree.Characters
             var distance = displacement.magnitude;
             if (distance > 0.001f)
             {
+                var thisActor=GetComponent<DiceFree.Combat.CombatActor>();
                 foreach (var unit in Physics.SphereCastAll(start + Vector3.up * 0.8f, agent.radius,
                     displacement.normalized, distance, (1 << 9) | (1 << 10) | (1 << 11), QueryTriggerInteraction.Ignore))
-                    if (unit.collider.transform.root != transform.root)
-                        distance = Mathf.Min(distance, Mathf.Max(0, unit.distance - 0.03f));
+                {
+                    if(unit.collider.transform.root==transform.root)continue;
+                    var other=unit.collider.GetComponentInParent<DiceFree.Combat.CombatActor>();
+                    if(other!=null && ((thisActor!=null && thisActor.Ghosting) ||
+                        other.Ghosting || !other.Alive))continue;
+                    distance = Mathf.Min(distance, Mathf.Max(0, unit.distance - 0.03f));
+                }
                 end = start + displacement.normalized * distance;
             }
             agent.Move(end - start);

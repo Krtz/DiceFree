@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DiceFree.Characters;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace DiceFree.Combat
 {
@@ -19,7 +20,13 @@ namespace DiceFree.Combat
         public TraversalMotor Motor { get; private set; }
         public CombatStatusController Effects { get; private set; }
         public float Radius => radius;
+        /// <summary>Ghosting is an explicit future spell/condition override.
+        /// Normal alive units must respect each other's circular footprints.</summary>
+        public bool Ghosting { get; private set; }
+        public void SetGhosting(bool value) => Ghosting = value;
         private string familyOverride;
+        private float nominalRadius;
+        private bool footprintInitialized;
         public string FamilyId => familyOverride ?? Stats.Definition.familyId;
         public bool Alive => isActiveAndEnabled && Health != null && Health.Alive;
         public bool CanAct => Alive && (Effects == null || !Effects.Stunned);
@@ -42,7 +49,43 @@ namespace DiceFree.Combat
             Stats = GetComponent<ActorStats>(); Health = GetComponent<Health>(); Motor = GetComponent<TraversalMotor>();
             Effects = GetComponent<CombatStatusController>();
         }
-        private void Start() => Motor.SetSpeed(Stats.MoveSpeed);
+        private void Start()
+        {
+            Motor.SetSpeed(Stats.MoveSpeed);
+            // Some wildlife configures its body during a different Start()
+            // callback. Maintain the authored base radius separately so
+            // Configure() can re-apply the runtime footprint in either order.
+            nominalRadius=radius;
+            footprintInitialized=true;
+            RefreshFootprint();
+            if(GetComponent<ActorFootprintSeparation>()==null)
+                gameObject.AddComponent<ActorFootprintSeparation>();
+        }
+
+        private void RefreshFootprint()
+        {
+            // Giant dungeon bosses already have oversized authored collision.
+            // Expand them modestly so they still fit their arena navigation.
+            float expanded=nominalRadius>1.4f ?
+                nominalRadius+Mathf.Min(.30f,nominalRadius*.15f) :
+                nominalRadius*(faction==0?1.50f:1.40f);
+            float minimum=faction==0?.675f:.54f;
+            radius=Mathf.Max(minimum,expanded);
+            var agent=GetComponent<NavMeshAgent>();
+            if(agent!=null)
+            {
+                agent.radius=radius;
+                agent.obstacleAvoidanceType=ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+                agent.avoidancePriority=faction==0?40:50;
+            }
+            var capsule=GetComponent<CapsuleCollider>();
+            if(capsule!=null)
+            {
+                capsule.radius=radius;
+                capsule.isTrigger=false;
+                capsule.enabled=Health.Alive;
+            }
+        }
         private void OnEnable() { if (!actors.Contains(this)) actors.Add(this); Health.Died += OnDeath; Health.Restored += OnRestore; Stats.Changed += OnLevel; }
         private void OnDisable() { actors.Remove(this); Health.Died -= OnDeath; Health.Restored -= OnRestore; Stats.Changed -= OnLevel; }
         private void OnLevel(float previousMaximum) => Motor.SetSpeed(Stats.MoveSpeed);
@@ -53,6 +96,13 @@ namespace DiceFree.Combat
         public bool IsFriendlyTo(CombatActor other) => Alive && other != null && other.Alive && faction == other.faction;
         public bool HasSightOf(CombatActor other) => !Physics.Linecast(transform.position + Vector3.up * 0.8f,
             other.transform.position + Vector3.up * 0.8f, 1 << 9, QueryTriggerInteraction.Ignore);
-        public void Configure(int team, float bodyRadius, string family = null) { faction = team; radius = bodyRadius; familyOverride = family; }
+        public void Configure(int team, float bodyRadius, string family = null)
+        {
+            faction=team;
+            nominalRadius=bodyRadius;
+            radius=bodyRadius;
+            familyOverride=family;
+            if(footprintInitialized)RefreshFootprint();
+        }
     }
 }
