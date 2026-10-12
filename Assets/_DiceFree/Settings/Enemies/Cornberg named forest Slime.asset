@@ -32,4 +32,4 @@ MonoBehaviour:
     count: 1
   completedQuestIds:
   - quest.cornberg.investigate-road
-  rewardXp: 35
+  rewardXp: 43
