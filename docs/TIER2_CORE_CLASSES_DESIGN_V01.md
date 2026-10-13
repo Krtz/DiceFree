@@ -1,6 +1,6 @@
 # DiceFree Tier II — Four Core Classes (Design Draft v0.1)
 
-**Date:** 2026-10-13  
+**Date:** 2026-10-13
 **Status:** PROPOSED FOR REVIEW — NOT LOCKED, no classes, quests, models, or NPC behavior implemented by this document.
 
 ## Existing rules to preserve
