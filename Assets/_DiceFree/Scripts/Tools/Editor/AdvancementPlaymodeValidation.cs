@@ -125,7 +125,7 @@ namespace DiceFree.EditorTools
                     if (freshMenu == null || !freshMenu.ReadyForNewEcho) return;
                     SessionState.SetInt(Prefix + "phase", 1);
                     deadline = Time.realtimeSinceStartup + 30f;
-                    AdvancementValidation.Require(freshMenu.TryStartNewEcho(),
+                    AdvancementValidation.Require(freshMenu.TryStartNewEcho("Krtz"),
                         "Fresh start menu could not begin as Novice: " + freshMenu.Status);
                     return;
                 }
@@ -169,6 +169,8 @@ namespace DiceFree.EditorTools
                 "Advancement fixture is missing player progression components.");
             AdvancementValidation.Require(controller.CurrentClassId == AdvancementAuthoring.NoviceId,
                 "Fresh advancement fixture did not begin as Novice.");
+            AdvancementValidation.Require(persistence.EchoName == "Krtz" && actor.DisplayName == "Krtz the Novice",
+                "Fresh Echo name did not reach the live player.");
 
             var physicalEdge = controller.Definitions.Single(value => value.targetClass.stableId == AdvancementAuthoring.PhysicalId);
             var magicalEdge = controller.Definitions.Single(value => value.targetClass.stableId == AdvancementAuthoring.MagicalId);
@@ -196,7 +198,8 @@ namespace DiceFree.EditorTools
                 AdvancementValidation.Require(journal.Accept(quest), "Could not establish active quest fork fixture.");
             string parentQuests = QuestSnapshot(journal);
 
-            var itemDefinition = inventory.Definitions.FirstOrDefault(value => value != null);
+            var itemDefinition = inventory.Definitions.FirstOrDefault(value => value != null &&
+                (value.allowedClassIds == null || value.allowedClassIds.Length == 0));
             AdvancementValidation.Require(itemDefinition != null, "Cornberg player has no item definition for fork validation.");
             var parentItem = inventory.Grant(itemDefinition.stableId);
             AdvancementValidation.Require(equipment.Equip(parentItem.instanceId, itemDefinition.slot),
@@ -216,6 +219,9 @@ namespace DiceFree.EditorTools
             AdvancementValidation.Require(controller.CurrentClassId == AdvancementAuthoring.PhysicalId &&
                     xp.Level == 1 && xp.CurrentXp == 0,
                 "Physical child did not become the active level-1 manifestation.");
+            AdvancementValidation.Require(persistence.EchoName == "Krtz" &&
+                    actor.DisplayName == "Krtz the " + controller.CurrentClass.displayName,
+                "Physical advancement changed the Echo name or left the old title.");
             AdvancementValidation.Require(!skills.ActiveForCurrentClass && skills.SpentPoints == 0,
                 "Novice skill system remained active on Physical child.");
             AdvancementValidation.Require(wallet.Gold == 41 && QuestSnapshot(journal) == parentQuests,
@@ -263,6 +269,8 @@ namespace DiceFree.EditorTools
                     xp.Level == 1 && xp.CurrentXp == 0 && !skills.ActiveForCurrentClass &&
                     wallet.Gold == 41 && QuestSnapshot(journal) == parentQuests,
                 "Magical child did not inherit/reset the expected fork state.");
+            AdvancementValidation.Require(actor.DisplayName == "Krtz the " + controller.CurrentClass.displayName,
+                "Magical advancement did not update the current title.");
 
             var magicalCopiedItem = inventory.Items.Single(value => value.definitionId == itemDefinition.stableId);
             AdvancementValidation.Require(magicalCopiedItem.instanceId != parentItem.instanceId &&
@@ -300,6 +308,11 @@ namespace DiceFree.EditorTools
             var entries = menu.Entries;
             AdvancementValidation.Require(entries.Length == 3,
                 "Start menu did not expose all three saved manifestations.");
+            AdvancementValidation.Require(entries.All(value => value.displayName.StartsWith("Krtz the ", StringComparison.Ordinal)),
+                "Start menu lost the saved Echo name.");
+            AdvancementValidation.Require(menu.TryRenameEcho("Bob") &&
+                    menu.Entries.All(value => value.displayName.StartsWith("Bob the ", StringComparison.Ordinal)),
+                "Renaming did not update every preserved manifestation: " + menu.Status);
             AdvancementValidation.Require(entries.All(value => value.available),
                 "Start menu reported an implemented prototype manifestation as unavailable.");
             AdvancementValidation.Require(entries.Single(value => value.classId == AdvancementAuthoring.NoviceId).level == 10,
@@ -331,6 +344,9 @@ namespace DiceFree.EditorTools
                     xp.Level == 1 && wallet.Gold == 50 && !skills.ActiveForCurrentClass &&
                     inventory.Items.Any(value => value.instanceId == SessionState.GetString(Prefix + "physical-item", "")),
                 "Start-menu selection did not load the preserved Physical manifestation.");
+            AdvancementValidation.Require(persistence.EchoName == "Bob" &&
+                    controller.GetComponent<CombatActor>().DisplayName == "Bob the " + controller.CurrentClass.displayName,
+                "Reloading a named Echo lost its name or current class title.");
 
             var profile = persistence.CaptureProfile();
             ValidateRoster(profile, AdvancementAuthoring.PhysicalId, 2);
@@ -353,7 +369,7 @@ namespace DiceFree.EditorTools
 
             var disk = new LocalEchoStore(root).Load();
             ValidateRoster(disk, AdvancementAuthoring.MagicalId, 2);
-            AdvancementValidation.Require(disk.schemaVersion == 5,
+            AdvancementValidation.Require(disk.schemaVersion == SaveMigrations.CurrentSchema,
                 "Advancement roster unexpectedly changed the Echo schema.");
 
             Debug.Log("DICEFREE_ADVANCEMENT_PLAYMODE_OK: two real branches, independent timelines, roster reload and parent return passed.");

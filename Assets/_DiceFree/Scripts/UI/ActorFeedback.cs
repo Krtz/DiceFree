@@ -49,17 +49,20 @@ namespace DiceFree.UI
             var p = Camera.main.WorldToScreenPoint(transform.position +
                 Vector3.up * (OverheadUnitHealthBars.OverheadHeight(actor) + .42f));
             if (p.z <= 0) return;
-            var rect = new Rect(p.x-90,Screen.height-p.y-15,180,24);
+            string label = $"{actor.DisplayName} L{actor.Stats.Level}";
+            var style = new GUIStyle(GUI.skin.label)
+            {
+                alignment=TextAnchor.MiddleCenter,
+                fontStyle=FontStyle.Bold,
+                normal={textColor=Color.white},
+                richText=false
+            };
+            float width = Mathf.Max(180, style.CalcSize(new GUIContent(label)).x + 12);
+            var rect = new Rect(p.x-width*.5f,Screen.height-p.y-15,width,24);
             if (nameplates == NameplateMode.Always || (nameplates == NameplateMode.WhenHurt && actor.Health.Current < actor.Health.Maximum))
-                GUI.Label(rect, $"{actor.Stats.Definition.displayName} L{actor.Stats.Level}",
-                    new GUIStyle(GUI.skin.label)
-                    {
-                        alignment=TextAnchor.MiddleCenter,
-                        fontStyle=FontStyle.Bold,
-                        normal={textColor=Color.white}
-                    });
-            if (floatingNumbers && Time.time < hitUntil) GUI.Label(new Rect(rect.x+65,rect.y-24,60,24), lastHit);
-            if (!actor.Alive && respawn != null) GUI.Label(new Rect(rect.x+30,rect.y+24,160,24),$"Respawn in {respawn.Remaining:0.0}s");
+                GUI.Label(rect, label, style);
+            if (floatingNumbers && Time.time < hitUntil) GUI.Label(new Rect(p.x-25,rect.y-24,60,24), lastHit);
+            if (!actor.Alive && respawn != null) GUI.Label(new Rect(p.x-60,rect.y+24,160,24),$"Respawn in {respawn.Remaining:0.0}s");
         }
         public void Configure(Transform model) => visual = model;
     }

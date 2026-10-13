@@ -47,7 +47,7 @@ namespace DiceFree.UI
             HudChrome.DrawHeader(
                 titleRect,
                 Theme,
-                $"{stats.Definition.displayName}   Level {stats.Level}");
+                $"{player.DisplayName}   Level {stats.Level}");
 
             float bodyY = titleRect.yMax + Theme.gap;
             float bodyHeight = inner.yMax - bodyY - xpHeight - Theme.gap;

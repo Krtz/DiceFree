@@ -145,7 +145,7 @@ namespace DiceFree.UI
             var actor=selected?.Actor;
             var npc=selected?.Npc;
             string title=actor!=null && actor.Stats.Definition!=null?
-                actor.Stats.Definition.displayName+"  Lv "+actor.Stats.Level:
+                actor.DisplayName+"  Lv "+actor.Stats.Level:
                 npc!=null && !string.IsNullOrWhiteSpace(npc.DisplayName)?
                     npc.DisplayName:
                     unit!=null?unit.name:"Select a creature or NPC";

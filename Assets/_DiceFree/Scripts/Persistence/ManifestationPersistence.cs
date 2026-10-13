@@ -13,7 +13,7 @@ using UnityEngine;
 namespace DiceFree.Persistence
 {
     [DefaultExecutionOrder(100), RequireComponent(typeof(ExperienceProgression), typeof(QuestJournal), typeof(RespawnAtAnchor))]
-    public sealed class ManifestationPersistence : MonoBehaviour, IDurableMutationCoordinator
+    public sealed class ManifestationPersistence : MonoBehaviour, IDurableMutationCoordinator, IActorDisplayName
     {
         [SerializeField, Min(0)] private float debounceSeconds = 0.25f;
         [SerializeField] private ClassCatalog classCatalog;
@@ -42,6 +42,8 @@ namespace DiceFree.Persistence
         public string MigrationStatus => store?.MigrationMessage;
         public string RecoveryStatus => store?.RecoveryMessage;
         public string CurrentClassId => actor?.Stats?.Definition?.stableId;
+        public string EchoName => EchoIdentity.ReadName(save);
+        public string DisplayName => EchoIdentity.Format(EchoName, actor?.Stats?.Definition?.displayName);
         public event Action<string> ActiveManifestationChanged;
 
         private string CurrentSectionId => ManifestationRoster.SectionIdFor(CurrentClassId);
@@ -106,6 +108,8 @@ namespace DiceFree.Persistence
                 save = store.Load();
                 bool existing = save != null;
                 save ??= new EchoSave();
+                if (!existing) EchoIdentity.ApplyPendingName(save, root);
+                else EchoIdentity.ClearPendingName();
 
                 RestoreEchoWideState(save);
 

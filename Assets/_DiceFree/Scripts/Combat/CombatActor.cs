@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DiceFree.Characters;
+using DiceFree.Foundation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ namespace DiceFree.Combat
         [SerializeField] private int faction;
         [SerializeField, Min(0.1f)] private float radius = 0.45f;
         public int Faction => faction;
+        public string DisplayName => GetComponent<IActorDisplayName>()?.DisplayName
+            ?? Stats?.Definition?.displayName ?? name;
         public ActorStats Stats { get; private set; }
         public Health Health { get; private set; }
         public TraversalMotor Motor { get; private set; }

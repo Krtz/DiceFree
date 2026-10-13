@@ -28,6 +28,7 @@ namespace DiceFree.Advancement
         private string status = "";
         private bool loadBlocked;
         private Vector2 scroll;
+        private string echoName = EchoIdentity.DefaultName;
 
         public ClassCatalog Catalog => classCatalog;
         public string GameplaySceneName => gameplaySceneName;
@@ -67,6 +68,7 @@ namespace DiceFree.Advancement
 
                 store = new LocalEchoStore(root);
                 profile = store.Load();
+                echoName = EchoIdentity.ReadName(profile);
                 if (!string.IsNullOrEmpty(store.RecoveryMessage)) status = store.RecoveryMessage;
                 if (!string.IsNullOrEmpty(store.MigrationMessage))
                     status = string.IsNullOrEmpty(status) ? store.MigrationMessage : status + "\n" + store.MigrationMessage;
@@ -127,8 +129,12 @@ namespace DiceFree.Advancement
             }
 
             GUILayout.Label("Every Echo begins as a Novice.");
+            GUILayout.Space(8);
+            GUILayout.Label("Echo name");
+            echoName = GUILayout.TextField(echoName, EchoIdentity.MaximumNameLength);
+            GUILayout.Label(EchoIdentity.Format(echoName, novice.displayName));
             GUILayout.Space(12);
-            if (GUILayout.Button("Start as Novice", GUILayout.Height(52)))
+            if (GUILayout.Button("Start adventure", GUILayout.Height(52)))
                 TryStartNewEcho();
         }
 
@@ -146,6 +152,14 @@ namespace DiceFree.Advancement
                 return;
             }
 
+            GUILayout.Label("Echo name");
+            GUI.enabled = EchoIdentity.CanRename(profile);
+            echoName = GUILayout.TextField(echoName, EchoIdentity.MaximumNameLength);
+            if (GUILayout.Button("Save name", GUILayout.Height(30)))
+                TryRenameEcho(echoName);
+            GUI.enabled = true;
+            GUILayout.Space(8);
+
             var entries = BuildEntries();
             if (entries.Length == 0)
             {
@@ -153,7 +167,7 @@ namespace DiceFree.Advancement
                 return;
             }
 
-            GUILayout.Label("Echo " + ShortId(profile.echoId) + "  •  save revision " + profile.revision);
+            GUILayout.Label(EchoIdentity.ReadName(profile));
             GUILayout.Space(8);
 
             foreach (var entry in entries)
@@ -174,7 +188,9 @@ namespace DiceFree.Advancement
                 Refresh();
         }
 
-        public bool TryStartNewEcho()
+        public bool TryStartNewEcho() => TryStartNewEcho(echoName);
+
+        public bool TryStartNewEcho(string name)
         {
             if (loadBlocked || store == null || profile != null)
             {
@@ -187,8 +203,47 @@ namespace DiceFree.Advancement
                 return false;
             }
 
-            SceneManager.LoadScene(gameplaySceneName);
-            return true;
+            try
+            {
+                EchoIdentity.QueueNewEchoName(name, EchoSaveLocation.ResolveRoot());
+                SceneManager.LoadScene(gameplaySceneName);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                EchoIdentity.ClearPendingName();
+                status = exception.Message;
+                return false;
+            }
+        }
+
+        public bool TryRenameEcho(string name)
+        {
+            try
+            {
+                if (store == null || profile == null || loadBlocked)
+                    throw new InvalidOperationException("Echo save is not loaded safely.");
+                var candidate = JsonUtility.FromJson<EchoSave>(JsonUtility.ToJson(profile));
+                EchoIdentity.WriteName(candidate, name);
+                if (EchoIdentity.ReadName(candidate) == EchoIdentity.ReadName(profile))
+                {
+                    echoName = EchoIdentity.ReadName(profile);
+                    status = "Echo name saved.";
+                    return true;
+                }
+                candidate.revision++;
+                candidate.writtenUtc = DateTime.UtcNow.ToString("O");
+                store.Commit(candidate);
+                profile = candidate;
+                echoName = EchoIdentity.ReadName(profile);
+                status = "Echo name saved.";
+                return true;
+            }
+            catch (Exception exception)
+            {
+                status = "Could not save Echo name: " + exception.Message;
+                return false;
+            }
         }
 
         public bool TryPlayManifestation(string classId)
@@ -241,7 +296,8 @@ namespace DiceFree.Advancement
                     return new ManifestationEntry
                     {
                         classId = value.state.classId,
-                        displayName = definition != null ? definition.displayName : value.state.classId,
+                        displayName = EchoIdentity.Format(EchoIdentity.ReadName(profile),
+                            definition != null ? definition.displayName : value.state.classId),
                         level = value.state.level,
                         available = definition != null,
                         active = value.state.classId == roster.activeClassId
@@ -277,7 +333,5 @@ namespace DiceFree.Advancement
             return first == null ? null : first.id.Substring(ManifestationRoster.ManifestationPrefix.Length);
         }
 
-        private static string ShortId(string value) =>
-            string.IsNullOrEmpty(value) ? "unknown" : value.Substring(0, Mathf.Min(8, value.Length));
     }
 }
