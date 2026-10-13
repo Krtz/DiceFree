@@ -1,5 +1,7 @@
 # Trimery — Village 2 design v0.2 (road geography and DiceBound crossover)
 
+> **Superseded mystery:** In [v0.3](TRIMERY_DESIGN_V03.md), the user confirmed the Ogre Roadwarden **deliberately destroyed the western highway on orders from an unknown issuer**. Do not use the rejected ancient-stone-reacts-to-Echo idea. v0.2 speculation about the Ogre merely guarding existing damage is historical.
+
 Status: DESIGN DRAFT; do not build geometry, quests, or boss yet. Supersedes contradictory spatial ideas from `TRIMERY_DESIGN_V01.md`. This document distinguishes CONFIRMED user intent from an OPTIONAL STORY PITCH awaiting approval.
 
 ## Confirmed geography and identity
