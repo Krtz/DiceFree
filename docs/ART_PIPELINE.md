@@ -33,7 +33,7 @@ It is intentionally small enough for the current project while establishing conv
 
 ## External assets and credits
 
-Record third-party asset candidates, their original creators, source links, license details, modifications and release attribution in the [asset-credit registry](ASSET_CREDITS.md). Verify rights before importing, and do not ship unverified candidates. Keep original license files/notices with source art where applicable.
+Record third-party asset candidates, their original creators, source links, license details, modifications and release attribution in the [asset-credit registry](ASSET_CREDITS.md). The downloaded package inventory, technical formats and initial import priorities are recorded separately in the [asset catalog](ASSET_CATALOG.md). Verify rights before importing, and do not ship unverified candidates. Keep original license files/notices with source art where applicable.
 
 ## Geometry detail and PC performance
 
