@@ -11,7 +11,7 @@ namespace DiceFree.UI
     /// Cast is interrupted by movement, incoming damage, stun or death.
     /// </summary>
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor),typeof(RespawnAtAnchor))]
-    public sealed class ReturnHomeAbility : MonoBehaviour
+    public sealed class ReturnHomeAbility : MonoBehaviour, IChannelingAbility
     {
         public const float CooldownDuration = 600f;
         public const float CastDuration = 10f;
@@ -24,6 +24,10 @@ namespace DiceFree.UI
         public bool Casting { get; private set; }
         public float CooldownRemaining => Mathf.Max(0f,readyAt-Time.time);
         public float CastRemaining => Casting ? Mathf.Max(0f,finishAt-Time.time) : 0f;
+        public bool IsChanneling => Casting;
+        public string ChannelLabel => "Return to Revive Stone";
+        public float ChannelDuration => CastDuration;
+        public float ChannelRemaining => CastRemaining;
         public string Feedback { get; private set; } = "";
 
         private void Awake()

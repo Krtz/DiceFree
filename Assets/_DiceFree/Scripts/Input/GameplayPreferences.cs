@@ -11,13 +11,18 @@ namespace DiceFree.Input
         WalkIntoRange = 1
     }
 
+    public enum OverheadHealthVisibility { Always = 0, WhenHurt = 1, Never = 2 }
+
     [Serializable]
     internal sealed class GameplayPreferencesData
     {
-        public int version = 1;
+        public int version = 2;
         public bool autoRetaliate = true;
         public OutOfRangeSkillBehavior outOfRangeSkillBehavior = OutOfRangeSkillBehavior.WalkIntoRange;
         public bool showCastRange = true;
+        public OverheadHealthVisibility selfHealthBar = OverheadHealthVisibility.WhenHurt;
+        public OverheadHealthVisibility allyHealthBar = OverheadHealthVisibility.WhenHurt;
+        public OverheadHealthVisibility enemyHealthBar = OverheadHealthVisibility.Always;
     }
 
     public sealed class GameplayPreferences
@@ -49,6 +54,9 @@ namespace DiceFree.Input
         public bool AutoRetaliate => data.autoRetaliate;
         public OutOfRangeSkillBehavior OutOfRangeSkillBehavior => data.outOfRangeSkillBehavior;
         public bool ShowCastRange => data.showCastRange;
+        public OverheadHealthVisibility SelfHealthBar => data.selfHealthBar;
+        public OverheadHealthVisibility AllyHealthBar => data.allyHealthBar;
+        public OverheadHealthVisibility EnemyHealthBar => data.enemyHealthBar;
 
         private GameplayPreferences(string directory)
         {
@@ -77,6 +85,18 @@ namespace DiceFree.Input
             Save();
         }
 
+        public void SetOverheadHealthVisibility(
+            OverheadHealthVisibility self, OverheadHealthVisibility ally,
+            OverheadHealthVisibility enemy)
+        {
+            if(data.selfHealthBar==self && data.allyHealthBar==ally &&
+                data.enemyHealthBar==enemy)return;
+            data.selfHealthBar=self;
+            data.allyHealthBar=ally;
+            data.enemyHealthBar=enemy;
+            Save();
+        }
+
         private void Load()
         {
             data = new GameplayPreferencesData();
@@ -85,7 +105,20 @@ namespace DiceFree.Input
             try
             {
                 var loaded = JsonUtility.FromJson<GameplayPreferencesData>(File.ReadAllText(path));
-                if (loaded != null && loaded.version == 1) data = loaded;
+                if(loaded!=null && (loaded.version==1 || loaded.version==2))
+                {
+                    // Unity's JsonUtility does not guarantee field initializers
+                    // for missing fields: preserve the existing v1 settings,
+                    // but explicitly initialize the newly introduced choices.
+                    if(loaded.version==1)
+                    {
+                        loaded.selfHealthBar=OverheadHealthVisibility.WhenHurt;
+                        loaded.allyHealthBar=OverheadHealthVisibility.WhenHurt;
+                        loaded.enemyHealthBar=OverheadHealthVisibility.Always;
+                    }
+                    loaded.version=2;
+                    data=loaded;
+                }
             }
             catch (Exception error) when (
                 error is IOException ||

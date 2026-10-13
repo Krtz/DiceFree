@@ -112,6 +112,10 @@ namespace DiceFree.UI
                 gameObject.AddComponent<DeathRespawnHud>();
             if (!TryGetComponent<EscapeMenuController>(out _))
                 gameObject.AddComponent<EscapeMenuController>();
+            if (!TryGetComponent<ChannelBarHud>(out _))
+                gameObject.AddComponent<ChannelBarHud>();
+            if (!TryGetComponent<OverheadUnitHealthBars>(out _))
+                gameObject.AddComponent<OverheadUnitHealthBars>();
         }
 
         private void OnDestroy()

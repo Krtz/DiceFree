@@ -45,11 +45,18 @@ namespace DiceFree.UI
             if (fog == null) fog=FindFirstObjectByType<WorldFogOfWar>();
             if (fog != null && !fog.IsVisible(transform.position)) return;
             if (Camera.main == null) return;
-            var p = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2.1f);
+            var p = Camera.main.WorldToScreenPoint(transform.position +
+                Vector3.up * (OverheadUnitHealthBars.OverheadHeight(actor) + .42f));
             if (p.z <= 0) return;
             var rect = new Rect(p.x-90,Screen.height-p.y-15,180,24);
             if (nameplates == NameplateMode.Always || (nameplates == NameplateMode.WhenHurt && actor.Health.Current < actor.Health.Maximum))
-                GUI.Box(rect, $"{actor.Stats.Definition.displayName} L{actor.Stats.Level} {actor.Health.Current:0}/{actor.Health.Maximum:0}");
+                GUI.Label(rect, $"{actor.Stats.Definition.displayName} L{actor.Stats.Level}",
+                    new GUIStyle(GUI.skin.label)
+                    {
+                        alignment=TextAnchor.MiddleCenter,
+                        fontStyle=FontStyle.Bold,
+                        normal={textColor=Color.white}
+                    });
             if (floatingNumbers && Time.time < hitUntil) GUI.Label(new Rect(rect.x+65,rect.y-24,60,24), lastHit);
             if (!actor.Alive && respawn != null) GUI.Label(new Rect(rect.x+30,rect.y+24,160,24),$"Respawn in {respawn.Remaining:0.0}s");
         }

@@ -234,9 +234,29 @@ namespace DiceFree.UI
             if(!string.IsNullOrEmpty(returnFeedback))GUILayout.Label(returnFeedback);
         }
 
+        private static readonly string[] BarVisibilityChoices =
+            { "Always", "Only when hurt", "Never" };
+        private static OverheadHealthVisibility DrawOverheadSetting(
+            string label,OverheadHealthVisibility value)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(label,GUILayout.Width(110));
+            int next=GUILayout.SelectionGrid((int)value,BarVisibilityChoices,3,
+                GUILayout.MinHeight(26));
+            GUILayout.EndHorizontal();
+            return (OverheadHealthVisibility)Mathf.Clamp(next,0,2);
+        }
         private void DrawHudSettings(HudLayoutManager hud)
         {
             GUILayout.Label("HUD");
+            GUILayout.Space(4);
+            GUILayout.Label("Health bars above units");
+            var self=DrawOverheadSetting("Your character",gameplayPreferences.SelfHealthBar);
+            var allies=DrawOverheadSetting("Allies",gameplayPreferences.AllyHealthBar);
+            var enemies=DrawOverheadSetting("Enemies",gameplayPreferences.EnemyHealthBar);
+            gameplayPreferences.SetOverheadHealthVisibility(self,allies,enemies);
+            GUILayout.Label("Only when hurt: visible while HP is below maximum. Different choices are saved between sessions.");
+            GUILayout.Space(12);
             GUILayout.Label("Theme");
 
             var themes = HudThemes.All;
