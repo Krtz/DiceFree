@@ -1,5 +1,14 @@
 # DiceFree Agent Handover
 
+## Asset credits and art-quality direction — 2026-10-14
+
+On `poc/cornberg`, `docs/ASSET_CREDITS.md` was created to track third-party model/art/audio candidates, license verification, imported asset paths, modifications and credits for game distribution. The Sketchfab **Catrina Skeleton Bride Figure Meshi vs SupaVoxel** by Pia Fernandez is recorded as a **candidate only**. Its CC Attribution designation comes from a user-provided download-dialog screenshot; the specific version and underlying provenance are unverified. **No asset download or Unity import occurred in this task.**
+
+`docs/ART_PIPELINE.md` links to the registry and records quality-first geometry guidance: **no universal low-poly cap**; preserve visual quality and evaluate performance on target PCs with representative active gameplay, LODs/materials/skinning/VFX.
+
+Registry created at commit `6a3bf8b3430f60ae1555d6d543caaed243d5d3ee`; art pipeline updated at `89ad9ee32eeb56bd1b989fb3e02f39eb90d43c76`. Next: verify licenses before using candidate assets and include confirmed in-use attributions in eventual shipped credits. Documentation-only change; no runtime validation was needed.
+
+
 ## Issue #48 Options / persistent key rebinding - 2026-10-05 (review-ready)
 
 Working branch: `feature/48-options-keybinds`, based on the reviewed Farmer's Pants validation head `6fd6beaada0767d1e5c37a1a7c365c5e6ee84368`. Issue #48 remains open. **No merge is authorized.**
