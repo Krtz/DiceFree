@@ -257,6 +257,15 @@ namespace DiceFree.UI
             gameplayPreferences.SetOverheadHealthVisibility(self,allies,enemies);
             GUILayout.Label("Only when hurt: visible while HP is below maximum. Different choices are saved between sessions.");
             GUILayout.Space(12);
+            GUILayout.Label("Minimap orientation");
+            GUILayout.BeginHorizontal();
+            bool north=gameplayPreferences.MinimapOrientation==MinimapOrientation.NorthUp;
+            if(GUILayout.Toggle(north,"North at top","Button")&&!north)
+                gameplayPreferences.SetMinimapOrientation(MinimapOrientation.NorthUp);
+            if(GUILayout.Toggle(!north,"Rotate with camera","Button")&&north)
+                gameplayPreferences.SetMinimapOrientation(MinimapOrientation.CameraUp);
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12);
             GUILayout.Label("Theme");
 
             var themes = HudThemes.All;

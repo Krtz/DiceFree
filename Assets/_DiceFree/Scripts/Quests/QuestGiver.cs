@@ -11,6 +11,11 @@ namespace DiceFree.Quests
         [SerializeField] private QuestDefinition quest;
         [SerializeField] private QuestDefinition[] additionalQuests = Array.Empty<QuestDefinition>();
         [SerializeField] private bool ambientOutsideQuest;
+        private void Start()
+        {
+            if(GetComponent<QuestWorldMarker>()==null)
+                gameObject.AddComponent<QuestWorldMarker>();
+        }
         public bool HasConversation(CombatActor actor)
         {
             if (!ambientOutsideQuest) return true;

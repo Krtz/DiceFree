@@ -1,4 +1,5 @@
 using DiceFree.Combat;
+using DiceFree.Input;
 using DiceFree.World;
 using UnityEngine;
 
@@ -20,6 +21,16 @@ namespace DiceFree.UI
         private Color32[] fogPixels;
         private float nextFogRefresh;
         private const int FogResolution = 192;
+        public bool CameraUp => GameplayPreferences.Current.MinimapOrientation ==
+            MinimapOrientation.CameraUp;
+        public static Vector3 MapUpDirection(Vector3 cameraForward)
+        {
+            Vector3 planar=Vector3.ProjectOnPlane(cameraForward,Vector3.up);
+            return planar.sqrMagnitude>.001f?planar.normalized:Vector3.forward;
+        }
+        public Vector3 MapUp => CameraUp && Camera.main!=null?
+            MapUpDirection(Camera.main.transform.forward):Vector3.forward;
+        private Vector3 MapRight=>Vector3.Cross(Vector3.up,MapUp).normalized;
 
         public override string LayoutId => "minimap";
         public override string DisplayName => "Minimap";
@@ -63,7 +74,8 @@ namespace DiceFree.UI
         {
             if (mapCamera == null || player == null) return;
             mapCamera.transform.position = player.transform.position + Vector3.up * 45f;
-            mapCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+            mapCamera.transform.rotation =
+                Quaternion.LookRotation(Vector3.down,MapUp);
             if(fog == null)fog = FindFirstObjectByType<WorldFogOfWar>();
             if(fog!=null && fogMap!=null && Time.unscaledTime>=nextFogRefresh)
             {
@@ -74,7 +86,8 @@ namespace DiceFree.UI
                 {
                     float dx=((x+.5f)/FogResolution*2f-1f)*worldRadius;
                     float dz=((y+.5f)/FogResolution*2f-1f)*worldRadius;
-                    byte alpha=fog.SmoothedOpacityAt(center+new Vector3(dx,0,dz));
+                    byte alpha=fog.SmoothedOpacityAt(center+
+                        MapRight*dx+MapUp*dz);
                     fogPixels[y*FogResolution+x]=new Color32(6,12,19,alpha);
                 }
                 fogMap.SetPixels32(fogPixels);
@@ -116,6 +129,17 @@ namespace DiceFree.UI
                 playerPosition.y,playerPosition.z+(.5f-v)*radius*2f);
         }
 
+        public static Vector3 WorldPointForMapClick(Vector3 playerPosition,
+            float radius,Rect mapRect,Vector2 guiPoint,Vector3 up)
+        {
+            float u=Mathf.Clamp01((guiPoint.x-mapRect.x)/mapRect.width);
+            float v=Mathf.Clamp01((guiPoint.y-mapRect.y)/mapRect.height);
+            up=MapUpDirection(up);
+            Vector3 right=Vector3.Cross(Vector3.up,up).normalized;
+            return playerPosition+right*((u-.5f)*radius*2f)+
+                up*((.5f-v)*radius*2f);
+        }
+
         public bool TryMoveFromMapClick(Rect mapRect, Vector2 guiPoint)
         {
             if(player==null||navigation==null||!mapRect.Contains(guiPoint) ||
@@ -123,7 +147,7 @@ namespace DiceFree.UI
                 (HudLayoutManager.Current?.EditMode ?? false))
                 return false;
             Vector3 destination=WorldPointForMapClick(
-                player.transform.position,worldRadius,mapRect,guiPoint);
+                player.transform.position,worldRadius,mapRect,guiPoint,MapUp);
             // The minimap is a top-down image of the world: sample the actual
             // ground below the requested XZ before seeking a NavMesh path.
             if(!Physics.Raycast(destination+Vector3.up*80f,Vector3.down,
@@ -172,7 +196,7 @@ namespace DiceFree.UI
             if(fog!=null && fogMap!=null)
                 GUI.DrawTexture(mapRect,fogMap,ScaleMode.StretchToFill,true);
 
-            DrawCompass(mapRect);
+            DrawCompass(mapRect,MapUp);
             if(isAttackMap)
                 HudChrome.Border(mapRect,2f,new Color(.94f,.30f,.18f,.88f));
             GUI.Label(
@@ -203,23 +227,33 @@ namespace DiceFree.UI
             }
         }
 
-        // ASCII labels and a drawn arrow avoid font-dependent compass glyphs.
-        private static void DrawCompass(Rect map)
+        // Cardinal markers remain true-world directions even when the map spins.
+        private static void DrawCompass(Rect map,Vector3 up)
         {
-            float size = Mathf.Clamp(map.width * .12f, 18, 30);
-            var style = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter,
-                fontStyle = FontStyle.Bold, fontSize = Mathf.RoundToInt(size * .65f) };
-            style.normal.textColor = Color.white;
-            void Label(string text, Rect rect) { GUI.Box(rect, GUIContent.none); GUI.Label(rect, text, style); }
-            Label("N", new Rect(map.center.x-size/2, map.y+2, size, size));
-            Label("S", new Rect(map.center.x-size/2, map.yMax-size-2, size, size));
-            Label("W", new Rect(map.x+2, map.center.y-size/2, size, size));
-            Label("E", new Rect(map.xMax-size-2, map.center.y-size/2, size, size));
-            var old = GUI.color; GUI.color = new Color(1, .85f, .35f);
-            GUI.DrawTexture(new Rect(map.center.x-1, map.y+size+6, 2, 10), Texture2D.whiteTexture);
-            for (int row=0; row<5; row++)
-                GUI.DrawTexture(new Rect(map.center.x-row, map.y+size+3+row, 1+row*2, 1), Texture2D.whiteTexture);
-            GUI.color = old;
+            Vector3 right=Vector3.Cross(Vector3.up,up).normalized;
+            float size=Mathf.Clamp(map.width*.12f,18,30);
+            var style=new GUIStyle(GUI.skin.label)
+            {
+                alignment=TextAnchor.MiddleCenter,
+                fontStyle=FontStyle.Bold,
+                fontSize=Mathf.RoundToInt(size*.65f),
+                normal={textColor=Color.white}
+            };
+            void Mark(string label,Vector3 world)
+            {
+                Vector2 screen=new(Vector3.Dot(world,right),
+                    Vector3.Dot(world,up));
+                Vector2 anchor=map.center+
+                    new Vector2(screen.x*(map.width*.5f-size*.52f),
+                        -screen.y*(map.height*.5f-size*.52f));
+                var rect=new Rect(anchor.x-size*.5f,anchor.y-size*.5f,size,size);
+                GUI.Box(rect,GUIContent.none);
+                GUI.Label(rect,label,style);
+            }
+            Mark("N",Vector3.forward);
+            Mark("S",Vector3.back);
+            Mark("W",Vector3.left);
+            Mark("E",Vector3.right);
         }
     }
 }

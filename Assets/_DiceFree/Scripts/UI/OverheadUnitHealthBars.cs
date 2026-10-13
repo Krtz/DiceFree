@@ -49,7 +49,7 @@ namespace DiceFree.UI
                     renderer.name.Contains("Stun"))continue;
                 height=Mathf.Max(height,renderer.bounds.max.y-actor.transform.position.y);
             }
-            height=Mathf.Clamp(height+.18f,1.35f,8f);
+            height=Mathf.Clamp(height+.77f,1.75f,8.6f);
             heights[key]=new HeightEntry{height=height,until=Time.unscaledTime+1.5f};
             return height;
         }

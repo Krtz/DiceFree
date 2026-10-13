@@ -14,7 +14,7 @@ namespace DiceFree.Ironpine
     // Lives on a real CombatActor: all attacks and kills use the ordinary DiceFree combat authority.
     // No hidden wolf summons, loot tables, or character-level scaling.
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(BasicAttack))]
-    public sealed class IronpineWildlife : MonoBehaviour, IActiveThreatSource
+    public sealed class IronpineWildlife : MonoBehaviour, IActiveThreatSource, DiceFree.UI.IInspectableVisual
     {
         [SerializeField] private WildlifeKind kind;
         [SerializeField] private Transform model;
@@ -43,6 +43,8 @@ namespace DiceFree.Ironpine
             actor!=null && actor.Alive && possibleTarget!=null &&
             target==possibleTarget;
         public bool IsBiting => attack != null && attack.Target != null && attack.State == "Wind-up";
+        public Transform Visual => model;
+        public Transform DisplayModel => model;
         public void Configure(WildlifeKind species, Transform visual, Vector3[] sites, Vector3[] grounds = null)
         {
             kind = species; model = visual;
@@ -60,6 +62,11 @@ namespace DiceFree.Ironpine
         private void Start()
         {
             GetComponent<DiceFree.AI.AggroBehaviour>().enabled = false;
+            // Imported Quillrat FBX faces its -Z axis. Align its visible
+            // head with the combat actor's +Z pathing and attack facing.
+            if(kind==WildlifeKind.Quillrat && model!=null &&
+               model.name.StartsWith("Ironpine rigged",StringComparison.Ordinal))
+                model.localRotation=Quaternion.Euler(0f,180f,0f);
             attack.enabled = kind != WildlifeKind.Quillrat;
             actor.Configure(1, kind == WildlifeKind.AlphaWolf ? .75f :
                 kind == WildlifeKind.Quillrat ? .35f : .52f, familyId);
@@ -75,6 +82,10 @@ namespace DiceFree.Ironpine
             if (kind != WildlifeKind.Quillrat)
                 actor.Stats.SetBasicAttackDamagePercentContribution(
                     "ironpine.wolf-balance", 50f);
+            // Only Alpha NORMAL auto-attacks hit 35% harder; pounces,
+            // lunges, Bleed and other scripted damage stay as authored.
+            attack.BasicAttackDamageScale=
+                kind==WildlifeKind.AlphaWolf?1.35f:1f;
             nextHowl = Time.time + 7f;
             nextSpecial = Time.time + 6f;
             nextWander = Time.time + UnityEngine.Random.Range(4f, 10f);
@@ -579,7 +590,13 @@ namespace DiceFree.Ironpine
             var go = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             go.name = "Ironpine homing quill";
             Destroy(go.GetComponent<Collider>());
-            go.transform.position = source.transform.position + Vector3.up * .85f;
+            // Spawn from the forward-facing snout rather than body centre
+            // (or the tail, when imported FBX forward differs from actor).
+            var body=source.GetComponent<IronpineWildlife>();
+            float muzzleDistance=body!=null && body.Kind==WildlifeKind.Quillrat?
+                .75f:.5f;
+            go.transform.position=source.transform.position+
+                source.transform.forward*muzzleDistance+Vector3.up*.72f;
             go.transform.localScale = new Vector3(.12f, .23f, .12f);
             var material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
             material.color = new Color(.75f, .56f, .28f);

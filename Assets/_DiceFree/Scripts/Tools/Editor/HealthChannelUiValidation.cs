@@ -52,6 +52,8 @@ namespace DiceFree.EditorTools
                 GameplayPreferences Open()=>
                     (GameplayPreferences)ctor.Invoke(new object[]{root});
                 var saved=Open();
+                Check(saved.MinimapOrientation==MinimapOrientation.NorthUp,
+                    "Legacy v1 settings must default to north-up minimap.");
                 Check(!saved.AutoRetaliate && !saved.ShowCastRange &&
                     saved.OutOfRangeSkillBehavior==OutOfRangeSkillBehavior.DoNothing,
                     "Legacy options changed during v1→v2 migration.");
@@ -63,13 +65,16 @@ namespace DiceFree.EditorTools
                     OverheadHealthVisibility.Always,
                     OverheadHealthVisibility.Never,
                     OverheadHealthVisibility.WhenHurt);
+                saved.SetMinimapOrientation(MinimapOrientation.CameraUp);
                 var reloaded=Open();
+                Check(reloaded.MinimapOrientation==MinimapOrientation.CameraUp,
+                    "Minimap orientation did not persist.");
                 Check(reloaded.SelfHealthBar==OverheadHealthVisibility.Always &&
                     reloaded.AllyHealthBar==OverheadHealthVisibility.Never &&
                     reloaded.EnemyHealthBar==OverheadHealthVisibility.WhenHurt,
                     "Independent choices not persisted/reloaded.");
-                Check(File.ReadAllText(file).Contains("\"version\": 2") ||
-                      File.ReadAllText(file).Contains("\"version\":2"),
+                Check(File.ReadAllText(file).Contains("\"version\": 3") ||
+                      File.ReadAllText(file).Contains("\"version\":3"),
                     "Overhead settings JSON version wasn't upgraded.");
                 Check(!reloaded.AutoRetaliate && !reloaded.ShowCastRange,
                     "Saving new options overwrote unrelated old preferences.");

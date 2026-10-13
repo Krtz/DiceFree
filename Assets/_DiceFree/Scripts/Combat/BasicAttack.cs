@@ -13,6 +13,9 @@ namespace DiceFree.Combat
         public int Hits { get; private set; }
         public int Misses { get; private set; }
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
+        /// <summary>Extra damage only for actual auto-attack impacts.
+        /// Abilities, scripted lunges and boss special hits are unaffected.</summary>
+        public float BasicAttackDamageScale { get; set; } = 1f;
         public AttackDefinition Definition => actor.Stats.Definition.basicAttack;
         private void Awake() => actor = GetComponent<CombatActor>();
         private void OnDisable() => Cancel();
@@ -60,7 +63,7 @@ namespace DiceFree.Combat
                     Target.Stats,
                     Definition,
                     resolution,
-                    Definition.RollDamageMultiplier(),
+                    Definition.RollDamageMultiplier()*BasicAttackDamageScale,
                     Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                     Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset));
                 Target.Health.ApplyPacket(actor, packet);

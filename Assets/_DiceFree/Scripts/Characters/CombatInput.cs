@@ -11,6 +11,7 @@ namespace DiceFree.Characters
     public sealed class CombatInput : MonoBehaviour, DiceFree.Foundation.IManifestationSessionState, ISharedCombatCommands
     {
         private TargetSelection selection;
+        private InspectSelection inspect;
         private BasicAttack attack;
         private SkillTargetingController skillTargeting;
         private InputBindings bindings;
@@ -60,6 +61,8 @@ namespace DiceFree.Characters
         private void Awake()
         {
             selection = GetComponent<TargetSelection>();
+            inspect=GetComponent<InspectSelection>();
+            if(inspect==null)inspect=gameObject.AddComponent<InspectSelection>();
             attack = GetComponent<BasicAttack>();
             skillTargeting = GetComponent<SkillTargetingController>();
             actor = GetComponent<CombatActor>();
@@ -124,11 +127,17 @@ namespace DiceFree.Characters
                 orders?.ClearOrders();
                 CancelAttackMove();
                 selection.Select(null);
+                inspect?.Clear();
                 attack.Cancel();
             }
             if (select.WasPressedThisFrame() && Mouse.current != null &&
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
-                selection.Select(Pick(Mouse.current.position.ReadValue()));
+            {
+                Vector2 point=Mouse.current.position.ReadValue();
+                var actorTarget=Pick(point);
+                selection.Select(actorTarget);
+                inspect?.Show(actorTarget,actorTarget==null?PickNpc(point):null);
+            }
             if (attackSelected.WasPressedThisFrame())
             {
                 if(orders==null)
@@ -145,6 +154,15 @@ namespace DiceFree.Characters
             if (camera != null && Physics.Raycast(camera.ScreenPointToRay(screenPoint), out var hit, 1500,
                 (1 << 8) | (1 << 9) | (1 << 10), QueryTriggerInteraction.Ignore))
                 return hit.collider.GetComponentInParent<CombatActor>();
+            return null;
+        }
+
+        private InteractionTarget PickNpc(Vector2 screenPoint)
+        {
+            var camera=Camera.main;
+            if(camera!=null && Physics.Raycast(camera.ScreenPointToRay(screenPoint),
+                out var hit,1500,(1<<11),QueryTriggerInteraction.Ignore))
+                return hit.collider.GetComponentInParent<InteractionTarget>();
             return null;
         }
 

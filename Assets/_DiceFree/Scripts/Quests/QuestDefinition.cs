@@ -40,5 +40,8 @@ namespace DiceFree.Quests
         // Opt-in story conversations; existing quests retain explicit acceptance/turn-in.
         public bool acceptOnTalk;
         public bool completeOnObjectives;
+        // Repeatable quests return to Available after successful turn-in.
+        // Prerequisites must still be completed before accepting each cycle.
+        public bool repeatable;
     }
 }

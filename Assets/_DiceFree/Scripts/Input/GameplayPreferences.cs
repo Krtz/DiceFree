@@ -12,17 +12,19 @@ namespace DiceFree.Input
     }
 
     public enum OverheadHealthVisibility { Always = 0, WhenHurt = 1, Never = 2 }
+    public enum MinimapOrientation { NorthUp = 0, CameraUp = 1 }
 
     [Serializable]
     internal sealed class GameplayPreferencesData
     {
-        public int version = 2;
+        public int version = 3;
         public bool autoRetaliate = true;
         public OutOfRangeSkillBehavior outOfRangeSkillBehavior = OutOfRangeSkillBehavior.WalkIntoRange;
         public bool showCastRange = true;
         public OverheadHealthVisibility selfHealthBar = OverheadHealthVisibility.WhenHurt;
         public OverheadHealthVisibility allyHealthBar = OverheadHealthVisibility.WhenHurt;
         public OverheadHealthVisibility enemyHealthBar = OverheadHealthVisibility.Always;
+        public MinimapOrientation minimapOrientation = MinimapOrientation.NorthUp;
     }
 
     public sealed class GameplayPreferences
@@ -57,6 +59,7 @@ namespace DiceFree.Input
         public OverheadHealthVisibility SelfHealthBar => data.selfHealthBar;
         public OverheadHealthVisibility AllyHealthBar => data.allyHealthBar;
         public OverheadHealthVisibility EnemyHealthBar => data.enemyHealthBar;
+        public MinimapOrientation MinimapOrientation => data.minimapOrientation;
 
         private GameplayPreferences(string directory)
         {
@@ -85,6 +88,13 @@ namespace DiceFree.Input
             Save();
         }
 
+        public void SetMinimapOrientation(MinimapOrientation value)
+        {
+            if(data.minimapOrientation==value)return;
+            data.minimapOrientation=value;
+            Save();
+        }
+
         public void SetOverheadHealthVisibility(
             OverheadHealthVisibility self, OverheadHealthVisibility ally,
             OverheadHealthVisibility enemy)
@@ -105,7 +115,7 @@ namespace DiceFree.Input
             try
             {
                 var loaded = JsonUtility.FromJson<GameplayPreferencesData>(File.ReadAllText(path));
-                if(loaded!=null && (loaded.version==1 || loaded.version==2))
+                if(loaded!=null && (loaded.version==1 || loaded.version==2 || loaded.version==3))
                 {
                     // Unity's JsonUtility does not guarantee field initializers
                     // for missing fields: preserve the existing v1 settings,
@@ -116,7 +126,9 @@ namespace DiceFree.Input
                         loaded.allyHealthBar=OverheadHealthVisibility.WhenHurt;
                         loaded.enemyHealthBar=OverheadHealthVisibility.Always;
                     }
-                    loaded.version=2;
+                    if(loaded.version<3)
+                        loaded.minimapOrientation=MinimapOrientation.NorthUp;
+                    loaded.version=3;
                     data=loaded;
                 }
             }

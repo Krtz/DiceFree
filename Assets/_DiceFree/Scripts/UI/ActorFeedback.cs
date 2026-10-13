@@ -11,6 +11,7 @@ namespace DiceFree.UI
         [SerializeField] private Transform visual;
         [SerializeField] private NameplateMode nameplates = NameplateMode.Always;
         [SerializeField] private bool floatingNumbers = true;
+        public Transform Visual => visual;
         private CombatActor actor;
         private BasicAttack attack;
         private OverworldRespawn respawn;

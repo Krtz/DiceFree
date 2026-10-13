@@ -156,7 +156,16 @@ namespace DiceFree.Quests
             var state = Find(definition.stableId);
             if (state == null || state.definitionVersion != definition.version || state.status != QuestStatus.ReadyToTurnIn) return false;
             if (!DiceFree.Items.FixedRewardGrant.TryGrant(gameObject, definition.rewardXp, definition.reward,
-                () => state.status = QuestStatus.Completed,
+                () =>
+                {
+                    if(definition.repeatable)
+                    {
+                        state.status=QuestStatus.Available;
+                        state.stage=state.count=0;
+                        state.alternatives=Array.Empty<ObjectiveCount>();
+                    }
+                    else state.status=QuestStatus.Completed;
+                },
                 () => state.status = QuestStatus.ReadyToTurnIn)) return false;
             Changed?.Invoke(); return true;
         }

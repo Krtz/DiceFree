@@ -86,6 +86,10 @@ namespace DiceFree.EditorTools
                         " expected "+expectedRatio+"x; got "+stats.MaximumHp);
                     Check(Mathf.Approximately(stats.BasicAttackDamageMultiplier,
                         wolf?1.5f:1f),
+                        "unexpected global bite damage for "+animal.name);
+                    Check(Mathf.Approximately(
+                        animal.Actor.GetComponent<DiceFree.Combat.BasicAttack>().BasicAttackDamageScale,
+                        animal.Kind==WildlifeKind.AlphaWolf?1.35f:1f),
                         "incorrect bite damage multiplier for "+animal.name);
                 }
                 Debug.Log("IRONPINE_WOLF_BALANCE_OK: 12 ordinary wolves + 1 Alpha have doubled HP / +50% damage; quillrats unchanged.");

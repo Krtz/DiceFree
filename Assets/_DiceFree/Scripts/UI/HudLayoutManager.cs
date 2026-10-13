@@ -116,6 +116,8 @@ namespace DiceFree.UI
                 gameObject.AddComponent<ChannelBarHud>();
             if (!TryGetComponent<OverheadUnitHealthBars>(out _))
                 gameObject.AddComponent<OverheadUnitHealthBars>();
+            if (!TryGetComponent<TargetInspectionHud>(out _))
+                gameObject.AddComponent<TargetInspectionHud>();
         }
 
         private void OnDestroy()

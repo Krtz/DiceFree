@@ -8509,7 +8509,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.8500023, y: 2, z: 0.8500023}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -8534,7 +8534,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8500023
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -9823,7 +9823,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78000003, y: 1.9339911, z: 0.78000003}
+  m_Extents: {x: 0.82877356, y: 1.9339911, z: 0.82877356}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -9848,7 +9848,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78000003
+  m_Radius: 0.82877356
   m_Height: 3.8679821
   m_Direction: 1
   m_Center: {x: 0, y: 1.9339911, z: 0}
@@ -23525,7 +23525,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78000003, y: 1.9339911, z: 0.78000003}
+  m_Extents: {x: 0.81884116, y: 1.9339911, z: 0.81884116}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -23550,7 +23550,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78000003
+  m_Radius: 0.81884116
   m_Height: 3.8679821
   m_Direction: 1
   m_Center: {x: 0, y: 1.9339911, z: 0}
@@ -112698,7 +112698,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78000003, y: 1.9339911, z: 0.78000003}
+  m_Extents: {x: 0.82670265, y: 1.9339911, z: 0.82670265}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -112723,7 +112723,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78000003
+  m_Radius: 0.82670265
   m_Height: 3.8679821
   m_Direction: 1
   m_Center: {x: 0, y: 1.9339911, z: 0}
@@ -118316,7 +118316,7 @@ Transform:
   m_GameObject: {fileID: 553515173}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.80901706, z: -0, w: -0.58778524}
-  m_LocalPosition: {x: -35.017788, y: -0.0017299652, z: 50.567154}
+  m_LocalPosition: {x: -33.578407, y: -0.007599055, z: 51.85979}
   m_LocalScale: {x: 1.8677175, y: 1.8677175, z: 1.8677175}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -133687,7 +133687,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.83287305, y: 2, z: 0.83287305}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -133712,7 +133712,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.83287305
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -183227,7 +183227,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 1.6810049, z: 0.78}
+  m_Extents: {x: 0.85588783, y: 1.6810049, z: 0.85588783}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -183252,7 +183252,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.85588783
   m_Height: 3.3620098
   m_Direction: 1
   m_Center: {x: 0, y: 1.6810049, z: 0}
@@ -210739,7 +210739,7 @@ Transform:
   m_GameObject: {fileID: 981933587}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70090926, z: -0, w: 0.71325046}
-  m_LocalPosition: {x: -35.11075, y: 0.003963709, z: 22.120005}
+  m_LocalPosition: {x: -34.54053, y: -0.0013667886, z: 22.677555}
   m_LocalScale: {x: 2.2113285, y: 2.2113285, z: 2.2113285}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -226366,7 +226366,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 1.6810049, z: 0.78}
+  m_Extents: {x: 0.83357483, y: 1.6810049, z: 0.83357483}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -226391,7 +226391,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.83357483
   m_Height: 3.3620098
   m_Direction: 1
   m_Center: {x: 0, y: 1.6810049, z: 0}
@@ -256997,7 +256997,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.8240315, y: 2, z: 0.8240315}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -257022,7 +257022,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8240315
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -276891,6 +276891,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b9b4813d72f6e04f920ad819d8778e2, type: 2}
   - {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
   - {fileID: 11400000, guid: 49c1a5309c1c07b488dbd1ba404d4f1c, type: 2}
+  - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -288278,7 +288279,7 @@ Transform:
   m_GameObject: {fileID: 1336912958}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.80901706, z: -0, w: -0.58778524}
-  m_LocalPosition: {x: -35.017788, y: -0.0017299652, z: 50.567154}
+  m_LocalPosition: {x: -33.58577, y: -0.043408323, z: 53.265793}
   m_LocalScale: {x: 1.8677175, y: 1.8677175, z: 1.8677175}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -308681,7 +308682,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78000003, y: 1.9339911, z: 0.78000003}
+  m_Extents: {x: 0.78489965, y: 1.9339911, z: 0.78489965}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -308706,7 +308707,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78000003
+  m_Radius: 0.78489965
   m_Height: 3.8679821
   m_Direction: 1
   m_Center: {x: 0, y: 1.9339911, z: 0}
@@ -327002,7 +327003,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.7912145, y: 2, z: 0.7912145}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -327027,7 +327028,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.7912145
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -332903,7 +332904,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.8309762, y: 2, z: 0.8309762}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -332928,7 +332929,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8309762
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -337883,6 +337884,7 @@ GameObject:
   - component: {fileID: 1580831092}
   - component: {fileID: 1580831091}
   - component: {fileID: 1580831090}
+  - component: {fileID: 1580831094}
   m_Layer: 0
   m_Name: Mira - provisional surge farmer
   m_TagString: Untagged
@@ -337942,7 +337944,8 @@ MonoBehaviour:
   approachPoint: {fileID: 0}
   context: {fileID: 0}
   quest: {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
-  additionalQuests: []
+  additionalQuests:
+  - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
   ambientOutsideQuest: 1
 --- !u!4 &1580831093
 Transform:
@@ -337960,6 +337963,18 @@ Transform:
   - {fileID: 740247882}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1580831094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580831089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c44228145878d439acbdc6c046be30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestWorldMarker
 --- !u!1 &1581146746
 GameObject:
   m_ObjectHideFlags: 0
@@ -340734,7 +340749,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.8167312, y: 2, z: 0.8167312}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -340759,7 +340774,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8167312
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -371248,7 +371263,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 1.6810049, z: 0.78}
+  m_Extents: {x: 0.8159706, y: 1.6810049, z: 0.8159706}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -371273,7 +371288,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8159706
   m_Height: 3.3620098
   m_Direction: 1
   m_Center: {x: 0, y: 1.6810049, z: 0}
@@ -418112,7 +418127,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.8419944, y: 2, z: 0.8419944}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -418137,7 +418152,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.8419944
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -432272,7 +432287,7 @@ Transform:
   m_GameObject: {fileID: 2018916948}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9999619, z: -0, w: -0.00872653}
-  m_LocalPosition: {x: 24, y: -0.18266845, z: -19}
+  m_LocalPosition: {x: 23.387901, y: -0.19075638, z: -18.299604}
   m_LocalScale: {x: 1.7777778, y: 1.7777778, z: 1.7777778}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -438149,7 +438164,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 2, z: 0.78}
+  m_Extents: {x: 0.82923204, y: 2, z: 0.82923204}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -438174,7 +438189,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.82923204
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
@@ -449521,7 +449536,7 @@ Transform:
   m_GameObject: {fileID: 2107558528}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9999619, z: -0, w: -0.00872653}
-  m_LocalPosition: {x: 24, y: -0.18266845, z: -19}
+  m_LocalPosition: {x: 21.811068, y: -0.19250403, z: -17.40606}
   m_LocalScale: {x: 1.7777778, y: 1.7777778, z: 1.7777778}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -454911,7 +454926,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.78, y: 1.6810049, z: 0.78}
+  m_Extents: {x: 0.84179324, y: 1.6810049, z: 0.84179324}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -454936,7 +454951,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78
+  m_Radius: 0.84179324
   m_Height: 3.3620098
   m_Direction: 1
   m_Center: {x: 0, y: 1.6810049, z: 0}
@@ -458942,8 +458957,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147560218231}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.76604444, z: -0, w: 0.64278764}
-  m_LocalPosition: {x: 17, y: -0.21793935, z: -18}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17, y: -0.14026044, z: -8.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -458958,8 +458973,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148441227970}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.76604444, z: -0, w: 0.64278764}
-  m_LocalPosition: {x: -3, y: 0.058794945, z: -19}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3, y: 0.03765221, z: -8.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
