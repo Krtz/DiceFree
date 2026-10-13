@@ -1,5 +1,8 @@
 # DiceFree Tier II classes — approved decisions & revised design v0.2
 
+> **Greatblade update (Oct 13):** The Greatblade kit, unlocked levels and evolving Mastery passive have been refined by the user. See [Greatblade design v0.3](GREATBLADE_PROTOTYPE_DESIGN_V03.md) and [Unity visual prototype](GREATBLADE_PROTOTYPE_IMPLEMENTATION.md). **Tier IV+ only** can equip slot-9 ultimates; earlier v0.2 wording about low-tier quest ultimates is obsolete.
+
+
 **Date:** 2026-10-13
 **Status:** User-approved class identities and system direction, with explicitly provisional skill details and future branches. **Design only** — no implementations, models, quest chains or art imported by this document.
 
