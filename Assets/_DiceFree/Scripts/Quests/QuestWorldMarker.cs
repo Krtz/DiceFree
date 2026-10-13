@@ -5,7 +5,7 @@ namespace DiceFree.Quests
 {
     /// <summary>
     /// Animated world-space, physically modelled punctuation above NPCs:
-    /// gold ! for available quests, green ? for turn-ins.
+    /// gold ! for ordinary quests, blue ! for repeatable quests, green ? for turn-ins.
     /// No UI screen-space text and no hit-test/collision.
     /// </summary>
     [DisallowMultipleComponent,RequireComponent(typeof(QuestGiver))]
@@ -14,10 +14,13 @@ namespace DiceFree.Quests
         private QuestGiver giver;
         private QuestJournal journal;
         private Transform pivot;
-        private GameObject exclamation,question;
+        private GameObject exclamation,repeatExclamation,question;
         private float baseHeight=2.9f;
-        private static Material gold,green;
+        private static Material gold,blue,green;
         public bool IsExclamation => exclamation!=null && exclamation.activeSelf;
+        public bool IsRepeatExclamation => repeatExclamation!=null && repeatExclamation.activeSelf;
+        public static bool IsRepeatAvailable(QuestDefinition quest,bool canAccept) =>
+            quest!=null && quest.repeatable && canAccept;
         public bool IsQuestion => question!=null && question.activeSelf;
 
         private void Awake()
@@ -59,6 +62,8 @@ namespace DiceFree.Quests
                 "Quest available golden 3D marker");
             if(green==null)green=MaterialFor(new Color(.18f,1f,.28f),
                 "Quest ready green 3D marker");
+            if(blue==null)blue=MaterialFor(new Color(.13f,.54f,1f),
+                "Repeatable quest available blue 3D marker");
             foreach(var render in GetComponentsInChildren<Renderer>())
                 baseHeight=Mathf.Max(baseHeight,
                     render.bounds.max.y-transform.position.y+.65f);
@@ -72,6 +77,10 @@ namespace DiceFree.Quests
                 new Vector3(0,.60f,0),.09f);
             Shape(PrimitiveType.Sphere,bang.transform,"! dot",
                 new Vector3(0,-.20f,0),Vector3.one*.18f,gold);
+            repeatExclamation=Instantiate(bang,pivot,false);
+            repeatExclamation.name="Repeatable quest 3D blue !";
+            foreach(var r in repeatExclamation.GetComponentsInChildren<Renderer>())
+                r.sharedMaterial=blue;
 
             var query=new GameObject("Ready quest 3D ?");
             query.transform.SetParent(pivot,false);
@@ -86,25 +95,32 @@ namespace DiceFree.Quests
             Shape(PrimitiveType.Sphere,query.transform,"? dot",
                 new Vector3(0,-.24f,0),Vector3.one*.18f,green);
             exclamation.SetActive(false);
+            repeatExclamation.SetActive(false);
             question.SetActive(false);
         }
         private void LateUpdate()
         {
             if(pivot==null)return;
             if(journal==null)journal=FindFirstObjectByType<QuestJournal>();
-            bool ready=false,available=false;
+            bool ready=false,available=false,repeatAvailable=false;
             if(journal!=null)
                 foreach(var quest in giver.Offers)
                 {
                     if(quest==null)continue;
                     var state=journal.GetProgress(quest.stableId);
                     if(state?.status==QuestStatus.ReadyToTurnIn)ready=true;
-                    if(journal.CanAccept(quest))available=true;
+                    if(journal.CanAccept(quest))
+                    {
+                        if(IsRepeatAvailable(quest,true))repeatAvailable=true;
+                        else available=true;
+                    }
                 }
-            pivot.gameObject.SetActive(ready || available);
-            if(!ready && !available)return;
+            pivot.gameObject.SetActive(ready || available || repeatAvailable);
+            if(!ready && !available && !repeatAvailable)return;
+            // Turn-ins take precedence, then new story quests, then repeatables.
             question.SetActive(ready);
             exclamation.SetActive(!ready && available);
+            repeatExclamation.SetActive(!ready && !available && repeatAvailable);
             pivot.localPosition=Vector3.up*(baseHeight+
                 .13f*Mathf.Sin(Time.time*2.5f));
             if(Camera.main!=null)
