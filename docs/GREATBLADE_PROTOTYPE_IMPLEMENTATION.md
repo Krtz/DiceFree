@@ -1,32 +1,57 @@
-# Greatblade first in-Unity prototype — implementation notes (2026-10-13)
+# Greatblade Unity prototype — implementation notes (2026-10-13)
 
-**Branch:** `feature/visual-overhaul-vis00`. The prototype is real Unity content; the full Greatblade combat/advancement implementation is **not finished**.
+**Branch:** `feature/visual-overhaul-vis00`. The textured visual prototype is repaired and tested in Unity. Greatblade combat and class advancement remain unfinished.
 
-## What was implemented
+## Visual setup
 
-- **Level gates and skill rank schedule scaffold** in `Assets/_DiceFree/Scripts/Progression/GreatbladeProgressionRules.cs`: Wide Arc, Spin Dash, Greatsword Mastery and Heavy Rhythm available at L1; Overhead Breaker L6; Battle Cry later. Uneven rank cadence, evolving Mastery bonuses at ranks 2–4, Heavy Rhythm gain/decay scaling. **No threshold Momentum buffs.** Tier IV+ is required for reserved ultimate slot 9. This is static rule metadata and tests, not a connected playable skills progression yet.
-- **One shared Greatblade base character** for eventual playable class **and** retired swordswoman NPC in Cornberg (same underlying model, with different equipment support planned).
-- **Female Warrior Princess** asset source `Assets/AllStarCharacterLibrary/Models/Characters/A03.FBX`. Its auto Humanoid import failed, so `GreatbladeHumanoidRig` maps 21 bones and builds a validated Unity Humanoid Avatar saved as **LOCAL LICENSED** `Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeFemaleAvatar.asset`.
-- **Two-handed animations** from `FREE - Modular Character - Fantasy RPG Human Male` / Blink (Idle, WalkForward, MeeleeAttack_TwoHanded, SpinToWin_TwoHanded) assigned to local animator controller. Retargeting capability/clip humanoid metadata validated; **actual animation style/hand placement still needs visual QA**.
-- **Oversized sword** from `Free Low Poly Swords`: `Assets/PurePoly/Free_Swords/Prefabs/PP_Sword_0363.prefab`, attached to the female rig's **R Hand** bone. Sword geometry scaled to approximate 2.75 world units for a Warcraft III-like exaggerated silhouette; pose, grip and orientation should be visually reviewed and adjusted if needed.
-- Shared LOCAL resource prefab `Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeHero.prefab` used by runtime visual component `DiceFree.Visuals.GreatbladePrototypeVisual`. Public clones without the original Asset Store art get an original code-drawn humanoid with large sword, without missing serialized vendor references.
-- Tracked scene `Assets/_DiceFree/Scenes/GreatbladePrototype.unity` has a camera, lights, stage and **two identically sourced Greatblade appearances** side by side: one labelled playable class prototype, the other retired swordswoman. Open this scene in the Unity Editor, then enter Play Mode to instantiate visuals. The visual component has a preview-spin property; actual skill combat is not enabled here.
+- The playable class and retired swordswoman use the same local resource, `GreatbladeLicensed/GreatbladeHero`. The tracked `Assets/_DiceFree/Scenes/GreatbladePrototype.unity` scene displays both appearances. Open it and enter Play Mode to instantiate the models.
+- Female Warrior Princess source: `Assets/AllStarCharacterLibrary/Models/Characters/A03.FBX`. Missing original A03 diffuse and normal textures were restored with their original metadata from the user's cached Unity package. The derived body material uses that atlas in URP. Only the full body renders; the overlapping A03_LOD and the character's native Longsword are disabled.
+- `GreatbladeHumanoidRig` builds a Humanoid Avatar from a temporarily normalized T-pose, mapping 51 human bones including 30 finger joints. It leaves the vendor FBX and bind pose intact. The derived asset is `Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeFemaleTposeAvatar.asset`. The old Avatar is retained locally because another process held it open.
+- Blink's WalkForward, MeeleeAttack_TwoHanded and SpinToWin_TwoHanded supply the motion. Local derived clips add a raised two-handed ready stance, preserve that upper-body guard while walking, and close the fingers around the grip during swing and spin. Original animation files remain unchanged.
+- The oversized weapon uses `Assets/PurePoly/Free_Swords/Prefabs/PP_Sword_0363.prefab`. Its length is 2.75 world units; width and thickness retain source scale so the handle fits the hands. Measured leather-handle anchors replace the original blade-centred pivot attachment.
+- `GreatbladeTwoHandGrip` aligns the sword with the authored palm line after animation, fits the fixed handle within both arms' reach, and solves the actual arm bones in LateUpdate. This affects visual bones only. It does not move the actor root or implement damage, movement or class rules.
+- The portrait stage has its own original neutral material, front camera and directional light. Authoring uses an additive scene and validation uses a preview scene, preserving the current gameplay scene.
 
-## Tests
+## Recreate and inspect
 
-- Unity 6000.6.3f1 recompile: **zero errors, zero warnings**.
-- `dicefree.greatblade.art-survey`: female mesh contains 6 SkinnedMeshRenderers; all Blink 2H animation clips and selected sword prefab found.
-- `dicefree.greatblade.rig-human`: **21 mapped human bones**, **64 total skeleton bones**, successful valid Humanoid Avatar.
-- `dicefree.greatblade.prototype.install`: preview scene and local vendor prefab authored successfully, with `avatarHumanoid=true`, four animation states and shared model resource.
-- `dicefree.greatblade.prototype.validate`: **DICEFREE_GREATBLADE_VISUAL_AND_PROGRESS_OK**, verifies valid female humanoid avatar, real source clips with Humanoid motion, right-hand sword socket, shared scene model, Greatblade level gates (L1/L6), 2 passive roles, rank cadence and no Tier II/III ultimate.
-- **No full visual in Game View, gear attachment under animation, actual Spin Dash movement/damage, skillbar rank spending or world NPC mentor quest was tested/implemented**. Avoid claiming those exist.
+With licensed sources installed, run:
 
-## Class kit and art production
+```text
+unity command dicefree.greatblade.rig-human --project-path T:\TEMP\DiceFree-Options --format json
+unity command dicefree.greatblade.prototype.install --project-path T:\TEMP\DiceFree-Options --format json
+unity command dicefree.greatblade.prototype.validate --project-path T:\TEMP\DiceFree-Options --format json
+```
 
-See `docs/GREATBLADE_PROTOTYPE_DESIGN_V03.md` for the user-approved six initial abilities and evolving passive design. An actual Greatblade avatar, two-handed equipment item and the retired mentor should eventually bind the shared visual base to class/equipment state, without duplicating assets. A live ground-targeted Spin Dash still needs collision-safe movement and AoE hits along the traveled route. A real Overhead Breaker still needs Momentum consumption, and Greatsword Mastery rank 4's shield vs heal is undecided.
+The standalone `dicefree.greatblade.visuals.repair` command refreshes the derived visual assets after prototype installation. Asset recovery from the user's package cache was a local repair; these commands do not download or redistribute licensed art.
 
-## Locally licensed art + public repository
+## Validation completed
 
-These are **gitignored, local-only**: `Assets/AllStarCharacterLibrary/`, `Assets/Blink/`, `Assets/PurePoly/`, `Assets/_DiceFree/Resources/GreatbladeLicensed/`. Their original downloaded Unity packages also remain in the user's Asset Store cache. **Never git-add them**. Tracked editor authoring script imports/adapts sources if present; tracked scene/runtime adapter fall back gracefully on public clones.
+- Unity 6000.6.3f1 compiled the final runtime and editor changes with zero compilation errors. The final Console contained 115 compiler warnings in unchanged code (114 obsolete-API warnings and one unreachable-code warning), with none from the repaired files.
+- `dicefree.greatblade.prototype.validate` returned `DICEFREE_GREATBLADE_VISUAL_AND_PROGRESS_OK`: original texture assigned, one body, one sword, all 30 finger joints, valid Humanoid rig, and 80 sampled poses across ready, walk, swing and spin. Maximum sampled palm-to-grip error was under 0.003 mm.
+- A live Play Mode test drove both runtime visual adapters through all four states. It measured 3,730 frames after LateUpdate, with maximum right-hand error 0.0022 mm and left-hand error 0.0028 mm. Neither actor root moved. These metrics measure configured palm anchors; live screenshots were also inspected for visible skin and hand placement.
+- The final ready view and swing were captured from the live scene. An immediate preview-scene render showed a displaced swing hand that was not present in the live view; live Play Mode confirmed the actual grip. Do not treat those immediate offscreen pose screenshots as authoritative for skin placement.
+- The local review evidence, source receipt, backups and live report are under `Library/GreatbladeVisualRepair20261013/`. The final preview is `Greatblade-Repaired-2026-10-13.png`.
+- The existing static progression checks still pass: four L1 entries (two active skills and two distinct passives), Overhead Breaker at L6, uneven rank cadence, and ultimate slot 9 restricted to Tier IV+.
+- No full player build, actual Greatblade skill damage, collision-safe Spin Dash travel, Momentum consumption, skill-rank spending or mentor quest was implemented or tested by this visual repair.
 
-**Do not overwrite active DiceFree profiles** (`EditorProfiles/primary-echo.json`); no class/save schema or existing Cornberg gameplay code has been modified by this visual prototype. **Never merge to main** without approval.
+## Design and next implementation
+
+`docs/GREATBLADE_PROTOTYPE_DESIGN_V03.md` remains the class design source. Greatblade is Tier II after Physical L30 and begins at class level 1. The six initial abilities are Wide Arc, Spin Dash, Overhead Breaker, Battle Cry, Greatsword Mastery and Heavy Rhythm. Momentum gains from attacks/skills and is consumed by the finisher; there are no threshold Momentum buffs. Greatsword Mastery rank 4's shield versus heal remains undecided.
+
+The next useful slice is a playable Wide Arc with Heavy Rhythm/Momentum feedback against a test target. Then implement ground-targeted Spin Dash with collision-safe travel and route hits, followed by the Momentum-consuming Overhead Breaker. Connect class advancement, equipment and the retired mentor after the combat loop is demonstrable.
+
+## Local startup recovery
+
+The existing Avatar file was open in a Node process; the new Avatar path avoids the blocked replacement without terminating that process. Unity's automatic Package Manager launch also failed on this PC. The editor successfully reopened using the already running local Package Manager service:
+
+```text
+T:\TEMP\unity\6000.6.3f1\Editor\Unity.exe -projectPath T:\TEMP\DiceFree-Options -upmIpcPath Upm-Diagnostic
+```
+
+That command depends on the local `Unity-Upm-Diagnostic` service still running. No antivirus exclusion or security setting was changed.
+
+## Licensed art and public repository
+
+These paths remain gitignored and local only: `Assets/AllStarCharacterLibrary/`, `Assets/Blink/`, `Assets/PurePoly/`, and `Assets/_DiceFree/Resources/GreatbladeLicensed/`. This includes the derived Avatar, clips, material, controller and prefab. Never stage their bytes or original cached Unity packages. Public clones use the existing original code-drawn fallback.
+
+Preserve `EditorProfiles/primary-echo.json`, unrelated material/settings edits, and Cornberg gameplay. This repair changes no save schema, combat progression or action-bar layout. Do not merge to main without approval.

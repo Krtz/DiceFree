@@ -57,7 +57,7 @@ namespace DiceFree.EditorTools
             }
             var female=AssetDatabase.LoadAssetAtPath<GameObject>(Female);
             var avatar=AssetDatabase.LoadAssetAtPath<Avatar>(
-                Local+"/GreatbladeFemaleAvatar.asset");
+                GreatbladeHumanoidRig.AvatarPath);
             if(avatar==null || !avatar.isHuman || !avatar.isValid)
                 avatar=AssetDatabase.LoadAllAssetsAtPath(Female)
                     .OfType<Avatar>().FirstOrDefault(x=>x!=null&&x.isHuman&&x.isValid);
@@ -131,24 +131,8 @@ namespace DiceFree.EditorTools
                     var swordInstance=(GameObject)PrefabUtility.InstantiatePrefab(sword);
                     swordInstance.name="Oversized two-handed Greatblade sword";
                     swordInstance.transform.SetParent(hand,false);
-                    swordInstance.transform.localPosition=new Vector3(
-                        0,-.04f,0);
-                    swordInstance.transform.localRotation=Quaternion.Euler(90,0,0);
-                    var renderers=swordInstance.GetComponentsInChildren<Renderer>(true);
-                    var bounds=new Bounds(Vector3.zero,Vector3.one);
-                    bool found=false;
-                    foreach(var mesh in renderers)
-                    {
-                        if(!found){bounds=mesh.bounds;found=true;}
-                        else bounds.Encapsulate(mesh.bounds);
-                    }
-                    // Scale disproportionately large for the game's WC3
-                    // hero silhouette, regardless of source prefab dimensions.
-                    float largest=Mathf.Max(bounds.size.x,
-                        Mathf.Max(bounds.size.y,bounds.size.z));
-                    float factor=found?Mathf.Clamp(2.75f/
-                        Mathf.Max(.01f,largest),.5f,7f):2.5f;
-                    swordInstance.transform.localScale*=factor;
+                    // VisualRepair measures the leather grips and sets the
+                    // final scale and orientation after Humanoid retargeting.
                     foreach(var col in model.GetComponentsInChildren<Collider>(true))
                         Object.DestroyImmediate(col);
                     PrefabUtility.SaveAsPrefabAsset(model,prefabPath);
@@ -171,31 +155,43 @@ namespace DiceFree.EditorTools
             }
             finally{PrefabUtility.UnloadPrefabContents(edited);}
 
-            var previous=EditorSceneManager.GetSceneManagerSetup();
+            GreatbladeVisualRepair.Install();
+            avatar=AssetDatabase.LoadAssetAtPath<Avatar>(GreatbladeHumanoidRig.AvatarPath);
+            var previousActive=SceneManager.GetActiveScene();
+            Scene scene=default;
             try
             {
-                var scene=EditorSceneManager.NewScene(
-                    NewSceneSetup.EmptyScene,NewSceneMode.Single);
+                scene=EditorSceneManager.NewScene(
+                    NewSceneSetup.EmptyScene,NewSceneMode.Additive);
+                SceneManager.SetActiveScene(scene);
                 var camera=new GameObject("Greatblade hero preview camera")
                     .AddComponent<Camera>();
-                camera.transform.position=new Vector3(0,4,-11f);
-                camera.transform.LookAt(new Vector3(0,1.5f,0));
-                camera.fieldOfView=34f;
+                camera.transform.position=new Vector3(0,2.9f,9.5f);
+                camera.transform.LookAt(new Vector3(0,1.65f,0));
+                camera.fieldOfView=35f;
                 camera.clearFlags=CameraClearFlags.SolidColor;
                 camera.backgroundColor=new Color(.085f,.105f,.135f);
                 var light=new GameObject("Greatblade preview sun").AddComponent<Light>();
                 light.type=LightType.Directional;
-                light.transform.rotation=Quaternion.Euler(40,-28,0);
-                light.intensity=1.6f;
+                light.transform.rotation=Quaternion.Euler(35,155,0);
+                light.intensity=1.2f;
                 var floor=GameObject.CreatePrimitive(PrimitiveType.Plane);
                 floor.name="Shared class portrait stage";
                 floor.transform.localScale=new Vector3(1.1f,1,1.1f);
-                var mat=AssetDatabase.LoadAssetAtPath<Material>(
-                    "Assets/_DiceFree/Materials/Blockout/Meadow.mat");
+                const string stageMaterial="Assets/_DiceFree/Materials/GreatbladeStage.mat";
+                var mat=AssetDatabase.LoadAssetAtPath<Material>(stageMaterial);
+                if(mat==null)
+                {
+                    mat=new Material(Shader.Find("Universal Render Pipeline/Lit"));
+                    mat.name="Greatblade portrait stage";
+                    mat.SetColor("_BaseColor",new Color(.15f,.19f,.22f));
+                    AssetDatabase.CreateAsset(mat,stageMaterial);
+                    AssetDatabase.SaveAssetIfDirty(mat);
+                }
                 if(mat!=null)floor.GetComponent<Renderer>().sharedMaterial=mat;
                 foreach(var actor in new[]{
-                    (name:"Greatblade playable class prototype",x:-2f),
-                    (name:"Retired swordswoman — SAME BASE",x:2f)})
+                    (name:"Greatblade playable class prototype",x:-1.6f),
+                    (name:"Retired swordswoman — SAME BASE",x:1.6f)})
                 {
                     var obj=new GameObject(actor.name);
                     obj.transform.position=new Vector3(actor.x,0,0);
@@ -206,10 +202,11 @@ namespace DiceFree.EditorTools
             }
             finally
             {
-                if(previous.Length>0)
-                    EditorSceneManager.RestoreSceneManagerSetup(previous);
+                if(scene.IsValid())EditorSceneManager.CloseScene(scene,true);
+                if(previousActive.IsValid() && previousActive.isLoaded)
+                    SceneManager.SetActiveScene(previousActive);
             }
-            AssetDatabase.SaveAssets();
+            AssetDatabase.SaveAssetIfDirty(controller);
             return new{success=true,
                 scene=Preview,
                 visualResource=GreatbladePrototypeVisual.ResourcePath,

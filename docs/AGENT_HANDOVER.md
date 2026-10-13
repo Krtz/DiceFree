@@ -1,3 +1,15 @@
+## 2026-10-13 — Greatblade visual repair completed
+
+- Branch remains `feature/visual-overhaul-vis00`; no merge to main. Greatblade combat/class advancement is still prototype work. See `docs/GREATBLADE_PROTOTYPE_IMPLEMENTATION.md` for the current visual setup, evidence and next slice.
+- Restored missing original A03 texture inputs from the local licensed cache. Derived textured body uses one body LOD; source Longsword hidden. Vendor FBX, source clips and materials remain intact.
+- Rebuilt retargeting from a temporary T-pose: 51 mapped human bones, all 30 finger joints. New ignored Avatar is `GreatbladeFemaleTposeAvatar.asset`; do not overwrite the old Avatar held open by a Node process.
+- Added raised two-hand ready/carry clips, closed-finger swing/spin derivatives, measured sword handle anchors and `GreatbladeTwoHandGrip` LateUpdate arm solving. Sword is 2.75 units long while grip girth retains source scale. Both class/mentor appearances share the same resource.
+- Final Unity compile succeeded. The prototype validator passed 80 poses across all four motions; the live runtime adapter test passed 3,730 frames with both actors, all four states, palm errors below 0.003 mm and no actor-root movement. Live ready/swing captures were inspected; immediate preview-scene skin renders can lag behind manual pose updates.
+- Evidence/backups/source receipt: `Library/GreatbladeVisualRepair20261013/`. Final Unity image: `Greatblade-Repaired-2026-10-13.png`. Temporary scripts are outside Assets.
+- Unity is open with the local Package Manager service via `-upmIpcPath Upm-Diagnostic`. Default UPM auto-spawning failed earlier; that workaround depends on the service remaining available. No security settings were changed.
+- Preserve unrelated material/settings edits and player profiles. Never stage licensed source/derived art. Visual authoring preserves the open gameplay scene; runtime tests stopped and the prior Cornberg scene was restored.
+- Next: playable Wide Arc plus Heavy Rhythm/Momentum feedback, then collision-safe Spin Dash and Momentum-consuming Overhead Breaker. No threshold Momentum buffs; rank-4 Mastery shield vs heal remains open.
+
 # DiceFree Agent Handover
 
 ## Issue #48 Options / persistent key rebinding - 2026-10-05 (review-ready)

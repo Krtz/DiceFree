@@ -48,12 +48,24 @@ namespace DiceFree.EditorTools
                     Require(clip.isHumanMotion,
                         "Animation must be Humanoid to retarget: "+clip.name);
 
-            var prior=EditorSceneManager.GetSceneManagerSetup();
+            var skins=art.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            Require(skins.Where(x=>x.enabled).All(x=>x.sharedMaterials.All(m=>
+                    m!=null && m.HasProperty("_BaseMap") && m.GetTexture("_BaseMap")!=null)),
+                "Visible body meshes must have their original atlas texture");
+            Require(skins.Count(x=>x.enabled && (x.name=="A03" || x.name=="A03_LOD"))==1,
+                "Exactly one body LOD must render");
+            Require(!art.GetComponentsInChildren<Renderer>(true).Any(x=>x.name=="Longsword" && x.enabled),
+                "The source character's extra sword must not render");
+            Require(sword.Find(GreatbladeVisualRepair.MainGrip)!=null &&
+                    sword.Find(GreatbladeVisualRepair.LowerGrip)!=null,
+                "Sword must use leather-handle grip anchors");
+
+            float maxSupportError=0,maxDominantError=0;
+            int fingerBones=0,samples=0;
+            var scene=EditorSceneManager.OpenPreviewScene(
+                "Assets/_DiceFree/Scenes/GreatbladePrototype.unity");
             try
             {
-                var scene=EditorSceneManager.OpenScene(
-                    "Assets/_DiceFree/Scenes/GreatbladePrototype.unity",
-                    OpenSceneMode.Single);
                 var previews=scene.GetRootGameObjects()
                     .SelectMany(x=>x.GetComponentsInChildren<GreatbladePrototypeVisual>(true))
                     .ToArray();
@@ -62,12 +74,38 @@ namespace DiceFree.EditorTools
                 Require(previews.Any(x=>x.name.Contains("retired",
                         StringComparison.OrdinalIgnoreCase)),
                     "Retired swordswoman missing from shared preview");
-                Require(previews.All(x=>GreatbladePrototypeVisual.ResourcePath==
-                    "GreatbladeLicensed/GreatbladeHero"),
-                    "Player/NPC model base diverged.");
+                var model=UnityEngine.Object.Instantiate(art);
+                SceneManager.MoveGameObjectToScene(model,scene);
+                var sampled=model.GetComponent<Animator>();
+                sampled.Rebind();
+                var grip=model.GetComponent<GreatbladeTwoHandGrip>();
+                Require(grip!=null,"Support-hand visual constraint missing");
+                string[] fingers={"Thumb","Index","Middle","Ring","Little"};
+                fingerBones=Enum.GetValues(typeof(HumanBodyBones)).Cast<HumanBodyBones>()
+                    .Where(x=>fingers.Any(f=>x.ToString().Contains(f)))
+                    .Count(x=>sampled.GetBoneTransform(x)!=null);
+                Require(fingerBones==30,"Both hands must have all finger joints mapped");
+                var main=grip.Weapon.Find(GreatbladeVisualRepair.MainGrip);
+                var hand=sampled.GetBoneTransform(HumanBodyBones.RightHand);
+                foreach(string name in new[]{"Greatblade two-hand ready","Greatblade walk",
+                    "Two-handed swing","Spin Dash"})
+                    for(int frame=0;frame<20;frame++)
+                    {
+                        sampled.Play(name,0,frame/20f);
+                        sampled.Update(0);
+                        grip.ApplyPose();
+                        maxDominantError=Mathf.Max(maxDominantError,
+                            Vector3.Distance(hand.TransformPoint(grip.PalmInHand),main.position));
+                        maxSupportError=Mathf.Max(maxSupportError,
+                            Vector3.Distance(grip.SupportPalm,grip.SupportGrip.position));
+                        samples++;
+                    }
+                Require(maxDominantError<.002f,"Dominant palm slips off the handle");
+                Require(maxSupportError<.025f,
+                    "Support palm cannot reach the handle throughout the four motions: "+
+                    maxSupportError.ToString("F4")+"m");
             }
-            finally{if(prior.Length>0)
-                EditorSceneManager.RestoreSceneManagerSetup(prior);}
+            finally{EditorSceneManager.ClosePreviewScene(scene);}
 
             var r=GreatbladeProgressionRules.Skills;
             Require(r.Length==6,"Expected four actives and two distinct passives");
@@ -114,7 +152,10 @@ namespace DiceFree.EditorTools
                 marker="DICEFREE_GREATBLADE_VISUAL_AND_PROGRESS_OK",
                 playerAndMentorSameModel=true,
                 femaleHumanoidAvatar=true,animationStates=states.Length,
-                swordInHand=true,passives=2,
+                swordInHand=true,texturedBody=true,oneBodyLod=true,
+                extraSwordHidden=true,fingerBones,
+                sampledVisualPoses=samples,maxSupportHandError=maxSupportError,
+                maxDominantHandError=maxDominantError,passives=2,
                 level1Skills=4,breakerFirstLevel=6,
                 ultimateTierMinimum=4};
         }
