@@ -1,0 +1,39 @@
+{
+  "sourceCommit": "c1e6c8c6ab7b14eb655e63cdbb4d93f4977ae00b",
+  "branch": "integration/world1-foundation",
+  "date": "2026-10-13",
+  "unityVersion": "6000.6.3f1",
+  "previousBuildWarnings": 45,
+  "result": "Succeeded",
+  "errors": 0,
+  "warnings": 0,
+  "sceneCount": 7,
+  "bytes": 317898556,
+  "buildTimeMs": 27245.4176,
+  "executable": "T:/TEMP/DiceFree-Options/Builds/World1Foundation/DiceFree.exe",
+  "buildJobId": "7a22677cbd0a4bf2b6804833a443ea25",
+  "buildWarningOrErrorMessages": [],
+  "validationMarkers": [
+    "DICEFRE_ARCHITECTURE_OK",
+    "DICEFREE_DEVELOPMENT_ROOM_PLAYMODE_OK",
+    "DICEFREE_ADVANCEMENT_PLAYMODE_OK",
+    "TRIMERY_VILLAGE_VALIDATED"
+  ],
+  "playerSmoke": {
+    "platform": "WindowsPlayer",
+    "buildGuid": "21bb30bb9a5c4ac7baf133a477f1797f",
+    "scene": "StartMenu",
+    "developmentBuild": true,
+    "frameCountFirst": 115492,
+    "frameCountLater": 269123,
+    "startupWarnings": 0,
+    "startupErrors": 0,
+    "pipelineServerRunning": true,
+    "occluderShaderSupported": true,
+    "occlusionShaderSupported": true,
+    "isolatedSaveRoot": true,
+    "gracefulExitCode": 0
+  },
+  "editorDevelopmentToggleRestored": false,
+  "licensedVillageShaderSourceTracked": false
+}
