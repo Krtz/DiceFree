@@ -1,4 +1,6 @@
 # Trimery — Village 2 design v0.1
+
+> **Updated geography/lore discussion:** See [Trimery design v0.2](TRIMERY_DESIGN_V02.md) for the three confirmed SOUTH/WEST/NORTH roads, the Big City around its enormous tree, timber palisade, and the optional DiceBound Ogre Roadwarden plot. This earlier v0.1 version is historical and contains superseded east-road placeholders.
 Date: 2026-10-12
 Status: Name, economy and major progression route confirmed by user. Environmental cause, size and precise layout still under design. **Do not implement new scenes yet.**
 
