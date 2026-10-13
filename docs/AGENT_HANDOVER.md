@@ -1,5 +1,14 @@
 # DiceFree Agent Handover
 
+## Local downloaded art staging audit — 2026-10-14
+
+Using the connected `Kratz` Windows PC through Desktop Commander, inspected `T:\TEMP\ART_ASSETS` read-only: **19 ZIP archives and one incomplete Chrome download**. Outer and nested ZIP member lists inspected; the eight direct GLBs were inspected for glTF mesh/vertex/triangle counts, skins and animations. All eight direct GLBs have **zero skins and zero animations**, with hundreds of thousands of vertices and ~0.85–1.5 million triangles. FBX and Alembic content was identified but not imported/rig-validated, and no Blender or Unity asset import was performed.
+
+New permanent technical catalog: [ASSET_CATALOG.md](ASSET_CATALOG.md). Updated [ASSET_CREDITS.md](ASSET_CREDITS.md) to cover all 19 archives, with source attribution and explicit license statuses. Source pages identified for Truffle Man (dotflare, CC BY) and Dark Necromancer (Pigcraft, CC BY); Catrina has CC Attribution per user screenshot (exact version not verified). Black Dragon is **CC BY-NC**, so hold for commercial use. Kindred is a League of Legends fan character; the model creator's CC BY does not clear the underlying character IP, so **do not ship**. All other candidates are on license-provenance hold pending original source checks. Original files were not changed or added to Git.
+
+Commits: catalog `9303edcdabee5d1f86734ec1b4f542f197c9ebdf`, credits `3501564979c7f2c3a63b86d9f582c76b69a3a1e0`. Next recommended task: source/license clearance and focused Blender/Unity visual/rig/material validation for Truffle Man or Dark Necromancer; preserve originals and avoid committing entire ZIP staging collection. Documentation-only; no code/build regressions run.
+
+
 ## Asset credits and art-quality direction — 2026-10-14
 
 On `poc/cornberg`, `docs/ASSET_CREDITS.md` was created to track third-party model/art/audio candidates, license verification, imported asset paths, modifications and credits for game distribution. The Sketchfab **Catrina Skeleton Bride Figure Meshi vs SupaVoxel** by Pia Fernandez is recorded as a **candidate only**. Its CC Attribution designation comes from a user-provided download-dialog screenshot; the specific version and underlying provenance are unverified. **No asset download or Unity import occurred in this task.**
