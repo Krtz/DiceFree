@@ -27,3 +27,10 @@ Validation completed so far:
 - Original recovered prefabs import and asset GUID checks pass.
 
 The next development milestones and production direction are recorded in `WORLD1_FOUNDATION_MILESTONES.md`. This consolidation does not finish World 1 content or implement Greatblade combat.
+
+Final verification:
+- All 24 fetched remote branch heads are ancestors of consolidated commit 74f43b8489d32fe68d7d96cb4bf194ba54b67237. The branch is pushed to GitHub.
+- Twelve other local Git checkouts were inspected; every local HEAD is also preserved. Five have only Unity/package preference variants, archived under local-checkouts. An old cleanup checkout's 555 deletions are recorded and do not remove current game files.
+- Normal named-Echo advancement, rename, class switching and reload regression passed DICEFREE_ADVANCEMENT_PLAYMODE_OK.
+- The full Windows Development build succeeded: 7 enabled scenes, 314938140 bytes, 0 errors, 45 warnings. Warnings concern older deprecated APIs, terrain collision pre-bake settings, disabled Pipeline tooling in Player builds, and third-party/debug shaders. They are recorded for later cleanup; they did not fail this build.
+- Executable on Axel's PC: T:/TEMP/DiceFree-Options/Builds/World1Foundation/DiceFree.exe. This build includes the development room and World2TransitionTest.
