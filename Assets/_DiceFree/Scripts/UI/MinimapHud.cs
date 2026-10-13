@@ -34,6 +34,7 @@ namespace DiceFree.UI
 
         public override string LayoutId => "minimap";
         public override string DisplayName => "Minimap";
+        public string MapName { get; set; } = "Cornberg";
         public override Rect DefaultNormalizedBounds => new(0.805f, 0.018f, 0.18f, 0.27f);
         public override Vector2 MinimumPixelSize => new(150, 150);
         public override float LockedAspectRatio => 1f;
@@ -186,7 +187,7 @@ namespace DiceFree.UI
             bool isAttackMap=targeting!=null &&
                 targeting.Mode==SkillTargetingMode.AttackMove;
             HudChrome.DrawHeader(headerRect, Theme,
-                isAttackMap?"Cornberg  /  ATTACK-MOVE":"Cornberg");
+                isAttackMap?MapName+"  /  ATTACK-MOVE":MapName);
 
             var mapRect = new Rect(inner.x, inner.y + header, inner.width, inner.height - header);
             if (mapTexture != null)

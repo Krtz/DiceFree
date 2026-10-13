@@ -14,6 +14,7 @@ namespace DiceFree.Dungeons
             if(returning||!GetComponent<ManifestationPersistence>().Flush())return false;
             returning=true;SlimeDungeonRun.Current?.ReleaseForSessionExit();options?.Close();
             GetComponent<SkillTargetingController>()?.Cancel();GetComponent<QuestJournalPanel>()?.Close();
+            DiceFree.Foundation.DevelopmentSession.End();
             SceneManager.LoadScene("StartMenu",LoadSceneMode.Single);return true;
         }
         void OnDestroy(){if(options!=null)options.ReturnToStartMenu=null;}

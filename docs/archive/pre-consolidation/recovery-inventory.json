@@ -1,0 +1,206 @@
+﻿[
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShield_Unity.png.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShieldPipelinePreview.unity",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShieldPipelinePreview.unity",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShieldPipelinePreview.unity.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShieldPipelinePreview.unity.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/ShieldArtPipelineValidation.cs",
+        "destination":  "SourceArt/LegacyValidation/art_40-shield-offhand/Assets/_DiceFree/Scripts/Tools/Editor/ShieldArtPipelineValidation.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/40-shield-offhand",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/ShieldArtPipelineValidation.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/art_40-shield-offhand/Assets/_DiceFree/Scripts/Tools/Editor/ShieldArtPipelineValidation.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/NoviceFootwearPipelineValidation.cs",
+        "destination":  "SourceArt/LegacyValidation/art_41-novice-shoes/Assets/_DiceFree/Scripts/Tools/Editor/NoviceFootwearPipelineValidation.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/41-novice-shoes",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/NoviceFootwearPipelineValidation.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/art_41-novice-shoes/Assets/_DiceFree/Scripts/Tools/Editor/NoviceFootwearPipelineValidation.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceHat_Unity.png",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceHat_Unity.png",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Art/Validation/Previews/NoviceHat_Unity.png.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Previews/NoviceHat_Unity.png.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceHatPipelinePreview.unity",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceHatPipelinePreview.unity",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceHatPipelinePreview.unity.meta",
+        "destination":  "Assets/_DiceFree/Art/Validation/Scenes/NoviceHatPipelinePreview.unity.meta",
+        "kind":  "Recovered original asset"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/NoviceHatPipelineValidation.cs",
+        "destination":  "SourceArt/LegacyValidation/art_42-novice-hat/Assets/_DiceFree/Scripts/Tools/Editor/NoviceHatPipelineValidation.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/42-novice-hat",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/NoviceHatPipelineValidation.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/art_42-novice-hat/Assets/_DiceFree/Scripts/Tools/Editor/NoviceHatPipelineValidation.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/art/44-novice-level-pacing",
+        "original":  "docs/NOVICE_PACING_AUDIT.md",
+        "destination":  "docs/archive/pre-consolidation/art_44-novice-level-pacing/docs/NOVICE_PACING_AUDIT.md",
+        "kind":  "Historical document"
+    },
+    {
+        "branch":  "origin/docs/serialization-migration-handover",
+        "original":  "docs/BANK_TRANSMOG_AND_COLLECTIONS.md",
+        "destination":  "docs/archive/pre-consolidation/docs_serialization-migration-handover/docs/BANK_TRANSMOG_AND_COLLECTIONS.md",
+        "kind":  "Historical document"
+    },
+    {
+        "branch":  "origin/docs/serialization-migration-handover",
+        "original":  "docs/CODEX_AND_COMPLETION.md",
+        "destination":  "docs/archive/pre-consolidation/docs_serialization-migration-handover/docs/CODEX_AND_COMPLETION.md",
+        "kind":  "Historical document"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Application/ControlsComposition.cs",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Application/ControlsComposition.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Application/ControlsComposition.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Application/ControlsComposition.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Foundation/ControlBindings.cs",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Foundation/ControlBindings.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Foundation/ControlBindings.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Foundation/ControlBindings.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Foundation/EscapeRouting.cs",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Foundation/EscapeRouting.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Foundation/EscapeRouting.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Foundation/EscapeRouting.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Persistence/LocalControlSettingsStore.cs",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Persistence/LocalControlSettingsStore.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Persistence/LocalControlSettingsStore.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Persistence/LocalControlSettingsStore.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/ControlSettingsValidation.cs",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Tools/Editor/ControlSettingsValidation.cs",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "Assets/_DiceFree/Scripts/Tools/Editor/ControlSettingsValidation.cs.meta",
+        "destination":  "SourceArt/LegacyValidation/feature_47-options-keybinds/Assets/_DiceFree/Scripts/Tools/Editor/ControlSettingsValidation.cs.meta",
+        "kind":  "Historical code, not compiled"
+    },
+    {
+        "branch":  "origin/feature/47-options-keybinds",
+        "original":  "docs/OPTIONS_KEYBINDINGS_VALIDATION.md",
+        "destination":  "docs/archive/pre-consolidation/feature_47-options-keybinds/docs/OPTIONS_KEYBINDINGS_VALIDATION.md",
+        "kind":  "Historical document"
+    },
+    {
+        "branch":  "origin/setup/unity-project",
+        "original":  "docs/BANK_TRANSMOG_AND_COLLECTIONS.md",
+        "destination":  "docs/archive/pre-consolidation/setup_unity-project/docs/BANK_TRANSMOG_AND_COLLECTIONS.md",
+        "kind":  "Historical document"
+    },
+    {
+        "branch":  "origin/setup/unity-project",
+        "original":  "docs/CODEX_AND_COMPLETION.md",
+        "destination":  "docs/archive/pre-consolidation/setup_unity-project/docs/CODEX_AND_COMPLETION.md",
+        "kind":  "Historical document"
+    }
+]

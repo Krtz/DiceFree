@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using DiceFree.Foundation;
 
 namespace DiceFree.Persistence
 {
@@ -16,7 +17,7 @@ namespace DiceFree.Persistence
             {
                 if (index + 1 >= args.Length || !Path.IsPathRooted(args[index + 1]))
                     throw new InvalidDataException("-diceFreeSaveRoot requires an absolute isolated directory.");
-                return args[index + 1];
+                return SessionRoot(args[index + 1]);
             }
 
             if (Application.isEditor)
@@ -26,7 +27,7 @@ namespace DiceFree.Persistence
                 {
                     if (!Path.IsPathFullyQualified(editorRoot))
                         throw new InvalidDataException(EditorSaveRootVariable + " must be an absolute isolated directory.");
-                    return editorRoot;
+                    return SessionRoot(editorRoot);
                 }
             }
 
@@ -34,9 +35,13 @@ namespace DiceFree.Persistence
                 Environment.GetEnvironmentVariable("DICEFREE_DISABLE_PERSISTENCE") == "1")
                 return null;
 
-            return Path.Combine(
+            return SessionRoot(Path.Combine(
                 Application.persistentDataPath,
-                Application.isEditor ? "EditorProfiles" : "Profiles");
+                Application.isEditor ? "EditorProfiles" : "Profiles"));
         }
+
+        private static string SessionRoot(string root) =>
+            DevelopmentSession.Active ? Path.Combine(root, "DevelopmentRoom") : root;
+
     }
 }

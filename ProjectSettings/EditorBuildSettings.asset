@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/DungeonRewardRoom.unity
     guid: 7cd90d2cf5c7acc4f8066a712b1085a3
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/DevelopmentRoom.unity
+    guid: be5f4928f90859f40a305cc57aa490ba
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/World2TransitionTest.unity
+    guid: a63f31989dc91584095b202e579416c4
   m_configObjects: {}

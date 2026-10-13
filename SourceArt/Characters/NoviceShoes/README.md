@@ -1,0 +1,7 @@
+# Novice Shoes Pipeline Prototype
+
+This is a single paired footwear proof, not production equipment art. The editable Blender 5.2.2 LTS source and deterministic export script are `NoviceShoes.blend` and `build_novice_shoes.py`; Unity imports `Assets/_DiceFree/Art/Characters/NoviceShoes/Models/NoviceShoes.fbx` at unit scale and authors its two URP materials in the presentation prefab.
+
+The DCC source authors `LeftShoeGroup` / `RightShoeGroup` and matching attachment anchors at the Novice foot references. The preview binds each shoe group beneath its corresponding imported Humanoid foot bone. The class presentation owns the unequipped `Novice_BaselineFeet` skinned renderer; the fixture disables it while shoes are equipped and restores it when removed. This proves the first visible Feet-slot replacement behavior only. It does not change gameplay equipment, starting gear, or collision, and it is not a general wearable system.
+
+Run the generator twice with Blender 5.2.2 LTS and compare `DICEFRE_SHOES_GEOMETRY_SHA256` to verify source geometry reproducibility. Unity Pipeline commands are `dicefree.art.shoes.prepare`, `dicefree.art.shoes.validate`, `dicefree.art.shoes.capture-preview`, and `dicefree.art.shoes.build-windows`. The dedicated preview scene is `Assets/_DiceFree/Art/Validation/Scenes/NoviceShoesPipelinePreview.unity`; its capture is `Assets/_DiceFree/Art/Validation/Previews/NoviceShoes_Unity.png`.
