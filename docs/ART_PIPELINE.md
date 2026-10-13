@@ -31,6 +31,16 @@ This document defines the working 3D-content pipeline for DiceFree.
 
 It is intentionally small enough for the current project while establishing conventions before large quantities of weapons, armor and characters exist.
 
+## External assets and credits
+
+Record third-party asset candidates, their original creators, source links, license details, modifications and release attribution in the [asset-credit registry](ASSET_CREDITS.md). Verify rights before importing, and do not ship unverified candidates. Keep original license files/notices with source art where applicable.
+
+## Geometry detail and PC performance
+
+**Visual ambition is not constrained by a universal low-poly vertex cap.** DiceFree may use richly detailed playable characters and especially detailed bosses where it improves the presentation. Prototype examples in this document are evidence, not production budgets. The right limit comes from profiling representative combat scenes on the target PC hardware, not from a generic per-model target.
+
+Keep high-resolution source meshes when practical. Test actual Unity import vertex and triangle counts, rig/skinning cost, material/draw-call count, transparency/overdraw, memory and texture residency, dynamic lights and VFX, and peak numbers of visible enemies/player characters. Add useful LODs, reduce hidden or tiny detail, and choose sensible material counts before discarding visible quality. A unique centerpiece boss can justify substantially more detail than a repeated background enemy, but a ~496,500-vertex model is **not automatically production-ready** without camera-distance, rig, LOD and performance validation. Evaluate visually at the real gameplay camera.
+
 ## Visual direction
 
 DiceFree should use a **stylized, readable, moderately exaggerated fantasy look**.
