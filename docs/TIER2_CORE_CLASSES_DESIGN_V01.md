@@ -1,5 +1,7 @@
 # DiceFree Tier II — Four Core Classes (Design Draft v0.1)
 
+> **Superseded:** The user approved **Greatblade**, Mage **INT-only and Math shield** (no Arcane), Priest **Mana + Grace**, and flexible skill counts with a quest-locked ultimate in slot 9. See [Tier II classes v0.2](TIER2_CORE_CLASSES_DESIGN_V02.md). v0.1 is retained for historical discussion.
+
 **Date:** 2026-10-13
 **Status:** PROPOSED FOR REVIEW — NOT LOCKED, no classes, quests, models, or NPC behavior implemented by this document.
 
