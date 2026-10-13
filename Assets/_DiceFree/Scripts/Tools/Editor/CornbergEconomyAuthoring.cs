@@ -117,8 +117,8 @@ namespace DiceFree.EditorTools
             Require(dagger!=null && dagger.stableId==Id && dagger.slot==EquipmentSlot.MainHand,"Dagger definition missing.");
             Require(JsonUtility.ToJson(dagger.stats)==JsonUtility.ToJson(new EquipmentStats {basicAttackFlatBonus=1}),"Dagger must grant exactly +1 basic attack damage.");
             var s=SceneManager.GetSceneByPath(ScenePath);if(!s.isLoaded)s=EditorSceneManager.OpenScene(ScenePath);
-            var shop=s.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<ItemShop>(true)).Single();
-            Require(shop.name=="NPCs/NPC_Merchant - 3D" && Vector2.Distance(new Vector2(shop.transform.position.x,shop.transform.position.z),new Vector2(17,-18))<2,"Wrong merchant/proximity.");
+            var shop=s.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<ItemShop>(true)).Single(x=>x.name=="NPCs/NPC_Merchant - 3D");
+            Require(shop.name=="NPCs/NPC_Merchant - 3D" && Vector2.Distance(new Vector2(shop.transform.position.x,shop.transform.position.z),new Vector2(17,-8.65f))<2,"Wrong merchant/proximity.");
             Require(shop.gameObject.layer==11 && shop.GetComponent<Collider>()!=null,"Merchant not right-clickable.");
             var inv=s.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<CarriedInventory>(true)).Single();
             Require(inv.Definitions.Count(d=>d==dagger)==1,"Catalog entry missing/duplicated.");

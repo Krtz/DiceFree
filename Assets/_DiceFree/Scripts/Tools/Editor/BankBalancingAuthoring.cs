@@ -157,7 +157,7 @@ namespace DiceFree.EditorTools
                     Check(!Physics.CheckCapsule(root.position + Vector3.up * .4f, root.position + Vector3.up * 1.7f, .4f, 1 << 9, QueryTriggerInteraction.Ignore), "NPC trapped in scenery.");
                     Check(Physics.Raycast(approach.position + Vector3.up, (root.position + Vector3.up - (approach.position + Vector3.up)).normalized, out var hit, 3, (1 << 9) | (1 << 11), QueryTriggerInteraction.Ignore) && hit.collider.GetComponentInParent<InteractionTarget>() != null, "NPC not publicly clickable.");
                 }
-                Check(All<BankInteraction>(scene).Single().DisplayName == "Peter Banker", "Peter Banker not wired.");
+                Check(All<BankInteraction>(scene).Single(x=>x.name=="NPCs/NPC_Banker - 3D").DisplayName == "Peter Banker", "Peter Banker not wired.");
             }
             finally { if (nav.valid) nav.Remove(); }
         }

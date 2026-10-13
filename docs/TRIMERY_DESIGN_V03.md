@@ -1,5 +1,7 @@
 # Trimery — Village 2 design v0.3: The Roadwarden's Order
 
+> **Current implementation:** [Trimery V1](TRIMERY_IMPLEMENTATION_V1.md) is now built into World 1. The Roadwarden remains at the ruined road, but his encounter will be accessible **from the Big City side only** and has **not** been implemented yet. The user prioritizes finishing Trimery.
+
 Status: narrative refinement dated 2026-10-13. CONFIRMED ideas below override ambiguous v0.2 proposals. No scene, quests, enemy encounters, or boss geometry have been implemented.
 
 ## Newly confirmed by the user
