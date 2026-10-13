@@ -10,7 +10,7 @@ This is the **technical and creative inventory** of downloaded assets, not a lic
 ## At-a-glance
 
 - **8 direct GLBs:** all have **0 glTF skins and 0 glTF animations** (they are static as packaged). Each has around **456k–933k glTF POSITION vertices**, and approximately **849k–1.5M triangles**. These are high-resolution source candidates, **not** low-cost animated game characters. A skin/animation is not magically supplied just because the file extension is GLB.
-- **9 FBX-bearing archives:** black dragon, blood priest, corrupted archangel, corrupted fallen priest, dark necromancer, fallen paladin, Kindred, Truffle Man, Viking house and wolf guy — **10 total**. Six of these are inside **nested** ZIPs (five Pigcraft-style character FBXs plus Kindred). Rigging/animation availability must be tested in Blender/Unity.
+- **10 FBX-bearing archives:** black dragon, blood priest, corrupted archangel, corrupted fallen priest, dark necromancer, fallen paladin, Kindred, Truffle Man, Viking house and wolf guy — **10 total**. Six of these are inside **nested** ZIPs (five Pigcraft-style character FBXs plus Kindred). Rigging/animation availability must be tested in Blender/Unity.
 - **1 Alembic (`.abc`) archive:** Warrior Girl. Not a standard rigged GLB/FBX Unity character; needs a separate compatibility review.
 - **1 `.glb.crdownload`:** incomplete Chrome download, **exclude**.
 - No obvious README/LICENSE/credit text file was found in any outer archive; nested ZIPs contain model/texture files and Kindred instructions PDFs, but no identified license text. **Check actual source pages**, not just ZIP contents.
