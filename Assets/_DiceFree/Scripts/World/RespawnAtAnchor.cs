@@ -37,8 +37,7 @@ namespace DiceFree.World
         {
             if(actor==null || !actor.Alive || Time.time<nextAnchorCheck)return;
             nextAnchorCheck=Time.time+.5f;
-            foreach(var stone in FindObjectsByType<ResurrectionAnchor>(
-                FindObjectsSortMode.None))
+            foreach(var stone in FindObjectsByType<ResurrectionAnchor>())
             {
                 if(stone==null || !stone.isActiveAndEnabled)continue;
                 if(Vector3.ProjectOnPlane(stone.transform.position-transform.position,
@@ -83,8 +82,7 @@ namespace DiceFree.World
                 }
             // Newly authored village stones need not be manually listed
             // in each actor prefab, but their saved stable IDs still resolve.
-            foreach(var candidate in FindObjectsByType<ResurrectionAnchor>(
-                FindObjectsSortMode.None))
+            foreach(var candidate in FindObjectsByType<ResurrectionAnchor>())
                 if(candidate!=null && candidate.StableId==id)
                 {
                     destination=candidate.transform;

@@ -85,6 +85,8 @@ namespace DiceFree.EditorTools
                 triangles[write++]=i+columns+2;
             }
             var mesh=SaveMesh("Trimery continuous playable terrain",vertices,triangles);
+            mesh.SetPreBakeCollisionMesh(false,true);
+            EditorUtility.SetDirty(mesh);
             return mesh;
         }
         private static void WallLine(Transform walls,

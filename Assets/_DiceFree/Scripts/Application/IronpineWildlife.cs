@@ -282,7 +282,7 @@ namespace DiceFree.Ironpine
         {
             if (responding) return 0;
             int count = 0;
-            foreach (var other in FindObjectsByType<IronpineWildlife>(FindObjectsSortMode.None))
+            foreach (var other in FindObjectsByType<IronpineWildlife>())
                 if (other != this && other.IsWolf && other.actor != null && other.actor.Alive &&
                     other.target == null && Vector3.Distance(other.transform.position, transform.position) <= 25f)
                     count++;
@@ -330,13 +330,13 @@ namespace DiceFree.Ironpine
                 if (IsAlpha)
                 {
                     ApplyFrenzy(10f);
-                    foreach (var other in FindObjectsByType<IronpineWildlife>(FindObjectsSortMode.None))
+                    foreach (var other in FindObjectsByType<IronpineWildlife>())
                         if (other != this && other.IsWolf && other.actor != null && other.actor.Alive &&
                             Vector3.Distance(other.transform.position, transform.position) <= 15f)
                             other.ApplyFrenzy(10f);
                 }
                 int count = 0;
-                foreach (var other in FindObjectsByType<IronpineWildlife>(FindObjectsSortMode.None))
+                foreach (var other in FindObjectsByType<IronpineWildlife>())
                 {
                     if (count == 2) break;
                     if (other != this && other.IsWolf && other.actor != null && other.actor.Alive &&

@@ -64,7 +64,7 @@ namespace DiceFree.UI
         }
         private void Acquire()
         {
-            if(selected==null)selected=FindFirstObjectByType<InspectSelection>();
+            if(selected==null)selected=FindAnyObjectByType<InspectSelection>();
         }
         private static void SetLayer(Transform node)
         {

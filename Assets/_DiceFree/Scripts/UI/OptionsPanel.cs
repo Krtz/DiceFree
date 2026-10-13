@@ -153,7 +153,7 @@ namespace DiceFree.UI
             // The options UI is often on the HUD root while AudioDirector is
             // on the player. Looking only on this GameObject hid the controls.
             if(audioSettings==null)
-                foreach(var candidate in FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
+                foreach(var candidate in FindObjectsByType<MonoBehaviour>())
                     if(candidate is IPlayerAudioSettings source){audioSettings=source;break;}
             if(audioSettings==null)
             {

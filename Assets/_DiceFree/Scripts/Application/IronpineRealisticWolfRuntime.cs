@@ -26,7 +26,7 @@ namespace DiceFree.Ironpine
         {
             var source=Resources.Load<GameObject>(Licensed);
             if(source==null)return;
-            foreach(var wolf in UnityEngine.Object.FindObjectsByType<IronpineWildlife>(FindObjectsSortMode.None))
+            foreach(var wolf in UnityEngine.Object.FindObjectsByType<IronpineWildlife>())
             {
                 if(wolf.Kind==WildlifeKind.Quillrat ||
                    wolf.transform.Find("Realistic furry wolf licensed visual")!=null)continue;

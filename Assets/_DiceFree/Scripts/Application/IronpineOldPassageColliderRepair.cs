@@ -25,8 +25,7 @@ namespace DiceFree.Ironpine
         private static void Apply()
         {
             int disabled=0;
-            foreach(var collider in UnityEngine.Object.FindObjectsByType<CapsuleCollider>(
-                FindObjectsSortMode.None))
+            foreach(var collider in UnityEngine.Object.FindObjectsByType<CapsuleCollider>())
             {
                 if(!collider.enabled || collider.name!="Playtest trunk collision")continue;
                 var trunk=collider.transform;

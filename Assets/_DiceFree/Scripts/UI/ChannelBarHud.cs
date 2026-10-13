@@ -22,7 +22,7 @@ namespace DiceFree.UI
         private void AcquirePlayer()
         {
             if(player!=null)return;
-            var home=FindFirstObjectByType<ReturnHomeAbility>();
+            var home=FindAnyObjectByType<ReturnHomeAbility>();
             if(home!=null)player=home.GetComponent<CombatActor>();
         }
         public bool TryActive(out IChannelingAbility spell)

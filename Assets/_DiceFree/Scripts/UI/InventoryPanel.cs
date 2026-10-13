@@ -87,10 +87,8 @@ namespace DiceFree.UI
                 selectedItemId = null;
             }
 
-            float debugHeight = 0f;
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-            debugHeight = 54f;
-#endif
+            bool showDevelopmentGrants = UnityEngine.Application.isEditor || Debug.isDebugBuild;
+            float debugHeight = showDevelopmentGrants ? 54f : 0f;
             var viewport = new Rect(
                 inner.x,
                 header.yMax + theme.gap,
@@ -169,19 +167,20 @@ namespace DiceFree.UI
             }
             GUI.EndScrollView();
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-            var debug = new Rect(inner.x, inner.yMax - debugHeight + 2f, inner.width, debugHeight - 2f);
-            HudChrome.Fill(debug, new Color(theme.slotTint.r, theme.slotTint.g, theme.slotTint.b, 0.72f));
-            GUILayout.BeginArea(new Rect(debug.x + 4f, debug.y + 2f, debug.width - 8f, debug.height - 4f));
-            GUILayout.Label("Development grants");
-            GUILayout.BeginHorizontal();
-            foreach (var definition in inventory.Definitions)
-                if (GUILayout.Button("+" + ShortName(definition.displayName)))
-                    FixedItemGrant.Grant(inventory, definition);
-            if (GUILayout.Button("+10g", GUILayout.Width(48))) wallet.Grant(10);
-            GUILayout.EndHorizontal();
-            GUILayout.EndArea();
-#endif
+            if (showDevelopmentGrants)
+            {
+                var debug = new Rect(inner.x, inner.yMax - debugHeight + 2f, inner.width, debugHeight - 2f);
+                HudChrome.Fill(debug, new Color(theme.slotTint.r, theme.slotTint.g, theme.slotTint.b, 0.72f));
+                GUILayout.BeginArea(new Rect(debug.x + 4f, debug.y + 2f, debug.width - 8f, debug.height - 4f));
+                GUILayout.Label("Development grants");
+                GUILayout.BeginHorizontal();
+                foreach (var definition in inventory.Definitions)
+                    if (GUILayout.Button("+" + ShortName(definition.displayName)))
+                        FixedItemGrant.Grant(inventory, definition);
+                if (GUILayout.Button("+10g", GUILayout.Width(48))) wallet.Grant(10);
+                GUILayout.EndHorizontal();
+                GUILayout.EndArea();
+            }
 
             if(!string.IsNullOrEmpty(itemFeedback))
                 GUI.Label(new Rect(inner.x,header.yMax+3,inner.width,22),itemFeedback);

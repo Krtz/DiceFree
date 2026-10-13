@@ -51,12 +51,21 @@ namespace DiceFree.EditorTools
                 !scenes.Contains("Assets/_DiceFree/Scenes/World2TransitionTest.unity") ||
                 scenes[0]!="Assets/_DiceFree/Scenes/StartMenu.unity")
                 throw new InvalidOperationException("Foundation build scene list is incomplete.");
+            BuildWarningRepairs.Run();
             string directory=System.IO.Path.GetFullPath("Builds/World1Foundation");
             System.IO.Directory.CreateDirectory(directory);
             string executable=System.IO.Path.Combine(directory,"DiceFree.exe");
-            var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{
-                scenes=scenes,locationPathName=executable,target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development
-            });
+            bool previousDevelopment = EditorUserBuildSettings.development;
+            UnityEditor.Build.Reporting.BuildReport report;
+            try
+            {
+                // Pipeline's build processor consults this toggle for custom scripted builds.
+                EditorUserBuildSettings.development = true;
+                report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
+                    scenes=scenes,locationPathName=executable,target=BuildTarget.StandaloneWindows64,options=BuildOptions.Development
+                });
+            }
+            finally { EditorUserBuildSettings.development = previousDevelopment; }
             var result=new{marker="DICEFREE_WORLD1_FOUNDATION_BUILD",result=report.summary.result.ToString(),
                 errors=report.summary.totalErrors,warnings=report.summary.totalWarnings,
                 sceneCount=scenes.Length,executable,bytes=report.summary.totalSize};

@@ -51,7 +51,7 @@ namespace DiceFree.UI
                 {navigation=navigator;break;}
             targeting = GetComponent<SkillTargetingController>();
             CreateCamera();
-            fog = FindFirstObjectByType<WorldFogOfWar>();
+            fog = FindAnyObjectByType<WorldFogOfWar>();
             fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
             {
                 name="Minimap exploration mask",filterMode=FilterMode.Bilinear,
@@ -77,7 +77,7 @@ namespace DiceFree.UI
             mapCamera.transform.position = player.transform.position + Vector3.up * 45f;
             mapCamera.transform.rotation =
                 Quaternion.LookRotation(Vector3.down,MapUp);
-            if(fog == null)fog = FindFirstObjectByType<WorldFogOfWar>();
+            if(fog == null)fog = FindAnyObjectByType<WorldFogOfWar>();
             if(fog!=null && fogMap!=null && Time.unscaledTime>=nextFogRefresh)
             {
                 nextFogRefresh=Time.unscaledTime+.16f;

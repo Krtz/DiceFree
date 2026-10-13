@@ -199,8 +199,7 @@ namespace DiceFree.World
         {
             System.Array.Clear(blocked, 0, blocked.Length);
             blockersCount = 0;
-            foreach(var collider in FindObjectsByType<Collider>(
-                FindObjectsSortMode.None))
+            foreach(var collider in FindObjectsByType<Collider>())
             {
                 if(collider == null || !collider.enabled || collider.isTrigger ||
                     !collider.gameObject.activeInHierarchy) continue;
@@ -349,17 +348,17 @@ namespace DiceFree.World
 
         private void DisposeRuntime()
         {
-            if(overlay!=null) DestroyObject(overlay);
-            if(overlayMesh!=null) DestroyObject(overlayMesh);
-            if(runtimeMaterial!=null) DestroyObject(runtimeMaterial);
-            if(fogTexture!=null) DestroyObject(fogTexture);
+            if(overlay!=null) DestroyRuntimeObject(overlay);
+            if(overlayMesh!=null) DestroyRuntimeObject(overlayMesh);
+            if(runtimeMaterial!=null) DestroyRuntimeObject(runtimeMaterial);
+            if(fogTexture!=null) DestroyRuntimeObject(fogTexture);
             overlay=null;
             overlayMesh=null;
             runtimeMaterial=null;
             fogTexture=null;
             overlayRenderer=null;
         }
-        private static void DestroyObject(Object item)
+        private static void DestroyRuntimeObject(Object item)
         {
             if(item==null) return;
             if(Application.isPlaying) Destroy(item);

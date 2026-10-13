@@ -18,3 +18,5 @@ The live isolated test passed `DICEFREE_DEVELOPMENT_ROOM_PLAYMODE_OK`: menu rout
 Authoring is reproducible with `dicefree.development.author`; it edits only its two new scenes and development data, using a copy of the Cornberg player rig. The original Cornberg scene is reopened afterward.
 
 The Windows Development build command is `dicefree.development.build-windows`. It includes all enabled scenes, checks StartMenu boots first and both test maps are included, and writes its build report next to Builds/World1Foundation/DiceFree.exe.
+
+Build verification on 2026-10-13: the current seven-scene Windows Development build succeeds with **0 errors and 0 warnings**. A real Player startup verified StartMenu, active local diagnostics and supported GPU debug shaders. The builder runs dicefree.build-warnings.repair and restores the previous Development toggle after building. See BUILD_WARNING_CLEANUP_2026-10-13.md for the reproducible asset repairs and foundation-warning-cleanup-report.json for the final report.

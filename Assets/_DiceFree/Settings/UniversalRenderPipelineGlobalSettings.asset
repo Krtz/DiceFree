@@ -19,7 +19,7 @@ MonoBehaviour:
     m_StripRuntimeDebugShaders: 1
   m_URPShaderStrippingSetting:
     m_Version: 0
-    m_StripUnusedPostProcessingVariantsAndResources: 1
+    m_StripUnusedPostProcessingVariantsAndResources: 0
     m_StripUnusedVariants: 1
     m_StripScreenCoordOverrideVariants: 1
     m_Strip2DUnusedVariants: 0
@@ -86,6 +86,7 @@ MonoBehaviour:
       - rid: 5747374308340793347
       - rid: 5747374308340793348
       - rid: 6588237625532874753
+      - rid: 6588237625532874755
       - rid: 6588237625532874756
       - rid: 6588237625532874759
       - rid: 6588237625532874761
@@ -335,7 +336,7 @@ MonoBehaviour:
       type: {class: URPShaderStrippingSetting, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Version: 0
-        m_StripUnusedPostProcessingVariantsAndResources: 1
+        m_StripUnusedPostProcessingVariantsAndResources: 0
         m_StripUnusedVariants: 1
         m_StripScreenCoordOverrideVariants: 1
         m_Strip2DUnusedVariants: 0
@@ -430,8 +431,8 @@ MonoBehaviour:
         m_OccluderDepthPyramidKernels: {fileID: 7200000, guid: 08b2b5fb307b0d249860612774a987da, type: 3}
         m_InstanceOcclusionCullingKernels: {fileID: 7200000, guid: f6d223acabc2f974795a5a7864b50e6c, type: 3}
         m_OcclusionCullingDebugKernels: {fileID: 7200000, guid: b23e766bcf50ca4438ef186b174557df, type: 3}
-        m_DebugOcclusionTestPS: {fileID: 4800000, guid: d3f0849180c2d0944bc71060693df100, type: 3}
-        m_DebugOccluderPS: {fileID: 4800000, guid: b3c92426a88625841ab15ca6a7917248, type: 3}
+        m_DebugOcclusionTestPS: {fileID: 4800000, guid: aa6c28e248fb58c45abb44edc9c24432, type: 3}
+        m_DebugOccluderPS: {fileID: 4800000, guid: 6521f4728efe11349ab5902015363e38, type: 3}
     - rid: 6852985685364965387
       type: {class: STP/RuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:

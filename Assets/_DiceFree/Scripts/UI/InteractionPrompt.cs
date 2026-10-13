@@ -10,7 +10,7 @@ namespace DiceFree.UI
         [SerializeField] private InteractionTarget target;
         [SerializeField] private CombatActor player;
         private WorldFogOfWar fog;
-        private void Awake() => fog=FindFirstObjectByType<WorldFogOfWar>();
+        private void Awake() => fog=FindAnyObjectByType<WorldFogOfWar>();
         private void OnGUI()
         {
             if (HudPointerBlocker.ModalOpen) return;

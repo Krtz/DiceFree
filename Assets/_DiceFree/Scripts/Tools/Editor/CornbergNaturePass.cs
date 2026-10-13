@@ -162,6 +162,7 @@ namespace DiceFree.EditorTools
                 uv[i]=new Vector2(point.x/13f,point.z/13f);
             }
             mesh.uv=uv;
+            mesh.SetPreBakeCollisionMesh(false,true);
             string meshPath=Art+"/CornbergMeadowTerrainUV.asset";
             var old=AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
             if(old!=null)AssetDatabase.DeleteAsset(meshPath);

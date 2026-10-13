@@ -57,7 +57,7 @@ namespace DiceFree.UI
         private void FindPlayer()
         {
             if(player!=null)return;
-            var returnHome=FindFirstObjectByType<ReturnHomeAbility>();
+            var returnHome=FindAnyObjectByType<ReturnHomeAbility>();
             if(returnHome!=null)player=returnHome.GetComponent<CombatActor>();
         }
         public OverheadHealthVisibility ModeFor(CombatActor actor)
@@ -77,7 +77,7 @@ namespace DiceFree.UI
             if(camera==null)return;
             FindPlayer();
             if(player==null)return;
-            if(fog==null)fog=FindFirstObjectByType<WorldFogOfWar>();
+            if(fog==null)fog=FindAnyObjectByType<WorldFogOfWar>();
             GUI.depth=6;
             foreach(var unit in CombatActor.All)
             {

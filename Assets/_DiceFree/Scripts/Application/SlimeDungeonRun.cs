@@ -165,7 +165,7 @@ namespace DiceFree.Dungeons
         {
             Completing=false;exiting=true;
             if(!SceneManager.GetSceneByName("DungeonRewardRoom").isLoaded)yield return SceneManager.LoadSceneAsync("DungeonRewardRoom",LoadSceneMode.Additive);
-            var room=FindFirstObjectByType<DungeonRewardRoom>();
+            var room=FindAnyObjectByType<DungeonRewardRoom>();
             var pool=regentVictory?Tuning.regentRewards:Tuning.normalRewards;
             foreach(var a in Participants.ToArray())
             {
@@ -201,7 +201,7 @@ namespace DiceFree.Dungeons
             registry.ReleaseDungeon(definition.stableId,lease.leaseToken,"world.face.1",out _);CleanupDungeon();yield return null;Finish();
         }
         void CleanupDungeon(){foreach(var obj in spawned)if(obj!=null)Destroy(obj);SceneManager.UnloadSceneAsync(definition.sceneId);}
-        public void Finish(){var room=FindFirstObjectByType<DungeonRewardRoom>();if(room!=null&&room.Pending==0&&SceneManager.GetSceneByName("DungeonRewardRoom").isLoaded)SceneManager.UnloadSceneAsync("DungeonRewardRoom");if(Current==this)Current=null;Destroy(gameObject);}
+        public void Finish(){var room=FindAnyObjectByType<DungeonRewardRoom>();if(room!=null&&room.Pending==0&&SceneManager.GetSceneByName("DungeonRewardRoom").isLoaded)SceneManager.UnloadSceneAsync("DungeonRewardRoom");if(Current==this)Current=null;Destroy(gameObject);}
         void Relocate(CombatActor a,Vector3 point)
         {
             a.GetComponent<BasicAttack>()?.Cancel();a.GetComponent<TargetSelection>()?.Select(null);a.GetComponent<Interactor>()?.Cancel();
@@ -212,7 +212,7 @@ namespace DiceFree.Dungeons
         }
         static void ConfigureCamera(CombatActor actor,Vector3 point)
         {
-            var camera=FindFirstObjectByType<DiceFree.Core.ExplorationCamera>();if(camera==null)return;
+            var camera=FindAnyObjectByType<DiceFree.Core.ExplorationCamera>();if(camera==null)return;
             camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19994,96,108):new Rect(-56,-44,181,116));
             camera.RecenterForTravel(actor.transform);
         }
@@ -221,7 +221,7 @@ namespace DiceFree.Dungeons
             return Current!=null && Current.definition!=null && !Current.exiting && new Rect(15,80,540,65).Contains(new Vector2(screenPoint.x,Screen.height-screenPoint.y));
         }
         void OnGUI(){if(definition==null||exiting||DiceFree.UI.HudPointerBlocker.ModalOpen)return;GUI.Box(new Rect(15,80,540,65),Status);if(!loading&&GUI.Button(new Rect(25,115,150,25),"Abandon dungeon"))Abandon();
-            if(StagingReady){var local=FindFirstObjectByType<DiceFree.Characters.CombatInput>();GUI.enabled=local!=null&&local.GetComponent<CombatActor>()==Initiator&&Initiator.Alive;
+            if(StagingReady){var local=FindAnyObjectByType<DiceFree.Characters.CombatInput>();GUI.enabled=local!=null&&local.GetComponent<CombatActor>()==Initiator&&Initiator.Alive;
                 if(GUI.Button(new Rect(185,115,150,25),"Start Now"))StartNow(local.GetComponent<CombatActor>());GUI.enabled=true;}}
         void OnDestroy(){if(Current==this)Current=null;foreach(var a in Participants)if(a!=null){a.Health.Died-=deathHandlers[a];var state=a.GetComponent<RunLoadoutLock>();if(state.Owner==this){state.Locked=false;state.InsideDungeon=false;state.DeathReturnHandler=null;state.Owner=null;}}}
     }

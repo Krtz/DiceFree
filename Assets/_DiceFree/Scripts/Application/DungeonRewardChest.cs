@@ -28,7 +28,7 @@ namespace DiceFree.Dungeons
         private void OnGUI()
         {
             if (!Available(owner) || Camera.main == null) return;
-            var local = FindFirstObjectByType<TraversalInput>();
+            var local = FindAnyObjectByType<TraversalInput>();
             if (local != null && local.GetComponent<CombatActor>() != owner) return;
             var world = transform.position + Vector3.up * 1.25f;
             var point = Camera.main.WorldToScreenPoint(world);

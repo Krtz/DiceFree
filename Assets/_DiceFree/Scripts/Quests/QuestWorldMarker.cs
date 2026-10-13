@@ -101,7 +101,7 @@ namespace DiceFree.Quests
         private void LateUpdate()
         {
             if(pivot==null)return;
-            if(journal==null)journal=FindFirstObjectByType<QuestJournal>();
+            if(journal==null)journal=FindAnyObjectByType<QuestJournal>();
             bool ready=false,available=false,repeatAvailable=false;
             if(journal!=null)
                 foreach(var quest in giver.Offers)
