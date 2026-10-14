@@ -54,9 +54,9 @@ namespace DiceFree.Development
         private static DevelopmentMap FindMap(Scene scene) =>
             scene.GetRootGameObjects().SelectMany(root => root.GetComponentsInChildren<DevelopmentMap>(true)).FirstOrDefault();
 
-        private bool Place(DevelopmentMap map)
+        private bool Place(DevelopmentMap map,Vector3? arrival=null)
         {
-            if (!player.Motor.TeleportAcrossMaps(map.spawn)) return false;
+            if (!player.Motor.TeleportAcrossMaps(arrival??map.spawn)) return false;
             var home = player.GetComponent<RespawnAtAnchor>();
             home.ConfigureRegisteredAnchors(map.anchor);
             home.Configure(map.anchor.transform);
@@ -66,6 +66,7 @@ namespace DiceFree.Development
             fog.Configure(player.transform, explorationCamera.GetComponent<Camera>(),
                 new Vector2(map.bounds.xMin,map.bounds.yMin),new Vector2(map.bounds.xMax,map.bounds.yMax),28);
             Map = map;
+            if(!Busy)GetComponent<CubeEdgePresentation>()?.Bind(map.GetComponent<CubeEdgeMap>());
             player.GetComponent<MinimapHud>().MapName = map.worldId == "world.test.2" ? "World 2 test" : "Development room";
             return true;
         }
@@ -113,9 +114,11 @@ namespace DiceFree.Development
 
         public bool Travel(string sceneName)
         {
-            if (Busy || Map == null || !player.Alive) return false;
+            if (Busy || Map == null || !player.CanAct || player.InCombat || HudPointerBlocker.ModalOpen) return false;
             if (sceneName != "DevelopmentRoom" && sceneName != "World2TransitionTest") return false;
-            if (sceneName == gameObject.scene.name) return false;
+            if (sceneName == gameObject.scene.name || !Application.CanStreamedLevelBeLoaded(sceneName)) return false;
+            var presentation=GetComponent<CubeEdgePresentation>();
+            if(presentation!=null&&(!presentation.CanStart(sceneName)||!player.Motor.Teleport(presentation.Edge.Approach)))return false;
             if (!player.GetComponent<ManifestationPersistence>().Flush()) return false;
             Busy = true;
             player.GetComponent<BasicAttack>()?.Cancel();
@@ -127,29 +130,35 @@ namespace DiceFree.Development
 
         private IEnumerator TravelRoutine(string sceneName)
         {
-            Scene previous = gameObject.scene;
-            Status = "Loading " + sceneName;
-            yield return SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
-            var next = SceneManager.GetSceneByName(sceneName);
-            var map = FindMap(next);
-            if (map == null || !Place(map))
+            Scene previous=gameObject.scene;
+            var presentation=GetComponent<CubeEdgePresentation>();
+            try
             {
-                Status = "Destination spawn is unavailable.";
-                yield return SceneManager.UnloadSceneAsync(next);
-                Busy = false;
-                yield break;
+                if(presentation!=null){presentation.Begin();yield return presentation.Warmup();}
+                Status="Loading neighbouring face";
+                yield return SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
+                var next=SceneManager.GetSceneByName(sceneName);var map=FindMap(next);
+                var edge=map!=null?map.GetComponent<CubeEdgeMap>():null;
+                if(map==null||(presentation!=null&&(edge==null||edge.link.destinationFaceId!=Map.worldId||
+                    edge.arrivalSpawnId!=presentation.Edge.link.destinationSpawnId)))
+                {
+                    Status="Destination edge is unavailable.";yield return SceneManager.UnloadSceneAsync(next);yield break;
+                }
+                if(presentation!=null){presentation.SuppressDestination(map);Status="Turning across the cube edge";yield return presentation.Rotate();}
+                if(!Place(map,edge!=null?(Vector3?)edge.Approach:null))
+                {
+                    Status="Destination spawn is unavailable.";yield return SceneManager.UnloadSceneAsync(next);yield break;
+                }
+                if(presentation!=null)presentation.Commit(edge);
+                // Keep the same player, camera, HUD and session helpers.
+                foreach(var root in previous.GetRootGameObjects())
+                    if(root.GetComponent<DevelopmentMap>()==null&&root.GetComponent<DevelopmentRoomBootstrap>()==null)
+                        SceneManager.MoveGameObjectToScene(root,next);
+                SceneManager.SetActiveScene(next);yield return SceneManager.UnloadSceneAsync(previous);
+                if(presentation!=null)yield return presentation.Settle();
+                CompletedTransitions++;Status="Arrived in "+Map.worldId+" - player state preserved";
             }
-            // The authored map is one root. All other roots are this session
-            // (player, cameras, HUD, runtime helpers), preserved as the same objects.
-            foreach (var root in previous.GetRootGameObjects())
-                if (root.GetComponent<DevelopmentMap>() == null &&
-                    root.GetComponent<DevelopmentRoomBootstrap>() == null)
-                    SceneManager.MoveGameObjectToScene(root,next);
-            SceneManager.SetActiveScene(next);
-            yield return SceneManager.UnloadSceneAsync(previous);
-            CompletedTransitions++;
-            Status = "Arrived in " + Map.worldId + " - player state preserved";
-            Busy = false;
+            finally {if(presentation!=null)presentation.End();Busy=false;}
         }
 
         private void OnGUI()

@@ -111,9 +111,14 @@ namespace DiceFree.EditorTools
                     SessionState.SetString(Key+"item",owned.instanceId);
                     player.GetComponent<GoldWallet>().Grant(123);
                     player.Health.SetEncounterHp(player.Health.Maximum*.5f);
+                    SessionState.SetFloat(Key+"hp-start",player.Health.Current);
+                    SessionState.SetFloat(Key+"hp-regen",player.Stats.Regeneration*player.Stats.HealingReceived);
                     var resources=player.GetComponent<ActorResourceController>();
                     Check(resources.Has(ResourceIds.Mana),"Magical test class lacks Mana");
                     Check(resources.TrySpend(ResourceIds.Mana,resources.Maximum(ResourceIds.Mana)*.5f),"test Mana setup failed");
+                    SessionState.SetFloat(Key+"mana-start",resources.Current(ResourceIds.Mana));
+                    SessionState.SetFloat(Key+"time-start",Time.time);
+                    SessionState.SetFloat(Key+"mana-regen",resources.Profiles.Single(p=>p.classId==player.Stats.Definition.stableId&&p.resource.stableId==ResourceIds.Mana).Regeneration(player.Stats.Attributes));
                     SessionState.SetString(Key+"player",player.GetEntityId().ToString());
                     SessionState.SetInt(Key+"phase",2);
                     Check(room.Travel("World2TransitionTest"),"World2 travel was rejected");
@@ -150,9 +155,13 @@ namespace DiceFree.EditorTools
             string item=SessionState.GetString(Key+"item","");
             Check(player.GetComponent<CarriedInventory>().Items.Any(value=>value.instanceId==item) &&
                 player.GetComponent<Equipment>().IsEquipped(item),"carried/equipped item identity was lost");
-            Check(player.Health.Current<player.Health.Maximum*.85f,"travel restored health");
+            float hpRate=SessionState.GetFloat(Key+"hp-regen",0);
+            float expectedHp=Mathf.Min(player.Health.Maximum,SessionState.GetFloat(Key+"hp-start",0)+hpRate*(Time.time-SessionState.GetFloat(Key+"time-start",Time.time)));
+            Check(Mathf.Abs(player.Health.Current-expectedHp)<Mathf.Max(.25f,hpRate*.15f),"travel changed health beyond natural regeneration");
             var res=player.GetComponent<ActorResourceController>();
-            Check(res.Current(ResourceIds.Mana)<res.Maximum(ResourceIds.Mana)*.85f,"travel refilled Mana");
+            float rate=SessionState.GetFloat(Key+"mana-regen",0);
+            float expected=Mathf.Min(res.Maximum(ResourceIds.Mana),SessionState.GetFloat(Key+"mana-start",0)+rate*(Time.time-SessionState.GetFloat(Key+"time-start",Time.time)));
+            Check(Mathf.Abs(res.Current(ResourceIds.Mana)-expected)<Mathf.Max(.25f,rate*.15f),"travel changed Mana beyond natural regeneration");
         }
 
         static void OnLog(string message,string stack,LogType type)

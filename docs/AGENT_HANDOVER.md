@@ -1,3 +1,14 @@
+## 2026-10-14 - Visible cube faces and quarter-turn test crossing
+
+- Development Room and World2TransitionTest are now adjacent 48m square faces with north/south seam gates, one/two golden pips, rebaked navigation and renderer-only face preview prefabs. Approach the blue face's north seam to see the purple face; crossing rotates the world 90 degrees beneath a presentation-only Echo.
+- CubeEdgeMap uses reciprocal WorldEdgeLink/CubeRotate spawn metadata. CubeEdgePresentation rotates visual surrogates while real physics/NavMeshes remain flat. Same player/camera/HUD/state move between additive maps; old maps unload. 2.2s turn plus short preparation/settling, no global pause or camera barrel roll.
+- Named actor action/motion blocks, temporary loadout lock and input/behaviour snapshots gate commands. Other owners' locks and previously disabled inputs survive. Invalid destination metadata restores presentation/controls without committing travel. Arrival stays inside the seam and requires moving inward before rearming automatic crossing.
+- Focused isolated suite passed 95 assertions: camera-visible neighbouring geometry, no preview actors/colliders/NavMesh, exact midpoint/animated +/-90 turns, same-player round trip, actual seam walking, failure recovery, classes/levels/items/ranks/gold/HP/Mana/cooldown continuity and normal-save sentinel protection.
+- Transport-only fixture disables ordinary HP/Mana regeneration for exact conservation. Existing dev-room/menu regression now checks enabled natural regeneration against elapsed simulation time rather than old instantaneous-trip percentage limits; it passed. Greatblade combat passed 75 and all ten data/architecture/progression regressions passed.
+- Approach/midpoint/arrival actual Game-view screenshots inspected and archived under docs/screenshots/CubeEdge-*. See docs/CUBE_EDGE_PROTOTYPE.md and docs/validation/CubeEdge*.
+- Production Cornberg routes, six-face topology and gameplay art are unchanged. This is a linked two-face visual/loading prototype, not full six-face implementation, seamless cube physics, multiplayer traversal or final cinematic polish.
+- Preserve unrelated ProjectSettings/PackageManagerSettings.asset and Assets/Settings. Continue integration/world1-foundation; no main merge.
+
 ## 2026-10-14 - Smaller cloth Magically Touched model integrated
 
 - User-approved Polytope free modular male cloth00 outfit, head01, hair20, short 01_A cape; indigo/violet cloth and modest Adventure Forge Fantasy Staff Lite. New MagicallyTouchedVisual loads optional ignored MagicalLicensed/MagicalHero; original form remains source-absence fallback.

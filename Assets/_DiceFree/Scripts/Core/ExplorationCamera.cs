@@ -30,6 +30,24 @@ namespace DiceFree.Core
 
         public bool LookingOut => lookingOut;
         public bool Following => following;
+        public bool PresentationOverride {get;private set;}
+        public void GetFollowPose(Transform follow,out Vector3 position,out Quaternion rotation,out float fieldOfView)
+        {
+            rotation=Quaternion.Euler(lookingOut?10f:pitch,yaw,0f);
+            var focus=follow.position+Vector3.up*(lookingOut?6f:1.5f);
+            position=focus-rotation*Vector3.forward*distance;
+            fieldOfView=lookingOut?65f:50f;
+        }
+        public void SetPresentationPose(Vector3 position,Quaternion rotation,float fieldOfView)
+        {
+            PresentationOverride=true;
+            transform.SetPositionAndRotation(position,rotation);
+            viewCamera.fieldOfView=fieldOfView;
+        }
+        public void ClearPresentationPose()
+        {
+            PresentationOverride=false;initialized=false;velocity=Vector3.zero;
+        }
 
         private void Awake()
         {
@@ -51,7 +69,7 @@ namespace DiceFree.Core
 
         private void LateUpdate()
         {
-            if (target == null) return;
+            if (target == null || PresentationOverride) return;
             if (!initialized) anchor = target.position;
 
             if (followToggle.WasPressedThisFrame()) following = !following;

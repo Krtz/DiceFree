@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "date": "2026-10-14",
+  "mode": "Windows Development player, batchmode/nographics, isolated save",
+  "unityVersion": "6000.6.3f1",
+  "buildGuid": "dd2951eef7ec49bb88d26fdfc9807db6",
+  "menuEntry": true,
+  "forwardArrival": "world.test.2",
+  "returnArrival": "world.test.1",
+  "transitions": 2,
+  "flips": 2,
+  "samePlayer": true,
+  "canAct": true,
+  "motionAllowed": true,
+  "uptimeAtVerification": 222.753555,
+  "limitations": "Functional standalone round trip only. Graphical evidence comes from Editor Game views; no standalone GPU/playthrough/performance claim."
+}

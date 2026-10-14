@@ -32,7 +32,13 @@ namespace DiceFree.Combat
         private bool footprintInitialized;
         public string FamilyId => familyOverride ?? Stats.Definition.familyId;
         public bool Alive => isActiveAndEnabled && Health != null && Health.Alive;
-        public bool CanAct => Alive && (Effects == null || !Effects.Stunned);
+        private readonly HashSet<string> actionBlocks=new();
+        public void SetActionBlocked(string sourceId,bool blocked)
+        {
+            if(string.IsNullOrWhiteSpace(sourceId))throw new System.ArgumentException("Action block needs a source ID.");
+            if(blocked)actionBlocks.Add(sourceId);else actionBlocks.Remove(sourceId);
+        }
+        public bool CanAct => Alive && actionBlocks.Count==0 && (Effects == null || !Effects.Stunned);
         public bool InCombat
         {
             get
