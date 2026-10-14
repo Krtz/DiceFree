@@ -1206,7 +1206,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7094090368227775121, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5748803482307489040}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2253423376704052342}
   m_SourcePrefab: {fileID: 100100000, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}
 --- !u!4 &1247654567062156980 stripped
 Transform:
@@ -1238,6 +1241,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1824756910130478810, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}
   m_PrefabInstance: {fileID: 8665563028965626468}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8395600826513239861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}
+  m_PrefabInstance: {fileID: 8665563028965626468}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2253423376704052342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395600826513239861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81e323bd344cbd49af1c5f8437ba4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.MagicallyTouchedVisual
+  resourcePath: MagicalLicensed/MagicalHero
+  model: {fileID: 0}
 --- !u!4 &9207885230205859215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7823ba59a1de0344b829aeda3a460bb7, type: 3}

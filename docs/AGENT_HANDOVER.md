@@ -1,4 +1,17 @@
-## 2026-10-14 â€” Plain all-slot gear and flexible class abilities
+## 2026-10-14 - Smaller cloth Magically Touched model integrated
+
+- User-approved Polytope free modular male cloth00 outfit, head01, hair20, short 01_A cape; indigo/violet cloth and modest Adventure Forge Fantasy Staff Lite. New MagicallyTouchedVisual loads optional ignored MagicalLicensed/MagicalHero; original form remains source-absence fallback.
+- Live idle geometry: Magical height 1.647m vs Physical 1.843m (~11% shorter), shoulder span .295m vs .405m (~27% narrower). Visual proportions only; gameplay colliders/reach/stats remain unchanged.
+- URP/Lit derived materials, valid Humanoid avatar, existing idle/walk/attack controller, no root motion/colliders. Existing gear sockets and bronze dagger follow the new rig. Mainhand/back gear hides staff/cape; unequip restores them.
+- PlainGearAttachment moved into its own Unity script file for authored-prefab serialization. Old secondary-class layout worked for runtime plain gear but lost the saved staff component. New focused test verifies no missing scripts and portrait fit; all-class suite checks the shared helper.
+- Model test passed 78 assertions, existing Magical five-skill/Mana/save/menu-reload suite passed, full gear/flexible-skill suite passed 232, ten static validators passed. Clear actual Game view and same-scale Editor comparison preview inspected. No full human playthrough or bespoke staff-attack animation claim.
+- Windows Development build passed with seven scenes, 0 errors/0 warnings, 348,117,424 reported bytes. See docs/MAGICAL_CLOTH_MODEL_IMPLEMENTATION.md, docs/screenshots/MagicalModel-* and docs/validation/MagicalModel*.
+- Archive/member hash rosters, licence/provenance and copied-byte verification recorded in docs/assets/Magical-source-receipt-2026-10-14.json. Source packs and derived resources stay ignored; local game-dev CLI unavailable, so no Game Development Studio lock receipt claim.
+- Cube design remains six face maps, adjacent face visible at an edge, smooth quarter-turn hiding loading. Existing World 2 state-preserving transition test is not yet the visual cube-edge flip prototype.
+- Preserve unrelated ProjectSettings/PackageManagerSettings.asset and Assets/Settings; continue integration/world1-foundation, no main merge.
+
+
+## 2026-10-14 - Plain all-slot gear and flexible class abilities
 
 - Cornberg merchant sells eleven plain level-1, common, all-class fitting items at 100 gold each; no normal player grants. Dev-room item list includes them. Tiny per-slot bonuses, original primitive bone-follow visuals, portrait fitting and scrollable buy/sell lists.
 - Greatblade keeps normal offhand restrictions; only explicitly flagged modelTestingItem fitting gear can occupy its offhand. Plain sword suppresses baseline Greatblade weapon while equipped.

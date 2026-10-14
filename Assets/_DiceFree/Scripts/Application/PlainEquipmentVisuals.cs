@@ -44,6 +44,13 @@ namespace DiceFree.Visuals
                 var visual=Create(definition.slot,previous,animator,headTop);visual.SetActive(false);
                 if(existing==null){existing=new EquipmentPresentation.Binding{definition=definition,slot=definition.slot};bindings.Add(existing);}
                 existing.visuals=existing.visuals.Concat(new[]{visual}).ToArray();
+                if(previous.GetComponent<MagicallyTouchedVisual>()!=null)
+                {
+                    string baselineName=definition.slot==EquipmentSlot.MainHand?"Caster Staff":
+                        definition.slot==EquipmentSlot.Back?"PT_Male_Armor_01_A_cape":null;
+                    if(baselineName!=null)existing.baselineVisuals=existing.baselineVisuals.Concat(previous.GetComponentsInChildren<Transform>(true)
+                        .Where(t=>t.name==baselineName).Select(t=>t.gameObject)).Distinct().ToArray();
+                }
                 if(definition.slot==EquipmentSlot.MainHand)
                 {
                     var grip=previous.GetComponentInChildren<GreatbladeTwoHandGrip>(true);
@@ -114,16 +121,5 @@ namespace DiceFree.Visuals
             }
             return group;
         }
-    }
-    /// <summary>Follows a bone while remaining inside the authoritative item's activation hierarchy.</summary>
-    [DefaultExecutionOrder(400)]
-    public sealed class PlainGearAttachment : MonoBehaviour, IPortraitPoseable
-    {
-        [SerializeField] private Transform bone;
-        [SerializeField] private Vector3 offset;
-        [SerializeField] private Quaternion rotation;
-        public void Configure(Transform value){bone=value;offset=bone.InverseTransformPoint(transform.position);rotation=Quaternion.Inverse(bone.rotation)*transform.rotation;}
-        private void LateUpdate()=>ApplyPortraitPose();
-        public void ApplyPortraitPose(){if(bone!=null)transform.SetPositionAndRotation(bone.TransformPoint(offset),bone.rotation*rotation);}
     }
 }

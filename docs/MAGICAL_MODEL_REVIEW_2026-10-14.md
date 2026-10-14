@@ -1,5 +1,7 @@
 # Magically Touched / Blessed model recommendation
 
+Status update: the user approved this candidate and its smaller/slimmer class adaptation is now integrated. See [MAGICAL_CLOTH_MODEL_IMPLEMENTATION.md](MAGICAL_CLOTH_MODEL_IMPLEMENTATION.md) for current implementation and validation. The candidate-only notes below describe the earlier review stage.
+
 Recommend the owned **Polytope Low Poly Modular Armors — Free** modular male human using its **cloth00** body, legs, gauntlets and boots, a visible face, a short cape and blue/violet colours. Pair it with a modestly scaled **Adventure Forge Fantasy Staff Lite**, with a soft gem glow. This gives the starter caster a recognisable silhouette while leaving room for a more elaborate advanced class.
 
 This is a candidate review, not an installed replacement. No paid generation, new package import, licensed-source publication, retargeting or gameplay model switch was performed.

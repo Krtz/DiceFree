@@ -92,3 +92,11 @@ Assets/_DiceFree/Resources/Audio/IronpineLicensed/
 
 /Assets/_DiceFree/Resources/PhysicalLicensed/
 /Assets/_DiceFree/Resources/PhysicalLicensed.meta
+
+# Locally licensed Polytope cloth character and Adventure Forge staff
+/Assets/Polytope Studio/
+/Assets/Polytope Studio.meta
+/Assets/AdventureForge/
+/Assets/AdventureForge.meta
+/Assets/_DiceFree/Resources/MagicalLicensed/
+/Assets/_DiceFree/Resources/MagicalLicensed.meta

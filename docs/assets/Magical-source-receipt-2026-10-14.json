@@ -1,0 +1,248 @@
+[
+  {
+    "name": "Low Poly Modular Armors - Free - LOWPOLY MEDIEVAL FANTASY SERIES",
+    "source": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Polytope Studio\\3D ModelsCharacters\\Low Poly Modular Armors - Free - LOWPOLY MEDIEVAL FANTASY SERIES.unitypackage",
+    "sha256": "2876c4f7a65ae86b2c6708f6254042ced2cd788bd6128980ac49b8986784ee73",
+    "assets": [
+      {
+        "guid": "004b7cabc9421734bb88a754e99fd641",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Base_Texture.png",
+        "assetSha256": "d240f81c02fabc694e1d20030715ba961847f3bdf7197fbb664b2a0ccac3b2ce",
+        "asset.metaSha256": "f9dc173568ffac9df0181ff11f5102030d89868e7f9e1a7bcaefd086c819e6a1"
+      },
+      {
+        "guid": "035d7aa8896fd004988e129310ea695a",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Custom_Mask_01.png",
+        "assetSha256": "d8319cb4581014e4141201ea939938fe858c92a739869b09426e4ffc48f0227e",
+        "asset.metaSha256": "55cf2c2b3cb11a892d082bdcfc788387aaa3dab96616461deb57d4daf2563a12"
+      },
+      {
+        "guid": "093505a5d838d4149a9f207bf3c33662",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_texture.tga",
+        "assetSha256": "d65025baf2c1a0e208b868db5b058b38e0a26a8820b7692a4f2a2b6a95804558",
+        "asset.metaSha256": "199bb3dbaa7650edb40ce2cf32aefd130060bfdd760f57a0abacd70a765623df"
+      },
+      {
+        "guid": "45f944a4396b0a54398eb1abe6743296",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Meshes/PT_Lowpoly_Armors_Male_Moduar_Free.fbx",
+        "assetSha256": "87ac4e3a085c8ea1876ee5f00e5c247b72c8ef780f5b5c460c4865aa83d9ce18",
+        "asset.metaSha256": "bb8f372e0cf38d39a07f69d8a80ccf6b898666749d78b86feb606a163bac5a5f"
+      },
+      {
+        "guid": "47efbf030a9bb7f428ba51b46a2fdd03",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Metal_Mask_01.png",
+        "assetSha256": "437a7f8e95d0ac1d0b91fb2cd2ddfdff37f40de2d67fb7710d56e92e8edac3cf",
+        "asset.metaSha256": "7b855f6f2b945ee98f2819e487577e46a447cb1c4344c5ace8f531fae09f57d7"
+      },
+      {
+        "guid": "59bb6b7d352551840bf2f30459145fa4",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Skin_Eye_Hair_Mask_02.png",
+        "assetSha256": "0e1e6950b4a5eeb20ec548dfd6f8e51a71323b4041f1aef297321ab10f8964c9",
+        "asset.metaSha256": "4684dce950d509eb4e0f80d87ef65d0185d45a3cccfccd6aaaaf7ac448f41b4d"
+      },
+      {
+        "guid": "7d388dc79e41c6f498271666b30c0630",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Gems_Mask_01.png",
+        "assetSha256": "ae819d55b4e62fa4e6e2ba690e40bcbfcd48567c8a3900cbbeee95c08148425f",
+        "asset.metaSha256": "7e5afd44a54411a2a3ba2f3f00e4b3764bbba8677d006f10d780daab3fa28063"
+      },
+      {
+        "guid": "9a688ecd3c6cbee4cb2a528bf72399d4",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Lips_Scars_Mask_01.png",
+        "assetSha256": "d82dda000818bc050cc243a813434926b4af88964933836a3b05a5359eaaabce",
+        "asset.metaSha256": "113b9b3afcbd0a53bab8406b003165057d3f5c9acbe5f542481cdd4fef15d68b"
+      },
+      {
+        "guid": "9c0e067347abba2489817b3ce813c911",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Leather_Mask_01.png",
+        "assetSha256": "1a5cfb322cb4cc1fbf8afebffc4a94a74213e159ca32e50d091a57fbae9bfdf1",
+        "asset.metaSha256": "14e130ab877115afa22d14630d4659b4a65ddaadb6cbfd8b0ba28879e42ecbc1"
+      },
+      {
+        "guid": "ae91646efc13ec44f8ccc5b5db2d6a8d",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Feathers_Mask_02.png",
+        "assetSha256": "4dac4088bd9f12dcf5b873c4573302eea4dfeb751c64190faf302c51221097dc",
+        "asset.metaSha256": "5fb6c30256eda63bdfe91a4b946cb106923e3a894d4859043d30682fd3dfb682"
+      },
+      {
+        "guid": "b76fe68d69ca53f43a4e6f66d135dd90",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Skin_Eye_Hair_Mask_01.png",
+        "assetSha256": "7f84d05deadedbb7912d5a0cf96e53fafc882bbd8b4a8ce75d0ba2caa966f68f",
+        "asset.metaSha256": "dc7906f4d824623fde4014e95063a8ad2b9ceab4774d6c2b482ce3a2cad9876e"
+      },
+      {
+        "guid": "d294e9544b9eca64188ea9d2482ea8a1",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Coat_of_Arms_01.png",
+        "assetSha256": "d413cfa4bf4f32e44b01ddf3d12a23617a46a6a42f496af39c9567b20e96712c",
+        "asset.metaSha256": "d4965e687ef96f3692ad50d01e0f5b80de89a04784f0bdf7f725d296590321d7"
+      },
+      {
+        "guid": "e4f1621d61032d045964d463b3806afe",
+        "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Textures/PT_Armors_Cloth_Mask_01.png",
+        "assetSha256": "80a75c295c33418f4c12c6f49ab6a5e2aa2ea32af9c783b5421b78a929112c14",
+        "asset.metaSha256": "de6b5871f6058d9e24d32295b482e65b0f9250a4c8aa52ba85323d9ded0c0816"
+      }
+    ],
+    "license": "Unity Asset Store EULA",
+    "admission": "User authorised class integration, 2026-10-14"
+  },
+  {
+    "name": "Fantasy Staff Lite",
+    "source": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Adventure Forge\\3D ModelsPropsWeapons\\Fantasy Staff Lite.unitypackage",
+    "sha256": "df3bd8aeb3db102cba2f63bb37d4bb6f47e32b5749abcc10cc23d89c53ba68bb",
+    "assets": [
+      {
+        "guid": "01a780589c93b9a4fb1b9ffae3b6088c",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_MetallicSmoothness2.tif",
+        "assetSha256": "71e2c1e88119250df35f5b657b3ffea7af5a0d47448a28775765ac2a23471548",
+        "asset.metaSha256": "7e2b30c43bc758963ed1da29ee018b166286cb331832258f86da13c49ab64c9d"
+      },
+      {
+        "guid": "045d593f9d21a274a8df6df5dac4b8ed",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_AO.tif",
+        "assetSha256": "58f7b5806b6c1baf45fa1e146c2cf449861daae161d6ea2ec35edb21929befe3",
+        "asset.metaSha256": "dccacead9bb8d903e2df86bd55f07830c2e4ee743855be577a6e5e6165cb4e68"
+      },
+      {
+        "guid": "14608d65f083c4846b35aecdeec5f436",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Metalstaff01.fbx",
+        "assetSha256": "e57f2075e028d323966706c672ca5c8cbe598b1ea6fb81c618ddf79e81ad1b05",
+        "asset.metaSha256": "34f904822bfadf9afdaaf8a273ab73ca8a3764c2af47a07da6cb281ab90611aa"
+      },
+      {
+        "guid": "1d951174e6ef1444bb055eaaadd5087a",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_Emission.tif",
+        "assetSha256": "91a0efd38a34997a5c696c8d4c87777d801e47118d1cafdb27f3b6f9b08ff919",
+        "asset.metaSha256": "0758a5e85f5cc073f784f576933e0670a52b35423ba953d6941412135ba67c0c"
+      },
+      {
+        "guid": "2db1ccd41614d8b4e9f09ad57fbad7cc",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rings/Metalstaff01Ring_MetallicSmoothness.tif",
+        "assetSha256": "bd8aab5def08c895f80aac567cbc4823012253400dead6e3dcadad9ede016346",
+        "asset.metaSha256": "3c7c28a15e9dd3942151f37f6537359404bd6b96157c10be3bf4c9838671fedf"
+      },
+      {
+        "guid": "3583f963362640b48b2b8de4a00e955a",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/512/MetalstaffInnerGem512MA.mat",
+        "assetSha256": "563503c535f1674af89ef9a8712f5aff1aeb782fdd3b59431c2111edfab52f1e",
+        "asset.metaSha256": "2c4a405afcb1e024343e3c31910bfdab5cf6f202e160bd48fa2f33ac48c0b536"
+      },
+      {
+        "guid": "39c68bdb0d8a0524996d52e2f2343aa7",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/512/MetalstaffRod512MA.mat",
+        "assetSha256": "4d678c851ea1394cc47b49344fabed801f40e6c182b869694a1491599d176b82",
+        "asset.metaSha256": "0c7708f4f60de409e200014f8f656c37172c0620c55600d421b29bea734446c8"
+      },
+      {
+        "guid": "47871c7da6fd3f04283ba8ce020ace1c",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/512/MetalstaffRing512MA.mat",
+        "assetSha256": "48f25c40918fdfd9736fee0868636da4e89cefc43d8377b880812e1ea870100f",
+        "asset.metaSha256": "3c47eb9d9f4e7fa7a26d53333141451be266793318f4ef0c15d1e29474c1bdde"
+      },
+      {
+        "guid": "481e1705f30af104c8b2bb8b70d97b3b",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rod/Metalstaff01RodMA_AO.tif",
+        "assetSha256": "0cc544bb85c3f4710ea5b94055477806896bf99321c47c014e428cc6252f37c1",
+        "asset.metaSha256": "3a2b5d084f7f2f14c771fcf90bb5fe91551ed40d353d2ade1c72046298d8c1c2"
+      },
+      {
+        "guid": "656bc216bf101ce4e9b005cda3962233",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_MetallicSmoothness.tif",
+        "assetSha256": "01dc87fe8ab4218a516ccd89a531a26ad4b8506ff551fd1957964483c9ac35f0",
+        "asset.metaSha256": "0dfc2efaffb9eb5c3d91fef507940f8b610be3474773e7cf6a7939fc54d5455c"
+      },
+      {
+        "guid": "7099989a41c552f43832d5c0603d944f",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/Metalstaff01InnerGemMA.mat",
+        "assetSha256": "668cc8be8b46b89db27aaf5285924e30723a7c3093e78ebd389cd4b64200ca3a",
+        "asset.metaSha256": "8d8e5019ff10990db99080cff5fc20586cb7aa49dfbefb24a1cb3a020c4ea9e1"
+      },
+      {
+        "guid": "71cde5360203d1e47b6c3e888d20ca76",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rod/Metalstaff01RodMA_Normal.tif",
+        "assetSha256": "71170e6e377b4f890dd42c1d5d287d69b8512fba0b593446749fd700153bead7",
+        "asset.metaSha256": "f5a5c058f3d1986fdc8b47273d53f050396dffdc447e8d7943f4ae1fa0c080e4"
+      },
+      {
+        "guid": "76d83317739267147a8e32a5d3ab087f",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/512/MetalstaffCasing512MA.mat",
+        "assetSha256": "e5cd1d938f872212ac25f1f0e9e4ef946f24d60a55658a78c93b15ac1f2f4eb4",
+        "asset.metaSha256": "3c970baf516ec538155876f2be304648bc001795227624413e32a0b44379af81"
+      },
+      {
+        "guid": "7704a5025d74feb4ab3ee3155c514882",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rod/Metalstaff01RodMA_MetallicSmoothness2.tif",
+        "assetSha256": "54c35ed4451fcec417fcb0601ec055346849949c0d5a8a1b1e9e93dbef8ff1ad",
+        "asset.metaSha256": "71c214798db8b0524c6740ebd122b233e48a9014b615dd0bf5b198a479d1e502"
+      },
+      {
+        "guid": "82874f3451f913e4994cfe213c95a689",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rings/Metalstaff01Ring_AlbedoTransparency.tif",
+        "assetSha256": "77beaa853ac2e36e04ae3d2bcbeedaba6d7f8b3660f3fd9e1143c106dd87a0af",
+        "asset.metaSha256": "a00235811da8bdf68e2f754d14537fcaa1b28f96ab1d8c38c23b3dd42c6d407a"
+      },
+      {
+        "guid": "882e79bf67fd05f4f9b93a590fc8fe5f",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/Metalstaff01RodMA.mat",
+        "assetSha256": "6650ad5007566d3040477a6dbf22c4f7f961703d3e3652fa7758cc77e1e31920",
+        "asset.metaSha256": "2e16cee15fd64bc4c7c2fd101679483f616c37951ade70697ce2f3afd5898c92"
+      },
+      {
+        "guid": "89eb0b60aea5f2147a4d8f02f3eb9a70",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rod/Metalstaff01RodMA_AlbedoTransparency.tif",
+        "assetSha256": "027544c140edd008974bb0e49120d2c41f9cc21c5280b18cbee18f5752b685d6",
+        "asset.metaSha256": "9888805fc02a55e2cede24b4a98f34ee93af6fb3839efc6e0efd5081285ae409"
+      },
+      {
+        "guid": "89f752993a778064f8c84bb2bb52e101",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rings/Metalstaff01Ring_Normal.tif",
+        "assetSha256": "cffba9406f93047eb83c107111d31cd26ae1514c785b502e4371e5a72ed3fcc0",
+        "asset.metaSha256": "54387c42f87435904450c09d8510902368601437ac9af426b976c7a54a9bcc69"
+      },
+      {
+        "guid": "8a81db11f5dc3b24da8db9d77be45138",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/Metalstaff01Ring.mat",
+        "assetSha256": "6f103e78e114fedbab2639b29143d7efb0fc3c50d37ab325e9915bc354e8b4b7",
+        "asset.metaSha256": "38f9e7e326b922d1370f954e594d6896b6a07f25584284a77228d70fd45cccd4"
+      },
+      {
+        "guid": "9a763c773ef7fff45b44fbb1a796b309",
+        "path": "Assets/AdventureForge/PreFab/Metalstaff01/512/Metalstaff01.prefab",
+        "assetSha256": "d8b6d294a973bec9a10be0e860d454c9c3dbf1e831d7c22e8390204b1da5db5e",
+        "asset.metaSha256": "03d1da55b6bf73f8a73e4bdca5eaa010a984522f5fed77150b1cf5ba5e2232b6"
+      },
+      {
+        "guid": "a7d7b36a091982d40a6330fb4c6bef93",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_AlbedoTransparency.tif",
+        "assetSha256": "f14f656d77e913664234ca789fa71e94e0ef8512c9b2d56f610ab22bcf1e6d81",
+        "asset.metaSha256": "9876538d65c261f69541ed7385ac78eeae231bc6202e73587c531a563f40cfeb"
+      },
+      {
+        "guid": "ae039af78ac8c3143993b9e9529551e1",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rings/Metalstaff01Ring_AO.tif",
+        "assetSha256": "fe044eb3233f88c2b976a1baed4de2ca3e8461372c660e8e6ef13ba6c995a656",
+        "asset.metaSha256": "b56418dbeba5b30bd3bc72476f560f568e774c96c84ec961e6606006e6f4d68a"
+      },
+      {
+        "guid": "c297bc6702b59734e9925f25e4a0738d",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Casing/Metalstaff01CasingMA_Normal.tif",
+        "assetSha256": "b19bb83471c8ad5e87bdf8c9a320e3ff7ace3fa2549f27e8a090c94bd97a04bd",
+        "asset.metaSha256": "ea423413ec3e8a33d4ab28963ca3e75e65f02cd2cd3ba6e9c41a7d846fe41f0f"
+      },
+      {
+        "guid": "d740f15bc390c8d4e9fc6c232765ad09",
+        "path": "Assets/AdventureForge/Texture/Metalstaff01/512/Metalstaff01 Rod/Metalstaff01RodMA_MetallicSmoothness.tif",
+        "assetSha256": "c92aea3eba734f337ac6967ed095ee99caabd971340f0575af3240be43538769",
+        "asset.metaSha256": "6d90a12cd860058086294d651a0ed10d0a260bb201edd8743948f02247b6ff23"
+      },
+      {
+        "guid": "e886333cd46843e4781e3342cc10d489",
+        "path": "Assets/AdventureForge/Geometry/Metalstaff01/Materials/Metalstaff01CasingMA.mat",
+        "assetSha256": "697dac24b3a6587704f4141de52896af49e0e493c8b85b9c1af3c4efda412a32",
+        "asset.metaSha256": "c1891a9f51a9102b7702ad80e14429de709c7c8ad77d42009e0fde58efb63e65"
+      }
+    ],
+    "license": "Unity Asset Store EULA",
+    "admission": "User authorised class integration, 2026-10-14"
+  }
+]

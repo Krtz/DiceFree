@@ -306434,7 +306434,7 @@ MonoBehaviour:
     animator: {fileID: 0}
   - classId: class.magically-touched-novice
     visualRoot: {fileID: 1621371690}
-    animator: {fileID: 1621371691}
+    animator: {fileID: 0}
   - classId: class.greatblade
     visualRoot: {fileID: 1566064368}
     animator: {fileID: 0}
