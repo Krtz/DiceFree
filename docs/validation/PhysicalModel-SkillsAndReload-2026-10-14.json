@@ -1,0 +1,23 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.physical.playmode-status",
+  "data": {
+    "command": "dicefree.physical.playmode-status",
+    "parameters": {},
+    "result": {
+      "status": "passed",
+      "success": true,
+      "finalMarker": "DICEFREE_PHYSICAL_PLAYMODE_OK",
+      "error": "",
+      "temporarySaveRoot": "C:\\Users\\Axel\\AppData\\Local\\Temp\\DiceFree-Physical-9c4615bb7fe7497495116442aa2665aa",
+      "phase": 4
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

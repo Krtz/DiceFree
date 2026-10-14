@@ -1,0 +1,62 @@
+﻿{
+  "success": true,
+  "command": "command runtime_status",
+  "data": {
+    "command": "runtime_status",
+    "parameters": {},
+    "result": {
+      "UnityVersion": "6000.6.3f1",
+      "Platform": "WindowsPlayer",
+      "BuildGuid": "005c8feae0be4d7498e28b778c55dbfb",
+      "Version": "0.1.0",
+      "IsPlaying": true,
+      "TargetFrameRate": -1,
+      "TimeScale": 1,
+      "RealTimeSinceStartup": 64.50982,
+      "FrameCount": 2003089,
+      "LoadedLevelName": "StartMenu",
+      "LoadedLevelBuildIndex": 0,
+      "Performance": {
+        "FrameStatsAvailable": true,
+        "SampleWindow": 120,
+        "Fps": 31210.14,
+        "AverageFrameTimeMs": 0.032040868,
+        "MinFrameTimeMs": 0.03110119,
+        "MaxFrameTimeMs": 0.0420989245,
+        "LastFrameTimeMs": 0.0324050449,
+        "GpuTimingAvailable": true,
+        "CpuFrameTimeMs": 0.0317,
+        "GpuFrameTimeMs": 0,
+        "TotalAllocatedMemory": 171002949,
+        "TotalReservedMemory": 566231040,
+        "MonoUsedSize": 9592832,
+        "MonoHeapSize": 12132352,
+        "GcMemory": 9592832,
+        "Counters": {
+          "DrawCalls": 0,
+          "SetPassCalls": 0,
+          "Triangles": 0,
+          "Vertices": 0,
+          "GcAllocInFrame": 3002
+        }
+      },
+      "PipelineDriver": {
+        "IsServerRunning": true,
+        "ActualPort": 7900,
+        "EnableInBuilds": true,
+        "RequestTimeoutMs": 30000,
+        "EnableAuditLogging": true,
+        "AutoStart": true,
+        "MaxWorkItemsPerFrame": 10
+      },
+      "Timestamp": "2026-10-14T15:22:29.9581325Z"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7900,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

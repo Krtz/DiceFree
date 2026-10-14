@@ -20578,6 +20578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1564654365}
   - component: {fileID: 1564654366}
+  - component: {fileID: 1564654367}
   m_Layer: 0
   m_Name: PhysicallyBlessedPresentation
   m_TagString: Untagged
@@ -20628,6 +20629,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1564654367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564654364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f859ac7d788907541bbff8a4f6f1551d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.PhysicalBlessedVisual
+  resourcePath: PhysicalLicensed/PhysicalHero
+  model: {fileID: 0}
 --- !u!1 &1565003392
 GameObject:
   m_ObjectHideFlags: 0
@@ -23217,7 +23232,7 @@ MonoBehaviour:
     animator: {fileID: 743668536}
   - classId: class.physically-blessed-novice
     visualRoot: {fileID: 1564654365}
-    animator: {fileID: 1564654366}
+    animator: {fileID: 0}
   - classId: class.magically-touched-novice
     visualRoot: {fileID: 1810539047}
     animator: {fileID: 1810539048}

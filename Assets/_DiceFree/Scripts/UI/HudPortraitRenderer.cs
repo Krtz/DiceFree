@@ -111,15 +111,52 @@ namespace DiceFree.UI
             foreach (var behaviour in clone.GetComponentsInChildren<MonoBehaviour>(true))
                 behaviour.enabled = false;
 
-            var animator = clone.GetComponentInChildren<Animator>(true);
+            var animator = ClassPresentationSwitcher.FindVisualAnimator(clone.transform);
             if (animator != null)
             {
                 animator.enabled = true;
                 animator.applyRootMotion = false;
                 animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 animator.speed = 1f;
+                animator.Rebind();
                 animator.Play(Animator.StringToHash("Base Layer.Idle"), 0, 0f);
+                animator.Update(0f);
             }
+            FrameVisibleModel();
+        }
+
+        private void FrameVisibleModel()
+        {
+            bool found = false;
+            Bounds bounds = default;
+            var baked = new Mesh();
+            try
+            {
+                foreach (var renderer in clone.GetComponentsInChildren<Renderer>())
+                {
+                    if (!renderer.enabled) continue;
+                    Bounds world = renderer.bounds;
+                    if (renderer is SkinnedMeshRenderer skin)
+                    {
+                        skin.BakeMesh(baked);
+                        var local = baked.bounds;
+                        world = new Bounds(skin.transform.TransformPoint(local.center), Vector3.zero);
+                        for (int x = -1; x <= 1; x += 2)
+                            for (int y = -1; y <= 1; y += 2)
+                                for (int z = -1; z <= 1; z += 2)
+                                    world.Encapsulate(skin.transform.TransformPoint(local.center + Vector3.Scale(local.extents, new Vector3(x, y, z))));
+                    }
+                    if (!found) { bounds = world; found = true; }
+                    else bounds.Encapsulate(world);
+                }
+            }
+            finally { Destroy(baked); }
+            if (!found) return;
+            float tangent = Mathf.Tan(portraitCamera.fieldOfView * Mathf.Deg2Rad * .5f);
+            float aspect = (float)Texture.width / Texture.height;
+            float distance = Mathf.Max(bounds.extents.y / tangent, bounds.extents.x / (tangent * aspect)) * 1.12f + bounds.extents.z;
+            portraitCamera.transform.position = bounds.center + studio.forward * Mathf.Max(1f, distance);
+            portraitCamera.transform.LookAt(bounds.center);
         }
 
         private static void SetLayerRecursive(Transform root, int layer)

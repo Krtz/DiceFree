@@ -1,3 +1,14 @@
+## 2026-10-14 — Physically Blessed starter-armour model integrated
+
+- Approved Blink FREE Modular Character Fantasy RPG Human Male now replaces the visible Physical model in Cornberg and Development Room. Helmet hidden; leather/padded chest, trousers, boots, bracers and modest shoulders. Existing class data and normal-boss advancement quest are preserved.
+- Reproducible authoring: dicefree.physical.model.author. Source prefab and URP-derived PhysicalLicensed resource stay local and ignored; portable original presentation remains usable when the resource is absent. Do not regenerate through the older PhysicalBlessedAuthoring.Prepare, which would overwrite the wider four-class composition.
+- PhysicalBlessedVisual loads once on activation, transfers existing item sockets to the new Humanoid bones and adds the existing bronze dagger's Physical visual. Animator discovery skips the disabled fallback. HUD clones reuse prepared art and frame actual baked visible geometry, including equipment and character rotation.
+- Final model test passed 47 assertions, including unavailable-source fallback, idle/walking/attack, dagger/shield/tophat/gloves, new-rig attachments, class switching and portrait clipping. Full Physical five-skill/Mana/menu-reload regression passed. Greatblade quest passed 35; Greatblade combat passed 75; ten static/regression validators passed.
+- Quest test now explicitly selects the active Slime gameplay portal; FindAny sometimes selected the inactive decorative exterior portal. This changes the fixture, not portal gameplay.
+- Actual Game view and temporary equipped close-up inspected. Windows seven-scene Development build succeeded with 0 errors/0 warnings (344,658,024 reported bytes); non-graphical startup remained responsive with StartMenu and advancing frames beyond 23 seconds. See docs/PHYSICAL_STARTER_ARMOUR_IMPLEMENTATION.md, docs/validation/PhysicalModel*-2026-10-14.json and docs/screenshots/PhysicalModel-Equipped.png.
+- Shared adaptive basic-attack animation remains; bespoke weapon-specific clips and final transmog fitting are future work. No full human playthrough claim.
+- Preserve unrelated ProjectSettings/PackageManagerSettings.asset and Assets/Settings. Continue integration/world1-foundation; main remains untouched.
+
 ## 2026-10-14 — Greatblade normal Slime Boss advancement quest
 
 - Supersedes the earlier direct advancement offer. Cornberg's retired swordswoman offers The Weight of a Greatblade only to Physical level 30+. Explicit acceptance, normal Slime Boss defeat, then return to her advances to level-1 Greatblade.

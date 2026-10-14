@@ -51,6 +51,15 @@ namespace DiceFree.UI
             return null;
         }
 
+        public static Animator FindVisualAnimator(Transform root)
+        {
+            if (root == null) return null;
+            var candidates = root.GetComponentsInChildren<Animator>(true);
+            foreach (var candidate in candidates)
+                if (candidate.isActiveAndEnabled) return candidate;
+            return candidates.Length > 0 ? candidates[0] : null;
+        }
+
         private void Refresh(bool force)
         {
             if (actor == null) actor = GetComponent<CombatActor>();
@@ -78,7 +87,7 @@ namespace DiceFree.UI
             if (feedback == null) feedback = GetComponent<ActorFeedback>();
             var animator = active.animator != null
                 ? active.animator
-                : active.visualRoot.GetComponentInChildren<Animator>(true);
+                : FindVisualAnimator(active.visualRoot);
             driver?.Configure(active.visualRoot, animator);
             feedback?.Configure(active.visualRoot);
         }

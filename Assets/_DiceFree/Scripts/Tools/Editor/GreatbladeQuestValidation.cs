@@ -102,7 +102,7 @@ namespace DiceFree.EditorTools
             Need(journal.GetProgress(quest.stableId).status==QuestStatus.Active&&journal.GetProgress(quest.stableId).count==0,"Accepted Physical quest lost during switching.");
             Protect(player);
             Phase("real dungeon normal-boss credit");
-            var portal=Object.FindAnyObjectByType<DungeonPortal>();
+            var portal=Object.FindObjectsByType<DungeonPortal>().Single(p=>p.isActiveAndEnabled&&p.definition!=null&&p.definition.stableId=="dungeon.slime");
             Need(player.Motor.Teleport(portal.ApproachPosition+Vector3.back*1.5f),"Dungeon approach.");
             Need(player.Alive&&player.Health.Invulnerable&&portal.CanInteract(player),"Protected player cannot interact with dungeon portal.");
             portal.Interact(player);while(SlimeDungeonRun.Current==null||!SlimeDungeonRun.Current.StagingReady)yield return null;

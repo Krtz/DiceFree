@@ -1,6 +1,6 @@
 # Physically Blessed model candidates — 2026-10-14
 
-User wants a more convincing Tier I model while keeping Greatblade visibly more advanced. This is candidate review only; the playable Physical presentation has not been replaced.
+Historical candidate review. The approved Blink starter-armour model has now been integrated into the playable Physical presentation; see PHYSICAL_STARTER_ARMOUR_IMPLEMENTATION.md for implementation and validation. The findings below record the original selection.
 
 ## Recommendation: Blink modular fantasy human starter armour
 
