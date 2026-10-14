@@ -305848,6 +305848,7 @@ GameObject:
   - component: {fileID: 1288724117}
   - component: {fileID: 1288724116}
   - component: {fileID: 1288724115}
+  - component: {fileID: 1288724118}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -306213,6 +306214,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c121e31e7a7355c4183c9543ddc9d7f3, type: 2}
   - {fileID: 11400000, guid: 725d53cadff67cc41b58826e21a8407e, type: 2}
   - {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
+  - {fileID: 11400000, guid: 645c0926dff69c444a8734877b4b0ae1, type: 2}
+  - {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
+  - {fileID: 11400000, guid: 8c91ba3c0a1ca4b47832001228ed2c73, type: 2}
+  - {fileID: 11400000, guid: 69d646f07338f8b4981d016dc7130a89, type: 2}
+  - {fileID: 11400000, guid: d51fa7d194a5bb64eae86775b1717991, type: 2}
+  - {fileID: 11400000, guid: 9fbf79ea2b24cb24aa7e579f899d78e8, type: 2}
+  - {fileID: 11400000, guid: 9fd1603b2755b4f44b2e445506c524c7, type: 2}
+  - {fileID: 11400000, guid: e75062e0b77882640a14dbd628b72b27, type: 2}
+  - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
+  - {fileID: 11400000, guid: 8508db9dcbb7745448bb788eb03ee77f, type: 2}
+  - {fileID: 11400000, guid: 3fb60e45f41df794094b44ad9baa7d84, type: 2}
 --- !u!114 &1288724073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306895,6 +306907,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694b86db790e52e47b027bca7eb5e9be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.GreatbladeSkillProgression
+--- !u!114 &1288724118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d27676b2325a1a41aaae15f7be0c2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.PlainEquipmentVisuals
 --- !u!1 &1288794739
 GameObject:
   m_ObjectHideFlags: 0
@@ -386446,6 +386470,39 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
     goldPrice: 15
     provisionalPrice: 1
+  - item: {fileID: 11400000, guid: 645c0926dff69c444a8734877b4b0ae1, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 8c91ba3c0a1ca4b47832001228ed2c73, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 69d646f07338f8b4981d016dc7130a89, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: d51fa7d194a5bb64eae86775b1717991, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 9fbf79ea2b24cb24aa7e579f899d78e8, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 9fd1603b2755b4f44b2e445506c524c7, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: e75062e0b77882640a14dbd628b72b27, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 8508db9dcbb7745448bb788eb03ee77f, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
+  - item: {fileID: 11400000, guid: 3fb60e45f41df794094b44ad9baa7d84, type: 2}
+    goldPrice: 100
+    provisionalPrice: 0
   resaleFraction: 0.5
   provisionalFallbackResaleGold: 1
 --- !u!1 &1627600075

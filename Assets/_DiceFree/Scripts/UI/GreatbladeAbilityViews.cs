@@ -12,7 +12,7 @@ namespace DiceFree.UI
             Kind.BattleCry=>"Battle Cry",Kind.GreatswordMastery=>"Greatsword Mastery",_=>"Heavy Rhythm"};
         public static AbilityBarSource.SlotView View(GreatbladeSkillProgression skills,GreatbladeSkillCaster caster,int slot,string key)
         {
-            if(skills==null||caster==null||slot<0||slot>=6)return default;
+            if(skills==null||caster==null||slot<0||slot>=GreatbladeProgressionRules.Skills.Length)return default;
             var kind=(Kind)slot;var rule=GreatbladeProgressionRules.For(kind);int rank=skills.Rank(kind);
             string icon="greatblade-"+kind.ToString().ToLowerInvariant();
             return new AbilityBarSource.SlotView(Name(kind),key,rank,rule.rankLevels.Length,caster.CooldownRemaining(kind),
@@ -44,7 +44,7 @@ namespace DiceFree.UI
         }
         public static bool Activate(GreatbladeSkillProgression skills,GreatbladeSkillCaster caster,SkillTargetingController targeting,IQueuedOrders orders,int slot,bool append)
         {
-            if(slot<0||slot>=4||skills==null||caster==null||targeting==null)return false;
+            if(slot<0||slot>=GreatbladeProgressionRules.Skills.Length||skills==null||caster==null||targeting==null||GreatbladeProgressionRules.For((Kind)slot).passive)return false;
             var kind=(Kind)slot;if(!caster.CanPrepare(kind))return false;
             switch(kind)
             {

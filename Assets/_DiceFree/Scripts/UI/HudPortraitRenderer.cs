@@ -49,7 +49,8 @@ namespace DiceFree.UI
             if (studio != null) Destroy(studio.gameObject);
         }
 
-        private void RequestRebuild() => rebuildRequested = true;
+        public void RequestRefresh() => rebuildRequested = true;
+        private void RequestRebuild() => RequestRefresh();
 
         private void CreateStudio()
         {
@@ -122,6 +123,8 @@ namespace DiceFree.UI
                 animator.Play(Animator.StringToHash("Base Layer.Idle"), 0, 0f);
                 animator.Update(0f);
             }
+            foreach (var behaviour in clone.GetComponentsInChildren<MonoBehaviour>(true))
+                if (behaviour is IPortraitPoseable poseable) poseable.ApplyPortraitPose();
             FrameVisibleModel();
         }
 

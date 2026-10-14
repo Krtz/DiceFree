@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "mode": "Windows Development player, batchmode/nographics, isolated save",
+  "unityVersion": "6000.6.3f1",
+  "buildGuid": "453af60013ff433db7bacddb227a03cc",
+  "scene": "StartMenu",
+  "uptimeSeconds": 27.6855412,
+  "frameCount": 853517,
+  "limitation": "Startup responsiveness only; no graphical gameplay or performance claim."
+}

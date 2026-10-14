@@ -73,7 +73,7 @@ namespace DiceFree.Visuals
                 bool changed = false;
                 foreach (var binding in equipment.Bindings)
                 {
-                    if (binding.slot != DiceFree.Items.EquipmentSlot.MainHand || binding.visuals.Any(g => g != null && g.transform.IsChildOf(transform))) continue;
+                    if (binding.slot != DiceFree.Items.EquipmentSlot.MainHand || binding.definition?.modelTestingItem == true || binding.visuals.Any(g => g != null && g.transform.IsChildOf(transform))) continue;
                     var source = binding.visuals.FirstOrDefault(g => g != null);
                     var sourceAnimator = source != null ? source.GetComponentInParent<Animator>() : null;
                     if (sourceAnimator == null)

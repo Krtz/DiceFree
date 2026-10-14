@@ -15,6 +15,8 @@ namespace DiceFree.Items
         public string rarityId = "rarity.provisional";
         public string sourceId;
         public bool questItem, bound;
+        [Tooltip("Prototype model-fitting gear: permits the plain offhand on all classes, including the two-handed Greatblade.")]
+        public bool modelTestingItem;
         public bool canSell = true;
         public string[] allowedClassIds = Array.Empty<string>();
         [TextArea] public string flavor;

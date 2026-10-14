@@ -28,7 +28,7 @@ namespace DiceFree.UI
                 (HudLayoutManager.Current != null && HudLayoutManager.Current.EditMode))
                 return;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i <= AbilityBarSource.UltimateSlot; i++)
                 if (source.WasPressedThisFrame(i))
                     source.Activate(i);
         }
@@ -69,7 +69,15 @@ namespace DiceFree.UI
                 GUI.Label(new Rect(panel.x+12,source.UnspentPoints>0?panel.y-45:panel.y-21,panel.width-20,20),
                     "Queued orders: "+queuedOrders.PendingOrders+
                     "   (Shift+click to append; Stop to clear)");
+            if (source.PageCount > 1)
+            {
+                var y = panel.y + 2f;
+                if (GUI.Button(new Rect(panel.xMax-155f,y,30f,22f),"<")) source.SetPage((source.SkillPage+source.PageCount-1)%source.PageCount);
+                GUI.Label(new Rect(panel.xMax-121f,y,82f,22f),"Skills "+(source.SkillPage+1)+"/"+source.PageCount);
+                if (GUI.Button(new Rect(panel.xMax-34f,y,30f,22f),">")) source.SetPage((source.SkillPage+1)%source.PageCount);
+            }
             Rect inner = Inner(panel);
+            if(source.PageCount>1){inner.y+=24f;inner.height-=24f;}
             float gap = Theme.gap;
             float cellWidth = (inner.width - gap * 5) / 6f;
             float cellHeight = (inner.height - gap) / 2f;
@@ -146,7 +154,7 @@ namespace DiceFree.UI
                 });
             }
 
-            if (slot<8)
+            if (slot<=AbilityBarSource.UltimateSlot)
             {
                 Rect rankBadge=new(rect.xMax-37,rect.yMax-19,35,17);
                 HudChrome.Fill(rankBadge,new Color(.015f,.021f,.035f,.84f));

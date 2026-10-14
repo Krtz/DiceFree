@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-14",
+  "branch": "integration/world1-foundation",
+  "combined": {
+    "passed": true,
+    "checks": 232
+  },
+  "greatbladeCombat": {
+    "passed": true,
+    "checks": 75
+  },
+  "physicalModel": {
+    "passed": true,
+    "checks": 47
+  },
+  "physicalSkills": {
+    "status": "passed",
+    "phase": 4,
+    "marker": "DICEFREE_PHYSICAL_PLAYMODE_OK"
+  },
+  "magicalSkills": {
+    "status": "passed",
+    "phase": 4,
+    "marker": "DICEFREE_MAGICAL_PLAYMODE_OK"
+  },
+  "developmentRoundTrip": {
+    "status": "passed",
+    "phase": 4,
+    "marker": "DICEFREE_DEVELOPMENT_ROOM_PLAYMODE_OK"
+  },
+  "catalogReopen": {
+    "Cornberg": 11,
+    "DevelopmentRoom": 11
+  },
+  "inputIdentity": {
+    "passed": true,
+    "preservedRecords": 66
+  },
+  "visualInspection": {
+    "source": "Unity Editor Game View",
+    "captured": "docs/screenshots/PlainGear-DevRoom.png",
+    "class": "Physically Blessed",
+    "plainSlots": 11
+  },
+  "limitations": [
+    "No full human playthrough.",
+    "Magical model recommendation is candidate-only; no Unity avatar or runtime integration validation."
+  ]
+}

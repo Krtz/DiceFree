@@ -62,7 +62,7 @@ namespace DiceFree.Skills
 
         public bool Spend(PhysicalSkillDefinition definition)
         {
-            if (!classActive || definition == null || UnspentPoints <= 0) return false;
+            if (!classActive || definition == null || !definitions.Contains(definition) || UnspentPoints <= 0) return false;
             int rank = Rank(definition.stableId);
             if (rank >= definition.maxRank) return false;
             ranks[definition.stableId] = rank + 1;
@@ -144,17 +144,16 @@ namespace DiceFree.Skills
         private void ValidateDefinitions()
         {
             var ids = new HashSet<string>(StringComparer.Ordinal);
-            int activeCount = 0, passiveCount = 0;
+            // Kit size and rank caps belong to authored data, not the progression container.
             foreach (var definition in definitions)
             {
-                if (definition == null || string.IsNullOrWhiteSpace(definition.stableId) || definition.maxRank != 6)
-                    throw new InvalidOperationException("Physical skills require stable IDs and exactly six ranks.");
+                if (definition == null || string.IsNullOrWhiteSpace(definition.stableId) || definition.maxRank < 1)
+                    throw new InvalidOperationException("Physical skills require stable IDs and positive rank caps.");
                 if (!ids.Add(definition.stableId))
                     throw new InvalidOperationException("Duplicate Physical skill ID: " + definition.stableId);
-                if (definition.Active) activeCount++; else passiveCount++;
+
             }
-            if (definitions.Length > 0 && (activeCount != 4 || passiveCount != 1))
-                throw new InvalidOperationException("Physically Blessed requires four actives and one passive.");
+
         }
     }
 }

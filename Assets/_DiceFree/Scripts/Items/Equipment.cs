@@ -28,7 +28,7 @@ namespace DiceFree.Items
             if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) return false;
             var item = inventory.Find(instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
             if (definition == null || definition.slot != slot || !Enum.IsDefined(typeof(EquipmentSlot), slot)) return false;
-            if(slot==EquipmentSlot.OffHand&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)return false;
+            if(slot==EquipmentSlot.OffHand&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId&&!definition.modelTestingItem)return false;
             if (definition.allowedClassIds != null && definition.allowedClassIds.Length > 0 &&
                 !definition.allowedClassIds.Contains(stats.Definition.stableId)) return false;
             slots.RemoveAll(s => s.slotId == slot.ToString() || s.instanceId == instanceId);
@@ -44,7 +44,7 @@ namespace DiceFree.Items
         public bool IsResolved(EquippedItem slot)
         {
             var item = inventory.Find(slot.instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
-            return !(slot.slotId==EquipmentSlot.OffHand.ToString()&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId) && definition != null && definition.slot.ToString() == slot.slotId &&
+            return definition != null && !(slot.slotId==EquipmentSlot.OffHand.ToString()&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId&&!definition.modelTestingItem) && definition.slot.ToString() == slot.slotId &&
                 (definition.allowedClassIds == null || definition.allowedClassIds.Length == 0 || definition.allowedClassIds.Contains(stats.Definition.stableId));
         }
         private void OnInventoryChanged()
@@ -72,7 +72,7 @@ namespace DiceFree.Items
         {
             if (!Valid(values, inventory.Items)) throw new ArgumentException("Invalid equipment references.");
             slots.Clear(); slots.AddRange(values.Select(s => s.Copy()));
-            if(stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)slots.RemoveAll(s=>s.slotId==EquipmentSlot.OffHand.ToString());
+            if(stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)slots.RemoveAll(s=>s.slotId==EquipmentSlot.OffHand.ToString()&&inventory.Resolve(inventory.Find(s.instanceId)?.definitionId)?.modelTestingItem!=true);
             Refresh(); Changed?.Invoke();
         }
     }

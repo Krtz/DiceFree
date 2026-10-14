@@ -1,3 +1,12 @@
+## 2026-10-14 â€” Plain all-slot gear and flexible class abilities
+
+- Cornberg merchant sells eleven plain level-1, common, all-class fitting items at 100 gold each; no normal player grants. Dev-room item list includes them. Tiny per-slot bonuses, original primitive bone-follow visuals, portrait fitting and scrollable buy/sell lists.
+- Greatblade keeps normal offhand restrictions; only explicitly flagged modelTestingItem fitting gear can occupy its offhand. Plain sword suppresses baseline Greatblade weapon while equipped.
+- IClassAbilityProvider and built-in adapters replace fixed four-active/one-passive bar dispatch. Authored order, any kit size, eight regular skills per page, optional pinned ultimate, varying positive Physical/Magical rank caps. Keys 1â€“8/page and T/ultimate; old 66 input identity/binding records preserved. Existing kits, combat targeting/queueing and save schema unchanged.
+- Combined isolated suite passed 232 checks, Greatblade combat 75, Physical model 47, Physical/Magical five-skill/Mana/menu-reload suites passed, ten static validators passed, dev-room/World 2 round trip passed. Saved Cornberg and DevelopmentRoom catalogues contain all eleven items after reopen. Clear dev-room full-set and merchant screenshots inspected.
+- Seven-scene Windows Development build succeeded, 0 errors/0 warnings, 344,700,296 bytes. See docs/PLAIN_GEAR_AND_FLEXIBLE_SKILLS.md and docs/validation/*PlainGear*.
+- Magical recommendation is candidate-only: owned Polytope free modular human cloth00, blue/violet, short cape, modest Fantasy Staff Lite. Actual cache inspected; no Unity avatar/material/retarget validation or replacement performed. UMA robes require more integration. See docs/MAGICAL_MODEL_REVIEW_2026-10-14.md.
+- Preserve unrelated ProjectSettings/PackageManagerSettings.asset and Assets/Settings. Licensed sources/derived resources remain ignored. Continue integration/world1-foundation; main untouched.
 ## 2026-10-14 — Physically Blessed starter-armour model integrated
 
 - Approved Blink FREE Modular Character Fantasy RPG Human Male now replaces the visible Physical model in Cornberg and Development Room. Helmet hidden; leather/padded chest, trousers, boots, bracers and modest shoulders. Existing class data and normal-boss advancement quest are preserved.
