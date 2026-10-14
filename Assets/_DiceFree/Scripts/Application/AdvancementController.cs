@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DiceFree.Combat;
 using DiceFree.Persistence;
 using DiceFree.Progression;
+using DiceFree.Quests;
 using UnityEngine;
 
 namespace DiceFree.Advancement
@@ -44,7 +45,9 @@ namespace DiceFree.Advancement
             definition.targetClass != null &&
             persistence != null &&
             persistence.Ready &&
-            !persistence.HasManifestation(definition.targetClass.stableId);
+            !persistence.HasManifestation(definition.targetClass.stableId) &&
+            (string.IsNullOrEmpty(definition.requiredQuestId)||
+             GetComponent<QuestJournal>()?.GetProgress(definition.requiredQuestId)?.status==QuestStatus.Completed);
 
         public bool TryAdvance(AdvancementDefinition definition)
         {
@@ -56,6 +59,25 @@ namespace DiceFree.Advancement
 
             Feedback = "Advanced into " + definition.targetClass.displayName + ". Parent manifestation preserved.";
             return true;
+        }
+
+        public bool TryTurnInAdvancementQuest(AdvancementDefinition definition,QuestDefinition quest)
+        {
+            if(definition==null||quest==null||definition.requiredQuestId!=quest.stableId||
+                !definition.Eligible(stats)||persistence==null||!persistence.Ready||
+                persistence.HasManifestation(definition.targetClass.stableId))
+                return SetFeedback("That advancement quest is not available.",false);
+            if(!persistence.TryCompleteAdvancementQuest(definition.targetClass,quest,out string error))
+                return SetFeedback(error,false);
+            return SetFeedback("Advanced into "+definition.targetClass.displayName+". Parent manifestation preserved.",true);
+        }
+
+        public bool TryAdvanceForDevelopment(AdvancementDefinition definition)
+        {
+            if(!DiceFree.Foundation.DevelopmentSession.Active||definition==null||!definition.Eligible(stats))
+                return SetFeedback("Development advancement is unavailable.",false);
+            if(!persistence.TryForkAndActivate(definition.targetClass,out string error))return SetFeedback(error,false);
+            return SetFeedback("Development class selected: "+definition.targetClass.displayName,true);
         }
 
         public bool TrySwitch(string classId)

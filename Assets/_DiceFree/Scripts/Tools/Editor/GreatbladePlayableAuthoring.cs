@@ -6,6 +6,7 @@ using DiceFree.Combat;
 using DiceFree.Persistence;
 using DiceFree.Progression;
 using DiceFree.Skills;
+using DiceFree.Quests;
 using DiceFree.UI;
 using DiceFree.Visuals;
 using DiceFree.World;
@@ -50,7 +51,17 @@ namespace DiceFree.EditorTools
                 var profile=Asset<ClassResourceProfile>(Folder+"/Greatblade Momentum.asset");
                 profile.stableId="resource-profile.greatblade.momentum";profile.classId=definition.stableId;profile.resource=resource;
                 profile.baseMaximum=100;profile.baseRegenPerSecond=0;profile.initialFraction=0;profile.loadPolicy=ResourceRetentionPolicy.ResetOnLoad;EditorUtility.SetDirty(profile);
+                var quest=Asset<QuestDefinition>(Folder+"/Swordswoman Slime Trial.asset");
+                quest.stableId=GreatbladeMentor.QuestId;quest.title="The Weight of a Greatblade";
+                quest.requiredClassId=physical.stableId;quest.requiredLevel=30;
+                quest.offer="Strength alone does not make a Greatblade. Enter the Slime Dungeon and defeat its normal Slime Boss. Return to me, and I will teach you to carry a greatsword.";
+                quest.activeDialogue="Your training awaits in the Slime Dungeon. Defeat the normal Slime Boss, then return to the retired swordswoman in Cornberg.";
+                quest.locationHint="Slime Dungeon: defeat the normal Slime Boss, then return to Cornberg's retired swordswoman.";
+                quest.stages=new[]{new QuestObjective{kind=ObjectiveKind.Kill,objectiveId="kill-normal-slime-boss",contentId="boss.slime",dungeonBossOnly=true,count=1,creditMode=QuestCreditMode.NearbyParty,creditRadius=50,instruction="Defeat the normal Slime Boss"}};
+                quest.rewardXp=0;quest.reward=null;quest.acceptOnTalk=false;quest.completeOnObjectives=false;quest.repeatable=false;
+                EditorUtility.SetDirty(quest);
                 var edge=Asset<AdvancementDefinition>(EdgePath);edge.stableId="advancement.physical.greatblade";edge.displayName="Become a Greatblade";
+                edge.requiredQuestId=quest.stableId;
                 edge.sourceClass=physical;edge.targetClass=definition;edge.requiredLevel=30;EditorUtility.SetDirty(edge);
                 var catalog=AssetDatabase.LoadAssetAtPath<ClassCatalog>(AdvancementAuthoring.CatalogPath);
                 catalog.Configure(catalog.Classes.Where(x=>x.stableId!=definition.stableId).Concat(new[]{definition}).ToArray());EditorUtility.SetDirty(catalog);
@@ -64,9 +75,12 @@ namespace DiceFree.EditorTools
                     edge=AssetDatabase.LoadAssetAtPath<AdvancementDefinition>(EdgePath);
                     tuning=AssetDatabase.LoadAssetAtPath<GreatbladeCombatTuning>(TuningPath);
                     profile=AssetDatabase.LoadAssetAtPath<ClassResourceProfile>(Folder+"/Greatblade Momentum.asset");
+                    quest=AssetDatabase.LoadAssetAtPath<QuestDefinition>(Folder+"/Swordswoman Slime Trial.asset");
                     foreach(var persistence in scene.GetRootGameObjects().SelectMany(x=>x.GetComponentsInChildren<ManifestationPersistence>(true)))
                     {
                         var go=persistence.gameObject;
+                        var journal=go.GetComponent<QuestJournal>();
+                        journal.Configure(journal.Definitions.Where(x=>x.stableId!=quest.stableId).Concat(new[]{quest}).ToArray());EditorUtility.SetDirty(journal);
                         persistence.ConfigureClassCatalog(catalog);EditorUtility.SetDirty(persistence);
                         var controller=go.GetComponent<AdvancementController>();
                         controller.Configure(catalog,controller.Definitions.Where(x=>x.stableId!=edge.stableId).Concat(new[]{edge}).ToArray());EditorUtility.SetDirty(controller);
@@ -100,7 +114,7 @@ namespace DiceFree.EditorTools
                     {
                         var farmer=GameObject.Find("Former swordswoman - farmer");
                         if(farmer==null)throw new InvalidOperationException("Retired swordswoman not found.");
-                        var mentor=Ensure<GreatbladeMentor>(farmer);mentor.ConfigureName("Learn the Greatblade's Way");
+                        var mentor=Ensure<GreatbladeMentor>(farmer);mentor.ConfigureName("Greatblade training");mentor.Configure(quest);
                         var context=Ensure<ContextualNpc>(farmer);
                         var data=new SerializedObject(context);var actions=data.FindProperty("actions");var keep=new List<InteractionTarget>();
                         for(int i=0;i<actions.arraySize;i++){var target=actions.GetArrayElementAtIndex(i).objectReferenceValue as InteractionTarget;if(target!=null&&target!=mentor)keep.Add(target);}

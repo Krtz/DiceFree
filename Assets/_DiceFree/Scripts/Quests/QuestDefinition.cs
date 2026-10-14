@@ -14,6 +14,7 @@ namespace DiceFree.Quests
         [Min(0)] public float creditRadius = 50;
         public string instruction;
         public string contentId;
+        public bool dungeonBossOnly;
         public string familyId;
         public string areaId;
         public string conversationId;
@@ -29,6 +30,8 @@ namespace DiceFree.Quests
     public sealed class QuestDefinition : ScriptableObject
     {
         public string stableId, title;
+        public string requiredClassId;
+        [Min(1)] public int requiredLevel = 1;
         [Min(1)] public int version = 1;
         [TextArea] public string offer;
         [TextArea] public string activeDialogue;

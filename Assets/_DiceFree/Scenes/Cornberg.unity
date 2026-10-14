@@ -48702,10 +48702,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4503954735219b741978629db2e61e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.GreatbladeMentor
-  displayName: Learn the Greatblade's Way
+  displayName: Greatblade training
   range: 2.5
   approachPoint: {fileID: 0}
   context: {fileID: 196815765}
+  trainingQuest: {fileID: 11400000, guid: 90bda820db15ebc47ad058327305b12d, type: 2}
 --- !u!1001 &197057363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306088,6 +306089,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
   - {fileID: 11400000, guid: 49c1a5309c1c07b488dbd1ba404d4f1c, type: 2}
   - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
+  - {fileID: 11400000, guid: 90bda820db15ebc47ad058327305b12d, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:

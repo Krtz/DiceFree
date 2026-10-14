@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DiceFree.Combat;
 using DiceFree.Progression;
+using DiceFree.Gameplay;
 using DiceFree.World;
 using UnityEngine;
 
@@ -31,6 +32,19 @@ namespace DiceFree.Quests
         [SerializeField] private List<QuestProgress> progress = new();
         private readonly HashSet<long> credited = new();
         private CombatActor owner;
+        private SemanticGameEventHub dungeonHub;
+        private IDisposable dungeonBossSubscription;
+        public void BindDungeonEvents(SemanticGameEventHub hub)
+        {
+            UnbindDungeonEvents();dungeonHub=hub;
+            if(hub!=null)dungeonBossSubscription=hub.Subscribe<DungeonBossKilledEvent>(fact=>
+                Advance(ObjectiveKind.Kill,fact.bossId,null,null,null,leaf=>leaf.dungeonBossOnly));
+        }
+        public void UnbindDungeonEvents(SemanticGameEventHub hub=null)
+        {
+            if(hub!=null&&hub!=dungeonHub)return;
+            dungeonBossSubscription?.Dispose();dungeonBossSubscription=null;dungeonHub=null;
+        }
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public event Action Changed;
         private void Awake()
@@ -42,7 +56,7 @@ namespace DiceFree.Quests
                 });
         }
         private void OnEnable() { DefeatEvents.Reported += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; }
-        private void OnDisable() { DefeatEvents.Reported -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
+        private void OnDisable() { UnbindDungeonEvents();DefeatEvents.Reported -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
         private QuestProgress Find(string id) => progress.Find(value => value.questId == id);
         public QuestProgress GetProgress(string id) => Find(id)?.Copy();
         // Detached stable-ID records form the future persistence seam; no scene references or UI names.
@@ -91,6 +105,7 @@ namespace DiceFree.Quests
         public bool CanAccept(QuestDefinition definition)
         {
             if (definition == null || Array.IndexOf(definitions,definition) < 0) return false;
+            if(owner.Stats.Level<definition.requiredLevel || (!string.IsNullOrEmpty(definition.requiredClassId)&&owner.Stats.Definition.stableId!=definition.requiredClassId))return false;
             var state = Find(definition.stableId);
             return state != null && state.definitionVersion == definition.version && state.status == QuestStatus.Available && PrerequisitesMet(definition);
         }
@@ -104,7 +119,7 @@ namespace DiceFree.Quests
         {
             if (!credited.Add(defeat.sequence)) return;
             Advance(ObjectiveKind.Kill, defeat.contentId, defeat.familyId, null, null,
-                objective => QuestCreditPolicy.Eligible(objective, owner, defeat) &&
+                objective => !objective.dungeonBossOnly && QuestCreditPolicy.Eligible(objective, owner, defeat) &&
                     (string.IsNullOrEmpty(objective.requiredTag) || defeat.HasTag(objective.requiredTag)));
         }
         private void OnArea(AreaEntered entered)
@@ -131,6 +146,7 @@ namespace DiceFree.Quests
             {
                 var state = Find(definition.stableId);
                 if (state.definitionVersion != definition.version || state.status != QuestStatus.Active) continue;
+                if(!string.IsNullOrEmpty(definition.requiredClassId)&&owner.Stats.Definition.stableId!=definition.requiredClassId)continue;
                 var objective = definition.stages[state.stage];
                 if (!ObjectiveProgress.Apply(objective, state, leaf => leaf.kind == kind &&
                     (string.IsNullOrEmpty(leaf.contentId) || leaf.contentId == content) &&

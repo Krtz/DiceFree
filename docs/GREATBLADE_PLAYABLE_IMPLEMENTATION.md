@@ -1,8 +1,8 @@
 # Greatblade playable prototype — 2026-10-14
 
-Greatblade is now a playable Tier II manifestation, advanced from a level-30 Physically Blessed Novice. The retired swordswoman in Cornberg offers an explicit advancement button when eligible. The parent manifestation remains intact, and the new Greatblade starts at class level 1. Development Room also offers direct Greatblade selection through the same advancement graph.
+Greatblade is now a playable Tier II manifestation, advanced from a level-30 Physically Blessed Novice after the retired swordswoman's normal Slime Boss training quest. Accept the quest, defeat the normal boss, and return to her to complete training. See GREATBLADE_ADVANCEMENT_QUEST.md. The parent manifestation remains intact, and the new Greatblade starts at class level 1. Development Room also offers direct Greatblade selection through the same advancement graph.
 
-This implements the approved kit in GREATBLADE_PROTOTYPE_DESIGN_V03.md. Exact balance numbers below are provisional. The mentor interaction is a prototype advancement offer; a narrative mentor quest is not yet implemented.
+This implements the approved kit in GREATBLADE_PROTOTYPE_DESIGN_V03.md. Exact balance numbers below are provisional. The mentor now uses a saved, dungeon-boss-gated training quest; narrative expansion remains future work.
 
 ## Skills and learning
 
@@ -67,4 +67,4 @@ No licensed source or derived model/animation assets are staged. Current develop
 Screenshot: screenshots/greatblade-playable-2026-10-14.png
 Machine-readable focused and regression results are stored beside this document.
 
-Windows x64 Development build succeeded: seven scenes, 317,919,332 reported bytes, zero errors and zero warnings. Build: Builds/World1Foundation/DiceFree.exe. Long-form balance/animation-feel playtesting, multiplayer and narrative advancement quests remain future work.
+Windows x64 Development build succeeded: seven scenes, 317,925,848 reported bytes, zero errors and zero warnings. Build: Builds/World1Foundation/DiceFree.exe. Long-form balance/animation-feel playtesting, multiplayer and narrative advancement quests remain future work.

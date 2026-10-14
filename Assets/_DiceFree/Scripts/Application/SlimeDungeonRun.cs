@@ -61,7 +61,7 @@ namespace DiceFree.Dungeons
             UnityEngine.Application.runInBackground=true;
             if(Participants.Contains(actor)) return "Already in staging.";
             Participants.Add(actor); home[actor]=actor.transform.position;
-            var hub=new SemanticGameEventHub(); actor.GetComponent<CodexProgression>()?.Bind(hub);playerEvents[actor]=hub;
+            var hub=new SemanticGameEventHub(); actor.GetComponent<CodexProgression>()?.Bind(hub);actor.GetComponent<QuestJournal>()?.BindDungeonEvents(hub);playerEvents[actor]=hub;
             deathHandlers[actor]=()=>PlayerDied(actor);actor.Health.Died+=deathHandlers[actor];
             var loadout=actor.GetComponent<RunLoadoutLock>()??actor.gameObject.AddComponent<RunLoadoutLock>();
             loadout.InsideDungeon=true;
@@ -180,6 +180,7 @@ namespace DiceFree.Dungeons
         }
         public void ReturnPlayer(CombatActor a,bool atEntrance)
         {
+            a.GetComponent<QuestJournal>()?.UnbindDungeonEvents(playerEvents[a]);
             a.GetComponent<RunLoadoutLock>().Locked=false;
             a.GetComponent<RunLoadoutLock>().DeathReturnHandler=null;
             a.GetComponent<RunLoadoutLock>().InsideDungeon=false;
@@ -223,6 +224,6 @@ namespace DiceFree.Dungeons
         void OnGUI(){if(definition==null||exiting||DiceFree.UI.HudPointerBlocker.ModalOpen)return;GUI.Box(new Rect(15,80,540,65),Status);if(!loading&&GUI.Button(new Rect(25,115,150,25),"Abandon dungeon"))Abandon();
             if(StagingReady){var local=FindAnyObjectByType<DiceFree.Characters.CombatInput>();GUI.enabled=local!=null&&local.GetComponent<CombatActor>()==Initiator&&Initiator.Alive;
                 if(GUI.Button(new Rect(185,115,150,25),"Start Now"))StartNow(local.GetComponent<CombatActor>());GUI.enabled=true;}}
-        void OnDestroy(){if(Current==this)Current=null;foreach(var a in Participants)if(a!=null){a.Health.Died-=deathHandlers[a];var state=a.GetComponent<RunLoadoutLock>();if(state.Owner==this){state.Locked=false;state.InsideDungeon=false;state.DeathReturnHandler=null;state.Owner=null;}}}
+        void OnDestroy(){if(Current==this)Current=null;foreach(var a in Participants)if(a!=null){a.Health.Died-=deathHandlers[a];a.GetComponent<QuestJournal>()?.UnbindDungeonEvents(playerEvents[a]);var state=a.GetComponent<RunLoadoutLock>();if(state.Owner==this){state.Locked=false;state.InsideDungeon=false;state.DeathReturnHandler=null;state.Owner=null;}}}
     }
 }

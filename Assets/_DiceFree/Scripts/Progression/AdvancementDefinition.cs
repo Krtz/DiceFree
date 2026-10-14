@@ -11,6 +11,7 @@ namespace DiceFree.Progression
         public ActorDefinition sourceClass;
         public ActorDefinition targetClass;
         [Min(1)] public int requiredLevel = 10;
+        public string requiredQuestId;
 
         public bool Eligible(ActorStats stats) =>
             stats != null &&

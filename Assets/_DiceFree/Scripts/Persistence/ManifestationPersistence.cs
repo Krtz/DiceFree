@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DiceFree.Combat;
 using DiceFree.Foundation;
 using DiceFree.Items;
@@ -362,7 +363,13 @@ namespace DiceFree.Persistence
             return result;
         }
 
-        public bool TryForkAndActivate(ActorDefinition targetDefinition, out string error)
+        public bool TryForkAndActivate(ActorDefinition targetDefinition, out string error)=>
+            TryForkInternal(targetDefinition,null,out error);
+
+        public bool TryCompleteAdvancementQuest(ActorDefinition targetDefinition,QuestDefinition quest,out string error)=>
+            TryForkInternal(targetDefinition,quest,out error);
+
+        private bool TryForkInternal(ActorDefinition targetDefinition,QuestDefinition completedQuest,out string error)
         {
             if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) { error = "Class is locked during this dungeon run."; return false; }
             error = null;
@@ -383,6 +390,17 @@ namespace DiceFree.Persistence
                 var currentSection = candidate.sections.Find(value => value.id == CurrentSectionId);
                 var preserved = currentSection == null ? null : ReadCurrentVersion(currentSection, CurrentClassId);
                 var parent = CaptureCurrentState(preserved);
+                if(completedQuest!=null)
+                {
+                    if(!journal.Definitions.Contains(completedQuest)||completedQuest.rewardXp!=0||completedQuest.reward!=null||
+                        (!string.IsNullOrEmpty(completedQuest.requiredClassId)&&completedQuest.requiredClassId!=CurrentClassId)||
+                        xp.Level<completedQuest.requiredLevel)
+                        return Reject("Advancement quest configuration or class eligibility is invalid.",out error);
+                    var record=Array.Find(parent.quests,q=>q.questId==completedQuest.stableId);
+                    if(record==null||record.definitionVersion!=completedQuest.version||record.status!=QuestStatus.ReadyToTurnIn)
+                        return Reject("Complete the advancement quest before returning to your mentor.",out error);
+                    record.status=QuestStatus.Completed;
+                }
                 ValidateState(actor.Stats.Definition, parent);
 
                 var child = ManifestationProfileTransactions.CreateChildSnapshot(parent, targetDefinition.stableId);

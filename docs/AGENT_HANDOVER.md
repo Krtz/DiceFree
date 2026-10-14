@@ -1,3 +1,13 @@
+## 2026-10-14 — Greatblade normal Slime Boss advancement quest
+
+- Supersedes the earlier direct advancement offer. Cornberg's retired swordswoman offers The Weight of a Greatblade only to Physical level 30+. Explicit acceptance, normal Slime Boss defeat, then return to her advances to level-1 Greatblade.
+- Earlier kills/miniboss/Regent/outside-dungeon boss actors do not count. Quest uses dungeonBossOnly and the participating player's scoped DungeonBossKilledEvent stream; no duplicate XP/drop reporter. Leaving the run unbinds the quest listener.
+- Completion and fork are one validated durable profile commit; parent level/gear/progression and completed quest are preserved. Existing Greatblade manifestations remain available. No save-schema bump.
+- Development Room retains an explicit DevelopmentSession-only class selection bypass; normal advancement is quest-gated.
+- Final isolated live quest test passed 35 assertions, including an actual dungeon normal-boss death and on-disk parent/child verification. Revised Greatblade combat suite passed 75 assertions; all ten regression validators passed.
+- Physical model review is candidate-only. Recommend installed Blink FREE Modular Character Fantasy RPG Human Male, starter leather/padded armour, visible face and modest weapon. Valid Humanoid avatar, 21 skinned meshes; URP preview captured. Source animations already installed, but live integration/retargeting not yet validated. See docs/PHYSICAL_MODEL_CANDIDATES_2026-10-14.md.
+- Preserve unrelated PackageManagerSettings, Assets/Settings and local licensed sources. Continue integration/world1-foundation; no main merge.
+
 ## 2026-10-14 — Greatblade is now playable
 
 - Branch integration/world1-foundation. See docs/GREATBLADE_PLAYABLE_IMPLEMENTATION.md for mechanics, provisional tuning, learning economy and evidence.

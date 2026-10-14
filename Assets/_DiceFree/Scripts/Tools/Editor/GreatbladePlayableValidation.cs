@@ -87,7 +87,7 @@ namespace DiceFree.EditorTools
             var edge=advance.Definitions.Single(x=>x.targetClass.stableId==GreatbladeProgressionRules.ClassId);
             Need(dev.SelectClass("class.physically-blessed-novice"),"Physical selection failed.");
             xp.RestoreState(29,0);Need(!advance.CanAdvance(edge),"Greatblade unlocked before Physical level 30.");
-            xp.RestoreState(30,0);Need(advance.CanAdvance(edge),"Physical level 30 cannot advance.");
+            xp.RestoreState(30,0);Need(!advance.CanAdvance(edge),"Quest-gated advancement bypassed the mentor quest.");
             var inventory=player.GetComponent<DiceFree.Items.CarriedInventory>();
             var equipment=player.GetComponent<DiceFree.Items.Equipment>();
             var shieldFixture=ScriptableObject.CreateInstance<DiceFree.Items.ItemDefinition>();
@@ -95,7 +95,7 @@ namespace DiceFree.EditorTools
             inventory.Configure(inventory.Definitions.Concat(new[]{shieldFixture}).ToArray());
             var offhand=inventory.Grant(shieldFixture.stableId);
             Need(equipment.Equip(offhand.instanceId,DiceFree.Items.EquipmentSlot.OffHand),"Parent offhand fixture.");
-            Need(advance.TryAdvance(edge),advance.Feedback);
+            Need(dev.SelectClass(GreatbladeProgressionRules.ClassId),advance.Feedback);
             yield return null;yield return null;
             var skills=player.GetComponent<GreatbladeSkillProgression>();var caster=player.GetComponent<GreatbladeSkillCaster>();
             var resources=player.GetComponent<ActorResourceController>();var basic=player.GetComponent<BasicAttack>();

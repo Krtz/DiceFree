@@ -95,7 +95,7 @@ namespace DiceFree.Development
             if(!controller.HasManifestation(edge.sourceClass.stableId)&&!SelectClass(edge.sourceClass.stableId))return false;
             if(!controller.TrySwitch(edge.sourceClass.stableId))return false;
             SetLevel(Mathf.Max(edge.requiredLevel,player.Stats.Level));
-            bool result = controller.TryAdvance(edge);
+            bool result = string.IsNullOrEmpty(edge.requiredQuestId)?controller.TryAdvance(edge):controller.TryAdvanceForDevelopment(edge);
             Status = controller.Feedback;
             return result;
         }

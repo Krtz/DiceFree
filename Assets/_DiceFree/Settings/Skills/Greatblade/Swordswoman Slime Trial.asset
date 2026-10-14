@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Swordswoman Slime Trial
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.greatblade.slime-trial
+  title: The Weight of a Greatblade
+  requiredClassId: class.physically-blessed-novice
+  requiredLevel: 30
+  version: 1
+  offer: Strength alone does not make a Greatblade. Enter the Slime Dungeon and defeat its normal Slime Boss. Return to me, and I will teach you to carry a greatsword.
+  activeDialogue: Your training awaits in the Slime Dungeon. Defeat the normal Slime Boss, then return to the retired swordswoman in Cornberg.
+  locationHint: 'Slime Dungeon: defeat the normal Slime Boss, then return to Cornberg''s retired swordswoman.'
+  stages:
+  - kind: 0
+    objectiveId: kill-normal-slime-boss
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat the normal Slime Boss
+    contentId: boss.slime
+    dungeonBossOnly: 1
+    familyId: 
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0
