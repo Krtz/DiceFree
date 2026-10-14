@@ -112,7 +112,7 @@ namespace DiceFree.UI
             wasWinding = winding;
 
             bool attacking = winding || animator.GetCurrentAnimatorStateInfo(0).IsName("UnarmedAttack");
-            if (!attacking)
+            if (!attacking && actor.Stats.Definition?.stableId != DiceFree.Progression.GreatbladeProgressionRules.ClassId)
             {
                 if(speed<=.03f)ApplyRelaxedIdleArms();
                 else ApplyLocomotionArmSwing(speed);

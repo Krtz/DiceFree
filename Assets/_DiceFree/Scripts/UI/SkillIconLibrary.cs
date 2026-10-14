@@ -65,6 +65,12 @@ namespace DiceFree.UI
             };
             Color focus=key switch
             {
+                "greatblade-widearc" => new Color(.96f,.70f,.28f),
+                "greatblade-spindash" => new Color(.30f,.85f,.95f),
+                "greatblade-overheadbreaker" => new Color(1f,.38f,.18f),
+                "greatblade-battlecry" => new Color(.94f,.52f,.28f),
+                "greatblade-greatswordmastery" => new Color(.78f,.84f,.96f),
+                "greatblade-heavyrhythm" => new Color(.88f,.65f,.22f),
                 "attack-command" => new Color(.90f,.67f,.27f),
                 "interact" => new Color(.55f,.90f,.76f),
                 "return-home" => new Color(.52f,.52f,.98f),
@@ -134,6 +140,25 @@ namespace DiceFree.UI
             }
             switch(key)
             {
+                case "greatblade-widearc":
+                    Stroke(21,12,43,48,4);Stroke(14,24,36,11,3);
+                    for(int i=0;i<50;i++){float a=Mathf.Lerp(-.2f,2.4f,i/49f);Dot(32+23*Mathf.Cos(a),24+23*Mathf.Sin(a),2);}
+                    break;
+                case "greatblade-spindash":
+                    for(int i=0;i<120;i++){float a=i*.09f,r=5+i*.15f;Dot(32+r*Mathf.Cos(a),32+r*Mathf.Sin(a),2);}
+                    Stroke(42,12,53,20,3);Stroke(53,20,42,23,3);break;
+                case "greatblade-overheadbreaker":
+                    Stroke(32,48,32,17,5);Stroke(21,39,43,39,3);
+                    Stroke(32,13,16,7,2);Stroke(32,13,48,7,2);Stroke(32,13,32,4,2);break;
+                case "greatblade-battlecry":
+                    Stroke(15,32,45,46,5);Stroke(15,32,45,18,5);Stroke(45,18,45,46,3);
+                    Stroke(21,27,24,14,3);Stroke(50,26,58,22,2);Stroke(51,33,60,33,2);Stroke(50,40,58,44,2);break;
+                case "greatblade-greatswordmastery":
+                    Ring(23);Stroke(32,12,32,52,4);Stroke(20,25,44,25,3);
+                    Dot(32,52,5);break;
+                case "greatblade-heavyrhythm":
+                    Stroke(8,30,19,30,2);Stroke(19,30,24,45,2);Stroke(24,45,32,15,2);
+                    Stroke(32,15,40,39,2);Stroke(40,39,46,30,2);Stroke(46,30,57,30,2);Ring(24);break;
                 case "attack-command":
                     Stroke(16,15,46,45,5);Stroke(21,39,39,20,4);
                     Dot(45,45,7);break;

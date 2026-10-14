@@ -90,10 +90,12 @@ namespace DiceFree.Development
             var controller = player.GetComponent<AdvancementController>();
             if (controller.HasManifestation(classId))
                 return controller.TrySwitch(classId);
-            if (!controller.TrySwitch("class.novice")) return false;
-            SetLevel(Mathf.Max(10,player.Stats.Level));
             var edge = controller.Definitions.FirstOrDefault(value => value.targetClass.stableId == classId);
-            bool result = edge != null && controller.TryAdvance(edge);
+            if(edge==null)return false;
+            if(!controller.HasManifestation(edge.sourceClass.stableId)&&!SelectClass(edge.sourceClass.stableId))return false;
+            if(!controller.TrySwitch(edge.sourceClass.stableId))return false;
+            SetLevel(Mathf.Max(edge.requiredLevel,player.Stats.Level));
+            bool result = controller.TryAdvance(edge);
             Status = controller.Feedback;
             return result;
         }

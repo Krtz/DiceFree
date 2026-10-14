@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6027a139f7edbc4591615db326687b7, type: 3}
+  m_Name: Physical to Greatblade
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Progression.AdvancementDefinition
+  stableId: advancement.physical.greatblade
+  displayName: Become a Greatblade
+  sourceClass: {fileID: 11400000, guid: dc710404bd3a56b468224aded22bf791, type: 2}
+  targetClass: {fileID: 11400000, guid: d6c86da6310123d49a8cbdb061bb1f37, type: 2}
+  requiredLevel: 30

@@ -5,7 +5,7 @@ namespace DiceFree.Combat
     public enum PacketOutcome { NoHpChange, Damage, ResistanceRestoration, Miss }
     public struct DamageResult
     {
-        public float baseRaw, raw, defense, afterDefense, resistance, mitigated, applied, restored;
+        public float baseRaw, raw, defense, afterDefense, resistance, mitigated, applied, restored, absorbed;
         public ActionResolution action;
         public ActionCriticalResolution critical;
         public ElementalResistanceResolution elementalResistance;

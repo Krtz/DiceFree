@@ -61,7 +61,8 @@ namespace DiceFree.EditorTools
             foreach (string guid in AssetDatabase.FindAssets("t:ActorDefinition", new[] { "Assets/_DiceFree/Settings" }))
             {
                 var actor = AssetDatabase.LoadAssetAtPath<ActorDefinition>(AssetDatabase.GUIDToAssetPath(guid));
-                if (actor?.basicAttack != null)
+                // Player-class accuracy policy; scripted enemy attacks have separate explicit policies.
+                if (actor?.basicAttack != null && actor.stableId != null && actor.stableId.StartsWith("class.", StringComparison.Ordinal))
                     Require(actor.basicAttack.requiresAccuracy, actor.name + " basic attack is not explicitly tagged as requiring accuracy.");
             }
 

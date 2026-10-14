@@ -117,7 +117,7 @@ namespace DiceFree.EditorTools
             var panel = player.GetComponent<MagicalSkillPanel>();
             var resourceBar = player.GetComponent<ResourceBar>();
             var switcher = player.GetComponent<ClassPresentationSwitcher>();
-            Require(resources != null && resources.Profiles.Count == 2 &&
+            Require(resources != null && resources.Profiles.Count >= 2 &&
                     resources.Profiles.Any(value => value.classId == PhysicalBlessedAuthoring.ClassId) &&
                     resources.Profiles.Any(value => value.classId == MagicalTouchedAuthoring.ClassId),
                 "Cornberg resource controller does not contain both Tier-1 Mana profiles.");

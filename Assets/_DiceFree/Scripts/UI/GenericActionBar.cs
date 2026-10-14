@@ -84,10 +84,7 @@ namespace DiceFree.UI
                     cellWidth,
                     cellHeight);
 
-                if (index < 5 || index >= 9)
-                    DrawAbility(rect, index);
-                else
-                    DrawEmpty(rect, index);
+                DrawAbility(rect, index);
             }
             if(!(HudLayoutManager.Current?.EditMode ?? false))
             {
@@ -149,7 +146,7 @@ namespace DiceFree.UI
                 });
             }
 
-            if (slot<5)
+            if (slot<8)
             {
                 Rect rankBadge=new(rect.xMax-37,rect.yMax-19,35,17);
                 HudChrome.Fill(rankBadge,new Color(.015f,.021f,.035f,.84f));

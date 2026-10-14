@@ -29,7 +29,7 @@ namespace DiceFree.EditorTools
             Require(novice != null && physical != null && magical != null && catalog != null &&
                     physicalEdge != null && magicalEdge != null, "Advancement assets are incomplete.");
             catalog.Validate();
-            Require(catalog.Classes.Count == 3, "Class catalog must contain exactly the current three prototype classes.");
+            Require(catalog.Classes.Count == 4 && catalog.Resolve(GreatbladeProgressionRules.ClassId)!=null, "Class catalog must contain the three starter classes and Greatblade.");
             Require(catalog.Resolve(AdvancementAuthoring.NoviceId) == novice &&
                     catalog.Resolve(AdvancementAuthoring.PhysicalId) == physical &&
                     catalog.Resolve(AdvancementAuthoring.MagicalId) == magical,
@@ -43,8 +43,8 @@ namespace DiceFree.EditorTools
             Edge(physicalEdge, "advancement.novice.physical", novice, physical);
             Edge(magicalEdge, "advancement.novice.magical", novice, magical);
 
-            Require(SaveMigrations.CurrentSchema == 5 && SaveMigrations.ManifestationVersion == 5,
-                "Advancement roster must remain an additive v5 section, not force a schema bump.");
+            Require(SaveMigrations.CurrentSchema == 6 && SaveMigrations.ManifestationVersion == 6,
+                "Greatblade must use the existing schema/manifestation v6 without a schema bump.");
 
             ValidateRosterSemantics();
             ValidateStartMenu(catalog);
@@ -60,11 +60,12 @@ namespace DiceFree.EditorTools
                 "Cornberg advancement composition is incomplete.");
             Require(stats != null && stats.Definition != null && stats.Definition.stableId == AdvancementAuthoring.NoviceId,
                 "Authored Cornberg scene must remain Novice by default; roster chooses another class only at runtime.");
-            Require(controller.Definitions.Count == 2 &&
+            Require(controller.Definitions.Count == 3 &&
                     controller.Definitions.Any(value => value == physicalEdge) &&
-                    controller.Definitions.Any(value => value == magicalEdge),
-                "Cornberg controller does not expose exactly the two Tier-1 edges.");
-            Require(controller.Classes.Count == 3, "Cornberg controller is not wired to the three-class catalog.");
+                    controller.Definitions.Any(value => value == magicalEdge) &&
+                    controller.Definitions.Any(value=>value.targetClass.stableId==GreatbladeProgressionRules.ClassId&&value.sourceClass==physical&&value.requiredLevel==30),
+                "Cornberg controller must expose both Tier-1 edges and Physical level-30 Greatblade.");
+            Require(controller.Classes.Count == 4, "Cornberg controller is not wired to the four-class catalog.");
 
             Debug.Log("DICEFREE_ADVANCEMENT_DATA_OK: Tier-1 shells, data-driven edges, optional v5 roster and Cornberg wiring passed.");
             return new
@@ -145,7 +146,7 @@ namespace DiceFree.EditorTools
             var roundTrip = ManifestationRoster.Read(profile, AdvancementAuthoring.NoviceId);
             Require(roundTrip.activeClassId == AdvancementAuthoring.PhysicalId &&
                     roundTrip.branches.Length == 1 &&
-                    profile.schemaVersion == 5,
+                    profile.schemaVersion == SaveMigrations.CurrentSchema,
                 "Roster round-trip changed active manifestation or schema.");
 
             bool duplicateRejected = false;

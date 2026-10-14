@@ -114,14 +114,16 @@ namespace DiceFree.UI
                 $"{player.Health.Current:0} / {hpMaximum:0}");
 
             var resourceRect = new Rect(inner.x, hpRect.yMax + gap, inner.width, barHeight);
-            if (resources != null && resources.Has(ResourceIds.Mana))
+            string resourceId=resources!=null&&resources.Has(GreatbladeSkillCaster.MomentumId)?GreatbladeSkillCaster.MomentumId:ResourceIds.Mana;
+            if (resources != null && resources.Has(resourceId))
             {
-                float maximum = Mathf.Max(1, resources.Maximum(ResourceIds.Mana));
-                DrawBar(
-                    resourceRect,
-                    resources.Current(ResourceIds.Mana) / maximum,
-                    new Color(0.08f, 0.30f, 0.80f, 1f),
-                    $"{resources.Current(ResourceIds.Mana):0} / {maximum:0}");
+                float maximum = Mathf.Max(1, resources.Maximum(resourceId));
+                bool momentum=resourceId==GreatbladeSkillCaster.MomentumId;
+                DrawBar(resourceRect,resources.Current(resourceId)/maximum,
+                    momentum?new Color(.88f,.48f,.08f,1f):new Color(.08f,.30f,.80f,1f),
+                    $"{(momentum?"Momentum ":"")}{resources.Current(resourceId):0} / {maximum:0}");
+                if(player.Health.TemporaryShield>0)
+                    GUI.Label(new Rect(hpRect.x,hpRect.y-18,hpRect.width,18),"Shield "+player.Health.TemporaryShield.ToString("0"));
             }
             else
             {

@@ -91,7 +91,7 @@ namespace DiceFree.EditorTools
             Require(runtimeResource != null && progression != null && caster != null && bar != null &&
                     panel != null && resourceBar != null && switcher != null,
                 "Cornberg Physical runtime/UI composition is incomplete.");
-            Require(runtimeResource.Profiles.Count == 1 && runtimeResource.Profiles[0] == resource,
+            Require(runtimeResource.Profiles.Contains(resource),
                 "Cornberg player is not wired to Physical Mana.");
             Require(progression.Definitions.Count == 5 &&
                     progression.Definitions.All(value => skills.Contains(value)),

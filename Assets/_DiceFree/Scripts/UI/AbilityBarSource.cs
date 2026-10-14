@@ -46,6 +46,8 @@ namespace DiceFree.UI
         }
 
         private ActorStats stats;
+        private GreatbladeSkillProgression greatblade;
+        private GreatbladeSkillCaster greatbladeCaster;
         private IQueuedOrders orders;
         private SkillTargetingController targeting;
         private NoviceSkillProgression novice;
@@ -65,6 +67,8 @@ namespace DiceFree.UI
         {
             stats = GetComponent<ActorStats>();
             actor = GetComponent<CombatActor>();
+            greatblade=GetComponent<GreatbladeSkillProgression>();
+            greatbladeCaster=GetComponent<GreatbladeSkillCaster>();
             foreach(var component in GetComponents<MonoBehaviour>())
                 if(component is ISharedCombatCommands commands)
                 {combatInput=commands;break;}
@@ -96,6 +100,7 @@ namespace DiceFree.UI
             get
             {
                 string id=stats?.Definition?.stableId;
+                if(id==DiceFree.Progression.GreatbladeProgressionRules.ClassId)return greatblade?.UnspentPoints??0;
                 if(id==NoviceSkillProgression.ClassStableId)return novice?.UnspentPoints??0;
                 if(id==PhysicalSkillProgression.ClassStableId)return physical?.UnspentPoints??0;
                 if(id==MagicalSkillProgression.ClassStableId)return magical?.UnspentPoints??0;
@@ -106,7 +111,10 @@ namespace DiceFree.UI
         public bool CanUpgrade(int slot) => View(slot).canUpgrade;
         public bool Upgrade(int slot)
         {
-            if(slot<0 || slot>4 || !CanUpgrade(slot))return false;
+            if(slot<0 || slot>7 || !CanUpgrade(slot))return false;
+            if(stats?.Definition?.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)
+                return greatblade!=null&&slot<6&&greatblade.Spend((DiceFree.Progression.GreatbladeProgressionRules.Kind)slot);
+            if(slot>4)return false;
             string id=stats?.Definition?.stableId;
             if(id==NoviceSkillProgression.ClassStableId)
             {
@@ -132,6 +140,7 @@ namespace DiceFree.UI
         public string UpgradeTooltip(int slot)
         {
             if(!CanUpgrade(slot))return "";
+            if(stats?.Definition?.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)return GreatbladeAbilityViews.Upgrade(greatblade,greatbladeCaster,slot);
             string id=stats?.Definition?.stableId;
             if(id==NoviceSkillProgression.ClassStableId)
             {
@@ -167,6 +176,7 @@ namespace DiceFree.UI
         {
             if (slot < 0 || slot >= 12 || stats?.Definition == null) return default;
             if(slot>=9)return SharedView(slot);
+            if(stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId)return GreatbladeAbilityViews.View(greatblade,greatbladeCaster,slot,slot<4?InputBindings.Display(actions[slot]):"");
             if(slot>=5)return default; // 6-9 reserved for future class skills.
             if(slot==4)return PassiveView();
 
@@ -306,9 +316,11 @@ namespace DiceFree.UI
         public bool Activate(int slot)
         {
             if (slot < 0 || slot >= 12 || stats?.Definition == null || targeting == null) return false;
-            if(slot>=4 && slot<=8)return false; // Passive and four reserved class-skill slots.
             if(slot!=11 && returnHome!=null && returnHome.Casting)
                 returnHome.Cancel();
+            if(stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId&&slot<9)
+                return GreatbladeAbilityViews.Activate(greatblade,greatbladeCaster,targeting,Orders,slot,ShiftHeld);
+            if(slot>=4 && slot<=8)return false; // Passive and four reserved class-skill slots.
             if(slot==9)
             {
                 combatInput?.BeginAttackTargeting();

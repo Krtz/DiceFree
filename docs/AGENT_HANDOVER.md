@@ -1,3 +1,14 @@
+## 2026-10-14 — Greatblade is now playable
+
+- Branch integration/world1-foundation. See docs/GREATBLADE_PLAYABLE_IMPLEMENTATION.md for mechanics, provisional tuning, learning economy and evidence.
+- Greatblade is Tier II from Physical level 30, starts level 1; retired Cornberg swordswoman offers explicit advancement. Dev room can select it through the graph. Parent snapshots stay intact.
+- Six skills: Wide Arc and ground-target collision-safe Spin Dash; Overhead Breaker L6 spending all Momentum; Battle Cry L18; evolving Greatsword Mastery and separate Heavy Rhythm. Four free starting ranks, subsequent gated ranks cost points from levels after 1. Six HUD slots, distinct icons, two visible passives; slot9 stays Tier IV ultimate-only.
+- Momentum 0–100, builds on actual hits, no threshold buffs, delayed out-of-combat decay, resets on load/death. Mastery rank4 uses provisional 5%-HP / 5-second shield; shield versus heal still not permanently decided.
+- Offhand blocked/unequipped for Greatblade; parent gear unchanged. Shared existing model/animations; generic Novice relaxed arm posing skipped for Greatblade.
+- Final focused live test passed 75 assertions; actual Game view inspected with six icons/passives and Momentum. Ten data/architecture/migration/presentation validators passed. Existing isolated dev-room / World2 round-trip test passed. Windows seven-scene Development build passed, 0 errors/0 warnings, 317,919,332 reported bytes.
+- No schema bump (existing v6); no licensed source/derived art committed; preserve unrelated PackageManagerSettings and untracked Assets/Settings. Main remains untouched.
+- Next useful work: human combat feel/balance pass, mentor narrative quest, then another Tier II kit. No production balance or multiplayer claim.
+
 ## 2026-10-14 — October gameplay repairs verified in Unity
 
 - Workspace `T:\TEMP\DiceFree-Options`, branch `integration/world1-foundation`. Read [OCT14_GAMEPLAY_FIX_VERIFICATION.md](OCT14_GAMEPLAY_FIX_VERIFICATION.md) for complete test evidence, build output, and limitations.

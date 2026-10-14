@@ -12,6 +12,7 @@ namespace DiceFree.Combat
         public string State { get; private set; } = "Idle";
         public int Hits { get; private set; }
         public int Misses { get; private set; }
+        public event System.Action<CombatActor,DamageResult> Connected;
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
         /// <summary>Extra damage only for actual auto-attack impacts.
         /// Abilities, scripted lunges and boss special hits are unaffected.</summary>
@@ -78,7 +79,8 @@ namespace DiceFree.Combat
                     Definition.RollDamageMultiplier()*BasicAttackDamageScale,
                     Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                     Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset));
-                Target.Health.ApplyPacket(actor, packet);
+                packet = Target.Health.ApplyPacket(actor, packet);
+                if (!packet.Missed) Connected?.Invoke(Target, packet);
                 if (packet.Missed) Misses++;
                 else
                 {

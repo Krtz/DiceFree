@@ -7,6 +7,37 @@ namespace DiceFree.Combat
     public sealed class Health : MonoBehaviour
     {
         private ActorStats stats;
+        private readonly System.Collections.Generic.SortedDictionary<string,(float amount,float until)> shields = new(System.StringComparer.Ordinal);
+        public float TemporaryShield
+        {
+            get
+            {
+                var expired=new System.Collections.Generic.List<string>();
+                float total=0;
+                foreach(var pair in shields)if(Time.time>=pair.Value.until)expired.Add(pair.Key);else total+=pair.Value.amount;
+                foreach(string id in expired)shields.Remove(id);
+                return total;
+            }
+        }
+        public void RemoveTemporaryShield(string source)=>shields.Remove(source);
+        public void AddTemporaryShield(string source,float amount,float seconds)
+        {
+            if(string.IsNullOrWhiteSpace(source)||!float.IsFinite(amount)||!float.IsFinite(seconds)||amount<0||seconds<=0)
+                throw new System.ArgumentException("Shield requires finite positive tuning and stable source.");
+            if(Alive)shields[source]=(amount,Time.time+seconds);
+        }
+        private float Absorb(float damage)
+        {
+            _=TemporaryShield;
+            float remaining=damage;
+            foreach(string id in new System.Collections.Generic.List<string>(shields.Keys))
+            {
+                var value=shields[id];float take=Mathf.Min(remaining,value.amount);remaining-=take;
+                if(value.amount<=take)shields.Remove(id);else shields[id]=(value.amount-take,value.until);
+                if(remaining<=0)break;
+            }
+            return remaining;
+        }
         public bool Invulnerable { get; set; }
         public void SetEncounterHp(float value) => Current = Mathf.Clamp(value, 1, Maximum);
         public float Current { get; private set; }
@@ -26,7 +57,7 @@ namespace DiceFree.Combat
         public float ApplyDamage(CombatActor source, DamageResult result) => ApplyPacket(source, result).applied;
         public DamageResult ApplyPacket(CombatActor source, DamageResult result)
         {
-            result.applied = result.restored = 0;
+            result.applied = result.restored = result.absorbed = 0;
             if (!Alive || Invulnerable || result.Missed) return result;
             if (result.Outcome == PacketOutcome.ResistanceRestoration)
             {
@@ -36,7 +67,9 @@ namespace DiceFree.Combat
             }
             else
             {
-                result.applied = Mathf.Min(Current, result.DamagePotential);
+                float unshielded=Absorb(result.DamagePotential);
+                result.absorbed=result.DamagePotential-unshielded;
+                result.applied = Mathf.Min(Current, unshielded);
                 Current -= result.applied;
                 if (result.applied > 0) Damaged?.Invoke(source, result);
             }
@@ -57,6 +90,7 @@ namespace DiceFree.Combat
             Heal(amount * (source == null ? 1 : source.HealingDone), present);
         public void Restore(float fraction = 1)
         {
+            shields.Clear();
             Current = Maximum * Mathf.Clamp(fraction, 0.01f, 1);
             Restored?.Invoke();
         }

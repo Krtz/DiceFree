@@ -48529,6 +48529,8 @@ GameObject:
   - component: {fileID: 196815761}
   - component: {fileID: 196815760}
   - component: {fileID: 196815759}
+  - component: {fileID: 196815766}
+  - component: {fileID: 196815765}
   m_Layer: 11
   m_Name: Former swordswoman - farmer
   m_TagString: Untagged
@@ -48565,7 +48567,7 @@ MonoBehaviour:
   displayName: Former swordswoman / farmer
   range: 2.5
   approachPoint: {fileID: 1607886632}
-  context: {fileID: 0}
+  context: {fileID: 196815765}
   quest: {fileID: 11400000, guid: 73ca99393a35ed440a762223280bf326, type: 2}
   additionalQuests:
   - {fileID: 11400000, guid: 2cd6385dca711dd4797b54efec4da990, type: 2}
@@ -48578,7 +48580,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196815758}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -48665,8 +48667,45 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1607886632}
+  - {fileID: 1386287480}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &196815765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196815758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd900a26a772d141aabcf745241f868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ContextualNpc
+  displayName: 
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 0}
+  npcId: npc.cornberg.swordswoman
+  actions:
+  - {fileID: 196815766}
+  - {fileID: 196815760}
+--- !u!114 &196815766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196815758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4503954735219b741978629db2e61e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.GreatbladeMentor
+  displayName: Learn the Greatblade's Way
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 196815765}
 --- !u!1001 &197057363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89503,6 +89542,10 @@ PrefabInstance:
     - target: {fileID: 7777455550924223822, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
       propertyPath: m_Name
       value: NovicePresentation
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777455550924223822, guid: 7117d45ac82cace49a3c8dc8a4dff54a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -305801,6 +305844,9 @@ GameObject:
   - component: {fileID: 1288724111}
   - component: {fileID: 1288724114}
   - component: {fileID: 1288724113}
+  - component: {fileID: 1288724117}
+  - component: {fileID: 1288724116}
+  - component: {fileID: 1288724115}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -305826,6 +305872,7 @@ Transform:
   - {fileID: 365897622}
   - {fileID: 1609161111}
   - {fileID: 1621371690}
+  - {fileID: 1566064368}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288724050
@@ -306351,6 +306398,7 @@ MonoBehaviour:
   advancements:
   - {fileID: 11400000, guid: 123e15b653cb14d4eb0760d07afc1526, type: 2}
   - {fileID: 11400000, guid: cc052526909043944862b2d3cf040000, type: 2}
+  - {fileID: 11400000, guid: 11c455c064284b045b22a306433705c9, type: 2}
 --- !u!114 &1288724083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306373,6 +306421,9 @@ MonoBehaviour:
   - classId: class.magically-touched-novice
     visualRoot: {fileID: 1621371690}
     animator: {fileID: 1621371691}
+  - classId: class.greatblade
+    visualRoot: {fileID: 1566064368}
+    animator: {fileID: 0}
 --- !u!114 &1288724084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306460,6 +306511,7 @@ MonoBehaviour:
   profiles:
   - {fileID: 11400000, guid: 5230fae6f1fedd746a22173b23caa3eb, type: 2}
   - {fileID: 11400000, guid: ffc1ec3bd00be4f4a90096449c83bea7, type: 2}
+  - {fileID: 11400000, guid: a5b817e78158d3543b5c1f2695591632, type: 2}
 --- !u!114 &1288724090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306804,6 +306856,43 @@ MonoBehaviour:
   initialSlots: 60
   expansionSlots: 30
   expansionBaseGold: 100
+--- !u!114 &1288724115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa22a2724946474e8c04c8d1e0cc63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.GreatbladePresentation
+--- !u!114 &1288724116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437a7adbdda7e9a48b2c73f87adccf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.GreatbladeSkillCaster
+  tuning: {fileID: 11400000, guid: d9e51112bfc724f42977566282c5fe2a, type: 2}
+--- !u!114 &1288724117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694b86db790e52e47b027bca7eb5e9be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.GreatbladeSkillProgression
 --- !u!1 &1288794739
 GameObject:
   m_ObjectHideFlags: 0
@@ -329321,6 +329410,51 @@ CapsuleCollider:
   m_Height: 3.481684
   m_Direction: 1
   m_Center: {x: 0, y: 1.740842, z: 0}
+--- !u!1 &1386287479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386287480}
+  - component: {fileID: 1386287481}
+  m_Layer: 0
+  m_Name: Greatblade mentor shared base
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386287480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386287479}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.98992825, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.1111112, z: 1.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 196815764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386287481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386287479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76185502e8815b4dbb933d14c96a74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.GreatbladePrototypeVisual
+  previewSpin: 0
 --- !u!1 &1386885956
 GameObject:
   m_ObjectHideFlags: 0
@@ -371444,6 +371578,51 @@ CapsuleCollider:
   m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!1 &1566064367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1566064368}
+  - component: {fileID: 1566064369}
+  m_Layer: 0
+  m_Name: GreatbladePresentation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1566064368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566064367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1288724049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1566064369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566064367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f76185502e8815b4dbb933d14c96a74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.GreatbladePrototypeVisual
+  previewSpin: 0
 --- !u!1 &1566754186
 GameObject:
   m_ObjectHideFlags: 0
