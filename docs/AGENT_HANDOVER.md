@@ -1,3 +1,11 @@
+## 2026-10-14 — October gameplay repairs verified in Unity
+
+- Workspace `T:\TEMP\DiceFree-Options`, branch `integration/world1-foundation`. Read [OCT14_GAMEPLAY_FIX_VERIFICATION.md](OCT14_GAMEPLAY_FIX_VERIFICATION.md) for complete test evidence, build output, and limitations.
+- Final focused isolated Play Mode: **PASSED**, including 9/9 Trimery walking points (banker approach), 14 URP material conversions, Trimery revive stone activation/death return, level-24 Novice vs both dungeon bosses pursuing and landing melee, and normal boss Slam raw damage 180 (10x).
+- Root cause fixed: scaled boss NavMesh agent radius mismatch; restored large-boss chase. Intentional teleports now rebase `ActorFootprintSeparation` so Slime Slam cannot create a false movement-separation impulse.
+- Additional Trimery/Slime/Ironpine/architecture/managed-reference/Greatblade/quadratic-XP validators passed. Windows x64 **7-scene Development build succeeded, 0 errors / 0 warnings**, at `Builds/World1Foundation/DiceFree.exe` (reported 317,880,024 bytes). 15-second standalone batchmode/nographics engine-start smoke stayed alive.
+- Remaining: manual graphical Game view/Windows-player QA (visual pink-material absence, attack readability, long player traversal); runtime test results do **not** prove all such visual/gameplay qualities. Preserve local untracked third-party source art and generated `Assets/Settings` files; no merge to `main` is authorized.
+
 ## 2026-10-13 — Greatblade visual repair completed
 
 - Branch remains `feature/visual-overhaul-vis00`; no merge to main. Greatblade combat/class advancement is still prototype work. See `docs/GREATBLADE_PROTOTYPE_IMPLEMENTATION.md` for the current visual setup, evidence and next slice.

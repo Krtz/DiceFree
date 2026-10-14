@@ -197,7 +197,9 @@ namespace DiceFree.UI
             if(fog!=null && fogMap!=null)
                 GUI.DrawTexture(mapRect,fogMap,ScaleMode.StretchToFill,true);
 
-            DrawCompass(mapRect,MapUp);
+            var corner=GameplayPreferences.Current.MinimapCompassCorner;
+            var compassBounds=MinimapCompass.BoundsFor(mapRect,corner);
+            MinimapCompass.Draw(mapRect,MapUp,corner);
             if(isAttackMap)
                 HudChrome.Border(mapRect,2f,new Color(.94f,.30f,.18f,.88f));
             GUI.Label(
@@ -209,8 +211,9 @@ namespace DiceFree.UI
                     fontStyle = FontStyle.Bold,
                     fontSize = Mathf.RoundToInt(Mathf.Clamp(mapRect.height * 0.08f, 12, 24))
                 });
-            var plus=new Rect(mapRect.xMax-52,mapRect.yMax-26,24,24);
-            var minus=new Rect(mapRect.xMax-26,mapRect.yMax-26,24,24);
+            float zoomX=corner==MinimapCompassCorner.BottomRight?mapRect.x:mapRect.xMax-52;
+            var plus=new Rect(zoomX,mapRect.yMax-26,24,24);
+            var minus=new Rect(zoomX+26,mapRect.yMax-26,24,24);
             if(GUI.Button(plus,"+"))Zoom(.8f);
             if(GUI.Button(minus,"-"))Zoom(1.25f);
 
@@ -223,38 +226,12 @@ namespace DiceFree.UI
                 !minus.Contains(evt.mousePosition) &&
                 !(HudLayoutManager.Current?.EditMode ?? false))
             {
-                TryMoveFromMapClick(mapRect,evt.mousePosition);
+                if(!compassBounds.Contains(evt.mousePosition))
+                    TryMoveFromMapClick(mapRect,evt.mousePosition);
                 evt.Use(); // A minimap click must never leak to world interactions.
             }
         }
 
-        // Cardinal markers remain true-world directions even when the map spins.
-        private static void DrawCompass(Rect map,Vector3 up)
-        {
-            Vector3 right=Vector3.Cross(Vector3.up,up).normalized;
-            float size=Mathf.Clamp(map.width*.12f,18,30);
-            var style=new GUIStyle(GUI.skin.label)
-            {
-                alignment=TextAnchor.MiddleCenter,
-                fontStyle=FontStyle.Bold,
-                fontSize=Mathf.RoundToInt(size*.65f),
-                normal={textColor=Color.white}
-            };
-            void Mark(string label,Vector3 world)
-            {
-                Vector2 screen=new(Vector3.Dot(world,right),
-                    Vector3.Dot(world,up));
-                Vector2 anchor=map.center+
-                    new Vector2(screen.x*(map.width*.5f-size*.52f),
-                        -screen.y*(map.height*.5f-size*.52f));
-                var rect=new Rect(anchor.x-size*.5f,anchor.y-size*.5f,size,size);
-                GUI.Box(rect,GUIContent.none);
-                GUI.Label(rect,label,style);
-            }
-            Mark("N",Vector3.forward);
-            Mark("S",Vector3.back);
-            Mark("W",Vector3.left);
-            Mark("E",Vector3.right);
-        }
+
     }
 }

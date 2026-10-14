@@ -13,11 +13,12 @@ namespace DiceFree.Input
 
     public enum OverheadHealthVisibility { Always = 0, WhenHurt = 1, Never = 2 }
     public enum MinimapOrientation { NorthUp = 0, CameraUp = 1 }
+    public enum MinimapCompassCorner { Off = 0, BottomLeft = 1, BottomRight = 2, TopLeft = 3, TopRight = 4 }
 
     [Serializable]
     internal sealed class GameplayPreferencesData
     {
-        public int version = 3;
+        public int version = 4;
         public bool autoRetaliate = true;
         public OutOfRangeSkillBehavior outOfRangeSkillBehavior = OutOfRangeSkillBehavior.WalkIntoRange;
         public bool showCastRange = true;
@@ -25,6 +26,7 @@ namespace DiceFree.Input
         public OverheadHealthVisibility allyHealthBar = OverheadHealthVisibility.WhenHurt;
         public OverheadHealthVisibility enemyHealthBar = OverheadHealthVisibility.Always;
         public MinimapOrientation minimapOrientation = MinimapOrientation.NorthUp;
+        public MinimapCompassCorner minimapCompassCorner = MinimapCompassCorner.BottomLeft;
     }
 
     public sealed class GameplayPreferences
@@ -60,6 +62,7 @@ namespace DiceFree.Input
         public OverheadHealthVisibility AllyHealthBar => data.allyHealthBar;
         public OverheadHealthVisibility EnemyHealthBar => data.enemyHealthBar;
         public MinimapOrientation MinimapOrientation => data.minimapOrientation;
+        public MinimapCompassCorner MinimapCompassCorner => data.minimapCompassCorner;
 
         private GameplayPreferences(string directory)
         {
@@ -95,6 +98,14 @@ namespace DiceFree.Input
             Save();
         }
 
+        public void SetMinimapCompassCorner(MinimapCompassCorner value)
+        {
+            if(!Enum.IsDefined(typeof(MinimapCompassCorner),value))throw new ArgumentOutOfRangeException(nameof(value));
+            if(data.minimapCompassCorner==value)return;
+            data.minimapCompassCorner=value;
+            Save();
+        }
+
         public void SetOverheadHealthVisibility(
             OverheadHealthVisibility self, OverheadHealthVisibility ally,
             OverheadHealthVisibility enemy)
@@ -115,7 +126,7 @@ namespace DiceFree.Input
             try
             {
                 var loaded = JsonUtility.FromJson<GameplayPreferencesData>(File.ReadAllText(path));
-                if(loaded!=null && (loaded.version==1 || loaded.version==2 || loaded.version==3))
+                if(loaded!=null && (loaded.version>=1 && loaded.version<=4))
                 {
                     // Unity's JsonUtility does not guarantee field initializers
                     // for missing fields: preserve the existing v1 settings,
@@ -128,7 +139,11 @@ namespace DiceFree.Input
                     }
                     if(loaded.version<3)
                         loaded.minimapOrientation=MinimapOrientation.NorthUp;
-                    loaded.version=3;
+                    if(loaded.version<4)
+                        loaded.minimapCompassCorner=MinimapCompassCorner.BottomLeft;
+                    if(!Enum.IsDefined(typeof(MinimapCompassCorner),loaded.minimapCompassCorner))
+                        loaded.minimapCompassCorner=MinimapCompassCorner.BottomLeft;
+                    loaded.version=4;
                     data=loaded;
                 }
             }

@@ -127,6 +127,7 @@ namespace DiceFree.Characters
             transform.position = hit.position;
             agent.enabled = true;
             bool ready = agent.isOnNavMesh;
+            if (ready) GetComponent<DiceFree.Combat.ActorFootprintSeparation>()?.RebaseAfterTeleport();
             RefreshSpeed();
             return ready;
         }
@@ -139,7 +140,11 @@ namespace DiceFree.Characters
             if (agent == null) return false;
             if (!agent.enabled) agent.enabled = true;
             if (!agent.isOnNavMesh || !NavMesh.SamplePosition(point, out var hit, 2, agent.areaMask)) return false;
-            Stop(); bool moved = agent.Warp(hit.position); RefreshSpeed(); return moved;
+            Stop();
+            bool moved = agent.Warp(hit.position);
+            if (moved) GetComponent<DiceFree.Combat.ActorFootprintSeparation>()?.RebaseAfterTeleport();
+            RefreshSpeed();
+            return moved;
         }
     }
 }

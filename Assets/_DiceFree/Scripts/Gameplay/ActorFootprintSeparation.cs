@@ -25,6 +25,10 @@ namespace DiceFree.Combat
             lastPosition=transform.position;
         }
         private void OnEnable()=>lastPosition=transform.position;
+        // A deliberate warp (including a boss's Slime Slam landing) is not
+        // locomotion. Never turn its large displacement into a collision push.
+        public void RebaseAfterTeleport()=>lastPosition=agent!=null && agent.enabled &&
+            agent.isOnNavMesh?agent.nextPosition:transform.position;
         private void LateUpdate()
         {
             if(actor==null || !actor.Alive || actor.Ghosting || agent==null ||

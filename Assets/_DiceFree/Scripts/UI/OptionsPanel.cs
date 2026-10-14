@@ -265,6 +265,12 @@ namespace DiceFree.UI
             if(GUILayout.Toggle(!north,"Rotate with camera","Button")&&north)
                 gameplayPreferences.SetMinimapOrientation(MinimapOrientation.CameraUp);
             GUILayout.EndHorizontal();
+            GUILayout.Space(8);
+            GUILayout.Label("Minimap compass rose");
+            string[] compassChoices={"Off","Bottom left","Bottom right","Top left","Top right"};
+            int compass=GUILayout.SelectionGrid((int)gameplayPreferences.MinimapCompassCorner,compassChoices,3);
+            if(compass!=(int)gameplayPreferences.MinimapCompassCorner)
+                gameplayPreferences.SetMinimapCompassCorner((MinimapCompassCorner)compass);
             GUILayout.Space(12);
             GUILayout.Label("Theme");
 

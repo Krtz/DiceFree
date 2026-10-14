@@ -172,10 +172,8 @@ namespace DiceFree.UI
                 var attack=actor.GetComponent<BasicAttack>()?.Definition;
                 if(attack!=null)
                 {
-                    Vector2 values=attack.RawDamageRange(st.Attributes)*
-                        st.BasicAttackDamageMultiplier;
-                    damage=$"{values.x+st.BasicAttackFlatBonus:0.#} - "+
-                        $"{values.y+st.BasicAttackFlatBonus+st.BasicAttackMaximumBonus:0.#}";
+                    Vector2 values=actor.GetComponent<BasicAttack>().DamageRange;
+                    damage=$"{values.x:0.#} - {values.y:0.#}";
                 }
                 GUI.Label(stats,"HP: "+actor.Health.Current.ToString("0")+
                     " / "+actor.Health.Maximum.ToString("0")+

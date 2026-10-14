@@ -17,6 +17,18 @@ namespace DiceFree.Combat
         /// Abilities, scripted lunges and boss special hits are unaffected.</summary>
         public float BasicAttackDamageScale { get; set; } = 1f;
         public AttackDefinition Definition => actor.Stats.Definition.basicAttack;
+        public Vector2 DamageRange
+        {
+            get
+            {
+                if(Definition==null)return Vector2.zero;
+                var stats=actor.Stats;
+                Vector2 raw=Definition.RawDamageRange(stats.Attributes)*BasicAttackDamageScale;
+                return new Vector2(
+                    Mathf.Max(0,raw.x*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMinimumOffset),
+                    Mathf.Max(0,(raw.y+stats.BasicAttackMaximumBonus)*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMaximumOffset));
+            }
+        }
         private void Awake() => actor = GetComponent<CombatActor>();
         private void OnDisable() => Cancel();
         public bool Order(CombatActor target)

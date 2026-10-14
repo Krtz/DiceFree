@@ -24,10 +24,10 @@ MonoBehaviour:
     agility: 0
     intelligence: 0
     spirit: 0
-  baseDamage: 9
+  baseDamage: 54
   coefficient: 0
   minimumDamageMultiplier: 1
-  maximumDamageMultiplier: 1
+  maximumDamageMultiplier: 1.3333334
   interval: 2.4
   windup: 0.25
   reach: 1.25

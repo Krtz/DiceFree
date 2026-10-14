@@ -36,7 +36,16 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
-            if (player == null || respawn == null || player.Alive || HudPointerBlocker.ModalOpen) return;
+            if (player == null || respawn == null || HudPointerBlocker.ModalOpen) return;
+            if(player.Alive)
+            {
+                if(Time.unscaledTime-respawn.LastAnchorActivatedAt<4f)
+                {
+                    var toast=new Rect(Screen.width*.5f-190f,42f,380f,32f);
+                    GUI.Box(toast,"Revive point attuned: "+respawn.AnchorName);
+                }
+                return;
+            }
 
             Rect rect = Bounds;
             var previous = GUI.color;

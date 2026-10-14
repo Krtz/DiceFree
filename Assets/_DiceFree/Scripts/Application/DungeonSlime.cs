@@ -20,7 +20,12 @@ namespace DiceFree.Dungeons
         public Vector3 LastCastSnapshot {get;private set;}
         public Vector3 LastImpactPosition {get;private set;}
         public int ThresholdsConsumed {get;private set;}
-        bool busy,ceased,engaged,bossBumpWinding;float nextAttack,nextBump;Vector3 home;
+        bool busy,ceased,engaged,bossBumpWinding;float nextAttack,nextBump,nextPursuit;Vector3 home;
+        public bool Engaged => engaged;
+        public CombatActor PursuitTarget { get; private set; }
+        public string PursuitState { get; private set; } = "Idle";
+        public int PursuitOrders { get; private set; }
+        public float DamageMultiplier => Role==SlimeRole.Boss ? Run.Tuning.bossDamageMultiplier : 1f;
         public string BossBumpState {get;private set;} = "Idle";
         public int BossBumpHits {get;private set;}
         public int BossBumpAttempts {get;private set;}
@@ -33,6 +38,8 @@ namespace DiceFree.Dungeons
             Run=run;Role=role;Blue=blue;Actor=GetComponent<CombatActor>();home=transform.position;
             visual=transform.Find("Presentation");if(visual!=null){visualHeight=visual.localPosition.y;visualScale=visual.localScale;}
             Actor.Health.Died+=Died;
+            Actor.Health.Damaged+=OnDamaged;
+            if(IsBoss)GetComponent<BasicAttack>().BasicAttackDamageScale=DamageMultiplier;
             if(role==SlimeRole.Dummy){Actor.Health.Invulnerable=true;GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;Actor.Motor.SetMotionBlocked("practice.dummy",true);}
             if(IsBoss||role==SlimeRole.Fragment){GetComponent<AggroBehaviour>().enabled=false;GetComponent<BasicAttack>().enabled=false;}
             if(role==SlimeRole.Puzzle||role==SlimeRole.Add)GetComponent<AggroBehaviour>().ConfigureAutoAggro(new AutoAggroPolicy{alwaysAutoAggro=true});
@@ -50,12 +57,12 @@ namespace DiceFree.Dungeons
             if(ceased||Captured)return;
             if(Role==SlimeRole.Dummy){if(!Actor.Alive||Actor.Health.Current<Actor.Health.Maximum*.2f)Actor.Health.Restore();return;}
             if(!Run.Active||!Actor.Alive)return;
-            if(IsBoss&&!Actor.CanAct)return;
+            if(IsBoss&&!Actor.CanAct){Actor.Motor.Stop();return;}
             if(!IsBoss)return;
             var living=Run.Living.ToArray();if(living.Length==0)return;
-            if(engaged&&living.All(p=>Vector3.Distance(p.transform.position,home)>24)){ResetEncounter();return;}
             if(!engaged){if(living.All(p=>Vector3.Distance(p.transform.position,home)>12))return;engaged=true;nextAttack=Time.time+2;nextBump=Time.time+.5f;}
             if(busy)return;
+            Pursue(living);
             float ratio=Actor.Health.Current/Actor.Health.Maximum;
             if(ThresholdsConsumed==0&&ratio<=.7f||ThresholdsConsumed==1&&ratio<=.3f){ThresholdsConsumed++;StartCoroutine(Divide());return;}
             if(bossBumpWinding)return;
@@ -64,8 +71,39 @@ namespace DiceFree.Dungeons
             if(Role==SlimeRole.Regent){int attack=Random.Range(0,3);if(attack==1){StartCoroutine(Roll(living));return;}if(attack==2){StartCoroutine(Bounce(living));return;}}
             StartCoroutine(Slam(living[Random.Range(0,living.Length)].transform.position,Radius));
         }
-        // A separate grounded melee attack between telegraphed specials.
-        // Never uses BasicAttack.MoveTo: miniboss and bosses stay in their authored arena.
+        void OnDamaged(CombatActor source,DamageResult result)
+        {
+            if(!IsBoss || Run==null || !Run.Active || !Actor.IsHostileTo(source) ||
+                !Run.Living.Contains(source))return;
+            if(!engaged){engaged=true;nextAttack=Time.time+2;nextBump=Time.time+.5f;}
+            PursuitTarget=source;
+        }
+        void Pursue(CombatActor[] living)
+        {
+            if(bossBumpWinding){Actor.Motor.Stop();return;}
+            if(PursuitTarget==null || !PursuitTarget.Alive ||
+                !living.Contains(PursuitTarget) || !Actor.IsHostileTo(PursuitTarget))
+                PursuitTarget=living.Where(Actor.IsHostileTo)
+                    .OrderBy(p=>(p.transform.position-transform.position).sqrMagnitude).FirstOrDefault();
+            if(PursuitTarget==null){Actor.Motor.Stop();PursuitState="Idle";return;}
+            float reach=Actor.Stats.Definition.basicAttack?.reach??.7f;
+            float distance=Vector3.Distance(transform.position,PursuitTarget.transform.position);
+            if(distance<=Actor.Radius+PursuitTarget.Radius+reach && Actor.HasSightOf(PursuitTarget))
+            {
+                Actor.Motor.Stop();PursuitState="Attacking";
+                var facing=Vector3.ProjectOnPlane(PursuitTarget.transform.position-transform.position,Vector3.up);
+                if(facing.sqrMagnitude>.001f)transform.rotation=Quaternion.LookRotation(facing);
+            }
+            else if(Time.time>=nextPursuit)
+            {
+                nextPursuit=Time.time+.2f;
+                bool moving=Actor.Motor.MoveTo(PursuitTarget.transform.position);
+                PursuitState=moving?"Pursuing":"Waiting for route";
+                if(moving)PursuitOrders++;
+            }
+        }
+        // Bosses pursue living participants between their scripted attacks.
+        // Their controller owns movement, melee and telegraphed mechanics.
         void TryBossBump(CombatActor[] living)
         {
             if(Time.time<nextBump||busy||bossBumpWinding)return;
@@ -89,7 +127,7 @@ namespace DiceFree.Dungeons
             {
                 var hit=AccuracyResolver.Resolve(Actor,definition);
                 var packet=DamageResolver.CalculatePacket(Actor.Stats,victim.Stats,
-                    definition,hit,definition.RollDamageMultiplier(),
+                    definition,hit,definition.RollDamageMultiplier()*DamageMultiplier,
                     Random.Range(0f,Actor.Stats.BasicAttackMaximumBonus),
                     Random.Range(Actor.Stats.Definition.basicAttackMinimumOffset,
                         Actor.Stats.Definition.basicAttackMaximumOffset));
@@ -227,7 +265,7 @@ namespace DiceFree.Dungeons
         void HitCircle(Vector3 p,float radius)
         {
             if(!Run.Active)return;
-            foreach(var a in Run.Living.ToArray())if(Vector3.Distance(a.transform.position,p)<=radius+a.Radius)DamageResolver.Hit(Actor,a,Role==SlimeRole.Regent?Run.Tuning.regentSlam:Run.Tuning.slam);
+            foreach(var a in Run.Living.ToArray())if(Vector3.Distance(a.transform.position,p)<=radius+a.Radius)DamageResolver.Hit(Actor,a,Role==SlimeRole.Regent?Run.Tuning.regentSlam:Run.Tuning.slam,rawMultiplier:DamageMultiplier);
         }
         public static GameObject Marker(Vector3 p,float radius,Color color)
         {
@@ -257,12 +295,13 @@ namespace DiceFree.Dungeons
             StopAllCoroutines();foreach(var m in markers)if(m!=null)Destroy(m);markers.Clear();
             foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);fragments.Clear();
             foreach(var a in adds)if(a!=null)Destroy(a.gameObject);adds.Clear();
+            PursuitTarget=null;PursuitState="Idle";nextPursuit=0;
             ThresholdsConsumed=0;Dividing=busy=engaged=bossBumpWinding=false;BossBumpState="Idle";nextBump=0;Actor.Health.Invulnerable=false;Actor.Health.Restore();Actor.Motor.Teleport(home);
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=true;foreach(var c in GetComponents<Collider>())c.enabled=true;
             if(visual!=null){visual.localPosition=new Vector3(0,visualHeight,0);visual.localScale=visualScale;}
         }
         void Died(){if(Role==SlimeRole.Dummy){Actor.Health.Restore();return;}Run.Killed(this);if(!IsBoss)Destroy(gameObject,1);}
-        void OnDestroy(){foreach(var m in markers)if(m!=null)Destroy(m);foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);if(Actor!=null)Actor.Health.Died-=Died;}
+        void OnDestroy(){foreach(var m in markers)if(m!=null)Destroy(m);foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);if(Actor!=null){Actor.Health.Died-=Died;Actor.Health.Damaged-=OnDamaged;}}
     }
     public static class SlimeDungeonVisuals
     {

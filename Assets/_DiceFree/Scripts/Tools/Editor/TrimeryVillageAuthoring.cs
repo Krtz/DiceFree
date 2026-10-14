@@ -43,15 +43,16 @@ namespace DiceFree.EditorTools
                 Mathf.Max(.001f,diff.sqrMagnitude));
             return Vector2.Distance(point,a+diff*along)<clearance;
         }
-        private static int ClearFootprint(Scene scene)
+        internal static int ClearFootprint(Scene scene)
         {
             int cleared=0;
             foreach(var t in All<Transform>(scene))
             {
                 if(!t.gameObject.activeSelf || !t.gameObject.activeInHierarchy)continue;
-                if(t.name!="Woodland tree" &&
-                    !t.name.StartsWith("Ironpine conifer",StringComparison.Ordinal))
-                    continue;
+                bool tree=t.name=="Woodland tree" ||
+                    t.name.StartsWith("Ironpine conifer",StringComparison.Ordinal) ||
+                    t.name.IndexOf("Trees/Tree_",StringComparison.Ordinal)>=0;
+                if(!tree)continue;
                 var p=new Vector2(t.position.x,t.position.z);
                 bool inTown=p.x>217f && p.x<282f && p.y>148f && p.y<213f;
                 bool road=NearRoad(p,new Vector2(223,149),new Vector2(248,154),7f) ||
@@ -294,7 +295,7 @@ namespace DiceFree.EditorTools
             // Land beside the D6's physical footprint on an actual
             // walkable NavMesh polygon; Return Home must not target its body.
             anchor.position=Ground(x+2f,z+2.8f);
-            anchor.gameObject.AddComponent<ResurrectionAnchor>().Configure(AnchorId);
+            anchor.gameObject.AddComponent<ResurrectionAnchor>().Configure(AnchorId,die.transform,4.5f);
             var trigger=Group("Return of the Runner - village arrival",stone);
             trigger.position=Ground(248,161);
             trigger.gameObject.AddComponent<ReachArea>().Configure(
@@ -333,6 +334,7 @@ namespace DiceFree.EditorTools
                     new[]{new Vector2(248,180),new Vector2(248,207),
                         new Vector2(248,243)},5f,roads);
                 int treesRemoved=ClearFootprint(scene);
+                OctoberPlaytestRepairs.RepairOuterNavigationEdges(All<Transform>(scene));
                 DrawPalisade(root);
                 var buildings=Group("Buildings - safe inner village",root);
                 foreach(var house in new[]{

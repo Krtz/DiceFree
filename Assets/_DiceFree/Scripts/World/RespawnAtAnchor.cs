@@ -20,6 +20,7 @@ namespace DiceFree.World
         private bool emergencyFallbackReady;
         private float nextAnchorCheck;
         public event Action AnchorChanged;
+        public float LastAnchorActivatedAt { get; private set; } = float.NegativeInfinity;
         public bool HasHomeAnchor => anchor != null || fallbackAnchor != null;
 
         // A revive stone is activated by reaching it, not by dying. This
@@ -30,6 +31,7 @@ namespace DiceFree.World
                string.IsNullOrEmpty(stone.StableId))return false;
             if(anchor==stone.transform)return true;
             anchor=stone.transform;
+            LastAnchorActivatedAt=Time.unscaledTime;
             AnchorChanged?.Invoke();
             return true;
         }
@@ -40,8 +42,7 @@ namespace DiceFree.World
             foreach(var stone in FindObjectsByType<ResurrectionAnchor>())
             {
                 if(stone==null || !stone.isActiveAndEnabled)continue;
-                if(Vector3.ProjectOnPlane(stone.transform.position-transform.position,
-                    Vector3.up).sqrMagnitude<=12.25f)
+                if(stone.CanActivateFrom(transform.position))
                     Activate(stone);
             }
         }

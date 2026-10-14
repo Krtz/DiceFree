@@ -222,7 +222,12 @@ namespace DiceFree.EditorTools
                     float multiplier=kind==WildlifeKind.Quillrat?.85f:
                         kind==WildlifeKind.DarkWolf?1.15f:
                         kind==WildlifeKind.AlphaWolf?1.5f:1f;
-                    a.baseDamage*=multiplier; a.coefficient*=multiplier;
+                    float minimumScale=kind==WildlifeKind.Quillrat?4f:
+                        kind==WildlifeKind.DarkWolf?3.5f:kind==WildlifeKind.AlphaWolf?6f:1f;
+                    float maximumScale=kind==WildlifeKind.Quillrat?5f:
+                        kind==WildlifeKind.DarkWolf?5f:kind==WildlifeKind.AlphaWolf?8f:1f;
+                    a.baseDamage*=multiplier*minimumScale; a.coefficient*=multiplier*minimumScale;
+                    a.maximumDamageMultiplier*=maximumScale/minimumScale;
                     a.interval=kind==WildlifeKind.GreyWolf?2.2f:
                         kind==WildlifeKind.DarkWolf?2f:kind==WildlifeKind.AlphaWolf?2.4f:2.8f;
                     a.windup=.25f;

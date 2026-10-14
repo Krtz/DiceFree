@@ -61,13 +61,9 @@ namespace DiceFree.UI
             string attackTooltip = "No basic attack.";
             if (basicAttack?.Definition != null)
             {
-                Vector2 range = basicAttack.Definition.RawDamageRange(attributes)
-                                * stats.BasicAttackDamageMultiplier;
-                attackMin = range.x + stats.BasicAttackFlatBonus;
-                attackMax = range.y + stats.BasicAttackFlatBonus;
-                attackMax += stats.BasicAttackMaximumBonus * stats.BasicAttackDamageMultiplier;
-                attackMin=Mathf.Max(0,attackMin+stats.Definition.basicAttackMinimumOffset);
-                attackMax=Mathf.Max(0,attackMax+stats.Definition.basicAttackMaximumOffset);
+                Vector2 range = basicAttack.DamageRange;
+                attackMin = range.x;
+                attackMax = range.y;
 
                 float interval = Mathf.Max(
                     basicAttack.Definition.interval,

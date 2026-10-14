@@ -93,11 +93,16 @@ namespace DiceFree.EditorTools
             sources.AddRange(obstacles);
             var settings=NavMesh.GetSettingsByID(0); settings.agentRadius=0.5f; settings.agentHeight=1.8f;
             settings.agentClimb=0.4f; settings.agentSlope=40; settings.overrideVoxelSize=true; settings.voxelSize=0.12f;
-            var data=NavMeshBuilder.BuildNavMeshData(settings,sources,bounds,Vector3.zero,Quaternion.identity);
-            if(data==null) throw new System.Exception("Navigation bake failed.");
             var saved=AssetDatabase.LoadAssetAtPath<NavMeshData>(NavigationPath);
-            if(saved==null) { AssetDatabase.CreateAsset(data,NavigationPath); saved=data; }
-            else { EditorUtility.CopySerialized(data,saved); Object.DestroyImmediate(data); }
+            if(saved==null)
+            {
+                saved=new NavMeshData(settings.agentTypeID);
+                AssetDatabase.CreateAsset(saved,NavigationPath);
+            }
+            // Update the native navigation data in place, preserving its asset identity.
+            if(!NavMeshBuilder.UpdateNavMeshData(saved,settings,sources,bounds))
+                throw new System.Exception("Navigation bake failed.");
+            saved.name="CornbergNavMesh";
             navigation.Configure(saved); EditorUtility.SetDirty(navigation); EditorUtility.SetDirty(saved);
         }
 

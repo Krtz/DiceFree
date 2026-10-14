@@ -77,14 +77,24 @@ namespace DiceFree.Combat
             var agent=GetComponent<NavMeshAgent>();
             if(agent!=null)
             {
-                agent.radius=radius;
+                // Navigation radius is local to the scaled actor root; hitboxes and
+                // combat ranges are world-space. Large boss roots otherwise become
+                // enormous avoidance bodies and cannot follow a valid dungeon path.
+                Vector3 worldScale=transform.lossyScale;
+                float planarScale=Mathf.Max(.001f,Mathf.Max(Mathf.Abs(worldScale.x),Mathf.Abs(worldScale.z)));
+                agent.radius=radius/planarScale;
                 agent.obstacleAvoidanceType=ObstacleAvoidanceType.HighQualityObstacleAvoidance;
                 agent.avoidancePriority=faction==0?40:50;
             }
             var capsule=GetComponent<CapsuleCollider>();
             if(capsule!=null)
             {
-                capsule.radius=radius;
+                // Radius is a world-space combat contract; CapsuleCollider uses local units.
+                Vector3 scale = transform.lossyScale;
+                float radiusScale = capsule.direction == 0 ? Mathf.Max(Mathf.Abs(scale.y),Mathf.Abs(scale.z)) :
+                    capsule.direction == 2 ? Mathf.Max(Mathf.Abs(scale.x),Mathf.Abs(scale.y)) :
+                    Mathf.Max(Mathf.Abs(scale.x),Mathf.Abs(scale.z));
+                capsule.radius=radius/Mathf.Max(.001f,radiusScale);
                 capsule.isTrigger=false;
                 capsule.enabled=Health.Alive;
             }

@@ -72,10 +72,11 @@ namespace DiceFree.Combat
             result.action = action;
             return result;
         }
-        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null, float skillFlatDamage = 0f)
+        public static float Hit(CombatActor source, CombatActor target, AttackDefinition attack, ActionCriticalResolution critical = null, float? coefficientOverride = null, float skillFlatDamage = 0f, float rawMultiplier = 1f)
         {
             if (!source.IsHostileTo(target)) return 0;
-            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride, skillFlatDamage: skillFlatDamage));
+            return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride,
+                rawMultiplier: attack.RollDamageMultiplier()*rawMultiplier, skillFlatDamage: skillFlatDamage));
         }
     }
 }
