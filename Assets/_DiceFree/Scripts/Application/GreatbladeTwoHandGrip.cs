@@ -19,6 +19,7 @@ namespace DiceFree.Visuals
         private Animator animator;
 
         public Transform Weapon=>weapon;
+        public Transform DominantGrip=>dominantGrip;
         public Transform SupportGrip=>supportGrip;
         public Vector3 PalmInHand=>palmInHand;
 

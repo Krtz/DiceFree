@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace DiceFree.Advancement
 {
-    public sealed class StartMenuController : MonoBehaviour
+    public sealed partial class StartMenuController : MonoBehaviour
     {
         [Serializable]
         public sealed class ManifestationEntry
@@ -16,6 +16,7 @@ namespace DiceFree.Advancement
             public string classId;
             public string displayName;
             public int level;
+            public int tier;
             public bool available;
             public bool active;
         }
@@ -53,6 +54,11 @@ namespace DiceFree.Advancement
         {
             status = "";
             loadBlocked = false;
+            menuPresentation ??= Resources.Load<MenuPresentationCatalog>("MenuPresentationCatalog");
+            portraitStage ??= GetComponent<MenuPortraitStage>()??gameObject.AddComponent<MenuPortraitStage>();
+            portraitStage.Clear();
+            options ??= FindAnyObjectByType<DiceFree.UI.OptionsPanel>()??gameObject.AddComponent<DiceFree.UI.OptionsPanel>();
+            options.ShowLauncher=false;
             try
             {
                 classCatalog?.Validate();
@@ -69,6 +75,8 @@ namespace DiceFree.Advancement
                 store = new LocalEchoStore(root);
                 profile = store.Load();
                 echoName = EchoIdentity.ReadName(profile);
+                var last=BuildEntries().FirstOrDefault(e=>e.active);
+                SelectedTier=last?.tier??0;
                 if (!string.IsNullOrEmpty(store.RecoveryMessage)) status = store.RecoveryMessage;
                 if (!string.IsNullOrEmpty(store.MigrationMessage))
                     status = string.IsNullOrEmpty(status) ? store.MigrationMessage : status + "\n" + store.MigrationMessage;
@@ -80,118 +88,6 @@ namespace DiceFree.Advancement
                 loadBlocked = true;
                 status = "Could not read Echo save: " + exception.Message;
             }
-        }
-
-        private void OnGUI()
-        {
-            const float width = 660;
-            float height = Mathf.Min(Screen.height - 80, 620);
-            var outer = new Rect((Screen.width - width) / 2f, (Screen.height - height) / 2f, width, height);
-            GUI.Box(outer, GUIContent.none);
-
-            GUI.Label(new Rect(outer.x + 24, outer.y + 20, outer.width - 48, 36), "DiceFree");
-            GUI.Label(new Rect(outer.x + 24, outer.y + 58, outer.width - 48, 24),
-                profile == null ? "Begin a new Echo" : "Choose a manifestation");
-
-            var content = new Rect(outer.x + 20, outer.y + 94, outer.width - 40, outer.height - 236);
-            GUILayout.BeginArea(content);
-            scroll = GUILayout.BeginScrollView(scroll);
-
-            if (loadBlocked)
-            {
-                GUILayout.Label("The Echo save cannot be used safely in this session.");
-                GUILayout.Label("Existing files have not been changed.");
-                if (GUILayout.Button("Retry", GUILayout.Height(34))) Refresh();
-            }
-            else if (profile == null)
-            {
-                DrawNewEcho();
-            }
-            else
-            {
-                DrawExistingEcho();
-            }
-
-            GUILayout.EndScrollView();
-            GUILayout.EndArea();
-
-            if (GUI.Button(new Rect(outer.x + 24, outer.yMax - 134, outer.width - 48, 34), "Multiplayer development test"))
-                DiceFree.Development.NetworkWorldLab.OpenSelection(this);
-
-            if (GUI.Button(new Rect(outer.x + 24, outer.yMax - 94, outer.width - 48, 34), "Development room"))
-                TryOpenDevelopmentRoom();
-
-            if (!string.IsNullOrEmpty(status))
-                GUI.Label(new Rect(outer.x + 24, outer.yMax - 54, outer.width - 48, 44), status);
-        }
-
-        private void DrawNewEcho()
-        {
-            var novice = classCatalog?.Resolve("class.novice");
-            if (novice == null)
-            {
-                GUILayout.Label("Novice content is unavailable. This build cannot create a new Echo.");
-                return;
-            }
-
-            GUILayout.Label("Every Echo begins as a Novice.");
-            GUILayout.Space(8);
-            GUILayout.Label("Echo name");
-            echoName = GUILayout.TextField(echoName, EchoIdentity.MaximumNameLength);
-            GUILayout.Label(EchoIdentity.Format(echoName, novice.displayName));
-            GUILayout.Space(12);
-            if (GUILayout.Button("Start adventure", GUILayout.Height(52)))
-                TryStartNewEcho();
-        }
-
-        private void DrawExistingEcho()
-        {
-            string fallback = InferFallbackClassId(profile);
-            ManifestationRosterSave roster;
-            try
-            {
-                roster = ManifestationRoster.Read(profile, fallback);
-            }
-            catch (Exception exception)
-            {
-                GUILayout.Label("The manifestation roster could not be read: " + exception.Message);
-                return;
-            }
-
-            GUILayout.Label("Echo name");
-            GUI.enabled = EchoIdentity.CanRename(profile);
-            echoName = GUILayout.TextField(echoName, EchoIdentity.MaximumNameLength);
-            if (GUILayout.Button("Save name", GUILayout.Height(30)))
-                TryRenameEcho(echoName);
-            GUI.enabled = true;
-            GUILayout.Space(8);
-
-            var entries = BuildEntries();
-            if (entries.Length == 0)
-            {
-                GUILayout.Label("This Echo contains no playable manifestation saves.");
-                return;
-            }
-
-            GUILayout.Label(EchoIdentity.ReadName(profile));
-            GUILayout.Space(8);
-
-            foreach (var entry in entries)
-            {
-                GUILayout.BeginVertical(GUI.skin.box);
-                GUILayout.Label(entry.displayName + "  —  Level " + entry.level);
-                GUILayout.Label(entry.active ? "Last active manifestation" : "Preserved manifestation");
-
-                GUI.enabled = entry.available;
-                if (GUILayout.Button(entry.available ? "Play " + entry.displayName : "Content unavailable in this build", GUILayout.Height(38)))
-                    TryPlayManifestation(entry.classId);
-                GUI.enabled = true;
-                GUILayout.EndVertical();
-                GUILayout.Space(6);
-            }
-
-            if (GUILayout.Button("Refresh saves", GUILayout.Height(30)))
-                Refresh();
         }
 
         public bool TryOpenDevelopmentRoom()
@@ -321,6 +217,7 @@ namespace DiceFree.Advancement
                         displayName = EchoIdentity.Format(EchoIdentity.ReadName(profile),
                             definition != null ? definition.displayName : value.state.classId),
                         level = value.state.level,
+                        tier = menuPresentation?.TierOf(value.state.classId)??-1,
                         available = definition != null,
                         active = value.state.classId == roster.activeClassId
                     };

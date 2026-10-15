@@ -326,6 +326,13 @@ namespace DiceFree.EditorTools
                         }
                         var wildlife=go.AddComponent<IronpineWildlife>();
                         wildlife.Configure(kind,visual,sites,kind==WildlifeKind.AlphaWolf?ground:null);
+                        if(kind==WildlifeKind.AlphaWolf) {
+                            var reward=AssetDatabase.LoadAssetAtPath<DiceFree.Items.ItemDefinition>(MenuAndWolfAuthoring.ItemPath);
+                            if(reward!=null) {
+                                var drop=go.AddComponent<DiceFree.Items.FixedWorldDrop>();
+                                drop.item=reward;drop.chance=.1f;
+                            }
+                        }
                         var agent=go.GetComponent<NavMeshAgent>();
                         if(agent!=null)
                         {

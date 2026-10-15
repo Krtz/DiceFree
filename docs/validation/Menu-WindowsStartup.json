@@ -1,0 +1,8 @@
+﻿{
+    "status":  "passed",
+    "runningAfterSeconds":  15,
+    "remainedRunning":  true,
+    "errorMatches":  0,
+    "mode":  "Windows batchmode/nographics; startup only",
+    "isolatedSaveRoot":  "C:\\Users\\Axel\\AppData\\Local\\Temp\\DiceFree-MenuStartup-039b1ce735d64c57a2e88ad2e0836ec9"
+}

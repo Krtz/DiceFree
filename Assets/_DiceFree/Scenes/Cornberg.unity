@@ -240856,6 +240856,7 @@ GameObject:
   - component: {fileID: 1017708032}
   - component: {fileID: 1017708043}
   - component: {fileID: 1017708044}
+  - component: {fileID: 1017708045}
   m_Layer: 10
   m_Name: AlphaWolf 22 (Lv 20)
   m_TagString: Untagged
@@ -241090,6 +241091,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fd1f845e49a6745b192b130d124e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Ironpine.IronpineCreatureAudio
+--- !u!114 &1017708045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017708030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16eda04788727634abe54e312572f5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Items.FixedWorldDrop
+  item: {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
+  chance: 0.1
 --- !u!1 &1018393674
 GameObject:
   m_ObjectHideFlags: 0
@@ -306140,6 +306155,7 @@ GameObject:
   - component: {fileID: 1288724116}
   - component: {fileID: 1288724115}
   - component: {fileID: 1288724118}
+  - component: {fileID: 1288724119}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -306516,6 +306532,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
   - {fileID: 11400000, guid: 8508db9dcbb7745448bb788eb03ee77f, type: 2}
   - {fileID: 11400000, guid: 3fb60e45f41df794094b44ad9baa7d84, type: 2}
+  - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
 --- !u!114 &1288724073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307210,6 +307227,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d27676b2325a1a41aaae15f7be0c2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.PlainEquipmentVisuals
+--- !u!114 &1288724119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810b989433e490d439d9e4760a214fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.WolfGreatswordVisual
 --- !u!1 &1288794739
 GameObject:
   m_ObjectHideFlags: 0

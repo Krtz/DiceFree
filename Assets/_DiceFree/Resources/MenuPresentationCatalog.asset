@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f20880da3d5504c96ea06ccdad06dd, type: 3}
+  m_Name: MenuPresentationCatalog
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.MenuPresentationCatalog
+  forms:
+  - classId: class.novice
+    tier: 0
+    preview: {fileID: 5603053031561179622, guid: abbb8431f39b94544a05582dff9b4ca7, type: 3}
+  - classId: class.physically-blessed-novice
+    tier: 1
+    preview: {fileID: 4374109296659657065, guid: 031b690d2f5b2434ea2104ffc0518122, type: 3}
+  - classId: class.magically-touched-novice
+    tier: 1
+    preview: {fileID: 5891301384852895501, guid: 1848cd7083896ec4488d48e6d44aa444, type: 3}
+  - classId: class.greatblade
+    tier: 2
+    preview: {fileID: 4079086238383127484, guid: 100511d9625520049ae54ca6c6fe2480, type: 3}
+  items:
+  - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
+  - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
+  - {fileID: 11400000, guid: 2a8274656d6b65049804a4cd08dc172f, type: 2}
+  - {fileID: 11400000, guid: b688bab5c1961174caaf5ea4e6ebe9ac, type: 2}
+  - {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
+  - {fileID: 11400000, guid: c121e31e7a7355c4183c9543ddc9d7f3, type: 2}
+  - {fileID: 11400000, guid: 725d53cadff67cc41b58826e21a8407e, type: 2}
+  - {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
+  - {fileID: 11400000, guid: 645c0926dff69c444a8734877b4b0ae1, type: 2}
+  - {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
+  - {fileID: 11400000, guid: 8c91ba3c0a1ca4b47832001228ed2c73, type: 2}
+  - {fileID: 11400000, guid: 69d646f07338f8b4981d016dc7130a89, type: 2}
+  - {fileID: 11400000, guid: d51fa7d194a5bb64eae86775b1717991, type: 2}
+  - {fileID: 11400000, guid: 9fbf79ea2b24cb24aa7e579f899d78e8, type: 2}
+  - {fileID: 11400000, guid: 9fd1603b2755b4f44b2e445506c524c7, type: 2}
+  - {fileID: 11400000, guid: e75062e0b77882640a14dbd628b72b27, type: 2}
+  - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
+  - {fileID: 11400000, guid: 8508db9dcbb7745448bb788eb03ee77f, type: 2}
+  - {fileID: 11400000, guid: 3fb60e45f41df794094b44ad9baa7d84, type: 2}
+  - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}

@@ -146,8 +146,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5121e1ce75118c74f80da338b47a51bd, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.StartMenuController
+  menuPresentation: {fileID: 11400000, guid: 7d491b4474b59af4f88caa834e2cf4c7, type: 2}
   classCatalog: {fileID: 11400000, guid: 3bcc34f14a616ff41a92a42d3cd19fd4, type: 2}
   gameplaySceneName: Cornberg
 --- !u!4 &868649077

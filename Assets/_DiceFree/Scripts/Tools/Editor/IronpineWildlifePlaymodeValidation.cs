@@ -56,8 +56,10 @@ namespace DiceFree.EditorTools
                 Check(animals.Count(a => a.Kind == WildlifeKind.AlphaWolf) == 1, "alpha");
                 Check(animals.All(a => a.Actor != null && a.Actor.Alive &&
                     a.Actor.Motor.Ready && a.Actor.Stats.Definition != null), "uninitialized actor/navmesh");
-                Check(animals.All(a => a.GetComponent<DiceFree.Items.FixedWorldDrop>() == null),
-                    "wildlife unexpectedly carries an item drop component");
+                Check(animals.All(a => a.Kind==WildlifeKind.AlphaWolf
+                    ? a.GetComponent<DiceFree.Items.FixedWorldDrop>()?.item?.stableId==DiceFree.Visuals.WolfGreatswordVisual.ItemId && Mathf.Approximately(a.GetComponent<DiceFree.Items.FixedWorldDrop>().chance,.1f)
+                    : a.GetComponent<DiceFree.Items.FixedWorldDrop>()==null),
+                    "Alpha Wolf greatsword drop or other wildlife loot changed");
                 Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>()?.ModelAnimator?.runtimeAnimatorController != null), "missing live rig animation controller");
                 Check(animals.All(a => a.GetComponent<IronpineCreatureAudio>() != null && a.GetComponent<AudioSource>() != null), "missing live spatial animal audio");
                 Check(animals.All(a => a.GetComponent<IronpineCreaturePresentation>().ModelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>().Length >= 3), "missing live skinned model");

@@ -2,6 +2,59 @@
 
 This is the source of truth for **third-party art, models, textures, animations, audio, VFX, fonts, and other distributable assets** considered for or used in DiceFree. Record provenance before committing an external asset to the Unity project. This document is a tracking aid, not proof of ownership or legal clearance.
 
+## Runtime credits — 2026-10-15
+
+Options -> Credits now presents the original creators of resource-backed art actually used by this prototype, with source and license links, a search field and the full bundled shader compatibility notice. This is separate from the staged downloaded candidates below.
+
+The checked-in [credit manifest](../SourceArt/Credits/credit_manifest.json) is the editable source. [Dependency/provenance evidence](assets/runtime-credit-source-map-2026-10-15.json) maps each asset pack to the Resources paths that use it. Publisher/title/product IDs come from the existing local Unity package headers; UI and copied icon/audio mappings also use the existing extraction manifests. Runtime entries with unavailable optional resource probes are omitted on installations without those art packs.
+
+The Credits button does not change license grants or clear candidate holds. Existing package terms and publisher notices still apply. No new third-party model, staged ZIP or raw vendor package was added by this menu/weapon change. The Wolf-Fang Greatsword model and icon are first-party primitive art.
+
+| In-use asset / technology | Creator | Source | Terms |
+| --- | --- | --- | --- |
+| Unity and Unity packages | Unity Technologies | [Source](https://unity.com) | [Terms](https://unity.com/legal/terms-of-service) |
+| 2D RPG Button 7 | JiroCraft | [Source](https://assetstore.unity.com/packages/278861) | [Terms](https://unity.com/legal/as-terms) |
+| Adventure UI Kit | Smashy Tech | [Source](https://assetstore.unity.com/packages/376222) | [Terms](https://unity.com/legal/as-terms) |
+| Animated Cartoon Treasure Chest | Flying Saci Game Studio | [Source](https://assetstore.unity.com/packages/146757) | [Terms](https://unity.com/legal/as-terms) |
+| Basic UI Elements: Concrete | DualCorStudios | [Source](https://assetstore.unity.com/packages/48833) | [Terms](https://unity.com/legal/as-terms) |
+| Basic UI Elements: Metal | DualCorStudios | [Source](https://assetstore.unity.com/packages/48832) | [Terms](https://unity.com/legal/as-terms) |
+| Battle Skill Icon | Dr.Game | [Source](https://assetstore.unity.com/packages/33262) | [Terms](https://unity.com/legal/as-terms) |
+| Bloodlines - Dark UI | Alebardium | [Source](https://assetstore.unity.com/packages/328721) | [Terms](https://unity.com/legal/as-terms) |
+| Camo UI Elements: Woodland | DualCorStudios | [Source](https://assetstore.unity.com/packages/48829) | [Terms](https://unity.com/legal/as-terms) |
+| Colorful UI Kit | Smashy Tech | [Source](https://assetstore.unity.com/packages/375864) | [Terms](https://unity.com/legal/as-terms) |
+| Dark Brown GUI kit | ARCEY | [Source](https://assetstore.unity.com/packages/201086) | [Terms](https://unity.com/legal/as-terms) |
+| Elemental Meters | Armathyx | [Source](https://assetstore.unity.com/packages/173133) | [Terms](https://unity.com/legal/as-terms) |
+| FREE - Modular Character - Fantasy RPG Human Male | Blink | [Source](https://assetstore.unity.com/packages/228952) | [Terms](https://unity.com/legal/as-terms) |
+| Free RPG Fantasy Spell Icons | Blink | [Source](https://assetstore.unity.com/packages/200511) | [Terms](https://unity.com/legal/as-terms) |
+| Fantasy Staff Lite | Adventure Forge | [Source](https://assetstore.unity.com/packages/54999) | [Terms](https://unity.com/legal/as-terms) |
+| Fantasy Wooden GUI : Free | Black Hammer | [Source](https://assetstore.unity.com/packages/103811) | [Terms](https://unity.com/legal/as-terms) |
+| Female Warrior Princess | All * Star Characters | [Source](https://assetstore.unity.com/packages/44041) | [Terms](https://unity.com/legal/as-terms) |
+| Free Game VFX Collection(URP) | Eric VFX Studio | [Source](https://assetstore.unity.com/packages/345212) | [Terms](https://unity.com/legal/as-terms) |
+| Free Low Poly Swords | Pure Poly | [Source](https://assetstore.unity.com/packages/189978) | [Terms](https://unity.com/legal/as-terms) |
+| Free Ui Pack | Valley Land Games | [Source](https://assetstore.unity.com/packages/170878) | [Terms](https://unity.com/legal/as-terms) |
+| GUI Parts | PONETI | [Source](https://assetstore.unity.com/packages/159068) | [Terms](https://unity.com/legal/as-terms) |
+| Game Input Controller Icons Free | Amanz | [Source](https://assetstore.unity.com/packages/285953) | [Terms](https://unity.com/legal/as-terms) |
+| Jelly pack UI | Smashy Tech | [Source](https://assetstore.unity.com/packages/347018) | [Terms](https://unity.com/legal/as-terms) |
+| Low Poly Modular Armors - Free - LOWPOLY MEDIEVAL FANTASY SERIES | Polytope Studio | [Source](https://assetstore.unity.com/packages/199890) | [Terms](https://unity.com/legal/as-terms) |
+| Low-Poly Medieval Market | VanillaArt | [Source](https://assetstore.unity.com/packages/262473) | [Terms](https://unity.com/legal/as-terms) |
+| Magic Spells - Fantasy Icons | The Higalina Vault | [Source](https://assetstore.unity.com/packages/346770) | [Terms](https://unity.com/legal/as-terms) |
+| Medieval Village Building Kit | Mikes Digital Emporium | [Source](https://assetstore.unity.com/packages/116540) | [Terms](https://unity.com/legal/as-terms) |
+| Pixel HUD UI Free Kit | IndigoLay | [Source](https://assetstore.unity.com/packages/378572) | [Terms](https://unity.com/legal/as-terms) |
+| Realistic Furry Wolf | Rip Vertices Studio | [Source](https://assetstore.unity.com/packages/311465) | [Terms](https://unity.com/legal/as-terms) |
+| SIMPLE FANTASY GUI | Nayrissa | [Source](https://assetstore.unity.com/packages/99451) | [Terms](https://unity.com/legal/as-terms) |
+| Shields V2 - Fantasy Icons [512x512 HD] | The Higalina Vault | [Source](https://assetstore.unity.com/packages/330528) | [Terms](https://unity.com/legal/as-terms) |
+| Simple UI Elements | Swapnil | [Source](https://assetstore.unity.com/packages/53276) | [Terms](https://unity.com/legal/as-terms) |
+| Soft Touch UI Kit Demo | Smashy Tech | [Source](https://assetstore.unity.com/packages/377802) | [Terms](https://unity.com/legal/as-terms) |
+| SoundBits | Free Sound FX Collection | SoundBits | [Source](https://assetstore.unity.com/packages/31837) | [Terms](https://unity.com/legal/as-terms) |
+| SpellBook. Preface | REXARD | [Source](https://assetstore.unity.com/packages/111069) | [Terms](https://unity.com/legal/as-terms) |
+| Spooky Horror UI Kit | Smashy Tech | [Source](https://assetstore.unity.com/packages/375774) | [Terms](https://unity.com/legal/as-terms) |
+| SteampunkUI | Gentleland | [Source](https://assetstore.unity.com/packages/238976) | [Terms](https://unity.com/legal/as-terms) |
+| Stone UI | SiLena_ART | [Source](https://assetstore.unity.com/packages/182526) | [Terms](https://unity.com/legal/as-terms) |
+| Sweet Land GUI | Persefida | [Source](https://assetstore.unity.com/packages/208285) | [Terms](https://unity.com/legal/as-terms) |
+| Unity Samples: UI | Unity Technologies | [Source](https://assetstore.unity.com/packages/25468) | [Terms](https://unity.com/legal/as-terms) |
+
+The shader compatibility notice is copied verbatim from Assets/_DiceFree/Shaders/Compatibility/LICENSE.md (Unity Companion License) into Resources/Credits/Notices/ShaderCompatibility.txt. Engine/package bundled notices remain supplied with the Unity player.
+
 ## Workflow
 
 1. **Candidate:** Record the original creator, exact source URL, claimed license (including version when known), intended use, and status. Do not treat candidates as shipped assets.

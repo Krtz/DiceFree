@@ -11,6 +11,7 @@ namespace DiceFree.Items
         public string stableId, displayName;
         public Sprite icon;
         public EquipmentSlot slot;
+        [Range(1,2)] public int handsRequired = 1;
         [Min(1)] public int itemLevel = 1;
         public string rarityId = "rarity.provisional";
         public string sourceId;

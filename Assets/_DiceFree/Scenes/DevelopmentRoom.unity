@@ -23171,6 +23171,7 @@ GameObject:
   - component: {fileID: 1724212337}
   - component: {fileID: 1724212336}
   - component: {fileID: 1724212339}
+  - component: {fileID: 1724212340}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -23900,6 +23901,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e75062e0b77882640a14dbd628b72b27, type: 2}
   - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
   - {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
+  - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
 --- !u!114 &1724212316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24242,6 +24244,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d27676b2325a1a41aaae15f7be0c2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.PlainEquipmentVisuals
+--- !u!114 &1724212340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810b989433e490d439d9e4760a214fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.WolfGreatswordVisual
 --- !u!1 &1725172786
 GameObject:
   m_ObjectHideFlags: 0

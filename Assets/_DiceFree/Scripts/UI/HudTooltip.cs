@@ -19,6 +19,7 @@ namespace DiceFree.UI
                 text.AppendLine().Append("Equipped: ").Append(equippedSlot);
 
             var stats = definition.stats;
+            if(definition.slot==EquipmentSlot.MainHand&&definition.handsRequired==2)text.AppendLine().Append("Two-handed weapon");
             Append(text, stats.attributes.vitality, "VIT");
             Append(text, stats.attributes.strength, "STR");
             Append(text, stats.attributes.agility, "AGI");

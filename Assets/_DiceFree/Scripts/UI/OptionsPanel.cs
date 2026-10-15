@@ -7,9 +7,9 @@ namespace DiceFree.UI
     [DefaultExecutionOrder(-10000)]
     public sealed class OptionsPanel : HudWidget
     {
-        public enum OptionsTab { Gameplay, Audio, HUD, Keybinds, Session }
+        public enum OptionsTab { Gameplay, Audio, HUD, Keybinds, Session, Credits }
         public OptionsTab SelectedTab { get; private set; } = OptionsTab.Gameplay;
-        private readonly Vector2[] tabScroll = new Vector2[5];
+        private readonly Vector2[] tabScroll = new Vector2[6];
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private IPlayerAudioSettings audioSettings;
@@ -23,6 +23,7 @@ namespace DiceFree.UI
             return saved;
         }
         public bool Open { get; private set; }
+        public bool ShowLauncher { get; set; } = true;
         private Rect ButtonBounds => new Rect(Mathf.Max(10,Screen.width-54),
             Mathf.Max(10,Screen.height-54),44,44);
         public override Rect Bounds => Open
@@ -66,7 +67,7 @@ namespace DiceFree.UI
             GUI.depth=-100;
             if(!Open)
             {
-                if(HudLayoutManager.Current==null && GUI.Button(ButtonBounds,"Options"))
+                if(ShowLauncher && HudLayoutManager.Current==null && GUI.Button(ButtonBounds,"Options"))
                     Show();
                 return;
             }
@@ -107,6 +108,7 @@ namespace DiceFree.UI
                     break;
                 case OptionsTab.Keybinds: DrawKeybinds(panel.width);break;
                 case OptionsTab.Session: DrawSession();break;
+                case OptionsTab.Credits: CreditsView.Draw();break;
             }
             GUILayout.EndScrollView();
             GUILayout.EndArea();

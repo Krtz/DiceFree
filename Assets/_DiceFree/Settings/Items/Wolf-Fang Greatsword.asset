@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Wolf-Fang Greatsword
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.alpha-wolf.greatsword
+  displayName: Wolf-Fang Greatsword
+  icon: {fileID: 473275048934476715, guid: 5bbc7af70e484644aa5bc1f111e44fc7, type: 3}
+  slot: 6
+  handsRequired: 2
+  itemLevel: 1
+  rarityId: rarity.uncommon
+  sourceId: ironpine.alpha-wolf
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  allowedClassIds: []
+  flavor: Plain steel, a dark leather grip and a pair of small wolf fangs.
+  stats:
+    attributes:
+      vitality: 0
+      strength: 5
+      agility: 0
+      intelligence: 0
+      spirit: 0
+    physicalDefense: 0
+    magicalDefense: 0
+    attackSpeedPercent: 0
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 10

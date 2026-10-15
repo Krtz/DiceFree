@@ -1,0 +1,27 @@
+﻿{
+    "success":  true,
+    "command":  "command dicefree.development.playmode-status",
+    "data":  {
+                 "command":  "dicefree.development.playmode-status",
+                 "parameters":  {
+
+                                },
+                 "result":  {
+                                "status":  "passed",
+                                "phase":  4,
+                                "marker":  "DICEFREE_DEVELOPMENT_ROOM_PLAYMODE_OK",
+                                "error":  ""
+                            },
+                 "target":  {
+                                "host":  "127.0.0.1",
+                                "port":  7800,
+                                "projectPath":  "T:\\TEMP\\DiceFree-Options"
+                            }
+             },
+    "errors":  [
+
+               ],
+    "warnings":  [
+
+                 ]
+}

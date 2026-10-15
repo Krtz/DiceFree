@@ -1,0 +1,24 @@
+﻿{
+  "success": true,
+  "command": "job status",
+  "data": {
+    "jobId": "d613145afa2547bb89b1c24d2c303162",
+    "command": "dicefree.development.build-windows",
+    "state": "completed",
+    "cancellationRequested": false,
+    "result": {
+      "marker": "DICEFREE_WORLD1_FOUNDATION_BUILD",
+      "result": "Succeeded",
+      "errors": 0,
+      "warnings": 0,
+      "sceneCount": 7,
+      "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\World1Foundation\\DiceFree.exe",
+      "bytes": 354090364
+    },
+    "error": null,
+    "errorDetails": null,
+    "progress": null
+  },
+  "errors": [],
+  "warnings": []
+}

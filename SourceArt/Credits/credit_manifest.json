@@ -1,0 +1,527 @@
+{
+  "entries": [
+    {
+      "title": "Unity and Unity packages",
+      "creator": "Unity Technologies",
+      "category": "Engine, rendering, input and networking",
+      "sourceUrl": "https://unity.com",
+      "licenseName": "Unity terms and bundled third-party notices",
+      "licenseUrl": "https://unity.com/legal/terms-of-service",
+      "notice": "Third-party engine notices are supplied with the Unity player.",
+      "resourceProbes": []
+    },
+    {
+      "title": "2D RPG Button 7",
+      "creator": "JiroCraft",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/278861",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-2d-rpg-button-7"
+      ]
+    },
+    {
+      "title": "Adventure UI Kit",
+      "creator": "Smashy Tech",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/376222",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-adventure-ui-kit"
+      ]
+    },
+    {
+      "title": "Animated Cartoon Treasure Chest",
+      "creator": "Flying Saci Game Studio",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/146757",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "WorldLoot/TreasureChestModel"
+      ]
+    },
+    {
+      "title": "Basic UI Elements: Concrete",
+      "creator": "DualCorStudios",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/48833",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-basic-ui-elements-concrete"
+      ]
+    },
+    {
+      "title": "Basic UI Elements: Metal",
+      "creator": "DualCorStudios",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/48832",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-basic-ui-elements-metal"
+      ]
+    },
+    {
+      "title": "Battle Skill Icon",
+      "creator": "Dr.Game",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/33262",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "AbilityIconsLicensed/arrow-rain",
+        "AbilityIconsLicensed/attack-command",
+        "AbilityIconsLicensed/fire-imbuement",
+        "AbilityIconsLicensed/guard",
+        "AbilityIconsLicensed/heavy-strike",
+        "AbilityIconsLicensed/ice-burst",
+        "AbilityIconsLicensed/interact",
+        "AbilityIconsLicensed/magic-sand",
+        "AbilityIconsLicensed/magical-passive",
+        "AbilityIconsLicensed/mend",
+        "AbilityIconsLicensed/novice-heal",
+        "AbilityIconsLicensed/novice-passive",
+        "AbilityIconsLicensed/novice-quickness",
+        "AbilityIconsLicensed/novice-stun",
+        "AbilityIconsLicensed/physical-passive",
+        "AbilityIconsLicensed/quickening",
+        "AbilityIconsLicensed/return-home",
+        "UiThemesLicensed/pack-battle-skill-icon"
+      ]
+    },
+    {
+      "title": "Bloodlines - Dark UI",
+      "creator": "Alebardium",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/328721",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-bloodlines-dark-ui"
+      ]
+    },
+    {
+      "title": "Camo UI Elements: Woodland",
+      "creator": "DualCorStudios",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/48829",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-camo-ui-elements-woodland"
+      ]
+    },
+    {
+      "title": "Colorful UI Kit",
+      "creator": "Smashy Tech",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/375864",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-colorful-ui-kit"
+      ]
+    },
+    {
+      "title": "Dark Brown GUI kit",
+      "creator": "ARCEY",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/201086",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-dark-brown-gui-kit"
+      ]
+    },
+    {
+      "title": "Elemental Meters",
+      "creator": "Armathyx",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/173133",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-elemental-meters"
+      ]
+    },
+    {
+      "title": "FREE - Modular Character - Fantasy RPG Human Male",
+      "creator": "Blink",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/228952",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "PhysicalLicensed/Materials/Accessories",
+        "PhysicalLicensed/Materials/Beard1",
+        "PhysicalLicensed/Materials/Beard3",
+        "PhysicalLicensed/Materials/Body",
+        "PhysicalLicensed/Materials/Eyebrows",
+        "PhysicalLicensed/Materials/Eyes",
+        "PhysicalLicensed/Materials/EyesOuter",
+        "PhysicalLicensed/Materials/Face1",
+        "PhysicalLicensed/Materials/Hair1",
+        "PhysicalLicensed/Materials/Hair2",
+        "PhysicalLicensed/Materials/StarterArmor_1",
+        "PhysicalLicensed/PhysicalHero"
+      ]
+    },
+    {
+      "title": "Free RPG Fantasy Spell Icons",
+      "creator": "Blink",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/200511",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-free-rpg-fantasy-spell-icons"
+      ]
+    },
+    {
+      "title": "Fantasy Staff Lite",
+      "creator": "Adventure Forge",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/54999",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "MagicalLicensed/MagicalHero",
+        "MagicalLicensed/Materials/Staff MetalstaffCasing512MA",
+        "MagicalLicensed/Materials/Staff MetalstaffRing512MA",
+        "MagicalLicensed/Materials/Staff MetalstaffRod512MA"
+      ]
+    },
+    {
+      "title": "Fantasy Wooden GUI : Free",
+      "creator": "Black Hammer",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/103811",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-fantasy-wooden-gui-free"
+      ]
+    },
+    {
+      "title": "Female Warrior Princess",
+      "creator": "All * Star Characters",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/44041",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "GreatbladeLicensed/GreatbladeBody",
+        "GreatbladeLicensed/GreatbladeHero"
+      ]
+    },
+    {
+      "title": "Free Game VFX Collection(URP)",
+      "creator": "Eric VFX Studio",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/345212",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "StatusVfxLicensed/StunSoftGlow"
+      ]
+    },
+    {
+      "title": "Free Low Poly Swords",
+      "creator": "Pure Poly",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/189978",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "GreatbladeLicensed/GreatbladeHero"
+      ]
+    },
+    {
+      "title": "Free Ui Pack",
+      "creator": "Valley Land Games",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/170878",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-free-ui-pack"
+      ]
+    },
+    {
+      "title": "GUI Parts",
+      "creator": "PONETI",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/159068",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-gui-parts"
+      ]
+    },
+    {
+      "title": "Game Input Controller Icons Free",
+      "creator": "Amanz",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/285953",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-game-input-controller-icons-free"
+      ]
+    },
+    {
+      "title": "Jelly pack UI",
+      "creator": "Smashy Tech",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/347018",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-jelly-pack-ui"
+      ]
+    },
+    {
+      "title": "Low Poly Modular Armors - Free - LOWPOLY MEDIEVAL FANTASY SERIES",
+      "creator": "Polytope Studio",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/199890",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "MagicalLicensed/MagicalHero",
+        "MagicalLicensed/Materials/Caster dark hair",
+        "MagicalLicensed/Materials/Caster indigo cloth",
+        "MagicalLicensed/Materials/Caster skin",
+        "MagicalLicensed/Materials/Caster violet cape",
+        "MagicalLicensed/Materials/Caster worn boots"
+      ]
+    },
+    {
+      "title": "Low-Poly Medieval Market",
+      "creator": "VanillaArt",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/262473",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "TrimeryLicensed/Crate",
+        "TrimeryLicensed/MarketStand",
+        "TrimeryLicensed/MarketStand2"
+      ]
+    },
+    {
+      "title": "Magic Spells - Fantasy Icons",
+      "creator": "The Higalina Vault",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/346770",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-magic-spells-40-fantasy-icons-512x512-hd"
+      ]
+    },
+    {
+      "title": "Medieval Village Building Kit",
+      "creator": "Mikes Digital Emporium",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/116540",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "TrimeryLicensed/TimberSupport"
+      ]
+    },
+    {
+      "title": "Pixel HUD UI Free Kit",
+      "creator": "IndigoLay",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/378572",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-pixel-hud-ui-free-kit"
+      ]
+    },
+    {
+      "title": "Realistic Furry Wolf",
+      "creator": "Rip Vertices Studio",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/311465",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "IronpineLicensedWolf/FurryWolfCoat",
+        "IronpineLicensedWolf/FurryWolfEyes",
+        "IronpineLicensedWolf/FurryWolfHair",
+        "IronpineLicensedWolf/FurryWolfShortFur",
+        "IronpineLicensedWolf/RealisticWolf"
+      ]
+    },
+    {
+      "title": "SIMPLE FANTASY GUI",
+      "creator": "Nayrissa",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/99451",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-simple-fantasy-gui"
+      ]
+    },
+    {
+      "title": "Shields V2 - Fantasy Icons [512x512 HD]",
+      "creator": "The Higalina Vault",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/330528",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-shields-40-fantasy-icons-512x512-hd"
+      ]
+    },
+    {
+      "title": "Simple UI Elements",
+      "creator": "Swapnil",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/53276",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-simple-ui-elements"
+      ]
+    },
+    {
+      "title": "Soft Touch UI Kit Demo",
+      "creator": "Smashy Tech",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/377802",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-soft-touch-ui-kit-demo"
+      ]
+    },
+    {
+      "title": "SoundBits | Free Sound FX Collection",
+      "creator": "SoundBits",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/31837",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "Audio/IronpineLicensed/WolfBark",
+        "Audio/IronpineLicensed/WolfGrowl",
+        "Audio/IronpineLicensed/WolfPack"
+      ]
+    },
+    {
+      "title": "SpellBook. Preface",
+      "creator": "REXARD",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/111069",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-spellbook-preface"
+      ]
+    },
+    {
+      "title": "Spooky Horror UI Kit",
+      "creator": "Smashy Tech",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/375774",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-spooky-horror-ui-kit"
+      ]
+    },
+    {
+      "title": "SteampunkUI",
+      "creator": "Gentleland",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/238976",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-steampunkui"
+      ]
+    },
+    {
+      "title": "Stone UI",
+      "creator": "SiLena_ART",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/182526",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-stone-ui"
+      ]
+    },
+    {
+      "title": "Sweet Land GUI",
+      "creator": "Persefida",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/208285",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-sweet-land-gui"
+      ]
+    },
+    {
+      "title": "Unity Samples: UI",
+      "creator": "Unity Technologies",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/25468",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "UiThemesLicensed/pack-ui-examples-ugui-sample-project"
+      ]
+    }
+  ]
+}
