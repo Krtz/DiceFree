@@ -120,7 +120,9 @@ namespace DiceFree.UI
                 animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 animator.speed = 1f;
                 animator.Rebind();
-                animator.Play(Animator.StringToHash("Base Layer.Idle"), 0, 0f);
+                int idle=Animator.StringToHash("Base Layer.Idle");
+                if(!animator.HasState(0,idle))idle=Animator.StringToHash("Base Layer.Greatblade two-hand ready");
+                if(animator.HasState(0,idle))animator.Play(idle, 0, 0f);
                 animator.Update(0f);
             }
             foreach (var behaviour in clone.GetComponentsInChildren<MonoBehaviour>(true))

@@ -1,0 +1,86 @@
+{
+    "status": "completed",
+    "rows": [
+        {
+            "classId": "class.novice",
+            "controller": "Assets/_DiceFree/Art/Characters/Novice/Animations/Novice.controller",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "state": "Idle,Locomotion,UnarmedAttack",
+            "avatar": "NoviceAvatar",
+            "humanoid": true,
+            "loop": false,
+            "distance": 11.419776916503906,
+            "maxSpeed": 5.0005011558532715,
+            "footTravel": 0.27492621541023254,
+            "legAngle": 8.028008460998535,
+            "normalizedTime": 2.209181308746338,
+            "idleSpeed": 0.0,
+            "states": [
+                "Idle",
+                "Locomotion",
+                "UnarmedAttack"
+            ]
+        },
+        {
+            "classId": "class.physically-blessed-novice",
+            "controller": "Assets/_DiceFree/Art/Characters/Novice/Animations/Novice.controller",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "state": "Idle,Locomotion,UnarmedAttack",
+            "avatar": "HumanMale_CharacterAvatar",
+            "humanoid": true,
+            "loop": false,
+            "distance": 11.114692687988281,
+            "maxSpeed": 5.006010055541992,
+            "footTravel": 0.3339884877204895,
+            "legAngle": 8.026544570922852,
+            "normalizedTime": 2.2244067192077637,
+            "idleSpeed": 0.0,
+            "states": [
+                "Idle",
+                "Locomotion",
+                "UnarmedAttack"
+            ]
+        },
+        {
+            "classId": "class.magically-touched-novice",
+            "controller": "Assets/_DiceFree/Art/Characters/Novice/Animations/Novice.controller",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "state": "Idle,Locomotion,UnarmedAttack",
+            "avatar": "PT_Lowpoly_Armors_Male_Moduar_FreeAvatar",
+            "humanoid": true,
+            "loop": false,
+            "distance": 10.906164169311523,
+            "maxSpeed": 5.002511978149414,
+            "footTravel": 0.27206990122795105,
+            "legAngle": 8.027715682983398,
+            "normalizedTime": 2.1177384853363037,
+            "idleSpeed": 0.0,
+            "states": [
+                "Idle",
+                "Locomotion",
+                "UnarmedAttack"
+            ]
+        },
+        {
+            "classId": "class.greatblade",
+            "controller": "Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladePrototype.controller",
+            "clip": "Greatblade two-handed carry walk",
+            "state": "Greatblade two-hand ready,Greatblade walk,Two-handed swing,Spin Dash",
+            "avatar": "GreatbladeFemaleAvatar",
+            "humanoid": true,
+            "loop": true,
+            "distance": 11.75948715209961,
+            "maxSpeed": 5.00450325012207,
+            "footTravel": 0.5412888526916504,
+            "legAngle": 63.37744140625,
+            "normalizedTime": 2.2160396575927734,
+            "idleSpeed": 0.0,
+            "states": [
+                "Greatblade two-hand ready",
+                "Greatblade walk",
+                "Two-handed swing",
+                "Spin Dash"
+            ]
+        }
+    ]
+}

@@ -22,7 +22,9 @@ namespace DiceFree.Combat
         ActorResourceController resources;
         BasicAttack basic;
         float lastHit,cryUntil,hasteUntil,areaGain;
-        bool suspendedBasic;
+        bool suspendedBasic, spinPassage;
+        ObstacleAvoidanceType priorAvoidance;
+        const string SpinSource="skill.greatblade.spin";
         public bool Busy{get;private set;}
         public string Feedback{get;private set;}="";
         public GreatbladeCombatTuning Tuning=>tuning;
@@ -100,7 +102,11 @@ namespace DiceFree.Combat
         {
             var hitOnce=new HashSet<CombatActor>();int corner=1;float elapsed=0,stalled=0;
             LastCastHits=0;areaGain=0;
-            actor.Motor.SetSpeedFactor("skill.greatblade.spin",tuning.spinSpeed/Mathf.Max(.1f,actor.Motor.BaseSpeed));
+            var agent=GetComponent<NavMeshAgent>();
+            priorAvoidance=agent.obstacleAvoidanceType;
+            agent.obstacleAvoidanceType=ObstacleAvoidanceType.NoObstacleAvoidance;
+            spinPassage=true;actor.SetEnemyPassage(SpinSource,true);
+            actor.Motor.SetSpeedFactor(SpinSource,tuning.spinSpeed/Mathf.Max(.1f,actor.Motor.BaseSpeed));
             while(corner<corners.Length&&elapsed<3&&ValidCast())
             {
                 float remaining=Time.deltaTime;
@@ -178,7 +184,16 @@ namespace DiceFree.Combat
         public void CancelCast()
         {
             StopAllCoroutines();Busy=false;
-            actor?.Motor?.RemoveSpeedFactor("skill.greatblade.spin");
+            actor?.Motor?.RemoveSpeedFactor(SpinSource);
+            if(spinPassage)
+            {
+                actor?.SetEnemyPassage(SpinSource,false);
+                var agent=GetComponent<NavMeshAgent>();
+                if(agent!=null&&agent.obstacleAvoidanceType==ObstacleAvoidanceType.NoObstacleAvoidance)
+                    agent.obstacleAvoidanceType=priorAvoidance;
+                GetComponent<ActorFootprintSeparation>()?.RebaseAfterTeleport();
+                spinPassage=false;
+            }
             actor?.Motor?.Stop();
             if(suspendedBasic&&basic!=null)basic.enabled=true;suspendedBasic=false;
         }

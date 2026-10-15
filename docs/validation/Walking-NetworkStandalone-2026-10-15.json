@@ -1,0 +1,1904 @@
+{
+    "marker":  "DICEFREE_NETWORK_WORLD_LAB",
+    "passed":  true,
+    "failure":  null,
+    "utc":  "2026-10-15T07:13:20.2828685Z",
+    "checks":  [
+                   {
+                       "name":  "Separate processes exchange authoritative state",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Independent host and guest movement",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Client receives authoritative position",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Out-of-bounds movement and cross-face attack rejected",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Other participant moves during cube flip",
+                       "passed":  true,
+                       "detail":  {
+                                      "startTick":  105,
+                                      "endTick":  115
+                                  }
+                   },
+                   {
+                       "name":  "Guest crosses alone while host stays on world1",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Walking inward rearms the gate without arrival bounce",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Existing BasicAttack resolves in both occupied worlds",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Round trip preserves server actor identity",
+                       "passed":  true,
+                       "detail":  "6339:256"
+                   },
+                   {
+                       "name":  "Late join receives damaged-world state",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Four players coexist",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Fifth player rejected without replacing roster",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Disconnected actor remains vulnerable in grace",
+                       "passed":  true,
+                       "detail":  {
+                                      "before":  496.9730224609375,
+                                      "during":  494.1044006347656
+                                  }
+                   },
+                   {
+                       "name":  "Reconnect keeps actor and missing HP",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Expired grace removes abandoned actor",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Expired reconnect uses fresh join rules",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "No runtime/navigation errors: host",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "No runtime/navigation errors: guest",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "No runtime/navigation errors: late",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "No runtime/navigation errors: fourth",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "No runtime/navigation errors: overflow",
+                       "passed":  true,
+                       "detail":  null
+                   },
+                   {
+                       "name":  "Both faces remain loaded on host",
+                       "passed":  true,
+                       "detail":  null
+                   }
+               ],
+    "evidence":  [
+                     {
+                         "name":  "joined",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 2 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  0,
+                                      "rejected":  0,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  26,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  3.649308443069458,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  -2.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -8.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  4.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -8.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39986.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  2000.0,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  -14.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -22.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  2000.0,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 2 participants",
+                                       "localFace":  "world.test.1",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  7,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  0,
+                                       "flips":  0,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  27,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  3.7496418952941895,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  -2.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  4.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39986.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  -14.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -22.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     },
+                     {
+                         "name":  "split-worlds",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 2 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  5,
+                                      "rejected":  32,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  150,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  16.085342407226563,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  -6.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -3.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  -0.001372285420075059,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9999990463256836
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  40000.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39979.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  -0.10183261334896088,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9948016405105591
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  1,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39986.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  2000.0,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  -14.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -22.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  2000.0,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 2 participants",
+                                       "localFace":  "world.test.2",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  130,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  1,
+                                       "flips":  1,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  150,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  16.085342407226563,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  -6.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -3.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  -0.001372285420075059,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9999990463256836
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  40000.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39979.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  -0.10183261334896088,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9948016405105591
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  1,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39986.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  -14.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -22.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     },
+                     {
+                         "name":  "simultaneous-combat",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 2 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  8,
+                                      "rejected":  32,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  235,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  24.609237670898438,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  -13.299657821655273,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -20.338237762451172
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.991273045539856,
+                                                                                           "z":  0.0,
+                                                                                           "w":  -0.13182476162910461
+                                                                                       },
+                                                                          "hp":  494.4801025390625,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.36480712890625,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  39987.4140625,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39979.3828125
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.9244206547737122,
+                                                                                           "z":  0.0,
+                                                                                           "w":  -0.38137444853782654
+                                                                                       },
+                                                                          "hp":  497.3187255859375,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  1.086618423461914,
+                                                                          "hits":  1,
+                                                                          "transitions":  1,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39986.0390625,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.38137444853782654,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9244206547737122
+                                                                                       },
+                                                                          "hp":  1996.9449462890625,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  1.086618423461914,
+                                                                          "hits":  1,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  -13.722947120666504,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -21.901580810546875
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.13182476162910461,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.991273045539856
+                                                                                       },
+                                                                          "hp":  1994.090087890625,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.36480712890625,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 2 participants",
+                                       "localFace":  "world.test.2",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  130,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  1,
+                                       "flips":  1,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  150,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  16.085342407226563,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  -6.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -3.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  -0.001372285420075059,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9999990463256836
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  40000.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39979.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  -0.10183261334896088,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9948016405105591
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  1,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39986.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  -14.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -22.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     },
+                     {
+                         "name":  "round-trip",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 2 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  11,
+                                      "rejected":  127,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  300,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  31.13205909729004,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  6.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -3.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.40725749731063843,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9133133888244629
+                                                                                       },
+                                                                          "hp":  495.1517639160156,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  21.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.7671947479248047,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.6414142847061157
+                                                                                       },
+                                                                          "hp":  497.9903869628906,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  1,
+                                                                          "transitions":  2,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39987.1015625,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.23046875
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.46381309628486633,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.8859331011772156
+                                                                                       },
+                                                                          "hp":  1997.1322021484375,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  1,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  4.698980331420898,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -4.512324810028076
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.3477923274040222,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.93757164478302
+                                                                                       },
+                                                                          "hp":  1994.27734375,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.4181041717529297,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 2 participants",
+                                       "localFace":  "world.test.1",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  279,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  2,
+                                       "flips":  2,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  299,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  31.03175163269043,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  6.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -3.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.40725749731063843,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9133133888244629
+                                                                                        },
+                                                                           "hp":  495.14111328125,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  2,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  21.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.7671947479248047,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.6414142847061157
+                                                                                        },
+                                                                           "hp":  497.979736328125,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  1,
+                                                                           "transitions":  2,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39987.1015625,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.23046875
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.46381309628486633,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.8859331011772156
+                                                                                        },
+                                                                           "hp":  1997.12890625,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  1,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  4.698980331420898,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -4.512324810028076
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.3477923274040222,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.93757164478302
+                                                                                        },
+                                                                           "hp":  1994.2740478515625,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.5184402465820313,
+                                                                           "hits":  2,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     },
+                     {
+                         "name":  "reconnected",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 4 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  12,
+                                      "rejected":  127,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  472,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  48.40553665161133,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  6.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -3.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.40725749731063843,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9133133888244629
+                                                                                       },
+                                                                          "hp":  462.85528564453125,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  4.41591739654541,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -2.790001630783081
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.9966850876808167,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.08135662227869034
+                                                                                       },
+                                                                          "hp":  494.1247253417969,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  2,
+                                                                          "transitions":  2,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.3",
+                                                                          "name":  "player.3 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6808:256",
+                                                                          "position":  {
+                                                                                           "x":  4.778582572937012,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -8.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.4",
+                                                                          "name":  "player.4 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "7277:256",
+                                                                          "position":  {
+                                                                                           "x":  6.173582553863525,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -8.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39987.1015625,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.23046875
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.46381309628486633,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.8859331011772156
+                                                                                       },
+                                                                          "hp":  1998.5257568359375,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  1,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  4.698980331420898,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -4.512324810028076
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  -0.08135662227869034,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9966850876808167
+                                                                                       },
+                                                                          "hp":  1993.079345703125,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.6959304809570313,
+                                                                          "hits":  15,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 4 participants",
+                                       "localFace":  "world.test.1",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  437,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  2,
+                                       "flips":  2,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  471,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  48.30435562133789,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  6.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -3.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.40725749731063843,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9133133888244629
+                                                                                        },
+                                                                           "hp":  462.8453369140625,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  2,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  4.41591739654541,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -2.790001630783081
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.9966850876808167,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.08135662227869034
+                                                                                        },
+                                                                           "hp":  494.1147766113281,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  2,
+                                                                           "transitions":  2,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.3",
+                                                                           "name":  "player.3 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6808:256",
+                                                                           "position":  {
+                                                                                            "x":  4.778582572937012,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.4",
+                                                                           "name":  "player.4 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "7277:256",
+                                                                           "position":  {
+                                                                                            "x":  6.173582553863525,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39987.1015625,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.23046875
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.46381309628486633,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.8859331011772156
+                                                                                        },
+                                                                           "hp":  1998.516357421875,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  1,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  4.698980331420898,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -4.512324810028076
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  -0.08135662227869034,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9966850876808167
+                                                                                        },
+                                                                           "hp":  1993.0699462890625,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.7952995300292969,
+                                                                           "hits":  15,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     },
+                     {
+                         "name":  "expired-rejoin",
+                         "host":  {
+                                      "ready":  true,
+                                      "connected":  true,
+                                      "host":  true,
+                                      "busy":  false,
+                                      "status":  "Hosting - 4 connected",
+                                      "localFace":  "world.test.1",
+                                      "unityVersion":  "6000.6.3f1",
+                                      "snapshots":  0,
+                                      "accepted":  13,
+                                      "rejected":  127,
+                                      "transitions":  0,
+                                      "flips":  0,
+                                      "loadedFaces":  [
+                                                          "world.test.2",
+                                                          "world.test.1"
+                                                      ],
+                                      "snapshot":  {
+                                                       "protocol":  1,
+                                                       "tick":  776,
+                                                       "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                       "ownId":  "player.1",
+                                                       "serverTime":  78.9368667602539,
+                                                       "actors":  [
+                                                                      {
+                                                                          "id":  "player.1",
+                                                                          "name":  "player.1 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "4955:256",
+                                                                          "position":  {
+                                                                                           "x":  6.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -3.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.40725749731063843,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.9133133888244629
+                                                                                       },
+                                                                          "hp":  398.934326171875,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  2,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.2",
+                                                                          "name":  "player.2 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6339:256",
+                                                                          "position":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  10.000000953674316
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.16537941992282867,
+                                                                                           "z":  0.0,
+                                                                                           "w":  -0.9862300753593445
+                                                                                       },
+                                                                          "hp":  497.1982421875,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  2,
+                                                                          "transitions":  2,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "player.4",
+                                                                          "name":  "player.4 the Novice",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "7277:256",
+                                                                          "position":  {
+                                                                                           "x":  6.173582553863525,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -8.0
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.0,
+                                                                                           "z":  0.0,
+                                                                                           "w":  1.0
+                                                                                       },
+                                                                          "hp":  500.0,
+                                                                          "maximumHp":  500.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  0,
+                                                                          "transitions":  0,
+                                                                          "connected":  true,
+                                                                          "travelling":  false,
+                                                                          "player":  true
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.2",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.2",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "5745:768",
+                                                                          "position":  {
+                                                                                           "x":  39987.1015625,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  39978.23046875
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.46381309628486633,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.8859331011772156
+                                                                                       },
+                                                                          "hp":  2000.0,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  0.0,
+                                                                          "hits":  1,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      },
+                                                                      {
+                                                                          "id":  "sentinel.world.test.1",
+                                                                          "name":  "Training sentinel",
+                                                                          "face":  "world.test.1",
+                                                                          "destination":  "",
+                                                                          "runtimeId":  "6324:256",
+                                                                          "position":  {
+                                                                                           "x":  4.698980331420898,
+                                                                                           "y":  0.0625,
+                                                                                           "z":  -4.512324810028076
+                                                                                       },
+                                                                          "rotation":  {
+                                                                                           "x":  0.0,
+                                                                                           "y":  0.3477923274040222,
+                                                                                           "z":  0.0,
+                                                                                           "w":  0.93757164478302
+                                                                                       },
+                                                                          "hp":  1995.9271240234375,
+                                                                          "maximumHp":  2000.0,
+                                                                          "cooldown":  1.2112274169921875,
+                                                                          "hits":  37,
+                                                                          "transitions":  0,
+                                                                          "connected":  false,
+                                                                          "travelling":  false,
+                                                                          "player":  false
+                                                                      }
+                                                                  ]
+                                                   }
+                                  },
+                         "guest":  {
+                                       "ready":  true,
+                                       "connected":  true,
+                                       "host":  false,
+                                       "busy":  false,
+                                       "status":  "Connected - 4 participants",
+                                       "localFace":  "world.test.1",
+                                       "unityVersion":  "6000.6.3f1",
+                                       "snapshots":  744,
+                                       "accepted":  0,
+                                       "rejected":  0,
+                                       "transitions":  2,
+                                       "flips":  2,
+                                       "loadedFaces":  [
+                                                           "world.test.2",
+                                                           "world.test.1"
+                                                       ],
+                                       "snapshot":  {
+                                                        "protocol":  1,
+                                                        "tick":  778,
+                                                        "session":  "b75029acf8ca4f00bdd995b2c65e03be",
+                                                        "ownId":  "player.2",
+                                                        "serverTime":  79.13726043701172,
+                                                        "actors":  [
+                                                                       {
+                                                                           "id":  "player.1",
+                                                                           "name":  "player.1 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "4955:256",
+                                                                           "position":  {
+                                                                                            "x":  6.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -3.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.40725749731063843,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.9133133888244629
+                                                                                        },
+                                                                           "hp":  395.9145202636719,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  2,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.2",
+                                                                           "name":  "player.2 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6339:256",
+                                                                           "position":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  10.000000953674316
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.16537941992282867,
+                                                                                            "z":  0.0,
+                                                                                            "w":  -0.9862300753593445
+                                                                                        },
+                                                                           "hp":  497.21820068359375,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  2,
+                                                                           "transitions":  2,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.5",
+                                                                           "name":  "player.5 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6808:768",
+                                                                           "position":  {
+                                                                                            "x":  5.416555881500244,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "player.4",
+                                                                           "name":  "player.4 the Novice",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "7277:256",
+                                                                           "position":  {
+                                                                                            "x":  6.811555862426758,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -8.0
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.0,
+                                                                                            "z":  0.0,
+                                                                                            "w":  1.0
+                                                                                        },
+                                                                           "hp":  500.0,
+                                                                           "maximumHp":  500.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  0,
+                                                                           "transitions":  0,
+                                                                           "connected":  true,
+                                                                           "travelling":  false,
+                                                                           "player":  true
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.2",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.2",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "5745:768",
+                                                                           "position":  {
+                                                                                            "x":  39987.1015625,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  39978.23046875
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.46381309628486633,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.8859331011772156
+                                                                                        },
+                                                                           "hp":  2000.0,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  0.0,
+                                                                           "hits":  1,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       },
+                                                                       {
+                                                                           "id":  "sentinel.world.test.1",
+                                                                           "name":  "Training sentinel",
+                                                                           "face":  "world.test.1",
+                                                                           "destination":  "",
+                                                                           "runtimeId":  "6324:256",
+                                                                           "position":  {
+                                                                                            "x":  4.698980331420898,
+                                                                                            "y":  0.0625,
+                                                                                            "z":  -4.512324810028076
+                                                                                        },
+                                                                           "rotation":  {
+                                                                                            "x":  0.0,
+                                                                                            "y":  0.3477923274040222,
+                                                                                            "z":  0.0,
+                                                                                            "w":  0.93757164478302
+                                                                                        },
+                                                                           "hp":  1995.9459228515625,
+                                                                           "maximumHp":  2000.0,
+                                                                           "cooldown":  1.0110702514648438,
+                                                                           "hits":  38,
+                                                                           "transitions":  0,
+                                                                           "connected":  false,
+                                                                           "travelling":  false,
+                                                                           "player":  false
+                                                                       }
+                                                                   ]
+                                                    }
+                                   }
+                     }
+                 ],
+    "limits":  [
+                   "Loopback only; laptop/internet untested",
+                   "Basic attacks; isolated Novices padded to 500 HP",
+                   "Both test maps resident in every process",
+                   "No skills/progression/host migration/production-world replication"
+               ]
+}

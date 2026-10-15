@@ -27,6 +27,16 @@ namespace DiceFree.Combat
         /// Normal alive units must respect each other's circular footprints.</summary>
         public bool Ghosting { get; private set; }
         public void SetGhosting(bool value) => Ghosting = value;
+        private readonly HashSet<string> enemyPassage = new(System.StringComparer.Ordinal);
+        /// <summary>Named ability lease: pass enemy bodies while terrain and friendly units still block.</summary>
+        public void SetEnemyPassage(string sourceId, bool enabled)
+        {
+            if(string.IsNullOrWhiteSpace(sourceId))throw new System.ArgumentException("Passage needs a stable source.");
+            if(enabled)enemyPassage.Add(sourceId);else enemyPassage.Remove(sourceId);
+        }
+        public bool CanPassThrough(CombatActor other) => other != null &&
+            (Ghosting || other.Ghosting ||
+             (faction != other.faction && (enemyPassage.Count > 0 || other.enemyPassage.Count > 0)));
         private string familyOverride;
         private float nominalRadius;
         private bool footprintInitialized;

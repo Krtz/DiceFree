@@ -28,7 +28,7 @@ namespace DiceFree.UI
             int mastery=skills.Rank(Kind.GreatswordMastery);
             text+=kind switch{
                 Kind.WideArc=>$"Frontal cleave: {t.ArcCoefficient(r):0.##} × STR physical damage (+ mastery/buffs).\nReach {t.arcReach:0.#}m beyond unit radii; angle {t.arcAngle+(mastery>=3?15+3*(mastery-3):0):0}°.\nWind-up {t.arcWindup:0.##}s. Connecting hits generate Momentum; capped per cast.",
-                Kind.SpinDash=>$"Ground-target spinning dash, up to {t.spinRange:0.#}m.\n{t.SpinCoefficient(r):0.##} × STR physical damage (+ mastery/buffs), once per enemy along the actual route.\nCollision-safe: walls and living units block movement. Generates Momentum.",
+                Kind.SpinDash=>$"Ground-target spinning dash, up to {t.spinRange:0.#}m.\n{t.SpinCoefficient(r):0.##} × STR physical damage (+ mastery/buffs), once per enemy along the actual route.\nPasses through enemies. Walls, objects and friendly units block movement. Generates Momentum.",
                 Kind.OverheadBreaker=>$"Single-target finisher: {t.BreakerCoefficient(r):0.##} × STR physical damage (+ mastery/buffs).\nConsumes ALL Momentum, requires {t.breakerMinimumMomentum:0}.\nEach Momentum adds 1.5% damage (100 = +150%).\nWind-up {t.breakerWindup:0.##}s; interrupted or escaped strikes do not refund.",
                 Kind.BattleCry=>$"Self offensive buff: +{t.cryDamagePercent+3*(r-1):0}% sword/skill damage for {t.cryDuration:0.#}s. No Momentum cost.",
                 Kind.GreatswordMastery=>$"+{GreatbladeProgressionRules.DamageBonusPct(r):0}% greatsword damage; +{GreatbladeProgressionRules.StrengthBonus(r):0} STR."+

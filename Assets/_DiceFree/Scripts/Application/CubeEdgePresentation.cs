@@ -62,7 +62,7 @@ namespace DiceFree.Development
         {
             if(room==null||room.Map==null||room.Busy||Edge==null)return;
             float local=Edge.Sign*(room.player.transform.position.z-Edge.Origin.z);
-            if(local<Edge.halfSize-7f)armed=true;
+            if(local<Edge.halfSize-4.5f)armed=true;
             if(armed&&Edge.AtCrossing(room.player.transform.position))room.Travel(Edge.destinationScene);
         }
         void VistaPose(out Vector3 position,out Quaternion rotation,out float fov)

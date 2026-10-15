@@ -1,0 +1,177 @@
+﻿[
+    {
+        "command":  "dicefree.advancement.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_ADVANCEMENT_DATA_OK",
+                       "classes":  4,
+                       "advancements":  3,
+                       "schema":  6,
+                       "rosterVersion":  1
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.physical.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_PHYSICAL_DATA_OK",
+                       "classId":  "class.physically-blessed-novice",
+                       "skillCount":  5,
+                       "manaMaximumAtLevel1":  65,
+                       "manaRegenAtLevel1":  4.5
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.magical.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_MAGICAL_DATA_OK",
+                       "classId":  "class.magically-touched-novice",
+                       "skillCount":  5,
+                       "manaMaximumAtLevel1":  119,
+                       "manaRegenAtLevel1":  8.900001,
+                       "sandRank6Cost":  100,
+                       "iceRank6Cost":  100
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.novice-skills.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_NOVICE_SKILLS_DATA_OK",
+                       "definitions":  5,
+                       "schema":  6
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.architecture.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture",
+                       "finalMarker":  "DICEFRE_ARCHITECTURE_OK",
+                       "elapsedSeconds":  1.3685125999999999,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.architecture.policy",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture-policy",
+                       "finalMarker":  "DICEFRE_ARCH_POLICY_SELFTEST_OK",
+                       "elapsedSeconds":  0.00048709999999999997,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.managed-references.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "validation":  "managed-references",
+                       "finalMarker":  "DICEFREE_MANAGED_REFERENCE_OK",
+                       "elapsedSeconds":  0.4240114,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.xp.quadratic.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "formula":  "30 + 3*(level-1)^2",
+                       "schema":  6,
+                       "manifestationsMigrated":  4,
+                       "questDefinitions":  8,
+                       "enemyDefinitions":  16
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.ui.skills.inspect",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "tooltipDefinitions":  15,
+                       "upgradeUi":  "In action bar",
+                       "concreteClassPanels":  3
+                   },
+        "errors":  [
+
+                   ]
+    },
+    {
+        "command":  "dicefree.greatblade.prototype.validate",
+        "exitCode":  0,
+        "success":  true,
+        "result":  {
+                       "success":  true,
+                       "marker":  "DICEFREE_GREATBLADE_VISUAL_AND_PROGRESS_OK",
+                       "playerAndMentorSameModel":  true,
+                       "femaleHumanoidAvatar":  true,
+                       "animationStates":  4,
+                       "swordInHand":  true,
+                       "texturedBody":  true,
+                       "oneBodyLod":  true,
+                       "extraSwordHidden":  true,
+                       "fingerBones":  30,
+                       "sampledVisualPoses":  80,
+                       "maxSupportHandError":  0.00000195068674,
+                       "maxDominantHandError":  0.00000137737038,
+                       "passives":  2,
+                       "level1Skills":  4,
+                       "breakerFirstLevel":  6,
+                       "ultimateTierMinimum":  4
+                   },
+        "errors":  [
+
+                   ]
+    }
+]

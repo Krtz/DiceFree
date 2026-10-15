@@ -79,7 +79,7 @@ namespace DiceFree.Characters
                 {
                     if(unit.collider.transform.root==transform.root)continue;
                     var other=unit.collider.GetComponentInParent<DiceFree.Combat.CombatActor>();
-                    if(other!=null && ((thisActor!=null && thisActor.Ghosting) ||
+                    if(other!=null && ((thisActor!=null && thisActor.CanPassThrough(other)) ||
                         other.Ghosting || !other.Alive))continue;
                     distance = Mathf.Min(distance, Mathf.Max(0, unit.distance - 0.03f));
                 }

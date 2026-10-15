@@ -55,8 +55,8 @@ try{
  Wait-For 'reject cross face attack' {(State 'host').rejected -gt $rejected}
  Check 'Out-of-bounds movement and cross-face attack rejected' $true
  Send 'guest' @{kind='move';x=0;z=21}
- Wait-For 'north edge' {(Distance (Player $guestId).position @{x=0;z=21}) -lt .7}
- Send 'guest' @{kind='travel';face='world.test.2'}
+ Wait-For 'north edge' {$p=Player $guestId;(Distance $p.position @{x=0;z=21}) -lt .7 -or $p.travelling -or $p.face -eq 'world.test.2'}
+ # Crossing must be activated by walking onto the pad, without a travel command.
  Wait-For 'turning' {(Player $guestId).travelling}
  $turnTick=(State 'host').snapshot.tick
  Send 'host' @{kind='move';x=-6;z=-3}
@@ -65,14 +65,17 @@ try{
  Wait-For 'world2 presentation' {$s=State 'guest';$s.localFace -eq 'world.test.2' -and $s.flips -eq 1 -and -not $s.busy}
  Check 'Guest crosses alone while host stays on world1' ((Player $hostId).face -eq 'world.test.1' -and (Player $guestId).face -eq 'world.test.2')
  Capture 'split-worlds'
+ Send 'guest' @{kind='move';x=40000;z=39990}
+ Wait-For 'walk inward to rearm arrival gate' {(Distance (Player $guestId).position @{x=40000;z=39990}) -lt .5}
+ Check 'Walking inward rearms the gate without arrival bounce' ((Player $guestId).face -eq 'world.test.2' -and (Player $guestId).transitions -eq 1)
  Send 'guest' @{kind='attack';target='sentinel.world.test.2'};Send 'host' @{kind='attack';target='sentinel.world.test.1'}
  Wait-For 'combat in both worlds' {(Player $guestId).hits -ge 1 -and (Player $hostId).hits -ge 1}
  Check 'Existing BasicAttack resolves in both occupied worlds' ((Player 'sentinel.world.test.1').hp -lt 2000 -and (Player 'sentinel.world.test.2').hp -lt 2000)
  Capture 'simultaneous-combat'
  Send 'guest' @{kind='move';x=40000;z=39979};Send 'host' @{kind='move';x=6;z=-3}
- Wait-For 'south edge' {(Distance (Player $guestId).position @{x=40000;z=39979}) -lt .7}
+ Wait-For 'south edge' {$p=Player $guestId;(Distance $p.position @{x=40000;z=39979}) -lt .7 -or $p.travelling -or $p.face -eq 'world.test.1'}
  Start-Sleep -Milliseconds 800
- Send 'guest' @{kind='travel';face='world.test.1'}
+ # Return crossing must also activate from walking alone.
  Wait-For 'return presentation' {$s=State 'guest';$s.localFace -eq 'world.test.1' -and $s.flips -eq 2 -and -not $s.busy}
  Check 'Round trip preserves server actor identity' ((Player $guestId).runtimeId -eq $runtime -and (Player $guestId).transitions -eq 2) $runtime
  Capture 'round-trip'

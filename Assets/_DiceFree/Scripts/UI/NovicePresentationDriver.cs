@@ -11,7 +11,6 @@ namespace DiceFree.UI
     {
         private static readonly int SpeedId = Animator.StringToHash("Speed");
         private static readonly int AttackId = Animator.StringToHash("Attack");
-        private static readonly int IdleId = Animator.StringToHash("Base Layer.Idle");
 
         [SerializeField] private Transform visualRoot;
         [SerializeField] private Animator animator;
@@ -20,7 +19,8 @@ namespace DiceFree.UI
         private BasicAttack attack;
         private NavMeshAgent agent;
         private bool wasWinding;
-        private float stalledWalkFor, stalledIdleFor;
+        private float stalledWalkFor, stalledIdleFor, attackVisualUntil;
+        private int idleState, walkState;
         private bool wasAlive;
         private Vector3 previousPosition;
         private bool hasPreviousPosition;
@@ -47,6 +47,7 @@ namespace DiceFree.UI
             }
 
             PrepareAnimator(animator, false);
+            ResolveStates();
             CacheHumanoidBones();
             previousPosition = transform.position;
             hasPreviousPosition = true;
@@ -62,6 +63,7 @@ namespace DiceFree.UI
             if (!alive)
             {
                 LastDrivenSpeed = 0;
+                stalledWalkFor = stalledIdleFor = attackVisualUntil = 0;
                 animator.SetFloat(SpeedId, 0f);
                 animator.speed = 0f;
                 wasWinding = false;
@@ -72,8 +74,9 @@ namespace DiceFree.UI
             if (!wasAlive)
             {
                 animator.speed = 1f;
+                attackVisualUntil = Time.time + .45f;
                 animator.ResetTrigger(AttackId);
-                animator.Play(IdleId, 0, 0f);
+                if(idleState!=0)animator.Play(idleState, 0, 0f);
                 wasAlive = true;
             }
             else
@@ -83,32 +86,33 @@ namespace DiceFree.UI
 
             LastDrivenSpeed = speed;
             animator.SetFloat(SpeedId, speed, 0.06f, Mathf.Max(0.0001f, Time.deltaTime));
-            // Some manifestation controllers occasionally remain in Idle after
-            // movement resumes (or in Walk after stopping). Only intervene
-            // after persistent movement-state mismatch, never during attacks.
-            bool moving = speed > .25f;
+            bool moving = speed > .13f;
             stalledWalkFor = moving ? stalledWalkFor + Time.deltaTime : 0f;
             stalledIdleFor = !moving ? stalledIdleFor + Time.deltaTime : 0f;
-            if (!animator.IsInTransition(0) &&
-                (attack == null || attack.State != "Wind-up"))
+            bool committed = (attack != null && attack.Target != null) ||
+                (actor.GetComponent<GreatbladeSkillCaster>()?.Busy ?? false) ||
+                Time.time < attackVisualUntil;
+            var state = animator.GetCurrentAnimatorStateInfo(0);
+            // A controller may use class-specific state names. Recover movement after
+            // interrupted attacks / class swaps without interrupting an active cast.
+            if (!committed && !animator.IsInTransition(0))
             {
-                var state = animator.GetCurrentAnimatorStateInfo(0);
-                if (stalledWalkFor >= .24f && state.IsName("Idle") &&
-                    animator.HasState(0, Animator.StringToHash("Base Layer.Locomotion")))
+                if (moving && stalledWalkFor >= .2f && walkState != 0 && state.fullPathHash != walkState)
                 {
-                    animator.CrossFade("Base Layer.Locomotion", .12f, 0);
-                    stalledWalkFor = 0f;
+                    animator.CrossFade(walkState, .10f, 0);
+                    stalledWalkFor = 0;
                 }
-                else if (stalledIdleFor >= .32f && state.IsName("Locomotion") &&
-                         animator.HasState(0, IdleId))
+                else if (!moving && stalledIdleFor >= .3f && idleState != 0 && state.fullPathHash == walkState)
                 {
-                    animator.CrossFade("Base Layer.Idle", .12f, 0);
-                    stalledIdleFor = 0f;
+                    animator.CrossFade(idleState, .10f, 0);
+                    stalledIdleFor = 0;
                 }
             }
-
+            // Scale only locomotion cadence; combat animations retain their authored timing.
+            animator.speed = !committed && moving && state.fullPathHash == walkState ?
+                Mathf.Clamp(speed / 5f, .35f, 1.8f) : 1f;
             bool winding = attack != null && attack.State == "Wind-up";
-            if (winding && !wasWinding) animator.SetTrigger(AttackId);
+            if (winding && !wasWinding) { animator.SetTrigger(AttackId); attackVisualUntil = Time.time + .45f; }
             wasWinding = winding;
 
             bool attacking = winding || animator.GetCurrentAnimatorStateInfo(0).IsName("UnarmedAttack");
@@ -154,10 +158,12 @@ namespace DiceFree.UI
             animator = modelAnimator;
             hasPreviousPosition = false;
             LastDrivenSpeed = 0;
+            stalledWalkFor = stalledIdleFor = attackVisualUntil = 0; wasWinding = false;
 
             if (animator != null)
             {
                 PrepareAnimator(animator, Application.isPlaying);
+                ResolveStates();
                 CacheHumanoidBones();
             }
         }
@@ -165,6 +171,7 @@ namespace DiceFree.UI
         public void PlayAttackAnimation()
         {
             if (animator == null || !animator.isActiveAndEnabled) return;
+            attackVisualUntil = Time.time + .45f;
             animator.ResetTrigger(AttackId);
             animator.SetTrigger(AttackId);
         }
@@ -208,6 +215,16 @@ namespace DiceFree.UI
             rightUpperArm.rotation = right * rightUpperArm.rotation;
         }
 
+        private static int FindState(Animator value, params string[] names)
+        {
+            foreach(var name in names){int hash=Animator.StringToHash(name);if(value.HasState(0,hash))return hash;}
+            return 0;
+        }
+        private void ResolveStates()
+        {
+            idleState=FindState(animator,"Base Layer.Idle","Base Layer.Greatblade two-hand ready");
+            walkState=FindState(animator,"Base Layer.Locomotion","Base Layer.Walk","Base Layer.Greatblade walk");
+        }
         private static void PrepareAnimator(Animator value, bool rebind)
         {
             value.applyRootMotion = false;
@@ -219,7 +236,8 @@ namespace DiceFree.UI
             value.enabled = true;
             value.Rebind();
             value.Update(0f);
-            value.Play(IdleId, 0, 0f);
+            int idle = FindState(value, "Base Layer.Idle", "Base Layer.Greatblade two-hand ready");
+            if(idle!=0)value.Play(idle, 0, 0f);
             value.Update(0f);
         }
     }

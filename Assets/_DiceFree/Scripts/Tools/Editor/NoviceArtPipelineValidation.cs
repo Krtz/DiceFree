@@ -91,6 +91,7 @@ namespace DiceFree.EditorTools
             importer.materialImportMode = ModelImporterMaterialImportMode.None;
             importer.importNormals = ModelImporterNormals.Import;
             importer.preserveHierarchy = true;
+            LocomotionRepair.ConfigureImportedLoops(importer);
             importer.SaveAndReimport();
             AssetDatabase.ImportAsset(ModelPath, ImportAssetOptions.ForceSynchronousImport);
 

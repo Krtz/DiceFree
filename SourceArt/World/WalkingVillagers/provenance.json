@@ -1,0 +1,53 @@
+{
+  "source": "SourceArt\\build_cornberg_batch.py",
+  "sourceSha256": "33ea863a45cf3d6f99ef17e2255e66efd24e5f7b74e61a5ad6bc95d57a8ead8f",
+  "license": "First-party DiceFree original art; no third-party input",
+  "blender": "5.2.2 LTS",
+  "assets": [
+    {
+      "role": "Farmer",
+      "sourceSeed": 833,
+      "blend": "SourceArt\\World\\WalkingVillagers\\NPC_Farmer.blend",
+      "fbx": "Assets\\_DiceFree\\Art\\World\\WalkingVillagers\\Models\\NPC_Farmer.fbx",
+      "sha256": "71f9fc167cb743b05b02c23f9db2e285420fac1d4c1a6de7dfc600a8374f6893",
+      "meshes": 6,
+      "vertices": 1428,
+      "bones": 16,
+      "unweightedVertices": 0,
+      "actions": [
+        "Idle",
+        "Walk"
+      ]
+    },
+    {
+      "role": "Villager",
+      "sourceSeed": 838,
+      "blend": "SourceArt\\World\\WalkingVillagers\\NPC_Villager.blend",
+      "fbx": "Assets\\_DiceFree\\Art\\World\\WalkingVillagers\\Models\\NPC_Villager.fbx",
+      "sha256": "a460172709ccd626abc365bf38c988c8e10c594fd21fb5e76f3e6d2db6150dc7",
+      "meshes": 5,
+      "vertices": 1356,
+      "bones": 16,
+      "unweightedVertices": 0,
+      "actions": [
+        "Idle",
+        "Walk"
+      ]
+    },
+    {
+      "role": "Herbalist",
+      "sourceSeed": 840,
+      "blend": "SourceArt\\World\\WalkingVillagers\\NPC_Herbalist.blend",
+      "fbx": "Assets\\_DiceFree\\Art\\World\\WalkingVillagers\\Models\\NPC_Herbalist.fbx",
+      "sha256": "402867684d5687f0ce870bf5d2e60f642c4aa611cba0b27487a54fc7746488f9",
+      "meshes": 5,
+      "vertices": 1786,
+      "bones": 16,
+      "unweightedVertices": 0,
+      "actions": [
+        "Idle",
+        "Walk"
+      ]
+    }
+  ]
+}

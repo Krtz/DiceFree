@@ -1,3 +1,14 @@
+## 2026-10-15 - Walking animations, edge pads and enemy-pass Spin Dash
+
+- Shared Novice FBX Idle/Locomotion now loops explicitly for Novice/Physically Blessed/Magically Touched. Authoring preserves it. Shared driver resolves actual class state names (including Greatblade), recovers stale walk states and scales only locomotion cadence. Greatblade portrait Idle now uses a valid state.
+- Four existing Cornberg wanderers (two farmers, villager, herbalist) now use derived first-party rigged versions of their original appearances. Actual-displacement animation follows their existing navigation; gameplay roots/colliders/identity/interactions stay intact. Static NPCs retain existing visuals. Original source assets unchanged. Reproducible Blender/Unity authoring and verified export hashes recorded under SourceArt/World/WalkingVillagers.
+- Seam activation now begins at 20.5m instead of 22.2m, so reaching the 21m pad crosses. Arrival stays disarmed until walking inward below 19.5m, avoiding bounce. Both directions verified.
+- Spin Dash uses a named enemy-only passage lease honored by direct-movement physics and symmetric actor separation, temporarily disables native unit avoidance, and restores only its own state. Enemies pass; walls/objects/friendlies/NavMesh boundaries still block. Exact hit counts and interrupt/other-owner cleanup verified. Tooltip updated.
+- Focused suite passed 76 runtime assertions, including all four class poses, four actual NPC walkers, two-way automatic crossing and dash cases. Cube 95, Greatblade 75, development/menu round trip, ten static/data checks, wildlife and village skinned-pose checks passed. NPC Unity pose image inspected.
+- Rebuilt seven-scene Windows Development player: 0 errors, 0 warnings, 353,319,456 bytes. Builds/World1Foundation/DiceFree.exe (use full folder).
+- Rebuilt standalone multiplayer lab passed 22/22 loopback checks. Harness now walks inward to rearm and relies on walking-only crossings; coordinate waits accept observed authoritative travel to avoid missing the auto-trigger frame. All previous roster/combat/reconnect checks retained. No laptop/LAN or production class/skill replication claim.
+- Read docs/WALKING_TRAVERSAL_FIXES_2026_10_15.md; results under docs/validation/Walking-* and docs/screenshots/WalkingVillagers-Poses.png. Reproduce with dicefree.traversal-fixes.test/status, dicefree.villager-walk.validate, and tools/validation/Invoke-NetworkWorldLab.ps1.
+- Preserve pre-existing ProjectSettings/PackageManagerSettings.asset and Assets/Settings*. Continue integration/world1-foundation; no main merge.
 ## 2026-10-15 â€” local multiplayer world lab
 
 - Added Main Menu -> Multiplayer development test. Direct/LAN host/join through NGO 2.13.3 and Editor-resolved built-in Unity Transport 6.6.0.

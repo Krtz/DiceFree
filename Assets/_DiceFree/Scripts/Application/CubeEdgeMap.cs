@@ -21,7 +21,7 @@ namespace DiceFree.Development
         public bool AtCrossing(Vector3 point)
         {
             var local=point-Origin;
-            return Mathf.Abs(local.x)<2.4f&&Sign*local.z>halfSize-1.8f;
+            return Mathf.Abs(local.x)<2.4f&&Sign*local.z>=halfSize-3.5f;
         }
     }
 }

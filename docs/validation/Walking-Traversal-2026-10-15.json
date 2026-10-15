@@ -1,0 +1,62 @@
+{
+    "status": "passed",
+    "error": "",
+    "checks": 76,
+    "walks": [
+        {
+            "classId": "class.novice",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "loop": true,
+            "distance": 6.04351806640625,
+            "lateFootTravel": 0.3750770092010498,
+            "lateLegAngle": 6.950836181640625,
+            "directDistance": 3.8098061084747314,
+            "rate": 1.0001015663146973,
+            "idleSpeed": 0.0
+        },
+        {
+            "classId": "class.physically-blessed-novice",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "loop": true,
+            "distance": 6.438139915466309,
+            "lateFootTravel": 0.4638388752937317,
+            "lateLegAngle": 6.773946762084961,
+            "directDistance": 3.5793957710266113,
+            "rate": 1.0011999607086182,
+            "idleSpeed": 0.0
+        },
+        {
+            "classId": "class.magically-touched-novice",
+            "clip": "Novice_Armature|Novice|Locomotion",
+            "loop": true,
+            "distance": 6.464872360229492,
+            "lateFootTravel": 0.4321669340133667,
+            "lateLegAngle": 4.06248664855957,
+            "directDistance": 3.681533098220825,
+            "rate": 1.000499963760376,
+            "idleSpeed": 0.0
+        },
+        {
+            "classId": "class.greatblade",
+            "clip": "Greatblade two-handed carry walk",
+            "loop": true,
+            "distance": 6.370349884033203,
+            "lateFootTravel": 0.6149802207946777,
+            "lateLegAngle": 51.07033920288086,
+            "directDistance": 3.933661699295044,
+            "rate": 1.000900149345398,
+            "idleSpeed": 0.0
+        }
+    ],
+    "dashDistance": 6.000325679779053,
+    "wallStopZ": -5.829999923706055,
+    "friendlyStopZ": -6.470000267028809,
+    "flips": 2,
+    "npcWalkers": 4,
+    "npcLegAngles": [
+        20.69896125793457,
+        20.698619842529297,
+        20.698619842529297,
+        20.698810577392578
+    ]
+}

@@ -45,7 +45,7 @@ namespace DiceFree.Combat
                 foreach(var other in CombatActor.All)
                 {
                     if(other==null || other==actor || !other.Alive ||
-                       other.Ghosting || !other.gameObject.activeInHierarchy)continue;
+                       actor.CanPassThrough(other) || !other.gameObject.activeInHierarchy)continue;
                     Vector3 delta=now-other.transform.position;
                     if(Mathf.Abs(delta.y)>1.3f)continue; // Separate floors.
                     delta.y=0;

@@ -49,7 +49,7 @@ string playerId=p.GetEntityId().ToString(),inventory=string.Join("|",inv.Items.S
 string ranks=string.Join("|",skills.CaptureState().Select(r=>r.stableId+":"+r.rank));
 float hp=p.Health.Current,mana=res.Current(ResourceIds.Mana);
 Need(!room.Travel("Cornberg")&&!room.Travel("DevelopmentRoom"),"Invalid/same-scene travel accepted");
-Need(p.Motor.Teleport(cube.Edge.Approach),"Edge approach unreachable");room.explorationCamera.RecenterForTravel(p.transform);
+Need(p.Motor.Teleport(cube.Edge.Approach-Vector3.forward*cube.Edge.Sign*1.2f),"Edge vista approach unreachable");room.explorationCamera.RecenterForTravel(p.transform);
 float until=Time.time+2;while(Time.time<until)yield return null;
 Need(cube.VistaVisible&&room.explorationCamera.PresentationOverride,"Edge vista did not engage");
 var planes=GeometryUtility.CalculateFrustumPlanes(room.explorationCamera.GetComponent<Camera>());

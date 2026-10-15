@@ -146,7 +146,7 @@ namespace DiceFree.EditorTools
             Need(caster.CastSpinDash(new Vector3(6,0,-2)),caster.Feedback);
             until=Time.time+5;while(caster.Busy&&Time.time<until)yield return null;
             Need(caster.LastCastHits==1&&targets[0].Health.Current<blockerHp,"Spin should hit blocker exactly once.");
-            Need(player.transform.position.z<-6&&Vector3.Distance(player.transform.position,targets[0].transform.position)>=player.Radius+targets[0].Radius-.08f,"Spin ghosted through a living target.");
+            Need(Vector3.Distance(player.transform.position,new Vector3(6,0,-2))<.5f&&!player.CanPassThrough(targets[0]),"Spin must pass the enemy, reach its target and restore normal body blocking.");
             caster.ResetForManifestationLoad();float momentum=caster.Momentum;
             Need(!caster.CastSpinDash(new Vector3(30,0,-2))&&caster.CooldownRemaining(Kind.SpinDash)==0&&caster.Momentum==momentum,"Invalid dash consumed cooldown/resource.");
             Need(player.Motor.Teleport(new Vector3(18,0,-10)),"Wall test placement.");
@@ -156,7 +156,7 @@ namespace DiceFree.EditorTools
             xp.RestoreState(6,0);Need(skills.Spend(Kind.OverheadBreaker)&&skills.Spend(Kind.GreatswordMastery),"Level 6 skills unavailable.");
             Need(!skills.Spend(Kind.GreatswordMastery),"Mastery rank 3 learned before level 12.");
             Need(!caster.CastOverheadBreaker(targets[0]),"Finisher ignored Momentum requirement.");
-            Need(player.Motor.Teleport(new Vector3(6,0,-8)),"Finisher placement.");
+            Need(player.Motor.Teleport(targets[0].transform.position-Vector3.forward*(player.Radius+targets[0].Radius+.2f)),"Finisher placement within melee reach after enemy-pass dash.");
             resources.Restore(GreatbladeSkillCaster.MomentumId,100);
             float victimHp=targets[0].Health.Current;
             Need(caster.CastOverheadBreaker(targets[0]),caster.Feedback);
