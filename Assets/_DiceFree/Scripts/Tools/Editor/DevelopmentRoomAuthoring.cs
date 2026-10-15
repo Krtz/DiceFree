@@ -189,7 +189,7 @@ namespace DiceFree.EditorTools
             stats.tuning=AssetDatabase.LoadAssetAtPath<CombatTuning>("Assets/_DiceFree/Settings/Combat/Cornberg provisional tuning.asset");
             EditorUtility.SetDirty(stats);
             var go=new GameObject("Training target");go.layer=10;go.transform.SetParent(parent);go.transform.position=at;
-            var agent=go.AddComponent<NavMeshAgent>();agent.radius=.5f;agent.height=2;
+            var agent=go.AddComponent<NavMeshAgent>();agent.enabled=false;agent.radius=.5f;agent.height=2;
             go.AddComponent<TraversalMotor>();go.AddComponent<ActorStats>().Configure(stats);go.AddComponent<Health>();
             go.AddComponent<CombatActor>().Configure(1,.5f,"dev.target");
             go.AddComponent<CombatStatusController>();

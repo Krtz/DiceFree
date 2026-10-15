@@ -1,3 +1,5 @@
+> Implementation status (2026-10-15): a bounded two-face local/LAN development lab now exists, with 21 passing separate-process checks. See [world lab](MULTIPLAYER_WORLD_LAB.md) and [verification](MULTIPLAYER_WORLD_LAB_VERIFICATION.md). The full-game requirements below remain design contracts; host migration, production-world replication and progression are not implemented by that lab.
+
 # Multiplayer and Sessions
 
 ## Core model

@@ -90,6 +90,15 @@ namespace DiceFree.World
         public string[] OccupiedDungeonIds =>
             dungeons.Keys.OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
+        /// <summary>Remove an expired overworld participant without altering dungeon leases.</summary>
+        public bool RemoveFromWorldFace(string participantId)
+        {
+            if (string.IsNullOrWhiteSpace(participantId) ||
+                !participants.TryGetValue(participantId, out var value) ||
+                value.kind != SessionLocationKind.WorldFace) return false;
+            return participants.Remove(participantId);
+        }
+
         public void PlaceOnWorldFace(string participantId, string faceId)
         {
             Require(participantId, nameof(participantId));

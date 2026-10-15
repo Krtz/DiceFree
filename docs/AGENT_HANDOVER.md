@@ -1,3 +1,17 @@
+## 2026-10-15 â€” local multiplayer world lab
+
+- Added Main Menu -> Multiplayer development test. Direct/LAN host/join through NGO 2.13.3 and Editor-resolved built-in Unity Transport 6.6.0.
+- Host-authoritative intent validation, existing TraversalMotor/BasicAttack/Health simulation, independent per-participant two-face quarter-turns without unloading occupied host maps, late join, four reserved slots, 30-second vulnerable reconnect grace and expiry cleanup.
+- Every lab launch uses a fresh temporary development save override; normal Echo/class saves are not imported. Menu cleanup explicitly verified no remaining override/session/maps.
+- 21/21 focused checks passed in separate Windows processes, including simultaneous combat on both faces, four players, fifth-player rejection, reconnect preserving actor/missing HP, and expiry/fresh rejoin. All five final process logs clean of runtime/navigation/fog errors.
+- Original cube regression 95 passed; Greatblade combat 75 passed; original dev round-trip passed; ten static/data checks passed; World/Codex cleanup/dungeon-lease regression passed.
+- Graphical Editor host and separate graphical Windows guest connected; telemetry and host screenshot verify split-face residency. Guest window itself has not had a manual visual walkthrough.
+- Both test maps currently remain loaded on every peer. Guest replicas use primitive shapes; only basic attacks, isolated Novices (500 test HP) and sentinels (2000 HP). This is not multiplayer support for Cornberg, skills/gear/quests/loot/progression, production streaming or host migration.
+- Windows build remains Builds/World1Foundation/DiceFree.exe; use the entire folder on the laptop. Host on desktop, join its LAN IPv4 and matching port (7777). No LAN/firewall/router changes made.
+- Read docs/MULTIPLAYER_WORLD_LAB.md and docs/MULTIPLAYER_WORLD_LAB_VERIFICATION.md. Evidence and screenshots are committed under docs/validation and docs/screenshots. Reproduce through tools/validation/Invoke-NetworkWorldLab.ps1.
+- Serialized only the six existing test-target NavMeshAgents disabled to avoid native activation before map NavMesh registration; TraversalMotor.Start enables them after registration. Headless fog bypasses rendering-only initialization.
+- Preserve pre-existing ProjectSettings/PackageManagerSettings.asset and untracked Assets/Settings*. No main merge.
+
 ## 2026-10-14 - Visible cube faces and quarter-turn test crossing
 
 - Development Room and World2TransitionTest are now adjacent 48m square faces with north/south seam gates, one/two golden pips, rebaked navigation and renderer-only face preview prefabs. Approach the blue face's north seam to see the purple face; crossing rotates the world 90 degrees beneath a presentation-only Echo.

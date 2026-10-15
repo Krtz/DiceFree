@@ -71,6 +71,7 @@ namespace DiceFree.World
         private void Initialize()
         {
             DisposeRuntime();
+            if (SystemInfo.graphicsDeviceType == UnityEngine.Rendering.GraphicsDeviceType.Null) { initialized = false; return; }
             columns = Mathf.CeilToInt((mapMax.x - mapMin.x) / Mathf.Max(.5f,cellSize));
             rows = Mathf.CeilToInt((mapMax.y - mapMin.y) / Mathf.Max(.5f,cellSize));
             explored = new bool[columns * rows];

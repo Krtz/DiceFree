@@ -96,6 +96,14 @@ namespace DiceFree.EditorTools
             var registry = new SessionMapRegistry();
             DateTime now = new(2026, 10, 7, 20, 0, 0, DateTimeKind.Utc);
 
+            Require(!registry.RemoveFromWorldFace(null) && !registry.RemoveFromWorldFace("missing"),
+                "Removing an unknown overworld participant must be harmless.");
+            registry.PlaceOnWorldFace("cleanup.fixture", "world.face.2");
+            Require(registry.RemoveFromWorldFace("cleanup.fixture") &&
+                registry.LocationOf("cleanup.fixture") == null &&
+                !registry.RemoveFromWorldFace("cleanup.fixture"),
+                "Expired overworld membership must be removed exactly once.");
+
             registry.PlaceOnWorldFace("player.a", "world.face.1");
             registry.PlaceOnWorldFace("player.b", "world.face.4");
             Require(registry.LocationOf("player.a").mapId == "world.face.1",
@@ -111,6 +119,12 @@ namespace DiceFree.EditorTools
                     out var slime,
                     out var error),
                 "First Slime Dungeon claimant should succeed: " + error);
+            Require(!registry.RemoveFromWorldFace("player.a") &&
+                registry.LocationOf("player.a").kind == SessionLocationKind.Dungeon &&
+                registry.Dungeon("dungeon.slime").leaseToken == slime.leaseToken,
+                "Overworld expiry must not remove a dungeon participant or lease.");
+            Require(registry.LocationOf("player.b").mapId == "world.face.4",
+                "Overworld cleanup changed another participant's face.");
 
             Require(!registry.TryClaimDungeonStaging(
                     "dungeon.slime",

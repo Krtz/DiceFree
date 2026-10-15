@@ -1,0 +1,131 @@
+{
+    "ready": true,
+    "connected": true,
+    "host": true,
+    "busy": false,
+    "status": "Hosting - 2 connected",
+    "localFace": "world.test.1",
+    "unityVersion": "6000.6.3f1",
+    "snapshots": 0,
+    "accepted": 2,
+    "rejected": 0,
+    "transitions": 0,
+    "flips": 0,
+    "loadedFaces": [
+        "world.test.2",
+        "world.test.1"
+    ],
+    "snapshot": {
+        "protocol": 1,
+        "tick": 929,
+        "session": "ea6f40b20373413a826701c05be887f1",
+        "ownId": "player.1",
+        "serverTime": 116.01563262939453,
+        "actors": [
+            {
+                "id": "player.1",
+                "name": "player.1 the Novice",
+                "face": "world.test.1",
+                "destination": "",
+                "runtimeId": "1125420:5888",
+                "position": {
+                    "x": -2.0,
+                    "y": 0.0625,
+                    "z": -8.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "hp": 500.0,
+                "maximumHp": 500.0,
+                "cooldown": 0.0,
+                "hits": 0,
+                "transitions": 0,
+                "connected": true,
+                "travelling": false,
+                "player": true
+            },
+            {
+                "id": "player.2",
+                "name": "player.2 the Novice",
+                "face": "world.test.2",
+                "destination": "",
+                "runtimeId": "1127020:2816",
+                "position": {
+                    "x": 40000.0,
+                    "y": 0.0625,
+                    "z": 39979.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": -0.06847789138555527,
+                    "z": 0.0,
+                    "w": 0.9976526498794556
+                },
+                "hp": 500.0,
+                "maximumHp": 500.0,
+                "cooldown": 0.0,
+                "hits": 0,
+                "transitions": 1,
+                "connected": true,
+                "travelling": false,
+                "player": true
+            },
+            {
+                "id": "sentinel.world.test.2",
+                "name": "Training sentinel",
+                "face": "world.test.2",
+                "destination": "",
+                "runtimeId": "1126990:2816",
+                "position": {
+                    "x": 39986.0,
+                    "y": 0.0625,
+                    "z": 39978.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "hp": 2000.0,
+                "maximumHp": 2000.0,
+                "cooldown": 0.0,
+                "hits": 0,
+                "transitions": 0,
+                "connected": false,
+                "travelling": false,
+                "player": false
+            },
+            {
+                "id": "sentinel.world.test.1",
+                "name": "Training sentinel",
+                "face": "world.test.1",
+                "destination": "",
+                "runtimeId": "1127005:2816",
+                "position": {
+                    "x": -14.0,
+                    "y": 0.0625,
+                    "z": -22.0
+                },
+                "rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "hp": 2000.0,
+                "maximumHp": 2000.0,
+                "cooldown": 0.0,
+                "hits": 0,
+                "transitions": 0,
+                "connected": false,
+                "travelling": false,
+                "player": false
+            }
+        ]
+    }
+}

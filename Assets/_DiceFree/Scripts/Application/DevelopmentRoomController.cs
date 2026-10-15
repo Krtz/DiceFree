@@ -114,6 +114,8 @@ namespace DiceFree.Development
 
         public bool Travel(string sceneName)
         {
+            if (NetworkWorldLab.Current != null && NetworkWorldLab.Current.Ready)
+                return NetworkWorldLab.Current.RequestTravel(sceneName);
             if (Busy || Map == null || !player.CanAct || player.InCombat || HudPointerBlocker.ModalOpen) return false;
             if (sceneName != "DevelopmentRoom" && sceneName != "World2TransitionTest") return false;
             if (sceneName == gameObject.scene.name || !Application.CanStreamedLevelBeLoaded(sceneName)) return false;
@@ -159,6 +161,32 @@ namespace DiceFree.Development
                 CompletedTransitions++;Status="Arrived in "+Map.worldId+" - player state preserved";
             }
             finally {if(presentation!=null)presentation.End();Busy=false;}
+        }
+
+        // Network lab keeps both maps alive; only this participant's presentation changes.
+        internal IEnumerator PresentNetworkTravel(DevelopmentMap destination, Func<bool> arrived)
+        {
+            if (Busy) yield break;
+            Busy = true;
+            var presentation = GetComponent<CubeEdgePresentation>();
+            try
+            {
+                presentation.Begin();
+                yield return presentation.Warmup();
+                presentation.SuppressDestination(destination);
+                yield return presentation.Rotate();
+                float deadline = Time.realtimeSinceStartup + 12;
+                while (!arrived() && Time.realtimeSinceStartup < deadline &&
+                    NetworkWorldLab.Current != null && NetworkWorldLab.Current.Connected)
+                    yield return null;
+                if (!arrived()) yield break;
+                var edge = destination.GetComponent<CubeEdgeMap>();
+                if (!Place(destination, edge.Approach)) yield break;
+                presentation.Commit(edge);
+                yield return presentation.Settle();
+                CompletedTransitions++;
+            }
+            finally { presentation.End(); Busy = false; }
         }
 
         private void OnGUI()

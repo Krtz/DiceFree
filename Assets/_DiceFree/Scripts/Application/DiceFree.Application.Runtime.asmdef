@@ -11,6 +11,9 @@
     "DiceFree.Persistence.Runtime",
     "DiceFree.UI.Runtime",
     "Unity.InputSystem",
+    "Unity.Netcode.Runtime",
+    "Unity.Networking.Transport",
+    "Unity.Collections",
     "DiceFree.Input.Runtime"
   ],
   "includePlatforms": [],

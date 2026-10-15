@@ -9,8 +9,20 @@ namespace DiceFree.Persistence
     {
         public const string EditorSaveRootVariable = "DICEFREE_EDITOR_SAVE_ROOT";
 
+        // Explicit temporary-session override, used by the isolated multiplayer lab.
+        public static string TemporaryRootOverride { get; private set; }
+        public static void SetTemporaryRoot(string root)
+        {
+            if (root != null && !Path.IsPathFullyQualified(root))
+                throw new InvalidDataException("Temporary save root must be absolute.");
+            TemporaryRootOverride = root;
+        }
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetTemporaryRoot() => TemporaryRootOverride = null;
+
         public static string ResolveRoot()
         {
+            if (TemporaryRootOverride != null) return SessionRoot(TemporaryRootOverride);
             var args = Environment.GetCommandLineArgs();
             int index = Array.IndexOf(args, "-diceFreeSaveRoot");
             if (index >= 0)

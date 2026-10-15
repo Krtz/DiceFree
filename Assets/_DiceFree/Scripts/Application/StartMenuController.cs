@@ -93,7 +93,7 @@ namespace DiceFree.Advancement
             GUI.Label(new Rect(outer.x + 24, outer.y + 58, outer.width - 48, 24),
                 profile == null ? "Begin a new Echo" : "Choose a manifestation");
 
-            var content = new Rect(outer.x + 20, outer.y + 94, outer.width - 40, outer.height - 196);
+            var content = new Rect(outer.x + 20, outer.y + 94, outer.width - 40, outer.height - 236);
             GUILayout.BeginArea(content);
             scroll = GUILayout.BeginScrollView(scroll);
 
@@ -114,6 +114,9 @@ namespace DiceFree.Advancement
 
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+
+            if (GUI.Button(new Rect(outer.x + 24, outer.yMax - 134, outer.width - 48, 34), "Multiplayer development test"))
+                DiceFree.Development.NetworkWorldLab.OpenSelection(this);
 
             if (GUI.Button(new Rect(outer.x + 24, outer.yMax - 94, outer.width - 48, 34), "Development room"))
                 TryOpenDevelopmentRoom();

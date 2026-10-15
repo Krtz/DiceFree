@@ -1,0 +1,19 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.world-codex.validate",
+  "data": {
+    "command": "dicefree.world-codex.validate",
+    "parameters": {},
+    "result": {
+      "success": true,
+      "finalMarker": "DICEFREE_WORLD_CODEX_OK"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
