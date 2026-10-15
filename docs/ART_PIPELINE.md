@@ -626,3 +626,7 @@ synthetic joint-flex check. Human cloth/art approval remains provisional.
 
 ## Cornberg 3D world batch (2026-10-08)
 `SourceArt/World/CornbergBatch/` contains 27 editable Blender .blend model sources (9 trees, 8 generic NPC roles, 9 transparent slime variants, opening mountain) and a manifest. Paired .fbx exports and recolorable URP materials are actually integrated in Cornberg via the reproducible `SourceArt/build_cornberg_batch.py` pipeline. Full details and limitations are in `docs/CORNBERG_ART_BATCH.md`. The Slime Dungeon interior is expressly postponed for co-design.
+
+## Downloaded asset candidates
+
+The staged 3D downloads are indexed in [ASSET_CATALOG.md](ASSET_CATALOG.md); creator/source/license/distribution status is tracked in [ASSET_CREDITS.md](ASSET_CREDITS.md). October 15 inventory covers 42 ZIPs and one completed GLB, with a CSV export and archive/hash/model/source evidence under docs/assets. Cataloguing does not import or clear an asset for use.

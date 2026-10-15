@@ -1,3 +1,12 @@
+## 2026-10-15 - Downloaded 3D catalog refreshed
+
+- Brought forward the original ASSET_CATALOG.md and ASSET_CREDITS.md from poc/cornberg 608e20a into integration/world1-foundation, then extended them for 23 new ZIPs in T:\TEMP\ART_ASSETS. Total: 42 ZIPs plus completed warrior_girl.glb. Originals remain unchanged; no DiceFree Unity import or model replacement.
+- New batch: 13 GLB sources (two skinned/animated), nine FBX sources (unskinned, no animation curves), one RAR-wrapped Medieval Guard. Windows tar lists the RAR but cannot decode its FBX filters; recorded as unverified, not a successful rig inspection.
+- Recorded hashes, sizes, member paths/CRCs and packaged geometry/rig counts in docs/assets/downloaded-assets-2026-10-15.json, flat CSV, and repeatable read-only tools/assets/inspect_downloaded_assets.py. Completed 1 GB Warrior Girl GLB has valid header but its 201 MiB JSON exceeds the 64 MiB bounded parser limit; no full accessor claim.
+- Official public Sketchfab API title/context plus triangle matches found 18 source candidates: 17 list CC BY 4.0; Duat Golem lists Free Standard. Five generic sources unresolved. Preserve rights holds: Duat is third-party-series content, and Mountain Dragon has a possible PROTOFACTOR upstream match (same filename/triangle count) despite Alexey's CC BY listing. This is a provenance lead, not an infringement finding.
+- Practical new technical shortlist: 10k-triangle Medieval Man; ~19k owl/lion/monster-dragon; 44k spear/shield knight. All are unrigged. Two distinct house downloads: 2,148 vs 23,700 tris, both source-unresolved. Well and several plague/abyss characters ~2m triangles, appearance/retopology references.
+- New entries and all 19 old registry rows retained; 43 files accounted for in Markdown/CSV, 23 new credit rows, source records included. No Unity build required for docs/offline inventory. Local game-dev CLI unavailable; no canonical package/admission/lock receipt claim.
+- Existing unrelated PackageManagerSettings.asset and Assets/Settings* left untouched. Continue integration/world1-foundation; main unchanged.
 ## 2026-10-15 - Walking animations, edge pads and enemy-pass Spin Dash
 
 - Shared Novice FBX Idle/Locomotion now loops explicitly for Novice/Physically Blessed/Magically Touched. Authoring preserves it. Shared driver resolves actual class state names (including Greatblade), recovers stale walk states and scales only locomotion cadence. Greatblade portrait Idle now uses a valid state.

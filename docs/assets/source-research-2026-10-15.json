@@ -1,0 +1,2169 @@
+{
+  "retrievedUtc": "2026-10-15T07:27:03.267610+00:00",
+  "method": "Unauthenticated official public Sketchfab API search; matches are source candidates, not archive ownership/license clearance",
+  "results": [
+    {
+      "file": "abyss-walker-bandaged-wanderer-blue-eyes.zip",
+      "query": "abyss walker bandaged wanderer blue eyes",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=abyss+walker+bandaged+wanderer+blue+eyes&count=24",
+      "candidates": [
+        {
+          "name": "Abyss Walker \u2013 Bandaged Wanderer, Blue Eyes",
+          "uid": "fab06be9be0c4232a8ee88a41d1562b3",
+          "url": "https://sketchfab.com/3d-models/fab06be9be0c4232a8ee88a41d1562b3",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 996586,
+          "faceCount": 1993268,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "An eerie abyss walker - a tall, gaunt humanoid explorer wrapped in tattered pale beige bandages beneath a tattered black outer robe, with a",
+            "descriptionSha256": "7118a7c83fb55baf8c183873f13ca4208dc7fdae18d9c3bd59457fdfeb19434f",
+            "publishedAt": "2026-07-19T16:30:08.931006",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Abyss Walker \u2013 Bandaged Wanderer, Blue Eyes",
+        "uid": "fab06be9be0c4232a8ee88a41d1562b3",
+        "url": "https://sketchfab.com/3d-models/fab06be9be0c4232a8ee88a41d1562b3",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 996586,
+        "faceCount": 1993268,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "An eerie abyss walker - a tall, gaunt humanoid explorer wrapped in tattered pale beige bandages beneath a tattered black outer robe, with a",
+          "descriptionSha256": "7118a7c83fb55baf8c183873f13ca4208dc7fdae18d9c3bd59457fdfeb19434f",
+          "publishedAt": "2026-07-19T16:30:08.931006",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "antlered-valkyrie-of-the-north-3d-model-free.zip",
+      "query": "antlered valkyrie of the north 3d model free",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=antlered+valkyrie+of+the+north+3d+model+free&count=24",
+      "candidates": [
+        {
+          "name": "Antlered Valkyrie of the North 3D Model Free",
+          "uid": "9d403eef76994835aeaee060659b808f",
+          "url": "https://sketchfab.com/3d-models/9d403eef76994835aeaee060659b808f",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 727314,
+          "faceCount": 1454549,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Antlered Valkyrie of the North 3D Model Free",
+            "descriptionSha256": "1c528b2913d25af90b7a24323b7e86da0c2cef2a6e75abdcf995087c8d918993",
+            "publishedAt": "2026-05-07T02:22:37.020522",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Antlered Valkyrie of the North 3D Model Free",
+        "uid": "9d403eef76994835aeaee060659b808f",
+        "url": "https://sketchfab.com/3d-models/9d403eef76994835aeaee060659b808f",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 727314,
+        "faceCount": 1454549,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Antlered Valkyrie of the North 3D Model Free",
+          "descriptionSha256": "1c528b2913d25af90b7a24323b7e86da0c2cef2a6e75abdcf995087c8d918993",
+          "publishedAt": "2026-05-07T02:22:37.020522",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "duat-golem-guard-monsterup.zip",
+      "query": "duat golem guard monsterup",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=duat+golem+guard+monsterup&count=24",
+      "candidates": [
+        {
+          "name": "Duat Golem Guard (MonsterUp)",
+          "uid": "52bcf459cb634b8dad90fcfb45f098f3",
+          "url": "https://sketchfab.com/3d-models/52bcf459cb634b8dad90fcfb45f098f3",
+          "creator": "SinisterClock",
+          "username": "multi_2024",
+          "license": {
+            "uid": "72eb2b1960364637901eacce19283624",
+            "label": "Free Standard"
+          },
+          "vertexCount": 20004,
+          "faceCount": 39738,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/72eb2b1960364637901eacce19283624",
+              "label": "Free Standard",
+              "fullName": "Free Standard",
+              "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+              "url": "https://sketchfab.com/licenses",
+              "slug": "free-st"
+            },
+            "descriptionExcerpt": "Duat Core guards; they appear in Episode 38 to try to stop Plunger's team from reaching the core. model made by : @reijin 3",
+            "descriptionSha256": "ad002dab9f499e78e6b1e6ae0a51ade919b5d988709bcc225b3e06d6b231e46f",
+            "publishedAt": "2026-08-02T14:22:18.300115",
+            "animationCount": 1,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Duat Golem Guard (MonsterUp)",
+        "uid": "52bcf459cb634b8dad90fcfb45f098f3",
+        "url": "https://sketchfab.com/3d-models/52bcf459cb634b8dad90fcfb45f098f3",
+        "creator": "SinisterClock",
+        "username": "multi_2024",
+        "license": {
+          "uid": "72eb2b1960364637901eacce19283624",
+          "label": "Free Standard"
+        },
+        "vertexCount": 20004,
+        "faceCount": 39738,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/72eb2b1960364637901eacce19283624",
+            "label": "Free Standard",
+            "fullName": "Free Standard",
+            "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+            "url": "https://sketchfab.com/licenses",
+            "slug": "free-st"
+          },
+          "descriptionExcerpt": "Duat Core guards; they appear in Episode 38 to try to stop Plunger's team from reaching the core. model made by : @reijin 3",
+          "descriptionSha256": "ad002dab9f499e78e6b1e6ae0a51ade919b5d988709bcc225b3e06d6b231e46f",
+          "publishedAt": "2026-08-02T14:22:18.300115",
+          "animationCount": 1,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "faceless-shadow-assassin.zip",
+      "query": "faceless shadow assassin",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=faceless+shadow+assassin&count=24",
+      "candidates": [
+        {
+          "name": "Faceless Shadow Assassin",
+          "uid": "c3fe097c89d0427e84152c0ad0f636cf",
+          "url": "https://sketchfab.com/3d-models/c3fe097c89d0427e84152c0ad0f636cf",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 493191,
+          "faceCount": 986498,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "A dark, faceless assassin shrouded under a massive hood, hiding all identity. He wields two sharp, menacing daggers, ready to strike from the shadows.",
+            "descriptionSha256": "d9e75150da1758dcb7101f68796513ac1255f043e510e38f322335482685cca1",
+            "publishedAt": "2026-01-07T18:17:19.449975",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Dark Faceless Black Assassin",
+          "uid": "95ac882f1d504dc790d52aa19713ff3b",
+          "url": "https://sketchfab.com/3d-models/95ac882f1d504dc790d52aa19713ff3b",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": null,
+          "vertexCount": 739022,
+          "faceCount": 1478056,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.723
+        },
+        {
+          "name": "Dark Faceless Black Assassin",
+          "uid": "9f4f0b0d38d94ba19120b0c6b54184d5",
+          "url": "https://sketchfab.com/3d-models/9f4f0b0d38d94ba19120b0c6b54184d5",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": null,
+          "vertexCount": 455658,
+          "faceCount": 911366,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.723
+        },
+        {
+          "name": "Royal Shadow Assassin Model",
+          "uid": "dc6b27b204e344189561bf5a847af4c3",
+          "url": "https://sketchfab.com/3d-models/dc6b27b204e344189561bf5a847af4c3",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": null,
+          "vertexCount": 929964,
+          "faceCount": 1860011,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.696
+        },
+        {
+          "name": "Shadow Leather Assassin Model",
+          "uid": "7d7c93eb8320425eaff0878dd3bbf111",
+          "url": "https://sketchfab.com/3d-models/7d7c93eb8320425eaff0878dd3bbf111",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": null,
+          "vertexCount": 981715,
+          "faceCount": 1963504,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.583
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Faceless Shadow Assassin",
+        "uid": "c3fe097c89d0427e84152c0ad0f636cf",
+        "url": "https://sketchfab.com/3d-models/c3fe097c89d0427e84152c0ad0f636cf",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 493191,
+        "faceCount": 986498,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "A dark, faceless assassin shrouded under a massive hood, hiding all identity. He wields two sharp, menacing daggers, ready to strike from the shadows.",
+          "descriptionSha256": "d9e75150da1758dcb7101f68796513ac1255f043e510e38f322335482685cca1",
+          "publishedAt": "2026-01-07T18:17:19.449975",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "feral-plague-doctor-shattered-mask-bandages.zip",
+      "query": "feral plague doctor shattered mask bandages",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=feral+plague+doctor+shattered+mask+bandages&count=24",
+      "candidates": [
+        {
+          "name": "Feral Plague Doctor - Shattered Mask & Bandages",
+          "uid": "41be4ffd12cc4c758d83ce7c46027278",
+          "url": "https://sketchfab.com/3d-models/41be4ffd12cc4c758d83ce7c46027278",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 957007,
+          "faceCount": 1914126,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "A decayed and unsettling feral plague doctor, a humanoid horror figure wrapped in a ragged torn black coat. His shattered bone-white beak mask hangs",
+            "descriptionSha256": "bab5d1ff336335f4725e1f60459c84a863dd37a971e5be2edf2fc5c2f9ad0021",
+            "publishedAt": "2026-07-13T17:19:48.571978",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Feral Plague Doctor - Shattered Mask & Bandages",
+        "uid": "41be4ffd12cc4c758d83ce7c46027278",
+        "url": "https://sketchfab.com/3d-models/41be4ffd12cc4c758d83ce7c46027278",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 957007,
+        "faceCount": 1914126,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "A decayed and unsettling feral plague doctor, a humanoid horror figure wrapped in a ragged torn black coat. His shattered bone-white beak mask hangs",
+          "descriptionSha256": "bab5d1ff336335f4725e1f60459c84a863dd37a971e5be2edf2fc5c2f9ad0021",
+          "publishedAt": "2026-07-13T17:19:48.571978",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "frostborne-warlord.zip",
+      "query": "frostborne warlord",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=frostborne+warlord&count=24",
+      "candidates": [
+        {
+          "name": "Frostborne Warlord",
+          "uid": "a7ae1999b92e4b6db413fcd0860a3a72",
+          "url": "https://sketchfab.com/3d-models/a7ae1999b92e4b6db413fcd0860a3a72",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 542735,
+          "faceCount": 1085491,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Frostborne Warlord warrior 3d model",
+            "descriptionSha256": "6c31b5b6d01644711d81d0268b29d38ab4ca215885f00851b92899d0d193dbc3",
+            "publishedAt": "2026-03-22T01:15:54.041848",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Frostborn Warlord",
+          "uid": "a8bb492c609b4c4fa61bb489d64e004b",
+          "url": "https://sketchfab.com/3d-models/a8bb492c609b4c4fa61bb489d64e004b",
+          "creator": "dtretyakov1985",
+          "username": "dtretyakov1985",
+          "license": null,
+          "vertexCount": 495438,
+          "faceCount": 990972,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.97
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Frostborne Warlord",
+        "uid": "a7ae1999b92e4b6db413fcd0860a3a72",
+        "url": "https://sketchfab.com/3d-models/a7ae1999b92e4b6db413fcd0860a3a72",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 542735,
+        "faceCount": 1085491,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Frostborne Warlord warrior 3d model",
+          "descriptionSha256": "6c31b5b6d01644711d81d0268b29d38ab4ca215885f00851b92899d0d193dbc3",
+          "publishedAt": "2026-03-22T01:15:54.041848",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "fur-clad-warlord-3d-model-free.zip",
+      "query": "fur clad warlord 3d model free",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=fur+clad+warlord+3d+model+free&count=24",
+      "candidates": [
+        {
+          "name": "Fur-Clad Warlord 3D Model Free",
+          "uid": "b232751b699d4cdb8aca4bce1913f7cc",
+          "url": "https://sketchfab.com/3d-models/b232751b699d4cdb8aca4bce1913f7cc",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 871573,
+          "faceCount": 1743203,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Fur-Clad Warlord 3D Model Free Download",
+            "descriptionSha256": "fa4a7ca0e097693c8c80d2b0b6698901a91386fc0e3aa117accddd237d58b75f",
+            "publishedAt": "2026-05-04T11:17:37.739649",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Frostbound Warlord",
+          "uid": "a416e430c5a5480695eac657b0bbd994",
+          "url": "https://sketchfab.com/3d-models/a416e430c5a5480695eac657b0bbd994",
+          "creator": "timthunder",
+          "username": "timothyupai",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 998737,
+          "faceCount": 1995819,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.476
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Fur-Clad Warlord 3D Model Free",
+        "uid": "b232751b699d4cdb8aca4bce1913f7cc",
+        "url": "https://sketchfab.com/3d-models/b232751b699d4cdb8aca4bce1913f7cc",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 871573,
+        "faceCount": 1743203,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Fur-Clad Warlord 3D Model Free Download",
+          "descriptionSha256": "fa4a7ca0e097693c8c80d2b0b6698901a91386fc0e3aa117accddd237d58b75f",
+          "publishedAt": "2026-05-04T11:17:37.739649",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "hooded-shadow-assassin.zip",
+      "query": "hooded shadow assassin",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=hooded+shadow+assassin&count=24",
+      "candidates": [
+        {
+          "name": "Hooded Shadow Assassin",
+          "uid": "d3d3c1efefa34f95a0b0ebc0dbae620d",
+          "url": "https://sketchfab.com/3d-models/d3d3c1efefa34f95a0b0ebc0dbae620d",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 390443,
+          "faceCount": 780964,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Hooded Shadow Assassin shadow hunter 3D model Free",
+            "descriptionSha256": "6dc4c21a3dcead4b554f50c9bf8672913cff09fe50316d9f0c13a46cb8f84778",
+            "publishedAt": "2026-04-21T13:34:41.716276",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Hooded_shadow_assassin",
+          "uid": "59039af4ad524a09930c7c339790b509",
+          "url": "https://sketchfab.com/3d-models/59039af4ad524a09930c7c339790b509",
+          "creator": "Ubei_Nezhno",
+          "username": "suninbef",
+          "license": null,
+          "vertexCount": 447670,
+          "faceCount": 780964,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Faceless Shadow Assassin",
+          "uid": "c3fe097c89d0427e84152c0ad0f636cf",
+          "url": "https://sketchfab.com/3d-models/c3fe097c89d0427e84152c0ad0f636cf",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 493191,
+          "faceCount": 986498,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.714
+        },
+        {
+          "name": "Royal Shadow Assassin Model",
+          "uid": "dc6b27b204e344189561bf5a847af4c3",
+          "url": "https://sketchfab.com/3d-models/dc6b27b204e344189561bf5a847af4c3",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": null,
+          "vertexCount": 929964,
+          "faceCount": 1860011,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.682
+        },
+        {
+          "name": "Dark Hooded Assassin Knight",
+          "uid": "274fded9798f40ecb304416feb65eff0",
+          "url": "https://sketchfab.com/3d-models/274fded9798f40ecb304416feb65eff0",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 7328,
+          "faceCount": 14346,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.636
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Hooded Shadow Assassin",
+        "uid": "d3d3c1efefa34f95a0b0ebc0dbae620d",
+        "url": "https://sketchfab.com/3d-models/d3d3c1efefa34f95a0b0ebc0dbae620d",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 390443,
+        "faceCount": 780964,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Hooded Shadow Assassin shadow hunter 3D model Free",
+          "descriptionSha256": "6dc4c21a3dcead4b554f50c9bf8672913cff09fe50316d9f0c13a46cb8f84778",
+          "publishedAt": "2026-04-21T13:34:41.716276",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "knight-with-spear-and-shield.zip",
+      "query": "knight with spear and shield",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=knight+with+spear+and+shield&count=24",
+      "candidates": [
+        {
+          "name": "Knight with spear and shield",
+          "uid": "f38944bdd22b45b5aad63ea553b2d8f2",
+          "url": "https://sketchfab.com/3d-models/f38944bdd22b45b5aad63ea553b2d8f2",
+          "creator": "mykola",
+          "username": "fedotov2002nikolai",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 24330,
+          "faceCount": 44175,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "a low-poly knight. 22547 polygons.",
+            "descriptionSha256": "780613fb47dec4e1614d95f3c98ad6940d90e9c40ec4cbf87360c5c344531ab1",
+            "publishedAt": "2022-05-05T20:37:39.483441",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Holy Knight Weapon Set Volume 2",
+          "uid": "732539ba7d13477e98fd76ca5a12fbfb",
+          "url": "https://sketchfab.com/3d-models/732539ba7d13477e98fd76ca5a12fbfb",
+          "creator": "EliteCreatures",
+          "username": "EliteCreatures",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 1940,
+          "faceCount": 2828,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.52
+        },
+        {
+          "name": "Black Knight Equipped",
+          "uid": "c56279fb6abf4479bf7ea4d79067677b",
+          "url": "https://sketchfab.com/3d-models/c56279fb6abf4479bf7ea4d79067677b",
+          "creator": "martin_dalm",
+          "username": "martin_dalm",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 52906,
+          "faceCount": 105554,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.465
+        },
+        {
+          "name": "Spear - rigged",
+          "uid": "5572c7f8c1b94fbea01be218edc6aab2",
+          "url": "https://sketchfab.com/3d-models/5572c7f8c1b94fbea01be218edc6aab2",
+          "creator": "lillyth",
+          "username": "lillyth",
+          "license": {
+            "uid": "5b54cf13b1a4422ca439696eb152070d",
+            "label": "Editorial"
+          },
+          "vertexCount": 341,
+          "faceCount": 642,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.457
+        },
+        {
+          "name": "Dread Knight Animated Weapon Set",
+          "uid": "9ea7ec5148134576a4cdfad61fa33e68",
+          "url": "https://sketchfab.com/3d-models/9ea7ec5148134576a4cdfad61fa33e68",
+          "creator": "EliteCreatures",
+          "username": "EliteCreatures",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 3228,
+          "faceCount": 3948,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.423
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Knight with spear and shield",
+        "uid": "f38944bdd22b45b5aad63ea553b2d8f2",
+        "url": "https://sketchfab.com/3d-models/f38944bdd22b45b5aad63ea553b2d8f2",
+        "creator": "mykola",
+        "username": "fedotov2002nikolai",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 24330,
+        "faceCount": 44175,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "a low-poly knight. 22547 polygons.",
+          "descriptionSha256": "780613fb47dec4e1614d95f3c98ad6940d90e9c40ec4cbf87360c5c344531ab1",
+          "publishedAt": "2022-05-05T20:37:39.483441",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "knight.zip",
+      "query": "knight",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=knight&count=24",
+      "candidates": [
+        {
+          "name": "Knight",
+          "uid": "2fb47f3b46a14b7c9377ac18acaf86a1",
+          "url": "https://sketchfab.com/3d-models/2fb47f3b46a14b7c9377ac18acaf86a1",
+          "creator": "Tommy Gunardi Teguh",
+          "username": "tommygt",
+          "license": null,
+          "vertexCount": 22041,
+          "faceCount": 21068,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Knight",
+          "uid": "a44d1cde49d842e7a63fe3ccead1c9b5",
+          "url": "https://sketchfab.com/3d-models/a44d1cde49d842e7a63fe3ccead1c9b5",
+          "creator": "gasak",
+          "username": "gasak210",
+          "license": null,
+          "vertexCount": 57782,
+          "faceCount": 109178,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Knight",
+          "uid": "5e329acfe424472ebc793fa1e4933439",
+          "url": "https://sketchfab.com/3d-models/5e329acfe424472ebc793fa1e4933439",
+          "creator": "alexanderchiveli",
+          "username": "alexanderchiveli",
+          "license": null,
+          "vertexCount": 24069,
+          "faceCount": 46595,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Knight",
+          "uid": "1e69b9833b6b4531ba0a8dcb043b9ef7",
+          "url": "https://sketchfab.com/3d-models/1e69b9833b6b4531ba0a8dcb043b9ef7",
+          "creator": "bestgamekits",
+          "username": "bestgamekits",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 1103,
+          "faceCount": 2058,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Knight",
+          "uid": "097ae080a0874970a242b3d8e9cf78db",
+          "url": "https://sketchfab.com/3d-models/097ae080a0874970a242b3d8e9cf78db",
+          "creator": "PaulCo",
+          "username": "paulco",
+          "license": null,
+          "vertexCount": 1570,
+          "faceCount": 2656,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        }
+      ]
+    },
+    {
+      "file": "low-poly-lion-with-wings-warrior-character-model.zip",
+      "query": "low poly lion with wings warrior character model",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=low+poly+lion+with+wings+warrior+character+model&count=24",
+      "candidates": [
+        {
+          "name": "Low Poly Lion with wings Warrior Character model",
+          "uid": "b9369e4bec8d4bc295b71c8468caa8da",
+          "url": "https://sketchfab.com/3d-models/b9369e4bec8d4bc295b71c8468caa8da",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 9520,
+          "faceCount": 19022,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Low Poly Lion with wings Warrior Character 3d model free download",
+            "descriptionSha256": "17eb502191e55fcf5e055a8f5d139e5db8999d41e2d2851eb1b07c535a06d8e7",
+            "publishedAt": "2026-08-27T01:36:41.794834",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Low Poly Lion with wings Warrior Character model",
+        "uid": "b9369e4bec8d4bc295b71c8468caa8da",
+        "url": "https://sketchfab.com/3d-models/b9369e4bec8d4bc295b71c8468caa8da",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 9520,
+        "faceCount": 19022,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Low Poly Lion with wings Warrior Character 3d model free download",
+          "descriptionSha256": "17eb502191e55fcf5e055a8f5d139e5db8999d41e2d2851eb1b07c535a06d8e7",
+          "publishedAt": "2026-08-27T01:36:41.794834",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "low-poly-monster-dragon-realistic.zip",
+      "query": "low poly monster dragon realistic",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=low+poly+monster+dragon+realistic&count=24",
+      "candidates": [
+        {
+          "name": "low poly monster dragon realistic",
+          "uid": "80b61be8006840918e70a83b96568da0",
+          "url": "https://sketchfab.com/3d-models/80b61be8006840918e70a83b96568da0",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 9488,
+          "faceCount": 18860,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "low poly monster dragon realistic 3d model download free",
+            "descriptionSha256": "2d37a1eafdebc88c3f714a815057fd70d1f56835c43b360acae81a1334773689",
+            "publishedAt": "2026-07-21T14:54:29.290819",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Low poly Realistic - Dinosaur Pack",
+          "uid": "d552ae0a243e452e88f4e044c8ba39a3",
+          "url": "https://sketchfab.com/3d-models/d552ae0a243e452e88f4e044c8ba39a3",
+          "creator": "Assemblr",
+          "username": "Assemblrworld86",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 50021,
+          "faceCount": 95702,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.561
+        },
+        {
+          "name": "Low poly Realistic Dinosaur - Mosasaur",
+          "uid": "061b23dbbf3741cabeadcac43b0d2bb7",
+          "url": "https://sketchfab.com/3d-models/061b23dbbf3741cabeadcac43b0d2bb7",
+          "creator": "Assemblr",
+          "username": "Assemblrworld86",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 15077,
+          "faceCount": 27184,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.525
+        },
+        {
+          "name": "Low poly Realistic Dinosaur - Pteranodon",
+          "uid": "2f617bd814c743129c900f9ccd848cd0",
+          "url": "https://sketchfab.com/3d-models/2f617bd814c743129c900f9ccd848cd0",
+          "creator": "Assemblr",
+          "username": "Assemblrworld86",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 11463,
+          "faceCount": 22790,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.508
+        },
+        {
+          "name": "Low poly Realistic Dinosaur - Triceratops",
+          "uid": "e0118d355f0747a6b6addd1fe965c29c",
+          "url": "https://sketchfab.com/3d-models/e0118d355f0747a6b6addd1fe965c29c",
+          "creator": "Assemblr",
+          "username": "Assemblrworld86",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 7679,
+          "faceCount": 15240,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.5
+        }
+      ],
+      "sourceCandidate": {
+        "name": "low poly monster dragon realistic",
+        "uid": "80b61be8006840918e70a83b96568da0",
+        "url": "https://sketchfab.com/3d-models/80b61be8006840918e70a83b96568da0",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 9488,
+        "faceCount": 18860,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "low poly monster dragon realistic 3d model download free",
+          "descriptionSha256": "2d37a1eafdebc88c3f714a815057fd70d1f56835c43b360acae81a1334773689",
+          "publishedAt": "2026-07-21T14:54:29.290819",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "low-poly-owl-warrior-character-3d-model-free.zip",
+      "query": "low poly owl warrior character 3d model free",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=low+poly+owl+warrior+character+3d+model+free&count=24",
+      "candidates": [
+        {
+          "name": "Low poly Owl warrior character 3d model free",
+          "uid": "8aaaecbf6774423a96feffc8dcc8e4e6",
+          "url": "https://sketchfab.com/3d-models/8aaaecbf6774423a96feffc8dcc8e4e6",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 9793,
+          "faceCount": 19580,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Low poly Owl warrior character 3d model free download",
+            "descriptionSha256": "46a8c70fad8348d779179375a49f333ad74049da9f1918a5a1514ef0023919a9",
+            "publishedAt": "2026-09-13T02:31:20.363542",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Crimson Paladin Warrior - Rodin AI vs SupaVoxel",
+          "uid": "8c47d0e5e5b3476baa1571b419630cb8",
+          "url": "https://sketchfab.com/3d-models/8c47d0e5e5b3476baa1571b419630cb8",
+          "creator": "Rafael Baker",
+          "username": "rafaelbaker",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 749576,
+          "faceCount": 1499310,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.395
+        },
+        {
+          "name": "Anime Swordswoman - Image to 3D - SupaVoxel",
+          "uid": "3f6e6154eaaa4e2d9693c621c8889bb0",
+          "url": "https://sketchfab.com/3d-models/3f6e6154eaaa4e2d9693c621c8889bb0",
+          "creator": "Xavi Vidal",
+          "username": "xvidal3",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 424435,
+          "faceCount": 848982,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.338
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Low poly Owl warrior character 3d model free",
+        "uid": "8aaaecbf6774423a96feffc8dcc8e4e6",
+        "url": "https://sketchfab.com/3d-models/8aaaecbf6774423a96feffc8dcc8e4e6",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 9793,
+        "faceCount": 19580,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Low poly Owl warrior character 3d model free download",
+          "descriptionSha256": "46a8c70fad8348d779179375a49f333ad74049da9f1918a5a1514ef0023919a9",
+          "publishedAt": "2026-09-13T02:31:20.363542",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "medieval-crusader-knight-clad.zip",
+      "query": "medieval crusader knight clad",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+crusader+knight+clad&count=24",
+      "candidates": [
+        {
+          "name": "medieval crusader knight clad",
+          "uid": "bee0613121b94d15889272c36582e153",
+          "url": "https://sketchfab.com/3d-models/bee0613121b94d15889272c36582e153",
+          "creator": "AintDisplayin",
+          "username": "AintDisplayin",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 250433,
+          "faceCount": 501244,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "This 3D model depicts a medieval crusader knight clad in worn plate armor and chainmail, wearing a hooded surcoat marked with a red cross.",
+            "descriptionSha256": "d43317232fe6c4a33807de6615256039eb373a7dc16897f4efd5e44b094b8fec",
+            "publishedAt": "2026-01-23T06:06:07.861982",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "medieval crusader knight clad",
+        "uid": "bee0613121b94d15889272c36582e153",
+        "url": "https://sketchfab.com/3d-models/bee0613121b94d15889272c36582e153",
+        "creator": "AintDisplayin",
+        "username": "AintDisplayin",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 250433,
+        "faceCount": 501244,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "This 3D model depicts a medieval crusader knight clad in worn plate armor and chainmail, wearing a hooded surcoat marked with a red cross.",
+          "descriptionSha256": "d43317232fe6c4a33807de6615256039eb373a7dc16897f4efd5e44b094b8fec",
+          "publishedAt": "2026-01-23T06:06:07.861982",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "medieval-guard.zip",
+      "query": "medieval guard",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+guard&count=24",
+      "candidates": [
+        {
+          "name": "Medieval Guard",
+          "uid": "ca548172f0984660bc4213b9404284fa",
+          "url": "https://sketchfab.com/3d-models/ca548172f0984660bc4213b9404284fa",
+          "creator": "Taylor",
+          "username": "r.taylor",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 97889,
+          "faceCount": 96550,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Guard",
+          "uid": "f777f46d501e4ab09fcaa0e0b84c7f6c",
+          "url": "https://sketchfab.com/3d-models/f777f46d501e4ab09fcaa0e0b84c7f6c",
+          "creator": "CGenesis",
+          "username": "CGenesis",
+          "license": null,
+          "vertexCount": 97889,
+          "faceCount": 96550,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Guard",
+          "uid": "97533d01640b479fb8cf3361affcc2fe",
+          "url": "https://sketchfab.com/3d-models/97533d01640b479fb8cf3361affcc2fe",
+          "creator": "fiendneko",
+          "username": "fiendneko",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 837,
+          "faceCount": 1549,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Guard",
+          "uid": "c86615551c8b454082d287b276d11e52",
+          "url": "https://sketchfab.com/3d-models/c86615551c8b454082d287b276d11e52",
+          "creator": "kidsgoodplay",
+          "username": "kidsgoodplay",
+          "license": null,
+          "vertexCount": 225249,
+          "faceCount": 450505,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Guard Tower",
+          "uid": "d27c3f6cb09649d2b500c65ab1bbe0c9",
+          "url": "https://sketchfab.com/3d-models/d27c3f6cb09649d2b500c65ab1bbe0c9",
+          "creator": "3DHaupt",
+          "username": "dennish2010",
+          "license": null,
+          "vertexCount": 48524,
+          "faceCount": 177884,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.839
+        }
+      ]
+    },
+    {
+      "file": "medieval-house (1).zip",
+      "query": "medieval house",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+house&count=24",
+      "candidates": [
+        {
+          "name": "Medieval house",
+          "uid": "904038d693b945d4843decee87fb0eb5",
+          "url": "https://sketchfab.com/3d-models/904038d693b945d4843decee87fb0eb5",
+          "creator": "Vanuartw",
+          "username": "sketh",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 46397,
+          "faceCount": 83052,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "4ec56df1c24d422ea85d1cfbf21bbe8c",
+          "url": "https://sketchfab.com/3d-models/4ec56df1c24d422ea85d1cfbf21bbe8c",
+          "creator": "Young_Wizard",
+          "username": "illya2878",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 1079,
+          "faceCount": 1504,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval House",
+          "uid": "1bea14d1a8a34b0b86a5374f256b47bf",
+          "url": "https://sketchfab.com/3d-models/1bea14d1a8a34b0b86a5374f256b47bf",
+          "creator": "cizzzoo",
+          "username": "pierpapiercizo",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 932776,
+          "faceCount": 851841,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "17b38f3c830845309474046ee58be7a0",
+          "url": "https://sketchfab.com/3d-models/17b38f3c830845309474046ee58be7a0",
+          "creator": "PetrDostal",
+          "username": "PetrDostal",
+          "license": null,
+          "vertexCount": 4037,
+          "faceCount": 6996,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "a8ad9d2723444b1b8ac054c232e61f12",
+          "url": "https://sketchfab.com/3d-models/a8ad9d2723444b1b8ac054c232e61f12",
+          "creator": "DoniTodorov",
+          "username": "DoniTodorov",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 15002,
+          "faceCount": 27778,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        }
+      ]
+    },
+    {
+      "file": "medieval-house.zip",
+      "query": "medieval house",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+house&count=24",
+      "candidates": [
+        {
+          "name": "Medieval house",
+          "uid": "904038d693b945d4843decee87fb0eb5",
+          "url": "https://sketchfab.com/3d-models/904038d693b945d4843decee87fb0eb5",
+          "creator": "Vanuartw",
+          "username": "sketh",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 46397,
+          "faceCount": 83052,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "4ec56df1c24d422ea85d1cfbf21bbe8c",
+          "url": "https://sketchfab.com/3d-models/4ec56df1c24d422ea85d1cfbf21bbe8c",
+          "creator": "Young_Wizard",
+          "username": "illya2878",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 1079,
+          "faceCount": 1504,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval House",
+          "uid": "1bea14d1a8a34b0b86a5374f256b47bf",
+          "url": "https://sketchfab.com/3d-models/1bea14d1a8a34b0b86a5374f256b47bf",
+          "creator": "cizzzoo",
+          "username": "pierpapiercizo",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 932776,
+          "faceCount": 851841,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "17b38f3c830845309474046ee58be7a0",
+          "url": "https://sketchfab.com/3d-models/17b38f3c830845309474046ee58be7a0",
+          "creator": "PetrDostal",
+          "username": "PetrDostal",
+          "license": null,
+          "vertexCount": 4037,
+          "faceCount": 6996,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval house",
+          "uid": "a8ad9d2723444b1b8ac054c232e61f12",
+          "url": "https://sketchfab.com/3d-models/a8ad9d2723444b1b8ac054c232e61f12",
+          "creator": "DoniTodorov",
+          "username": "DoniTodorov",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 15002,
+          "faceCount": 27778,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        }
+      ]
+    },
+    {
+      "file": "medieval-knight-model.zip",
+      "query": "medieval knight model",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+knight+model&count=24",
+      "candidates": [
+        {
+          "name": "Medieval knight",
+          "uid": "1629b56db814401aaf7f3868f0577472",
+          "url": "https://sketchfab.com/3d-models/1629b56db814401aaf7f3868f0577472",
+          "creator": "3dUVpro",
+          "username": "3dUVpro",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 14942,
+          "faceCount": 30000,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.848
+        },
+        {
+          "name": "Medieval Knight",
+          "uid": "3fad8f451c054220bd43e23aa52177b6",
+          "url": "https://sketchfab.com/3d-models/3fad8f451c054220bd43e23aa52177b6",
+          "creator": "vdchris7",
+          "username": "vdchris7",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 14737,
+          "faceCount": 24402,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.848
+        },
+        {
+          "name": "Medieval Knight Armor",
+          "uid": "fee00017617e41ff86d9cb895fb256a8",
+          "url": "https://sketchfab.com/3d-models/fee00017617e41ff86d9cb895fb256a8",
+          "creator": "Rumpelstiltskin",
+          "username": "rumpelshtiltshin",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 150288,
+          "faceCount": 296482,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.842
+        },
+        {
+          "name": "Medieval Knight Armor",
+          "uid": "9ad4be2d1d474bd89d6f4769391204e8",
+          "url": "https://sketchfab.com/3d-models/9ad4be2d1d474bd89d6f4769391204e8",
+          "creator": "denizkaplan",
+          "username": "denizkaplan",
+          "license": null,
+          "vertexCount": 36928,
+          "faceCount": 68818,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.842
+        },
+        {
+          "name": "Knight model",
+          "uid": "eb8a9d6ebaf84fe6a17dc5a70851b1ab",
+          "url": "https://sketchfab.com/3d-models/eb8a9d6ebaf84fe6a17dc5a70851b1ab",
+          "creator": "Mordius",
+          "username": "Mordius",
+          "license": null,
+          "vertexCount": 8667,
+          "faceCount": 15430,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.733
+        }
+      ]
+    },
+    {
+      "file": "medieval-man.zip",
+      "query": "medieval man",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+man&count=24",
+      "candidates": [
+        {
+          "name": "Medieval Man",
+          "uid": "e9bccd39a35047a196b7e1e97163ba75",
+          "url": "https://sketchfab.com/3d-models/e9bccd39a35047a196b7e1e97163ba75",
+          "creator": "Lukas Hahn 3D",
+          "username": "specter",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 88141,
+          "faceCount": 179571,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Man",
+          "uid": "07794757add64fda8dd7d7cc35dd7040",
+          "url": "https://sketchfab.com/3d-models/07794757add64fda8dd7d7cc35dd7040",
+          "creator": "EmanuelP",
+          "username": "EmanuelP",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 5000,
+          "faceCount": 10000,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Free to use in any project",
+            "descriptionSha256": "52dd04125d5dcab0d70c109b1a20fac14194a94f4b582c656fb0d976dfb6a8a2",
+            "publishedAt": "2025-05-18T17:58:18.984063",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Medieval man",
+          "uid": "2d42cd097f3e44d69a687f4b0649093a",
+          "url": "https://sketchfab.com/3d-models/2d42cd097f3e44d69a687f4b0649093a",
+          "creator": "Oleg Zhevelev",
+          "username": "zhev",
+          "license": null,
+          "vertexCount": 2657,
+          "faceCount": 2537,
+          "isDownloadable": false,
+          "exactTitle": true,
+          "similarity": 1.0
+        },
+        {
+          "name": "Medieval Man At Arms",
+          "uid": "c233021098f14df883d4d860a629f35a",
+          "url": "https://sketchfab.com/3d-models/c233021098f14df883d4d860a629f35a",
+          "creator": "Morejo",
+          "username": "Morejo",
+          "license": null,
+          "vertexCount": 13926,
+          "faceCount": 24636,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.786
+        },
+        {
+          "name": "Medieval VR Hands",
+          "uid": "86fd6cec31e347289571a039852c02ed",
+          "url": "https://sketchfab.com/3d-models/86fd6cec31e347289571a039852c02ed",
+          "creator": "Milos Baskic",
+          "username": "MilosBaskic",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 1954,
+          "faceCount": 3673,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.769
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Medieval Man",
+        "uid": "07794757add64fda8dd7d7cc35dd7040",
+        "url": "https://sketchfab.com/3d-models/07794757add64fda8dd7d7cc35dd7040",
+        "creator": "EmanuelP",
+        "username": "EmanuelP",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 5000,
+        "faceCount": 10000,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Free to use in any project",
+          "descriptionSha256": "52dd04125d5dcab0d70c109b1a20fac14194a94f4b582c656fb0d976dfb6a8a2",
+          "publishedAt": "2025-05-18T17:58:18.984063",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "medieval-stone-well-game-prop.zip",
+      "query": "medieval stone well game prop",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+stone+well+game+prop&count=24",
+      "candidates": [
+        {
+          "name": "Medieval Stone Well - Game Prop",
+          "uid": "a0ca279889b84afb9f24b88bff9c6860",
+          "url": "https://sketchfab.com/3d-models/a0ca279889b84afb9f24b88bff9c6860",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 967373,
+          "faceCount": 1935315,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "A highly detailed ancient medieval stone well, a weathered circular well built from rough mossy fieldstones, a wooden roof frame with worn shingles, a",
+            "descriptionSha256": "e91f5b5889fc223235a2abeb7d1c67fd3f30fd40554e71e4071db41ff4d1372e",
+            "publishedAt": "2026-08-05T13:53:21.635129",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Medieval Stone Water Well",
+          "uid": "2515c9cc8e2b44f3b48bbca919ee5d35",
+          "url": "https://sketchfab.com/3d-models/2515c9cc8e2b44f3b48bbca919ee5d35",
+          "creator": "deleted_cube",
+          "username": "deleted_cube",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 136850,
+          "faceCount": 274776,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.723
+        },
+        {
+          "name": "6 medieval props",
+          "uid": "f08f661cecee451680da6580a67cf0c1",
+          "url": "https://sketchfab.com/3d-models/f08f661cecee451680da6580a67cf0c1",
+          "creator": "cmarcks2000",
+          "username": "cmarcks2000",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 4125,
+          "faceCount": 7912,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.615
+        },
+        {
+          "name": "Old Medieval Water Well - Low Poly PBR",
+          "uid": "866d8fa769844e0fa3aebb4327f4a921",
+          "url": "https://sketchfab.com/3d-models/866d8fa769844e0fa3aebb4327f4a921",
+          "creator": "Leomanish",
+          "username": "Leomanish",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 732,
+          "faceCount": 1380,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.582
+        },
+        {
+          "name": "Low Poly Medieval Well",
+          "uid": "6e61a97c24cf4271a6550cf46bc90648",
+          "url": "https://sketchfab.com/3d-models/6e61a97c24cf4271a6550cf46bc90648",
+          "creator": "Sravan Kumar",
+          "username": "sravankumar.s2008",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 2826,
+          "faceCount": 4870,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.545
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Medieval Stone Well - Game Prop",
+        "uid": "a0ca279889b84afb9f24b88bff9c6860",
+        "url": "https://sketchfab.com/3d-models/a0ca279889b84afb9f24b88bff9c6860",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 967373,
+        "faceCount": 1935315,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "A highly detailed ancient medieval stone well, a weathered circular well built from rough mossy fieldstones, a wooden roof frame with worn shingles, a",
+          "descriptionSha256": "e91f5b5889fc223235a2abeb7d1c67fd3f30fd40554e71e4071db41ff4d1372e",
+          "publishedAt": "2026-08-05T13:53:21.635129",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "midnight-outlaw-shadow-character-3d-model-free.zip",
+      "query": "midnight outlaw shadow character 3d model free",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=midnight+outlaw+shadow+character+3d+model+free&count=24",
+      "candidates": [
+        {
+          "name": "Midnight Outlaw Shadow Character 3D Model Free",
+          "uid": "e8b29a6c85164173941569cb1aca6d9f",
+          "url": "https://sketchfab.com/3d-models/e8b29a6c85164173941569cb1aca6d9f",
+          "creator": "iRahulRajput",
+          "username": "rt699448",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 236778,
+          "faceCount": 473583,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "Midnight Outlaw Shadow Character 3D Model Free Download",
+            "descriptionSha256": "586a7278a88438e14578c92ed3d6d9935041c883e65a29af689cf08efebc8338",
+            "publishedAt": "2026-05-08T06:11:58.131263",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Midnight Outlaw Shadow Character 3D Model Free",
+        "uid": "e8b29a6c85164173941569cb1aca6d9f",
+        "url": "https://sketchfab.com/3d-models/e8b29a6c85164173941569cb1aca6d9f",
+        "creator": "iRahulRajput",
+        "username": "rt699448",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 236778,
+        "faceCount": 473583,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "Midnight Outlaw Shadow Character 3D Model Free Download",
+          "descriptionSha256": "586a7278a88438e14578c92ed3d6d9935041c883e65a29af689cf08efebc8338",
+          "publishedAt": "2026-05-08T06:11:58.131263",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "mountain-dragon.zip",
+      "query": "mountain dragon",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=mountain+dragon&count=24",
+      "candidates": [
+        {
+          "name": "Mountain Dragon",
+          "uid": "0a0665396f634b0e9d0872720087f52c",
+          "url": "https://sketchfab.com/3d-models/0a0665396f634b0e9d0872720087f52c",
+          "creator": "Alexey",
+          "username": "lexazaixa25",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 20472,
+          "faceCount": 20460,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "",
+            "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "publishedAt": "2026-08-10T14:59:02.548017",
+            "animationCount": 1,
+            "isDownloadable": true
+          }
+        },
+        {
+          "name": "Mountain Dragon (WIP)",
+          "uid": "ded0868e75a0426e8f2510dc8473a876",
+          "url": "https://sketchfab.com/3d-models/ded0868e75a0426e8f2510dc8473a876",
+          "creator": "MDCornett",
+          "username": "mdcornett",
+          "license": null,
+          "vertexCount": 10180,
+          "faceCount": 20352,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.903
+        },
+        {
+          "name": "Sakhar the Mountain Dragon",
+          "uid": "1ab4c770a1b64b3ab87c660c40b85445",
+          "url": "https://sketchfab.com/3d-models/1ab4c770a1b64b3ab87c660c40b85445",
+          "creator": "G",
+          "username": "garbagedaaay",
+          "license": null,
+          "vertexCount": 88608,
+          "faceCount": 175576,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.757
+        },
+        {
+          "name": "MOUNTAIN DRAGON ANIMATIONS",
+          "uid": "347cae9f87104374bc3ac554d9d3fd6e",
+          "url": "https://sketchfab.com/3d-models/347cae9f87104374bc3ac554d9d3fd6e",
+          "creator": "PROTOFACTOR, INC.",
+          "username": "protofactor",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "vertexCount": 10236,
+          "faceCount": 20460,
+          "isDownloadable": false,
+          "exactTitle": false,
+          "similarity": 0.737
+        },
+        {
+          "name": "Mountain Lake",
+          "uid": "3043ead27ac74144950e634197a1490b",
+          "url": "https://sketchfab.com/3d-models/3043ead27ac74144950e634197a1490b",
+          "creator": "ill_drakon",
+          "username": "ill_drakon",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 1051107,
+          "faceCount": 2098112,
+          "isDownloadable": true,
+          "exactTitle": false,
+          "similarity": 0.692
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Mountain Dragon",
+        "uid": "0a0665396f634b0e9d0872720087f52c",
+        "url": "https://sketchfab.com/3d-models/0a0665396f634b0e9d0872720087f52c",
+        "creator": "Alexey",
+        "username": "lexazaixa25",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 20472,
+        "faceCount": 20460,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "",
+          "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "publishedAt": "2026-08-10T14:59:02.548017",
+          "animationCount": 1,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    },
+    {
+      "file": "plague-doctor-bone-mask-warding-cane.zip",
+      "query": "plague doctor bone mask warding cane",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=plague+doctor+bone+mask+warding+cane&count=24",
+      "candidates": [
+        {
+          "name": "Plague Doctor - Bone Mask & Warding Cane",
+          "uid": "6e708e9717644a26b918a501043248e8",
+          "url": "https://sketchfab.com/3d-models/6e708e9717644a26b918a501043248e8",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "vertexCount": 973943,
+          "faceCount": 1947980,
+          "isDownloadable": true,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "descriptionExcerpt": "A realistic dark fantasy plague doctor, tall and faceless, wearing a tattered black robe over a pale ivory undershirt. His bird-beak mask is carved",
+            "descriptionSha256": "3d9ea6beca3cef13b2cac558c82f7f420d498009748eaa9c9e41b7d95fb622d5",
+            "publishedAt": "2026-07-13T16:59:49.001322",
+            "animationCount": 0,
+            "isDownloadable": true
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Plague Doctor - Bone Mask & Warding Cane",
+        "uid": "6e708e9717644a26b918a501043248e8",
+        "url": "https://sketchfab.com/3d-models/6e708e9717644a26b918a501043248e8",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "vertexCount": 973943,
+        "faceCount": 1947980,
+        "isDownloadable": true,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "descriptionExcerpt": "A realistic dark fantasy plague doctor, tall and faceless, wearing a tattered black robe over a pale ivory undershirt. His bird-beak mask is carved",
+          "descriptionSha256": "3d9ea6beca3cef13b2cac558c82f7f420d498009748eaa9c9e41b7d95fb622d5",
+          "publishedAt": "2026-07-13T16:59:49.001322",
+          "animationCount": 0,
+          "isDownloadable": true
+        }
+      },
+      "sourceMatchBasis": "matching title/search context plus exact packaged triangle count; not cryptographic proof of uploader rights"
+    }
+  ],
+  "upstreamReview": [
+    {
+      "file": "mountain-dragon.zip",
+      "possibleUpstream": {
+        "title": "MOUNTAIN DRAGON ANIMATIONS",
+        "uid": "347cae9f87104374bc3ac554d9d3fd6e",
+        "creator": "PROTOFACTOR, INC.",
+        "license": {
+          "uri": "https://api.sketchfab.com/v3/licenses/783b685da9bf457d81e829fa283f3567",
+          "label": "Standard",
+          "fullName": "Standard",
+          "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+          "url": "https://sketchfab.com/licenses",
+          "slug": "st"
+        },
+        "faceCount": 20460,
+        "url": "https://sketchfab.com/3d-models/347cae9f87104374bc3ac554d9d3fd6e"
+      },
+      "basis": "Same 20,460 triangles and packaged source name MOUNTAIN_DRAGON_ANIMATIONS; this is a lead, not proof of ownership or copying",
+      "status": "Hold until provenance/permission is established"
+    }
+  ]
+}
