@@ -1,6 +1,6 @@
 # DiceFree — Mage (Tier II) — class design interview
 
-**Status:** ACTIVE DESIGN · Round 1 decisions recorded · Round 2 awaiting answers · **DESIGN ONLY**  
+**Status:** ACTIVE DESIGN · Rounds 1–2 decisions recorded · Round 3 awaiting answers · **DESIGN ONLY**  
 **Updated:** 2026-10-15  
 **Owner:** User (final decisions); other DiceFree development chat will implement **only after the completed design is approved**.  
 **Branch:** `integration/world1-foundation`.
@@ -30,33 +30,57 @@
 | Spell schools represented | **Fire, Ice, Electric/Lightning, Math, Nature, Radiation** — **CONFIRMED WIZ-003**. Use the game's existing canonical element IDs, not new ad hoc schools. |
 | Non-healing identity | No dedicated healing spells in the Mage's intended kit — **CONFIRMED WIZ-002**. Defensive Mana magic remains available. |
 | Weapons | **Wand + orb** favored in Tier II v0.2 but not independently finalized in this interview. Orb as real equippable offhand is still a separate decision. |
-| Regular skill count | Six named actives + passive concepts below. No fixed 4-active/1-passive rule and **no Tier II ultimate**. Flexible skill pagination must follow current shared implementation. |
+| Regular skill count | **Six named active spells and two distinct passives** (Elemental Weaving + resistance aura together; Max Mana + Mana regen together). Rank caps, unlock order and point budget are **OPEN**. No universal 4-active/1-passive rule, and **no Tier II ultimate**. |
 
-## Confirmed active skill roster — mechanics still to design
+## Confirmed Mage skill roster — Round 2
 
-**Six active skills and their elements are confirmed.** Their exact effects beyond the statements below, targeting, cast/windup, intervals, cooldown, costs, ranges and level/rank progression remain open.
+**Six active spells + two passives.** Names and elemental identities are user-selected. The rules below are **CONFIRMED** where stated. Effects requiring interpretation, class/ability rank caps, damage coefficients, Mana upfront costs, cast times, ranges and most cooldowns remain **OPEN**.
 
-| # | Skill | Element | Confirmed identity | Open behavior |
+| # | Active skill | Element | Confirmed effect | Still to specify |
 | ---: | --- | --- | --- | --- |
-| 1 | **Ember Bolt** | **Fire** | Offensive Mage spell | Projectile vs instant, cast length, single/AoE, DoT/burn, damage |
-| 2 | **Frost Snare** | **Ice** | Offensive/control Mage spell | Snare/root vs slow, area geometry, damage, boss CC behavior |
-| 3 | **Arc Lightning** | **Electric** | Offensive Mage spell | Chain targets vs straight line, hit count, stun/control, damage |
-| 4 | **Math Barrier** | **Math** | **SELF-CAST** damage-to-Mana shield — **CONFIRMED WIZ-004** | For a portion of incoming damage, **Mana is lost in place of HP** (not Mana generated as a reward). Exact percentage, whether mitigation occurs before conversion, Mana-per-damage rate, duration/cooldown, what happens at 0 Mana, and stacking are **OPEN**. Preserve generic Mana/resource-shield resolution conventions unless explicitly overridden. |
-| 5 | **Quicksand** | **Nature** | Additional Mage spell | Ground zone vs unit, movement slow/root/pull, damage/DoT, duration |
-| 6 | **Half-Life** | **Radiation** | Additional Mage spell | Damage/DoT/decay/defense debuff/other; no behavior is inferred from the name |
+| 1 | **Ember Bolt** | **Fire** | Ranged **single-target** direct Fire attack; quick spell with a **real cooldown**. Explicitly **not spammable**, **not a substitute for the Mage's basic autoattack**. | Exact cooldown, cast/windup, damage, range, whether it burns (original suggestion remains optional). |
+| 2 | **Frost Snare** | **Ice** | Short **root/freeze**-style control, as contrasted with Quicksand's longer area denial. | Single target vs area, root/freeze exact CC category, damage, control duration, boss CC limitations. |
+| 3 | **Arc Lightning** | **Electric** | Lightning attack that **chains between multiple enemies**, with a **longer cooldown than Ember Bolt**. | Number of jumps, falloff, range, damage, exact cooldown and any status effects. |
+| 4 | **Math Barrier** | **Math** | **Self-cast** Mana shield: redirects a percentage of incoming damage from HP to **spent Mana** while active. **Exact rank formulas below.** | Upfront Mana cost, cooldown, mitigation ordering, behavior at partial Mana, stacking and max skill rank. |
+| 5 | **Quicksand** | **Nature** | **Ground-targeted persistent area** that **slows and gradually damages enemies**; distinguish from Frost Snare's short control. | Radius, lifetime, movement slow %, DoT cadence, recast limits, cooldown, scaling and element tagging. |
+| 6 | **Half-Life** | **Radiation** | **Single-target radioactive damage-over-time effect**. While affected, the target's **DEF is reduced by `5 × Half-Life skill rank`**. | Which DEF channel(s) (Physical, Magical, both), debuff and DoT durations/ticks, exact damage, stacking/refresh, dispel and cooldown. |
 
-The **Math Barrier** is a self-protection effect paid through Mana, not a caster healing skill. Do **not** invent an Arcane Ward, ordinary absorb shield or an ally-targeted version.
+**Confirmed combat cadence:** Ember Bolt is a cooldown-bound spell used **alongside** the normal autoattack, not a spam filler replacing it; Arc Lightning's cooldown is longer. No healing spells added.
 
-## Passives — confirmed concepts, unconfirmed allocation and effects
+### Math Barrier — user-confirmed formulas (MAGE-009)
 
-| Concept | Decision |
-| --- | --- |
-| **Elemental-resistance-reduction aura** | **CONFIRMED WIZ-003:** nearby enemies suffer an elemental resistance penalty equal to **−1 percentage point per skill rank**, i.e., rank 1 −1%, rank 2 −2%, rank 3 −3%, etc. Aura radius, max rank, affected elements, application rules, and overlap with another Mage's aura are **OPEN**. The user's wording was "level of skill x -1% elemental resistance"; do not assume the ultimate rank cap yet. |
-| **Elemental combo / Elemental Weaving** | **CONFIRMED WIZ-005:** mixing different spell elements should give a beneficial passive bonus. Mechanics, trigger, benefit, duration, stacking, number of elements needed and whether Math Barrier triggers it are **OPEN**. |
-| **Mana regeneration passive** | **SUGGESTED / OPEN:** The user proposed *maybe* Mana regeneration as part of the passive arrangement. It is **not yet confirmed** as a separate passive or an aura rider. |
-| **Passive organization** | **OPEN:** the above may be individual passives or some effects could share an evolving passive with rank milestones; clarify before implementation. |
+Let `r` denote **Math Barrier skill rank**, starting at rank 1:
 
-**Note on terminology:** “−1% elemental resistance per rank” means subtracting one **percentage point** from an enemy's elemental resistance per rank, not a 1% relative multiplication. If the user intends a different formula, correct it on next review.
+- **Duration:** `2 × r` seconds.
+- **Redirected share of incoming damage:** `25% + 5% × r` from HP to Mana. This is a portion **prevented from reducing HP**, paid from available Mana.
+- **Mana efficiency / cost:** for each **1 HP damage prevented**, consume `2 − 0.1 × r` Mana.
+- **At zero Mana:** the protective redirection ceases and the caster **takes the full incoming damage** normally (subject to ordinary defense/resistance as usual). No free shield when Mana is empty.
+- **Self-target only**; not an ally barrier.
+
+**Derived examples only**, *not* a decision that Mage skills cap at rank 6:
+
+| Barrier rank | Duration | Redirected damage | Mana per 1 HP protected |
+| ---: | ---: | ---: | ---: |
+| 1 | 2 s | 30% | 1.9 |
+| 3 | 6 s | 40% | 1.7 |
+| 6 | 12 s | 55% | 1.4 |
+
+**OPEN technical details:** Determine whether the redirect uses damage **after** ordinary damage mitigation (shared mana-shield convention suggests yes); if Mana runs out **partway** through a hit, determine partial protection vs no protection for that hit. Do not accidentally make unredirected damage disappear: the normal HP fraction always applies. Clarify whether the barrier vanishes immediately at 0 Mana or remains active and resumes if Mana regenerates during its duration. Rank ceiling must keep cost positive and percentages within valid bounds, without silently imposing a rank cap.
+
+### Passive A — Elemental Weaving (combined with elemental resistance aura)
+
+**CONFIRMED MAGE-010:**
+- **One passive**, not two, combining the prior resistance-reduction aura with the elemental-rotation benefit.
+- The **aura** reduces the elemental resistance of nearby enemies by **1 percentage point per passive skill rank** (at rank 1, −1%; rank 5, −5%). Aura radius, exact affected schools, boss eligibility and same-aura stacking with other Mages are **OPEN**.
+- Casting/mixing **different elements** grants a rotational benefit: **reduces the cooldowns of other spells by 0.2 seconds** and grants **+5% damage per element**. These are the user's exact proposed units, *not* automatically 0.2 × rank or 5% × passive rank.
+- **OPEN:** what qualifies as a new/different element; whether a successful hit or a completed cast triggers it; whether each newly distinct school adds another +5%, and the maximum number of elements/bonus stacks; buff duration/expiration and reset on same-school casts; whether Math Barrier counts; whether every switch reduces each other spell's remaining cooldown or only the next cast's cooldown; whether this 0.2 s occurs per switch/element and how to prevent same-frame/proc recursion; whether the aura and rotation improve with rank independently.
+- Elemental passives do **not** automatically rewrite the universal elements' inherent effects.
+
+### Passive B — Mana Attunement (working name)
+
+**CONFIRMED MAGE-010:** a **separate passive** raises both **maximum Mana** and **Mana regeneration**. User approved both effects together; the former Magically Touched Novice also had Mana Attunement but Mage progression does **not** automatically inherit numeric ranks from Tier I.
+
+**OPEN:** passive's actual name, flat vs percentage increases per rank, rank cap, interaction with equipment/INT and whether any ally Mana regeneration aura persists into Mage (not specified here; do not inherit automatically).
 
 ## Existing systems and design constraints
 
@@ -75,25 +99,33 @@ The **Math Barrier** is a self-protection effect paid through Mana, not a caster
 - **WIZ-004 — CONFIRMED:** Math Barrier is self-cast and redirects a **percentage of damage to Mana**. Exact ratios, costs and depletion behavior **OPEN**.
 - **WIZ-005 — CONFIRMED:** Only regular Mana; a passive rewarding **mixing elements** is required. Trigger/bonus **OPEN**.
 
-## Round 2 — next five questions (awaiting answers)
+## Round 2 — answers recorded on 2026-10-15
 
-**MAGE-006 — Fire and Lightning damage identity.** Should **Ember Bolt** be a quick single-target filler (possibly applying a burn), while **Arc Lightning** jumps across several enemies, or do you imagine different mechanics for either of them? What should distinguish Fire damage from Lightning?
+- **MAGE-006 — CONFIRMED:** Ember Bolt is a quick single-target Fire spell with a **nontrivial cooldown**, not a spammable autoattack replacement. Arc Lightning chains between enemies, with an **even longer cooldown**. Ember burn is *not yet locked*.
+- **MAGE-007 — CONFIRMED:** Frost Snare is short Ice crowd control; Quicksand is a persistent Nature slow-and-damage ground zone. Exact roots/freezes and numeric CC are still **OPEN**.
+- **MAGE-008 — CONFIRMED:** Half-Life is a **single-target Radiation DoT**, applying **−5 DEF per skill rank**. Defense channel(s), duration, DoT damage/ticks and reapplication rules **OPEN**.
+- **MAGE-009 — CONFIRMED:** Math Barrier self-cast: duration `2r` seconds; redirects `25% + 5r%` of incoming damage from HP to consumed Mana; each prevented HP consumes `2 − 0.1r` Mana. When Mana is empty take **full damage**. Partial-Mana hit, rank caps and standard mitigation ordering still **OPEN**.
+- **MAGE-010 — CONFIRMED:** Combine elemental resistance aura and Elemental Weaving into **one passive**; keep +Max Mana and +Mana regeneration in a **second passive**. Elemental Weaving reduces other spells' cooldowns by **0.2 sec** and increases damage by **5% per element** when mixing elements. Exact trigger, stack/count, duration and skill rank scaling **OPEN**.
 
-**MAGE-007 — Ice vs Nature control.** We have both **Frost Snare (Ice)** and **Quicksand (Nature)**. How should they differ? For example, Frost Snare could be a short root or freeze on a target, while Quicksand is a longer ground-targeted zone that slows and gradually damages enemies. Are those the right roles, or something else?
+## Round 3 — five questions (awaiting answers)
 
-**MAGE-008 — Radiation / Half-Life.** What do you want **Half-Life** to do? Potential directions include a single-target Radiation damage-over-time effect that decays, a spreading radioactive debuff, or a hit that reduces enemy defenses/resistances. Which feels right for Mage?
+**MAGE-011 — Base attributes and growth.** The Tier I Magically Touched Novice balance baseline at level 1 is **VIT 10 / STR 5 / AGI 5 / INT 13 / SPR 13**, with average per-level growth of **+1 VIT, +0.5 STR, +0.5 AGI, +2 INT, +2 SPR**. Mage should be a noticeably stronger **INT-focused Tier II** class with limited SPR emphasis. What level-1 stat spread and per-level growth do you want? You can state proportions/relative importance now and finalize exact numbers in a later pass.
 
-**MAGE-009 — Math Barrier resource conversion.** Roughly **what percentage** of incoming damage should Math Barrier redirect to Mana (e.g. 30%, 50%, 75%)? Should **1 prevented HP damage cost 1 Mana**, or another rate? If Mana runs out during a hit, should the unabsorbed portion hit HP normally?
+**MAGE-012 — Mana pool, regeneration and passive growth.** Should Mage start with substantially more maximum Mana/regen than Magically Touched, and should **Mana Attunement** grant **flat bonuses**, **percent bonuses**, or both? Should that passive only buff the Mage or also emit a small ally Mana-regeneration aura like the Tier I version?
 
-**MAGE-010 — Aura and elemental-combo passives.** Should the **−1% enemy elemental resistance per rank aura** be a passive of its own, and **Elemental Weaving** another passive, or should they merge as one evolving passive? When Mage uses *different* elements in succession, should the reward be bonus damage, reduced Mana costs, regeneration, or another effect? Does your “maybe Mana regen” belong in its own passive?
+**MAGE-013 — Starting kit and unlock timeline.** Which of the **six active spells** and **two passives** should already be learned at **Mage level 1**, and which should unlock later (up to level 60)? Should all rank-1 starting skills be free, like Greatblade's beginning kit, with points spent on later ranks?
+
+**MAGE-014 — Elemental Weaving: exact sequence.** Suppose you cast **Ember Bolt → Frost Snare → Arc Lightning**. Should this earn **+5%, then +10%, then +15%** damage according to the number of distinct elements used, or is a switch always a fixed **+5%**? How long does the bonus last, when does it reset, and is the **−0.2 s cooldown reduction** applied to **every other spell each time you switch elements**? Should Math Barrier count?
+
+**MAGE-015 — Wand/orb and basic attack.** Do you want to commit to **wand (main hand) + equippable orb (offhand)** for Mage? What should its normal autoattack look and feel like: elemental projectile based on wand/orb, fixed non-elemental magical bolt, or something else? Any alternative weapon types allowed?
 
 ## Later design rounds — topics not yet finalized
 
-1. Starting attributes and per-level growth (VIT, STR, AGI, INT, SPR), base HP, defenses, movement, starting/cap/regeneration of Mana and class resistance.
-2. Baseline attack, wand/orb equipment compatibility, alternate equipment choices, visual body/race/casting style and mentor quest.
-3. Every skill's exact target pattern, range, radius/jumps, cast time, cost, cooldown, base coefficient, rank-up effects and any control/resistance interaction.
-4. How many abilities are learned free at Mage level 1, when the remaining abilities/passives unlock through level 60, passive ranks/points and saved progression.
-5. Elemental rotation edge cases, PvE group aura stacking, boss crowd-control diminishing returns, interrupt/death behavior, solo viability and 1–4-player party tests.
+1. Base HP, base P-DEF/M-DEF, movement, class elemental resistances, stat-to-Mana resource formula and exact skill passive values.
+2. Ember Bolt / Frost Snare / Arc Lightning / Quicksand / Half-Life detailed target, damage, dot/CC duration, tick cadence, cooldown, casting and rank-specific effects.
+3. Half-Life **DEF channel(s)**; Math Barrier partial-Mana hit / interruption rules, and all rank caps (including safe conversion limits).
+4. Skill points, skill ranks, level gates 1–60, cooldown timing, mana costs, UI and solo/party balancing.
+5. Mentor advancement quest, art silhouette, VFX readability, ally aura stacking and anti-exploit/multiplayer acceptance tests.
 
 ## Implementation handoff — not authorized yet
 
@@ -108,4 +140,9 @@ The other DiceFree implementation chat should use this document as the single Ma
 | 2026-10-15 | WIZ-003 | Six named elemental actives and −1 percentage-point/rank enemy resistance aura | **CONFIRMED**, mechanics open |
 | 2026-10-15 | WIZ-004 | Self-only Math Barrier substitutes Mana for a % of HP damage | **CONFIRMED**, conversion open |
 | 2026-10-15 | WIZ-005 | Regular Mana; rewarding different elements with passive | **CONFIRMED**, bonus open |
-| 2026-10-15 | MAGE-006 through MAGE-010 | Round 2 asked | **AWAITING USER** |
+| 2026-10-15 | MAGE-006 | Ember Bolt cooldown-bound single target; Arc Lightning chains with longer cooldown | **CONFIRMED**, exact values open |
+| 2026-10-15 | MAGE-007 | Frost Snare short Ice control; Quicksand lasting Nature slow/DoT ground area | **CONFIRMED**, exact effects open |
+| 2026-10-15 | MAGE-008 | Half-Life Radiation single-target DoT; −5 DEF per skill rank | **CONFIRMED**, defense channel open |
+| 2026-10-15 | MAGE-009 | Math Barrier: self-only, 2r sec, (25+5r)% redirect, (2−0.1r) Mana/HP absorbed; no Mana = full damage | **CONFIRMED**, partial-hit/cap open |
+| 2026-10-15 | MAGE-010 | Combine resistance aura + Elemental Weaving; second passive Max Mana + regeneration | **CONFIRMED**, rotation semantics open |
+| 2026-10-15 | MAGE-011 through MAGE-015 | Round 3 asked | **AWAITING USER** |
