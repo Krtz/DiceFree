@@ -74,7 +74,7 @@ namespace DiceFree.Combat
    int rank=skills.Rank(Kind.Quicksand);Commit(Kind.Quicksand,rank);StartCoroutine(Quicksand(point,rank));return true;
   }
   void Commit(Kind kind,int rank){
-   
+
    GetComponent<BasicAttack>()?.Cancel();actor.Motor.Stop();
    if(!resources.TrySpend(ResourceIds.Mana,MageProgressionRules.Cost(kind,rank)))throw new InvalidOperationException("Mage cast resource validation changed.");
    readyAt[kind]=Time.time+MageProgressionRules.Cooldown(kind);
