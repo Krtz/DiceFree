@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: A Mind for Magic
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.mage.slime-puzzle
+  title: A Mind for Magic
+  requiredClassId: class.magically-touched-novice
+  requiredLevel: 30
+  version: 1
+  offer: Magic asks more than power. Enter the Slime Dungeon and solve the enchanted tree puzzle. Return to me afterwards, and I will teach you the Mage's craft.
+  activeDialogue: Solve the five-ring tree puzzle in the Slime Dungeon, then return to the retired mage at Cornberg's brewery.
+  locationHint: Slime Dungeon tree puzzle; return to Cornberg's brewer.
+  stages:
+  - kind: 4
+    objectiveId: solve-slime-tree
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Solve the Slime Dungeon tree puzzle
+    contentId: puzzle.slime-tree
+    dungeonBossOnly: 0
+    familyId: 
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

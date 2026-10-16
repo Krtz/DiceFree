@@ -1,0 +1,171 @@
+﻿[
+    {
+        "command":  "dicefree.mage.validate",
+        "result":  {
+                       "marker":  "DICEFREE_MAGE_DATA_OK",
+                       "players":  2,
+                       "abilities":  8,
+                       "actives":  6,
+                       "elements":  6,
+                       "advancementLevel":  30,
+                       "visual":  "Original placeholder"
+                   }
+    },
+    {
+        "command":  "dicefree.advancement.validate",
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_ADVANCEMENT_DATA_OK",
+                       "classes":  5,
+                       "advancements":  4,
+                       "schema":  6,
+                       "rosterVersion":  1
+                   }
+    },
+    {
+        "command":  "dicefree.physical.validate",
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_PHYSICAL_DATA_OK",
+                       "classId":  "class.physically-blessed-novice",
+                       "skillCount":  5,
+                       "manaMaximumAtLevel1":  65,
+                       "manaRegenAtLevel1":  4.5
+                   }
+    },
+    {
+        "command":  "dicefree.magical.validate",
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_MAGICAL_DATA_OK",
+                       "classId":  "class.magically-touched-novice",
+                       "skillCount":  5,
+                       "manaMaximumAtLevel1":  119,
+                       "manaRegenAtLevel1":  8.900001,
+                       "sandRank6Cost":  100,
+                       "iceRank6Cost":  100
+                   }
+    },
+    {
+        "command":  "dicefree.novice-skills.validate",
+        "result":  {
+                       "success":  true,
+                       "finalMarker":  "DICEFREE_NOVICE_SKILLS_DATA_OK",
+                       "definitions":  5,
+                       "schema":  6
+                   }
+    },
+    {
+        "command":  "dicefree.architecture.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture",
+                       "finalMarker":  "DICEFRE_ARCHITECTURE_OK",
+                       "elapsedSeconds":  1.8394157999999998,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.architecture.policy",
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture-policy",
+                       "finalMarker":  "DICEFRE_ARCH_POLICY_SELFTEST_OK",
+                       "elapsedSeconds":  0.00043359999999999997,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.managed-references.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "managed-references",
+                       "finalMarker":  "DICEFREE_MANAGED_REFERENCE_OK",
+                       "elapsedSeconds":  0.8032836,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.xp.quadratic.validate",
+        "result":  {
+                       "success":  true,
+                       "formula":  "30 + 3*(level-1)^2",
+                       "schema":  6,
+                       "manifestationsMigrated":  4,
+                       "questDefinitions":  9,
+                       "enemyDefinitions":  16
+                   }
+    },
+    {
+        "command":  "dicefree.ui.skills.inspect",
+        "result":  {
+                       "success":  true,
+                       "tooltipDefinitions":  15,
+                       "upgradeUi":  "In action bar",
+                       "concreteClassPanels":  3
+                   }
+    },
+    {
+        "command":  "dicefree.greatblade.prototype.validate",
+        "result":  {
+                       "success":  true,
+                       "marker":  "DICEFREE_GREATBLADE_VISUAL_AND_PROGRESS_OK",
+                       "playerAndMentorSameModel":  true,
+                       "femaleHumanoidAvatar":  true,
+                       "animationStates":  4,
+                       "swordInHand":  true,
+                       "texturedBody":  true,
+                       "oneBodyLod":  true,
+                       "extraSwordHidden":  true,
+                       "fingerBones":  30,
+                       "sampledVisualPoses":  80,
+                       "maxSupportHandError":  0.00000195068674,
+                       "maxDominantHandError":  0.00000137737038,
+                       "passives":  2,
+                       "level1Skills":  4,
+                       "breakerFirstLevel":  6,
+                       "ultimateTierMinimum":  4
+                   }
+    },
+    {
+        "command":  "dicefree.slime.validate",
+        "result":  {
+                       "success":  true,
+                       "marker":  "SLIME_DUNGEON_DATA_OK",
+                       "rolls":  20000,
+                       "rare":  1025,
+                       "two":  4752
+                   }
+    },
+    {
+        "command":  "dicefree.ironpine-wildlife.validate",
+        "result":  {
+                       "success":  true,
+                       "counts":  [
+                                      10,
+                                      7,
+                                      4,
+                                      1
+                                  ],
+                       "navigation":  "Spawn positions authored from NavMesh"
+                   }
+    },
+    {
+        "command":  "dicefree.october-playtest.validate",
+        "result":  {
+                       "marker":  "DICEFREE_OCTOBER_PLAYTEST_DATA_OK",
+                       "attackDefinitions":  9,
+                       "compassChoices":  5,
+                       "settingsMigration":  true
+                   }
+    }
+]

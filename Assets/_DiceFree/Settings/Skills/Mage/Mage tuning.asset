@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51eb2456cbd3abd4a868d2d1a9cd436a, type: 3}
+  m_Name: Mage tuning
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.MageCombatTuning
+  attacks:
+  - {fileID: 11400000, guid: 6e0e2708181029949b21b6e589a991c5, type: 2}
+  - {fileID: 11400000, guid: a6637aeb002a45948b3ebf1f108c1b1d, type: 2}
+  - {fileID: 11400000, guid: dc03c350ab982ae41b4669e78d6f34c4, type: 2}
+  - {fileID: 11400000, guid: 6556907f7d9961540b35f248b9cd3e42, type: 2}
+  - {fileID: 11400000, guid: be650024d3921c34cbb1815884eaefec, type: 2}
+  - {fileID: 11400000, guid: f0effc3fde59c93449a3af08d58f95c1, type: 2}
+  range: 18
+  chainRange: 6
+  quicksandRadius: 3.5
+  decayDelay: 8
+  decayInterval: 1

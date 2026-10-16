@@ -1,5 +1,14 @@
 # Class Progression
 
+## Current Tier II additions (2026-10-16)
+
+Both first branches now have a level-30 quest advancement: Physically Blessed Novice to Greatblade through the retired swordswoman's normal Slime Boss trial, and Magically Touched Novice to Mage through the brewer / retired mage's Slime Dungeon puzzle trial. Both require returning to the mentor and create a level-1 child manifestation while preserving the parent.
+
+Mage is an unspecialized INT caster with six active spells and two passives. See [Mage specification](classes/MAGE.md) for the agreed rules, provisional balance and visual provenance. The flexible ability provider supports this eight-ability kit without assigning an ultimate.
+
+The menu now groups saved manifestations by tier and displays equipped 2D portraits. Historical prototype sections below describe earlier milestones, not the complete current feature set.
+
+
 ## Core concept
 
 Every new Echo lineage begins as a **Novice**.

@@ -1,0 +1,8 @@
+﻿{
+    "status":  "passed",
+    "runningAfterSeconds":  15,
+    "remainedRunning":  true,
+    "errorMatches":  0,
+    "mode":  "Windows batchmode/nographics; startup only",
+    "isolatedSaveRoot":  "C:\\Users\\Axel\\AppData\\Local\\Temp\\DiceFree-MageStartup-75ff1a3027a9455f9b310dbc46c32f98"
+}

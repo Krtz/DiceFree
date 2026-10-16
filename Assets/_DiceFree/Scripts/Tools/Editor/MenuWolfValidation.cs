@@ -107,8 +107,8 @@ namespace DiceFree.EditorTools
    string root=SessionState.GetString(Key+"root",""),path=new LocalEchoStore(root).Path;
    string original=File.ReadAllText(path);var profile=new LocalEchoStore(root).Load();
    var catalog=Resources.Load<MenuPresentationCatalog>("MenuPresentationCatalog");
-   Need(menu.SelectedTier==2&&menu.Entries.Length==5,"Default last-active tier / preserved entries");
-   Need(menu.EntriesForTier(0).Length==1&&menu.EntriesForTier(1).Length==2&&menu.EntriesForTier(2).Length==1&&menu.EntriesForTier(5).Length==0,"Tier grouping");
+   Need(menu.SelectedTier==2&&menu.Entries.Length==catalog.forms.Length+1,"Default last-active tier / preserved entries");
+   Need(menu.EntriesForTier(0).Length==1&&menu.EntriesForTier(1).Length==2&&menu.EntriesForTier(2).Length==2&&menu.EntriesForTier(5).Length==0,"Tier grouping");
    Need(menu.EntriesForTier(-1).Length==1&&!menu.EntriesForTier(-1)[0].available&&!menu.TryPlayManifestation("class.future"),"Unknown class was activated or lost");
    menu.Refresh();
    foreach(var f in catalog.forms)menu.PortraitStage.Get(f.classId,ManifestationRoster.ReadManifestation(profile,f.classId),catalog);
@@ -116,6 +116,10 @@ namespace DiceFree.EditorTools
    foreach(var p in menu.PortraitStage.Portraits){
     Need(p.rendered&&p.texture.IsCreated(),"Portrait did not render "+p.classId);
     Need(p.root.GetComponentsInChildren<CombatActor>(true).Length==0&&p.root.GetComponentsInChildren<ManifestationPersistence>(true).Length==0&&p.root.GetComponentsInChildren<Health>(true).Length==0,"Live gameplay in portrait");
+    if(p.classId=="class.mage")foreach(string baseline in new[]{"Mage Hat","Mage Wand","Mage Orb"}){
+     var part=p.root.GetComponentsInChildren<Transform>(true).Single(t=>t.name==baseline);
+     Need(!part.gameObject.activeInHierarchy,"Equipped Mage preview overlaps default "+baseline);
+    }
     var expected=ManifestationRoster.ReadManifestation(profile,p.classId);
     var ids=expected.equipment.Select(s=>expected.inventory.Single(i=>i.instanceId==s.instanceId).definitionId).OrderBy(x=>x).ToArray();
     Need(ids.SequenceEqual(p.equippedIds.OrderBy(x=>x)),"Wrong equipped portrait gear "+p.classId);
@@ -132,6 +136,8 @@ namespace DiceFree.EditorTools
     var testWolf=inventory.Items.Single(i=>i.definitionId==WolfGreatswordVisual.ItemId);
     var old=loadout.Slots;
     Need(loadout.Equip(testWolf.instanceId,EquipmentSlot.MainHand)&&loadout.IsEquipped(testWolf.instanceId),"All-class two-hand equip "+p.classId);
+    if(p.classId=="class.mage")foreach(string baseline in new[]{"Mage Wand","Mage Orb"})
+     Need(!p.root.GetComponentsInChildren<Transform>(true).Single(t=>t.name==baseline).gameObject.activeInHierarchy,"Two-hand Mage preview overlaps "+baseline);
     loadout.Restore(old);
    }
    menu.SelectTier(1);yield return Frames(4);yield return Pause("tier1_ready");
@@ -196,7 +202,7 @@ namespace DiceFree.EditorTools
    Need(saved.sections.Single(s=>s.id=="future:opaque").json=="{\"preserved\":true}"&&ManifestationRoster.HasManifestation(saved,"class.future"),"Opaque future state lost");
    Need(player.GetComponent<DiceFree.Dungeons.ReturnToStartMenu>().Return(),"Return to menu failed");
    menu=null;while(menu==null||!menu.HasLoadedProfile){menu=Object.FindAnyObjectByType<StartMenuController>();yield return null;}
-   yield return Frames(8);Need(menu.SelectedTier==2&&menu.EntriesForTier(2).Single().active,"Return lost active tier");
+   yield return Frames(8);Need(menu.SelectedTier==2&&menu.EntriesForTier(2).Single(e=>e.classId=="class.greatblade").active,"Return lost active tier");
    Need(Object.FindObjectsByType<CombatActor>().Length==0,"Gameplay actors survived menu return");
    SessionState.SetString(Key+"phase","complete");
   }

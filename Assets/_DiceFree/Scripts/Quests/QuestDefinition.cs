@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DiceFree.Quests
 {
-    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any }
+    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any, SolvePuzzle }
     [Serializable]
     public class QuestLeaf
     {

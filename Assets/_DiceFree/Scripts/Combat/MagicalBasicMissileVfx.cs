@@ -21,7 +21,7 @@ namespace DiceFree.Combat
         {
             if (!Application.isPlaying || source == null || recipient == null) return;
             if (source.Stats.Definition == null ||
-                source.Stats.Definition.stableId != "class.magically-touched-novice") return;
+                source.Stats.Definition.stableId != "class.magically-touched-novice" && source.Stats.Definition.stableId != "class.mage") return;
             var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             sphere.name = "Magically Touched - Arcane Spark missile";
             var collider = sphere.GetComponent<Collider>();

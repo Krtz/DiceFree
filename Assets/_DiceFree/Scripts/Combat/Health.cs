@@ -7,6 +7,7 @@ namespace DiceFree.Combat
     public sealed class Health : MonoBehaviour
     {
         private ActorStats stats;
+        private IIncomingDamageRedirector[] redirectors;
         private readonly System.Collections.Generic.SortedDictionary<string,(float amount,float until)> shields = new(System.StringComparer.Ordinal);
         public float TemporaryShield
         {
@@ -50,7 +51,11 @@ namespace DiceFree.Combat
         // Connected packet, including zero damage or resistance restoration. Distinct from ordinary healing.
         public event Action<CombatActor, DamageResult> PacketResolved;
         public event Action<float> Healed;
-        private void Awake() { stats = GetComponent<ActorStats>(); Current = Maximum; }
+        private void Awake() { stats = GetComponent<ActorStats>(); Current = Maximum;
+            var list=new System.Collections.Generic.List<IIncomingDamageRedirector>();
+            foreach(var c in GetComponents<MonoBehaviour>())if(c is IIncomingDamageRedirector r)list.Add(r);
+            redirectors=list.ToArray();
+        }
         private void OnEnable() => stats.Changed += RefreshMaximum;
         private void OnDisable() => stats.Changed -= RefreshMaximum;
         private void Update() { if (Alive) Heal(stats.Regeneration * Time.deltaTime, false); }
@@ -68,6 +73,8 @@ namespace DiceFree.Combat
             else
             {
                 float unshielded=Absorb(result.DamagePotential);
+                foreach(var redirector in redirectors)
+                    unshielded=Mathf.Clamp(redirector.RedirectDamage(unshielded),0,unshielded);
                 result.absorbed=result.DamagePotential-unshielded;
                 result.applied = Mathf.Min(Current, unshielded);
                 Current -= result.applied;

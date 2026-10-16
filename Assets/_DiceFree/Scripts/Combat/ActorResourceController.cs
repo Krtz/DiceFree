@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -166,7 +166,7 @@ namespace DiceFree.Combat
                 profile.Validate();
                 string id = profile.resource.stableId;
                 active[id] = profile;
-                float maximum = profile.Maximum(stats.Attributes);
+                float maximum = Maximum(id);
                 float initial = maximum * Mathf.Clamp01(profile.initialFraction);
                 if (profile.loadPolicy == ResourceRetentionPolicy.Persist && saved != null)
                 {

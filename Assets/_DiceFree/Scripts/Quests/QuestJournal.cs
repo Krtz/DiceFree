@@ -33,17 +33,19 @@ namespace DiceFree.Quests
         private readonly HashSet<long> credited = new();
         private CombatActor owner;
         private SemanticGameEventHub dungeonHub;
-        private IDisposable dungeonBossSubscription;
+        private IDisposable dungeonBossSubscription,puzzleSubscription;
         public void BindDungeonEvents(SemanticGameEventHub hub)
         {
             UnbindDungeonEvents();dungeonHub=hub;
             if(hub!=null)dungeonBossSubscription=hub.Subscribe<DungeonBossKilledEvent>(fact=>
                 Advance(ObjectiveKind.Kill,fact.bossId,null,null,null,leaf=>leaf.dungeonBossOnly));
+            if(hub!=null)puzzleSubscription=hub.Subscribe<DungeonPuzzleSolvedEvent>(fact=>
+                Advance(ObjectiveKind.SolvePuzzle,fact.puzzleId,null,null));
         }
         public void UnbindDungeonEvents(SemanticGameEventHub hub=null)
         {
             if(hub!=null&&hub!=dungeonHub)return;
-            dungeonBossSubscription?.Dispose();dungeonBossSubscription=null;dungeonHub=null;
+            dungeonBossSubscription?.Dispose();puzzleSubscription?.Dispose();puzzleSubscription=null;dungeonBossSubscription=null;dungeonHub=null;
         }
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public event Action Changed;

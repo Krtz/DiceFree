@@ -44,7 +44,7 @@ namespace DiceFree.Visuals
             if(binding==null){binding=new EquipmentPresentation.Binding{definition=item,slot=EquipmentSlot.MainHand};bindings.Add(binding);}
             binding.visuals=binding.visuals.Concat(new[]{group}).ToArray();
             var grip=root.GetComponentInChildren<GreatbladeTwoHandGrip>(true);
-            var baseline=root.GetComponentsInChildren<Transform>(true).Where(t=>t.name=="Caster Staff"||
+            var baseline=root.GetComponentsInChildren<Transform>(true).Where(t=>t.name=="Caster Staff"||t.name=="Mage Wand"||t.name=="Mage Orb"||
                 t.name.IndexOf("greatsword",StringComparison.OrdinalIgnoreCase)>=0&&!t.IsChildOf(group.transform)&&t!=group.transform).Select(t=>t.gameObject);
             if(grip?.Weapon!=null)baseline=baseline.Concat(new[]{grip.Weapon.gameObject});
             binding.baselineVisuals=binding.baselineVisuals.Concat(baseline).Distinct().ToArray();

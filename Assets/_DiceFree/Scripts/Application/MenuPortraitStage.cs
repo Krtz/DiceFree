@@ -40,6 +40,8 @@ namespace DiceFree.Advancement
             plain.PrepareVisual(visual,root.GetComponent<EquipmentPresentation>(),inv);
             var wolf=root.GetComponent<WolfGreatswordVisual>()??root.AddComponent<WolfGreatswordVisual>();
             wolf.enabled=false;wolf.PrepareVisual(visual,root.GetComponent<EquipmentPresentation>(),inv);
+            // Procedural class defaults exist before gear bindings are generated. Register them now.
+            foreach(var mage in visual.GetComponentsInChildren<MageOutfit>(true))mage.BindEquipmentBaselines();
             equipment.Restore(state?.equipment??Array.Empty<EquippedItem>());
             foreach(var a in visual.GetComponentsInChildren<Animator>(true)) {
                 if(!a.isActiveAndEnabled)continue;

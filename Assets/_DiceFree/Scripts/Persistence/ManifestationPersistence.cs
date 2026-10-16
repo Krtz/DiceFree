@@ -309,11 +309,12 @@ namespace DiceFree.Persistence
 
             var skillState = FindSkillState(definition.stableId);
             skillState?.RestoreState(state.classSkills ?? Array.Empty<SkillRankState>());
-            resources?.RestoreForClass(definition.stableId, ToRuntimeResources(state.resources));
 
             journal.RestoreState(state.quests);
             inventory.Restore(state.inventory);
             equipment.Restore(state.equipment);
+            // Restore resources after gear: INT and passive bonuses define the live capacity.
+            resources?.RestoreForClass(definition.stableId, ToRuntimeResources(state.resources));
             wallet.Restore(state.gold);
             if (!anchor.LoadAtAnchor(state.anchorId))
                 throw new InvalidOperationException("Saved/fallback resurrection point is not navigable.");

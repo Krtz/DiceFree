@@ -1,0 +1,40 @@
+﻿[
+    {
+        "command":  "dicefree.mage.validate",
+        "result":  {
+                       "marker":  "DICEFREE_MAGE_DATA_OK",
+                       "players":  2,
+                       "abilities":  8,
+                       "actives":  6,
+                       "elements":  6,
+                       "advancementLevel":  30,
+                       "visual":  "Original placeholder"
+                   }
+    },
+    {
+        "command":  "dicefree.architecture.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture",
+                       "finalMarker":  "DICEFRE_ARCHITECTURE_OK",
+                       "elapsedSeconds":  1.4588345,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.managed-references.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "managed-references",
+                       "finalMarker":  "DICEFREE_MANAGED_REFERENCE_OK",
+                       "elapsedSeconds":  0.8515062,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    }
+]

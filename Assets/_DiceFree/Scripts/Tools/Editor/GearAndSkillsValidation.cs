@@ -52,7 +52,7 @@ namespace DiceFree.EditorTools
             Need(wallet.Gold==0&&inv.Items.Length==11&&eq.Slots.Length==0,"Purchase set, debit or implicit equip");
             Need(!shop.Purchase(player,offers[0].index,out _)&&inv.Items.Length==11,"Unfunded duplicate purchase succeeded");
             DevelopmentSession.Begin();
-            foreach(string id in new[]{"class.novice","class.physically-blessed-novice","class.magically-touched-novice","class.greatblade"})
+            foreach(string id in new[]{"class.novice","class.physically-blessed-novice","class.magically-touched-novice","class.greatblade","class.mage"})
             {
                 Phase("all slots: "+id);
                 if(controller.HasManifestation(id))Need(controller.TrySwitch(id),controller.Feedback);
@@ -90,7 +90,7 @@ namespace DiceFree.EditorTools
             }
             Need(controller.TrySwitch("class.novice")&&eq.Slots.Length==11&&controller.TrySwitch("class.greatblade")&&eq.Slots.Length==11,"All-slot manifestation roundtrip");
             var disk=new LocalEchoStore(Path.GetDirectoryName(save.SavePath)).Load();
-            foreach(string id in new[]{"class.novice","class.physically-blessed-novice","class.magically-touched-novice","class.greatblade"})
+            foreach(string id in new[]{"class.novice","class.physically-blessed-novice","class.magically-touched-novice","class.greatblade","class.mage"})
                 Need(ManifestationRoster.ReadManifestation(disk,id).equipment.Length==11,"On-disk equipped slots missing "+id);
             Phase("flexible definitions and layouts");
             Need(controller.TrySwitch("class.physically-blessed-novice"),"Physical skill fixture switch");yield return null;

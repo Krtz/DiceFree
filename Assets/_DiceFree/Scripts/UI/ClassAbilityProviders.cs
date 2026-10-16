@@ -118,6 +118,8 @@ namespace DiceFree.UI
                         case MagicalSkillKind.IceBurst:targeting.BeginGround(d.displayName,point=>mc.CastIceBurst(d,point),d.range);return true;
                         default:return false;}
                 });
+            var mage=owner.GetComponent<MageSkillProgression>();var mageCaster=owner.GetComponent<MageSkillCaster>();
+            if(mage!=null&&mageCaster!=null)yield return new MageAbilityProvider(mage,mageCaster);
             var greatblade=owner.GetComponent<GreatbladeSkillProgression>();var gc=owner.GetComponent<GreatbladeSkillCaster>();
             if(greatblade!=null&&gc!=null)yield return new GreatbladeAbilityProvider(greatblade,gc);
         }

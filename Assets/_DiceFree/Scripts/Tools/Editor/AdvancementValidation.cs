@@ -29,7 +29,7 @@ namespace DiceFree.EditorTools
             Require(novice != null && physical != null && magical != null && catalog != null &&
                     physicalEdge != null && magicalEdge != null, "Advancement assets are incomplete.");
             catalog.Validate();
-            Require(catalog.Classes.Count == 4 && catalog.Resolve(GreatbladeProgressionRules.ClassId)!=null, "Class catalog must contain the three starter classes and Greatblade.");
+            Require(catalog.Classes.Count == 5 && catalog.Resolve(GreatbladeProgressionRules.ClassId)!=null && catalog.Resolve(MageProgressionRules.ClassId)!=null, "Class catalog must contain the three starter classes, Greatblade and Mage.");
             Require(catalog.Resolve(AdvancementAuthoring.NoviceId) == novice &&
                     catalog.Resolve(AdvancementAuthoring.PhysicalId) == physical &&
                     catalog.Resolve(AdvancementAuthoring.MagicalId) == magical,
@@ -60,12 +60,12 @@ namespace DiceFree.EditorTools
                 "Cornberg advancement composition is incomplete.");
             Require(stats != null && stats.Definition != null && stats.Definition.stableId == AdvancementAuthoring.NoviceId,
                 "Authored Cornberg scene must remain Novice by default; roster chooses another class only at runtime.");
-            Require(controller.Definitions.Count == 3 &&
+            Require(controller.Definitions.Count == 4 &&
                     controller.Definitions.Any(value => value == physicalEdge) &&
                     controller.Definitions.Any(value => value == magicalEdge) &&
                     controller.Definitions.Any(value=>value.targetClass.stableId==GreatbladeProgressionRules.ClassId&&value.sourceClass==physical&&value.requiredLevel==30),
                 "Cornberg controller must expose both Tier-1 edges and Physical level-30 Greatblade.");
-            Require(controller.Classes.Count == 4, "Cornberg controller is not wired to the four-class catalog.");
+            Require(controller.Classes.Count == 5, "Cornberg controller is not wired to the five-class catalog.");
 
             Debug.Log("DICEFREE_ADVANCEMENT_DATA_OK: Tier-1 shells, data-driven edges, optional v5 roster and Cornberg wiring passed.");
             return new

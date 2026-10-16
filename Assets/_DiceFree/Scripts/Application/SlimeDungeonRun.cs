@@ -153,7 +153,10 @@ namespace DiceFree.Dungeons
         }
         public void SolvePuzzle(bool secret)
         {
-            PuzzleSolved=true;SecretSolved=secret;bossGate.SetActive(false);Grant(secret?Tuning.bluePuzzleXp:Tuning.puzzleXp,0);
+            if(!Active||PuzzleSolved)return;
+            PuzzleSolved=true;SecretSolved=secret;
+            Publish(new DungeonPuzzleSolvedEvent(definition.stableId,"puzzle.slime-tree"));
+            bossGate.SetActive(false);Grant(secret?Tuning.bluePuzzleXp:Tuning.puzzleXp,0);
             Spawn(Tuning.boss,Origin+new Vector3(68,0,76),3.2f,SlimeRole.Boss);
             if(secret){secretGate.SetActive(false);Spawn(Tuning.regent,Origin+new Vector3(52,0,22),4.4f,SlimeRole.Regent);Publish(new DungeonSecretDiscoveredEvent(definition.stableId,"secret.slime-regent"));}
             Status=secret?"Both final routes open — defeat either boss":"Normal Slime Boss route open";

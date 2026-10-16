@@ -1,3 +1,16 @@
+## 2026-10-16 - Tier II Mage, puzzle advancement and elemental kit
+
+- Level-30 Magically Touched Novice accepts A Mind for Magic from Cornberg's brewer / retired mage, solves the actual Slime Dungeon five-ring tree puzzle and returns for atomic advancement to level-1 Mage. Parent retained; earlier puzzle clears, boss kills, wrong manifestation and duplicate turn-ins cannot bypass it.
+- Six active spells: Ember Bolt, Frost Snare, Arc Lightning, Quicksand, Half-Life, Math Barrier. Two separate passives: unique-element Weaving/resistance reduction and Mana Attunement. INT scaling, wand basic attack, flexible eight-entry provider, rank/point gates, no ultimate. Save schema remains 6.
+- Weaving repeats refresh the shared 8s delay without duplicate elements; ticks/jumps/targets never add casts. +5% damage/stack and other Mage cooldowns -0.2s per cast. Decay 1 oldest element/s, resistance 1%/rank, Mana passive +30/+0.5 regen per rank are provisional starting balance.
+- Half-Life reduces both defenses by 5 x rank. Self-only Math Barrier lasts 2 x rank seconds, redirects (25+5 x rank)% of post-shield damage at (2-0.1 x rank) Mana/damage. Full/partial/empty Mana, healing and shield priority tested.
+- Both player scenes, five-class catalog, dev-room selector, saves, all eleven slots and equipped Tier II menu previews wired. Original pointed hat/split coat/tapered cape/wand/orb placeholder over the existing licensed humanoid; approved commercial LittleSimple pack is NOT installed. Existing Humanoid animations reused. Some icons/effects remain prototype.
+- Fixed resource restore to include passive modifiers and to occur after equipped attribute bonuses. Full Mana survives class switching with passive+gear capacity. Fixed portrait initialization so Mage defaults hide behind equipped items, including two-hand suppression of both wand and orb.
+- Verified: Mage 106, five-class gear/skills 277, Greatblade combat 75, swordswoman quest 35, equipped menu/loot 65; dev/menu/World2 round trip and fourteen static/data validators passed. Final Mage/architecture/managed references rechecked after portrait fix. Actual default/HUD/equipped portrait captures inspected.
+- Seven-scene Windows Development build succeeded, 0 errors/0 warnings, 354,686,240 bytes. Builds/World1Foundation/DiceFree.exe; use complete folder. Isolated 15s batch/nographics startup smoke passed without error matches; not a full graphical playthrough.
+- Read docs/classes/MAGE.md and docs/MAGE_TIER2_2026_10_16.md. Evidence: docs/validation/Mage-*.json and docs/screenshots/Mage-*.png. Reproduce dicefree.mage.test/status/resume and .validate; .author then dicefree.menu-wolf.author to rebuild authored data/previews.
+- Production Mage multiplayer is not implemented; existing isolated Novice/basic-attack network lab unchanged. Continue integration/world1-foundation; main unchanged. Preserve unrelated PackageManagerSettings.asset and Assets/Settings*.
+
 ## 2026-10-15 - Tiered equipped menu, Credits and Alpha Wolf greatsword
 
 - StartMenu now has tier tabs derived from the advancement graph, saved manifestation cards with Echo/title/level and read-only full-body 2D portraits showing each form's own equipment. Empty tiers and future/unavailable saves are handled. New/rename/refresh/dev-room/multiplayer entry points remain.
