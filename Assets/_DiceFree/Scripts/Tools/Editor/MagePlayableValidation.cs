@@ -108,15 +108,28 @@ namespace DiceFree.EditorTools
    Need(skills.CaptureState().Length==8&&skills.SpentPoints==36,"Mage rank economy");
    Need(Mathf.Approximately(mana.Maximum(ResourceIds.Mana),80+p.Stats.Attributes.intelligence*10+150),"Mana passive maximum");
    var targets=CombatActor.All.Where(t=>t!=p&&t.Stats.Definition.stableId=="dev.practice-target").ToArray();Need(targets.Length==3,"Three chain fixtures");
-   foreach(var t in targets){t.Stats.SetEncounterMaximumHp(100000);t.Health.Restore();t.Health.Invulnerable=false;if(t.TryGetComponent<BasicAttack>(out var basic))basic.enabled=false;t.Motor.Stop();}
+   foreach(var t in targets){t.Stats.SetEncounterMaximumHp(100000);t.Health.Restore();t.Health.Invulnerable=false;if(t.TryGetComponent<BasicAttack>(out var basic))basic.enabled=false;t.Effects.ConfigureControl(0,false);t.Motor.Stop();}
    Need(p.Motor.Teleport(new Vector3(-10,0,-8))&&targets[0].Motor.Teleport(new Vector3(-10,0,-2))&&targets[1].Motor.Teleport(new Vector3(-7,0,0))&&targets[2].Motor.Teleport(new Vector3(-4,0,-1)),"Spell arena placement");
+   var aura=p.GetComponent<ElementalResistanceAura>();Need(aura!=null&&Mathf.Approximately(aura.Reduction,.05f),"Mage aura rank");
+   var fire=caster.Tuning.attacks[0].element;float raw=targets[0].Stats.RawResistance(fire)+.05f;
+   foreach(var a in caster.Tuning.attacks)Need(Mathf.Approximately(ElementalResistanceAura.StrongestAgainst(targets[0].Stats,a.element),.05f),"Passive aura school "+a.element.stableId);
+   Need(caster.Tuning.attacks[3].element.stableId=="element.nature","Quicksand must use canonical Nature");
+   Need(p.Motor.Teleport(new Vector3(-20,0,-15)),"Aura leave placement");Need(Mathf.Approximately(targets[0].Stats.RawResistance(fire),raw),"Aura remained out of range");
+   Need(p.Motor.Teleport(new Vector3(-10,0,-8)),"Aura return placement");
+   int team=targets[1].Faction;float radius=targets[1].Radius/1.4f;targets[1].Configure(p.Faction,radius);
+   var second=targets[1].gameObject.AddComponent<ElementalResistanceAura>();second.Configure(caster.Tuning.attacks.Select(a=>a.element).ToArray(),.03f,8);
+   Need(Mathf.Approximately(targets[0].Stats.RawResistance(fire),raw-.05f),"Overlapping auras stacked");
+   aura.Clear();Need(Mathf.Approximately(targets[0].Stats.RawResistance(fire),raw-.03f),"Weaker aura fallback");
+   second.enabled=false;Need(Mathf.Approximately(targets[0].Stats.RawResistance(fire),raw),"Disabled aura leaked");
+   Object.Destroy(second);targets[1].Configure(team,radius);skills.RestoreState(skills.CaptureState());
+   Need(Mathf.Approximately(targets[0].Stats.RawResistance(fire),raw-.05f),"Mage aura did not restore");
    caster.ResetForManifestationLoad();float hp=targets[0].Health.Current,mp=mana.Current(ResourceIds.Mana);
    Need(caster.Cast(Kind.EmberBolt,targets[0]),caster.Feedback);Need(caster.WeavingStacks==1&&mana.Current(ResourceIds.Mana)<mp,"Ember cost/stack");
    mp=mana.Current(ResourceIds.Mana);Need(!caster.Cast(Kind.EmberBolt,targets[0])&&Mathf.Approximately(mp,mana.Current(ResourceIds.Mana))&&caster.WeavingStacks==1,"Rejected cast changed Mana/stacks");yield return Wait(.8f);
    Need(targets[0].Health.Current<hp,"Ember projectile did not hit");yield return Wait(4.4f);
    float oldDecay=caster.DecayStartsAt;Need(caster.Cast(Kind.EmberBolt,targets[0])&&caster.WeavingStacks==1&&caster.DecayStartsAt>oldDecay+4,"Repeated element did not refresh");
    float cool=caster.CooldownRemaining(Kind.EmberBolt),speed=targets[0].Stats.MoveSpeed;
-   Need(caster.Cast(Kind.FrostSnare,targets[0]),caster.Feedback);Need(caster.WeavingStacks==2&&caster.CooldownRemaining(Kind.EmberBolt)<cool-.15f,"Unique element or other cooldown reduction");Need(targets[0].Stats.MoveSpeed<speed,"Frost slow missing");
+   Need(caster.Cast(Kind.FrostSnare,targets[0]),caster.Feedback);Need(caster.WeavingStacks==2&&caster.CooldownRemaining(Kind.EmberBolt)<cool-.15f,"Unique element or other cooldown reduction");Need(targets[0].Effects.Stunned&&!targets[0].CanAct,"Frost freeze missing");
    var health=targets.Select(t=>t.Health.Current).ToArray();Need(caster.Cast(Kind.ArcLightning,targets[0]),caster.Feedback);
    Need(targets.Select((t,i)=>t.Health.Current<health[i]).All(x=>x)&&caster.WeavingStacks==3,"Chain hit count or duplicate stacks");report.chainTargets=3;
    Need(caster.CastQuicksand(targets[0].transform.position),caster.Feedback);yield return Wait(1.1f);Need(caster.WeavingStacks==4,"Quicksand ticks added stacks");
@@ -133,6 +146,9 @@ namespace DiceFree.EditorTools
    packet=p.Health.ApplyPacket(targets[0],new DamageResult{mitigated=100});Need(Mathf.Approximately(packet.applied,100)&&packet.absorbed==0,"Zero Mana still protected");
    mp=mana.Current(ResourceIds.Mana);p.Health.ApplyPacket(targets[0],new DamageResult{mitigated=-20,element=caster.Tuning.attacks[5].element});Need(Mathf.Approximately(mp,mana.Current(ResourceIds.Mana)),"Resistance healing spent Mana");
    p.Health.Invulnerable=true;caster.ResetForManifestationLoad();Need(targets[0].Stats.DefenseModifiers(DamageChannel.Physical).reductionFlat==0,"Owned debuff leaked on reset");
+   yield return Wait(2.1f);Need(!targets[0].Effects.Stunned,"Frost freeze did not expire");
+   targets[0].Effects.ConfigureControl(0,true);mana.RefillAll();Need(caster.Cast(Kind.FrostSnare,targets[0])&&!targets[0].Effects.Stunned,"Freeze ignored boss immunity");
+   targets[0].Effects.ConfigureControl(0,false);caster.ResetForManifestationLoad();
    mana.RefillAll();var ranks=skills.CaptureState();skills.RestoreState(ranks.Select(r=>new SkillRankState(r.stableId,r.stableId==MageSkillProgression.Id(Kind.MathBarrier)?1:r.rank)).ToArray());
    Need(caster.Cast(Kind.MathBarrier)&&caster.BarrierRemaining<=2.01f,"Rank-1 duration");yield return Wait(2.15f);Need(caster.BarrierRemaining==0,"Barrier expiry");skills.RestoreState(ranks);
    Phase("Weaving refresh and gradual decay");caster.ResetForManifestationLoad();mana.RefillAll();

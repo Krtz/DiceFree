@@ -6,6 +6,7 @@ namespace DiceFree.Combat
  public sealed class MageCombatTuning:ScriptableObject
  {
   public AttackDefinition[] attacks=new AttackDefinition[6];
+  public float auraRadius=8;
   public float range=18,chainRange=6,quicksandRadius=3.5f,decayDelay=8,decayInterval=1;
  }
 }

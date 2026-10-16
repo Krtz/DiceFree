@@ -22,6 +22,7 @@ namespace DiceFree.EditorTools
    Need(definition.stableId==MageProgressionRules.ClassId&&definition.basicAttack.weights.intelligence==1&&definition.basicAttack.weights.strength==0&&definition.basicAttack.weights.spirit==0,"Mage must scale attacks with INT.");
    Need(tuning.attacks.Length==6&&tuning.attacks.All(a=>a!=null&&a.element!=null&&!a.requiresAccuracy&&a.weights.intelligence==1)&&tuning.attacks.Select(a=>a.element.stableId).Distinct().Count()==6,"Six distinct elemental attacks.");
    Need(MageProgressionRules.Skills.Length==8&&MageProgressionRules.Skills.Count(r=>r.passive)==2,"Flexible eight-ability Mage kit.");
+   Need(tuning.auraRadius==8&&tuning.attacks[3].element.stableId=="element.nature","Nature and aura authoring.");
    Need(tuning.decayDelay==8&&tuning.decayInterval==1,"Weaving timing.");
    Need(MageProgressionRules.Cooldown(MageProgressionRules.Kind.EmberBolt)>0&&MageProgressionRules.Cooldown(MageProgressionRules.Kind.ArcLightning)>MageProgressionRules.Cooldown(MageProgressionRules.Kind.EmberBolt),"Cooldown identity.");
    Need(profile.classId==definition.stableId&&profile.maximumPerIntelligence==10&&profile.maximumPerSpirit==0,"Mage Mana scaling.");
@@ -56,7 +57,7 @@ namespace DiceFree.EditorTools
     basic.stableId="attack.mage.wand";basic.displayName="Wand Spark";basic.weights=new AttributeValues{intelligence=1};basic.scaling=AttributeScaling.Weighted;basic.channel=DamageChannel.Magical;
     basic.baseDamage=1;basic.coefficient=1.2f;basic.interval=1.5f;basic.reach=12;basic.windup=.25f;basic.element=null;definition.basicAttack=basic;
     var tuning=Asset<MageCombatTuning>(TuningPath);tuning.attacks=new AttackDefinition[6];tuning.range=18;tuning.chainRange=6;tuning.quicksandRadius=3.5f;tuning.decayDelay=8;tuning.decayInterval=1;
-    string[] elements={"Fire","Ice","Electric","Earth","Radiation","Math"};
+    string[] elements={"Fire","Ice","Electric","Nature","Radiation","Math"};
     foreach(var rule in MageProgressionRules.Skills.Where(r=>!r.passive)){
      int i=(int)rule.kind;string name=MageProgressionRules.Name(rule.kind);
      var element=Asset<ElementDefinition>(MagicalTouchedAuthoring.ElementFolder+"/"+elements[i]+".asset");element.stableId="element."+elements[i].ToLowerInvariant();element.displayName=elements[i];EditorUtility.SetDirty(element);

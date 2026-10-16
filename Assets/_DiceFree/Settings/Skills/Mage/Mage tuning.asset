@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6556907f7d9961540b35f248b9cd3e42, type: 2}
   - {fileID: 11400000, guid: be650024d3921c34cbb1815884eaefec, type: 2}
   - {fileID: 11400000, guid: f0effc3fde59c93449a3af08d58f95c1, type: 2}
+  auraRadius: 8
   range: 18
   chainRange: 6
   quicksandRadius: 3.5

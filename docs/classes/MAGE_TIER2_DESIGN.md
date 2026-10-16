@@ -1,8 +1,10 @@
 # DiceFree — Mage (Tier II) — class design interview
 
-**Status:** ACTIVE DESIGN · Rounds 1–2 decisions recorded · Round 3 awaiting answers · **DESIGN ONLY**  
-**Updated:** 2026-10-15  
-**Owner:** User (final decisions); other DiceFree development chat will implement **only after the completed design is approved**.  
+> **Implementation update — 2026-10-16:** The user subsequently authorized a playable Mage prototype in the implementation chat. See [current implementation and provisional balance](MAGE.md) and [verification](../MAGE_TIER2_2026_10_16.md). This interview's confirmed decisions are preserved; open numeric questions are not relabeled as user-approved. Later approvals fix the Slime Dungeon puzzle/return quest and unique-element Weaving with an eight-second inactivity delay. The earlier design-only handoff below describes the interview's historical scope.
+
+**Status:** Playable prototype implemented following later user authorization · Rounds 1–2 decisions preserved · Remaining balance/design questions still open  
+**Updated:** 2026-10-16  
+**Owner:** User (final decisions); the implementation chat was subsequently authorized to build the playable prototype. Provisional implementation numbers do not close unanswered interview questions.  
 **Branch:** `integration/world1-foundation`.
 
 **Prior specifications to reconcile:** [Tier II core classes v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [earlier Tier II proposals v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md), [class progression](../CLASS_PROGRESSION.md), [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md), [flexible skill framework](../PLAIN_GEAR_AND_FLEXIBLE_SKILLS.md), and [stat/element rules](../STATS_AND_DAMAGE.md). When older documents differ, the **user decisions in this Mage interview supersede their Mage proposals only**; do not silently alter other classes.
@@ -127,7 +129,7 @@ Let `r` denote **Math Barrier skill rank**, starting at rank 1:
 4. Skill points, skill ranks, level gates 1–60, cooldown timing, mana costs, UI and solo/party balancing.
 5. Mentor advancement quest, art silhouette, VFX readability, ally aura stacking and anti-exploit/multiplayer acceptance tests.
 
-## Implementation handoff — not authorized yet
+## Historical implementation handoff — before later prototype authorization
 
 The other DiceFree implementation chat should use this document as the single Mage source of truth once all decisions and numeric tables are approved. Implementation will require data-driven skill definitions, class-stats/element/weapon definitions, cast animation/VFX placeholders, passive state and auras, tests for Math Barrier partial-Mana cases, aura stacking, rotations, progression, persistence, damage/cost/cooldown rank calculations, advancement integration, and NPC mentor behavior. **Do not begin implementation while this is in interview status.**
 

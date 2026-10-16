@@ -15,7 +15,7 @@ MonoBehaviour:
   stableId: attack.mage.quicksand
   displayName: Quicksand
   channel: 1
-  element: {fileID: 11400000, guid: 3b2558c1edbd5b14bbbdd3f28d3c5d7b, type: 2}
+  element: {fileID: 11400000, guid: 8edf73d47e5ee704f81621513ca71c82, type: 2}
   requiresAccuracy: 0
   scaling: 0
   weights:

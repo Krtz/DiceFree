@@ -12,7 +12,7 @@ namespace DiceFree.Combat
   readonly HashSet<(MageAfflictions target,string id)> ownedEffects=new();
   readonly List<GameObject> sessionVfx=new();
   CombatActor actor;MageSkillProgression skills;ActorResourceController resources;
-  float nextDecay,barrierUntil;int barrierRank,serial;
+  float nextDecay,barrierUntil;int barrierRank,serial;ElementalResistanceAura aura;
   public MageCombatTuning Tuning=>tuning;
   public string Feedback{get;private set;}="";
   public int WeavingStacks=>elements.Count;
@@ -21,9 +21,9 @@ namespace DiceFree.Combat
   public float BarrierRemaining=>Mathf.Max(0,barrierUntil-Time.time);
   public event Action<Kind> Casted;
   public void Configure(MageCombatTuning value)=>tuning=value;
-  void Awake(){actor=GetComponent<CombatActor>();skills=GetComponent<MageSkillProgression>();resources=GetComponent<ActorResourceController>();}
-  void OnEnable(){actor??=GetComponent<CombatActor>();if(actor.Health!=null)actor.Health.Died+=ResetForManifestationLoad;}
-  void OnDisable(){if(actor?.Health!=null)actor.Health.Died-=ResetForManifestationLoad;ResetForManifestationLoad();}
+  void Awake(){actor=GetComponent<CombatActor>();skills=GetComponent<MageSkillProgression>();resources=GetComponent<ActorResourceController>();aura=GetComponent<ElementalResistanceAura>()??gameObject.AddComponent<ElementalResistanceAura>();RefreshAura();}
+  void OnEnable(){actor??=GetComponent<CombatActor>();if(actor.Health!=null)actor.Health.Died+=ResetForManifestationLoad;skills.Changed+=RefreshAura;RefreshAura();}
+  void OnDisable(){if(actor?.Health!=null)actor.Health.Died-=ResetForManifestationLoad;if(skills!=null)skills.Changed-=RefreshAura;ResetForManifestationLoad();aura?.Clear();}
   void Update(){
    if(!skills.ActiveForCurrentClass){if(elements.Count>0||barrierUntil>0)ResetForManifestationLoad();return;}
    while(elements.Count>0&&Time.time>=nextDecay){elements.RemoveAt(0);nextDecay+=tuning.decayInterval;SyncWeaving();}
@@ -46,7 +46,7 @@ namespace DiceFree.Combat
    switch(kind){
     case Kind.EmberBolt:StartCoroutine(Ember(target,rank));break;
     case Kind.FrostSnare:
-     Hit(target,kind,rank);if(target.Alive)target.Effects?.ApplyMovementSpeedDebuff(EffectId("frost"),30+rank*4,3+rank*.4f);
+     Hit(target,kind,rank);if(target.Alive)target.Effects?.TryApplyStun(.75f+rank*.25f,false);
      MageSpellVfx.Burst(target.transform.position,Color.cyan);break;
     case Kind.ArcLightning:
      var seen=new HashSet<CombatActor>();var current=target;Vector3 from=transform.position+Vector3.up;
@@ -86,16 +86,16 @@ namespace DiceFree.Combat
    }
    Feedback=MageProgressionRules.Name(kind)+" cast.";Casted?.Invoke(kind);
   }
+  void RefreshAura(){
+   if(aura==null)return;
+   if(!isActiveAndEnabled||tuning==null||!skills.ActiveForCurrentClass){aura.Clear();return;}
+   aura.Configure(tuning.attacks.Select(a=>a.element).ToArray(),skills.Rank(Kind.ElementalWeaving)*.01f,tuning.auraRadius);
+  }
   void SyncWeaving()=>actor.Stats.SetBasicAttackDamagePercentContribution("mage.weaving",WeavingStacks*5);
   string EffectId(string name)=>"mage."+name+":"+actor.GetEntityId();
   void Hit(CombatActor target,Kind kind,int rank,float falloff=1){
    if(!actor.IsHostileTo(target))return;
-   var attack=tuning.attacks[(int)kind];int weaving=skills.Rank(Kind.ElementalWeaving);
-   if(weaving>0&&attack.element!=null){
-    var aff=target.GetComponent<MageAfflictions>()??target.gameObject.AddComponent<MageAfflictions>();
-    string id=EffectId("resistance."+attack.element.stableId);
-    aff.ApplyResistance(id,attack.element,weaving*.01f,8);ownedEffects.Add((aff,id));
-   }
+   var attack=tuning.attacks[(int)kind];
    DamageResolver.Hit(actor,target,attack,coefficientOverride:MageProgressionRules.Coefficient(kind,rank),rawMultiplier:(1+WeavingStacks*.05f)*falloff);
   }
   IEnumerator Ember(CombatActor target,int rank){
