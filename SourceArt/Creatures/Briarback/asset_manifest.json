@@ -1,0 +1,18 @@
+{
+  "name": "Briarback Quilboar",
+  "source": "Original DiceFree geometry; first-party Novice rig and animation code reused",
+  "license": "DiceFree original project art",
+  "meters": true,
+  "vertices": 2651,
+  "triangles": 5098,
+  "bones": 22,
+  "actions": [
+    "Quilboar|Attack",
+    "Quilboar|Death",
+    "Quilboar|Idle",
+    "Quilboar|Locomotion",
+    "Quilboar|Slam"
+  ],
+  "fbxSha256": "b4bf8c110a00c5658aaba8888dc84e650089299b1c2607137342dafe930783d9",
+  "provider": "offline Blender; no paid generation or canonical game-dev package"
+}

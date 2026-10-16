@@ -1,0 +1,64 @@
+{
+  "package": "Stylized Forest Kit Samples",
+  "packageSha256": "00bf1c7dbafca6c8418f025fd9562f11239d97feec18c236b36b8cb4bc467ae8",
+  "license": "Standard Unity Asset Store EULA",
+  "sourceUrl": "https://assetstore.unity.com/packages/3d/environments/stylized-forest-kit-samples-403082",
+  "destination": "Assets/_DiceFree/LocalArt/TreesLicensed/Source",
+  "files": [
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak02_D.png",
+      "path": "Texture\\Oak\\T_Oak02_D.png",
+      "sha256": "4a9bac5f9fcb95ff790bbeeed43ea09c422d5123c879a3bddcf61264108781e9",
+      "metaSha256": "d046126c48efba2f6ac17a897da9f35ebc4c4d0765962560d49a3ff010463f04"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak01_ID.png",
+      "path": "Texture\\Oak\\T_Oak01_ID.png",
+      "sha256": "1ecf818d30eae81494d6a88e2a7ba0a8644e384027788f91ddf069dba34028b8",
+      "metaSha256": "30eb4efdb1acce4bcbc9239a294977c505f54975adcd608256b7e6ac8d8f8779"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak01_N.png",
+      "path": "Texture\\Oak\\T_Oak01_N.png",
+      "sha256": "e0f867a93c70e51d2c2df624c9452fde5e59ca355a9c97d8215d492e20e5a496",
+      "metaSha256": "87ec98b03a510b03eb32dc2442465ca5bae36291dfc551c09574c385ad9e8393"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Model/M_Oak01.fbx",
+      "path": "Model\\M_Oak01.fbx",
+      "sha256": "4b16814207d8a156fc009d6fdfadb5bb663c51c0ef8494b719031bf3afa6f230",
+      "metaSha256": "89cda9a16bcb95e9d7454b23a4597154eeb4ff0ecc6b69f5146473af41641d29"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak01_O.png",
+      "path": "Texture\\Oak\\T_Oak01_O.png",
+      "sha256": "6aea7506bab275e3bcf906e2bd44384e44f9b1e316907f489aea3378f1ddd26e",
+      "metaSha256": "91c2d3746c66b5f3e0480927473ee7b1fddc5c7f81cb7b696c1ba8b6c301e3e4"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak03_D.png",
+      "path": "Texture\\Oak\\T_Oak03_D.png",
+      "sha256": "b675706f7aa913c207d1cf0efd622eb9594489c80a227f33b674821cb3a597e7",
+      "metaSha256": "7986e8e3e380cc22c328331973f73a5a46282024214007a7c4ca6748d9a3b2ae"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak01_M.png",
+      "path": "Texture\\Oak\\T_Oak01_M.png",
+      "sha256": "fec4a8606d0e15f35adce1dbfac03929d1b0051c85fa2f5df76624e3117abf87",
+      "metaSha256": "74aff00aa2833c76ee8971881e7330e404c1c0b27be425fc5658f974eae5d51c"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak01_D.png",
+      "path": "Texture\\Oak\\T_Oak01_D.png",
+      "sha256": "d16e406ea8d93a38af75098c0b6f143bec8d9572c4e167d24be5a6eae2956d1b",
+      "metaSha256": "079d47a76f3ed92f3b07a05eec0a453c2d30dd42b7ab0bdc5ca356195ad736c1"
+    },
+    {
+      "source": "Assets/Symphonie/StylizedForestKit Samples/Texture/Oak/T_Oak04_D.png",
+      "path": "Texture\\Oak\\T_Oak04_D.png",
+      "sha256": "3e4e82a4f21fd17bec07c9fd736e7ae8b6d061d7ae27e044af922b1b031034c3",
+      "metaSha256": "3dfc8b64af008dee8b3ae1d8fd18da5905c457cffbf222302dda683ed7973474"
+    }
+  ],
+  "method": "Curated Unity model and texture extraction; game-dev unavailable; no canonical receipt claim"
+}

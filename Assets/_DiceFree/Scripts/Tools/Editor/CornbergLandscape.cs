@@ -126,7 +126,7 @@ namespace DiceFree.EditorTools
                 new Vector3(120,30,100), LeafLight, vista, false);
             Shape("Distant wooded ridge", PrimitiveType.Sphere, new Vector3(30,-6,210),
                 new Vector3(180,36,110), Leaf, vista, false);
-            var origin = new Vector3(300, -3, 330);
+            var origin = new Vector3(300, -3, 560);
             Shape("Ancient trunk", PrimitiveType.Cylinder, origin + Vector3.up * 65, new Vector3(19,65,19), Timber, vista, false);
             for (int i = 0; i < 7; i++)
             {

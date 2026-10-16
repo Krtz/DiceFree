@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Northern Trail
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.briarback.northern-trail
+  title: The Northern Trail
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: The western highway is ruined, and the northern trail is our only way toward the Big City. Check the old watchpost, drive back the quilboar warband and defeat their camp chief, Harrowtusk. Bring your report back here.
+  activeDialogue: Scout the old watchpost north of Trimery, defeat eight quilboars, then find Harrowtusk in the eastern stockade. Return to Scout Runa at the north gate.
+  locationHint: "Trimery north gate \u2192 old watchpost \u2192 Briarback camps \u2192 Harrowtusk's eastern stockade \u2192 Scout Runa."
+  stages:
+  - kind: 1
+    objectiveId: scout-watchpost
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Scout the old watchpost north of Trimery
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: 
+    areaId: area.briarback.watchpost
+    conversationId: 
+    count: 1
+    alternatives: []
+  - kind: 0
+    objectiveId: thin-warband
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat 8 quilboars in Briarback
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    areaId: 
+    conversationId: 
+    count: 8
+    alternatives: []
+  - kind: 0
+    objectiveId: defeat-harrowtusk
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat Harrowtusk in the eastern stockade, then return to Scout Runa
+    contentId: briarback.harrowtusk
+    dungeonBossOnly: 0
+    familyId: 
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 1800
+  reward: {fileID: 11400000, guid: 3034f86c8b365584f9308e1fcbf0061b, type: 2}
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

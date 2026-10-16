@@ -25,6 +25,7 @@ namespace DiceFree.Core
         private Camera viewCamera;
         private CameraOcclusionFader occlusionFader;
         private Rect mapBounds = new(-56, -44, 181, 116);
+        public Rect MapBounds=>mapBounds;
         public void ConfigureMapBounds(Rect bounds) => mapBounds = bounds;
         public void RecenterForTravel(Transform follow) { target = follow; following = true; lookingOut = false; initialized = false; velocity = Vector3.zero; }
 
@@ -52,6 +53,8 @@ namespace DiceFree.Core
         private void Awake()
         {
             viewCamera = GetComponent<Camera>();
+            // Portrait studios own layer 31; their directional lights must not enter world culling.
+            viewCamera.cullingMask &= ~(1 << 31);
             occlusionFader = GetComponent<CameraOcclusionFader>() ??
                              gameObject.AddComponent<CameraOcclusionFader>();
             bindings = InputBindings.Current;

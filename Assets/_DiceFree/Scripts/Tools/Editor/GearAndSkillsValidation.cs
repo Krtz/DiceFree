@@ -86,6 +86,14 @@ namespace DiceFree.EditorTools
                     }
                 }
                 Need(root.GetComponentsInChildren<Collider>(true).Length==0,"Gear added a gameplay collider");
+                var mantle=inv.Grant(DiceFree.Briarback.BriarbackMantleVisual.ItemId);
+                Need(eq.Equip(mantle.instanceId,EquipmentSlot.Back),"Mantle equip "+id);
+                yield return null;yield return null;
+                Need(root.GetComponentsInChildren<Transform>(true).Single(t=>t.name=="Bristlehide Mantle").gameObject.activeInHierarchy,"Mantle visual "+id);
+                var mantleRenderer=root.GetComponentsInChildren<Renderer>().Single(r=>r.name=="Bristlehide Mantle");
+                Need(mantleRenderer.bounds.size.magnitude<3&&mantleRenderer.bounds.size.magnitude>.3f,"Mantle world scale "+id);
+                var plainBack=inv.Items.Single(i=>i.definitionId==offers.Single(o=>o.offer.item.slot==EquipmentSlot.Back).offer.item.stableId);
+                Need(eq.Equip(plainBack.instanceId,EquipmentSlot.Back),"Restore plain back "+id);
                 Need(save.Flush(),"Gear save failed");
             }
             Need(controller.TrySwitch("class.novice")&&eq.Slots.Length==11&&controller.TrySwitch("class.greatblade")&&eq.Slots.Length==11,"All-slot manifestation roundtrip");

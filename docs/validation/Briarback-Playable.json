@@ -1,0 +1,13 @@
+{
+    "status": "passed",
+    "error": "",
+    "checks": 164,
+    "walked": 30,
+    "kills": 9,
+    "slamHits": 1,
+    "slamRaw": 160.0,
+    "walkMeters": 607.8319702148438,
+    "animatedFootDegrees": 20.46320915222168,
+    "rewardPersisted": true,
+    "menuPortrait": true
+}

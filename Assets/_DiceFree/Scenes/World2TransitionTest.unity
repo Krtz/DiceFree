@@ -2552,6 +2552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052251971}
   - component: {fileID: 1052251972}
+  - component: {fileID: 1052251973}
   m_Layer: 0
   m_Name: Test map sun
   m_TagString: Untagged
@@ -2591,12 +2592,12 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Strength: 0.85
+    m_Bias: 0.04
+    m_NormalBias: 0.25
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -2639,6 +2640,22 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1052251973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052251970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cbbb743fe2ef2438025f41ae551e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.WorldDayNightCycle
+  celestialLight: {fileID: 1052251972}
+  cycleMinutes: 48
+  startingHour: 10
+  running: 1
 --- !u!1 &1064669931
 GameObject:
   m_ObjectHideFlags: 0

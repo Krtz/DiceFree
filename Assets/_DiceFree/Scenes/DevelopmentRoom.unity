@@ -27643,6 +27643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94d52590c7f12b468ec9aa4307993c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Visuals.MageOutfit
+  built: 0
 --- !u!114 &1635985403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27993,6 +27994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1657609698}
   - component: {fileID: 1657609699}
+  - component: {fileID: 1657609700}
   m_Layer: 0
   m_Name: Test map sun
   m_TagString: Untagged
@@ -28032,12 +28034,12 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Strength: 0.85
+    m_Bias: 0.04
+    m_NormalBias: 0.25
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -28080,6 +28082,22 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &1657609700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657609697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cbbb743fe2ef2438025f41ae551e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.WorldDayNightCycle
+  celestialLight: {fileID: 1657609699}
+  cycleMinutes: 48
+  startingHour: 10
+  running: 1
 --- !u!1 &1669925562
 GameObject:
   m_ObjectHideFlags: 0
@@ -29161,6 +29179,7 @@ GameObject:
   - component: {fileID: 1724212343}
   - component: {fileID: 1724212342}
   - component: {fileID: 1724212341}
+  - component: {fileID: 1724212344}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -29902,6 +29921,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
   - {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
   - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
+  - {fileID: 11400000, guid: ebcc26185f9ce1247bec9b8ab8770e4c, type: 2}
 --- !u!114 &1724212316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29974,6 +29994,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
   - {fileID: 11400000, guid: 90bda820db15ebc47ad058327305b12d, type: 2}
   - {fileID: 11400000, guid: e4eb663e55593724ca411458347e10e3, type: 2}
+  - {fileID: 11400000, guid: 1fb20a59ffe3a404182670b19a28189e, type: 2}
   progress: []
 --- !u!114 &1724212321
 MonoBehaviour:
@@ -30294,6 +30315,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c9ff8e145a70d47ba6ae1a55e39b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.MageSkillProgression
+--- !u!114 &1724212344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc59e1d21519894688ea799e789cbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Briarback.BriarbackMantleVisual
 --- !u!1 &1725172786
 GameObject:
   m_ObjectHideFlags: 0

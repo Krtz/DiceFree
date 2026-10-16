@@ -45,6 +45,13 @@ namespace DiceFree.World
         private bool initialized;
         private int blockersCount;
 
+        // Dungeons occupy remote map coordinates. Preserve overworld exploration while
+        // resolving local visibility through the same obstacle layer.
+        public bool UsesLocalVisibility => revealer != null &&
+            (revealer.position.x < mapMin.x || revealer.position.x > mapMax.x ||
+             revealer.position.z < mapMin.y || revealer.position.z > mapMax.y);
+        public Vector2 MapMin => mapMin;
+        public Vector2 MapMax => mapMax;
         public float VisionRadius => visionRadius;
         public int ExploredCellCount { get; private set; }
         public int BlockingObjectsCount => blockersCount;
@@ -147,6 +154,8 @@ namespace DiceFree.World
             float dx = location.x - revealer.position.x;
             float dz = location.z - revealer.position.z;
             if(dx*dx + dz*dz > visionRadius*visionRadius) return false;
+            if(UsesLocalVisibility) return !Physics.Linecast(revealer.position+Vector3.up*.8f,
+                location+Vector3.up*.8f,1<<9,QueryTriggerInteraction.Ignore);
             int x = Mathf.FloorToInt((location.x-mapMin.x)/cellSize);
             int z = Mathf.FloorToInt((location.z-mapMin.y)/cellSize);
             return visibleCells != null && x >= 0 && z >= 0 &&
@@ -157,7 +166,7 @@ namespace DiceFree.World
         // rather than sampling the jagged, authoritative gameplay LOS grid.
         public byte SmoothedOpacityAt(Vector3 position)
         {
-            if(pixels==null || !initialized) return OpacityAt(position);
+            if(UsesLocalVisibility || pixels==null || !initialized) return OpacityAt(position);
             float u = Mathf.Clamp01((position.x-mapMin.x)/(mapMax.x-mapMin.x));
             float v = Mathf.Clamp01((position.z-mapMin.y)/(mapMax.y-mapMin.y));
             float fx = Mathf.Clamp(u*TextureWidth-.5f,0f,TextureWidth-1f);
@@ -175,6 +184,7 @@ namespace DiceFree.World
 
         public bool IsExplored(Vector3 location)
         {
+            if(UsesLocalVisibility)return IsVisible(location);
             if(!initialized && explored == null) return false;
             int x = Mathf.FloorToInt((location.x-mapMin.x)/cellSize);
             int z = Mathf.FloorToInt((location.z-mapMin.y)/cellSize);

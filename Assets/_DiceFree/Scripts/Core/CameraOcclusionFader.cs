@@ -144,7 +144,9 @@ namespace DiceFree.Core
 
             material.SetOverrideTag("RenderType", "Transparent");
             material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            material.DisableKeyword("_ALPHATEST_ON");
+            // Preserve alpha-cutout for textured leaves while fading their opacity.
+            if (!material.HasProperty("_AlphaClip") || material.GetFloat("_AlphaClip") < .5f)
+                material.DisableKeyword("_ALPHATEST_ON");
             material.renderQueue = (int)RenderQueue.Transparent;
 
             if (material.HasProperty("_BaseColor"))

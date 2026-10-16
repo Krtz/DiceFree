@@ -74,6 +74,8 @@ namespace DiceFree.EditorTools
    Need(p.Motor.Teleport(portal.ApproachPosition+Vector3.back*1.5f)&&portal.CanInteract(p),"Dungeon portal approach");
    portal.Interact(p);while(SlimeDungeonRun.Current==null||!SlimeDungeonRun.Current.StagingReady)yield return null;
    var run=SlimeDungeonRun.Current;Need(run.StartNow(p),"Start dungeon");
+   var clock=Object.FindAnyObjectByType<WorldDayNightCycle>();Need(clock!=null&&clock.IsInterior,"Dungeon inherited outdoor clock lighting");
+   var dungeonFog=Object.FindAnyObjectByType<WorldFogOfWar>();Need(dungeonFog.UsesLocalVisibility&&dungeonFog.IsVisible(p.transform.position),"Dungeon local fog visibility");
    var mini=Object.FindObjectsByType<DungeonSlime>().Single(s=>s.Role==SlimeRole.Miniboss);mini.Actor.Health.ApplyDamage(p,new DamageResult{mitigated=mini.Actor.Health.Maximum*2});yield return Frames(3);
    Need(journal.GetProgress(quest.stableId).count==0,"Miniboss solved Mage quest");
    var puzzle=Object.FindAnyObjectByType<SlimeTreePuzzle>();
@@ -86,6 +88,8 @@ namespace DiceFree.EditorTools
    Need(save.CurrentClassId==AdvancementAuthoring.MagicalId&&!controller.CanAdvance(edge),"Puzzle advanced without returning");
    run.SolvePuzzle(false);Need(journal.GetProgress(quest.stableId).count==1,"Puzzle replay duplicated objective");
    run.Abandon();while(SlimeDungeonRun.Current!=null)yield return null;
+   Need(!clock.IsInterior&&!dungeonFog.UsesLocalVisibility,"Outdoor lighting/fog not restored");
+   Need(Object.FindAnyObjectByType<DiceFree.Core.ExplorationCamera>().MapBounds==BriarbackAuthoring.Bounds,"Expanded camera bounds lost after dungeon return");
    Need(save.Flush(),"Ready quest save");Need(controller.TrySwitch("class.novice")&&controller.TrySwitch(AdvancementAuthoring.MagicalId),"Ready quest switch");
    Need(journal.GetProgress(quest.stableId).status==QuestStatus.ReadyToTurnIn,"Ready quest lost");
    Protect(p);Need(p.Motor.Teleport(mentor.ApproachPosition+Vector3.back*1.8f),"Return to brewer");yield return Frames(2);

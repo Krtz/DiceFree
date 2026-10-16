@@ -100,3 +100,9 @@ Assets/_DiceFree/Resources/Audio/IronpineLicensed/
 /Assets/AdventureForge.meta
 /Assets/_DiceFree/Resources/MagicalLicensed/
 /Assets/_DiceFree/Resources/MagicalLicensed.meta
+
+# Optional locally licensed tree models, textures and generated prefabs
+/Assets/_DiceFree/LocalArt/
+/Assets/_DiceFree/LocalArt.meta
+/Assets/_DiceFree/Resources/TreesLicensed/
+/Assets/_DiceFree/Resources/TreesLicensed.meta

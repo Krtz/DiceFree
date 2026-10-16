@@ -216,8 +216,9 @@ namespace DiceFree.Dungeons
         }
         static void ConfigureCamera(CombatActor actor,Vector3 point)
         {
+            FindAnyObjectByType<WorldDayNightCycle>()?.SetInterior(point.x>19000);
             var camera=FindAnyObjectByType<DiceFree.Core.ExplorationCamera>();if(camera==null)return;
-            camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19994,96,108):new Rect(-56,-44,181,116));
+            camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19994,96,108):OverworldMapBounds.ForScene(actor.gameObject.scene,new Rect(-56,-44,181,116)));
             camera.RecenterForTravel(actor.transform);
         }
         public static bool CoversPointer(Vector2 screenPoint)

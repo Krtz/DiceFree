@@ -1,0 +1,119 @@
+﻿[
+    {
+        "command":  "dicefree.mage.validate",
+        "result":  {
+                       "marker":  "DICEFREE_MAGE_DATA_OK",
+                       "players":  2,
+                       "abilities":  8,
+                       "actives":  6,
+                       "elements":  6,
+                       "advancementLevel":  30,
+                       "visual":  "Original placeholder"
+                   }
+    },
+    {
+        "command":  "dicefree.architecture.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture",
+                       "finalMarker":  "DICEFRE_ARCHITECTURE_OK",
+                       "elapsedSeconds":  2.8729655999999997,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.architecture.policy",
+        "result":  {
+                       "success":  true,
+                       "validation":  "architecture-policy",
+                       "finalMarker":  "DICEFRE_ARCH_POLICY_SELFTEST_OK",
+                       "elapsedSeconds":  0.0003834,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.managed-references.validate",
+        "result":  {
+                       "success":  true,
+                       "validation":  "managed-references",
+                       "finalMarker":  "DICEFREE_MANAGED_REFERENCE_OK",
+                       "elapsedSeconds":  1.1538062,
+                       "error":  null,
+                       "temporarySaveRoot":  null,
+                       "logPath":  "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+                       "testedGitSha":  ""
+                   }
+    },
+    {
+        "command":  "dicefree.xp.quadratic.validate",
+        "result":  {
+                       "success":  true,
+                       "formula":  "30 + 3*(level-1)^2",
+                       "schema":  6,
+                       "manifestationsMigrated":  4,
+                       "questDefinitions":  10,
+                       "enemyDefinitions":  29
+                   }
+    },
+    {
+        "command":  "dicefree.slime.validate",
+        "result":  {
+                       "success":  true,
+                       "marker":  "SLIME_DUNGEON_DATA_OK",
+                       "rolls":  20000,
+                       "rare":  1025,
+                       "two":  4752
+                   }
+    },
+    {
+        "command":  "dicefree.ironpine-wildlife.validate",
+        "result":  {
+                       "success":  true,
+                       "counts":  [
+                                      10,
+                                      7,
+                                      4,
+                                      1
+                                  ],
+                       "navigation":  "Spawn positions authored from NavMesh"
+                   }
+    },
+    {
+        "command":  "dicefree.october-playtest.validate",
+        "result":  {
+                       "marker":  "DICEFREE_OCTOBER_PLAYTEST_DATA_OK",
+                       "attackDefinitions":  9,
+                       "compassChoices":  5,
+                       "settingsMigration":  true
+                   }
+    },
+    {
+        "command":  "dicefree.trimery.validate",
+        "result":  {
+                       "success":  true,
+                       "marker":  "TRIMERY_VILLAGE_VALIDATED",
+                       "gates":  3,
+                       "guards":  6,
+                       "buildings":  7,
+                       "artSlots":  20,
+                       "revive":  "anchor.trimery",
+                       "runnerArrival":  "area.world1.next-settlement-arrival",
+                       "blockers":  12,
+                       "routesChecked":  6
+                   }
+    },
+    {
+        "command":  "dicefree.forest.sight.validate",
+        "result":  {
+                       "success":  true,
+                       "doorsFacingRoad":  2,
+                       "solidTrees":  660
+                   }
+    }
+]

@@ -522,6 +522,18 @@
       "resourceProbes": [
         "UiThemesLicensed/pack-ui-examples-ugui-sample-project"
       ]
+    },
+    {
+      "title": "Stylized Forest Kit Samples",
+      "creator": "Symphonie Studio / Unity China Publisher Hub",
+      "category": "Trees",
+      "sourceUrl": "https://assetstore.unity.com/packages/3d/environments/stylized-forest-kit-samples-403082",
+      "licenseName": "Standard Unity Asset Store EULA",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Locally installed oak model and textures. DiceFree URP adaptation with original fallback.",
+      "resourceProbes": [
+        "TreesLicensed/Oak1"
+      ]
     }
   ]
 }

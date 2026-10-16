@@ -1,0 +1,11 @@
+{
+    "status": "passed",
+    "error": "",
+    "checks": 4308,
+    "walked": 1,
+    "detailedTrees": 857,
+    "sunShadowShift": 136.0561981201172,
+    "moonShadowShift": 136.0556640625,
+    "sunShadows": true,
+    "moonShadows": true
+}

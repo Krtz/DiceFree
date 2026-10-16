@@ -1,0 +1,12 @@
+{
+    "status": "passed",
+    "error": "",
+    "checks": 127,
+    "chainTargets": 3,
+    "uniqueElements": 6,
+    "puzzleCaptures": 5,
+    "fullBarrierHp": 50.0,
+    "partialBarrierHp": 99.5,
+    "walkDistance": 9.79704475402832,
+    "questAdvanced": true
+}
