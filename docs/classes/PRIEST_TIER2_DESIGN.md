@@ -1,6 +1,6 @@
 # DiceFree — Tier II Priest — Design Interview
 
-**Status:** DESIGN INTERVIEW IN PROGRESS — Round 1 questions pending. **Design only: do not implement from this document until user sign-off.**  
+**Status:** DESIGN INTERVIEW IN PROGRESS — Round 1 approved direction recorded; Round 2 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
 **Started:** 2026-10-17  
 **Repository branch:** `integration/world1-foundation`  
 **Design owner:** User; interview and documentation in five-question rounds, then the other DiceFree chat can implement.
@@ -23,10 +23,10 @@
 | Subject | Existing commitment | Notes |
 | --- | --- | --- |
 | Class name/tier | **Priest, Tier II**, advancing from **Magically Touched Novice** at its level-30 quest threshold. | Quest itself not yet approved/implemented. |
-| Role | Primary capable **healer** that also has a **meaningful offensive rotation** and can level/quest **solo**. More healing-oriented than Mage, not a helpless heal-only party alt. | Specific spells and amount of damage not decided. |
+| Role | **CONFIRMED PRIEST-001:** general-purpose **hybrid healer** at Tier II, mixing direct healing, shields, periodic healing and meaningful damage; solo capable. Distinct specializations are for potential Tier III Priest advancements. | Not a narrowly specialized Tier II healer. Exact relative throughput open. |
 | Weapons | **Staff** is the intended Priest weapon family. | Whether staff is strictly required, offhands, other weapons and initial gear remain open. |
-| Attributes | Earlier concept: **SPR-focused healing with INT also relevant**; exact split/formulas and stats are **not locked**. | Do not assume Mage's INT-only offensive scaling applies to Priest. |
-| Resources | **Two real resources: Mana and Grace**. **Every active spell consumes Mana**, including Grace-empowered casts. Grace can enhance **both offensive damage and healing**, not only healing. | Generation, max, decay, rank interactions and empowerment trigger not yet approved. |
+| Attributes | **CONFIRMED PRIEST-005:** **SPR is Priest's primary attribute for both healing AND damage**. Exact SPR coefficients, INT secondary benefits, level-1 base and per-level growth are **OPEN**. | This explicitly replaces the older split suggestion of SPR healing / INT damage. |
+| Resources | **Mana + Grace**. Every spell costs Mana even when Grace-empowered. **CONFIRMED PRIEST-003–004:** both effective damage and healing generate Grace (healing earns a bit more), and **Grace is an upgradeable passive with a manually activated use** that empowers the **next spell**, rather than triggering automatically. | Gain math, exact spending, cooldown/timer and spell-by-spell bonuses remain **OPEN**. |
 | Without Grace | Priest retains usable damage/healing spells paid for with Mana; cannot require Grace for its basic function. | Specific ranks/ability gating open. |
 | Skill system | Current flexible spell/action system accepts variable mixed active/passive skill counts; no universal fixed kit shape. No Tier II ultimate. | Existing class system is implemented for Mage, but Priest remains design-only. |
 | Mentor | The **Trimery healer** is intended as Priest trainer and future quest giver. | Current healer implementation is only a free HP-service placeholder. |
@@ -36,47 +36,64 @@
 
 As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world has an ivory/blue **Trimery Priest placeholder** close to the village green that offers **free HP treatment to living players** via interaction. It does not refill Mana/Grace, resurrect, clear statuses, start/complete advancement, or unlock Priest. See `docs/TRIMERY_HEALER_2026_10_17.md` for scoped validation. This NPC is a future mentor candidate, not the implemented Priest class.
 
-## Skill concepts from existing proposals — NOT approved
+## Confirmed Tier II Priest kit — Round 1
 
-Two historical iterations should be reconciled with the user, not silently combined:
+**CONFIRMED PRIEST-002:** **Four standard active spells plus one hybrid passive/active Grace skill**, whose precise formulas, ranks, level unlocks and resource costs are still **OPEN**. This selection supersedes both earlier four-spell proposals. Do **not** silently add Pilgrim's Step, Judgment, a separate Mend, a different Sanctuary or separate Shared Light passive without a later user decision.
 
-| Role | Early Tier II draft (v0.1/v0.2) | More recent Priest proposal (2026-10-17) | Status |
+| Skill | Element | Confirmed effect | Still to decide |
 | --- | --- | --- | --- |
-| Ranged Light damage | **Judgment** | **Holy Light** | **PROPOSED** |
-| Targeted direct healing | **Mend** | **Targeted Heal** | **PROPOSED** |
-| Allies healed + enemies damaged in an area | **Sanctuary** ground field | **Holy Nova** nearby burst | **PROPOSED**, targeting/geometry differs |
-| Defensive/mobility action | **Aegis** ally/self absorb shield | **Pilgrim's Step** short directional dash | **PROPOSED**, distinct roles |
-| Passive | **Shared Light** building Grace from effective aid/offense | Grace resource and empowerment mechanics, passive lineup not finalized | **OPEN** |
+| **Holy Light** | **Light** | **Single targeted spell:** cast on a friendly target to **heal**, or on an enemy to deal **Light-element damage**. | Cast time, range, cooldown, Mana cost, magnitude, interaction with Grace, self-portrait targeting. |
+| **Light Burst** | **Light** | **Targeted area-of-effect** spell that **heals allies and deals Light-element damage to enemies**. | Ground/targeted anchor, radius, whether both factions affected simultaneously, cast/cooldown, falloff, Mana cost, Grace effect. |
+| **Aegis** | **Light** | **Protective Light-element shield**. | Self/ally target eligibility, amount, damage filters, duration, shield priority, Mana cost, cooldown, Grace effect. |
+| **Working name: periodic Light spell** | **UNDECIDED** (spell element not explicitly stated by user) | **Single-target dual-function spell:** applies a **damage-over-time (DoT)** effect to an enemy or a **heal-over-time (HoT)** effect to an ally. | Name, whether Light element, tick rate, duration, refresh/stacking, damage/heal, targeting, Mana and Grace effects. |
+| **Grace** | **Resource-driven passive + manual active use** | **Only one skill** with both a **passive** role (generate Grace from healing and damage, higher gain for healing) and a **clickable active action** to **empower the next spell**. | Amount earned per action versus proportional throughput; decay, cap, spending, empowered bonus, how long it is queued, rank effects. |
 
-The more recent working kit includes **Holy Light + Targeted Heal + Holy Nova + short dash**. There is no reason the kit must have exactly four active abilities; shielding could remain a later skill or be omitted if the user prefers.
+**Terminology/targeting acceptance requirements:**
+- Holy Light chooses heal or damage **based on valid target allegiance**, not randomly. Target-friendly/self and target-hostile modes must preserve shared target confirmation and ability restrictions.
+- Light Burst is **targeted AoE**, not a fixed caster-centered Holy Nova unless the user explicitly changes the target type.
+- The dual DoT/HoT spell is a single skill with different friendly/enemy outcomes, not two independent skill-point/rank slots.
+- Aegis is a **Light-element protective shield**; damage channel and element eligibility are not implicitly decided by this wording. Use the shared shield priority/mitigation system when designed.
+- The Grace skill is both a **passive** and an **active use**. Ordinary class/provider UI must make its passive description and active activation/armed state readable. Manual empowerment should never trigger automatically merely because Grace is high.
+- These four spells and the manual Grace activation remain **Mana-costing active effects where applicable**, but whether pressing Grace itself costs Mana is **OPEN**; prior blanket "every active skill costs Mana" was intended for spells and must not inadvertently force a Mana cost on passive Grace activation without asking.
+- **SPR scales both healing and spell damage.** No INT-only or healing SPR/damage INT split imported from Mage.
+- Without Grace, offensive and healing spells must remain viable. No separate Priest resurrection spell was selected in this round.
 
-## Resource design — confirmed boundaries, open formulas
+## Mana and Grace design — Round 1 decisions
 
 **Mana**
-- Every active skill costs Mana, including its Grace-empowered version.
-- Mana regeneration, starting/cap values, cost/rank curves, interaction with INT/SPR and normal skill economy are **OPEN**.
+- Existing approved direction: **every actual Priest spell costs Mana**, including empowered versions; Grace empowerment does not replace or waive Mana costs.
+- Mana pool, regen, per-spell costs and whether activating the Grace passive has any Mana cost are **OPEN**.
 
 **Grace**
-- Grace may improve **both damage and healing**, as previously approved.
-- Proposed (not yet user-approved): generate Grace from **effective offensive hits** and **useful healing/support**, avoiding overheal/missed/dummy spam; spend deliberately on enhanced casts; no generation from canceled casts; at most once per original cast so AoE recipients cannot multiply generation.
-- **OPEN:** maximum meter/cap, sources/rates, solo viability, decay outside combat, spending trigger (automatic threshold vs deliberate), which spells consume it, empowerment size/effects, partial Grace, resetting/persistence on save and character switch.
-- The current Priest proposal correctly warns about accidental loops: avoid empowerment that refunds its own full Grace cost and don't charge resources when a cast is canceled.
+- **CONFIRMED PRIEST-003:** gained from **both healing and damaging**, with **healing generating somewhat more Grace** than damage. Neither the relative gain ratio nor whether gain is per effective cast or actual HP throughput has been decided.
+- **CONFIRMED PRIEST-004:** the **Grace passive is also an active skill**; pressing/using it **arms an empowerment on the next spell**. This is deliberate user control, not automatic spending at a threshold.
+- Earlier agreement preserved: Grace can empower **both damage and healing**; an empowered spell **still costs its normal Mana**.
+- **OPEN:** Grace meter cap, gain/decay, talent ranks, cast frequency controls, how much Grace is consumed, whether the activated state times out, self-cast/target-cancel effects and separate empowerment effects for each spell.
+- Safeguards proposed but not yet locked: no free Grace from pure overheal, no generation on missed/invalid/dummy actions, no recursive generation from a spell that just consumed Grace, and no per-target multiplication for one AoE cast. Confirm with user before implementation.
 
 ## Advancement concept — NOT APPROVED
 
 Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks with the Trimery healer, accepts training, heals three distinct wounded lumberworkers using a temporary quest heal action, protects one recovering worker from a solo-friendly threat, and returns to the same mentor for explicit advancement to level-1 Priest. This is **only a proposed quest**; no implementation authorization. Keep already-completed actions from bypassing acceptance and avoid dependencies on a particular prior skill rank. Prior Mage/Greatblade trials are different.
 
-## Round 1 — five questions for the user (awaiting answers)
+## Round 1 — answers recorded on 2026-10-17
 
-**PRIEST-001 — Core fantasy and healing style.** Should Priest be primarily a **reactive direct healer** (big targeted heals, rapid emergency saves), a more **proactive shield/buff** healer, or a **hybrid**? It must still have a meaningful damage rotation for solo play. How should a Tier II Priest feel distinct from higher-tier dedicated healers?
+- **PRIEST-001 — CONFIRMED:** mixed general-purpose healing at Tier II, offering a taste of different healing techniques; future **Tier III** Priest branches can specialize later.
+- **PRIEST-002 — CONFIRMED:** the four spell actives are **Holy Light** (heal ally/damage enemy single target), **Light Burst** (targeted AoE heal/damage), **Aegis** (Light-element protective shield) and a **single-target DoT-on-enemy / HoT-on-ally spell** (name not chosen). **Grace** is the fifth class skill and combines passive + active functionality. No dash selected.
+- **PRIEST-003 — CONFIRMED:** both damage and healing generate Grace, healing slightly more; formula and decay are **OPEN**.
+- **PRIEST-004 — CONFIRMED:** manually **activate Grace** to empower the next spell; effect/cost amount and timing **OPEN**.
+- **PRIEST-005 — CONFIRMED:** **SPR is the main scaling attribute for both damage and healing**. User did not separately confirm staff equipment restrictions or the autoattack element in this answer; keep them **OPEN** rather than assuming.
 
-**PRIEST-002 — Active kit.** The recent proposal suggests **Holy Light** (single-target Light damage), **Targeted Heal** (self/ally heal), **Holy Nova** (heals allies + damages enemies around Priest), and **Pilgrim's Step** (short dash). The older draft had **Aegis** (shield) instead of dash. Which skills do you want to keep/change, do you want the shield as a fifth skill, and what other skills should this Tier II class have? No fixed four-active limit.
+## Round 2 — five questions (awaiting answers)
 
-**PRIEST-003 — Grace generation.** Should Grace be earned through **dealing damage, genuinely healing injured allies/self, both**, or something else? Should the generation reward damage/healing *casts* or the *actual amount* of damage/healing done? Do you want Grace to decay over time/out of combat?
+**PRIEST-006 — Holy Light.** For this **one-target ally heal / enemy Light damage** spell, do you want a **quick direct cast with a cooldown** or a **slower hard cast with a bigger effect**? Should an empowered Holy Light simply hit/heal harder, or additionally gain a special effect?
 
-**PRIEST-004 — Grace spending / empowerment.** Should Grace empower the next eligible spell **automatically** when enough is available, or should players choose when to spend it (e.g. dedicated empower toggle/key)? How should empowered **offensive** versus **healing** spells differ: raw bonus, added effects, AoE, extra shields or something else? Mana still costs its normal amount.
+**PRIEST-007 — Light Burst.** Should you **target a point on the ground** to create a circle that **heals all allies and damages all enemies inside it at the same time**, or target a friendly/enemy unit and center the AoE on that target? Should it be an **instant burst** or a field lasting a few seconds?
 
-**PRIEST-005 — Attributes and staff.** Should Priest scale **healing mainly with SPR and damage mainly with INT**, or favor SPR for both? Do you confirm a **staff** as the primary weapon, and do you envision a ranged Light/basic attack between spell cooldowns? We can settle actual starting attributes and per-level growth in a later round.
+**PRIEST-008 — Aegis.** Can Aegis target **yourself and allies**, and should it absorb **all ordinary incoming damage** or only selected damage types/elements? Should it be a fixed-absorb shield that expires, a percentage reduction, or a mix? What should Grace empowerment add to the shield?
+
+**PRIEST-009 — The combined DoT/HoT.** What should we **call** the single-target enemy-DoT / ally-HoT spell, and do you want both modes to last the **same duration** and tick at the **same interval**, or to have different patterns? Should the damage and healing both be **Light-element** effects?
+
+**PRIEST-010 — Grace's core numbers and activation.** Should Grace generation be **a fixed amount per successful cast** (healing earns more) or **scale with actual damage / HP restored**? Roughly how much Grace can you hold, and should it **decay outside combat**? When you actively press Grace, should it spend **all accumulated Grace** to scale up the next spell, or a **fixed portion/threshold**?
 
 ## Remaining design work (not yet approved)
 
@@ -91,5 +108,10 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 | Date | ID | Decision | State |
 | --- | --- | --- | --- |
 | 2026-10-17 | Existing Tier II direction | Priest, staff, Mana+Grace; active Mana costs, Grace enhances offense and healing; good solo DPS; Trimery healer mentor | **PREVIOUSLY AGREED**, details open |
-| 2026-10-17 | PRIEST-001–PRIEST-005 | First five interview questions asked | **AWAITING USER** |
+| 2026-10-17 | PRIEST-001 | Mixed all-round Tier II healer; Tier III can specialize | **CONFIRMED** |
+| 2026-10-17 | PRIEST-002 | Holy Light dual target, Light Burst targeted AoE, Aegis shield, dual target DoT/HoT, Grace passive/active | **CONFIRMED**, mechanical specifics open |
+| 2026-10-17 | PRIEST-003 | Both heals and damage generate Grace; healing slightly more | **CONFIRMED**, gain/decay open |
+| 2026-10-17 | PRIEST-004 | Grace manually activated to empower next spell | **CONFIRMED**, cost/bonus open |
+| 2026-10-17 | PRIEST-005 | SPR primary for healing AND damage | **CONFIRMED**, weapon/basic attack not answered |
+| 2026-10-17 | PRIEST-006–PRIEST-010 | Round 2 questions asked | **AWAITING USER** |
 
