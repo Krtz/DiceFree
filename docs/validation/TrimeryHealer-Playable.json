@@ -1,0 +1,10 @@
+{
+    "status": "passed",
+    "error": "",
+    "checks": 48,
+    "walked": 5,
+    "frames": 9,
+    "receivedHealing": 18.746601104736328,
+    "clicked": true,
+    "nearest": true
+}

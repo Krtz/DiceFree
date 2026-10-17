@@ -1,0 +1,23 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.briarback.validate",
+  "data": {
+    "command": "dicefree.briarback.validate",
+    "parameters": {},
+    "result": {
+      "marker": "DICEFREE_BRIARBACK_DATA_OK",
+      "creatures": 13,
+      "paths": 16,
+      "movingVertices": 10161,
+      "questStages": 3,
+      "rewardSlots": 1
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

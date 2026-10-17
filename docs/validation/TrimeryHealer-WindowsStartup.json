@@ -1,0 +1,8 @@
+﻿{
+    "status":  "passed",
+    "runningAfterSeconds":  15,
+    "remainedRunning":  true,
+    "errorMatches":  0,
+    "mode":  "Windows batchmode/nographics; startup only",
+    "isolatedSaveRoot":  "C:\\Users\\Axel\\AppData\\Local\\Temp\\DiceFree-TrimeryHealerStartup-69244af718fb4c61bad7f1fdf705568f"
+}

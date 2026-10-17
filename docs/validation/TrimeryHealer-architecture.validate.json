@@ -1,0 +1,25 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.architecture.validate",
+  "data": {
+    "command": "dicefree.architecture.validate",
+    "parameters": {},
+    "result": {
+      "success": true,
+      "validation": "architecture",
+      "finalMarker": "DICEFRE_ARCHITECTURE_OK",
+      "elapsedSeconds": 3.0470577,
+      "error": null,
+      "temporarySaveRoot": null,
+      "logPath": "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+      "testedGitSha": ""
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

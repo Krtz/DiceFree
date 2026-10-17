@@ -1,0 +1,25 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.managed-references.validate",
+  "data": {
+    "command": "dicefree.managed-references.validate",
+    "parameters": {},
+    "result": {
+      "success": true,
+      "validation": "managed-references",
+      "finalMarker": "DICEFREE_MANAGED_REFERENCE_OK",
+      "elapsedSeconds": 1.4001694999999998,
+      "error": null,
+      "temporarySaveRoot": null,
+      "logPath": "T:/TEMP/DiceFree-Options/Library/GameplayValidationEditor.log",
+      "testedGitSha": ""
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

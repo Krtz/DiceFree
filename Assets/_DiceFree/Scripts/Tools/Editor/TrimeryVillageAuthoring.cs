@@ -360,6 +360,7 @@ namespace DiceFree.EditorTools
                 WestRoadDamage(root);
                 ReviveStone(root);
                 int services=CloneServices(scene,root);
+                TrimeryHealerAuthoring.InstallInto(scene);
                 EditorSceneManager.MarkSceneDirty(scene);
                 Check(EditorSceneManager.SaveScene(scene),"Scene save failed.");
                 AssetDatabase.SaveAssets();

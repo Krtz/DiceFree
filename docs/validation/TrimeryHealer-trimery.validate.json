@@ -1,0 +1,27 @@
+﻿{
+  "success": true,
+  "command": "command dicefree.trimery.validate",
+  "data": {
+    "command": "dicefree.trimery.validate",
+    "parameters": {},
+    "result": {
+      "success": true,
+      "marker": "TRIMERY_VILLAGE_VALIDATED",
+      "gates": 3,
+      "guards": 6,
+      "buildings": 7,
+      "artSlots": 20,
+      "revive": "anchor.trimery",
+      "runnerArrival": "area.world1.next-settlement-arrival",
+      "blockers": 12,
+      "routesChecked": 6
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "T:\\TEMP\\DiceFree-Options"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
