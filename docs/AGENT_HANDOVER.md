@@ -1,3 +1,13 @@
+## 2026-10-17 - Downloaded asset catalog refreshed (17 new ZIPs)
+
+- Reviewed T:\TEMP\ART_ASSETS against the Oct15 inventory. Now 59 ZIPs plus warrior_girl.glb (60 files). All 43 existing hashes unchanged; 17 new outer ZIPs passed full member CRC checks. Original downloads untouched; no Unity/gameplay changes.
+- Added every new archive to docs/ASSET_CATALOG.md and ASSET_CREDITS.md; new full inventory/CSV, source metadata and per-asset review in docs/assets/*2026-10-17*. Nine FBXs have skins + animation curves, one skinned FBX has empty animation stack, four static ~1.9-2M triangle FBXs, one nested OBJ character, one compressed Blender scene, one oversized RAR FBX.
+- Best technical leads: DJMaesen Treeman (8616tris/2materials) and Lizardman (6582/1), both matched CC BY4 listings with rigs/curves. Tyranno (7366tris/11 stacks) has multiple identical uploads/upstream rroobboo credit, so source hold. Skeleton Animated (2094tris) exact source unresolved. Generic Medieval Civilian3 (21410tris/7materials) FreeStandard/Fuse/Mixamo source-term review. MushroomWarrior (14135tris/4materials) concept artist Matthew McAngus review.
+- CatWitch has Waspsalad/Minecraft concept provenance; both HIT2 downloads identify third-party game content; holds recorded. Blade1 is Ch_Chosun_A OBJ character, not a confirmed sword. Ouroboros has compressed Blender header303; Blender unavailable, no rig/scene claims. Hundra RAR FBX exceeds768MiB cap. Four Pigcraft undead/fungal models unrigged/high-poly references.
+- Twelve unique filename-context + geometry source candidates (11 CC BY4, 1 FreeStandard), not ownership clearance; duplicate/source-only leads explicitly distinguished. No new bundled license/readme identified. game-dev unavailable; no canonical admission receipt or runtime Credits additions claimed.
+- Added repeatable public Sketchfab metadata research and OBJ/PNG/header/CRC supplement tools; added 30s watchdog around RAR decoder reads. Scripts compile; catalog/registry/CSV cover all17, fullCSV60, source/review counts verified. No new runtime build required for docs/inventory tooling.
+- Continue integration/world1-foundation; main unchanged. Preserve unrelated ProjectSettings/PackageManagerSettings.asset and Assets/Settings*. Current healer and Priest draft remain as prior handover; Priest not implemented.
+
 ## 2026-10-17 - Trimery healer placeholder and Priest design draft
 
 - User played/liked the current build, reported no healer in Trimery ("timerly"), requested a healer blob and then designing Tier II Priest with an advancement quest from this NPC.

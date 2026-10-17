@@ -1,0 +1,1813 @@
+{
+  "retrievedUtc": "2026-10-17T21:47:29.881729+00:00",
+  "method": "Unauthenticated official public Sketchfab API; title/triangle source candidates, no ownership clearance",
+  "results": [
+    {
+      "file": "animated-skeleton-casts-spell-with-hands.zip",
+      "query": "animated skeleton casts spell with hands",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=animated+skeleton+casts+spell+with+hands&count=100",
+      "candidates": [
+        {
+          "name": "Animated Skeleton Casts Spell with Hands",
+          "uid": "2b1936a5356e44eda6ca4bc22ba959af",
+          "url": "https://sketchfab.com/3d-models/2b1936a5356e44eda6ca4bc22ba959af",
+          "creator": "LasquetiSpice",
+          "username": "LasquetiSpice",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 99799,
+          "vertexCount": 50436,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2022-03-10T23:17:37.598523",
+            "descriptionExcerpt": "Skeleton casts magic spell with hands in this looping animation. See this 3D model in action, and more",
+            "descriptionSha256": "75b649e85f8a0c2ef7970eb76dfc68214b217a8201b8ea4c83e0e2cc609923af"
+          }
+        },
+        {
+          "name": "Animated Skeleton Casts Spell With Hands",
+          "uid": "8e3409fbe4734634a337c38bc7b3d663",
+          "url": "https://sketchfab.com/3d-models/8e3409fbe4734634a337c38bc7b3d663",
+          "creator": "cetacBellako",
+          "username": "cetacBellako",
+          "license": null,
+          "faceCount": 99799,
+          "vertexCount": 50436,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": false,
+          "detail": {
+            "license": {},
+            "animationCount": 1,
+            "publishedAt": "2022-03-14T18:39:00.504402",
+            "descriptionExcerpt": "Calaverita",
+            "descriptionSha256": "8fb5e660c2238bdfe2e6abb3a31aae9dce3706644a201862c621e8aafb71f538"
+          }
+        },
+        {
+          "name": "Hand Painted Woods Witch / Warlock Rigged",
+          "uid": "7ceac3033d8b45ba9eeb15bd90529370",
+          "url": "https://sketchfab.com/3d-models/7ceac3033d8b45ba9eeb15bd90529370",
+          "creator": "Lowpolyprincipal",
+          "username": "Lowpolyprincipal",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "faceCount": 3030,
+          "vertexCount": 1478,
+          "exactTitle": false,
+          "similarity": 0.4051,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": null,
+      "sourceMatchBasis": "Exact source unresolved; candidates only"
+    },
+    {
+      "file": "blade-1.zip",
+      "query": "blade 1",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=blade+1&count=100",
+      "candidates": [
+        {
+          "name": "三国blade_1",
+          "uid": "baa74580a7eb4dd2a6005986791110ec",
+          "url": "https://sketchfab.com/3d-models/baa74580a7eb4dd2a6005986791110ec",
+          "creator": "enzohao",
+          "username": "enzohao",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 18139,
+          "vertexCount": 10496,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2022-09-29T02:18:03.102953",
+            "descriptionExcerpt": "",
+            "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "name": "Blade",
+          "uid": "8a45cac79926424ab3e421d8da45aba9",
+          "url": "https://sketchfab.com/3d-models/8a45cac79926424ab3e421d8da45aba9",
+          "creator": "Ed",
+          "username": "Ed3D.Blend",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "faceCount": 38496,
+          "vertexCount": 19834,
+          "exactTitle": false,
+          "similarity": 0.8333,
+          "triangleMatch": false,
+          "isDownloadable": false,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/783b685da9bf457d81e829fa283f3567",
+              "label": "Standard",
+              "fullName": "Standard",
+              "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+              "url": "https://sketchfab.com/licenses",
+              "slug": "st"
+            },
+            "animationCount": 0,
+            "publishedAt": "2022-11-26T15:12:58.628103",
+            "descriptionExcerpt": "Blade UV Unwrapped and textured. Comes with textures at 1k & 2k resolution. Contains PBR & Toon (LBS)",
+            "descriptionSha256": "4bbe091607f19fec2ec4bdc917f79dbec368352c02cc955ffc19619c1c663330"
+          }
+        },
+        {
+          "name": "Yozora blade 1",
+          "uid": "7b66c2772da147a6a6934cdcbb8a2518",
+          "url": "https://sketchfab.com/3d-models/7b66c2772da147a6a6934cdcbb8a2518",
+          "creator": "Night123sky",
+          "username": "Night123sky",
+          "license": {
+            "uid": "bbfe3f7dbcdd4122b966b85b9786a989",
+            "label": "CC Attribution-NonCommercial"
+          },
+          "faceCount": 295224,
+          "vertexCount": 148363,
+          "exactTitle": false,
+          "similarity": 0.6667,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "Blade Warrior",
+          "uid": "5d35a3265d9844e688d79092614ced62",
+          "url": "https://sketchfab.com/3d-models/5d35a3265d9844e688d79092614ced62",
+          "creator": "CrossRoad",
+          "username": "kimys2848",
+          "license": null,
+          "faceCount": 1232,
+          "vertexCount": 1235,
+          "exactTitle": false,
+          "similarity": 0.6,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Laser Blade",
+          "uid": "ee938d1f40c247b28c06bed115f7da61",
+          "url": "https://sketchfab.com/3d-models/ee938d1f40c247b28c06bed115f7da61",
+          "creator": "Philip Gilbert",
+          "username": "PhilipAGilbert",
+          "license": null,
+          "faceCount": 75956,
+          "vertexCount": 39317,
+          "exactTitle": false,
+          "similarity": 0.5556,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "三国blade_1",
+        "uid": "baa74580a7eb4dd2a6005986791110ec",
+        "url": "https://sketchfab.com/3d-models/baa74580a7eb4dd2a6005986791110ec",
+        "creator": "enzohao",
+        "username": "enzohao",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 18139,
+        "vertexCount": 10496,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2022-09-29T02:18:03.102953",
+          "descriptionExcerpt": "",
+          "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "bone-knight-horned-skull-greatsword.zip",
+      "query": "bone knight horned skull greatsword",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=bone+knight+horned+skull+greatsword&count=100",
+      "candidates": [
+        {
+          "name": "Bone Knight - Horned Skull Greatsword",
+          "uid": "7969777c567545e3a19732b8498be603",
+          "url": "https://sketchfab.com/3d-models/7969777c567545e3a19732b8498be603",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1961318,
+          "vertexCount": 980379,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2026-07-20T12:49:44.324550",
+            "descriptionExcerpt": "Highly detailed dark fantasy bone knight character model, an undead skeletal warrior wearing dark corroded plate armor fused",
+            "descriptionSha256": "acedd114ecf6e64f84b079a02d07aaec2b26792b592add53dc277d6c4e0726b9"
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Bone Knight - Horned Skull Greatsword",
+        "uid": "7969777c567545e3a19732b8498be603",
+        "url": "https://sketchfab.com/3d-models/7969777c567545e3a19732b8498be603",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 1961318,
+        "vertexCount": 980379,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2026-07-20T12:49:44.324550",
+          "descriptionExcerpt": "Highly detailed dark fantasy bone knight character model, an undead skeletal warrior wearing dark corroded plate armor fused",
+          "descriptionSha256": "acedd114ecf6e64f84b079a02d07aaec2b26792b592add53dc277d6c4e0726b9"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "cat-witch.zip",
+      "query": "cat witch",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=cat+witch&count=100",
+      "candidates": [
+        {
+          "name": "Cat Witch",
+          "uid": "886ac1f9d3664da09b682920de86f73d",
+          "url": "https://sketchfab.com/3d-models/886ac1f9d3664da09b682920de86f73d",
+          "creator": "AKM",
+          "username": "AKM_Models",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 18531,
+          "vertexCount": 9626,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2026-04-12T05:39:00.412076",
+            "descriptionExcerpt": "A 3D model of a character by Waspsalad. He drew the Minecraft witch as an anthro cat, and",
+            "descriptionSha256": "de8a055e01614b6e97e2cd783faac225f2b5a84fc2c8bbdd193e3ac157f8f669"
+          }
+        },
+        {
+          "name": "Cat Witch",
+          "uid": "d6b4aa0a934148008401249408106150",
+          "url": "https://sketchfab.com/3d-models/d6b4aa0a934148008401249408106150",
+          "creator": "theamazingdonovan207",
+          "username": "theamazingdonovan207",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 14302,
+          "vertexCount": 7441,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2024-04-14T22:25:27.170068",
+            "descriptionExcerpt": "She's a super cute and cool cat witch who loves to talk.",
+            "descriptionSha256": "47a45b6b32178b184b0f2b54a8b1b4b33a49af8a522e207b43f0306f658eb22f"
+          }
+        },
+        {
+          "name": "a cat witch",
+          "uid": "b3ef3215a941414da05daf6fc65a3a33",
+          "url": "https://sketchfab.com/3d-models/b3ef3215a941414da05daf6fc65a3a33",
+          "creator": "Akiko.Tomiyoshi",
+          "username": "Akiko.Tomiyoshi",
+          "license": null,
+          "faceCount": 503556,
+          "vertexCount": 252261,
+          "exactTitle": false,
+          "similarity": 0.9,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Cat The Witch",
+          "uid": "6d8934f9eec34040abe379b3facea059",
+          "url": "https://sketchfab.com/3d-models/6d8934f9eec34040abe379b3facea059",
+          "creator": "cerura vinula",
+          "username": "cerura_vinula",
+          "license": null,
+          "faceCount": 17202,
+          "vertexCount": 9264,
+          "exactTitle": false,
+          "similarity": 0.8182,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Little Witch",
+          "uid": "4313ce8594af4101a1d2b4020b0dae05",
+          "url": "https://sketchfab.com/3d-models/4313ce8594af4101a1d2b4020b0dae05",
+          "creator": "km8008",
+          "username": "km8008",
+          "license": null,
+          "faceCount": 3322,
+          "vertexCount": 1662,
+          "exactTitle": false,
+          "similarity": 0.6667,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Cat Witch",
+        "uid": "886ac1f9d3664da09b682920de86f73d",
+        "url": "https://sketchfab.com/3d-models/886ac1f9d3664da09b682920de86f73d",
+        "creator": "AKM",
+        "username": "AKM_Models",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 18531,
+        "vertexCount": 9626,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1,
+          "publishedAt": "2026-04-12T05:39:00.412076",
+          "descriptionExcerpt": "A 3D model of a character by Waspsalad. He drew the Minecraft witch as an anthro cat, and",
+          "descriptionSha256": "de8a055e01614b6e97e2cd783faac225f2b5a84fc2c8bbdd193e3ac157f8f669",
+          "descriptionLinks": []
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "fungal-golem-forest-mushroom-beast.zip",
+      "query": "fungal golem forest mushroom beast",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=fungal+golem+forest+mushroom+beast&count=100",
+      "candidates": [
+        {
+          "name": "Fungal Golem - Forest Mushroom Beast",
+          "uid": "067e5912ebb44c34b1253135d91291f5",
+          "url": "https://sketchfab.com/3d-models/067e5912ebb44c34b1253135d91291f5",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1926248,
+          "vertexCount": 963067,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2026-08-11T15:24:48.659651",
+            "descriptionExcerpt": "A hunched humanoid construct formed from dense woodland fungus, with overlapping mushroom caps in brown and pale cream",
+            "descriptionSha256": "1dd51bd95c90e8f2ccbea38fff00f9d1c5e21e69ae1a6cfb99c03e0585797810"
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Fungal Golem - Forest Mushroom Beast",
+        "uid": "067e5912ebb44c34b1253135d91291f5",
+        "url": "https://sketchfab.com/3d-models/067e5912ebb44c34b1253135d91291f5",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 1926248,
+        "vertexCount": 963067,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2026-08-11T15:24:48.659651",
+          "descriptionExcerpt": "A hunched humanoid construct formed from dense woodland fungus, with overlapping mushroom caps in brown and pale cream",
+          "descriptionSha256": "1dd51bd95c90e8f2ccbea38fff00f9d1c5e21e69ae1a6cfb99c03e0585797810"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "game-ready-low-poly-tactical-character.zip",
+      "query": "game ready low poly tactical character",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=game+ready+low+poly+tactical+character&count=100",
+      "candidates": [
+        {
+          "name": "Game Ready Low Poly Tactical Character",
+          "uid": "68213c7d97a04b1b963599180210f5bd",
+          "url": "https://sketchfab.com/3d-models/68213c7d97a04b1b963599180210f5bd",
+          "creator": "DanlyVostok",
+          "username": "1799danly",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 23822,
+          "vertexCount": 12336,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2025-07-27T18:42:09.547565",
+            "descriptionExcerpt": "Tactical anime-style character. Free to use license. Low-poly optimized. ![](https://i.postimg.cc/qvg8tyTY/Prev1.png)",
+            "descriptionSha256": "7ee66c7f0691b82c78ff4f6e3ff897df7668008bf0a27dbb0096afcc91c55ac8"
+          }
+        },
+        {
+          "name": "Game Ready low poly character tactical",
+          "uid": "342501b0c84843a3a418319c31ea26fa",
+          "url": "https://sketchfab.com/3d-models/342501b0c84843a3a418319c31ea26fa",
+          "creator": "DanlyVostok",
+          "username": "1799danly",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 22868,
+          "vertexCount": 11667,
+          "exactTitle": false,
+          "similarity": 0.7632,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2025-03-16T17:11:54.594831",
+            "descriptionExcerpt": "Game Ready low poly character tactical FREE USE! ![](https://cdnb.artstation.com/p/assets/images/images/086/239/549/small/danlyvostok-preview.jpg?1742729666)",
+            "descriptionSha256": "32b3fb7218da8d461e259194a0ffcbe948248d4b6b778c1826eefd8db010023e"
+          }
+        },
+        {
+          "name": "Modern Tactical Female Character",
+          "uid": "9dfef55054094b4990d33fe22ac14c6e",
+          "url": "https://sketchfab.com/3d-models/9dfef55054094b4990d33fe22ac14c6e",
+          "creator": "ItsKrish7",
+          "username": "f1ec06ea1594482bb780a65d0f9afb",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 282187,
+          "vertexCount": 141028,
+          "exactTitle": false,
+          "similarity": 0.6286,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "Hoody Game Ready Low Poly",
+          "uid": "72ba46e828fa418ca3041be51f9bfaa2",
+          "url": "https://sketchfab.com/3d-models/72ba46e828fa418ca3041be51f9bfaa2",
+          "creator": "DanlyVostok",
+          "username": "1799danly",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 4370,
+          "vertexCount": 2187,
+          "exactTitle": false,
+          "similarity": 0.6032,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "Low Poly Game Ready Military Tactical Backpack",
+          "uid": "95a4fc7300584384b56ce3add58dbc9f",
+          "url": "https://sketchfab.com/3d-models/95a4fc7300584384b56ce3add58dbc9f",
+          "creator": "DanlyVostok",
+          "username": "1799danly",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 2730,
+          "vertexCount": 1373,
+          "exactTitle": false,
+          "similarity": 0.5952,
+          "triangleMatch": false,
+          "isDownloadable": true
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Game Ready Low Poly Tactical Character",
+        "uid": "68213c7d97a04b1b963599180210f5bd",
+        "url": "https://sketchfab.com/3d-models/68213c7d97a04b1b963599180210f5bd",
+        "creator": "DanlyVostok",
+        "username": "1799danly",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 23822,
+        "vertexCount": 12336,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1,
+          "publishedAt": "2025-07-27T18:42:09.547565",
+          "descriptionExcerpt": "Tactical anime-style character. Free to use license. Low-poly optimized. ![](https://i.postimg.cc/qvg8tyTY/Prev1.png)",
+          "descriptionSha256": "7ee66c7f0691b82c78ff4f6e3ff897df7668008bf0a27dbb0096afcc91c55ac8"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "hit2-female-swordsman.zip",
+      "query": "hit2 female swordsman",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=hit2+female+swordsman&count=100",
+      "candidates": [
+        {
+          "name": "HIT2 Female swordsman",
+          "uid": "bfc0c40414ce4e37bea0567ce4a36792",
+          "url": "https://sketchfab.com/3d-models/bfc0c40414ce4e37bea0567ce4a36792",
+          "creator": "enzohao",
+          "username": "enzohao",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 50384,
+          "vertexCount": 31194,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2023-01-03T05:52:00.294222",
+            "descriptionExcerpt": "",
+            "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "HIT2 Female swordsman",
+        "uid": "bfc0c40414ce4e37bea0567ce4a36792",
+        "url": "https://sketchfab.com/3d-models/bfc0c40414ce4e37bea0567ce4a36792",
+        "creator": "enzohao",
+        "username": "enzohao",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 50384,
+        "vertexCount": 31194,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2023-01-03T05:52:00.294222",
+          "descriptionExcerpt": "",
+          "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "hit2-hundra-high-poly.zip",
+      "query": "hit2 hundra high poly",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=hit2+hundra+high+poly&count=100",
+      "candidates": [
+        {
+          "name": "HIT2 - Hundra (High Poly)",
+          "uid": "5c7189bc29444fb9ad3c5a32ccde0d44",
+          "url": "https://sketchfab.com/3d-models/5c7189bc29444fb9ad3c5a32ccde0d44",
+          "creator": "Doctor A.",
+          "username": "doctorA",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 81201,
+          "vertexCount": 52280,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 17,
+            "publishedAt": "2024-01-15T11:23:56.686020",
+            "descriptionExcerpt": "**[Donate](https://ko-fi.com/doctoranus) [Instagram](https://www.instagram.com/doctoranu5) [Discord](https://discord.com/invite/uJjAja3n3n)** # Heroes of Incredible Tales 2 - Hundra 3d model + animations Rigging: ✔️ Animations:",
+            "descriptionSha256": "9bfbbcd41ee2200e2983d820d08bd6497bbedfe65ae34562f519e0508ab9a343"
+          }
+        }
+      ],
+      "sourceCandidate": null,
+      "sourceMatchBasis": "Exact source unresolved; candidates only"
+    },
+    {
+      "file": "lizardman.zip",
+      "query": "lizardman",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=lizardman&count=100",
+      "candidates": [
+        {
+          "name": "Lizardman",
+          "uid": "a710eb3eaeab4200a2ff83abc9b0c4db",
+          "url": "https://sketchfab.com/3d-models/a710eb3eaeab4200a2ff83abc9b0c4db",
+          "creator": "DJMaesen",
+          "username": "bumstrum",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 6582,
+          "vertexCount": 3367,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2018-03-20T22:00:51.363424",
+            "descriptionExcerpt": "low poly alien creature",
+            "descriptionSha256": "425e9adb6b58cb27d518cf5b23eab8c580fd63d3740ad531a2d74098c3085a31"
+          }
+        },
+        {
+          "name": "lizardman",
+          "uid": "fb976855dfe24829ae034d46e99a4f7a",
+          "url": "https://sketchfab.com/3d-models/fb976855dfe24829ae034d46e99a4f7a",
+          "creator": "toomiro",
+          "username": "toomiro",
+          "license": null,
+          "faceCount": 2381,
+          "vertexCount": 1893,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false,
+          "detail": {
+            "license": {},
+            "animationCount": 0,
+            "publishedAt": "2017-06-07T16:08:51.024775",
+            "descriptionExcerpt": "![](https://cdna.artstation.com/p/assets/images/images/006/216/306/large/toomiro-rakugaki-82-02.jpg?1496859082http://) [https://www.artstation.com/artwork/BWL94](http://)",
+            "descriptionSha256": "28e77e6ee28a7a20e7bb6587af1866a346cc6fe9fab0199ac4f075ff3a7ddf9b"
+          }
+        },
+        {
+          "name": "Lizardman",
+          "uid": "c3e7990321764632979d96f8e7fe5edd",
+          "url": "https://sketchfab.com/3d-models/c3e7990321764632979d96f8e7fe5edd",
+          "creator": "gammabyte",
+          "username": "gammabyte",
+          "license": null,
+          "faceCount": 1632,
+          "vertexCount": 1088,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Lizardman",
+          "uid": "74ea1d414fac4cd383d4d3282d2e5551",
+          "url": "https://sketchfab.com/3d-models/74ea1d414fac4cd383d4d3282d2e5551",
+          "creator": "endoferas",
+          "username": "endoferas",
+          "license": null,
+          "faceCount": 271024,
+          "vertexCount": 135950,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Lizardman",
+          "uid": "9d7b59af60ca4c2899c001feebcfd27e",
+          "url": "https://sketchfab.com/3d-models/9d7b59af60ca4c2899c001feebcfd27e",
+          "creator": "whitebengaltiger",
+          "username": "blackpanthaartist",
+          "license": null,
+          "faceCount": 56777,
+          "vertexCount": 29456,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Lizardman",
+        "uid": "a710eb3eaeab4200a2ff83abc9b0c4db",
+        "url": "https://sketchfab.com/3d-models/a710eb3eaeab4200a2ff83abc9b0c4db",
+        "creator": "DJMaesen",
+        "username": "bumstrum",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 6582,
+        "vertexCount": 3367,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1,
+          "publishedAt": "2018-03-20T22:00:51.363424",
+          "descriptionExcerpt": "low poly alien creature",
+          "descriptionSha256": "425e9adb6b58cb27d518cf5b23eab8c580fd63d3740ad531a2d74098c3085a31"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "medieval-civilian-3.zip",
+      "query": "medieval civilian 3",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=medieval+civilian+3&count=100",
+      "candidates": [
+        {
+          "name": "Medieval Civilian 3",
+          "uid": "d99ca22f06134e8dab28fdfa75d87f31",
+          "url": "https://sketchfab.com/3d-models/d99ca22f06134e8dab28fdfa75d87f31",
+          "creator": "Leonardo Carvalho",
+          "username": "livrosparacriancas",
+          "license": {
+            "uid": "72eb2b1960364637901eacce19283624",
+            "label": "Free Standard"
+          },
+          "faceCount": 21410,
+          "vertexCount": 12576,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/72eb2b1960364637901eacce19283624",
+              "label": "Free Standard",
+              "fullName": "Free Standard",
+              "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+              "url": "https://sketchfab.com/licenses",
+              "slug": "free-st"
+            },
+            "animationCount": 1,
+            "publishedAt": "2020-05-05T06:24:20.397874",
+            "descriptionExcerpt": "*This character can be easily created with Adobe Fuse software .fuse character mixamo rig. Could be animated in",
+            "descriptionSha256": "98ba28f51dab2e6f9f003321cc939b6e8b7783e5d27fa25f3bac370cc05fa79f"
+          }
+        },
+        {
+          "name": "Low Poly Medieval Peasants - Animated & Rigged",
+          "uid": "5c734994119e458a8792cc477b2595bd",
+          "url": "https://sketchfab.com/3d-models/5c734994119e458a8792cc477b2595bd",
+          "creator": "Studio Ochi",
+          "username": "studioochi",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "faceCount": 6888,
+          "vertexCount": 3461,
+          "exactTitle": false,
+          "similarity": 0.3934,
+          "triangleMatch": false,
+          "isDownloadable": false,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/783b685da9bf457d81e829fa283f3567",
+              "label": "Standard",
+              "fullName": "Standard",
+              "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+              "url": "https://sketchfab.com/licenses",
+              "slug": "st"
+            },
+            "animationCount": 1,
+            "publishedAt": "2024-08-04T01:11:24.311911",
+            "descriptionExcerpt": "# **LOW POLY MEDIEVAL PEASANTS PACK** Our animated and rigged low poly people packs come in a variety",
+            "descriptionSha256": "08458e154452f38b5e1715fe8154cb86d798ff595a5bf716f06d32d4fea695e3"
+          }
+        },
+        {
+          "name": "Bellver castle,gothic,map,scan,medieval,palma",
+          "uid": "48c8d90d778c433e8085f83a5fe7445f",
+          "url": "https://sketchfab.com/3d-models/48c8d90d778c433e8085f83a5fe7445f",
+          "creator": "SENSIET",
+          "username": "asensio",
+          "license": {
+            "uid": "5b54cf13b1a4422ca439696eb152070d",
+            "label": "Editorial"
+          },
+          "faceCount": 124779,
+          "vertexCount": 82004,
+          "exactTitle": false,
+          "similarity": 0.3438,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Bellver castle,gothic,map,scan,medieval,palma",
+          "uid": "faecee271ff544b08918a55694f0c25e",
+          "url": "https://sketchfab.com/3d-models/faecee271ff544b08918a55694f0c25e",
+          "creator": "SENSIET",
+          "username": "asensio",
+          "license": {
+            "uid": "5b54cf13b1a4422ca439696eb152070d",
+            "label": "Editorial"
+          },
+          "faceCount": 165976,
+          "vertexCount": 109864,
+          "exactTitle": false,
+          "similarity": 0.3438,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Medieval Civilian 3",
+        "uid": "d99ca22f06134e8dab28fdfa75d87f31",
+        "url": "https://sketchfab.com/3d-models/d99ca22f06134e8dab28fdfa75d87f31",
+        "creator": "Leonardo Carvalho",
+        "username": "livrosparacriancas",
+        "license": {
+          "uid": "72eb2b1960364637901eacce19283624",
+          "label": "Free Standard"
+        },
+        "faceCount": 21410,
+        "vertexCount": 12576,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/72eb2b1960364637901eacce19283624",
+            "label": "Free Standard",
+            "fullName": "Free Standard",
+            "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+            "url": "https://sketchfab.com/licenses",
+            "slug": "free-st"
+          },
+          "animationCount": 1,
+          "publishedAt": "2020-05-05T06:24:20.397874",
+          "descriptionExcerpt": "*This character can be easily created with Adobe Fuse software .fuse character mixamo rig. Could be animated in",
+          "descriptionSha256": "98ba28f51dab2e6f9f003321cc939b6e8b7783e5d27fa25f3bac370cc05fa79f",
+          "descriptionLinks": [
+            "https://www.mixamo.com/"
+          ]
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "mushroom-warrior.zip",
+      "query": "mushroom warrior",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=mushroom+warrior&count=100",
+      "candidates": [
+        {
+          "name": "Mushroom Warrior",
+          "uid": "143bf8087cac498bb8e99c21b961e972",
+          "url": "https://sketchfab.com/3d-models/143bf8087cac498bb8e99c21b961e972",
+          "creator": "Muru",
+          "username": "muru",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 14135,
+          "vertexCount": 7286,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2024-02-23T18:45:03.562845",
+            "descriptionExcerpt": "The mushroom dweller was forced to take up arms to protect his swamps. The author of the concept",
+            "descriptionSha256": "8575da1f7ee1192755bce25c6937a04358fe0032a97e0a696cd829f35575ff10"
+          }
+        },
+        {
+          "name": "Mushroom Warrior",
+          "uid": "f0ab1da8d7e74759b5bea8618c350914",
+          "url": "https://sketchfab.com/3d-models/f0ab1da8d7e74759b5bea8618c350914",
+          "creator": "DearMousey",
+          "username": "meow-vortex",
+          "license": {
+            "uid": "34b725081a6a4184957efaec2cb84ed3",
+            "label": "CC Attribution-NonCommercial-NoDerivs"
+          },
+          "faceCount": 1736,
+          "vertexCount": 942,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/34b725081a6a4184957efaec2cb84ed3",
+              "label": "CC Attribution-NonCommercial-NoDerivs",
+              "fullName": "CC Attribution-NonCommercial-NoDerivs",
+              "requirements": "Author must be credited. No commercial use. Modified versions can not be distributed.",
+              "url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
+              "slug": "by-nc-nd"
+            },
+            "animationCount": 0,
+            "publishedAt": "2020-04-11T05:26:42.084710",
+            "descriptionExcerpt": "Concept art by Sephiroth https://www.artstation.com/artwork/Dxw1xn I like the idea so much I couldn't resist making it in 3D!",
+            "descriptionSha256": "efc09610cafbfbffe7fe934de82614797ce6b469ae9bf02b83b820b2029b2400"
+          }
+        },
+        {
+          "name": "Mushroom Warrior",
+          "uid": "b99a35b8cd01473280c4ba4704b49e6a",
+          "url": "https://sketchfab.com/3d-models/b99a35b8cd01473280c4ba4704b49e6a",
+          "creator": "bymarlee.jpg",
+          "username": "bymarlee.jpg",
+          "license": null,
+          "faceCount": 11036,
+          "vertexCount": 5919,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Mushroom Warrior",
+          "uid": "391de0aa11d44635a53fa927e47dd1cb",
+          "url": "https://sketchfab.com/3d-models/391de0aa11d44635a53fa927e47dd1cb",
+          "creator": "POTVORA",
+          "username": "sergey_silichev",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1187159,
+          "vertexCount": 593107,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "Mushroom Warrior",
+          "uid": "a90e5f38b35947ac9d2cbb02aaa75a48",
+          "url": "https://sketchfab.com/3d-models/a90e5f38b35947ac9d2cbb02aaa75a48",
+          "creator": "jimbledoods",
+          "username": "emilija.kl",
+          "license": null,
+          "faceCount": 6586,
+          "vertexCount": 3593,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Mushroom Warrior",
+        "uid": "143bf8087cac498bb8e99c21b961e972",
+        "url": "https://sketchfab.com/3d-models/143bf8087cac498bb8e99c21b961e972",
+        "creator": "Muru",
+        "username": "muru",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 14135,
+        "vertexCount": 7286,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1,
+          "publishedAt": "2024-02-23T18:45:03.562845",
+          "descriptionExcerpt": "The mushroom dweller was forced to take up arms to protect his swamps. The author of the concept",
+          "descriptionSha256": "8575da1f7ee1192755bce25c6937a04358fe0032a97e0a696cd829f35575ff10",
+          "descriptionLinks": [
+            "https://www.artstation.com/matthewmcangus"
+          ]
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "ouroboros-the-calm.zip",
+      "query": "ouroboros the calm",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=ouroboros+the+calm&count=100",
+      "candidates": [
+        {
+          "name": "Ouroboros The Calm",
+          "uid": "385d5d29f006413ea15d14f838b93bea",
+          "url": "https://sketchfab.com/3d-models/385d5d29f006413ea15d14f838b93bea",
+          "creator": "tamminen",
+          "username": "tamminen",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 28023,
+          "vertexCount": 19135,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2023-01-18T10:40:48.067594",
+            "descriptionExcerpt": "Usually Ouroboros is eating its own tail. This however is a calm one. About Ouroboros Ouroboros, emblematic serpent",
+            "descriptionSha256": "2fe6051e56fa95d042f8f4f798227d1a306590b542fc4b1364b8514c3bd8ea28"
+          }
+        },
+        {
+          "name": "Heraldic Ouroboros",
+          "uid": "6aee7466fce8460aadffa0910c2e1d67",
+          "url": "https://sketchfab.com/3d-models/6aee7466fce8460aadffa0910c2e1d67",
+          "creator": "Emily Bujnoch",
+          "username": "ebujnoch",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 946222,
+          "vertexCount": 473100,
+          "exactTitle": false,
+          "similarity": 0.5,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2023-05-31T23:57:35.331568",
+            "descriptionExcerpt": "Heraldic Ouroboros was also created using a software called ZBrush and the composition consists of a Calopus and",
+            "descriptionSha256": "8b89fba47bcc44b57afdf08df0445d710c6ecd77f4508cdc99c33bb1d742e5a4"
+          }
+        }
+      ],
+      "sourceCandidate": null,
+      "sourceMatchBasis": "Exact source unresolved; candidates only"
+    },
+    {
+      "file": "skeletal-lich-king-in-bone-crown-and-robes.zip",
+      "query": "skeletal lich king in bone crown and robes",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=skeletal+lich+king+in+bone+crown+and+robes&count=100",
+      "candidates": [
+        {
+          "name": "Skeletal Lich King in Bone Crown and Robes",
+          "uid": "0fa4c6a200444b4abc108a9b0b9edae6",
+          "url": "https://sketchfab.com/3d-models/0fa4c6a200444b4abc108a9b0b9edae6",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1893142,
+          "vertexCount": 946077,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2026-07-18T18:30:57.824442",
+            "descriptionExcerpt": "A highly detailed dark fantasy Lich character, a skeletal undead sorcerer king with bone-white skeletal features, tattered royal",
+            "descriptionSha256": "56f6d7dd4f87d2229e3cd714630bbdf0575eb486563c000a4c093cde8a309efc"
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Skeletal Lich King in Bone Crown and Robes",
+        "uid": "0fa4c6a200444b4abc108a9b0b9edae6",
+        "url": "https://sketchfab.com/3d-models/0fa4c6a200444b4abc108a9b0b9edae6",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 1893142,
+        "vertexCount": 946077,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2026-07-18T18:30:57.824442",
+          "descriptionExcerpt": "A highly detailed dark fantasy Lich character, a skeletal undead sorcerer king with bone-white skeletal features, tattered royal",
+          "descriptionSha256": "56f6d7dd4f87d2229e3cd714630bbdf0575eb486563c000a4c093cde8a309efc"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "skeleton-animated.zip",
+      "query": "skeleton animated",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=skeleton+animated&count=100",
+      "candidates": [
+        {
+          "name": "Skeleton animated",
+          "uid": "9210377c7a514cf6b48a31b9d3991ff3",
+          "url": "https://sketchfab.com/3d-models/9210377c7a514cf6b48a31b9d3991ff3",
+          "creator": "danielmclogan",
+          "username": "danielmclogan",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 6821,
+          "vertexCount": 3482,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2020-05-07T08:08:42.038269",
+            "descriptionExcerpt": "Animated 3D model of a human skeleton warrior. Originally part of a thesis studying anatomy of skeletons.",
+            "descriptionSha256": "0d100b0ed83a342de53d7c05c1694ab56cf47a774c93b2559be2bf2694d82f51"
+          }
+        },
+        {
+          "name": "Skeleton (Animated)",
+          "uid": "bd1de4a8153a44fe93e728ca8e06701b",
+          "url": "https://sketchfab.com/3d-models/bd1de4a8153a44fe93e728ca8e06701b",
+          "creator": "One_Boy",
+          "username": "one_boy",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1412,
+          "vertexCount": 1118,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2016-12-06T18:09:47.564864",
+            "descriptionExcerpt": "This is free model from Unity Asset store. Make rig and animation on it.",
+            "descriptionSha256": "414a67949a96c82a52341787c25e35372e9ec2590637a04e7d9aa451b6d1acc0"
+          }
+        },
+        {
+          "name": "Explode Skeleton Animated",
+          "uid": "504a0a2421f54c91801b4f959b719faf",
+          "url": "https://sketchfab.com/3d-models/504a0a2421f54c91801b4f959b719faf",
+          "creator": "Lucas Patez",
+          "username": "lukpatez",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 12990,
+          "vertexCount": 6772,
+          "exactTitle": false,
+          "similarity": 0.8095,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "Skeleton animated character",
+          "uid": "7934529c761f4031b623d6ca0e1e3546",
+          "url": "https://sketchfab.com/3d-models/7934529c761f4031b623d6ca0e1e3546",
+          "creator": "TheGameAssets",
+          "username": "TheGameAssets",
+          "license": {
+            "uid": "783b685da9bf457d81e829fa283f3567",
+            "label": "Standard"
+          },
+          "faceCount": 1939,
+          "vertexCount": 1100,
+          "exactTitle": false,
+          "similarity": 0.7727,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Chibi Skeleton - Animated Mob",
+          "uid": "5389b2a377c445c9aa300808ada73970",
+          "url": "https://sketchfab.com/3d-models/5389b2a377c445c9aa300808ada73970",
+          "creator": "Manning Design",
+          "username": "manningdesign",
+          "license": null,
+          "faceCount": 1104,
+          "vertexCount": 736,
+          "exactTitle": false,
+          "similarity": 0.7727,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": null,
+      "sourceMatchBasis": "Exact source unresolved; candidates only"
+    },
+    {
+      "file": "skeleton-mage-glowing-crystal-staff.zip",
+      "query": "skeleton mage glowing crystal staff",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=skeleton+mage+glowing+crystal+staff&count=100",
+      "candidates": [
+        {
+          "name": "Skeleton Mage - Glowing Crystal Staff",
+          "uid": "372ec5a97f1e4ccea4a4f0bdbed4ab08",
+          "url": "https://sketchfab.com/3d-models/372ec5a97f1e4ccea4a4f0bdbed4ab08",
+          "creator": "Pigcraft",
+          "username": "s8819296",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 1992321,
+          "vertexCount": 995882,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 0,
+            "publishedAt": "2026-07-20T12:37:08.549450",
+            "descriptionExcerpt": "Highly detailed dark fantasy skeleton mage character model, an undead skeletal spellcaster with bone-white skeletal features wearing tattered",
+            "descriptionSha256": "62817f94d7185d88200878a9fe284ea3cc3ada4622f3fa05058efde6363eaaec"
+          }
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Skeleton Mage - Glowing Crystal Staff",
+        "uid": "372ec5a97f1e4ccea4a4f0bdbed4ab08",
+        "url": "https://sketchfab.com/3d-models/372ec5a97f1e4ccea4a4f0bdbed4ab08",
+        "creator": "Pigcraft",
+        "username": "s8819296",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 1992321,
+        "vertexCount": 995882,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0,
+          "publishedAt": "2026-07-20T12:37:08.549450",
+          "descriptionExcerpt": "Highly detailed dark fantasy skeleton mage character model, an undead skeletal spellcaster with bone-white skeletal features wearing tattered",
+          "descriptionSha256": "62817f94d7185d88200878a9fe284ea3cc3ada4622f3fa05058efde6363eaaec"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "treeman.zip",
+      "query": "treeman",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=treeman&count=100",
+      "candidates": [
+        {
+          "name": "Treeman",
+          "uid": "e3a094316a8c4820a94d271afffe497c",
+          "url": "https://sketchfab.com/3d-models/e3a094316a8c4820a94d271afffe497c",
+          "creator": "DJMaesen",
+          "username": "bumstrum",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 8616,
+          "vertexCount": 4382,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 1,
+            "publishedAt": "2018-09-10T15:43:50.478763",
+            "descriptionExcerpt": "gameready mythical creature 2k maps",
+            "descriptionSha256": "4c099eed2b8a9abbfce4abda0f630301f871330d289171ab1e808c74f94968bf"
+          }
+        },
+        {
+          "name": "Treeman",
+          "uid": "6b7993fab32a450cb669a6a95aead192",
+          "url": "https://sketchfab.com/3d-models/6b7993fab32a450cb669a6a95aead192",
+          "creator": "TPeebles",
+          "username": "TPeebles17",
+          "license": null,
+          "faceCount": 24968,
+          "vertexCount": 12622,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false,
+          "detail": {
+            "license": {},
+            "animationCount": 0,
+            "publishedAt": "2022-12-15T14:37:43.277155",
+            "descriptionExcerpt": "A treeman model made for a college project. Original concept by Tony Briggs Original Concept: https://www.artstation.com/artwork/68BWoV",
+            "descriptionSha256": "d3e901a8776e46f215f99dc94c16d9686dcf577552cd3f7d575ec81384959bac"
+          }
+        },
+        {
+          "name": "Treeman",
+          "uid": "5e0ec06a658c46738efb9be33fb2e5c3",
+          "url": "https://sketchfab.com/3d-models/5e0ec06a658c46738efb9be33fb2e5c3",
+          "creator": "Paweł Stanisławowicz",
+          "username": "General_Autism",
+          "license": null,
+          "faceCount": 5664,
+          "vertexCount": 2834,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        },
+        {
+          "name": "Treeman",
+          "uid": "de79bed78a824670a59c78910cec2070",
+          "url": "https://sketchfab.com/3d-models/de79bed78a824670a59c78910cec2070",
+          "creator": "freewaycola",
+          "username": "freewaycola",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 439958,
+          "vertexCount": 219983,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": true
+        },
+        {
+          "name": "treeman",
+          "uid": "322ff5c4f44c4726915e7dc4064a4085",
+          "url": "https://sketchfab.com/3d-models/322ff5c4f44c4726915e7dc4064a4085",
+          "creator": "mufabaz_312",
+          "username": "mufabaz_312",
+          "license": null,
+          "faceCount": 13476,
+          "vertexCount": 7163,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": false,
+          "isDownloadable": false
+        }
+      ],
+      "sourceCandidate": {
+        "name": "Treeman",
+        "uid": "e3a094316a8c4820a94d271afffe497c",
+        "url": "https://sketchfab.com/3d-models/e3a094316a8c4820a94d271afffe497c",
+        "creator": "DJMaesen",
+        "username": "bumstrum",
+        "license": {
+          "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution"
+        },
+        "faceCount": 8616,
+        "vertexCount": 4382,
+        "exactTitle": true,
+        "similarity": 1.0,
+        "triangleMatch": true,
+        "isDownloadable": true,
+        "detail": {
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1,
+          "publishedAt": "2018-09-10T15:43:50.478763",
+          "descriptionExcerpt": "gameready mythical creature 2k maps",
+          "descriptionSha256": "4c099eed2b8a9abbfce4abda0f630301f871330d289171ab1e808c74f94968bf"
+        }
+      },
+      "sourceMatchBasis": "Matching title/search context and packaged triangle count; ownership not established"
+    },
+    {
+      "file": "tyranno.zip",
+      "query": "tyranno",
+      "api": "https://api.sketchfab.com/v3/search?type=models&q=tyranno&count=100",
+      "candidates": [
+        {
+          "name": "TYRANNO",
+          "uid": "a54f6868a63e4c729556d387aa090a43",
+          "url": "https://sketchfab.com/3d-models/a54f6868a63e4c729556d387aa090a43",
+          "creator": "seth the yutyrannus",
+          "username": "slang107123456789",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 7366,
+          "vertexCount": 4092,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 10,
+            "publishedAt": "2023-10-10T23:05:29.029259",
+            "descriptionExcerpt": "i going to add a single texture to this dinosaur and this model is a credit to rroobboo",
+            "descriptionSha256": "d106f626ee377fd6d7b3801d0fcbc45e0c84971f99ec2d38bb7e97d32ec6fea8"
+          }
+        },
+        {
+          "name": "Tyranno",
+          "uid": "9a6f0762fd5c4a99b51712863dd10707",
+          "url": "https://sketchfab.com/3d-models/9a6f0762fd5c4a99b51712863dd10707",
+          "creator": "T reey",
+          "username": "Treey1",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 7366,
+          "vertexCount": 4092,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "animationCount": 11,
+            "publishedAt": "2025-03-15T07:53:59.707105",
+            "descriptionExcerpt": "",
+            "descriptionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        {
+          "name": "tyranno",
+          "uid": "cbbeea528cfc40518db132935192ec4b",
+          "url": "https://sketchfab.com/3d-models/cbbeea528cfc40518db132935192ec4b",
+          "creator": "SEAP VR",
+          "username": "seapvisualization",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 7366,
+          "vertexCount": 4092,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "publishedAt": "2024-03-20T07:36:05.822063",
+            "animationCount": 1,
+            "descriptionExcerpt": ""
+          }
+        },
+        {
+          "name": "Tyranno",
+          "uid": "fd764cf347da465badde08ac64d86cde",
+          "url": "https://sketchfab.com/3d-models/fd764cf347da465badde08ac64d86cde",
+          "creator": "Emmett.s",
+          "username": "Emmett.s",
+          "license": null,
+          "faceCount": 7366,
+          "vertexCount": 4092,
+          "exactTitle": true,
+          "similarity": 1.0,
+          "triangleMatch": true,
+          "isDownloadable": false,
+          "detail": {
+            "license": {},
+            "publishedAt": "2024-10-03T16:38:56.362711",
+            "animationCount": 10,
+            "descriptionExcerpt": ""
+          }
+        },
+        {
+          "name": "Tyranno walk",
+          "uid": "f262043cd0004620a4745ea0d66918c3",
+          "url": "https://sketchfab.com/3d-models/f262043cd0004620a4745ea0d66918c3",
+          "creator": "LostBoyz2078",
+          "username": "LostModels2025",
+          "license": {
+            "uid": "322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution"
+          },
+          "faceCount": 7366,
+          "vertexCount": 4092,
+          "exactTitle": false,
+          "similarity": 0.7368,
+          "triangleMatch": true,
+          "isDownloadable": true,
+          "detail": {
+            "license": {
+              "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+              "label": "CC Attribution",
+              "fullName": "Creative Commons Attribution",
+              "requirements": "Author must be credited. Commercial use is allowed.",
+              "url": "http://creativecommons.org/licenses/by/4.0/",
+              "slug": "by"
+            },
+            "publishedAt": "2023-11-28T13:26:09.640675",
+            "animationCount": 1,
+            "descriptionExcerpt": "Tyranno walk"
+          }
+        }
+      ],
+      "sourceCandidate": null,
+      "sourceMatchBasis": "Exact source unresolved; candidates only"
+    }
+  ]
+}

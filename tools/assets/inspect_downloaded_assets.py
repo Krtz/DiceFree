@@ -2,7 +2,7 @@
 python tools/assets/inspect_downloaded_assets.py --source T:\\TEMP\\ART_ASSETS --output docs/assets/downloaded-assets-2026-10-15.json
 Counts describe packaged data, not engine renderer costs or a license grant.
 """
-import argparse, collections, hashlib, io, json, re, struct, zipfile, zlib, subprocess, tempfile, shutil
+import argparse, collections, hashlib, io, json, re, struct, zipfile, zlib, subprocess, tempfile, shutil, threading
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -101,6 +101,8 @@ def rar(payload,prefix):
             entry=dict(path=prefix+name)
             if Path(name).suffix.lower()=='.fbx':
                 process=subprocess.Popen([tool,'-xOf',str(path),'--',name],stdout=subprocess.PIPE,stderr=subprocess.DEVNULL)
+                timer=threading.Timer(30,process.kill)
+                timer.start()
                 try:
                     payload=process.stdout.read(MAX_MEMBER+1)
                     if len(payload)>MAX_MEMBER:
@@ -109,6 +111,7 @@ def rar(payload,prefix):
                         if process.wait(timeout=30)!=0:raise ValueError('RAR FBX read failed')
                         entry['bytes']=len(payload);entry['model']=fbx(payload)
                 finally:
+                    timer.cancel()
                     process.stdout.close()
                     if process.poll() is None:process.kill()
                     process.wait()
