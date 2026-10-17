@@ -1,0 +1,298 @@
+{
+  "inspectedUtc": "2026-10-17T22:01:29.251514+00:00",
+  "method": "Read-only glTF asset metadata; no engine import",
+  "files": [
+    {
+      "file": "anime-swordswoman-image-to-3d-supavoxel.zip",
+      "sha256": "bbd9d6e401bb56536d837db1d580e21948e49fbd498379c6d5cc761373fd8ba2",
+      "metadata": [
+        {
+          "path": "source/107.glb",
+          "asset": {
+            "generator": "pygltflib@v1.16.5",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "antlered-valkyrie-of-the-north-3d-model-free.zip",
+      "sha256": "dcacba9317d818ac8e2ac89d8d08c329864f0d01329bc1f369df264d619edd76",
+      "metadata": [
+        {
+          "path": "source/model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r170"
+          }
+        }
+      ]
+    },
+    {
+      "file": "catrina-skeleton-bride-figure-meshi-vs-supavoxel.zip",
+      "sha256": "85811320258b6d22802feef3afd89ed238a85ea8d61277c4f22fae32aa087cf6",
+      "metadata": [
+        {
+          "path": "source/pool0156_wm.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.0",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "coffee-cup-samurai-sloyd-vs-supavoxel.zip",
+      "sha256": "9d919b2f3ec661694084ce41640629e0c893b81467827799b1c621aa42242e03",
+      "metadata": [
+        {
+          "path": "source/pool2147.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.1",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "cyberpunk-swordswoman-3d-ai-studio-vs-supavoxel.zip",
+      "sha256": "418864eeb23f07079d6ba473a632f071f00466917ad0b8e6cbf64ea6e7b46c1d",
+      "metadata": [
+        {
+          "path": "source/pool0125.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.1",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "duat-golem-guard-monsterup.zip",
+      "sha256": "8ae5b4ed568dd470ba367b8139e2bcfb5e2d2108b640d56d5ec988a80b0d91cc",
+      "metadata": [
+        {
+          "path": "source/DUATgolem.glb",
+          "asset": {
+            "generator": "Khronos glTF Blender I/O v5.0.21",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "faceless-shadow-assassin.zip",
+      "sha256": "215ed70b5039b63a192d67c4d2e083704de513ccbbb8bce024e449257c843da8",
+      "metadata": [
+        {
+          "path": "source/asassin dagger.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r182"
+          }
+        }
+      ]
+    },
+    {
+      "file": "frostborne-warlord.zip",
+      "sha256": "e65562547f007e1d51b299d8e4b48e0c5f797e15840844c5a001572388620fd2",
+      "metadata": [
+        {
+          "path": "source/model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r170"
+          }
+        }
+      ]
+    },
+    {
+      "file": "fur-clad-warlord-3d-model-free.zip",
+      "sha256": "053e3efd3f09b1a0bb60ca80fc808ad6d2f761462c2eae65365dfe8051100ade",
+      "metadata": [
+        {
+          "path": "source/model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r170"
+          }
+        }
+      ]
+    },
+    {
+      "file": "holy-knight-lady-character-hyper3d-vs-supavoxel.zip",
+      "sha256": "2f5cc6376d7a15abd97ee95c15a82fca1e47eac80540b36d7db3e265c7a4c2f4",
+      "metadata": [
+        {
+          "path": "source/pool0728_wm.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.0",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "hooded-shadow-assassin.zip",
+      "sha256": "0dbc44b9fbb2177b3711203bec4051a7700e7b1614a68d295ec4ce28596215bd",
+      "metadata": [
+        {
+          "path": "source/model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r170"
+          }
+        }
+      ]
+    },
+    {
+      "file": "low-poly-lion-with-wings-warrior-character-model.zip",
+      "sha256": "3b9cbe1c7c61a157fc78fa1b40a48ccc2e6e0da8404abaa78cf90ffa79a8f95b",
+      "metadata": [
+        {
+          "path": "source/Low poly Warrior Character.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "Tripo"
+          }
+        }
+      ]
+    },
+    {
+      "file": "low-poly-monster-dragon-realistic.zip",
+      "sha256": "d3ffc00a2a6fa3fcaef86c53913d1fdb822b1f50980708cbb331b528dba0386a",
+      "metadata": [
+        {
+          "path": "source/low poly monster dragon realistic.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "Tripo"
+          }
+        }
+      ]
+    },
+    {
+      "file": "low-poly-owl-warrior-character-3d-model-free.zip",
+      "sha256": "f1a2f236c92cfa73c4f7646c49e36a7662fea8f35e46b2eb414578b926f07e30",
+      "metadata": [
+        {
+          "path": "source/3bdbaa66-f387-431a-bc18-e1e06ec94d63.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "Tripo"
+          }
+        }
+      ]
+    },
+    {
+      "file": "medieval-crusader-knight-clad.zip",
+      "sha256": "e66036d28a252ff0a3c7506f157c4ca3e7c38585a97af39fd63c88a0ed69556d",
+      "metadata": [
+        {
+          "path": "source/medieval+knight+3d+model.glb",
+          "asset": {
+            "generator": "Tripo",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "medieval-knight-model.zip",
+      "sha256": "bc50bb0ff20a4a2a415151a977d1a1b599d19cc867ce07bfe2750104ad0acac0",
+      "metadata": [
+        {
+          "path": "source/medieval+knight+3d+model (1).glb",
+          "asset": {
+            "generator": "Tripo",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "midnight-outlaw-shadow-character-3d-model-free.zip",
+      "sha256": "99107451b342e03d93ad2adb5f3d3a1a20507605216b22689048783d5cc3a026",
+      "metadata": [
+        {
+          "path": "source/model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r170"
+          }
+        }
+      ]
+    },
+    {
+      "file": "mountain-dragon.zip",
+      "sha256": "84552efaa4fd5421813954568a27c7e5214389aa61a61177adfbf7729451a383",
+      "metadata": [
+        {
+          "path": "source/MOUNTAIN_DRAGON_ANIMATIONS.glb",
+          "asset": {
+            "generator": "OpenSceneGraph 3.5.6",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "redhead-anime-swordswoman-png-to-stl-supavoxel.zip",
+      "sha256": "a0f670940ad6f8f42a0f0414e81ad64089e42e40691659f4e013a93efef2cde0",
+      "metadata": [
+        {
+          "path": "source/waifu005.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.1",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "samurai-cat-tripo-3d-vs-meshy-supavoxel.zip",
+      "sha256": "eacddc4806e3b7e471a258c938af46e9042b37d4a4b1adb168b1c35c8a8b5da2",
+      "metadata": [
+        {
+          "path": "source/pool0488_wm.glb",
+          "asset": {
+            "generator": "glTF-Transform v4.5.0",
+            "version": "2.0"
+          }
+        }
+      ]
+    },
+    {
+      "file": "viking-shieldmaiden-3d-model.zip",
+      "sha256": "35244cf52dde43f5add246989bd20b54afc5f802b4bba2e6f5e86b26a165293b",
+      "metadata": [
+        {
+          "path": "source/barbarian warrior 3d model.glb",
+          "asset": {
+            "version": "2.0",
+            "generator": "THREE.GLTFExporter r182"
+          }
+        }
+      ]
+    },
+    {
+      "file": "warrior_girl.glb",
+      "sha256": "e5410a13269239996cd0044b331977c379e6e163d751e01e8e4d3e6ed8b5dcc0",
+      "metadata": [
+        {
+          "path": "warrior_girl.glb",
+          "asset": {
+            "extras": {
+              "author": "NORBERTO-3D (https://sketchfab.com/norberto3d)",
+              "license": "CC-BY-NC-SA-4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)",
+              "source": "https://sketchfab.com/3d-models/warrior-girl-1581a536b8984935a31891dc685e8376",
+              "title": "Warrior Girl"
+            },
+            "generator": "Sketchfab-12.65.0",
+            "version": "2.0"
+          }
+        }
+      ]
+    }
+  ]
+}

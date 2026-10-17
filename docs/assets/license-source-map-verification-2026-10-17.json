@@ -1,0 +1,221 @@
+{
+  "checkedUtc": "2026-10-17T22:05:44.448338+00:00",
+  "scope": "Selected inventory files",
+  "method": "License fields from official Sketchfab model details; archive-to-page evidence recorded separately",
+  "pageLicenseMeaning": "Stated model-page license, distinct from underlying ownership/provenance review",
+  "summary": {
+    "page license recorded": 5
+  },
+  "files": [
+    {
+      "file": "black-dragon-with-idle-animation.zip",
+      "sha256": "e5d1ce6b7a8b62443924fcc9e310ef6e6f0dcc3a8735b237fa2a0cdfd475e593",
+      "queries": [
+        {
+          "url": "https://api.sketchfab.com/v3/models/fb0053a2e59b43868e934c239bf4eb36",
+          "resultCount": 1
+        }
+      ],
+      "candidates": [],
+      "pages": [
+        {
+          "uid": "fb0053a2e59b43868e934c239bf4eb36",
+          "title": "Black Dragon with Idle Animation",
+          "creator": "3DHaupt",
+          "username": "dennish2010",
+          "url": "https://sketchfab.com/3d-models/fb0053a2e59b43868e934c239bf4eb36",
+          "triangles": 37992,
+          "vertices": 19389,
+          "downloadable": true,
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/bbfe3f7dbcdd4122b966b85b9786a989",
+            "label": "CC Attribution-NonCommercial",
+            "fullName": "Creative Commons Attribution-NonCommercial",
+            "requirements": "Author must be credited. No commercial use.",
+            "url": "http://creativecommons.org/licenses/by-nc/4.0/",
+            "slug": "by-nc"
+          },
+          "animationCount": 1
+        }
+      ],
+      "matchBasis": "Original 3DHaupt source already recorded in the project registry; re-upload candidates have different license claims",
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/bbfe3f7dbcdd4122b966b85b9786a989",
+        "label": "CC Attribution-NonCommercial",
+        "fullName": "Creative Commons Attribution-NonCommercial",
+        "requirements": "Author must be credited. No commercial use.",
+        "url": "http://creativecommons.org/licenses/by-nc/4.0/",
+        "slug": "by-nc"
+      },
+      "status": "page license recorded"
+    },
+    {
+      "file": "medieval-guard.zip",
+      "sha256": "8bb80c79e0149620e590d1c2d1335e4c53d2c169318fd4c966a5f766578aba01",
+      "queries": [
+        {
+          "url": "https://api.sketchfab.com/v3/models/ca548172f0984660bc4213b9404284fa",
+          "resultCount": 1
+        }
+      ],
+      "candidates": [],
+      "pages": [
+        {
+          "uid": "ca548172f0984660bc4213b9404284fa",
+          "title": "Medieval Guard",
+          "creator": "Taylor",
+          "username": "r.taylor",
+          "url": "https://sketchfab.com/3d-models/ca548172f0984660bc4213b9404284fa",
+          "triangles": 96550,
+          "vertices": 97889,
+          "downloadable": true,
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 0
+        }
+      ],
+      "matchBasis": "Exact title and matching original texture-name set; RAR geometry remains unparsed",
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "status": "page license recorded"
+    },
+    {
+      "file": "skeleton-animated.zip",
+      "sha256": "eafd50ee0694660586e70a4bc03833f14aa9bd4a445768a53af8b66b9188e232",
+      "queries": [
+        {
+          "url": "https://api.sketchfab.com/v3/models/bd1de4a8153a44fe93e728ca8e06701b",
+          "resultCount": 1
+        }
+      ],
+      "candidates": [],
+      "pages": [
+        {
+          "uid": "bd1de4a8153a44fe93e728ca8e06701b",
+          "title": "Skeleton (Animated)",
+          "creator": "One_Boy",
+          "username": "one_boy",
+          "url": "https://sketchfab.com/3d-models/bd1de4a8153a44fe93e728ca8e06701b",
+          "triangles": 1412,
+          "vertices": 1118,
+          "downloadable": true,
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+            "label": "CC Attribution",
+            "fullName": "Creative Commons Attribution",
+            "requirements": "Author must be credited. Commercial use is allowed.",
+            "url": "http://creativecommons.org/licenses/by/4.0/",
+            "slug": "by"
+          },
+          "animationCount": 1
+        }
+      ],
+      "matchBasis": "Normalized exact title, matching 1118 vertices and one animation; packaged triangulation differs",
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+        "label": "CC Attribution",
+        "fullName": "Creative Commons Attribution",
+        "requirements": "Author must be credited. Commercial use is allowed.",
+        "url": "http://creativecommons.org/licenses/by/4.0/",
+        "slug": "by"
+      },
+      "status": "page license recorded"
+    },
+    {
+      "file": "warrior-girl.zip",
+      "sha256": "68f348d2a0581ff2b4c8287a66501921ef44b54a9a7f9904b9c0baff5ba77457",
+      "queries": [
+        {
+          "url": "https://api.sketchfab.com/v3/models/1581a536b8984935a31891dc685e8376",
+          "resultCount": 1
+        }
+      ],
+      "candidates": [],
+      "pages": [
+        {
+          "uid": "1581a536b8984935a31891dc685e8376",
+          "title": "Warrior Girl",
+          "creator": "NORBERTO-3D",
+          "username": "norberto3d",
+          "url": "https://sketchfab.com/3d-models/1581a536b8984935a31891dc685e8376",
+          "triangles": 286716,
+          "vertices": 4006,
+          "downloadable": true,
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/2628dbe5140a4e9592126c8df566c0b7",
+            "label": "CC Attribution-NonCommercial-ShareAlike",
+            "fullName": "CC Attribution-NonCommercial-ShareAlike",
+            "requirements": "Author must be credited. No commercial use. Modified versions must have the same license.",
+            "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "slug": "by-nc-sa"
+          },
+          "animationCount": 1
+        }
+      ],
+      "matchBasis": "Matching texture set/identifiers with the exact GLB source; paired Alembic/GLB variants",
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/2628dbe5140a4e9592126c8df566c0b7",
+        "label": "CC Attribution-NonCommercial-ShareAlike",
+        "fullName": "CC Attribution-NonCommercial-ShareAlike",
+        "requirements": "Author must be credited. No commercial use. Modified versions must have the same license.",
+        "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "slug": "by-nc-sa"
+      },
+      "status": "page license recorded"
+    },
+    {
+      "file": "warrior_girl.glb",
+      "sha256": "e5410a13269239996cd0044b331977c379e6e163d751e01e8e4d3e6ed8b5dcc0",
+      "queries": [
+        {
+          "url": "https://api.sketchfab.com/v3/models/1581a536b8984935a31891dc685e8376",
+          "resultCount": 1
+        }
+      ],
+      "candidates": [],
+      "pages": [
+        {
+          "uid": "1581a536b8984935a31891dc685e8376",
+          "title": "Warrior Girl",
+          "creator": "NORBERTO-3D",
+          "username": "norberto3d",
+          "url": "https://sketchfab.com/3d-models/1581a536b8984935a31891dc685e8376",
+          "triangles": 286716,
+          "vertices": 4006,
+          "downloadable": true,
+          "license": {
+            "uri": "https://api.sketchfab.com/v3/licenses/2628dbe5140a4e9592126c8df566c0b7",
+            "label": "CC Attribution-NonCommercial-ShareAlike",
+            "fullName": "CC Attribution-NonCommercial-ShareAlike",
+            "requirements": "Author must be credited. No commercial use. Modified versions must have the same license.",
+            "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+            "slug": "by-nc-sa"
+          },
+          "animationCount": 1
+        }
+      ],
+      "matchBasis": "Exact Sketchfab source URL embedded in packaged glTF asset metadata",
+      "listedLicense": {
+        "uri": "https://api.sketchfab.com/v3/licenses/2628dbe5140a4e9592126c8df566c0b7",
+        "label": "CC Attribution-NonCommercial-ShareAlike",
+        "fullName": "CC Attribution-NonCommercial-ShareAlike",
+        "requirements": "Author must be credited. No commercial use. Modified versions must have the same license.",
+        "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "slug": "by-nc-sa"
+      },
+      "status": "page license recorded"
+    }
+  ]
+}

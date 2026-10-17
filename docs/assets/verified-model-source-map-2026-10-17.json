@@ -1,0 +1,426 @@
+{
+  "verifiedUtc": "2026-10-17T22:02:42.076549+00:00",
+  "method": "Verified archive-to-page mapping; evidence retained in the full license audit",
+  "files": [
+    {
+      "file": "abyss-walker-bandaged-wanderer-blue-eyes.zip",
+      "sha256": "42fcbeadd1aac556ca08e37fe336c92f2dc48a4e608dc6ae4d066177c74985a2",
+      "uid": "fab06be9be0c4232a8ee88a41d1562b3",
+      "source": "https://sketchfab.com/3d-models/fab06be9be0c4232a8ee88a41d1562b3",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "animated-skeleton-casts-spell-with-hands.zip",
+      "sha256": "a949c581416f8cbf447616d54b73093c831d63b4c234395aeb1815dc072ef922",
+      "uid": "2b1936a5356e44eda6ca4bc22ba959af",
+      "source": "https://sketchfab.com/3d-models/2b1936a5356e44eda6ca4bc22ba959af",
+      "matchBasis": "title/filename context plus matching packaged triangle count; unique matching animation count and downloadable licensed page"
+    },
+    {
+      "file": "anime-swordswoman-image-to-3d-supavoxel.zip",
+      "sha256": "bbd9d6e401bb56536d837db1d580e21948e49fbd498379c6d5cc761373fd8ba2",
+      "uid": "3f6e6154eaaa4e2d9693c621c8889bb0",
+      "source": "https://sketchfab.com/3d-models/3f6e6154eaaa4e2d9693c621c8889bb0",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "antlered-valkyrie-of-the-north-3d-model-free.zip",
+      "sha256": "dcacba9317d818ac8e2ac89d8d08c329864f0d01329bc1f369df264d619edd76",
+      "uid": "9d403eef76994835aeaee060659b808f",
+      "source": "https://sketchfab.com/3d-models/9d403eef76994835aeaee060659b808f",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "black-dragon-with-idle-animation.zip",
+      "sha256": "e5d1ce6b7a8b62443924fcc9e310ef6e6f0dcc3a8735b237fa2a0cdfd475e593",
+      "uid": "fb0053a2e59b43868e934c239bf4eb36",
+      "source": "https://sketchfab.com/3d-models/fb0053a2e59b43868e934c239bf4eb36",
+      "matchBasis": "Original 3DHaupt source already recorded in the project registry; re-upload candidates have different license claims"
+    },
+    {
+      "file": "blade-1.zip",
+      "sha256": "a3f4c0af3b4bf0d3c569cb1e895438acf0afacb0923aec4eb4ce6c30dae65256",
+      "uid": "baa74580a7eb4dd2a6005986791110ec",
+      "source": "https://sketchfab.com/3d-models/baa74580a7eb4dd2a6005986791110ec",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "blood-priest-in-crimson-ritual-robes.zip",
+      "sha256": "7746700a285ea661982c72ed220501270e26c05c883a436c3b224abecfb6ff73",
+      "uid": "8055a4c59bf7451c8b95db8baab58909",
+      "source": "https://sketchfab.com/3d-models/8055a4c59bf7451c8b95db8baab58909",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "bone-knight-horned-skull-greatsword.zip",
+      "sha256": "a1ec5c30159f91144d08af4cc26b93b6a1347af563fbcca4222a5b737097e82e",
+      "uid": "7969777c567545e3a19732b8498be603",
+      "source": "https://sketchfab.com/3d-models/7969777c567545e3a19732b8498be603",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "cat-witch.zip",
+      "sha256": "68bd95cf81e816c770d1778f103596910204b18d862c0ec43bdb7f0b61ccd5fe",
+      "uid": "886ac1f9d3664da09b682920de86f73d",
+      "source": "https://sketchfab.com/3d-models/886ac1f9d3664da09b682920de86f73d",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "catrina-skeleton-bride-figure-meshi-vs-supavoxel.zip",
+      "sha256": "85811320258b6d22802feef3afd89ed238a85ea8d61277c4f22fae32aa087cf6",
+      "uid": "7868738c801b4edfaf9487984b0a27ea",
+      "source": "https://sketchfab.com/3d-models/7868738c801b4edfaf9487984b0a27ea",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "coffee-cup-samurai-sloyd-vs-supavoxel.zip",
+      "sha256": "9d919b2f3ec661694084ce41640629e0c893b81467827799b1c621aa42242e03",
+      "uid": "2df0cd562d404437a8805f0a20c42a80",
+      "source": "https://sketchfab.com/3d-models/2df0cd562d404437a8805f0a20c42a80",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "corrupted-archangel-six-wings-boss.zip",
+      "sha256": "5ad89a58d7e860fb68997c36f031f198232a055ea574ceed83a26283f8324737",
+      "uid": "139d6f0185684ab9ae12fed7530c0696",
+      "source": "https://sketchfab.com/3d-models/139d6f0185684ab9ae12fed7530c0696",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "corrupted-fallen-priest-dark-fantasy.zip",
+      "sha256": "db6c015c5cd78a51a60f8f2bc5e2745a6acc14350ad428fdba3cf73f9f265ae0",
+      "uid": "1ab734d8c4464ae49d5b5091f3ea2afc",
+      "source": "https://sketchfab.com/3d-models/1ab734d8c4464ae49d5b5091f3ea2afc",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "cyberpunk-swordswoman-3d-ai-studio-vs-supavoxel.zip",
+      "sha256": "418864eeb23f07079d6ba473a632f071f00466917ad0b8e6cbf64ea6e7b46c1d",
+      "uid": "82f6ebbd1f744ac884946bbe09529cc0",
+      "source": "https://sketchfab.com/3d-models/82f6ebbd1f744ac884946bbe09529cc0",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "dark-necromancer-corrupted-staff-skulls.zip",
+      "sha256": "c7b25235c448b603a417807d85dea9cb1af1399583b1948c52e79467e8b1d573",
+      "uid": "10c3bef4113b4e128ad41c9fdcab74e3",
+      "source": "https://sketchfab.com/3d-models/10c3bef4113b4e128ad41c9fdcab74e3",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "duat-golem-guard-monsterup.zip",
+      "sha256": "8ae5b4ed568dd470ba367b8139e2bcfb5e2d2108b640d56d5ec988a80b0d91cc",
+      "uid": "52bcf459cb634b8dad90fcfb45f098f3",
+      "source": "https://sketchfab.com/3d-models/52bcf459cb634b8dad90fcfb45f098f3",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "faceless-shadow-assassin.zip",
+      "sha256": "215ed70b5039b63a192d67c4d2e083704de513ccbbb8bce024e449257c843da8",
+      "uid": "c3fe097c89d0427e84152c0ad0f636cf",
+      "source": "https://sketchfab.com/3d-models/c3fe097c89d0427e84152c0ad0f636cf",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "fallen-paladin-in-corrupted-black-plate-armor.zip",
+      "sha256": "633b44c690bc15dbd8d93591e6a71a2bacf0b837c7f6b001d29f9554333d1142",
+      "uid": "df3056caff7e4f079bd4eec0fa9bcd54",
+      "source": "https://sketchfab.com/3d-models/df3056caff7e4f079bd4eec0fa9bcd54",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "feral-plague-doctor-shattered-mask-bandages.zip",
+      "sha256": "d8ff6c95d00f612bf0273b2b97c205488890526977adb0f8c15c12c83e40c3b8",
+      "uid": "41be4ffd12cc4c758d83ce7c46027278",
+      "source": "https://sketchfab.com/3d-models/41be4ffd12cc4c758d83ce7c46027278",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "frostborne-warlord.zip",
+      "sha256": "e65562547f007e1d51b299d8e4b48e0c5f797e15840844c5a001572388620fd2",
+      "uid": "a7ae1999b92e4b6db413fcd0860a3a72",
+      "source": "https://sketchfab.com/3d-models/a7ae1999b92e4b6db413fcd0860a3a72",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "fungal-golem-forest-mushroom-beast.zip",
+      "sha256": "5e58d02da93547a8219f23d4d5bed869d2c54f17d12a1cf6a2c81c31b5f0cd4d",
+      "uid": "067e5912ebb44c34b1253135d91291f5",
+      "source": "https://sketchfab.com/3d-models/067e5912ebb44c34b1253135d91291f5",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "fur-clad-warlord-3d-model-free.zip",
+      "sha256": "053e3efd3f09b1a0bb60ca80fc808ad6d2f761462c2eae65365dfe8051100ade",
+      "uid": "b232751b699d4cdb8aca4bce1913f7cc",
+      "source": "https://sketchfab.com/3d-models/b232751b699d4cdb8aca4bce1913f7cc",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "game-ready-low-poly-tactical-character.zip",
+      "sha256": "7b92260a466f8c803e9b548e5b2212f59256011f6f93e7d5556d9fee3879027d",
+      "uid": "68213c7d97a04b1b963599180210f5bd",
+      "source": "https://sketchfab.com/3d-models/68213c7d97a04b1b963599180210f5bd",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "hit2-female-swordsman.zip",
+      "sha256": "1972abefecd12d7e8de0cfb339ec3c9e1da52de30807b4abb609e699dc0165fd",
+      "uid": "bfc0c40414ce4e37bea0567ce4a36792",
+      "source": "https://sketchfab.com/3d-models/bfc0c40414ce4e37bea0567ce4a36792",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "hit2-hundra-high-poly.zip",
+      "sha256": "cc206f1b225821a465c6358b9d8d95edc9b09eadf34cc741c8c34740f7e02cd6",
+      "uid": "5c7189bc29444fb9ad3c5a32ccde0d44",
+      "source": "https://sketchfab.com/3d-models/5c7189bc29444fb9ad3c5a32ccde0d44",
+      "matchBasis": "unique exact filename/title match; geometry comparison unavailable or different"
+    },
+    {
+      "file": "holy-knight-lady-character-hyper3d-vs-supavoxel.zip",
+      "sha256": "2f5cc6376d7a15abd97ee95c15a82fca1e47eac80540b36d7db3e265c7a4c2f4",
+      "uid": "d121abbe19c244e8aa3573a812e00492",
+      "source": "https://sketchfab.com/3d-models/d121abbe19c244e8aa3573a812e00492",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "hooded-shadow-assassin.zip",
+      "sha256": "0dbc44b9fbb2177b3711203bec4051a7700e7b1614a68d295ec4ce28596215bd",
+      "uid": "d3d3c1efefa34f95a0b0ebc0dbae620d",
+      "source": "https://sketchfab.com/3d-models/d3d3c1efefa34f95a0b0ebc0dbae620d",
+      "matchBasis": "title/filename context plus matching packaged triangle count; unique matching animation count and downloadable licensed page"
+    },
+    {
+      "file": "kindred-league-of-legends-rigged.zip",
+      "sha256": "042fb0abf61a77b23a782eabe8af9a6fe081c2422d5656746fb8761ecf880344",
+      "uid": "06a32da82b0441c39950296315307400",
+      "source": "https://sketchfab.com/3d-models/06a32da82b0441c39950296315307400",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "knight-with-spear-and-shield.zip",
+      "sha256": "565906ccb440f9e91c2bed726dc6cc41ffaa9a4a078817593b70a726c1d85baf",
+      "uid": "f38944bdd22b45b5aad63ea553b2d8f2",
+      "source": "https://sketchfab.com/3d-models/f38944bdd22b45b5aad63ea553b2d8f2",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "knight.zip",
+      "sha256": "bd50d24d8c0b0ccf111f2d3bd71006b62f8a0856a6e4afdfe0a0f5c036d947e2",
+      "uid": "739ae7bc5a99465aa753e3cdb7e916d4",
+      "source": "https://sketchfab.com/3d-models/739ae7bc5a99465aa753e3cdb7e916d4",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "lizardman.zip",
+      "sha256": "f36158499e09091aba6b1f9fa43cb898202bf0ca746e97c80eb871f85b4276a8",
+      "uid": "a710eb3eaeab4200a2ff83abc9b0c4db",
+      "source": "https://sketchfab.com/3d-models/a710eb3eaeab4200a2ff83abc9b0c4db",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "low-poly-lion-with-wings-warrior-character-model.zip",
+      "sha256": "3b9cbe1c7c61a157fc78fa1b40a48ccc2e6e0da8404abaa78cf90ffa79a8f95b",
+      "uid": "b9369e4bec8d4bc295b71c8468caa8da",
+      "source": "https://sketchfab.com/3d-models/b9369e4bec8d4bc295b71c8468caa8da",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "low-poly-monster-dragon-realistic.zip",
+      "sha256": "d3ffc00a2a6fa3fcaef86c53913d1fdb822b1f50980708cbb331b528dba0386a",
+      "uid": "80b61be8006840918e70a83b96568da0",
+      "source": "https://sketchfab.com/3d-models/80b61be8006840918e70a83b96568da0",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "low-poly-owl-warrior-character-3d-model-free.zip",
+      "sha256": "f1a2f236c92cfa73c4f7646c49e36a7662fea8f35e46b2eb414578b926f07e30",
+      "uid": "8aaaecbf6774423a96feffc8dcc8e4e6",
+      "source": "https://sketchfab.com/3d-models/8aaaecbf6774423a96feffc8dcc8e4e6",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-civilian-3.zip",
+      "sha256": "787a7fbfef67d7239f080cffdfe81020805c13a416a7c0ff9542b46146a92c22",
+      "uid": "d99ca22f06134e8dab28fdfa75d87f31",
+      "source": "https://sketchfab.com/3d-models/d99ca22f06134e8dab28fdfa75d87f31",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-crusader-knight-clad.zip",
+      "sha256": "e66036d28a252ff0a3c7506f157c4ca3e7c38585a97af39fd63c88a0ed69556d",
+      "uid": "bee0613121b94d15889272c36582e153",
+      "source": "https://sketchfab.com/3d-models/bee0613121b94d15889272c36582e153",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-guard.zip",
+      "sha256": "8bb80c79e0149620e590d1c2d1335e4c53d2c169318fd4c966a5f766578aba01",
+      "uid": "ca548172f0984660bc4213b9404284fa",
+      "source": "https://sketchfab.com/3d-models/ca548172f0984660bc4213b9404284fa",
+      "matchBasis": "Exact title and matching original texture-name set; RAR geometry remains unparsed"
+    },
+    {
+      "file": "medieval-house (1).zip",
+      "sha256": "00acf540db61a5ea3c371015fbfa0e01ecbd666d274ce9468fa1ab52dac68bee",
+      "uid": "f2c018138bbb4401b62069344ce8b27f",
+      "source": "https://sketchfab.com/3d-models/f2c018138bbb4401b62069344ce8b27f",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-house.zip",
+      "sha256": "f7fc2b091b7f4f2879c8b96208d00e0fdd4c4fe2b3303cc850b917939f0cec12",
+      "uid": "fd5a74391db84c93b4cce687a8464e7b",
+      "source": "https://sketchfab.com/3d-models/fd5a74391db84c93b4cce687a8464e7b",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-knight-model.zip",
+      "sha256": "bc50bb0ff20a4a2a415151a977d1a1b599d19cc867ce07bfe2750104ad0acac0",
+      "uid": "6a88b93faaff4d5bbdd89f80b8a025a7",
+      "source": "https://sketchfab.com/3d-models/6a88b93faaff4d5bbdd89f80b8a025a7",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-man.zip",
+      "sha256": "0c8800dfaf7a6beb241076d0445faf737ab085fe3e3a998586971d34afffe5a2",
+      "uid": "07794757add64fda8dd7d7cc35dd7040",
+      "source": "https://sketchfab.com/3d-models/07794757add64fda8dd7d7cc35dd7040",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "medieval-stone-well-game-prop.zip",
+      "sha256": "dd30ff5e9e4339db19aa50ddde0520c8c11c255368063e8f5f40d42ed5ac9ed7",
+      "uid": "a0ca279889b84afb9f24b88bff9c6860",
+      "source": "https://sketchfab.com/3d-models/a0ca279889b84afb9f24b88bff9c6860",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "midnight-outlaw-shadow-character-3d-model-free.zip",
+      "sha256": "99107451b342e03d93ad2adb5f3d3a1a20507605216b22689048783d5cc3a026",
+      "uid": "e8b29a6c85164173941569cb1aca6d9f",
+      "source": "https://sketchfab.com/3d-models/e8b29a6c85164173941569cb1aca6d9f",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "mountain-dragon.zip",
+      "sha256": "84552efaa4fd5421813954568a27c7e5214389aa61a61177adfbf7729451a383",
+      "uid": "0a0665396f634b0e9d0872720087f52c",
+      "source": "https://sketchfab.com/3d-models/0a0665396f634b0e9d0872720087f52c",
+      "matchBasis": "title/filename context plus matching packaged triangle count; unique matching animation count and downloadable licensed page"
+    },
+    {
+      "file": "mushroom-warrior.zip",
+      "sha256": "5f1e4bcbc5c732b21349b76f16ac6295ae502f474407afaafa4520b4bd3591c5",
+      "uid": "143bf8087cac498bb8e99c21b961e972",
+      "source": "https://sketchfab.com/3d-models/143bf8087cac498bb8e99c21b961e972",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "ouroboros-the-calm.zip",
+      "sha256": "656048fff56942b8f02cd6ad3df493579e25203d59c264f1a09b8490c4d5726d",
+      "uid": "385d5d29f006413ea15d14f838b93bea",
+      "source": "https://sketchfab.com/3d-models/385d5d29f006413ea15d14f838b93bea",
+      "matchBasis": "unique exact filename/title match; geometry comparison unavailable or different"
+    },
+    {
+      "file": "plague-doctor-bone-mask-warding-cane.zip",
+      "sha256": "c7f415265dea085126d624610cb45f8dd36fe7f4f99cc3160407802caa83a8d7",
+      "uid": "6e708e9717644a26b918a501043248e8",
+      "source": "https://sketchfab.com/3d-models/6e708e9717644a26b918a501043248e8",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "redhead-anime-swordswoman-png-to-stl-supavoxel.zip",
+      "sha256": "a0f670940ad6f8f42a0f0414e81ad64089e42e40691659f4e013a93efef2cde0",
+      "uid": "62e93c4c3a88459993f97d754daf7759",
+      "source": "https://sketchfab.com/3d-models/62e93c4c3a88459993f97d754daf7759",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "samurai-cat-tripo-3d-vs-meshy-supavoxel.zip",
+      "sha256": "eacddc4806e3b7e471a258c938af46e9042b37d4a4b1adb168b1c35c8a8b5da2",
+      "uid": "5d03a814cc5c43e7b9a28b579962c17c",
+      "source": "https://sketchfab.com/3d-models/5d03a814cc5c43e7b9a28b579962c17c",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "skeletal-lich-king-in-bone-crown-and-robes.zip",
+      "sha256": "09730c7ddbf162416c8cb582c3ef1cb29d6696cb5722e9c148f65646c15a8765",
+      "uid": "0fa4c6a200444b4abc108a9b0b9edae6",
+      "source": "https://sketchfab.com/3d-models/0fa4c6a200444b4abc108a9b0b9edae6",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "skeleton-animated.zip",
+      "sha256": "eafd50ee0694660586e70a4bc03833f14aa9bd4a445768a53af8b66b9188e232",
+      "uid": "bd1de4a8153a44fe93e728ca8e06701b",
+      "source": "https://sketchfab.com/3d-models/bd1de4a8153a44fe93e728ca8e06701b",
+      "matchBasis": "Normalized exact title, matching 1118 vertices and one animation; packaged triangulation differs"
+    },
+    {
+      "file": "skeleton-mage-glowing-crystal-staff.zip",
+      "sha256": "2c4b446aa3ca1ad5857d1bd33ea8e7913d35c1a990d78a0f0e5bacaefcf17935",
+      "uid": "372ec5a97f1e4ccea4a4f0bdbed4ab08",
+      "source": "https://sketchfab.com/3d-models/372ec5a97f1e4ccea4a4f0bdbed4ab08",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "treeman.zip",
+      "sha256": "f08fd9a30a7357eccf2a9bccd0c0bfdba5f7967d85ce69642e5fb79114ceed35",
+      "uid": "e3a094316a8c4820a94d271afffe497c",
+      "source": "https://sketchfab.com/3d-models/e3a094316a8c4820a94d271afffe497c",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "truffle-man.zip",
+      "sha256": "facc30bd122596a498ba531bd3fb84c211cb47765ed498caeaba6071fd1552c3",
+      "uid": "e41c6781e4854a1fbe5cdf24a0029aab",
+      "source": "https://sketchfab.com/3d-models/e41c6781e4854a1fbe5cdf24a0029aab",
+      "matchBasis": "title/filename context plus matching packaged triangle count; only currently downloadable licensed match"
+    },
+    {
+      "file": "tyranno.zip",
+      "sha256": "c3f4828cd614c686b85ce2a5ecfeea32b73be50068026343daaf0b8585e35b01",
+      "uid": "9a6f0762fd5c4a99b51712863dd10707",
+      "source": "https://sketchfab.com/3d-models/9a6f0762fd5c4a99b51712863dd10707",
+      "matchBasis": "title/filename context plus matching packaged triangle count; unique matching animation count and downloadable licensed page"
+    },
+    {
+      "file": "viking-house.zip",
+      "sha256": "4470d940a6d1df787d0e5cf9ee7e52e2641931171dcca64867006deb4163a195",
+      "uid": "1eb39d129c6f4f9dbc3e86ec9b000ebe",
+      "source": "https://sketchfab.com/3d-models/1eb39d129c6f4f9dbc3e86ec9b000ebe",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "viking-shieldmaiden-3d-model.zip",
+      "sha256": "35244cf52dde43f5add246989bd20b54afc5f802b4bba2e6f5e86b26a165293b",
+      "uid": "f27776c1d5154f189cec86638bec6e8e",
+      "source": "https://sketchfab.com/3d-models/f27776c1d5154f189cec86638bec6e8e",
+      "matchBasis": "title/filename context plus matching packaged triangle count"
+    },
+    {
+      "file": "warrior-girl.zip",
+      "sha256": "68f348d2a0581ff2b4c8287a66501921ef44b54a9a7f9904b9c0baff5ba77457",
+      "uid": "1581a536b8984935a31891dc685e8376",
+      "source": "https://sketchfab.com/3d-models/1581a536b8984935a31891dc685e8376",
+      "matchBasis": "Matching texture set/identifiers with the exact GLB source; paired Alembic/GLB variants"
+    },
+    {
+      "file": "warrior_girl.glb",
+      "sha256": "e5410a13269239996cd0044b331977c379e6e163d751e01e8e4d3e6ed8b5dcc0",
+      "uid": "1581a536b8984935a31891dc685e8376",
+      "source": "https://sketchfab.com/3d-models/1581a536b8984935a31891dc685e8376",
+      "matchBasis": "Exact Sketchfab source URL embedded in packaged glTF asset metadata"
+    },
+    {
+      "file": "wolf-guy.zip",
+      "sha256": "18b12cdf34e0feeec76f9a970a3adbabc965eff738850ef6d4458b311202bb1a",
+      "uid": "ae247d7e082746d69b47cd617bd2fd32",
+      "source": "https://sketchfab.com/3d-models/ae247d7e082746d69b47cd617bd2fd32",
+      "matchBasis": "unique exact filename/title match; geometry comparison unavailable or different"
+    }
+  ]
+}
