@@ -1,6 +1,6 @@
 # DiceFree — Tier II Priest — Design Interview
 
-**Status:** DESIGN INTERVIEW IN PROGRESS — Round 1 approved direction recorded; Round 2 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
+**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–2 recorded; Round 3 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
 **Started:** 2026-10-17  
 **Repository branch:** `integration/world1-foundation`  
 **Design owner:** User; interview and documentation in five-question rounds, then the other DiceFree chat can implement.
@@ -26,7 +26,7 @@
 | Role | **CONFIRMED PRIEST-001:** general-purpose **hybrid healer** at Tier II, mixing direct healing, shields, periodic healing and meaningful damage; solo capable. Distinct specializations are for potential Tier III Priest advancements. | Not a narrowly specialized Tier II healer. Exact relative throughput open. |
 | Weapons | **Staff** is the intended Priest weapon family. | Whether staff is strictly required, offhands, other weapons and initial gear remain open. |
 | Attributes | **CONFIRMED PRIEST-005:** **SPR is Priest's primary attribute for both healing AND damage**. Exact SPR coefficients, INT secondary benefits, level-1 base and per-level growth are **OPEN**. | This explicitly replaces the older split suggestion of SPR healing / INT damage. |
-| Resources | **Mana + Grace**. Every spell costs Mana even when Grace-empowered. **CONFIRMED PRIEST-003–004:** both effective damage and healing generate Grace (healing earns a bit more), and **Grace is an upgradeable passive with a manually activated use** that empowers the **next spell**, rather than triggering automatically. | Gain math, exact spending, cooldown/timer and spell-by-spell bonuses remain **OPEN**. |
+| Resources | **Mana + Grace**. Every spell costs Mana even when Grace-empowered; Grace is a **passive with manual active use** that empowers the next spell. **Round 2:** one Grace point per successful spell, no decay, no saved Grace on fresh game/load, requires a full meter (about 10 spells at first rank, fewer at higher Grace ranks), consumes all Grace per empowered cast. | **OPEN CONFLICT:** Round 1 said healing earns slightly more Grace; Round 2 said 1 per successful spell. Confirm whether the newer rule replaces the earlier advantage. Exact rank thresholds and activation semantics still open. |
 | Without Grace | Priest retains usable damage/healing spells paid for with Mana; cannot require Grace for its basic function. | Specific ranks/ability gating open. |
 | Skill system | Current flexible spell/action system accepts variable mixed active/passive skill counts; no universal fixed kit shape. No Tier II ultimate. | Existing class system is implemented for Mage, but Priest remains design-only. |
 | Mentor | The **Trimery healer** is intended as Priest trainer and future quest giver. | Current healer implementation is only a free HP-service placeholder. |
@@ -36,40 +36,61 @@
 
 As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world has an ivory/blue **Trimery Priest placeholder** close to the village green that offers **free HP treatment to living players** via interaction. It does not refill Mana/Grace, resurrect, clear statuses, start/complete advancement, or unlock Priest. See `docs/TRIMERY_HEALER_2026_10_17.md` for scoped validation. This NPC is a future mentor candidate, not the implemented Priest class.
 
-## Confirmed Tier II Priest kit — Round 1
+## Confirmed Tier II Priest kit — updated through Round 2
 
-**CONFIRMED PRIEST-002:** **Four standard active spells plus one hybrid passive/active Grace skill**, whose precise formulas, ranks, level unlocks and resource costs are still **OPEN**. This selection supersedes both earlier four-spell proposals. Do **not** silently add Pilgrim's Step, Judgment, a separate Mend, a different Sanctuary or separate Shared Light passive without a later user decision.
+**Four standard spells plus one hybrid passive/active Grace skill** — **CONFIRMED PRIEST-002**. Do **not** silently add Pilgrim's Step/dash, Judgment, Mend, Sanctuary, Shared Light or a Tier II ultimate. The proposed mechanics below are authoritative where labeled **CONFIRMED**; starting values, exact ranks, spell range, magnitudes and some empowerment decisions remain **OPEN**.
 
-| Skill | Element | Confirmed effect | Still to decide |
+| Skill | Element | Confirmed behavior | Unresolved questions |
 | --- | --- | --- | --- |
-| **Holy Light** | **Light** | **Single targeted spell:** cast on a friendly target to **heal**, or on an enemy to deal **Light-element damage**. | Cast time, range, cooldown, Mana cost, magnitude, interaction with Grace, self-portrait targeting. |
-| **Light Burst** | **Light** | **Targeted area-of-effect** spell that **heals allies and deals Light-element damage to enemies**. | Ground/targeted anchor, radius, whether both factions affected simultaneously, cast/cooldown, falloff, Mana cost, Grace effect. |
-| **Aegis** | **Light** | **Protective Light-element shield**. | Self/ally target eligibility, amount, damage filters, duration, shield priority, Mana cost, cooldown, Grace effect. |
-| **Working name: periodic Light spell** | **UNDECIDED** (spell element not explicitly stated by user) | **Single-target dual-function spell:** applies a **damage-over-time (DoT)** effect to an enemy or a **heal-over-time (HoT)** effect to an ally. | Name, whether Light element, tick rate, duration, refresh/stacking, damage/heal, targeting, Mana and Grace effects. |
-| **Grace** | **Resource-driven passive + manual active use** | **Only one skill** with both a **passive** role (generate Grace from healing and damage, higher gain for healing) and a **clickable active action** to **empower the next spell**. | Amount earned per action versus proportional throughput; decay, cap, spending, empowered bonus, how long it is queued, rank effects. |
+| **Holy Light** | **Light** | One-target heal on ally/self; Light damage on hostile. **Round 2:** start balancing with a **longer cooldown and strong SPR scaling**, to adjust in testing. **Grace empowerment adds a chain bounce** (not merely a raw-number bonus). | Cooldown/damage/heal, cast time, number and radius of bounces, whether subsequent targets can mix ally and enemy modes, bounce falloff and individual hit eligibility. |
+| **Light Burst** | **Light** | **Select a character** (ally, self or enemy, subject to normal targeting eligibility) and **center one instant AoE burst on that character**, healing allies and damaging enemies in the area. **Grace empowerment changes the cast to THREE bursts, ONE SECOND apart**. | Radius, whether area stays at cast-start position or follows target between pulses, AoE target cap, whether pulses may hit same unit multiple times and resource/Grace generation per cast. |
+| **Aegis** | **OPEN: Light, Nature or Ice** | **Elemental protective shield.** Round 2 explicitly **reopened its element selection** among Light/Nature/Ice. User expects elemental shields to be more efficient against matching damage and less efficient against mismatched damage. | Choose element, shield HP, exact matching/nonmatching efficiency, self/ally targeting, duration, cooldown, how Grace empowerment changes it. |
+| **Unnamed periodic spell** | **Nature favored, not final** | Single-target spell: **Nature-themed damage-over-time (DoT) on an enemy** or **Nature-themed heal-over-time (HoT) on an ally** is the user's **new preferred direction**. | Final name/element, tick duration/frequency, stacking/refreshing, direct hit or pure periodic, Grace-empowered version and resistance/heal interaction. |
+| **Grace** | **Passive with active activation** | Generate Grace from successful spells. **Round 2:** **one Grace point per successful spell**; meter requires **about ten spell casts at rank 1**, with fewer casts needed at higher ranks. **No decay**; **starts at zero when loading game** (no persistence across saves/game sessions). Manually use Grace when meter is **FULL** to empower the next spell; an empowered successful cast **consumes all Grace**. | Exact rank threshold table/cap, successful-spell definition (healing vs damage and overheal), previous healing-bonus conflict, empowerment cancel/failure behavior, mana charge for activating Grace itself and spell-by-spell empowerment benefits. |
 
-**Terminology/targeting acceptance requirements:**
-- Holy Light chooses heal or damage **based on valid target allegiance**, not randomly. Target-friendly/self and target-hostile modes must preserve shared target confirmation and ability restrictions.
-- Light Burst is **targeted AoE**, not a fixed caster-centered Holy Nova unless the user explicitly changes the target type.
-- The dual DoT/HoT spell is a single skill with different friendly/enemy outcomes, not two independent skill-point/rank slots.
-- Aegis is a **Light-element protective shield**; damage channel and element eligibility are not implicitly decided by this wording. Use the shared shield priority/mitigation system when designed.
-- The Grace skill is both a **passive** and an **active use**. Ordinary class/provider UI must make its passive description and active activation/armed state readable. Manual empowerment should never trigger automatically merely because Grace is high.
-- These four spells and the manual Grace activation remain **Mana-costing active effects where applicable**, but whether pressing Grace itself costs Mana is **OPEN**; prior blanket "every active skill costs Mana" was intended for spells and must not inadvertently force a Mana cost on passive Grace activation without asking.
-- **SPR scales both healing and spell damage.** No INT-only or healing SPR/damage INT split imported from Mage.
-- Without Grace, offensive and healing spells must remain viable. No separate Priest resurrection spell was selected in this round.
+### Holy Light: Grace chain behavior
 
-## Mana and Grace design — Round 1 decisions
+**CONFIRMED PRIEST-006:**
+- Keep Holy Light as one friendly/hostile-targeting Light-element spell, with normal SPR scaling.
+- Initially balance it around a **meaningful/long cooldown and strong healing and damage scaling**; numerical values **are intentionally provisional**.
+- **Grace adds chain bounces**. An empowered friendly-start cast should remain a legitimate heal and a hostile-start cast legitimate damage. Whether chains remain within one allegiance or can heal/damage mixed nearby units is **OPEN** and must be chosen by user. The number of bounces and falloff are also **OPEN**.
+- The chain is one spell cast for Grace generation unless later explicitly changed.
 
-**Mana**
-- Existing approved direction: **every actual Priest spell costs Mana**, including empowered versions; Grace empowerment does not replace or waive Mana costs.
-- Mana pool, regen, per-spell costs and whether activating the Grace passive has any Mana cost are **OPEN**.
+### Light Burst: Grace triples the event
 
-**Grace**
-- **CONFIRMED PRIEST-003:** gained from **both healing and damaging**, with **healing generating somewhat more Grace** than damage. Neither the relative gain ratio nor whether gain is per effective cast or actual HP throughput has been decided.
-- **CONFIRMED PRIEST-004:** the **Grace passive is also an active skill**; pressing/using it **arms an empowerment on the next spell**. This is deliberate user control, not automatic spending at a threshold.
-- Earlier agreement preserved: Grace can empower **both damage and healing**; an empowered spell **still costs its normal Mana**.
-- **OPEN:** Grace meter cap, gain/decay, talent ranks, cast frequency controls, how much Grace is consumed, whether the activated state times out, self-cast/target-cancel effects and separate empowerment effects for each spell.
-- Safeguards proposed but not yet locked: no free Grace from pure overheal, no generation on missed/invalid/dummy actions, no recursive generation from a spell that just consumed Grace, and no per-target multiplication for one AoE cast. Confirm with user before implementation.
+**CONFIRMED PRIEST-007:**
+- Target an **individual character**, not the ground, to determine the initial AoE center.
+- Normal mode delivers **one instant burst**, healing eligible friendly targets and damaging eligible enemies within range.
+- Empowered by Grace, deliver **three pulses, one second apart** (at cast time, +1s and +2s unless user chooses an alternate timing). Three events are a **single empowered cast**.
+- **OPEN**: lock AoE at the chosen initial location or follow a moving target; hits/heals per pulse; interruption/cancellation after first pulse; whether secondary pulses generate further Grace (anti-multiplication is recommended).
+
+### Aegis and existing elemental-shield architecture
+
+**CONFIRMED PRIEST-008 (intent):** This must be an **elemental shield**. The choice between **Light, Nature or Ice is unresolved**. The previously provisional Light element is **no longer locked**.
+
+**Verified in `docs/STATS_AND_DAMAGE.md` sections "Shields and absorbs" and "Shield resolution order":** the DiceFree shared shield design supports per-element efficiency multipliers, total capacity, eligibility, expiration, priority and overflow, with specific shields normally resolving before generic shields and damage normally mitigated before shields. However, **there is no documented universal fixed numeric rule** such as matching 1 shield HP per damage versus 2 or 3 against mismatched elements.
+
+The user's illustrative concept is compatible with the framework:
+- Matching element: for example, **1 shield HP consumed to prevent 1 damage**.
+- Nonmatching element: for example, **2 or 3 shield HP consumed to prevent 1 damage**.
+- These are **examples, not approved Aegis numbers**. The shield must be able to stop both types of eligible damage at different efficiencies if so designed.
+- **OPEN**: element choice, exact per-element costs, grace empowerment, shield stacking/refreshing and self/ally targeting.
+
+**Important elemental-healing interaction:** If the periodic Nature HoT is defined as elemental healing, it inherits the global elemental-healing rule (matching target resistance can increase or reduce healing), not a new Priest-specific formula.
+
+### Grace: generation, threshold, activation, reset
+
+**CONFIRMED PRIEST-009/010 insofar as details below:**
+- A **single skill** acts as both the Grace generation passive and the **manual empowerment action**.
+- **Round 2:** **1 Grace per successful spell cast** (whether friendly or hostile); the desired **first-rank threshold is approximately 10 spells**, and higher Grace skill ranks reduce that number.
+- **No natural decay**. Do not preserve current Grace points in saves; **every game load starts at 0 Grace**.
+- You may manually activate Grace **only at full Grace** to empower the **next spell**. That empowered spell consumes **the whole filled meter**. Every actual Priest spell still consumes Mana, even when empowered.
+- **Potential inconsistency to clarify:** Round 1 specified healing produces **a bit more Grace** than dealing damage, but Round 2 now specifies one Grace point per successful spell without distinguishing healing from damage. **Do not silently grant an extra point for healing**, and do not declare the earlier preference formally abandoned until user confirms.
+- **Proposed protections, not new user decisions:** canceled/invalid targets should not spend Grace, damage/heal ticks and triple-pulse Light Burst should not multiply Grace earned per single cast, and effective overhealing shouldn't enable endless Grace farming. Handle Grace consumption on actual successful spell execution, not when starting a target selector.
+
+### Possible Tier III directions — ideas only
+
+The user has floated a future **Druid or Nature-focused healer** (stronger HoTs and natural magic) and a **Hierophant / Prophet or Light-focused healer**. These are **not approved class IDs or tree edges**; they are inspiration for keeping Tier II Priest versatile and mixing Light + potentially Nature magic. Other paths remain possible.
 
 ## Advancement concept — NOT APPROVED
 
@@ -83,17 +104,25 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 - **PRIEST-004 — CONFIRMED:** manually **activate Grace** to empower the next spell; effect/cost amount and timing **OPEN**.
 - **PRIEST-005 — CONFIRMED:** **SPR is the main scaling attribute for both damage and healing**. User did not separately confirm staff equipment restrictions or the autoattack element in this answer; keep them **OPEN** rather than assuming.
 
-## Round 2 — five questions (awaiting answers)
+## Round 2 — answers recorded on 2026-10-18
 
-**PRIEST-006 — Holy Light.** For this **one-target ally heal / enemy Light damage** spell, do you want a **quick direct cast with a cooldown** or a **slower hard cast with a bigger effect**? Should an empowered Holy Light simply hit/heal harder, or additionally gain a special effect?
+- **PRIEST-006 — CONFIRMED:** initially longer Holy Light cooldown and strong scaling (balance targets, not numerical locks). Grace adds a **chain bounce** as its special effect.
+- **PRIEST-007 — CONFIRMED:** Light Burst AoE centers on a **targeted character**; normal cast is **one instant burst**, Grace version is **three bursts one second apart**.
+- **PRIEST-008 — OPEN element; CONFIRMED directional preference:** Aegis should use **Light, Nature or Ice**, with elemental matching shield efficiency. Shared shield framework supports per-element rates, but **1:1 matching vs 2–3:1 mismatched** are *illustrative possibilities*, not existing universal locked values. Grace's Aegis effect not yet specified.
+- **PRIEST-009 — PREFERRED, NOT FINAL:** Nature-themed dual DoT/HoT fits Tier II Priest and possible future Nature/Druid lineage; final name and element still open.
+- **PRIEST-010 — CONFIRMED:** one Grace point per successful spell; about **ten successful spells** to fill at Grace rank 1, decreasing threshold with higher ranks; **no decay**; **reset Grace to zero on load**; only **fully charged** Grace can be activated; successful next empowered cast **consumes all Grace**. Conflict with earlier higher gain from healing still open.
 
-**PRIEST-007 — Light Burst.** Should you **target a point on the ground** to create a circle that **heals all allies and damages all enemies inside it at the same time**, or target a friendly/enemy unit and center the AoE on that target? Should it be an **instant burst** or a field lasting a few seconds?
+## Round 3 — next five questions (awaiting answers)
 
-**PRIEST-008 — Aegis.** Can Aegis target **yourself and allies**, and should it absorb **all ordinary incoming damage** or only selected damage types/elements? Should it be a fixed-absorb shield that expires, a percentage reduction, or a mix? What should Grace empowerment add to the shield?
+**PRIEST-011 — Aegis element, shield ratios and targets.** Which element should **Aegis** use at Tier II: **Light, Nature or Ice**? Should it protect **self and allies**, and do you like the illustrative efficiency of **1 shield HP per 1 matching-element damage, 2 shield HP per 1 other-element damage**, or prefer **3:1** or a different scheme? What should **Grace-empowered Aegis** do differently?
 
-**PRIEST-009 — The combined DoT/HoT.** What should we **call** the single-target enemy-DoT / ally-HoT spell, and do you want both modes to last the **same duration** and tick at the **same interval**, or to have different patterns? Should the damage and healing both be **Light-element** effects?
+**PRIEST-012 — Grace rank thresholds and healing bonus conflict.** Should Grace rank 1 need **10** successful casts, rank 2 need **9**, rank 3 need **8**, and so on, with some minimum requirement? Does the new **1 Grace per successful spell** replace the earlier "healing gives slightly more Grace," or should healing have another small advantage without raising generation above one per cast?
 
-**PRIEST-010 — Grace's core numbers and activation.** Should Grace generation be **a fixed amount per successful cast** (healing earns more) or **scale with actual damage / HP restored**? Roughly how much Grace can you hold, and should it **decay outside combat**? When you actively press Grace, should it spend **all accumulated Grace** to scale up the next spell, or a **fixed portion/threshold**?
+**PRIEST-013 — Holy Light's empowered chain.** When you empower Holy Light, how many **bounces** should it have, and should a chain **stay friendly if you start on an ally / hostile if on enemy**, or bounce between **both allies and enemies**, automatically healing or harming as appropriate? Should each bounce have **the same strength** or some falloff?
+
+**PRIEST-014 — Light Burst's three pulses.** When its target **moves** after the initial cast, should the second/third pulse **follow that target**, or remain at the **original location**? Can the same ally/enemy be affected by all three pulses? Are you happy treating all three as **one cast for Grace generation**?
+
+**PRIEST-015 — Nature HoT/DoT.** Should we lock the periodic spell's element to **Nature** now? What name would you like (for example *Renewal*, *Verdant Touch* or *Living Bloom*)? Should it tick for the same duration/rate on friends and enemies, and what extra effect should a **Grace-empowered** version produce?
 
 ## Remaining design work (not yet approved)
 
@@ -113,5 +142,10 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 | 2026-10-17 | PRIEST-003 | Both heals and damage generate Grace; healing slightly more | **CONFIRMED**, gain/decay open |
 | 2026-10-17 | PRIEST-004 | Grace manually activated to empower next spell | **CONFIRMED**, cost/bonus open |
 | 2026-10-17 | PRIEST-005 | SPR primary for healing AND damage | **CONFIRMED**, weapon/basic attack not answered |
-| 2026-10-17 | PRIEST-006–PRIEST-010 | Round 2 questions asked | **AWAITING USER** |
+| 2026-10-18 | PRIEST-006 | Holy Light starts long-CD/strong SPR; Grace causes chain bounces | **CONFIRMED**, bounce rules open |
+| 2026-10-18 | PRIEST-007 | Light Burst centered on chosen character; instant normally, three bursts 1s apart with Grace | **CONFIRMED**, pulse movement/targets open |
+| 2026-10-18 | PRIEST-008 | Aegis element reopened to Light/Nature/Ice; elemental shield efficiency preference | **OPEN element/ratios**; system support verified |
+| 2026-10-18 | PRIEST-009 | Nature-themed single-target DoT/HoT suggested; Druid/Nature and Hierophant/Prophet/Light later ideas | **PREFERRED**, not final |
+| 2026-10-18 | PRIEST-010 | 1 Grace/successful spell; ~10 casts initially, fewer at higher ranks; no decay/persistence; full meter/consumes all | **CONFIRMED**, rank thresholds + healing bonus conflict open |
+| 2026-10-18 | PRIEST-011–PRIEST-015 | Round 3 questions asked | **AWAITING USER** |
 
