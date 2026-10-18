@@ -221,6 +221,17 @@ This remains true when a much later-tier Echo-wide event unlocks an earlier-tier
 
 If a class save is permanently deleted, recreate it by advancing into it again from an appropriate earlier class; Echo-wide discovery and milestones remain intact.
 
+### Universal rank-zero and ordinary basic-attack rules (user correction 2026-10-18)
+
+**Approved design direction for ALL classes and tiers:**
+
+- A newly created class manifestation begins with **every class ability/passive at rank 0**, even if that ability is eligible to learn at level 1. Do **not** automatically grant free rank-1 starter abilities.
+- Every new manifestation starts at **class level 1 with exactly one unspent class skill point**; gaining levels grants more skill points under its class rules (the current common pattern is one per level).
+- A player may spend that point on an eligible rank-0 skill to learn rank 1. Other skills remain rank 0 until purchased; class-specific level requirements may delay eligibility. Do not equate a visible locked rank-0 skill with an already learned skill.
+- **All ordinary/basic/autoattacks deal normal, non-elemental damage**; do not implicitly make them Fire for Mage, Light for Priest, etc. A class's weapon, reach, animation, attack channel (Physical/Magical) and primary-stat scaling are independent design choices. Explicitly authored equipment/abilities may separately add elemental damage where appropriate.
+- This **supersedes** prior prototype-level choices such as the Mage design's **free learned level-1 ability ranks**. Existing gameplay code and current class specs may still implement those legacy choices; treat that as **an implementation discrepancy to reconcile in the development chat**, not as a claim that every live class already conforms.
+- This is a rules clarification only. No Unity code, player save or balance was modified by this documentation change.
+
 ### Tier-1 skill-rank pattern
 
 Current Tier-1 direction:
