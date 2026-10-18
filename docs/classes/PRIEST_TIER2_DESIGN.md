@@ -1,6 +1,6 @@
 # DiceFree — Tier II Priest — Design Interview
 
-**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–4 recorded (Q19 open); Round 5 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
+**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–5 recorded; Round 6 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
 **Started:** 2026-10-17  
 **Repository branch:** `integration/world1-foundation`  
 **Design owner:** User; interview and documentation in five-question rounds, then the other DiceFree chat can implement.
@@ -24,33 +24,34 @@
 | --- | --- | --- |
 | Class name/tier | **Priest, Tier II**, advancing from **Magically Touched Novice** at its level-30 quest threshold. | Quest itself not yet approved/implemented. |
 | Role | **CONFIRMED PRIEST-001:** general-purpose **hybrid healer** at Tier II, mixing direct healing, shields, periodic healing and meaningful damage; solo capable. Distinct specializations are for potential Tier III Priest advancements. | Not a narrowly specialized Tier II healer. Exact relative throughput open. |
-| Weapons | **Staff** is the intended Priest weapon family. | Whether staff is strictly required, offhands, other weapons and initial gear remain open. |
+| Weapons | **CONFIRMED PRIEST-023:** Priest uses **staffs only**, with exceptions for items that explicitly have **all-classes** usability. Ordinary autoattacks remain normal/non-elemental and **never generate Grace**. | Staff combat reach/visual/basic attack scaling remains a separate question; the user did not choose an inherent Light basic attack. |
 | Attributes | SPR primary for healing **and** damage. User delegated precise stat distribution. **Provisional Tier II Priest baseline:** VIT 12, STR 5, AGI 6, INT 11, SPR 18; per-level growth +1.5/+0.5/+0.75/+1.5/+3 respectively. | Playtest starting values; not exact numbers dictated by user. Tier II stats/growth exceed Tier I overall, on par with Tier II Mage. |
-| Resources | Mana and Grace. **Newly confirmed**: 2 Grace from successful zero-overheal heals, 1 from other successful spells (including overheals/full-HP healing); Grace rank 1–5 needs 10/9/8/7/6 points respectively; no decay, starts 0 on load; full meter manually empowers next cast. | Partial mechanics/cancel handling still open. |
+| Resources | **Mana + Grace**. Mana management should be Priest's **main sustained-healing limitation**; initial Mana costs are comparatively low and **grow with progression**; spells begin with comparatively long cooldowns that **decrease on rank investments**. Grace generates 2 on zero-overheal heals, 1 on other successful spell casts; rank 1–5 thresholds 10/9/8/7/6; no decay, reset on load. | Exact starting Mana/costs, what 'level' scales costs, regen, cooldown table, cancellation/recursion details remain open. |
 | Without Grace | Priest retains usable damage/healing spells paid for with Mana; cannot require Grace for its basic function. | Specific ranks/ability gating open. |
-| Skill system | Current flexible spell/action system accepts variable mixed active/passive skill counts; no universal fixed kit shape. No Tier II ultimate. | Existing class system is implemented for Mage, but Priest remains design-only. |
+| Skill system | **Five spell actives** (Holy Light, Light Burst, Aegis, Wild Growth, low-tier Revive) **plus Grace** (one passive with manual empowerment activation). All abilities begin at rank **0**; new Priest starts level 1 with exactly **one skill point**. **Grace rank 1 unlocks at Priest level 5**, upgrading every five Priest levels through rank 5 at level 25. No Tier II ultimate. | Rank/availability gates for other spells and Revive still open. |
 | Mentor | The **Trimery healer** is intended as Priest trainer and future quest giver. | Current healer implementation is only a free HP-service placeholder. |
-| Resurrection | Town healing, a resurrection stone and any future Priest **combat resurrection** are different systems; a resurrection spell is **not** automatically in Priest's starting kit. | Future resurrection direction: expensive, long cast, stacking sickness; requires explicit design. |
+| Resurrection | **CONFIRMED PRIEST-022:** Priest has a **low-tier Revive** spell: **8-second cast**, can begin only if current Mana is **strictly greater than 50% of max Mana**, and **uses all the Mana Priest has at the time of payment**. | Mana payment timing, interruption consequences, revive HP, range/target rules, skill unlock level and Resurrection Sickness application/open numeric details still require decisions. |
 
 ## Present in the game — separate from Priest class
 
 As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world has an ivory/blue **Trimery Priest placeholder** close to the village green that offers **free HP treatment to living players** via interaction. It does not refill Mana/Grace, resurrect, clear statuses, start/complete advancement, or unlock Priest. See `docs/TRIMERY_HEALER_2026_10_17.md` for scoped validation. This NPC is a future mentor candidate, not the implemented Priest class.
 
-## Confirmed Tier II Priest kit — updated through Round 3
+## Confirmed Tier II Priest kit — updated through Round 5
 
-**Confirmed roster:** four standard spells and one manually activated/passive Grace skill. No additional routine abilities or ultimate are approved. Priest scales **both healing and damage from SPR**.
+**Confirmed roster:** **five standard spells** (including the user-added low-tier **Revive**) plus **one manually activated/passive Grace skill**. No Tier II ultimate. Priest scales **both healing and damage from SPR**; the **basic attack is normal, non-elemental and gives no Grace**, and **staffs are its exclusive class weapon** except explicitly all-classes equipment. Start new Priest with all skills **rank 0**, one spendable point at level 1. Only **Grace's unlock table** is currently specified (level 5 onward).
 
 | Ability | Element | CONFIRMED mechanics | OPEN balance/edge cases |
 | --- | --- | --- | --- |
-| **Holy Light** | Light | Single target: heal friendly/self, damage enemy. Strong scaling and meaningful longer cooldown as initial balance direction. With Grace: **one chain bounce per Holy Light skill rank**; can bounce between **allies and enemies**; every successive bounce is **10% less effective**. | Damage/healing, cooldown, jump range, repeat targets, 10% falloff mathematics (additive vs multiplicative). |
+| **Holy Light** | Light | Single target: heal friend/self or damage foe. Strong scaling and long initial cooldown; **cooldown decreases with invested ranks**. Grace adds **one bounce per Holy Light rank**, visiting allies **and** enemies, can **revisit previous targets** and **prioritizes allies with lowest health**. Each bounce is **×0.9** effectiveness relative to the previous hit: 100% → 90% → 81% → 72.9%… | Magnitude, cooldown/rank reductions, bounce search radius, healing priority uses lowest absolute vs percentage HP (OPEN), ties and hostility fallback. |
 | **Light Burst** | Light | Instant AoE centered on a **targeted character**, heals friends and damages enemies. With Grace: **three bursts one second apart** which **follow that same character as it moves**; the same friend/enemy may be affected by all three. | Radius, exact effects, target death/teleport and interrupt handling. |
-| **Aegis** | **Ice** | **Self/ally target** shield. Against matching Ice damage, consumes **0.5 shield HP per 1 prevented damage**. Against other damage, consumes **1.5 shield HP per 1 prevented damage**. With Grace: shielded target deals a **small amount of damage around themselves**. | Shield capacity/duration, refresh, Grace AoE as pulse or aura, damage element/radius/magnitude, mixed/untyped/Pure damage eligibility. |
+| **Aegis** | **Ice** | Self/ally Ice shield: **0.5 shield HP per 1 Ice damage prevented**, **1.5 per 1 non-Ice damage prevented**. Grace causes the shield recipient to emit a **continuous damaging aura** that **scales with Priest SPR**. | Capacity, duration, aura tick interval/radius/element/magnitude, refresh/overlap, damage eligibility and Mana cost. |
 | **Wild Growth** | **Nature** | Single-target **HoT on ally/self** or **DoT on enemy**, **identical base tick value, tick interval and duration**. With Grace: **double HoT duration** or **apply slow on DoT**. | Exact magnitude/cadence, slow value/duration, refresh/stack behavior, cooldown/cost. |
-| **Grace** | Passive + manually activated skill | **2 Grace** for a successful heal without overhealing; **1 Grace** for another successful heal, shield or offensive spell. Rank 1 full meter requires **10 Grace**, max Grace rank full meter **6 Grace**. No decay; **reset to 0 on save/game load**. Full meter only can be activated to empower next spell; the empowered cast consumes all Grace and **still spends Mana**. | Grace rank count/intermediate thresholds, whether partly overhealing still earns 2 or only 1, other eligibility, activation duration/cancel behavior. |
+| **Revive** (working name; low-tier) | **Element OPEN / resurrection effect** | **NEW PRIEST-022:** resurrect a dead player through an **8-second cast**. Cast only if **current Mana > 50% of max Mana**; consume **all currently held Mana** for this resurrection. No Grace specialization, skill rank or unlock level has yet been established. | Exact range/target, recovery HP, Mana payment time, interrupted cast, Resurrection Sickness, cooldown, rank improvements and Grace compatibility. |
+| **Grace** | Passive + manually activated skill | **Available for first purchase at Priest level 5**; upgradeable at **levels 10, 15, 20, 25** (ranks 1–5). Full meter requirements **10/9/8/7/6**. Successful heal with zero overheal gives **2 Grace**; any other successful spell gives **1**, except **ordinary autoattacks give 0**. No natural decay, starts 0 on load. Full Grace can be manually armed to empower next spell; successful empowerment consumes full Grace and still costs Mana. | Grace use on Revive, pending cast failures/interruptions and Grace-generation on Revive, other per-cast safeguards. |
 
 ### Holy Light: Grace bounce details (PRIEST-013)
 - A Grace-empowered Holy Light makes **r additional bounces**, where **r is Holy Light's skill rank**, **not Priest character level**. Bounce destinations can be both friendly and hostile; each destination is healed or damaged according to allegiance.
-- Each consecutive bounce is **10% less effective**. **OPEN** whether 100→90→80 or 100→90→81 and whether chains may revisit the same target. Jump selection/range remains open.
+- **CONFIRMED PRIEST-025:** each consecutive bounce multiplies the previous bounce's amount by **0.90**: initial hit 100%, bounce 1 90%, bounce 2 81%, bounce 3 72.9% and so on. **Revisiting previously affected recipients is allowed**. Target search **prioritizes allies with the lowest health**, then may reach enemies as appropriate. **OPEN**: lowest current HP vs lowest HP percentage, bounce search radius, ties, maximum times per target and how to avoid loops beyond the fixed rank-limited bounce count.
 - The whole chain is **one spell cast for Grace generation**, not one per bounce.
 
 ### Light Burst: following three-pulse effect (PRIEST-014)
@@ -64,12 +65,22 @@ As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world
 - For incoming damage after shared mitigation: **one point of Ice damage prevented consumes 0.5 shield HP**, while **one point of non-Ice damage prevented consumes 1.5 shield HP**.
 - Example: an Aegis with 100 nominal shield HP could prevent 200 Ice damage or approximately 66.7 other damage (illustrative example only; **100 capacity is not a chosen actual shield value**).
 - The shared framework in `docs/STATS_AND_DAMAGE.md` allows per-element efficiency, damage filters, absorb priorities, shield duration and overflow. These coefficients are **specific to Aegis**, not a universal global elemental-shield rule.
-- Grace-empowered Aegis additionally causes the **shield recipient** to inflict **small nearby damage**. Its frequency (on-cast pulse vs continuing aura/on-hit) and element are **OPEN**.
+- **CONFIRMED PRIEST-024:** empowered Aegis adds a **continuous nearby-damage aura** carried by the **shielded recipient**; damage **scales with Priest SPR**. The aura's **element** (Ice would be coherent, but user did not explicitly choose it), radius, tick interval, damage coefficient and lifetime (whether exactly the shield duration) are **OPEN**. Damage from the aura is **not** an ordinary Priest basic attack and should not grant Grace per damage tick unless approved.
 
 ### Wild Growth: dual Nature periodic (PRIEST-015)
 - Both enemy **Nature DoT** and friendly/self **Nature HoT** use the **same baseline magnitude per tick, period and duration**.
 - Standard resistance/healing rules may make *final* damage and healing differ even when base amounts match.
 - Grace on HoT: **double lifetime**, normal tick interval. Grace on DoT: original duration plus **movement slow**, whose amount and duration are still **OPEN**.
+
+### Revive — newly confirmed low-tier Priest spell (PRIEST-022)
+
+- **CONFIRMED:** Priest has a **low-tier resurrection spell** in addition to the earlier four active spells.
+- **Cast time:** exactly **8 seconds** (not yet ranked/scaled).
+- **Cast-eligibility test:** Priest must have **strictly more than 50% of max Mana remaining** to initiate casting (for example 51% qualifies, 50% does not).
+- **Cost:** **all of Priest's currently held Mana**. When the payment occurs is not yet chosen; neither upfront reservation nor consumption on completed cast may be silently assumed.
+- The previous cross-class combat framework already supports **repeatable resurrection with a long cast, high resource cost, and stacking Resurrection Sickness**. `docs/COMBAT.md` says sickness affects the five main stats with a **provisional ~10% reduction per stack**; duration/stack cap are still unconfirmed. Do not silently fix those numbers into Priest.
+- **OPEN:** when and how Revive becomes purchaseable starting from rank 0, whether it has ranks and what those ranks change, targeting dead allies versus yourself, range/line of sight, resurrected HP/resources, in-combat/out-of-combat use, corpse availability before respawn, Resurrection Sickness stacking, interrupted cast costs/refunds, whether it can receive Grace empowerment, whether it generates Grace and how an uninterrupted eight-second cast behaves if Mana changes during casting.
+- **Mana-management fantasy:** resurrecting should leave Priest temporarily unable to heal via Mana, so cost/eligibility must not be bypassed by a cheap trick or accidental double-cast. Precise mechanisms require approval.
 
 ### Grace: generation, rank milestones and reset (PRIEST-012/014)
 - **2 points** from a successfully cast **heal that does not overheal**; **1 point** from all other **successful healing, shield and damage casts**. Round 1's preference for better healing generation is therefore satisfied.
@@ -79,6 +90,15 @@ As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world
 - Grace is a **manual active power** on the same skill as its passive generation. It is only usable when full, empowers the **next successful spell**, and the empowered cast consumes **all accumulated Grace**. All real spells still cost normal Mana.
 - For empowered Light Burst, **only the original/first pulse generates Grace**. Repeated pulses may still damage/heal normally; they do not create more Grace. Further multi-hit/tick exploitation safeguards need explicit design before coding.
 - **OPEN:** Grace rank progression and intermediate thresholds, how long armed state lasts, interruption/target cancel handling, self-heal and instant shield event generation, any Mana cost for pressing the Grace toggle.
+
+### Staff attacks, cooldowns and Mana balance (PRIEST-021/023)
+
+- **CONFIRMED:** Priest can wield **staffs**, plus gear whose eligibility explicitly allows **all classes**. It does **not** freely wield every other class weapon.
+- **CONFIRMED:** all classes' ordinary basic attacks deal **normal, non-elemental** damage; Priest's ordinary staff autoattack generates **zero Grace**. Other ordinary damage calculations and attack scaling follow shared rules (exact Priest basic attack stat coefficient remains open).
+- **CONFIRMED:** the Priest should begin with **relatively long cooldowns**, with **small reductions each time a skill point increases that spell's rank**. Exact baseline/rank formulas are **BALANCE OPEN**. The phrase 'every skillpoint' is interpreted as investment into the specific spell, to be confirmed if different.
+- **CONFIRMED:** Mana costs start **low** and **increase with progression**. **OPEN** whether this means Priest **character level**, **spell rank**, or both, and how this interacts with scaling heal power.
+- **CONFIRMED gameplay direction:** **Mana management**, rather than a pure cooldown ceiling or limitless healing throughput, should be the main long-fight healer constraint; a weak enemy should not be heal-tanked indefinitely for **20 minutes** merely through bottomless self-heals. Tuned mana pool, regen, spell costs, resource restoration and throughput must make this meaningful while keeping early solo play feasible.
+- Grace-powered healing/burst chains remain subject to their ordinary Mana cost. Staff attacks never provide Grace and are not themselves elemental.
 
 ### Possible Tier III branches — ideas only
 
@@ -157,17 +177,25 @@ Fractional growth should be applied as whole-number increments over levels in th
 - **PRIEST-019:** Mana/cooldown question unanswered.
 - **PRIEST-020:** Global correction: all basic attacks are **normal/non-elemental**. Staff equipment and basic-attack Grace generation not answered.
 
-## Round 5 — five questions (awaiting answers)
+## Round 5 — answers recorded 2026-10-18
 
-**PRIEST-021 — Mana economy and cooldowns (unanswered Q19).** Moderate Mana costs with comfortable regeneration, or a larger pool with expensive, slower-recovery spells? Would playtest cooldowns of **Holy Light 8–10 seconds, Light Burst 14–18, Aegis 12–16, Wild Growth 6–8** suit your vision, or do you prefer different pacing?
+- **PRIEST-021 — CONFIRMED design direction:** longer initial spell cooldowns than earlier suggestions; cooldowns shorten somewhat with skill-point/rank investment. Mana costs initially low but increase with level/progression (exact level axis **OPEN**). Mana management is **the main intended balancing lever for healers**, especially to prevent indefinite heal-stalling of fights. No actual Mana pool/regeneration/cost or cooldown values approved.
+- **PRIEST-022 — CONFIRMED:** Grace rank 1 becomes eligible at **Priest level 5**, and can upgrade every five Priest levels: **ranks 1–5 at levels 5/10/15/20/25**. Also user **added low-tier Revive**: **8-second cast**, only castable while Priest's Mana is **> 50%**, and it **consumes all current Mana**. Other ability unlocks, Revive's ranks and resurrection effects **OPEN**.
+- **PRIEST-023 — CONFIRMED:** Priest uses **staffs only**, except items with an **all-classes equipment exception**. Ordinary basic attacks give **no Grace** and, per earlier global correction, use **normal/non-elemental damage**.
+- **PRIEST-024 — CONFIRMED:** Grace-empowered Aegis makes the shield recipient deal **continuous nearby aura damage** scaling with Priest **SPR**. Aura's element, radius, frequency and lifetime not yet approved.
+- **PRIEST-025 — CONFIRMED:** Holy Light bounces use **multiplicative ×0.9** loss per successive bounce (100/90/81/72.9%...). Can **bounce back to previous recipients**, and chooses targets **favoring lowest-health allies**. Exact health comparison/chain search/fallback OPEN.
 
-**PRIEST-022 — Skill unlock levels.** We now start with **all skills at rank 0 and just one skill point at Priest level 1**. Should **all five skills be available for that first point**, or should some become eligible later (for example Holy Light/Grace early, Light Burst/Aegis/Wild Growth later)? Do you want their maximum ranks to differ?
+## Round 6 — five questions (awaiting answers)
 
-**PRIEST-023 — Staff and Grace from autoattacks.** Does Priest use a **staff only**, or can it equip other weapons? Autoattack damage stays **normal/non-elemental** whatever you choose. Should a successful basic attack generate Grace, or should **only cast spells** generate Grace?
+**PRIEST-026 — Revive level/ranks and Grace.** At what **Priest level** should **Revive** become available for its first rank? Should it have up to five ranks like the other abilities, and if so, what should spending skill points on Revive improve (e.g. resurrected HP, range, cast time, sickness severity or cooldown)? Should the **Grace button** be able to empower Revive, and if yes, what special effect?
 
-**PRIEST-024 — Empowered Aegis's damage.** Is the small damage around the shielded recipient a **continuing aura**, a **one-time pulse on application**, or a **retaliation whenever the shield is struck**? Should that bonus damage be **Ice-element** and scale with SPR?
+**PRIEST-027 — Revive targeting and penalties.** Should Revive work **during combat** on a **dead party member before they choose to respawn**, or also on NPCs/out of combat? With the existing stacking **Resurrection Sickness** concept, should a revived ally return at **low HP** and suffer that sickness? If the Priest is **interrupted during the 8-second cast**, should all Mana be lost or should it only be spent on successfully completed resurrection?
 
-**PRIEST-025 — Holy Light bounce falloff.** Is 10% loss per bounce **additive** (100%, 90%, 80%, 70%...) or **multiplicative** (100%, 90%, 81%, 72.9%...)? Can an empowered chain bounce **back to someone already hit/healed**, or must every recipient be distinct?
+**PRIEST-028 — Starting cooldowns and Mana cost progression.** Since Mana management should cap long-term healing, would you prefer the **Mana cost to grow with each invested spell rank** (rather than passively with character level), so stronger heals cost more? Should cooldown reductions also occur **per rank in the same spell**? Any starting cooldown values you'd prefer for Holy Light, Light Burst, Aegis and Wild Growth, or should I propose provisional numbers?
+
+**PRIEST-029 — Spell availability / rank caps.** All skills begin rank **0** and Grace specifically unlocks at level **5**. Should **Holy Light, Light Burst, Aegis and Wild Growth** all be *eligible to learn* at Priest **level 1**, or unlock gradually later? Do we want **five ranks each** for these spells, with successive ranks only purchasable at designated level breakpoints?
+
+**PRIEST-030 — Aegis aura and Holy Light bounce priority.** For Grace-powered **Ice Aegis**, should its damaging aura also be **Ice-element**, ticking regularly for as long as the shield lasts? For Holy Light chains, does **'lowest-health ally'** mean **lowest HP percentage** (e.g. 20/100 before 100/1000), and should wounded allies always take priority over enemy hits as long as they're within bounce range?
 
 ## Remaining design work (not yet approved)
 
@@ -202,5 +230,10 @@ Fractional growth should be applied as whole-number increments over levels in th
 | 2026-10-18 | PRIEST-018 | All class skills start rank 0, 1 class point at level 1; no free ranks | **CONFIRMED, GLOBAL** |
 | 2026-10-18 | PRIEST-019 | Mana economy and cooldown pacing unanswered | **OPEN** |
 | 2026-10-18 | PRIEST-020 | All classes' autoattacks normal/non-elemental damage | **CONFIRMED, GLOBAL** |
-| 2026-10-18 | PRIEST-021–PRIEST-025 | Round 5 questions asked | **AWAITING USER** |
+| 2026-10-18 | PRIEST-021 | Start longer cooldowns, reduce per skill investment; Mana costs increase with progression; long-fight healing constrained by Mana | **CONFIRMED principles**, numeric mechanics open |
+| 2026-10-18 | PRIEST-022 | Grace available r1 at level 5, ranks every 5 levels; new 8-sec Revive with >50% Mana requirement and full current-Mana cost | **CONFIRMED**, Revive unlock/edge cases open |
+| 2026-10-18 | PRIEST-023 | Staff weapon restriction except all-classes gear; autoattacks generate no Grace and remain non-elemental | **CONFIRMED** |
+| 2026-10-18 | PRIEST-024 | Grace-empowered Aegis creates continuous nearby-damage aura scaling with SPR | **CONFIRMED**, element/tick details open |
+| 2026-10-18 | PRIEST-025 | Holy Light chain uses multiplicative 0.9 per bounce, can revisit prior recipients, prioritizes lowest-health allies | **CONFIRMED**, HP comparison details open |
+| 2026-10-18 | PRIEST-026–PRIEST-030 | Round 6 questions asked | **AWAITING USER** |
 
