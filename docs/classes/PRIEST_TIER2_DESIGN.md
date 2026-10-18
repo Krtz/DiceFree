@@ -1,6 +1,6 @@
 # DiceFree — Tier II Priest — Design Interview
 
-**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–3 recorded; Round 4 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
+**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–4 recorded (Q19 open); Round 5 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
 **Started:** 2026-10-17  
 **Repository branch:** `integration/world1-foundation`  
 **Design owner:** User; interview and documentation in five-question rounds, then the other DiceFree chat can implement.
@@ -25,8 +25,8 @@
 | Class name/tier | **Priest, Tier II**, advancing from **Magically Touched Novice** at its level-30 quest threshold. | Quest itself not yet approved/implemented. |
 | Role | **CONFIRMED PRIEST-001:** general-purpose **hybrid healer** at Tier II, mixing direct healing, shields, periodic healing and meaningful damage; solo capable. Distinct specializations are for potential Tier III Priest advancements. | Not a narrowly specialized Tier II healer. Exact relative throughput open. |
 | Weapons | **Staff** is the intended Priest weapon family. | Whether staff is strictly required, offhands, other weapons and initial gear remain open. |
-| Attributes | **CONFIRMED PRIEST-005:** **SPR is Priest's primary attribute for both healing AND damage**. Exact SPR coefficients, INT secondary benefits, level-1 base and per-level growth are **OPEN**. | This explicitly replaces the older split suggestion of SPR healing / INT damage. |
-| Resources | **Mana + Grace**; actual spells always cost Mana. **Grace generation:** 2 per successful heal without overheal, 1 for other successful heals, shields or damage casts. Full meter requires 10 Grace at rank 1 and 6 at max Grace rank; no decay; starts at 0 after loading; manually activate full meter to empower next spell, consuming all Grace. | Exact rank count and intermediate thresholds, precise overheal eligibility and canceled-cast behavior remain open. |
+| Attributes | SPR primary for healing **and** damage. User delegated precise stat distribution. **Provisional Tier II Priest baseline:** VIT 12, STR 5, AGI 6, INT 11, SPR 18; per-level growth +1.5/+0.5/+0.75/+1.5/+3 respectively. | Playtest starting values; not exact numbers dictated by user. Tier II stats/growth exceed Tier I overall, on par with Tier II Mage. |
+| Resources | Mana and Grace. **Newly confirmed**: 2 Grace from successful zero-overheal heals, 1 from other successful spells (including overheals/full-HP healing); Grace rank 1–5 needs 10/9/8/7/6 points respectively; no decay, starts 0 on load; full meter manually empowers next cast. | Partial mechanics/cancel handling still open. |
 | Without Grace | Priest retains usable damage/healing spells paid for with Mana; cannot require Grace for its basic function. | Specific ranks/ability gating open. |
 | Skill system | Current flexible spell/action system accepts variable mixed active/passive skill counts; no universal fixed kit shape. No Tier II ultimate. | Existing class system is implemented for Mage, but Priest remains design-only. |
 | Mentor | The **Trimery healer** is intended as Priest trainer and future quest giver. | Current healer implementation is only a free HP-service placeholder. |
@@ -112,7 +112,7 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 - **PRIEST-014 CONFIRMED:** Grace Light Burst's three bursts follow the selected character; units can be struck/treated by every pulse. Only the first pulse earns a single 1- or 2-point Grace grant.
 - **PRIEST-015 CONFIRMED:** periodic spell called **Wild Growth**, **Nature**, identical base tick values/interval/duration for HoT or DoT; Grace doubles HoT duration or adds slow to DoT.
 
-## Round 4 — next five questions (awaiting user)
+## Historical Round 4 — original five questions (answered except Q19; see authoritative updated answers below)
 
 **PRIEST-016 — Stats and stat growth.** We confirmed that **SPR is Priest's main stat for both healing and damage**. What should Priest's **starting VIT / STR / AGI / INT / SPR** and **growth per level** be? For comparison, Magically Touched Novice currently starts at **10 / 5 / 5 / 13 / 13** with growth **+1 / +0.5 / +0.5 / +2 / +2**; the Mage Tier II prototype starts **11 / 5 / 8 / 18 / 9**, with growth **+1.5 / +0.5 / +0.75 / +3 / +1.5**. Approximate priorities are fine if you prefer us to balance numbers later.
 
@@ -123,6 +123,51 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 **PRIEST-019 — Mana economy and cooldowns.** Should Priest have a **large Mana pool but expensive casts**, or **moderate spell costs with faster natural regeneration**? Should Holy Light have the **longer, stronger heal cooldown**, Light Burst the **longest AoE cooldown**, Aegis an intermediate defensive cooldown, and Wild Growth a more maintainable periodic cast? We can leave exact numerical balance provisional.
 
 **PRIEST-020 — Staff/basic attack and Grace.** Should Priest commit to a **staff**, with an **SPR-scaling Light basic attack** used between spell cooldowns? Should **basic attacks generate Grace**, or should only the four actual spell casts do that?
+
+## Round 4 corrections and preliminary Priest stat package — authoritative for later implementation
+
+**PRIEST-016: User confirmed the stat philosophy and delegated numerical values to the designer.** Priest prioritizes SPR for **both healing and damage**, has moderate VIT, some INT and lower STR/AGI. A higher class tier must gain more **total** base attributes and per-level growth than lower tiers. The following is a **provisional designer-selected balance recommendation**, not user-specified exact numbers:
+
+| Stat | Tier I Magically Touched base / growth | Tier II Mage prototype base / growth | **Tier II Priest proposed base / growth** |
+| --- | --- | --- | --- |
+| VIT | 10 / +1 | 11 / +1.5 | **12 / +1.5** |
+| STR | 5 / +0.5 | 5 / +0.5 | **5 / +0.5** |
+| AGI | 5 / +0.5 | 8 / +0.75 | **6 / +0.75** |
+| INT | 13 / +2 | 18 / +3 | **11 / +1.5** |
+| SPR | 13 / +2 | 9 / +1.5 | **18 / +3** |
+| **Total** | **46 / +6** | **51 / +7.25** | **52 / +7.25** |
+
+Fractional growth should be applied as whole-number increments over levels in the game. Base HP/defenses/Mana and coefficients are still to be tuned.
+
+**PRIEST-017: Grace ranks and overheal — CONFIRMED.** Grace has **five ranks**. A full meter requires **10, 9, 8, 7, 6 Grace points** at ranks **1–5**, respectively; at rank **0**, Grace is not yet learned. A successful heal with **exactly zero overheal** awards **2 Grace**. **Every other successful heal** (including a full-HP heal and partly overhealing) awards **1 Grace**, as does a successful damage or shield spell. This supersedes older general 1-per-cast descriptions. The user's choice to grant a point for full-health healing is intentional; do not silently nullify it with older anti-overheal proposals. Chain jumps/secondary Light Burst pulses still do not generate extra Grace, per previous decisions.
+
+**PRIEST-018: GLOBAL RULE, not just Priest — CONFIRMED.** **All class skills begin at rank 0** for a freshly created manifestation, with **exactly 1 spendable skill point at character level 1** and +1 on later levels by the existing advancement economy. **No free starting rank-1 spells or passives.** Skill availability gates and individual rank progression can still vary by class. Existing Mage/Greatblade prototypes document free initial ranks; **this is a mismatch to resolve separately during implementation**, not authorization to edit gameplay in this design chat. Priest skill availability/unlock levels still **OPEN**.
+
+**PRIEST-019: NOT ANSWERED.** Mana/cooldown pacing remains completely **OPEN**.
+
+**PRIEST-020: GLOBAL RULE, not just Priest — CONFIRMED.** **Every class's ordinary basic/autoattack does normal, non-elemental damage**; there is no inherent Light-element autoattack for Priest. Class-dependent attack reach, visual, Physical/Magical channel, stat scaling and specifically authored elemental weapon enhancements are separate decisions. **Priest staff restriction and whether its autoattacks award Grace remain OPEN.**
+
+> The most recent user corrections in this section **supersede any contradictory text above**, including the older Grace overview, earlier anti-overheal *recommendations*, and earlier free-starting-rank suggestions. No Unity gameplay code changed.
+
+## Round 4 — answers recorded on 2026-10-18
+
+- **PRIEST-016:** SPR-heavy stats with tier-appropriate total base/growth; user delegated numerical distribution. Designer proposed **12/5/6/11/18** and per-level **+1.5/+0.5/+0.75/+1.5/+3** (VIT/STR/AGI/INT/SPR), for playtesting.
+- **PRIEST-017:** Exactly 5 Grace ranks, thresholds **10→9→8→7→6**. Zero-overheal heal = 2 Grace; any other successful heal, including full-HP healing, = 1; damage/shield = 1.
+- **PRIEST-018:** Global correction: every skill starts **rank 0**, with 1 point at class level 1, no free starter ranks. Actual Priest skill unlock timeline unanswered.
+- **PRIEST-019:** Mana/cooldown question unanswered.
+- **PRIEST-020:** Global correction: all basic attacks are **normal/non-elemental**. Staff equipment and basic-attack Grace generation not answered.
+
+## Round 5 — five questions (awaiting answers)
+
+**PRIEST-021 — Mana economy and cooldowns (unanswered Q19).** Moderate Mana costs with comfortable regeneration, or a larger pool with expensive, slower-recovery spells? Would playtest cooldowns of **Holy Light 8–10 seconds, Light Burst 14–18, Aegis 12–16, Wild Growth 6–8** suit your vision, or do you prefer different pacing?
+
+**PRIEST-022 — Skill unlock levels.** We now start with **all skills at rank 0 and just one skill point at Priest level 1**. Should **all five skills be available for that first point**, or should some become eligible later (for example Holy Light/Grace early, Light Burst/Aegis/Wild Growth later)? Do you want their maximum ranks to differ?
+
+**PRIEST-023 — Staff and Grace from autoattacks.** Does Priest use a **staff only**, or can it equip other weapons? Autoattack damage stays **normal/non-elemental** whatever you choose. Should a successful basic attack generate Grace, or should **only cast spells** generate Grace?
+
+**PRIEST-024 — Empowered Aegis's damage.** Is the small damage around the shielded recipient a **continuing aura**, a **one-time pulse on application**, or a **retaliation whenever the shield is struck**? Should that bonus damage be **Ice-element** and scale with SPR?
+
+**PRIEST-025 — Holy Light bounce falloff.** Is 10% loss per bounce **additive** (100%, 90%, 80%, 70%...) or **multiplicative** (100%, 90%, 81%, 72.9%...)? Can an empowered chain bounce **back to someone already hit/healed**, or must every recipient be distinct?
 
 ## Remaining design work (not yet approved)
 
@@ -152,5 +197,10 @@ Recent proposal **Hands of Mercy**: level-30 eligible Magically Touched speaks w
 | 2026-10-18 | PRIEST-013 | Holy Light's Grace bounce count equals ability rank; mixed allies/enemies; 10% less each bounce | **CONFIRMED**, exact falloff open |
 | 2026-10-18 | PRIEST-014 | Triple Light Burst follows target; same unit affected thrice; original pulse alone generates 1 or 2 Grace | **CONFIRMED** |
 | 2026-10-18 | PRIEST-015 | Wild Growth Nature DoT/HoT same base duration/interval/potency; Grace 2× HoT duration or slows DoT | **CONFIRMED**, numbers open |
-| 2026-10-18 | PRIEST-016–PRIEST-020 | Round 4 questions asked | **AWAITING USER** |
+| 2026-10-18 | PRIEST-016 | SPR-heavy stats; suggested Tier II stat baseline/growth documented | **CONFIRMED direction; exact values delegated, provisional** |
+| 2026-10-18 | PRIEST-017 | Five Grace ranks require 10/9/8/7/6; zero-overheal heal yields 2, full-HP heal yields 1 | **CONFIRMED** |
+| 2026-10-18 | PRIEST-018 | All class skills start rank 0, 1 class point at level 1; no free ranks | **CONFIRMED, GLOBAL** |
+| 2026-10-18 | PRIEST-019 | Mana economy and cooldown pacing unanswered | **OPEN** |
+| 2026-10-18 | PRIEST-020 | All classes' autoattacks normal/non-elemental damage | **CONFIRMED, GLOBAL** |
+| 2026-10-18 | PRIEST-021–PRIEST-025 | Round 5 questions asked | **AWAITING USER** |
 
