@@ -503,21 +503,15 @@ Classes, passives, gear and profession effects may modify consumable behaviour.
 Repeatable healer resurrection is allowed but costly:
 - long cast time;
 - high resource cost;
-- stacking Resurrection Sickness.
+- stacking **Resurrection Sickness**.
 
-Resurrection Sickness affects the **five primary attributes only**:
-- Vitality
-- Strength
-- Agility
-- Intelligence
-- Spirit
+### Resurrection Sickness — confirmed 2026-10-19
 
-Current working direction:
-- each stack reduces those five attributes by roughly 10%.
-
-Derived effects then naturally change because the underlying attributes changed.
-
-Exact duration, stack cap and stacking math remain to be balanced.
+- Each stack lasts **exactly 5 minutes (300 seconds)**, with its **OWN INDEPENDENT expiration timer**. Acquiring a fresh stack does **not refresh or replace the remaining durations** of older stacks.
+- Ending an encounter does **not** remove Resurrection Sickness. A stack ends only when its own 5-minute timer expires (unless a future explicitly authored cleansing mechanic says otherwise).
+- **Each active stack reduces all five primary attributes by 10%**: Vitality, Strength, Agility, Intelligence and Spirit. Derived quantities change through their normal stat formulas.
+- The **maximum stack count, attribute floor/minimum and save/load persistence** remain undecided; do not invent them in a class implementation.
+- How much HP/Mana the revived target receives is **skill-specific**: Priest's Tier II Revive currently restores **15% maximum HP and 15% maximum Mana**, distinct from the sickness's 10%-per-stack attribute penalty. Other class revives may restore different resource amounts.
 
 ## Enemy AI and encounter architecture
 
