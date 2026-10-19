@@ -28,7 +28,7 @@ Supersedes `TIER2_CORE_CLASSES_DESIGN_V01.md` on all conflicting points. Preserv
 
 **Weapon/silhouette family proposals**, to reserve future differentiation:
 - **Mage:** wand and orb. Wand projects elemental spells; orb is a catalyst or implement in off-hand, not an unrelated shield or book. Mage does NOT require an ordinary staff.
-- **Acolyte** (future magical route/name not final): wand + **book/grimoire**; forbidden lore/death/spirit traditions distinct from Mage elemental magic. Book must have meaningful active/passive system, not just cosmetic.
+- **Acolyte** (**CONFIRMED normal Tier II route** under Magically Touched): **wand mainhand + grimoire offhand**. **LATEST USER OVERRIDE (ACOLYTE-002, 2026-10-19): the grimoire is simply a normal STAT-BEARING EQUIPPABLE OFFHAND for now**; there is NO mandatory unique book mechanic, inscription system or class-specific equipment resource. All items may someday modify skills through standard item effects/Intrinsics. **ACOLYTE-001/003/004:** slow sustained damage/curse specialist with **separate Curse, DoT, Summon and channeled Life Drain** skills; **Mana + Soul Charges**, earned from offensive spells and spent on summons. **ACOLYTE-005:** graveyard NPC's proper-burial quest involving bodies/remains collected in Cornberg and Trimery is a **deferred story direction**, not a finalized quest or NPC location. Full details in [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md).
 - **Priest & Druid** (future Druid): **staff-focused** classes; Priest holy-support staff, Druid organic/nature staff (later Druids may also shapeshift). Retain weapon variety even if they use same category.
 - Greatblade 2H sword; Defender sword & shield; future Ranger bow, Rogue daggers remain possible.
 
