@@ -94,7 +94,7 @@ Meaningful Attack Speed/Movement Speed increases should primarily come from:
 - temporary effects;
 - class identity.
 
-Generic Evasion is not currently committed.
+Generic Evasion is not currently committed. **Skill-specific exception (Ranger Tier II design, 2026-10-19; NOT IMPLEMENTED):** Ranger **Evasive Step** explicitly grants **+1 percentage point evasion per purchased Evasive Step rank**, lasting for **3 seconds after a 3–4m cursor-directed leap**, and it applies **ONLY to incoming enemy basic/autoattack hit checks**, not spells/abilities/ground effects, even if those effects use the Physical damage channel. This does NOT imply universal AGI-derived evasion or ordinary baseline dodge for all classes. Ranger Bow Mastery's separate **1.4× crit, 1pp chance/rank on Ranger basic attacks and Aimed Shot only** uses the authored opt-in crit rules later in this document. See [Ranger Tier II design](classes/RANGER_TIER2_DESIGN.md).
 
 ### Intelligence
 
