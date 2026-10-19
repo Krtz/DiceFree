@@ -1,7 +1,7 @@
 # DiceFree Tier II — Greatblade and Mage skill-rank audit
 
 **Date:** 2026-10-19  
-**Status:** DESIGN REVIEW / PROPOSALS ONLY — do **not** modify Unity C#, skill assets, save files or existing manifests until the user approves a migration and revised rank progression.  
+**Status:** DESIGN REVIEW — Round 1 core policies APPROVED (2026-10-19); weighted per-skill caps and implementation detail choices pending. **Do not modify Unity C#, skill assets, saves or manifestations until class-by-class formulas, gates and migration requirements receive complete implementation sign-off.**  
 **Branch inspected:** `integration/world1-foundation`  
 **Companion design:** [Priest Tier II interview](classes/PRIEST_TIER2_DESIGN.md)  
 **Global authority:** [Class Progression: universal zero-rank rule](CLASS_PROGRESSION.md#universal-rank-zero-and-ordinary-basic-attack-rules-user-correction-2026-10-18)
@@ -21,7 +21,7 @@ This is an audit of **current implementation source** and design docs, **not a U
 - A skill's **first eligibility level** may be gated even though its current rank is zero. Gaining eligibility is **not an automatic learned rank**.
 - A plain basic attack deals **normal non-elemental damage**; this audit does not propose changing attack elements.
 - Tier II can advance when the manifestation reaches level **60**, but can overlevel.
-- For **Priest**, the user approved **near-complete skill-point spend capacity around level 80** (= Tier II level 60 + one third of 60), now 78 ranks (4 × 18 + 5 Grace + 1 Revive). **Whether exactly the same spend-down philosophy applies to Greatblade/Mage is pending user approval**; it is likely relevant but must not be silently retroactively imposed.
+- **CONFIRMED RANK-001:** near-complete skill-point spend capacity **around level 80 applies to Greatblade AND Mage**, as already approved for Priest (Priest 78 total ranks: 4 × 18 + Grace 5 + Revive 1). Tier II advancement milestone is level 60; +33% levels means about level 80. Balance around available investments rather than arbitrary same-rank caps.
 - Flexible class skills, variable actives/passives, in-bar upgrade icons and zero-rank skill representations are already supported at the shared UI/provider level. Do not add a fixed universal kit size.
 
 ## Current coded skill budget
@@ -92,35 +92,103 @@ The v0.3 Greatblade design explicitly recommends *different rank-up breakpoint s
 
 ### Safe migration requirements before implementation
 
-- Explicitly approve the new first-level eligibility list, per-skill rank caps, gates, formulas and handling of existing saves before editing Unity code.
+- **First eligibility levels and rank-zero starts are now CONFIRMED for both classes (RANK-002/003)**; weighted rank caps and per-level upgrades remain subject to review. Finalize per-skill caps, formulas, eligibility-versus-rank-gate semantics and migration details before editing Unity code.
 - Treat `classSkills` save records and save/restore validation as authoritative. **Never erase skill ranks, invalidate an existing manifestation or overwrite user progress** because old free ranks now count against a new point budget.
-- Decide whether to **grandfather legacy free ranks**, **perform a one-time zero-rank/refund migration**, or support a **user-triggered respec of legacy Tier II manifestations**, including level-1 saves with four legacy free abilities and only one newly allowed point. This cannot be resolved by blindly treating four ranks as purchased at level 1.
+- **CONFIRMED RANK-005:** perform a **ONE-TIME RESET AND FULL SKILL-POINT REFUND** for existing Greatblade and Mage saves, including their four formerly free rank-1 skills; **NO grandfathered skill ranks**. The preserved manifestation keeps its class level/XP, attributes, gear, inventory, items, quests, currency, appearance, progression, and other unrelated state. Available unspent points after reset must be **equal to character level** under the one-point-at-level-1 and +1-per-level system, not `level−1`; do not credit a phantom extra four points for formerly free starters. Must migrate atomically, idempotently, backup/validate before writing, mark completed per save/manifestation, restore all ranks as 0 until repurchased, and never overwrite parent manifestations or other class saves. Interaction timing and player-facing notice remain for sign-off.
 - Centralize rank-zero, one-point-at-level-1 semantics for both classes; update point budget, rank gates, passive activation, rank-zero tooltips and in-bar [+] eligibility.
 - If expanding ranks, retune Mage Math Barrier and high-rank Greatblade Mastery/Heavy Rhythm; add anti-negative/over-100%-redirect validation, skill point overspend checks and tests around level 1, 6, 18, 30, 42, 60, 80, class fork, class switch, save load and reloading legacy saves.
 - Keep old gameplay code untouched during this interview/audit. Current branch's previously verified builds do not validate a hypothetical revised implementation.
 
-## Suggested approaches — NOT approved
+## Round 1 — five user decisions (2026-10-19)
 
-**Simple/even rank-count option (first-unlock levels can remain distinct):**
-- **Greatblade:** six skills × **13 ranks each** = **78 purchasable skill ranks**, leaving **2** points at level 80. Keep the six existing unique abilities and authored first unlocks. Higher rank effects/cooldowns need revisiting.
-- **Mage:** eight skills × **10 ranks each** = **80 purchasable ranks**, leaving **0** points at level 80. Mage Math Barrier's rank-10 protection would be 75% and cost 1 Mana per damage prevented under its current raw formula; even this can have overlong duration, so it requires balance/testing.
+- **RANK-001 CONFIRMED:** **Greatblade and Mage follow Priest's rough level-80 nearly-spend-all-points target**.
+- **RANK-002 CONFIRMED:** **Greatblade keeps its original first-eligibility levels**: Wide Arc, Spin Dash, Greatsword Mastery, Heavy Rhythm at level 1; Overhead Breaker at level 6; Battle Cry at level 18. **All ranks begin at 0**; exactly one point available at character level 1, no auto-learned skills.
+- **RANK-003 CONFIRMED:** **Mage keeps its original first-eligibility levels**: Ember Bolt, Frost Snare, Elemental Weaving, Mana Attunement at 1; Arc Lightning, Math Barrier at 6; Quicksand at 12; Half-Life at 18. **All ranks begin at 0**, one point at level 1.
+- **RANK-004 CONFIRMED in part:** **rank caps must vary with the ability's function and balancing needs**, rather than being uniform. Specifically **Math Barrier remains capped at its existing five ranks and keeps its established identity/formulas** for that cap. **OPEN:** user's answer did *not* explicitly address the other half of question 4, namely whether upgrades can happen **every level after first unlock** or must retain periodic rank-up gates; request separate confirmation. Other skill caps are proposed below, not selected by user.
+- **RANK-005 CONFIRMED:** **existing Greatblade/Mage skill allocations must be RESET and REFUNDED** once in a safe migration; no grandfathering four free ranks. No other character or save progress should be lost.
 
-**Weighted cap option:** distribute approximately **78–80 total ranks** across the roster, assigning fewer points to niche utilities like Math Barrier or Battle Cry and more to primary active spells. This may create more meaningful progression but requires a deliberate balance table and user review.
+### Weighted skill-rank cap proposal — NOT user-approved
 
-The **first-unlock level** of a skill is distinct from the **per-level right to upgrade an already-unlocked skill**. A clean compromise is retaining Greatblade/Mage's **existing first-unlock identities**, then allowing subsequent rank-up at **each level** until its particular cap; no fixed periodic 6/12/18/24 gates. This is NOT yet a user-approved revision to Greatblade's original gated progression.
+The actual roster and first-learn gates remain unchanged. A class may have a different rank cap for each skill based on effect complexity, utility, performance and playtest scaling.
 
-## Five questions for user — cross-class review round 1
+**Greatblade proposal — 78 ranks total / 80 points by level 80:**
 
-**RANK-001:** Should the **near-spend-down by level 80** target now apply to **Greatblade and Mage**, not only Priest? Or should these classes each have a different desired level for maxing their skill investments?
+| Ability | First eligible level (confirmed) | Current cap (code) | Suggested cap (proposal) | Why |
+| --- | ---: | ---: | ---: | --- |
+| Wide Arc | 1 | 6 | **18** | Primary repeatable AoE damage; strong upgrade sink |
+| Spin Dash | 1 | 4 | **14** | Mixed damage/mobility, moderate cap to avoid unreasonable travel damage |
+| Overhead Breaker | 6 | 5 | **18** | Core Momentum spender/finisher and second main damage sink |
+| Battle Cry | 18 | 3 | **8** | Short damage utility buff, fewer ranks |
+| Greatsword Mastery | 1 | 6 | **12** | Evolving passive, ranks 2/3/4 keep their specific effects |
+| Heavy Rhythm | 1 | 7 | **8** | Momentum economy; avoid flattening resource decay scaling |
+| **Total** | | **31** | **78** | **2 potential spare points at level 80** |
 
-**RANK-002:** Keep Greatblade's currently approved first skill unlocks (**Wide Arc, Spin Dash, Mastery, Heavy Rhythm at level 1; Overhead Breaker at level 6; Battle Cry at level 18**) but **start all at rank 0 with one level-1 point**? Would you revise any of those unlock levels?
+**Mage proposal — 80 ranks total / 80 points by level 80:**
 
-**RANK-003:** Keep Mage's current first unlock order (**Ember/Frost/Weaving/Mana Attunement at level 1; Arc Lightning/Math Barrier at 6; Quicksand at 12; Half-Life at 18**) with zero ranks and the single initial point, or would you change any?
+| Ability | First eligible level (confirmed) | Current cap (code) | Suggested cap (proposal) | Why |
+| --- | ---: | ---: | ---: | --- |
+| Ember Bolt | 1 | 5 | **18** | Primary single-target damage sink |
+| Frost Snare | 1 | 5 | **12** | Control + damage; freeze duration must be bounded at high rank |
+| Arc Lightning | 6 | 5 | **12** | Multiple-target chain; number of jumps must be performance/target capped |
+| Quicksand | 12 | 5 | **10** | AoE field and slow, avoid infinite high-rank field stacking |
+| Half-Life | 18 | 5 | **8** | Strong DEF reduction DoT; tune debuff scaling |
+| Math Barrier | 6 | 5 | **5 — CONFIRMED unchanged** | Keep established duration/redirection/Mana efficiency formulas and maximum |
+| Elemental Weaving | 1 | 5 | **8** | Rotation/resistance passive, with controlled aura growth |
+| Mana Attunement | 1 | 5 | **7** | Mana pool/regen passive, bounded to prevent excessive sustain |
+| **Total** | | **40** | **80** | **0 potential spare points at level 80** |
 
-**RANK-004:** Once a skill becomes eligible, should both classes allow investing **one rank per class level into that skill**, without fixed periodic gates, similar to Priest? For the approximate level-80 budget, prefer **uniform caps** (Greatblade 13 each, Mage 10 each), or **weighted different caps by skill importance**?
+**Important:** `18` rank caps do **not** mean all ranks retain existing linear damage/movement/CC/resource formulas. High-rank damage, cooldowns, freezes, DEF reduction, chain-count caps, aura values and durations must be tuned. **Math Barrier explicitly remains capped at 5** and retains its intended formulas at ranks 1–5; any proposed changes to Math Barrier's current balance require fresh user approval. Greatblade's passive rank-4 shield/alternate-heal question remains separately open.
 
-**RANK-005:** How should **existing playable Greatblade/Mage saved characters with four grandfathered free starter ranks** migrate to the new economy: keep their current builds with grandfathered old starter ranks, or perform a **one-time safe reset/refund** of all invested skill ranks and grant the correct number of class-level skill points to redistribute? No automatic character/save mutation until chosen.
+### Proposed changes to level gates — awaiting user response
 
+- Preserve the **first eligibility levels** of every class ability, which are now confirmed.
+- **PROPOSED, NOT YET CONFIRMED:** once eligible/learned, allow investing a rank each subsequent **class level**, subject to its distinct cap and available skill point, rather than the existing 6/12/18/24 rank-breakpoint arrays. This matches Priest's pacing but replaces an intentionally different previous Greatblade design rule. Ask the user explicitly before changing that aspect.
+- A fixed special unlock level may still be used for an authored ability or passive's milestone effect; that does not require rank-ups to be spaced out. For example, Greatsword Mastery's rank-2/3/4 effects remain bound to ranks, not new class-level gates.
+- The new zero-rank semantics mean first-learned abilities only become usable once the single starting skill point is actually invested.
+
+### Safe one-time reset/refund — CONFIRMED policy; implementation details open
+
+Upon migration of an existing Mage or Greatblade manifestation:
+1. **Preserve a recoverable original save/backup** and confirm that the class ID, saved XP/level, and rank records are valid enough to migrate. Never corrupt or delete a save just because an old saved rank exceeds the new rank-at-level allowance.
+2. In one atomic/idempotent transaction **set all its class skill ranks to 0**, preserving class level and all other saved state; make its skill points available equal to **current class level** (e.g. level 1 → 1 point; level 30 → 30; level 80 → 80), not a second bonus/reward. This **refunds all purchased ranks AND former implicit free ranks into the correct class-level pool** without counting them twice.
+3. Ensure the normal view and ability provider render unlearned rank-0 skills, allowed [+] purchase buttons, and cooldown/resource/passive effects only at rank ≥1. Recompute passive bonuses and derived stats after reset.
+4. Guard the migration with **one-time per-manifestation version/marker**, not one-time per account; loading/playing an already-migrated save must **never reset skills again**. Handle offline/archived/older save revisions as they are encountered.
+5. After migration, show an informative in-game notice (proposed wording: *Class skills were reset to match the new progression system. Your skill points have been refunded.*), and let the player allocate as normal; no long-term unlimited respec is implied.
+6. Verify rollback/backup, mid-fork state, class switching, both classes on the same account, missing skill records, badly formed saves, and level-1 saves where four free skill ranks were embedded historically. Avoid changes to Novice/Tier I skill point policies unless their actual implementations conflict with the universal rank-0 rule and the user approves a broader migration.
+
+### Code impacts for later implementation (no C# edits yet)
+
+- Greatblade/Mage `StarterRank` calculation should not silently return one for first-unlock-level-1 skills. Update `SpentPoints`/`UnspentPoints`, `Rank`, `RestoreState`, `CanRestore` and ability providers to implement **0 starter ranks, `Level - Σ(ranks)` unspent points** and validated class-level first-eligibility gates.
+- Under a revised per-level rank system, `rankLevels` arrays alone no longer express both first-unlock and maximum rank appropriately; use separate authoring fields or equivalent validated rules for **firstLearnLevel** and **maxRank**, keeping purchased-rank history and skill-point total valid on save/load.
+- Retune high-rank growth to respect the separate cap of each skill. Avoid negative Mana per damage and >100% redirect; Math Barrier stays five ranks so is safe at its known ranks.
+- Update tooltip next-rank previews, action-bar purchase availability, skill data/assets, save-load tests and automated validators after user approves the specific rank schedule/caps.
+- **No Unity code changes or save migration were performed by the design audit.**
+
+## Five questions for user — cross-class review round 2
+
+**RANK-006 — Per-level upgrading:** The previous Q4 answer clearly approved **different caps**, but didn't explicitly say whether Mage and Greatblade should have **no periodic upgrade gates**. After an ability first unlocks, can the player invest **one rank per class level** into it, like Priest, until that ability reaches its own maximum cap?
+
+**RANK-007 — Greatblade weighted caps:** How do you feel about **Wide Arc 18, Spin Dash 14, Overhead Breaker 18, Battle Cry 8, Greatsword Mastery 12, Heavy Rhythm 8**? That totals **78 ranks**, close to 80 points at level 80. We can rebalance those individual caps later.
+
+**RANK-008 — Mage weighted caps:** How about **Ember Bolt 18, Frost Snare 12, Arc Lightning 12, Quicksand 10, Half-Life 8, Math Barrier 5 (unchanged), Elemental Weaving 8, Mana Attunement 7**? That totals **80**, matching all points at level 80 while keeping Math Barrier at five ranks.
+
+**RANK-009 — High-rank effect scaling:** For ranks beyond today's code caps, may I propose **diminishing or capped secondary effects** (e.g., Frost Snare's freeze duration, Arc Lightning's jump count, Half-Life's DEF reduction, Greatblade Heavy Rhythm's Momentum efficiency), while still letting damage/healing/rank benefits improve? Math Barrier's five ranks would remain unchanged.
+
+**RANK-010 — Existing-save migration UX:** Should the one-time full reset/refund happen **automatically on first load after the update**, with a clear in-game notification and a recoverable backup? It would preserve class level/XP/gear/quest progress and give the correct one point per class level, including level 1. Or would you prefer a confirmation prompt before resetting skills?
+
+## Decision log
+
+| Date | Subject | State |
+| --- | --- | --- |
+| 2026-10-18 | All skills rank 0 + one spendable point at level 1 | **CONFIRMED global design**, not yet reflected in Greatblade/Mage code |
+| 2026-10-19 | Priest four regular ×18 + Grace5 + Revive1 = 78 spendable at level80 | **CONFIRMED for Priest** |
+| 2026-10-19 | Greatblade/Mage free starter ranks, capped early and level-80 underspending quantified from branch code | **VERIFIED current implementation** |
+| 2026-10-19 | RANK-001 | Greatblade/Mage share near-complete spend-down target by level80 | **CONFIRMED** |
+| 2026-10-19 | RANK-002 | Preserve Greatblade first skill unlocks, rank 0 and 1 initial point | **CONFIRMED** |
+| 2026-10-19 | RANK-003 | Preserve Mage first skill unlocks, rank 0 and 1 initial point | **CONFIRMED** |
+| 2026-10-19 | RANK-004 | Different max ranks appropriate to skill; Math Barrier keeps max rank 5; per-level upgrading not explicitly answered | **CONFIRMED cap policy; gate detail OPEN** |
+| 2026-10-19 | RANK-005 | Existing Mage/Greatblade characters receive a one-time skill reset/refund | **CONFIRMED policy; implementation trigger open** |
+| 2026-10-19 | RANK-006–RANK-010 | Cross-class Round 2 questions asked | **AWAITING USER** |
 ## Decision log
 
 | Date | Subject | State |
