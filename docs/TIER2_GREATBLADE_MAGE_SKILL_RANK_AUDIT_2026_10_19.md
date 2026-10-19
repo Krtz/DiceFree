@@ -1,7 +1,7 @@
 # DiceFree Tier II — Greatblade and Mage skill-rank audit
 
 **Date:** 2026-10-19  
-**Status:** DESIGN REVIEW — Rounds 1–2 confirmed (2026-10-19). Mage's weighted caps approved; Greatblade Mastery rank shape and cap distribution under review; mixed skill-specific rank cadence approved. **No Unity C#, save, build or live skill changes yet; implementation handoff awaits final sign-off.**  
+**Status:** DESIGN REVIEW — Rounds 1–3 recorded (2026-10-19). Both classes' weighted cap totals and selected rank schedules confirmed; Greatsword Mastery's **exact alternating-effect rank placement** and the **post-cap skill-point policy** remain OPEN. **No Unity C#, save, build or live skill changes; implementation handoff awaits final sign-off.**  
 **Branch inspected:** `integration/world1-foundation`  
 **Companion design:** [Priest Tier II interview](classes/PRIEST_TIER2_DESIGN.md)  
 **Global authority:** [Class Progression: universal zero-rank rule](CLASS_PROGRESSION.md#universal-rank-zero-and-ordinary-basic-attack-rules-user-correction-2026-10-18)
@@ -117,21 +117,30 @@ The v0.3 Greatblade design explicitly recommends *different rank-up breakpoint s
 
 ## Updated weighted cap distributions
 
-### Greatblade — counterproposal, not yet approved
+### Greatblade — FINAL weighted rank caps CONFIRMED RANK-011/012
 
-**User's concern:** Greatsword Mastery should not need 12 ranks filled with barely differentiated bonuses. My recommended adjustment is **8 Mastery ranks**, keeping its current real milestone effects at ranks **1–4**, with later upgrades primarily increasing flat STR and greatsword-damage bonuses until we deliberately design distinct higher milestones. The four reclaimed ranks go to the two main damage abilities rather than bloating Heavy Rhythm (which already has a Momentum decay floor).
+**User chose exactly eight Greatsword Mastery ranks**, with **alternating substantial mechanics and flat STR/sword-damage increases**. User-approved total Greatblade capacity: **78 ranks**.
 
-| Skill | Previous proposal | New proposal | First learn |
-| --- | ---: | ---: | ---: |
-| Wide Arc | 18 | **20** | 1 |
-| Spin Dash | 14 | **14** | 1 |
-| Overhead Breaker | 18 | **20** | 6 |
-| Battle Cry | 8 | **8** | 18 |
-| Greatsword Mastery | 12 | **8** | 1 |
-| Heavy Rhythm | 8 | **8** | 1 |
-| **Total** | **78** | **78** | — |
+| Skill | First-learn level | Maximum rank (CONFIRMED) |
+| --- | ---: | ---: |
+| Wide Arc | 1 | **20** |
+| Spin Dash | 1 | **16** |
+| Overhead Breaker | 6 | **18** |
+| Battle Cry | 18 | **8** |
+| Greatsword Mastery | 1 | **8** |
+| Heavy Rhythm | 1 | **8** |
+| **Total** | — | **78** |
 
-Alternative equally viable: keep **Mastery 12** but have **explicit milestone upgrades** separated by ranks that grant only modest STR/greatsword-damage bonuses. The user asked to weigh these options, not to silently finalize 8 vs 12. For either approach, preserve previously approved **rank 2** Wide Arc haste, **rank 3** wider cleave, **rank 4** small finisher protection (shield vs heal still open); don't replace them with fluff.
+#### Greatsword Mastery — current behavior versus proposed alternate effects
+
+The currently implemented passive has these genuine effects:
+- At **every rank**: +1 STR and +2% greatsword/basic sword damage per rank (provisional existing values).
+- Currently at **rank 2**: Wide Arc grants a temporary attack-speed buff (base +8%, +2 percentage points per later rank, 3s duration +0.25s per later rank, per existing prototype).
+- Currently at **rank 3**: Wide Arc cone grows wider (base +15 degrees, +3 degrees per later rank in current prototype).
+- Currently at **rank 4**: Overhead Breaker awards temporary **shield** (+5% max HP, 5 seconds, +0.5 percentage points later), but **shield versus heal remains a design question**. Existing shield is provisional gameplay.
+- At rank 1 the passive starts giving STR/sword-damage bonuses; this is its foundational identity rather than an additional attack.
+
+**PROPOSED layout requiring user sign-off (RANK-016):** rank **1** basic mastery (STR/damage), rank **2** stats only, rank **3** Wide Arc haste, rank **4** stats only, rank **5** wider Wide Arc, rank **6** stats only, rank **7** Overhead Breaker temporary shield (or heal, unresolved), rank **8** stats only. **All ranks improve STR/damage**. This satisfies an alternating every-other-rank idea without introducing a new unapproved mechanic, but moves existing features from live 2/3/4 → proposed 3/5/7. This rank-shift is **NOT YET APPROVED**; migration reset will help users reallocate.
 
 ### Mage — user-approved weighted cap (80 points)
 
@@ -147,9 +156,9 @@ Alternative equally viable: keep **Mastery 12** but have **explicit milestone up
 | Mana Attunement | 1 | **7** |
 | **Total** | — | **80** |
 
-**Half-Life cadence example:** rank 1 at Mage level 18, then 22, 26, 30, 34, 38, 42, 46 (every four levels). This is a concrete **DESIGNER EXAMPLE based on the user's tentative suggestion**, not confirmed gate table.
+**CONFIRMED RANK-014:** Half-Life ranks 1–8 become eligible at Mage levels **18, 22, 26, 30, 34, 38, 42, 46** respectively (**four character levels between ranks**). This schedule is approved, not just an example.
 
-**Math Barrier:** maintain its current five-rank cap and formulas, and preferably keep original gates **6, 12, 18, 24, 30** unless the user specifically wants them changed.
+**CONFIRMED RANK-014:** Math Barrier maintains its five-rank cap, existing formulas and exact skill-rank eligibility levels **6, 12, 18, 24, 30**.
 
 For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, Mana sustain, or cooldown benefits upward without bound. Tuned benefits should be visible on rank previews.
 
@@ -157,46 +166,65 @@ For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, M
 
 | Skill family | Example progression | Rationale |
 | --- | --- | --- |
-| Primary direct damage abilities (Wide Arc, Overhead Breaker, Ember Bolt) | once every class level after first unlock | Main long-term investment sinks |
+| Primary direct damage abilities (Wide Arc, Overhead Breaker, Ember Bolt) | **CONFIRMED RANK-013:** upgrade each class level after first unlock, to their own caps | Main long-term investment sinks |
 | Multi-target/mobility spells (Spin Dash, Arc Lightning) | 2 levels per rank | Manage mobility/target expansion |
-| Status/DOT fields (Frost Snare, Quicksand, Half-Life) | 2–4 levels per rank | Avoid exaggerated CC/DEF effects |
+| Status/DOT fields (Frost Snare, Quicksand) | 2–4 levels per rank **PROPOSED**; Half-Life **CONFIRMED four levels** from level 18 | Avoid exaggerated CC/DEF effects |
 | Major utility/passives (Battle Cry, Heavy Rhythm, Elemental Weaving, Mana Attunement) | 3–5 levels per rank | Preserve special effects and meaningful increments |
 | Greatsword Mastery | maybe fewer ranks or milestone ranks with flat-stat fillers | User specifically flagged this ability |
-| Math Barrier | **existing gates proposed unchanged**: 6 / 12 / 18 / 24 / 30 | Five-rank special utility, existing formulas |
+| Math Barrier | **CONFIRMED existing gates**: 6 / 12 / 18 / 24 / 30 | Five-rank special utility; existing formulas |
 
-Schedules should satisfy **first-unlock levels** and allow the proposed total rank investments to become purchasable by approximately **level 80**. A cadence must not push the class's nominal max ranks well beyond 80 or leave many unusable level-80 points. 
+Schedules must preserve first-learn levels and allow almost all rank investments to be purchasable by approximately level 80. Some skills have per-level increases (confirmed), some have bespoke gaps. Avoid dead points and stale rank reminders once everything becomes capped. The final post-cap/no-upgrade-available notification policy is still open. 
 
 ## Implementation conditions, migration and tests
 
-- **Confirmed migration**: on first load of each pre-update Mage/Greatblade manifestation, **automatically reset all its class skill ranks to 0** and return **exactly one spendable point per current class level**, not one per level plus the old four free starter ranks. This preserves class level, XP, gear, items, gold, quests, class/echo progression and parent save manifestations.
+- **Confirmed migration**: on first load of each pre-update Mage/Greatblade manifestation, **automatically reset all class skill ranks to 0**, preserving class level, XP, gear, items, gold, quests, class/echo progression and parent save manifestations. **All level 80+ legacy saves are eligible for the reset (RANK-015)**. Their final **excess spendable-points policy remains OPEN** due to user's new concern about permanently unspendable points; do not quietly discard or endlessly surface surplus before it is decided. No old four free ranks survive.
 - **No notification, confirmation modal or extra respec button** for this one-time migration.
 - For safety: **atomic per-manifestation migration, idempotent migration marker/version, recoverable pre-migration backup**, passive re-evaluation, default rank-0 tooltips/upgrade UI and save validation after committing.
 - **Neither the migration nor combat skills have been changed in code**. Final schedules and high-rank curves await user sign-off in the separate implementation handoff.
 
-## Cross-class Round 3 — five questions (awaiting user)
+## Cross-class Round 3 — answers recorded 2026-10-19
 
-**RANK-011 — Greatsword Mastery rank shape.** Would you prefer **8 ranks maximum** for Greatsword Mastery (maintain its current real effects at ranks 1–4, with ranks 5–8 giving gradually better STR/greatsword bonuses), or **12 ranks with real new milestone mechanics spaced among smaller flat-stat ranks**? If you want a different cap, that's fine too.
+- **RANK-011 — CONFIRMED cap/direction:** Greatsword Mastery maximum **8 ranks**. Alternate actual added mechanics and ordinary +STR/+greatsword damage ranks. The exact new placement of its currently rank-2 haste, rank-3 cone growth and rank-4 finisher protection is **OPEN**; propose milestones rank 3/5/7.
+- **RANK-012 — CONFIRMED:** Greatblade caps **Wide Arc 20, Spin Dash 16, Overhead Breaker 18, Battle Cry 8, Greatsword Mastery 8, Heavy Rhythm 8**, totaling **78** ranks.
+- **RANK-013 — CONFIRMED:** Wide Arc, Overhead Breaker and Ember Bolt **can gain one rank each subsequent class level after first unlock**, subject to caps. Other skills use different, individually authored spacings.
+- **RANK-014 — CONFIRMED:** Mage Half-Life first/every rank eligibility levels **18/22/26/30/34/38/42/46**, Math Barrier **6/12/18/24/30**, current Math Barrier cap/formulas preserved.
+- **RANK-015 — CONFIRMED support for high-level old saves, OPEN overflow policy:** user explicitly said legacy Mage/Greatblade characters at **level 80+** should receive the automatic skill reset/refund but then questioned infinite unspendable points. Two ideas surfaced: **stop awarding/spending points once every skill reaches maximum** vs **grant every class an uncapped/long-cap Novice-like all-stat passive point sink**. **Neither selected**; user wants advice. Critical UX: do not show recurring unspent-point reminders if no rank is purchasable or after all abilities are maxed. See recommendation and follow-up below.
 
-**RANK-012 — Greatblade total budget.** If Mastery drops from 12 to **8 ranks**, should the four recovered ranks go to **Wide Arc (20 instead of 18)** and **Overhead Breaker (20 instead of 18)**, keeping Greatblade at **78 total possible ranks**? Or would you distribute them differently?
+## Skill-point overflow and rank-ready UX — new design discussion
 
-**RANK-013 — Primary spell cadence.** Should main damage spells (Wide Arc, Overhead Breaker, Ember Bolt) be rankable **every class level**, with secondary/utility skills requiring 2–5 levels between upgrades, subject to each skill's first-learn requirement and cap? Any exceptions?
+**Identified problem:** `UnspentPoints = Level − SpentPoints` grows indefinitely when class levels exceed total possible ranks. The action-bar [+] and points reminder can show surplus numbers that **cannot be used**, especially at level 80+ after maxing every rank. Legacy high-level saves exacerbate this after migration.
 
-**RANK-014 — Half-Life and Math Barrier schedules.** Shall we **lock Half-Life at ranks 1–8 at Mage levels 18/22/26/30/34/38/42/46**, while leaving Math Barrier at **6/12/18/24/30** and its current formulas? Or do you prefer other gaps?
+**Recommended policy (NOT YET APPROVED):** **do not add a global Novice all-stat passive to every class**. Otherwise all classes gain potentially unbounded STR/INT/SPR/VIT/AGI from overleveling, eroding authored class identities, gear balance and deliberate advancement choice. Instead use a **bounded per-manifestation skill-point budget**:
 
-**RANK-015 — Migration progress and safety.** On first loading a legacy Mage/Greatblade save, I'll **reset only class skill ranks, preserve everything else, silently refund one point per class level, and keep a recoverable backup**, without any notification. Should this migration also apply if a saved character is **already at level 80+**, with surplus points retained for potential future skill additions rather than discarded? (The ordinary +1 point/level can continue above the cap.)
+- **Total allocation budget** = `min(current class level, sum of current class skill max ranks)` (e.g. Greatblade `min(level,78)`, Mage `min(level,80)`, Priest `min(level,78)`). Unspent allocation = `max(0, total budget − ranks spent)` respecting class-specific level-gated first availability/rank spacing.
+- Once **all ranks are purchased**, **unspent is zero** and future level-ups **do not award surplus spendable skill points**; XP, character level, stats and overleveling continue normally. Points at a temporary rank gate may remain banked until a legal upgrade unlocks.
+- The skillpoint reminder/[+] can be visible **only when there is at least one currently purchasable rank** (enough banked points AND rank gate satisfied), not merely when an unspendable point count is nonzero. Do not show per-level "you have skill points" prompts without an eligible upgrade.
+- If the class later receives new skills or raised rank caps, recalculating the bounded budget from **current class level** makes any retroactively earned eligibility visible and preserves old overlevels. Skill rank spent data and migration revision markers remain authoritative; no phantom persistent overflow.
+- A migrated level-100 Mage would have **up to 80** points available to reallocate within Mage's 80-rank cap; a migrated level-100 Greatblade **up to 78**, not 100 permanently unspendable points. This **does not reduce character level or earned XP**, only caps the *currently spendable skill-point budget*.
+- **Still open:** special rewards that award bonus skill points beyond class-level progression, class-specific uncapped sink mechanics, respec treatment and whether to show a separate earned lifetime-points statistic (but **not** an unusable badge). Such future systems need deliberate design; do not assume.
+
+## Cross-class Round 4 — five questions (awaiting user)
+
+**RANK-016 — Greatsword Mastery's eight ranks.** Can we use **rank 1** to activate the base passive, **ranks 2/4/6/8** for extra STR and greatsword damage only, **rank 3** to add the temporary Wide Arc attack-speed bonus, **rank 5** to widen Wide Arc and **rank 7** to add protection after Overhead Breaker? This moves the existing early effects from ranks 2/3/4 to 3/5/7. For rank 7, do you want the currently implemented small **shield**, or **healing** instead?
+
+**RANK-017 — Unspendable point solution.** My recommendation is **cap the spendable skill-point budget to the class's total rank capacity**, stopping further allocation when all ranks are maxed, but let the character **continue leveling and gaining stats**. Do **NOT** add a universal novice-style passive stat sink. Does that sound right?
+
+**RANK-018 — Level-gated reminder.** If a character has banked skill points but **none of their currently unlocked skills can upgrade yet**, should the UI **hide the unspent-points notification until at least one legal upgrade becomes available**? This also fixes misleading reminder popups before the character reaches the next rank gate.
+
+**RANK-019 — Greatblade's other rank-up spacing.** We have Wide Arc and Overhead Breaker eligible every class level after first unlock. For **Spin Dash (16 ranks)**, **Battle Cry (8)**, **Greatsword Mastery (8)** and **Heavy Rhythm (8)**, should I pick provisional rank-gate schedules tailored to each skill and balanced toward level 80, or do you want to choose any exact intervals yourself?
+
+**RANK-020 — Higher-rank Mage pacing.** Ember Bolt increases every class level; Half-Life gets a rank every **4 levels**; Math Barrier keeps **6/12/18/24/30**. Should I choose distinct provisional intervals for Frost Snare, Arc Lightning, Quicksand, Elemental Weaving and Mana Attunement, with caps and diminishing utility effects already confirmed, for you to review?
 
 ## Decision log
 
 | Date | Question | Result |
 | --- | --- | --- |
-| 2026-10-18 | Universal rank-0, one class point at level 1 | **CONFIRMED** |
-| 2026-10-19 | RANK-001 | Greatblade/Mage level-80 near-spend target **CONFIRMED** |
-| 2026-10-19 | RANK-002–003 | First-unlock levels unchanged, no starter ranks **CONFIRMED** |
-| 2026-10-19 | RANK-004 | Different caps by function, Math Barrier stays rank 5 **CONFIRMED** |
-| 2026-10-19 | RANK-005 | Existing class saves reset/refund once **CONFIRMED** |
-| 2026-10-19 | RANK-006 | Skill-specific cadence, no universal upgrade interval **CONFIRMED**; Half-Life 4-level example provisional |
-| 2026-10-19 | RANK-007 | Greatsword Mastery fewer ranks **or** sparse special milestones with stat filler **CONFIRMED direction**, cap open |
-| 2026-10-19 | RANK-008 | Mage caps 18/12/12/10/8/5/8/7 **CONFIRMED** |
-| 2026-10-19 | RANK-009 | Diminishing/capped secondary effects permitted **CONFIRMED** |
-| 2026-10-19 | RANK-010 | Automatic silent one-time reset/refund on first legacy save load **CONFIRMED** |
-| 2026-10-19 | RANK-011–RANK-015 | Round 3 questions **AWAITING USER** |
+| 2026-10-18 | Universal rank-0 and one point at class level 1 | **CONFIRMED** |
+| 2026-10-19 | RANK-001–005 | Level-80 budget, first unlocks unchanged, varied caps, Math Barrier 5, one-time reset/refund | **CONFIRMED** |
+| 2026-10-19 | RANK-006–010 | Per-skill rank interval, Mage 80 weighted ranks, diminishing utility effects, silent automatic migration | **CONFIRMED** |
+| 2026-10-19 | RANK-011 | Greatsword Mastery max 8, alternating mechanic/stat ranks | **CONFIRMED**, actual rank milestone positions/open shield vs heal |
+| 2026-10-19 | RANK-012 | Greatblade caps 20/16/18/8/8/8 = 78 | **CONFIRMED** |
+| 2026-10-19 | RANK-013 | Greatblade Wide Arc and Breaker, Mage Ember Bolt rank-up every class level | **CONFIRMED** |
+| 2026-10-19 | RANK-014 | Half-Life 18/22/26/30/34/38/42/46; Math Barrier 6/12/18/24/30 | **CONFIRMED** |
+| 2026-10-19 | RANK-015 | High-level old saves migrate; persistent unusable-point problem flagged; bounded points vs passive sink undecided | **CONFIRMED migration**, **OPEN overflow policy** |
+| 2026-10-19 | RANK-016–020 | New five questions | **AWAITING USER** |
