@@ -724,6 +724,8 @@ Default:
 
 Individual effects can define different rules if desired.
 
+**Confirmed skill-specific exception in Defender design (2026-10-19; NOT IMPLEMENTED):** multiple Defender **Shield Sweep temporary ally Physical/Magical Defense buffs from DIFFERENT Defenders STACK additively**, while a repeat Shield Sweep from the SAME Defender replaces that Defender's old four-second buff. In contrast, the continuously present **Hold the Line +elemental-resistance aura** continues to use the **strongest same-identity aura, not additive stacking**. Do not conflate different-caster Sweep buff stacking with Hold the Line aura stacking. See [Defender Tier II design](classes/DEFENDER_TIER2_DESIGN.md).
+
 ## Dispel strength
 
 Every dispellable effect defines its own dispel interaction.
