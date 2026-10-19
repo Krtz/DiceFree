@@ -1,5 +1,8 @@
 # Greatblade — Tier II prototype v0.3 (user-approved kit, cadence and 3D asset pass)
 
+> **Later user skill-progression decisions (2026-10-19):** original Greatblade skill **first availability levels** are confirmed, but this historical design's suggestion of **four free level-1 skills is superseded** by the global **rank-0, one-point-at-level-1** rule. The original periodic rank-up gates and fixed low caps are under review against the Tier II near-spend-down-by-level-80 rule; caps should be weighted by function. Existing saves will be fully reset/refunded once in a safe implementation migration. See [Greatblade/Mage skill-rank audit](TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). Do not confuse as-built prototype behavior with finalized redesigned progression.
+
+
 **2026-10-13 — gameplay design locked where noted, balance and rank dates provisional.**
 Supersedes Greatblade entries in `TIER2_CORE_CLASSES_DESIGN_V01.md` and `V02.md`.
 
