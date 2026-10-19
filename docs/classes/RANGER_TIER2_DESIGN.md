@@ -198,7 +198,7 @@ Count all individual skill ranks whose own level gate is reached at that Ranger 
 ## Ranger Round 5 — user answers recorded 2026-10-19
 
 - **RANGER-021 APPROVED:** Ranger total cap **80 ranks** and exact designer-selected six-skill gates: Aimed Shot20, Exploding Arrow18, Arrow Rain16, Hawk Dive10, Evasive Step8, Bow Mastery8, with exact gate levels in schedule table. All levels 1–80 pass purchase-accessibility proof; initial playtest baseline, not code.
-- **RANGER-022 CONFIRMED:** Exploding Arrow impacts one primary enemy with greater successful-hit total damage; **2.5m Gun-element explosion** around hit impact. **EXPLOSION STILL HAPPENS ON MISSED DIRECT ARROW**. Designer proposes miss detonation at miss/ground landing point, with independent splash checks, not a guaranteed primary hit; final miss-center rule open.
+- **RANGER-022 PARTIALLY HISTORICAL / SUPERSEDED BY LATEST RANGER-027:** **2.5m Gun-element explosion** around primary enemy, with primary direct+blast damage confirmed. The previous assistant's imagined **MISSED ARROW detonation** and offset-ground landing were mistakenly recorded in this older round and were **explicitly rejected by user in RANGER-027**. **AUTHORITATIVE LATEST: Exploding Arrow CANNOT MISS and always detonates at successfully hit primary target.**
 - **RANGER-023 CONFIRMED:** Aimed Shot EXTRA flat marked-target damage starts at **0.5 × Ranger AGI**, **increases further with Aimed Shot skill rank** (exact rank growth formula left for designer to propose/approve). This is additional to the usual mark's percent damage bonus, not a flat 20% extra.
 - **RANGER-024 CONFIRMED:** Bow Mastery grants **+2 AGI per rank**; its **+0.1m/rank range bonus applies to BOTH basic attacks and Aimed Shot**. Bow Mastery crit permission stays **basic attacks + Aimed Shot ONLY**, +1pp/rank at 1.4×, consistent with explicit crit framework.
 - **RANGER-025 CONFIRMED:** **Evasive Step cannot be cast while rooted or stunned**. Arrow Rain has a **1.5 SECOND CHANNEL** where Ranger fires a **big arrow into sky then smaller arrow**; then **FOUR damaging rainfall WAVES over TWO SECONDS** in the selected ground area, hitting later-arriving enemies too. Precise channel interruption and wave tick spacing remain open.
@@ -259,7 +259,7 @@ Use `B` = the current normal bow basic attack's raw damage before mitigation, an
 | 2026-10-19 | RANGER-019 | Bow Mastery crit basic+Aimed Shot ONLY, +1pp/rank at 1.4×; +0.1m basic range/rank; +AGI | **CONFIRMED; AGI number OPEN** |
 | 2026-10-19 | RANGER-020 | Delegated six-skill cap/gate schedule design, designer proposal 20/18/16/10/8/8 = 80 | **DELEGATED; proposed schedule awaits user approval** |
 | 2026-10-19 | RANGER-021 | Exact 80-rank six-skill caps/gates | **APPROVED initial playtest** |
-| 2026-10-19 | RANGER-022 | Exploding Arrow Gun 2.5m AoE even after a direct-hit MISS | **CONFIRMED; landing point OPEN** |
+| 2026-10-19 | RANGER-022 | Gun explosion 2.5m primary target; miss branch was later corrected and disallowed by RANGER-027 | **2.5m CONFIRMED; MISS SCENARIO HISTORICAL/SUPERSEDED** |
 | 2026-10-19 | RANGER-023 | Marked Aimed Shot +0.5×AGI flat bonus plus extra skill-rank scaling | **CONFIRMED; rank coefficient OPEN** |
 | 2026-10-19 | RANGER-024 | Bow Mastery +2 AGI/rank; +0.1m range/rank to basics AND Aimed; crit eligibility unchanged | **CONFIRMED** |
 | 2026-10-19 | RANGER-025 | Evasive Step unavailable while rooted/stunned; Arrow Rain 1.5s big-then-small upward-arrow channel + 4 waves over 2s | **CONFIRMED; channel interrupts OPEN** |
