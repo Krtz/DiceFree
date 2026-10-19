@@ -1,7 +1,7 @@
 # DiceFree Tier II — Greatblade and Mage skill-rank audit
 
 **Date:** 2026-10-19  
-**Status:** DESIGN REVIEW — Rounds 1–4 recorded (2026-10-19). Greatsword Mastery's alternating rank milestones + shield, both classes' cap totals, universal bounded skill-point budget and purchasable-upgrade-only indicator are CONFIRMED. Designer-chosen specific remaining rank-gate schedules below are playtest baselines. **No Unity C#, save, build or live skill changes; implementation handoff awaits final sign-off.**  
+**Status:** DESIGN REVIEW — Rounds 1–5 recorded (2026-10-19). Initial per-skill rank gate schedules approved for implementation testing; Greatsword Mastery base power, Metal shield and Mage secondary-effect ceiling design recorded. User delegated quiet banked-point menu UX. **No Unity C#, save, build or live skill changes; implementation handoff awaits final sign-off.**  
 **Branch inspected:** `integration/world1-foundation`  
 **Companion design:** [Priest Tier II interview](classes/PRIEST_TIER2_DESIGN.md)  
 **Global authority:** [Class Progression: universal zero-rank rule](CLASS_PROGRESSION.md#universal-rank-zero-and-ordinary-basic-attack-rules-user-correction-2026-10-18)
@@ -137,10 +137,19 @@ The currently implemented passive has these genuine effects:
 - At **every rank**: +1 STR and +2% greatsword/basic sword damage per rank (provisional existing values).
 - Currently at **rank 2**: Wide Arc grants a temporary attack-speed buff (base +8%, +2 percentage points per later rank, 3s duration +0.25s per later rank, per existing prototype).
 - Currently at **rank 3**: Wide Arc cone grows wider (base +15 degrees, +3 degrees per later rank in current prototype).
-- Currently at **rank 4**: Overhead Breaker awards temporary **shield** (+5% max HP, 5 seconds, +0.5 percentage points per later rank) in the old implementation. **RANK-016 CONFIRMED** that the redesigned milestone at rank 7 remains a **shield, not a heal**. Exact high-rank shield values remain playtest balance.
+- **HISTORICAL LIVE CODE:** old Greatblade rank-4 Mastery had a temporary generic shield of ~5% maximum HP for 5 seconds (+0.5 percentage point per later rank). **SUPERSEDED BY RANK-023:** the new **rank-7 milestone** grants a **METAL-element shield** absorbing **100 + 5% of the Greatblade's maximum HP**, lasting **exactly 5 seconds**. It is a shield, not a heal. Do not carry over the old +0.5%-per-rank capacity scaling unless separately approved.
 - At rank 1 the passive starts giving STR/sword-damage bonuses; this is its foundational identity rather than an additional attack.
 
-**CONFIRMED RANK-016 layout:** rank **1** initial STR/damage mastery, **2** stats only, **3** unlock Wide Arc attack-speed buff, **4** stats only, **5** expand Wide Arc hit cone, **6** stats only, **7** unlock Overhead Breaker temporary **SHIELD**, **8** stats only. **EVERY rank improves STR + greatsword damage**. Ranks 2/4/6/8 do not need distinct combat mechanics. This deliberately moves former live mechanic milestones 2/3/4 → 3/5/7; old saves migrate by resetting/refunding rather than silently upgrading these effects. Existing numeric modifiers are provisional.
+**CONFIRMED RANK-016/022/023 layout:** rank **1** basic Mastery, **2** stats only, **3** temporary Wide Arc haste, **4** stats only, **5** wider Wide Arc, **6** stats only, **7** Overhead Breaker creates a **5-second Metal-element shield absorbing 100 + 5% of max HP**, **8** stats only. **EVERY rank gives +1 STR and +2% greatsword damage** (additive bonus per rank, provisional playtest coefficients). At rank 8 the shield's 100 + 5%-of-HP base is unchanged because the user approved no separate rank-8 shield increase, while STR/damage still grows. Historic mechanics 2/3/4 deliberately shift to 3/5/7. **OPEN**: whether Metal tag filters eligible damage or merely identifies the shield's element, specific-priority/efficiency interaction with other shields and whether to absorb Pure damage. The shared shields framework defines these per skill, not globally.
+
+### Metal shield semantics (Greatsword Mastery rank 7)
+
+- **Trigger:** on **successful Overhead Breaker** when the actor has Greatsword Mastery rank ≥7; no heal.
+- **Element:** **Metal** (not Ice, generic non-elemental, or a Metal damage attack).
+- **Capacity:** **100 + 0.05 × shielded Greatblade's maximum HP** absorb points at creation. Exactly **5 seconds** lifetime, ending earlier if fully consumed. E.g. at max HP 1,000, capacity = 150 absorb points; this is an illustrative computed example, not a fixed Greatblade HP value.
+- **Ranks:** +1 STR and +2% greatsword damage every rank 1–8. Rank 8 does **not** introduce a new mechanism or automatic 0.5% increase to shield coefficient.
+- **Resolution:** respect `docs/STATS_AND_DAMAGE.md`: defense/resistance generally mitigate before shield consumption; filtered/specific versus generic shield priority determined by ability. **The user has not chosen whether Metal shields absorb all incoming damage or specifically Metal damage / enhanced Metal efficiency**. Implementation must not infer an eligibility filter from the element tag alone. Also decide Pure-damage eligibility, stacking/retrigger replacement and whether bonus 100 is adjusted by shield-bonus modifiers in the general framework.
+- **Save-state:** shield is transient combat state, not permanent skill rank state; preserve only purchased Mastery ranks, not lingering shield across manifestation loads unless general combat rules say otherwise.
 
 ### Mage — user-approved weighted cap (80 points)
 
@@ -204,7 +213,7 @@ For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, M
 
 ## Per-skill rank-gate schedules — designer-selected provisional playtest baselines
 
-**User delegation RANK-019/020:** choose individual gaps per skill, but wherever possible preserve the ability to **spend one earned point on some legal upgrade on EVERY class level up to the class's maximum allocation**. Confirmed first unlocks, maximum ranks and previously user-approved gate intervals must not change. These are **specific designer-selected playtest schedules**, not immutable numeric balance and not Unity-implemented yet.
+**User delegation RANK-019/020, followed by APPROVAL RANK-021:** use the below **exact level-gate schedules as the initial implementation/playtest baselines**, with the ability to **spend one earned point on a legal upgrade every class level through class max allocation**. First unlocks, caps, Half-Life/Math Barrier gates are confirmed. These **initially approved schedules** are still subject to ordinary gameplay balancing, and they are **NOT yet implemented in Unity**.
 
 ### Greatblade — 78 ranks available by level 78
 
@@ -218,7 +227,7 @@ For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, M
 | Heavy Rhythm | 8 | 1 | 11 | 78 | 1, 12, 23, 34, 45, 56, 67, 78 |
 
 - **User CONFIRMED:** Wide Arc and Overhead Breaker can rank up every level after first purchase. Greatsword Mastery rank-1 starts at level 1 but its *extra special effects* occur at **skill ranks 3/5/7**, not automatically when merely reaching their corresponding class levels.
-- The longer cadence for Spin Dash, Battle Cry, Mastery and Heavy Rhythm is a provisional method of preserving utility identity and making future upgrades meaningful.
+- **CONFIRMED RANK-021 for initial playtest implementation:** Spin Dash ranks every 5 levels; Battle Cry every 8; Greatsword Mastery every 10; Heavy Rhythm every 11. These are approved initial pacing schedules but can be retuned after playing. This permits all 78 Greatblade points to be allocated by class level 78.
 - **Validation:** with these gates, for **every Greatblade class level 1 through 78**, the total count of already-unlocked distinct rank purchases is **at least the character level**. Therefore a player allocating one point every level is not forced to bank points, although they may choose to. By level 78 all **78** ranks have become eligible. The spendable pool then caps at 78.
 
 ### Mage — 80 ranks available by level 79
@@ -234,7 +243,7 @@ For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, M
 | Elemental Weaving | 8 | 1 | 11 | 78 | 1, 12, 23, 34, 45, 56, 67, 78 |
 | Mana Attunement | 7 | 1 | 13 | 79 | 1, 14, 27, 40, 53, 66, 79 |
 
-- **User CONFIRMED:** Ember Bolt can rank up each Mage level after purchase; Half-Life ranks 1–8 at **18/22/26/30/34/38/42/46**; Math Barrier retains **6/12/18/24/30** and max rank 5, formulas unchanged. The other Mage skill intervals above are delegated designer choices for initial playtesting.
+- **CONFIRMED RANK-021 for initial playtest implementation:** Ember Bolt every level, Frost Snare every 7, Arc Lightning every 6, Quicksand every 7, Elemental Weaving every 11, Mana Attunement every 13. Earlier-confirmed Half-Life ranks at **18/22/26/30/34/38/42/46** and Math Barrier at **6/12/18/24/30**, cap 5/formulas unchanged. Values subject to later playtesting only, not pending initial approval.
 - **Validation:** for **every Mage class level 1 through 80**, the total number of accessible individual rank purchases is **at least that level**, so allocating one point at each level is always feasible. The last of all **80** total ranks becomes available at level **79**, ready for the final budget point at level 80.
 
 ### Mathematically checked availability milestones
@@ -266,17 +275,48 @@ These counts represent total **distinct rank purchases eligible at or below a gi
 - **RANK-019 — CONFIRMED DELEGATION:** assistant may choose Greatblade's remaining per-skill rank gates while preserving **ability to spend one point each level through max budget**. Designer schedule and verified level-by-level capacity above.
 - **RANK-020 — CONFIRMED DELEGATION:** same for Mage's Frost Snare, Arc Lightning, Quicksand, Elemental Weaving and Mana Attunement; designer schedule and verification above.
 
-## Cross-class Round 5 — next five questions (awaiting user)
+## Cross-class Round 5 — five answers recorded on 2026-10-19
 
-**RANK-021 — Skill rank schedules.** I've designed and checked schedules allowing a point to be invested **at every level until maxed**. Greatblade: Spin Dash every **5** levels, Battle Cry every **8**, Greatsword Mastery every **10**, Heavy Rhythm every **11**, while Wide Arc and Breaker are every level. Mage: Frost Snare every **7**, Arc Lightning every **6**, Quicksand every **7**, Elemental Weaving every **11**, Mana Attunement every **13**, keeping confirmed Half-Life, Math Barrier and Ember rules. Shall these be our provisional default schedules for the initial implementation, subject to playtesting?
+- **RANK-021 CONFIRMED:** all Greatblade and Mage **exact candidate skill rank gate schedules**, as laid out and level-by-level validated in the audit, are approved as **the initial implementation/playtest schedules**. Rebalance later if playtesting proves necessary; do not revise other previously approved first-unlock levels.
+- **RANK-022 CONFIRMED:** Greatsword Mastery ranks **1–8 grant +1 STR and +2% greatsword damage per rank** as baseline. Significant new effects still only at ranks 3, 5 and 7.
+- **RANK-023 CONFIRMED NEW METAL SHIELD:** at Mastery rank ≥7, successful Overhead Breaker adds **Metal-element shield lasting 5 seconds**, capacity **100 + (5% × Greatblade maximum HP)**. This replaces prior 5% max-HP-only generic shield, does not heal, and does not silently get an extra rank-8 shield scaling. Exact damage-eligibility/stacking remains open.
+- **RANK-024 CONFIRMED DELEGATION:** designer may choose sensible provisional high-rank ceilings for Mage CC, Arc chain count, Half-Life defense reduction, Quicksand field/slow and other secondary effects; numeric proposals below remain playtest values.
+- **RANK-025 CONFIRMED DELEGATION:** skill UI may **quietly show exact banked point count and per-skill next eligible level**, while **not** showing an upgrade HUD reminder/popup until at least one rank can actually be purchased. No alerts for inaccessible ranks or permanently exhausted caps.
 
-**RANK-022 — Greatsword Mastery power.** For all eight ranks, the existing prototype gives **+1 STR and +2% greatsword damage per rank**, plus the new milestones at 3/5/7. Should that remain the initial baseline, or would you prefer diminishing bonuses toward ranks 6–8?
+## Mage high-rank secondary-effect playtest ceilings — designer proposal under RANK-024
 
-**RANK-023 — Greatblade shield strength.** At Greatsword Mastery rank 7, should Overhead Breaker's temporary shield retain the prototype's **5% maximum HP for 5 seconds** (and its small later-rank improvement), or should we start with a different amount/duration?
+These limits are *designer-selected implementation starting values*, not newly user-chosen exact combat numbers. Preserve Math Barrier rank 1–5 unchanged.
 
-**RANK-024 — Mage high-rank control effects.** Would you like me to choose sensible, playtestable ceilings for high-rank Frost Snare freeze duration, Arc Lightning chain targets, Half-Life defense reduction and Quicksand slowing/damage, preserving their identity but avoiding runaway effects? Math Barrier remains unchanged.
+| Skill | Provisional secondary-effect cap/rule | Primary rank growth |
+| --- | --- | --- |
+| Frost Snare (max rank 12) | Existing formula `0.75 + 0.25 × rank` stun/freeze would reach 3.75s at 12. **Propose cap freeze at 2.5 seconds BEFORE target CC resistance/hard immunity**; ranks after cap still increase spell damage, possibly slightly improve hit/coverage if separately balanced | Damage continues to scale per rank |
+| Arc Lightning (max rank 12) | Existing targets `3 + floor((rank−1)/2)` gives at most **8** target hits/jumps at rank 12; **cap at 8 unique hostile targets** unless deliberately authored boss exception, with standard falloff | Damage/magnitude continues to scale per rank |
+| Half-Life (max rank 8) | Current `−5 DEF × rank` is **−40 Physical AND −40 Magical DEF at rank 8**, cap total debuff at **−40 per channel** rather than permitting larger rank/item multipliers by mistake; same-caster DoT refresh, not self-stack | Damage-over-time potency continues to grow at high ranks |
+| Quicksand (max rank 10) | **Propose 40% maximum movement slow** at highest rank with a deliberately gentle early-rank ramp; keep field area/duration finite, non-stacking same-caster zone policy if supported | Per-tick Nature damage improves, without uncontrolled slow or field overlap |
+| Elemental Weaving (max rank 8) | Continue resist reduction, but **limit individual Mage aura resistance reduction to −8 percentage points at max rank**, using stronger-copy overlap rather than additive Mage aura stacking | Elemental rotation rewards remain, but do not multiply unbounded aura effects |
+| Mana Attunement (max rank 7) | Initial existing +30 maximum Mana and +0.5 Mana/s per rank yields +210 Mana and +3.5 Mana/s at rank 7; **use as starting ceiling** and rebalance with actual spell costs instead of extrapolating endlessly | Resource pool and regen improve per rank |
 
-**RANK-025 — Banked points in menus.** When points are banked for a future level gate but nothing is currently purchasable, should the skill menu still **show the exact banked point count and next eligible level**, without showing the popup/reminder? (The action bar [+] only appears for legal purchases.)
+No change to **Math Barrier's 5-rank cap, 2×rank duration, (25+5×rank)% redirection, or (2−0.1×rank) Mana per damage**. Secondary caps are not permission to change unrelated elemental rules or cross-class CC immunity behavior.
+
+## Banked skill-point interface — designer-selected UX for RANK-025
+
+- The **class skill panel** shows a subdued `Available skill points: N` indicator reflecting currently banked *spendable budget*, even when none can yet be purchased. If N=0, it may omit the count or display 0 unobtrusively.
+- Each **locked next-rank tooltip** displays `Next rank unlocks at class level L` using that skill's authored schedule, or `MAX RANK` if purchased to cap. Never show a future level for an already-maxed skill.
+- **No global popup, red dot or skill-point reminder** when every skill's next rank is level-gated or all skills maxed; preserve prior confirmed rule that the reminder is visible **only if at least one rank can be legally bought now**.
+- When an upgrade becomes purchasable and banked points exist, show the ordinary small indicator/action-bar [+] on that eligible skill rather than a persistent modal interruption.
+- The class skill-point budget stays **bounded** by its total purchasable ranks, but class level, XP, class attributes and overleveling continue normally. Preserve banked points across save/load and manifestation switching under the existing save model.
+
+## Cross-class Round 6 — five questions (awaiting user)
+
+**RANK-026 — Metal shield damage eligibility.** Should Greatsword Mastery's **Metal shield** absorb **all types of incoming damage** as a standard element-tagged protective shield, or absorb **Metal damage only** / resist Metal damage more efficiently? I recommend **all regular damage types**, with Metal as the thematic shield element, because a five-second finisher shield would otherwise be extremely situational. Pure damage can retain normal framework exceptions.
+
+**RANK-027 — Metal shield refresh/overlap.** If Overhead Breaker is used again before the five-second Metal shield expires, should the new shield **refresh/replace the existing one** (my preference), **add capacity to it**, or create a separate additional shield? Should this be a **self-shield only** (currently the intended finisher effect)?
+
+**RANK-028 — Mage secondary caps.** For initial playtesting, would you approve **Frost Snare freeze capped at 2.5s**, Arc Lightning at **8 distinct enemy targets**, Half-Life max **−40 Physical/Magical DEF**, Quicksand max **40% slow**, and Elemental Weaving aura **−8 percentage points**, with rank-based damage/potency still growing and Math Barrier unchanged?
+
+**RANK-029 — Skill menu UX.** When a point is banked but no ranks are currently purchasable, I recommend an unobtrusive count only in the opened **skill panel**, with `Next upgrade: level N` on skill tooltips. **No HUD reminder at all** until an actual rank purchase is possible. Does that presentation work for you?
+
+**RANK-030 — Final handoff scope.** After approving those remaining details, should we prepare a **single Greatblade + Mage implementation handoff** covering progression code, tooltip/action bar and safe save migration together, while leaving Priest implementation and balance as a separate task? (No Unity work will start in this chat unless explicitly requested.)
 
 ## Decision log
 
@@ -290,4 +330,9 @@ These counts represent total **distinct rank purchases eligible at or below a gi
 | 2026-10-19 | RANK-017 | Capped skill-point budget; no universal novice stat passive | **CONFIRMED** |
 | 2026-10-19 | RANK-018 | Upgrade-ready reminder only for purchasable rank | **CONFIRMED** |
 | 2026-10-19 | RANK-019–020 | Assistant designs per-skill gate schedule, ensures one spendable rank each class level till max | **CONFIRMED delegation; computed schedules provisional** |
-| 2026-10-19 | RANK-021–025 | Round 5 questions asked | **AWAITING USER** |
+| 2026-10-19 | RANK-021 | All candidate Greatblade/Mage rank schedules accepted for initial playtest implementation | **CONFIRMED** |
+| 2026-10-19 | RANK-022 | Greatsword Mastery +1 STR and +2% greatsword damage each of 8 ranks | **CONFIRMED** |
+| 2026-10-19 | RANK-023 | Mastery rank-7 Overhead Breaker triggers Metal shield, 5s, 100+5% max HP | **CONFIRMED**, eligible damage and stacking open |
+| 2026-10-19 | RANK-024 | Mage secondary-effect ceilings delegated to designer | **CONFIRMED delegation**, numeric playtest proposals |
+| 2026-10-19 | RANK-025 | Quiet in-panel banked points and per-skill next-level tooltip; actionable reminder only | **CONFIRMED delegated UX choice** |
+| 2026-10-19 | RANK-026–030 | Round 6 questions asked | **AWAITING USER** |
