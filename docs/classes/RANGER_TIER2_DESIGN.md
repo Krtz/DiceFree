@@ -62,7 +62,7 @@
 
 #### Bow Mastery — skill-rank-based class range and explicit crit
 
-- **Confirmed:** **AGI increase per skill rank** (exact flat AGI unknown); **small Ranger-range increase per Bow Mastery rank** on top of class base (exact meter/rank unknown), applies **equally to BOTH shortbows and longbows on the same Ranger**; **+1 percentage point crit chance per Bow Mastery skill rank, on eligible effects, critical hit modifier **1.4× raw damage**.
+- **Confirmed:** **AGI increase per skill rank** (exact flat AGI unknown); **small Ranger-range increase per Bow Mastery rank** on top of class base (exact meter/rank unknown), applies **equally to BOTH shortbows and longbows on the same Ranger**; **+1 percentage point crit chance per Bow Mastery rank** on eligible effects, with a **1.4× raw-damage critical multiplier**.
 - Because DiceFree has **NO universal crit chance or multiplier** and uses **explicit opt-in crit sources** (`docs/STATS_AND_DAMAGE.md` and `docs/COMBAT.md`), Bow Mastery must author its own chance/rule and specify whether basic attacks, Ranger skills, physical arrow attacks or all ability damage can use it. **Do not assume all projectile/DoT skills crit by default**. If other explicit crit rules are present, use the existing highest-multiplier-first rule; don't silently stack/merge unrelated crit sources.
 - **Unresolved** rank cap (the user described a per-rank effect, not infinite levels), flat AGI/rank, exact +meters per rank, and whether class buffs/skill ranks alter skill target range versus autoattack reach. Potential Tier III class range differences remain possible even though Tier II Bow Mastery boosts its normal class range.
 
