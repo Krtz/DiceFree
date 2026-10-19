@@ -1,6 +1,6 @@
 # DiceFree — Tier II Priest — Design Interview
 
-**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–9 recorded; Round 10 awaiting answers. **Design only: do not implement from this document until user sign-off.**  
+**Status:** DESIGN INTERVIEW IN PROGRESS — Rounds 1–10 recorded; cross-class rank audit underway. **Design only: do not implement from this document until user sign-off.**  
 **Started:** 2026-10-17  
 **Repository branch:** `integration/world1-foundation`  
 **Design owner:** User; interview and documentation in five-question rounds, then the other DiceFree chat can implement.
@@ -29,7 +29,7 @@
 | Resources | Mana + Grace. **Mana management is the main long-fight balance lever**; Mana costs increase per invested rank, cooldowns decrease a little per invested rank. Numeric costs/damage/regeneration/cooldowns are **delegated to designer for provisional playtesting**, subject to later rebalancing. Grace thresholds 10/9/8/7/6 for ranks 1–5; no decay and starts at zero on load; +2 for a successful zero-overheal heal, +1 for other successful spells. | Spell rank ceiling, actual skill potency/Mana regeneration and Grace edge cases OPEN. |
 | Without Grace | Priest retains usable damage/healing spells paid for with Mana; cannot require Grace for its basic function. | Specific ranks/ability gating open. |
 | Skill system | **CONFIRMED PRIEST-041:** four regular spells Holy Light/Light Burst/**Ice Aegis**/Wild Growth each have **18 ranks maximum**, purchasable from character level 1 with no special per-rank level gates; Grace has 5 ranks at level gates 5/10/15/20/25, Revive has one rank at level 20. This is **78 spendable skill ranks total**, nearly consuming the **80 skill points at character level 80** (Tier II level-60 advancement milestone + roughly 33%). Start all at rank 0, one skill point at level 1. | Rank scaling coefficients/Mana and cooldown numbers remain provisional, except Wild Growth's confirmed per-rank slow/cooldown endpoints. |
-| Mentor | **Trimery healer explicitly offers Priest advancement**. Eligible Tier I Magically Touched escorts defenseless inspector + two fighting guards in solo-human instance Trimery → Cornberg; inspector automatically walks and pauses for several small wolf/slime attacks. Investigates whether Cornberg road suffered the same **physically destroyed, ordered road closure** as western Trimery–Big City highway by Ogre Roadwarden (Roadwarden remains on western road's Big City side, not here). Player/inspector death fails to Trimery; guards may die; unlimited free retries; arrival at Cornberg permanently credits escort step; then return to healer for Priest fork. | Report/outcome of inspection, wave design, guards dying, player save/retry and quest title remain OPEN. |
+| Mentor | Trimery healer explicitly offers Priest advancement: level-30 Magically Touched escorts a defenseless inspector and two fighting guards on a private automatic Trimery–Cornberg route. **This is an independent side quest: inspector finds nothing unusual, no main-story development.** ~5 minutes and **3–5 smaller wolves/slimes encounters**, pausing for combat; guards may die, and if both do, player must finish fighting alone without replacement guards. **Skilled Mend-only play should keep at least one guard alive.** Player or inspector death fails, teleport to Trimery, unlimited free retries; arrival at Cornberg permanently completes escort; return to Trimery healer for Priest promotion. | Exact spawn/AI tuning and final dialogue still open. |
 | Resurrection | Revive rank 1 at level 20; 8s cast, 4s with Grace, >50% current/max Mana to begin, all current Mana spent on success, interrupted cast costs nothing and refunds 60s cooldown. Returns ally with **15% max HP and 15% max Mana**. **Resurrection Sickness: -10% each primary stat per stack, 5-minute independent timer for EACH stack**, never cleared just by ending encounter. | Other resources, maximum sickness stacks, save/load behavior, range/target validity still OPEN. |
 
 ## Present in the game — separate from Priest class
@@ -45,7 +45,7 @@ As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world
 | **Holy Light** | Light | Single-target ally heal or enemy damage. With Grace one bounce per spell rank, repeat recipients allowed, heals prioritize lowest-HP-percentage wounded allies; each hop ×0.9 previous potency. Relatively long cooldown shortened per rank and Mana costs rise per rank. | SPR coefficient and magnitude, Mana/cooldown numbers, bounce range, max rank. |
 | **Light Burst** | Light | Instant heal/damage AoE centered on a chosen character, Grace grants three pulses 1 second apart following that character; target can be affected by all, only initial pulse earns Grace. Purchasable from level 1 and upgradeable at each next level pending cap. | Radius, SPR coefficients, Mana/cooldown numerical values, cap and multipulse target validity. |
 | **Ice Aegis** | Ice | Single-target shield on self/ally. Matching Ice damage consumes 0.5 shield HP/1 prevented damage; non-Ice consumes 1.5. Grace adds **Ice damage every 0.1 seconds** around shield holder while shield remains, with **small per-tick damage** scaling with Priest SPR. Purchasable at level 1, can upgrade at any level (pending max rank). | Shield lifetime and capacity, aura radius, exact tick coefficient, overlapping auras, Mana costs/cooldowns, cap. |
-| **Wild Growth** | Nature | Single-target Nature HoT on ally/self or DoT on enemy, 8-second normal duration with small **0.25s ticks**; empowered friendly HoT lasts 16 seconds, empowered enemy DoT slows from **10% at rank 1 to 50% at rank 18** using **10% + 40%×(rank−1)/17**. **18 ranks max. Wild Growth cooldown = 12s at rank 1, linearly decreasing to 8s at rank 18** (minimum 8s = normal effect duration; it need NOT exceed 16s). | Tick potency, resource costs, refresh/stacking, rounding/UI presentation, slow uptime upon refresh. |
+| **Wild Growth** | Nature | Targeted Nature HoT/DoT, 0.25s ticks, base 8s; Grace HoT 16s or hostile slow 10→50% ranks 1–18. CD 12→8s across 18 ranks. **Same caster + same target: recasting refreshes/replaces original Wild Growth**, no own stacking; **different characters' Wild Growth casts stack separately** with independent tick timers and durations. | Per-tick amount, regular vs empowered replacement details, combat presentation. |
 | **Revive** (working name; low-tier) | Resurrection | Single-rank combat rez at lv20, 8s cast (4s Grace), cast starts only above 50% Mana, spends ALL held Mana upon success; 60s cooldown refunded/no Mana on interrupt. Returns dead party member at **15% HP and 15% Mana**, with sickness **-10% each primary stat per stack**, **five-minute individual timer per stack**. | Other resource pools, sickness stacking cap, Revive range/corpse targeting rules and persistence open. |
 | **Grace** | Passive + manually activated skill | **Available for first purchase at Priest level 5**; upgradeable at **levels 10, 15, 20, 25** (ranks 1–5). Full meter requirements **10/9/8/7/6**. Successful heal with zero overheal gives **2 Grace**; any other successful spell gives **1**, except **ordinary autoattacks give 0**. No natural decay, starts 0 on load. Full Grace can be manually armed to empower next spell; successful empowerment consumes full Grace and still costs Mana. | Grace use on Revive, pending cast failures/interruptions and Grace-generation on Revive, other per-cast safeguards. |
 
@@ -73,6 +73,7 @@ As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world
 - **CONFIRMED PRIEST-037:** normal duration **8s**, Grace HoT **16s**, enemy DoT still **8s**. Both HoT/DoT **tick every 0.25s**, using frequent small amounts: normally **32 ticks** and Grace HoT **64 ticks**, before any optional time-zero tick.
 - **IMPORTANT CORRECTION:** Wild Growth's cooldown must be **greater than or equal to its normal eight-second duration (>=8s)** including maximum skill rank. It **does not** need to outlast the 16s empowered HoT; overlapping the Grace HoT with a later cast is permitted.
 - **CONFIRMED PRIEST-041/042:** Wild Growth has **18 ranks** and a Grace-empowered DoT slow of **`10% + 40% × (rank−1)/17`**: rank 1 = 10%; rank 18 = 50%, linearly across the ranks. This supersedes the early `10+5×rank` illustration, which would exceed 50% at high ranks.
+- **PRIEST-049 CONFIRMED ownership rule:** a new Wild Growth from the **same caster on the same target refreshes/replaces** that caster's existing HoT/DoT. **Different casters can each maintain separate simultaneous Wild Growth applications**, which stack independently. Each caster-owned application has its own duration/tick timeline. Whether a fresh normal cast overwrites a more potent ongoing Grace HoT is an open edge case.
 - **CONFIRMED PRIEST-042 starting balance:** regular cooldown **12 seconds at rank 1**, dropping **linearly to 8 seconds by rank 18**, i.e. `12 − 4×(rank−1)/17 seconds` before any later explicitly authored cooldown modifiers. This satisfies **CD >= NORMAL 8-second duration**, not the 16-second empowered HoT. Numerical spell coefficients and Mana costs are still delegated to playtesting, but the user specifically approved this baseline cooldown curve.
 
 ### Revive — confirmed low-tier resurrection (PRIEST-022/026/027)
@@ -87,6 +88,13 @@ As of `integration/world1-foundation` commit `5a74e1112` (2026-10-17), the world
 - **CONFIRMED PRIEST-038:** global Resurrection Sickness has **individual timers for every stack, each lasting exactly 5 minutes**; encounter end does NOT clear them. Each stack reduces all **five primary stats by 10%**. Maximum stacking/attribute floor and whether sickness persists across reloads remain OPEN.
 - **OPEN:** whether Recurring Revive cast success awards normal 1 Grace point, what happens when full Grace was armed and Revive is interrupted, grave/corpse visibility, within-combat corpse eligibility, and persistence of Resurrection Sickness. Grace must not bypass full Mana consumption.
 
+
+### Grace empowerment persistence and interruptions (PRIEST-050)
+
+- **Once manually armed, full Grace remains armed indefinitely until the next successfully completed spell.** No time limit while waiting for a cast to succeed.
+- Canceled targeting, invalid actions and interrupted casts **do not consume Grace or clear the armed state**.
+- Specifically, an interrupted **Grace-empowered Revive** preserves fully armed Grace, spends no Mana and refunds its 60-second cooldown. Successfully completed Revive spends Mana and Grace normally.
+- Consume Grace only when a successful spell action actually completes; ordinary multi-pulse follow-ups remain part of one original successful cast. Detailed handling of death/save/scene transition while armed remains to be tested.
 
 ### Grace: generation, rank milestones and reset (PRIEST-012/014)
 - **2 points** from a successfully cast **heal that does not overheal**; **1 point** from all other **successful healing, shield and damage casts**. Round 1's preference for better healing generation is therefore satisfied.
@@ -130,6 +138,14 @@ A future **Nature/Druid HoT specialization** and **Light/Hierophant/Prophet spec
 - **Retries (PRIEST-044):** the Trimery healer allows **UNLIMITED FREE RETRIES**, without fees, consumables or permanent attempt caps, until the inspector reaches Cornberg alive. Restart at the Trimery-side beginning; exact dialogue and save/exiting-mid-run remain open.
 - **Success (PRIEST-040):** the inspector reaches Cornberg **alive**; mark the escort stage **permanently complete** in that character/quest's progression. Do not automatically become Priest or force the escort again when reloading. The player **travels back independently** to the Trimery healer, explicitly **turns in**, and **then advances** to a new level-1 Tier II Priest manifestation while preserving the original Tier I parent.
 - **Still OPEN:** what the inspector *discovers about the Cornberg road* and reports; inspector name/visual/story dialogue; number and placements of attacks, preferred escort duration, behavior if both guards die leaving monsters, save/quit/re-entry, NPC conversation at Cornberg and final quest title.
+
+### Round 10 final escort clarifications
+
+- **Inspector's finding:** **NOTHING UNUSUAL** on the Cornberg route. This quest is **self-contained side content with no main-story relevance**, despite the western-road event motivating the initial inspection. Do not foreshadow sabotage, invent clues or tie the apparent quiet Cornberg road to the Ogre Roadwarden plot.
+- **Duration/pace:** approximately **five minutes total**, with **3–5 small wolf/slime encounters** along the scripted road and recovery gaps.
+- **Guards:** if **both die**, the player is left to defeat remaining hostiles themselves. **No automatic reinforcements**. Nonetheless an appropriately played healing-specialist Tier I character should normally be able to **complete the trial using Mend alone**, by sustaining at least one guard through the encounters. A failure to protect guards can force the player's offensive fallback without changing the no-guard-death-failure rule.
+- **Inspector dialogue at Cornberg:** report nothing significant found; successfully credit escort step, without initiating a separate story chain.
+- **Wild Growth and Grace changes for Round 10 are recorded in the skill sections** above.
 
 ## Round 1 — answers recorded on 2026-10-17
 
@@ -240,17 +256,17 @@ Fractional growth should be applied as whole-number increments over levels in th
 - **PRIEST-044 — CONFIRMED:** **player death also fails the escort** and returns player out to Trimery. Trimery healer gives **unlimited free retries**, just as inspector death fails and returns player to Trimery.
 - **PRIEST-045 — CONFIRMED:** inspector checks whether the Trimery–Cornberg route suffered the same deliberate physical road destruction as the western Trimery–Big City highway, where the Ogre Roadwarden blocked passage **“By order”**. The **Roadwarden stays at the western highway, accessible from the Big City side** and does not appear in this escort. The **who/why of his orders are still a mystery**; inspector's conclusion about the Cornberg road remains OPEN. Trimery healer **explicitly identifies this escort as Priest advancement**.
 
-## Round 10 — five questions (awaiting answers)
+## Round 10 — five answers recorded on 2026-10-19
 
-**PRIEST-046 — Inspector's findings in Cornberg.** We previously established the **Ogre Roadwarden physically destroyed the western Trimery–Big City highway** and declared the closure was **“By order”**, without revealing who ordered it. On reaching **Cornberg**, should the inspector **find this road is still intact and merely dangerous from normal wildlife**, **discover clues of the same organized sabotage**, or **leave the result uncertain** for a later story quest? What should the inspector report?
+- **PRIEST-046 — CONFIRMED:** inspector **finds nothing**; Priest escort is **only an advancement side quest**, with no main-story implications.
+- **PRIEST-047 — CONFIRMED:** around **5 minutes**, with **3–5 small wolf/slime encounters**.
+- **PRIEST-048 — CONFIRMED:** if **both guards die**, player must fight remaining threats without reinforcements; skilled **Mend-only** play should save at least one guard and thereby remain a viable completion route.
+- **PRIEST-049 — CONFIRMED:** same caster refreshes/replaces own Wild Growth on the same target; **different players' applications stack** independently.
+- **PRIEST-050 — CONFIRMED:** Grace remains armed **indefinitely until a successful spell**; interruption/cancel preserves it. Interrupted empowered Revive retains Grace, Mana and refunded cooldown.
 
-**PRIEST-047 — Escort length and attacks.** Should the instanced journey aim for **about 5 minutes or 10 minutes** when played normally? Would **three to five smaller attacks** by wolves/slimes, with short recovery pauses for Mend and Mana regeneration, feel about right?
+## Cross-class skill-rank audit — requested
 
-**PRIEST-048 — Both guards dying.** You said guard deaths don't fail the quest. If **both guards die while hostile enemies remain**, should the player be able to finish solely by using offensive Tier I skills, or should the encounter provide a fallback (e.g. guard reinforcements after a delay), so a **Mend-only healer** can still finish? The maxed-Mend-only victory requirement may otherwise conflict with the guards dying.
-
-**PRIEST-049 — Wild Growth repeat casts.** If the player casts Wild Growth twice on the **same target** before the previous 8-second effect expires (or 16-second Grace HoT), should the new cast **refresh/replace the previous HoT or DoT**, or should different applications **stack independently**? With your 8–12-second cooldown it mostly matters for cooldown reduction gear/teammates and Grace HoT overlap.
-
-**PRIEST-050 — Grace activation edge cases.** When full Grace is manually armed for the next spell, should that **stay armed indefinitely until a successful spell**, even if the player cancels a targeting cursor or gets interrupted? And should **Revive interrupted mid-cast** preserve the armed Grace, since no Mana or cooldown is consumed?
+The user requested a review of **Greatblade and Mage**, particularly free starting ranks, spending level 1's skill point, unlock schedules, max-rank budgets, and compatibility with the newer **rank-0 universal rule** and the level-60 +33% spending philosophy. The audit is **design-only**; no gameplay changes are authorized. See forthcoming cross-class audit report and obtain approval before revising Greatblade/Mage specs or implementing save migrations.
 
 ## Remaining design work (not yet approved)
 
@@ -310,5 +326,10 @@ Fractional growth should be applied as whole-number increments over levels in th
 | 2026-10-19 | PRIEST-043 | Inspector follows automatic road route and stops while enemies attack | **CONFIRMED** |
 | 2026-10-19 | PRIEST-044 | Player death fails escort to Trimery; healer offers unlimited free retries | **CONFIRMED** |
 | 2026-10-19 | PRIEST-045 | Inspector investigates whether Cornberg road shows same ordered physical destruction as western Trimery–Big City road by Ogre Roadwarden; healer identifies Priest advancement | **CONFIRMED**; inspection findings still OPEN |
-| 2026-10-19 | PRIEST-046–PRIEST-050 | Round 10 five questions asked | **AWAITING USER** |
+| 2026-10-19 | PRIEST-046 | Inspector finds nothing unusual; standalone side quest, no main-story revelation | **CONFIRMED** |
+| 2026-10-19 | PRIEST-047 | Escort ~5 minutes with 3–5 small encounters | **CONFIRMED** |
+| 2026-10-19 | PRIEST-048 | Both guards dead means player fights alone; skilled Mend-only play should keep a guard alive | **CONFIRMED** |
+| 2026-10-19 | PRIEST-049 | Wild Growth same-caster refresh; separate casters stack independently | **CONFIRMED** |
+| 2026-10-19 | PRIEST-050 | Grace armed indefinitely until successful spell; interrupted Revive preserves armed Grace | **CONFIRMED** |
+| 2026-10-19 | Cross-class audit | Review Greatblade/Mage rank-zero and budgets before implementation | **OPEN REVIEW** |
 
