@@ -280,7 +280,7 @@ Each class defines:
 A Way is allowed to transform the Echo substantially. Classes are not constrained to one human body or even one universal humanoid rig.
 
 Settled Tier-2 visual identities:
-- **Ranger -> Wood Elf**;
+- **Ranger -> Wood Elf**. **Newer confirmed Ranger Tier II design (2026-10-19, documentation-only):** from eligible level-30 Physically Blessed Novice, AGI-primary Physical ranged DPS; accepts **shortbows** (faster attacks, lower damage per shot) and **longbows** (slower attacks, higher damage per shot), with both bow types **two-handed occupying mainhand + offhand slots**; **no equippable offhand quiver**. Basic autoattacks briefly **stop to fire** (WC3/Dota/League timing; no ordinary firing while moving). **Mana is the only class resource**, with no permanent pet; possible instant **Hawk Dive** attack animal flavor. A **wounded Ranger near the Priest in Trimery** quests the player to kill **Alpha Wolf** and return to advance, preserving the Tier I parent. Dual crossbows/pistols remain only Tier III/IV speculative possibilities. Exact Ranger skill kit, combat coefficients, and future advancements are OPEN. See [Ranger Tier II design](classes/RANGER_TIER2_DESIGN.md).
 - **Wizard -> High Elf**.
 
 Tentative future directions:
