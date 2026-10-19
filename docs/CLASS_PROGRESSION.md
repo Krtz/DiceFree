@@ -195,21 +195,29 @@ Current candidate level-30 branching:
 
 This four-plus-four split is still a working direction rather than locked final structure.
 
-### World 1 normal Tier II scope and next-world pacing — latest user direction (2026-10-19)
+### World 1 normal Tier II scope and World 2 tier progression — LOCKED by user 2026-10-19
 
-**USER-CONFIRMED PLANNING RULE:** **DO NOT DESIGN Tier III class skill kits, advancement quests or branches yet.** Finish the **normal Tier II roster** first. Only afterward shift design attention to the **Quillboar region/area**, the **major city**, and related World 1 content. **Tier III classes are intended for World 2**, not for World 1's initial class-design push. Earlier documents mention speculative Tier III names and one secret/convergence unlock: those are historical FUTURE IDEAS, **not current design tasks or authorization to flesh out Tier III**. Continue normal Tier II class design only until the user changes this plan.
+**USER-CONFIRMED FINAL NORMAL TIER II ROSTER FOR WORLD 1: EXACTLY EIGHT CLASSES, FOUR FROM EACH TIER I NOVICE.** This closes the immediate question of whether Acolyte/Thief are the last normal classes: **Psion is INCLUDED as the eighth class**. Other future ideas such as Druid are not additional normal World 1 Tier II classes unless user revises scope.
 
-**User is deciding the *final* normal Tier II roster NOW; do not silently close it.** Existing standard Tier II roster is:
-- **Physically Blessed Novice (four intended ordinary branches):** Greatblade, Defender, Ranger, **Thief/Rogue** (name and kit still open).
-- **Magically Touched Novice (three existing intended ordinary branches):** Mage, Priest, **Acolyte** (occult wand+grimoire concept; kit and name still open).
-- **Additional candidate proposed by designer after user explicitly asked:** **Psion**, a possible *normal* Magically Touched Tier II mental-force / spatial-control class. **NOT USER APPROVED and NOT yet a permanent roster entry.** Four physical + four magical would be **eight standard Tier II classes** with Psion; without it there are seven (4 physical + 3 magical). The old generalized "four-plus-four" archetype note above was a working example, not a cap.
-- **Other uncommitted possible future normal Tier II concepts:** Druid/Nature and any later ideas. A Ninth/Tenth normal Tier II class is **NOT automatically approved**; number remains user's choice.
+| Tier I parent | Standard World 1 Tier II class | Design status |
+| --- | --- | --- |
+| Physically Blessed Novice | **Greatblade** | Designed |
+| Physically Blessed Novice | **Defender** | Designed |
+| Physically Blessed Novice | **Ranger** | Designed |
+| Physically Blessed Novice | **Thief** | Roster APPROVED; identity/skills/advancement design NEXT AFTER Acolyte |
+| Magically Touched Novice | **Mage** | Designed |
+| Magically Touched Novice | **Priest** | Designed |
+| Magically Touched Novice | **Acolyte** | Roster APPROVED; **NEXT active design**, see [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md) |
+| Magically Touched Novice | **Psion** | Roster APPROVED; specific psychic kit/equipment/advancement NOT YET DESIGNED, after Thief |
 
-**Important arithmetic:** Greatblade/Defender/Ranger/Thief is **4 physical**; Mage/Priest/Acolyte is **3 magical** → **7 existing intended names total**, rising to **8 total** if Psion becomes the fourth magical branch. Do not count Tier III names, secret classes or speculative Druid as already approved normal Tier II.
+**USER-APPROVED DESIGN AND WORLD ORDER:**
+1. Finish all eight NORMAL World 1 Tier II class designs, specifically **Acolyte → Thief → Psion** for the three unfinished classes.
+2. Then design the **Quillboar area/region**.
+3. Then design the **major/big city** and its gameplay/services.
+4. Some **Tier II advancement NPCs MAY be moved to that future city** for progression pacing; this is an open later decision. Do NOT quietly relocate already-agreed mentors/quests or invent finished city geography. Keep Cornberg swordswoman/Mage brewer, Trimery Priest healer, Trimery veteran Defender guard and wounded Ranger/Alpha Wolf as currently specified unless user explicitly revises them.
+5. **DO NOT DESIGN ANY TIER III CLASSES NOW. Tier III belongs to World 2.** Older Greatblade, Ranger, Priest and Defender Tier III concept names/convergence snippets are historical brainstorming only; do not expand their trees, skills or quests until World 2 design is authorized.
 
-**NPC/city planning — still OPEN:** The user may relocate **some Tier II advancement NPCs to the future big city** while designing its services/progression; this is a possibility **not a mandate to rewrite previously agreed quest mentors or move existing NPCs now**. Retain Cornberg swordswoman/Mage brewer, Trimery Priest healer, Trimery veteran Defender guard, and wounded Ranger/Alpha Wolf quest as the latest agreed starting placements until explicitly revised. Consider placing future Acolyte/Thief/possible Psion mentors in the city once the city has a defined role.
-
-**No Unity changes, new class IDs, quest scripts, assets or implementation handoff are approved by this planning note.**
+**CLASS IMPLEMENTATION SCOPE:** This is an explicit **DESIGN/DOCUMENTATION-ONLY** conversation. No Unity source, scene/world creation, builds, saves, NPC moves or implementation tickets without later instruction in the separate DiceFree implementation workflow. User approval of the eight-class roster is NOT evidence eight classes are already playable or coded. Final game names of Thief/Psion/Acolyte, their visuals, weapons and kits can still be tuned by their own upcoming interviews, while preserving the currently approved class identities unless later changed.
 
 ### Long-term class-web scale
 
