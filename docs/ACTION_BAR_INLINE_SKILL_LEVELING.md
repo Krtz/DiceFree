@@ -1,6 +1,8 @@
 # Action Bar v2: inline skill leveling, passives, and commands — 2026-10-12
 
-Implementation branch: `feature/visual-overhaul-vis00`.
+Implementation branch for the historical October 12 as-built spec: `feature/visual-overhaul-vis00`.
+
+> **Newer design decision (2026-10-19; NOT YET IMPLEMENTED):** the active class's skillpoint reminder and level-up notification must be shown **ONLY when at least one rank is purchasable at this very moment** (unspent point and current rank gate / maximum rank / active class requirements satisfied). Hide it when rank gates prevent purchases despite banked points, and hide it after all class skills are maxed. **Bound spendable skill points by `min(classLevel, sum(classSkillMaxRanks))`** to eliminate overleveled unspendable-point spam. Keep banked points in the normal skill UI, but do not show a notification unless a purchase is possible. See [current global class progression](CLASS_PROGRESSION.md) and [Greatblade/Mage audit with rank-by-level validation](TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). Historical rules/tests below describe the older playable UI, not this later redesign.
 
 ## The 12-slot bar
 
