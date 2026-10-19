@@ -1,7 +1,7 @@
 # DiceFree Tier II — Greatblade and Mage skill-rank audit
 
 **Date:** 2026-10-19  
-**Status:** DESIGN REVIEW — Rounds 1–5 recorded (2026-10-19). Initial per-skill rank gate schedules approved for implementation testing; Greatsword Mastery base power, Metal shield and Mage secondary-effect ceiling design recorded. User delegated quiet banked-point menu UX. **No Unity C#, save, build or live skill changes; implementation handoff awaits final sign-off.**  
+**Status:** DESIGN DOCUMENTATION — Rounds 1–6 recorded (2026-10-19). Rank progression, Greatblade Metal shield, Mage provisional effect ceilings, and quiet skill-point UX agreed. **Do not implement in this chat.** User will explicitly instruct their separate working chat to reread these docs and implement **after remote-access capability is restored**. No handoff task or Unity changes yet.  
 **Branch inspected:** `integration/world1-foundation`  
 **Companion design:** [Priest Tier II interview](classes/PRIEST_TIER2_DESIGN.md)  
 **Global authority:** [Class Progression: universal zero-rank rule](CLASS_PROGRESSION.md#universal-rank-zero-and-ordinary-basic-attack-rules-user-correction-2026-10-18)
@@ -142,14 +142,16 @@ The currently implemented passive has these genuine effects:
 
 **CONFIRMED RANK-016/022/023 layout:** rank **1** basic Mastery, **2** stats only, **3** temporary Wide Arc haste, **4** stats only, **5** wider Wide Arc, **6** stats only, **7** Overhead Breaker creates a **5-second Metal-element shield absorbing 100 + 5% of max HP**, **8** stats only. **EVERY rank gives +1 STR and +2% greatsword damage** (additive bonus per rank, provisional playtest coefficients). At rank 8 the shield's 100 + 5%-of-HP base is unchanged because the user approved no separate rank-8 shield increase, while STR/damage still grows. Historic mechanics 2/3/4 deliberately shift to 3/5/7. **OPEN**: whether Metal tag filters eligible damage or merely identifies the shield's element, specific-priority/efficiency interaction with other shields and whether to absorb Pure damage. The shared shields framework defines these per skill, not globally.
 
-### Metal shield semantics (Greatsword Mastery rank 7)
+### Metal shield semantics (Greatsword Mastery rank 7) — global rule and replacement CONFIRMED
 
-- **Trigger:** on **successful Overhead Breaker** when the actor has Greatsword Mastery rank ≥7; no heal.
-- **Element:** **Metal** (not Ice, generic non-elemental, or a Metal damage attack).
-- **Capacity:** **100 + 0.05 × shielded Greatblade's maximum HP** absorb points at creation. Exactly **5 seconds** lifetime, ending earlier if fully consumed. E.g. at max HP 1,000, capacity = 150 absorb points; this is an illustrative computed example, not a fixed Greatblade HP value.
-- **Ranks:** +1 STR and +2% greatsword damage every rank 1–8. Rank 8 does **not** introduce a new mechanism or automatic 0.5% increase to shield coefficient.
-- **Resolution:** respect `docs/STATS_AND_DAMAGE.md`: defense/resistance generally mitigate before shield consumption; filtered/specific versus generic shield priority determined by ability. **The user has not chosen whether Metal shields absorb all incoming damage or specifically Metal damage / enhanced Metal efficiency**. Implementation must not infer an eligibility filter from the element tag alone. Also decide Pure-damage eligibility, stacking/retrigger replacement and whether bonus 100 is adjusted by shield-bonus modifiers in the general framework.
-- **Save-state:** shield is transient combat state, not permanent skill rank state; preserve only purchased Mastery ranks, not lingering shield across manifestation loads unless general combat rules say otherwise.
+- **Trigger:** successful Overhead Breaker when Greatblade has Mastery rank ≥7. **Self-shield** is existing intended prototype behavior; user has not separately answered targetable-ally eligibility, so do not grant ally-target shielding.
+- **Element:** **Metal**.
+- **Capacity:** **100 + 0.05 × Greatblade's maximum HP** shield HP, lasting **5 seconds** at most (ends sooner if fully consumed). E.g. max HP 1,000 → 150 shield HP.
+- **GLOBAL ELEMENTAL EFFICIENCY (RANK-026):** **each 1 shield HP blocks 1.5 damage of the SAME element (Metal here) or 0.5 damage of OTHER elements / ordinary non-elemental damage**. This is the global default for elemental shields, also affecting Priest Ice Aegis. Equivalent shield HP consumption: **2/3 per 1 matching damage**, **2 per 1 nonmatching**. E.g. the 150-shield-HP example absorbs up to **225 Metal damage** or **75 non-Metal damage**, after mitigation. Do not interpret the element as Metal-only filtering. Pure damage remains an expressly per-shield eligibility decision.
+- **ON RETRIGGER (RANK-027):** applying a new Greatblade Mastery Metal shield from Overhead Breaker **REPLACES/REFRESHES the old shield from that same effect**: new full nominal capacity and new five-second lifetime; **do NOT add remaining capacity, independently stack multiple copies, or preserve old expiry**. Different shield types still use global priorities as appropriate.
+- **Rank 8:** adds another +1 STR and +2% greatsword damage, but **does not automatically change this shield formula**.
+- **Global source of truth:** [STATS_AND_DAMAGE.md, Elemental shield absorption efficiency](STATS_AND_DAMAGE.md). Its elemental efficiencies supersede old Priest Ice Aegis-specific coefficients. Standard post-mitigation/priority/overflow semantics remain.
+- **Transient effect:** shield is combat state, not persistent manifestation skill-rank state. No Unity edit or shield migration performed in this documentation session.
 
 ### Mage — user-approved weighted cap (80 points)
 
@@ -283,9 +285,9 @@ These counts represent total **distinct rank purchases eligible at or below a gi
 - **RANK-024 CONFIRMED DELEGATION:** designer may choose sensible provisional high-rank ceilings for Mage CC, Arc chain count, Half-Life defense reduction, Quicksand field/slow and other secondary effects; numeric proposals below remain playtest values.
 - **RANK-025 CONFIRMED DELEGATION:** skill UI may **quietly show exact banked point count and per-skill next eligible level**, while **not** showing an upgrade HUD reminder/popup until at least one rank can actually be purchased. No alerts for inaccessible ranks or permanently exhausted caps.
 
-## Mage high-rank secondary-effect playtest ceilings — designer proposal under RANK-024
+## Mage high-rank secondary-effect ceilings — approved RANK-028 as initial playtest defaults
 
-These limits are *designer-selected implementation starting values*, not newly user-chosen exact combat numbers. Preserve Math Barrier rank 1–5 unchanged.
+**RANK-028 approved** these designer-chosen ceilings as **initial playtest values**. They are not immutable forever, and are not yet live gameplay. Preserve Math Barrier ranks 1–5 unchanged.
 
 | Skill | Provisional secondary-effect cap/rule | Primary rank growth |
 | --- | --- | --- |
@@ -298,25 +300,34 @@ These limits are *designer-selected implementation starting values*, not newly u
 
 No change to **Math Barrier's 5-rank cap, 2×rank duration, (25+5×rank)% redirection, or (2−0.1×rank) Mana per damage**. Secondary caps are not permission to change unrelated elemental rules or cross-class CC immunity behavior.
 
-## Banked skill-point interface — designer-selected UX for RANK-025
+## Banked skill-point interface — approved RANK-029
 
-- The **class skill panel** shows a subdued `Available skill points: N` indicator reflecting currently banked *spendable budget*, even when none can yet be purchased. If N=0, it may omit the count or display 0 unobtrusively.
+- **RANK-029 CONFIRMED:** the **opened class skill panel** shows a subtle `Available skill points: N` count for the banked *spendable* budget, even when no skill can yet rank up. At N=0 it can quietly show zero or omit the count.
 - Each **locked next-rank tooltip** displays `Next rank unlocks at class level L` using that skill's authored schedule, or `MAX RANK` if purchased to cap. Never show a future level for an already-maxed skill.
 - **No global popup, red dot or skill-point reminder** when every skill's next rank is level-gated or all skills maxed; preserve prior confirmed rule that the reminder is visible **only if at least one rank can be legally bought now**.
 - When an upgrade becomes purchasable and banked points exist, show the ordinary small indicator/action-bar [+] on that eligible skill rather than a persistent modal interruption.
 - The class skill-point budget stays **bounded** by its total purchasable ranks, but class level, XP, class attributes and overleveling continue normally. Preserve banked points across save/load and manifestation switching under the existing save model.
 
-## Cross-class Round 6 — five questions (awaiting user)
+## Cross-class Round 6 — answers recorded on 2026-10-19
 
-**RANK-026 — Metal shield damage eligibility.** Should Greatsword Mastery's **Metal shield** absorb **all types of incoming damage** as a standard element-tagged protective shield, or absorb **Metal damage only** / resist Metal damage more efficiently? I recommend **all regular damage types**, with Metal as the thematic shield element, because a five-second finisher shield would otherwise be extremely situational. Pure damage can retain normal framework exceptions.
+- **RANK-026 — CONFIRMED GLOBAL RULE:** all ordinary elemental shields have elemental absorb efficiency. **1 shield HP prevents 1.5 damage of its own element, or 0.5 damage of a different element or normal non-elemental damage.** The shield covers ordinary nonmatching damage at reduced efficiency; it is not Metal-only filtering. Shield capacity is not identical to blocked incoming damage; respect mitigation and overflow. Global framework updated at `docs/STATS_AND_DAMAGE.md`. This also **supersedes Priest Ice Aegis's earlier 0.5 shield HP/matching damage and 1.5 shield HP/mismatched damage**, now replaced with the new efficiency ratios.
+- **RANK-027 — CONFIRMED:** a subsequent successful Overhead Breaker **replaces/refreshes** the existing Greatblade Metal finisher shield with fresh capacity and five-second expiry. No stacking/additive capacity.
+- **RANK-028 — CONFIRMED INITIAL MAGE PLAYTEST CEILINGS:** Frost Snare freeze up to **2.5 seconds**; Arc Lightning up to **8 distinct enemy targets**; Half-Life debuff maximum **−40 Physical and −40 Magical DEF**; Quicksand slow up to **40%**; Elemental Weaving rank-8 resistance aura maximum **−8 percentage points**; Math Barrier unchanged. These are tunable after actual playtesting, but approved as starting numerical caps.
+- **RANK-029 — CONFIRMED:** quiet banked-points value in opened skill panel plus next eligible class level in each blocked rank's tooltip; **no HUD badge/popup** unless a rank can be purchased now. This respects the previously confirmed capped skill-point budget.
+- **RANK-030 — CONFIRMED NO IMPLEMENTATION/HANDOFF YET:** user **does not want a single Greatblade/Mage implementation handoff or any changes in this chat**. Continue **design and documentation only**; once a functioning remote connection exists, user will ask their **separate working/implementation chat** to **read all latest design docs and implement**. Do not pretend remote is working, create implementation tasks, modify C# or migrate character saves now.
 
-**RANK-027 — Metal shield refresh/overlap.** If Overhead Breaker is used again before the five-second Metal shield expires, should the new shield **refresh/replace the existing one** (my preference), **add capacity to it**, or create a separate additional shield? Should this be a **self-shield only** (currently the intended finisher effect)?
+### Documentation-only status and eventual read-first references
 
-**RANK-028 — Mage secondary caps.** For initial playtesting, would you approve **Frost Snare freeze capped at 2.5s**, Arc Lightning at **8 distinct enemy targets**, Half-Life max **−40 Physical/Magical DEF**, Quicksand max **40% slow**, and Elemental Weaving aura **−8 percentage points**, with rank-based damage/potency still growing and Math Barrier unchanged?
+When the user explicitly authorizes implementation in the working chat after remote access returns, that chat should **first reread**, at minimum:
+- `docs/TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md` — authority for Greatblade/Mage rank caps, skill gates, Math Barrier exceptions, passive milestones, safe one-time silent legacy migration, capped spendable points and purchase-ready indicators.
+- `docs/CLASS_PROGRESSION.md` — cross-class rank-zero/level-1 rules and limited skillpoint budget.
+- `docs/STATS_AND_DAMAGE.md` — **global elemental shield efficiencies**, mitigation/resolution order and Pure-damage exceptions.
+- `docs/GREATBLADE_PROTOTYPE_DESIGN_V03.md`, `docs/GREATBLADE_PLAYABLE_IMPLEMENTATION.md` — historical/proposed Greatblade mechanics and specific new Metal shield effect.
+- `docs/classes/MAGE.md`, `docs/classes/MAGE_TIER2_DESIGN.md` — Mage skill identities and current prototype.
+- `docs/classes/PRIEST_TIER2_DESIGN.md` — Priest design and older Ice Aegis ratio explicitly superseded by global shield rule.
+- `docs/ACTION_BAR_INLINE_SKILL_LEVELING.md` — actionable-only skillpoint notification and quiet in-panel banked points.
 
-**RANK-029 — Skill menu UX.** When a point is banked but no ranks are currently purchasable, I recommend an unobtrusive count only in the opened **skill panel**, with `Next upgrade: level N` on skill tooltips. **No HUD reminder at all** until an actual rank purchase is possible. Does that presentation work for you?
-
-**RANK-030 — Final handoff scope.** After approving those remaining details, should we prepare a **single Greatblade + Mage implementation handoff** covering progression code, tooltip/action bar and safe save migration together, while leaving Priest implementation and balance as a separate task? (No Unity work will start in this chat unless explicitly requested.)
+**No implementation here.** Exact handoff work tickets, code changes, testing, builds and migrations are to be decided only in the future working chat when authorized.
 
 ## Decision log
 
@@ -335,4 +346,8 @@ No change to **Math Barrier's 5-rank cap, 2×rank duration, (25+5×rank)% redire
 | 2026-10-19 | RANK-023 | Mastery rank-7 Overhead Breaker triggers Metal shield, 5s, 100+5% max HP | **CONFIRMED**, eligible damage and stacking open |
 | 2026-10-19 | RANK-024 | Mage secondary-effect ceilings delegated to designer | **CONFIRMED delegation**, numeric playtest proposals |
 | 2026-10-19 | RANK-025 | Quiet in-panel banked points and per-skill next-level tooltip; actionable reminder only | **CONFIRMED delegated UX choice** |
-| 2026-10-19 | RANK-026–030 | Round 6 questions asked | **AWAITING USER** |
+| 2026-10-19 | RANK-026 | Elemental shields: same-element 1 shield HP blocks 1.5 damage; other/untyped 0.5; global rule also applies to Ice Aegis | **CONFIRMED GLOBAL RULE** |
+| 2026-10-19 | RANK-027 | Greatblade Metal shield reapplication replaces existing shield and refreshes capacity/duration | **CONFIRMED** |
+| 2026-10-19 | RANK-028 | Mage CC/chain/debuff/slow/aura ceilings approved as first playtest values | **CONFIRMED** |
+| 2026-10-19 | RANK-029 | Quiet banked-point menu count + next eligible level, no reminder unless actually purchasable | **CONFIRMED** |
+| 2026-10-19 | RANK-030 | No handoff or Unity implementation; preserve docs until remote returns and user instructs separate working chat | **CONFIRMED — DESIGN ONLY** |
