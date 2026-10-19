@@ -232,6 +232,15 @@ If a class save is permanently deleted, recreate it by advancing into it again f
 - This **supersedes** prior prototype-level choices such as the Mage design's **free learned level-1 ability ranks**. Existing gameplay code and current class specs may still implement those legacy choices; treat that as **an implementation discrepancy to reconcile in the development chat**, not as a claim that every live class already conforms.
 - This is a rules clarification only. No Unity code, player save or balance was modified by this documentation change.
 
+### Tier II skill-point capacity, varied caps and legacy resets (user decisions 2026-10-19)
+
+- **CONFIRMED for Tier II Priest, Greatblade and Mage:** the class's **total available skill-rank investment capacity should use almost all earned skill points by approximately class level 80**, i.e. the normal Tier II level-60 advancement threshold plus ~33% extra levels. This is **not** a requirement to automatically advance at 60; characters may continue leveling.
+- **CONFIRMED:** individual ability **maximum ranks are based on their effects, balance and performance**, not a universal cap. A high-damage spell can have many ranks while a special utility can have few; specifically **Mage's Math Barrier retains its existing five-rank maximum**.
+- **CONFIRMED:** Greatblade and Mage retain the exact first-availability/unlock levels in their existing implemented class designs, but **all skills begin at rank 0** with **one spendable point at class level 1**, no free rank-1 abilities.
+- **CONFIRMED:** existing Greatblade and Mage saves under the old four-free-starting-ranks economy require a **one-time full class-skill reset and refund**, **not grandfathered free ranks**. Preserve the same class level, XP and all unrelated character/quest/inventory/equipment/save progress. Grant spendable points equal to earned class-level allocation (level 1 → 1, level 80 → 80); do not credit four extras. Reset must be safe/idempotent, per manifestation, with no accidental repeat reset.
+- **Still OPEN:** weighted rank caps for Greatblade/Mage besides Math Barrier, whether existing periodic rank-gating becomes once-per-character-level rank purchases after first unlock, the detailed per-rank balance formulas and the player-facing migration trigger/notice.
+- **DESIGN-ONLY status:** this record **does not mean the playable Greatblade or Mage C# allocators/saves have been migrated**. The existing implementation still auto-learns four starter ranks and counts unspent points as `level−1−spent`. **Do not interpret the new policy as shipped.** Read the [Greatblade/Mage rank audit](TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md) before implementation.
+
 ### Tier-1 skill-rank pattern
 
 Current Tier-1 direction:
