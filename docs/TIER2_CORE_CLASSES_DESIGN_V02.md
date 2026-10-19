@@ -6,6 +6,8 @@
 **Date:** 2026-10-13
 **Status:** User-approved class identities and system direction, with explicitly provisional skill details and future branches. **Design only** — no implementations, models, quest chains or art imported by this document.
 
+> **LATEST WORLD 1 DESIGN ORDER (2026-10-19):** User explicitly wants **all NORMAL Tier II classes designed BEFORE the Quillboar area and major city**, and **NO Tier III class design until World 2**. Historic Tier III names, successor sketches and secret convergence examples below are **archived future ideas only**, not active work. Some Tier II mentor/advancement NPCs might later move to the major city, but **do not change confirmed mentor quests or current map placements without a later decision**. **Next normal Tier II classes under consideration:** physical **Thief/Rogue**, magical **Acolyte** (wand+grimoire occult), and an **optional magical Psion** mentioned by user as a roster question. **The Psion is NOT approved yet; normal roster is still under review.** For detailed status see [Class progression / World 1 scope](CLASS_PROGRESSION.md).
+
 Supersedes `TIER2_CORE_CLASSES_DESIGN_V01.md` on all conflicting points. Preserve agreed base concepts from v0.1 unless revised below.
 
 ## Core progression (existing rules, unchanged)
