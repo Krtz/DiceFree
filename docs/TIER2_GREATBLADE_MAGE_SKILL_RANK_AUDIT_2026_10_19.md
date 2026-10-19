@@ -58,7 +58,7 @@ The v0.3 Greatblade design explicitly recommends *different rank-up breakpoint s
 - `HeavyRhythm` scales Momentum gain by `1+0.08×rank`; decay multiplier bottoms out at **0.3**, so rank benefits may plateau in one dimension at higher ranks.
 - `WideArc`, `SpinDash`, `OverheadBreaker`, `BattleCry` use provisional per-rank coefficients. Additional ranks need careful cooldown, damage and utility curves rather than extending linear scalars blindly.
 - Preserve level **1** first eligibility for Wide Arc, Spin Dash, Greatsword Mastery and Heavy Rhythm; level **6** first eligibility for Overhead Breaker and level **18** for Battle Cry unless user revises those separately.
-- Greatblade's **Greatsword Mastery rank 4 shield vs heal** was deliberately an unresolved design choice even though the prototype implements a shield; do not silently portray prototype balancing as final canon.
+- **HISTORICAL vs NEW DESIGN:** Greatblade's old prototype used shield on Mastery rank 4 and once considered a heal instead. **RANK-016 later CONFIRMED that the new Mastery rank 7 triggers a shield, not a heal**, with prior haste/cone milestones at ranks 3/5. Old code may still have rank-4 shield until implemented.
 
 ### Mage — current exact rank gates (already implemented)
 
@@ -94,7 +94,7 @@ The v0.3 Greatblade design explicitly recommends *different rank-up breakpoint s
 
 - **First eligibility levels and rank-zero starts are now CONFIRMED for both classes (RANK-002/003)**; weighted rank caps and per-level upgrades remain subject to review. Finalize per-skill caps, formulas, eligibility-versus-rank-gate semantics and migration details before editing Unity code.
 - Treat `classSkills` save records and save/restore validation as authoritative. **Never erase skill ranks, invalidate an existing manifestation or overwrite user progress** because old free ranks now count against a new point budget.
-- **CONFIRMED RANK-005:** perform a **ONE-TIME RESET AND FULL SKILL-POINT REFUND** for existing Greatblade and Mage saves, including their four formerly free rank-1 skills; **NO grandfathered skill ranks**. The preserved manifestation keeps its class level/XP, attributes, gear, inventory, items, quests, currency, appearance, progression, and other unrelated state. Available unspent points after reset must be **equal to character level** under the one-point-at-level-1 and +1-per-level system, not `level−1`; do not credit a phantom extra four points for formerly free starters. Must migrate atomically, idempotently, backup/validate before writing, mark completed per save/manifestation, restore all ranks as 0 until repurchased, and never overwrite parent manifestations or other class saves. Interaction timing and player-facing notice remain for sign-off.
+- **CONFIRMED RANK-005/010/015/017/018:** perform a **ONE-TIME AUTOMATIC SILENT RESET AND REFUND** on first load of each existing Greatblade/Mage save, including old free starters, with **NO grandfathered ranks** and **NO notification**. Keep XP, class level, stats, gear, inventory, quests, currency, appearance and unrelated state. Refund only the **current legal spendable budget `min(classLevel, Σ class max ranks)`**, not `level−1`, not uncapped class level if overleveled, and not four phantom starter points. Mark migration per manifestation, backup safely, write atomically/idempotently, and preserve every parent/other class save.
 - Centralize rank-zero, one-point-at-level-1 semantics for both classes; update point budget, rank gates, passive activation, rank-zero tooltips and in-bar [+] eligibility.
 - If expanding ranks, retune Mage Math Barrier and high-rank Greatblade Mastery/Heavy Rhythm; add anti-negative/over-100%-redirect validation, skill point overspend checks and tests around level 1, 6, 18, 30, 42, 60, 80, class fork, class switch, save load and reloading legacy saves.
 - Keep old gameplay code untouched during this interview/audit. Current branch's previously verified builds do not validate a hypothetical revised implementation.
@@ -173,7 +173,7 @@ For increased rank caps, do **not** carry freeze, jump counts, DEF reductions, M
 | Greatsword Mastery | maybe fewer ranks or milestone ranks with flat-stat fillers | User specifically flagged this ability |
 | Math Barrier | **CONFIRMED existing gates**: 6 / 12 / 18 / 24 / 30 | Five-rank special utility; existing formulas |
 
-Schedules must preserve first-learn levels and allow almost all rank investments to be purchasable by approximately level 80. Some skills have per-level increases (confirmed), some have bespoke gaps. Avoid dead points and stale rank reminders once everything becomes capped. The final post-cap/no-upgrade-available notification policy is still open. 
+**CONFIRMED RANK-017–020:** schedules must preserve first-learn levels, use individual rank cadences and allow a **legal one-point-per-level purchase path** until 78 Greatblade / 80 Mage, verified mathematically against every level. The upgrade-ready notification is **only shown when a purchase is legal**; points capped at class total rank budget. Exact designer-selected tables and checks appear below. 
 
 ## Implementation conditions, migration and tests
 
