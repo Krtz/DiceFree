@@ -5,15 +5,15 @@
 **Branch:** `integration/world1-foundation`  
 **References:** [Tier II roster v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [original five skill concepts](../TIER2_CORE_CLASSES_DESIGN_V01.md), [class progression](../CLASS_PROGRESSION.md), [stats and shields](../STATS_AND_DAMAGE.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Greatblade/Mage rank audit](../TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md).
 
-## Confirmed Defender decisions — updated through Round 2 (2026-10-19)
+## Confirmed Defender decisions — updated through Round 3 (2026-10-19)
 
 | Area | Confirmed by user | Still awaiting specific design |
 | --- | --- | --- |
 | Class | **Defender** is the right **Tier II** baseline tank name. **Guardian**, **Vanguard** and similarly stronger/more-specialized names make sense for **future advancement alternatives**, not current class name. | Future Tier III path names/actual classes are not yet committed. |
 | Lineage and loadout | Inherited approved roster: from **Physically Blessed Novice** at Tier I level 30, 1H sword + shield, Tier II new level-1 manifestation preserving parent, STR/VIT, frontline physical tank, solo viability. | Exact stat baselines, growth, visual NPC skin, gear permissions. |
-| Resource | **Resolve generated when taking enemy damage and when using expressly Resolve-generating skills.** The damage amount used for Resolve generation must be **PRE-MITIGATION**: high Armor/Defense, resistance, damage reduction, shields and active guard do not reduce Resolve gained from the same incoming hit. | Resolve cap, per-hit coefficients/soft cap, DoT and multi-hit grouping, decay, costs. |
+| Resource | **CONFIRMED:** Resolve **0–100**; generated from taking hostile **pre-mitigation** damage and specifically tagged abilities, with sensible per-hit safeguards, **very slow decay**. Better defenses, Bulwark mitigation, and shield absorption must not reduce incoming-hit Resolve credit. | Exact gain coefficient, hit/cast cap, decay rate/delay, hit exclusions and death/load reset remain balance OPEN. |
 | Elemental shields | **LATEST GLOBAL RULE** after Defender discussion: **0.8 shield HP consumed per 1 matching-element damage**, **1.2 shield HP per 1 nonmatching ordinary damage**, or equivalently **1 shield HP prevents 1.25 matching / about 0.833 nonmatching damage**. | Pure-damage eligibility per skill; not physical equipment shields by default. |
-| Skills | **CONFIRMED Round 2:** Shield Bash = short targeted charge with a brief stun and interrupt on eligible casts; Challenge = AoE real threat/brief taunt; Bulwark = Resolve-SPENDING temporary mitigation, with Resolve still earned from pre-mitigation incoming hits; Shield Sweep = frontal AoE Resolve generation plus **nearby allies gain P-DEF and M-DEF per enemy hit**; Hold the Line = **personal defense + Resolve-generation passive** with a **weak +1 elemental resistance per passive rank aura**, shared radius with Shield Sweep's ally buff. | Exact dash range, speeds, target/miss behavior, Resolve values, numerical buffs/ceilings, aura element scope/radius and skill rank-up rules OPEN. |
+| Skills | **CONFIRMED through Round 3:** targeted short-charge/stun/interrupt Shield Bash obeys existing global **Do Nothing / Move Into Range** out-of-range behavior; Challenge AoE taunt/threat; Bulwark spends Resolve for mitigation while taking pre-mitigation hits builds Resolve; Shield Sweep AoE grants **+1 P-DEF and +1 M-DEF × Shield Sweep rank × distinct enemies hit (max FIVE)** to allies **INCLUDING Defender** within Hold the Line's radius; Hold the Line primarily personal defense/Resolve plus weak **+1 percentage point ALL elemental resistances per rank** in **5m circular aura** shared with Sweep's ally-buff reach. | Specific skill rank caps, cooldowns, buff duration/refresh, threat values, dash maximum range and some effects still open. |
 | Advancement | **An instanced defend-the-gate quest at Trimery** from the distinguished veteran guard is directionally **APPROVED**, protecting people/guards from attackers. | NPC identity, threat types/waves, duration, fail/retry, when turn-in grants class. |
 
 ## Earlier approved roster and class fantasy (not new skill sign-off)
@@ -40,14 +40,13 @@ Suggested conceptual pipeline:
 
 **All five previously proposed skill identities are now accepted in broad mechanical form**, but precise amounts, cooldowns, targeting geometry, Resolve scaling and rank progression are not yet approved unless separately marked. Numeric examples below are **provisional playtest proposals**, not shipped code.
 
-### 1. Shield Bash — CONFIRMED short targeted charge, melee impact, interrupt and stun (DEFENDER-006)
+### 1. Shield Bash — targeted charge obeying out-of-range setting (DEFENDER-006/011)
 
-- **CONFIRMED:** Shield Bash targets an enemy and **charges/dashes a SHORT distance directly toward that enemy**, finishing with a shield impact. This is not a stationary shield slap or free-aim ground dash. It deals modest Physical damage and causes a **short stun** if target is vulnerable; **interrupts interruptible enemy casts** independently of ordinary boss stun immunity. Against hard CC-immune bosses, preserve the interrupt if the specific boss cast is marked interruptible.
-- **PROPOSED range:** approximately **4–6 meters maximum**, closing to melee contact and resolving collision against other entities/world geometry safely. No phasing through walls/enemies; no teleport; no arbitrary extended distance if the target is already in melee range (just bash).
-- **PROPOSED stun:** **0.75s**, respecting usual crowd-control immunity/resistance. **PROPOSED cooldown:** **8–10s**.
-- **PROPOSED Resolve:** roughly **+8 on a successful enemy hit**, independent of Resolve gained from incoming hostile pre-mitigation damage.
-- **OPEN:** exact max range, whether clicking out of range attempts to approach the target automatically, line-of-sight checks, what happens if target moves/dies mid-dash, collision and failed/interrupted charges, cooldown commit and whether Resolve award requires contact.
-- **Visual:** short shield-forward lunge, forward body movement and a readable impact/interrupt.
+- **CONFIRMED:** targeted short shield-first dash into a hostile, shield impact, short stun on vulnerable enemies, interruption of separately interruptible enemy casts. Boss stun immunity must not automatically make explicitly interruptible casts immune to interruption.
+- **CONFIRMED DEFENDER-011:** follow the **EXISTING player-wide out-of-range skill behavior setting**; do **NOT** add a Defender-only option. If **Do Nothing** is selected, an out-of-range Shield Bash does not initiate pursuit/automatic movement (the normal inability-to-cast feedback may apply). If **Move Into Range** is selected, approach target via ordinary pathing and then initiate the short targeted dash/bash once the target becomes valid and close enough. Re-evaluate range/target/path if target moves or dies; do not charge through walls or blocked paths.
+- **PROPOSED short-dash range:** approximately **5m** (the user's reply confirmed the *setting behavior*, not the numeric 5m suggestion). At melee distance, simply perform impact without a pointless dash. Resolve proper physics/collision and never teleport or phase through obstacles.
+- **PROVISIONAL:** ~0.75s vulnerable-target stun, ~8–10s cooldown, modest Physical damage, ~8 Resolve on an actual landed hit.
+- **OPEN:** final dash travel range/speed, enemy/ally collision, interruption/cancellation/refund rules, cooldown commencement, line of sight and failed targets. Settings' exact saved/internal identifier should be inspected by the implementation chat, not invented here.
 
 ### 2. Challenge — CONFIRMED nearby AoE taunt/threat (DEFENDER-007)
 
@@ -61,22 +60,43 @@ Suggested conceptual pipeline:
 - **PROPOSED first-rank costs/balance:** ~**25 Resolve**, **4 seconds** duration, **30% reduction to incoming eligible ordinary damage** during effect, **20–24s cooldown**, perhaps **20% movement slowing** while guarding. These exact figures/movement constraints are **NOT user-approved**.
 - **OPEN:** buff persistence during movement/casting, frontal directional guard versus all directions, protection of allies versus self only, exact rank scaling and any interaction with CC.
 
-### 4. Shield Sweep — CONFIRMED frontal damage/Resolve and ally DEF buff (DEFENDER-009)
+### 4. Shield Sweep — confirmed rank-scaled ally defense and self-inclusion (DEFENDER-009/012)
 
-- **CONFIRMED:** a short-range **frontal sword/shield AoE** against hostile targets which **generates Resolve** from successful hits and also grants **Physical Defense AND Magical Defense** to **allies near the Defender**. **Buff strength increases per distinct enemy actually hit by THAT Shield Sweep cast** (not per damage tick or each attempted target; misses do not count). This was requested instead of a generic small percentage damage-reduction buff.
-- **CONFIRMED RADIUS SYNERGY:** the allied DEF buff uses the **same circular ally radius as Hold the Line's visible elemental-resistance aura**, so players can see who is positioned to receive it. **The radius of the forward-facing enemy attack cone is separate**; do not restrict allies to being in the enemy cone.
-- **PROPOSED attack:** frontal **~160–180°**, **~3m reach**, modest Physical damage per target. **PROPOSED Resolve:** +5 per distinct enemy hit, maximum +15 per activation. **PROPOSED cooldown:** 10–12s.
-- **PROPOSED ally buff:** **+2 Physical Defense and +2 Magical Defense per distinct hostile hit**, duration **~3 seconds**, with a sensible **per-cast stack/target cap** (e.g. count only first 5 unique targets → at most +10/+10 DEF), and an allied buff radius of **~5m**. This is NOT approved numerical balance; needs user preference or delegation. Determine whether Defender themselves also receives the defense buff.
-- **OPEN:** buff per-target numerical contribution, duration, cap/stacking with multiple Defenders, group-target requirement, self-inclusion and buff display. AOE control and enemy hit confirmations must be server/authority accurate eventually.
+- **CONFIRMED:** frontal Physical sword-and-shield AoE that damages nearby hostiles, generates Resolve on hits, and protects **every eligible nearby ally INCLUDING THE DEFENDER THEMSELVES**. The recipient circle is exactly the **same 5m radius as Hold the Line's resistance aura**, not the frontal cone in which enemies are hit.
+- **CONFIRMED BUFF FORMULA (skill rank R, distinct successfully hit enemies N):**
+  `bonusPhysicalDefense = bonusMagicalDefense = R × min(N, 5)` **flat Defense points**, NOT percentages, NOT +2 per hit, and NOT scaling from Resolve or Hold the Line rank. Count a given hostile once per Shield Sweep activation; no benefit for misses/immune/invalid non-hits. At rank 8 and 5 enemies successfully hit, buff = **+40 P-DEF / +40 M-DEF** for all recipients including caster.
+- **CONFIRMED:** **at most 5 monsters count** for the buff even if the frontal attack actually hits more; extra targets can still receive AoE damage per the skill definition.
+- **PROVISIONAL, not yet user-approved:** ~3s buff duration; ~160–180° frontal enemy cone, ~3m enemy reach; 10–12s cooldown; +5 Resolve per unique hostile hit with +15 per cast cap; refreshing/replacing buffs from the same skill/caster rather than continually self-stacking.
+- **OPEN:** exact buff lifetime, stacking/refresh for repeat casts and different Defenders, whether DEF buffs snapshot their recipient set at successful cast or follow allies moving in/out for the duration. Aura range remains the visual guide for which allies benefit *when Shield Sweep resolves*.
 
-### 5. Hold the Line — CONFIRMED personal defense/Resolve with visible weak ally aura (DEFENDER-010)
+### 5. Hold the Line — confirmed five-meter all-element aura (DEFENDER-010/013)
 
-- **CONFIRMED personal passive:** increase Defender's own **defensive capability** and **Resolve generation** as the main identity; do **not** make its primary investment about party-wide threat or ally damage mitigation.
-- **CONFIRMED weak aura:** every purchased Hold the Line rank adds **+1 elemental resistance** to eligible allies inside an always-visible or clearly indicated aura around Defender. Aura exists importantly as a **range visualization** for Shield Sweep's short DEF buff, which therefore shares its ally-area radius.
-- **WORKING INTERPRETATION, NOT YET EXPLICITLY CONFIRMED:** that means **+1 percentage point to each elemental resistance per Hold the Line rank**, e.g., rank 5 = +5 percentage points to each element in range, rather than a bonus to a single element. This matches existing DiceFree resistance-percent convention, but exact scope needs confirmation. No rank should convert aura to a damage shield just by being called an aura.
-- **PROPOSED radius:** **~5 meters circular around Defender**, matching Shield Sweep's allied buff radius; **enemy cone range stays independent**. Passive activates at Hold the Line rank ≥1 and ends on class change/unequip/defeat according to ordinary aura rules. If multiple Defenders are nearby, use the **global aura rule** in `docs/STATS_AND_DAMAGE.md`: **strongest eligible Hold the Line aura applies**, not additive copies, unless an explicit future exception is chosen.
-- **PROPOSED personal bonuses:** small increases to the Defender's Physical Defense (possibly Magical Defense as well) and +% Resolve generated from qualifying incoming hits/skills, scaling gently by rank. No requirement to stand motionless; identity can depend on active combat state.
-- **OPEN:** exact personal stat coefficients, the Resolve bonus magnitude, aura maximum radius/visibility, whether the passive grants ally aura while out of combat, whether it applies to Defender themselves, how to handle aura overlaps with other skill/gear sources, number of available ranks.
+- **CONFIRMED main passive:** enhance Defender's **personal defense and Resolve generation**, not primarily group threat or group mitigation. Holding still must not be required for normal positioning/dodge play.
+- **CONFIRMED AURA:** within **5m circular radius around Defender**, eligible group members **including Defender** gain **+1 percentage point to EACH ELEMENTAL RESISTANCE per purchased Hold the Line skill rank**. Example: rank 5 → **+5 percentage points Fire, Ice, Metal, etc.** per eligible ally. This is not raw resistance rating and does not grant Physical/Magical DEF by itself; the latter comes from Shield Sweep when activated.
+- **CONFIRMED SHARED RANGE:** the Hold the Line aura's visible area is the **same five-meter allied-recipient radius** as Shield Sweep's P-DEF/M-DEF buff. The *Shield Sweep enemy hit cone* may be narrower/shorter and does not define which allies receive defense.
+- **CONFIRMED AURA STACKING:** when multiple Defenders' Hold the Line auras overlap, the strongest applicable **same-identity aura** applies, following `docs/STATS_AND_DAMAGE.md`; **do not stack separate copies additively**. Different authored aura types use their normal framework rules.
+- **PROVISIONAL:** personal Physical DEF and potentially Magical DEF per rank, a small increase to qualified Resolve generation, out-of-combat aura availability and visual radius decal intensity. These still need tuning. The aura is meant to be very weak and primarily helps allies see the Sweep buff radius, not a dramatic tank-scale elemental protection bubble.
+- **OPEN:** maximum passive rank, precise personal defense/Resolve bonuses, whether out-of-combat aura visibility can be toggled, and aura refresh behavior during class/zone changes.
+
+## Resolve — confirmed 0–100 meter and very slow decay (DEFENDER-014)
+
+- **CONFIRMED:** maximum **100 Resolve**; taking hostile incoming damaging hits and using approved Resolve-generating skills adds resource. Ordinary autoattacks do not grant a separate free Resolve bonus unless later designed as a skill-specific exception.
+- **CONFIRMED:** amount gained from taking damage is based on **pre-mitigation incoming damage** (before Physical/Magical Defense, element resistance, Bulwark mitigation, or shield absorption). Damage avoidance/real miss yields no resource on an attack that never connects.
+- **CONFIRMED:** prevent abuse with some **maximum gain per qualifying hit/action**, avoiding infinite resource generation from massive boss attacks and rapid separate DoT ticks. Exact formula/cap not yet determined.
+- **CONFIRMED:** **very slow decay**, rather than indefinite storage. Exact start delay, per-second decay rate and whether decay pauses in combat are open for the next round; design direction suggests decay mostly/outside combat.
+- **PROPOSED playtest numbers only:** gain could use `min(12, 2 + 0.03 × rawIncomingHitDamage)` Resolve per meaningful hostile hit, with DoT grouping; outside combat start after a short delay then decay **~0.5–1 Resolve/sec**. This is a designer illustration, **not** a fixed number or approval. Incoming raw damage scale must be validated before choosing a coefficient.
+- **EXCLUDED unless separately agreed:** self-inflicted damage, friendly fire and duplicate Resolve per defense/shield/HP-loss stage.
+
+## Future Tier III counterattack concept — USER IDEA, NOT A DEFENDER TIER II SKILL (DEFENDER-015)
+
+**User's original concept, preserved without silently finalizing it:**
+- For **exactly 2 seconds**, character gains **+500 Physical Defense AND +500 Magical Defense multiplied by the ability's rank**.
+- During those two seconds, accumulate/store **ALL incoming PRE-MITIGATION damage** into a temporary charge instead of merely counting actual HP lost.
+- At the end of the two seconds, **release the stored damage** as a powerful retaliatory attack. **Whether this release is SINGLE-TARGET or AREA-OF-EFFECT remains deliberately undecided.**
+- User is **UNSURE whether to include this at Tier II or reserve it for Tier III** and leaned toward reserving as a potentially later class-defining skill; don't presume either is selected. **Working name “Reckoning” is the designer's suggestion ONLY**, not approved naming.
+- My design recommendation (not user-confirmed): reserve for a specialized Tier III **Guardian (defensive payback)** or **Vanguard (offensive payback)** rather than overload baseline Tier II Defender, which already has Bulwark as a Resolve-consuming defense. This is concept design, **not** a Tier II ultimate and does not change the Tier IV+ ultimate restriction.
+- **OPEN design risks:** exact damage snapshot point vs raw action coefficients (physical and magical packets, DoT, friendly hits, redirected damage); prevent duplicated damage credit from mixed multi-packet hits; whether outgoing retaliation is mitigated by normal enemy defenses, affected by crit, target selection/radius, duration ending on death, damage storage cap, ratio/scaling and Resolve cost/cooldown. Using +500 DEF/rank inside the shared diminishing-return Defense model may generate extremely high defenses but not outright invincibility; test future ranks separately.
+- **NO IMPLEMENTATION, no new class identity or advancement fork approved by this idea.**
 
 ## Class skill-point and level-gate framework
 
@@ -101,17 +121,25 @@ Suggested conceptual pipeline:
 - **DEFENDER-009 — CONFIRMED:** Shield Sweep is frontline enemy AoE Resolve generation plus a nearby-**ally** buff that grants **both Physical DEF and Magical DEF per distinct enemy struck**, NOT the former generic % reduction. Ally recipients are determined by a circular radius identical to Hold the Line's aura radius. The enemy hit area remains a forward-facing cone.
 - **DEFENDER-010 — CONFIRMED:** Hold the Line prioritizes **self-defense and Resolve generation**, but also grants a **very weak +1 elemental resistance per passive rank ally aura**. Primarily acts as visible proximity/range guidance for Shield Sweep's protective buff. Exact elemental breadth/unit (all resistances vs one school; percentage points), max rank, radius, personal mitigation amounts and Resolve cap remain undecided.
 
-## Round 3 — five questions (awaiting answers)
+## Round 3 — five answers recorded (2026-10-19)
 
-**DEFENDER-011 — Shield Bash targeting and dash.** Would you like the targeted Shield Bash charge to reach **about 5 meters**, travel into melee contact and **stop at walls/units rather than ghosting through**? If an enemy is out of that range, should clicking Shield Bash **move toward them automatically and charge once in range** (following your general targeting settings), or should it simply show “out of range” without moving?
+- **DEFENDER-011 — CONFIRMED:** Shield Bash obeys the **existing out-of-range skill setting**. **Do Nothing** = do not pursue when out of range; **Move Into Range** = approach target then execute short targeted dash/bash when valid. Numeric dash range remains open; prior 5m was a proposal, not explicitly approved.
+- **DEFENDER-012 — CONFIRMED:** Shield Sweep grants **+1 flat Physical DEF and +1 flat Magical DEF PER Shield Sweep skill rank × enemies successfully struck**, **counting a maximum of five distinct enemies**, and **includes the Defender themselves** among allied buff recipients. Example rank8 × five hits = +40 PDEF/+40 MDEF. Duration and stacking still open; previous +2-per-hit amount is superseded.
+- **DEFENDER-013 — CONFIRMED:** Hold the Line grants a **+1 percentage point to ALL elemental resistance types per passive rank**, in a **five-meter radius** that also determines Shield Sweep ally recipients. Multiple identical Defender auras overlap using the **strongest**, not additive stacking.
+- **DEFENDER-014 — CONFIRMED:** Resolve capacity **0–100**, generated by eligible **pre-mitigation** hits and designated skill generators with per-hit/cast abuse protection, and **very slow decay**. Exact coefficients/decay time remain open.
+- **DEFENDER-015 — USER IDEA PRESERVED, TIER STILL UNDECIDED:** highly defensive **2-second counter skill**, grants **+500 PDEF and +500 MDEF × skill rank**, stores **all incoming pre-mitigation damage**, then unleashes the stored damage. Single-target vs AoE unknown; user asked whether it belongs to future Tier III. The assistant recommends reserving it for Tier III, but user has not yet locked the choice. No new Tier II ability automatically approved.
 
-**DEFENDER-012 — Shield Sweep defense strength.** I suggest each distinct enemy hit grants nearby allies **+2 Physical DEF and +2 Magical DEF for 3 seconds**, counting up to **5 enemies** per cast (maximum +10 to each DEF). Does that sound good as an initial test? Should the Defender receive the same buff, or only other allies?
+## Round 4 — five questions (awaiting answers)
 
-**DEFENDER-013 — Hold the Line aura.** By **+1 elemental resistance per rank**, did you mean **+1 percentage point to ALL elemental resistance types** per rank (e.g. rank 5 grants +5 Fire, Ice, Metal, etc.)? And can we set its radius to about **5 meters**, shared with Shield Sweep ally buff, with only the strongest Defender aura applying when several overlap?
+**DEFENDER-016 — Counterattack tier:** Should we **reserve the new 2-second +500 PDEF/MDEF-per-rank damage-storage-and-release skill exclusively for Tier III**, keeping Tier II Defender to the five current skills? My recommendation is yes; we can later specialize a **Guardian/Vanguard** around it without compromising Defender's introductory tank kit. Or do you want a smaller version now in Tier II?
 
-**DEFENDER-014 — Resolve resource.** Shall we start at **0–100 Resolve**, with **no passive gain from regular autoattacks**, and a formula based on each real incoming hit's **pre-mitigation damage**, limiting Resolve earned from a single hit/cast so boss bursts and tiny DoT ticks don't produce unlimited Resolve? Should Resolve decay slowly outside combat, or remain until used?
+**DEFENDER-017 — Resolve decay:** Would **zero Resolve decay during combat** and **very slow decay once out of combat** feel right? A provisional starting point is **0.5 Resolve per second after 5 seconds without combat**, with resource cap 100. Or should it slowly decay even during combat?
 
-**DEFENDER-015 — Next design priority.** Shall we keep these **five confirmed mechanics** as Defender's initial roster (four actives + Hold the Line) and next tackle **skill rank caps/level-gate schedules** to allow roughly 78–80 possible investments by class level 80? Or would you like to add a separate damaging Resolve spender/counterattack to make solo offense more interesting before we lock the roster?
+**DEFENDER-018 — Shield Sweep buff duration and refresh:** With the confirmed `Sweep rank × min(enemies hit, 5)` flat PDEF/MDEF formula, should the ally buff last **3 seconds**, and should a fresh successful Sweep **replace/refresh the same Defender's earlier buff** rather than additively stacking it? Multiple Defenders could contribute separate strengths, with the strongest same-effect buff taking priority.
+
+**DEFENDER-019 — Shield Bash dash reach:** Should we lock its maximum charge distance at **5 meters** before automatic pathing/range behavior kicks in (depending on existing options)? This would be a brief targeted gap-closer that cannot cross blocked geometry, not a long-range teleport.
+
+**DEFENDER-020 — Advancing the design:** Next, should we design **Defender's five skill rank caps and individual rank-level gates**, aiming for approximately **78–80 purchasable ranks by level 80**, with one usable purchase per class level as with Greatblade/Mage? Or would you like to work out the **Trimery gate defense advancement quest** first?
 
 ## Decision ledger
 
@@ -127,4 +155,9 @@ Suggested conceptual pipeline:
 | 2026-10-19 | DEFENDER-008: Bulwark Resolve spender, incoming hit generation stays pre-mitigation | **CONFIRMED CORE** |
 | 2026-10-19 | DEFENDER-009: Shield Sweep AoE Resolve + P-DEF/M-DEF buff PER target hit to nearby allies | **CONFIRMED CORE; numbers OPEN** |
 | 2026-10-19 | DEFENDER-010: Hold the Line personal resilience/Resolve + weak +1 elemental resist/rank ally aura (matching Shield Sweep ally range) | **CONFIRMED CORE; resistance scope/radius OPEN** |
-| 2026-10-19 | DEFENDER-011–015: five Round 3 questions asked | **AWAITING USER** |
+| 2026-10-19 | DEFENDER-011: Shield Bash follows existing Do Nothing / Move Into Range player option | **CONFIRMED** |
+| 2026-10-19 | DEFENDER-012: Shield Sweep flat +1 PDEF/MDEF × skill rank × 1–5 distinct hits; includes Defender | **CONFIRMED** |
+| 2026-10-19 | DEFENDER-013: Hold the Line 5m +1 percentage point to all elemental resist per rank, strongest identical aura | **CONFIRMED** |
+| 2026-10-19 | DEFENDER-014: 0–100 Resolve, pre-mitigation gain, per-hit safeguard, very slow decay | **CONFIRMED; exact formula/decay OPEN** |
+| 2026-10-19 | DEFENDER-015: 2s +500 DEF per rank counterskill storing pre-mitigation damage and releasing it | **USER CONCEPT; TIER/AOE/ST OPEN** |
+| 2026-10-19 | DEFENDER-016–020: five Round 4 questions | **AWAITING USER** |
