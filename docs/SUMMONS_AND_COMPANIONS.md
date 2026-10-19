@@ -35,6 +35,8 @@ Examples:
 
 The generic framework should enforce authored limits cleanly without inventing a global design cap.
 
+**Acolyte Tier II class-specific decision (2026-10-19, DESIGN ONLY):** Acolyte summons **directly controllable skeletons** which each live **15 seconds**, with **at most 4 active per caster** and **4 Soul Charges per summon** (resource cap8). When a further summon is valid at cap4, **replace the oldest** skeleton instead of rejecting the summon. Passive automatic retaliation follows the owning hero's existing **Auto-Retaliate On/Off toggle**, not an always-aggressive independent pet setting. Explicit RTS selection/orders take priority. This is NOT a general cap or lifetime for other summon classes and is NOT implemented by this documentation. See [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md).
+
 ## Ownership and control
 
 Every owned unit can identify:
