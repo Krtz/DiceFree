@@ -1,7 +1,7 @@
 # DiceFree — Tier II Ranger — design interview
 
 **Created:** 2026-10-19  
-**Status:** RANGER ROUNDS 1–3 RECORDED — DESIGN ONLY, NOT IMPLEMENTED. Round 3 approves Hawk Dive/mark timing, marked-target Aimed Shot synergy, explosive-arrow replacement for Multishot, moving dodge/evasion and range/crit-based Bow Mastery. This is documentation-only; user will ask a separate DiceFree working chat to read all latest specifications and implement after remote desktop access returns. Do NOT change Unity C#, assets, builds or saves here.  
+**Status:** RANGER ROUNDS 1–4 RECORDED — DESIGN ONLY, NOT IMPLEMENTED. Round 4 confirms Physical Gun Exploding Arrow with emphasized primary target, AGI-based flat marked Aimed Shot bonus, basic-attack-only Evasive Step evasion, Bow Mastery crit on basic attacks/Aimed Shot and +0.1m range per rank. Ranger six-skill weighted cap and gate timetable is a **designer proposal**, checked against all 80 levels, pending user review. This is documentation-only; user will ask a separate DiceFree working chat to read all latest specifications and implement after remote desktop access returns. Do NOT change Unity C#, assets, builds or saves here.  
 **Branch:** `integration/world1-foundation`  
 **References:** [Class Progression](../CLASS_PROGRESSION.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Tier II original four classes](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Defender Tier II interview](DEFENDER_TIER2_DESIGN.md), [Stats and Damage](../STATS_AND_DAMAGE.md).
 
@@ -38,12 +38,12 @@
 
 **The current six identities are accepted, but not fully numerically finalized.** Every new Tier II Ranger skill begins at rank 0. Earlier Round 2 accepted Multishot as a candidate; **RANGER-013 deliberately REPLACES Multishot with an explosive/gunpowder arrow** to foreshadow future Gunslinger/gun classes. Never implement both by silently retaining Multishot in the active kit.
 
-1. **Aimed Shot — confirmed extra mark synergy:** heavy **single-target Physical shot** with short stationary windup; target afflicted with the **caster Ranger's Hunter's Mark** takes the ordinary mark damage bonus **AND an additional Aimed Shot-specific marked-target bonus**. Exact additional damage, shot coefficient and windup time still OPEN.
-2. **Exploding Arrow / Gunpowder Arrow — confirmed replacement concept, NAME NOT SET:** fires a **gunpowder/explosive arrow** rather than a fan of arrows, as a thematic hint at potential later gun-based classes. **Damage channel/element, delivery (detonate on impact or ground), AoE radius, number of targets, Mana cost, cooldown and secondary effects not yet chosen.** Explosion visual flavor alone does NOT automatically confer Gun/Tech/Fire element, and must use the authored elements framework rather than inventing one. Do not retain Multishot as an additional Tier II ability.
+1. **Aimed Shot — CONFIRMED flat AGI-based marked synergy:** heavy **single-target Physical shot** with short stationary windup. A target marked by the **same Ranger** takes the regular percentage Hunter's Mark damage increase AND an additional **FLAT damage amount proportional to the Ranger's AGI** (not an extra fixed percent). The exact AGI coefficient, interaction with Aimed Shot's rank and mark multiplier, windup and damage baseline are designer tuning questions. This shot and basic attacks are eligible for Bow Mastery's special 1.4× crit; other Ranger skills are not eligible from Bow Mastery.
+2. **Exploding Arrow (gunpowder-themed name provisional) — CONFIRMED:** a **Physical-channel, Gun-ELEMENT** arrow strikes one hostile primary target, then causes an **AoE explosion centered ON THAT HIT TARGET**. The direct target **takes MORE total damage** than enemies merely near the blast. The explosion is a real Gun-element attack, not just an animation/VFX color. Initial damage split, radius, Mana cost, cooldown and exact miss/detonation rules remain for design. This REPLACES Multishot in the six-skill roster.
 3. **Arrow Rain — confirmed distinct ground AoE:** ground-targeted arrows falling in **repeated waves over a short time**, affecting enemies entering the area after casting, rather than a one-time snapshot of enemy roster. This succeeds Tier I's Arrow Rain *thematically*, but starts at **Ranger rank 0**, does not inherit the Tier I skill points, and gets its own skill scaling.
 4. **Hawk Dive — confirmed mark opener:** one-off **single-target Physical attack** featuring a descending hawk that strikes and disappears (not a persistent actor). **Initial approved playtest:** **15-second cooldown**, Hunter's Mark **8-second duration**, +**10% damage from this Ranger's attacks/skills** to that target; higher ranks may grow toward a designer provisional maximum around **20–25%**, not a hard final cap unless user approves its exact limit. Only **one active target per casting Ranger**.
-5. **Evasive Step — confirmed directional mobility:** **short leap TOWARD MOUSE POINTER**, not necessarily away from the enemy, followed by a **brief increased Movement Speed buff** and a temporary **+1% EVASION PER EVASIVE STEP SKILL RANK** (e.g. rank 5 = +5 percentage points) lasting a few seconds. Buff does NOT grant basic attacks while moving unless a later explicit skill says so. Leap direction/travel uses actual obstacle-safe movement, not a teleport through walls.
-6. **Bow Mastery — confirmed AGI + range + custom crit rule:** passive **raises AGI**, very slightly increases **Ranger effective normal attack range per skill rank**, and grants **+1 percentage point critical chance PER BOW MASTERY RANK** with a **1.4× raw damage multiplier on successful critical hits**. This is an **explicit class passive crit permission/rule**, not a new global crit baseline. Applicability to **autoattacks only vs Ranger damage skills too** is OPEN and should be decided in the next round. Exact AGI gain, meters per rank, rank cap and crit interactions require balancing. No universal bow-damage or attack-speed bonus implied by this latest user description.
+5. **Evasive Step — CONFIRMED:** **3–4 meter obstacle-safe leap toward mouse cursor**, then **3 seconds of +10% Movement Speed** and **+1 percentage point evasion chance PER EVASIVE STEP rank**. Evasion applies **ONLY to enemy basic/autoattacks**, not enemy active abilities/spells/AoE, even if those are Physical. An evaded basic attack does not deal HP damage and follows normal dodge/miss rules. No basic shooting while moving from this buff.
+6. **Bow Mastery — CONFIRMED:** passive raises **AGI** (amount per rank open), and adds **+0.1m effective BASIC ATTACK RANGE per Bow Mastery rank** to the shared Ranger class base for both bow types. Explicitly grants **+1 percentage point chance to crit per Bow Mastery rank at 1.4× raw damage**, eligible **ONLY for Ranger basic/autoattacks and Aimed Shot**, not Exploding Arrow, Arrow Rain or Hawk Dive. This is an explicit skill-granted crit rule, NOT generic crit chance or an automatic rule for other skills.
 
 #### Hunter's Mark — RANGER-008/011/012 confirmed
 
@@ -53,18 +53,34 @@
 - **Aimed Shot** adds a SECOND, ability-specific marked-target damage bonus **on top of Hunter's Mark's general bonus**; how the two boosts stack (add/multiply), and extra percentage, remain OPEN.
 - **OPEN:** mark refresh/removal ordering, crit/proc interaction, target death and dispel behavior, mark from different Rangers, ranks and VFX/status indicator. Only caster Ranger gains mark bonus by default.
 
-#### Evasive Step — confirmed input and evasion ranks
+#### Evasive Step — Round 4 confirmed movement-speed and basic-attack evasion
 
-- **On skill activation, leap briefly toward mouse pointer** through normal collision-safe movement. This is an **ability leap**, not free shooting while moving or an unlimited instant teleport.
-- Upon completing the leap, apply **temporary increased movement speed** and **evasion chance +1 percentage point × purchased Evasive Step rank** for **a few seconds**. Evasion means the existing attack-miss/avoidance system's mechanic as applicable, not shield absorption or flat Defense.
-- **PROVISIONAL:** ~3-second buff duration, ~3–4m max leap reach, +8–12% Movement Speed, ~12–16s cooldown; user has NOT approved these numerical coefficients. Need confirm whether evasion affects physical autoattacks only, projectile skills and/or Magic/Pure attacks.
-- Movement during an ordinary autoattack windup already cancels the unfired arrow; Evasive Step must respect that. The leap must not bypass body collision/walls or unintentionally apply auto-attack-while-moving mechanics.
+- **Confirmed:** quick **3–4 meter** leap toward the **mouse cursor**, using collision-safe movement and normal path constraints; **3 seconds of +10% Movement Speed** following the leap; **+1 percentage point evasion per Evasive Step purchased rank**, affecting **enemy basic/autoattacks only** during the same three-second buff.
+- Evasion is an **explicit effect sourced from Evasive Step**, **NOT generic Evasion from the Agility attribute**. Existing global stats documentation explicitly says generic Evasion is not committed. Apply evasion to enemy basic attack hit determination; do not apply it to enemy skill/ground-AoE damage by default or treat it as Physical Defense.
+- At designer-proposed rank 8, this means **+8 percentage points** of basic-attack evasion; the +10% speed and three-second duration are **not multiplied by rank** unless specifically revised later.
+- **Open:** exact leap-distance target within the 3–4m range, skill cooldown/Mana cost, what if mouse points beyond valid geometry, whether skill can dodge while stunned/rooted, interaction with unavoidable/basic attacks and later class upgrades. Movement before an autoattack's projectile release cancels that Ranger shot; projectiles already fired persist.
 
-#### Bow Mastery — skill-rank-based class range and explicit crit
+#### Bow Mastery — Round 4 confirmed range and crit eligibility
 
-- **Confirmed:** **AGI increase per skill rank** (exact flat AGI unknown); **small Ranger-range increase per Bow Mastery rank** on top of class base (exact meter/rank unknown), applies **equally to BOTH shortbows and longbows on the same Ranger**; **+1 percentage point crit chance per Bow Mastery rank** on eligible effects, with a **1.4× raw-damage critical multiplier**.
-- Because DiceFree has **NO universal crit chance or multiplier** and uses **explicit opt-in crit sources** (`docs/STATS_AND_DAMAGE.md` and `docs/COMBAT.md`), Bow Mastery must author its own chance/rule and specify whether basic attacks, Ranger skills, physical arrow attacks or all ability damage can use it. **Do not assume all projectile/DoT skills crit by default**. If other explicit crit rules are present, use the existing highest-multiplier-first rule; don't silently stack/merge unrelated crit sources.
-- **Unresolved** rank cap (the user described a per-rank effect, not infinite levels), flat AGI/rank, exact +meters per rank, and whether class buffs/skill ranks alter skill target range versus autoattack reach. Potential Tier III class range differences remain possible even though Tier II Bow Mastery boosts its normal class range.
+- **Confirmed:** +AGI per skill rank (exact flat AGI growth not yet approved); **+0.1m BASIC ATTACK RANGE × Bow Mastery rank** for Tier II Ranger, equally for **shortbows AND longbows** at the same mastery rank. Basic range remains **class-authored** rather than bow-item-defined. Range granted by Bow Mastery does **not automatically extend every skill's targeting range**.
+- **Confirmed explicit crit grant:** on normal bow basic attacks and **Aimed Shot only**, Bow Mastery grants **+1 percentage point crit chance per skill rank**, crit result **1.4× RAW damage** before mitigation. If max rank is the designer-proposed 8, then Bow Mastery rank 8 grants **8% crit chance, 1.4× damage**, plus **0.8m basic attack range**.
+- **NOT included in Bow Mastery's crit eligibility:** Hawk Dive, Arrow Rain, Exploding Arrow, Evasive Step or non-Ranger damage effects. They may receive their **own separately authored crit sources** in the future; no global crit stat granted.
+- DiceFree's `docs/STATS_AND_DAMAGE.md` / `docs/COMBAT.md` policy is **explicit crit permissions; no universal baseline multiplier**. If the action is eligible for Bow Mastery's 1.4× rule and another item/skill crit rule, follow the system's **highest-multiplier-first independent roll**. Do not turn +rank% into a globally pooled crit chance.
+- **Open:** exactly how much AGI each purchased rank adds (recommend starting **+1 AGI per rank** as designer playtest proposal), max rank approval, how ability range buffs interact with class reach and other passive crit modifiers.
+
+#### Exploding Arrow — Round 4 confirmed Physical Gun impact and blast
+
+- **Confirmed:** firing an **Exploding Arrow** at a **single hostile target** creates **one direct hit** and then a **Gun-ELEMENT blast centered on the hit target**, damaging nearby enemies with **Gun-element damage**, while the primary target takes greater total damage than any equally situated secondary target.
+- **Working designer interpretation:** **Physical** is the damage channel, **Gun** is the element—these are independent in DiceFree's existing element rules (`docs/ELEMENTS.md`), so Physical Defense and Gun resistance apply as normal. A possible simple resolution: primary target takes a **single direct Physical Gun impact packet + one Physical Gun splash packet**, while each secondary enemy in a small radius takes **only the single splash packet**; no accidental duplicate secondary hits or separate unspecified Fire/Tech packets. Main target gets greater damage because of the extra impact. **User confirmed element/relative damage; exact packet model remains designer suggestion until approved.**
+- **PROVISIONAL starting balance:** radius about **2.5m**, projectile/impact hit coefficient maybe **~1.0 bow-attack equivalent** direct, plus **~0.55 bow-attack equivalent** AoE splash to primary+nearby; exact rank scaling, damage, Mana cost and cooldown await balance decisions. Avoid automatically imposing Gun element's legacy DiceBound proc/penetration percentages without confirming the DiceFree element registry and ability permissions.
+- **OPEN:** whether a missed primary shot creates no blast (my suggestion), whether splash applies after on-hit mark/crit, multiple target-hit packet attribution, spell-target auto-move into range and max blast victims. Only Hunter's Mark and Aimed Shot use the passive crit rules approved so far.
+
+#### Aimed Shot — Round 4 confirmed AGI flat-damage mark bonus
+
+- **Confirmed:** Aimed Shot does its own single-target Physical strike with a brief stationary windup. Against an enemy with **this same Ranger's** Hunter's Mark, apply an **ADDITIONAL FLAT damage bonus that scales with the Ranger's current AGI**, **not** a second +20% flat percentage multiplier.
+- **PROVISIONAL example ONLY:** `bonusRawDamageAgainstMarkedTarget = 0.5 × RangerCurrentAGI` on top of Aimed Shot's normal raw shot damage. This extra raw damage can use the **same action-wide Bow Mastery crit result** as Aimed Shot (1.4× if crit triggers), after which the Hunter's Mark damage increase is applied to the qualifying Ranger attack. **The exact AGI coefficient and stacking order are NOT user-approved.**
+- Keep one target per Ranger's Hunter's Mark; the general Hunter's Mark damage multiplier still applies to Aimed Shot whether or not any extra marked-damage bonus is active (Aimed Shot must also be useful on an unmarked enemy).
+- **OPEN:** exact attack coefficient, cast/windup duration and cancellation behavior during player movement, bonus scale per Aimed Shot rank, damage splitting and latency/cancel forgiveness.
 
 ### Tier III specialization directions — discussed, NOT CONFIRMED future branches
 
@@ -98,17 +114,86 @@
 - **RANGER-015 CONFIRMED:** **Bow Mastery adds AGI, a small basic-attack range increase per skill rank, and +1 percentage point crit chance per rank for eligible attacks dealing 1.4× raw damage on crit**. Which attacks and skills can use the crit rule, exact AGI and range progression and max rank remain OPEN. Crit uses explicit class skill rule, not generic global chance/multiplier.
 - **RECONCILIATION:** the earlier Ranger Round 2 plan had the same **class base range for longbows and shortbows**, and floated distinct base ranges for possible future Tier III Beastmaster/Marksman. Round 3 adds range growth via Bow Mastery and **DOES NOT** make shortbows longer/shorter than longbows for the same Tier II class/rank. Earlier proposed Bow Mastery flat bow damage/attack speed is **superseded by the AGI/range/crit set**.
 
-## Ranger Round 4 — five questions (awaiting user)
+## Ranger Round 4 — five user answers recorded 2026-10-19
 
-**RANGER-016 — Exploding Arrow mechanics:** Should **Exploding Arrow** strike a single target with an arrow and then **explode in a small radius** around them, dealing **Physical damage to nearby enemies**? I'd propose this as a straightforward gunpowder blast, with explosion *visuals* not automatically creating a new element. Or should we explicitly assign the **Gun** or **Tech** element to the explosion?
+- **RANGER-016 — CONFIRMED:** Exploding Arrow hits one hostile primary target then **Gun-element AoE explosion around that hit target**. **Primary target takes MORE damage** than surrounding enemies. No Fire/Tech substitution; DiceFree Gun element already exists. Working combat channel is **Physical Gun**, and direct-hit-plus-splash packet design is provisional.
+- **RANGER-017 — CONFIRMED:** Aimed Shot against Hunter's Mark gains **additional FLAT damage scaling with AGI**, on top of normal Hunter's Mark bonus, **NOT** the originally suggested +20% extra damage multiplier. Exact flat AGI coefficient and rank scale open.
+- **RANGER-018 — CONFIRMED:** Evasive Step **3–4m cursor-directed leap**, **3 seconds +10% Movement Speed** and **+1 percentage point evasion per Evasive Step rank**, where evasion works **against enemy basic/autoattacks ONLY**, not against skill/spell/AoE attacks.
+- **RANGER-019 — CONFIRMED:** Bow Mastery **+1 percentage point crit chance per rank at 1.4×** applies **ONLY to basic attacks and Aimed Shot**, not all Ranger damage abilities. **+0.1m basic attack range per Bow Mastery rank**; AGI bonus per rank still to tune.
+- **RANGER-020 — DESIGNER DELEGATION:** user approves **designing** weighted Ranger max-rank caps and exact rank gates using the prior Tier II classes as precedent. Designer proposes **Aimed Shot20 / Exploding Arrow18 / Arrow Rain16 / Hawk Dive10 / Evasive Step8 / Bow Mastery8 = 80**, with all rank gates and validation shown below. This is a **proposed first playtest schedule**, NOT explicitly user-approved exact numbers and NOT implemented.
 
-**RANGER-017 — Aimed Shot bonus:** Hawk Dive marks for 8s with +10% general Ranger damage. On top of that, should **Aimed Shot** against a marked target gain a further **+20% of Aimed Shot's damage** initially (possibly higher by rank), or do you prefer a flat damage addition that scales with AGI?
+## Ranger Round 4 — designer-proposed rank caps and class-level gates (NOT YET APPROVED)
 
-**RANGER-018 — Evasive Step duration and mobility:** I suggest a **3–4 meter cursor-directed leap**, followed by **3 seconds of +10% Movement Speed** and **+1 percentage point evasion per Evasive Step rank**. Do those starting mobility values sound right? Should the evasion affect *all dodgeable attacks*, or **Physical only**?
+### Proposed weighted 80-rank budget
 
-**RANGER-019 — Bow Mastery crit scope and range:** Should the passive **+1% crit per rank at 1.4× damage** apply to **basic attacks and Ranger damage abilities**, including Aimed Shot, Hawk Dive, Arrow Rain and Exploding Arrow (subject to authored crit eligibility)? For the subtle range bonus, is **+0.1 meter basic-attack range per rank** a reasonable playtest starting point? AGI gain per rank still needs balancing.
+All Tier II Ranger skills start at **rank 0**. The new class manifestation starts at **level 1 with one spendable point** and +1 class skill point every level, capped by authored total, following `docs/CLASS_PROGRESSION.md`:
+`availableBudget = min(classLevel, 80)`; `unspent = max(0, availableBudget − purchasedClassRanks)`. No free starting skills. One character can progress beyond class level 80 and level 60 advancement threshold; XP/stats continue without phantom overflow points.
 
-**RANGER-020 — Advancing rank progression:** Can I choose the full **six-skill max rank and individual unlock schedules** for Ranger, targeting **about 80 purchasable ranks by class level 80** with at least one legal skill upgrade each level, just like the other Tier II classes? We'd then review your preferred progression pacing and high-rank side-effect caps.
+| Skill | Proposed rank cap | First eligible Ranger level | Level gap between purchases | Last eligible level | Complete rank gate levels |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Aimed Shot | 20 | 1 | 1 | 20 | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 |
+| Exploding Arrow | 18 | 6 | 4 | 74 | 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74 |
+| Arrow Rain | 16 | 12 | 4 | 72 | 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72 |
+| Hawk Dive | 10 | 1 | 7 | 64 | 1, 8, 15, 22, 29, 36, 43, 50, 57, 64 |
+| Evasive Step | 8 | 1 | 10 | 71 | 1, 11, 21, 31, 41, 51, 61, 71 |
+| Bow Mastery | 8 | 1 | 11 | 78 | 1, 12, 23, 34, 45, 56, 67, 78 |
+| **TOTAL** | **80** | — | — | **78** | **All 80 ranks eligible by Ranger level 78; final budget point earned at level 80** |
+
+- **Aimed Shot20:** ranks every class level from 1–20; high-rank damage should matter, but its flat marked AGI bonus should not explode quadratically with player AGI, per-rank coefficient and mark stacking.
+- **Exploding Arrow18:** first rank class level **6**, further ranks every **4 levels** through level 74. Primary-target Physical Gun impact plus nearby Gun splash scales direct damage with rank; radius and hit count should remain bounded to avoid performance escalation.
+- **Arrow Rain16:** first rank at **class level 12**, every **4 levels** through level 72. New monsters entering ground zone are hittable by wave ticks. Damage grows by rank; duration/radius should not increase indefinitely.
+- **Hawk Dive10:** available from class level **1**, every **7 levels** through level 64. Rank1 mark10% for8s at15s CD; proposed rank growth `markBonusPct = min(23.5%, 10% + 1.5 percentage points × (rank−1))`; this approaches the earlier user-agreed ~20–25% upper playtest direction without unlimited multiplicative scaling. This **exact high-rank formula is designer proposal**, not a newly chosen user numeric.
+- **Evasive Step8:** first class level **1**, then every **10 levels** through level71; rank1 +1pp basic-attack evasion, rank8 +8pp, +10% movement speed for3s and cursor leap3–4m always. No indefinite evasion uptime nor rank-scaled leap distance without approval.
+- **Bow Mastery8:** first class level **1**, then every **11 levels** through level78. Rank1 +0.1m basic range/+1pp crit at1.4× (basic and Aimed Shot), rank8 +0.8m/+8pp. Designer suggests **+1 AGI per rank** as starting tuning, but **user has not approved exact AGI coefficient**.
+
+### Verification — every integer Ranger class level 1–80
+
+Count all individual skill ranks whose own level gate is reached at that Ranger class level as `eligibleCount(level)`. An uninterrupted one-point-per-level purchase path exists when `eligibleCount(level) >= level` at all levels up to the budget cap (80), assuming ranks are purchased in ascending order within each skill.
+
+| Ranger class level | Total eligible distinct rank purchases | Earned/capped skill budget | Eligible-purchase cushion |
+| ---: | ---: | ---: | ---: |
+| 1 | 4 | 1 | 3 |
+| 6 | 10 | 6 | 4 |
+| 12 | 21 | 12 | 9 |
+| 18 | 31 | 18 | 13 |
+| 20 | 34 | 20 | 14 |
+| 30 | 43 | 30 | 13 |
+| 40 | 51 | 40 | 11 |
+| 50 | 60 | 50 | 10 |
+| 60 | 68 | 60 | 8 |
+| 65 | 72 | 65 | 7 |
+| 70 | 76 | 70 | 6 |
+| 73 | 78 | 73 | 5 |
+| 74 | 79 | 74 | 5 |
+| 75 | 79 | 75 | 4 |
+| 76 | 79 | 76 | 3 |
+| 77 | 79 | 77 | 2 |
+| 78 | 80 | 78 | 2 |
+| 79 | 80 | 79 | 1 |
+| 80 | 80 | 80 | 0 |
+
+**Designer-computed verification PASSED for ALL integer levels 1–80**: no level violates `eligibleCount(L) >= L`. All **80** purchasable ranks unlocked by level **78**; player earns the 80th class-skill point at level **80**. As with Greatblade/Mage/Defender, banking remains optional. The HUD upgrade-ready indicator must show only when a next rank is actually purchasable now, while the menu can quietly display banked count and future rank's next eligible level. No Unity balance/code/save implementation in this documentation run.
+
+### Balance/implementation cautions
+
+- **At rank8 Bow Mastery:** total additive **+8 percentage points** crit chance for eligible actions, **1.4×** multiplier, **+0.8m Ranger basic attack range**, possibly +8 AGI if the provisional +1 AGI/rank is later approved. Bow range from mastery applies to either bow family; Tier III base-range changes may be class-specific.
+- **At rank8 Evasive Step:** +8pp **BASIC-AUTOATTACK-ONLY** evasion after leap, 3s +10% movespeed. This is an authored miss/avoid rule (generic Agility evasion remains uncommitted) and must not make the skill a blanket dodge of bosses' active magic, physical spells or AoE.
+- **At rank10 Hawk Dive:** provisional Hunter's Mark bonus **23.5%** for8s at15s cooldown, capped at one marked target per Ranger. Exact mark high rank coefficient may change during playtests.
+- **Exploding Arrow:** Physical channel + Gun element distinct; both direct-hit Gun and AoE splash should avoid duplicate splash packet emission per enemy. Bow Mastery critical permission explicitly excludes Exploding Arrow, Arrow Rain and Hawk Dive.
+- **Aimed Shot:** base Physical damage and flat AGI mark synergy get one action-wide Bow Mastery crit result if eligible; use existing highest-multiplier-first rule when other independent crit sources exist, and do not silently give Gun AoE or ground DoTs this passive crit.
+- **NOTE:** rank caps/gates here are designer-selected because user requested us to create them; only the six skills and explicit Round 4 numbers are USER-CONFIRMED so far. Keep first-rank balances/schedules marked **proposed** until user reviews.
+
+## Ranger Round 5 — five questions (awaiting user)
+
+**RANGER-021 — Six-skill rank progression:** I propose **Aimed Shot20, Exploding Arrow18, Arrow Rain16, Hawk Dive10, Evasive Step8, Bow Mastery8 = 80 total ranks**. Unlock: level1 Aimed/Hawk/Evasive/Mastery, level6 Exploding Arrow, level12 Arrow Rain; individual rank gaps and full checked gate table above. Shall we approve these as Ranger's initial playtest schedule?
+
+**RANGER-022 — Exploding Arrow splash details:** Does a **Physical Gun direct hit + a Physical Gun explosion centered on target** work, where the primary receives direct + splash and secondary targets receive only one splash packet? Initial **2.5m blast radius**, modest splash (~55% of basic arrow damage) and larger primary total damage; no Fire/Tech packets. Should the explosion still happen if the projectile misses the target?
+
+**RANGER-023 — Aimed Shot flat AGI coefficient:** For the **extra marked-target flat bonus**, should we start with **+0.5 × current AGI raw damage**, on top of normal Aimed Shot and Hunter's Mark, then tune? Should that extra damage itself grow with Aimed Shot skill rank, or remain simply AGI-based while the base shot scales with rank?
+
+**RANGER-024 — Bow Mastery AGI and scope:** For this eight-rank passive, I suggest **+1 AGI per rank**, **+0.1m basic attack range/rank**, and the confirmed **+1pp crit chance/rank at 1.4×** on **basic attacks and Aimed Shot only**. Does that AGI rate work, and should range growth stay restricted to basic attacks rather than increase every Ranger ability's cast range?
+
+**RANGER-025 — Ability and control balancing:** Would you like Evasive Step's **3–4m mouse leap and 3s +10% movement / basic-only evasion** to be usable **while rooted or stunned**? My recommendation: **NO**, standard root/stun restrictions apply; movement interrupts an unfired basic attack. Should the Arrow Rain ground zone pulse about **three waves over 1–2 seconds**, or be a longer-lasting AoE field?
 
 ## Decision log
 
@@ -133,4 +218,9 @@
 | 2026-10-19 | RANGER-013 | Replace Multishot with gunpowder/Exploding Arrow; retain ground multiwave Arrow Rain | **CONFIRMED core, explosion details open** |
 | 2026-10-19 | RANGER-014 | Evasive Step mouse-directed leap, temporary Movement Speed buff and +1% evasion per skill rank | **CONFIRMED core** |
 | 2026-10-19 | RANGER-015 | Bow Mastery AGI + tiny range per rank + 1% crit chance per rank at 1.4× damage | **CONFIRMED; exact values/scope open** |
-| 2026-10-19 | RANGER-016–020 | Ranger Round 4 questions | **AWAITING USER** |
+| 2026-10-19 | RANGER-016 | Exploding Arrow: Gun-element projectile, explosion centered on hit target, primary takes more damage | **CONFIRMED core; Physical channel is designer interpretation** |
+| 2026-10-19 | RANGER-017 | Aimed Shot extra marked-target FLAT damage scaling with Ranger AGI | **CONFIRMED core; coefficient OPEN** |
+| 2026-10-19 | RANGER-018 | Evasive Step 3–4m cursor leap, 3s +10% MoveSpeed, +1pp/rank evasion on basic attacks ONLY | **CONFIRMED** |
+| 2026-10-19 | RANGER-019 | Bow Mastery crit basic+Aimed Shot ONLY, +1pp/rank at 1.4×; +0.1m basic range/rank; +AGI | **CONFIRMED; AGI number OPEN** |
+| 2026-10-19 | RANGER-020 | Delegated six-skill cap/gate schedule design, designer proposal 20/18/16/10/8/8 = 80 | **DELEGATED; proposed schedule awaits user approval** |
+| 2026-10-19 | RANGER-021–025 | Ranger Round 5 five questions | **AWAITING USER** |
