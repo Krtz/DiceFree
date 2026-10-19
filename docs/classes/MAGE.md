@@ -1,5 +1,8 @@
 # Mage — Tier II
 
+> **Skill progression design update (2026-10-19; NOT YET IMPLEMENTED):** the user confirmed that every Mage skill must start at **rank 0** with **one spendable point at character level 1**, preserving current ability first-unlock levels; rank caps should vary according to skill function and aim to spend almost all 80 level-80 points. **Math Barrier remains capped at rank 5.** Existing Mage saves must receive a **safe one-time skill reset and refund** (preserving levels/items/quests/etc.). This document's *free starting rank-1, five-rank-each and rank-gate tables describe the current playable implementation*, not the approved redesign. See [the Greatblade/Mage skill-rank audit](../TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). Do not treat these policy changes as shipped until code, tests and save migration are completed.
+
+
 Mage is an INT-based general elemental caster. Tier III can specialize later. Stable class ID: `class.mage`. A wand and a floating orb are the default focus visuals; all existing class-neutral test equipment remains usable. No ultimate is assigned before Tier IV.
 
 ## Advancement
