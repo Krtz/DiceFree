@@ -296,6 +296,8 @@ Supported dimensions include:
 
 Spell pushback is supported for abilities/classes that explicitly use it.
 
+**Ranger-specific design-only channel example (2026-10-19, NOT IMPLEMENTED):** Ranger Tier II **Arrow Rain** first performs a **1.5-second channel**, animating the Ranger firing a **large arrow then a smaller arrow into the sky**. Only after that channel completes does an independent **four-wave, two-second ground rain** begin; enemies entering later can be struck at subsequent waves. This is **not** a 3.5s player channel: the player channels for 1.5s, while rain resolves for 2s. **Whether movement, CC or damage aborts the initial channel is not yet approved**; the per-ability casting framework above should support the eventual choice. See [Ranger Tier II design](classes/RANGER_TIER2_DESIGN.md).
+
 ## Cooldowns and shared cooldown groups
 
 DiceFree has **no universal global cooldown by default**.
