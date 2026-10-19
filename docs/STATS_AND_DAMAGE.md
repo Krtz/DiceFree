@@ -528,6 +528,27 @@ Examples:
 
 Shield behaviour is designed case by case using one common framework.
 
+### Elemental shield absorption efficiency — global rule (confirmed 2026-10-19)
+
+**An elemental shield absorbs incoming eligible post-mitigation damage from any ordinary element, not only its own element.** Physical/Magical channel is independent of the damage element; ordinary untyped/non-elemental damage counts as **nonmatching**. The shield element is meaningful to its efficiency:
+
+| Incoming damage element | Damage prevented per 1 shield HP consumed | Shield HP cost per 1 damage prevented |
+| --- | ---: | ---: |
+| **Same element as shield** | **1.5** | **2/3 ≈ 0.6667** |
+| **Different element or normal untyped damage** | **0.5** | **2** |
+
+For a nominal **100-shield-HP** elemental barrier, the capacity prevents **150 same-element damage** or **50 nonmatching damage**, after normal damage mitigation. Mixed-element incoming hits consume from the remaining shield HP according to each component's applicable coefficient; do not retroactively change shield HP already consumed.
+
+**Shield HP is a capacity unit, not automatically the damage amount prevented.** On an oversized hit, consume up to the remaining shield capacity, prevent at most `capacityRemaining × matchingCoefficient` damage, and pass any unblocked damage through to HP. Implement fractional capacity/rounding in a consistent deterministic way.
+
+- This is **the shared default for elemental shields** (including Greatblade's **Metal** finisher shield and Priest's **Ice Aegis**) and **supersedes older class-specific coefficients** if they disagree; both use the matching/nonmatching ratios above unless a future specifically approved skill exception overrides them.
+- A **generic non-elemental shield** without a special efficiency rule is not automatically converted into an elemental shield; its ordinary absorb conversion remains **1 shield HP per 1 damage prevented** under the shared default.
+- **Pure Damage** is still governed by its own shield eligibility rule (see Pure Damage below); no implied universal Pure absorption. Explicit shield priority, filtering and regeneration/expiration rules elsewhere in this document still apply.
+- Greatblade's Mastery rank-7 **Metal** shield is intended to absorb **all ordinary incoming damage**, using the above efficiencies, lasting **5 seconds** with capacity **100 + 5% of Greatblade max HP**. Re-triggering Overhead Breaker **replaces/refreshes** the existing shield; it **does not stack or add capacity**. Precise character-owner identity and shield ordering relative to other types follow combat framework rules.
+- Priest **Ice Aegis** remains a self/ally shield whose Grace-enhanced damage aura is a separate effect; it uses these global efficiencies despite older design text describing **2 matching / 0.667 nonmatching damage prevented per shield HP**. The newer global decision overrides those old coefficients.
+
+**Status:** design/documentation only; gameplay implementations, shield tests and save formats were **not** changed by this edit.
+
 ## Overhealing
 
 Default behaviour:
