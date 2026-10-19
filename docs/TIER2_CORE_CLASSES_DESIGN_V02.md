@@ -93,7 +93,9 @@ All abilities use Mana until a distinct second resource is approved. Different s
 
 **Mentor/service:** a proper Tier II staff-wielding village Priest **in Trimery**, taking the role of a living healer instead of static healing well. Actual NPC heal service can be configured independently from the later advancement quest. Visual distinction from generic Mage is crucial.
 
-## Defender — approved v0.1 design, unchanged
+## Defender — original v0.1 concept (updated design interview available)
+
+> **Newer Defender user interview (2026-10-19):** [Defender Tier II design document](classes/DEFENDER_TIER2_DESIGN.md). The Defender name and Trimery gate-defense quest direction are confirmed; **Resolve gains from incoming damage BEFORE mitigation and expressly Resolve-generating skills**. The original five skills below are **proposals awaiting approval of specific mechanics**. The latest global elemental shield efficiency from this discussion is **0.8 shield HP per matching damage blocked, 1.2 per nonmatching**, recorded in [Stats and Damage](STATS_AND_DAMAGE.md). Stronger-specialized Guardian/Vanguard names are potential Tier III paths. **Design only, no Unity implementation here.**
 
 - **Sword and shield**, VIT + STR, active tank/support play through **Resolve**.
 - Initial proposed abilities: **Shield Bash** (impact/interrupt), **Challenge** (real threat), **Bulwark** (defensive stance), **Shield Sweep** (close AoE and frontline safety).
