@@ -100,7 +100,7 @@
 ## Ranger Round 2 — five answers recorded 2026-10-19
 
 - **RANGER-006 CONFIRMED:** Tier II shortbows and longbows have **SAME normal range**, derived from Ranger class rather than weapon item family. Typical comparable longbows **+25% per-shot damage and ~20% less attack speed** versus shortbows as a **design guideline for bow items**, not a forced universal multiplier. Future Tier III Beastmaster/Marksman class-differentiated reach and bow identity floated but NOT LOCKED.
-- **RANGER-007 CONFIRMED:** user likes the initial **six skills** Aimed Shot, Multishot/Rapid Volley, Arrow Rain, Hawk Dive, Evasive Step, Bow Mastery, subject to next-round mechanical design and final balancing.
+- **RANGER-007 HISTORICAL INITIAL ROSTER:** user liked Aimed Shot, Multishot/Rapid Volley, Arrow Rain, Hawk Dive, Evasive Step, Bow Mastery at Round 2. **RANGER-013 subsequently REPLACED Multishot with Exploding Arrow**. Do NOT use the old roster as current.
 - **RANGER-008 CONFIRMED:** Hawk Dive = **single-target Physical hit**, hawk appears only for strike, applies **Hunter's Mark**, temporarily amplifying **Ranger's own attacks AND skills** against that target. **One marked target at a time per Ranger**. The user noted that duration shorter than CD could achieve uniqueness, but explicitly enforcing one active mark is robust; duration, cooldown, damage bonus and mark-refresh specifics remain open.
 - **RANGER-009 CONFIRMED:** player movement **cancels Ranger autoattack WINDUP before projectile release**, WC3/Dota/LoL rhythm. Once an arrow has fired, subsequent movement does not cancel it.
 - **RANGER-010 CONFIRMED:** only **post-acceptance** Alpha Wolf kill is credited, with **return-to-wounded-Ranger** turn-in; use the existing Alpha Wolf as quest target rather than adding a separate quest-only boss, when confirmed present in game.
@@ -109,9 +109,9 @@
 
 - **RANGER-011 CONFIRMED:** Hawk Dive cooldown **15s**, Hunter's Mark duration **8s**, initially **+10%** own attacks/skills damage; higher ranks may raise toward ~20–25% (provisional top-end tuning, not exact locked final cap). One marked target per Ranger.
 - **RANGER-012 CONFIRMED:** Aimed Shot deals **additional damage against Hunter's Mark** target above and beyond the normal mark amplification, in a short stationary-windup heavy physical shot. Exact extra bonus is OPEN.
-- **RANGER-013 CONFIRMED ROSTER CHANGE:** **REPLACE Multishot** in Tier II six skills with **Exploding Arrow / Gunpowder Arrow** (working names), a gunpowder-themed attack to foreshadow later gun class fantasy. **Arrow Rain** remains a **ground-targeted attack dealing multiple waves across time, including enemies entering after cast**. Actual explosion damage element/size/procs undecided.
+- **RANGER-013 CONFIRMED ROSTER CHANGE:** **REPLACE Multishot** in Tier II six skills with **Exploding Arrow / Gunpowder Arrow** (working names), a gunpowder-themed attack to foreshadow later gun class fantasy. **Arrow Rain** remains a **ground-targeted attack dealing multiple waves across time, including enemies entering after cast**. Exploding Arrow's element was **undecided in Round 3 but RESOLVED as Gun by RANGER-016 in Round 4**; exact radius and procs remain open.
 - **RANGER-014 CONFIRMED:** **Evasive Step leaps toward mouse pointer**, then grants a **few seconds of extra Movement Speed** and **+1% evasion chance PER Evasive Step skill rank**. No normal moving basic-attack permission.
-- **RANGER-015 CONFIRMED:** **Bow Mastery adds AGI, a small basic-attack range increase per skill rank, and +1 percentage point crit chance per rank for eligible attacks dealing 1.4× raw damage on crit**. Which attacks and skills can use the crit rule, exact AGI and range progression and max rank remain OPEN. Crit uses explicit class skill rule, not generic global chance/multiplier.
+- **RANGER-015 CONFIRMED:** **Bow Mastery adds AGI, a small basic-attack range increase per skill rank, and +1 percentage point crit chance per rank for eligible attacks dealing 1.4× raw damage on crit**. **HISTORICAL RANGER-015:** eligibility, exact range increment and max ranks were still open at this round; **RANGER-019 later confirms basic attacks + Aimed Shot ONLY, +0.1m/rank**, while the designer-proposed Bow Mastery rank cap 8 awaits user approval. Crit uses explicit class skill rule, not generic global chance/multiplier.
 - **RECONCILIATION:** the earlier Ranger Round 2 plan had the same **class base range for longbows and shortbows**, and floated distinct base ranges for possible future Tier III Beastmaster/Marksman. Round 3 adds range growth via Bow Mastery and **DOES NOT** make shortbows longer/shorter than longbows for the same Tier II class/rank. Earlier proposed Bow Mastery flat bow damage/attack speed is **superseded by the AGI/range/crit set**.
 
 ## Ranger Round 4 — five user answers recorded 2026-10-19
@@ -209,7 +209,7 @@ Count all individual skill ranks whose own level gate is reached at that Ranger 
 | 2026-10-19 | RANGER-004 | No pet; possible one-off Hawk Dive attack theme | **CONFIRMED direction; skill specifics open** |
 | 2026-10-19 | RANGER-005 | Wounded Ranger near Trimery Priest requests killing Alpha Wolf, simple advancement | **CONFIRMED direction** |
 | 2026-10-19 | RANGER-006 | Same Ranger class-defined bow range, longbow typical +25% shot damage / 20% slower vs shortbow; potential tier III class range differences only future ideas | **CONFIRMED** |
-| 2026-10-19 | RANGER-007 | Aimed Shot, Multishot, Arrow Rain, Hawk Dive, Evasive Step, Bow Mastery starting six-skill roster | **APPROVED core; exact mechanics open** |
+| 2026-10-19 | RANGER-007 | Initial roster included Multishot; later RANGER-013 replaced it with Exploding Arrow | **HISTORICAL; MULTISHOT SUPERSEDED** |
 | 2026-10-19 | RANGER-008 | Hawk Dive single-target Physical plus Hunter's Mark, one target per Ranger, +damage from own attacks and skills | **CONFIRMED; % and uptime open** |
 | 2026-10-19 | RANGER-009 | Movement interrupts pre-release autoattack windup; already launched arrows still resolve | **CONFIRMED** |
 | 2026-10-19 | RANGER-010 | Quest must be accepted before existing Alpha Wolf kill, then return to wounded Ranger | **CONFIRMED** |
@@ -217,7 +217,7 @@ Count all individual skill ranks whose own level gate is reached at that Ranger 
 | 2026-10-19 | RANGER-012 | Aimed Shot gets additional marked-target damage above normal Hunter's Mark bonus | **CONFIRMED concept** |
 | 2026-10-19 | RANGER-013 | Replace Multishot with gunpowder/Exploding Arrow; retain ground multiwave Arrow Rain | **CONFIRMED core, explosion details open** |
 | 2026-10-19 | RANGER-014 | Evasive Step mouse-directed leap, temporary Movement Speed buff and +1% evasion per skill rank | **CONFIRMED core** |
-| 2026-10-19 | RANGER-015 | Bow Mastery AGI + tiny range per rank + 1% crit chance per rank at 1.4× damage | **CONFIRMED; exact values/scope open** |
+| 2026-10-19 | RANGER-015 | Bow Mastery AGI + tiny range/rank + 1pp crit/rank at 1.4× | **CONFIRMED core; subsequent RANGER-019 settles +0.1m/rank and basic+Aimed crit scope** |
 | 2026-10-19 | RANGER-016 | Exploding Arrow: Gun-element projectile, explosion centered on hit target, primary takes more damage | **CONFIRMED core; Physical channel is designer interpretation** |
 | 2026-10-19 | RANGER-017 | Aimed Shot extra marked-target FLAT damage scaling with Ranger AGI | **CONFIRMED core; coefficient OPEN** |
 | 2026-10-19 | RANGER-018 | Evasive Step 3–4m cursor leap, 3s +10% MoveSpeed, +1pp/rank evasion on basic attacks ONLY | **CONFIRMED** |
