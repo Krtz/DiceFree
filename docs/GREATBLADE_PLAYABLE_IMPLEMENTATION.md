@@ -1,5 +1,8 @@
 # Greatblade playable prototype — 2026-10-14
 
+> **Skill progression design update (2026-10-19; NOT YET IMPLEMENTED):** Greatblade retains its existing skill **first-unlock levels** but must begin with **all skills rank 0 and one point at class level 1**, not four free starters. Class skill rank caps will vary by skill and support almost all 80 level-80 points. Existing Greatblade saves require a **safe one-time skill reset/refund**, preserving all other progress. The current *four free rank-1 skills, periodic upgrade gates and 31-rank total* below are as-built implementation facts, not future rules. See [Greatblade/Mage rank audit](TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). No migration or combat changes have been made.
+
+
 Greatblade is now a playable Tier II manifestation, advanced from a level-30 Physically Blessed Novice after the retired swordswoman's normal Slime Boss training quest. Accept the quest, defeat the normal boss, and return to her to complete training. See GREATBLADE_ADVANCEMENT_QUEST.md. The parent manifestation remains intact, and the new Greatblade starts at class level 1. Development Room also offers direct Greatblade selection through the same advancement graph.
 
 This implements the approved kit in GREATBLADE_PROTOTYPE_DESIGN_V03.md. Exact balance numbers below are provisional. The mentor now uses a saved, dungeon-boss-gated training quest; narrative expansion remains future work.
