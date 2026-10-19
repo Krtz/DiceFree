@@ -528,26 +528,27 @@ Examples:
 
 Shield behaviour is designed case by case using one common framework.
 
-### Elemental shield absorption efficiency — global rule (confirmed 2026-10-19)
+### Elemental shield absorption efficiency — latest global rule (updated 2026-10-19; Defender Round 1)
 
-**An elemental shield absorbs incoming eligible post-mitigation damage from any ordinary element, not only its own element.** Physical/Magical channel is independent of the damage element; ordinary untyped/non-elemental damage counts as **nonmatching**. The shield element is meaningful to its efficiency:
+**CONFIRMED latest user decision:** an elemental shield can absorb *all ordinary eligible incoming damage*, with better efficiency against its own element. The cost is expressed as **SHIELD HP CONSUMED per 1 point of prevented, post-mitigation damage** (not damage prevented per 1 shield HP):
 
-| Incoming damage element | Damage prevented per 1 shield HP consumed | Shield HP cost per 1 damage prevented |
+| Incoming damage element | Shield HP consumed per 1 damage prevented | Damage prevented per 1 shield HP |
 | --- | ---: | ---: |
-| **Same element as shield** | **1.5** | **2/3 ≈ 0.6667** |
-| **Different element or normal untyped damage** | **0.5** | **2** |
+| **Same element as shield** | **0.8** | **1.25** |
+| **Different element or untyped ordinary damage** | **1.2** | **0.833333…** |
 
-For a nominal **100-shield-HP** elemental barrier, the capacity prevents **150 same-element damage** or **50 nonmatching damage**, after normal damage mitigation. Mixed-element incoming hits consume from the remaining shield HP according to each component's applicable coefficient; do not retroactively change shield HP already consumed.
+This **supersedes** the brief 2026-10-19 global rule of 1 shield HP preventing **1.5 matching** / **0.5 nonmatching** damage, which had been recorded before the Defender design interview. It also supersedes even earlier Ice Aegis-only consumption of 0.5 shield HP per matching damage and 1.5 per nonmatching damage. In an implementation, use **0.8/1.2 shield-HP consumption** as the authoritative current global elemental-shield rule, unless a future specifically agreed skill exception applies.
 
-**Shield HP is a capacity unit, not automatically the damage amount prevented.** On an oversized hit, consume up to the remaining shield capacity, prevent at most `capacityRemaining × matchingCoefficient` damage, and pass any unblocked damage through to HP. Implement fractional capacity/rounding in a consistent deterministic way.
+For **100 nominal shield HP**, this shields **125 matching damage** or approximately **83.33 other/untyped damage** (after mitigation). For a mixed-element hit, calculate each eligible packet using its own efficiency and subtract its corresponding shield-HP cost. Never permit fractional rounding to create extra damage prevented, double-charge, or overflow absorption.
 
-- This is **the shared default for elemental shields** (including Greatblade's **Metal** finisher shield and Priest's **Ice Aegis**) and **supersedes older class-specific coefficients** if they disagree; both use the matching/nonmatching ratios above unless a future specifically approved skill exception overrides them.
-- A **generic non-elemental shield** without a special efficiency rule is not automatically converted into an elemental shield; its ordinary absorb conversion remains **1 shield HP per 1 damage prevented** under the shared default.
-- **Pure Damage** is still governed by its own shield eligibility rule (see Pure Damage below); no implied universal Pure absorption. Explicit shield priority, filtering and regeneration/expiration rules elsewhere in this document still apply.
-- Greatblade's Mastery rank-7 **Metal** shield is intended to absorb **all ordinary incoming damage**, using the above efficiencies, lasting **5 seconds** with capacity **100 + 5% of Greatblade max HP**. Re-triggering Overhead Breaker **replaces/refreshes** the existing shield; it **does not stack or add capacity**. Precise character-owner identity and shield ordering relative to other types follow combat framework rules.
-- Priest **Ice Aegis** remains a self/ally shield whose Grace-enhanced damage aura is a separate effect; it uses these global efficiencies despite older design text describing **2 matching / 0.667 nonmatching damage prevented per shield HP**. The newer global decision overrides those old coefficients.
+**Shield capacity is not the same as damage prevented.** For an eligible hit with post-mitigation damage `D`, matching cost coefficient `c` (0.8 or 1.2) and remaining capacity `C`, `blockedDamage = min(D, C/c)`, `consumedShieldHP = blockedDamage × c`; damage not prevented passes through to HP. Preserve deterministic fractional/rounding behavior.
 
-**Status:** design/documentation only; gameplay implementations, shield tests and save formats were **not** changed by this edit.
+- **Greatblade Metal finisher shield:** capacity **100 + 5% of Greatblade max HP**, maximum duration **5 seconds**; absorb all eligible ordinary incoming damage under the 0.8/1.2 costs. Recasting via successful Overhead Breaker **replaces/refills** the prior same-effect shield rather than stacking capacities. The Metal label supplies matching-element advantage, not Metal-only filtering.
+- **Priest Ice Aegis:** self/ally Ice-element shield using these same current global 0.8/1.2 costs. Grace's Ice damage aura and its shield duration/capacity are separate spell rules.
+- **Non-elemental/generic shield:** retains ordinary **1 shield HP : 1 prevented damage** unless explicitly designed otherwise. An item's visual theme is not enough to infer a shield element.
+- **Pure Damage:** special-case shield eligibility remains explicitly specified for the individual effect; this global elemental ratio does **not** automatically make every shield block Pure damage. Also respect incoming Defense/resistance mitigation, special-priority shields and overflow from other parts of this document.
+
+**Status: design only.** Not implemented or tested in Unity yet; preserve historical change rationale, not outdated numerical values.
 
 ## Overhealing
 
