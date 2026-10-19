@@ -207,7 +207,7 @@ This four-plus-four split is still a working direction rather than locked final 
 | Physically Blessed Novice | **Thief** | Roster APPROVED; identity/skills/advancement design NEXT AFTER Acolyte |
 | Magically Touched Novice | **Mage** | Designed |
 | Magically Touched Novice | **Priest** | Designed |
-| Magically Touched Novice | **Acolyte** | Roster APPROVED; **NEXT active design**, see [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md) |
+| Magically Touched Novice | **Acolyte** | Roster APPROVED; **Round 1 core identity confirmed** (curse, DoT, soul-charge summon, channeled life drain). [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md) |
 | Magically Touched Novice | **Psion** | Roster APPROVED; specific psychic kit/equipment/advancement NOT YET DESIGNED, after Thief |
 
 **USER-APPROVED DESIGN AND WORLD ORDER:**
@@ -216,6 +216,8 @@ This four-plus-four split is still a working direction rather than locked final 
 3. Then design the **major/big city** and its gameplay/services.
 4. Some **Tier II advancement NPCs MAY be moved to that future city** for progression pacing; this is an open later decision. Do NOT quietly relocate already-agreed mentors/quests or invent finished city geography. Keep Cornberg swordswoman/Mage brewer, Trimery Priest healer, Trimery veteran Defender guard and wounded Ranger/Alpha Wolf as currently specified unless user explicitly revises them.
 5. **DO NOT DESIGN ANY TIER III CLASSES NOW. Tier III belongs to World 2.** Older Greatblade, Ranger, Priest and Defender Tier III concept names/convergence snippets are historical brainstorming only; do not expand their trees, skills or quests until World 2 design is authorized.
+
+**ACOLYTE ROUND 1 (2026-10-19):** user chose four core combat pillars: **one Curse, one distinct damage-over-time ability, one Soul Charge-spending Summon, one channeled Life Drain**. Acolyte uses **Mana + Soul Charges**, charges earned through offensive spells; charge caps/gain and summon type remain open. **Wand + grimoire** remain the equipment concept, but the grimoire is a **normal stat-bearing offhand for now**, NOT a compulsory special spell/inscription/book-charge system; authored item Intrinsics may modify class abilities later across all classes. Role is **sustained damage, curses/debuffs and life-drain self-sustain**, contrasting with Mage burst/CC. A future **graveyard mentor** asking for deceased people from **Cornberg and Trimery** to be brought for **proper burial** is a story hook; exact NPC, geography and advancement mechanics deliberately DEFERRED until location planning. Details: [Acolyte class design](classes/ACOLYTE_TIER2_DESIGN.md).
 
 **CLASS IMPLEMENTATION SCOPE:** This is an explicit **DESIGN/DOCUMENTATION-ONLY** conversation. No Unity source, scene/world creation, builds, saves, NPC moves or implementation tickets without later instruction in the separate DiceFree implementation workflow. User approval of the eight-class roster is NOT evidence eight classes are already playable or coded. Final game names of Thief/Psion/Acolyte, their visuals, weapons and kits can still be tuned by their own upcoming interviews, while preserving the currently approved class identities unless later changed.
 
