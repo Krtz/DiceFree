@@ -39,6 +39,8 @@ The generic framework should enforce authored limits cleanly without inventing a
 
 **Latest Acolyte summon rank design (2026-10-20, class-specific and DESIGN ONLY):** the user confirmed each Summon Skeleton rank improves **skeleton HP and basic attack damage** rather than increasing the approved 15-second life, maximum four active, single summon per cast or four-Soul resource cost. **Summon Skeleton FIRST PLAYTEST cooldown = 3s, ZERO Mana (4 Soul Charges).** Numeric proposed rank1 HP `55+2×OwnerVIT`, normal basic Physical raw damage `3+0.18×OwnerINT`, +5% HP/+6% damage per extra rank are **still designer proposals**; owner snapshot vs live-inheritance OPEN. [Acolyte Tier II spec](classes/ACOLYTE_TIER2_DESIGN.md).
 
+**Acolyte Round8 newest SUMMON-SPECIFIC OVERRIDE (2026-10-20, USER APPROVED / DESIGN ONLY):** snapshot Acolyte owner's stats at moment skeleton spawns. Skeleton at purchased Summon skill rank `r` gets `MAX_HP=(55+2×OWNER_SPR_AT_SUMMON)×(1+0.05×(r−1))` (NOT owner VIT), and normal Physical basic-attack RAW `(3+0.18×OWNER_INT_AT_SUMMON)×(1+0.06×(r−1))`. **HP +5% and attack damage +6% per extra rank**, owner buff changes later do NOT recompute existing summoned skeleton stats during its fixed15s duration. Other existing class decisions (one/cast,4Soul,0Mana,3s CD, cap4/oldest replacement, RTS controls and hero auto-retaliation) remain unchanged. This is NOT a generic pet scaling model. [Acolyte final spec](classes/ACOLYTE_TIER2_DESIGN.md).
+
 ## Ownership and control
 
 Every owned unit can identify:
