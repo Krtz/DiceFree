@@ -2,13 +2,44 @@
 
 DiceFree is planned around **six major overworld regions**, corresponding to the six outer faces of the Dice.
 
+## NEW WORLD CONCEPT — opposite pip faces, contrasting themes (2026-10-21; PROVISIONAL)
+
+**USER-BRAINSTORMED AND WANTED RECORDED BEFORE SLEEP:** DiceFree's opposite dice faces should express **OPPOSITE OR STRONGLY CONTRASTING environmental themes**. On a normal d6 the opposite faces sum to seven: **1 ↔ 6, 2 ↔ 5, and 3 ↔ 4**. The **opposition rule is the appealing design direction**; the six specific climates/creature populations beyond established Face 1 are **provisional**, NOT locked, and this note is NOT authorization to design or implement new worlds now.
+
+| Die face | Current PROVISIONAL core biome/atmosphere idea | Opposite pair contrast |
+| --- | --- | --- |
+| **Face 1 — one pip** | **Green, lush, vibrant and full of life**, in line with existing pastoral World 1/Cornberg/Great Tree plan | **Face 1 ↔ Face 6: life vs death** |
+| **Face 6 — six pips** | **Dark, dreary, bleak, heavily populated with undead** | Death/decay versus thriving Face 1 |
+| **Face 2 — two pips** | **Tropical/hot, potentially volcanic** (volcanoes, humid warm areas) | **Face 2 ↔ Face 5: heat vs cold** |
+| **Face 5 — five pips** | **Cold, snowy, wintry/icy** | Snow/ice opposite tropical volcanoes |
+| **Face 3 — three pips** | **Desert, arid and dry** | **Face 3 ↔ Face 4: dryness vs water** |
+| **Face 4 — four pips** | **Sea/water-dominant, oceanic and swampy**, with wetlands/marshes | Water/swamps opposite dry desert |
+
+**Do NOT mistake this as six finalized worlds or a fixed world order beyond existing progression.** All later-face themes, sub-biomes, lore, climate boundaries, monsters and visual assets remain undecided. The user especially liked **pairwise opposition as a general governing idea**, even if specific face assignments/biomes change when those regions are designed.
+
+### Relationship to older DiceBound-derived visual references
+
+This is a **NEWER conceptual preference** than the older `DICEBOUND_WORLD_VISUAL_REFERENCES.md` examples. The corresponding **DiceBound Board 1–6 image references remain useful and their board-to-face NUMERIC ASSOCIATION remains unchanged**, but the old image's landscape **must not be treated as a locked primary DiceFree face biome** when it conflicts with this NEW PROVISIONAL opposite-face idea.
+
+In particular:
+- Older **Face 2 / Astral Road** was misty rocky forest; newly brainstormed Face 2 is **tropical volcanic**.
+- Older **Face 3 / Fractured Road** was ruined fortress/graveyard; newly brainstormed Face 3 is **dry desert**.
+- Older **Face 4 / Crown Road** was cursed swamp, compatible with the newer **water-dominant/sea/swamp** direction.
+- Older **Face 5 / Oblivion Ringroad** was **volcanic**; the user now suggests **snow/ice instead**, putting the tropical-volcanic climate on Face 2. **Do not quietly keep Face 5 predominantly volcanic while claiming the new opposition concept is followed.**
+- Older **Face 6 / End of Mathematics** had ashen gothic citadel; the new **dark undead** theme can borrow gothic visual DNA without specifying finished undead factions.
+- Face 1 remains **lush and green**, preserving the existing Cornberg, Great Tree/Yggdrasil landmark and already planned World 1 terrain and towns.
+
+Retain existing `biome blending between faces` and interconnected cube-world rules unless later revised. Note also **opposite faces on a cube are NOT adjoining borders**; the opposition is at a world/theme level, not necessarily an adjacent geographical seam. **No actual DiceFree maps, scenes, terrain, art, quests or assets should change from this brainstorm.** Production priority remains World 1 → Quillboar area → major city before substantial planning of other faces.
+
+
+
 ## DiceBound visual inheritance
 
 Each DiceFree face takes its visual/environmental DNA from the matching DiceBound Board screen background **and** Normal combat background.
 
 See `docs/DICEBOUND_WORLD_VISUAL_REFERENCES.md`.
 
-The mapping is now fixed:
+The **numeric Board-to-Face visual-reference association** remains fixed (this does **not** fix each face's final dominant climate; see the newer opposite-pip concept above):
 - Face 1 <- Board 1 / Green Road / welcoming woodland;
 - Face 2 <- Board 2 / Astral Road / misty rocky forest;
 - Face 3 <- Board 3 / Fractured Road / desolate ruined-fortress/graveyard mood;
@@ -110,7 +141,7 @@ Normal monsters respawn on timers. Named/elites respawn more slowly.
 
 ## Open questions
 
-- Exact DiceBound-board theme per face.
+- How to combine newer opposite-face biome contrasts with older DiceBound source-image visual DNA, without making later-world climates immutable now.
 - Regional level bands.
 - How literally landmarks map to pip positions.
 - Corner treatment where three faces meet.
