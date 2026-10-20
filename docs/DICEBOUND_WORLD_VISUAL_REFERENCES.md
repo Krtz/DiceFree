@@ -4,6 +4,9 @@ DiceFree's six outer faces should take their **visual DNA** from the correspondi
 
 This is inspiration/continuity, not a mandate to literally reproduce a 2D image in 3D.
 
+> **NEW PROVISIONAL WORLD THEME IDEA (2026-10-21):** User wants OPPOSITE d6 FACES to have CONTRASTING ENVIRONMENTS: **Face1 green/lush/life ↔ Face6 dark/bleak/undead; Face2 tropical/volcanic ↔ Face5 cold/snowy; Face3 dry/desert ↔ Face4 sea/water/swamps.** Specific climates are **NOT FINAL**; the contrast pattern is a preferred world-design principle. The numerical DiceBound image-to-face mapping below still supplies historical visual DNA, **NOT a locked final face biome**. Older Face5 VOLCANIC board art is an especially important mismatch with the newer Face5 SNOW suggestion; don't silently assert both are the dominant final climate. Also Face2's misty forest/Face3's ruined fortress may differ from the new provisional hot/desert ideas. Retain image references for motifs/architecture/magic/creatures and revisit when later worlds are actually designed. [Opposite-face idea bank](REGIONS.md). **Do not modify existing Unity maps/assets or start designing Faces2–6.**
+
+
 ## Source rule
 
 For each face, consult both:
