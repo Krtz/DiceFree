@@ -39,6 +39,10 @@ The exact milestone granularity is class-data driven. A requirement may care abo
 - completing an advancement quest;
 - another explicit class-specific achievement.
 
+## Future convergence concept note (2026-10-21; NOT A COMMITTED REQUIREMENT)
+
+The user brainstormed a possible **secret, dual-wielding sword class** after progressing **Berserker lineage** AND **Duelist lineage** on the same Echo. The prerequisites were tentatively described as **Berserker level120 AND Duelist level120**, or perhaps attaining their corresponding **Tier IV lineages**. Under current Tier progression rules, reaching level120 on a Tier III class is a threshold for Tier IV, so these are **alternatives not yet resolved as a condition expression**. Dual-wielding **two normal swords** or perhaps **two two-handed swords** was floated, NOT approved as a generic equipment permission, fixed Tier IV class or class name. Do not create a real unlock definition or new mechanics until user authorizes World2 higher-tier/secret class design. Other possible Thief Tier III paths being parked: **Burglar→Pirate Tier IV** (poison/tricks), **Duelist** (two daggers, evasion, rapid attacks), **Assassin** (stealth/positioning, slow accurate lethal attacks). See [Thief future idea bank](classes/THIEF_TIER2_DESIGN.md).
+
 ## Convergence classes
 
 A class can require evidence from multiple lineages.
