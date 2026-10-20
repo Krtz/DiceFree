@@ -1,7 +1,7 @@
 # DiceFree — Acolyte Tier II — design interview
 
 **Created:** 2026-10-19  
-**Status:** WORLD 1 STANDARD TIER II CLASS. **ROUNDS 1–4 USER DECISIONS RECORDED 2026-10-19**. Six-skill Tier II kit now consists of Curse (rank1 −5 MDEF, −0.10 attacks/s for 10s; shared boss Tenacity attenuation), Radiation DoT (3m/2s continuous contact, timer resets, chain spreads, new manual casts refresh), player-controlled 15s skeleton summons (cap4, new summon replaces oldest, idle aggression follows hero Auto-Retaliate), 5s Void Drain Life (heals 25% of actual HP damage at rank1, +2 percentage points per rank; 60–65% vicinity suggested cap), NEW 1s Void Mortal Coil (hostile INT+SPR damage, ally/owned-summon healing), and NEW INT+small SPR/poison-on-basic passive. Mana/Soul Charge cap8/cost4 skeleton, +1 per drain tick and affected target death. Further exact numeric formulas and poison, Mortal Coil healing, Tenacity and quest details remain under design. **DESIGN/DOCUMENTATION ONLY; NO UNITY IMPLEMENTATION.**  
+**Status:** WORLD 1 STANDARD TIER II CLASS. **ROUNDS 1–5 USER DECISIONS RECORDED THROUGH 2026-10-20**. Six-skill Tier II kit now consists of Curse (rank1 −5 MDEF, −0.10 attacks/s for 10s; shared boss Tenacity attenuation), Radiation DoT (3m/2s continuous contact, timer resets, chain spreads, new manual casts refresh), player-controlled 15s skeleton summons (cap4, new summon replaces oldest, idle aggression follows hero Auto-Retaliate), 5s Void Drain Life (heals 25% of actual HP damage at rank1, +2 percentage points per rank; 60–65% vicinity suggested cap), NEW 1s Void Mortal Coil (hostile INT+SPR damage, ally/owned-summon healing), and NEW INT+small SPR/poison-on-basic passive. Mana/Soul Charge cap8/cost4 skeleton, +1 per drain tick and affected target death. Round5 CONFIRMS Void-element Mortal Coil healing on self/allies/skeletons, standard one-second channel interruption, enemy-hit +1 Soul Charge and healing +0, and +2 INT/+1 SPR per passive rank with nonstacking three-second poison refreshed on each successful wand basic attack. The USER-DELEGATED 80-rank schedule is PROPOSED and needs separate approval. Mortal Coil coefficients, poison damage, shared Tenacity formula and quest details remain open. **DESIGN/DOCUMENTATION ONLY; NO UNITY IMPLEMENTATION.**  
 **Branch:** `integration/world1-foundation`  
 **References:** [Class Progression](../CLASS_PROGRESSION.md), [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md), [Tier II Core Classes v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md).
 
@@ -34,12 +34,12 @@ There are EXACTLY EIGHT normal World 1 Tier II classes, four under each Tier I p
 | Pillar 2 | **Weak Radiation DoT** spreads via **3m proximity for 2 uninterrupted seconds**; contact timer RESETS on separation. Newly infected enemies can further spread it, with visited-target history blocking A→B→A and other re-infections in a chain. **Manual re-cast on affected target refreshes duration**. +1 Soul Charge when afflicted enemy dies. | Initial duration/tick damage/tick rate, status refresh detail and spread between different Acolytes OPEN |
 | Pillar 3 | **15-second, directly controllable skeletons**, max4 active; new skeleton cast at cap4 **REPLACES OLDEST** (not blocked). Skeletons follow hero's **Auto-Retaliate setting** during idle/unscripted behavior and obey direct RTS orders. **4 Soul Charges per skeleton**. | Selection and command priority, per-cast spawned count, HP/damage, Mana, lifetimes on hero swap/death OPEN |
 | Pillar 4 | **Drain Life** 5s Void channel, one damage tick/s, **+1 Soul Charge per successful tick**. Heals **25% of actual enemy HP damage at rank1**, increasing **+2 percentage points per rank**, toward a provisional **~60–65% ceiling** pending rank cap. No healing from shield-absorbed damage. | Max skill rank and whether 60 or 65% exact cap, damage coefficients, Mana/cooldown OPEN |
-| Pillar 5 | **Mortal Coil** is a **1-second channel/cast**: on an enemy deals a modest **Void-element attack whose damage scales with INT and SPR**; on friendly allied units (including Acolyte's summoned skeletons) **HEALS**. | Self-targeting, whether friendly heal is elemental Void or normal healing, healing coefficient, 1s cancel rules, Soul generation, targeting/open |
-| Pillar 6 | **Passive** increases **INT and a smaller amount of SPR**, and applies a **small poison effect through Acolyte basic/autoattacks**. | Exact attribute numbers, whether poison is guaranteed on-hit or proc, damage duration/stacking, status tag vs element, passive name/rank growth OPEN |
+| Pillar 5 | **Mortal Coil** one-second channel: hostile target takes Void Magical damage scaling INT+SPR; **self/other allied heroes/owned skeletons instead receive VOID-ELEMENT HEALING**. Moving, stun or explicit interrupts cancel, ordinary damage does not. **Enemy damage +1 Soul Charge, healing +0**. | Healing/damage coefficient, Mana/CD, rank scaling, target validity and Void-resistance special cases OPEN |
+| Pillar 6 | **Poison passive** grants **+2 INT and +1 SPR per rank**. Every successful wand basic attack applies or refreshes **one small nonstacking three-second Poison-tag DoT**, damage scaling with INT/passive rank. | Tick frequency, exact damage, elemental classification and proposed skill rank cap OPEN |
 | Resources | **Mana + Soul Charges CAP8**, cost **4 per skeleton summon**. **+1 for each successful Drain Life damage tick** and **+1 on death of enemy currently afflicted with caster's Radiation DoT**. **Applying Curse or Radiation DoT gives 0 charges**; their ordinary ticks are NOT automatic charge generators. | Whether other *future direct offensive spells* earn charges (must be explicitly authored), charge decay/persistence, simultaneous death attribution OPEN |
 | Equipment | **Wand mainhand + grimoire offhand**, both ordinary authored gear/stat/intrinsic carriers | Authorable drops/Intrinsics, class weapon permissions, exact item stats; **no unique grimoire charges/pages/inscriptions system** |
 | Advancement | **Graveyard caretaker** concept: collect dead from **Cornberg and Trimery** for proper burial at graveyard | Exact cemetery site, NPC, remains locations/counters, story presentation and trial scripts intentionally DEFERRED |
-| Future rank economy | All new class skills **rank0**, one spendable skill point at class level1, aim ~78–80 purchasable total through level80 with individual rank gates | How many final skills, rank caps/unlock levels, damage formulas, costs and animations |
+| Future rank economy | Six skills begin rank0, earn one skill point/class level; user delegated an 80-rank gate schedule. **Designer proposes Curse14 / Radiation16 / Skeleton12 / Drain20 / Mortal Coil10 / Passive8**, with all 80 integer class levels audited. | Exact cap/gates await user numeric approval; no code changes |
 
 **Six-skill kit CONFIRMED as of Round 4:** Curse, distinct Radiation DoT, skeleton Summon, channeled Drain Life, **Mortal Coil**, and an **INT/SPR + poison-on-autoattack passive**. Earlier hypothetical Occult Bolt and Forbidden Knowledge are SUPERSEDED and should not be added as extra abilities. Soul Charge generation via enemy-directed Mortal Coil remains OPEN; no automatic yield on its friendly healing use. Spell ranks and class levels remain separate from weapon upgrades.
 
@@ -53,15 +53,15 @@ DiceFree's shared `docs/COMBAT.md` and `docs/SUMMONS_AND_COMPANIONS.md` summon f
 2. **Radiation Plague** (working name) — a **relatively weak Magical Radiation DoT**. An uninfected enemy within **3m** of an infected enemy for **2 CONTINUOUS seconds** acquires the DoT. The two-second contact timer **RESETS if enemies move farther than 3m** before completion. Secondary infected enemies can pass onward (A→B→C), but this infection chain tracks visited recipient IDs so **no enemy in its own propagation lineage is re-infected by spread** (A→B→A and cycles disallowed). The Acolyte may deliberately **recast on the same enemy to REFRESH** the DoT duration; this is a new player cast and does not mean proximity bounce-back is allowed. **Only death WHILE afflicted yields +1 Soul Charge**, not application or ordinary periodic ticks; casting Curse grants zero. **OPEN:** initial dot duration, tick cadence/damage, multiple nearby sources, infection chain identity on manual reapply, cross-caster status behavior.
 3. **Summon Skeleton** (working name) — directly **RTS player-controlled**, **one skeleton per cast as a provisional implementation assumption** (user did NOT choose number per cast explicitly), per-skeleton **15-second duration**, cap **4 active** per Acolyte, Soul Charges **cost 4 each**. When another skeleton is summoned at cap, **REPLACE/DESPAWN THE OLDEST first** and create the newest (resources spent on the accepted summon). Skeletons' spontaneous fight-back behavior **mirrors the HERO'S AUTO-RETALIATE TOGGLE**, rather than always aggressive: if ON they may respond to enemy aggression, if OFF they obey direct orders without automatic retaliation. **Explicit player commands always have priority** and remain possible whichever toggle is selected. This rule is consistent with `docs/SUMMONS_AND_COMPANIONS.md` player-controllable/hybrid owned units; do not assume it creates a second independent auto-retaliate settings menu. **OPEN:** whether passive retaliation includes acquisition/autoattack of nearby targets that have not attacked (do not assume), AI threat targeting, skeleton stats, mana cost, animation, replacement expiry ordering for ties, handling hero death.
 4. **Drain Life** (working name) — **5-second Magical VOID-element CHANNEL**, **one damage tick each second** (five if uninterrupted). A successful tick generates **+1 Soul Charge** capped at 8. Heal caster by **25% of actual target HP damage dealt at Drain Life rank1**, adding **+2 PERCENTAGE POINTS PER ADDITIONAL SKILL RANK** (so rank6 → 35%). The accepted earlier initial **~60–65% eventual healing cap** is a **playtest TARGET RANGE, not an exact specified cap or final skill max rank**; choose rank cap and rounding consistently later. If target shields absorb damage, that blocked amount causes **ZERO healing** (and no extra independent lifesteal). Moving/stun/explicit interruption cancels remaining channel ticks; ordinary incoming hits do not. **OPEN:** exact end cap, damage coefficient, what a "successful" zero-HP-damage tick means for Soul Charge award, Mana/cooldown/attack range.
-5. **Mortal Coil** (name USER-SUGGESTED, working final) — **ONE-SECOND channel** whose **hostile target path deals a SMALL MAGICAL VOID-damage hit**, scaling with **BOTH INT and SPR**. It can **instead be cast on an allied unit or the Acolyte's own summoned skeleton to HEAL that target**. This is a **dual-targeting class spell, not a forced damage+heal pair on the same cast**; target relationship determines offensive vs helpful resolution. Friendly healing has its own authored coefficient, possible SPR/INT scaling and choice of elemental vs non-elemental healing still OPEN; **the Void element is confirmed for the offensive DAMAGE branch, not automatically for healing** (DiceFree heals may optionally have an element). Channel movement/stun interruption, ability cooldown/Mana, self-cast eligibility, whether enemy hit grants a Soul Charge, and what happens when target disappears mid-channel OPEN.
-6. **Passive — Occult Adept** (designer WORKING NAME only) — grants additional **INT** per skill rank and a **SMALLER amount of SPR** per skill rank, plus a **small POISON effect applied by normal wand BASIC/AUTOATTACKS**. Exact INT/SPR stat gains, poison chance/stacking/tick damage/duration and eligibility remain OPEN. DiceFree's general combat docs already support a semantic **Poison STATUS TAG**; this **does NOT automatically approve 'Poison' as a new elemental affinity** or assign an element to its periodic damage. Do NOT silently duplicate the separate Radiation DoT, give passive poison a 3m spread, or grant Soul Charges on the poison ticks unless later confirmed.
+5. **Mortal Coil** — user-suggested name. One-second channel, **normal move/stun/explicit-interrupt cancellation**, ordinary damage alone does not cancel. Against an enemy: **Void-element Magical damage** scaling with **INT and SPR**; successful damaging resolution **awards +1 Soul Charge**. Against **the Acolyte themself, an allied hero or an owned skeleton**, instead delivers **VOID-ELEMENT HEALING**, and **generates zero Soul Charges**. Void HEALING uses the target's Void resistance as an elemental healing modifier per `docs/STATS_AND_DAMAGE.md`; this is NOT a normal Magical damage instance. Exact raw healing/damage coefficients, Mana/CD and target-invalid behavior are OPEN.
+6. **Passive — Occult Adept** (WORKING NAME only): each rank gives **+2 INT and +1 SPR**. Every successful Acolyte **wand BASIC attack** reliably applies or **refreshes ONE Poison-tagged DoT lasting three seconds**; no RNG proc gate, no stacks/second instance on repeated hits. Poison damage scales with **INT and passive skill rank**, without automatically granting Soul Charges or copying Radiation plague's proximity spread. `Poison` is a semantic status tag from `docs/COMBAT.md`, NOT necessarily a damage element; exact elemental type and per-tick raw damage/tick cadence remain OPEN. Proposed cap8 means +16 INT/+8 SPR, but cap not yet numeric-user-approved.
 
 ### Established Acolyte Soul Charge economy
 
 - **Mana + Soul Charges**, capacity **8**, **4 Soul Charges per skeleton**; details such as whether Summon also spends Mana/charges decay between combats still open.
 - **+1 Soul Charge per successful Drain Life tick**, **+1 per enemy death while marked by THIS Acolyte's Radiation DoT** (irrespective of which player dealt final blow), both capped at 8.
 - **ZERO Soul Charge merely from applying Curse or Radiation**. Ordinary Radiation ticking, skeleton hits and passive poison ticks are NOT approved charge generators.
-- **Mortal Coil enemy hit granting Soul Charge is OPEN.** Allied healing must not automatically generate Soul Charges unless user separately approves this; prevent heal-spam farming.
+- **ACOLYTE-022 confirmed:** successful enemy-damaging Mortal Coil grants **+1 Soul Charge**; any self/ally/skeleton Void-healing Mortal Coil grants **ZERO**. Aborted casts and poison ticks must not award charges.
 - **Shared global Tenacity** should govern boss susceptibility to the flat Curse debuffs. No authoritative exact formula located yet in this design thread, so this is an integration question, not a numerically resolved parameter.
 - **Summons are class-authored**: four-skeleton cap is not universal, 15s lifespan, older replaced at cap and same owner toggle for Auto-Retaliate. They can still be directly commanded using existing RTS selection and unit orders.
 - **General Tier II skill ranks:** all 6 begin at rank0 and require purchased ranks, with ~78–80 total purchasable ranks by level80. No rank caps or skill-level gates chosen until next interview round. Details of graveyard burial quest remain deferred.
@@ -102,17 +102,74 @@ DiceFree's shared `docs/COMBAT.md` and `docs/SUMMONS_AND_COMPANIONS.md` summon f
 - **ACOLYTE-019 CONFIRMED:** Drain Life restoration is **25% actual enemy HP damage at skill rank1** and **+2 percentage points per additional rank**. The previously proposed **~60–65% eventual cap** is approved as a general target, but its exact value and interaction with final skill rank are not yet settled. No healing for shield-absorbed damage.
 - **ACOLYTE-020 CONFIRMED ROSTER REVISION:** six current skills: (1) flat MDEF/attack-speed Curse, (2) spreading Radiation DoT, (3) controlled skeletons, (4) 5s Void Drain Life, (5) **Mortal Coil** — 1s channel dealing modest **Void damage scaled by INT+SPR on enemies**, **healing a friendly target (allies/summoned skeletons)**, and (6) passive providing **INT + lesser SPR + small poison from wand autoattacks**. Fifth skill is **NOT** Occult Bolt; no seventh skill added. Poison-proc/element and friendly heal targeting formulas OPEN.
 
-## Round 5 — five questions (AWAITING USER)
+## Round 5 — five user answers recorded 2026-10-20
 
-**ACOLYTE-021 — Mortal Coil healing and self-targeting:** On an enemy Mortal Coil deals a single **Void Magical damage hit** after its **1s channel**; on an allied hero or your skeleton it instead does one **heal** after 1s. Should **self-cast** also be supported? And should friendly healing be **non-elemental**, even though enemy damage is Void, or also Void-element healing (which would interact with the target's Void resistance)?
+- **ACOLYTE-021 CONFIRMED:** Mortal Coil **VOID-element healing** can target **SELF, allies and owned skeletons**, while an enemy receives Void Magical damage. Void healing is governed by the existing **elemental healing** rule: target Void resistance can increase/reduce the heal and extremely negative resistance can theoretically invert it; no bespoke exception approved yet.
+- **ACOLYTE-022 CONFIRMED:** Mortal Coil 1s channel cancels if caster **moves, gets stunned or is explicitly interrupted**, ordinary incoming damage alone does NOT cancel. Successful ENEMY DAMAGE generates **+1 Soul Charge**; healing (self/allied/skeleton) generates **zero**.
+- **ACOLYTE-023 CONFIRMED:** every **successfully landing wand BASIC/AUTOATTACK** applies **a small NONSTACKING Poison DoT lasting 3 seconds**. More wand basic hits **refresh** the single DoT; not a random chance, not extra stacks.
+- **ACOLYTE-024 CONFIRMED:** passive **+2 INT and +1 SPR per passive rank**. Poison DoT damage scales with **INT and passive skill rank**, basic attacks only; poison amount and element still open.
+- **ACOLYTE-025 USER DELEGATED:** create and verify a full **80-rank** six-skill schedule that allows buying a rank at every class level1–80, with individual rank caps/gates. Designer proposal below awaits approval of specific numbers.
 
-**ACOLYTE-022 — Mortal Coil interrupts and Soul Charges:** Should Mortal Coil's **1-second channel** cancel on **movement, stun and explicit interrupt** (normal hits don't interrupt), just like Drain Life? Should a successful *enemy-damaging* Mortal Coil award **+1 Soul Charge**, while the *healing* use awards **none**? I recommend yes to both.
+## Proposed Acolyte 80-rank class progression — DESIGNER PROPOSAL, NOT YET APPROVED
 
-**ACOLYTE-023 — Passive poison mechanics:** For the passive's small basic-attack poison, should each **successful wand autoattack** apply/refresh a **weak Poison-tagged DoT** (say **3 seconds**) without stacking, or should it be a **20% chance on hit** with stronger individual poison? I recommend reliable small nonstacking poison; its exact damage element would remain separately authored rather than invent a global 'Poison element.'
+All 6 skills start at **rank0**. The class receives one spendable rank point at character class level1, then +1/class level until 80. Rank purchase requires all prior ranks of that same skill, and a minimum class level for the next individual rank. The following caps, gates and intervals are **designer-chosen**, not yet separately approved by the user.
 
-**ACOLYTE-024 — Passive attribute progression:** Would **+2 INT and +1 SPR per passive skill rank** fit your preferred "some INT, a little SPR" scaling, or do you want smaller/fractional SPR growth? Should the poison's damage scale with INT and passive rank, with basic wand attacks as the only triggers?
+| Skill | Max rank (proposed) | First gate | Interval | Last gate | Every level gate |
+| --- | ---: | ---: | --- | ---: | --- |
+| Withering Curse | 14 | 1 | Every 5 levels | 66 | 1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66 |
+| Radiation Plague | 16 | 1 | Every 5 levels | 76 | 1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76 |
+| Summon Skeleton | 12 | 1 | Every 6 levels | 67 | 1, 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67 |
+| Drain Life | 20 | 1 | Every 4 levels | 77 | 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73, 77 |
+| Mortal Coil | 10 | 6 | Every 7 levels | 69 | 6, 13, 20, 27, 34, 41, 48, 55, 62, 69 |
+| Occult Adept (working name) | 8 | 1 | Every 10 levels | 71 | 1, 11, 21, 31, 41, 51, 61, 71 |
+| **TOTAL** | **80** | — | — | **77** | Full 80-rank skill capacity eligible by class level77 |
 
-**ACOLYTE-025 — Acolyte ranks and progression:** May I design and validate **80 total rank purchases across these SIX skills**, choosing skill-specific caps/unlock intervals so a class skill point is spendable **every level from 1–80**, as with Ranger/Defender? We'd then review damage/cooldown/Mana numbers, especially the exact Drain Life healing cap and rank curve.
+**Drain Life 20-rank fit:** the USER-APPROVED healing ratio is `25% + 2 percentage points × (skillRank−1)`. This designer-proposed 20-rank cap would put the final healing conversion at `25% + 19×2%=63%` of actual HP damage dealt, inside the previously accepted approximate 60–65% cap direction. This **63% is a consequence of the proposed cap**, not yet a separate user decision. With proposed passive max8, its totals would be +16 INT/+8 SPR.
+
+### Verified one-point-every-level access
+
+For class level `L`, `eligible(L)` = sum of all individual authored rank gates reachable by L. Every class level 1–80 must satisfy `eligible(L) >= L` for a continuous spend-one-point-per-level path; within each skill, ranks are purchased in ascending rank order and levels for those ranks strictly increase.
+
+| Class level | Eligible rank purchases | Earned points | Cushion |
+| ---: | ---: | ---: | ---: |
+| 1 | 5 | 1 | 4 |
+| 5 | 6 | 5 | 1 |
+| 6 | 9 | 6 | 3 |
+| 10 | 11 | 10 | 1 |
+| 20 | 22 | 20 | 2 |
+| 30 | 32 | 30 | 2 |
+| 40 | 42 | 40 | 2 |
+| 50 | 54 | 50 | 4 |
+| 60 | 63 | 60 | 3 |
+| 70 | 75 | 70 | 5 |
+| 75 | 78 | 75 | 3 |
+| 76 | 79 | 76 | 3 |
+| 77 | 80 | 77 | 3 |
+| 78 | 80 | 78 | 2 |
+| 79 | 80 | 79 | 1 |
+| 80 | 80 | 80 | 0 |
+
+**Programmatic audit PASS:** across **all integer class levels from 1 through 80**, every level has at least as many eligible skill ranks as earned skill points; no gate is above80. **All 80 rank purchases are eligible by class level77**, and the last skill point arrives at level80. Skill upgrade-ready cues should be actionable, not just based on unused points. No automatic ranks on advancement, no over-cap purchase and no extra Tier III skill design during World1.
+
+### Playtest cautions and open parameters
+
+- Mortal Coil HEAL is **Void-element healing**, not magical Void damage cast at an ally. Global elemental healing resistance can make Void healing strong/weak/inverted depending on target resistance; do not silently override that.
+- One successful enemy-damaging Coil earns +1 Soul; friendly Coil HEAL earns0. Poison automatic ticks, Curse/Radiation application, Radiation periodic ticks and skeleton hits do not inherit Soul income rules.
+- Passive Poison is a **separate nonstacking three-second DoT** with `Poison` semantic STATUS tag, **not automatically a new Poison element**, not spreading by Radiation chain, no extra stacks even when repeated wand autos hit.
+- Rank1 poison damage, tick interval, whether it is non-elemental Magical or existing element, Mortal Coil healing raw coefficient, mana/CD/damage rank formulas and final Curse Tenacity formula are OPEN.
+- Grimoire stays ordinary stat item; future items/intrinsics can alter spells across all classes. Graveyard story quest from Cornberg+Trimery remains an idea reserved for region/city design. **No C#/prefab/Unity changes from this work.**
+
+## Round 6 — five questions (AWAITING USER)
+
+**ACOLYTE-026 — Approve Acolyte rank schedule:** Shall we approve the designer-proposed **Curse14 / Radiation16 / Skeleton12 / Drain Life20 / Mortal Coil10 / Passive8 = 80**, with the verified unlock intervals shown above? Drain Life max20 then heals **63% of actual HP damage**, and passive max8 grants +16 INT/+8 SPR.
+
+**ACOLYTE-027 — Mortal Coil scaling:** Should BOTH enemy Void damage and friendly Void healing scale from **INT and SPR**, but enemy damage emphasize **INT** and healing emphasize **SPR**, with the raw coefficients improving with Mortal Coil skill rank? I'll keep exact first-pass coefficients for balancing unless you prefer specific numbers.
+
+**ACOLYTE-028 — Poison type and tick schedule:** Should the guaranteed nonstacking **3s Poison DoT** tick **once per second (3 ticks)** and deal **non-elemental Magical damage** with Poison status tag, or should its damage use an existing element like Radiation while remaining independent from Radiation Plague's contagious DoT?
+
+**ACOLYTE-029 — Skeleton casting and Auto-Retaliate:** Should **one Summon Skeleton cast create ONE skeleton for 4 Soul Charges**, with no additional Mana cost, or should it also consume Mana? Should hero Auto-Retaliate OFF mean skeletons only attack on direct orders, with ON permitting retaliation to enemy attacks?
+
+**ACOLYTE-030 — Next balance pass:** May I design initial **Mana costs, cooldowns, damaging/healing rank coefficients and full high-rank curves** for all six Acolyte skills as designer proposals, while keeping boss Tenacity's exact mitigation formula global and awaiting its own system agreement?
 
 ## Decision ledger
 
@@ -141,4 +198,9 @@ DiceFree's shared `docs/COMBAT.md` and `docs/SUMMONS_AND_COMPANIONS.md` summon f
 | 2026-10-19 | ACOLYTE-018 | Cap4 skeletons, newly summoned replaces oldest, auto-retaliate mirrors hero toggle | **CONFIRMED** |
 | 2026-10-19 | ACOLYTE-019 | Drain Life heal25% at rank1 +2pp/rank on actual HP damage, target max~60–65% | **CONFIRMED baseline & growth; exact cap OPEN** |
 | 2026-10-19 | ACOLYTE-020 | Six skills: original four + Mortal Coil (1s INT/SPR Void dmg or ally/summon heal) + INT/lower SPR/auto-poison passive | **CONFIRMED kit; mechanics open** |
-| 2026-10-19 | ACOLYTE-021–025 | Round 5 five follow-up questions | **AWAITING USER** |
+| 2026-10-20 | ACOLYTE-021 | Self/ally/skeleton Mortal Coil heals with VOID ELEMENT | **CONFIRMED** |
+| 2026-10-20 | ACOLYTE-022 | 1s normal channel cancel rules; successful hostile Mortal Coil +1 Soul, healing +0 | **CONFIRMED** |
+| 2026-10-20 | ACOLYTE-023 | Each successful wand auto causes 3s refreshing nonstacking Poison DoT | **CONFIRMED** |
+| 2026-10-20 | ACOLYTE-024 | Passive +2 INT/+1 SPR per rank; Poison damage scales with INT and passive rank | **CONFIRMED** |
+| 2026-10-20 | ACOLYTE-025 | 80-rank schedule creation delegated; 14/16/12/20/10/8 proposal audited | **DELEGATED; EXACT GATES AWAIT USER APPROVAL** |
+| 2026-10-20 | ACOLYTE-026–030 | Round 6 five follow-up questions | **AWAITING USER** |
