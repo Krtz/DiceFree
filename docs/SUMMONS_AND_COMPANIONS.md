@@ -37,6 +37,8 @@ The generic framework should enforce authored limits cleanly without inventing a
 
 **Acolyte Tier II class-specific decision (2026-10-19, DESIGN ONLY):** Acolyte summons **directly controllable skeletons** which each live **15 seconds**, with **at most 4 active per caster**, **EXACTLY ONE skeleton per cast**, and **4 Soul Charges per summon / ZERO Mana cost** (resource cap8). When a further summon is valid at cap4, **replace the oldest** skeleton instead of rejecting the summon. Passive automatic retaliation follows the owning hero's existing **Auto-Retaliate On/Off toggle**: OFF means attacks only on explicit player orders, ON permits fighting back when attacked (not automatic unprovoked aggression); this is not an independent pet setting. Explicit RTS selection/orders take priority. This is NOT a general cap or lifetime for other summon classes and is NOT implemented by this documentation. See [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md).
 
+**Latest Acolyte summon rank design (2026-10-20, class-specific and DESIGN ONLY):** the user confirmed each Summon Skeleton rank improves **skeleton HP and basic attack damage** rather than increasing the approved 15-second life, maximum four active, single summon per cast or four-Soul resource cost. **Summon Skeleton FIRST PLAYTEST cooldown = 3s, ZERO Mana (4 Soul Charges).** Numeric proposed rank1 HP `55+2×OwnerVIT`, normal basic Physical raw damage `3+0.18×OwnerINT`, +5% HP/+6% damage per extra rank are **still designer proposals**; owner snapshot vs live-inheritance OPEN. [Acolyte Tier II spec](classes/ACOLYTE_TIER2_DESIGN.md).
+
 ## Ownership and control
 
 Every owned unit can identify:
