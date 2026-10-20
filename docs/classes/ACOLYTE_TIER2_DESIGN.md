@@ -1,9 +1,34 @@
 # DiceFree — Acolyte Tier II — design interview
 
 **Created:** 2026-10-19  
-**Status:** WORLD 1 STANDARD TIER II CLASS. **ROUNDS 1–7 USER DECISIONS RECORDED THROUGH 2026-10-20**. Six-skill Tier II kit now consists of Curse (rank1 −5 MDEF, −0.10 attacks/s for 10s; shared boss Tenacity attenuation), Radiation DoT (3m/2s continuous contact, timer resets, chain spreads, new manual casts refresh), player-controlled 15s skeleton summons (cap4, new summon replaces oldest, idle aggression follows hero Auto-Retaliate), 5s Void Drain Life (heals 25% of actual HP damage at rank1, +2 percentage points per rank; 60–65% vicinity suggested cap), NEW 1s Void Mortal Coil (hostile INT+SPR damage, ally/owned-summon healing), and NEW INT+small SPR/poison-on-basic passive. Mana/Soul Charge cap8/cost4 skeleton, +1 per drain tick and affected target death. Round5 CONFIRMS Void-element Mortal Coil healing on self/allies/skeletons, standard one-second channel interruption, enemy-hit +1 Soul Charge and healing +0, and +2 INT/+1 SPR per passive rank with nonstacking three-second poison refreshed on each successful wand basic attack. User APPROVED the exact 80-rank progression and its gates in ACOLYTE-026. Round6 confirms INT+SPR Mortal Coil scaling with SPR emphasis in Void healing, **one skeleton per summon costing 4 Soul ONLY and ZERO Mana**, and **MAGICAL COFFEE-element, NOT Donut, Poison-tag DoT** (corrected user message) ticking each second for 3s without spreading. **Initial cooldown and Mana values are now USER-APPROVED (Round7)**. Radiation duration is 3s at rank1 to 8s at rank16; skeleton rank improves HP/basic damage; Coffee poison refresh preserves its tick timer; Drain Life ticks grant +1 Soul and damage shield even when fully blocked, but heal 0 from absorbed damage. **Other raw damage coefficients remain designer PROPOSALS**. Global Tenacity formula and graveyard quest remain open. **DESIGN/DOCUMENTATION ONLY; NO UNITY IMPLEMENTATION.**  
+**Status:** WORLD 1 STANDARD TIER II CLASS. **ROUNDS 1–8 USER DECISIONS RECORDED THROUGH 2026-10-20**. Six-skill Tier II kit now consists of Curse (rank1 −5 MDEF, −0.10 attacks/s for 10s; shared boss Tenacity attenuation), Radiation DoT (3m/2s continuous contact, timer resets, chain spreads, new manual casts refresh), player-controlled 15s skeleton summons (cap4, new summon replaces oldest, idle aggression follows hero Auto-Retaliate), 5s Void Drain Life (heals 25% of actual HP damage at rank1, +2 percentage points per rank; 60–65% vicinity suggested cap), NEW 1s Void Mortal Coil (hostile INT+SPR damage, ally/owned-summon healing), and NEW INT+small SPR/poison-on-basic passive. Mana/Soul Charge cap8/cost4 skeleton, +1 per drain tick and affected target death. Round5 CONFIRMS Void-element Mortal Coil healing on self/allies/skeletons, standard one-second channel interruption, enemy-hit +1 Soul Charge and healing +0, and +2 INT/+1 SPR per passive rank with nonstacking three-second poison refreshed on each successful wand basic attack. User APPROVED the exact 80-rank progression and its gates in ACOLYTE-026. Round6 confirms INT+SPR Mortal Coil scaling with SPR emphasis in Void healing, **one skeleton per summon costing 4 Soul ONLY and ZERO Mana**, and **MAGICAL COFFEE-element, NOT Donut, Poison-tag DoT** (corrected user message) ticking each second for 3s without spreading. **Initial cooldown and Mana values are now USER-APPROVED (Round7)**. Radiation duration is 3s at rank1 to 8s at rank16; skeleton rank improves HP/basic damage; Coffee poison refresh preserves its tick timer; Drain Life ticks grant +1 Soul and damage shield even when fully blocked, but heal 0 from absorbed damage. **Other raw damage coefficients remain designer PROPOSALS**. Global Tenacity formula and graveyard quest remain open. **DESIGN/DOCUMENTATION ONLY; NO UNITY IMPLEMENTATION.**  
 **Branch:** `integration/world1-foundation`  
 **References:** [Class Progression](../CLASS_PROGRESSION.md), [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md), [Tier II Core Classes v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md).
+
+## FINAL ROUND 8 — AUTHORITATIVE APPROVAL (2026-10-20)
+
+**The user has completed Acolyte's Tier II design and requested Thief next. The following newer decisions OVERRIDE earlier proposals or "open" entries anywhere below. Design only; NO Unity implementation.**
+
+- **ACOLYTE-036:** Radiation Plague duration is **3s at ranks1–3, 4s ranks4–6, 5s ranks7–9, 6s ranks10–12, 7s ranks13–15, 8s rank16**. Formula `3+floor((rank−1)/3)` seconds.
+- **ACOLYTE-037:** Radiation propagation (3m proximity, 2 continuous seconds, resets upon separation) gives each new infected enemy **ONLY the source's REMAINING DoT duration at transmission**, never a fresh full duration; the chain can't infect an already infected prior host. **RADIATION DAMAGES EVERY 0.1 SECONDS (10 TICKS PER SECOND)**, not once per second. User approved lowering each tick accordingly: divide the formerly approved one-second raw tick formula by **10**, yielding `rawDamagePer0.1sTick = [(2+0.10×casterINT)×(1+0.05×(RadiationRank−1))]/10`; this maintains the intended DPS. A source that expires before the 2s contact is completed cannot spread, and ordinary DoT ticks grant no Soul Charges.
+- **ACOLYTE-038:** Skeleton MAX HP uses owner's **SPR, NOT VIT**: `(55+2×ownerSPR_atSummon)×(1+0.05×(SummonRank−1))`. Skeleton normal **Physical basic attack** RAW damage: `(3+0.18×ownerINT_atSummon)×(1+0.06×(SummonRank−1))`. **SNAPSHOT owner stats at the instant skeleton is summoned**, never dynamically reevaluate from later buffs/gear. This also confirms HP+5% and attack+6% per additional Summon rank. Cap4, one per 4 Soul cast, 15s lifetime, oldest replacement, hero Auto-Retaliate and 0 Mana unchanged.
+- **ACOLYTE-039:** Curse flat MDEF reduction `5+(rank−1)` and flat attack-rate reduction `0.10+0.005×(rank−1)` attacks/sec for10s. At rank14 **−18 MDEF / −0.165 attacks/sec**. Boss application remains governed by shared Tenacity, still awaiting its global system equation.
+- **ACOLYTE-040:** All previously proposed RAW coefficient curves for Radiation, Drain Life, Mortal Coil enemy Void damage and allied Void healing, and MAGICAL COFFEE Poison ticks are **APPROVED FIRST-PLAYTEST BASELINES**, modified by the explicit 0.1s÷10 Radiation tick requirement above and owner-SPR skeleton HP. They are not implemented and may be balanced after testing.
+
+### Full approved first-playtest numeric baseline
+
+Let `r` be rank of that skill, `INT` current caster Intelligence, `SPR` current Spirit (summon OWNER stats are snapshotted). All values are initial tuning, not playtest measurements:
+
+| Skill | Approved cap | CD / Mana | Approved raw formula, delivery and other core effects |
+| --- | ---: | --- | --- |
+| Withering Curse | 14 | 12s / 12 Mana | 10s duration, −(5+(r−1)) MDEF, −(0.10+0.005×(r−1)) attacks/s; global boss Tenacity |
+| Radiation Plague | 16 | 10s / 15 Mana | DoT duration `3+floor((r−1)/3)`s. Magical Radiation RAW **each 0.1s**: `((2+0.10×INT)×(1+0.05×(r−1)))/10`. Contact spread3m/2 continuous seconds, new host INHERITS remaining source time; never backtracking. DoT victim death +1 Soul |
+| Summon Skeleton | 12 | 3s / **0 Mana +4 Soul** | 1 controllable15s skeleton, max4/replaces oldest. **HP `(55+2×ownerSPR_atSummon)×(1+0.05×(r−1))`**; Physical basic RAW `(3+0.18×ownerINT_atSummon)×(1+0.06×(r−1))`; SNAPSHOT owner stats, not live |
+| Drain Life | 20 | 14s / 24 Mana | 5s Void Magical channel, **ONE tick/s**, RAW each tick `(4+0.20×INT+0.10×SPR)×(1+0.06×(r−1))`. Resolved ticks DAMAGE shields and +1 Soul even FULLY blocked; healing `25%+2pp×(r−1)` of actual enemy HP damage only (max63%), 0 from shield absorption |
+| Mortal Coil | 10 | 7s / 14 Mana | 1s interruptible cast. Enemy Magical Void RAW `(10+0.60×INT+0.30×SPR)×(1+0.08×(r−1))`; allied/self/skeleton **Void ELEMENTAL HEAL** RAW `(10+0.25×INT+0.70×SPR)×(1+0.08×(r−1))` before healing/resistance modifiers; successful hostile +1 Soul, healing0 |
+| Occult Adept (working name) | 8 | Passive / 0 | +2 INT and +1 SPR per rank. Successful wand basic refreshes **one 3s nonstacking nonspreading Poison-tag Magical COFFEE DoT** with once/sec continuous tick clock; RAW/tick `1+0.06×INT+0.35×(r−1)` |
+
+**Implementation follow-up only** (NOT grounds to continue class interview now): shared boss Tenacity numeric calculation, elemental Void/Coffee registry, round-off of frequent Radiation ticks, infection chain ownership and expiry, summon visuals/RTS controls, immune/invalid targets, actual economy tuning, graveyard mentor burial quest involving Cornberg and Trimery. **Acolyte interview complete. Thief begins now. Tier III design is excluded until World 2.**
 
 ## User-approved World 1 roster and design order
 
@@ -198,17 +223,9 @@ For class level `L`, `eligible(L)` = sum of all individual authored rank gates r
 - **ACOLYTE-034 USER CONFIRMED:** Coffee-element Poison-tagged 3s DoT refreshes its duration on another successful wand basic attack but its existing 1-second periodic tick TIMER CONTINUES, is not reset; DoT remains nonstacking and nonspreading.
 - **ACOLYTE-035 USER CONFIRMED:** every successfully resolved Drain Life damage tick DAMAGES enemy shields and grants +1 Soul Charge (called a "soul shard" colloquially in answer), INCLUDING if shield blocks all HP damage; drain healing remains based solely on ACTUAL HP damage and therefore ZERO if fully absorbed. Prior resource name remains **Soul Charges** until user explicitly renames it.
 
-## Round 8 — five questions (AWAITING USER)
+## Round 8 — user approvals recorded 2026-10-20; interview finished
 
-**ACOLYTE-036 — Radiation duration progression:** Between **3 seconds at rank1** and **8 seconds at rank16**, should the DoT grow by **+1 second at ranks4, 7, 10, 13 and 16** (my preference), instead of fractional seconds per rank?
-
-**ACOLYTE-037 — Radiation ticks and spread duration:** Should the weak Radiation plague **tick once per second**, and should every newly infected enemy get the FULL duration based on your skill rank instead of inheriting only the source enemy's remaining time? I recommend yes to both.
-
-**ACOLYTE-038 — Skeleton HP and basic damage numbers:** Should we adopt as initial playtest numbers **rank1 HP = 55+2×owner VIT**, **normal basic raw Physical damage = 3+0.18×owner INT**, with **+5% HP/+6% attack damage per subsequent Summon rank**? Should summoned skeleton stats **snapshot owner stats at creation**, rather than recalculate throughout their 15s life?
-
-**ACOLYTE-039 — Curse rank growth:** Would **each Curse rank after1 add −1 flat MDEF and −0.005 attacks/second** (rank14 giving **−18 MDEF/−0.165 attacks/sec**), retaining the 10-second duration? Boss reduction will use the eventual global Tenacity formula.
-
-**ACOLYTE-040 — Raw spell damage and healing:** Can we adopt the first-pass **raw damage/healing coefficient formulas in the balance table** for Radiation, Drain Life, INT-heavy Mortal Coil damage, SPR-heavy Void healing, and Coffee poison as our initial playtest values, with tuning permitted after actual Unity tests?
+**ACOLYTE-036–040 all APPROVED**, fully specified in the authoritative first section of this file. No further Acolyte interview questions; next Thief Tier II. No Unity changes.
 
 ## Decision ledger
 
@@ -252,4 +269,9 @@ For class level `L`, `eligible(L)` = sum of all individual authored rank gates r
 | 2026-10-20 | ACOLYTE-033 | Summon rank increases skeleton HP/basic attack, not count/lifetime/cost | **CONFIRMED; numeric coefficients still DESIGNER-proposed** |
 | 2026-10-20 | ACOLYTE-034 | Coffee Poison refresh preserves tick clock while renewing3s duration | **USER CONFIRMED** |
 | 2026-10-20 | ACOLYTE-035 | Shielded Drain Life tick damages shield and yields +1 Soul; blocked HP damage heals0 | **USER CONFIRMED** |
-| 2026-10-20 | ACOLYTE-036–040 | Round8 five follow-up questions | **AWAITING USER** |
+| 2026-10-20 | ACOLYTE-036 | Radiation +1s duration at ranks4/7/10/13/16 | **USER APPROVED** |
+| 2026-10-20 | ACOLYTE-037 | Radiation transmits source remaining time and ticks 0.1s with each tick÷10 raw damage | **USER APPROVED** |
+| 2026-10-20 | ACOLYTE-038 | Skeleton HP scales with SPR not VIT, attack INT, +5%/+6% per rank, owner stats snapshot | **USER APPROVED** |
+| 2026-10-20 | ACOLYTE-039 | Flat Curse growth MDEF −1, rate −0.005 attacks/s per skill rank | **USER APPROVED** |
+| 2026-10-20 | ACOLYTE-040 | All initial raw damage/heal coefficients approved with Radiation/skeleton corrections | **USER APPROVED INITIAL PLAYTEST** |
+| 2026-10-20 | ACOLYTE-CLOSED | Acolyte design complete; user switches to Thief | **COMPLETE DESIGN-ONLY** |
