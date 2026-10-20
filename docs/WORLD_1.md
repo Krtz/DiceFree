@@ -9,6 +9,8 @@ It is the **one-dot face** of the Dice and takes direct visual inspiration from 
 
 Think **start of the adventure**: pastoral greenery, forests, small roads and a Shire-like sense of safety on the surface — while still containing mysteries that matter much later.
 
+> **World-wide thematic contrast idea (2026-10-21, PROVISIONAL):** This green, thriving one-pip world may deliberately contrast with **opposite Face 6**, envisioned as dark, dreary and undead-filled — **life vs death**. The other provisional opposite pairs are warm/tropical volcanic Face2 vs cold/snowy Face5, and dry/desert Face3 vs oceanic/sea-and-swamp Face4. **Only the opposition concept is the newly preferred framing; themes for Faces2–6 are NOT FINAL.** Preserve all existing Cornberg, Great Tree, Quillboar and World1 starter work. [Regions / opposite-face ideas](REGIONS.md).
+
 ## Macro landmark: the Great Tree
 
 A gigantic **Yggdrasil-scale tree** stands around the middle of World 1.
