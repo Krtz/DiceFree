@@ -1,0 +1,452 @@
+{
+  "mode": "extracted",
+  "canonicalAdmission": false,
+  "packages": [
+    {
+      "package": "Free Game VFX CollectionURP",
+      "packageSha256": "f8c94fcf37ed0783f60ee4b5e5964441e8114807cbc03f604dfcca5d6f024c62",
+      "header": {
+        "link": {
+          "id": "345212",
+          "type": "content"
+        },
+        "unity_version": "2022.3.45f1",
+        "pubdate": "09 Sep 2026",
+        "version": "1.03",
+        "upload_id": "992578",
+        "version_id": "1475574",
+        "category": {
+          "id": "125",
+          "label": "Particle Systems"
+        },
+        "id": "345212",
+        "title": "Free Game VFX Collection(URP)",
+        "publisher": {
+          "id": "81454",
+          "label": "Eric VFX Studio"
+        }
+      },
+      "roots": {
+        "EmberProjectile": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Free Game VFX/Prefab/FX_Fireball.prefab"
+      },
+      "files": [
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Shader/AlphaBlendFlow.shader",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Shader/AlphaBlendFlow.shader",
+          "guid": "00f3c70d32d97ee47ac72d2ffef81b21",
+          "bytes": 8645,
+          "sha256": "b837e362eb7e4dbc9cf902d3a70a348c89f8b963b17b55f0dffcfaedfd2bd0b0"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Mesh/Eric_HalfSphere000.FBX",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Mesh/Eric_HalfSphere000.FBX",
+          "guid": "192cd2224047f8c439068909fa5fbad5",
+          "bytes": 131520,
+          "sha256": "ddb3d5ec80b3aed79a803f20b3aa586b60d847926ddfb25f7c23f61cfad59ebd"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/glow_ball2_grey_3 1.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/glow_ball2_grey_3 1.mat",
+          "guid": "2333d67c0a26955478de4e30079aacdf",
+          "bytes": 2508,
+          "sha256": "bd04cbb9777a31e1416848545fe89061f84836cf3c6ffd86f9afed7b5e94c2d5"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/Aura_Flame_001.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/Aura_Flame_001.mat",
+          "guid": "31acf60b9fccfb046809ad7c6766f613",
+          "bytes": 3854,
+          "sha256": "57deb3398e0f952481a952d68b995d33a0f9ba3044c3f9a79edec1cd0870adfd"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/Aura_Flame_000.tga",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/Aura_Flame_000.tga",
+          "guid": "3f9773758558cf94089a3b9cd657b5ea",
+          "bytes": 107455,
+          "sha256": "0e3ca5f15a7f0e5ae96bff9af502a6281c398eecb5715794bf4db71d60f4b3cf"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/decal_fire10.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/decal_fire10.mat",
+          "guid": "4150b7fb4d1e7544d8bf2ed87e113633",
+          "bytes": 3769,
+          "sha256": "79d19b4164dd08314dcd9222dc74e4c6b8019cb21844244b02e86a383c4df67b"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Mesh/sphere_12pl.fbx",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Mesh/sphere_12pl.fbx",
+          "guid": "4353d61d0f3b78746bc215f0db8cc961",
+          "bytes": 23568,
+          "sha256": "aa380b3db7410a521796a125317b2849955e0c195db667f0489e1fa0e1cc14ab"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/firerock 3.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/firerock 3.mat",
+          "guid": "460addb3f248de24eb165c5e1513d342",
+          "bytes": 3793,
+          "sha256": "723c323347d98d08f498175695c0a6253dba79728f13a43d6cbcca733e6b46a6"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/Gradient_Beam_007.tga",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/Gradient_Beam_007.tga",
+          "guid": "4bd566bde80d4c2438d179872ef27526",
+          "bytes": 31420,
+          "sha256": "057447aafb73357d72003116c98ef3cc7b617df07296f3baeed17428cb0a5ce4"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Mesh/FX_Eric_Plane001.FBX",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Mesh/FX_Eric_Plane001.FBX",
+          "guid": "4c8cf5eee56369449b5d1d5ae778d8b5",
+          "bytes": 17216,
+          "sha256": "68c2af44931e7c27dbaf6f537e8127792f775a778eced3cb51d0f91e31748c0b"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/particle_sprite_droplet.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/particle_sprite_droplet.mat",
+          "guid": "5f86ec6ff355e8549ae0062c45146588",
+          "bytes": 1750,
+          "sha256": "0b5e5d95d5023c98a13aa5ea641db545ec67177b1ab207d4df59218efa19eae3"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Mesh/sphere_8pl.fbx",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Mesh/sphere_8pl.fbx",
+          "guid": "63159ad6ffca56c448548dbed4985af6",
+          "bytes": 16544,
+          "sha256": "2d2485655c6e921eb2c23117ee9187ba3f258daf3bebff5e2cf2a137b78a2b0d"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/decal_fire10.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/decal_fire10.png",
+          "guid": "74a4a24538024ca47b818043c22ea4b6",
+          "bytes": 57786,
+          "sha256": "3fc6de48c53320d778221b560204a1887ee8441beff8c3a9122988dd713b1f5a"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/firerock.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/firerock.png",
+          "guid": "79f635bbab7e83847928045650ae3013",
+          "bytes": 99806,
+          "sha256": "e2b916dac0834e92da9fb5679a9048711c4b569a0ba298fb8121b4d43cae2fdd"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/glow_ball2_grey.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/glow_ball2_grey.png",
+          "guid": "85e4677c5b37d524f9aa1eaf5dd4a1b7",
+          "bytes": 9565,
+          "sha256": "e4f40ece29943a8ccc461f3f3943ec9350f629d2049b0fe63cb302fa769d7745"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/noise_03.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/noise_03.png",
+          "guid": "9fe9cb53d9dd8e549ac7734da0abb5f1",
+          "bytes": 47282,
+          "sha256": "6fc36a4f7c497a303ab287e8aa229052a4bf7988431006bbf4e37c5e3752e39a"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/particle_sprite_01.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/particle_sprite_01.png",
+          "guid": "a099c522f01d2114aa3475657dbc1d80",
+          "bytes": 852,
+          "sha256": "275d0964ae94ba2af602bc4a6bad9df45a900bfe2153567d48ec110930829750"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Shader/AdditiveFlow.shader",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Shader/AdditiveFlow.shader",
+          "guid": "ce47b9045a7a3214ca1379e605f54d9f",
+          "bytes": 9281,
+          "sha256": "09cf6fe34ff2895ba1e7d026919e9b95ac2ce082ab44b7a23554b4a04e7bac71"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/ring_03a.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/ring_03a.mat",
+          "guid": "cededfd4febec0a40b22f99e2b9acb18",
+          "bytes": 3772,
+          "sha256": "c679ee9fe94d97ad6297311001f150741d0e825b57b50a3996f1816c065f9afd"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Fireball.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Free Game VFX/Prefab/FX_Fireball.prefab",
+          "guid": "eccbc655050af0b4f81d8db39f84a58e",
+          "bytes": 1290106,
+          "sha256": "f1231d6d74d906b0e0441dd829fccbf786b47e5dbfa80798e17ae8c99efcf90b"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/Gradient_Beam_007.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/Gradient_Beam_007.mat",
+          "guid": "f98c7f0acd24324408d00e1b68eb92c2",
+          "bytes": 3801,
+          "sha256": "6c9e93ffc463b2ba870af9ca1fbc3b2ba0a6f10845ad539513baacc0864fd9af"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Materials/firerock 2.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Materials/firerock 2.mat",
+          "guid": "fa64669a1ba87ce49bb1cf46be7e622e",
+          "bytes": 3759,
+          "sha256": "573162819ef082e6a22cfecc694a4df5c083bfd39079c91d0f617d5374543ad1"
+        },
+        {
+          "source": "Assets/Eric VFX Studio/Resource/Textures/ring02_00_2.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Textures/ring02_00_2.png",
+          "guid": "fe32942e430bac34599c3e6056e28ed3",
+          "bytes": 20718,
+          "sha256": "663e2d9d661d9988b201febf17f76ca049704f5750357a799b9ef98b8962ff5e"
+        }
+      ]
+    },
+    {
+      "package": "Magic Effects FREE",
+      "packageSha256": "2228de7ba7f19934be8b58c96e1d8ce50f20ac51777fcdaa7b4478ea64d0b44d",
+      "header": {
+        "link": {
+          "id": "247933",
+          "type": "content"
+        },
+        "unity_version": "2022.3.12f1",
+        "pubdate": "04 Jun 2025",
+        "version": "1.6",
+        "upload_id": "762116",
+        "version_id": "1071952",
+        "category": {
+          "id": "130",
+          "label": "Particle Systems/Magic"
+        },
+        "id": "247933",
+        "title": "Magic Effects FREE",
+        "publisher": {
+          "id": "28391",
+          "label": "Hovl Studio"
+        }
+      },
+      "roots": {
+        "EmberImpact": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Explosion.prefab",
+        "FrostImpact": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Snow hit.prefab",
+        "FrostCircle": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Magic circles/Freeze circle.prefab",
+        "LightningImpact": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Electro hit.prefab",
+        "SandBurst": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust ground.prefab",
+        "SandLoop": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust loop.prefab",
+        "MathShield": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Magic shields/Magic shield pink.prefab",
+        "RadiationAura": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Character auras/Debuff.prefab",
+        "RadiationImpact": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Green hit.prefab"
+      },
+      "files": [
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Arrow1.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Arrow1.mat",
+          "guid": "00b2a55319476cf40b84578eb2f8c2df",
+          "bytes": 2843,
+          "sha256": "e3664a49a85b6df054e8519837dc39fec9b8bca01841adb3c0e21119e0d85763"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Smoke26.png",
+          "guid": "08b3912bdc0a5ed4d9a27125425a97f4",
+          "bytes": 143820,
+          "sha256": "166563dc4cc0f60091013febfcee839e4cf64417e4c97b315ac701a1ee953e48"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Snowflake.png",
+          "guid": "0e1a6a9f47773b7478bea4aee1a1b64e",
+          "bytes": 6825,
+          "sha256": "e03c115180a1d6fb72bb1652dbe9108b90743119f388d9e3b5eb5e94b5c6322d"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Magic circles/Freeze circle.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Magic circles/Freeze circle.prefab",
+          "guid": "0e5709a7ddb77924090c112cf73bb98a",
+          "bytes": 591982,
+          "sha256": "e2cb1c751256f01e621107a7f7047c61de07c431439d7d25b72e92fe7f5a1cca"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Snow hit.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Snow hit.prefab",
+          "guid": "0edef91621bb6b34384ccc9dbb98729c",
+          "bytes": 589232,
+          "sha256": "12bcca2b741d35649f62393e7b4d1b5c74995194fb211e007b2dfb34d7e7c355"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Snowflake.mat",
+          "guid": "110e8ef5ba5275f4c864c6b5190c7891",
+          "bytes": 2846,
+          "sha256": "9a31b481e0524dbaa97561cb904af93c8d18ec3a7c1c67575d7792800e2e18fe"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust loop.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust loop.prefab",
+          "guid": "2d8c2dfad6d208641b2b0a3b26af5960",
+          "bytes": 117186,
+          "sha256": "f3f75560e7601c1a91dc5ca91cd5c9b19424feba525e44778f7122f67b0905fb"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Green hit.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Green hit.prefab",
+          "guid": "3138a83bedbd6ad4481ba0b061da2eb6",
+          "bytes": 471343,
+          "sha256": "0bcd11e03b76cb726597aa632b8e905ce16d1f8df8a28c3c5268f394e85b0771"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Additive.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Additive.mat",
+          "guid": "32fac6e45890e9d48961b3db7c93c0be",
+          "bytes": 2799,
+          "sha256": "3ca5e1afd1265e7dd7d192d6f615822589437999c709078dd90f076c6767f450"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Electro.mat",
+          "guid": "410fa9a27b8dd1f4989dd201babd7d76",
+          "bytes": 2847,
+          "sha256": "c0aeb354cbeede1efd773ff463c79535e95052fb75bdecdb7ee11cb5cd80d4ea"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust ground.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Smoke effects/Dust ground.prefab",
+          "guid": "41494896fc96c9748b81d3356632794e",
+          "bytes": 117184,
+          "sha256": "a8a04eda42ab4d4c5df51fa8ab9f9195c9cbef2c9b464130000854afaa1dbd18"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Flash.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Flash.png",
+          "guid": "497534591604c9c40922a9ea2ef833b2",
+          "bytes": 5869,
+          "sha256": "4396a7ceaa1b8048932d2b42cb7ca6961db7784f9093cee73f7439da89d28b60"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Models/Cylinder.fbx",
+          "guid": "4a8c064de5d1b4045a9e9d4ebd5d6575",
+          "bytes": 13036,
+          "sha256": "6146444eebaf0223a0e4d3957cfb47a9503d90a8dd98f23d0ecf08525cab14a7"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Circle.mat",
+          "guid": "4bab0f95134663b4c9c3dd73939c0ff1",
+          "bytes": 2846,
+          "sha256": "c61eeaa6690859663f7749d84aadf0d17754845b13c7eaac7c2d4c0cb3fa5e61"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Magic shields/Magic shield pink.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Magic shields/Magic shield pink.prefab",
+          "guid": "5156d6689efbccb4991059f3a5755566",
+          "bytes": 470885,
+          "sha256": "6117effeb57d57e9ee54bd2ef6a46acee7ffdc1cf2668d1ce9947b7105567f6a"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Smoke26.mat",
+          "guid": "616a777eb757ff14c82a79feeb35d9b1",
+          "bytes": 2838,
+          "sha256": "67417dc88a5a63bad3782faf8e1476c0c0bdc4709821c6b7d9237d3609f0797b"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Point1.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Point1.png",
+          "guid": "640e93060c8b460449dc5d4f16193387",
+          "bytes": 2480,
+          "sha256": "9169777c6117c7a3f0569bf97d226df00d4e1788c437ace159b8808810883c7d"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Flare.mat",
+          "guid": "818e127314f46c844a3b31d893dcfe6a",
+          "bytes": 2845,
+          "sha256": "32859f150f478062c80fa8b2fbf40e521e6cea26b597d7d68fabca7702e4b386"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Explosion.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Explosion.prefab",
+          "guid": "8eb503696b886e04faff8fc0f480d473",
+          "bytes": 471002,
+          "sha256": "4ae44fbf6701a0ed2b40729f8be784f8e314c5f795efb2339aea13693cadaed7"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Flare.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Flare.png",
+          "guid": "96a713cc4a0aa464caab5d8fad5911e5",
+          "bytes": 9461,
+          "sha256": "c4e9a2bc29fbd54113f75d34dab944d2edc465b93bc30d07478f0fcac7db5451"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Mask1.mat",
+          "guid": "96d60590d2a3f0143a9a84d4568d9de8",
+          "bytes": 2851,
+          "sha256": "ed631705663ec50a0cf08f0b69d55d359a974917631ad5f69e3c3addda2169e5"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Electro hit.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Hits and explosions/Electro hit.prefab",
+          "guid": "a164e676dbbd6e54587237e619372c98",
+          "bytes": 354858,
+          "sha256": "7d122a74690de364e002130d3a667158bba29e7541b58d95a750c7aa86791ad4"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Prefabs/Character auras/Debuff.prefab",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Prefabs/Character auras/Debuff.prefab",
+          "guid": "a58aa9a78f2b45b45bb0f3e2e1e3ad3c",
+          "bytes": 464986,
+          "sha256": "c76574a6280161db99148e052bb9f91ed2ac00139bf875e1c6df87691696337f"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/SmokeFree1.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/SmokeFree1.png",
+          "guid": "bbc32c56102b32f4dafa718b4e782d9d",
+          "bytes": 49509,
+          "sha256": "2145a0245c1f4ab3fe54ca19e97dac20c3192f8003bdf3e5a295178eab01bd69"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Circle.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Circle.png",
+          "guid": "c4cf9c9f7cf52f6409ef75a08a4357ac",
+          "bytes": 15131,
+          "sha256": "2ad22d6c74229f6a6c7c870d4f61ec8c103b3212dc43e24ce82b01123c7f61ec"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Mask1.png",
+          "guid": "c829f3f833484ac45b5b9150cb06631c",
+          "bytes": 146944,
+          "sha256": "8a60080819f682bc053d9b21245026dd608070bd8fb4d35fce602df2104efb4e"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Arrow1.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Arrow1.png",
+          "guid": "cd95337217b49a143a851ed79a626632",
+          "bytes": 12487,
+          "sha256": "f36547db475794c37c23d71205045406b93e6a97d3d62fae781e1a57d09955b9"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Flash.mat",
+          "guid": "db3488de871721d4f83250ff2af716b7",
+          "bytes": 2842,
+          "sha256": "9d90549bf1c517933fef1693109170dd03b10eca812f03239ac5b46a700c58c8"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/Point.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/Point.mat",
+          "guid": "e546d2d7171981b468cf29388d902e99",
+          "bytes": 2943,
+          "sha256": "0fbcd3674e4bfe4c72c86969136e8e619a5b76a721d8b8d0c3f1019e5cc33202"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Materials/SmokeFree1.mat",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Materials/SmokeFree1.mat",
+          "guid": "ea6dde5ed1a02aa43828aad40f3f7974",
+          "bytes": 2924,
+          "sha256": "202979dabff7a3040bc4dca8679f112bda431fcc2504cb5b8fe20da567cf36af"
+        },
+        {
+          "source": "Assets/Hovl Studio/Magic effects pack/Textures/Electro.png",
+          "destination": "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Textures/Electro.png",
+          "guid": "ede7b7fc6b09fcc41892be0d6935c8cf",
+          "bytes": 24389,
+          "sha256": "88f9efccb45668fc3ce9396ddcbff150195ea2a65f2cf32f4482a5988f82955f"
+        }
+      ]
+    }
+  ]
+}

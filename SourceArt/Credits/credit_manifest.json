@@ -243,7 +243,28 @@
       "licenseUrl": "https://unity.com/legal/as-terms",
       "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
       "resourceProbes": [
-        "StatusVfxLicensed/StunSoftGlow"
+        "StatusVfxLicensed/StunSoftGlow",
+        "MageVfxLicensed/EmberProjectile"
+      ]
+    },
+    {
+      "title": "Magic Effects FREE",
+      "creator": "Hovl Studio",
+      "category": "Art, animation, UI or audio",
+      "sourceUrl": "https://assetstore.unity.com/packages/247933",
+      "licenseName": "Unity Asset Store EULA; publisher notices apply",
+      "licenseUrl": "https://unity.com/legal/as-terms",
+      "notice": "Selected art adapted for DiceFree. Copyright remains with the original creator.",
+      "resourceProbes": [
+        "MageVfxLicensed/EmberImpact",
+        "MageVfxLicensed/FrostImpact",
+        "MageVfxLicensed/FrostCircle",
+        "MageVfxLicensed/LightningImpact",
+        "MageVfxLicensed/SandBurst",
+        "MageVfxLicensed/SandLoop",
+        "MageVfxLicensed/MathShield",
+        "MageVfxLicensed/RadiationAura",
+        "MageVfxLicensed/RadiationImpact"
       ]
     },
     {

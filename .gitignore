@@ -106,3 +106,9 @@ Assets/_DiceFree/Resources/Audio/IronpineLicensed/
 /Assets/_DiceFree/LocalArt.meta
 /Assets/_DiceFree/Resources/TreesLicensed/
 /Assets/_DiceFree/Resources/TreesLicensed.meta
+
+# Selected owned VFX packs and generated licensed prefabs stay local.
+/Assets/_DiceFree/Art/MageVfxVendor/
+/Assets/_DiceFree/Art/MageVfxVendor.meta
+/Assets/_DiceFree/Resources/MageVfxLicensed/
+/Assets/_DiceFree/Resources/MageVfxLicensed.meta

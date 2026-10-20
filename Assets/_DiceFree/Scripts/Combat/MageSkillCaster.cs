@@ -9,6 +9,7 @@ namespace DiceFree.Combat
   [SerializeField] MageCombatTuning tuning;
   readonly Dictionary<Kind,float> readyAt=new();readonly List<string> elements=new();
   readonly Dictionary<string,int> dotVersions=new();
+  readonly Dictionary<string,GameObject> dotVisuals=new();
   readonly HashSet<(MageAfflictions target,string id)> ownedEffects=new();
   readonly List<GameObject> sessionVfx=new();
   CombatActor actor;MageSkillProgression skills;ActorResourceController resources;
@@ -25,6 +26,7 @@ namespace DiceFree.Combat
   void OnEnable(){actor??=GetComponent<CombatActor>();if(actor.Health!=null)actor.Health.Died+=ResetForManifestationLoad;skills.Changed+=RefreshAura;RefreshAura();}
   void OnDisable(){if(actor?.Health!=null)actor.Health.Died-=ResetForManifestationLoad;if(skills!=null)skills.Changed-=RefreshAura;ResetForManifestationLoad();aura?.Clear();}
   void Update(){
+   for(int i=sessionVfx.Count-1;i>=0;i--)if(sessionVfx[i]==null)sessionVfx.RemoveAt(i);
    if(!skills.ActiveForCurrentClass){if(elements.Count>0||barrierUntil>0)ResetForManifestationLoad();return;}
    while(elements.Count>0&&Time.time>=nextDecay){elements.RemoveAt(0);nextDecay+=tuning.decayInterval;SyncWeaving();}
   }
@@ -47,11 +49,11 @@ namespace DiceFree.Combat
     case Kind.EmberBolt:StartCoroutine(Ember(target,rank));break;
     case Kind.FrostSnare:
      Hit(target,kind,rank);if(target.Alive)target.Effects?.TryApplyStun(.75f+rank*.25f,false);
-     MageSpellVfx.Burst(target.transform.position,Color.cyan);break;
+     sessionVfx.Add(MageSpellVfx.Frost(target.transform.position));break;
     case Kind.ArcLightning:
      var seen=new HashSet<CombatActor>();var current=target;Vector3 from=transform.position+Vector3.up;
      for(int i=0;i<3+(rank-1)/2&&current!=null;i++){
-      seen.Add(current);MageSpellVfx.Line(from,current.transform.position+Vector3.up,new Color(.5f,.7f,1));
+      seen.Add(current);sessionVfx.Add(MageSpellVfx.Line(from,current.transform.position+Vector3.up,new Color(.5f,.7f,1)));
       Hit(current,kind,rank,Mathf.Pow(.8f,i));from=current.transform.position+Vector3.up;
       var previous=current;
       current=CombatActor.All.Where(t=>actor.IsHostileTo(t)&&!seen.Contains(t)&&Vector3.Distance(previous.transform.position,t.transform.position)<=tuning.chainRange&&previous.HasSightOf(t)).OrderBy(t=>Vector3.Distance(previous.transform.position,t.transform.position)).ThenBy(t=>t.GetEntityId().ToString()).FirstOrDefault();
@@ -59,7 +61,10 @@ namespace DiceFree.Combat
     case Kind.HalfLife:
      var aff=target.GetComponent<MageAfflictions>()??target.gameObject.AddComponent<MageAfflictions>();
      string id=EffectId("half-life");aff.ApplyDefense(id,rank*5,6+rank*2);ownedEffects.Add((aff,id));
-     int version=++serial;dotVersions[target.GetEntityId().ToString()]=version;StartCoroutine(HalfLife(target,rank,version));break;
+     string targetKey=target.GetEntityId().ToString();
+     if(dotVisuals.Remove(targetKey,out var oldVisual)&&oldVisual!=null)Destroy(oldVisual);
+     var radiation=MageSpellVfx.Radiation(target,6+rank*2);dotVisuals[targetKey]=radiation;sessionVfx.Add(radiation);
+     int version=++serial;dotVersions[targetKey]=version;StartCoroutine(HalfLife(target,rank,version));break;
     case Kind.MathBarrier:
      barrierRank=rank;barrierUntil=Time.time+MageProgressionRules.BarrierDuration(rank);
      sessionVfx.Add(MageSpellVfx.Barrier(transform,MageProgressionRules.BarrierDuration(rank)));break;
@@ -100,14 +105,21 @@ namespace DiceFree.Combat
   }
   IEnumerator Ember(CombatActor target,int rank){
    Vector3 from=transform.position+Vector3.up*1.2f;float delay=Mathf.Clamp(Vector3.Distance(transform.position,target.transform.position)/16,.1f,.7f);
-   MageSpellVfx.Bolt(from,target,delay,new Color(1,.32f,.06f));yield return new WaitForSeconds(delay);
-   if(actor.Alive&&skills.ActiveForCurrentClass&&target!=null)Hit(target,Kind.EmberBolt,rank);
+   sessionVfx.Add(MageSpellVfx.Bolt(from,target,delay,new Color(1,.32f,.06f)));yield return new WaitForSeconds(delay);
+   if(actor.Alive&&skills.ActiveForCurrentClass&&target!=null){Hit(target,Kind.EmberBolt,rank);sessionVfx.Add(MageSpellVfx.EmberImpact(target.transform.position));}
   }
   IEnumerator HalfLife(CombatActor target,int rank,int version){
-   for(int i=0;i<6+rank*2;i++){
-    yield return new WaitForSeconds(1);
-    if(!actor.Alive||!skills.ActiveForCurrentClass||target==null||!target.Alive||!dotVersions.TryGetValue(target.GetEntityId().ToString(),out int active)||active!=version)yield break;
-    Hit(target,Kind.HalfLife,rank);MageSpellVfx.Burst(target.transform.position,new Color(.45f,1,.12f),.25f);
+   string key=target.GetEntityId().ToString();
+   try{
+    for(int i=0;i<6+rank*2;i++){
+     yield return new WaitForSeconds(1);
+     if(!actor.Alive||!skills.ActiveForCurrentClass||target==null||!target.Alive||!dotVersions.TryGetValue(key,out int active)||active!=version)yield break;
+     Hit(target,Kind.HalfLife,rank);sessionVfx.Add(MageSpellVfx.RadiationTick(target.transform.position));
+    }
+   }finally{
+    if(dotVersions.TryGetValue(key,out int current)&&current==version){
+     dotVersions.Remove(key);if(dotVisuals.Remove(key,out var visual)&&visual!=null)Destroy(visual);
+    }
    }
   }
   IEnumerator Quicksand(Vector3 point,int rank){
@@ -126,7 +138,7 @@ namespace DiceFree.Combat
    return absorbed>0&&resources.TrySpend(ResourceIds.Mana,absorbed*efficiency)?incoming-absorbed:incoming;
   }
   public void ResetForManifestationLoad(){
-   StopAllCoroutines();readyAt.Clear();elements.Clear();dotVersions.Clear();barrierUntil=0;barrierRank=0;
+   StopAllCoroutines();readyAt.Clear();elements.Clear();dotVersions.Clear();dotVisuals.Clear();barrierUntil=0;barrierRank=0;
    if(actor!=null)actor.Stats.RemoveBasicAttackDamagePercentContribution("mage.weaving");
    foreach(var entry in ownedEffects)if(entry.target!=null)entry.target.Remove(entry.id);ownedEffects.Clear();foreach(var v in sessionVfx)if(v!=null)Destroy(v);sessionVfx.Clear();Feedback="";
   }

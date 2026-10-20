@@ -206,6 +206,24 @@ MonoBehaviour:
     notice: Selected art adapted for DiceFree. Copyright remains with the original creator.
     resourceProbes:
     - StatusVfxLicensed/StunSoftGlow
+    - MageVfxLicensed/EmberProjectile
+  - title: Magic Effects FREE
+    creator: Hovl Studio
+    category: Art, animation, UI or audio
+    sourceUrl: https://assetstore.unity.com/packages/247933
+    licenseName: Unity Asset Store EULA; publisher notices apply
+    licenseUrl: https://unity.com/legal/as-terms
+    notice: Selected art adapted for DiceFree. Copyright remains with the original creator.
+    resourceProbes:
+    - MageVfxLicensed/EmberImpact
+    - MageVfxLicensed/FrostImpact
+    - MageVfxLicensed/FrostCircle
+    - MageVfxLicensed/LightningImpact
+    - MageVfxLicensed/SandBurst
+    - MageVfxLicensed/SandLoop
+    - MageVfxLicensed/MathShield
+    - MageVfxLicensed/RadiationAura
+    - MageVfxLicensed/RadiationImpact
   - title: Free Low Poly Swords
     creator: Pure Poly
     category: Art, animation, UI or audio
@@ -423,7 +441,7 @@ MonoBehaviour:
     sourceUrl: https://assetstore.unity.com/packages/3d/environments/stylized-forest-kit-samples-403082
     licenseName: Standard Unity Asset Store EULA
     licenseUrl: https://unity.com/legal/as-terms
-    notice: Locally installed oak model and textures. DiceFree URP material adaptation; original fallback available.
+    notice: Locally installed oak model and textures. DiceFree URP adaptation with original fallback.
     resourceProbes:
     - TreesLicensed/Oak1
   notices:
