@@ -34,6 +34,11 @@ Examples already established in DiceBound design include traditional and strange
 
 The examples above included `Donut`, but that globally available element remains entirely separate and unchanged. `Coffee` has not been verified in DiceBound's source element registry; when implementation begins, reconcile the canonical source list and create a named Coffee element in DiceFree if needed, with stable ID/resistance/VFX hooks. **Do not pretend Coffee is already an implemented live element or invent a Coffee proc/penalty.** This is class DESIGN ONLY. See [Acolyte Tier II](classes/ACOLYTE_TIER2_DESIGN.md).
 
+## Thief Tier II Physical Nature and Physical Tech status effects (2026-10-21; DESIGN ONLY)
+
+**User-confirmed class-specific element/channel combinations:** **Envenom** is an instant Thief dagger stab applying a **NONSTACKING Poison-tagged DoT using PHYSICAL damage channel + NATURE element**; exact initial stabbing damage element, poison tick timing and duration remain open. **Smoke Bomb** is a ground-targeted, 4m-radius, five-second damaging cloud; its DoT uses **PHYSICAL damage channel + TECH element** while enemies inside suffer 20% miss chance on **basic attacks only**. The miss penalty ends instantly on exit. This does **NOT** redefine Tech/Nature elements globally, confer universal elemental proc effects, or imply smoke makes the Thief invisible. Element != damage channel != status tag: Poison is a status label, not a new element. Nature already explicitly exists below and Tech is part of the inherited illustrative element roster above; confirm stable IDs during implementation. [Thief Tier II source design](classes/THIEF_TIER2_DESIGN.md).
+
+
 ## Nature
 
 **Nature is explicitly a DiceFree element**, regardless of whether its exact DiceBound status changes before DiceFree implementation.
