@@ -21,16 +21,17 @@ namespace DiceFree.UI
    string text=MageProgressionRules.Name(kind)+" — "+(rule.passive?"Passive":"Spell")+"\n"+(rank>0?"Rank "+rank:"Unlock level "+rule.rankLevels[0])+"\n";
    text+=kind switch{
     Kind.EmberBolt=>$"Fire projectile: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT magical damage.",
-    Kind.FrostSnare=>$"Ice: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage. Brief freeze for {.75f+r*.25f:0.##}s, using shared stun resistance and immunity.",
-    Kind.ArcLightning=>$"Electric damage: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT. Hits up to {3+(r-1)/2} distinct enemies; 6m jumps; each jump deals 80% of the previous hit.",
-    Kind.Quicksand=>$"Nature field, 3.5m radius for {4+r}s. Once per second: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage, {40+r*3}% slow.",
-    Kind.HalfLife=>$"Radiation DoT: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT each second for {6+2*r}s. Reduces both defenses by {5*r}; same caster refreshes rather than stacking.",
+    Kind.FrostSnare=>$"Ice: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage. Freeze up to {MageProgressionRules.FrostFreezeDuration(r):0.##}s, using shared stun resistance and immunity.",
+    Kind.ArcLightning=>$"Electric damage: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT. Hits up to {MageProgressionRules.ArcLightningTargetCount(r)} distinct enemies; 6m jumps; each jump deals 80% of the previous hit.",
+    Kind.Quicksand=>$"Nature field, 3.5m radius for {4+r}s. Once per second: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage, {MageProgressionRules.QuicksandSlowPercent(r)}% slow.",
+    Kind.HalfLife=>$"Radiation DoT: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT each second for {6+2*r}s. Reduces both defenses by {MageProgressionRules.HalfLifeDefenseReduction(r)}; same caster refreshes rather than stacking.",
     Kind.MathBarrier=>$"Self only. For {2*r}s redirects {25+5*r}% of post-shield damage to Mana, at {2-.1f*r:0.#} Mana per damage absorbed. Insufficient Mana absorbs only what is affordable; remaining damage reaches HP.",
-    Kind.ElementalWeaving=>$"One stack per unique element cast; repeated elements refresh the shared 8s delay. +5% spell/basic damage per stack. After 8s without an elemental cast, lose one oldest stack per second. Each cast reduces OTHER Mage cooldowns by 0.2s. Nearby enemies within {caster.Tuning.auraRadius:0.#}m lose {r} percentage points of resistance to the six Mage schools; strongest overlapping aura wins. No hit is needed. Damage ticks, bounces, targets and basic attacks do not create stacks.\nCurrent stacks: {caster.WeavingStacks}",
+    Kind.ElementalWeaving=>$"One stack per unique element cast; repeated elements refresh the shared 8s delay. +5% spell/basic damage per stack. After 8s without an elemental cast, lose one oldest stack per second. Each cast reduces OTHER Mage cooldowns by 0.2s. Nearby enemies within {caster.Tuning.auraRadius:0.#}m lose {MageProgressionRules.WeavingResistanceReduction(r)} percentage points of resistance to the six Mage schools; strongest overlapping aura wins. No hit is needed. Damage ticks, bounces, targets and basic attacks do not create stacks.\nCurrent stacks: {caster.WeavingStacks}",
     _=>$"+{30*r} maximum Mana and +{.5f*r:0.#} Mana regeneration per second."
    };
    if(!rule.passive)text+=$"\nMana {MageProgressionRules.Cost(kind,r):0}; cooldown {MageProgressionRules.Cooldown(kind):0}s; range {(kind==Kind.MathBarrier?"self":"18m")}.";
    int next=rule.NextRankLevel(rank);if(next<int.MaxValue)text+="\nNext rank: class level "+next+" and 1 skill point.";
+   if(skills.UnspentPoints>0)text+="\nBanked class skill points: "+skills.UnspentPoints+".";
    return text;
   }
   public bool Activate(int index,SkillTargetingController targeting,IQueuedOrders orders,bool append){

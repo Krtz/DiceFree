@@ -338,12 +338,26 @@ namespace DiceFree.Persistence
                 equipment = equipment.Slots,
                 gold = wallet.Gold,
                 classSkills = skillState != null
-                    ? skillState.CaptureState()
+                    ? PreserveUnknownSkillRanks(skillState.CaptureState(), preserved?.classSkills)
                     : preserved?.classSkills ?? Array.Empty<SkillRankState>(),
+                classSkillRankMigrationVersion = CurrentClassId == "class.greatblade" || CurrentClassId == "class.mage"
+                    ? SaveMigrations.ClassSkillRankMigrationVersion
+                    : preserved?.classSkillRankMigrationVersion ?? 0,
                 resources = resources != null
                     ? ToSaveResources(resources.CaptureForActive(ToRuntimeResources(preserved?.resources)))
                     : preserved?.resources ?? Array.Empty<ResourceSaveValue>()
             };
+        }
+
+        private static SkillRankState[] PreserveUnknownSkillRanks(SkillRankState[] captured, SkillRankState[] preserved)
+        {
+            var result = new List<SkillRankState>(captured ?? Array.Empty<SkillRankState>());
+            var knownIds = new HashSet<string>(result.Where(value => value != null && !string.IsNullOrWhiteSpace(value.stableId))
+                .Select(value => value.stableId), StringComparer.Ordinal);
+            foreach (var value in preserved ?? Array.Empty<SkillRankState>())
+                if (value != null && !string.IsNullOrWhiteSpace(value.stableId) && knownIds.Add(value.stableId))
+                    result.Add(value);
+            return result.ToArray();
         }
 
         private static RuntimeResourceValue[] ToRuntimeResources(ResourceSaveValue[] saved)

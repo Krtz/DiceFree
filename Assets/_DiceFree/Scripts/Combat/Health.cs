@@ -8,7 +8,7 @@ namespace DiceFree.Combat
     {
         private ActorStats stats;
         private IIncomingDamageRedirector[] redirectors;
-        private readonly System.Collections.Generic.SortedDictionary<string,(float amount,float until)> shields = new(System.StringComparer.Ordinal);
+        private readonly System.Collections.Generic.SortedDictionary<string,(float amount,float until,string elementId)> shields = new(System.StringComparer.Ordinal);
         public float TemporaryShield
         {
             get
@@ -21,20 +21,24 @@ namespace DiceFree.Combat
             }
         }
         public void RemoveTemporaryShield(string source)=>shields.Remove(source);
-        public void AddTemporaryShield(string source,float amount,float seconds)
+        public void AddTemporaryShield(string source,float amount,float seconds,string elementId=null)
         {
             if(string.IsNullOrWhiteSpace(source)||!float.IsFinite(amount)||!float.IsFinite(seconds)||amount<0||seconds<=0)
                 throw new System.ArgumentException("Shield requires finite positive tuning and stable source.");
-            if(Alive)shields[source]=(amount,Time.time+seconds);
+            if(Alive)shields[source]=(amount,Time.time+seconds,elementId);
         }
-        private float Absorb(float damage)
+        private float Absorb(float damage,ElementDefinition incomingElement)
         {
             _=TemporaryShield;
             float remaining=damage;
             foreach(string id in new System.Collections.Generic.List<string>(shields.Keys))
             {
-                var value=shields[id];float take=Mathf.Min(remaining,value.amount);remaining-=take;
-                if(value.amount<=take)shields.Remove(id);else shields[id]=(value.amount-take,value.until);
+                var value=shields[id];
+                float shieldPerDamage=string.IsNullOrEmpty(value.elementId)?1f:
+                    (incomingElement!=null&&incomingElement.stableId==value.elementId ? .8f : 1.2f);
+                float blocked=Mathf.Min(remaining,value.amount/shieldPerDamage);
+                remaining-=blocked;float spent=blocked*shieldPerDamage;
+                if(value.amount<=spent)shields.Remove(id);else shields[id]=(value.amount-spent,value.until,value.elementId);
                 if(remaining<=0)break;
             }
             return remaining;
@@ -72,7 +76,7 @@ namespace DiceFree.Combat
             }
             else
             {
-                float unshielded=Absorb(result.DamagePotential);
+                float unshielded=Absorb(result.DamagePotential,result.element);
                 foreach(var redirector in redirectors)
                     unshielded=Mathf.Clamp(redirector.RedirectDamage(unshielded),0,unshielded);
                 result.absorbed=result.DamagePotential-unshielded;

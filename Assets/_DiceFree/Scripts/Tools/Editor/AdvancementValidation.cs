@@ -43,8 +43,8 @@ namespace DiceFree.EditorTools
             Edge(physicalEdge, "advancement.novice.physical", novice, physical);
             Edge(magicalEdge, "advancement.novice.magical", novice, magical);
 
-            Require(SaveMigrations.CurrentSchema == 6 && SaveMigrations.ManifestationVersion == 6,
-                "Greatblade must use the existing schema/manifestation v6 without a schema bump.");
+            Require(SaveMigrations.CurrentSchema == 7 && SaveMigrations.ManifestationVersion == 7,
+                "Greatblade/Mage rank reset must use schema/manifestation v7.");
 
             ValidateRosterSemantics();
             ValidateStartMenu(catalog);

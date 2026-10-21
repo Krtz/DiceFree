@@ -72,13 +72,22 @@ namespace DiceFree.Persistence
                     // Preserve the original verified bytes permanently before
                     // the first quadratic migration, alongside rotating backups.
                     // Never overwrite an existing pre-quadratic safety copy.
-                    if (save.schemaVersion < SaveMigrations.CurrentSchema)
+                    if (save.schemaVersion < 6)
                     {
                         string safetyCopy = Path + ".pre-quadratic-original";
                         if (!File.Exists(safetyCopy))
                         {
                             File.Copy(candidate, safetyCopy);
                             Read(safetyCopy); // Checksum/integrity verified.
+                        }
+                    }
+                    if (SaveMigrations.RequiresClassSkillRankReset(save))
+                    {
+                        string safetyCopy = Path + ".pre-skill-rank-v1-original";
+                        if (!File.Exists(safetyCopy))
+                        {
+                            File.Copy(candidate, safetyCopy);
+                            Read(safetyCopy); // Verify the exact pre-rank-reset bytes before migration.
                         }
                     }
                     var migrated = SaveMigrations.Upgrade(save);

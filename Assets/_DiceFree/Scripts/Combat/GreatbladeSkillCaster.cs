@@ -75,7 +75,7 @@ namespace DiceFree.Combat
             if(!ValidCast())yield break;
             LastCastHits=0;areaGain=0;
             int mastery=skills.Rank(Kind.GreatswordMastery);
-            float angle=tuning.arcAngle+(mastery>=3?15+3*(mastery-3):0);
+            float angle=tuning.arcAngle+GreatbladeProgressionRules.MasteryArcWidth(mastery);
             foreach(var target in new List<CombatActor>(CombatActor.All))
             {
                 if(!actor.IsHostileTo(target)||!actor.HasSightOf(target))continue;
@@ -83,7 +83,7 @@ namespace DiceFree.Combat
                 if(delta.magnitude>actor.Radius+target.Radius+tuning.arcReach||Vector3.Angle(transform.forward,delta)>angle*.5f)continue;
                 Hit(target,tuning.wideArc,tuning.ArcCoefficient(skills.Rank(Kind.WideArc)),true);
             }
-            if(mastery>=2){hasteUntil=Time.time+3+.25f*(mastery-2);actor.Stats.SetAttackSpeedPercentModifier(HasteSource,8+2*(mastery-2));}
+            if(GreatbladeProgressionRules.GetsMasteryCleaveHaste(mastery)){hasteUntil=Time.time+GreatbladeProgressionRules.MasteryHasteDuration(mastery);actor.Stats.SetAttackSpeedPercentModifier(HasteSource,GreatbladeProgressionRules.MasteryHastePercent(mastery));}
             Finish(Kind.WideArc);
         }
         public bool CastSpinDash(Vector3 point)
@@ -148,7 +148,8 @@ namespace DiceFree.Combat
             {
                 bool connected=Hit(target,tuning.overheadBreaker,tuning.BreakerCoefficient(skills.Rank(Kind.OverheadBreaker)),false,1+spent/100f*1.5f);
                 int mastery=skills.Rank(Kind.GreatswordMastery);
-                if(connected&&mastery>=4)actor.Health.AddTemporaryShield("greatblade.mastery",actor.Health.Maximum*(.05f+.005f*(mastery-4)),5);
+                if(connected&&GreatbladeProgressionRules.GetsMasteryFinisherProtection(mastery))
+                    actor.Health.AddTemporaryShield("greatblade.mastery",GreatbladeProgressionRules.MasteryShieldCapacity(actor.Health.Maximum),5,"element.metal");
             }
             Finish(Kind.OverheadBreaker);
         }

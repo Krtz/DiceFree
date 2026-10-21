@@ -1,6 +1,6 @@
 # Mage — Tier II
 
-> **Skill progression design update (2026-10-19; NOT YET IMPLEMENTED):** the user confirmed that every Mage skill must start at **rank 0** with **one spendable point at character level 1**, preserving current ability first-unlock levels; rank caps should vary according to skill function and aim to spend almost all 80 level-80 points. **Math Barrier remains capped at rank 5.** Approved new per-ability maximum ranks are **Ember Bolt 18 / Frost Snare 12 / Arc Lightning 12 / Quicksand 10 / Half-Life 8 / Math Barrier 5 / Elemental Weaving 8 / Mana Attunement 7**. Rank upgrades use **skill-specific level intervals**. **Confirmed:** Ember Bolt may rank up every class level; Half-Life ranks unlock at Mage levels **18/22/26/30/34/38/42/46**, and Math Barrier retains existing **6/12/18/24/30** gates. Remaining Mage rank-gate schedules have now been selected as **provisional tested level-by-level playtest baselines**, detailed in the audit: Frost Snare every 7 levels from 1, Arc Lightning every 6 from 6, Quicksand every 7 from 12, Elemental Weaving every 11 from 1, Mana Attunement every 13 from 1. These schedules preserve a feasible purchase every class level through Mage level 80. **Designer-selected provisional secondary-effect ceilings:** Frost Snare freezes up to **2.5s**, Arc Lightning chains up to **8 distinct hostiles**, Half-Life debuffs at most **−40 Physical/−40 Magical DEF**, Quicksand slows up to **40%**, and Elemental Weaving's own aura reaches **−8 percentage points** at its rank-8 cap. **These initial playtest ceilings are now USER-APPROVED, but NOT LIVE**; damage continues scaling, and Math Barrier remains unchanged. Numerical balance is not finalized. **CONFIRMED global UX:** max spendable allocation is min(class level, 80), and only show the point reminder when a rank is actually available for purchase. Existing Mage saves must receive an **automatic SILENT one-time skill reset and refund on first loading the legacy manifestation** (preserving levels/items/quests/etc.; safe backup and idempotent migration; no notification). This document's *free starting rank-1, five-rank-each and rank-gate tables describe the current playable implementation*, not the approved redesign. See [the Greatblade/Mage skill-rank audit](../TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). Do not treat these policy changes as shipped until code, tests and save migration are completed.
+> **Implementation update (2026-10-21):** rank-zero progression, the approved rank caps/gates, actionable-only skill-point reminder, and one-time legacy Greatblade/Mage reset/refund are implemented locally on `integration/world1-foundation`. Unity compile and runtime validation remain pending because the connected Editor is blocked by a scene-backup recovery modal. Do not treat this source update as runtime-verified until the focused rank/migration and Mage/Greatblade harnesses pass in Unity.
 
 
 Mage is an INT-based general elemental caster. Tier III can specialize later. Stable class ID: `class.mage`. A wand and a floating orb are the default focus visuals; all existing class-neutral test equipment remains usable. No ultimate is assigned before Tier IV.
@@ -15,16 +15,16 @@ Six active abilities and two passives use the extensible class ability provider.
 
 | Ability | Element | Behavior | Rank unlock levels |
 |---|---|---|---|
-| Ember Bolt | Fire | Single-target projectile with its own cooldown | 1, 6, 12, 18, 24 |
-| Frost Snare | Ice | Targeted damage and brief freeze using shared stun rules | 1, 6, 12, 18, 24 |
-| Arc Lightning | Electric | Chains to distinct nearby enemies, with damage falloff | 6, 12, 18, 24, 30 |
-| Quicksand | Nature | Ground field with damage ticks and a slow | 12, 18, 24, 30, 36 |
-| Half-Life | Radiation | Single-target damage over time and defense reduction | 18, 24, 30, 36, 42 |
+| Ember Bolt | Fire | Single-target projectile with its own cooldown; maximum rank 18 | 1–18, every level |
+| Frost Snare | Ice | Targeted damage and freeze capped at 2.5 seconds; maximum rank 12 | 1, 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78 |
+| Arc Lightning | Electric | Chains to distinct nearby enemies, capped at 8 targets; maximum rank 12 | 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72 |
+| Quicksand | Nature | Ground field with damage ticks and slow capped at 40%; maximum rank 10 | 12, 19, 26, 33, 40, 47, 54, 61, 68, 75 |
+| Half-Life | Radiation | Single-target damage over time; defense reduction capped at 40 per channel; maximum rank 8 | 18, 22, 26, 30, 34, 38, 42, 46 |
 | Math Barrier | Math | Self-only damage redirection to Mana | 6, 12, 18, 24, 30 |
-| Elemental Weaving | Passive | Unique-element stacks, cooldown reductions and resistance reduction | 1, 6, 12, 18, 24 |
-| Mana Attunement | Passive | Maximum Mana and regeneration | 1, 6, 12, 18, 24 |
+| Elemental Weaving | Passive | Unique-element stacks, cooldown reductions and own resistance-reduction aura capped at 8 percentage points; maximum rank 8 | 1, 12, 23, 34, 45, 56, 67, 78 |
+| Mana Attunement | Passive | +30 maximum Mana and +0.5 Mana regeneration per rank; maximum rank 7 | 1, 14, 27, 40, 53, 66, 79 |
 
-Level-1 abilities begin at rank 1 for free. Subsequent learned ranks cost one skill point; each class level after the first grants one point.
+Every ability and passive starts at rank 0. Mage level 1 provides one spendable skill point; later levels add one point until the 80-rank total cap is reached. Mage rank allocations and all caps are implemented locally but await Unity validation. Quicksand currently ramps by 4 percentage points per rank until the approved 40% ceiling; that slope is an implementation choice, not a separately approved balance curve. Math Barrier retains its approved original five-rank formulas.
 
 ### Agreed rules
 

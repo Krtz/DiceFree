@@ -5,6 +5,7 @@ namespace DiceFree.Progression
  public static class MageProgressionRules
  {
   public const string ClassId="class.mage";
+  public const int TotalRanks=80;
   public enum Kind {EmberBolt,FrostSnare,ArcLightning,Quicksand,HalfLife,MathBarrier,ElementalWeaving,ManaAttunement}
   public readonly struct Rule {
    public readonly Kind kind; public readonly bool passive;public readonly int[] rankLevels;
@@ -13,10 +14,13 @@ namespace DiceFree.Progression
    public int NextRankLevel(int rank)=>rank>=0&&rank<rankLevels.Length?rankLevels[rank]:int.MaxValue;
   }
   public static readonly Rule[] Skills={
-   new(Kind.EmberBolt,false,1,6,12,18,24),new(Kind.FrostSnare,false,1,6,12,18,24),
-   new(Kind.ArcLightning,false,6,12,18,24,30),new(Kind.Quicksand,false,12,18,24,30,36),
-   new(Kind.HalfLife,false,18,24,30,36,42),new(Kind.MathBarrier,false,6,12,18,24,30),
-   new(Kind.ElementalWeaving,true,1,6,12,18,24),new(Kind.ManaAttunement,true,1,6,12,18,24)};
+   new(Kind.EmberBolt,false,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),
+   new(Kind.FrostSnare,false,1,8,15,22,29,36,43,50,57,64,71,78),
+   new(Kind.ArcLightning,false,6,12,18,24,30,36,42,48,54,60,66,72),
+   new(Kind.Quicksand,false,12,19,26,33,40,47,54,61,68,75),
+   new(Kind.HalfLife,false,18,22,26,30,34,38,42,46),new(Kind.MathBarrier,false,6,12,18,24,30),
+   new(Kind.ElementalWeaving,true,1,12,23,34,45,56,67,78),new(Kind.ManaAttunement,true,1,14,27,40,53,66,79)};
+  public static int AllocationBudget(int classLevel)=>Mathf.Min(Mathf.Max(0,classLevel),TotalRanks);
   public static Rule For(Kind k){foreach(var r in Skills)if(r.kind==k)return r;throw new ArgumentOutOfRangeException(nameof(k));}
   public static bool CanRankUp(Kind kind,int level,int rank)=>rank>=0&&rank<For(kind).rankLevels.Length&&level>=For(kind).rankLevels[rank];
   public static string Name(Kind k)=>k switch {Kind.EmberBolt=>"Ember Bolt",Kind.FrostSnare=>"Frost Snare",Kind.ArcLightning=>"Arc Lightning",Kind.Quicksand=>"Quicksand",Kind.HalfLife=>"Half-Life",Kind.MathBarrier=>"Math Barrier",Kind.ElementalWeaving=>"Elemental Weaving",_=>"Mana Attunement"};
@@ -26,5 +30,10 @@ namespace DiceFree.Progression
   public static float BarrierDuration(int rank)=>rank*2;
   public static float BarrierFraction(int rank)=>(25+rank*5)/100f;
   public static float ManaPerDamage(int rank)=>2-rank*.1f;
+  public static float FrostFreezeDuration(int rank)=>Mathf.Min(2.5f,.75f+.25f*Mathf.Max(0,rank));
+  public static int ArcLightningTargetCount(int rank)=>Mathf.Min(8,3+Mathf.Max(0,rank-1)/2);
+  public static float HalfLifeDefenseReduction(int rank)=>Mathf.Min(40,5*Mathf.Max(0,rank));
+  public static float QuicksandSlowPercent(int rank)=>Mathf.Min(40,4*Mathf.Max(0,rank));
+  public static float WeavingResistanceReduction(int rank)=>Mathf.Min(8,Mathf.Max(0,rank));
  }
 }

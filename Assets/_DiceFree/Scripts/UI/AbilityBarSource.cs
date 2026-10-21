@@ -67,6 +67,16 @@ namespace DiceFree.UI
             }
         }
         public int AbilityCount=>CurrentProvider?.Count??0;
+        public bool HasPurchasableUpgrade
+        {
+            get
+            {
+                var provider=CurrentProvider;
+                if(provider==null||provider.UnspentPoints<=0)return false;
+                for(int i=0;i<provider.Count;i++)if(provider.View(i,"").canUpgrade)return true;
+                return false;
+            }
+        }
         public int PageCount
         {
             get {var p=CurrentProvider;int count=p==null?0:p.Count-(p.UltimateIndex>=0&&p.UltimateIndex<p.Count?1:0);return Mathf.Max(1,Mathf.CeilToInt(count/(float)PageSize));}

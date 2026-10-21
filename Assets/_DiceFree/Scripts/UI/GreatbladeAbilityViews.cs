@@ -27,19 +27,20 @@ namespace DiceFree.UI
             if(t==null)return text;
             int mastery=skills.Rank(Kind.GreatswordMastery);
             text+=kind switch{
-                Kind.WideArc=>$"Frontal cleave: {t.ArcCoefficient(r):0.##} × STR physical damage (+ mastery/buffs).\nReach {t.arcReach:0.#}m beyond unit radii; angle {t.arcAngle+(mastery>=3?15+3*(mastery-3):0):0}°.\nWind-up {t.arcWindup:0.##}s. Connecting hits generate Momentum; capped per cast.",
+                Kind.WideArc=>$"Frontal cleave: {t.ArcCoefficient(r):0.##} × STR physical damage (+ mastery/buffs).\nReach {t.arcReach:0.#}m beyond unit radii; angle {t.arcAngle+GreatbladeProgressionRules.MasteryArcWidth(mastery):0}°.\nWind-up {t.arcWindup:0.##}s. Connecting hits generate Momentum; capped per cast.",
                 Kind.SpinDash=>$"Ground-target spinning dash, up to {t.spinRange:0.#}m.\n{t.SpinCoefficient(r):0.##} × STR physical damage (+ mastery/buffs), once per enemy along the actual route.\nPasses through enemies. Walls, objects and friendly units block movement. Generates Momentum.",
                 Kind.OverheadBreaker=>$"Single-target finisher: {t.BreakerCoefficient(r):0.##} × STR physical damage (+ mastery/buffs).\nConsumes ALL Momentum, requires {t.breakerMinimumMomentum:0}.\nEach Momentum adds 1.5% damage (100 = +150%).\nWind-up {t.breakerWindup:0.##}s; interrupted or escaped strikes do not refund.",
                 Kind.BattleCry=>$"Self offensive buff: +{t.cryDamagePercent+3*(r-1):0}% sword/skill damage for {t.cryDuration:0.#}s. No Momentum cost.",
                 Kind.GreatswordMastery=>$"+{GreatbladeProgressionRules.DamageBonusPct(r):0}% greatsword damage; +{GreatbladeProgressionRules.StrengthBonus(r):0} STR."+
-                    (r>=2?$"\nWide Arc grants +{8+2*(r-2):0}% attack speed for {3+.25f*(r-2):0.##}s.":"\nRank 2 adds brief attack speed after Wide Arc.")+
-                    (r>=3?$"\nWide Arc widens by {15+3*(r-3):0}°.":"\nRank 3 widens Wide Arc.")+
-                    (r>=4?$"\nConnecting Breaker grants {5+.5f*(r-4):0.#}% max-HP shield for 5s (provisional).":"\nRank 4 adds a small finisher shield (provisional)."),
+                    (r>=3?$"\nWide Arc grants +{GreatbladeProgressionRules.MasteryHastePercent(r):0}% attack speed for {GreatbladeProgressionRules.MasteryHasteDuration(r):0.##}s.":"\nRank 3 adds brief attack speed after Wide Arc.")+
+                    (r>=5?$"\nWide Arc widens by {GreatbladeProgressionRules.MasteryArcWidth(r):0}°.":"\nRank 5 widens Wide Arc.")+
+                    (r>=7?$"\nConnecting Breaker grants a 5s Metal shield with {GreatbladeProgressionRules.MasteryShieldCapacity(1000):0} capacity at 1,000 max HP (100 + 5% max HP).":"\nRank 7 adds a 5s Metal shield after a connecting Breaker."),
                 _=>$"Momentum gained on hits: ×{GreatbladeProgressionRules.MomentumGainFactor(r):0.##}.\nOut-of-combat decay: {t.decayPerSecond*GreatbladeProgressionRules.MomentumDecayFactor(r):0.##}/s after {t.decayDelay:0.#}s without a hit.\n100 cap; no Momentum threshold buffs."
             };
             if(!rule.passive)text+="\nCooldown "+caster.Cooldown(kind).ToString("0.#")+"s.";
             int next=rule.NextRankLevel(rank);
             if(next<int.MaxValue)text+="\nNext rank requires class level "+next+" and 1 skill point.";
+            if(skills.UnspentPoints>0)text+="\nBanked class skill points: "+skills.UnspentPoints+".";
             return text;
         }
         public static bool Activate(GreatbladeSkillProgression skills,GreatbladeSkillCaster caster,SkillTargetingController targeting,IQueuedOrders orders,int slot,bool append)

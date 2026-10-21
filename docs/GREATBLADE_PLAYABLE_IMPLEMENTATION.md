@@ -1,6 +1,6 @@
 # Greatblade playable prototype — 2026-10-14
 
-> **Skill progression design update (2026-10-19; NOT YET IMPLEMENTED):** Greatblade retains its existing skill **first-unlock levels** but must begin with **all skills rank 0 and one point at class level 1**, not four free starters. Confirmed redesigned caps: **Wide Arc 20, Spin Dash 16, Overhead Breaker 18, Battle Cry 8, Greatsword Mastery 8, Heavy Rhythm 8** (78 total). Greatsword Mastery adds the Wide Arc haste at rank **3**, wider cleave at rank **5** and a **METAL-element shield lasting 5 seconds and absorbing 100 + 5% of maximum HP** after a successful Overhead Breaker at Mastery rank **7** (every rank adds **+1 STR / +2% greatsword damage**). **New design:** the shield uses **0.8 shield HP per matching Metal damage absorbed or 1.2 shield HP per other/untyped ordinary damage absorbed** (latest global rule) and new applications **replace/refresh rather than stack**. Old gameplay code still uses a different shield threshold, element and amount until future implementation; the change is NOT shipped. Existing Greatblade saves require a **safe silent automatic one-time skill reset/refund**, preserving all unrelated progress. Skillpoints stop accumulating at the class's total rank cap, and the point reminder only appears when a legal rank is purchasable. The current *four free rank-1 skills, periodic upgrade gates and 31-rank total* below are as-built implementation facts, not future rules. See [Greatblade/Mage rank audit](TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md). No migration or combat changes have been made.
+> **Implementation update (2026-10-21):** the approved rank-zero point budget, weighted rank gates/caps, rank-3/5/7 Greatsword Mastery milestones, Metal shield and one-time legacy Greatblade/Mage reset/refund are implemented locally on `integration/world1-foundation`. The current Editor is blocked at a scene-backup recovery modal, so compile and runtime validation have not yet been obtained. The detailed rank audit records exact gates and formulas; do not treat this update as Unity-verified.
 
 
 Greatblade is now a playable Tier II manifestation, advanced from a level-30 Physically Blessed Novice after the retired swordswoman's normal Slime Boss training quest. Accept the quest, defeat the normal boss, and return to her to complete training. See GREATBLADE_ADVANCEMENT_QUEST.md. The parent manifestation remains intact, and the new Greatblade starts at class level 1. Development Room also offers direct Greatblade selection through the same advancement graph.
@@ -11,14 +11,14 @@ This implements the approved kit in GREATBLADE_PROTOTYPE_DESIGN_V03.md. Exact ba
 
 | Slot | Ability | Starter/unlock | Rank gates |
 |---|---|---|---|
-| 1 | Wide Arc | Free rank 1 | 1, 6, 12, 18, 24, 30 |
-| 2 | Spin Dash | Free rank 1 | 1, 9, 18, 27 |
-| 3 | Overhead Breaker | Learn at level 6 | 6, 12, 18, 24, 30 |
-| 4 | Battle Cry | Learn at level 18 | 18, 24, 30 |
-| 5 | Greatsword Mastery | Free rank 1, passive | 1, 6, 12, 18, 24, 30 |
-| 6 | Heavy Rhythm | Free rank 1, passive | 1, 5, 10, 15, 20, 25, 30 |
+| 1 | Wide Arc | Rank 0; first rank at level 1; cap 20 | Every level 1–20 |
+| 2 | Spin Dash | Rank 0; first rank at level 1; cap 16 | 1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76 |
+| 3 | Overhead Breaker | Rank 0; first rank at level 6; cap 18 | Every level 6–23 |
+| 4 | Battle Cry | Rank 0; first rank at level 18; cap 8 | 18, 26, 34, 42, 50, 58, 66, 74 |
+| 5 | Greatsword Mastery | Rank 0; first rank at level 1; cap 8 | 1, 11, 21, 31, 41, 51, 61, 71 |
+| 6 | Heavy Rhythm | Rank 0; first rank at level 1; cap 8 | 1, 12, 23, 34, 45, 56, 67, 78 |
 
-Four free starting ranks; one allocatable point for each level after 1. Additional ranks and later abilities require both a point and their own level gate. Use the action-bar plus button; keys 1–4 use the existing rebindable skill actions. Slots 7–8 remain empty; slot 9 remains reserved for Tier IV+ ultimates. Shared Attack, Interact and Return retain slots 10–12.
+Every skill starts at rank 0. Class level 1 grants one point; each level grants one until the 78-rank class budget is exhausted. A purchase requires both an unspent point and the skill's next-rank level gate. Use the action-bar plus button; keys 1–4 use the existing rebindable skill actions. Slots 7–8 remain empty; slot 9 remains reserved for Tier IV+ ultimates. Shared Attack, Interact and Return retain slots 10–12.
 
 The generic HUD now draws abilities by their actual slot data rather than reserving slots 6–9 unconditionally. Six distinct original procedural icon sigils and live rank/cooldown/tooltips are provided.
 
@@ -40,7 +40,7 @@ Momentum cap 100, starts at zero, resets on manifestation load/death. Successful
 
 Heavy Rhythm gain factor: 1 + 0.08 × rank. Decay begins after five seconds without a connecting hit, while out of combat and not committing a class strike; base decay 8/s × max(0.3, 1 − 0.07 × rank). No threshold buffs or hit-chain resets.
 
-Greatsword Mastery adds 2% sword damage and 1 STR per rank. Rank 2 adds Wide Arc haste (+8%, +2 points per later rank, 3s + 0.25s per later rank). Rank 3 adds 15 degrees of cone width, +3 per later rank. Rank 4 adds a successful Breaker shield of 5% maximum HP for five seconds, +0.5 percentage points per later rank. **Shield versus heal remains an open design choice; this is the provisional shield implementation.**
+Greatsword Mastery adds +2% greatsword damage and +1 STR per rank. Rank 3 unlocks Wide Arc haste (8%, +2 percentage points per further rank; 3s, +0.25s per further rank); rank 5 unlocks wider Wide Arc (15 degrees, +3 degrees per further rank); rank 7 unlocks a successful Overhead Breaker Metal shield with capacity `100 + 5% maximum HP` for 5 seconds. Elemental absorption consumes 0.8 shield HP per matching Metal damage prevented, or 1.2 for other/untyped ordinary damage; same-source recasts refresh/replace the shield. These are implemented in source but await Unity gameplay regression.
 
 Temporary shield absorption is recorded separately from HP damage. Class buffs, haste, shield, cooldowns and committed movement are cleaned up on manifestation load. Greatblade occupies both hands: offhand equipment is returned to the child bag and cannot be equipped; the parent equipment snapshot is preserved.
 

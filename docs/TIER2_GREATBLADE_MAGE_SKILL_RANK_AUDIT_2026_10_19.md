@@ -1,7 +1,7 @@
 # DiceFree Tier II — Greatblade and Mage skill-rank audit
 
 **Date:** 2026-10-19  
-**Status:** DESIGN DOCUMENTATION — Rounds 1–6 recorded (2026-10-19). Rank progression, Greatblade Metal shield, Mage provisional effect ceilings, and quiet skill-point UX agreed. **Do not implement in this chat.** User will explicitly instruct their separate working chat to reread these docs and implement **after remote-access capability is restored**. No handoff task or Unity changes yet.  
+**Status update (2026-10-21):** Approved Greatblade/Mage rank-zero progression, exact caps/gates, Greatblade mastery milestones and Metal shield, Mage ceilings, actionable skill-point UX, and one-time legacy reset/refund have been implemented locally on `integration/world1-foundation`. The focused Editor validator and affected gameplay harness assertions have been updated. **Unity compile/runtime verification is pending** because the connected Editor is blocked by a scene-backup recovery modal. The original audit below remains the design and baseline evidence; it is not evidence the current implementation has passed Unity.
 **Branch inspected:** `integration/world1-foundation`  
 **Companion design:** [Priest Tier II interview](classes/PRIEST_TIER2_DESIGN.md)  
 **Global authority:** [Class Progression: universal zero-rank rule](CLASS_PROGRESSION.md#universal-rank-zero-and-ordinary-basic-attack-rules-user-correction-2026-10-18)

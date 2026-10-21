@@ -52,7 +52,7 @@ namespace DiceFree.UI
                     if(component is IQueuedOrders queue){queuedOrders=queue;break;}
             Rect panel = Bounds;
             DrawPanel(panel);
-            if(source.UnspentPoints>0)
+            if(source.HasPurchasableUpgrade)
             {
                 Rect label=new(panel.x+12f,panel.y-23f,panel.width-24f,21f);
                 HudChrome.Fill(label,new Color(.10f,.23f,.15f,.96f));
@@ -66,7 +66,7 @@ namespace DiceFree.UI
                     });
             }
             if(queuedOrders!=null && queuedOrders.PendingOrders>0)
-                GUI.Label(new Rect(panel.x+12,source.UnspentPoints>0?panel.y-45:panel.y-21,panel.width-20,20),
+                GUI.Label(new Rect(panel.x+12,source.HasPurchasableUpgrade?panel.y-45:panel.y-21,panel.width-20,20),
                     "Queued orders: "+queuedOrders.PendingOrders+
                     "   (Shift+click to append; Stop to clear)");
             if (source.PageCount > 1)

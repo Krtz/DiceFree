@@ -48,11 +48,11 @@ namespace DiceFree.Combat
    switch(kind){
     case Kind.EmberBolt:StartCoroutine(Ember(target,rank));break;
     case Kind.FrostSnare:
-     Hit(target,kind,rank);if(target.Alive)target.Effects?.TryApplyStun(.75f+rank*.25f,false);
+     Hit(target,kind,rank);if(target.Alive)target.Effects?.TryApplyStun(MageProgressionRules.FrostFreezeDuration(rank),false);
      sessionVfx.Add(MageSpellVfx.Frost(target.transform.position));break;
     case Kind.ArcLightning:
      var seen=new HashSet<CombatActor>();var current=target;Vector3 from=transform.position+Vector3.up;
-     for(int i=0;i<3+(rank-1)/2&&current!=null;i++){
+     for(int i=0;i<MageProgressionRules.ArcLightningTargetCount(rank)&&current!=null;i++){
       seen.Add(current);sessionVfx.Add(MageSpellVfx.Line(from,current.transform.position+Vector3.up,new Color(.5f,.7f,1)));
       Hit(current,kind,rank,Mathf.Pow(.8f,i));from=current.transform.position+Vector3.up;
       var previous=current;
@@ -60,7 +60,7 @@ namespace DiceFree.Combat
      }break;
     case Kind.HalfLife:
      var aff=target.GetComponent<MageAfflictions>()??target.gameObject.AddComponent<MageAfflictions>();
-     string id=EffectId("half-life");aff.ApplyDefense(id,rank*5,6+rank*2);ownedEffects.Add((aff,id));
+     string id=EffectId("half-life");aff.ApplyDefense(id,MageProgressionRules.HalfLifeDefenseReduction(rank),6+rank*2);ownedEffects.Add((aff,id));
      string targetKey=target.GetEntityId().ToString();
      if(dotVisuals.Remove(targetKey,out var oldVisual)&&oldVisual!=null)Destroy(oldVisual);
      var radiation=MageSpellVfx.Radiation(target,6+rank*2);dotVisuals[targetKey]=radiation;sessionVfx.Add(radiation);
@@ -94,7 +94,7 @@ namespace DiceFree.Combat
   void RefreshAura(){
    if(aura==null)return;
    if(!isActiveAndEnabled||tuning==null||!skills.ActiveForCurrentClass){aura.Clear();return;}
-   aura.Configure(tuning.attacks.Select(a=>a.element).ToArray(),skills.Rank(Kind.ElementalWeaving)*.01f,tuning.auraRadius);
+   aura.Configure(tuning.attacks.Select(a=>a.element).ToArray(),MageProgressionRules.WeavingResistanceReduction(skills.Rank(Kind.ElementalWeaving))*.01f,tuning.auraRadius);
   }
   void SyncWeaving()=>actor.Stats.SetBasicAttackDamagePercentContribution("mage.weaving",WeavingStacks*5);
   string EffectId(string name)=>"mage."+name+":"+actor.GetEntityId();
@@ -127,7 +127,7 @@ namespace DiceFree.Combat
    for(int i=0;i<4+rank;i++){
     if(!actor.Alive||!skills.ActiveForCurrentClass)yield break;
     foreach(var t in CombatActor.All.Where(t=>actor.IsHostileTo(t)&&Vector2.Distance(new Vector2(t.transform.position.x,t.transform.position.z),new Vector2(point.x,point.z))<=tuning.quicksandRadius+t.Radius).ToArray()){
-     Hit(t,Kind.Quicksand,rank);if(t.Alive)t.Effects?.ApplyMovementSpeedDebuff(EffectId("quicksand"),40+rank*3,1.2f);
+     Hit(t,Kind.Quicksand,rank);if(t.Alive)t.Effects?.ApplyMovementSpeedDebuff(EffectId("quicksand"),MageProgressionRules.QuicksandSlowPercent(rank),1.2f);
     }yield return new WaitForSeconds(1);
    }
   }

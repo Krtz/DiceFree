@@ -11,8 +11,9 @@ namespace DiceFree.Persistence
     }
     public static class SaveMigrations
     {
-        public const int CurrentSchema = 6;
-        public const int ManifestationVersion = 6;
+        public const int CurrentSchema = 7;
+        public const int ManifestationVersion = 7;
+        public const int ClassSkillRankMigrationVersion = 1;
         [Serializable] private sealed class ManifestationV1
         {
             public string classId;
@@ -58,7 +59,7 @@ namespace DiceFree.Persistence
                 foreach (var section in result.sections)
                 {
                     if (!section.id.StartsWith("manifestation:", StringComparison.Ordinal)) continue;
-                    if (section.version >= 2 && section.version <= 5)
+                    if (section.version >= 2 && section.version <= 6)
                     {
                         var previous = JsonUtility.FromJson<ManifestationSave>(section.json);
                         if (previous == null || section.id != "manifestation:" + previous.classId || previous.level < 1 || previous.xp < 0 || previous.quests == null)
@@ -77,7 +78,8 @@ namespace DiceFree.Persistence
                                 quest.alternatives = Array.Empty<ObjectiveCount>();
                             }
                         }
-                        previous.xp = RebaseLegacyXp(previous.level, previous.xp);
+                        if (section.version < 6) previous.xp = RebaseLegacyXp(previous.level, previous.xp);
+                        ApplyClassSkillRankMigration(previous, section.version);
                         section.json = JsonUtility.ToJson(previous); section.version = ManifestationVersion;
                         continue;
                     }
@@ -90,6 +92,7 @@ namespace DiceFree.Persistence
                         classId = old.classId, level = old.level, xp = RebaseLegacyXp(old.level, old.xp), anchorId = old.anchorId, quests = old.quests,
                         classSkills = Array.Empty<SkillRankState>()
                     };
+                    ApplyClassSkillRankMigration(current, section.version);
                     foreach (var quest in current.quests)
                     {
                         if (quest == null) throw new SaveMigrationException("Null v1 quest record.");
@@ -103,7 +106,38 @@ namespace DiceFree.Persistence
                 return result;
             }
             catch (SaveMigrationException) { throw; }
-            catch (Exception error) { throw new SaveMigrationException("Echo migration to v6 failed; original preserved.", error); }
+            catch (Exception error) { throw new SaveMigrationException("Echo migration to v7 failed; original preserved.", error); }
         }
+
+        public static bool RequiresClassSkillRankReset(EchoSave source)
+        {
+            if (source?.sections == null) return false;
+            foreach (var section in source.sections)
+            {
+                if (section == null || section.version > 6 ||
+                    !section.id.StartsWith("manifestation:", StringComparison.Ordinal)) continue;
+                var state = JsonUtility.FromJson<ManifestationSave>(section.json);
+                if (state != null && IsRankResetClass(state.classId) &&
+                    state.classSkillRankMigrationVersion < ClassSkillRankMigrationVersion)
+                    return true;
+            }
+            return false;
+        }
+
+        private static void ApplyClassSkillRankMigration(ManifestationSave state, int previousVersion)
+        {
+            if (state == null || previousVersion > 6 || !IsRankResetClass(state.classId) ||
+                state.classSkillRankMigrationVersion >= ClassSkillRankMigrationVersion) return;
+
+            string prefix = state.classId == "class.greatblade" ? "skill.greatblade." : "skill.mage.";
+            foreach (var rank in state.classSkills ?? Array.Empty<SkillRankState>())
+                if (rank != null && rank.stableId != null && rank.stableId.StartsWith(prefix, StringComparison.Ordinal))
+                    rank.rank = 0;
+            state.classSkills ??= Array.Empty<SkillRankState>();
+            state.classSkillRankMigrationVersion = ClassSkillRankMigrationVersion;
+        }
+
+        private static bool IsRankResetClass(string classId) =>
+            classId == "class.greatblade" || classId == "class.mage";
     }
 }

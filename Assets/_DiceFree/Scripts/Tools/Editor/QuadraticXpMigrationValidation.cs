@@ -78,12 +78,12 @@ namespace DiceFree.EditorTools
             }
             older.sections.Add(new SaveSection
             {
-                id="echo:future-feature",version=7,json="{\"keep\":true}"
+                id="echo:future-feature",version=8,json="{\"keep\":true}"
             });
 
             string originalJson=JsonUtility.ToJson(older);
             var migrated=SaveMigrations.Upgrade(older);
-            Check(migrated.schemaVersion==6 &&
+            Check(migrated.schemaVersion==7 &&
                 JsonUtility.ToJson(older)==originalJson,
                 "Migration mutated original source or failed version bump.");
             foreach(var old in older.sections.Where(x=>
@@ -93,7 +93,7 @@ namespace DiceFree.EditorTools
                 var before=JsonUtility.FromJson<ManifestationSave>(old.json);
                 var after=JsonUtility.FromJson<ManifestationSave>(updated.json);
                 int expected=SaveMigrations.RebaseLegacyXp(before.level,before.xp);
-                Check(updated.version==6 && after.level==before.level &&
+                Check(updated.version==7 && after.level==before.level &&
                     after.xp==expected && after.gold==before.gold &&
                     after.classId==before.classId,
                     "Migration altered saved character identity, level, money or XP fraction.");
@@ -107,7 +107,7 @@ namespace DiceFree.EditorTools
                 }
             }
             var future=migrated.sections.Single(x=>x.id=="echo:future-feature");
-            Check(future.version==7 && future.json=="{\"keep\":true}",
+            Check(future.version==8 && future.json=="{\"keep\":true}",
                 "Unknown Echo-wide save data must remain byte-for-byte opaque.");
             Check(JsonUtility.ToJson(SaveMigrations.Upgrade(migrated))==
                     JsonUtility.ToJson(migrated),
@@ -134,9 +134,9 @@ namespace DiceFree.EditorTools
             foreach(var monster in monsters.OrderBy(x=>x.stableId))
                 Debug.Log("DICEFREE_XP_ENEMY_AUDIT "+monster.stableId+
                     " killXp="+monster.experienceReward);
-            Debug.Log("DICEFREE_QUADRATIC_XP_MIGRATION_OK: coefficient 3, levels 1-200, schema v6, four class save states, opaque sections, audited rewards");
+            Debug.Log("DICEFREE_QUADRATIC_XP_MIGRATION_OK: coefficient 3, levels 1-200, schema v7, four class save states, opaque sections, audited rewards");
             return new{success=true,formula="30 + 3*(level-1)^2",
-                schema=6,manifestationsMigrated=4,questDefinitions=quests.Length,
+                schema=7,manifestationsMigrated=4,questDefinitions=quests.Length,
                 enemyDefinitions=monsters.Length};
         }
 

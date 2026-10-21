@@ -107,7 +107,8 @@ namespace DiceFree.EditorTools
             Need(!equipment.Equip(childOffhand.instanceId,DiceFree.Items.EquipmentSlot.OffHand),"Greatblade accepted an offhand.");
             foreach(var rule in GreatbladeProgressionRules.Skills)
                 Need(skills.Rank(rule.kind)==GreatbladeSkillProgression.StarterRank(rule.kind),"Free starter ranks or locked abilities incorrect.");
-            Need(skills.UnspentPoints==0&&resources.Has(GreatbladeSkillCaster.MomentumId)&&caster.Momentum==0,"Starter point economy/resource initialization.");
+            Need(skills.UnspentPoints==1&&resources.Has(GreatbladeSkillCaster.MomentumId)&&caster.Momentum==0,"Rank-zero level-1 point/resource initialization.");
+            Need(skills.Spend(Kind.WideArc)&&skills.UnspentPoints==0,"Could not spend the level-1 point on Wide Arc.");
             Need(Enumerable.Range(0,6).All(i=>bar.View(i).Exists)&&bar.View(4).passive&&bar.View(5).passive&&!bar.View(8).Exists,"Six mixed skill slots / Tier IV ultimate reservation.");
             Need(!skills.Spend(Kind.OverheadBreaker)&&!caster.CanPrepare(Kind.OverheadBreaker),"Breaker incorrectly usable at level 1.");
             Need(player.GetComponent<ClassPresentationSwitcher>().ActiveVisualRoot?.name=="GreatbladePresentation","Playable model did not activate.");
@@ -132,6 +133,7 @@ namespace DiceFree.EditorTools
             until=Time.time+3;while(caster.Busy&&Time.time<until)yield return null;
             Need(caster.LastCastHits==0&&caster.Momentum==0,"Misses must not generate Momentum.");
             player.Effects.ClearTransient();
+            xp.RestoreState(2,0);Need(skills.Spend(Kind.SpinDash),"Spin Dash's level-1 rank should be available at level 2 with a point.");
             Phase("collision-safe Spin Dash");
             caster.ResetForManifestationLoad();
             Need(player.Motor.Teleport(new Vector3(6,0,-10)),"Spin start placement.");
@@ -154,7 +156,7 @@ namespace DiceFree.EditorTools
             Phase("rank gates, finisher, mastery and cry");
             xp.RestoreState(5,0);Need(!skills.Spend(Kind.OverheadBreaker),"Breaker learned before 6.");
             xp.RestoreState(6,0);Need(skills.Spend(Kind.OverheadBreaker)&&skills.Spend(Kind.GreatswordMastery),"Level 6 skills unavailable.");
-            Need(!skills.Spend(Kind.GreatswordMastery),"Mastery rank 3 learned before level 12.");
+            Need(!skills.Spend(Kind.GreatswordMastery),"Mastery rank 2 learned before level 11.");
             Need(!caster.CastOverheadBreaker(targets[0]),"Finisher ignored Momentum requirement.");
             Need(player.Motor.Teleport(targets[0].transform.position-Vector3.forward*(player.Radius+targets[0].Radius+.2f)),"Finisher placement within melee reach after enemy-pass dash.");
             resources.Restore(GreatbladeSkillCaster.MomentumId,100);
@@ -163,15 +165,29 @@ namespace DiceFree.EditorTools
             Need(caster.Momentum==0&&caster.LastMomentumSpent==100,"Finisher must consume ALL Momentum.");
             until=Time.time+3;while(caster.Busy&&Time.time<until)yield return null;
             Need(caster.LastCastHits==1&&targets[0].Health.Current<victimHp,"Finisher did not connect.");
-            xp.RestoreState(18,0);
-            Need(skills.Spend(Kind.GreatswordMastery)&&skills.Spend(Kind.GreatswordMastery)&&skills.Spend(Kind.BattleCry),"Mastery/cry gated ranks.");
+            Need(player.Health.TemporaryShield==0,"Mastery shield unlocked before rank 7.");
+            xp.RestoreState(71,0);
+            skills.RestoreState(new[] {
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.WideArc),1),
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.SpinDash),1),
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.OverheadBreaker),1),
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.BattleCry),1),
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.GreatswordMastery),7),
+                new SkillRankState(GreatbladeSkillProgression.Id(Kind.HeavyRhythm),1)
+            });
             caster.ResetForManifestationLoad();resources.Restore(GreatbladeSkillCaster.MomentumId,100);
             Need(caster.CastOverheadBreaker(targets[0]),caster.Feedback);
             until=Time.time+3;while(caster.Busy&&Time.time<until)yield return null;
-            Need(Mathf.Abs(player.Health.TemporaryShield-player.Health.Maximum*.05f)<.1f,"Rank-4 finisher shield missing.");
-            player.Health.Invulnerable=false;float hp=player.Health.Current;
-            var shielded=player.Health.ApplyPacket(targets[0],new DamageResult{mitigated=5,channel=DamageChannel.Physical});
-            Need(shielded.absorbed==5&&shielded.applied==0&&player.Health.Current==hp,"Shield absorption damaged HP.");
+            Need(Mathf.Abs(player.Health.TemporaryShield-GreatbladeProgressionRules.MasteryShieldCapacity(player.Health.Maximum))<.1f,"Rank-7 Metal finisher shield missing.");
+            player.Health.Invulnerable=false;float hp=player.Health.Current;float capacity=player.Health.TemporaryShield;
+            var metal=ScriptableObject.CreateInstance<ElementDefinition>();metal.stableId="element.metal";
+            var otherElement=ScriptableObject.CreateInstance<ElementDefinition>();otherElement.stableId="element.fire";
+            var matched=player.Health.ApplyPacket(targets[0],new DamageResult{mitigated=10,channel=DamageChannel.Physical,element=metal});
+            Need(matched.absorbed==10&&matched.applied==0&&player.Health.Current==hp&&Mathf.Abs(player.Health.TemporaryShield-(capacity-8))<.1f,"Matching Metal shield efficiency.");
+            float afterMatched=player.Health.TemporaryShield;
+            var unmatched=player.Health.ApplyPacket(targets[0],new DamageResult{mitigated=10,channel=DamageChannel.Physical,element=otherElement});
+            Need(unmatched.absorbed==10&&unmatched.applied==0&&Mathf.Abs(player.Health.TemporaryShield-(afterMatched-12))<.1f,"Nonmatching Metal shield efficiency.");
+            Object.Destroy(metal);Object.Destroy(otherElement);
             player.Health.Invulnerable=true;
             float baseDamage=basic.DamageRange.x;
             Need(caster.CastBattleCry()&&basic.DamageRange.x>baseDamage,"Battle Cry did not increase actual damage.");
@@ -193,7 +209,7 @@ namespace DiceFree.EditorTools
             Need(equipment.IsEquipped(offhand.instanceId),"Parent equipment snapshot was changed by child advancement.");
             Need(advance.TrySwitch(GreatbladeProgressionRules.ClassId),advance.Feedback);
             yield return null;
-            Need(player.Stats.Level==18&&saved.All(s=>skills.CaptureState().Any(v=>v.stableId==s.stableId&&v.rank==s.rank)),"Saved Greatblade level/ranks did not roundtrip.");
+            Need(player.Stats.Level==71&&saved.All(s=>skills.CaptureState().Any(v=>v.stableId==s.stableId&&v.rank==s.rank)),"Saved Greatblade level/ranks did not roundtrip.");
             Need(caster.Momentum==0&&caster.CooldownRemaining(Kind.WideArc)==0,"Transient resource/cooldown persisted.");
             Need(!skills.CanRestore(new[]{new SkillRankState(GreatbladeSkillProgression.Id(Kind.OverheadBreaker),1)},1),"Invalid saved unlock passed validation.");
             var root=new LocalEchoStore(Path.GetDirectoryName(save.SavePath)).Load();

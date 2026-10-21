@@ -33,6 +33,7 @@ namespace DiceFree.Persistence
         public ItemInstance[] inventory = Array.Empty<ItemInstance>();
         public EquippedItem[] equipment = Array.Empty<EquippedItem>();
         public SkillRankState[] classSkills = Array.Empty<SkillRankState>();
+        public int classSkillRankMigrationVersion;
         public long gold;
     }
     [Serializable] internal sealed class SaveEnvelope

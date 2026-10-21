@@ -20,10 +20,10 @@ namespace DiceFree.Skills
         public bool ActiveForCurrentClass=>active;
         public int Level=>xp?.Level??1;
         public int SpentPoints=>MageProgressionRules.Skills.Sum(r=>Mathf.Max(0,Rank(r.kind)-StarterRank(r.kind)));
-        public int UnspentPoints=>active?Mathf.Max(0,Level-1-SpentPoints):0;
+        public int UnspentPoints=>active?Mathf.Max(0,MageProgressionRules.AllocationBudget(Level)-SpentPoints):0;
         public event Action Changed;
         public static string Id(Kind kind)=>"skill.mage."+kind.ToString().ToLowerInvariant();
-        public static int StarterRank(Kind kind)=>MageProgressionRules.For(kind).rankLevels[0]==1?1:0;
+        public static int StarterRank(Kind kind)=>0;
         void Awake()
         {
             xp=GetComponent<ExperienceProgression>();stats=GetComponent<ActorStats>();
@@ -51,7 +51,7 @@ namespace DiceFree.Skills
                 if(value.rank>rule.AvailableRank(level))return false;
                 spent+=Mathf.Max(0,value.rank-StarterRank(rule.kind));
             }
-            return level>=1&&spent<=level-1;
+            return level>=1&&spent<=MageProgressionRules.AllocationBudget(level);
         }
         public void RestoreState(SkillRankState[] values)
         {
@@ -59,7 +59,7 @@ namespace DiceFree.Skills
             ranks.Clear();
             foreach(var value in values??Array.Empty<SkillRankState>())
                 foreach(var rule in MageProgressionRules.Skills)
-                    if(Id(rule.kind)==value.stableId)ranks[rule.kind]=Mathf.Max(StarterRank(rule.kind),value.rank);
+                    if(Id(rule.kind)==value.stableId)ranks[rule.kind]=value.rank;
             ApplyPassive();Changed?.Invoke();
         }
         public SkillRankState[] CaptureState()=>!active?Array.Empty<SkillRankState>():
