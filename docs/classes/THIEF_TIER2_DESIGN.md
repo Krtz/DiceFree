@@ -1,7 +1,7 @@
 # DiceFree — Thief Tier II — design interview
 
 **Created:** 2026-10-20  
-**Status:** NORMAL WORLD 1 TIER II THIEF — **ROUND 1 USER DECISIONS CONFIRMED (2026-10-21)**. Dual one-handed daggers, Mana only, short stealth with bonus damage on its first breaking normal autoattack, and mixed fast-assassin/agile-duelist/dirty-tricks fantasy approved. Appearance asset selection is DEFERRED to separate working chat/Codex after reviewing user-downloaded assets; class mentor/quest design deferred until AFTER major city. Exact combat skills, stealth rules, damage values and dual-attack cadence OPEN. **DESIGN ONLY; NO UNITY C#/SCENE/ASSET/BUILD/SAVE CHANGES.**  
+**Status:** NORMAL WORLD 1 TIER II THIEF — **ROUNDS 1–2 USER DECISIONS CONFIRMED (2026-10-21)**. AGI-only offensive scaling and Mana-only resource; two stat-bearing one-handed daggers, **one basic attack event with alternating dagger animations**; Stealth baseline about4 seconds growing to8 seconds at max skill rank, first autoattack breaking stealth receives a damage MULTIPLIER, no additional behind-target bonus. User named Envenom, a dedicated 'crit' skill, Fan of Knives, Smoke Bomb (area DoT + missed enemy attacks), and a passive focused on critical-hit chance with possible bonus AGI, yielding five active + one passive WORKING kit. Exact spell numbers, critical action rules, smoke mechanics and passive AGI size are OPEN. Appearance to be decided by separate working chat/Codex reviewing existing user-downloaded assets; advancement quest AFTER major city. **DESIGN ONLY; NO UNITY C#/SCENE/ASSET/BUILD/SAVE CHANGES.**  
 **Branch:** `integration/world1-foundation`  
 **Links:** [Class Progression](../CLASS_PROGRESSION.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Tier II Core Classes v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md), [Class Requirements](../CLASS_REQUIREMENTS_AND_DISCOVERY.md), [Ranger Tier II](RANGER_TIER2_DESIGN.md), [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md).
 
@@ -17,9 +17,9 @@ Exactly eight ordinary Tier II classes in World 1:
 
 **Already confirmed:**
 - Thief is one of the **four standard Tier II Physically Blessed Novice branches**, eligible for advancement when the parent reaches **Tier I class level30**; a **new child manifestation at Tier II class level1**, not overwriting the parent. Keep the shared Echo class/manifestation state and ability purchasing rules.
-- Physically Blessed is STR/AGI melee generalist with Mana. **USER-APPROVED THIEF-004: Thief uses MANA ONLY**, no new Energy, Stamina, Guile or Combo Point class resource. Attribute emphasis (likely AGI) and actual skill scaling remain open.
+- Physically Blessed is a broad STR/AGI novice, but **THIEF-010 USER CONFIRMED AGI-ONLY SCALING for Thief's offensive class mechanics**; no STR contribution to Thief skill coefficients, though STR's universal defensive role remains per global stats. **THIEF-004: Mana ONLY**, no new Energy, Stamina, Guile or Combo Point class resource. Exact AGI damage coefficients OPEN.
 - Shared combat framework supports explicit per-class attack styles, hand-slot equipment, DoT/status tags, positional or dodge mechanics, conditional critical hits, and independent owner effects; **none are automatically unlocked on Thief**.
-- The original `docs/TIER2_CORE_CLASSES_DESIGN_V02.md` suggested Rogue daggers. **USER-APPROVED THIEF-002 NOW CONFIRMS TWO ONE-HANDED DAGGERS equipped in mainhand+offhand**. All presently implemented equipment (not just the Thief's) is **ordinary stat-bearing gear/stat sticks for now**, with unique effects or Intrinsics on future authored items rather than automatically adding item procs now. Dual-wield attack animation/attack sequencing and offhand independent hit events were NOT chosen by user and remain OPEN.
+- The original `docs/TIER2_CORE_CLASSES_DESIGN_V02.md` suggested Rogue daggers. **THIEF-002 confirms TWO ONE-HANDED DAGGERS equipped in mainhand+offhand**. Items remain ordinary stat-bearing gear until authored effects/Intrinsics are introduced later. **THIEF-008 now confirms exactly ONE basic-attack event with ALTERNATING mainhand/offhand stab animations**, not independent offhand strikes, separate attack timers or duplicate OnHit effects. Both equipped daggers contribute their standard item stats.
 - For recent Tier II classes, weighted class skill caps/gates target **roughly 80 purchasable ranks through Tier II level80**, with skills beginning rank0 and 1 point earned at level1 and per further level, but Thief's exact skill roster, rank caps and availability gates are NOT YET AUTHORED.
 
 **DESIGNER SUGGESTIONS, NOT USER DECISIONS:**
@@ -78,6 +78,10 @@ Thief (standard Tier II; mixed class)
 
 **USER says all equipment pieces are presently stat sticks**, including both dagger items. **Later specially authored item drops can gain UNIQUE EFFECTS/INTRINSICS**, which may modify skills for any class; no such specific effects are approved by this decision. Different item stats, offhand slot and gear restrictions are still meaningful; do not imply dual wielding automatically has two independent basic attack timers or two OnHit triggers. Weapon animation, base attack interval and dual-wield feel are character combat design, separate from item mechanics.
 
+### Earlier brainstorming (superseded or still optional)
+
+**Round2 supersedes suggested Rapid Stab/Quickstep/Pocket Sand as automatic choices:** user instead explicitly named **Stealth, Envenom, a crit ability, Fan of Knives, and Smoke Bomb**, plus a crit-focused passive. Do NOT add Rapid Stab/Quickstep/Pocket Sand as seventh+ abilities. No passive evasion/attack-speed bonus has been approved for Tier II. User preferred AGI ONLY over AGI+STR and multiplier over flat stealth-opening damage/automatic guaranteed crit. The detailed kit follows; remaining free-form seeds below are historical ideas only.
+
 ### Initial unapproved gameplay seeds for next discussion
 
 - A short Stealth ability might become a brief movement/reposition window and empower its next melee basic attack, but exact invisibility/detection/combat permissions are undecided.
@@ -85,17 +89,40 @@ Thief (standard Tier II; mixed class)
 - Passive AGI, basic attack speed, evasion or positional synergy remain ideas, not approved bonuses.
 - The class could eventually have around six active/passive skill ranks and ~80 purchaseable ranks for Tier II level80, **but its skill roster and max ranks must be designed before choosing an exact schedule**.
 
-## Round 2 — EXACTLY FIVE questions (AWAITING USER)
+## Round 2 — five USER decisions recorded 2026-10-21
 
-**THIEF-006 — Stealth timing and combat use:** How short should stealth last (for example **3–5 seconds**), and should Thief be able to activate it **while already fighting**, rather than only out of combat? I'd recommend combat usability for bosses and solo play, with an appropriate cooldown.
+- **THIEF-006 CONFIRMED:** short Stealth has **~4-second duration at rank1 and ~8-second duration at the eventual skill cap**. User said "Start at line 4 seconds" (interpreted as "like 4 seconds") and "be like 8 seconds at max rank", so these are initial targets, not exact interpolation/gate schedule. It is not yet confirmed whether usable IN COMBAT, whether incoming damage cancels it, whether hostile AI drops target, exact cooldown/Mana, or what level/rank reaches max.
+- **THIEF-007 CONFIRMED:** bonus on the FIRST **normal/basic autoattack which breaks stealth** must be a **DAMAGE MULTIPLIER**, not a flat number and NOT a guaranteed critical hit just from stealth. No extra rear-position/backstab bonus at Tier II; backstab reward belongs to later classes. The question offered `+50%` only as an example; user selected **option B** but did NOT approve an exact 1.5× coefficient.
+- **THIEF-008 CONFIRMED:** two stat-only one-handed daggers equipped in mainhand + offhand. **ONE basic attack EVENT total with an alternating RIGHT/LEFT dagger stab animation** (option A). No independent offhand attacks, timers, second critical roll, double status procs or separate OnHit event per normal basic attack unless some future unique item explicitly authors a different rule.
+- **THIEF-009 CONFIRMED USER-CHOSEN ABILITY NAMES/ROSTER:** **STEALTH**, **ENVENOM** (poison idea, exact application/damage/channel/effect not specified), **"A CRIT"** (a dedicated critical-hit skill, whether instant guaranteed critical attack or short buff remains OPEN), **FAN OF KNIVES** (area knife attack, range/hits/projectiles/damage OPEN), and **SMOKE BOMB** (creates damaging AREA DAMAGE-OVER-TIME and applies **MISS CHANCE TO ENEMIES INSIDE THE SMOKE**, exact damage type/radius/duration/miss penalty and effect application OPEN). No Rapid Stab, Quickstep or Pocket Sand was selected. Skills need not all start at class level1; exact unlock levels TBD.
+- **THIEF-010 CONFIRMED / PARTLY OPEN:** all **Thief offensive class damage scaling = AGI ONLY, with NO STR component**. First passive's main identity is **critical-hit chance** (user chose **B**). User said **"maybe bonus agi"**, so bonus AGI is a **desired possibility NOT fixed as a numerical/guaranteed passive rule**. Passive effect eligibility (basic attacks only vs Thief skills), critical multiplier, rank growth and whether/how much AGI it grants are OPEN. DiceFree global crit baseline is **0% unless an authored explicit crit rule opts in**: see `docs/STATS_AND_DAMAGE.md`.
 
-**THIEF-007 — Stealth-breaking basic attack:** Should the FIRST normal dagger autoattack breaking stealth add **extra flat Physical damage**, multiply that basic attack's damage (for example **+50%**), or be a **guaranteed crit**? Also, should attacking from behind add anything beyond the stealth bonus, or should that be reserved for a future Assassin?
+## Current Thief Tier II kit — FIVE active abilities + ONE passive (working names)
 
-**THIEF-008 — Dual-dagger basic-attack behavior:** As both equipped dagger ITEMS are stat sticks, do you want Thief's basic attack to be **one attack event with an alternating right/left stab animation**, or **two separate quick strikes/attack events** with their own timings? Both can show dual daggers without custom item procs; the former is simpler to balance.
+| Skill | User-approved concept | Precise mechanics still OPEN |
+| --- | --- | --- |
+| **Stealth** | 4s initial target → 8s at max, and its breaking FIRST normal autoattack receives damage MULTIPLIER, no behind-target bonus | Combat activation/detection, incoming damage/reveal, multiplier value, CD/Mana, duration rank interpolation, movement restrictions |
+| **Envenom** | The user requested a poison-themed Thief skill, name "Envenom or something" | Does it poison a target by an instant stab, coat the next dagger basic attack, or apply a timed buff? DoT duration/damage type/stacking, and whether the poison is an element versus a Poison status tag |
+| **Critical Strike** (WORKING label for user's "a crit") | A distinct **crit-oriented active skill** | Guaranteed crit on one hit versus crit-chance buff versus an attack with special critical multiplier, action/range, cooldown, Mana and AGI formula |
+| **Fan of Knives** | An attack with multiple knives/area damage | Self-centered AoE vs targeted location; hit-event rules, radius, projectiles, Physical element/channel, attack count/AGI scaling, cooldown/Mana |
+| **Smoke Bomb** | An AoE zone that does **damage-over-time AND reduces enemy hit reliability through miss chance while INSIDE** | Radius, lifetime, tick interval/damage type, enemy autoattacks vs ability/spells affected, miss rate, whether effect ends when leaving, enemy/boss tenacity interaction |
+| **Critical passive** (WORKING name) | Primarily increases **critical hit chance**; user also considering **some bonus AGI** | Exact crit chance/rank, which Thief actions may crit, baseline crit damage multiplier, AGI per rank, rank cap |
 
-**THIEF-009 — First other active abilities:** Which TWO should form Thief's early kit alongside Stealth: **a rapid multi-stab single-target attack**, **an evasive quickstep/dash**, or **a dirty trick like pocket sand that weakens/blinds briefly**? We can add the third later, but what should be the default level1 play pattern?
+**Five active + one passive** is an accurate description of the user-named concepts. Exact final shipped ability titles, whether the "crit" is an active guaranteed-hit move rather than a temporary buff, and detailed numeric properties await further answers. Since all skills start rank0 and class gains one point each class level, weighted skill caps/gates totalling ~80 remain to be designed AFTER individual mechanics.
 
-**THIEF-010 — Damage/defense emphasis and passive:** Should ordinary Tier II Thief mainly scale **AGI for physical damage**, with a LITTLE STR contribution, and should its passive lean toward **attack speed, basic-attack critical chance, or evasion**? No inherent crit is assumed under global combat rules; class skill/passive can explicitly grant it.
+**Tier III idea bank remains unchanged:** Future Burglar→Pirate, Duelist, Assassin and Berserker+Duelist dual-sword secret are speculative World2+/later progression only. Do NOT design those future kits now. Thief advancement quest waits until after the big city, appearance awaits the separate working chat/Codex asset review.
+
+## Round 3 — EXACTLY FIVE questions (AWAITING USER)
+
+**THIEF-011 — Stealth operation and opening multiplier:** Should Stealth be usable **during combat**, and should **taking damage immediately break it**? I'd propose 4s at rank1 to 8s at maximum rank with a **1.5× first basic-attack damage multiplier** at rank1, growing with skill rank. Are those opening multiplier values the right direction? Should enemies lose their current target when Thief vanishes, or simply be unable to aim at them until Stealth ends?
+
+**THIEF-012 — Envenom:** Do you envision Envenom as an **instant poison stab**, a **poison coating that enhances the next few basic attacks**, or a **single-target Poison-tagged DoT** applied at range? I lean toward a stab applying a nonstacking DoT, increasing damage with AGI and skill rank; the actual poison DAMAGE ELEMENT (if any) is undecided.
+
+**THIEF-013 — The critical-hit skill:** When you say **"a crit"**, do you want an **instant powerful dagger attack guaranteed to critically strike**, or a short buff making the Thief's next normal basic hit a guaranteed crit? We could call it **Critical Strike** temporarily. Its critical permission/multiplier must be explicit, since DiceFree doesn't have a free global crit chance.
+
+**THIEF-014 — Fan of Knives:** Should Fan of Knives be a **self-centered 360° burst** hitting nearby enemies, or a **forward cone/projectile fan** toward the cursor? I lean toward an AoE centered on Thief that throws spinning blades outward, with one damage instance per enemy per cast (not per visible knife), so it's easy to read and balance.
+
+**THIEF-015 — Smoke Bomb:** How about a **ground-targeted lingering cloud**, causing **small periodic damage** plus a **chance for basic attacks to miss** for enemies standing inside? Should its miss effect also affect hostile skills/spells, or only autoattacks? I'd recommend only basics initially, so bosses stay threatening. We can settle exact damage element, radius, lifetime and the passive's AGI/crit rank scaling in the following round.
 
 ## Decision ledger
 
@@ -111,4 +138,9 @@ Thief (standard Tier II; mixed class)
 | 2026-10-21 | THIEF-005 | Look chosen later by working chat/Codex from user-downloaded assets; advancement NPC/quest AFTER big city | **USER CONFIRMED DEFERRED** |
 | 2026-10-21 | THIEF-FUTURE-PATHS | PROVISIONAL Tier III paths: Burglar→Pirate(TierIV), agile dual-dagger Duelist, slower lethal stealth-positioning Assassin | **USER-BRAINSTORMED; WORLD2 FUTURE ONLY, NOT APPROVED PATH GRAPH** |
 | 2026-10-21 | THIEF-FUTURE-CONVERGENCE | Possible Berserker-lineage + Duelist-lineage late milestone unlock on same Echo (perhaps both level120 or TierIV) → secret dual-sword / dual-two-handed-sword class | **USER-BRAINSTORMED; unlock criteria / tier / weapon rules UNDECIDED** |
-| 2026-10-21 | THIEF-006–010 | Round2 questions | **AWAITING USER** |
+| 2026-10-21 | THIEF-006 | Stealth approx4s rank1 to8s max | **USER CONFIRMED duration targets; rank interpolation/combat behavior OPEN** |
+| 2026-10-21 | THIEF-007 | Breaking first basic attack uses MULTIPLIER, no behind damage; 50% example NOT approved | **USER CONFIRMED mechanic, coefficient OPEN** |
+| 2026-10-21 | THIEF-008 | One basic attack event with alternate dagger animations; both daggers stat items | **USER CONFIRMED** |
+| 2026-10-21 | THIEF-009 | Five actives: Stealth, Envenom, Crit skill, Fan of Knives, Smoke Bomb (area DoT + enemy miss) | **USER CONFIRMED skill ideas; mechanics still OPEN** |
+| 2026-10-21 | THIEF-010 | AGI ONLY damage scaling; crit-chance focused passive with maybe additional AGI | **AGI-only and crit focus CONFIRMED; passive AGI OPEN** |
+| 2026-10-21 | THIEF-011–015 | Round3 five new questions | **AWAITING USER** |
