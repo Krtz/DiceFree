@@ -73,6 +73,18 @@ Checked UTC: 2026-10-17T22:02:42.076549+00:00.
 These staged candidates have no new runtime use. The license column records what
 the linked Sketchfab page states, independently of source-design or integration review.
 
+### Additional local intake — 2026-10-21
+
+52 newer ZIP archives were added to the local staging inventory. Their outer ZIP CRCs and structural metadata were checked, but their exact source-page identities and licenses were not verified. The 2026-10-17 page-license audit above covers only the original 60 files. **Do not import, redistribute, or add these newer files to runtime credits until each exact source and license is confirmed.** Full data is in the [2026-10-21 inventory](assets/downloaded-assets-2026-10-21.json), [112-row CSV](assets/downloaded-assets-2026-10-21.csv), and [review record](assets/review-2026-10-21.json).
+
+Potential Thief research leads below are explicitly candidates, not cleared assets. Local archive filenames and geometry counts are suggestive, but do not prove the exact download/source match. Sketchfab page metadata was checked on 2026-10-21; verify the model identity against the staged bytes and review AI/source-image provenance before use.
+
+| Staged file | Source candidate | Page metadata | Current disposition |
+| --- | --- | --- | --- |
+| `free-magical-assassin.zip` | [FREE Magical Assassin](https://sketchfab.com/3d-models/free-magical-assassin-bb0b4d55b652425aa3edddd039ef4a46), Axinovium | Page states CC Attribution; page lists 30k triangles and says the model was created using Meshy. | Candidate match by title and local 30k-triangle GLB only; source match, underlying-image provenance, and usable license chain remain unverified. Hold. |
+| `ga-free-251-the-shrewd-scoundrel.zip` | [GA-CHR-069 - The Shrewd Scoundrel](https://sketchfab.com/3d-models/ga-chr-069-the-shrewd-scoundrel-8d4a8044ab7b4a7e84357efa8698d83e), Galaxy Abundant | Page states CC Attribution, 388.7k triangles, and AI-generated. | Candidate match by title and local 388,670-triangle GLB only; exact source match and underlying-image provenance remain unverified. Hold. |
+| `free-elven-assassin-weapon-set-bow-dagger.zip` | [FREE - Elven Assassin Weapon Set Bow & Dagger](https://sketchfab.com/3d-models/free-elven-assassin-weapon-set-bow-dagger-b8e64cc0c7df472c9f0cb5d6e1acdd3f), nodgerty | Page states CC Attribution and lists 10.3k triangles. | Nested RAR was not parsed, so local geometry/source match is unverified. Hold. |
+
 | Download | Creator / uploader | Source model page | Stated license |
 | --- | --- | --- | --- |
 | `abyss-walker-bandaged-wanderer-blue-eyes.zip` | Pigcraft | [Abyss Walker – Bandaged Wanderer, Blue Eyes](https://sketchfab.com/3d-models/fab06be9be0c4232a8ee88a41d1562b3) | [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) |

@@ -1,10 +1,9 @@
 # DiceFree Downloaded 3D Asset Catalog
 
-**Updated: complete license audit, 2026-10-17 UTC.**
-**Inventory:** 59 ZIP archives + one standalone GLB in `T:\TEMP\ART_ASSETS`.
-The 17 newest archives passed outer-ZIP CRC checks; all 43 older file hashes were unchanged.
+**License audit:** 60 files, 2026-10-17 UTC. **Current local inventory:** 111 ZIP archives + one standalone GLB (112 files), including the 52-file intake dated 2026-10-21 below.
+The original license audit covers only the first 60 files. The newer 52-file intake has not had source-page/license verification and is not cleared for use or redistribution.
 
-**Every file now has a stated model-page license and creator/source link.**
+**The original 60 files** have a stated model-page license and creator/source link.
 55 files: CC BY 4.0; two: Free Standard; Black Dragon: CC BY-NC 4.0;
 Warrior Girl's ZIP and GLB: CC BY-NC-SA 4.0.
 
@@ -102,3 +101,64 @@ are polygon-fan estimates, not evaluated engine costs; animation curves alone do
 not validate visual quality or a complete gameplay animation set.
 
 No new engine import or runtime credit entry was made by the license audit.
+
+## New local intake — 2026-10-21
+
+**52 additional ZIP archives** were inventoried from local staging. All outer ZIP CRC checks passed and the older 60 file hashes are unchanged. Structural counts below are archive inspection only: there was no Unity/Blender import, visual inspection, deformation test, or source-page/license verification. Do not import, redistribute, or credit these files as used assets until provenance and terms are verified. Nested RAR files are not parsed.
+
+[Full inventory JSON](assets/downloaded-assets-2026-10-21.json) | [112-row searchable CSV](assets/downloaded-assets-2026-10-21.csv) | [Dated review](assets/review-2026-10-21.json)
+
+| Download | MiB | Packaged structure estimate | Provenance status |
+| --- | ---: | --- | --- |
+| `13-free-game-charecters.zip` | 28.3 | GLB; 148345 vertices / 220142 triangles; 0 skins; 0 clips/stacks; 15 materials | **Source/license unverified; do not use or redistribute** |
+| `4-game-charecters-free-for-u.zip` | 4.4 | GLB; 16167 vertices / 19274 triangles; 0 skins; 0 clips/stacks; 4 materials | **Source/license unverified; do not use or redistribute** |
+| `beautiful-female-magician.zip` | 5.8 | GLB; 9516 vertices / 12610 triangles; 1 skins; 0 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `beautiful-female-warrior.zip` | 6.5 | GLB; 11148 vertices / 14949 triangles; 1 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `beautiful-princess-dress.zip` | 20.7 | GLB; 15003 vertices / 18402 triangles; 1 skins; 0 clips/stacks; 2 materials | **Source/license unverified; do not use or redistribute** |
+| `beauty-with-religious-style.zip` | 7.7 | GLB; 16621 vertices / 20303 triangles; 1 skins; 0 clips/stacks; 2 materials | **Source/license unverified; do not use or redistribute** |
+| `birdman-monster.zip` | 1.5 | GLB; 3408 vertices / 4376 triangles; 1 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `card-magic-girl.zip` | 6 | GLB; 11328 vertices / 14980 triangles; 1 skins; 0 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `cyberkatana.zip` | 3 | FBX; 422 vertices / 780 triangles; 0 skins; 1 clips/stacks; 2 materials | **Source/license unverified; do not use or redistribute** |
+| `dark-fantasy-sorceress-crystal-staff.zip` | 61.5 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `egyptian-goddess-full-character.zip` | 10.2 | FBX; 8750 vertices / 15981 triangles; 0 skins; 1 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `emberwing-inferno.zip` | 34.7 | GLB; 611297 vertices / 1013559 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `fantasy-villager.zip` | 45 | GLB; 494986 vertices / 881753 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `flail.zip` | 25.8 | FBX; 5552 vertices / 9170 triangles; 0 skins; 0 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `forest-elf-archer.zip` | 134.1 | FBX; 22723 vertices / 43026 triangles; 3 skins; 0 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `free-desolate-devil-scythe-gameready.zip` | 79.7 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `free-elven-assassin-weapon-set-bow-dagger.zip` | 157.4 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `free-magical-assassin.zip` | 3.4 | GLB; 22678 vertices / 30000 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `free-pack-human-skeleton.zip` | 2 | FBX; 26430 vertices / 51650 triangles; 0 skins; 1 clips/stacks; 2 materials | **Source/license unverified; do not use or redistribute** |
+| `free-skeleton-warrior-arrow.zip` | 1.3 | FBX; 9255 vertices / 13131 triangles; 13 skins; 1 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `free-stylized-dark-fantasy-skeleton-v1.zip` | 11 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `ga-free-251-the-shrewd-scoundrel.zip` | 30 | GLB; 225203 vertices / 388670 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `giant-stone-magma-golem.zip` | 28.8 | FBX; 500022 vertices / 1000048 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `goat-headed-warrior-3d-model.zip` | 51.6 | GLB; 248732 vertices / 417057 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `gravewarden-of-the-wilds.zip` | 97.7 | GLB; 1762594 vertices / 3017033 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `guardian-angel.zip` | 4.6 | FBX; 12297 vertices / 23552 triangles; 0 skins; 1 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `high-elf-mistress.zip` | 9.3 | GLB; 35571 vertices / 46806 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `holy-knight.zip` | 48.6 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `infernal-magma-hound-free-lava-creature-asset.zip` | 10.9 | FBX; 6271 vertices / 12538 triangles; 1 skins; 4 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `kalestra-the-sorceress.zip` | 111.6 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-of-the-heavens-white-mage-staff.zip` | 22.6 | FBX; 6629 vertices / 12222 triangles; 0 skins; 1 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `magic-ring-blue.zip` | 1.9 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-ring-green.zip` | 0.9 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-ring-red.zip` | 1.9 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-ring-yellow.zip` | 2.5 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-ring-yingyangblue.zip` | 0.9 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `magic-staff.zip` | 14.6 | FBX; 9582 vertices / 19236 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `magician.zip` | 1 | GLB; 3356 vertices / 4874 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `male-viking-warrior-outfit.zip` | 171.1 | FBX; 30857 vertices / 52522 triangles; 0 skins; 0 clips/stacks; 5 materials | **Source/license unverified; do not use or redistribute** |
+| `minri-high-priest-elf-woman.zip` | 10.1 | GLB; 41673 vertices / 53692 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `monster-concept.zip` | 109.3 | FBX; 22830 vertices / 45526 triangles; 5 skins; 1 clips/stacks; 3 materials | **Source/license unverified; do not use or redistribute** |
+| `monster.zip` | 3.2 | GLB; 3441 vertices / 4698 triangles; 1 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `muscular-humanoid-frog-warrior.zip` | 17.4 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `mycelium-revenant.zip` | 36 | GLB; 510652 vertices / 883816 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `nyra-woman-warrior.zip` | 151.6 | Nested or unsupported model content; see JSON member list | **Source/license unverified; do not use or redistribute** |
+| `rainbow-scorpion-3d-model-free.zip` | 59.5 | GLB; 386800 vertices / 611991 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `rune-golem-free.zip` | 89.2 | FBX; 4556 vertices / 9108 triangles; 0 skins; 0 clips/stacks; 0 materials | **Source/license unverified; do not use or redistribute** |
+| `samurai-character.zip` | 32 | FBX; 81212 vertices / 160377 triangles; 0 skins; 1 clips/stacks; 12 materials | **Source/license unverified; do not use or redistribute** |
+| `voidbound-necromancer.zip` | 55.3 | GLB; 955592 vertices / 1663847 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `warrior-mage.zip` | 11.1 | GLB; 19326 vertices / 25675 triangles; 2 skins; 0 clips/stacks; 4 materials | **Source/license unverified; do not use or redistribute** |
+| `wasteland-female-warden-3d-model-free.zip` | 47.8 | GLB; 518770 vertices / 941008 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+| `werewolf.zip` | 6.1 | GLB; 3666 vertices / 5240 triangles; 1 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
