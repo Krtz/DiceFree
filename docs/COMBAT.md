@@ -214,6 +214,9 @@ Mobility is class identity:
 - base move speed can differ by class;
 - strong mobility should have tradeoffs.
 
+**Thief Tier II class-specific design decision (THIEF-016–020; 2026-10-21; NOT IMPLEMENTED):** In-combat Stealth prevents enemies from perceiving/targeting the hidden Thief even when hit by ordinary damage; **damage does NOT cancel Stealth**. On entry, enemies must DROP their stored threat against the Thief either entirely or drastically (exact 100% reset versus partial percent user choice pending), instead of only suspending target selection. This is NOT a global rule for all invisibility and NOT permission to reset boss encounters, other party members' threat or boss scripted mechanics. Thief's 4→8s stealth duration and ~1.1×→2× first-normal-basic opener increase gradually with rank. **Poison-tag Envenom damage-over-time is PHYSICAL NATURE**, while ground Smoke Bomb DoT is **PHYSICAL TECH**; normal Physical Defense and respective elemental resistances apply. Smoke Bomb 4m radius/5s and grants enemies within it **20% MISS CHANCE FOR ENEMY BASIC ATTACKS ONLY**, immediately removed on leaving, NO automatic ability/spell misses. The temporary crit buff grants guaranteed critical hits **on Thief BASIC ATTACKS ONLY**, lasting 1s first rank→4s max; this is skill-specific, not global crit eligibility. See [Thief Tier II design](classes/THIEF_TIER2_DESIGN.md).
+
+
 ## Threat
 
 DiceFree has a proper threat system.
