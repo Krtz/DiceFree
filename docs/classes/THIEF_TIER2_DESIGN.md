@@ -1,7 +1,7 @@
 # DiceFree — Thief Tier II — design interview
 
 **Created:** 2026-10-20  
-**Status:** World 1 normal Tier II Thief — **ROUNDS 1–6 CONFIRMED** (2026-10-22). Mana only, AGI-only offense, dual stat-only daggers with single alternating basic attack event. Stealth removes95% threat and 4→8s concealment and 1.1→2× BASIC opener; incoming damage doesn't reveal. **Envenom/Fan get MORE ranks than Stealth** in new designer-authored, validated schedule 16/18/10/18/10/8=80, replacing old20/14/12/14/12/8 (exact gates are designer proposals under delegated rank mathematics). Envenom Physical Nature poison RAW AGI tick formula approved, duration refresh preserves tick timer. Smoke Physical Tech four ticks/sec with approved per-second AGI formula÷4, nonstacking. Fan is moving-usable, 4m/360°, one Physical event per enemy. **Envenom, Fan, Smoke and activating Crit Buff BREAK STEALTH**, without BASIC opener bonus. Initial cooldown/Mana numbers are pending approval. Appearance/quest deferred. **DESIGN ONLY; NO UNITY CODE/ASSET/BUILD CHANGES**.
+**Status:** **THIEF ROUNDS 1–7 USER APPROVED, 2026-10-22; initial playtest design nearly complete**. Approved six-skill 80-rank schedule/gates Stealth16/Envenom18/CritBuff10/Fan18/Smoke10/CritPassive8, all levels1–80 spendable; approved CDs/Mana and Fan AGI physical raw coefficients. Stealth reduces enemy threat95% and enemies reacquire normally using retained5%+new threat, no 95% restoration. **LATEST USER CORRECTION: ACTIVATING GUARANTEED-BASIC-CRIT BUFF DOES NOT BREAK STEALTH; ENVENOM BREAKING STEALTH RECEIVES STEALTH OPENER DAMAGE MULTIPLIER just like a BASIC attack.** Fan and Smoke DO break stealth without opener. Smoke DoT and basic-miss stop upon exit; Envenom Poison remains attached after moving away. No Unity or asset implementation here; model choice/advancement quest deferred. Round8 finishing questions below; TierIII deferred World2.
 **Branch:** `integration/world1-foundation`  
 **Links:** [Class Progression](../CLASS_PROGRESSION.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Tier II Core Classes v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md), [Class Requirements](../CLASS_REQUIREMENTS_AND_DISCOVERY.md), [Ranger Tier II](RANGER_TIER2_DESIGN.md), [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md).
 
@@ -101,11 +101,11 @@ Thief (standard Tier II; mixed class)
 
 | Skill | User-approved concept | Precise mechanics still OPEN |
 | --- | --- | --- |
-| **Stealth** | Combat Stealth reduces Thief threat95%, hidden untargetable even if taking damage. Smooth 4→8s and 1.1→2× BASIC first-break multiplier over **DESIGNER-PROPOSED 16 ranks**. Envenom, Fan, Smoke, crit-buff activation and attacking BASIC reveal, but only BASIC earns opener bonus | Revised designer cap16/gates pending numeric approval; mana/CD and enemy reacquire semantics open |
-| **Envenom** | Instant non-elemental Physical stab RAW **2× ordinary basic attack**, then single nonstacking 3s Poison-tag **Physical Nature DoT**, tick RAW `(2+0.10×AGI)×(1+0.05×(r−1))` once/sec. Refresh3s duration but **KEEP existing tick clock**. Casting BREAKS STEALTH without basic opener | Mana/CD and cleanup/immunity handling open |
-| **Critical buff** (working name) | Basic attacks ONLY guaranteed critical for 1s rank1→4s max, 1.5× RAW basic crit; activating buff BREAKS STEALTH without opener bonus. New designer cap10 | Mana/CD and snapshot/order of crit rules open |
-| **Fan of Knives** | **4m radius, full360° centered on Thief**, ONE non-elemental Physical attack event per enemy per cast, AGI and skill-rank scaling. **CASTABLE WHILE MOVING**; cast BREAKS STEALTH, no basic-only crit or basic opener bonus | Raw damage coefficient and Mana/CD OPEN |
-| **Smoke Bomb** | Ground-targeted4m radius/5s zone,20% enemy BASIC miss inside only, nonstacking overlaps. Physical Tech RAW PER SECOND `(2+0.08×AGI)×(1+0.05×(r−1))`, **every0.25s TICK RAW = that /4**,20 nominal ticks/zone. Casting BREAKS STEALTH, no opener bonus | Mana/CD, strongest overlapping cloud credit and target exit timing OPEN |
+| **Stealth** | **USER APPROVED rank16 cap and gates**, 4→8s and1.1×→2× opener over ranks1–16. In combat, invisible/untargetable; incoming damage doesn't cancel; on cast reduce individual enemy threat95%, on exit enemies resume targeting based on remaining5% +new threat. First NORMAL BASIC attack **OR ENVENOM** breaking Stealth receives opener bonus (Envenom direct packet vs Poison DoT open). **Crit buff activation DOES NOT break Stealth**; Fan and Smoke break without bonus | Non-basic noncombat interactions, attack miss/blocked opener consumption, Envenom poison tick bonus scope open |
+| **Envenom** | **USER APPROVED cap18 and gates, CD8s/12 Mana**. Instant non-elemental Physical dagger STAB RAW2×ordinary basic; 3s nonstacking Poison-tag Physical Nature DoT RAW/tick `(2+0.10×AGI)×(1+0.05×(r−1))` once/sec, reapply refresh3s duration but KEEP tick clock. Poison persists despite victim moving away. **Skill breaks Stealth and DOES get Stealth opener damage bonus**, unlike previously documented THIEF-030 (direct stab only is pending recommended interpretation) | Stealth multiplier direct vs attached DoT to confirm, misses/immunities open; not a BASIC autoattack for the crit buff |
+| **Critical buff** (name TBD) | **USER APPROVED cap10 and gates, CD18s/16 Mana**. Guaranteed 1.5× RAW crits on **NORMAL BASIC ATTACKS ONLY**, duration `1+3×(r−1)/9`s (1s rank1→4s rank10). **ACTIVATING BUFF DOES NOT BREAK STEALTH**; can prepare a guaranteed-crit stealth-breaking BASIC strike. Does not guarantee Envenom/other skill crits | Tick-down when hidden, exact reactivation and animation constraints open |
+| **Fan of Knives** | **USER APPROVED cap18/gates/CD9s/18 Mana**, Thief-centered 4m/360°, 1 non-elemental Physical hit per enemy, usable while moving. **RAW per enemy `(8+0.45×AGI)×(1+0.06×(r−1))`**. Breaks stealth **without** stealth opener; only BASIC hit or Envenom gets opener | Target immunity and visuals subject to implementation |
+| **Smoke Bomb** | **USER APPROVED cap10/gates/CD18s/20 Mana**, ground-target4m radius/5s, 20% enemy BASIC miss only while physically inside, immediately ends on exit; **Physical Tech damage ticks0.25s ONLY WHILE INSIDE**, RAW per tick `[(2+0.08×AGI)×(1+0.05×(r−1))]/4`. Overlapping zones nonstacking. **CAST BREAKS STEALTH without opener** | Overlap source ownership/re-entry tick ordering implementation details open |
 | **Critical passive** (working name) | +1 AGI and +1 percentage point BASIC-attack crit chance/rank, crit 1.5× RAW, proposed cap8 yields +8 AGI/+8pp; buff temporarily guarantees basic crit | Future item crit permission interaction handled by general rules |
 
 **Five active + one passive** is an accurate description of the user-named concepts. Exact final shipped ability titles, whether the "crit" is an active guaranteed-hit move rather than a temporary buff, and detailed numeric properties await further answers. Since all skills start rank0 and class gains one point each class level, weighted skill caps/gates totalling ~80 remain to be designed AFTER individual mechanics.
@@ -154,11 +154,11 @@ Thief remains **AGI-only offensive scaling**, **Mana only**, **one basic hit eve
 - **THIEF-029 USER CONFIRMED:** Fan of Knives is **SELF-CENTERED 360-DEGREE PHYSICAL AoE**, radius **4 meters**, **ONE damage instance per enemy** in radius per cast, with AGI and Fan rank scaling; **USABLE WHILE MOVING**. Fan is a SKILL event, not an additional basic attack/automatic crit proc. Fan's precise RAW initial coefficient remains OPEN.
 - **THIEF-030 USER CONFIRMED REVEAL RULE & DELEGATED BALANCE DESIGN:** Casting **ENVENOM**, **FAN OF KNIVES**, **SMOKE BOMB**, or **ACTIVATING GUARANTEED-CRIT BUFF** breaks Stealth, as does using a normal basic attack. **Only a NORMAL BASIC autoattack that breaks Stealth receives its 1.1×→2× bonus.** Incoming damage still does not reveal Thief. STEALTH ACTIVATION itself grants concealment, not cancels it. User authorized proposing initial cooldown/Mana costs, but did NOT approve the concrete numbers below.
 
-## Revised Thief 80-rank schedule — DELEGATED MATHEMATICS, VALIDATED DESIGNER BASELINE
+## USER-APPROVED Thief 80-rank schedule and level gates — Round7 (INITIAL PLAYTEST)
 
-Six skills begin at rank0 at Tier II class level1, earn1 class skill point at class level1 and one per further level until80. Skill rank purchases require prior rank and its level gate. This newer schedule redistributes ranks to make **Envenom and Fan out-rank Stealth** as the user requested. Exact gates/maxima are user-delegated designer baselines pending numeric sign-off.
+Six skills begin at rank0 at Tier II class level1, earn1 class skill point at class level1 and one per further level until80. Skill rank purchases require prior rank and its level gate. This newer schedule redistributes ranks to make **Envenom and Fan out-rank Stealth** as the user requested. **All six caps and their full eligibility gate schedules WERE USER APPROVED as the initial playtest allocation in THIEF-031**, after user delegated the arithmetic.
 
-| Skill | Proposed maximum rank | First eligible class level | Further upgrade interval | Last eligible gate | Every rank gate |
+| Skill | **Approved maximum rank** | First eligible class level | Further upgrade interval | Last eligible gate | **Approved per-rank eligibility levels** |
 | --- | ---: | ---: | --- | ---: | --- |
 | Stealth | 16 | 1 | Every 5 levels | 76 | 1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76 |
 | Envenom | 18 | 1 | Every 4 levels | 69 | 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69 |
@@ -190,38 +190,67 @@ Six skills begin at rank0 at Tier II class level1, earn1 class skill point at cl
 | 79 | 80 | 79 | 1 |
 | 80 | 80 | 80 | 0 |
 
-### Rank-scaled examples under revised designer caps
+### Rank-scaled examples under USER-APPROVED caps
 
-- Stealth proposed max16: each purchased rank after1 adds `4/15≈0.26667s` hidden duration and `0.9/15=0.06×` BASIC opener multiplier. Rank1 4s/1.1×; rank16 8s/2×. Threat drop 95% upon activation; damage taken does not reveal.
-- Crit buff proposed max10: 1→4s basic-only guaranteed crit, rank formula `1+3×(r−1)/9`; activation reveals Stealth.
-- Envenom proposed max18: RAW Physical normal-basic-derived hit×2 plus three1s-ticks of Physical Nature Poison using approved RAW AGI coefficient and +5% increase per rank over1. Refresh never restarts periodic clock.
-- Fan proposed max18: 4m moving-usable 360° Physical single damage packet/enemy, raw AGI/rank coefficient TBD.
-- Smoke proposed max10: four0.25s Physical Tech ticks/sec, raw/tick `[(2+0.08×AGI)×(1+0.05×(r−1))]/4`, nonstacking enemy zone effects.
-- Crit passive proposed max8: +8 AGI/+8 percentage points BASIC critical chance and 1.5× RAW normal-basic crits at cap.
+- Stealth USER-APPROVED max16: each purchased rank after1 adds `4/15≈0.26667s` hidden duration and `0.9/15=0.06×` BASIC opener multiplier. Rank1 4s/1.1×; rank16 8s/2×. Threat drop 95% upon activation; damage taken does not reveal.
+- Crit buff USER-APPROVED max10: 1→4s basic-only guaranteed crit, rank formula `1+3×(r−1)/9`; **activation does NOT reveal** and can be used while hidden to prepare a critical opening BASIC hit.
+- Envenom USER-APPROVED max18: RAW Physical normal-basic-derived hit×2 plus three1s-ticks of Physical Nature Poison using approved RAW AGI coefficient and +5% increase per rank over1. Refresh never restarts periodic clock. **When Envenom breaks Stealth, its stab receives Stealth opener bonus (exact scope on DoT ticks to confirm).**
+- Fan USER-APPROVED max18: 4m moving-usable 360° Physical single hit per enemy, **raw `(8+0.45×AGI)×(1+0.06×(r−1))`**.
+- Smoke USER-APPROVED max10: four0.25s Physical Tech ticks/sec, raw/tick `[(2+0.08×AGI)×(1+0.05×(r−1))]/4`, nonstacking enemy zone effects.
+- Crit passive USER-APPROVED max8: +8 AGI/+8 percentage points BASIC critical chance and 1.5× RAW normal-basic crits at cap.
 
-## First-pass skill cooldown and Mana cost proposals — NOT YET USER-APPROVED
+## USER-APPROVED first-playtest cooldowns and Mana costs — Round7
 
-| Active | Proposed cooldown | Proposed Mana | Balance purpose |
+| Active | **Approved cooldown** | **Approved Mana** | Balance purpose |
 | --- | ---: | ---: | --- |
 | **Stealth** | **24s** | **20** | 95% threat dump and 4–8s untargetability, powerful basic opener; avoid spamming |
 | **Envenom** | **8s** | **12** | Repeatable single-target double-basic damage plus 3s nonstacking poison |
-| **Guaranteed-Crit buff** | **18s** | **16** | 1–4s buff on basic autoattacks only; activating it breaks Stealth |
+| **Guaranteed-Crit buff** | **18s** | **16** | 1–4s guaranteed-basic-crit buff; activating it **does NOT break Stealth**, useful before a basic opener |
 | **Fan of Knives** | **9s** | **18** | Moving 4m AoE, one hit per nearby enemy |
 | **Smoke Bomb** | **18s** | **20** | Five-second cloud DoT and 20% basic miss chance while inside |
 
-**Every above Mana/CD value is a DESIGNER PLAYTEST PROPOSAL, not yet user-approved.** No class was built in this chat. No Tier III design until World 2; after Thief design, Psion is next.
+**ALL FIVE above CD/Mana values ARE USER APPROVED (THIEF-032)** as first-playtest baselines and subject to later balancing. No Unity content was built in this chat. No Tier III design until World 2; after Thief design, Psion is next.
 
-## Round 7 — FIVE questions (AWAITING USER)
+## Round 7 — FIVE USER DECISIONS RECORDED 2026-10-22
 
-**THIEF-031 — Ranks:** Do you approve the revised, mathematically validated **16 Stealth / 18 Envenom / 10 Crit buff / 18 Fan / 10 Smoke / 8 Crit passive = 80** as our initial playtest ranks, with all levels1–80 spendable? Stealth max16 still reaches8s and a2× basic opener.
+**THIEF-031 USER APPROVED EXACT FULL INITIAL PLAYTEST SKILL RANK CAPS AND GATES:** **Stealth16 / Envenom18 / guaranteed-basic-crit buff10 / Fan of Knives18 / Smoke Bomb10 / crit/AGI passive8 =80**. The entire numeric rank-gate table below is now APPROVED as the initial playtest schedule; no longer merely a designer suggestion. Skill ranks start0, one skill point per Tier II level1–80, last unlock gate at77, automated audit passed `eligible(L)≥L` for all integers1–80. Linear Stealth `duration(r)=4+4×(r−1)/15` seconds and `stealthOpenerMultiplier(r)=1.1+0.9×(r−1)/15`; rank1 4s/1.1×, rank16 8s/2×. Guaranteed-basic-crit buff rank1→10 duration `1+3×(r−1)/9` seconds (1s→4s), while the passive rank8 gives +8 AGI/+8 percentage points BASIC attack crit at1.5× RAW.
 
-**THIEF-032 — Mana and cooldowns:** Do these proposed first-playtest costs look good: **Stealth24s/20 Mana, Envenom8s/12, Crit buff18s/16, Fan9s/18, Smoke18s/20**?
+**THIEF-032 USER APPROVED ALL FIVE FIRST-PLAYTEST MANA/CD PAIRS:** **Stealth24s cooldown /20 Mana; Envenom8s/12 Mana; guaranteed-basic-crit buff18s/16 Mana; Fan of Knives9s/18 Mana; Smoke Bomb18s/20 Mana.** These are USER-APPROVED initial balance baselines, not implemented values.
 
-**THIEF-033 — Fan damage:** Would you approve initial **RAW Physical Fan damage per enemy** `(8+0.45×AGI)×(1+0.06×(FanRank−1))`? One hit per enemy within4m, moving-usable, no basic-only crit.
+**THIEF-033 USER APPROVED FAN RAW DAMAGE FORMULA:** For purchased Fan rank `r∈[1,18]`, **one non-elemental Physical RAW hit per enemy** within Thief-centered4m/360°, usable WHILE MOVING: `FanRawPerTarget=(8+0.45×currentThiefAGI)×(1+0.06×(r−1))`. This is a skill event, **not a basic attack**, so the basic-only guaranteed-crit buff/passive never automatically makes Fan crit. One damage event per target per cast.
 
-**THIEF-034 — Stealth exit/threat:** When Stealth breaks or times out, should normal enemy targeting resume using **the remaining 5% threat plus any NEW threat** gained thereafter, never restoring the deleted95%? Should the first basic opener damage apply on the attack that simultaneously reveals the Thief? I recommend yes.
+**THIEF-034 USER APPROVED ENEMY REACQUISITION ON STEALTH EXIT:** Stealth activation once removes EXACTLY95% of Thief's threat from enemies' threat tables; this reduction PERSISTS when invisibility expires or breaks. Normal enemy target acquisition resumes based on the remaining5% plus NEW subsequent threat, NOT a restored95%, without resetting a boss encounter or other party member threat. The **first normal basic attack breaking Stealth** gets its Stealth rank-based opening-damage multiplier on that same revealing attack. Even if enemies cannot see or target the hidden Thief, this Thief can aim and strike enemies.
 
-**THIEF-035 — Smoke and Envenom target behavior:** Should enemies stop taking Smoke Bomb Physical Tech damage IMMEDIATELY upon leaving the cloud (just as its miss debuff already does), while Envenom's attached Poison DoT continues to tick after the victim walks away? I recommend yes.
+**THIEF-035 USER APPROVED AREA VS ATTACHED DOT:** Smoke Bomb's Physical Tech DoT **and** its20% BASIC-miss penalty apply ONLY while each enemy is PHYSICALLY INSIDE a live cloud; both end IMMEDIATELY upon leaving and resume as appropriate upon re-entry while cloud persists. Overlapping friendly clouds NEVER stack DoT or miss effects. By contrast Envenom's **attached three-second nonstacking Physical Nature Poison DoT** CONTINUES to tick on victim after moving away from the Thief and smoke. Normal DoT expiry/dispels still apply.
+
+### Two EXPLICIT USER CORRECTIONS — NEWEST AND AUTHORITATIVE, overruling THIEF-030
+
+**THIEF-036A — Crit buff activation DOES NOT BREAK STEALTH.** The guaranteed-basic-crit BUFF is a self-buff and may be activated **WHILE HIDDEN, retaining concealment and the ability to perform a buffed critical BASIC opener**. This directly REVERSES THIEF-030's earlier "activating buff breaks Stealth" statement; earlier combat/progression docs mentioning that are historical and superseded. The buff still only guarantees crits for **NORMAL BASIC ATTACKS**, never Envenom/Fan/Smoke, unless a later user decision expands eligibility. Buff lasts1s rank1 to4s rank10; exact expiration timing continues to use ordinary buff rules. Incoming damage also DOES NOT reveal, as already confirmed.
+
+**THIEF-036B — ENVENOM BREAKING STEALTH DOES RECEIVE THE STEALTH OPENING MULTIPLIER.** This directly REVERSES THIEF-030's "only BASIC can receive opener" and "Envenom breaks without opener" restrictions. A normal basic attack **OR** Envenom skill stab that breaks Stealth should get the Stealth rank1→16 1.1×→2× opener multiplier. **Working implementation interpretation (ASK NEXT ROUND): apply multiplier to Envenom's DIRECT 2×normal-basic RAW stab packet ONLY, NOT to attached 3-second Physical Nature Poison DoT ticks**, to avoid multiplying its entire poison duration for a single reveal. Thus `StealthEnvenomDirectRaw = 2×normalBasicRaw×stealthOpenerMultiplier(stealthRank)`, before ordinary Physical mitigation; at max Stealth rank that's 4×normalBasicRaw DIRECT before mitigation. User approved Envenom receiving bonus, not specifically DoT eligibility, so direct-only interpretation is a **RECOMMENDATION PENDING THIEF-036** rather than falsely labeling this packet scope confirmed. Other combat abilities Fan/Smoke still break invisibility and do NOT receive opening bonus. Crit buff does NOT break and does NOT consume opening bonus.
+
+**Important:** Old decisions are retained below as history, but Round7 (including new corrections) is AUTHORITATIVE. No Unity code, assets, scenes, builds, NPCs or quests modified in this design chat.
+
+## Thief first-playtest status — nearly complete
+
+- **Approved 80 ranks:** Stealth16, Envenom18, crit buff10, Fan18, Smoke10, passive8; exact gate schedule as detailed below.
+- **Approved Mana/CD:** Stealth24s/20, Envenom8s/12, crit buff18s/16, Fan9s/18, Smoke18s/20.
+- **Approved damage formulas:** Envenom direct2×normalBasicRaw; Physical Nature Poison DoT RAW/tick `(2+0.10×AGI)×(1+0.05×(r−1))` every1s for3s; Fan Physical RAW/target `(8+0.45×AGI)×(1+0.06×(r−1))` one hit per target; Smoke Physical Tech RAW per0.25s tick `[(2+0.08×AGI)×(1+0.05×(r−1))]/4` while inside 4m/5s cloud, overlapping zones nonstacking.
+- **Stealth mechanics:** in-combat, enemy cannot see or target; takes damage without reveal; cast reduces stored Thief threat95%; on expiry retain5%+future threat; first BASIC or Envenom breaking concealment earns opener bonus, Fan/Smoke reveal without bonus, CRIT BUFF DOES NOT REVEAL.
+- **Passive:** +1 AGI and +1pp BASIC attack crit chance per rank to8, eligible basic crit at1.5×; timed crit buff guarantees ONLY basic attack crits, active stealth-compatible.
+- **Open implementation questions:** direct-only vs poison ticks for stealth-Envenom bonus; miss/failed target handling; buff timer/overlap ordering; whether mundane items/interactions cancel stealth; multi-caster smoke overlap and update clocks. The named Thief character visual is deferred to working chat/Codex inspecting user's assets; advancement quest remains deferred until after designing major city. Future Tier III and IV ideas remain archived only.
+
+## Round 8 — EXACTLY FIVE finishing questions (AWAITING USER)
+
+**THIEF-036 — Envenom opener packet:** We agree breaking Stealth with Envenom gets the same 1.1×→2× opening multiplier as a normal BASIC attack. Should it multiply **Envenom's initial direct dagger hit ONLY** (`2×basicRaw×stealthMultiplier`, reaching4×basicRaw at max Stealth), leaving subsequent Poison DoT ticks normal? I recommend YES.
+
+**THIEF-037 — Guaranteed-crit buff timer while hidden:** Now that casting the guaranteed BASIC-crit buff does NOT break Stealth, should its **1s→4s duration tick down normally in real time even while hidden**, with no special pause or free automatic extension? I'd recommend yes, so timing matters.
+
+**THIEF-038 — Buff, stealth and misses:** If the first stealth-breaking BASIC attack **misses or is fully blocked**, should the opening bonus be consumed anyway, or persist until a successful HP-damaging hit? I'd recommend consuming on the first resolved attack attempt (normal miss/shields still matter), while Envenom direct hit uses the same rule.
+
+**THIEF-039 — Stealth interactions:** Ordinary movement and incoming damage already preserve stealth; Envenom/Fan/Smoke break it, and Crit buff doesn't. Should **potions, opening UI/inventory, looting and interacting with NPCs/objects** preserve Stealth or reveal the Thief? I'd suggest UI/potions preserve it, but actual interaction/looting reveals, to avoid stealth-interaction exploits.
+
+**THIEF-040 — Ready for Psion?:** With the above finishing combat edge rules, can we mark **Thief Tier II design COMPLETE for initial playtesting**, explicitly leaving model selection to working chat/Codex and advancement mentor quest until after the major city, and start **Psion** next? Or is there one last Thief mechanic you want included before we close its interview?
 
 ## Decision ledger
 
@@ -262,4 +291,11 @@ Six skills begin at rank0 at Tier II class level1, earn1 class skill point at cl
 | 2026-10-22 | THIEF-028 | Envenom Physical Nature per-second RAW tick `(2+0.10×AGI)×(1+0.05×(r−1))`, clock preserved on refresh | **USER APPROVED INITIAL COEFFICIENT/TIMER** |
 | 2026-10-22 | THIEF-029 | 4m 360° Fan, one Physical damage event per enemy, usable while moving | **USER APPROVED, RAW coefficient OPEN** |
 | 2026-10-22 | THIEF-030 | Envenom/Fan/Smoke/activating Crit buff break stealth with no basic opener; design Mana/CD proposals | **USER APPROVED REVEAL; CD/Mana DESIGNER PROPOSALS** |
-| 2026-10-22 | THIEF-031–035 | Five Round7 questions | **AWAITING USER** |
+| 2026-10-22 | THIEF-031 | Full caps/gates 16/18/10/18/10/8=80, last gate77, purchases available all class levels1–80 | **USER APPROVED INITIAL PLAYTEST** |
+| 2026-10-22 | THIEF-032 | CDs/Mana: Stealth24s/20, Envenom8s/12, crit buff18s/16, Fan9s/18, Smoke18s/20 | **USER APPROVED INITIAL PLAYTEST** |
+| 2026-10-22 | THIEF-033 | Fan Physical RAW per enemy `(8+0.45×AGI)×(1+0.06×(rank−1))` | **USER APPROVED INITIAL PLAYTEST** |
+| 2026-10-22 | THIEF-034 | On Stealth exit enemy targeting resumes on retained5% threat +new threat, never restores removed95%; opening BASIC applies multiplier while revealing | **USER APPROVED** |
+| 2026-10-22 | THIEF-035 | Smoke Physical Tech damage AND miss ends instantly on exiting cloud; Envenom attached Physical Nature poison persists on target | **USER APPROVED** |
+| 2026-10-22 | THIEF-036A | Activating basic guaranteed-crit buff PRESERVES Stealth, correcting THIEF-030 | **USER EXPLICIT CORRECTION APPROVED** |
+| 2026-10-22 | THIEF-036B | Envenom breaking Stealth gets opening attack damage multiplier, correcting THIEF-030 | **USER EXPLICIT CORRECTION APPROVED; damage packet scope open** |
+| 2026-10-22 | THIEF-036–040 | Five Round8 finishing questions | **AWAITING USER** |
