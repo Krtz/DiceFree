@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **PSION TIER II ROUND 1 ACTIVE — EXACTLY FIVE OPEN QUESTIONS, NO PSION GAMEPLAY MECHANICS APPROVED YET** (2026-10-22). Normal standard eighth/final World1 Tier II class under Magically Touched Novice. Thief Tier II rounds1–8 completed (gameplay design only, NOT implemented). The Psion title/class slot is user-approved; signature weapon, combat style, resources, attributes, spells, presentation, advancement and quests remain OPEN. **DESIGN/DOCUMENTATION ONLY. NO UNITY SOURCE/SCENE/ASSET/BUILD/SAVE CHANGES.**
+**Status:** **PSION TIER II ROUND 1 PARTIALLY ANSWERED (2026-10-22); USER PAUSED FOR LATER.** Eighth/final normal World1 Tier II from Magically Touched Novice, NOT implemented. Mixed autoattacks + spells, closer-ranged than other ranged classes, and early named spell/passive/clone/AoE concepts recorded in latest section below. Elemental choices, weapons, Mana/resource, model and advancement quest unresolved. Future autoattack/spell descendant branches remain FUTURE WORLD2+ IDEAS ONLY. **DOCS ONLY, NO UNITY MODIFICATIONS.**
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
 
@@ -29,7 +29,7 @@ These directions might fit a Psion, but NONE are presently approved:
 - Potential **INT**, **SPR**, or mixed offensive scaling; Mana-only, Mana+Focus or different class mechanic; various catalyst/empty-hand combat silhouettes are **not user approved**.
 - These are *possible Tier II class identity options*, not separate Tier III paths. No exact skills, new damage elements or resource UI invented yet.
 
-## Psion Round 1 — EXACTLY FIVE questions (AWAITING USER)
+## Psion Round 1 — ORIGINAL FIVE QUESTIONS (PARTIALLY ANSWERED; USER PAUSED)
 
 **PSION-001 — Psychic identity:** Should Psion's Tier II fantasy be mainly **telekinesis** (moving/hurling things with the mind), **telepathy** (mental disruption, hallucinations, influence), **gravity/spatial manipulation**, or **a blend**? I'd suggest a blend with a distinctive central mechanic, but not assume which you prefer.
 
@@ -47,6 +47,36 @@ These directions might fit a Psion, but NONE are presently approved:
 | --- | --- | --- | --- |
 | 2026-10-19 | PSION-FOUNDATION-ROSTER | Psion is normal EIGHTH World1 Tier II, under Magically Touched Novice | **USER CONFIRMED** |
 | 2026-10-22 | PSION-FOUNDATION-SEQUENCE | Thief gameplay design completed → Psion now active → Quillboar area → major city; no TierIII until World2 | **USER CONFIRMED** |
-| 2026-10-22 | PSION-001–005 | Five Round1 identity/role/element/weapon+resource/appearance questions | **AWAITING USER** |
+| 2026-10-22 | PSION-001–003 | Partial answers: mixed autoattack+spell kit, relatively short ranged, elements deferred; detailed latest decisions below | **PARTIALLY USER CONFIRMED** |
+| 2026-10-22 | PSION-004–005 | Weapon/resource/appearance/advancement unanswered | **AWAITING USER LATER** |
+| 2026-10-22 | PSION-006–010 | Next exact five follow-up questions below | **USER REQUESTED LATER, NOT NOW** |
 
 **Scope reminder:** no Unity changes, TierIII kit design, mentor quests or art generation from this file. Preserve approved user answers, mark speculative values as proposals, re-fetch after every GitHub update, and ask exactly five new numbered questions each continuing round.
+
+## LATEST USER CONCEPTS — PSION ROUND 1 (2026-10-22; AUTHORITATIVE OVER EARLIER BRAINSTORMING)
+
+User had to leave and explicitly requested the questions **again later**. DO NOT mistake partially answered questions for an invitation to quiz right now. Save user-authored gameplay directions and distinguish definitive concepts from maybes.
+
+1. **PSION-001 — blended autoattacks + spellcasting CONFIRMED.** Psion Tier II should combine the two styles. The user envisages **AT LEAST TWO FUTURE descendant classes**, one focused on autoattacks and one focused on spells. Record as **speculative future class path inspirations for World2+ ONLY**; exact tier, class names and branches NOT approved; don't design those paths yet.
+2. **Psychic Bolt — user-selected concept:** **single-target MAGICAL damage plus STUN**. User is **thinking METAL for its element**, but later explicitly said element choices NOT YET SET; treat Metal as a **TENTATIVE suggestion, never user-locked**. Stun duration, CC vs bosses/Tenacity, CD, Mana, range and damage formulas OPEN.
+3. **Psionic Blades — user-selected passive concept:** **crit on normal/basic AUTOATTACKS and ignoring a FLAT defense value on those attacks**. It is not generic percent defense penetration. The basic attack's damage channel (Physical vs Magical), applicable PDEF/MDEF, crit amount/multiplier, flat points ignored and rank scaling OPEN. This does not grant crit to all skills by default.
+4. **Mental Image — user-selected active concept:** **spawn an IMMOBILE/STATIC clone at a selected location**; the clone **AUTOATTACKS enemies within its range for 10% OF THE PSION'S OWN NORMAL BASIC/AUTOATTACK DAMAGE VALUE per attack**; clone **EXPLODES WHEN ITS DURATION ENDS OR IT IS KILLED**. Clone duration, HP, whether targetable (killed implies vulnerable but rules not selected), attack speed, target acquisition, range, maximum concurrent images, explosion damage/radius/channel/element, raw damage scaling, Mana/CD OPEN. Do not substitute roaming pets or full-strength duplicate.
+5. **One AoE spell — user-selected core concept.** Exact name, shape, damage/elements, effects, scaling, unlocks OPEN. **Maybe a shield? — ONLY A TENTATIVE ADDITION**, not an agreed sixth active. No total six-skill count/rank caps chosen for Psion.
+6. **Hybrid autoattack attribute scaling direction USER CHOSEN: BOTH AGI AND INT contribute**. The proposed idea **"maybe 0.45× normal value from both or something" is a PROVISIONAL numeric illustration**, not a locked formula. Actual AGI+INT coefficients, attack speed, crit, raw channel and how gear contributes require later approval. Do not decide spell scaling from autoattack scaling.
+7. **PSION-002 — shorter RANGED CONFIRMED:** Psion is RANGED, but **closer ranged than other standard ranged classes**; not melee, exact meters undecided. User did NOT decide if primary focus is DPS, crowd-control specialist, shielding hybrid beyond the blended attacking style.
+8. **PSION-003 — DAMAGE ELEMENT CHOICES EXPLICITLY DEFERRED:** use the existing elemental rules, but NO specific element has been finalized. The tentative Psychic Bolt Metal suggestion is NOT binding. Don't invent a new Psychic element. Bolt's MAGICAL channel is specified, but its element is OPEN.
+9. **PSION-004/005 unanswered:** weapon, offhand, Mana-only vs secondary resource, specific spell scaling, character appearance/model and advancement mentor/quest location remain undecided. The user didn't authorize appearance or NPC decisions today.
+
+### Round 2 — EXACTLY FIVE QUESTIONS (DEFERRED, SEND WHEN REMINDED)
+
+**PSION-006 — Psychic Bolt:** Shall its single-target Magical stun bolt use **Metal** as the element, or keep that undecided? How should the stun scale with ranks, especially on bosses using Tenacity?
+
+**PSION-007 — Psionic Blades:** Do normal Psion autoattacks deal Physical or Magical damage? Which matching FLAT defense (PDEF or MDEF) should Psionic Blades bypass, how should basic crit chance grow, and do we start testing the tentative 0.45×AGI+0.45×INT formula?
+
+**PSION-008 — Mental Image:** How long does the immobile clone last; how much HP, what attack range, and can multiple exist? What should its death/expiry explosion do? Keep its user-selected attack damage at 10% of Psion basic value.
+
+**PSION-009 — AoE and optional shield:** What should the AoE look/play like (close pulse, targeted blast or ground field), and shall a SHIELD spell be included? If yes, who can it shield? Skill count/rank budget not fixed.
+
+**PSION-010 — Equipment/resources/appearance:** Empty hands, wand+focus, staff or other equipment? Mana only or a secondary class mechanic? Should appearance selection happen through the separate working chat's asset review and advancement quest wait until the big city?
+
+**Do not design Tier III here. Do not perform any Unity or gameplay implementation. Continue documenting and asking exactly five questions when user resumes.**
