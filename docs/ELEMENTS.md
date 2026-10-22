@@ -41,6 +41,8 @@ The examples above included `Donut`, but that globally available element remains
 
 **Thief Round5 element delivery refinement (2026-10-21; class DESIGN ONLY):** Envenom is an instant direct stab equal to **2× Thief normal basic RAW** using an ordinary **non-elemental PHYSICAL hit**, and separately inflicts a **three-second, one-tick-per-second, NONSTACKING Poison-status DoT using PHYSICAL NATURE**. Smoke Bomb DoT is **PHYSICAL TECH**, **FOUR damage ticks per second** with per-tick RAW reduced one quarter of otherwise equivalent per-second attack damage, **not Magical Tech**; overlapping clouds do not stack their DoT or basic attack miss penalty. `Poison` is a semantic status TAG, Nature is the damage element and Physical is the channel. These do not authorize new universal Nature/Tech proc mechanics. [Thief Round5 design](classes/THIEF_TIER2_DESIGN.md).
 
+**Thief newest Round6 element formulas (2026-10-22, DESIGN ONLY):** Envenom delivers INITIAL non-elemental Physical stab RAW2× normal basic, followed by attached Poison-status **Physical Nature** 3s nonstacking DoT with one1s tick of RAW `(2+0.10×AGI)×(1+0.05×(r−1))`; refresh duration but DON'T restart tick clock. Smoke Bomb's **Physical Tech** per-second total RAW `(2+0.08×AGI)×(1+0.05×(r−1))` is divided by4 for EACH of four0.25s ticks per second in its 5s 4m cloud; overlapping effects nonstack. Fan of Knives is ONE ordinary non-elemental Physical damage instance per enemy within centered4m radius, moving usable. No new Nature/Tech element proc rules or generic Poison damage element. [Thief detailed spec](classes/THIEF_TIER2_DESIGN.md).
+
 ## Nature
 
 **Nature is explicitly a DiceFree element**, regardless of whether its exact DiceBound status changes before DiceFree implementation.
