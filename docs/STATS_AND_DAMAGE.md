@@ -378,6 +378,8 @@ This is not yet locked and must be validated for consistency/exploit risk.
 
 Do not assume every class has access to these.
 
+**Thief Tier II BASIC-ONLY critical and Stealth opening exception (2026-10-22; USER-APPROVED DESIGN, NOT IMPLEMENTED):** Thief crit passive grants +1pp normal BASIC critical chance and +1 AGI/rank, eligible critical BASIC attacks use 1.5× RAW damage. Timed self-buff (rank1 1s→rank10 4s, 18s CD,16Mana) guarantees 100% critical chance for eligible **NORMAL BASIC ATTACKS ONLY**, not Envenom, Fan, Poison ticks or Smoke. **Activating the buff does NOT break Stealth**: class-specific concealment-compatible preparation. **Stealth's 1.1×→2× rank-based opening damage multiplier applies when a BASIC attack OR ENVENOM dagger skill stab breaks invisibility**, per newer user correction; this does NOT make Envenom a basic attack for critical permission. Exact Envenom bonus scope (direct skill stab packet only vs follow-on Poison DoT) remains OPEN, with direct-only recommended; do not automatically propagate basic crit to the physical Nature Poison DoT. Fan single non-elemental Physical RAW hit per enemy within4m is `(8+0.45×AGI)×(1+0.06×(FanRank−1))`; NOT a basic hit, no Thief buff crit. See [Thief latest](classes/THIEF_TIER2_DESIGN.md).
+
 ## Critical hits
 
 Crit is not universal by default.
