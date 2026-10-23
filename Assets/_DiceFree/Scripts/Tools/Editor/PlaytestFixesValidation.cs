@@ -171,7 +171,7 @@ namespace DiceFree.EditorTools
                 "A failed potion lookup restored health without consuming an item.");
             var potionInstance=inventory.Grant(healthPotion.stableId);
             var guardedPotion=inventory.Grant(healthPotion.stableId);bool reentrantPotionUsed=true;
-            Action<float> potionObserver=_=>reentrantPotionUsed=inventoryPanel.RunItemAction(
+            Action<float> potionObserver=healedAmount=>reentrantPotionUsed=inventoryPanel.RunItemAction(
                 guardedPotion.instanceId,"Use",out _);
             heroHealth.Healed+=potionObserver;
             bool firstPotionUsed=inventoryPanel.RunItemAction(potionInstance.instanceId,"Use",out _);
