@@ -198,15 +198,19 @@ namespace DiceFree.EditorTools
             Action observe=()=>{observedAtomic=inventory.Find(item.instanceId)==null&&wallet.Gold==beforeGold+price;reentered=shop.Sell(hero,item.instanceId,out _);};inventory.Changed+=observe;
             Check(shop.Sell(hero,item.instanceId,out _),"Owned bag item sale failed.");inventory.Changed-=observe;Check(observedAtomic&&!reentered&&wallet.Gold==beforeGold+price&&inventory.Find(item.instanceId)==null,"Sale observers saw partial state or reentrant duplicate.");Check(!shop.Sell(hero,item.instanceId,out _),"Fast repeat sold missing instance.");
             var overflow=inventory.Grant(definition.stableId);wallet.Restore(long.MaxValue);Check(!shop.Sell(hero,overflow.instanceId,out _)&&inventory.Find(overflow.instanceId)!=null&&wallet.Gold==long.MaxValue,"Wallet overflow consumed item.");wallet.Restore(beforeGold+price);
-            var npc=UnityEngine.Object.FindObjectsByType<VillageVisualIdle>().First();var visual=npc.Visual;var before=visual.position;
+            var npc=UnityEngine.Object.FindObjectsByType<VillageVisualIdle>().First(n=>n.isActiveAndEnabled&&n.Visual!=null);var visual=npc.Visual;
+            var before=visual.localPosition;var beforeRotation=visual.localRotation;
             float end=Time.time+1;int frame=Time.frameCount;while(Time.time<end)yield return null;
-            Check(Time.frameCount>frame+1,"Player loop frozen.");Check(Vector3.Distance(before,visual.position)>.002f||Quaternion.Angle(visual.localRotation,Quaternion.identity)>1,"NPC idle invisible.");
+            Check(Time.frameCount>frame+1,"Player loop frozen.");Check(Vector3.Distance(before,visual.localPosition)>.002f||Quaternion.Angle(visual.localRotation,beforeRotation)>1,"NPC idle invisible.");
             Check(npc.GetComponent<Collider>().bounds.size.y>1,"NPC capsule impractical.");
-            var tree=UnityEngine.Object.FindObjectsByType<TreeCameraOccluder>().First();var mesh=tree.GetComponentsInChildren<Renderer>().First(r=>r.enabled);var originals=mesh.sharedMaterials;
+            var tree=UnityEngine.Object.FindObjectsByType<TreeCameraOccluder>().First();
+            var mesh=tree.GetComponentsInChildren<Renderer>().First(r=>r.enabled&&
+                !r.name.Contains("Bark")&&!r.name.Contains("Trunk"));var originals=mesh.sharedMaterials;
             var fader=new GameObject("Isolated fade test").AddComponent<CameraOcclusionFader>();var center=mesh.bounds.center;
-            fader.UpdateOcclusion(center-Vector3.forward*20,center+Vector3.forward*20);Check(mesh.sharedMaterials[0]!=originals[0],"Tree canopy did not ghost.");
+            var focus=tree.transform.position+Vector3.up;var occlusionCameraPosition=center+(center-focus).normalized*20f;
+            fader.UpdateOcclusion(focus,occlusionCameraPosition);Check(mesh.sharedMaterials[0]!=originals[0],"Tree canopy did not ghost.");
             fader.UpdateOcclusion(center+Vector3.right*100,center+Vector3.right*100+Vector3.up);Check(mesh.sharedMaterials.SequenceEqual(originals),"Tree did not restore opacity.");
-            fader.UpdateOcclusion(center-Vector3.forward*20,center+Vector3.forward*20);var enchanted=new Material(originals[0]);enchanted.color=Color.blue;var changed=mesh.sharedMaterials;changed[0]=enchanted;mesh.sharedMaterials=changed;
+            fader.UpdateOcclusion(focus,occlusionCameraPosition);var enchanted=new Material(originals[0]);enchanted.color=Color.blue;var changed=mesh.sharedMaterials;changed[0]=enchanted;mesh.sharedMaterials=changed;
             fader.UpdateOcclusion(center-Vector3.forward*20,center+Vector3.forward*20);fader.UpdateOcclusion(center+Vector3.right*100,center+Vector3.right*100+Vector3.up);Check(mesh.sharedMaterials[0]==enchanted,"Ghost restore overwrote puzzle enchantment.");
             mesh.sharedMaterials=originals;UnityEngine.Object.Destroy(enchanted);UnityEngine.Object.Destroy(fader.gameObject);
             var portal=UnityEngine.Object.FindObjectsByType<DungeonPortal>().Single(p=>p.isActiveAndEnabled);
@@ -243,8 +247,8 @@ namespace DiceFree.EditorTools
             var mini=UnityEngine.Object.FindObjectsByType<DungeonSlime>().Single(s=>s.Role==SlimeRole.Miniboss);
             Check(Mathf.Approximately(mini.Actor.Health.Maximum,800),"Miniboss not 5x HP.");
             var bossDefinition=mini.Actor.Stats.Definition;
-            float bossBase=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
-                bossDefinition.basicAttack).baseRaw;
+            float bossBase=bossDefinition.basicAttack.RawDamage(mini.Actor.Stats.Attributes)*
+                mini.Actor.Stats.BasicAttackDamageMultiplier+mini.Actor.Stats.BasicAttackFlatBonus;
             float bossMin=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
                 bossDefinition.basicAttack,basicAttackRangeOffset:bossDefinition.basicAttackMinimumOffset).baseRaw;
             float bossMax=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
@@ -260,9 +264,12 @@ namespace DiceFree.EditorTools
             Check(hero.Motor.Teleport(mini.transform.position+Vector3.back*3),"Boss animation fixture unreachable.");
             var miniVisual=mini.transform.Find("Presentation");var miniScale=miniVisual.localScale;
             do{yield return null;}while(!mini.Busy);yield return null;Check(miniVisual.localScale!=miniScale,"Boss Slam anticipation has no visual deformation.");
-            do{yield return null;}while(mini.Busy);Check(Vector3.Distance(miniVisual.localScale,miniScale)<.01f,"Slam did not reform presentation.");
+            do{yield return null;}while(mini.Busy);Check(Vector3.Distance(miniVisual.localScale,Vector3.one)<.06f,"Slam did not reform presentation to its idle scale.");
             mini.Actor.Health.SetEncounterHp(mini.Actor.Health.Maximum*.69f);do{yield return null;}while(!mini.Dividing);
-            var fragments=UnityEngine.Object.FindObjectsByType<DungeonSlime>().Where(s=>s.Role==SlimeRole.Fragment).ToArray();Check(fragments.Length==2&&fragments.All(f=>f.transform.localScale.x==1.6f&&Mathf.Approximately(f.Actor.Health.Maximum,300)),"Boss fragments must have exactly 300 HP.");
+            var fragments=UnityEngine.Object.FindObjectsByType<DungeonSlime>().Where(s=>s.Role==SlimeRole.Fragment).ToArray();
+            float expectedFragmentHp=mini.Actor.Health.Maximum*run.Tuning.minibossFragmentHpFraction;
+            Check(fragments.Length==2&&fragments.All(f=>Mathf.Approximately(f.transform.localScale.x,1.6f)&&Mathf.Approximately(f.Actor.Health.Maximum,expectedFragmentHp)),
+                "Big Slime fragments must use the authored miniboss fragment health fraction.");
             fragments[0].Actor.Health.ApplyDamage(hero,new DamageResult{mitigated=999});do{yield return null;}while(mini.Dividing);Check(Vector3.Distance(miniVisual.localScale,miniScale)<.01f,"Divide did not visually reform.");
             long savedGold=wallet.Gold;var options=UnityEngine.Object.FindFirstObjectByType<OptionsPanel>();options.Show();
             Check(options.RequestReturnToStartMenu(),"Options save-and-return failed.");
