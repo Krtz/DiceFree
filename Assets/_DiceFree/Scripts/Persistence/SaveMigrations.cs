@@ -130,9 +130,15 @@ namespace DiceFree.Persistence
                 state.classSkillRankMigrationVersion >= ClassSkillRankMigrationVersion) return;
 
             string prefix = state.classId == "class.greatblade" ? "skill.greatblade." : "skill.mage.";
-            foreach (var rank in state.classSkills ?? Array.Empty<SkillRankState>())
-                if (rank != null && rank.stableId != null && rank.stableId.StartsWith(prefix, StringComparison.Ordinal))
+            for (int i = 0; i < (state.classSkills?.Length ?? 0); i++)
+            {
+                var rank = state.classSkills[i];
+                if (rank.stableId != null && rank.stableId.StartsWith(prefix, StringComparison.Ordinal))
+                {
                     rank.rank = 0;
+                    state.classSkills[i] = rank;
+                }
+            }
             state.classSkills ??= Array.Empty<SkillRankState>();
             state.classSkillRankMigrationVersion = ClassSkillRankMigrationVersion;
         }

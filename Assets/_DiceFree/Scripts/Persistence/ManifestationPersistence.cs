@@ -352,10 +352,10 @@ namespace DiceFree.Persistence
         private static SkillRankState[] PreserveUnknownSkillRanks(SkillRankState[] captured, SkillRankState[] preserved)
         {
             var result = new List<SkillRankState>(captured ?? Array.Empty<SkillRankState>());
-            var knownIds = new HashSet<string>(result.Where(value => value != null && !string.IsNullOrWhiteSpace(value.stableId))
+            var knownIds = new HashSet<string>(result.Where(value => !string.IsNullOrWhiteSpace(value.stableId))
                 .Select(value => value.stableId), StringComparer.Ordinal);
             foreach (var value in preserved ?? Array.Empty<SkillRankState>())
-                if (value != null && !string.IsNullOrWhiteSpace(value.stableId) && knownIds.Add(value.stableId))
+                if (!string.IsNullOrWhiteSpace(value.stableId) && knownIds.Add(value.stableId))
                     result.Add(value);
             return result.ToArray();
         }
