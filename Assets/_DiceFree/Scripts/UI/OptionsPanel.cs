@@ -12,6 +12,7 @@ namespace DiceFree.UI
         private readonly Vector2[] tabScroll = new Vector2[7];
         private Resolution[] availableResolutions = System.Array.Empty<Resolution>();
         private int resolutionIndex;
+        private int requestedWidth,requestedHeight;
         private FullScreenMode fullScreenMode;
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
@@ -36,14 +37,15 @@ namespace DiceFree.UI
             bindings=InputBindings.Current;
             gameplayPreferences=GameplayPreferences.Current;
             availableResolutions=Screen.resolutions;
-            resolutionIndex=FindResolution(Screen.width,Screen.height);
+            requestedWidth=Screen.width;requestedHeight=Screen.height;
+            resolutionIndex=FindResolution(availableResolutions,requestedWidth,requestedHeight);
             fullScreenMode=Screen.fullScreenMode;
             if(PlayerPrefs.HasKey("DiceFree.Graphics.Width"))
             {
                 int width=PlayerPrefs.GetInt("DiceFree.Graphics.Width");
                 int height=PlayerPrefs.GetInt("DiceFree.Graphics.Height");
-                int saved=FindResolution(width,height);
-                if(saved>=0)resolutionIndex=saved;
+                if(width>0&&height>0)
+                {requestedWidth=width;requestedHeight=height;resolutionIndex=FindResolution(availableResolutions,width,height);}
                 int mode=PlayerPrefs.GetInt("DiceFree.Graphics.FullScreenMode",(int)fullScreenMode);
                 if(System.Enum.IsDefined(typeof(FullScreenMode),mode))fullScreenMode=(FullScreenMode)mode;
                 ApplyGraphics();
@@ -130,11 +132,27 @@ namespace DiceFree.UI
             GUILayout.EndScrollView();
             GUILayout.EndArea();
         }
-        private int FindResolution(int width,int height)
+        public static int FindResolution(Resolution[] resolutions,int width,int height)
         {
-            for(int i=0;i<availableResolutions.Length;i++)
-                if(availableResolutions[i].width==width&&availableResolutions[i].height==height)return i;
-            return availableResolutions.Length==0?-1:availableResolutions.Length-1;
+            if(resolutions==null)return -1;
+            for(int i=0;i<resolutions.Length;i++)
+                if(resolutions[i].width==width&&resolutions[i].height==height)return i;
+            return -1;
+        }
+        public static Vector2Int ResolveRequestedResolution(int selectedIndex,Resolution[] resolutions,
+            int requestedWidth,int requestedHeight)
+        {
+            if(resolutions!=null&&selectedIndex>=0&&selectedIndex<resolutions.Length)
+                return new Vector2Int(resolutions[selectedIndex].width,resolutions[selectedIndex].height);
+            return new Vector2Int(requestedWidth,requestedHeight);
+        }
+        private void SelectResolution(int index)
+        {
+            if(index<0||index>=availableResolutions.Length)return;
+            resolutionIndex=index;
+            requestedWidth=availableResolutions[index].width;
+            requestedHeight=availableResolutions[index].height;
+            ApplyGraphics();
         }
         private void DrawGraphics()
         {
@@ -145,15 +163,16 @@ namespace DiceFree.UI
             GUILayout.BeginHorizontal();
             GUI.enabled=availableResolutions.Length>1;
             if(GUILayout.Button("◀",GUILayout.Width(48)))
-            {resolutionIndex=(resolutionIndex-1+availableResolutions.Length)%availableResolutions.Length;ApplyGraphics();}
+                SelectResolution(resolutionIndex<0?availableResolutions.Length-1:
+                    (resolutionIndex-1+availableResolutions.Length)%availableResolutions.Length);
             GUI.enabled=true;
             string resolution=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
                 ? availableResolutions[resolutionIndex].width+" × "+availableResolutions[resolutionIndex].height
-                : Screen.width+" × "+Screen.height;
+                : requestedWidth+" × "+requestedHeight+" (custom / unavailable)";
             GUILayout.Label(resolution,GUILayout.Width(180));
             GUI.enabled=availableResolutions.Length>1;
             if(GUILayout.Button("▶",GUILayout.Width(48)))
-            {resolutionIndex=(resolutionIndex+1)%availableResolutions.Length;ApplyGraphics();}
+                SelectResolution(resolutionIndex<0?0:(resolutionIndex+1)%availableResolutions.Length);
             GUI.enabled=true;
             GUILayout.EndHorizontal();
             GUILayout.Space(12);
@@ -168,16 +187,18 @@ namespace DiceFree.UI
             GUILayout.Space(12);
             if(GUILayout.Button("Use current desktop resolution"))
             {
-                int desktop=FindResolution(Display.main.systemWidth,Display.main.systemHeight);
-                if(desktop>=0){resolutionIndex=desktop;ApplyGraphics();}
+                int desktop=FindResolution(availableResolutions,Display.main.systemWidth,Display.main.systemHeight);
+                requestedWidth=Display.main.systemWidth;requestedHeight=Display.main.systemHeight;
+                if(desktop>=0)resolutionIndex=desktop;
+                else resolutionIndex=-1;
+                ApplyGraphics();
             }
         }
         private void ApplyGraphics()
         {
-            int width=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
-                ? availableResolutions[resolutionIndex].width:Screen.width;
-            int height=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
-                ? availableResolutions[resolutionIndex].height:Screen.height;
+            var requested=ResolveRequestedResolution(resolutionIndex,availableResolutions,requestedWidth,requestedHeight);
+            int width=requested.x>0?requested.x:Screen.width;
+            int height=requested.y>0?requested.y:Screen.height;
             Screen.SetResolution(width,height,fullScreenMode);
             PlayerPrefs.SetInt("DiceFree.Graphics.Width",width);
             PlayerPrefs.SetInt("DiceFree.Graphics.Height",height);

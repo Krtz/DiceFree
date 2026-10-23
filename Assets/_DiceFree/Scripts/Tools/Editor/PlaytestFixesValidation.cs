@@ -77,6 +77,12 @@ namespace DiceFree.EditorTools
             Check(Mathf.Approximately(range.x,29.8f)&&Mathf.Approximately(range.y,30f),
                 "Primary attribute contribution must be 1% lower at minimum damage than maximum damage.");
             UnityEngine.Object.Destroy(rangeProbe);
+            var listedModes=Screen.resolutions;
+            Check(OptionsPanel.FindResolution(listedModes,-1,-1)==-1,
+                "An unavailable current/saved display mode must stay explicitly unlisted.");
+            var retainedMode=OptionsPanel.ResolveRequestedResolution(-1,listedModes,1280,800);
+            Check(retainedMode.x==1280&&retainedMode.y==800,
+                "Changing display mode substituted a listed resolution for the requested window dimensions.");
             var codex=hero.GetComponent<CodexProgression>();var overworld=CombatActor.All.First(a=>a!=hero&&a.Stats.Definition.stableId=="enemy.crop-slime");
             int kills=codex.Monsters.FirstOrDefault(m=>m.monsterId==overworld.Stats.Definition.stableId)?.kills??0;
             overworld.Health.ApplyDamage(hero,new DamageResult{mitigated=overworld.Health.Maximum*2});
@@ -98,10 +104,39 @@ namespace DiceFree.EditorTools
             repeatRecord.definitionVersion=repeatSlime.version;journal.RestoreState(repeatState);
             Check(!tracker.TrackedQuests.Contains(repeatSlime),"Unaccepted repeatable quest appeared in tracker.");
             var wolfQuest=journal.Definitions.Single(q=>q.stableId=="quest.cornberg.repeat-wolf-hunt");
-            Check(wolfQuest.repeatable&&wolfQuest.stages[0].kind==ObjectiveKind.Any&&
-                wolfQuest.stages[0].alternatives.Any(leaf=>leaf.familyId=="ironpine.wolf"&&leaf.count==15)&&
-                wolfQuest.stages[0].alternatives.Any(leaf=>leaf.familyId=="ironpine.alpha-wolf"&&leaf.count==15),
-                "Repeatable 15-wolf quest must accept either Ironpine wolf family.");
+            Check(wolfQuest.repeatable&&wolfQuest.stages[0].kind==ObjectiveKind.Kill&&
+                wolfQuest.stages[0].count==15&&wolfQuest.stages[0].familyIds.Contains("ironpine.wolf")&&
+                wolfQuest.stages[0].familyIds.Contains("ironpine.alpha-wolf"),
+                "Repeatable 15-wolf quest must use one shared counter for both Ironpine wolf families.");
+            var wolfBaseline=journal.CaptureState();var mixedState=journal.CaptureState();
+            var mixedRecord=mixedState.Single(p=>p.questId==wolfQuest.stableId);
+            mixedRecord.definitionVersion=wolfQuest.version;mixedRecord.status=QuestStatus.Active;
+            mixedRecord.stage=mixedRecord.count=0;mixedRecord.alternatives=Array.Empty<ObjectiveCount>();
+            journal.RestoreState(mixedState);
+            var wolfFacts=new SemanticGameEventHub();journal.BindDungeonEvents(wolfFacts);
+            wolfFacts.Publish(new MonsterKilledEvent("unrelated-boar","ironpine.boar"));
+            Check(journal.GetProgress(wolfQuest.stableId).count==0,
+                "The shared wolf objective credited an unrelated monster family.");
+            for(int i=0;i<14;i++)wolfFacts.Publish(new MonsterKilledEvent("ordinary-wolf-"+i,"ironpine.wolf"));
+            wolfFacts.Publish(new MonsterKilledEvent("alpha-wolf-1","ironpine.alpha-wolf"));
+            var mixedProgress=journal.GetProgress(wolfQuest.stableId);
+            Check(mixedProgress.count==15&&mixedProgress.status==QuestStatus.ReadyToTurnIn,
+                "Fourteen ordinary wolves plus one Alpha Wolf did not complete the shared 15-wolf objective.");
+            journal.UnbindDungeonEvents();
+            var legacyWolf=journal.CaptureState();var legacyWolfRecord=legacyWolf.Single(p=>p.questId==wolfQuest.stableId);
+            legacyWolfRecord.definitionVersion=1;legacyWolfRecord.status=QuestStatus.Active;
+            legacyWolfRecord.stage=0;legacyWolfRecord.count=0;
+            legacyWolfRecord.alternatives=new[]{new ObjectiveCount{objectiveId="ironpine-wolves",count=14},
+                new ObjectiveCount{objectiveId="ironpine-alpha-wolves",count=1}};
+            journal.RestoreState(legacyWolf);
+            var migratedWolf=journal.GetProgress(wolfQuest.stableId);
+            Check(migratedWolf.definitionVersion==2&&migratedWolf.count==15&&
+                migratedWolf.alternatives.Length==0&&migratedWolf.status==QuestStatus.ReadyToTurnIn,
+                "Legacy wolf progress was not merged into the shared counter.");
+            journal.RestoreState(journal.CaptureState());
+            Check(journal.GetProgress(wolfQuest.stableId).count==15,
+                "Wolf progress migration repeated or lost progress after reload.");
+            journal.RestoreState(wolfBaseline);
             repeatRecord.status=QuestStatus.Active;journal.RestoreState(repeatState);
             var dungeonFacts=new SemanticGameEventHub();journal.BindDungeonEvents(dungeonFacts);
             dungeonFacts.Publish(new MonsterKilledEvent("enemy.dungeon-slime-validation","enemy-family.slime"));
@@ -124,11 +159,32 @@ namespace DiceFree.EditorTools
             var healthPotion=inventory.Resolve("item.potion.minor-health");
             var inventoryPanel=hero.GetComponent<InventoryPanel>();var heroHealth=hero.GetComponent<Health>();
             Check(inventoryPanel!=null&&heroHealth!=null,"Consumable use presentation missing.");
+            var fullHealthPotion=inventory.Grant(healthPotion.stableId);
+            Check(!inventoryPanel.RunItemAction(fullHealthPotion.instanceId,"Use",out _)&&
+                inventory.Find(fullHealthPotion.instanceId)!=null&&Mathf.Approximately(heroHealth.Current,heroHealth.Maximum),
+                "A no-benefit potion attempt consumed its item or changed health.");
+            inventory.Remove(fullHealthPotion.instanceId);
             float savedHp=heroHealth.Current;heroHealth.SetEncounterHp(Mathf.Max(1,heroHealth.Maximum-15));
+            float beforeFailedUse=heroHealth.Current;
+            Check(!inventoryPanel.RunItemAction("missing-potion-instance","Use",out _)&&
+                Mathf.Approximately(heroHealth.Current,beforeFailedUse),
+                "A failed potion lookup restored health without consuming an item.");
             var potionInstance=inventory.Grant(healthPotion.stableId);
-            Check(inventoryPanel.RunItemAction(potionInstance.instanceId,"Use",out _)&&
-                Mathf.Approximately(heroHealth.Current,heroHealth.Maximum)&&inventory.Find(potionInstance.instanceId)==null,
-                "Minor health potion did not restore health and consume one bag item.");
+            var guardedPotion=inventory.Grant(healthPotion.stableId);bool reentrantPotionUsed=true;
+            Action<float> potionObserver=_=>reentrantPotionUsed=inventoryPanel.RunItemAction(
+                guardedPotion.instanceId,"Use",out _);
+            heroHealth.Healed+=potionObserver;
+            bool firstPotionUsed=inventoryPanel.RunItemAction(potionInstance.instanceId,"Use",out _);
+            heroHealth.Healed-=potionObserver;
+            Check(firstPotionUsed&&Mathf.Approximately(heroHealth.Current,heroHealth.Maximum)&&
+                inventory.Find(potionInstance.instanceId)==null&&!reentrantPotionUsed&&
+                inventory.Find(guardedPotion.instanceId)!=null,
+                "Potion callback re-entry duplicated use or removed the second potion.");
+            float afterFirstUse=heroHealth.Current;
+            Check(!inventoryPanel.RunItemAction(potionInstance.instanceId,"Use",out _)&&
+                Mathf.Approximately(heroHealth.Current,afterFirstUse),
+                "Repeated use of a consumed potion applied restoration again.");
+            inventory.Remove(guardedPotion.instanceId);
             heroHealth.SetEncounterHp(savedHp);
             Check(hero.Motor.Teleport(shop.ApproachPosition+Vector3.back*1.5f)&&shop.CanInteract(hero),"Merchant interaction broken by NPC capsule.");
             wallet.Grant(shop.Offers[0].goldPrice);int beforeItems=inventory.Items.Length;long purchaseGold=wallet.Gold;bool purchaseAtomic=false,purchaseReentered=false;

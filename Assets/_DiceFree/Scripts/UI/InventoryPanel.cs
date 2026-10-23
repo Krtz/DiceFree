@@ -26,6 +26,7 @@ namespace DiceFree.UI
         private InputAction toggle;
         private bool open;
         private Vector2 scroll;
+        private bool consumableUseInProgress;
 
         public bool IsOpen => open;
         public override bool BlocksPointer => open;
@@ -254,14 +255,43 @@ namespace DiceFree.UI
         private bool UseConsumable(string instanceId,ItemDefinition definition,out string message)
         {
             message="Cannot use this item.";
-            if(definition==null||!definition.consumable||GetComponent<CombatActor>()?.Alive!=true)return false;
-            float restored=GetComponent<Health>()?.Heal(definition.restoreHealth)??0;
+            if(consumableUseInProgress||definition==null||!definition.consumable||
+               GetComponent<CombatActor>()?.Alive!=true)return false;
+            var health=GetComponent<Health>();
             var resources=GetComponent<ActorResourceController>();
-            if(resources!=null&&!string.IsNullOrWhiteSpace(definition.restoreResourceId))
-                restored+=resources.Restore(definition.restoreResourceId,definition.restoreResourceAmount);
-            if(restored<=0.001f){message="You cannot benefit from that potion right now.";return false;}
-            if(!inventory.Remove(instanceId)){message="The potion could not be removed from your bag.";return false;}
-            message="Used "+definition.displayName+".";return true;
+            var stats=GetComponent<ActorStats>();
+            bool canRestoreHealth=health!=null&&definition.restoreHealth>0&&
+                health.Current<health.Maximum&&stats!=null&&stats.HealingReceived>0;
+            bool canRestoreResource=resources!=null&&!string.IsNullOrWhiteSpace(definition.restoreResourceId)&&
+                definition.restoreResourceAmount>0&&resources.Has(definition.restoreResourceId)&&
+                resources.Current(definition.restoreResourceId)<resources.Maximum(definition.restoreResourceId);
+            if(!canRestoreHealth&&!canRestoreResource)
+            {message="You cannot benefit from that potion right now.";return false;}
+            var item=inventory.Find(instanceId);
+            if(item==null){message="The potion could not be removed from your bag.";return false;}
+            consumableUseInProgress=true;
+            try
+            {
+                if(!inventory.Remove(instanceId))
+                {message="The potion could not be removed from your bag.";return false;}
+                // Removal commits before resource callbacks run. If an inventory observer filled
+                // the relevant resource meanwhile, return the same item rather than waste it.
+                canRestoreHealth=health!=null&&definition.restoreHealth>0&&
+                    health.Current<health.Maximum&&stats!=null&&stats.HealingReceived>0;
+                canRestoreResource=resources!=null&&!string.IsNullOrWhiteSpace(definition.restoreResourceId)&&
+                    definition.restoreResourceAmount>0&&resources.Has(definition.restoreResourceId)&&
+                    resources.Current(definition.restoreResourceId)<resources.Maximum(definition.restoreResourceId);
+                if(!canRestoreHealth&&!canRestoreResource)
+                {
+                    inventory.RestoreDroppedItem(item);
+                    message="You cannot benefit from that potion right now.";
+                    return false;
+                }
+                if(canRestoreHealth)health.Heal(definition.restoreHealth);
+                if(canRestoreResource)resources.Restore(definition.restoreResourceId,definition.restoreResourceAmount);
+                message="Used "+definition.displayName+".";return true;
+            }
+            finally{consumableUseInProgress=false;}
         }
 
         private static string ShortName(string value)

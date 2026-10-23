@@ -101,6 +101,25 @@ namespace DiceFree.Quests
                     if(copy.status==QuestStatus.Active&&copy.count>=15)
                         copy.status=QuestStatus.ReadyToTurnIn;
                 }
+                if(copy.questId=="quest.cornberg.repeat-wolf-hunt"&&
+                   copy.definitionVersion==1&&Array.Exists(definitions,d=>d.stableId==copy.questId&&d.version==2))
+                {
+                    if(copy.alternatives==null)copy.alternatives=Array.Empty<ObjectiveCount>();
+                    int ordinary=copy.alternatives.Where(value=>value!=null&&value.objectiveId=="ironpine-wolves")
+                        .Sum(value=>Mathf.Max(0,value.count));
+                    int alpha=copy.alternatives.Where(value=>value!=null&&value.objectiveId=="ironpine-alpha-wolves")
+                        .Sum(value=>Mathf.Max(0,value.count));
+                    copy.count=Mathf.Min(15,ordinary+alpha);
+                    copy.alternatives=Array.Empty<ObjectiveCount>();
+                    copy.definitionVersion=2;
+                    copy.stage=0;
+                    if(copy.status==QuestStatus.Completed)copy.status=QuestStatus.Available;
+                    else if(copy.status==QuestStatus.Active&&copy.count>=15)
+                        copy.status=QuestStatus.ReadyToTurnIn;
+                    else if(copy.status==QuestStatus.ReadyToTurnIn&&copy.count<15)
+                        copy.status=QuestStatus.Active;
+                    if(copy.status==QuestStatus.Available)copy.count=0;
+                }
                 progress.Add(copy);
             }
             foreach (var definition in definitions)
@@ -167,7 +186,10 @@ namespace DiceFree.Quests
                 var objective = definition.stages[state.stage];
                 if (!ObjectiveProgress.Apply(objective, state, leaf => leaf.kind == kind &&
                     (string.IsNullOrEmpty(leaf.contentId) || leaf.contentId == content) &&
-                    (string.IsNullOrEmpty(leaf.familyId) || leaf.familyId == family) &&
+                    ((leaf.familyIds == null || leaf.familyIds.Length == 0)
+                        ? string.IsNullOrEmpty(leaf.familyId) || leaf.familyId == family
+                        : (!string.IsNullOrEmpty(leaf.familyId) && leaf.familyId == family) ||
+                          Array.IndexOf(leaf.familyIds, family) >= 0) &&
                     (kind != ObjectiveKind.ReachArea || leaf.areaId == area) &&
                     (kind != ObjectiveKind.TalkTo || string.IsNullOrEmpty(leaf.conversationId) || leaf.conversationId == conversation) &&
                     (eligible == null || eligible(leaf)))) continue;

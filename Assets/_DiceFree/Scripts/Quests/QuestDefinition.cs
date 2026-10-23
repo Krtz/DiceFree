@@ -16,6 +16,8 @@ namespace DiceFree.Quests
         public string contentId;
         public bool dungeonBossOnly;
         public string familyId;
+        // Optional additional kill families counted by the same objective total.
+        public string[] familyIds = Array.Empty<string>();
         public string areaId;
         public string conversationId;
         [Min(1)] public int count = 1;

@@ -65,20 +65,16 @@ namespace DiceFree.EditorTools
                 if(wolves==null){wolves=ScriptableObject.CreateInstance<QuestDefinition>();
                     AssetDatabase.CreateAsset(wolves,"Assets/_DiceFree/Settings/Enemies/Cornberg repeat wolf hunt.asset");}
                 wolves.stableId="quest.cornberg.repeat-wolf-hunt";
-                wolves.title="Another 15 Wolves";wolves.version=1;wolves.repeatable=true;
+                wolves.title="Another 15 Wolves";wolves.version=2;wolves.repeatable=true;
                 wolves.completedQuestIds=new[]{CornbergSurgeSetup.QuestId};
                 wolves.offer="The wolves on the old road keep threatening travelers. Defeat fifteen and report back.";
                 wolves.activeDialogue="Fifteen wolves. I'll have your next reward ready.";
                 wolves.locationHint="Return to Mira in Cornberg after killing 15 wolves.";
                 wolves.rewardXp=400;
-                wolves.stages=new[]{new QuestObjective{kind=ObjectiveKind.Any,count=1,
-                    instruction="Defeat 15 wolves",alternatives=new QuestLeaf[]{
-                        new QuestLeaf{kind=ObjectiveKind.Kill,objectiveId="ironpine-wolves",
-                            familyId="ironpine.wolf",count=15,creditMode=QuestCreditMode.NearbyParty,
-                            creditRadius=50,instruction="Defeat 15 Ironpine wolves"},
-                        new QuestLeaf{kind=ObjectiveKind.Kill,objectiveId="ironpine-alpha-wolves",
-                            familyId="ironpine.alpha-wolf",count=15,creditMode=QuestCreditMode.NearbyParty,
-                            creditRadius=50,instruction="Defeat 15 Alpha Wolves"}}}};
+                wolves.stages=new[]{new QuestObjective{kind=ObjectiveKind.Kill,count=15,
+                    familyIds=new[]{"ironpine.wolf","ironpine.alpha-wolf"},
+                    creditMode=QuestCreditMode.NearbyParty,creditRadius=50,
+                    instruction="Defeat 15 wolves"}};
                 EditorUtility.SetDirty(wolves);
                 if(!journal.Definitions.Contains(quest))
                     journal.Configure(journal.Definitions.Concat(new[]{quest}).ToArray());
@@ -97,7 +93,7 @@ namespace DiceFree.EditorTools
                 return new{success=true,questId=QuestId,
                     repeatable=quest.repeatable,kills=15,
                     rewardXp=quest.rewardXp,wolfQuest=wolves.stableId,wolfKills=15,
-                    wolfFamily=wolves.stages[0].familyId,questNpc=mira.name,
+                    wolfFamilies=wolves.stages[0].familyIds,questNpc=mira.name,
                     prerequisites=quest.completedQuestIds};
             }
             finally{if(backup.Length>0)EditorSceneManager.RestoreSceneManagerSetup(backup);}
