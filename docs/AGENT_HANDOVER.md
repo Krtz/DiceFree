@@ -50,19 +50,25 @@ inventory for +30 health or +25 mana. The Big Slime authored offsets currently
 resolve to 4x minimum / 5x maximum raw attack damage (16–20 from a 4 base).
 CodexPanel now has a book-like paper/cover treatment.
 
-The follow-up combat/input pass keeps auto-retaliation idle-only while the player is travelling or has queued orders, displays attack ranges as whole numbers, halves Magically Touched's natural mana regeneration (5 to 2.5 base and 0.15 to 0.075 per INT/SPI), supports repeat attack-move targeting after Shift+X while Shift remains held, and applies primary-attribute scaling at 99% on the minimum end versus 100% on the maximum end. The repeat targeting flag is cleared whenever targeting is cancelled. These changes are static-reviewed only; the blocked Editor prevented compile and gameplay validation.
+The follow-up combat/input pass keeps auto-retaliation idle-only while the player is travelling or has queued orders, displays attack ranges as whole numbers, halves Magically Touched's natural mana regeneration (5 to 2.5 base and 0.15 to 0.075 per INT/SPI), supports repeat attack-move targeting after Shift+X while Shift remains held, and applies primary-attribute scaling at 99% on the minimum end versus 100% on the maximum end across the attack damage paths. The repeat targeting flag is cleared whenever targeting is cancelled. The focused Editor harness now includes a deterministic assertion for the 99%/100% attribute range.
 
 Editor regression source was extended in `PlaytestFixesValidation.cs`, but it
-has NOT run. The connected Unity CLI/Editor is currently unavailable from this
-session; no successful compile, focused Play Mode run, architecture check,
-visual inspection, or fresh Windows build has been obtained. Treat every
-runtime/UI/quest change in this section as unverified until those checks are
-run on Unity 6000.6.3f1. No commit, push, or merge was made. `main` was not
-changed. Preserve the untracked `Assets/Settings/` and Package Manager settings
-changes. Next step: restore the connected licensed Unity Editor/CLI and run the
-project compile/import followed by the focused playtest-fixes harness, then
-review screenshots and fix any actual errors before producing a new Windows
-Development build.
+has NOT run. Commit `164e10f4ef6d4530465833da7a0259e3c3ec980c` contains the
+implementation and was pushed to `origin/integration/world1-foundation` after
+rebasing over remote documentation updates through `46eb3aa0120035be39409cb1d8f8c4641401953b`.
+No merge was made. The connected Editor remains inaccessible: `unity status`
+reports `STATUS_DESCRIPTOR_UNREADABLE`, and the installed Editor list is empty
+in this session. The supported CLI build attempt stopped before compilation
+because Unity 6000.6.3f1 is not installed in this environment; no executable
+was produced. Therefore no successful compile, focused Play Mode run,
+architecture check, visual inspection, Windows build, or startup test has been
+obtained. Treat runtime/UI/quest behavior here as unverified until Unity
+6000.6.3f1 is restored and those checks are run. `main` was not changed.
+Preserve the untracked `Assets/Settings/` and Package Manager settings changes.
+Next step: restore/register the licensed Editor in this environment, wait for
+import/compile, run `dicefree.playtest-fixes.playtest` and the architecture,
+policy, and managed-reference commands, inspect generated screenshots, then
+build a Windows Development player and verify startup/normal shutdown.
 
 - User explicitly requested all downloaded assets' listed website licenses. Completed all60 files (59ZIP + WarriorGirl standaloneGLB), covering59 distinct model pages. Removed provisional license-unknown language from current catalog/registry and separated page licenses from provenance/technical concerns.
 - Stated license totals by FILE: 55 CC BY4.0, 2 FreeStandard (DuatGolem and MedievalCivilian3), BlackDragon1 CC BY-NC4.0 (original3DHaupt page), WarriorGirl ZIP+GLB2 CC BY-NC-SA4.0 (NORBERTO-3D, one model/two formats). Every row now links exact source, creator, versioned terms and matching evidence.
