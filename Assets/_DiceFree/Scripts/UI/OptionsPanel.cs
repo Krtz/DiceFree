@@ -7,9 +7,12 @@ namespace DiceFree.UI
     [DefaultExecutionOrder(-10000)]
     public sealed class OptionsPanel : HudWidget
     {
-        public enum OptionsTab { Gameplay, Audio, HUD, Keybinds, Session, Credits }
+        public enum OptionsTab { Gameplay, Graphics, Audio, HUD, Keybinds, Session, Credits }
         public OptionsTab SelectedTab { get; private set; } = OptionsTab.Gameplay;
-        private readonly Vector2[] tabScroll = new Vector2[6];
+        private readonly Vector2[] tabScroll = new Vector2[7];
+        private Resolution[] availableResolutions = System.Array.Empty<Resolution>();
+        private int resolutionIndex;
+        private FullScreenMode fullScreenMode;
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private IPlayerAudioSettings audioSettings;
@@ -32,6 +35,19 @@ namespace DiceFree.UI
         {
             bindings=InputBindings.Current;
             gameplayPreferences=GameplayPreferences.Current;
+            availableResolutions=Screen.resolutions;
+            resolutionIndex=FindResolution(Screen.width,Screen.height);
+            fullScreenMode=Screen.fullScreenMode;
+            if(PlayerPrefs.HasKey("DiceFree.Graphics.Width"))
+            {
+                int width=PlayerPrefs.GetInt("DiceFree.Graphics.Width");
+                int height=PlayerPrefs.GetInt("DiceFree.Graphics.Height");
+                int saved=FindResolution(width,height);
+                if(saved>=0)resolutionIndex=saved;
+                int mode=PlayerPrefs.GetInt("DiceFree.Graphics.FullScreenMode",(int)fullScreenMode);
+                if(System.Enum.IsDefined(typeof(FullScreenMode),mode))fullScreenMode=(FullScreenMode)mode;
+                ApplyGraphics();
+            }
             foreach(var component in GetComponents<MonoBehaviour>())
                 if(component is IPlayerAudioSettings audio){audioSettings=audio;break;}
         }
@@ -100,6 +116,7 @@ namespace DiceFree.UI
             switch(SelectedTab)
             {
                 case OptionsTab.Gameplay: DrawGameplay();break;
+                case OptionsTab.Graphics: DrawGraphics();break;
                 case OptionsTab.Audio: DrawAudio();break;
                 case OptionsTab.HUD:
                     if(HudLayoutManager.Current!=null)
@@ -112,6 +129,60 @@ namespace DiceFree.UI
             }
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+        }
+        private int FindResolution(int width,int height)
+        {
+            for(int i=0;i<availableResolutions.Length;i++)
+                if(availableResolutions[i].width==width&&availableResolutions[i].height==height)return i;
+            return availableResolutions.Length==0?-1:availableResolutions.Length-1;
+        }
+        private void DrawGraphics()
+        {
+            GUILayout.Label("Graphics",GUILayout.Height(26));
+            GUILayout.Label("Display changes apply immediately and are saved on this PC.");
+            GUILayout.Space(12);
+            GUILayout.Label("Resolution");
+            GUILayout.BeginHorizontal();
+            GUI.enabled=availableResolutions.Length>1;
+            if(GUILayout.Button("◀",GUILayout.Width(48)))
+            {resolutionIndex=(resolutionIndex-1+availableResolutions.Length)%availableResolutions.Length;ApplyGraphics();}
+            GUI.enabled=true;
+            string resolution=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
+                ? availableResolutions[resolutionIndex].width+" × "+availableResolutions[resolutionIndex].height
+                : Screen.width+" × "+Screen.height;
+            GUILayout.Label(resolution,GUILayout.Width(180));
+            GUI.enabled=availableResolutions.Length>1;
+            if(GUILayout.Button("▶",GUILayout.Width(48)))
+            {resolutionIndex=(resolutionIndex+1)%availableResolutions.Length;ApplyGraphics();}
+            GUI.enabled=true;
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12);
+            GUILayout.Label("Display mode");
+            string[] labels={"Windowed","Borderless fullscreen","Maximized window","Exclusive fullscreen"};
+            FullScreenMode[] modes={FullScreenMode.Windowed,FullScreenMode.FullScreenWindow,
+                FullScreenMode.MaximizedWindow,FullScreenMode.ExclusiveFullScreen};
+            int selected=System.Array.IndexOf(modes,fullScreenMode);
+            int next=GUILayout.SelectionGrid(selected,labels,2,GUILayout.MinHeight(64));
+            if(next>=0&&next<modes.Length&&modes[next]!=fullScreenMode)
+            {fullScreenMode=modes[next];ApplyGraphics();}
+            GUILayout.Space(12);
+            if(GUILayout.Button("Use current desktop resolution"))
+            {
+                int desktop=FindResolution(Display.main.systemWidth,Display.main.systemHeight);
+                if(desktop>=0){resolutionIndex=desktop;ApplyGraphics();}
+            }
+        }
+        private void ApplyGraphics()
+        {
+            int width=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
+                ? availableResolutions[resolutionIndex].width:Screen.width;
+            int height=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
+                ? availableResolutions[resolutionIndex].height:Screen.height;
+            Screen.SetResolution(width,height,fullScreenMode);
+            PlayerPrefs.SetInt("DiceFree.Graphics.Width",width);
+            PlayerPrefs.SetInt("DiceFree.Graphics.Height",height);
+            PlayerPrefs.SetInt("DiceFree.Graphics.FullScreenMode",(int)fullScreenMode);
+            PlayerPrefs.Save();
         }
         private void DrawGameplay()
         {

@@ -59,9 +59,7 @@ namespace DiceFree.Core
                         if (bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
                     }
                     if (blocks) foreach (var mesh in tree.Renderers)
-                        if(mesh!=null && (mesh.name.Contains("Foliage")||
-                            mesh.name.Contains("LeafAccent")||mesh.name.Contains("Crown")||
-                            mesh.name.Contains("Canopy"))) visibleThisFrame.Add(mesh);
+                        if(mesh!=null) visibleThisFrame.Add(mesh);
                 }
             }
 

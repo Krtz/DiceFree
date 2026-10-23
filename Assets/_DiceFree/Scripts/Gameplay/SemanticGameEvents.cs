@@ -12,8 +12,9 @@ namespace DiceFree.Gameplay
 
     public readonly struct MonsterKilledEvent : ISemanticGameEvent
     {
-        public readonly string monsterId;
-        public MonsterKilledEvent(string value) => monsterId = value;
+        public readonly string monsterId,familyId;
+        public MonsterKilledEvent(string value,string family = null)
+        {monsterId=value;familyId=family;}
     }
 
     public readonly struct DropObservedEvent : ISemanticGameEvent

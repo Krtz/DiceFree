@@ -34,6 +34,13 @@ namespace DiceFree.UI
             if (!string.IsNullOrWhiteSpace(definition.flavor))
                 text.AppendLine().AppendLine().Append(definition.flavor.Trim());
 
+            if(definition.consumable)
+            {
+                text.AppendLine().Append("Use:");
+                if(definition.restoreHealth>0)text.Append(" restore up to ").Append(definition.restoreHealth.ToString("0.#")).Append(" health");
+                if(definition.restoreResourceAmount>0)text.Append(" restore up to ").Append(definition.restoreResourceAmount.ToString("0.#")).Append(" ").Append(definition.restoreResourceId);
+            }
+
             return text.ToString();
         }
 

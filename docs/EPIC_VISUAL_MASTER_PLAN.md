@@ -16,6 +16,14 @@ Every major design choice should pass four questions:
 
 Target feeling: Warcraft III / Twilight's Eve ORPG's iconic class fantasy and progression, with modern authoring quality, tactile animation, clear FFXIV-like boss telegraphs and a distinct Diceworld identity. References are mood targets, not models or art to copy.
 
+Axel's October 23, 2026 Twilight's Eve screenshots further clarify the desired
+player-facing presentation: a rich isometric adventure framed by a substantial
+fantasy HUD, with atmospheric regions and explicit feedback for dialogue,
+objectives, rewards, abilities, travel and dungeon outcomes. Treat the HUD as a
+readable companion to exploration and combat, not as a copied Warcraft layout or
+a reason to obscure the world. Detailed observations and translation guardrails
+are in `docs/TWILIGHTS_EVE_REFERENCE.md` and `docs/UI_HUD.md`.
+
 ## Decisions — locked visual philosophy
 
 ### 1. Class identity is the protagonist

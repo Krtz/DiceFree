@@ -167,7 +167,7 @@ namespace DiceFree.Combat
             float bonus=1+GreatbladeProgressionRules.DamageBonusPct(skills.Rank(Kind.GreatswordMastery))/100f;
             if(cryUntil>Time.time)bonus+= (tuning.cryDamagePercent+3*(skills.Rank(Kind.BattleCry)-1))/100f;
             var packet=resolution.Hit.missed?new DamageResult{action=resolution,channel=attack.channel}:
-                DamageResolver.Calculate(actor.Stats,target.Stats,attack,resolution.Critical,coefficient,attack.RollDamageMultiplier()*bonus*extra);
+                DamageResolver.Calculate(actor.Stats,target.Stats,attack,resolution.Critical,coefficient,attack.RollDamageMultiplier(actor.Stats.Attributes,bonus*extra,coefficient));
             packet.action=resolution;packet=target.Health.ApplyPacket(actor,packet);
             if(packet.applied+packet.absorbed<=0)return false;
             LastCastHits++;

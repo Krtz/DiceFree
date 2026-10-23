@@ -4,7 +4,6 @@ using System.Linq;
 using DiceFree.Advancement;
 using DiceFree.Characters;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace DiceFree.World
@@ -22,6 +21,7 @@ namespace DiceFree.World
         private TraversalMotor motor;
         private AdvancementController advancement;
         private bool busy;
+        private DiceFree.Input.InputBindings bindings;
         private string sceneName = DefaultTrialScene;
         public bool InsideTrial { get; private set; }
         public bool Busy => busy;
@@ -31,6 +31,7 @@ namespace DiceFree.World
         {
             motor = GetComponent<TraversalMotor>();
             advancement = GetComponent<AdvancementController>();
+            bindings=DiceFree.Input.InputBindings.Current;
             SceneManager.sceneLoaded += OnMapLoaded;
             SceneManager.sceneUnloaded += OnMapUnloaded;
         }
@@ -145,15 +146,15 @@ namespace DiceFree.World
 
         private void Update()
         {
-            if (!InsideTrial || busy || Keyboard.current == null) return;
-            if (Keyboard.current.eKey.wasPressedThisFrame) Exit();
+            if (!InsideTrial || busy || bindings==null) return;
+            if (bindings.Action("Gameplay/Interact").WasPressedThisFrame()) Exit();
         }
 
         private void OnGUI()
         {
             if (!InsideTrial || busy) return;
             GUI.Box(new Rect(Screen.width*.5f-230,15,460,53),
-                "Mountain Trial — choose your Way to advance\nPress E to return to Cornberg");
+                "Mountain Trial — choose your Way to advance\nPress "+DiceFree.Input.InputBindings.Display(bindings.Action("Gameplay/Interact"))+" to return to Cornberg");
         }
     }
 
@@ -167,6 +168,7 @@ namespace DiceFree.World
         [SerializeField] private Transform rightDoor;
         private Quaternion leftClosed,rightClosed;
         private MountainTrialTraveller traveller;
+        private DiceFree.Input.InputBindings bindings;
 
         public void Configure(string scene,int level)
         {
@@ -183,6 +185,7 @@ namespace DiceFree.World
             leftClosed=leftDoor != null ? leftDoor.localRotation : Quaternion.identity;
             rightClosed=rightDoor != null ? rightDoor.localRotation : Quaternion.identity;
             traveller=FindAnyObjectByType<MountainTrialTraveller>();
+            bindings=DiceFree.Input.InputBindings.Current;
         }
 
         private void Update()
@@ -199,7 +202,7 @@ namespace DiceFree.World
             float range=Vector3.Distance(
                 traveller.transform.position,transform.position);
             if (range>25f)return;
-            if (Keyboard.current!=null && Keyboard.current.eKey.wasPressedThisFrame)
+            if (bindings!=null && bindings.Action("Gameplay/Interact").WasPressedThisFrame())
                 traveller.Enter(trialSceneName);
         }
 
@@ -209,7 +212,7 @@ namespace DiceFree.World
             float range=Vector3.Distance(traveller.transform.position,transform.position);
             if (range>25f)return;
             string message=traveller.Eligible
-                ? "Novice Mountain — Gate open. Press E to enter the separate advancement trial."
+                ? "Novice Mountain — Gate open. Press "+DiceFree.Input.InputBindings.Display(bindings.Action("Gameplay/Interact"))+" to enter the separate advancement trial."
                 : $"Novice Mountain — sealed. Reach level {minimumLevel} as a Novice to enter.";
             GUI.Box(new Rect(Screen.width*.5f-250,78,500,37),message);
         }

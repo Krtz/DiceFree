@@ -44,6 +44,16 @@ Classic mouse movement is the primary balance target. There is no universal dodg
 Primary structural inspiration:
 - Warcraft III persistent ORPG custom maps, especially Twilight's Eve ORPG.
 
+The desired presentation also draws on the feeling of a lived-in classic ORPG:
+an expressive isometric world, recognizable player and enemy silhouettes,
+distinct regional atmospheres, and an information-rich HUD that makes quests,
+combat choices and character growth easy to follow while the world remains
+visible. Dialogue, objectives, rewards, unlock requirements and region/dungeon
+transitions should give the player a clear sense of what is happening and what
+they can do next. Axel's Twilight's Eve screenshots clarify this direction;
+specific observations and translation guardrails are recorded in
+`docs/TWILIGHTS_EVE_REFERENCE.md`.
+
 Design DNA carried from DiceBound:
 - secret class unlocks;
 - account progression;

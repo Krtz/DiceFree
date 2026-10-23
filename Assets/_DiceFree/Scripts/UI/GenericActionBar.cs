@@ -98,8 +98,6 @@ namespace DiceFree.UI
             {
                 if(!string.IsNullOrWhiteSpace(hoveredSkillTooltip))
                     HudTooltip.DrawAt(hoveredSkillTooltip,tooltipPointer);
-                else
-                    HudTooltip.DrawCurrent();
             }
         }
 

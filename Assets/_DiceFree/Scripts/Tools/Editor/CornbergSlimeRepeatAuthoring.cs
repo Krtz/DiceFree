@@ -22,7 +22,7 @@ namespace DiceFree.EditorTools
             scene.GetRootGameObjects()
                 .SelectMany(root=>root.GetComponentsInChildren<T>(true)).ToArray();
         [CliCommand("dicefree.cornberg.repeat-slime.install",
-            "Install 30-Slime repeatable hunt on Mira, unlocked by Break the Slime Surge.")]
+            "Install repeatable 15-Slime and 15-Wolf hunts on Mira after Break the Slime Surge.")]
         public static object Install()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode)
@@ -44,25 +44,48 @@ namespace DiceFree.EditorTools
                     AssetDatabase.CreateAsset(quest,AssetPath);
                 }
                 quest.stableId=QuestId;
-                quest.title="Another Thirty Slimes";
+                quest.title="Another 15 Slimes";
+                quest.version=2;
                 quest.repeatable=true;
                 quest.completedQuestIds=new[]{CornbergSurgeSetup.QuestId};
-                quest.offer="Those Slimes keep coming back. Bring down thirty Slimes outside or around Cornberg, then report back. There's always more work for a willing adventurer.";
-                quest.activeDialogue="Thirty Slimes. I'll have your next reward ready.";
-                quest.locationHint="Return to Mira in Cornberg after killing 30 Slimes.";
-                quest.rewardXp=120;
+                quest.offer="Those Slimes keep coming back. Bring down fifteen Slimes outside or around Cornberg, then report back. There's always more work for a willing adventurer.";
+                quest.activeDialogue="Fifteen Slimes. I'll have your next reward ready.";
+                quest.locationHint="Return to Mira in Cornberg after killing 15 Slimes.";
+                quest.rewardXp=400;
                 quest.stages=new[]{new QuestObjective
                 {
                     kind=ObjectiveKind.Kill, familyId="enemy-family.slime",
-                    count=30,creditMode=QuestCreditMode.NearbyParty,
+                    count=15,creditMode=QuestCreditMode.NearbyParty,
                     creditRadius=50,
-                    instruction="Defeat thirty Slimes"
+                    instruction="Defeat 15 Slimes"
                 }};
                 EditorUtility.SetDirty(quest);
+                var wolves=AssetDatabase.LoadAssetAtPath<QuestDefinition>(
+                    "Assets/_DiceFree/Settings/Enemies/Cornberg repeat wolf hunt.asset");
+                if(wolves==null){wolves=ScriptableObject.CreateInstance<QuestDefinition>();
+                    AssetDatabase.CreateAsset(wolves,"Assets/_DiceFree/Settings/Enemies/Cornberg repeat wolf hunt.asset");}
+                wolves.stableId="quest.cornberg.repeat-wolf-hunt";
+                wolves.title="Another 15 Wolves";wolves.version=1;wolves.repeatable=true;
+                wolves.completedQuestIds=new[]{CornbergSurgeSetup.QuestId};
+                wolves.offer="The wolves on the old road keep threatening travelers. Defeat fifteen and report back.";
+                wolves.activeDialogue="Fifteen wolves. I'll have your next reward ready.";
+                wolves.locationHint="Return to Mira in Cornberg after killing 15 wolves.";
+                wolves.rewardXp=400;
+                wolves.stages=new[]{new QuestObjective{kind=ObjectiveKind.Any,count=1,
+                    instruction="Defeat 15 wolves",alternatives=new QuestLeaf[]{
+                        new QuestLeaf{kind=ObjectiveKind.Kill,objectiveId="ironpine-wolves",
+                            familyId="ironpine.wolf",count=15,creditMode=QuestCreditMode.NearbyParty,
+                            creditRadius=50,instruction="Defeat 15 Ironpine wolves"},
+                        new QuestLeaf{kind=ObjectiveKind.Kill,objectiveId="ironpine-alpha-wolves",
+                            familyId="ironpine.alpha-wolf",count=15,creditMode=QuestCreditMode.NearbyParty,
+                            creditRadius=50,instruction="Defeat 15 Alpha Wolves"}}}};
+                EditorUtility.SetDirty(wolves);
                 if(!journal.Definitions.Contains(quest))
                     journal.Configure(journal.Definitions.Concat(new[]{quest}).ToArray());
-                if(!mira.Offers.Contains(quest))
-                    mira.ConfigureAdditional(mira.Offers.Skip(1).Concat(new[]{quest}).ToArray());
+                if(!journal.Definitions.Contains(wolves))
+                    journal.Configure(journal.Definitions.Concat(new[]{wolves}).ToArray());
+                mira.ConfigureAdditional(mira.Offers.Skip(1).Concat(new[]{quest,wolves})
+                    .Distinct().ToArray());
                 if(mira.GetComponent<QuestWorldMarker>()==null)
                     mira.gameObject.AddComponent<QuestWorldMarker>();
                 EditorUtility.SetDirty(journal);
@@ -72,8 +95,9 @@ namespace DiceFree.EditorTools
                     throw new InvalidOperationException("Couldn't save Cornberg.");
                 AssetDatabase.SaveAssets();
                 return new{success=true,questId=QuestId,
-                    repeatable=quest.repeatable,kills=30,
-                    rewardXp=quest.rewardXp,questNpc=mira.name,
+                    repeatable=quest.repeatable,kills=15,
+                    rewardXp=quest.rewardXp,wolfQuest=wolves.stableId,wolfKills=15,
+                    wolfFamily=wolves.stages[0].familyId,questNpc=mira.name,
                     prerequisites=quest.completedQuestIds};
             }
             finally{if(backup.Length>0)EditorSceneManager.RestoreSceneManagerSetup(backup);}

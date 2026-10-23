@@ -76,7 +76,7 @@ namespace DiceFree.Combat
         {
             if (!source.IsHostileTo(target)) return 0;
             return target.Health.ApplyDamage(source, Calculate(source.Stats, target.Stats, attack, critical, coefficientOverride,
-                rawMultiplier: attack.RollDamageMultiplier()*rawMultiplier, skillFlatDamage: skillFlatDamage));
+                rawMultiplier: attack.RollDamageMultiplier(source.Stats.Attributes, rawMultiplier, coefficientOverride), skillFlatDamage: skillFlatDamage));
         }
     }
 }

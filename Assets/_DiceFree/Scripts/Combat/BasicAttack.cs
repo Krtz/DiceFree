@@ -76,7 +76,7 @@ namespace DiceFree.Combat
                     Target.Stats,
                     Definition,
                     resolution,
-                    Definition.RollDamageMultiplier()*BasicAttackDamageScale,
+                    Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                     Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                     Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset));
                 packet = Target.Health.ApplyPacket(actor, packet);

@@ -20,6 +20,13 @@ structured results without asking Axel to click validation menus.
   supported installation path for other checkouts. After installation,
   `unity pipeline list` should report the connected Editor and installed
   package.
+- The player build disables the Pipeline package's runtime auto-start via
+  `ProjectSettings/Packages/com.unity.pipeline/RuntimePipelineConfig.json`
+  (`enableInBuilds: false`). This avoids first-launch descriptor writes into
+  a potentially read-only install directory. The Editor bridge remains
+  available for development and validation; re-enable player runtime Pipeline
+  only if a distributable build has an explicit runtime Pipeline use case and
+  a writable descriptor location.
 - `unity mcp configure codex --project-path <project>` configures Unity's
   official Codex MCP integration. `unity skill install codex --local` installs
   Unity's CLI guidance into the project for compatible Codex CLI sessions.

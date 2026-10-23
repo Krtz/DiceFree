@@ -177,6 +177,10 @@ Default behavior:
 - click destination;
 - character/selected controllable unit moves toward it and attacks eligible hostile targets encountered according to its targeting rules.
 
+With **Shift held**, press the Attack command (`X`) once and click multiple enemies or ground points. Each click appends an attack-move/attack-target order while Shift remains held; releasing Shift exits the repeated targeting cursor without cancelling already queued orders. A normal `X` remains a single attack-move targeting action.
+
+Auto-retaliate is a fallback while the player is idle. It does not replace active movement/attack-move orders or commands already in the command queue.
+
 Exact acquisition priority and leash rules remain to be designed.
 
 ## Stop and Hold Position
@@ -448,3 +452,7 @@ However:
 - controller support must map onto the same movement/combat/action systems rather than becoming a separate simplified game mode.
 
 Controller-specific targeting, command-grid navigation, ground targeting, summon/unit selection and UI navigation remain to be designed in smaller focused decisions.
+
+## Current Windows playtest follow-up (implementation pending Unity verification)
+
+The Cornberg Novice Mountain gate and trial return use the shared **I / Interact** action and display its configured binding; neither hardcodes E. The standalone project is configured to continue simulation while unfocused. Losing focus still cancels the hero's current command to avoid stale input, but it does not globally pause gameplay.

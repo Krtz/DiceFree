@@ -13,27 +13,27 @@ MonoBehaviour:
   m_Name: Cornberg repeat slime hunt
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.cornberg.repeat-slime-hunt
-  title: Another Thirty Slimes
-  version: 1
-  offer: Those Slimes keep coming back. Bring down thirty Slimes outside or around Cornberg, then report back. There's always more work for a willing adventurer.
-  activeDialogue: Thirty Slimes. I'll have your next reward ready.
-  locationHint: Return to Mira in Cornberg after killing 30 Slimes.
+  title: Another 15 Slimes
+  version: 2
+  offer: Those Slimes keep coming back. Bring down fifteen Slimes outside or around Cornberg, then report back. There's always more work for a willing adventurer.
+  activeDialogue: Fifteen Slimes. I'll have your next reward ready.
+  locationHint: Return to Mira in Cornberg after killing 15 Slimes.
   stages:
   - kind: 0
     objectiveId: 
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat thirty Slimes
+    instruction: Defeat 15 Slimes
     contentId: 
     familyId: enemy-family.slime
     areaId: 
     conversationId: 
-    count: 30
+    count: 15
     alternatives: []
   completedQuestIds:
   - quest.cornberg.break-slime-surge
-  rewardXp: 120
+  rewardXp: 400
   reward: {fileID: 0}
   acceptOnTalk: 0
   completeOnObjectives: 0

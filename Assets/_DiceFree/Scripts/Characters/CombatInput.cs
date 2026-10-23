@@ -97,6 +97,9 @@ namespace DiceFree.Characters
             if (source == null || actor == null || !actor.IsHostileTo(source)) return;
             if (attack == null || attack.Target != null) return;
             if (skillTargeting != null && skillTargeting.Active) return;
+            // Preserve explicit locomotion and queued commands. Auto-retaliate is
+            // a fallback only when the player is otherwise idle.
+            if (AttackMoving || actor.Motor.Travelling || orders?.HasOrders == true) return;
 
             selection.Select(source);
             GetComponent<Interactor>()?.Cancel();

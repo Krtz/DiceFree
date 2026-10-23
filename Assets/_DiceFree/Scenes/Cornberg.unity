@@ -364910,6 +364910,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
   - {fileID: 11400000, guid: 49c1a5309c1c07b488dbd1ba404d4f1c, type: 2}
   - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
+  - {fileID: 11400000, guid: 4cb4ff85051b4052993e4566f8ac0451, type: 2}
   - {fileID: 11400000, guid: 90bda820db15ebc47ad058327305b12d, type: 2}
   - {fileID: 11400000, guid: e4eb663e55593724ca411458347e10e3, type: 2}
   - {fileID: 11400000, guid: 1fb20a59ffe3a404182670b19a28189e, type: 2}
@@ -447329,6 +447330,7 @@ MonoBehaviour:
   quest: {fileID: 11400000, guid: f3755e78edff31542a3b6ac5c4a66a26, type: 2}
   additionalQuests:
   - {fileID: 11400000, guid: 4114565668b0b7e42be78abe07b4460b, type: 2}
+  - {fileID: 11400000, guid: 4cb4ff85051b4052993e4566f8ac0451, type: 2}
   ambientOutsideQuest: 1
 --- !u!4 &1580831093
 Transform:
@@ -605193,6 +605195,7 @@ GameObject:
   - component: {fileID: 919132148441227974}
   - component: {fileID: 919132148441227976}
   - component: {fileID: 919132148441227975}
+  - component: {fileID: 919132148441227977}
   m_Layer: 11
   m_Name: NPCs/NPC_Alchemist - 3D
   m_TagString: Untagged
@@ -605289,6 +605292,7 @@ MonoBehaviour:
   npcId: npc.cornberg.brewer
   actions:
   - {fileID: 919132148441227976}
+  - {fileID: 919132148441227977}
 --- !u!114 &919132148441227976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605306,6 +605310,31 @@ MonoBehaviour:
   approachPoint: {fileID: 0}
   context: {fileID: 919132148441227975}
   trainingQuest: {fileID: 11400000, guid: e4eb663e55593724ca411458347e10e3, type: 2}
+--- !u!114 &919132148441227977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148441227970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8af4da895307ab54dbb53b10b3ff1450, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Items.ItemShop
+  displayName: Cornberg Brewer
+  range: 2.5
+  approachPoint: {fileID: 0}
+  context: {fileID: 0}
+  offers:
+  - item: {fileID: 11400000, guid: 413758f2cf924ed5b29dce1c0a41dd01, type: 2}
+    goldPrice: 12
+    provisionalPrice: 1
+  - item: {fileID: 11400000, guid: 413758f2cf924ed5b29dce1c0a41dd02, type: 2}
+    goldPrice: 15
+    provisionalPrice: 1
+  resaleFraction: 0.5
+  provisionalFallbackResaleGold: 1
 --- !u!1 &919132148549414463
 GameObject:
   m_ObjectHideFlags: 0

@@ -3373,3 +3373,11 @@ The Slime Regent is a conditional higher-level route/boss. Slime Queen / Slime K
 Monster kills, observed drops, witnessed mechanics and dungeon completion data are recorded from semantic gameplay events. Undiscovered content is absent rather than shown as spoiler placeholders.
 
 See `docs/CODEX.md`.
+
+## 2026-10-23 — Classic ORPG presentation reference clarified
+
+**Direction:** Axel wants DiceFree's overall player-facing feel to move closer to the lively, information-rich presentation in his Twilight's Eve ORPG screenshots: atmospheric isometric regions; a substantial but readable fantasy HUD; and clear in-play feedback for dialogue, objectives, rewards, ability requirements, character growth, travel and dungeon outcomes.
+
+**Guardrails:** Translate those qualities through DiceFree's own world, class identity, story, UI architecture and progression. This is not permission to copy Twilight's Eve assets, exact layout, text, icons, map, classes or mechanics. Existing design decisions—including DiceFree's single androgynous Novice—remain authoritative.
+
+See `docs/TWILIGHTS_EVE_REFERENCE.md`, `docs/VISUAL_ART_DIRECTION.md`, `docs/UI_HUD.md` and `docs/QUESTS_AND_INTERACTIONS.md` for the detailed guidance.

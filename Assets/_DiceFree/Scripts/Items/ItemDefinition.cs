@@ -19,6 +19,11 @@ namespace DiceFree.Items
         [Tooltip("Prototype model-fitting gear: permits the plain offhand on all classes, including the two-handed Greatblade.")]
         public bool modelTestingItem;
         public bool canSell = true;
+        [Header("Consumable (prototype)")]
+        public bool consumable;
+        [Min(0)] public float restoreHealth;
+        public string restoreResourceId;
+        [Min(0)] public float restoreResourceAmount;
         public string[] allowedClassIds = Array.Empty<string>();
         [TextArea] public string flavor;
         public EquipmentStats stats;

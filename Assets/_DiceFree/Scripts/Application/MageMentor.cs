@@ -29,7 +29,7 @@ namespace DiceFree.Visuals
    if(state.status==QuestStatus.ReadyToTurnIn&&GUI.Button(new Rect(b.x+18,b.y+153,b.width-36,34),"Complete training and become a level-1 Mage"))CompleteTraining(visitor);
    if(visitor==null)return;
    var shop=GetComponent<DiceFree.Items.ItemShop>();
-   if(shop!=null&&GUI.Button(new Rect(b.x+18,b.y+193,160,30),"Browse brewing supplies")){var actor=visitor;visitor=null;shop.Interact(actor);return;}
+   if(shop!=null&&GUI.Button(new Rect(b.x+18,b.y+193,160,30),"Browse brewing supplies")){var actor=visitor;visitor=null;actor.GetComponent<Interactor>()?.Order(shop);return;}
    GUI.Label(new Rect(b.x+190,b.y+194,b.width-205,35),feedback);
    if(GUI.Button(new Rect(b.x+18,b.y+237,b.width-36,28),"Leave"))visitor=null;
   }

@@ -18,8 +18,8 @@ MonoBehaviour:
   baseMaximum: 80
   maximumPerIntelligence: 2
   maximumPerSpirit: 1
-  baseRegenPerSecond: 5
-  regenPerIntelligence: 0.15
-  regenPerSpirit: 0.15
+  baseRegenPerSecond: 2.5
+  regenPerIntelligence: 0.075
+  regenPerSpirit: 0.075
   initialFraction: 1
   loadPolicy: 1

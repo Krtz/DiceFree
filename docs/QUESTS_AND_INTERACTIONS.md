@@ -207,3 +207,20 @@ For now, normal quest objectives should plainly tell the player what to do.
 The quest framework should still allow individual authored quests to use intentionally vaguer clues/directions later, but vagueness is an exception rather than the default UX.
 
 Do not remove the classic markers in pursuit of a universally "immersive" quest presentation.
+
+### Dialogue and progression feedback
+
+The user-shared Twilight's Eve screenshots reinforce a clear, in-world ORPG
+feedback loop: an NPC's dialogue gives the reason for a task, the task states
+what to do, and the player can see what completion grants. Use speaker identity
+and readable dialogue presentation so players can follow a conversation without
+losing awareness of the world. Journal/tracker entries should retain the
+actionable objective after the conversation ends. Show meaningful level-up
+gains, skill requirements/rank effects, area transitions and dungeon completion
+at the point they matter. These are presentation goals; the screenshots do not
+change quest rules, reward values, progression pacing or the existing semantic
+event/credit model.
+
+### Current Cornberg repeatable hunts (implementation pending Unity verification)
+
+After Break the Slime Surge, Mira offers **Another 15 Slimes**. Open-world and Slime Dungeon trash slimes share `enemy-family.slime` kill credit; encounter bosses remain separate. The quest awards 400 XP, matching 20 current Road Slime kills at 20 XP each. Existing version-1 repeat-hunt progress migrates to version 2, caps at 15 and becomes ready to turn in when its old count already meets the new target. Mira also offers a repeatable 15-wolf hunt for the two authored Ironpine wolf families. Its 400 XP reward is provisional.

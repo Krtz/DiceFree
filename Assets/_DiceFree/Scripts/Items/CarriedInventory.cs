@@ -12,7 +12,15 @@ namespace DiceFree.Items
         public event Action Changed;
         public ItemInstance[] Items => owned.Select(i => i.Copy()).ToArray();
         public IReadOnlyList<ItemDefinition> Definitions => definitions;
-        public void Configure(ItemDefinition[] values) => definitions = values;
+        private void Awake() => IncludeResourcesPotions();
+        public void Configure(ItemDefinition[] values) { definitions = values; IncludeResourcesPotions(); }
+        private void IncludeResourcesPotions()
+        {
+            var potions=Resources.LoadAll<ItemDefinition>("DiceFree/Potions");
+            if(potions.Length==0)return;
+            definitions=(definitions??Array.Empty<ItemDefinition>()).Concat(potions)
+                .Where(value=>value!=null).Distinct().ToArray();
+        }
         public ItemDefinition Resolve(string id) => Array.Find(definitions, d => d != null && d.stableId == id);
         public ItemInstance Find(string id) => owned.Find(i => i.instanceId == id)?.Copy();
         public ItemInstance Grant(string definitionId)

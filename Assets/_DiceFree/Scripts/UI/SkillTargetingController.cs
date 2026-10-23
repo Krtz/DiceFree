@@ -30,6 +30,7 @@ namespace DiceFree.UI
         private GameplayPreferences preferences;
         private Func<CombatActor, bool> unitConfirm;
         private Func<Vector3, bool> groundConfirm;
+        private bool repeatShiftAttackMove;
         private int consumedFrame = -1;
         private float castRange;
 
@@ -67,7 +68,11 @@ namespace DiceFree.UI
         public void BeginAttackMove(Func<CombatActor,bool> unit, Func<Vector3,bool> ground)
         {
             BeginGround("Attack",ground);
-            Mode=SkillTargetingMode.AttackMove;unitConfirm=unit;Feedback="Click an enemy or ground to attack-move.";
+            Mode=SkillTargetingMode.AttackMove;unitConfirm=unit;
+            repeatShiftAttackMove=ShiftHeld;
+            Feedback=repeatShiftAttackMove
+                ? "Shift is held: click enemies or ground to queue attack-moves."
+                : "Click an enemy or ground to attack-move.";
         }
 
         private void Awake()
@@ -113,7 +118,11 @@ namespace DiceFree.UI
                 Orders.ClearOrders();
                 succeeded=groundConfirm(point);
             }
-            if(succeeded)Cancel();
+            if(succeeded)
+            {
+                if(!repeatShiftAttackMove || !ShiftHeld)Cancel();
+                else Feedback="Attack-move queued. Choose another point or release Shift to finish.";
+            }
             else Feedback="Cannot reach that point from the minimap.";
             return succeeded;
         }
@@ -123,7 +132,8 @@ namespace DiceFree.UI
             if(Mode!=SkillTargetingMode.AttackMove || groundConfirm==null ||
                Orders==null)return false;
             if(!Orders.SubmitAttackMove(point,groundConfirm,true))return false;
-            Cancel();
+            if(!repeatShiftAttackMove || !ShiftHeld)Cancel();
+            else Feedback="Attack-move queued. Choose another point or release Shift to finish.";
             return true;
         }
 
@@ -188,6 +198,7 @@ namespace DiceFree.UI
         {
             ClearPending(true);
             Mode = SkillTargetingMode.None;
+            repeatShiftAttackMove = false;
             SkillLabel = "";
             Feedback = "";
             castRange = 0f;
@@ -229,6 +240,14 @@ namespace DiceFree.UI
             if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 Consume();
+                Cancel();
+                return;
+            }
+
+            // Shift+X arms a repeat queueing mode. Releasing Shift exits the
+            // targeting cursor without cancelling already queued orders.
+            if(Mode==SkillTargetingMode.AttackMove && repeatShiftAttackMove && !ShiftHeld)
+            {
                 Cancel();
                 return;
             }
@@ -280,7 +299,12 @@ namespace DiceFree.UI
                         Orders.SubmitUnit(HoveredActor,castRange,unitConfirm,true),
                     _ => false
                 };
-                if(queued)Cancel();
+                if(queued)
+                {
+                    if(Mode==SkillTargetingMode.AttackMove && repeatShiftAttackMove && ShiftHeld)
+                        Feedback="Attack-move queued. Click another enemy or ground, or release Shift to finish.";
+                    else Cancel();
+                }
                 else Feedback="Cannot add this command to the queue.";
                 return;
             }

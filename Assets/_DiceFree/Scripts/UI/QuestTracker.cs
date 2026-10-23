@@ -6,7 +6,7 @@ namespace DiceFree.UI
 {
     public sealed class QuestTracker : CustomizableHudWidget
     {
-        public QuestDefinition[] TrackedQuests=>journal==null?System.Array.Empty<QuestDefinition>():journal.Definitions.Where(q=>journal.PrerequisitesMet(q)&&journal.GetProgress(q.stableId)?.status!=QuestStatus.Completed).ToArray();
+        public QuestDefinition[] TrackedQuests=>journal==null?System.Array.Empty<QuestDefinition>():journal.Definitions.Where(q=>journal.GetProgress(q.stableId)?.status is QuestStatus.Active or QuestStatus.ReadyToTurnIn).ToArray();
         [SerializeField] private QuestJournal journal;
         private Vector2 scroll;
 
@@ -34,7 +34,7 @@ namespace DiceFree.UI
             {
                 if (!journal.PrerequisitesMet(quest)) continue;
                 var state = journal.GetProgress(quest.stableId);
-                if(state==null||state.status==QuestStatus.Completed)continue;
+                if(state==null||state.status is not (QuestStatus.Active or QuestStatus.ReadyToTurnIn))continue;
                 GUILayout.Label(quest.title, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
 
                 if (state.definitionVersion != quest.version)
@@ -47,16 +47,12 @@ namespace DiceFree.UI
                 }
 
                 string text;
-                if (state.status == QuestStatus.Available)
-                    text = "! " + quest.locationHint;
-                else if (state.status == QuestStatus.Completed)
-                    text = "Completed";
+                if (state.status == QuestStatus.ReadyToTurnIn)
+                    text = $"? {state.count}/{quest.stages[Mathf.Clamp(state.stage, 0, quest.stages.Length - 1)].count} complete · Return to the quest giver.";
                 else
                 {
                     int stageIndex = Mathf.Clamp(state.stage, 0, Mathf.Max(0, quest.stages.Length - 1));
-                    text = state.status == QuestStatus.ReadyToTurnIn
-                        ? $"? {state.count}/{quest.stages[stageIndex].count} complete · Return to the quest giver."
-                        : ObjectiveProgress.Describe(quest.stages[stageIndex], state);
+                    text = ObjectiveProgress.Describe(quest.stages[stageIndex], state);
                 }
 
                 GUILayout.Label(text, new GUIStyle(GUI.skin.label) { wordWrap = true });

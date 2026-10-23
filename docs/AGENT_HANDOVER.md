@@ -25,6 +25,45 @@
 
 ## 2026-10-17 - Complete Sketchfab page-license audit
 
+## 2026-10-23 — Cornberg first-player fixes in progress
+
+Active checkout: `T:\TEMP\DiceFree-Options`, branch
+`integration/world1-foundation`, base HEAD `ceba89cead42e2d4c05bcfa7c226bc0863aa5cc8`.
+The current working tree contains user-owned visual/design documentation and
+Package Manager settings edits from before this pass; keep them. New, still
+uncommitted prototype fixes add a Graphics options tab (resolution and four
+window modes), turn off player-build Pipeline auto-start to prevent the
+read-only install-folder descriptor error, keep time running while unfocused,
+scope hover tooltip display to the current hovered control, show only active
+and ready-to-turn-in quests in the sidebar, and fade all renderers belonging
+to an occluding tree. Mountain entry/return uses the shared Interact binding
+(default I).
+
+Quest and item changes add the repeatable `Another 15 Slimes` objective with
+400 XP (20 road slimes at the authored 20 XP each), credit dungeon trash slimes
+through the dungeon event hub, and migrate the existing v1 slime quest progress
+to v2 while capping it at 15. The repeatable `Another 15 Wolves` offer is added
+after `Break the Slime Surge` and accepts 15 Ironpine wolves or 15 Alpha Wolves;
+its 400 XP reward is provisional. Cornberg Brewer now offers prototype minor
+health/mana potions at 12/15 gold, and a new potion can be consumed from the
+inventory for +30 health or +25 mana. The Big Slime authored offsets currently
+resolve to 4x minimum / 5x maximum raw attack damage (16–20 from a 4 base).
+CodexPanel now has a book-like paper/cover treatment.
+
+The follow-up combat/input pass keeps auto-retaliation idle-only while the player is travelling or has queued orders, displays attack ranges as whole numbers, halves Magically Touched's natural mana regeneration (5 to 2.5 base and 0.15 to 0.075 per INT/SPI), supports repeat attack-move targeting after Shift+X while Shift remains held, and applies primary-attribute scaling at 99% on the minimum end versus 100% on the maximum end. The repeat targeting flag is cleared whenever targeting is cancelled. These changes are static-reviewed only; the blocked Editor prevented compile and gameplay validation.
+
+Editor regression source was extended in `PlaytestFixesValidation.cs`, but it
+has NOT run. The connected Unity CLI/Editor is currently unavailable from this
+session; no successful compile, focused Play Mode run, architecture check,
+visual inspection, or fresh Windows build has been obtained. Treat every
+runtime/UI/quest change in this section as unverified until those checks are
+run on Unity 6000.6.3f1. No commit, push, or merge was made. `main` was not
+changed. Preserve the untracked `Assets/Settings/` and Package Manager settings
+changes. Next step: restore the connected licensed Unity Editor/CLI and run the
+project compile/import followed by the focused playtest-fixes harness, then
+review screenshots and fix any actual errors before producing a new Windows
+Development build.
+
 - User explicitly requested all downloaded assets' listed website licenses. Completed all60 files (59ZIP + WarriorGirl standaloneGLB), covering59 distinct model pages. Removed provisional license-unknown language from current catalog/registry and separated page licenses from provenance/technical concerns.
 - Stated license totals by FILE: 55 CC BY4.0, 2 FreeStandard (DuatGolem and MedievalCivilian3), BlackDragon1 CC BY-NC4.0 (original3DHaupt page), WarriorGirl ZIP+GLB2 CC BY-NC-SA4.0 (NORBERTO-3D, one model/two formats). Every row now links exact source, creator, versioned terms and matching evidence.
 - Generic Knight, both MedievalHouses and MedievalKnightModel resolved by deeper search/geometry. All GLB embedded asset metadata inspected read-only, including the large WarriorGirl via mmap. Exact embedded source/license for WarriorGirl, shared Alembic texture set verified. MedievalGuard Taylor source matched all29 texture-name stems; RAR decode remains unrelated technical limitation. SkeletonAnimated matched One_Boy by1118vertices/title/oneanimation; different triangle counts documented. Tyranno selected the downloadable T reey page matching11animations; upstream re-upload notes retained separately.

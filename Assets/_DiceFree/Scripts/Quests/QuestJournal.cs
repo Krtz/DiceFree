@@ -33,19 +33,22 @@ namespace DiceFree.Quests
         private readonly HashSet<long> credited = new();
         private CombatActor owner;
         private SemanticGameEventHub dungeonHub;
-        private IDisposable dungeonBossSubscription,puzzleSubscription;
+        private IDisposable dungeonBossSubscription,puzzleSubscription,monsterKilledSubscription;
         public void BindDungeonEvents(SemanticGameEventHub hub)
         {
             UnbindDungeonEvents();dungeonHub=hub;
             if(hub!=null)dungeonBossSubscription=hub.Subscribe<DungeonBossKilledEvent>(fact=>
                 Advance(ObjectiveKind.Kill,fact.bossId,null,null,null,leaf=>leaf.dungeonBossOnly));
+            if(hub!=null)monsterKilledSubscription=hub.Subscribe<MonsterKilledEvent>(fact=>
+                Advance(ObjectiveKind.Kill,fact.monsterId,fact.familyId,null,null,leaf=>!leaf.dungeonBossOnly));
             if(hub!=null)puzzleSubscription=hub.Subscribe<DungeonPuzzleSolvedEvent>(fact=>
                 Advance(ObjectiveKind.SolvePuzzle,fact.puzzleId,null,null));
         }
         public void UnbindDungeonEvents(SemanticGameEventHub hub=null)
         {
             if(hub!=null&&hub!=dungeonHub)return;
-            dungeonBossSubscription?.Dispose();puzzleSubscription?.Dispose();puzzleSubscription=null;dungeonBossSubscription=null;dungeonHub=null;
+            dungeonBossSubscription?.Dispose();puzzleSubscription?.Dispose();monsterKilledSubscription?.Dispose();
+            puzzleSubscription=null;dungeonBossSubscription=null;monsterKilledSubscription=null;dungeonHub=null;
         }
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public event Action Changed;
@@ -87,7 +90,19 @@ namespace DiceFree.Quests
         {
             if (!CanRestore(records)) throw new ArgumentException("Invalid saved quest state.");
             progress = new List<QuestProgress>();
-            foreach (var record in records) progress.Add(record.Copy());
+            foreach (var record in records)
+            {
+                var copy=record.Copy();
+                if(copy.questId=="quest.cornberg.repeat-slime-hunt"&&
+                   copy.definitionVersion==1&&Array.Exists(definitions,d=>d.stableId==copy.questId&&d.version==2))
+                {
+                    copy.count=Mathf.Min(15,copy.count);
+                    copy.definitionVersion=2;
+                    if(copy.status==QuestStatus.Active&&copy.count>=15)
+                        copy.status=QuestStatus.ReadyToTurnIn;
+                }
+                progress.Add(copy);
+            }
             foreach (var definition in definitions)
                 if (Find(definition.stableId) == null) progress.Add(new QuestProgress {
                     questId = definition.stableId, definitionVersion = definition.version

@@ -343,3 +343,7 @@ Provide developer tooling to:
 The harness is development-only.
 
 Goal: iterating on boss #40 should not require walking through a 50-minute dungeon for every test.
+
+## Current Big Slime tuning (implementation pending Unity verification)
+
+The Slime Dungeon Big Slime reuses its authored 4-damage Slime Bump definition. Its basic-attack minimum and maximum offsets are set to 12 and 16, producing a 16–20 raw damage range (4× minimum and 5× maximum). This leaves shared slime attack data unchanged; verify against mitigated gameplay hits before treating it as final balance.

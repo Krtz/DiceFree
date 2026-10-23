@@ -54,7 +54,8 @@ namespace DiceFree.Items
                 // Guard spans synchronous Changed callbacks, preventing reentrant double purchases.
                 if(!wallet.CanSpend(offer.goldPrice)){message="Not enough gold.";return false;}
                 if (!inventory.PurchaseForGold(offer.item.stableId,wallet,offer.goldPrice)) { message = "Inventory is locked."; return false; }
-                message = "Purchased " + offer.item.displayName + ". Equip it from Inventory.";
+                message = "Purchased " + offer.item.displayName + ". " +
+                    (offer.item.consumable ? "Use it from Inventory." : "Equip it from Inventory.");
                 return true;
             }
             finally { purchasing = false; }

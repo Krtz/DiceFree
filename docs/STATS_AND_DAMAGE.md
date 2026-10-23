@@ -147,6 +147,8 @@ Abilities may scale from:
 
 The class's primary attribute is a default identity, not a rule that every skill must use exactly that stat.
 
+For attacks, the attribute-scaled contribution is 1% lower at the minimum end than at the maximum end: minimum damage receives 99% of that contribution, while maximum damage receives 100%. Authored min/max spread remains on the attack's base-damage term.
+
 ## Tooltip presentation
 
 Normal tooltips should prioritize readability, League-of-Legends style:

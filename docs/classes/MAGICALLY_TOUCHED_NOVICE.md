@@ -46,6 +46,8 @@ Magically Touched should:
 - see Mana costs grow more meaningfully with stronger/ranked spells;
 - care substantially more about natural Mana regeneration and INT-linked Mana scaling.
 
+Current prototype Mana regeneration is deliberately modest: **2.5 Mana/sec base**, plus **0.075/sec per INT** and **0.075/sec per SPI**. This is half the previous authored profile; Mana Attunement should have a meaningful reason to rank up.
+
 This creates a real reason for INT/resource progression without making the physical Tier-1 class resource-starved.
 
 ## Basic attack and equipment

@@ -71,6 +71,12 @@ namespace DiceFree.EditorTools
             CombatActor hero;
             do{yield return null;hero=UnityEngine.Object.FindFirstObjectByType<TraversalInput>()?.GetComponent<CombatActor>();}while(hero==null||!hero.Motor.Ready||!hero.GetComponent<ManifestationPersistence>().Ready);
             foreach(var ai in UnityEngine.Object.FindObjectsByType<DiceFree.AI.AggroBehaviour>())ai.enabled=false;
+            var rangeProbe=ScriptableObject.CreateInstance<AttackDefinition>();
+            rangeProbe.baseDamage=10;rangeProbe.coefficient=2;rangeProbe.scaling=AttributeScaling.Highest;
+            var range=rangeProbe.RawDamageRange(new AttributeValues(10));
+            Check(Mathf.Approximately(range.x,29.8f)&&Mathf.Approximately(range.y,30f),
+                "Primary attribute contribution must be 1% lower at minimum damage than maximum damage.");
+            UnityEngine.Object.Destroy(rangeProbe);
             var codex=hero.GetComponent<CodexProgression>();var overworld=CombatActor.All.First(a=>a!=hero&&a.Stats.Definition.stableId=="enemy.crop-slime");
             int kills=codex.Monsters.FirstOrDefault(m=>m.monsterId==overworld.Stats.Definition.stableId)?.kills??0;
             overworld.Health.ApplyDamage(hero,new DamageResult{mitigated=overworld.Health.Maximum*2});
@@ -86,9 +92,44 @@ namespace DiceFree.EditorTools
             var modified=journal.CaptureState();var record=modified.Single(p=>p.questId==completed.stableId);record.stage=completed.stages.Length-1;record.count=completed.stages.Last().count;record.status=QuestStatus.Completed;journal.RestoreState(modified);
             Check(!tracker.TrackedQuests.Contains(completed)&&journal.GetProgress(completed.stableId).status==QuestStatus.Completed,"Completed quest tracker/history wrong.");
             record.status=QuestStatus.ReadyToTurnIn;journal.RestoreState(modified);Check(tracker.TrackedQuests.Contains(completed),"Ready-to-turn-in quest hidden.");journal.RestoreState(quests);
+            var repeatSlime=journal.Definitions.Single(q=>q.stableId=="quest.cornberg.repeat-slime-hunt");
+            var repeatState=journal.CaptureState();var repeatRecord=repeatState.Single(p=>p.questId==repeatSlime.stableId);
+            repeatRecord.status=QuestStatus.Available;repeatRecord.stage=repeatRecord.count=0;
+            repeatRecord.definitionVersion=repeatSlime.version;journal.RestoreState(repeatState);
+            Check(!tracker.TrackedQuests.Contains(repeatSlime),"Unaccepted repeatable quest appeared in tracker.");
+            var wolfQuest=journal.Definitions.Single(q=>q.stableId=="quest.cornberg.repeat-wolf-hunt");
+            Check(wolfQuest.repeatable&&wolfQuest.stages[0].kind==ObjectiveKind.Any&&
+                wolfQuest.stages[0].alternatives.Any(leaf=>leaf.familyId=="ironpine.wolf"&&leaf.count==15)&&
+                wolfQuest.stages[0].alternatives.Any(leaf=>leaf.familyId=="ironpine.alpha-wolf"&&leaf.count==15),
+                "Repeatable 15-wolf quest must accept either Ironpine wolf family.");
+            repeatRecord.status=QuestStatus.Active;journal.RestoreState(repeatState);
+            var dungeonFacts=new SemanticGameEventHub();journal.BindDungeonEvents(dungeonFacts);
+            dungeonFacts.Publish(new MonsterKilledEvent("enemy.dungeon-slime-validation","enemy-family.slime"));
+            Check(journal.GetProgress(repeatSlime.stableId).count==1,"Dungeon trash slime did not advance repeat slime quest.");
+            journal.UnbindDungeonEvents();
+            var legacyState=journal.CaptureState();var legacySlime=legacyState.Single(p=>p.questId==repeatSlime.stableId);
+            legacySlime.definitionVersion=1;legacySlime.status=QuestStatus.Active;legacySlime.stage=0;legacySlime.count=23;
+            journal.RestoreState(legacyState);
+            var migratedSlime=journal.GetProgress(repeatSlime.stableId);
+            Check(migratedSlime.definitionVersion==2&&migratedSlime.count==15&&
+                migratedSlime.status==QuestStatus.ReadyToTurnIn,
+                "Legacy 30-Slime quest progress did not migrate to capped 15-Slime completion.");
+            journal.RestoreState(quests);
             var journalPanel=hero.GetComponent<QuestJournalPanel>();journalPanel.Show();Check(journalPanel.Open&&journalPanel.BlocksPointer,"Journal button panel missing.");KeyPress(UnityEngine.InputSystem.Key.Escape,hero.GetComponent<EscapeMenuController>());Check(!journalPanel.Open,"Journal Escape close failed.");yield return null;
             var minimap=hero.GetComponent<MinimapHud>();var cameraPosition=Camera.main.transform.position;minimap.Zoom(100);Check(minimap.WorldRadius==60,"Minimap upper clamp wrong.");minimap.Zoom(.001f);Check(minimap.WorldRadius==8&&Camera.main.transform.position==cameraPosition,"Minimap zoom affects player camera.");minimap.Zoom(2.75f);
             var inventory=hero.GetComponent<CarriedInventory>();var equipment=hero.GetComponent<Equipment>();var wallet=hero.GetComponent<GoldWallet>();var shop=UnityEngine.Object.FindFirstObjectByType<ItemShop>();
+            Check(inventory.Resolve("item.potion.minor-health")?.consumable==true&&
+                inventory.Resolve("item.potion.minor-mana")?.restoreResourceId==ResourceIds.Mana,
+                "Brewer potion definitions were not loaded into carried inventory.");
+            var healthPotion=inventory.Resolve("item.potion.minor-health");
+            var inventoryPanel=hero.GetComponent<InventoryPanel>();var heroHealth=hero.GetComponent<Health>();
+            Check(inventoryPanel!=null&&heroHealth!=null,"Consumable use presentation missing.");
+            float savedHp=heroHealth.Current;heroHealth.SetEncounterHp(Mathf.Max(1,heroHealth.Maximum-15));
+            var potionInstance=inventory.Grant(healthPotion.stableId);
+            Check(inventoryPanel.RunItemAction(potionInstance.instanceId,"Use",out _)&&
+                Mathf.Approximately(heroHealth.Current,heroHealth.Maximum)&&inventory.Find(potionInstance.instanceId)==null,
+                "Minor health potion did not restore health and consume one bag item.");
+            heroHealth.SetEncounterHp(savedHp);
             Check(hero.Motor.Teleport(shop.ApproachPosition+Vector3.back*1.5f)&&shop.CanInteract(hero),"Merchant interaction broken by NPC capsule.");
             wallet.Grant(shop.Offers[0].goldPrice);int beforeItems=inventory.Items.Length;long purchaseGold=wallet.Gold;bool purchaseAtomic=false,purchaseReentered=false;
             Action buyObserver=()=>{purchaseAtomic=inventory.Items.Length==beforeItems+1&&wallet.Gold==purchaseGold-shop.Offers[0].goldPrice;purchaseReentered=shop.Purchase(hero,0,out _);};inventory.Changed+=buyObserver;
@@ -145,6 +186,15 @@ namespace DiceFree.EditorTools
             hero.Health.Invulnerable=true;
             var mini=UnityEngine.Object.FindObjectsByType<DungeonSlime>().Single(s=>s.Role==SlimeRole.Miniboss);
             Check(Mathf.Approximately(mini.Actor.Health.Maximum,800),"Miniboss not 5x HP.");
+            var bossDefinition=mini.Actor.Stats.Definition;
+            float bossBase=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
+                bossDefinition.basicAttack).baseRaw;
+            float bossMin=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
+                bossDefinition.basicAttack,basicAttackRangeOffset:bossDefinition.basicAttackMinimumOffset).baseRaw;
+            float bossMax=DamageResolver.Calculate(mini.Actor.Stats,hero.Stats,
+                bossDefinition.basicAttack,basicAttackRangeOffset:bossDefinition.basicAttackMaximumOffset).baseRaw;
+            Check(Mathf.Approximately(bossMin,bossBase*4)&&Mathf.Approximately(bossMax,bossBase*5),
+                "Big Slime minimum/maximum attack damage must be 4x/5x the authored base.");
             Check(Mathf.Approximately(mini.transform.localScale.x,2.3f*3)&&Mathf.Approximately(mini.Actor.Radius,.65f*2.3f*3),"Miniboss size/hit radius must scale 3x.");
             Check(run.Tuning.boss.baseHp==3000&&run.Tuning.regent.baseHp==16000,"Normal/Regent boss health changed incorrectly.");
             var trash=UnityEngine.Object.FindObjectsByType<DungeonSlime>().First(s=>s.Role==SlimeRole.Trash);trash.GetComponent<DiceFree.AI.AggroBehaviour>().enabled=false;

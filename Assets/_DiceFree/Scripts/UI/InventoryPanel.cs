@@ -151,9 +151,11 @@ namespace DiceFree.UI
                     }
                     if (GUI.Button(slotRect, new GUIContent("", tooltip), GUIStyle.none))
                     {
-                        if(equipment.Equip(items[index].instanceId, definition.slot))
+                        if(definition.consumable)
+                            UseConsumable(items[index].instanceId,definition);
+                        else if(equipment.Equip(items[index].instanceId, definition.slot))
                             itemFeedback="Equipped "+definition.displayName+".";
-                        else itemFeedback="Cannot equip "+definition.displayName+".";
+                        else if(!definition.consumable)itemFeedback="Cannot equip "+definition.displayName+".";
                         selectedItemId=null;
                     }
                 }
@@ -198,6 +200,7 @@ namespace DiceFree.UI
             {message="Item no longer exists.";return false;}
             switch(action)
             {
+                case "Use": return UseConsumable(instanceId,def,out message);
                 case "Equip":
                     if(equipment.Equip(instanceId,def.slot))
                     {message="Equipped "+def.displayName+".";return true;}
@@ -222,10 +225,13 @@ namespace DiceFree.UI
             var item=inventory.Find(selectedItemId);
             if(item==null){selectedItemId=null;return;}
             HudChrome.DrawPanel(contextBounds,theme);
+            var definition=inventory.Resolve(item.definitionId);
+            string[] actions=definition!=null&&definition.consumable
+                ? new[]{"Use","Drop","Send to Bank"}:new[]{"Equip","Drop","Send to Bank"};
             const float height=32f;
-            for(int i=0;i<3;i++)
+            for(int i=0;i<actions.Length;i++)
             {
-                string action=i==0?"Equip":i==1?"Drop":"Send to Bank";
+                string action=actions[i];
                 var rect=new Rect(contextBounds.x+7,contextBounds.y+7+i*height,
                     contextBounds.width-14,height-2);
                 if(GUI.Button(rect,action))
@@ -239,6 +245,23 @@ namespace DiceFree.UI
             if(Event.current.type==EventType.MouseDown &&
                !contextBounds.Contains(Event.current.mousePosition))
                 selectedItemId=null;
+        }
+
+        private bool UseConsumable(string instanceId,ItemDefinition definition)
+        {
+            return UseConsumable(instanceId,definition,out itemFeedback);
+        }
+        private bool UseConsumable(string instanceId,ItemDefinition definition,out string message)
+        {
+            message="Cannot use this item.";
+            if(definition==null||!definition.consumable||GetComponent<CombatActor>()?.Alive!=true)return false;
+            float restored=GetComponent<Health>()?.Heal(definition.restoreHealth)??0;
+            var resources=GetComponent<ActorResourceController>();
+            if(resources!=null&&!string.IsNullOrWhiteSpace(definition.restoreResourceId))
+                restored+=resources.Restore(definition.restoreResourceId,definition.restoreResourceAmount);
+            if(restored<=0.001f){message="You cannot benefit from that potion right now.";return false;}
+            if(!inventory.Remove(instanceId)){message="The potion could not be removed from your bag.";return false;}
+            message="Used "+definition.displayName+".";return true;
         }
 
         private static string ShortName(string value)

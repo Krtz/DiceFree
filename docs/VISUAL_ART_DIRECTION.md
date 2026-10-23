@@ -1,6 +1,6 @@
 # DiceFree Visual Overhaul — Approved Direction (Interview)
 
-Status: Round 1 approved by Axel on 2026-10-09. Round 2 onward pending. This is direction for planning, NOT authorization to replace content or alter gameplay yet.
+Status: Visual interview Rounds 1–6 approved by Axel on 2026-10-09; user-shared ORPG presentation calibration added 2026-10-23. This is direction for planning, NOT authorization to replace content or alter gameplay yet.
 
 ## Central progression rule
 **Visual escalation with progression:** early/low-level areas, classes, enemies, units, equipment, loot, buildings and experiences should be comparatively simple and grounded. As levels, regions and challenges rise, visuals progressively become grander, stranger, more elaborate and more epic. Avoid giving starter content the visual complexity of endgame content. Early-world beauty and strong landmarks are still welcome: simplicity is NOT low quality.
@@ -26,8 +26,24 @@ Status: Round 1 approved by Axel on 2026-10-09. Round 2 onward pending. This is 
 - Asset license/redistribution, Unity URP compatibility, editable source geometry/rigging and performance need checking individually.
 - Cornberg and Slime Dungeon are current first candidates; final visual scope and priorities are subject to later interview rounds.
 
-## Interview continuation
-Round 2: Cornberg architecture, landmarks, northern farmlands, eastern forest, transitions and navigability. Further rounds: Slime Dungeon, characters/gear, effects/lighting, technical/performance and implementation sequencing.
+## User-shared ORPG presentation calibration (2026-10-23)
+Axel shared Twilight's Eve ORPG screenshots as a reference for the atmosphere
+and moment-to-moment presentation he wants DiceFree to move toward. They clarify
+the existing Warcraft III ORPG inspiration: a richly composed isometric world
+with strong regional mood; readable settlements, paths, enemies and landmarks;
+and a substantial fantasy command HUD whose framed panels feel part of the game
+world. Dialogue, quest asks and rewards, skill requirements/scaling, level
+growth, region changes and dungeon completion should be visible and
+understandable during play. This is a presentation preference, not approval to
+copy Twilight's Eve assets, exact layout, text, icons, map, names, mechanics or
+content. DiceFree's own HUD architecture, class identity, world lore, early-to-
+late visual escalation, configurability and readability rules remain in force.
+
+## Approved interview coverage
+The approved rounds below cover Cornberg and surroundings, Slime Dungeon,
+characters/equipment/Blender, lighting/weather/animation/VFX/graphics, and asset
+selection/production workflow. The October 23 reference calibration clarifies
+presentation without reopening those decisions.
 
 ## Source
 Direct user responses to visual-interview Round 1, October 9, 2026.

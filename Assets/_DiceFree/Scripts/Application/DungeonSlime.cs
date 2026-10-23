@@ -127,7 +127,7 @@ namespace DiceFree.Dungeons
             {
                 var hit=AccuracyResolver.Resolve(Actor,definition);
                 var packet=DamageResolver.CalculatePacket(Actor.Stats,victim.Stats,
-                    definition,hit,definition.RollDamageMultiplier()*DamageMultiplier,
+                    definition,hit,definition.RollDamageMultiplier(Actor.Stats.Attributes,DamageMultiplier),
                     Random.Range(0f,Actor.Stats.BasicAttackMaximumBonus),
                     Random.Range(Actor.Stats.Definition.basicAttackMinimumOffset,
                         Actor.Stats.Definition.basicAttackMaximumOffset));

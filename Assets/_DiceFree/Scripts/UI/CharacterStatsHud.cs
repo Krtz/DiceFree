@@ -83,7 +83,7 @@ namespace DiceFree.UI
 
             DrawRows(left, new[]
             {
-                new Row("Attack", $"{attackMin:0.#}–{attackMax:0.#}", attackTooltip),
+                new Row("Attack", $"{attackMin:0}–{attackMax:0}", attackTooltip),
                 new Row(
                     "M Def",
                     magicalDefense.ToString("0.#"),

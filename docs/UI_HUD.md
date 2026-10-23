@@ -19,6 +19,24 @@ The framework should support radically different player-created layouts, includi
 
 The POC only needs one strong default layout. Do not build a complete HUD editor yet.
 
+### Classic ORPG presentation cues
+
+Axel's Twilight's Eve screenshots (see `docs/TWILIGHTS_EVE_REFERENCE.md`) clarify
+the desired feel of the default presentation: a substantial, information-rich
+fantasy command HUD framing a continuously visible isometric world. A restrained
+stone/metal frame language, warm gold accents, dark translucent panel grounds,
+distinct iconography and prominent player/enemy identity are useful visual
+references. Preserve DiceFree's own module placement and customization rules;
+this is a style and information-hierarchy cue, not a requirement to reproduce
+the screenshot's exact frame, scoreboard, colors or arrangement.
+
+The HUD and world should cooperate to explain play. Make current objectives,
+skill requirements/rank effects, combat state, character growth, area changes
+and completion/reward states easy to notice when relevant. Keep overlays
+compact enough that players can still read terrain, actors, movement routes and
+danger cues. Support both detailed and reduced HUD/effects settings rather than
+making the busiest presentation mandatory.
+
 ## Default layout
 
 ### Bottom player panel
@@ -336,6 +354,8 @@ Detailed combat telemetry may remain developer-only even if a normal player-faci
 
 Character, inventory and similar major windows are overlay panels over the live world rather than full-screen pause screens.
 
+Attack damage ranges in the character and target information panels display whole numbers. Internal damage calculations retain their full precision.
+
 Direction:
 - movable;
 - scalable where appropriate;
@@ -431,3 +451,7 @@ POC does **not** need:
 - UI edit-mode UX;
 - precise XP-bar styling;
 - exact system/menu button set.
+
+## Current Windows playtest follow-up (implementation pending Unity verification)
+
+Options now has a Graphics tab for resolution plus Windowed, Borderless Fullscreen, Maximized Window and Exclusive Fullscreen modes. Selection is stored locally through PlayerPrefs. The Cornberg quest tracker is restricted to accepted Active and ReadyToTurnIn quests; Available quests remain at their NPCs. Action-bar skill tooltips are drawn only while the pointer is over the skill or its upgrade button. The Codex panel uses a prototype open-book paper/spine layout without changing discovery rules.

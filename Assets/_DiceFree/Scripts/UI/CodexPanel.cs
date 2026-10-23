@@ -41,15 +41,31 @@ namespace DiceFree.UI
 
             Rect panel = Bounds;
             DrawPanel(panel);
-            Rect inner = Inner(panel);
+            // The Codex opens as a bound volume: a dark leather cover, two
+            // paper leaves and a visible center crease, while retaining the
+            // existing responsive HUD bounds and contents.
+            HudChrome.Fill(new Rect(panel.x+5,panel.y+5,panel.width-10,panel.height-10),
+                new Color(.18f,.105f,.055f,.98f));
+            Rect inner = new(panel.x+16,panel.y+14,panel.width-32,panel.height-28);
+            HudChrome.Fill(inner,new Color(.79f,.70f,.51f,.98f));
+            HudChrome.Fill(new Rect(inner.center.x-3,inner.y+7,6,inner.height-14),
+                new Color(.27f,.17f,.10f,.85f));
+            var pageTint=GUI.color;
+            GUI.color=new Color(.92f,.86f,.70f,.94f);
+            GUI.DrawTexture(new Rect(inner.x+8,inner.y+8,inner.width*.5f-14,inner.height-16),Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(inner.center.x+7,inner.y+8,inner.width*.5f-15,inner.height-16),Texture2D.whiteTexture);
+            GUI.color=pageTint;
+            var contentPage=new Rect(inner.x+18,inner.y+14,inner.width-36,inner.height-28);
 
             const float headerHeight = 30f;
-            var header = new Rect(inner.x, inner.y, inner.width, headerHeight);
-            HudChrome.DrawHeader(header, Theme, "Echo Codex");
+            var header = new Rect(contentPage.x, contentPage.y, contentPage.width, headerHeight);
+            GUI.Label(header,"THE ECHO CODEX",new GUIStyle(GUI.skin.label)
+            {fontStyle=FontStyle.Bold,fontSize=18,alignment=TextAnchor.MiddleCenter,
+                normal={textColor=new Color(.25f,.14f,.07f)}});
             if (GUI.Button(
                     new Rect(header.xMax - 64f, header.y + 3f, 60f, header.height - 6f),
                     "Close",
-                    HudChrome.HeaderButtonStyle(Theme)))
+                    new GUIStyle(GUI.skin.button)))
                 open = false;
 
             float tabsY = header.yMax + Theme.gap;
@@ -63,10 +79,10 @@ namespace DiceFree.UI
                 tab = Tab.Dungeons;
 
             var content = new Rect(
-                inner.x,
+                contentPage.x,
                 monsters.yMax + Theme.gap,
-                inner.width,
-                inner.yMax - monsters.yMax - Theme.gap);
+                contentPage.width,
+                contentPage.yMax - monsters.yMax - Theme.gap);
 
             GUILayout.BeginArea(content);
             scroll = GUILayout.BeginScrollView(scroll);

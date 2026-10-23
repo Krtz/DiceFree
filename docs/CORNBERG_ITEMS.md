@@ -172,3 +172,7 @@ consequences of Vitality, not separate item bonuses. No save-schema change.
 Pants replace only the authored baseline underwear object and share the actual
 Novice skeleton. Unequip/disable restores captured baseline active states.
 Hands and Feet remain independent presentation bindings.
+
+## Brewer potions (prototype implementation pending Unity verification)
+
+The Cornberg brewer offers single-instance **Minor Health Potion** and **Minor Mana Potion** purchases at provisional prices of 12g and 15g. Using a health potion restores up to 30 HP; using a mana potion restores up to 25 `resource.mana` when that resource is active. A potion is consumed only when it restores a positive amount. Potions remain ordinary owned inventory instances for persistence and have no stacks, cooldowns, combat restrictions or class-specific effects in this prototype.

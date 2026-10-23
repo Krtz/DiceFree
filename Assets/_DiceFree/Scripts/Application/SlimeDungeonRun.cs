@@ -136,7 +136,7 @@ namespace DiceFree.Dungeons
         public void Killed(DungeonSlime slime)
         {
             if(!Active)return;
-            if(slime.Role==SlimeRole.Trash){Grant(Tuning.trashXp,Tuning.trashGold);Publish(new MonsterKilledEvent(slime.Actor.Stats.Definition.stableId));}
+              if(slime.Role==SlimeRole.Trash){Grant(Tuning.trashXp,Tuning.trashGold);Publish(new MonsterKilledEvent(slime.Actor.Stats.Definition.stableId,slime.Actor.Stats.Definition.familyId));}
             if(slime.Role==SlimeRole.Miniboss)
             {
                 MinibossDead=true;puzzleGate.SetActive(false);Grant(Tuning.minibossXp,Tuning.minibossGold);Publish(new DungeonBossKilledEvent(definition.stableId,"boss.big-slime"));puzzle.Begin(SecretEligible);Status="Lure slimes into all five green rings";

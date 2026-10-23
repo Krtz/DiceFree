@@ -5,6 +5,13 @@ Do NOT begin art imports, edit Unity scenes or merge without explicit follow-up 
 ## Vision and constraints
 DiceFree is an increasingly epic fantasy RPG, starting with simple level-1 village life and culminating in elaborate, surreal high-tier classes, enemies, equipment and environments. Realistic and stylized assets may freely coexist. Detailed, cinematic presentation must remain readable from an isometric camera and scalable via presets plus advanced user settings. Finish selected assets to polished quality rather than create large unfinished quantities.
 
+Axel's October 23, 2026 Twilight's Eve screenshots calibrate the intended ORPG
+feel: atmospheric, richly composed isometric regions paired with a substantial
+but readable fantasy HUD and clear feedback for quests, character growth,
+abilities, travel and dungeon outcomes. This adds presentation emphasis to the
+existing visual direction; it does not authorize copying another game's assets,
+layout, story or mechanics. See `docs/TWILIGHTS_EVE_REFERENCE.md`.
+
 Cornberg: small, cozy mixed-architecture farming hamlet, iconic *existing* lightly magical healing well linked to unusually large crops, realistic northern agriculture, prominent river and bridges, colorful slightly magical eastern forest where the slimes themselves remain the only overt supernatural objects. Strong landmarks, varied roads/elevation, modest quest-linked changes, accessible navigation. Important buildings are strong candidates for custom Blender work.
 Slime Dungeon: deceptively peaceful, denser forest, natural paths, modest Big Slime clearing, root-twisted central tree with five integrated green glow rings, increasingly grand woodland amphitheater boss arena, comical top hat, secret royal Regent domain, out-of-world shared reward sanctuary. Puzzle and boss contract in SLIME_DUNGEON.md remains authoritative.
 Classes: unique body/model for each class and high-quality class-specific animations; first art wave covers Novice, Physically Blessed Novice and Magically Touched Novice. Novice begins looking like ordinary villager. Every advancement brings noticeable class identity. Item identity outranks rarity, transmog overrides strict visible equipment when relevant. Future one class-mentor NPC per class generally gives corresponding advancement quests, secret exceptions allowed.
