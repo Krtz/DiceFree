@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **PSION TIER II ROUND 1 PARTIALLY ANSWERED (2026-10-22); USER PAUSED FOR LATER.** Eighth/final normal World1 Tier II from Magically Touched Novice, NOT implemented. Mixed autoattacks + spells, closer-ranged than other ranged classes, and early named spell/passive/clone/AoE concepts recorded in latest section below. Elemental choices, weapons, Mana/resource, model and advancement quest unresolved. Future autoattack/spell descendant branches remain FUTURE WORLD2+ IDEAS ONLY. **DOCS ONLY, NO UNITY MODIFICATIONS.**
+**Status:** **ROUNDS 2 AND 3 ANSWERED (2026-10-24); mechanical decisions recorded below.** Tier II design only; no Unity implementation. Shield shared-vs-independent absorption remains under discussion. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
 
@@ -80,3 +80,24 @@ User had to leave and explicitly requested the questions **again later**. DO NOT
 **PSION-010 — Equipment/resources/appearance:** Empty hands, wand+focus, staff or other equipment? Mana only or a secondary class mechanic? Should appearance selection happen through the separate working chat's asset review and advancement quest wait until the big city?
 
 **Do not design Tier III here. Do not perform any Unity or gameplay implementation. Continue documenting and asking exactly five questions when user resumes.**
+
+
+## CURRENT AUTHORITATIVE DESIGN — ROUNDS 2–3 (2026-10-24)
+
+This section **supersedes earlier 'unanswered', 'tentative', and 'deferred Round 2' notes above** wherever inconsistent. The earlier interview is retained as history.
+
+| ID | User decision | Status |
+| --- | --- | --- |
+| PSION-006 | Psychic Bolt deals **Magical Metal** single-target damage and stuns; stun scales by rank to **3 seconds at maximum rank**, reduced by boss Tenacity. Rank count and rank-1 stun still open. | USER CONFIRMED |
+| PSION-007 | **All normal autoattacks in DiceFree deal Physical damage**, although abilities/passives may add Magical damage. Psion's Physical basic attacks start at **0.45×AGI + 0.45×INT** (0.9 total), for testing. Passive basic-attack crit chance **+2.5 percentage points per rank**, crit damage **150%** (interpret as total multiplier pending validation). Passive ignores **1 flat Physical Defense per rank**. Rename to **Psionic Blades Mastery** is assistant-preferred but user proposed alternatives and has not explicitly locked the name. | MECHANICS USER CONFIRMED; NAME OPEN |
+| PSION-008 | Stationary placed **Mental Image** clone lasts up to **5 seconds at max rank**, duration increases with ranks. Same HP and attack range as caster, but takes **250% MORE damage** (3.5× incoming; interpretation should be verified). Multiple clones may coexist. Clone basic attacks deal **10% of caster basic-attack damage** and **inherit caster critical chance and other basic-attack modifiers**; clone explodes for **AoE damage only** on expiry or death. Explosion magnitude/element/radius, rank count, attack speed and mana/cooldown open. | USER CONFIRMED |
+| PSION-009 | AoE spell is a **Lightning-element storm**, **three lightning waves over 0.6 seconds**. A **Metal-element shield** affects Psion and allies in a nearby radius. Whether allies get independent shields or all draw on **one shared absorption pool remains undecided**; assistant recommends one shared pool, applied to nearby allies at cast time, with INT/rank scaling and no pool multiplication per ally. These implementation details are PROPOSALS, not approvals. | CORE USER CONFIRMED; SHIELD POOL OPEN |
+| PSION-010 | Tier II equipment: **psionic blades** and **tome offhand**. **Mana only**. Advancement quest and class model **deferred**. | USER CONFIRMED |
+
+**Important interpretation:** 'Psionic blades' denotes equipment; the proposed **Psionic Blades Mastery** denotes the passive. User also floated 'Mental Attacks' or similar names. No final passive rename yet. Preserve universal Physical basic-attack rule. Distinguish spell Magical channel from Lightning/Metal element.
+
+**Round 3 shield discussion:** User felt independent shields would be easier but a shared damage-absorption pool sounded more fun and requested advice. Assistant recommends **shared absorption** for tactical party interaction. Do not record the shared pool as approved until user confirms.
+
+**Still open:** rank caps and unlock levels, skill damage/mana/cooldowns/ranges, shield pool type/values/radius/duration, Mental Image explosion specifics, final passive name, Psion model and quest (explicitly later). No Unity modifications or World2+ descendant implementation.
+
+**Documentation workflow:** User explicitly requests updating design documents after **every design round**. Maintain this file on `integration/world1-foundation` after each round, preserving confirmed-vs-proposed distinctions.
