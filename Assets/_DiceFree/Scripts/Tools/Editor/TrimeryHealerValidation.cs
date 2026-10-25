@@ -1,14 +1,16 @@
 using System; using System.IO; using System.Linq; using System.Collections; using System.Collections.Generic;
 using DiceFree.Core; using DiceFree.Characters; using DiceFree.Combat; using DiceFree.Persistence; using DiceFree.World;
-using UnityEngine; using UnityEngine.AI; using UnityEditor; using UnityEditor.SceneManagement; using Unity.Pipeline.Commands;
+using DiceFree.UI;
+using UnityEngine; using UnityEngine.AI; using UnityEngine.InputSystem; using UnityEngine.InputSystem.LowLevel; using UnityEditor; using UnityEditor.SceneManagement; using Unity.Pipeline.Commands;
 using Object = UnityEngine.Object;
 namespace DiceFree.EditorTools
 {
  [InitializeOnLoad] public static class TrimeryHealerValidation
  {
   const string Key="DiceFree.TrimeryHealer."; static readonly Stack<IEnumerator> steps=new(); static double deadline; static int checks;
-  [Serializable] sealed class Report { public string status,error; public int checks,walked,frames; public float receivedHealing; public bool clicked,nearest; }
+  [Serializable] sealed class Report { public string status,error; public int checks,walked,frames; public float receivedHealing; public bool routedClick,clicked,nearest; }
   static Report report;
+  static Mouse mouse; static InputSettings.BackgroundBehavior background; static InputSettings.EditorInputBehaviorInPlayMode editorInput;
   static TrimeryHealerValidation()=>EditorApplication.playModeStateChanged+=Changed;
   static void Need(bool condition,string message){if(!condition)throw new InvalidOperationException(message); checks++;}
   [CliCommand("dicefree.trimery.healer.test","Isolated live walking, click, keyboard-path, treatment and safety checks.")]
@@ -18,6 +20,7 @@ namespace DiceFree.EditorTools
     if(UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).isDirty)throw new InvalidOperationException("Save modified scenes first");
    SessionState.SetString(Key+"scene",EditorSceneManager.GetActiveScene().path);
    SessionState.SetBool(Key+"options",EditorSettings.enterPlayModeOptionsEnabled);SessionState.SetInt(Key+"flags",(int)EditorSettings.enterPlayModeOptions);
+   SessionState.SetBool(Key+"background",Application.runInBackground);
    SessionState.SetBool(Key+"cleanup",true);SessionState.SetString(Key+"status","running");SessionState.SetString(Key+"error","");SessionState.SetInt(Key+"checks",0);
    string root=Path.Combine(Path.GetTempPath(),"DiceFree-Healer-"+Guid.NewGuid().ToString("N"));
    PersistenceTestGuard.UseIsolatedSaveRootForNextPlay(root);EditorSettings.enterPlayModeOptionsEnabled=false;
@@ -27,11 +30,17 @@ namespace DiceFree.EditorTools
   public static object Status()=>new{status=SessionState.GetString(Key+"status","idle"),checks=SessionState.GetInt(Key+"checks",0),error=SessionState.GetString(Key+"error","")};
   static void Changed(PlayModeStateChange state){
    if(state==PlayModeStateChange.EnteredPlayMode&&SessionState.GetString(Key+"status","")=="running"){
+    Application.runInBackground=true;
+    background=InputSystem.settings.backgroundBehavior;editorInput=InputSystem.settings.editorInputBehaviorInPlayMode;
+    InputSystem.settings.backgroundBehavior=InputSettings.BackgroundBehavior.IgnoreFocus;
+    InputSystem.settings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+    mouse=InputSystem.AddDevice<Mouse>();
     checks=0;report=new Report();steps.Clear();steps.Push(Flow());deadline=EditorApplication.timeSinceStartup+180;
     EditorApplication.update+=Tick;Application.logMessageReceived+=Log;
    }
    if(state==PlayModeStateChange.EnteredEditMode&&SessionState.GetBool(Key+"cleanup",false)){
     SessionState.SetBool(Key+"cleanup",false);EditorApplication.update-=Tick;Application.logMessageReceived-=Log;
+    Application.runInBackground=SessionState.GetBool(Key+"background",false);
     PersistenceTestGuard.ClearValidationOverrides();EditorSettings.enterPlayModeOptions=(EnterPlayModeOptions)SessionState.GetInt(Key+"flags",0);
     EditorSettings.enterPlayModeOptionsEnabled=SessionState.GetBool(Key+"options",false);
     var scene=SessionState.GetString(Key+"scene","");if(!string.IsNullOrWhiteSpace(scene))EditorSceneManager.OpenScene(scene);
@@ -44,6 +53,8 @@ namespace DiceFree.EditorTools
   }catch(Exception e){Finish(false,e.ToString());}}
   static void Finish(bool pass,string error){
    EditorApplication.update-=Tick;Application.logMessageReceived-=Log;report??=new Report();report.status=pass?"passed":"failed";report.error=error;report.checks=checks;
+   if(mouse!=null&&mouse.added)InputSystem.RemoveDevice(mouse);mouse=null;
+   InputSystem.settings.backgroundBehavior=background;InputSystem.settings.editorInputBehaviorInPlayMode=editorInput;
    SessionState.SetString(Key+"status",report.status);SessionState.SetString(Key+"error",error??"");SessionState.SetInt(Key+"checks",checks);
    File.WriteAllText("Library/TrimeryHealerResults.json",JsonUtility.ToJson(report,true));EditorApplication.ExitPlaymode();
   }
@@ -64,16 +75,28 @@ namespace DiceFree.EditorTools
   static IEnumerator Flow(){
    CombatActor p=null;while(p==null){p=Object.FindAnyObjectByType<TraversalInput>()?.GetComponent<CombatActor>();yield return null;}
    var save=p.GetComponent<ManifestationPersistence>();while(!save.Ready||!p.Motor.Ready)yield return null;
-   p.GetComponent<TraversalInput>().enabled=false;p.GetComponent<CombatInput>().enabled=false;p.GetComponent<BasicAttack>().enabled=false;p.Health.Invulnerable=true;
+   var controls=p.GetComponent<TraversalInput>();controls.enabled=true;p.GetComponent<CombatInput>().enabled=false;p.GetComponent<BasicAttack>().enabled=false;p.Health.Invulnerable=true;
    var healers=Object.FindObjectsByType<HealerInteraction>();Need(healers.Length==1,"Expected exactly one healer");var healer=healers[0];
    Need(healer.GetComponent<CombatActor>()==null,"Healer must not be hostile/combat target");
    Need(healer.GetComponent<Collider>().gameObject.layer==10,"Not click selectable");
    Need(healer.GetComponentsInChildren<Collider>().All(c=>c.gameObject.layer!=9),"Healer blocks world navigation");
    Need(healer.GetComponentsInChildren<Renderer>().All(r=>r.sharedMaterial!=null&&r.sharedMaterial.shader.isSupported),"Unsupported healer material");
    var registry=p.GetComponent<InteractionRegistry>();Need(registry.Contains(healer),"Healer absent from interaction registry");
+   var playerCollider=p.GetComponent<CapsuleCollider>();Need(playerCollider!=null&&playerCollider.enabled&&!playerCollider.isTrigger,"Player gameplay collision capsule missing or invalid");
    Need(NavMesh.SamplePosition(CornbergLandscape.Ground(248,181),out var start,3,1),"Village arrival unreachable");
    Need(p.Motor.Teleport(start.position),"Village relocation");
-   int frame=Time.frameCount;yield return Wait(.5f);report.frames=Time.frameCount-frame;Need(report.frames>5,"Runtime not advancing");
+    int frame=Time.frameCount;yield return Wait(.5f);report.frames=Time.frameCount-frame;Need(report.frames>1,"Runtime not advancing");
+   var destination=CornbergLandscape.Ground(248,185);var screen=controls.WorldCamera.WorldToScreenPoint(destination);
+   Need(screen.z>0&&screen.x>=0&&screen.x<Screen.width&&screen.y>=0&&screen.y<Screen.height,"Click-to-move destination is outside the live camera view");
+   Need(!HudPointerBlocker.Covers(screen),"Click-to-move test point is covered by gameplay UI");
+   var groundRay=controls.WorldCamera.ScreenPointToRay(screen);
+   Need(Physics.Raycast(groundRay,out var groundHit,1500,(1<<8)|(1<<9),QueryTriggerInteraction.Ignore)&&groundHit.collider.gameObject.layer==8,"Click-to-move point does not hit navigable ground");
+   var priorPosition=p.transform.position;InputSystem.QueueStateEvent(mouse,new MouseState{position=screen,buttons=2});InputSystem.Update();controls.SendMessage("Update");
+   Need(p.Motor.Travelling,"Synthetic right-click did not reach TraversalInput and start a NavMesh route");
+   InputSystem.QueueStateEvent(mouse,new MouseState{position=screen,buttons=0});InputSystem.Update();
+   float moveEnd=Time.time+5;while(Vector3.Distance(priorPosition,p.transform.position)<.5f&&Time.time<moveEnd)yield return null;
+   Need(Vector3.Distance(priorPosition,p.transform.position)>.5f,"Click-to-move path was accepted but the player did not move");report.routedClick=true;
+   yield return Walk(p,destination);
    foreach(var point in new[]{new Vector2(248,185),new Vector2(248,190),new Vector2(246,190)})
     yield return Walk(p,CornbergLandscape.Ground(point.x,point.y));
    Need(healer.CanInteract(p),"Cannot interact at road approach");

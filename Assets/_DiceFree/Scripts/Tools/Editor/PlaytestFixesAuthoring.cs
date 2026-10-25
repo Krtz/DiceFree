@@ -115,8 +115,20 @@ namespace DiceFree.EditorTools
             var portals=All<DungeonPortal>(scene).Where(p=>p.isActiveAndEnabled).ToArray();Require(portals.Length==1&&portals[0].name=="08 - Slime dungeon entrance - exterior only","Incorrect active cave portal.");
             Require(portals[0].transform.Find("Playtest cave interaction").GetComponent<Collider>().enabled,"Portal click collider disabled.");
             foreach(var npc in All<VillageVisualIdle>(scene)){Require(npc.Visual!=null&&npc.Visual.GetComponentsInChildren<Renderer>().Length>0,"Idle has no visible geometry.");Require(npc.GetComponent<CapsuleCollider>()?.enabled==true&&npc.GetComponent<NavMeshObstacle>()!=null,"NPC collision missing.");}
-            foreach(var tree in All<TreeCameraOccluder>(scene))Require(tree.transform.Find("Playtest trunk collision").GetComponent<NavMeshObstacle>().carving,"Tree navigation missing.");
-            return new {success=true,marker="PLAYTEST_P0_SCENE_OK",npcs=All<VillageVisualIdle>(scene).Length,trees=All<TreeCameraOccluder>(scene).Length};
+            // The authored playtest collision contract belongs to the world-tree roots
+            // configured by Install, not every nested foliage renderer/occlusion helper.
+            var trees=All<Transform>(scene).Where(t=>t.name.StartsWith("Trees/Tree_",StringComparison.Ordinal)).ToArray();
+            foreach(var tree in trees)
+            {
+                Require(tree.GetComponent<TreeCameraOccluder>()!=null,"Tree camera occlusion missing: "+tree.name);
+                var trunk=tree.Find("Playtest trunk collision");
+                Require(trunk!=null,"Tree physical trunk collision missing: "+tree.name);
+                var collider=trunk.GetComponent<CapsuleCollider>();
+                Require(collider!=null&&collider.enabled&&!collider.isTrigger,"Tree physical trunk collider invalid: "+tree.name);
+                var obstacle=trunk.GetComponent<NavMeshObstacle>();
+                Require(obstacle!=null&&obstacle.enabled&&obstacle.carving,"Tree navigation obstacle invalid: "+tree.name);
+            }
+            return new {success=true,marker="PLAYTEST_P0_SCENE_OK",npcs=All<VillageVisualIdle>(scene).Length,trees=trees.Length};
         }
     }
 }

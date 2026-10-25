@@ -300757,6 +300757,7 @@ GameObject:
   - component: {fileID: 1067462376}
   - component: {fileID: 1067462375}
   - component: {fileID: 1067462374}
+  - component: {fileID: 1067462378}
   m_Layer: 10
   m_Name: Trimery priest - placeholder healer
   m_TagString: Untagged
@@ -300851,6 +300852,22 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!208 &1067462378
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067462372}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.6, y: 0.9, z: 0.6}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.85, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1067794386
 GameObject:
   m_ObjectHideFlags: 0

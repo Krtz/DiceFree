@@ -18,13 +18,22 @@ namespace DiceFree.UI
         private GameplayPreferences gameplayPreferences;
         private IPlayerAudioSettings audioSettings;
         public System.Func<bool> ReturnToStartMenu { get; set; }
+        public System.Func<bool> QuitToDesktop { get; set; }
         private bool confirmReturn;
+        private bool confirmQuit;
         private string returnFeedback = "";
+        private string quitFeedback = "";
         public bool RequestReturnToStartMenu()
         {
             bool saved = ReturnToStartMenu?.Invoke()==true;
             if(!saved)returnFeedback="Could not save progress. Return cancelled.";
             return saved;
+        }
+        public bool RequestQuitToDesktop()
+        {
+            bool quit = QuitToDesktop?.Invoke()==true;
+            if(!quit)quitFeedback=QuitToDesktop==null?"Quit to Desktop is unavailable in this scene.":"Could not save progress. Quit cancelled.";
+            return quit;
         }
         public bool Open { get; private set; }
         public bool ShowLauncher { get; set; } = true;
@@ -68,7 +77,7 @@ namespace DiceFree.UI
             if(bindings==null)return;
             bindings.CancelRebind();
             PlayerPrefs.Save();
-            Open=false;confirmReturn=false;
+            Open=false;confirmReturn=false;confirmQuit=false;
             bindings.SetModal(false);
         }
         private void Update()
@@ -314,18 +323,32 @@ namespace DiceFree.UI
             GUILayout.Label("Session");
             GUILayout.Label("Your progress is saved before returning to the start menu.");
             if(ReturnToStartMenu==null)
-            {GUILayout.Label("Return to Start Menu is unavailable in this scene.");return;}
-            if(!confirmReturn && GUILayout.Button("Save and Return to Start Menu"))
-                confirmReturn=true;
-            if(confirmReturn)
+                GUILayout.Label("Return to Start Menu is unavailable in this scene.");
+            else
             {
-                GUILayout.Label("Save progress and leave? Active dungeon runs will end.");
-                GUILayout.BeginHorizontal();
-                if(GUILayout.Button("Save and Return"))RequestReturnToStartMenu();
-                if(GUILayout.Button("Cancel"))confirmReturn=false;
-                GUILayout.EndHorizontal();
+                if(!confirmReturn && GUILayout.Button("Save and Return to Start Menu"))
+                    confirmReturn=true;
+                if(confirmReturn)
+                {
+                    GUILayout.Label("Save progress and leave? Active dungeon runs will end.");
+                    GUILayout.BeginHorizontal();
+                    if(GUILayout.Button("Save and Return"))RequestReturnToStartMenu();
+                    if(GUILayout.Button("Cancel"))confirmReturn=false;
+                    GUILayout.EndHorizontal();
+                }
             }
             if(!string.IsNullOrEmpty(returnFeedback))GUILayout.Label(returnFeedback);
+            GUILayout.Space(16);
+            if(GUILayout.Button("Quit to Desktop"))confirmQuit=true;
+            if(confirmQuit)
+            {
+                GUILayout.Label("Save progress and close DiceFree? Active dungeon runs will end.");
+                GUILayout.BeginHorizontal();
+                if(GUILayout.Button("Save and Quit to Desktop"))RequestQuitToDesktop();
+                if(GUILayout.Button("Cancel"))confirmQuit=false;
+                GUILayout.EndHorizontal();
+            }
+            if(!string.IsNullOrEmpty(quitFeedback))GUILayout.Label(quitFeedback);
         }
 
         private static readonly string[] BarVisibilityChoices =

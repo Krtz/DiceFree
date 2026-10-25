@@ -11,7 +11,7 @@ namespace DiceFree.Advancement
         MenuPortraitStage portraitStage;OptionsPanel options;
         GUIStyle title,heading,small,body,cardTitle,button,tab,nameField;
         static readonly Color Gold=new(.82f,.67f,.39f),Muted=new(.61f,.66f,.72f);
-        void OnDestroy(){if(options!=null)options.ShowLauncher=true;}
+        void OnDestroy(){if(options!=null){options.ShowLauncher=true;options.QuitToDesktop=null;}}
         public int SelectedTier {get;private set;}
         public MenuPortraitStage PortraitStage=>portraitStage;
         public ManifestationEntry[] EntriesForTier(int tier)=>Entries.Where(e=>e.tier==tier).ToArray();

@@ -59,6 +59,7 @@ namespace DiceFree.Advancement
             portraitStage.Clear();
             options ??= FindAnyObjectByType<DiceFree.UI.OptionsPanel>()??gameObject.AddComponent<DiceFree.UI.OptionsPanel>();
             options.ShowLauncher=false;
+            options.QuitToDesktop=QuitToDesktop;
             try
             {
                 classCatalog?.Validate();
@@ -88,6 +89,15 @@ namespace DiceFree.Advancement
                 loadBlocked = true;
                 status = "Could not read Echo save: " + exception.Message;
             }
+        }
+
+        private bool QuitToDesktop()
+        {
+            options?.Close();
+            DiceFree.Foundation.DevelopmentSession.End();
+            PlayerPrefs.Save();
+            Application.Quit();
+            return true;
         }
 
         public bool TryOpenDevelopmentRoom()

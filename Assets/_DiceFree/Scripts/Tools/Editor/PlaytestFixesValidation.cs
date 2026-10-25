@@ -33,6 +33,10 @@ namespace DiceFree.EditorTools
         static InputSettings.BackgroundBehavior background;static InputSettings.EditorInputBehaviorInPlayMode editorInput;
         static PlaytestFixesValidation()=>EditorApplication.playModeStateChanged+=Changed;
         static void Check(bool value,string message){if(!value)throw new InvalidOperationException(message);checks++;}
+        static bool WithinIdleScale(Vector3 value,Vector3 minimum,Vector3 maximum,float margin=.025f)=>
+            value.x>=minimum.x-margin&&value.x<=maximum.x+margin&&
+            value.y>=minimum.y-margin&&value.y<=maximum.y+margin&&
+            value.z>=minimum.z-margin&&value.z<=maximum.z+margin;
         [CliCommand("dicefree.playtest-fixes.playtest", "Isolated-save P0 cave, idle, tree ghosting, dummy and early-start regression.")]
         public static object Start()
         {
@@ -203,7 +207,9 @@ namespace DiceFree.EditorTools
             float end=Time.time+1;int frame=Time.frameCount;while(Time.time<end)yield return null;
             Check(Time.frameCount>frame+1,"Player loop frozen.");Check(Vector3.Distance(before,visual.localPosition)>.002f||Quaternion.Angle(visual.localRotation,beforeRotation)>1,"NPC idle invisible.");
             Check(npc.GetComponent<Collider>().bounds.size.y>1,"NPC capsule impractical.");
-            var tree=UnityEngine.Object.FindObjectsByType<TreeCameraOccluder>().First();
+            var tree=UnityEngine.Object.FindObjectsByType<TreeCameraOccluder>().FirstOrDefault(t=>
+                t.GetComponentsInChildren<Renderer>().Any(r=>r.enabled&&!r.name.Contains("Bark")&&!r.name.Contains("Trunk")));
+            Check(tree!=null,"No enabled foliage canopy renderer is available for the ghosting regression.");
             var mesh=tree.GetComponentsInChildren<Renderer>().First(r=>r.enabled&&
                 !r.name.Contains("Bark")&&!r.name.Contains("Trunk"));var originals=mesh.sharedMaterials;
             var fader=new GameObject("Isolated fade test").AddComponent<CameraOcclusionFader>();var center=mesh.bounds.center;
@@ -261,16 +267,42 @@ namespace DiceFree.EditorTools
             Check(trash.Actor.Motor.Teleport(hero.transform.position+Vector3.forward*1.5f),"Attack animation fixture unreachable.");
             var trashVisual=trash.transform.Find("Presentation");var trashScale=trashVisual.localScale;var trashAttack=trash.GetComponent<BasicAttack>();Check(trashAttack.Order(hero),"Regular slime attack order failed.");
             do{yield return null;}while(trashAttack.State!="Wind-up");yield return null;Check(trashVisual.localScale.y<trashScale.y*.9f,"Regular slime attack has no visible squash.");trashAttack.enabled=false;
+            while(mini.Busy)yield return null;
+            yield return null;
+            mini.enabled=false;
             Check(hero.Motor.Teleport(mini.transform.position+Vector3.back*3),"Boss animation fixture unreachable.");
-            var miniVisual=mini.transform.Find("Presentation");var miniScale=miniVisual.localScale;
-            do{yield return null;}while(!mini.Busy);yield return null;Check(miniVisual.localScale!=miniScale,"Boss Slam anticipation has no visual deformation.");
-            do{yield return null;}while(mini.Busy);Check(Vector3.Distance(miniVisual.localScale,Vector3.one)<.06f,"Slam did not reform presentation to its idle scale.");
+            var miniVisual=mini.transform.Find("Presentation");
+            var idleMinimum=miniVisual.localScale;var idleMaximum=idleMinimum;
+            for(int sample=0;sample<240;sample++){yield return null;idleMinimum=Vector3.Min(idleMinimum,miniVisual.localScale);idleMaximum=Vector3.Max(idleMaximum,miniVisual.localScale);}
+            mini.enabled=true;
+            bool observedSlam=false;
+            for(int attackFrame=0;attackFrame<360&&!observedSlam;attackFrame++)
+            {yield return null;observedSlam=mini.Busy;}
+            Check(observedSlam,"Boss did not begin a Slam for the animation fixture.");
+            bool slamDeformed=false;
+            for(int slamFrame=0;slamFrame<120&&mini.Busy;slamFrame++)
+            {
+                yield return null;
+                if(miniVisual.localScale.y<idleMinimum.y*.9f||miniVisual.localScale.x>idleMaximum.x*1.08f)
+                {slamDeformed=true;break;}
+            }
+            Check(slamDeformed,"Boss Slam anticipation has no visual deformation.");
+            do{yield return null;}while(mini.Busy);
+            bool slamReformed=false;
+            for(int restoreFrame=0;restoreFrame<60&&!slamReformed;restoreFrame++)
+            {yield return null;slamReformed=WithinIdleScale(miniVisual.localScale,idleMinimum,idleMaximum);}
+            Check(slamReformed,
+                $"Slam did not reform presentation to its idle scale. current={miniVisual.localScale:F3}, idle=[{idleMinimum:F3}..{idleMaximum:F3}]");
             mini.Actor.Health.SetEncounterHp(mini.Actor.Health.Maximum*.69f);do{yield return null;}while(!mini.Dividing);
             var fragments=UnityEngine.Object.FindObjectsByType<DungeonSlime>().Where(s=>s.Role==SlimeRole.Fragment).ToArray();
             float expectedFragmentHp=mini.Actor.Health.Maximum*run.Tuning.minibossFragmentHpFraction;
             Check(fragments.Length==2&&fragments.All(f=>Mathf.Approximately(f.transform.localScale.x,1.6f)&&Mathf.Approximately(f.Actor.Health.Maximum,expectedFragmentHp)),
                 "Big Slime fragments must use the authored miniboss fragment health fraction.");
-            fragments[0].Actor.Health.ApplyDamage(hero,new DamageResult{mitigated=999});do{yield return null;}while(mini.Dividing);Check(Vector3.Distance(miniVisual.localScale,miniScale)<.01f,"Divide did not visually reform.");
+            fragments[0].Actor.Health.ApplyDamage(hero,new DamageResult{mitigated=999});do{yield return null;}while(mini.Dividing);
+            bool divideReformed=false;
+            for(int restoreFrame=0;restoreFrame<60&&!divideReformed;restoreFrame++)
+            {yield return null;divideReformed=WithinIdleScale(miniVisual.localScale,idleMinimum,idleMaximum);}
+            Check(divideReformed,"Divide did not visually reform.");
             long savedGold=wallet.Gold;var options=UnityEngine.Object.FindFirstObjectByType<OptionsPanel>();options.Show();
             Check(options.RequestReturnToStartMenu(),"Options save-and-return failed.");
             StartMenuController menu;do{yield return null;menu=UnityEngine.Object.FindFirstObjectByType<StartMenuController>();}while(menu==null||!menu.HasLoadedProfile);

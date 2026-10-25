@@ -8,6 +8,7 @@ using Unity.Pipeline.Commands;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
@@ -71,6 +72,7 @@ namespace DiceFree.EditorTools
             selection.center = Vector3.up * .85f;
             selection.radius = .6f;
             selection.height = 1.8f;
+            ConfigureStationaryNpcObstacle(go, selection);
             var visual = new GameObject("Soft priest blob").transform;
             visual.SetParent(go.transform, false);
             visual.localRotation = Quaternion.Euler(0, 90, 0);
@@ -93,6 +95,54 @@ namespace DiceFree.EditorTools
             go.AddComponent<InteractionPrompt>().Configure(healer, player);
             return healer;
         }
+
+        private static NavMeshObstacle ConfigureStationaryNpcObstacle(GameObject root, CapsuleCollider selection)
+        {
+            var obstacle = root.GetComponent<NavMeshObstacle>();
+            if (obstacle == null) obstacle = root.AddComponent<NavMeshObstacle>();
+            obstacle.shape = NavMeshObstacleShape.Capsule;
+            obstacle.center = selection.center;
+            obstacle.radius = selection.radius;
+            obstacle.height = selection.height;
+            obstacle.carving = root.GetComponent<VillageHomeWander>() == null;
+            EditorUtility.SetDirty(obstacle);
+            return obstacle;
+        }
+
+        [CliCommand("dicefree.trimery.healer.repair-obstacle", "Add the matching stationary-NPC NavMeshObstacle to the existing Trimery healer only.")]
+        public static object RepairObstacle()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Edit Mode only");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+                if (SceneManager.GetSceneAt(i).isDirty) throw new InvalidOperationException("Save modified scenes first");
+            var previous = EditorSceneManager.GetSceneManagerSetup();
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(TrimeryVillageAuthoring.ScenePath);
+                var roots = scene.GetRootGameObjects()
+                    .SelectMany(g => g.GetComponentsInChildren<Transform>(true));
+                var healer = roots.Single(t => t.name == Name);
+                var selection = healer.GetComponent<CapsuleCollider>();
+                if (selection == null || !selection.enabled)
+                    throw new InvalidOperationException("Trimery healer selection collider is missing or disabled");
+                var obstacle = ConfigureStationaryNpcObstacle(healer.gameObject, selection);
+                EditorUtility.SetDirty(healer.gameObject);
+                EditorSceneManager.MarkSceneDirty(scene);
+                if (!EditorSceneManager.SaveScene(scene)) throw new InvalidOperationException("Scene save failed");
+                AssetDatabase.SaveAssets();
+                return new
+                {
+                    repaired = true,
+                    name = healer.name,
+                    colliderCenter = selection.center.ToString(),
+                    radius = obstacle.radius,
+                    height = obstacle.height,
+                    carving = obstacle.carving
+                };
+            }
+            finally { EditorSceneManager.RestoreSceneManagerSetup(previous); }
+        }
+
         [CliCommand("dicefree.trimery.healer.install", "Install or refresh only the Trimery placeholder healer, preserving other village work.")]
         public static object Install()
         {
