@@ -38,15 +38,7 @@ namespace DiceFree.UI
             if (source == null || HudPointerBlocker.ModalOpen) return;
 
             hoveredSkillTooltip=null;
-            tooltipPointer=Event.current.mousePosition;
-            if(Mouse.current!=null)
-            {
-                Vector2 device=Mouse.current.position.ReadValue();
-                Vector2 ui=new Vector2(device.x,Screen.height-device.y);
-                // Mouse Input System can update without an IMGUI mouse event.
-                if(ui.x>=0&&ui.x<=Screen.width&&ui.y>=0&&ui.y<=Screen.height)
-                    tooltipPointer=ui;
-            }
+            tooltipPointer=HudTooltip.CurrentGuiPointerPosition();
             if(queuedOrders==null)
                 foreach(var component in GetComponents<MonoBehaviour>())
                     if(component is IQueuedOrders queue){queuedOrders=queue;break;}
@@ -113,8 +105,7 @@ namespace DiceFree.UI
             bool interactable = !view.passive && view.learned &&
                                 view.cooldown <= 0.001f &&
                                 !(HudLayoutManager.Current?.EditMode ?? false);
-            bool hovered = rect.Contains(tooltipPointer) ||
-                rect.Contains(Event.current.mousePosition);
+            bool hovered = rect.Contains(tooltipPointer);
             if(hovered)
                 hoveredSkillTooltip=view.tooltip;
             HudChrome.DrawSlot(rect, Theme, view.learned, hovered);
@@ -241,8 +232,7 @@ namespace DiceFree.UI
             if(view.canUpgrade && !(HudLayoutManager.Current?.EditMode ?? false))
             {
                 Rect plus=new(rect.xMax-27f,rect.y+2f,25f,23f);
-                bool over=plus.Contains(tooltipPointer) ||
-                    plus.Contains(Event.current.mousePosition);
+                bool over=plus.Contains(tooltipPointer);
                 string details=source.UpgradeTooltip(slot);
                 if(over)hoveredSkillTooltip=details;
                 HudChrome.Fill(plus,over?new Color(.28f,.58f,.16f,.98f):

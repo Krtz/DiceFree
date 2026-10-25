@@ -23,8 +23,9 @@ namespace DiceFree.EditorTools
             Require(all.Length==35,"Expected five original themes and 30 pack themes");
             Require(all.Select(x=>x.id).Distinct().Count()==all.Length,
                 "Duplicate theme identity");
-            Require(Enum.GetValues(typeof(OptionsPanel.OptionsTab)).Length==6,
-                "Expected six distinct options tabs");
+            int optionsTabCount=Enum.GetValues(typeof(OptionsPanel.OptionsTab)).Length;
+            Require(optionsTabCount==7,
+                "Expected seven distinct options tabs including Session and Credits");
             int loaded=0;
             foreach(var theme in all)
                 if(theme.id.StartsWith("pack-")&&HudThemeArtwork.HasArt(theme.id))
@@ -51,7 +52,7 @@ namespace DiceFree.EditorTools
             Require(colors.Length==3 && (colors[0]-colors[1]).maxColorComponent!=0f,
                 "Quillrat three visual palettes collapsed");
             return new {success=true,themeCount=all.Length,
-                localArtworkThemes=loaded,optionsTabs=6,
+                localArtworkThemes=loaded,optionsTabs=optionsTabCount,
                 quillratUrpMaterials=quillrats.Length};
         }
 

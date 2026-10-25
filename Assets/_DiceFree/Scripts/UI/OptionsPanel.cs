@@ -14,6 +14,7 @@ namespace DiceFree.UI
         private int resolutionIndex;
         private int requestedWidth,requestedHeight;
         private FullScreenMode fullScreenMode;
+        private bool resolutionDropdownOpen;
         private InputBindings bindings;
         private GameplayPreferences gameplayPreferences;
         private IPlayerAudioSettings audioSettings;
@@ -140,6 +141,7 @@ namespace DiceFree.UI
             }
             GUILayout.EndScrollView();
             GUILayout.EndArea();
+            if(SelectedTab!=OptionsTab.Graphics)resolutionDropdownOpen=false;
         }
         public static int FindResolution(Resolution[] resolutions,int width,int height)
         {
@@ -169,21 +171,46 @@ namespace DiceFree.UI
             GUILayout.Label("Display changes apply immediately and are saved on this PC.");
             GUILayout.Space(12);
             GUILayout.Label("Resolution");
-            GUILayout.BeginHorizontal();
-            GUI.enabled=availableResolutions.Length>1;
-            if(GUILayout.Button("◀",GUILayout.Width(48)))
-                SelectResolution(resolutionIndex<0?availableResolutions.Length-1:
-                    (resolutionIndex-1+availableResolutions.Length)%availableResolutions.Length);
-            GUI.enabled=true;
-            string resolution=resolutionIndex>=0&&resolutionIndex<availableResolutions.Length
-                ? availableResolutions[resolutionIndex].width+" × "+availableResolutions[resolutionIndex].height
-                : requestedWidth+" × "+requestedHeight+" (custom / unavailable)";
-            GUILayout.Label(resolution,GUILayout.Width(180));
-            GUI.enabled=availableResolutions.Length>1;
-            if(GUILayout.Button("▶",GUILayout.Width(48)))
-                SelectResolution(resolutionIndex<0?0:(resolutionIndex+1)%availableResolutions.Length);
-            GUI.enabled=true;
-            GUILayout.EndHorizontal();
+            bool hasCustomResolution=resolutionIndex<0;
+            int customOffset=hasCustomResolution?1:0;
+            string[] resolutionOptions=new string[availableResolutions.Length+customOffset];
+            string selectedLabel;
+            if(hasCustomResolution)
+            {
+                resolutionOptions[0]=requestedWidth+" × "+requestedHeight+
+                    " (current; unavailable in display list)";
+                selectedLabel=resolutionOptions[0];
+            }
+            else selectedLabel=availableResolutions[resolutionIndex].width+" × "+
+                availableResolutions[resolutionIndex].height;
+            for(int i=0;i<availableResolutions.Length;i++)
+                resolutionOptions[i+customOffset]=availableResolutions[i].width+
+                    " × "+availableResolutions[i].height;
+            bool previous=GUI.enabled;
+            GUI.enabled=previous&&availableResolutions.Length>0;
+            Rect selector=GUILayoutUtility.GetRect(330f,30f,
+                GUILayout.Width(330f),GUILayout.Height(30f));
+            if(GUI.Button(selector,new GUIContent(selectedLabel+"  ▼")))
+                resolutionDropdownOpen=!resolutionDropdownOpen;
+            GUI.enabled=previous;
+            if(resolutionOptions.Length==0)
+                GUILayout.Label("No display resolutions are reported by this device.");
+            if(resolutionDropdownOpen)
+            {
+                GUILayout.BeginVertical("box",GUILayout.Width(330f));
+                if(hasCustomResolution)
+                    GUILayout.Label(resolutionOptions[0],GUILayout.Height(25f));
+                for(int i=0;i<availableResolutions.Length;i++)
+                {
+                    string label=(i==resolutionIndex?"✓ ":"")+resolutionOptions[i+customOffset];
+                    if(GUILayout.Button(label,GUILayout.Height(25f)))
+                    {
+                        SelectResolution(i);
+                        resolutionDropdownOpen=false;
+                    }
+                }
+                GUILayout.EndVertical();
+            }
             GUILayout.Space(12);
             GUILayout.Label("Display mode");
             string[] labels={"Windowed","Borderless fullscreen","Maximized window","Exclusive fullscreen"};
@@ -203,6 +230,7 @@ namespace DiceFree.UI
                 ApplyGraphics();
             }
         }
+
         private void ApplyGraphics()
         {
             var requested=ResolveRequestedResolution(resolutionIndex,availableResolutions,requestedWidth,requestedHeight);

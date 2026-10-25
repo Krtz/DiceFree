@@ -1,6 +1,7 @@
 using System.Text;
 using DiceFree.Items;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DiceFree.UI
 {
@@ -45,7 +46,23 @@ namespace DiceFree.UI
         }
 
         public static void DrawCurrent() =>
-            DrawAt(GUI.tooltip,Event.current.mousePosition);
+            DrawAt(GUI.tooltip,CurrentGuiPointerPosition());
+
+        // Input System coordinates are bottom-left-origin screen pixels while
+        // IMGUI uses top-left-origin coordinates. When a mouse device exists,
+        // use its live position even if it is outside the game window. Falling
+        // back to Event.current in that case can reuse an old mouse event and
+        // leave a tooltip stuck on the last hovered control.
+        public static Vector2 CurrentGuiPointerPosition()
+        {
+            if(Mouse.current!=null)
+            {
+                Vector2 pointer=Mouse.current.position.ReadValue();
+                return new Vector2(pointer.x,Screen.height-pointer.y);
+            }
+            return Event.current==null ? new Vector2(-10000,-10000) :
+                Event.current.mousePosition;
+        }
 
         public static void DrawAt(string tooltip,Vector2 position)
         {
