@@ -100,3 +100,25 @@ An ordinary Quillboar encounter should present clear tactical roles: the shield-
 5. Warrior: how much priority to grant ally defense versus ordinary threat targeting, and what happens when no nearby ally needs protection.
 
 No Unity terrain, prefabs, code, scenes or encounter implementation authorized.
+
+
+## Round 5 — 2026-10-26 (LATEST; USER CONFIRMED, INCLUDING FOLLOW-UP CLARIFICATION)
+
+| ID | Topic | Decision | Status |
+| --- | --- | --- | --- |
+| QUILL-022 | Warrior's active shielding | Warrior periodically raises a shield for **70% incoming damage reduction lasting 2 seconds**, on a **15-second cooldown**. Exact cooldown start, whether this applies to all incoming damage types, and whether the Warrior can attack while shield is raised remain to specify; do not substitute passive chance-to-block. | USER CONFIRMED |
+| QUILL-023 | Spear Thrower returns to range | It switches to melee **only when physically attacked in melee** (Round 4), then **returns to ranged spear throwing as soon as the melee attacker moves away**. Use practical contact/reach checks later; do not impose a 3s/5s recovery delay. | USER CONFIRMED |
+| QUILL-024 | Shaman variants and elements | **Four distinct elemental Quillboar Shaman enemy variants**: **Fire Shaman**, **Earth Shaman**, **Lightning Shaman**, **Ice Shaman**. This directly resolves the user's Round 5 'Custom selection' clarification. Each shaman variant is primarily an offensive elemental spellcaster. **These are four variants of the already-established Shaman archetype, not four additional primary archetypes or a single Shaman cycling through four elements.** Exact spell kits, cast times, damage channels, cooldowns, NPC counts and elemental effects remain to design. | USER CONFIRMED in follow-up |
+| QUILL-025 | Brute wind-up | The Brute's devastating slow basic attacks have a **clearly visible 1.2-second wind-up animation**. Exact attack cadence, hit check timing and damage are not yet specified. | USER CONFIRMED |
+| QUILL-026 | Warrior protect-ally AI | Warrior **prioritizes enemies threatening nearby Shamans and Spear Throwers using protective positioning and target priority**, but **respects its leash and existing combat engagement** rather than endlessly chasing attackers or forcibly overriding every active encounter. Exact threat weighting, leash range and protection radius remain open. | USER CONFIRMED |
+
+### Approved Quillboar opponent structure after Round 5
+
+- Four principal ordinary enemy archetypes: **Warrior, Spear Thrower, Shaman, Brute**.
+- Within the offensive Shaman archetype, **Fire / Earth / Lightning / Ice** are separate identifiable variants with independently designed spell kits to follow.
+- Warriors form an intelligent defensive front with periodic high-mitigation shield and protective AI.
+- Spear Throwers throw at range and engage in melee in response to *actual melee attack*; resume throwing when aggressor moves away.
+- Brutes threaten with telegraphed 1.2-second heavy normal/basic attacks.
+- Encounters remain primarily moderate enemy groups across the cleared open grounds, fortified settlements, hill/cliff passages and branched roads north of Trimery; chieftain remains stationary in the largest fortified settlement.
+
+**Next design round:** define first-pass offensive spells for the four Shaman variants and their distinguishing combat mechanics, preferably five focused questions. No Unity implementation, enemy prefabs, assets, terrain or quest changes authorized.
