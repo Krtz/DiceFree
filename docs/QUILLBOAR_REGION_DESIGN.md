@@ -122,3 +122,27 @@ No Unity terrain, prefabs, code, scenes or encounter implementation authorized.
 - Encounters remain primarily moderate enemy groups across the cleared open grounds, fortified settlements, hill/cliff passages and branched roads north of Trimery; chieftain remains stationary in the largest fortified settlement.
 
 **Next design round:** define first-pass offensive spells for the four Shaman variants and their distinguishing combat mechanics, preferably five focused questions. No Unity implementation, enemy prefabs, assets, terrain or quest changes authorized.
+
+
+## Round 6 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+All four Quillboar Shaman variants are **ordinary hostile ranged spellcasting enemies**; each has **normal Magical basic attacks plus exactly TWO special spells**. One main special spell is now confirmed for each variant, while its second spell remains OPEN. Do not treat the second spell suggestions or numeric values as approved. Do not conflate the four elemental variants with one Shaman who rotates elements.
+
+| ID | Variant | Approved first special ability | Status |
+| --- | --- | --- | --- |
+| QUILL-027 | **Fire Shaman** | **Fireball** — single-target fire projectile applying **Burning** status. Projectile follows normal combat rules unless later explicitly modified. Burning duration, tick damage, stacking/refresh, cast time, cooldown and range are OPEN. | USER CONFIRMED |
+| QUILL-028 | **Earth Shaman** | **Stone Prison** — temporarily **roots one player** in place. Exact root duration, duration reductions through CC resistance/Tenacity, projectile/ground-target mechanics, damage (if any), break condition and cooldown are OPEN. | USER CONFIRMED |
+| QUILL-029 | **Lightning Shaman** | **Chain Lightning** — magical Lightning spell that **jumps between nearby players**. Exact number of jumps, radius between targets, repeat hits, falloff, cooldown and damage coefficients are OPEN. | USER CONFIRMED |
+| QUILL-030 | **Ice Shaman** | **Frost Nova** — a **close-range area attack that applies a movement slow**. Exact radius, slow amount and duration, damage/cast timing and cooldown are OPEN. | USER CONFIRMED |
+| QUILL-031 | **Shared ordinary Shaman kit** | Each of the **four** Shaman types gets **two special spells PLUS normal magical basic attacks**. There is no third special spell by default. The four *second* specials are not yet chosen. | USER CONFIRMED |
+
+### Current Shaman kit inventory
+
+| Variant | Basic attack | Special #1 | Special #2 |
+| --- | --- | --- | --- |
+| Fire | Normal Magical basic | Fireball + Burning | **OPEN** |
+| Earth | Normal Magical basic | Stone Prison root | **OPEN** |
+| Lightning | Normal Magical basic | Chain Lightning jumps | **OPEN** |
+| Ice | Normal Magical basic | Frost Nova AoE slow | **OPEN** |
+
+**Later decisions:** individual second spells, exact damage channels/elements where not obvious, numerical values, CC behavior under universal rules, spell priority and reaction to interrupts. Keep normal enemy AI/aggro systems and previous Warrior/Thrower/Brute mechanics. **No Unity/gameplay implementation authorized.**
