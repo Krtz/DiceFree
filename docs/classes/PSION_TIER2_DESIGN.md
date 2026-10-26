@@ -355,3 +355,53 @@ User explicitly **delegated numerical Mana-formula selection to the designer**, 
 | PSION-086 | **Psychic Bolt follows the existing normal targeted-spell projectile system** for travel, terrain/obstacle interaction, targeting and hit resolution; do not invent class-specific instant-hit or obstacle-piercing behavior. | USER CONFIRMED |
 
 **Open priority:** author and mathematically validate Psion's exact 80-rank skill gate progression against class unlocks (Bolt1 / Blades1 / Image5 / Storm8 / Shield10) and caps (20/18/18/12/12). Present for user review before calling exact gates approved. Numerical Mana costs remain designer-provisional. Defer model and advancement mentor/quest until later World1 content planning. No Unity implementation or Tier III design authorized.
+
+
+## Psion Round 19 — 2026-10-26 (LATEST)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-087 | Use **the same general rank-gate spacing approach as Acolyte and Thief**: Tier II level 1 starts with one spendable point, one more each level through 80, 80 purchased ranks total, rank-specific gates and predecessor-rank prerequisites. Author Psion-specific gates to honor level-1 Bolt/Blades, Image level5, Storm level8, Shield level10. | USER CONFIRMED DIRECTION; exact gate schedule is DESIGNER PLAYTEST PROPOSAL BELOW |
+| PSION-088 | Retain **+2.5 percentage points basic-attack critical chance per Psionic Blades Mastery rank**, but **mark the coefficient provisional until gameplay playtesting** (18 ranks would currently yield +45pp). Existing 1 flat PDEF bypass/rank and 150% basic crit damage remain. | USER CONFIRMED PROVISIONAL |
+| PSION-089 | **No manual-dismissal ability** for Mental Image. It expires normally or can be killed, triggering its full enemies-only Magical Void explosion; no invented dismissal control. | USER CONFIRMED |
+| PSION-090 | **Mental Image is a normal targetable unit** with ordinary threat and real collision, rather than being only incidentally hittable. Its earlier 250% increased incoming damage rule, caster-max-HP snapshot, immobility and 4m full-damage explosion remain. | USER CONFIRMED |
+| PSION-091 | **Psion Physical basic attack uses 0.45× AGI + 0.45× INT as the intended baseline**, retaining normal shared basic-attack systems. Coefficients are a starting balance baseline subject to normal playtesting, not a reason to shift toward 0.5/0.5. | USER CONFIRMED |
+
+### Designer-proposed 80-rank eligibility schedule — REVIEW BASELINE, NOT YET USER APPROVED EXACT GATES
+
+In accordance with PSION-087, follow the Acolyte/Thief structure with approximately 4 levels between upgrades on three core skills and 6 levels on Storm/Shield, plus early front-loaded Bolt/Blades upgrades to make initial levels feasible. A gate makes a rank eligible, **not automatically purchased**. Previous ranks must be purchased before the next rank of that skill. All five class skills start rank0.
+
+| Skill | Max ranks | First eligible level | Final gate | Every proposed individual rank gate |
+| --- | ---: | ---: | ---: | --- |
+| Psychic Bolt | 20 | 1 | 75 | 1, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75 |
+| Psionic Blades Mastery | 18 | 1 | 66 | 1, 2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66 |
+| Mental Image | 18 | 5 | 73 | 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73 |
+| Lightning Storm | 12 | 8 | 74 | 8, 14, 20, 26, 32, 38, 44, 50, 56, 62, 68, 74 |
+| Metal Shield | 12 | 10 | 76 | 10, 16, 22, 28, 34, 40, 46, 52, 58, 64, 70, 76 |
+| **TOTAL** | **80** | — | **76** | All rank gates reachable by level 76 |
+
+**Arithmetic check performed:** For EVERY class level `L=1..80`, cumulative gates `eligible(L) >= L`; hence a player earning one class point per level has at least one legal path to spend one per level. Each skill's gates are strictly increasing, none occur before the ability's existing unlock, and all 80 ranks are eligible by level76. Validation PASS for all 80 class levels; no enforced class rank purchases and no additional skill ranks beyond caps.
+
+| Class level | Cumulative eligible rank gates | Cushion over points earned |
+| ---: | ---: | ---: |
+| 1 | 2 | 1 |
+| 2 | 3 | 1 |
+| 3 | 4 | 1 |
+| 4 | 4 | 0 |
+| 5 | 5 | 0 |
+| 8 | 8 | 0 |
+| 10 | 11 | 1 |
+| 20 | 21 | 1 |
+| 30 | 32 | 2 |
+| 40 | 43 | 3 |
+| 50 | 54 | 4 |
+| 60 | 64 | 4 |
+| 70 | 75 | 5 |
+| 75 | 79 | 4 |
+| 76 | 80 | 4 |
+| 77 | 80 | 3 |
+| 78 | 80 | 2 |
+| 79 | 80 | 1 |
+| 80 | 80 | 0 |
+
+**Next step:** user can approve the specific schedule or ask for changes, and final balancing/playtests can tune cooldowns/mana/damage. Psionic Blades critical coefficient and existing designer Mana costs remain provisional for playtesting. Psion class appearance and advancement quest remain deferred to later region/city design; do not start Tier III class design or modify Unity implementation from this interview.
