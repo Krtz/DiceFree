@@ -1262,6 +1262,63 @@ MonoBehaviour:
   - {fileID: 1194198768}
   localBase: {x: 0, y: 0, z: 0}
   localHeight: 5.317589
+--- !u!1 &3599634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3599635}
+  - component: {fileID: 3599636}
+  m_Layer: 0
+  m_Name: Asset visual anchor - Timber merchant hall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3599635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 260, y: -0.1344825, z: 188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1290772354}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3599636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573a046415d964b4694b046bb0dcae23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
+  licensedResource: TimberMerchantHall
+  fallbackVisual: {fileID: 0}
+  fallbackRenderers:
+  - {fileID: 386501715}
+  - {fileID: 1342975691}
+  - {fileID: 1140096161}
+  - {fileID: 891143199}
+  - {fileID: 1288794741}
+  - {fileID: 136538379}
+  - {fileID: 1796448642}
+  - {fileID: 1315367536}
+  licensedScale: {x: 1, y: 1, z: 1}
+  licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &3663662
 GameObject:
   m_ObjectHideFlags: 0
@@ -8773,6 +8830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: MarketStand
   fallbackVisual: {fileID: 309749882}
+  fallbackRenderers: []
   licensedScale: {x: 1.35, y: 1.35, z: 1.35}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &34576584
@@ -35681,6 +35739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: Crate
   fallbackVisual: {fileID: 467043238}
+  fallbackRenderers: []
   licensedScale: {x: 0.85, y: 0.85, z: 0.85}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &131915524
@@ -37189,6 +37248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &138752564
@@ -62604,6 +62664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &212210222
@@ -109077,6 +109138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: Crate
   fallbackVisual: {fileID: 2252603}
+  fallbackRenderers: []
   licensedScale: {x: 0.85, y: 0.85, z: 0.85}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &371411294
@@ -119702,6 +119764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &412200162
@@ -124278,6 +124341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &429792874
@@ -182576,6 +182640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &646609119
@@ -217687,6 +217752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &762959851
@@ -218722,6 +218788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: Crate
   fallbackVisual: {fileID: 2098029707}
+  fallbackRenderers: []
   licensedScale: {x: 0.85, y: 0.85, z: 0.85}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &769206352
@@ -218884,6 +218951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &770485394
@@ -253644,6 +253712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &898691758
@@ -272537,6 +272606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: Crate
   fallbackVisual: {fileID: 732358173}
+  fallbackRenderers: []
   licensedScale: {x: 0.85, y: 0.85, z: 0.85}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &963821849
@@ -310954,6 +311024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1103487378
@@ -331295,6 +331366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1179104377
@@ -346778,6 +346850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1229690334
@@ -366602,6 +366675,7 @@ Transform:
   - {fileID: 1104194755}
   - {fileID: 1619137273}
   - {fileID: 898317397}
+  - {fileID: 3599635}
   m_Father: {fileID: 748622344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290801508
@@ -458580,6 +458654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1619297615
@@ -540515,6 +540590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1913394223
@@ -559947,6 +560023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: TimberSupport
   fallbackVisual: {fileID: 0}
+  fallbackRenderers: []
   licensedScale: {x: 1, y: 1.35, z: 1}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1983406969
@@ -596151,6 +596228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TrimeryArtSlot
   licensedResource: MarketStand2
   fallbackVisual: {fileID: 1368927901}
+  fallbackRenderers: []
   licensedScale: {x: 1.35, y: 1.35, z: 1.35}
   licensedOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &2122840581
@@ -605337,7 +605415,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af4da895307ab54dbb53b10b3ff1450, type: 3}
-  m_Name: ''
+  m_Name: 
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Items.ItemShop
   displayName: Cornberg Brewer
   range: 2.5

@@ -8,15 +8,24 @@ namespace DiceFree.World
     {
         [SerializeField] private string licensedResource;
         [SerializeField] private Transform fallbackVisual;
+        [SerializeField] private Renderer[] fallbackRenderers;
         [SerializeField] private Vector3 licensedScale=Vector3.one;
         [SerializeField] private Vector3 licensedOffset=Vector3.zero;
         readonly List<Material> ownedMaterials=new();
         public string Resource => licensedResource;
         public bool LoadedLicensedArt { get; private set; }
         public int ConvertedMaterials { get; private set; }
+        public int FallbackRendererCount => fallbackRenderers?.Length ?? 0;
         public void Configure(string resource,Transform fallback,Vector3 scale,Vector3 offset)
         {
             licensedResource=resource;fallbackVisual=fallback;
+            licensedScale=scale;licensedOffset=offset;
+        }
+        public void ConfigureReplacement(string resource,Renderer[] renderers,
+            Vector3 scale,Vector3 offset)
+        {
+            licensedResource=resource;fallbackVisual=null;
+            fallbackRenderers=renderers??System.Array.Empty<Renderer>();
             licensedScale=scale;licensedOffset=offset;
         }
         private void Start()
@@ -35,6 +44,8 @@ namespace DiceFree.World
             foreach(var behaviour in art.GetComponentsInChildren<MonoBehaviour>(true))
                 if(behaviour!=null)behaviour.enabled=false;
             if(fallbackVisual!=null)fallbackVisual.gameObject.SetActive(false);
+            foreach(var renderer in fallbackRenderers)
+                if(renderer!=null)renderer.enabled=false;
             LoadedLicensedArt=true;
         }
         bool PrepareMaterials(GameObject art)
