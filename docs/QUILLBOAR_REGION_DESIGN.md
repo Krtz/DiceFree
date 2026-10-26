@@ -491,3 +491,26 @@ Keep the previously approved Chieftain **level 40**, optional **2–4-player tar
 | **Name TBD — unique defensive legs** | Legs | **VIT + Physical Defense** (exact values TBD) | **10%** | Standard leg equipment eligibility |
 
 Keep Chieftain level 40, 10-minute boss respawn, elite guard 5-minute independent respawns, 2–4-player tuning with difficult solo possibility, and standard world-boss loot distribution. **No special axe shockwave, automatic set bonus or unasked-for stat modifiers approved.** This remains documentation/design only, not authorization to create Unity equipment.
+
+
+## Round 25 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Item/equipment rule | Approved specification | Notes |
+| --- | --- | --- | --- |
+| QUILL-126 | **Leg armor name** | **Chieftain's War Leggings**, unique leg-slot Chieftain drop. | 10% drop rate retained from Round 24. |
+| QUILL-127 | **Leg armor VIT** | **+15 VIT**. | Fixed bonus, no unapproved secondary attribute. |
+| QUILL-128 | **Leg armor Physical Defense** | **+15 Physical Defense**. | Fixed bonus. |
+| QUILL-129 | **Chieftain loot equip requirement** | All THREE Chieftain unique pieces use **(character level >= 40) OR (class Tier >= II)**. It is an **OR**, not an AND. A Tier II or Tier III character at **level 1** may equip them, due to level resetting upon advancement. Also allows a level-40 character regardless of Tier, if such progression is possible. The user's extra thought overrides the multiple-choice selection "level 40 minimum" when read alone. | Verify shared equipment UI shows eligibility clearly; this is specifically the Chieftain loot set, not all equipment globally. |
+| QUILL-130 | **Groundbreaker two-handed / universal melee special case** | Groundbreaker is **genuinely two-handed**, and equipping it **occupies both hands / sacrifices the offhand equipment slot**; a shield, orb, book or any other offhand cannot be equipped simultaneously. **Every melee class can equip Groundbreaker and use its regular class skills with it, even if its normal weapon restrictions/skill checks would prevent those skills when wielding a two-handed axe.** The intended tradeoff is giving up an offhand for its **+45 STR** on a weapon with **+10 base damage**. | Requires explicit item-specific proficiency/weapon-skill compatibility exception and normal two-hand/offhand exclusion; do not change weapon requirements for every item/class globally without separate approval. Skills still follow their ordinary level/rank, cost, cooldown and target rules. |
+
+### Finalized Chieftain three-piece unique drop specification after Round 25
+
+| Item | Slot | Fixed stats | Drop chance | Equip gate |
+| --- | --- | --- | --- | --- |
+| **Groundbreaker** | **Two-handed weapon (both hands)** | **+10 base weapon damage, +45 STR** | **10%** | **Level 40+ OR Tier II+**; *all melee classes* may equip and use normal skills regardless of weapon type; **no offhand** |
+| **Quillboar Battle Spikes** | Shoulders | **+10 STR, +10 AGI, +10 VIT** | **10%** | **Level 40+ OR Tier II+** |
+| **Chieftain's War Leggings** | Legs | **+15 VIT, +15 Physical Defense** | **10%** | **Level 40+ OR Tier II+** |
+
+**Important precedence:** user explicitly refined item level restriction from an absolute minimum of level 40 to an **OR advancement-tier condition**; likewise user clarified Groundbreaker's **both-hands occupancy** and **class-skill compatibility for ALL melee classes**. Earlier tentative interpretation that Defender shield skills might become unavailable when equipping Groundbreaker is superseded FOR THIS ITEM ONLY: normal class skills remain usable despite sacrificing offhand/shield. Whether any *mechanics* of a shield-dependent ability need a cosmetic/substitute execution when no shield is present is implementation design, not permission to disable those skills.
+
+Keep standard world-boss loot distribution, level-40 Chieftain, 10-min boss respawn and independently 5-min elite guard respawn. Exact drops/roll independence are shared loot-system details. **No Unity code/asset edits are authorized by this documentation-only round.**
