@@ -184,3 +184,16 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 | **Total** | **80** |
 
 **Implementation caution:** Each Lightning Storm wave deals the full per-wave listed damage; if all three land, a cast deals three times that value, before mitigation. Confirm timing and hit behavior during the next rounds. Neither an extra sixth ability nor Tier III content is authorized. Continue five-question design rounds and update this file after each completed round.
+
+
+## Psion Round 9 — 2026-10-26 (LATEST; user-confirmed)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-036 | At Tier II Psion **level 1**, only **Psychic Bolt** and **Psionic Blades Mastery** are unlocked. Mental Image, Lightning Storm and Metal Shield unlock later; exact levels are OPEN. | USER CONFIRMED |
+| PSION-037 | **Psychic Bolt cooldown = 8 seconds**. Previous rank-1 stun 0.15s and +0.15s per rank to max 3s remain locked, boss Tenacity applies. | USER CONFIRMED |
+| PSION-038 | **Mental Image has no hard simultaneous-clone cap**. The number active is limited organically by its Mana cost, cooldown and lifetime (up to 5s at max rank); exact cooldown/Mana values remain OPEN. Do not invent a 2/3/4 clone cap. | USER CONFIRMED |
+| PSION-039 | **Mental Image clones inherit Psion's current attack speed (100%)**, alongside the previously confirmed 10% per-hit basic-attack damage and inherited crit/basic-attack modifiers. | USER CONFIRMED |
+| PSION-040 | **Lightning Storm is a targeted circular ground AoE**, dealing three individually full-damage Lightning waves over 0.6s with INT scaling plus flat damage per rank. Exact targeting range, circle radius and casting/movement rules OPEN. | USER CONFIRMED |
+
+**Rank caps unchanged:** Bolt 20, Blades 18, Image 18, Storm 12, Shield 12 = 80. Exactly five abilities. No Unity implementation, no Tier III class work. Next interview round should settle remaining ability unlock levels and cooldown/Mana/range decisions. Keep the five-question cadence; update this file after each completed round.
