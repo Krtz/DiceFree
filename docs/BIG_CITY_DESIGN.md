@@ -95,3 +95,37 @@ Schematic is only a mnemonic for directional travel; map locations and detailed 
 - Whether the city's wider wall layout includes separate district gates or one primary exterior wall.
 
 **DESIGN/DOCUMENTATION ONLY; no Unity implementation or existing road modification authorized.**
+
+
+## Round 3 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Feature | Approved direction | Still open |
+| --- | --- | --- | --- |
+| CITY-013 | **World Tree center and inner civic space** | The World Tree's innermost surroundings are **a mixture of sacred gardens, grand plazas and important buildings**. Preserve a monumental spiritual/civic atmosphere, rather than making the entire center exclusively a temple, palace, or purely wild park. | Exact buildings and which parts are public or access-restricted; shrines/fountains not yet individually confirmed. |
+| CITY-014 | **Concentric district ordering** | **OUTER rings:** adventurer and merchant districts. **MIDDLE rings:** artisan and mage districts. **INNER rings nearest World Tree:** noble district. The tree itself and its sacred civic core remain the central focus. This ordering supersedes other proposed district arrangements. | District boundaries, number of physical walls/rings, cross-ring traffic access and residences for non-nobles. |
+| CITY-015 | **Capital governance** | Arborium is governed by **an ancient magical order whose purpose includes protecting the World Tree**. Do not introduce a king, elected mayor or guild council as the primary ruler in contradiction. | Order name, membership, leadership structure, ideology, public legitimacy, extent of magical versus civic authority, and possible internal politics. |
+| CITY-016 | **Adventurers' Guild architecture and location** | A **huge fortified guildhall near Arborium's enormous northern city gate**, within/along the outer adventurer district. The Adventurers' Guild representative who completes the Trimery→Arborium main quest can be associated with this guild, but the exact representative location is still to be placed. | Guildhall size/shape, training grounds, quest board, interior, NPC. |
+| CITY-017 | **Everyday magical infrastructure** | Magic is **mostly practical**, e.g. city lamps, transport and utilities, rather than making all districts uniformly full of spectacular floating structures. Magical infrastructure contributes to Arborium's advanced fantasy-capital character. | Specific transport system, power source, services, and which parts are accessible to players. |
+| CITY-018 | **Mage district whimsical magic** | The mage quarters include **additional scattered, unusual/random magical sights and phenomena** beyond the city's ordinary practical enchantments. They add local personality and can be atmospheric rather than automatic hazards, special quests or mechanics. | Exact whimsical details, visual effects, interactables and potential future quests. |
+
+### Round 3 approved macro layout
+
+```text
+     ENORMOUS FORTIFIED NORTHERN GATE
+                 |
+      Huge fortified Adventurers' Guild
+                 |
+      OUTER RING — Adventurers / Merchants
+                 |
+      MIDDLE RING — Artisans / Mages
+           (mage-quarter oddities)
+                 |
+      INNER RING — Nobles
+                 |
+      SACRED WORLD TREE CORE
+      Gardens + plazas + important buildings
+```
+
+This diagram is conceptual, not the finalized street map: actual districts occupy space around the **concentric rings**, with connecting avenues/radial streets to be designed. The city remains **Arborium**, greatest metropolis on World 1, entered via the northern gate after Trimery → north into Quillboar → west → south. Preserve the preexisting broken direct Trimery–Arborium road; its exact structural cause is not being redesigned.
+
+**Next design round:** determine how the ancient magical order is organized/seen by citizens, how open the World Tree center is, major radial avenues/transit, the Adventurers' Guild's player services, and distinctive magical activity in the mage quarter. No city/Unity implementation authorized by this interview.
