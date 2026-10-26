@@ -534,3 +534,37 @@ Keep standard world-boss loot distribution, level-40 Chieftain, 10-min boss resp
 - All items: **Level 40+ OR Tier II+**, and **no item set interaction**.
 
 **Next design phase:** finalize region-facing details not yet specified, such as enemy drop identity, ordinary Quillboar aggro/leash, boss rewards beyond equipment/XP, camp quest hooks, and safe approaches to the fortress; or perform a structured completeness pass before authorizing Unity implementation. DOCUMENTATION ONLY; no game content/code changes authorized by this round.
+
+
+## Round 27 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+The user's freeform details override questionnaire simplifications, especially for normal enemy loot and quest count.
+
+| ID | Topic | Approved direction | Open/guardrails |
+| --- | --- | --- | --- |
+| QUILL-136 | **Ordinary Quillboar loot** | **Currency only.** Ordinary Quillboars drop **nothing besides their standard currency**: no tusk/hide crafting materials, occasional equipment, or generic extra drops. | World boss Chieftain retains his separately approved three unique items; ordinary-enemy rule does not erase boss loot. |
+| QUILL-137 | **Ordinary Quillboar detection/leash** | **8-meter aggro radius and 20-meter leash** for ordinary Quillboars, instead of Ironpine 10m/25m. | Standard world threat, target-loss and return-to-spawn behavior applies. World-boss leash remains its standard separate rule. |
+| QUILL-138 | **Warrior protective assistance** | **Quillboar Warriors actively assist/protect nearby Shamans and Spear Throwers**, consistent with previously approved Warrior physical positioning and target selection. Other normal Quillboars use **ordinary aggro and combat assistance behavior**, not special tribe-wide alarm/call chains. | Exact proximity detection/assistance range, pathing and whether assistance counts as a pack pull remain to design. Existing 3-member road patrols still do not issue reinforcement calls. |
+| QUILL-139 | **Trimery → big city main quest** | **One main storyline quest** from **Trimery**, focused on **traveling through the Quillboar biome to reach the big city** beyond it. The regional storyline is about the journey/route, NOT a mandatory quest to kill the Chieftain or clear all camps. | Exact city destination/name, road exit, NPC dialogue, checkpoints and completion trigger TBD. |
+| QUILL-140 | **Four-element Shaman hunt** | **One optional quest** to defeat **one Fire, one Earth, one Lightning and one Ice Shaman**. Completion **unlocks the Quillboar Shaman ritual dungeon later**. | Objective credit rules, quest giver, rewards, how future dungeon access is presented/implemented TBD. Does not require constructing the dungeon now. |
+| QUILL-141 | **Repeatable Quillboar hunt** | **One repeatable quest** to kill **X Quillboars**, with the kill count X not yet determined. | Kill credit, repeat turn-in, rewards, amount and quest giver TBD. |
+| QUILL-142 | **Optional Chieftain quest** | **One optional quest** to defeat the **level 40 Chieftain**. Not a prerequisite for the main road-to-city storyline or basic access to the boss. | Quest giver, completion credit, XP/currency rewards and prerequisites TBD. |
+| QUILL-143 | **Ritual dungeon status** | **Approved in principle as a FUTURE Quillboar Shaman ritual dungeon**, **to be designed separately later**. It is unlocked by the optional four-element Shaman hunt. The dungeon's map, boss, monsters, gameplay, loot and entrance are **NOT yet approved**. | Do not implement or fabricate a dungeon in current worldbuilding scope. |
+
+### Quest structure after Round 27
+
+1. **Main quest:** travel north from Trimery through Quillboar territory and **reach the big city** (Chieftain kill not required).
+2. **Optional:** kill **one of each elemental Shaman** (Fire, Earth, Lightning, Ice) to **unlock the future Shaman ritual dungeon**.
+3. **Repeatable:** kill **X ordinary Quillboars**, return/turn in, repeat (X TBD).
+4. **Optional:** defeat the **level 40 Quillboar Chieftain**.
+
+All four are quest concepts approved for the region; their rewards, givers, exact tracking and dialogue require later approval. Dungeon design/implementation is deferred; only existence and unlock condition approved.
+
+### Ordinary enemy combat / loot baseline
+
+- Ordinary Quillboars: **8m aggro / 20m leash**, **90s individual respawn**, **currency only**.
+- Warriors proactively help nearby **Shamans and Spear Throwers**; other Quillboar enemy archetypes use normal combat behavior.
+- Patrols remain **3-member road groups**, no deliberate alarm calls, 3–8s camp-stop pauses.
+- This does not override the Chieftain's **level 40** world-boss loot, mechanics, respawn, or **three 10%-chance unique items**.
+
+**Next design round:** main quest journey completion and giver, Shaman hunt dungeon unlock handling, repeatable kill amount/rewards, Chieftain quest reward, and optional quest credit with group play. DOCUMENTATION/DESIGN ONLY; no Unity implementation authorized.
