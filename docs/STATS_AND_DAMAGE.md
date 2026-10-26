@@ -1565,3 +1565,10 @@ Ordinary spatial AoE checks use the actor's authored gameplay hit volume.
 If any qualifying portion of that hit volume overlaps the AoE volume, the actor is hit/inside unless that specific effect explicitly defines a different rule.
 
 Do not reduce ordinary AoE eligibility to a center-point-only test, because different class forms may have meaningfully different physical footprints.
+
+
+## 2026-10-26 — Universal baseline movement speed (newer global decision)
+
+**USER-CONFIRMED OVERRIDE:** All playable classes have **the same unmodified baseline Movement Speed**. Use the documented **50 displayed Move Speed = 5 m/s** default; do not assign class-specific base movement speed advantages/disadvantages. This supersedes older passages suggesting class-authored differences in *baseline* locomotion speed. Class data may still author skill/passive effects, gear permissions and other **modifiers**; AGI-derived bonuses and temporary buffs still affect the final resolved movement speed. Do not infer any speed from character appearance, size or body shape.
+
+**Psion Metal Shield (design only):** the existing elemental shield system applies unchanged: consumes 0.8 shield capacity per post-mitigation Metal damage prevented and 1.2 capacity per other ordinary eligible damage prevented, with standard shield-piercing exceptions. Its distinctive feature is a shared pool among the recipients of a single caster's shield; no custom absorption multiplier. Detailed design: [Psion Tier II](classes/PSION_TIER2_DESIGN.md).
