@@ -342,3 +342,16 @@ User explicitly **delegated numerical Mana-formula selection to the designer**, 
 | PSION-081 | **All classes share the same unmodified baseline movement speed**. The existing project baseline is **5 m/s / 50 displayed Move Speed**. Attribute, gear, ability and temporary movement modifiers remain eligible, but don't give Psion or other classes inherently different unmodified baseline speeds. Supersedes historical statements that classes can have individually different base movement speeds. | USER CONFIRMED GAME-WIDE |
 
 **Documentation source checks:** `docs/STATS_AND_DAMAGE.md` confirms the current shared elemental shield coefficients 0.8 matching / 1.2 nonmatching, current generic shield implementation 1:1, and the existing 5 m/s / 50 display baseline. `docs/COMBAT.md` describes per-ability channel interruption instead of a universal any-damage-cancels rule. Retain class-specific modifiers to final speed, but enforce equal baseline speed across all classes. Next rounds should focus on the Psion gate schedule and remaining material mechanical open points; numeric Mana remains delegated playtest values. No Unity implementation/Tier III authorized.
+
+
+## Psion Round 18 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-082 | **Mental Image's 4m Magical Void explosion damages enemies only**; it does not damage friendly players, the casting Psion, or friendly owned units under ordinary friendly-fire assumptions. | USER CONFIRMED |
+| PSION-083 | **Mental Image always explodes for full listed damage when killed by enemies**, just as on natural expiry. Damage does not scale down with remaining lifetime or current HP. Explosion raw damage remains `30 + 10 × rank + 0.6 × AGI + 0.6 × INT` (snapshotted stats), and radius remains 4m. | USER CONFIRMED |
+| PSION-084 | **Every Lightning Storm wave independently checks which enemies are currently inside the 4m targeted ground AoE**. Enemies entering before a later wave can be hit by that wave; those who leave are not hit by subsequent waves while outside. Three full-damage waves at 0.0, 0.3, 0.6s into the channel if not interrupted. | USER CONFIRMED |
+| PSION-085 | When a protected ally dies, **their Metal Shield protection ends, but the remaining shared pool persists for the other surviving protected allies** for its remaining duration/capacity. Death does not destroy or replenish the entire pool. | USER CONFIRMED |
+| PSION-086 | **Psychic Bolt follows the existing normal targeted-spell projectile system** for travel, terrain/obstacle interaction, targeting and hit resolution; do not invent class-specific instant-hit or obstacle-piercing behavior. | USER CONFIRMED |
+
+**Open priority:** author and mathematically validate Psion's exact 80-rank skill gate progression against class unlocks (Bolt1 / Blades1 / Image5 / Storm8 / Shield10) and caps (20/18/18/12/12). Present for user review before calling exact gates approved. Numerical Mana costs remain designer-provisional. Defer model and advancement mentor/quest until later World1 content planning. No Unity implementation or Tier III design authorized.
