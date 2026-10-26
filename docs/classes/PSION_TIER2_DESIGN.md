@@ -258,3 +258,26 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 | PSION-055 | **Mental Image remains ground-targeted placement**, but also follows user's correction away from truly instant casts; approximately **0.1–0.2s nonzero cast time**, exact value OPEN. Earlier instant placement answer is superseded only with respect to cast duration, not ground targeting. | USER CONFIRMED ground targeting and nonzero short cast; exact timing OPEN |
 
 **Interpretation note:** Three numerical formulas above are written literally as "base + coefficient × rank + stat multiplier" rather than silently converting them to (rank−1). Both cast-time selections came from the same round and user provided one general correction; confirm whether both should share the same exact cast time, and whether other spells follow the same minimum-cast principle. All five ability identities, 80 rank allocation, cooldowns and other prior approvals remain unchanged. No Unity implementation/Tier III content authorized. Continue approximately five-question design batches and update after each round.
+
+
+## Psion Round 13 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-056 | **Psychic Bolt cast time = 0.1 seconds**. This supersedes the previously open short-cast range and the earlier instant-cast option. | USER CONFIRMED |
+| PSION-057 | **Mental Image cast time = 0.2 seconds**, using **ground-targeted placement** as previously confirmed. | USER CONFIRMED |
+| PSION-058 | **Lightning Storm cast time = 0.2 seconds**, targeted 4m-radius ground AoE with three full-damage waves over 0.6s. | USER CONFIRMED |
+| PSION-059 | **Metal Shield cast time = 0.2 seconds**, centered on caster, affecting eligible allies in 8m radius at cast resolution. | USER CONFIRMED |
+| PSION-060 | **Mental Image targeting:** prioritize the Psion's current target if it is inside the stationary clone's attack range and valid to attack; otherwise attack the nearest valid enemy in range. Further retarget-frequency details are open. | USER CONFIRMED |
+| PSION-061 | **Mana costs increase significantly with purchased skill rank** for active skills, rather than remaining fixed. Exact starting costs, per-rank growth and whether each skill uses different coefficients remain OPEN. Psionic Blades Mastery is passive and has no cast Mana cost. | USER CONFIRMED general Mana progression; exact numbers OPEN |
+
+### Current cast times
+
+| Active ability | Cast time |
+| --- | ---: |
+| Psychic Bolt | 0.1s |
+| Mental Image | 0.2s |
+| Lightning Storm | 0.2s |
+| Metal Shield | 0.2s |
+
+**Next design round:** determine Mana-cost progression and any remaining important cast/target behavior. Preserve 80 total ranks, existing unlocks, cooldowns, ranges, shield sharing and damage formulas. No Tier III class or Unity work authorized. Maintain five-question interview batches and update this file after each round.
