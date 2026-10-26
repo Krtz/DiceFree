@@ -3399,3 +3399,8 @@ See `docs/TWILIGHTS_EVE_REFERENCE.md`, `docs/VISUAL_ART_DIRECTION.md`, `docs/UI_
 ## 2026-10-26 — Independent overlapping AoE damage global default
 
 **User-confirmed global rule:** Separate independently applied damaging AoEs each deal their full separately resolved damage packets to eligible targets, **even when their areas overlap**. Multiple Psions' Lightning Storms therefore each apply all of their own waves without automatic overlap damage reduction/replacement. Explicit exceptions (e.g. authored nonstacking status/effects) can exist; do not infer global exclusion or additive status stacks from this default. See `docs/COMBAT.md`.
+
+
+## 2026-10-26 — Quillboar region, Round 1
+
+**User-confirmed:** The World 1 Quillboar area north of Trimery targets **levels 25–35** and is primarily **open/cleared terrain** with **settlements, hills and occasional cliffs**, surrounded/delineated by forest and trees. Its Quillboars form an organized **tribal society of chiefs, shamans and warriors**, and **every Quillboar is hostile**. Main regional threat: **a powerful chieftain uniting the tribes**. A **shaman performing a ritual** is a tentative **future dungeon** direction, not yet an approved dungeon. Detail and future interview: `docs/QUILLBOAR_REGION_DESIGN.md`. Design-only; no Unity changes.
