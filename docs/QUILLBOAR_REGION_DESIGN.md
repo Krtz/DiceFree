@@ -610,3 +610,27 @@ All four are quest concepts approved for the region; their rewards, givers, exac
 **Interpretation guardrail:** There are four Trimery quest-giver NPCs (one for each distinct quest) plus a quest-completion NPC inside the future big city and a dungeon access NPC; no names or precise positions approved. Quest specifics above supersede earlier generalized options. All existing Quillboar mechanics, gear and reward rules remain as previously recorded.
 
 **Next round:** identify each questgiver role, whether dungeon NPC is located in Trimery or near an eventual entrance, Chieftain title delivery conditions and NPC dialogue flavor, repeatable reward amounts and story quest completion reward. DOCUMENTATION ONLY; no Unity/map/quest implementation authorized.
+
+
+## Round 30 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+The player's freeform clarification about the dungeon entrance **explicitly overrides** the previous Round 29/QUILL-153 requirement to interact with a separate dungeon NPC. The optional Shaman hunt has a quest giver in Trimery; completing the hunt grants permanent access, and reaching the actual dungeon still requires finding its physical entrance in the Quillboar biome.
+
+| ID | Quest / NPC | Approved behavior | Still open |
+| --- | --- | --- | --- |
+| QUILL-154 | **Main quest giver** | A **village guard or road patrol captain in Trimery** starts the main quest to cross the Quillboar biome and reach the big city. The quest is finished by speaking to a designated NPC within the big city per Round 28. | Choose whether guard or captain, NPC names, dialog, rewards. |
+| QUILL-155 | **Elemental Shaman quest giver** | A **scholar studying elemental magic**, located **in Trimery**, gives the optional hunt for **one Fire, one Earth, one Lightning and one Ice Shaman**. | Scholar name, appearance, dialog, precise turn-in and quest award timings. |
+| QUILL-156 | **Repeatable regional hunt giver** | A **local bounty hunter in Trimery** gives the repeatable **kill 20 Quillboars** quest. Player **returns to that bounty hunter in Trimery** to collect XP + currency and repeat it. | NPC name, exact rewards, placement, dialog. |
+| QUILL-157 | **Dungeon access correction (SUPERSEDES QUILL-153)** | **Completing the scholar's four-Shaman hunt permanently unlocks the future Shaman ritual dungeon for that CHARACTER**. **NO additional dungeon NPC conversation is needed to activate the unlock.** The player must nevertheless **travel into the Quillboar biome and find the physical dungeon entrance** to actually enter it. The entrance is not the Trimery quest giver, nor a menu teleport from Trimery. | Exact entrance position, quest completion/turn-in trigger, appearance and dungeon content to be designed separately. Keep the dungeon approved-in-principle but not implemented. |
+| QUILL-158 | **Chieftain optional quest turn-in** | After defeating the level-40 Chieftain with the quest active, return to **the quest giver in Trimery** for **XP, currency and the unique cosmetic title `Chieftain's Bane`**. The title is not automatically awarded on boss death. | Chieftain quest giver's identity, dialog and reward values remain OPEN; he/she is the **fourth distinct quest giver** in Trimery under Round 29. |
+
+### Updated definitive regional quest flow
+
+1. **Main story — Cross to the big city:** receive from a Trimery **guard or road patrol captain**, travel through the Quillboar biome, **speak to the designated NPC inside the big city** to complete.
+2. **Optional scholar's hunt — Four elements:** receive from a **Trimery elemental scholar**, kill **one Shaman of each Fire, Earth, Lightning and Ice**, **complete the quest** to permanently unlock dungeon eligibility **for the character**; **locate the dungeon entrance physically inside the Quillboar region** and enter there when the separately designed dungeon exists. **No separate dungeon unlock NPC**.
+3. **Repeatable bounty — 20 Quillboars:** receive from a **Trimery bounty hunter**, kill **20** qualifying Quillboars with standard group credit, **return to the same bounty hunter** for XP and currency, repeat.
+4. **Optional level-40 Chieftain:** receive from a fourth distinct **Trimery quest NPC** (role undecided), kill the Chieftain and **return to this NPC in Trimery** for XP, currency and **`Chieftain's Bane` title**.
+
+**Precedence note:** QUILL-157 overrides QUILL-153 and any Round 29 narrative that says a separate dungeon NPC must be spoken to to unlock access. The scholar is the quest giver; the permanently unlocked dungeon is entered via a physical entrance to be discovered. Do not invent its dungeon layout, bosses, rewards, immediate implementation, or a new required NPC.
+
+**Next design round:** choose the fourth Chieftain quest giver, specific completion/turn-in condition for the scholar's hunt, city arrival NPC type, rough entrance placement/detection, and quest reward quantities or story hooks. Continue design-only updates on this branch; no Unity changes yet.
