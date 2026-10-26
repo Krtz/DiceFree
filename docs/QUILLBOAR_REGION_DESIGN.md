@@ -230,3 +230,22 @@ Each of the four Shaman variants retains **normal Magical basic attacks plus exa
 The **Fire Shaman** shields a nearby frontline Warrior/Brute (or another eligible ally) to punish repeated melee basic attacks for 5s; its 15s cooldown prevents permanent coverage without other mechanics. The **Earth Shaman** telegraphs its 2m-wide rolling hazard for 1.5s; players can dodge a straight-line boulder that passes through multiple units before stopping on a solid obstacle. The **Ice Shaman** actively positions Frozen Ground in predicted player paths and around clusters, creating 4m-radius temporary movement control.
 
 **Next interview:** begin the powerful stationary **chieftain in the largest fortified settlement** and/or settlement encounter geography; final numerical tuning of minor Shaman attacks and boulder speeds can remain provisional until playtesting. This design round does not authorize Unity changes, dungeon construction or implementing bosses.
+
+
+## Round 11 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Confirmed decision | Still open |
+| --- | --- | --- | --- |
+| QUILL-053 | **Chieftain fighting style** | A **massive two-handed axe wielder** specializing in **powerful sweeping attacks**. Visually imposing melee commander; no shield or dual-wielding style. | Exact attacks, cone/sweep arcs, ranges, attack cadence and numerical damage. |
+| QUILL-054 | **Chieftain bodyguards** | The encounter **begins with exactly two elite Quillboar bodyguards** protecting the chieftain. | Their archetypes, special mechanics, positioning, threat AI, whether they respawn, and boss-bodyguard synergy. |
+| QUILL-055 | **Largest settlement / stronghold** | The largest fortified Quillboar settlement combines **wooden fortifications with natural cliffs**. Chieftain is stationed inside it as previously confirmed. | Palisade/gate arrangement, paths, vantage points, stronghold extent and exact arena geometry. |
+| QUILL-056 | **Boss access / exploration** | **Players may reach and engage the chieftain at any time, provided they fight through the settlement.** Do not gate him behind regional quests, camp leader kills, a special event, a locked gate, or mandatory progression flags. | Aggro/leash, how much of the settlement pulls with him, and re-entry/reset behavior. |
+| QUILL-057 | **Boss encounter identity** | Boss is defined by **massive, visibly telegraphed attacks that reward movement and dodging**. Attack readability and fair reaction windows are central. | Specific tells, timings, hit areas, multi-phase behavior (NOT approved yet), avoidance rewards and damage. |
+
+### Consolidated chieftain encounter concept
+
+A physically imposing **stationary outdoor regional boss** in the largest enemy-held stronghold, amid **wooden defensive structures and rugged cliffs**, with **two elite bodyguards present at engagement**. The chieftain fights with an oversized **two-handed axe**, using **sweeping attacks with clear warnings**. The stronghold is an accessible overworld location: adventurous players can challenge him without unlocking a quest, but must confront the hostile Quillboar defenders on the way.
+
+**Boundary of approval:** no extra reinforcements, battlecry buffs, phase changes, forced arena lockdown, environmental hazard mechanics, mandatory quest gates, loot rules, respawn numbers or bodyguard specializations have been approved in this round. These remain for subsequent design discussions. Preserve the separate future **Shaman ritual dungeon idea** as provisional; the chieftain is not its dungeon boss.
+
+**Next round:** specify axe attacks and attack warnings, elite bodyguard roles, chieftain/boss leash, and whether attacks can threaten several players. Design/documentation only; no Unity changes.
