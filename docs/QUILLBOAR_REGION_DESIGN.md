@@ -588,3 +588,25 @@ All four are quest concepts approved for the region; their rewards, givers, exac
 4. **Optional Chieftain defeat**: kill the level-40 Chieftain, quest reward **XP + currency + unique cosmetic title**, separate from the boss's ordinary shared world-boss loot table.
 
 **No changes to existing Chieftain loot, items, drop chances, class eligibility, level/tier equip conditions or regional enemy AI.** Next design round: title choice, questgiver/turn-in choices, exact eligibility for group kill credit, quest chain unlock mechanics, and whether the dungeon opens immediately or at a future story milestone. Documentation only; no Unity implementation authorized.
+
+
+## Round 29 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Quest mechanic | Approved decision | Remaining details |
+| --- | --- | --- | --- |
+| QUILL-149 | **Chieftain quest cosmetic title** | Reward the unique title **Chieftain's Bane** for the optional level-40 Quillboar Chieftain quest. Under the game's existing title convention, display it as **`<Echo> the Chieftain's Bane`**. Title is a quest reward, separate from the boss's three 10% equipment drops. | Achievement/title persistence and precise award-on-hand-in procedure should follow common quest/title systems. |
+| QUILL-150 | **Trimery quest givers** | The **four distinct regional quests** originate from **different NPCs in Trimery**, not all from one NPC and not acquired by finding camp NPCs. This covers the big-city main travel quest, the optional four-element Shaman hunt, the repeatable 20-Quillboar hunt, and the optional Chieftain quest. | Individual giver identity/names, dialogue and locations within Trimery remain OPEN. |
+| QUILL-151 | **Party quest kill credit** | Follow the game's **standard multiplayer party quest-credit rules** for Chieftain, Shaman and repeatable Quillboar kills, rather than adding an arbitrary killing-blow-only, damage-only or universally-nearby-specific exception. | Consult the authoritative shared party credit system during implementation; if undefined, design that globally instead of assuming an exception for the region. |
+| QUILL-152 | **Repeatable hunt turn-in** | After killing **20 Quillboars**, player must **return to the original quest giver in Trimery** for turn-in and XP + currency. The quest does not autocomplete at kill 20 and does not turn in at any other random NPC. | Exact XP/currency amounts and NPC identity remain OPEN; repeat acceptance follows standard quests. |
+| QUILL-153 | **Shaman dungeon access NPC** | Defeat one Fire, Earth, Lightning and Ice Shaman for the optional quest, then **speak to a dedicated dungeon NPC** to activate/access the dungeon. The resulting access unlock is **permanent for that character** as already approved. Hunting the four Shamans alone does not skip the NPC interaction. | The dungeon NPC's identity/location and whether talking activates an existing unlock flag versus grants a fresh one remain to specify; enforce permanence after valid unlock. The dungeon is approved for future separate design but NOT yet authored/implemented. |
+
+### Quest flow as of Round 29
+
+- **Main story:** obtain travel quest from a dedicated NPC in Trimery; reach the big city beyond Quillboar territory; finish by talking to the designated **city NPC** (separate from the four Trimery questgivers).
+- **Optional elemental Shaman quest:** accept from its own Trimery NPC; defeat **one of each** Fire, Earth, Lightning and Ice Shaman; **speak with a dungeon NPC** to obtain/activate **permanent per-character dungeon access**. Future dungeon contents/entrance remain separately designed.
+- **Repeatable regional hunt:** accept from its own Trimery NPC; kill **20 Quillboars** using existing shared party-kill-credit rules; **return to same NPC in Trimery** for **XP + currency**; repeat.
+- **Optional Chieftain hunt:** accept from its own Trimery NPC; defeat **level 40 Chieftain** with ordinary multiplayer credit; reward **XP + currency + Chieftain's Bane** title, independent of world-boss gear drops.
+
+**Interpretation guardrail:** There are four Trimery quest-giver NPCs (one for each distinct quest) plus a quest-completion NPC inside the future big city and a dungeon access NPC; no names or precise positions approved. Quest specifics above supersede earlier generalized options. All existing Quillboar mechanics, gear and reward rules remain as previously recorded.
+
+**Next round:** identify each questgiver role, whether dungeon NPC is located in Trimery or near an eventual entrance, Chieftain title delivery conditions and NPC dialogue flavor, repeatable reward amounts and story quest completion reward. DOCUMENTATION ONLY; no Unity/map/quest implementation authorized.
