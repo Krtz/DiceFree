@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **ROUNDS 2–4 ANSWERED (through 2026-10-26); see latest confirmed decisions at bottom.** Tier II design only; no Unity implementation. Metal Shield's shared absorption is confirmed. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
+**Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. DESIGN ONLY — no Unity implementation or playtest validation.** Historical earlier entries below are superseded by latest rounds. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
 
@@ -405,3 +405,24 @@ In accordance with PSION-087, follow the Acolyte/Thief structure with approximat
 | 80 | 80 | 0 |
 
 **Next step:** user can approve the specific schedule or ask for changes, and final balancing/playtests can tune cooldowns/mana/damage. Psionic Blades critical coefficient and existing designer Mana costs remain provisional for playtesting. Psion class appearance and advancement quest remain deferred to later region/city design; do not start Tier III class design or modify Unity implementation from this interview.
+
+
+## Psion Round 20 — 2026-10-26 — TIER II GAMEPLAY DESIGN COMPLETE
+
+**STATUS: USER APPROVED ALL 80 EXACT SKILL RANK GATES. Psion's five-ability Tier II gameplay design interview is COMPLETE as the initial playtest specification, NOT IMPLEMENTED IN UNITY and NOT YET PLAYTEST-BALANCED.** This section is the latest authority over outdated "proposed" / "pending approval" gate labels above. Earlier brainstorms are historical.
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-092 | **APPROVE all 80 EXACT rank eligibility gates** in the designer-audited Round 19 table as first-playtest design. One class skill point per level 1–80, no auto ranks, prior rank prerequisite, all points have available legal purchases at every level. Caps Bolt20 / Blades18 / Image18 / Storm12 / Shield12. Unlocks Bolt1, Blades1, Image5, Storm8, Shield10. Every gate is available by level76. | USER APPROVED EXACT TABLE |
+| PSION-093 | **Mental Image is fully autonomous**: use previously approved caster-current-target-then-nearest target selection, finishing its current attack before retargeting. NO direct player RTS command/control of clone. | USER CONFIRMED |
+| PSION-094 | If the **Psion dies**, an existing Mental Image **remains in the world until its ordinary scheduled expiration**, unless killed first; regular targeting/combat/collision and full Void explosion on either cause continue. Do not auto-despawn it on owner death. | USER CONFIRMED |
+| PSION-095 | **Overlapping Lightning Storms from multiple Psions each resolve all their own full damage independently**, per normal overlapping AoE rules. No reduction, mutual cancellation or replacement solely due to overlap. User explicitly confirms this should be the *default global behavior for independent damaging AoEs*, not a Psion-only privilege. Exceptions must be authored explicitly; status/effect stacking can still have their own rules. | USER CONFIRMED GLOBAL |
+| PSION-096 | **Defer Psion appearance/model AND advancement mentor/quest** until planning the major city, after the Quillboar region. Do not invent or implement them as part of completing gameplay design. | USER CONFIRMED |
+
+### Final rank-gate approval
+
+The **entire five-row, individual rank eligibility list in Round 19** is now **USER APPROVED (PSION-092)**, not merely designer-proposed. The computed rank-gate audit PASSED for all 80 character levels. All gates unlock by level76, but all 80 skill points are earned through level80. Keep the **+2.5 percentage points per Psionic Blades Mastery rank** as a provisional playtest coefficient and the four Mana-cost formulas as designer-selected first-playtest values; skill identity, mechanics, approved gates and other user-confirmed details are not reopened automatically.
+
+### Next content-design sequence
+
+**Psion gameplay complete → Quillboar region → major city → deferred appearance/advancement quests when geographically appropriate.** Normal World1 Tier II roster design complete; do not design Tier III descendants until World2. No Unity gameplay implementation or test execution has been authorized by this design conversation.
