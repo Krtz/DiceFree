@@ -281,3 +281,21 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 | Metal Shield | 0.2s |
 
 **Next design round:** determine Mana-cost progression and any remaining important cast/target behavior. Preserve 80 total ranks, existing unlocks, cooldowns, ranges, shield sharing and damage formulas. No Tier III class or Unity work authorized. Maintain five-question interview batches and update this file after each round.
+
+
+## Psion Round 14 — 2026-10-26 (LATEST)
+
+User explicitly **delegated numerical Mana-formula selection to the designer**, acknowledging that the values require playtesting and balancing. Therefore, mana coefficients below are **DESIGNER-SELECTED PROVISIONAL PLAYTEST VALUES (AUTHORIZED TO PROPOSE), NOT USER-APPROVED FINAL BALANCE**. These honor the user's confirmed rule that Mana increases substantially with purchased skill rank.
+
+| ID | Ability | Provisional Mana cost (r = purchased rank) | Rank 1 | Maximum rank cost | Status |
+| --- | --- | --- | ---: | ---: | --- |
+| PSION-062 | Psychic Bolt (max rank 20) | **8 + 3 × r** | 11 | 68 | DESIGNER PROVISIONAL — PLAYTEST |
+| PSION-063 | Mental Image (max rank 18) | **14 + 5 × r** | 19 | 104 | DESIGNER PROVISIONAL — PLAYTEST |
+| PSION-064 | Lightning Storm (max rank 12) | **20 + 7 × r** | 27 | 104 | DESIGNER PROVISIONAL — PLAYTEST |
+| PSION-065 | Metal Shield (max rank 12) | **18 + 6 × r** | 24 | 90 | DESIGNER PROVISIONAL — PLAYTEST |
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-066 | **Mental Image retargeting:** when the Psion changes targets, the clone **finishes its current basic attack before changing targets**, if the new Psion target is valid and in clone attack range. Otherwise, it selects the nearest valid enemy in range as previously agreed. | USER CONFIRMED |
+
+**Important validation notes:** Psion's final level-dependent Mana budget/regen is not specified, so costs require simulation and real playtesting against actual resources, cast frequency, rank gates and time-to-kill. Literal formula uses rank r, so rank 1 costs include one rank increment. Psionic Blades Mastery passive has no cast Mana cost. Do not silently reclassify these designer-provisional coefficients as user-confirmed permanent balance. Preserve no-hard-clone-cap and cooldown/gear interactions. Gameplay kit still exactly five abilities; no Unity implementation or World2 Tier III work authorized.
