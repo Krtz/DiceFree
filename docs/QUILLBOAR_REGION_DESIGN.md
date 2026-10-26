@@ -634,3 +634,27 @@ The player's freeform clarification about the dungeon entrance **explicitly over
 **Precedence note:** QUILL-157 overrides QUILL-153 and any Round 29 narrative that says a separate dungeon NPC must be spoken to to unlock access. The scholar is the quest giver; the permanently unlocked dungeon is entered via a physical entrance to be discovered. Do not invent its dungeon layout, bosses, rewards, immediate implementation, or a new required NPC.
 
 **Next design round:** choose the fourth Chieftain quest giver, specific completion/turn-in condition for the scholar's hunt, city arrival NPC type, rough entrance placement/detection, and quest reward quantities or story hooks. Continue design-only updates on this branch; no Unity changes yet.
+
+
+## Round 31 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Quest / region detail | Approved decision | Remaining open |
+| --- | --- | --- | --- |
+| QUILL-159 | **Optional Chieftain quest giver and motivation** | The **village elder in Trimery** offers the optional level-40 Chieftain quest because **the elder fears a Quillboar invasion**. The player returns to the elder in Trimery after defeating the boss for **XP, currency and the unique cosmetic title `Chieftain's Bane`**. Boss remains OPTIONAL for progressing to the big city. | Elder's specific name, exact dialogue and reward amounts. |
+| QUILL-160 | **Four-Shaman quest completion and unlock point** | After killing **one Fire, one Earth, one Lightning and one Ice Shaman**, the player must **return to the elemental scholar in Trimery and complete/turn in the quest**. At **quest completion/turn-in**, **permanent Shaman ritual dungeon access unlocks for that character**. The four kills alone do NOT grant immediate access, and there is NO separate dungeon unlock NPC. | UI reveal of unlocked dungeon and journal messaging. |
+| QUILL-161 | **Future dungeon entrance** | Dungeon entrance will be a **hidden cave in cliffs near the elemental settlements**, physically located **within the Quillboar biome**. After turning in the hunt, players **still need to find/reach this entrance** to enter. | Precise cave placement, visibility/cues, entrance art and dungeon gameplay are for the separate dungeon-design round. This does not authorize immediate dungeon implementation. |
+| QUILL-162 | **Big-city main quest completion NPC** | After traveling from Trimery through the Quillboar biome and reaching the big city, the player must **speak with an Adventurers' Guild representative INSIDE the big city** to complete the main travel quest. | Guild rep name, exact building/location and dialogue decided in big-city design. |
+| QUILL-163 | **Quest XP/currency reward method** | **Use existing shared quest reward/XP/currency formulas where already available**; tune unusually large/unique rewards through later playtesting instead of inventing fixed bespoke numbers now. Where no authoritative formula exists, keep the value as a **tuning placeholder**. | Final numerics require systems lookup or tuning, not automatic assignment during this interview. |
+
+### Definitive four-quest route (Rounds 27–31)
+
+1. **Main — Reach the big city:** offered by **a Trimery guard or road-patrol captain**; traverse the Quillboar region; finish by talking to an **Adventurers' Guild representative inside the big city**.
+2. **Optional — Four elemental Shamans:** offered by **Trimery's elemental scholar**; kill **one each Fire/Earth/Lightning/Ice Shaman**; **return to the scholar in Trimery and TURN IN** to permanently unlock the future dungeon **for this character**. Then **discover the hidden cliff-cave entrance near the elemental settlements** and enter there. **There is no standalone dungeon unlock NPC.**
+3. **Repeatable — 20 Quillboars:** offered by a **local Trimery bounty hunter**; kill 20 with standard party credit; return to the bounty hunter in Trimery for **XP + currency**, repeat.
+4. **Optional — Chieftain invasion threat:** offered by the **Trimery village elder** out of concern about an invasion; defeat the optional level-40 Chieftain; return to the elder for **XP + currency + `Chieftain's Bane` title**.
+
+### Handoff boundary / remaining gaps
+
+World population count was intentionally delegated to authored environment/performance; named NPCs, reward figures and remaining minor ability damage/cooldowns are deliberately open for implementation tuning. The **future Shaman ritual dungeon is approved in concept and unlocked by the scholar's quest**, but its interior/encounters/rewards remain for separate design, not this region implementation. A dedicated big-city design round is still needed for the Adventurers' Guild representative and the city itself.
+
+**No Unity implementation was requested or performed** in this design round. GitHub documentation on `integration/world1-foundation` is the source of truth, with later round decisions and explicit supersession notes overriding earlier preliminary interpretations.
