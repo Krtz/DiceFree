@@ -143,3 +143,20 @@ This section **supersedes earlier 'unanswered', 'tentative', and 'deferred Round
 User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Mastery, Mental Image, AoE lightning storm (three waves in 0.6s), Metal Shield** and asked **"I don't know where the psychic shockwave comes from?"** The "Psychic Shockwave" naming and outward-expanding pulse came from prior assistant questions and user's Round 4 and 5 selections; the assistant may have wrongly interpreted that as replacing the original lightning storm. **Treat the current AoE slot as DISPUTED, not a sixth ability**. Ask whether the user prefers restoring the three-wave Lightning storm, the expanding shockwave, or a hybrid effect. Until clarified, do NOT describe Psychic Shockwave as the final approved skill, and do NOT remove historical lightning-storm details. The Round 5 rank×basic-attack damage suggestion may or may not be carried to the eventual chosen AoE; clarify if necessary.
 
 **No Unity implementation or Tier III designs; keep documenting after each completed round.**
+
+
+## Psion Round 7 — 2026-10-26 (LATEST; resolves AoE ambiguity)
+
+**Authoritative five-ability Tier II kit:** Psychic Bolt, Psionic Blades Mastery (passive; name still subject to final approval), Mental Image, **Lightning Storm**, Metal Shield. No sixth ability. The prior Psychic Shockwave proposal is **NOT a separate skill and NOT the selected AoE**. Its outward-expanding look, rank×basic-attack damage and speculative mechanics are **superseded**, not current design.
+
+| ID | User decision | Status |
+| --- | --- | --- |
+| PSION-026 | **Restore original Lightning Storm**: three waves of Lightning-element AoE damage over **0.6 seconds**. The temporary Psychic Shockwave replacement is discarded. | USER CONFIRMED |
+| PSION-027 | Lightning Storm scales with **INT-based damage PLUS flat damage per purchased skill rank**. It does **not** use rank × basic-attack damage. Exact coefficients, rank caps, AoE radius, cooldown and Mana cost remain OPEN. | USER CONFIRMED |
+| PSION-028 | **Mental Image explosion deals Void damage**. This explicit extra note overrides the earlier questionnaire selection "Undecided" for its element. Explosion retains 4m radius and scales with AGI + INT + flat damage per rank. Exact damage channel remains to be formally specified (Void is an element, not automatically a channel). | USER CONFIRMED |
+| PSION-029 | If two different Psions shield the same character, **each Psion maintains a separate shield absorption pool**. Within each caster's shield, affected allies share that caster's pool; re-casting by the same Psion replaces their existing pool with a fresh pool. Cross-pool damage order and cross-caster stacking edge cases still OPEN. | USER CONFIRMED |
+| PSION-030 | **Uneven skill ranks**: Psychic Bolt, Psionic Blades Mastery and Mental Image receive relatively more purchasable ranks; **Lightning Storm and Metal Shield both get fewer ranks**. Exact caps, sum (~80 target) and level gates remain OPEN. | USER CONFIRMED |
+
+**Carry forward unchanged:** Psychic Bolt Magical Metal and rank-scaling up-to-3s stun (boss Tenacity); Physical AGI+INT basic attacks at provisional 0.45+0.45 weighting, Psionic Blades Mastery +2.5 percentage points crit chance and 1 flat PDEF ignored per rank (150% crit damage); multiple stationary Mental Images attack for 10% caster basic-attack damage and inherit crit/basic attack modifiers, take 250% more damage, explode upon expiration/death, maximum rank duration 5 seconds; Metal Shield cast-time 8m AoE, affected members keep protection outside radius for 8 seconds, shared absorption pool per caster based on flat per rank plus small INT, re-cast replaces own pool. No Unity implementation or Tier III design.
+
+**Next round:** determine exact relative rank caps/total; Lightning Storm damage application (three separately resolved waves); clone Void explosion channel and formula; Metal Shield overlapping pool damage-order; Psychic Bolt rank progression. Keep exactly five focused questions and update this file after each round.
