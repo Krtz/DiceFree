@@ -245,3 +245,16 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 | Metal Shield | 10 | 12 | 30s | At cast: Psion and allies within 8m protected for 8s, retain protection after leaving; one shared absorption pool per caster; flat ranks dominant + moderate INT; oldest pool consumed first if overlapping, recast replaces own pool |
 
 **Still to specify**: exact numbers for mana costs, damage/shield coefficients, ranges, cast times and eligible rank-purchase levels, plus advanced corner cases. No Unity implementation nor Tier III class designing. Continue with five-question rounds and update the design doc each round.
+
+
+## Psion Round 12 — 2026-10-26 (LATEST; user-confirmed)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-051 | **Psychic Bolt listed damage = 30 + 8 × purchased rank + 1.2 × INT.** Single-target Magical Metal damage with 8s cooldown; stun = 0.15s × rank, reduced by boss Tenacity. This implies 38 + 1.2×INT at rank 1 and 190 + 1.2×INT at rank 20 under the literal rank formula. | USER CONFIRMED |
+| PSION-052 | **Lightning Storm damage PER EACH of its three waves = 15 + 5 × purchased rank + 0.6 × INT**; all three waves deal their own full listed damage over 0.6s. Ground-targeted circle radius 4m; 15s cooldown; Lightning-element Magical damage. Literal rank 1 per-wave = 20 + 0.6×INT; rank 12 = 75 + 0.6×INT. | USER CONFIRMED |
+| PSION-053 | **Metal Shield one shared absorption pool per casting Psion = 100 + 30 × purchased rank + 0.75 × INT**. This absorbs total shared damage across all allies covered by that particular cast, NOT once for each ally. Flat/rank portion dominates; cooldown 30s, 8m initial cast-time radius, 8s duration. Literal rank 1 pool = 130 + 0.75×INT; rank 12 pool = 460 + 0.75×INT. | USER CONFIRMED |
+| PSION-054 | **Psychic Bolt uses a very short NONZERO cast time**: user initially chose instant, then explicitly corrected this in extra thoughts: "i don't want instant, i want like 0.1 or 0.2 cast time." **Exact 0.1 vs 0.2 seconds OPEN**, do not record instant. | USER CONFIRMED nonzero short cast; exact timing OPEN |
+| PSION-055 | **Mental Image remains ground-targeted placement**, but also follows user's correction away from truly instant casts; approximately **0.1–0.2s nonzero cast time**, exact value OPEN. Earlier instant placement answer is superseded only with respect to cast duration, not ground targeting. | USER CONFIRMED ground targeting and nonzero short cast; exact timing OPEN |
+
+**Interpretation note:** Three numerical formulas above are written literally as "base + coefficient × rank + stat multiplier" rather than silently converting them to (rank−1). Both cast-time selections came from the same round and user provided one general correction; confirm whether both should share the same exact cast time, and whether other spells follow the same minimum-cast principle. All five ability identities, 80 rank allocation, cooldowns and other prior approvals remain unchanged. No Unity implementation/Tier III content authorized. Continue approximately five-question design batches and update after each round.
