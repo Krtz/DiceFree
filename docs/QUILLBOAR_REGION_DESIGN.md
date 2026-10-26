@@ -36,3 +36,27 @@
 - How does the shaman ritual candidate relate to faction lore and the later optional dungeon?
 
 **Next step:** continue five-question design rounds; update this document after each user-approved round. Do not implement Unity work unless separately instructed.
+
+
+## Round 2 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Design choice | Confirmed specification |
+| --- | --- | --- |
+| QUILL-007 | **Overworld layout** | A **mixture of broad/open terrain, hostile Quillboar camps and narrow passages**. The environment retains cleared ground, hills and cliffs, while forest/tree clusters form the outer biome boundaries. No single central-camp-only layout; exact topology remains open. |
+| QUILL-008 | **Chieftain encounter placement** | The **powerful tribe-uniting chieftain is a stationary boss within the largest fortified Quillboar settlement**. This is a regional boss, not a roaming world elite or dungeon boss. Boss abilities, arena, access and respawn remain open. |
+| QUILL-009 | **Ordinary enemy roster** | Exactly four **initial ordinary enemy archetypes** selected by the user: **Quillboar Warrior**, **Quillboar Spear Thrower**, **Quillboar Shaman**, and **Quillboar Brute**. The user's extra thoughts explicitly specify these, superseding the questionnaire option to select them individually later. Their skills, stats, encounter roles and exact counts remain open. |
+| QUILL-010 | **Population density** | **Moderately sized/scattered hostile enemy groups throughout the overworld**, with camps/settlements as denser natural concentrations if later designed. Do not infer exact numbers, aggro radii or spawn/respawn schedules. |
+| QUILL-011 | **Traversal roads** | The main road **north from Trimery branches into several routes through the biome**. The branches' destinations, safety, navigation obstacles, patrol risk and exact geometry remain open. Do not silently choose a wholly safe, permanently blocked, or fully enemy-controlled road. |
+
+### Current confirmed regional sketch
+
+- **Geographic origin:** north of Trimery, World 1.
+- **Target level range:** 25–35.
+- **Visuals:** primarily cleared/open spaces, scattered camps and settlement clusters; hills, cliffs and narrower passages; dense trees/forest along biome boundaries.
+- **Enemy factions:** all Quillboars hostile, tribal society including chiefs/shamans/warriors. Four regular archetypes: Warrior / Spear Thrower / Shaman / Brute.
+- **Major threat:** stationary chieftain within the largest fortified Quillboar settlement.
+- **Navigation:** branching road network from the Trimery approach, enabling multiple pathways.
+- **Enemy distribution:** moderate grouping across the area rather than uniform heavy saturation.
+- **Possible dungeon (NOT confirmed as production work):** shaman conducting a ritual, distinct from outdoor chieftain.
+
+**Next round:** ask about each of the four enemy archetypes' combat mechanics and groups, then exact path/camp and chieftain implementation later. Design/doc only; no Unity updates, assets, map editing, quests, bosses or dungeon implementation authorized.
