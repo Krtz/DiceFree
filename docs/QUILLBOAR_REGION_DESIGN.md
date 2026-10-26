@@ -213,3 +213,20 @@ Each of the four Shaman variants retains **normal Magical basic attacks plus exa
 - Ice Shaman Frozen Ground: **4m radius, 3s live zone, 50% movement slow on occupants**, slow overlap delegated to shared stacking rules, which remain to be specified at the global level.
 
 **Next round possibilities:** Fire Shield duration/CD and retaliation amount, Boulder Toss wind-up/speed/width, Frozen Ground cast range/CD, Thunderbolt/Chain Lightning interaction, or open region-map/camp/chieftain geography. Design/documentation only; no Unity content changed.
+
+
+## Round 10 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Feature | Confirmed specification | Open details |
+| --- | --- | --- | --- |
+| QUILL-048 | **Fire Shield duration and cooldown** | Fire Shaman's self/ally **Fire Shield lasts 5 seconds** and has a **15-second cooldown**. Preserve earlier priority for Warriors and Brutes; retaliation only on successfully landed melee **basic** attacks, including hits fully absorbed by shields. | Whether cooldown starts on cast or expiry, dispel/recast behavior and shield visual behavior follow normal ability framework unless specifically changed. |
+| QUILL-049 | **Fire Shield retaliation amount** | Each qualifying landed melee basic attack triggers a **small FIXED amount of Fire-element retaliatory damage**, rather than damage proportional to the attacking unit's basic attack or Shaman rank/level as a bespoke formula. | Exact fixed numeric damage value and Physical/Magical channel of retaliatory packet remain to tune/confirm; do not invent a value or automatic level scaling. |
+| QUILL-050 | **Earth Shaman Boulder Toss wind-up** | **1.5-second visible wind-up** before the Earth Shaman releases the already-confirmed large rolling straight-line boulder. Direction locks into a dodgeable trajectory; stops/shatters on solid terrain and continues through separate enemies, hitting each enemy at most once. | Trajectory aim snapshot exact timing, movement speed, max distance, projectile-versus-player collision, damage and cooldown remain OPEN. |
+| QUILL-051 | **Earth Shaman Boulder Toss size** | The physical rolling boulder has a **2-meter diameter** (nominal 1m radius) and is a substantial visible hazard. Do not substitute a small generic rock or automatically change it to a 2m radius. | Collision/hit volume geometry and animation implementation will follow engine conventions once authorized. |
+| QUILL-052 | **Ice Shaman Frozen Ground tactical placement** | AI should **predict target movement and favor grouped players** when choosing a ground location, rather than always targeting current position or fixed offsets. Existing ground zone lasts 3s, radius 4m, slows occupants by 50%, with shared slow-stacking rules still authoritative. | Prediction/targeting algorithm, cast range/cooldown, ability to place under cover, and prioritization weights remain OPEN. |
+
+### Round 10 encounter implications
+
+The **Fire Shaman** shields a nearby frontline Warrior/Brute (or another eligible ally) to punish repeated melee basic attacks for 5s; its 15s cooldown prevents permanent coverage without other mechanics. The **Earth Shaman** telegraphs its 2m-wide rolling hazard for 1.5s; players can dodge a straight-line boulder that passes through multiple units before stopping on a solid obstacle. The **Ice Shaman** actively positions Frozen Ground in predicted player paths and around clusters, creating 4m-radius temporary movement control.
+
+**Next interview:** begin the powerful stationary **chieftain in the largest fortified settlement** and/or settlement encounter geography; final numerical tuning of minor Shaman attacks and boulder speeds can remain provisional until playtesting. This design round does not authorize Unity changes, dungeon construction or implementing bosses.
