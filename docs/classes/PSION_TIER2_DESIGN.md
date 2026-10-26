@@ -314,3 +314,18 @@ User explicitly **delegated numerical Mana-formula selection to the designer**, 
 **Tier II reference check (2026-10-26):** Acolyte and Thief both use one spendable point per level 1–80, all skills initially rank 0, explicit increasing rank eligibility levels, and arithmetic proof that every level has at least one eligible purchase; their specific caps and rank-gate tables were separately approved. Psion's max ranks remain Bolt20 / Blades18 / Image18 / Storm12 / Shield12, unlock levels 1/1/5/8/10. Design its own eligibility gates and validate; do not claim any user-approved exact table yet.
 
 **Remaining design:** Psion skill gate schedule, Mental Image explosion trigger and lifetime interaction, Storm non-movement interruption rules, practical ranges, resource/max Mana baselines and last presentation/quest deferrals. Mana coefficients are provisional designer test numbers. No Unity implementation or Tier III creation.
+
+
+## Psion Round 16 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-072 | Psion **basic-attack range = 5 meters**. Psion remains a genuinely short-ranged ranged hybrid. | USER CONFIRMED |
+| PSION-073 | **Psychic Bolt range = basic-attack range + 2 meters**, thus **7 meters** at the approved 5-meter baseline. | USER CONFIRMED |
+| PSION-074 | **Mental Image placement range = 6 meters from the Psion**. This is ground-target placement distance, separate from the clone's inherited **5m basic-attack range**. | USER CONFIRMED |
+| PSION-075 | **Lightning Storm follows normal channel rules**. The prior 0.2s cast value is explicitly **SUPERSEDED**: the spell now has **0.1 seconds of initial casting, then channels the actual three-wave storm over 0.6 seconds**. Movement or stun during channel cancels remaining waves, and explicit interrupts follow normal channel rules. Ordinary incoming damage should follow shared channel handling, which is per-ability in COMBAT.md; unless globally decided, do not silently assume every hit interrupts. | USER CONFIRMED |
+| PSION-076 | When Mental Image expires while mid-attack, **only attacks whose projectile has already been launched continue to resolve**. An unlaunched attack is canceled on expiry and the clone explodes immediately; a launched projectile remains in flight according to normal projectile resolution. | USER CONFIRMED |
+
+**Casting/channel clarification:** The Lightning Storm's **0.1s initial cast + 0.6s active channel** gives a 0.7s full execution window if uninterrupted, not the older 0.2s cast + independent storm. Three independently full-damage Lightning waves occur within the 0.6s channel; interruption retains previous resolved waves and cancels the remaining waves. Unlike Ranger Arrow Rain's independently resolving ground rain, Lightning Storm requires ongoing channeling. Combat docs affirm each ability defines movement, damage and interruption behavior; they do not define a universal automatic cancel-on-any-damage rule. Existing 4m ground-targeted circle, INT + flat damage/rank per wave, 15s cooldown remain.
+
+**Open:** Lightning Storm ordinary incoming-damage interruption choice if not otherwise settled, per-wave exact trigger timestamps, Psion skill-rank gate table, Mental Image explosion damage coefficient and shield/practical balance, other target/range edge cases. No Unity implementation, no Tier III designs. Continue five-question design batches and update this document after each completed round.
