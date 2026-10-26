@@ -344,3 +344,20 @@ Players approach north from **Trimery** into the level 25–35 Quillboar region,
 Guard handling specifically: guards are **individually pullable** prior to attacking the chief; engaging the Chieftain pulls **both currently living guards**. When Chieftain resets, **living guards reset** as well, while guards previously killed remain dead until their own **ordinary respawn**. Do not silently resurrect killed guards or invent bodyguard waves.
 
 **Next design round:** define micro-camp composition and structures, secondary settlements, exact ascent style/crossroads, castle fortification lines, boss arena scale and elite guard placement. DESIGN ONLY; no Unity/map changes authorized.
+
+
+## Round 17 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Region feature | Approved decision | Still open |
+| --- | --- | --- | --- |
+| QUILL-083 | **Tiny Quillboar camps** | Numerous **mixed makeshift camps**, with **varied structures and enemy-group compositions** rather than a rigid template of tents/huts and fixed 2–4 or 3–6 units. Preserve the sense of different small tribal sites across the mostly open region. | Counts, exact combinations of props and enemies, density, loot/interactables. |
+| QUILL-084 | **Larger Quillboar settlements** | The fewer **larger settlements are Shaman-focused ritual settlements featuring elemental decorations**. They should reinforce the already approved four distinct Shaman variants (Fire, Earth, Lightning, Ice). | Whether each settlement belongs to one element or mixes several, ritual props, any ritual mechanics, and specific settlement sizes. **Do not treat this approval as confirmation of a separate ritual dungeon**; that remains only a candidate concept. |
+| QUILL-085 | **Cliff fortress ascent** | Reach the Chieftain's highest-level arena by **wooden ramps and bridges connecting cliff terraces**. The ramps/bridges are actual traversable paths through the multi-level wooden-and-natural-cliff stronghold. | Number of terraces, bridge widths, guard encounters, alternate routes and fall hazards. |
+| QUILL-086 | **Regional patrols** | **Small Quillboar patrol groups walk between camps along the circular road**. They are mobile regional traffic instead of exclusively stationary guards or massive roaming warbands. | Group size/composition, path length, patrol timing, aggro radius, respawn, and whether they stop at camps. |
+| QUILL-087 | **Chieftain arena size** | The high-elevation **cliff-backed, wooden-palisade-enclosed outdoor clearing is approximately 25 meters in diameter**, offering generous maneuvering/dodging space for the boss's 6m × 1m Overhead Smash and other attacks. | Exact terrain shape, entrances and precise authored dimensions; do not reinterpret 25m diameter as radius. |
+
+### Region flow after Round 17
+
+A circular road branching from north of Trimery links **numerous small, varied makeshift Quillboar camps** and a smaller number of **elemental Shaman ritual settlements**. **Small Quillboar patrols** travel along the road between sites. A separate route climbs the imposing Chieftain stronghold using **wooden ramps and bridges between cliff terraces**, terminating at a roughly **25m-diameter cliff-backed, palisade-surrounded clearing**. One elite Warrior and one elite Brute protect the Chieftain; individually pullable, both living ones join immediately if the boss is engaged; resetting boss returns surviving guards, not already dead ones.
+
+**Next interview:** ritual settlement elemental specialization, camp patrol composition, patrol reactions/assist, ramp/bridge terrain hazards, and whether the arena's 25m clearing should have cover. No Unity scene/AI/asset implementation approved; keep this a design specification.
