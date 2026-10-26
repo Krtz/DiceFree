@@ -495,3 +495,10 @@ Advancement quests/events are decided **case by case**.
 The first Tier 0 -> Tier 1 advancement is intentionally simple: the Novice is told to **go to the mountain** rather than completing a conventional bespoke class trial.
 
 Later advancements can use authored class-specific quests, trials, rituals, discoveries or other requirements as appropriate.
+
+
+## 2026-10-26 — All eight normal World1 Tier II gameplay class designs complete (Psion Round 20)
+
+**Latest user confirmation:** The final eighth regular Tier II, **Psion** (Magically Touched Novice branch), completed its **first-playtest gameplay design interview**. This supersedes earlier historical statements in this document describing Psion as Round1/ACTIVE/unanswered. Kit: **Psychic Bolt, Psionic Blades Mastery, Mental Image, Lightning Storm, Metal Shield**. The precise 80 rank-gate schedule is **USER APPROVED**: caps **20/18/18/12/12**, one spendable point at level1 and every level through80, all 80 eligibility gates by level76, audited one-legal-point-per-level access. All details: [Completed Psion design](classes/PSION_TIER2_DESIGN.md).
+
+**Gameplay designs for the eight planned normal Tier II classes are now covered; this does NOT claim implementation or playtest balance completion.** Psion's appearance/model and advancement mentor/quest are explicitly deferred until after the Quillboar region and when designing the major city. Next content-design sequence: **Quillboar area → big city**. No Tier III design until World2.
