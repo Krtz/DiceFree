@@ -249,3 +249,20 @@ A physically imposing **stationary outdoor regional boss** in the largest enemy-
 **Boundary of approval:** no extra reinforcements, battlecry buffs, phase changes, forced arena lockdown, environmental hazard mechanics, mandatory quest gates, loot rules, respawn numbers or bodyguard specializations have been approved in this round. These remain for subsequent design discussions. Preserve the separate future **Shaman ritual dungeon idea** as provisional; the chieftain is not its dungeon boss.
 
 **Next round:** specify axe attacks and attack warnings, elite bodyguard roles, chieftain/boss leash, and whether attacks can threaten several players. Design/documentation only; no Unity changes.
+
+
+## Round 12 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Chieftain mechanic | Confirmed specification | Open detail |
+| --- | --- | --- | --- |
+| QUILL-058 | **Signature attack: Ground-Splitting Overhead Smash** | The chieftain's signature is a **narrow but devastating overhead two-handed axe smash** that splits/strikes the ground. It is a positional dodge check, not the wide frontal/270° sweep as signature. Prior broader approval for an axe fighter with powerful sweeping attacks may still inform ordinary/secondary moves, but the **signature overhead smash takes precedence**. | Hit shape/width, length, damage, wind-up, cooldown, whether ground split lingers. |
+| QUILL-059 | **Boss attack telegraphs** | Combine **clearly readable weapon wind-up animations AND RED ground danger indicators**. Both are important for the chieftain's dodge-focused encounter. | Exact indicator shapes and appearance duration for each move. |
+| QUILL-060 | **Exactly two elite bodyguards** | Boss begins with **one elite Quillboar Warrior and one elite Quillboar Brute**. Retain the archetypes' existing roles (Warrior shield/protection, Brute slow high-HP heavy basic attacks), with elite stat tuning/extra mechanics still OPEN. | Positioning, pull linkage, behavior on boss reset/death, elite modifiers. |
+| QUILL-061 | **Single-phase encounter** | Boss uses **one consistent moveset throughout the fight**. Do not automatically introduce HP-threshold phase transitions, damage/haste enrage or new moves at 50% HP. | Specific abilities and attack cadence within that one moveset. |
+| QUILL-062 | **World-boss leash and reset** | Retreat/evade follows the **existing standard world-boss leash and reset rules**, with no invented chieftain-only full-settlement chase, arena boundary instant reset or one-off special mechanic. | Exact established global leash values and reset behavior should be taken from shared systems rather than guessed here. |
+
+### Chieftain state after Round 12
+
+A massive two-handed axe chieftain in a cliff-backed wooden stronghold, freely accessible to players who fight through the hostile settlement. The combat begins with **one elite Warrior and one elite Brute bodyguard**. The chieftain's primary identity is a **heavily damaging overhead ground-splitting smash** with an obvious wind-up and red ground telegraph; he can have additional sweeping moves consistent with earlier concepts, but they have **not** been selected as signature attacks. There are **no scripted phase changes**. Retreat and reset follow ordinary world-boss rules, not a special locked arena.
+
+**Next round:** specify smash geometry/timing, other axe attacks, bodyguard engagement/reset linkage and boss rewards/respawn later. Continue user interview in roughly five-question rounds, updating this file after each. DESIGN ONLY; no Unity scene/AI/ability implementation authorized.
