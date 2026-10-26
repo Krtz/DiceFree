@@ -204,3 +204,8 @@ Before seriously designing Face 2, Face 1 should have a coherent answer for:
 - travel-point rules;
 - visual landmark/pip identity;
 - at least one future expansion boundary that can later be opened naturally.
+
+
+## 2026-10-26 — World 1 Quillboar biome direction
+
+**User-confirmed Round 1:** North of Trimery, a level **25–35** region dominated by **cleared open ground, tribal Quillboar settlements, hills and occasional cliffs**; **forest and trees define its biome boundary**. All Quillboars are hostile, with a tribal hierarchy including chiefs, shamans and warriors. **Chieftain uniting tribes** is the primary regional danger. **Ritual-performing shaman as future dungeon hook** remains a concept, not final design. See [Quillboar Region Design](QUILLBOAR_REGION_DESIGN.md). Do not interpret this as authorization to construct terrain or gameplay yet.
