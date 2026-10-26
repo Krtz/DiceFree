@@ -568,3 +568,23 @@ All four are quest concepts approved for the region; their rewards, givers, exac
 - This does not override the Chieftain's **level 40** world-boss loot, mechanics, respawn, or **three 10%-chance unique items**.
 
 **Next design round:** main quest journey completion and giver, Shaman hunt dungeon unlock handling, repeatable kill amount/rewards, Chieftain quest reward, and optional quest credit with group play. DOCUMENTATION/DESIGN ONLY; no Unity implementation authorized.
+
+
+## Round 28 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Quest feature | Approved decision | Still open |
+| --- | --- | --- | --- |
+| QUILL-144 | **Main travel quest completion** | The main quest from Trimery to the **big city beyond the Quillboar biome** completes **when the player speaks to a specific NPC inside the big city**. Merely crossing the city boundary, reaching a checkpoint, or using a travel stone must not automatically complete it. | Big city name (unless already decided in core world docs), NPC identity, dialogue, reward, whether entry is tracked as an intermediate stage. |
+| QUILL-145 | **Repeatable Quillboar hunt kill count** | Each repeatable completion requires **20 Quillboar kills**. Follow ordinary quest kill credit rules; no level-variable count unless separately approved. | NPC giver/turn-in, exact eligible Quillboar types, shared-party kill credit. |
+| QUILL-146 | **Repeatable hunt rewards** | Reward **experience (XP) AND currency** each turn-in; no additional material/item reward authorized. | Exact XP and currency values, repetition policies/cooldowns, questgiver. |
+| QUILL-147 | **Shaman dungeon permanent unlock** | Optional hunt (kill **one Fire, one Earth, one Lightning, one Ice Shaman**) grants **permanent dungeon access for the CHARACTER completing it**. Do not make it account-wide, temporary, or dependent on an entry consumable. The dungeon itself is separately approved for FUTURE design, not yet authored. | Dungeon access UI/entrance, timing/quest hand-in trigger, party entry eligibility and exact dungeon content. |
+| QUILL-148 | **Chieftain quest rewards** | Optional quest to defeat the level-40 Chieftain rewards **XP, currency, and ONE unique cosmetic title**. This title is a quest reward independent of the Chieftain's three 10%-chance equipment drops. | Title wording, exact XP/currency, claiming flow and whether title unlocks on quest turn-in. |
+
+### Quillboar quest lineup — updated approved state
+
+1. **Main story — Travel to the big city**: starts from Trimery, player traverses the Quillboar biome, **talks to a designated NPC INSIDE the big city** to finish.
+2. **Optional Shaman hunt**: kill one of each **Fire/Earth/Lightning/Ice Shaman**, unlocking a **future, separately designed ritual dungeon permanently PER CHARACTER** after quest completion.
+3. **Repeatable hunt**: kill **20 Quillboars**, turn in for **XP + currency**, may repeat.
+4. **Optional Chieftain defeat**: kill the level-40 Chieftain, quest reward **XP + currency + unique cosmetic title**, separate from the boss's ordinary shared world-boss loot table.
+
+**No changes to existing Chieftain loot, items, drop chances, class eligibility, level/tier equip conditions or regional enemy AI.** Next design round: title choice, questgiver/turn-in choices, exact eligibility for group kill credit, quest chain unlock mechanics, and whether the dungeon opens immediately or at a future story milestone. Documentation only; no Unity implementation authorized.
