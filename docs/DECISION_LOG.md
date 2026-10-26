@@ -3381,3 +3381,12 @@ See `docs/CODEX.md`.
 **Guardrails:** Translate those qualities through DiceFree's own world, class identity, story, UI architecture and progression. This is not permission to copy Twilight's Eve assets, exact layout, text, icons, map, classes or mechanics. Existing design decisions—including DiceFree's single androgynous Novice—remain authoritative.
 
 See `docs/TWILIGHTS_EVE_REFERENCE.md`, `docs/VISUAL_ART_DIRECTION.md`, `docs/UI_HUD.md` and `docs/QUESTS_AND_INTERACTIONS.md` for the detailed guidance.
+
+
+## 2026-10-26 — Global baseline movement speed override
+
+**Decision (user-confirmed):** All playable classes use the **same baseline movement speed**, currently **5 m/s / 50 displayed Move Speed** as already defined in `docs/STATS_AND_DAMAGE.md`. This **supersedes** the earlier September 26 direction allowing different class baseline speeds. Class stats (including AGI), skills, equipment and buffs may still modify resolved speed. Appearance/size does not establish faster or slower base locomotion.
+
+## 2026-10-26 — Psion Round 17
+
+**Decisions (user-confirmed):** Lightning Storm follows shared channel rules with three channel waves at 0.0, 0.3 and 0.6s; Mental Image Magical Void explosion raw = 30 + 10×rank + 0.6×AGI + 0.6×INT; Metal Shield uses normal elemental shield behavior including existing Metal matching-element efficiency and shield-piercing rules (one shared absorption pool per caster). See `docs/classes/PSION_TIER2_DESIGN.md` for all user-confirmed specifics and remaining open choices.
