@@ -222,3 +222,26 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 **Balance clarification needed:** Mental Image's maximum lifetime is 5 seconds while its cooldown is now 12 seconds. Under ordinary single-charge cooldown rules, one Psion cannot have more than one active clone simultaneously. Earlier user decision explicitly removed any **hard clone cap**; preserve that rule, but do not imply that simultaneous clones are achievable without future cooldown reductions, charges, resets, recasts or other mechanics. No new enabling mechanic approved yet; ask later if needed.
 
 **Still open:** Metal Shield cooldown, Mana costs, damage coefficients, Lightning Storm AoE radius, Mental Image cast range and target behavior, remaining rank eligibility/gates, and other tuning. Exactly five Tier II abilities; no Unity implementation or Tier III work. Continue with a batch of approximately five questions, updating this document after the completed design round.
+
+
+## Psion Round 11 — 2026-10-26 (LATEST; user-confirmed)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-046 | **Metal Shield cooldown = 30 seconds**; shield remains cast-time 8m radius, 8s duration, flat-per-rank-dominant shared absorption pool, with INT contribution. | USER CONFIRMED |
+| PSION-047 | **Mental Image duration = 1.6s at purchased rank 1 + 0.2s for every additional rank**; formula `1.6 + 0.2 × (rank − 1)` seconds, reaching **5.0s at rank 18**. | USER CONFIRMED |
+| PSION-048 | **Mental Image cooldown stays at 12s**, with no simultaneous clone cap; **cooldown-reducing gear may enable overlapping clones later**. Do not invent a charge system, automatic cooldown reduction per rank or lower default cooldown. | USER CONFIRMED |
+| PSION-049 | **Lightning Storm ground-targeted circular AoE has a 4m radius**; three full-damage waves over 0.6s, INT-based + flat per rank, 15s cooldown. | USER CONFIRMED |
+| PSION-050 | **Metal Shield shared absorption pool scales primarily with flat shield amount per purchased rank plus a moderate INT contribution**; flat-rank portion should remain dominant at ordinary target gear levels. Exact coefficients/formula remain OPEN. | USER CONFIRMED |
+
+### Ability overview after Round 11
+
+| Ability | Unlock | Max ranks | Cooldown | Additional facts |
+| --- | ---: | ---: | --- | --- |
+| Psychic Bolt | 1 | 20 | 8s | Magical Metal; stun = 0.15s × rank before Tenacity |
+| Psionic Blades Mastery | 1 | 18 | Passive | +2.5 percentage points basic crit and 1 flat PDEF ignored per rank |
+| Mental Image | 5 | 18 | 12s | Duration 1.6→5s; stationary; full caster attack speed; attacks for 10% basic value; 4m Magical Void explosion; no hard cap |
+| Lightning Storm | 8 | 12 | 15s | Ground-targeted 4m AoE; 3 waves in 0.6s, each full INT + flat-rank damage |
+| Metal Shield | 10 | 12 | 30s | At cast: Psion and allies within 8m protected for 8s, retain protection after leaving; one shared absorption pool per caster; flat ranks dominant + moderate INT; oldest pool consumed first if overlapping, recast replaces own pool |
+
+**Still to specify**: exact numbers for mana costs, damage/shield coefficients, ranges, cast times and eligible rank-purchase levels, plus advanced corner cases. No Unity implementation nor Tier III class designing. Continue with five-question rounds and update the design doc each round.
