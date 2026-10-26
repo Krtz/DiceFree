@@ -114,3 +114,16 @@ This section **supersedes earlier 'unanswered', 'tentative', and 'deferred Round
 | PSION-015 | **Only five abilities/skills are needed for Tier II Psion for now**: Psychic Bolt, Psionic Blades (passive; final name pending), Mental Image, Psychic Shockwave (working name), and Metal Shield. **Do not add a sixth ability**. | USER CONFIRMED |
 
 **Important scope:** Psion remains a hybrid short-ranged AGI/INT basic-attacker and spellcaster with Mana, psionic blades+tome. Previously locked Bolt/clone/basic-attack details remain in force. Model and advancement quest are still deferred. No Tier III design or implementation authorized. Continue in batches of five design questions, and update this document after each round.
+
+
+## Psion Round 5 — 2026-10-26 (LATEST)
+
+| ID | User decision | Status |
+| --- | --- | --- |
+| PSION-016 | **Psychic Shockwave originates from the Psion** and expands outward in a circle. Its wave appearance is **visual presentation only**; do not infer knockback, slow, travel-distance damage scaling, or another gameplay effect. | USER CONFIRMED |
+| PSION-017 | Psychic Shockwave deals **skill rank × 1 basic-attack damage value** (tentative exact implementation/wording to clarify; user's words: "give skill rank x 1 base attack damage"). Pure damage, **no additional slow/knockback**. Its damage channel and element remain OPEN; don't infer Physical merely from referencing basic-attack damage. | USER CONFIRMED damage-scaling direction; implementation details OPEN |
+| PSION-018 | **Metal Shield absorption pool** scales primarily with a **flat shield value per skill rank**, plus a **smaller INT contribution**. Coefficients and pool amounts OPEN. The confirmed 8m AoE still gives everyone one shared pool lasting 8s. | USER CONFIRMED |
+| PSION-019 | Metal Shield affects the Psion and allies **within the 8m radius at cast time**; those affected **retain protection after leaving** the radius until the 8s duration ends or the shared pool is depleted. No continuous entry/refresh of protected participants is implied. | USER CONFIRMED |
+| PSION-020 | **Mental Image explosion** scales with **AGI + INT**, **plus flat damage per skill rank**. Precise coefficients, channel, element, AoE radius and trigger-time behavior remain OPEN; continue to explode on clone death or expiry. | USER CONFIRMED |
+
+**Scope:** Exactly five Tier II abilities for now, no sixth. Follow-up questions should refine these five, including rank caps/unlocks, ranges, damage channels/elements, cooldowns and clone behavior. Do not implement Unity changes or invent tier III paths or advancement quests.
