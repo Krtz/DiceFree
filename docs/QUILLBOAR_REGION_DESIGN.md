@@ -447,3 +447,25 @@ North of Trimery, Quillboar camps and four elemental Shaman settlements occupy m
 The **optional level 40 Quillboar Chieftain** respawns after **10 minutes**, with his separately pullable elite Warrior and Brute bodyguards respawning **every 5 minutes after their own deaths** (their deaths are *not* reversed by boss reset). The boss is tuned toward **2–4 participants** but permits a challenging solo attempt. He has a **rare unique two-handed axe** as his primary reward and uses **standard world-boss loot rules**. **Shoulder and leg armor drops have been proposed, but NOT approved or assigned probabilities**. No bespoke loot distribution or implementation change is authorized by this round.
 
 **Next interview:** confirm shoulder/leg loot and define axe rarity, drop % and stat identity; distinguish bodyguard loot; decide appropriate solo challenge and loot/respawn constraints without inventing percentages. DESIGN/DOCUMENTATION ONLY: no Unity scene/ability/loot changes approved.
+
+
+## Round 23 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Loot specification | Confirmed decision | Open details |
+| --- | --- | --- | --- |
+| QUILL-114 | **Three unique Chieftain equipment drops** | Chieftain can drop **THREE distinct unique equipment pieces**: his signature two-handed axe, a **shoulder-slot item**, and a **leg-slot item**. The shoulders and legs are now **CONFIRMED**, superseding the tentative Round 22 suggestion. | Shoulder/leg names, stats, rarity tiers, their separate drop rates, loot roll independence. |
+| QUILL-115 | **Signature axe name** | The unique two-handed axe is officially called **Groundbreaker**. | Exact model/appearance, description, required level, compatibility, item tier. |
+| QUILL-116 | **Groundbreaker stat identity** | **MODEST base physical weapon attack/damage and HIGH STR bonus.** The user's explicit freeform clarification supersedes the multiple-choice wording "very high physical attack damage and STR." **Do not give Groundbreaker very high base weapon damage** just because the earlier option said so. Distinguish this STR-centric axe from conventional high-base-damage weapons. | Numeric weapon damage, STR amount, secondary properties, whether any unique intrinsic exists (none approved). |
+| QUILL-117 | **Groundbreaker drop probability** | **10% chance** to drop Groundbreaker from the Chieftain under existing world-boss loot distribution/roll rules. | Clarify exact eligibility and roll source against authoritative world-boss loot system at implementation; don't copy 10% automatically to armor pieces. |
+| QUILL-118 | **Shoulder item combat identity** | Unique shoulder-slot drop should be **OFFENSIVELY oriented**. | Exact attribute bonuses, any offensive mechanics, model/name/drop %. |
+| QUILL-119 | **Leg item combat identity** | Unique leg-slot drop should be **DEFENSIVELY oriented**. | Exact defense/VIT/resistance bonuses, model/name/drop %. |
+
+### Chieftain reward pool — Round 23 locked direction
+
+1. **Groundbreaker**, two-handed axe — **10% drop chance**, deliberately **modest base attack but high STR**. Exact stat numbers OPEN.
+2. **Unique shoulders** — confirmed to exist, **offensive** bonuses. Name, stats and drop chance OPEN.
+3. **Unique legs** — confirmed to exist, **defensive** bonuses. Name, stats and drop chance OPEN.
+
+Keep the previously approved Chieftain **level 40**, optional **2–4-player target with difficult solo possibility**, **10-minute boss respawn**, **5-minute independent elite bodyguard respawn**, and standard **world-boss loot rules**. No custom guaranteed loot, automatic set bonuses or attack-proc shockwave was approved.
+
+**Next round:** choose names and stat identities of shoulder/leg items; confirm their drop percentages, Groundbreaker base attack/STR numbers, and required level/rarity if desired. Update the GitHub doc after each design round. DOCUMENTATION ONLY: no Unity/item implementation authorized.
