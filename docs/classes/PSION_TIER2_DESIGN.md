@@ -197,3 +197,28 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 | PSION-040 | **Lightning Storm is a targeted circular ground AoE**, dealing three individually full-damage Lightning waves over 0.6s with INT scaling plus flat damage per rank. Exact targeting range, circle radius and casting/movement rules OPEN. | USER CONFIRMED |
 
 **Rank caps unchanged:** Bolt 20, Blades 18, Image 18, Storm 12, Shield 12 = 80. Exactly five abilities. No Unity implementation, no Tier III class work. Next interview round should settle remaining ability unlock levels and cooldown/Mana/range decisions. Keep the five-question cadence; update this file after each completed round.
+
+
+## Psion Round 10 — 2026-10-26 (LATEST; user-confirmed)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-041 | **Mental Image unlocks at Psion level 5** (not level 1). | USER CONFIRMED |
+| PSION-042 | **Lightning Storm unlocks at Psion level 8**. | USER CONFIRMED |
+| PSION-043 | **Metal Shield unlocks at Psion level 10**. | USER CONFIRMED |
+| PSION-044 | **Mental Image cooldown = 12 seconds**. | USER CONFIRMED |
+| PSION-045 | **Lightning Storm cooldown = 15 seconds**. | USER CONFIRMED |
+
+### Ability unlock schedule (authoritative)
+
+| Ability | Unlock level | Max purchased ranks | Cooldown |
+| --- | ---: | ---: | --- |
+| Psychic Bolt | 1 | 20 | 8s |
+| Psionic Blades Mastery (passive) | 1 | 18 | Passive |
+| Mental Image | 5 | 18 | 12s |
+| Lightning Storm | 8 | 12 | 15s |
+| Metal Shield | 10 | 12 | OPEN |
+
+**Balance clarification needed:** Mental Image's maximum lifetime is 5 seconds while its cooldown is now 12 seconds. Under ordinary single-charge cooldown rules, one Psion cannot have more than one active clone simultaneously. Earlier user decision explicitly removed any **hard clone cap**; preserve that rule, but do not imply that simultaneous clones are achievable without future cooldown reductions, charges, resets, recasts or other mechanics. No new enabling mechanic approved yet; ask later if needed.
+
+**Still open:** Metal Shield cooldown, Mana costs, damage coefficients, Lightning Storm AoE radius, Mental Image cast range and target behavior, remaining rank eligibility/gates, and other tuning. Exactly five Tier II abilities; no Unity implementation or Tier III work. Continue with a batch of approximately five questions, updating this document after the completed design round.
