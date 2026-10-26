@@ -1026,3 +1026,8 @@ The retired adventurer couple can help a **Novice** respec/reallocate Novice ski
 This is specifically a Novice service and is not a promise that later classes use the same respec system.
 
 Exact dialogue, cost and interaction flow remain open.
+
+
+## 2026-10-26 — Quillboar region design Round 1 (user-confirmed)
+
+World1's Quillboar biome is **north of Trimery** in the established route plan, and targets **levels 25–35**. The user confirmed a **largely cleared/open biome** with Quillboar camps and settlements, **hills and some cliffs**, rather than continuous dense forest; trees/forest delineate the **biome boundaries**. Quillboars are **all hostile**, and are an organized **tribal society with chiefs, shamans and warriors**. A **powerful chieftain uniting the tribes** is the main region-level threat. A **shaman performing a ritual** is a suggested **future dungeon hook**, *not a confirmed dungeon or encounter design*. Further topology, creatures, quest details and bosses remain open. [Authoritative Quillboar design interview](QUILLBOAR_REGION_DESIGN.md). No map/Unity changes authorized.
