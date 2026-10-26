@@ -469,3 +469,25 @@ The **optional level 40 Quillboar Chieftain** respawns after **10 minutes**, wit
 Keep the previously approved Chieftain **level 40**, optional **2–4-player target with difficult solo possibility**, **10-minute boss respawn**, **5-minute independent elite bodyguard respawn**, and standard **world-boss loot rules**. No custom guaranteed loot, automatic set bonuses or attack-proc shockwave was approved.
 
 **Next round:** choose names and stat identities of shoulder/leg items; confirm their drop percentages, Groundbreaker base attack/STR numbers, and required level/rarity if desired. Update the GitHub doc after each design round. DOCUMENTATION ONLY: no Unity/item implementation authorized.
+
+
+## Round 24 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Chieftain loot | Confirmed specification | Still open |
+| --- | --- | --- | --- |
+| QUILL-120 | **Groundbreaker numeric stats** | Unique two-handed axe **Groundbreaker** provides **+10 weapon/base physical attack damage and +45 STR**. The user's explicitly specified custom values override all suggested stat presets and earlier "very high base damage" language. Its defining strength is the **high STR bonus rather than base damage**. | Exact level requirement, appearance/model, intrinsic (none explicitly approved), other equip mechanics. |
+| QUILL-121 | **Groundbreaker class eligibility** | Groundbreaker is **wieldable by ALL melee classes**, as explicitly requested. Do not silently restrict it to Greatblade only because it is a two-handed axe. The item must support an intentional exception/compatibility rule if a melee class's normal weapon proficiency would otherwise reject a 2H axe. | Equip behavior where a melee class normally uses sword/shield or a different melee weapon, how off-hand/shield unequipping works, and canonical categorization of 'melee class' in equipment systems. Preserve existing slot/weapon rules where possible but do not erase this explicit all-melee eligibility. |
+| QUILL-122 | **Unique shoulder name** | **Quillboar Battle Spikes** is the confirmed name of the Chieftain's unique shoulder-slot reward. | Model/rarity/requirement and any appearance details. |
+| QUILL-123 | **Quillboar Battle Spikes stats** | Shoulder item gives **+10 AGI, +10 STR, +10 VIT**, exactly (no additional crit chance or attack-speed bonus automatically). Earlier offensive-shoulder design is refined by this three-attribute distribution. | Other properties not approved. |
+| QUILL-124 | **Unique leg item stats** | The Chieftain's unique defensive leg-slot reward focuses on **VIT and Physical Defense**. | Leg item NAME and precise VIT/Physical Defense numeric amounts remain OPEN. |
+| QUILL-125 | **Unique shoulder and leg drop chance** | **10% drop chance EACH** for Quillboar Battle Spikes and the yet-to-be-named leg armor; this matches Groundbreaker's existing **10%**. There are THREE separately defined unique items with 10% drop chances. | Whether loot rolls are independent, exclusive, or governed by an existing global loot-pool system is not established here; use standard world-boss rules without assuming a special roll model. |
+
+### Current Chieftain equipment loot table (design)
+
+| Item | Slot | Stats | Drop chance | Eligibility |
+| --- | --- | --- | --- | --- |
+| **Groundbreaker** | Two-handed axe | **+10 weapon damage, +45 STR** | **10%** | **All melee classes**, not Greatblade-only |
+| **Quillboar Battle Spikes** | Shoulders | **+10 AGI, +10 STR, +10 VIT** | **10%** | Standard shoulder equipment eligibility |
+| **Name TBD — unique defensive legs** | Legs | **VIT + Physical Defense** (exact values TBD) | **10%** | Standard leg equipment eligibility |
+
+Keep Chieftain level 40, 10-minute boss respawn, elite guard 5-minute independent respawns, 2–4-player tuning with difficult solo possibility, and standard world-boss loot distribution. **No special axe shockwave, automatic set bonus or unasked-for stat modifiers approved.** This remains documentation/design only, not authorization to create Unity equipment.
