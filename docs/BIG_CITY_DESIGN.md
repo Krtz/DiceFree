@@ -68,3 +68,30 @@ Schematic is only a mnemonic for directional travel; map locations and detailed 
 - Large-scale city entrance position from the northern Quillboar detour and internal district network.
 
 **Next design round:** finalize or narrow city name; decide tree integration, district composition, broken-road cause/role and city approach architecture. **DESIGN/DOCUMENTATION ONLY; no Unity changes authorized.**
+
+
+## Round 2 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Approved direction | Status |
+| --- | --- | --- | --- |
+| CITY-008 | **Final city name** | **Arborium** — preferred fantasy capital name, superseding earlier working option **Arborurbs**. Use Arborium as the city's name in future World 1 design. | USER CONFIRMED |
+| CITY-009 | **World Tree urban layout** | The city is built in **concentric rings encircling the gigantic central World Tree**. Organize radial access and urban districts with this overall ring-based form. This does **not** by itself approve elevated branch structures, root-top architecture, number of rings or district-to-ring allocations. | USER CONFIRMED |
+| CITY-010 | **Distinct city districts** | Include **clearly separated districts for merchants, artisans, mages, nobles, and adventurers** within the grand fantasy capital. Distinct district identity is approved; exact radial ring assignments, count of wards and relative sizes are OPEN. | USER CONFIRMED |
+| CITY-011 | **Broken direct Trimery road — respect earlier work** | The user explicitly said this has **ALREADY been decided** and declined to reselect its cause/appearance. **Preserve the established broken/direct Trimery–Arborium road and the alternate route north into Quillboar → west → south into Arborium. Do NOT select a new cause such as a destroyed bridge, collapsed mountain pass, Quillboar barricade, or aqueduct here.** Review any previous scene/project evidence for its more specific existing physical design before authoring or modifying that road. | PRE-EXISTING DECISION PRESERVED; NO NEW CHOICE MADE IN THIS ROUND |
+| CITY-012 | **Arrival/entry gate** | Players arrive from the Quillboar region via an **enormous, fortified NORTHERN city gate**. This is on the route coming south from the western Quillboar sector. Preserve the city's grand fantasy architectural scale. | USER CONFIRMED |
+
+### Round 2 consolidated design and geographic continuity
+
+**Arborium**, the largest and most important city on World 1, is a monumental magical capital built in **concentric rings around the World Tree**, featuring separate **merchant, artisan, mage, noble, and adventurer districts**. Players entering from Quillboar territory come through a **huge fortified northern gate**. Existing route remains **Trimery → north into Quillboar → west through Quillboar → south into Arborium**. The earlier **direct Trimery–Arborium road is broken**, and the user has already discussed this; do not re-propose or overwrite its cause and structure without reviewing prior authoritative decisions.
+
+**Review note:** Current readable `docs/WORLD_1.md` references an early blocked road related to Cornberg/Trimery starter progression and forest/slimes, but that should **not automatically be conflated with the distinct direct Trimery–Arborium road**. Current `docs/BIG_CITY_DESIGN.md` has only the broken-road connection and future-restoration fact, not its precise failure mechanism. An implementation handoff should inspect earlier scene and design decisions rather than invent the bridge/pass reason or repeatedly quiz the user about it.
+
+### Open for Round 3
+
+- Which urban ring contains which districts and how gates/avenues connect them.
+- Is the World Tree itself accessible and what building or institution occupies the innermost ring?
+- What does the Adventurers' Guild building look like, given the established main-quest turn-in to a guild representative?
+- City governance, local culture and how magic appears in daily life.
+- Whether the city's wider wall layout includes separate district gates or one primary exterior wall.
+
+**DESIGN/DOCUMENTATION ONLY; no Unity implementation or existing road modification authorized.**
