@@ -194,3 +194,22 @@ Each of the four Shaman variants retains **normal Magical basic attacks plus exa
 - Lightning Shamans apply a **brief 0.5s stun**, Ice Shamans create **3s areas imposing 50% slow on occupants**.
 
 **Round 9 design priorities:** Fire Shield triggering on hit vs attempt, boulder projectile obstacle behavior and per-target collision, Frozen Ground area/radius and overlapping zones, frontline defensive baselines and/or threat/positioning specifics. Numeric stat/ability values not specified remain OPEN; do not implement Unity content under this documentation-only interview.
+
+
+## Round 9 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Mechanic | Approved decision | Open / implementation caution |
+| --- | --- | --- | --- |
+| QUILL-043 | **Fire Shield trigger** | Retaliate **only after a melee BASIC attack successfully hits the protected Shaman/ally**, including if an eligible shield absorbs **100%** of the hit. A miss does not trigger. Melee abilities/skills, ranged basics and spells do not trigger. | Exact retaliatory damage, duration and cooldown OPEN. "Successfully hits" refers to the hit event, NOT actual HP loss. |
+| QUILL-044 | **Boulder Toss terrain collision** | Straight-rolling Boulder Toss **stops and shatters upon colliding with solid terrain**. It still passes through enemies as already agreed; never treats valid units as terrain blockers. | Exact solid obstacle colliders, travel speed/size/range and whether shattering itself does damage remain OPEN (don't invent a shatter AoE). |
+| QUILL-045 | **Frozen Ground radius** | Ice Shaman Frozen Ground has a **4-meter radius**. Its existing **3s duration** and **50% movement-speed slow while inside** remain unchanged. | Cast range, cooldown and damage behavior still OPEN. |
+| QUILL-046 | **Overlapping Frozen Ground slow** | Follow the **game's shared/universal movement slow-stacking rules**, not an invented class-specific stack/add/merge exception. | Audit of current `docs/COMBAT.md` and `docs/STATS_AND_DAMAGE.md` did not identify an explicit universally finalized numeric slow-stacking formula. Leave exact stacking arithmetic OPEN until that shared rule is defined elsewhere; do not pretend a "strongest wins" or additive rule was chosen. |
+| QUILL-047 | **Boulder Toss repeated collision** | A **single rolling boulder may damage each individual enemy at most ONCE**, even if an actor's collider is intersected for multiple frames, while the boulder can continue forward through and hit different enemies. | Use per-boulder hit-target tracking if implemented later; no special repeat-hits/ticks or shatter-hit packet authorized. |
+
+### Round 9 consolidated details
+
+- Fire Shield protects a Quillboar self/ally (prefer Warriors and Brutes) and triggers only on **landed melee normal basic** strikes, even with **fully shield-absorbed damage**.
+- Earth Shaman Boulder Toss: long telegraphed wind-up, straight-line rolling **dodgeable** projectile, continues through units, **one contact damage packet per individual enemy**, stops/shatters on **solid terrain**.
+- Ice Shaman Frozen Ground: **4m radius, 3s live zone, 50% movement slow on occupants**, slow overlap delegated to shared stacking rules, which remain to be specified at the global level.
+
+**Next round possibilities:** Fire Shield duration/CD and retaliation amount, Boulder Toss wind-up/speed/width, Frozen Ground cast range/CD, Thunderbolt/Chain Lightning interaction, or open region-map/camp/chieftain geography. Design/documentation only; no Unity content changed.
