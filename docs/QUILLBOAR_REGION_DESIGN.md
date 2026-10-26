@@ -283,3 +283,24 @@ A massive two-handed axe chieftain in a cliff-backed wooden stronghold, freely a
 The stationary Chieftain, located in the largest cliff-and-wood fortified settlement, fights with a **massive two-handed axe**. He has a **single consistent combat phase** and is accessible to anyone fighting through the settlement. His primary signature is a **1.5s telegraphed, narrow 6m linear overhead ground fracture that inflicts massive damage plus a short stun**; his other confirmed special is **ranged Axe Throw** to threaten distant players. The **two elite guards consist of one Warrior and one Brute**, stationed close enough to protect the boss but **independently pullable** for tactical preparation. Boss retreat uses the normal world-boss leash/reset system. Attack specifics, bodyguard linkage upon directly pulling boss, loot, respawn, and numeric tuning are not yet approved.
 
 **Next round priorities:** choose Axe Throw targeting and travel, fracture width, stun duration, bodyguard responses when directly engaging the Chieftain, and telegraph/cooldown timing. Keep the single-phase rule, guard pull separation, and standard shared combat/CC systems. DESIGN/DOCUMENTATION ONLY: no Unity implementation authorized.
+
+
+## Round 14 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Chieftain mechanic | Confirmed behavior | Open details |
+| --- | --- | --- | --- |
+| QUILL-068 | **Overhead Smash fracture width** | The straight-line ground fracture is **1 meter wide** and remains **6 meters long**. This is a narrow rectangular/linear positional dodge challenge, not a 1m radius. | Exact targeting lock, collision/telegraph alignment, impact/recovery time. |
+| QUILL-069 | **Overhead Smash stun duration** | A successful hit deals the previously confirmed massive damage **plus 1 second of stun**, reduced or prevented by ordinary shared Tenacity/CC-immunity mechanics. Retain the 1.5-second telegraphed wind-up, red ground indicator, and weapon animation. | Actual raw damage values, stun application when damage absorbed by shields, ability cooldown. |
+| QUILL-070 | **Axe Throw projectile behavior** | The Chieftain throws a **homing axe that follows its selected target**, not a locked straight-line dodgeable axe. Follow the normal targeted-projectile framework for collision/impact unless explicitly overridden later. | Projectile speed, turn rate/homing persistence, solid obstacles, ranged reach, impact effects, cooldown, whether returning axe animation matters. |
+| QUILL-071 | **Bodyguard assist on Chieftain pull** | If players engage the **Chieftain directly**, **both living elite bodyguards immediately join the fight**, even though the bodyguards **can themselves be pulled separately beforehand** (QUILL-066). Guards already killed do not magically reappear just for boss pull. | Whether separated/killed guards respawn during a live boss engagement, guard reset and exact combat linkage details. |
+| QUILL-072 | **Axe Throw target selection** | Choose the **highest-threat player who is OUTSIDE melee range** as the homing axe target. Do not make it random, prioritize the farthest player, or automatically target whoever has highest threat regardless of melee distance. | Actual melee/ranged eligibility threshold; behavior if no players are outside melee range; impact damage and cooldown. |
+
+### Consolidated Chieftain mechanics after Round 14
+
+- Stationary, freely accessible **outdoor regional chieftain** in the largest wooden-and-cliff Quillboar stronghold; massive two-handed axe and **one consistent phase**.
+- **Overhead Ground Fracture Smash:** warning **1.5s**, animation plus red ground indicator, straight **6m length × 1m width**, high damage and **1s stun** on hit (normal CC rules).
+- **Axe Throw:** homing axe aimed at the **highest-threat player outside melee range**. Homing is intentional; projectile should follow ordinary shared targeted-spell/projectile collision rules unless later specified.
+- **Two guards:** one elite **Warrior** and one elite **Brute**. Each can be pulled separately for preparation; **attacking the chieftain causes BOTH currently living guards to assist immediately**. No phase changes or additional reinforcements automatically introduced.
+- Leash/reset follows shared world-boss rules.
+
+**Next focused design questions:** What if no eligible ranged Axe Throw target exists? How does the homing axe interact with obstacles? What are Smash cooldown, Axe Throw cooldown and attack cadence? Should a shield-absorbed Smash hit still stun? How should the guard fight/reset stay coherent with independent pulling? Keep all numerical balance subject to playtest. **DESIGN ONLY; no Unity implementation.**
