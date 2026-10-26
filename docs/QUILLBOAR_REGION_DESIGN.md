@@ -514,3 +514,23 @@ Keep Chieftain level 40, 10-minute boss respawn, elite guard 5-minute independen
 **Important precedence:** user explicitly refined item level restriction from an absolute minimum of level 40 to an **OR advancement-tier condition**; likewise user clarified Groundbreaker's **both-hands occupancy** and **class-skill compatibility for ALL melee classes**. Earlier tentative interpretation that Defender shield skills might become unavailable when equipping Groundbreaker is superseded FOR THIS ITEM ONLY: normal class skills remain usable despite sacrificing offhand/shield. Whether any *mechanics* of a shield-dependent ability need a cosmetic/substitute execution when no shield is present is implementation design, not permission to disable those skills.
 
 Keep standard world-boss loot distribution, level-40 Chieftain, 10-min boss respawn and independently 5-min elite guard respawn. Exact drops/roll independence are shared loot-system details. **No Unity code/asset edits are authorized by this documentation-only round.**
+
+
+## Round 26 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Item visual / behavior | Approved design | Implementation notes |
+| --- | --- | --- | --- |
+| QUILL-131 | **Groundbreaker visual model** | A **massive single-bladed axe made from bone and metal**, reflecting the Chieftain's brutal Quillboar tribal design. Its oversized silhouette and single blade should distinguish it from double-headed axes. | Specific bone/metal arrangement, textures, proportions and crafting are subject to art implementation. |
+| QUILL-132 | **Groundbreaker basic attack and skill animations** | **All melee classes** wielding Groundbreaker use a **general two-handed basic attack animation**, but **retain each class's own specific skill animations**. Equipping the axe does not disable ordinary melee class skills, even when its two-hand/offhand occupancy would normally conflict with weapon visuals. | Some shield- or weapon-specific skill animations may need compatible presentation or animation blending; do not change the skill's approved gameplay or manufacture a shield offhand while using the two-handed axe. |
+| QUILL-133 | **Quillboar Battle Spikes appearance** | Unique shoulder equipment looks like **bone and tusk shoulder armor**. | Exact geometry, size and palette TBD; stats remain +10 STR, +10 AGI, +10 VIT. |
+| QUILL-134 | **Chieftain's War Leggings appearance** | Unique leg gear uses **primitive bone-plated armor and leather**. | Exact art TBD; stats remain +15 VIT, +15 Physical Defense. |
+| QUILL-135 | **No item set interaction** | All three unique Chieftain items are **fully independent equipment rewards**; **no set bonus, pair bonus, three-piece gameplay bonus, or special multi-piece visual effect**. | Existing independent item stats and 10% individual drop chances remain unchanged. |
+
+### Chieftain three-item art and equipment snapshot
+
+- **Groundbreaker:** massive **single-bladed bone-and-metal** two-handed axe; **+10 weapon damage / +45 STR**, **10%** drop; all melee classes can wield, using common two-handed **basic** animation and their existing class-specific **skill** animations; occupies both hands/no offhand.
+- **Quillboar Battle Spikes:** **bone-and-tusk shoulders**, **+10 STR / +10 AGI / +10 VIT**, **10%** drop.
+- **Chieftain's War Leggings:** **leather-and-bone-plated legs**, **+15 VIT / +15 Physical Defense**, **10%** drop.
+- All items: **Level 40+ OR Tier II+**, and **no item set interaction**.
+
+**Next design phase:** finalize region-facing details not yet specified, such as enemy drop identity, ordinary Quillboar aggro/leash, boss rewards beyond equipment/XP, camp quest hooks, and safe approaches to the fortress; or perform a structured completeness pass before authorizing Unity implementation. DOCUMENTATION ONLY; no game content/code changes authorized by this round.
