@@ -75,3 +75,28 @@
 **Encounter design direction (interpretive, not additional confirmed skills):** Warrior fronts protect vulnerable elemental Shamans and ranged Spear Throwers; thrown-spear specialists switch to melee under pressure; slower Brutes reward awareness of heavy basic attacks. All four are hostile and found in moderate groups across cleared plains, camps, branches and cliff corridors. Continue to use ordinary universal combat and projectile/shield systems unless a special mechanic is explicitly selected.
 
 **Next design round priorities:** choose Warrior block behavior, Spear Thrower melee-switch threshold, Shaman's elemental identity, Brute attack cadence/telegraph, and exact protective Warrior group AI. No Unity code or map work authorized.
+
+
+## Round 4 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Topic | User-confirmed decision |
+| --- | --- | --- |
+| QUILL-017 | **Warrior defensive shield** | The Warrior **periodically raises its shield** for a **short defensive window**, reducing incoming damage while raised. It is **not** currently specified as a passive random block roll or direction-only always-on block. Exact raised duration, cooldown, reduction percentage, channel/element coverage and actions while raised remain OPEN. |
+| QUILL-018 | **Spear Thrower close-range behavior** | Primarily throws ranged spears and **switches to melee ONLY when physically attacked in melee**, rather than automatically when a player is within a fixed 3m/5m range. Operational trigger (landed melee hit versus melee attack attempt), duration of melee stance, return-to-range logic and melee attacks remain OPEN. Do not replace this decision with proximity-only switching. |
+| QUILL-019 | **Shaman elemental affinity** | **Offensive spellcaster using a COMBINATION OF MULTIPLE existing elements**. Exact selected elements, spell kit, ranges, cooldowns, effects and casts remain OPEN. Do not silently select Fire/Lightning/Earth as confirmed choices or make Shamans heal by default. |
+| QUILL-020 | **Brute attack telegraph** | **Slow, hard-hitting BASIC/normal autoattacks with a visible wind-up animation**. Telegraph should make the heavy attack readable; exact attack timing, hit reach, damage and interruption mechanics remain OPEN. This does not approve a separate slam/knockback/enrage skill. |
+| QUILL-021 | **Warrior protection AI** | Warriors protect Shamans and Spear Throwers using a **combination of physical positioning and target prioritization**. They should seek to interpose and prioritize threats to vulnerable ranged allies. Exact reevaluation frequency, formation distance, leash/aggro override and body-blocking behaviors remain OPEN. No automatic taunt ability is approved. |
+
+### Round 4 interpretation
+
+An ordinary Quillboar encounter should present clear tactical roles: the shield-bearing Warrior takes the front line and raises a protective shield periodically; ranged Spear Throwers continue throwing until **actually attacked in melee**; multi-element offensive Shamans threaten from the back; slow Brutes deliver highly telegraphed heavy basic attacks. Warriors should try to interpose between players and nearby ranged allies and respond to threats toward them. These are **design decisions only**, not implemented enemy AI.
+
+### Outstanding Round 5 questions
+
+1. Warrior: shield uptime, damage-reduction value, and whether it can attack while bracing.
+2. Spear Thrower: what exactly triggers the melee switch and when it returns to throwing.
+3. Shaman: which specific elements and spell patterns.
+4. Brute: wind-up duration and possibility of repositioning/dodging without breaking the basic-attack system.
+5. Warrior: how much priority to grant ally defense versus ordinary threat targeting, and what happens when no nearby ally needs protection.
+
+No Unity terrain, prefabs, code, scenes or encounter implementation authorized.
