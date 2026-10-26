@@ -146,3 +146,29 @@ All four Quillboar Shaman variants are **ordinary hostile ranged spellcasting en
 | Ice | Normal Magical basic | Frost Nova AoE slow | **OPEN** |
 
 **Later decisions:** individual second spells, exact damage channels/elements where not obvious, numerical values, CC behavior under universal rules, spell priority and reaction to interrupts. Keep normal enemy AI/aggro systems and previous Warrior/Thrower/Brute mechanics. **No Unity/gameplay implementation authorized.**
+
+
+## Round 7 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+Each of the four Shaman variants retains **normal Magical basic attacks plus exactly two special spells**. This round finalizes each variant's **second special spell** and its tactical decision-making direction. The user's freeform details about Fire Shield and Boulder Toss supersede any overly generic reading of the questionnaire options.
+
+| ID | Shaman / AI | Approved second special or decision | Status |
+| --- | --- | --- | --- |
+| QUILL-032 | **Fire Shaman — Fire Shield** | Castable on the Shaman **or nearby allied Quillboars**, not merely self-only. While active, it **damages MELEE attackers only** when they attack the shielded unit; ranged attacks/spells do not trigger it by default. Exact trigger-on-attempt versus on-landed-hit, damage value/type/element, duration, cast range, cooldown, multiple-shield stacking, and reactions to melee skills remain OPEN. It is a retaliatory buff, not general damage reflection against all incoming attacks. | USER CONFIRMED |
+| QUILL-033 | **Earth Shaman — Boulder Toss** | **Long, visible casting/wind-up**, then **rolls a big boulder toward the targeted enemy** along the ground. The boulder must be **dodgeable by player movement**. Do not implement as a homing projectile that automatically tracks its target all the way to impact. Wind-up seconds, rolling trajectory targeting snapshot, boulder width/speed/lifetime, environmental collisions, AoE or single-target contact, and dodge telegraph format remain OPEN. | USER CONFIRMED |
+| QUILL-034 | **Lightning Shaman — Thunderbolt** | **Single-target Lightning strike that briefly stuns**. Exact stun duration, Tenacity/CC reductions, cast tell, range, damage and cooldown remain OPEN. | USER CONFIRMED |
+| QUILL-035 | **Ice Shaman — Frozen Ground** | Creates a **ground area that slows players** standing within it. Exact placement, AoE shape/radius, duration, slow magnitude, entry/exit behavior, whether damage is involved and cooldown remain OPEN. | USER CONFIRMED |
+| QUILL-036 | **Tactical spell AI** | Shamans **choose specials tactically according to player positions and battlefield conditions**, instead of a strict fixed rotation or unconditional cast-on-cooldown. Conditions and priority/cooldown policy remain to design. | USER CONFIRMED |
+
+### Four finalized ordinary Shaman kits (ability identities)
+
+| Variant | Basic attack | Special #1 (Round 6) | Special #2 (Round 7) |
+| --- | --- | --- | --- |
+| **Fire** | Normal Magical | **Fireball**: single-target projectile + Burning | **Fire Shield**: self/ally buff retaliating against melee attackers only |
+| **Earth** | Normal Magical | **Stone Prison**: temporarily roots player | **Boulder Toss**: big, telegraphed rolling, dodgeable boulder aimed toward target |
+| **Lightning** | Normal Magical | **Chain Lightning**: jumps between nearby players | **Thunderbolt**: single-target Lightning strike + brief stun |
+| **Ice** | Normal Magical | **Frost Nova**: close-range AoE slow | **Frozen Ground**: persistent slowing ground zone |
+
+**Balance and combat framework:** retain global damage/element/projectile/collision/shield/CC rules. Do not invent precise timings or coefficients before user approval or delegated playtest tuning. Fire Shield may be especially tactically relevant on frontline Warriors and Brutes, but no automatic priority or grant to those archetypes is approved merely by that observation. Enemy spell kits are design-only; Unity behavior has not been implemented.
+
+**Next design round:** Five focused questions can determine Fire Shield trigger and target priorities; Boulder Toss wind-up/path; Thunderbolt stun; Frozen Ground duration/slow; tactical Shaman spell selection or combos.
