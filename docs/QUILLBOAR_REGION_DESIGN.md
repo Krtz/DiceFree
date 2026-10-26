@@ -60,3 +60,18 @@
 - **Possible dungeon (NOT confirmed as production work):** shaman conducting a ritual, distinct from outdoor chieftain.
 
 **Next round:** ask about each of the four enemy archetypes' combat mechanics and groups, then exact path/camp and chieftain implementation later. Design/doc only; no Unity updates, assets, map editing, quests, bosses or dungeon implementation authorized.
+
+
+## Round 3 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Enemy or system | Approved behavior |
+| --- | --- | --- |
+| QUILL-012 | **Quillboar Warrior** | **Defensive melee fighter with shield and blocking**. It forms the front line and may defend vulnerable allies. Exact block chance, damage reduction, facing, cooldowns and reaction rules remain OPEN. Do not assume an offensive charge or bleed ability. |
+| QUILL-013 | **Quillboar Spear Thrower** | **Throws spears from range and switches to melee when approached.** Define actual ranged/melee ranges, timing, weapon handling, projectile collision and retreat/positioning in later rounds. Do not silently assign a snare or pierce mechanic. |
+| QUILL-014 | **Quillboar Shaman** | **Offensive elemental spellcaster**, not a healer/buffer/totem specialist by default. Its specific elements, damage spells, spell ranges, cast times, targeting and interruption behavior remain OPEN. |
+| QUILL-015 | **Quillboar Brute** | **Slow, high-HP enemy with devastating basic attacks.** Its threat comes from big normal autoattack hits rather than an automatically approved ground slam, charge or enrage ability. Exact movement speed vs common baseline, attack speed, raw damage, HP and telegraphs remain OPEN; enemy-specific speed can differ from *playable class* common baseline rule. |
+| QUILL-016 | **Mixed-group tactics** | **Warriors protect Shamans and Spear Throwers**. Plan their group positioning, threat behavior and protective movement accordingly; the user did not yet choose coordinated alarm calls, chain-aggro or specific formation mechanics. Brute role in mixed groups is still OPEN. |
+
+**Encounter design direction (interpretive, not additional confirmed skills):** Warrior fronts protect vulnerable elemental Shamans and ranged Spear Throwers; thrown-spear specialists switch to melee under pressure; slower Brutes reward awareness of heavy basic attacks. All four are hostile and found in moderate groups across cleared plains, camps, branches and cliff corridors. Continue to use ordinary universal combat and projectile/shield systems unless a special mechanic is explicitly selected.
+
+**Next design round priorities:** choose Warrior block behavior, Spear Thrower melee-switch threshold, Shaman's elemental identity, Brute attack cadence/telegraph, and exact protective Warrior group AI. No Unity code or map work authorized.
