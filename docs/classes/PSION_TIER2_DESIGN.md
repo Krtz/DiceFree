@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **ROUNDS 2 AND 3 ANSWERED (2026-10-24); mechanical decisions recorded below.** Tier II design only; no Unity implementation. Shield shared-vs-independent absorption remains under discussion. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
+**Status:** **ROUNDS 2–4 ANSWERED (through 2026-10-26); see latest confirmed decisions at bottom.** Tier II design only; no Unity implementation. Metal Shield's shared absorption is confirmed. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
 
@@ -101,3 +101,16 @@ This section **supersedes earlier 'unanswered', 'tentative', and 'deferred Round
 **Still open:** rank caps and unlock levels, skill damage/mana/cooldowns/ranges, shield pool type/values/radius/duration, Mental Image explosion specifics, final passive name, Psion model and quest (explicitly later). No Unity modifications or World2+ descendant implementation.
 
 **Documentation workflow:** User explicitly requests updating design documents after **every design round**. Maintain this file on `integration/world1-foundation` after each round, preserving confirmed-vs-proposed distinctions.
+
+
+## Psion Round 4 — 2026-10-26 (LATEST; supersedes conflicting Round 3 details)
+
+| ID | User decision | Status |
+| --- | --- | --- |
+| PSION-011 | **Metal Shield** is centered on the Psion with an **8-meter radius**; it grants protection to the Psion and nearby allies. | USER CONFIRMED |
+| PSION-012 | All protected allies draw from **one shared absorption pool**, not a separate pool per ally. Pool size, how it handles departing/re-entering players, damage order and stacking/recasting remain OPEN. | USER CONFIRMED pool model; mechanics OPEN |
+| PSION-013 | Metal Shield duration is **8 seconds**. | USER CONFIRMED |
+| PSION-014 | Replace the formerly selected **three-wave Lightning storm** with a **Psychic Shockwave spreading outward**. Treat the shockwave as the current AoE skill concept; exact damage channel, element, radius, expansion speed, CC and rank behavior OPEN. Do not assume Lightning remains its element. | USER CONFIRMED concept; mechanics OPEN |
+| PSION-015 | **Only five abilities/skills are needed for Tier II Psion for now**: Psychic Bolt, Psionic Blades (passive; final name pending), Mental Image, Psychic Shockwave (working name), and Metal Shield. **Do not add a sixth ability**. | USER CONFIRMED |
+
+**Important scope:** Psion remains a hybrid short-ranged AGI/INT basic-attacker and spellcaster with Mana, psionic blades+tome. Previously locked Bolt/clone/basic-attack details remain in force. Model and advancement quest are still deferred. No Tier III design or implementation authorized. Continue in batches of five design questions, and update this document after each round.
