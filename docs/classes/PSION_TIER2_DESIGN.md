@@ -160,3 +160,27 @@ User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Ma
 **Carry forward unchanged:** Psychic Bolt Magical Metal and rank-scaling up-to-3s stun (boss Tenacity); Physical AGI+INT basic attacks at provisional 0.45+0.45 weighting, Psionic Blades Mastery +2.5 percentage points crit chance and 1 flat PDEF ignored per rank (150% crit damage); multiple stationary Mental Images attack for 10% caster basic-attack damage and inherit crit/basic attack modifiers, take 250% more damage, explode upon expiration/death, maximum rank duration 5 seconds; Metal Shield cast-time 8m AoE, affected members keep protection outside radius for 8 seconds, shared absorption pool per caster based on flat per rank plus small INT, re-cast replaces own pool. No Unity implementation or Tier III design.
 
 **Next round:** determine exact relative rank caps/total; Lightning Storm damage application (three separately resolved waves); clone Void explosion channel and formula; Metal Shield overlapping pool damage-order; Psychic Bolt rank progression. Keep exactly five focused questions and update this file after each round.
+
+
+## Psion Round 8 — 2026-10-26 (LATEST; user-confirmed)
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| PSION-031 | **Exactly 80 purchased ranks total** allocated: **Psychic Bolt 20**, **Psionic Blades Mastery 18**, **Mental Image 18**, **Lightning Storm 12**, **Metal Shield 12**. This supersedes all illustrative rank distribution options. Unlock-level gates and initial rank accessibility remain open. | USER CONFIRMED |
+| PSION-032 | **Lightning Storm has three waves over 0.6 seconds; EACH wave deals the full listed spell damage**, rather than dividing displayed damage by three. Spell's damage formula is INT-based + flat damage per skill rank. Exact coefficients and rank-1 values open; distinguish damage per wave from full cast total (3 × per-wave damage when all hit). | USER CONFIRMED |
+| PSION-033 | **Mental Image explosion damage channel = Magical and element = Void**, with 4m AoE radius, AGI + INT + flat damage/rank, on death or expiry. Clone's basic attacks still inherit Physical basic-attack channel from universal rules; only explosion is Magical Void. | USER CONFIRMED |
+| PSION-034 | When multiple Psions apply distinct Metal Shield pools to one target, damage is absorbed from **the oldest shield pool first**. Each caster retains one shared pool across their protected allies; recasting replaces that caster's old pool. Ordering/tie edge cases open. | USER CONFIRMED |
+| PSION-035 | Psychic Bolt stun begins at **0.15 seconds at rank 1**, and gains **+0.15 seconds for each purchased rank**: formula **0.15s × rank**; rank 20 reaches **3.0 seconds** before boss Tenacity adjustment. This explicit user note **supersedes questionnaire's 0.5s start**. | USER CONFIRMED |
+
+### Rank caps table (authoritative)
+
+| Ability | Max purchased ranks |
+| --- | ---: |
+| Psychic Bolt | 20 |
+| Psionic Blades Mastery | 18 |
+| Mental Image | 18 |
+| Lightning Storm | 12 |
+| Metal Shield | 12 |
+| **Total** | **80** |
+
+**Implementation caution:** Each Lightning Storm wave deals the full per-wave listed damage; if all three land, a cast deals three times that value, before mitigation. Confirm timing and hit behavior during the next rounds. Neither an extra sixth ability nor Tier III content is authorized. Continue five-question design rounds and update this file after each completed round.
