@@ -304,3 +304,24 @@ The stationary Chieftain, located in the largest cliff-and-wood fortified settle
 - Leash/reset follows shared world-boss rules.
 
 **Next focused design questions:** What if no eligible ranged Axe Throw target exists? How does the homing axe interact with obstacles? What are Smash cooldown, Axe Throw cooldown and attack cadence? Should a shield-absorbed Smash hit still stun? How should the guard fight/reset stay coherent with independent pulling? Keep all numerical balance subject to playtest. **DESIGN ONLY; no Unity implementation.**
+
+
+## Round 15 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Chieftain mechanic | Confirmed decision | Implementation guardrail |
+| --- | --- | --- | --- |
+| QUILL-073 | **Axe Throw eligibility / no ranged targets** | **Do not use Axe Throw if no player is outside melee range**. The Chieftain continues normal melee combat instead of selecting a melee player, switching to lowest-HP targeting or repositioning artificially. | Use the previously approved highest-threat target *among eligible players outside melee range* when such a player exists. Exact melee-range threshold remains shared-system/encounter tuning. |
+| QUILL-074 | **Axe Throw terrain collision** | The **homing axe follows the normal homing-projectile collision rules**, including terrain/obstacle handling. | Do not invent a Chieftain-only terrain-penetrating axe, navigation-around-walls or custom collision bypass. Shared homing behavior is authoritative. |
+| QUILL-075 | **Overhead Smash cooldown** | **12 seconds** between uses per ordinary cooldown rules. Signature remains 1.5s telegraph, red danger indicator, 6m length × 1m width fracture, massive damage and 1s stun when applicable. | Raw damage, aiming/lock timing, shared cooldown start and impact collision details are subject to normal systems/playtesting. |
+| QUILL-076 | **Axe Throw cooldown** | **15 seconds**. Maintain homing ranged attack on the highest-threat eligible player outside melee range only. | Damage, travel speed, range and wind-up remain OPEN. |
+| QUILL-077 | **Overhead Smash stun on shield-absorbed hit** | **Follow normal shared damage-and-crowd-control rules**, including shield absorption, hit resolution, Tenacity and immunity. No ability-specific requirement for actual HP damage and no special guaranteed-through-shield CC rule has been approved. | If the shared rules have an unspecified shield-vs-CC case, leave it unresolved at the shared-system level rather than asserting one outcome. |
+
+### Approved Chieftain combat snapshot through Round 15
+
+- The boss is a **massive two-handed axe** Quillboar in the largest cliff-and-wood fortified overworld settlement, accessible without quest gates.
+- **Overhead Smash**: 12s cooldown; 1.5s visible axe wind-up plus red telegraph; narrow **6m × 1m** ground fracture; massive damage and **1s stun** governed by shared damage/CC systems.
+- **Axe Throw**: 15s cooldown; **homing projectile**, shared projectile collisions, selects **highest-threat player outside melee range**; if none exists, skip Axe Throw and continue melee.
+- **Guards**: one elite Warrior and one elite Brute; they can be pulled separately, but both *living* guards join immediately if the Chieftain is directly engaged.
+- Single-phase fight, normal world-boss leash/reset. No boss-only HP thresholds, forced reinforcement waves or custom immunity logic.
+
+**Next design phase:** stronghold route layout, camp structure, boss encounter space, guards' respawn linkage, standard overworld encounter tuning and rewards. Design/documentation only; no Unity changes from this interview.
