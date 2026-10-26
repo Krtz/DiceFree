@@ -907,3 +907,10 @@ When miss chance exists, it resolves once per action by default. A miss causes a
 Explicit per-projectile/per-packet hit checks require an authored exception.
 
 Miss chance is expressed as an explicit percentage. Ordinary miss-chance modifiers stack additively in percentage points and the final chance is clamped to 0-100%.
+
+
+## 2026-10-26 — Default overlap of independent damaging AoEs (user-confirmed)
+
+**GLOBAL DEFAULT:** If two or more independently created damaging AoEs overlap spatially and temporally, **each AoE resolves its own full damage against eligible units on its own hit/tick schedule**, including when the effects originate from different friendly casters or multiple Psions. Do not automatically reduce damage, merge pools, cancel one AoE or replace an older instance just because the damaging regions overlap. Ordinary per-packet mitigation, shields, element/resistance, hit volumes and target eligibility still apply. Explicitly authored exceptions for nonstacking statuses, same-source effects or specialized mechanics remain possible and **do not redefine the default for independent damage packets**.
+
+**Concrete Psion confirmation:** multiple independent Lightning Storm ground circles can overlap; each storm delivers its own full, separately resolved Lightning waves at 0.0/0.3/0.6s after the 0.1s cast, if the owning Psion sustains its 0.6s channel. Every wave separately checks occupants of that storm's 4m circle, under universal AoE hit-volume rules. See `docs/classes/PSION_TIER2_DESIGN.md`. Design rule only, not an implementation claim.
