@@ -172,3 +172,25 @@ Each of the four Shaman variants retains **normal Magical basic attacks plus exa
 **Balance and combat framework:** retain global damage/element/projectile/collision/shield/CC rules. Do not invent precise timings or coefficients before user approval or delegated playtest tuning. Fire Shield may be especially tactically relevant on frontline Warriors and Brutes, but no automatic priority or grant to those archetypes is approved merely by that observation. Enemy spell kits are design-only; Unity behavior has not been implemented.
 
 **Next design round:** Five focused questions can determine Fire Shield trigger and target priorities; Boulder Toss wind-up/path; Thunderbolt stun; Frozen Ground duration/slow; tactical Shaman spell selection or combos.
+
+
+## Round 8 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | Mechanic | Confirmed behavior | Unresolved details |
+| --- | --- | --- | --- |
+| QUILL-037 | **Fire Shield retaliation eligibility** | Fire Shield damages enemies **only in response to melee BASIC/AUTOATTACKS** made against its protected self or ally. **Melee abilities/skills do NOT proc Fire Shield**, and ranged basic attacks and spells do not proc it. | Whether a missed/blocked melee basic attempt triggers retaliation, nominal damage and duration. |
+| QUILL-038 | **Earth Shaman Boulder Toss path** | After its previously confirmed **long, clearly visible wind-up**, the large boulder **rolls in a straight line, continuing through enemies rather than stopping at the first enemy it hits**. The path is dodgeable, non-homing, and may strike multiple separate enemies along its course. | Snapshot targeting/direction, hit-once-per-target handling, travel distance, collisions with terrain, boulder speed, width, base damage and cooldown. |
+| QUILL-039 | **Lightning Shaman Thunderbolt stun** | Thunderbolt deals its single-target Lightning attack with a **0.5-second stun** as its normal baseline; follow global CC/Tenacity and immunity behavior. | Damage, cast timing, cooldown and range. |
+| QUILL-040 | **Ice Shaman Frozen Ground potency** | Creates a **3-second-lasting ground zone** imposing **50% movement-speed slow while a player is physically inside it**. The user selected the option with "while inside", so no 50% slow persisting after exit unless expressly authored later. | Radius, tick/damage behavior (none yet confirmed), cooldown and terrain target range. |
+| QUILL-041 | **Fire Shaman defensive target preference** | Fire Shamans **prioritize frontline Quillboar Warriors and Brutes** when deciding which ally to buff with Fire Shield. Buff may still apply to self or other allies per QUILL-032, but defensive frontline priority is explicit. | Self-defense fallback and refresh/recast policies. |
+| QUILL-042 | **Enemy defense archetype split** | **Warriors and Brutes: relatively HIGH Physical Defense, LOW Magical Defense. Shamans and Spear Throwers: relatively LOW Physical Defense, HIGH Magical Defense.** This is a comparative design direction for these specific Quillboar enemies, not a universal stat conversion rule. | Actual flat PDEF/MDEF values and scaling at levels 25–35, individual subtype variance. |
+
+### Resulting intended combat tradeoffs
+
+- **Warrior / Brute**: physical toughness encourages Magical attacks and positioning instead of relying only on basic Physical damage.
+- **Spear Thrower / Elemental Shaman**: stronger against Magical damage, more vulnerable to Physical attacks if players can reach them past the Warriors.
+- Fire Shield punishes only **melee BASIC attacks** into protected frontliners; melee special abilities can avoid the retaliation trigger even when they deal melee-range damage.
+- Earth Shamans create a telegraphed **line-path boulder hazard** passing through enemies, not an automatically hitting targeted projectile.
+- Lightning Shamans apply a **brief 0.5s stun**, Ice Shamans create **3s areas imposing 50% slow on occupants**.
+
+**Round 9 design priorities:** Fire Shield triggering on hit vs attempt, boulder projectile obstacle behavior and per-target collision, Frozen Ground area/radius and overlapping zones, frontline defensive baselines and/or threat/positioning specifics. Numeric stat/ability values not specified remain OPEN; do not implement Unity content under this documentation-only interview.
