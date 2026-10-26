@@ -325,3 +325,22 @@ The stationary Chieftain, located in the largest cliff-and-wood fortified settle
 - Single-phase fight, normal world-boss leash/reset. No boss-only HP thresholds, forced reinforcement waves or custom immunity logic.
 
 **Next design phase:** stronghold route layout, camp structure, boss encounter space, guards' respawn linkage, standard overworld encounter tuning and rewards. Design/documentation only; no Unity changes from this interview.
+
+
+## Round 16 — 2026-10-26 (LATEST; USER CONFIRMED)
+
+| ID | World / encounter feature | Confirmed decision | Still open |
+| --- | --- | --- | --- |
+| QUILL-078 | **Chieftain stronghold structure** | Largest fortified settlement is a **multi-level fortress built against natural cliffs**, with the Chieftain stationed at the **highest level**. Earlier wooden fortifications + natural cliff identity remains authoritative. | Exact number of terraces/levels, ramps, gates, approach routes, and fort footprint. |
+| QUILL-079 | **Regional camps / settlements** | Prefer **numerous tiny Quillboar camps and fewer large settlements**, rather than a fixed count of 2–4 midsized camps. Camps should be spread through the existing open landscape / hills and maintain the tribal settlement feel. | Total camp counts, specific locations, encounter density per camp, any extra larger settlement beyond the chieftain's stronghold. |
+| QUILL-080 | **Road network** | The roads from Trimery's northward approach form a **circular road linking the camps**, plus a **separate path leading to the Chieftain's stronghold**. Preserve branching travel choice and viable loops without forcing one linear camp-clear order. | Exact circuit geometry, crossroads, side trails, path elevation, alternative links. |
+| QUILL-081 | **Chieftain arena** | The boss fight takes place in a **cliff-backed clearing surrounded by wooden palisades** at the **highest level** of the fortress. It is an outdoor clearing, not an enclosed hall or automatically a raised stone platform. | Arena dimensions, cover, entrance location and whether any obstacles affect the homing axe; do not invent a forced arena lock. |
+| QUILL-082 | **Two elite bodyguards: resetting and deaths** | On Chieftain reset, **both bodyguards reset with him IF they are alive**. **Dead bodyguards remain dead** until their **normal respawn timers/rules**; resetting the boss never immediately resurrects them. Preserve independent pre-pulling and both living guards joining when the Chieftain itself is engaged. | Bodyguard normal respawn interval, precise spawn/patrol anchors, guard/boss leash interactions. |
+
+### Stronghold and region navigation — latest approved outline
+
+Players approach north from **Trimery** into the level 25–35 Quillboar region, where an interconnected **circular road** links numerous **small camps** and fewer larger settlements in mostly open terrain with hills, some cliffs and occasional narrow passages. A **separate access path** branches toward the chief's imposing **wooden-and-cliff multi-level fortress**. At the **top**, the chieftain and his two elite guards inhabit an outdoor **clearing backed by cliffs and edged with wooden palisades**. Players may reach the boss by fighting through the settlement at any time: there is **no required camp clearance, quest gate, or forced boss unlock**.
+
+Guard handling specifically: guards are **individually pullable** prior to attacking the chief; engaging the Chieftain pulls **both currently living guards**. When Chieftain resets, **living guards reset** as well, while guards previously killed remain dead until their own **ordinary respawn**. Do not silently resurrect killed guards or invent bodyguard waves.
+
+**Next design round:** define micro-camp composition and structures, secondary settlements, exact ascent style/crossroads, castle fortification lines, boss arena scale and elite guard placement. DESIGN ONLY; no Unity/map changes authorized.
