@@ -3390,3 +3390,12 @@ See `docs/TWILIGHTS_EVE_REFERENCE.md`, `docs/VISUAL_ART_DIRECTION.md`, `docs/UI_
 ## 2026-10-26 — Psion Round 17
 
 **Decisions (user-confirmed):** Lightning Storm follows shared channel rules with three channel waves at 0.0, 0.3 and 0.6s; Mental Image Magical Void explosion raw = 30 + 10×rank + 0.6×AGI + 0.6×INT; Metal Shield uses normal elemental shield behavior including existing Metal matching-element efficiency and shield-piercing rules (one shared absorption pool per caster). See `docs/classes/PSION_TIER2_DESIGN.md` for all user-confirmed specifics and remaining open choices.
+
+
+## 2026-10-26 — Psion Tier II class gameplay interview complete
+
+**User-confirmed:** All 80 exact Psion rank gates in `docs/classes/PSION_TIER2_DESIGN.md` Round19 are now APPROVED as initial playtest design (20 Psychic Bolt / 18 Psionic Blades Mastery / 18 Mental Image / 12 Lightning Storm / 12 Metal Shield; complete eligibility by level76, all 80 points earned by level80). Mental Image is autonomous, cannot receive direct player commands, and persists until normal expiration if its caster dies (unless killed first). Psion model and advancement quest remain deferred to major-city design after Quillboar area. Gameplay design completed; **not Unity-implemented or playtested**, Mana costs and passive crit coefficient subject to playtest tuning.
+
+## 2026-10-26 — Independent overlapping AoE damage global default
+
+**User-confirmed global rule:** Separate independently applied damaging AoEs each deal their full separately resolved damage packets to eligible targets, **even when their areas overlap**. Multiple Psions' Lightning Storms therefore each apply all of their own waves without automatic overlap damage reduction/replacement. Explicit exceptions (e.g. authored nonstacking status/effects) can exist; do not infer global exclusion or additive status stacks from this default. See `docs/COMBAT.md`.
