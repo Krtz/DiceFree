@@ -127,3 +127,19 @@ This section **supersedes earlier 'unanswered', 'tentative', and 'deferred Round
 | PSION-020 | **Mental Image explosion** scales with **AGI + INT**, **plus flat damage per skill rank**. Precise coefficients, channel, element, AoE radius and trigger-time behavior remain OPEN; continue to explode on clone death or expiry. | USER CONFIRMED |
 
 **Scope:** Exactly five Tier II abilities for now, no sixth. Follow-up questions should refine these five, including rank caps/unlocks, ranges, damage channels/elements, cooldowns and clone behavior. Do not implement Unity changes or invent tier III paths or advancement quests.
+
+
+## Psion Round 6 — 2026-10-26 (latest clarification)
+
+| ID | User answer | Status |
+| --- | --- | --- |
+| PSION-021 | AoE ability damage channel / element **not answered**. | OPEN |
+| PSION-022 | AoE ability maximum radius **not answered**. | OPEN |
+| PSION-023 | **Mental Image explosion radius = 4 meters.** | USER CONFIRMED |
+| PSION-024 | Recasting **Metal Shield replaces the existing shield with a fresh shared pool**, rather than stacking pools. Exact cross-caster interaction and shield targeting still open. | USER CONFIRMED |
+| PSION-025 | Psion should have **unevenly distributed skill ranks** across its five abilities, in the direction of the standard ~80-rank Tier II budget. Individual caps/gates not yet selected. | USER CONFIRMED qualitative distribution; exact budget still pending |
+
+### AoE ability correction/ambiguity — resolve before more mechanical decisions
+User restated their intended FIVE-skill kit as **Psychic Bolt, Psionic Blades Mastery, Mental Image, AoE lightning storm (three waves in 0.6s), Metal Shield** and asked **"I don't know where the psychic shockwave comes from?"** The "Psychic Shockwave" naming and outward-expanding pulse came from prior assistant questions and user's Round 4 and 5 selections; the assistant may have wrongly interpreted that as replacing the original lightning storm. **Treat the current AoE slot as DISPUTED, not a sixth ability**. Ask whether the user prefers restoring the three-wave Lightning storm, the expanding shockwave, or a hybrid effect. Until clarified, do NOT describe Psychic Shockwave as the final approved skill, and do NOT remove historical lightning-storm details. The Round 5 rank×basic-attack damage suggestion may or may not be carried to the eventual chosen AoE; clarify if necessary.
+
+**No Unity implementation or Tier III designs; keep documenting after each completed round.**
