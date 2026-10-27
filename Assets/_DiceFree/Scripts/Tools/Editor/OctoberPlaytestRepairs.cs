@@ -27,7 +27,10 @@ namespace DiceFree.EditorTools
                 else if(transform.name=="North edge")
                 {
                     bool frontier=all.Any(t=>t.name==BriarbackAuthoring.RootName);
-                    transform.position=frontier?new Vector3(268f,3.6f,400f):new Vector3(248f,3.6f,250.35f);
+                    bool northernStronghold=all.Any(t=>t.name=="Briarback northern mountain stronghold - additive");
+                    transform.position=frontier
+                        ?new Vector3(268f,3.6f,northernStronghold?545f:400f)
+                        :new Vector3(248f,3.6f,250.35f);
                     obstacle.size=frontier?new Vector3(160f,8f,3.5f):new Vector3(108f,8f,3.5f);
                 }
                 else continue;

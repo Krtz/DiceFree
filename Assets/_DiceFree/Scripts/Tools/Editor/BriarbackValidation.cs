@@ -5,13 +5,20 @@ namespace DiceFree.EditorTools
  {
   static void Need(bool ok,string text){if(!ok)throw new InvalidOperationException(text);}
   static Vector3 Nav(Vector2 point){Need(NavMesh.SamplePosition(new Vector3(point.x,0,point.y),out var hit,1.5f,1),"No navigation at "+point);return hit.position;}
-  [CliCommand("dicefree.briarback.validate","Validate region topology, thirteen creature compositions, original rig, quest and reward.")]
+  [CliCommand("dicefree.briarback.validate","Validate legacy or additive Quillboar roster, region topology, rig, quest and reward.")]
   public static object Run(){
    Need(!EditorApplication.isPlayingOrWillChangePlaymode,"Edit Mode only");var setup=EditorSceneManager.GetSceneManagerSetup();NavMeshDataInstance nav=default;int paths=0,moving=0;
    try{
     EditorSceneManager.OpenScene(BriarbackAuthoring.Scene);var root=GameObject.Find(BriarbackAuthoring.RootName);Need(root!=null,"Region missing");
     nav=NavMesh.AddNavMeshData(Object.FindAnyObjectByType<WorldNavigation>().Data);
-    var creatures=root.GetComponentsInChildren<QuilboarCombat>();Need(creatures.Length==13&&creatures.Count(c=>c.role==QuilboarRole.Harrowtusk)==1,"Enemy composition");
+    var creatures=root.GetComponentsInChildren<QuilboarCombat>();
+    var additiveRoot=root.transform.Find("Approved Quillboar role prototypes - additive");
+    bool additiveRoles=additiveRoot!=null;
+    var roleCreatures=additiveRoot!=null?additiveRoot.GetComponentsInChildren<QuilboarCombat>():Array.Empty<QuilboarCombat>();
+    var expectedRoles=new[]{QuilboarRole.Warrior,QuilboarRole.SpearThrower,QuilboarRole.FireShaman,QuilboarRole.EarthShaman,QuilboarRole.LightningShaman,QuilboarRole.IceShaman,QuilboarRole.Brute};
+    int harrowtuskCount=creatures.Count(c=>c.role==QuilboarRole.Harrowtusk);
+    var compositionValid=harrowtuskCount==1&&(additiveRoles?creatures.Length==20&&roleCreatures.Length==7&&expectedRoles.All(role=>roleCreatures.Count(c=>c.role==role)==1):creatures.Length==13);
+    Need(compositionValid,$"Enemy composition: total={creatures.Length}, harrowtusk={harrowtuskCount}, additiveRoot={additiveRoot!=null}, additiveRoles={roleCreatures.Length}, roleCounts={string.Join(",",expectedRoles.Select(role=>$"{role}:{roleCreatures.Count(c=>c.role==role)}"))}");
     foreach(var c in creatures){
      var actor=c.GetComponent<CombatActor>();var d=c.GetComponent<ActorStats>().Definition;
      Need(d.familyId==BriarbackAuthoring.Family&&d.basicAttack!=null&&c.GetComponent<DefeatReporter>()!=null&&c.GetComponent<OverworldRespawn>()?.Definition!=null,"Combat/credit/respawn composition");
@@ -20,6 +27,21 @@ namespace DiceFree.EditorTools
      Nav(new Vector2(c.transform.position.x,c.transform.position.z));
      Need(c.GetComponent<QuilboarPresentation>().model.runtimeAnimatorController!=null,"No creature animations");
      Need(c.GetComponentsInChildren<SkinnedMeshRenderer>().All(r=>r.sharedMesh.bindposes.Length>=20&&r.sharedMaterials.All(m=>m!=null&&m.shader.name.StartsWith("Universal Render Pipeline/"))),"Rig or URP materials");
+    }
+    if(additiveRoles){
+     foreach(var c in roleCreatures.Where(c=>c.role==QuilboarRole.Warrior||c.role==QuilboarRole.Brute)){
+      var definition=c.GetComponent<ActorStats>().Definition;
+      Need(definition.physicalDefense==16&&definition.magicalDefense==6,"Frontline defense profile");
+     }
+     foreach(var c in roleCreatures.Where(c=>c.role==QuilboarRole.SpearThrower||c.IsShaman)){
+      var definition=c.GetComponent<ActorStats>().Definition;var attack=definition.basicAttack;
+      Need(definition.physicalDefense==6&&definition.magicalDefense==16,"Ranged defense profile");
+      if(c.IsShaman)Need(attack.channel==DamageChannel.Magical&&attack.element!=null&&Mathf.Approximately(attack.reach,10),"Elemental Shaman basic attack");
+      else Need(attack.channel==DamageChannel.Physical&&Mathf.Approximately(attack.reach,9),"Spear Thrower ranged basic attack");
+     }
+     var bruteDefinition=roleCreatures.Single(c=>c.role==QuilboarRole.Brute).GetComponent<ActorStats>().Definition;
+     var warriorDefinition=roleCreatures.Single(c=>c.role==QuilboarRole.Warrior).GetComponent<ActorStats>().Definition;
+     Need(Mathf.Approximately(bruteDefinition.basicAttack.windup,1.2f)&&bruteDefinition.basicAttack.baseDamage>=warriorDefinition.basicAttack.baseDamage*1.7f&&bruteDefinition.baseHp>=warriorDefinition.baseHp*1.7f&&Mathf.Approximately(bruteDefinition.moveSpeed,3.1f),"Brute heavy attack profile");
     }
     Vector3 previous=Nav(new Vector2(250,182));
     foreach(var point in new[]{new Vector2(242,199)}.Concat(BriarbackAuthoring.Route).Concat(BriarbackAuthoring.EliteRoute)){
@@ -40,7 +62,7 @@ namespace DiceFree.EditorTools
     foreach(string scene in new[]{BriarbackAuthoring.Scene,"Assets/_DiceFree/Scenes/DevelopmentRoom.unity"}){
      EditorSceneManager.OpenScene(scene);var p=Object.FindAnyObjectByType<TraversalInput>(FindObjectsInactive.Include);Need(p.GetComponent<CarriedInventory>().Resolve(item.stableId)==item&&p.GetComponent<QuestJournal>().Definitions.Contains(quest)&&p.GetComponent<BriarbackMantleVisual>()!=null,"Player content catalog");
     }
-    return new{marker="DICEFREE_BRIARBACK_DATA_OK",creatures=13,paths,movingVertices=moving,questStages=3,rewardSlots=1};
+    return new{marker="DICEFREE_BRIARBACK_DATA_OK",creatures=creatures.Length,approvedRoles=additiveRoles?7:0,paths,movingVertices=moving,questStages=3,rewardSlots=1};
    }finally{if(nav.valid)nav.Remove();EditorSceneManager.RestoreSceneManagerSetup(setup);}
   }
  }

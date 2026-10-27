@@ -84,7 +84,11 @@ namespace DiceFree.EditorTools
                 FindObjectsSortMode.None).Any(t=>
                     t.name==TrimeryVillageAuthoring.RootName);
             bool briarback=Object.FindObjectsByType<Transform>().Any(t=>t.name==BriarbackAuthoring.RootName);
-            var bounds=briarback?new Bounds(new Vector3(134,18,168),new Vector3(438,100,476)):trimery
+            var northernBriarback=Object.FindObjectsByType<Transform>(FindObjectsSortMode.None)
+                .Any(t=>t.name=="Briarback northern mountain stronghold - additive");
+            var bounds=briarback?(northernBriarback
+                ?new Bounds(new Vector3(134,18,237.5f),new Vector3(438,100,615))
+                :new Bounds(new Vector3(134,18,168),new Vector3(438,100,476))):trimery
                 ?new Bounds(new Vector3(118,18,94),
                     new Vector3(405,100,329))
                 :new Bounds(new Vector3(95,18,70),

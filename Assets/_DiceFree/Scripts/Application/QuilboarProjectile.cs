@@ -4,12 +4,20 @@ namespace DiceFree.Briarback
  public sealed class QuilboarProjectile:MonoBehaviour
  {
   CombatActor target;Vector3 from;float began,duration;Material material;
-  public static void Launch(CombatActor source,CombatActor victim,float seconds,bool nature){
-   if(victim==null)return;var go=GameObject.CreatePrimitive(nature?PrimitiveType.Sphere:PrimitiveType.Capsule);go.name=nature?"Briar bolt visual":"Bone javelin visual";go.layer=2;
+  public static void Launch(CombatActor source,CombatActor victim,float seconds){
+   if(victim==null)return;
+   var element=source.Stats?.Definition?.basicAttack?.element;
+   bool elemental=element!=null;
+   Color color=element==null?new Color(.85f,.73f,.43f):element.stableId switch{
+    "element.fire"=>new Color(1f,.34f,.08f),"element.earth"=>new Color(.48f,.31f,.16f),
+    "element.lightning"=>new Color(.95f,.85f,.18f),"element.ice"=>new Color(.35f,.82f,1f),
+    _=>new Color(.4f,.85f,.16f)};
+   var go=GameObject.CreatePrimitive(elemental?PrimitiveType.Sphere:PrimitiveType.Capsule);
+   go.name=elemental?element.displayName+" shaman bolt visual":"Bone javelin visual";go.layer=2;
    var collider=go.GetComponent<Collider>();collider.enabled=false;Destroy(collider);
-   go.transform.localScale=nature?Vector3.one*.19f:new Vector3(.06f,.38f,.06f);
+   go.transform.localScale=elemental?Vector3.one*.19f:new Vector3(.06f,.38f,.06f);
    var p=go.AddComponent<QuilboarProjectile>();p.from=source.transform.position+Vector3.up*1.35f;p.target=victim;p.began=Time.time;p.duration=Mathf.Max(.1f,seconds);
-   p.material=new Material(Shader.Find("Universal Render Pipeline/Unlit")){color=nature?new Color(.4f,.85f,.16f):new Color(.85f,.73f,.43f)};go.GetComponent<Renderer>().sharedMaterial=p.material;go.transform.position=p.from;
+   p.material=new Material(Shader.Find("Universal Render Pipeline/Unlit")){color=color};go.GetComponent<Renderer>().sharedMaterial=p.material;go.transform.position=p.from;
   }
   void Update(){
    if(target==null){Destroy(gameObject);return;}

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Another 20 Quillboars
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.briarback.repeat-bounty
+  title: Another 20 Quillboars
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: Trimery needs the Briarback warband kept off the road. Defeat twenty Quillboars, then return here for your bounty.
+  activeDialogue: Twenty down. Return when the bounty is complete and I will pay you.
+  locationHint: Return to the Trimery bounty hunter after defeating 20 Quillboars.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat 20 Quillboars
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 20
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 400
+  reward: {fileID: 11400000, guid: 0b5c8a59e5b1e4a4495a9c56c6421e05, type: 2}
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 1

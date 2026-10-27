@@ -57,6 +57,42 @@ namespace DiceFree.EditorTools
 
         private static Vector3 Ground(float x,float z) => CornbergLandscape.Ground(x,z);
 
+        [CliCommand("dicefree.cornberg-perimeter.repair-grounded-trees",
+            "Lower unsupported natural-boundary trees to the authored ground while retaining trees on ridge props.")]
+        public static object RepairGroundedTrees()
+        {
+            Require(!EditorApplication.isPlaying,"Stop Play Mode first");
+            var s=SceneManager.GetSceneByPath(Cornberg);
+            Require(s.isLoaded,"Open the current Cornberg scene first");
+            var original=Find(s,InnerName);
+            Require(original!=null,"Natural boundary group missing");
+            var rocks=original.Cast<Transform>().Where(t=>t.name=="Mossy ridge"&&
+                t.gameObject.activeInHierarchy).ToArray();
+            var trees=original.Cast<Transform>().Where(t=>t.name=="Woodland tree"&&
+                t.gameObject.activeInHierarchy).ToArray();
+            var unsupported=trees.Where(tree=>!rocks.Any(rock=>
+                    Mathf.Abs(rock.position.x-tree.position.x)<1f&&
+                    Mathf.Abs(rock.position.z-tree.position.z)<1f)&&
+                Mathf.Abs(tree.position.y-Ground(tree.position.x,tree.position.z).y)>=.3f).ToArray();
+            foreach(var tree in unsupported)
+            {
+                Undo.RecordObject(tree,"Ground unsupported woodland tree");
+                tree.position=Ground(tree.position.x,tree.position.z);
+                EditorUtility.SetDirty(tree);
+            }
+            if(unsupported.Length>0)
+            {
+                EditorSceneManager.MarkSceneDirty(s);
+                Require(EditorSceneManager.SaveScene(s),"Could not save grounded woodland trees");
+            }
+            return new{status="CORNBERG_BOUNDARY_TREES_GROUNDED",
+                boundaryTrees=trees.Length,unsupportedTreesAdjusted=unsupported.Length,
+                ridgeSupportedTrees=trees.Count(tree=>rocks.Any(rock=>
+                    Mathf.Abs(rock.position.x-tree.position.x)<1f&&
+                    Mathf.Abs(rock.position.z-tree.position.z)<1f)),
+                sceneSaved=unsupported.Length>0};
+        }
+
         [CliCommand("dicefree.cornberg-perimeter.install",
             "Clear obsolete dense inner woodland and enclose eastern expansion with dense 3D foliage.")]
         public static object Install()
@@ -181,6 +217,16 @@ namespace DiceFree.EditorTools
                 var old=Find(s,InnerName);
                 var outer=Find(s,OuterName);
                 Require(old!=null&&outer!=null,"Required natural boundary missing");
+                var ridgeProps=old.Cast<Transform>().Where(t=>t.name=="Mossy ridge"&&
+                    t.gameObject.activeInHierarchy).ToArray();
+                var unsupportedBoundaryTrees=old.Cast<Transform>().Where(t=>
+                    t.name=="Woodland tree"&&t.gameObject.activeInHierarchy&&
+                    !ridgeProps.Any(r=>
+                        Mathf.Abs(r.position.x-t.position.x)<1f&&
+                        Mathf.Abs(r.position.z-t.position.z)<1f)).ToArray();
+                Require(unsupportedBoundaryTrees.All(t=>
+                    Mathf.Abs(t.position.y-Ground(t.position.x,t.position.z).y)<.3f),
+                    "Unsupported natural-boundary tree is still floating above ground");
                 Require(old.Cast<Transform>().All(t=>!IsInteriorRidge(t)),
                     "Old diagonal ridge still obstructs expanded region");
                 Require(old.Cast<Transform>().All(t=>t.name!="Sign - Dense woodland"||
@@ -189,10 +235,18 @@ namespace DiceFree.EditorTools
                     t.name.StartsWith("East inside")||t.name.StartsWith("East outside")||
                     t.name.StartsWith("North inside")||t.name.StartsWith("North outside")||
                     t.name.StartsWith("South inside")||t.name.StartsWith("South outside")).ToArray();
-                Require(trees.Length>=120&&trees.All(t=>t.gameObject.activeSelf),
-                    "Outer thicket missing full tree enclosure");
-                Require(trees.All(t=>t.GetComponentsInChildren<Collider>(true).Any(c=>c.enabled&&!c.isTrigger)),
-                    "Outer vegetation missing tree trunk collision");
+                var activeTrees=trees.Where(t=>t.gameObject.activeInHierarchy).ToArray();
+                var eastTrees=activeTrees.Count(t=>t.name.StartsWith("East "));
+                var northTrees=activeTrees.Count(t=>t.name.StartsWith("North "));
+                var southTrees=activeTrees.Count(t=>t.name.StartsWith("South "));
+                // Density is intentionally adjustable in the scene. Validate a usable
+                // visual edge per side instead of requiring every authored tree active.
+                Require(activeTrees.Length>=100&&eastTrees>=40&&northTrees>=18&&southTrees>=36,
+                    "Selective woodland thinning left an under-covered perimeter side");
+                Require(activeTrees.All(t=>
+                    t.GetComponentsInChildren<Collider>(true).Any(c=>c.enabled&&!c.isTrigger)&&
+                    t.GetComponentsInChildren<NavMeshObstacle>(true).Any(o=>o.enabled)),
+                    "Active outer trees must retain trunk collision and NavMesh obstacles");
                 var wall=outer.Find("Physical outer edge");
                 Require(wall!=null&&wall.childCount==3 &&
                     wall.Cast<Transform>().All(t=>t.GetComponent<BoxCollider>()?.enabled==true&&
@@ -216,7 +270,9 @@ namespace DiceFree.EditorTools
                     path.status==NavMeshPathStatus.PathComplete,
                     "Existing NavMesh cannot reach expanded forest");
                 return new{status="CORNBERG_OUTER_WOODLAND_OK",
-                    perimeterTrees=trees.Length,originalDiagonalOpen=true,
+                    perimeterTrees=trees.Length,activePerimeterTrees=activeTrees.Length,
+                    eastTrees=eastTrees,northTrees=northTrees,southTrees=southTrees,
+                    originalDiagonalOpen=true,
                     seamsRemainingActive=seam.Count(t=>t.parent.gameObject.activeSelf),
                     physicalEdges=wall.childCount,eastForestNavMesh=path.status.ToString()};
             }

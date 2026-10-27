@@ -32,8 +32,8 @@ MonoBehaviour:
     intelligence: 0
     spirit: 0
   baseHp: 1590
-  physicalDefense: 10
-  magicalDefense: 8
+  physicalDefense: 6
+  magicalDefense: 16
   moveSpeed: 4
   basicAttack: {fileID: 11400000, guid: e13d2c9cf307a2141916b6b6a21a60ad, type: 2}
   basicAttackMinimumOffset: 0

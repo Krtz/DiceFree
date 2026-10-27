@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8b500a2195a4844806b9b5163a07fd, type: 3}
   m_Name: Warband respawn
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.RespawnDefinition
-  delaySeconds: 65
+  delaySeconds: 90

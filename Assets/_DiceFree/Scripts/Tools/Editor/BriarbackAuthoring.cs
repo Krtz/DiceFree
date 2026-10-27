@@ -12,6 +12,21 @@ namespace DiceFree.EditorTools
   public static readonly Vector2[] EliteRoute={new(241,324),new(264,320),new(288,317),new(313,324)};
   public static Rect Bounds=>new(-85,-70,438,476);
   static readonly Color[] Skin={new(.40f,.25f,.15f),new(.30f,.35f,.29f),new(.37f,.25f,.43f),new(.46f,.18f,.10f)};
+  static Color SkinFor(QuilboarRole role)=>role switch{
+   QuilboarRole.Raider=>Skin[0],QuilboarRole.SpearThrower=>Skin[1],QuilboarRole.Totemcaller=>Skin[2],
+   QuilboarRole.Harrowtusk=>Skin[3],QuilboarRole.Warrior=>Skin[1],QuilboarRole.Brute=>Skin[0],
+   _=>Skin[2]};
+  static bool IsShaman(QuilboarRole role)=>role==QuilboarRole.Totemcaller||role==QuilboarRole.FireShaman||
+   role==QuilboarRole.EarthShaman||role==QuilboarRole.LightningShaman||role==QuilboarRole.IceShaman;
+  static bool IsFrontline(QuilboarRole role)=>role==QuilboarRole.Warrior||role==QuilboarRole.Brute;
+  static bool IsRanged(QuilboarRole role)=>role==QuilboarRole.SpearThrower||IsShaman(role);
+  static ElementDefinition Element(QuilboarRole role){
+   if(role==QuilboarRole.Totemcaller)return AssetDatabase.LoadAssetAtPath<ElementDefinition>(MagicalTouchedAuthoring.NaturePath);
+   string name=role switch{QuilboarRole.FireShaman=>"Fire",QuilboarRole.EarthShaman=>"Earth",QuilboarRole.LightningShaman=>"Lightning",QuilboarRole.IceShaman=>"Ice",_=>null};
+   if(name==null)return null;
+   var element=Asset<ElementDefinition>(MagicalTouchedAuthoring.ElementFolder+"/"+name+".asset");
+   element.stableId="element."+name.ToLowerInvariant();element.displayName=name;EditorUtility.SetDirty(element);return element;
+  }
   static Material earth,grass,leaf,wood,stone,bone,dark;
   static Vector3 G(float x,float z)=>CornbergLandscape.Ground(x,z);
   static Vector3 G(Vector2 p)=>G(p.x,p.y);
@@ -110,8 +125,9 @@ namespace DiceFree.EditorTools
    Vector3 p=hand.position;float length=role==QuilboarRole.Raider?.7f:1.3f;
    var shaft=Shape("Wooden weapon shaft",PrimitiveType.Cylinder,p+model.up*(length*.22f),new Vector3(.07f,length*.5f,.07f),wood,group,false);
    if(role==QuilboarRole.Harrowtusk)Box("Harrowtusk oversized stone hammer",p+model.up*.9f,new Vector3(.75f,.42f,.42f),stone,group,false);
-   else if(role==QuilboarRole.Totemcaller){
-    Shape("Nature focus",PrimitiveType.Sphere,p+model.up*.95f,Vector3.one*.26f,leaf,group,false);
+   else if(IsShaman(role)){
+    string focus=role==QuilboarRole.Totemcaller?"Nature focus":role.ToString()+" focus";
+    Shape(focus,PrimitiveType.Sphere,p+model.up*.95f,Vector3.one*.26f,role==QuilboarRole.Totemcaller?leaf:bone,group,false);
     ConeAt("Bone staff crown",group,p+model.up*1.1f,new Vector3(.18f,.35f,.18f),bone,cone);
    }else if(role==QuilboarRole.SpearThrower)ConeAt("Bone javelin point",group,p+model.up*.88f,new Vector3(.16f,.35f,.16f),bone,cone);
    else Shape("Heavy raider club",PrimitiveType.Sphere,p+model.up*.55f,new Vector3(.30f,.40f,.28f),bone,group,false);
@@ -119,15 +135,32 @@ namespace DiceFree.EditorTools
   }
   static ActorDefinition Definition(CombatTuning tuning,QuilboarRole role,int level){
    string key=role+"-L"+level;var a=Asset<AttackDefinition>(Folder+"/"+key+" attack.asset");
-   a.stableId="attack.briarback."+key.ToLowerInvariant();a.displayName=role==QuilboarRole.SpearThrower?"Bone javelin":role==QuilboarRole.Totemcaller?"Briar bolt":"Heavy club";
-   a.baseDamage=role==QuilboarRole.Harrowtusk?75:36+(level-21)*2;a.coefficient=0;a.weights=default;a.minimumDamageMultiplier=.85f;a.maximumDamageMultiplier=1.15f;
-   a.channel=role==QuilboarRole.Totemcaller?DamageChannel.Magical:DamageChannel.Physical;a.element=role==QuilboarRole.Totemcaller?AssetDatabase.LoadAssetAtPath<ElementDefinition>(MagicalTouchedAuthoring.NaturePath):null;
-   a.requiresAccuracy=true;a.interval=role==QuilboarRole.Harrowtusk?2.3f:2.1f;a.windup=.65f;a.reach=role==QuilboarRole.SpearThrower?9:role==QuilboarRole.Totemcaller?10:1.1f;
+   a.stableId="attack.briarback."+key.ToLowerInvariant();a.displayName=role switch{
+    QuilboarRole.SpearThrower=>"Bone javelin",QuilboarRole.Totemcaller=>"Briar bolt",
+    QuilboarRole.FireShaman=>"Fire bolt",QuilboarRole.EarthShaman=>"Earth shard",
+    QuilboarRole.LightningShaman=>"Lightning bolt",QuilboarRole.IceShaman=>"Ice shard",_=>"Heavy club"};
+   float baseDamage=role==QuilboarRole.Harrowtusk?75:36+(level-21)*2;
+   // Initial role separation is intentionally provisional until this roster is
+   // tested in the region; the approved direction is a slow, durable, hard-hit Brute.
+   a.baseDamage=role==QuilboarRole.Brute?baseDamage*1.75f:baseDamage;a.coefficient=0;a.weights=default;a.minimumDamageMultiplier=.85f;a.maximumDamageMultiplier=1.15f;
+   a.channel=IsShaman(role)?DamageChannel.Magical:DamageChannel.Physical;a.element=IsShaman(role)?Element(role):null;
+   a.requiresAccuracy=true;a.interval=role==QuilboarRole.Harrowtusk?2.3f:2.1f;
+   // Approved Quillboar Brute telegraph: a slow, visible 1.2-second wind-up
+   // on its ordinary basic attack (not a separate slam ability).
+   a.windup=role==QuilboarRole.Brute?1.2f:.65f;
+   a.reach=role==QuilboarRole.SpearThrower?9:IsShaman(role)?10:1.1f;
    var d=Asset<ActorDefinition>(Folder+"/"+key+" stats.asset");d.stableId=role==QuilboarRole.Harrowtusk?EliteId:"briarback."+role.ToString().ToLowerInvariant();d.familyId=Family;
-   d.displayName=role==QuilboarRole.Harrowtusk?"Harrowtusk":role==QuilboarRole.Totemcaller?"Quilboar Totemcaller":role==QuilboarRole.SpearThrower?"Quilboar Spear Thrower":"Quilboar Raider";
+   d.displayName=role==QuilboarRole.Harrowtusk?"Harrowtusk":role==QuilboarRole.Brute?"Quilboar Brute":
+    role==QuilboarRole.Warrior?"Quilboar Warrior":role==QuilboarRole.Totemcaller?"Quilboar Totemcaller":
+    role==QuilboarRole.SpearThrower?"Quilboar Spear Thrower":role.ToString().EndsWith("Shaman")?"Quilboar "+role+" Shaman":"Quilboar Raider";
    d.tags=new[]{"briarback","quilboar"};d.experienceReward=role==QuilboarRole.Harrowtusk?900:210+(level-21)*12;d.tuning=tuning;d.baseAttributes=new AttributeValues{vitality=5,strength=5,intelligence=5};d.growth=default;
-   d.baseHp=role==QuilboarRole.Harrowtusk?5200:1150+(level-21)*110;d.overrideVitalityRegeneration=true;d.regenerationPerVitality=0;
-   d.moveSpeed=role==QuilboarRole.Harrowtusk?3.5f:4;d.physicalDefense=role==QuilboarRole.Harrowtusk?22:10;d.magicalDefense=role==QuilboarRole.Harrowtusk?18:8;d.basicAttack=a;
+   float baseHealth=role==QuilboarRole.Harrowtusk?5200:1150+(level-21)*110;
+   d.baseHp=role==QuilboarRole.Brute?baseHealth*1.75f:baseHealth;d.overrideVitalityRegeneration=true;d.regenerationPerVitality=0;
+   d.moveSpeed=role==QuilboarRole.Harrowtusk?3.5f:role==QuilboarRole.Brute?3.1f:4;
+   // Provisional values realize the approved relative defense split. Rebalance
+   // after Play Mode testing; preserve the existing Harrowtusk elite profile.
+   d.physicalDefense=role==QuilboarRole.Harrowtusk?22:IsFrontline(role)?16:IsRanged(role)?6:10;
+   d.magicalDefense=role==QuilboarRole.Harrowtusk?18:IsFrontline(role)?6:IsRanged(role)?16:8;d.basicAttack=a;
    EditorUtility.SetDirty(a);EditorUtility.SetDirty(d);return d;
   }
   static GameObject Enemy(Transform root,GameObject template,Vector2 at,QuilboarRole role,int level,AnimatorController controller,Mesh cone,int number){
@@ -138,16 +171,18 @@ namespace DiceFree.EditorTools
    foreach(var c in go.GetComponents<MonoBehaviour>())if(c is not ActorStats&&c is not Health&&c is not CombatActor&&c is not TraversalMotor&&c is not BasicAttack&&c is not AggroBehaviour&&c is not CombatStatusController&&c is not DefeatReporter)Object.DestroyImmediate(c);
    go.GetComponent<ActorStats>().Configure(Definition(template.GetComponent<ActorStats>().Definition.tuning,role,level),level);
    go.GetComponent<CombatActor>().Configure(1,role==QuilboarRole.Harrowtusk?.85f:.50f);
-   go.GetComponent<AggroBehaviour>().Configure(12,role==QuilboarRole.Harrowtusk?30:26);go.GetComponent<AggroBehaviour>().ConfigureAutoAggro(new AutoAggroPolicy{alwaysAutoAggro=true});
+   // Approved ordinary Quillboar threat radii are 8m / 20m; keep the legacy
+   // Harrowtusk fixture on its separate provisional elite leash until replaced.
+   go.GetComponent<AggroBehaviour>().Configure(role==QuilboarRole.Harrowtusk?12:8,role==QuilboarRole.Harrowtusk?30:20);go.GetComponent<AggroBehaviour>().ConfigureAutoAggro(new AutoAggroPolicy{alwaysAutoAggro=true});
    go.GetComponent<CombatStatusController>().ConfigureControl(role==QuilboarRole.Harrowtusk?.5f:0,false);
-   var respawn=Asset<RespawnDefinition>(Folder+"/"+(role==QuilboarRole.Harrowtusk?"Elite":"Warband")+" respawn.asset");respawn.delaySeconds=role==QuilboarRole.Harrowtusk?180:65;EditorUtility.SetDirty(respawn);go.AddComponent<OverworldRespawn>().Configure(respawn);
+   var respawn=Asset<RespawnDefinition>(Folder+"/"+(role==QuilboarRole.Harrowtusk?"Elite":"Warband")+" respawn.asset");respawn.delaySeconds=role==QuilboarRole.Harrowtusk?180:90;EditorUtility.SetDirty(respawn);go.AddComponent<OverworldRespawn>().Configure(respawn);
    var model=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(Art+"/Models/Quilboar.fbx"),go.transform);
    model.name="Quilboar original animated model";model.transform.localPosition=Vector3.zero;model.transform.localScale=Vector3.one*(role==QuilboarRole.Harrowtusk?1.5f:1);
    var toes=model.GetComponentsInChildren<Transform>().First(t=>t.name=="LeftToes");var foot=model.GetComponentsInChildren<Transform>().First(t=>t.name=="LeftFoot");if((toes.position-foot.position).z<0)model.transform.localRotation=Quaternion.Euler(0,180,0);
    var animator=model.GetComponent<Animator>();animator.runtimeAnimatorController=controller;animator.applyRootMotion=false;animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
    foreach(var renderer in model.GetComponentsInChildren<SkinnedMeshRenderer>()){
     renderer.updateWhenOffscreen=true;renderer.sharedMaterials=renderer.sharedMaterials.Select(m=>{
-     string name=m.name;Color color=name.Contains("Hide")?Skin[(int)role]:name.Contains("Bone")?new Color(.83f,.73f,.49f):name.Contains("Eye")?new Color(.95f,.43f,.05f):name.Contains("Leather")?new Color(.22f,.15f,.08f):new Color(.12f,.07f,.04f);
+     string name=m.name;Color color=name.Contains("Hide")?SkinFor(role):name.Contains("Bone")?new Color(.83f,.73f,.49f):name.Contains("Eye")?new Color(.95f,.43f,.05f):name.Contains("Leather")?new Color(.22f,.15f,.08f):new Color(.12f,.07f,.04f);
      return Mat(name+(name.Contains("Hide")?" "+role:""),color);
     }).ToArray();
    }
@@ -159,6 +194,7 @@ namespace DiceFree.EditorTools
    var p=go.AddComponent<QuilboarPresentation>();p.model=animator;
    var agent=go.GetComponent<NavMeshAgent>();agent.enabled=false;agent.radius=role==QuilboarRole.Harrowtusk?.85f:.5f;agent.height=role==QuilboarRole.Harrowtusk?2.9f:2;
    var collider=go.GetComponent<CapsuleCollider>();collider.radius=agent.radius;collider.height=agent.height;collider.center=Vector3.up*agent.height*.5f;
+   go.SetActive(true);
    return go;
   }
   static ItemDefinition Reward(){
@@ -218,6 +254,71 @@ namespace DiceFree.EditorTools
     AssetDatabase.SaveAssets();EditorSceneManager.OpenScene(Scene);WorldEnvironmentAuthoring.InstallScene(EditorSceneManager.GetActiveScene());EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());CornbergSceneBuilder.Rebake();
     return new{marker="DICEFREE_BRIARBACK_AUTHORED",enemies=count,camps=5,quest=QuestId,reward=item.stableId};
    }finally{EditorSceneManager.RestoreSceneManagerSetup(setup);}
+  }
+
+  [CliCommand("dicefree.briarback.roles.author-additive","Add approved Quillboar role prototypes to the open Cornberg scene without replacing its existing region.")]
+  public static object AuthorApprovedRolesAdditively(){
+   if(EditorApplication.isPlayingOrWillChangePlaymode)throw new InvalidOperationException("Edit Mode only");
+   var scene=EditorSceneManager.GetActiveScene();
+   if(scene.path!=Scene)throw new InvalidOperationException("Open Cornberg.unity before running the additive role authoring command.");
+   if(scene.isDirty)throw new InvalidOperationException("Save the current Cornberg scene changes first; this command refuses to save over unsaved work.");
+   var root=GameObject.Find(RootName);if(root==null)throw new InvalidOperationException("Existing Briarback region root was not found; the broad region installer is intentionally not called.");
+   const string groupName="Approved Quillboar role prototypes - additive";
+   var approvedRoles=new[]{QuilboarRole.Warrior,QuilboarRole.SpearThrower,QuilboarRole.FireShaman,QuilboarRole.EarthShaman,QuilboarRole.LightningShaman,QuilboarRole.IceShaman,QuilboarRole.Brute};
+   var existingGroup=root.transform.Find(groupName);
+   if(existingGroup!=null){
+    var existing=existingGroup.GetComponentsInChildren<QuilboarCombat>(true);
+    if(existing.Length!=approvedRoles.Length||approvedRoles.Any(role=>existing.Count(c=>c.role==role)!=1))
+     throw new InvalidOperationException("The existing additive group does not contain exactly one of each approved prototype; refusing to alter it.");
+    bool repaired=false;
+    if(!existingGroup.gameObject.activeSelf){Undo.RecordObject(existingGroup.gameObject,"Activate approved Quillboar prototypes");existingGroup.gameObject.SetActive(true);repaired=true;}
+    foreach(var actor in existing){if(actor.gameObject.activeSelf)continue;Undo.RecordObject(actor.gameObject,"Activate approved Quillboar prototype");actor.gameObject.SetActive(true);repaired=true;}
+    if(repaired){EditorSceneManager.MarkSceneDirty(scene);if(!EditorSceneManager.SaveScene(scene))throw new IOException("Unity could not save the activated additive role prototypes.");}
+    return new{marker=repaired?"DICEFREE_BRIARBACK_ROLES_REPAIRED":"DICEFREE_BRIARBACK_ROLES_ALREADY_READY",roles=existing.Select(c=>c.role.ToString()).ToArray(),scene=Scene,legacyRegionPreserved=true,otherScenesChanged=false};
+   }
+   var template=Object.FindObjectsByType<CombatActor>(FindObjectsInactive.Include).FirstOrDefault(a=>a.GetComponent<ActorStats>()?.Definition?.stableId=="enemy.road-slime");
+   if(template==null)throw new InvalidOperationException("Could not find the existing road-slime combat template.");
+   var navigation=Object.FindAnyObjectByType<WorldNavigation>();
+   if(navigation?.Data==null)throw new InvalidOperationException("World navigation data is required to place role prototypes safely.");
+   var controller=AssetDatabase.LoadAssetAtPath<AnimatorController>(Art+"/Quilboar.controller");
+   var cone=AssetDatabase.LoadAssetAtPath<Mesh>(Folder+"/Original eight-sided thorn cone.asset");
+   if(controller==null||cone==null)throw new InvalidOperationException("Existing Quilboar animation controller or weapon mesh is missing; run no broad installer automatically.");
+   var roles=new[]{
+    (QuilboarRole.Warrior,new Vector2(274,278)),
+    (QuilboarRole.SpearThrower,new Vector2(207,317)),
+    (QuilboarRole.FireShaman,new Vector2(285,355)),
+    (QuilboarRole.EarthShaman,new Vector2(278,363)),
+    (QuilboarRole.LightningShaman,new Vector2(293,362)),
+    (QuilboarRole.IceShaman,new Vector2(286,370)),
+    (QuilboarRole.Brute,new Vector2(293,320))
+   };
+   NavMeshDataInstance nav=default;GameObject group=null;
+   try{
+    nav=NavMesh.AddNavMeshData(navigation.Data);
+    if(!NavMesh.SamplePosition(G(242,199),out var approach,1.5f,1))throw new InvalidOperationException("No navigation at the established northern approach.");
+    var occupied=Object.FindObjectsByType<CombatActor>(FindObjectsInactive.Include).Select(a=>a.transform.position).ToArray();
+    var placements=new List<(QuilboarRole role,Vector3 position)>();
+    foreach(var entry in roles){
+     var ground=G(entry.Item2);
+     if(!NavMesh.SamplePosition(ground,out var hit,1.5f,1))throw new InvalidOperationException("No existing NavMesh near additive spawn for "+entry.Item1+" at "+entry.Item2);
+     if(occupied.Any(p=>Vector3.Distance(p,hit.position)<4f)||placements.Any(p=>Vector3.Distance(p.position,hit.position)<4f))
+      throw new InvalidOperationException("Additive spawn for "+entry.Item1+" is too close to an existing actor or another prototype.");
+     var path=new NavMeshPath();
+     if(!NavMesh.CalculatePath(approach.position,hit.position,1,path)||path.status!=NavMeshPathStatus.PathComplete)
+      throw new InvalidOperationException("Additive spawn for "+entry.Item1+" is not reachable from the northern approach.");
+     placements.Add((entry.Item1,hit.position));
+    }
+    earth=Mat("Briarback worn trail",new Color(.46f,.37f,.24f));grass=Mat("Briarback dry woodland",new Color(.37f,.43f,.23f));leaf=Mat("Briarback olive canopy",new Color(.30f,.38f,.17f));wood=Mat("Briarback weathered timber",new Color(.30f,.20f,.11f));stone=Mat("Briarback ridge rock",new Color(.42f,.44f,.35f));bone=Mat("Briarback pale bone",new Color(.82f,.69f,.42f));dark=Mat("Briarback charcoal",new Color(.12f,.10f,.07f));
+    group=new GameObject(groupName);Undo.RegisterCreatedObjectUndo(group,"Add approved Quillboar role prototypes");group.transform.SetParent(root.transform,false);
+    int number=100;
+    foreach(var placement in placements)Enemy(group.transform,template.gameObject,new Vector2(placement.position.x,placement.position.z),placement.role,25,controller,cone,number++);
+    AssetDatabase.SaveAssets();EditorSceneManager.MarkSceneDirty(scene);
+    if(!EditorSceneManager.SaveScene(scene))throw new IOException("Unity could not save the Cornberg scene after additive role authoring.");
+    return new{marker="DICEFREE_BRIARBACK_ROLES_ADDED",roles=placements.Select(p=>p.role.ToString()).ToArray(),scene=Scene,legacyRegionPreserved=true,otherScenesChanged=false};
+   }catch{
+    if(group!=null)Undo.DestroyObjectImmediate(group);
+    throw;
+   }finally{if(nav.valid)nav.Remove();}
   }
  }
 }

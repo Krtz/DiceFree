@@ -15,9 +15,13 @@ namespace DiceFree.Briarback
             if(creature.Winding){model.speed=1;Play("Slam",1.1f);return;}
             if(actor.Effects?.Stunned==true){model.speed=0;return;}
             bool now=basic.State=="Wind-up";
-            if(now&&!winding){state="";model.speed=1;Play("Attack",.65f);
-                if(creature.role==QuilboarRole.SpearThrower||creature.role==QuilboarRole.Totemcaller)
-                    QuilboarProjectile.Launch(actor,basic.Target,basic.Definition.windup/actor.Stats.AttackSpeed,creature.role==QuilboarRole.Totemcaller);
+            if(now&&!winding){state="";model.speed=1;
+                // Match the actual BasicAttack impact clock. Brute definitions
+                // author 1.2 seconds before attack-speed scaling.
+                float attackWindup=basic.Definition.windup/actor.Stats.AttackSpeed;
+                Play("Attack",attackWindup);
+                if((creature.role==QuilboarRole.SpearThrower&&!creature.SpearInMelee)||creature.IsShaman)
+                    QuilboarProjectile.Launch(actor,basic.Target,basic.Definition.windup/actor.Stats.AttackSpeed);
             }
             winding=now;
             if(Time.time<hold){model.speed=1;return;}

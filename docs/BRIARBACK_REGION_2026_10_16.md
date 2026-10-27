@@ -1,5 +1,14 @@
 # Provisional northern quilboar region
 
+> **Superseded for current region content (2026-10-27):** This document records
+> the earlier provisional Briarback implementation and its historical
+> verification. The approved World 1 Quillboar design now lives in
+> [`QUILLBOAR_REGION_DESIGN.md`](QUILLBOAR_REGION_DESIGN.md). Reuse this scene
+> blockout only where it remains compatible; the Raider/Totemcaller roster,
+> Harrowtusk encounter, watchpost quest chain, and their provisional balance
+> are not the current region specification. Do not treat the historical test
+> results below as validation of the newer design.
+
 This implements Axel's selected next step: a connected World 1 region with a quest, normal groups, elite and useful equipment reward. **Briarback, Scout Runa, Harrowtusk, all quest/item names and all balance values are provisional implementation choices.** They are not newly approved world canon.
 
 ## Route and boundaries
@@ -41,3 +50,9 @@ The final camp/creature captures are an additional isolated visual fixture with 
 Final seven-scene Windows build and startup passed with zero build warnings/errors. JSON: docs/validation/Briarback-*.json and Environment-*.json.
 
 Commands: dicefree.briarback.author / validate / test / status / resume. Author rebuilds only the region root and its own content, appends catalogs including inactive development player, preserves other world services and rebakes expanded navigation. Runtime tests use isolated saves; scripted defeat fixtures test credit/reward behavior separately from pursuit, walking, real slam impacts/dodges/interrupts and live skinned animation.
+
+## 2026-10-27 — additive roles and current live verification
+
+The existing Cornberg WIP now includes seven active additive prototypes: Warrior, Spear Thrower, Fire/Earth/Lightning/Ice Shamans, and Brute. Unity Editor API authoring preserved all prior scene content. The original 13-actor region remains intact; the new actors make the scene composition 20. The first authoring pass exposed an inactive-clone bug inherited from the road-slime template; the authoring helper now activates fully configured actors and the additive author command safely repairs exactly the seven expected actors without duplicating them.
+
+The role validator passes with 20 actors, all seven new role profiles, 16 complete navigation segments and 10,161 animated mesh vertices. The Play Mode harness uses an isolated temporary save and passes 189 checks, including role shield/protection, Spear Thrower stance transition, real route walking, pursuit, quest credit, Harrowtusk dodge/interrupt, 160 raw slam damage, reward persistence and equipped menu portrait. It walked 30 checkpoints / 605.2m, recorded 9 defeat fixtures and 20.46 degrees of moving foot deformation. The test returned to a clean Cornberg Edit Mode scene. The saved Editor Game View capture is `Assets/Logs/Briarback-Playtest-20261027.png`; its cyan NavMesh visualization is an Editor debug overlay. No standalone build or manual human playthrough is claimed. Chieftain loot remains gated by its separate approved specification and has not been implemented here.

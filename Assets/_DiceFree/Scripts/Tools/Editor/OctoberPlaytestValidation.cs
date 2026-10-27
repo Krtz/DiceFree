@@ -45,6 +45,7 @@ namespace DiceFree.EditorTools
             Need(!preferences.AutoRetaliate && !preferences.ShowCastRange &&
                 preferences.MinimapOrientation==MinimapOrientation.CameraUp &&
                 preferences.MinimapCompassCorner==MinimapCompassCorner.BottomLeft &&
+                preferences.QuickCastMode==QuickCastMode.Reticle &&
                 preferences.SelfHealthBar==OverheadHealthVisibility.Never,"v3 settings migration lost an existing preference.");
             var map=new Rect(30,40,240,210);
             foreach(MinimapCompassCorner corner in Enum.GetValues(typeof(MinimapCompassCorner)))
@@ -56,6 +57,12 @@ namespace DiceFree.EditorTools
                 Rect bounds=DiceFree.UI.MinimapCompass.BoundsFor(map,corner);
                 Need(corner==MinimapCompassCorner.Off?bounds.width==0:
                     map.Contains(bounds.min)&&map.Contains(bounds.max),"Compass escapes the map corner.");
+            }
+            foreach(QuickCastMode mode in Enum.GetValues(typeof(QuickCastMode)))
+            {
+                preferences.SetQuickCastMode(mode);
+                var reloaded=(GameplayPreferences)constructor.Invoke(new object[]{directory});
+                Need(reloaded.QuickCastMode==mode,"Quickcast mode did not persist.");
             }
             Need(Vector2.Distance(DiceFree.UI.MinimapCompass.DirectionOnMap(Vector3.forward,Vector3.right),
                 Vector2.left)<.001f,"Camera-up compass north is incorrect.");

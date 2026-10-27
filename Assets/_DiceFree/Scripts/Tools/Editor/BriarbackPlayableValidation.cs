@@ -46,17 +46,120 @@ namespace DiceFree.EditorTools
   static IEnumerator Walk(CombatActor p,Vector2 point){
    var target=Point(point);Need(p.Motor.MoveTo(target),"Move order rejected at "+point);float until=Time.time+18;Vector3 previous=p.transform.position;
    while(Vector3.Distance(p.transform.position,target)>1.0f&&Time.time<until){report.walkMeters+=Vector3.Distance(previous,p.transform.position);previous=p.transform.position;yield return null;}
-   Need(Vector3.Distance(p.transform.position,target)<=1.0f,"Walking blocked at "+point+" from "+p.transform.position);p.Motor.Stop();report.walked++;
+   if(Vector3.Distance(p.transform.position,target)>1.0f){
+    var agent=p.GetComponent<NavMeshAgent>();var attack=p.GetComponent<BasicAttack>();
+    var blockers=Physics.OverlapCapsule(p.transform.position+Vector3.up*.35f,p.transform.position+Vector3.up*1.7f,.34f,
+     Physics.AllLayers,QueryTriggerInteraction.Ignore).Where(c=>c!=null&&c.enabled&&c.gameObject.activeInHierarchy&&c.transform.root!=p.transform.root)
+     .Select(c=>c.transform.root.name+"/"+c.name+" ["+LayerMask.LayerToName(c.gameObject.layer)+"]").Distinct().Take(12).ToArray();
+    string corners=agent!=null&&agent.hasPath?string.Join(" -> ",agent.path.corners.Select(c=>c.ToString("F1"))):"<none>";
+    Need(false,"Walking blocked at "+point+" from "+p.transform.position+"; agent="+(agent==null?"missing":$"onMesh={agent.isOnNavMesh}, stopped={agent.isStopped}, hasPath={agent.hasPath}, status={agent.pathStatus}, remaining={agent.remainingDistance:F2}, velocity={agent.velocity:F2}")+"; attack="+(attack?.Target?.name??"none")+"; corners="+corners+"; blockers="+string.Join(", ",blockers));
+   }
+   p.Motor.Stop();report.walked++;
   }
   static long TotalXp(ExperienceProgression xp){long total=xp.CurrentXp;for(int i=1;i<xp.Level;i++)total+=30+3L*(i-1)*(i-1);return total;}
   static void Defeat(CombatActor p,CombatActor target){target.Health.Invulnerable=false;target.Health.ApplyPacket(p,new DamageResult{mitigated=1000000});Need(!target.Alive,"Scripted fixture defeat failed");}
+  static IEnumerator BountyHunt(CombatActor p,QuestJournal journal,ExperienceProgression xp,
+   ManifestationPersistence save,QuilboarCombat[] creatures){
+   Phase("repeatable 20-Quillboar bounty, same-giver turn-in, and next-cycle persistence");
+   const string questId="quest.briarback.repeat-bounty";
+   var giver=Object.FindObjectsByType<QuestGiver>().Single(value=>value.Offers.Any(q=>q!=null&&q.stableId==questId));
+   var quest=giver.Offers.Single(value=>value!=null&&value.stableId==questId);
+   var approach=Point(new Vector2(giver.ApproachPosition.x,giver.ApproachPosition.z));
+   Need(p.Motor.Teleport(approach),"Bounty giver approach was not reachable");Physics.SyncTransforms();yield return Frames(2);
+   Need(giver.CanInteract(p)&&journal.CanAccept(quest),"Trimery bounty could not be accepted in interaction range");
+   Need(giver.Accept(p,quest),"Bounty acceptance failed");
+   var count=journal.GetProgress(questId);Need(count.status==QuestStatus.Active&&count.count==0,"Bounty did not start at zero");
+   Need(creatures.Length==20,"Bounty fixture did not cover all twenty Quillboars");
+   for(int i=0;i<creatures.Length;i++){
+    var actor=creatures[i].GetComponent<CombatActor>();actor.Health.Restore();
+    Defeat(p,actor);count=journal.GetProgress(questId);
+    Need(count.count==i+1&&(i==creatures.Length-1?count.status==QuestStatus.ReadyToTurnIn:count.status==QuestStatus.Active),
+     "Shared Briarback family counter failed at kill "+(i+1));
+    actor.Health.Restore();
+   }
+   Need(!giver.Accept(p,quest),"Ready bounty was accepted as a new cycle before turn-in");
+   Need(p.Motor.Teleport(approach),"Could not return to the same Trimery bounty giver");Physics.SyncTransforms();yield return Frames(2);
+   long gold=p.GetComponent<GoldWallet>().Gold,experience=TotalXp(xp);
+   Need(giver.TurnIn(p,quest),"Return-to-giver bounty turn-in failed");
+   Need(p.GetComponent<GoldWallet>().Gold==gold+50&&TotalXp(xp)==experience+400,
+    "Bounty did not grant the disclosed XP and gold tuning placeholders");
+   count=journal.GetProgress(questId);Need(count.status==QuestStatus.Available&&count.count==0,
+    "Successful bounty turn-in did not reset its repeatable progress");
+   Need(giver.Accept(p,quest),"Bounty could not be accepted for the next cycle");
+   var repeat=creatures[0].GetComponent<CombatActor>();repeat.Health.Restore();Defeat(p,repeat);repeat.Health.Restore();
+   count=journal.GetProgress(questId);Need(count.status==QuestStatus.Active&&count.count==1,
+    "A kill in the next bounty cycle was not counted from one");
+   Need(save.Flush(),"The next-cycle bounty state did not save");
+   var disk=new LocalEchoStore(Path.GetDirectoryName(save.SavePath)).Load();
+   var manifestation=ManifestationRoster.ReadManifestation(disk,"class.novice");
+   var saved=manifestation.quests.Single(value=>value.questId==questId);
+   Need(saved.status==QuestStatus.Active&&saved.count==1,
+    "The next-cycle bounty progress was not preserved in the isolated save");
+  }
   static IEnumerator Flow(){
    CombatActor p=null;while(p==null){p=Object.FindAnyObjectByType<TraversalInput>()?.GetComponent<CombatActor>();yield return null;}
    var save=p.GetComponent<ManifestationPersistence>();while(!save.Ready||!p.Motor.Ready)yield return null;
    p.GetComponent<TraversalInput>().enabled=false;p.GetComponent<CombatInput>().enabled=false;p.GetComponent<BasicAttack>().enabled=false;p.Health.Invulnerable=true;
    var xp=p.GetComponent<ExperienceProgression>();xp.RestoreState(24,0);p.Health.Restore();
-   var creatures=Object.FindObjectsByType<QuilboarCombat>();Need(creatures.Length==13,"Live creature count");
+   var creatures=Object.FindObjectsByType<QuilboarCombat>();Need(creatures.Length==20,$"Live creature count: {creatures.Length}");
+   var roleRoot=GameObject.Find("Approved Quillboar role prototypes - additive");Need(roleRoot!=null,"Approved role prototypes were not loaded");
+   var rolePrototypes=roleRoot.GetComponentsInChildren<QuilboarCombat>();Need(rolePrototypes.Length==7,"Live approved role prototype count");
    foreach(var c in creatures){c.GetComponent<AggroBehaviour>().enabled=false;c.GetComponent<BasicAttack>().enabled=false;c.enabled=false;}
+   Phase("Warrior shield reduction, duration, and cooldown");
+   var shieldFixture=rolePrototypes.Single(c=>c.role==QuilboarRole.Warrior);var priorRole=shieldFixture.role;shieldFixture.enabled=true;
+   var shieldStats=shieldFixture.GetComponent<CombatActor>().Stats;
+   Need(shieldFixture.TryRaiseWarriorShield()&&shieldFixture.WarriorShieldActive,"Warrior shield did not raise");
+   Need(Mathf.Approximately(shieldStats.IncomingDamageMultiplier(DamageChannel.Physical),.3f)&&
+    Mathf.Approximately(shieldStats.IncomingDamageMultiplier(DamageChannel.Magical),.3f),"Warrior shield did not reduce both existing damage channels by 70 percent");
+   Need(!shieldFixture.TryRaiseWarriorShield(),"Warrior shield ignored its 15-second cooldown");yield return Wait(2.1f);
+   Need(!shieldFixture.WarriorShieldActive&&Mathf.Approximately(shieldStats.IncomingDamageMultiplier(DamageChannel.Physical),1)&&
+    Mathf.Approximately(shieldStats.IncomingDamageMultiplier(DamageChannel.Magical),1),"Warrior shield did not expire cleanly after two seconds");
+   shieldFixture.enabled=false;shieldFixture.role=priorRole;
+   Phase("Warrior protection prioritizes ranged-ally threats without replacing an active engagement");
+   var guard=shieldFixture;guard.role=QuilboarRole.Warrior;guard.enabled=true;
+   var guardAttack=guard.GetComponent<BasicAttack>();var guardAggro=guard.GetComponent<AggroBehaviour>();
+   var ally=rolePrototypes.Single(c=>c.role==QuilboarRole.FireShaman);var priorAllyRole=ally.role;
+   var allyAttack=ally.GetComponent<BasicAttack>();
+   Vector3 guardHome=guardAggro.Home;Vector3 oldGuard=guard.transform.position,oldAlly=ally.transform.position,oldPlayer=p.transform.position;
+   Need(NavMesh.SamplePosition(guardHome,out var guardPoint,2,1),"Warrior guard home has no nearby walkable point");
+   Need(NavMesh.SamplePosition(guardPoint.position+Vector3.right*2,out var allyPoint,2,1),"Ranged ally guard fixture has no nearby walkable point");
+   Need(NavMesh.SamplePosition(guardPoint.position+Vector3.right*4,out var threatPoint,2,1),"Threat guard fixture has no nearby walkable point");
+   Need(guard.GetComponent<CombatActor>().Motor.Teleport(guardPoint.position)&&ally.GetComponent<CombatActor>().Motor.Teleport(allyPoint.position)&&p.Motor.Teleport(threatPoint.position),"Warrior protection fixture placement failed");
+   Physics.SyncTransforms();
+   Need(allyAttack.Order(p),"Ranged ally could not acquire the test threat");
+   Need(guardAttack.Order(p),"Warrior could not establish the existing-engagement fixture");
+   Need(!guard.TryProtectRangedAlly()&&guardAttack.Target==p,"Warrior protection replaced its existing combat target");
+   guardAttack.Cancel();
+   Need(guard.TryProtectRangedAlly()&&guardAttack.Target==p,"Warrior did not prioritize a threat attacking its nearby ranged ally");
+   Need(guard.TryGetApproachPosition(p,out var intercept),"Warrior did not choose a physical intercept point for its ranged ally");
+   var allyToThreat=Vector3.ProjectOnPlane(p.transform.position-ally.transform.position,Vector3.up).normalized;
+   var allyToIntercept=Vector3.ProjectOnPlane(intercept-ally.transform.position,Vector3.up);
+   Need(Vector3.Dot(allyToIntercept,allyToThreat)>0&&allyToIntercept.magnitude<
+    Vector3.ProjectOnPlane(p.transform.position-ally.transform.position,Vector3.up).magnitude&&
+    Vector3.Distance(guard.transform.position,intercept)<guard.protectionRadius+2,
+    "Warrior intercept destination was not between its ranged ally and the attacking threat");
+   guardAttack.enabled=true;yield return Wait(.25f);
+   var guardAgent=guard.GetComponent<UnityEngine.AI.NavMeshAgent>();
+   Need(guardAgent!=null&&guardAgent.hasPath&&Vector3.Distance(guardAgent.destination,intercept)<.8f,
+    "BasicAttack pursuit did not route the Warrior to the tactical intercept point");
+   guardAttack.enabled=false;
+   allyAttack.Cancel();guardAttack.Cancel();
+   Need(guard.GetComponent<CombatActor>().Motor.Teleport(oldGuard)&&ally.GetComponent<CombatActor>().Motor.Teleport(oldAlly)&&p.Motor.Teleport(oldPlayer),"Warrior protection fixture cleanup failed");
+   guard.enabled=false;guard.role=priorRole;ally.role=priorAllyRole;Physics.SyncTransforms();
+   Phase("spear thrower switches stance after a hostile physical melee hit event");
+   var thrower=rolePrototypes.Single(c=>c.role==QuilboarRole.SpearThrower);var throwerActor=thrower.GetComponent<CombatActor>();
+   var throwerAttack=thrower.GetComponent<BasicAttack>();var playerAttack=p.GetComponent<BasicAttack>();
+   thrower.enabled=true;
+   Need(NavMesh.SamplePosition(thrower.transform.position+Vector3.right*.2f,out var meleePosition,.75f,1),"Melee stance fixture has no nearby walkable point");
+   Need(p.Motor.Teleport(meleePosition.position),"Melee stance player placement");Physics.SyncTransforms();
+   Need(playerAttack.InRange(throwerActor)&&playerAttack.Order(throwerActor),"Melee stance attack target is not in basic-attack reach");
+   throwerActor.Health.ApplyPacket(p,new DamageResult{channel=DamageChannel.Physical,mitigated=1});
+   Need(thrower.SpearInMelee&&Mathf.Approximately(throwerAttack.ReachOverride,playerAttack.Definition.reach),
+    "Spear Thrower did not switch after the hostile physical melee hit event");
+   Need(p.Motor.Teleport(Point(new Vector2(250,182))),"Spear stance range-return placement");yield return null;
+   Need(!thrower.SpearInMelee&&throwerAttack.ReachOverride<0,
+    "Spear Thrower did not return to ranged reach when the melee attacker moved away");
+   thrower.enabled=false;playerAttack.Cancel();
    var giver=Object.FindObjectsByType<QuestGiver>().Single(q=>q.name=="Scout Runa - northern trail");var quest=giver.Quest;var journal=p.GetComponent<QuestJournal>();
    var first=creatures.First(c=>c.role==QuilboarRole.Raider).GetComponent<CombatActor>();
    Phase("quest prerequisites, no early credit and real northern walking");
@@ -116,6 +219,7 @@ namespace DiceFree.EditorTools
    var visual=p.GetComponent<ClassPresentationSwitcher>().ActiveVisualRoot;Need(visual.GetComponentsInChildren<Transform>(true).Single(t=>t.name=="Bristlehide Mantle").gameObject.activeInHierarchy,"Live reward model");
    Need(save.Flush(),"Quest/gear save");var disk=new LocalEchoStore(Path.GetDirectoryName(save.SavePath)).Load();var state=ManifestationRoster.ReadManifestation(disk,"class.novice");
    report.rewardPersisted=state.quests.Single(q=>q.questId==quest.stableId).status==QuestStatus.Completed&&state.equipment.Any(e=>e.instanceId==mantle.instanceId);Need(report.rewardPersisted,"On-disk quest/equipment");
+   yield return BountyHunt(p,journal,xp,save,creatures);
    boss.Health.Restore();Need(p.Motor.Teleport(Point(new Vector2(308,330))),"Visual placement");p.transform.rotation=Quaternion.LookRotation(Vector3.ProjectOnPlane(boss.transform.position-p.transform.position,Vector3.up));p.Health.Restore();p.GetComponent<TargetSelection>().Select(boss);
    Object.FindAnyObjectByType<ExplorationCamera>().RecenterForTravel(p.transform);yield return Frames(10);
    Phase("visual_ready");SessionState.SetString(Key+"status","visual_ready");while(!SessionState.GetBool(Key+"resume",false)){deadline=EditorApplication.timeSinceStartup+300;yield return null;}
