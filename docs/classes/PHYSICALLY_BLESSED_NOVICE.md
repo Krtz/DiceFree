@@ -4,6 +4,10 @@
 
 **Working Tier 1 direction.** Exact skills, coefficients, mana costs and equipment lists are not yet final.
 
+### Current prototype flat damage
+
+The current implementation adds a small skill-rank-scaled flat term on top of each damage coefficient: Heavy Strike adds **4 raw damage per rank**, and each Arrow Rain wave adds **2 raw damage per rank**. Guard, Quickening and Martial Aptitude are not damage/healing actions and have no such term. These are initial playtest values, not a locked balance rule; connected-Editor validation is pending for the current change.
+
 ## Identity
 
 Physically Blessed Novice is still a broad physical blank slate rather than a fully specialized Fighter/Rogue/Ranger/Tank.

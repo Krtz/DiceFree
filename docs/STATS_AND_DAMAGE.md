@@ -147,6 +147,8 @@ Abilities may scale from:
 
 The class's primary attribute is a default identity, not a rule that every skill must use exactly that stat.
 
+An ability may add an explicit flat amount per purchased rank on top of its attribute-scaled contribution. This is authored per skill and is not a universal damage formula; healing abilities may use their own rank-scaled flat healing term. Current prototype values are summarized in the class-specific design pages and remain subject to playtesting.
+
 For attacks, the attribute-scaled contribution is 1% lower at the minimum end than at the maximum end: minimum damage receives 99% of that contribution, while maximum damage receives 100%. Authored min/max spread remains on the attack's base-damage term.
 
 ## Tooltip presentation

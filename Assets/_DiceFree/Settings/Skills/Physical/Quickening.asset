@@ -24,6 +24,7 @@ MonoBehaviour:
   attack: {fileID: 0}
   damageCoefficientRank1: 0
   damageCoefficientPerAdditionalRank: 0
+  flatDamagePerRank: 0
   arrowRadius: 3
   arrowHitCount: 3
   arrowHitInterval: 0.35

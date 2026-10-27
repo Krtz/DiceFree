@@ -88,7 +88,8 @@ namespace DiceFree.Combat
             basicAttack?.Cancel();
             actor.Motor.Stop();
             Face(target.transform.position);
-            float applied = DamageResolver.Hit(actor, target, definition.attack, null, definition.DamageCoefficient(rank));
+            float applied = DamageResolver.Hit(actor, target, definition.attack, null,
+                definition.DamageCoefficient(rank),definition.FlatDamage(rank));
             EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalHeavy, target.transform.position);
             if (applied > 0)
                 target.Effects?.TryApplyStun(definition.HeavyStunSeconds(rank), false);
@@ -138,7 +139,8 @@ namespace DiceFree.Combat
                 var flatA = new Vector2(candidate.transform.position.x, candidate.transform.position.z);
                 var flatB = new Vector2(point.x, point.z);
                 if (Vector2.Distance(flatA, flatB) > definition.arrowRadius + candidate.Radius) continue;
-                DamageResolver.Hit(actor, candidate, definition.attack, null, definition.DamageCoefficient(rank));
+                DamageResolver.Hit(actor, candidate, definition.attack, null,
+                    definition.DamageCoefficient(rank),definition.FlatDamage(rank));
             }
         }
 

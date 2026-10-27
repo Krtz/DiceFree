@@ -181,6 +181,30 @@ namespace DiceFree.EditorTools
             };
         }
 
+        [CliCommand("dicefree.physical.sync-flat-damage", "Apply the approved per-rank flat damage values to Physical skill assets without changing the scene.", Tags = new[] { "progression", "physical" })]
+        public static object SyncFlatDamage()
+        {
+            var values = new[]
+            {
+                (HeavyPath, PhysicalSkillKind.HeavyStrike, 4f),
+                (GuardPath, PhysicalSkillKind.Guard, 0f),
+                (QuickeningPath, PhysicalSkillKind.Quickening, 0f),
+                (ArrowRainPath, PhysicalSkillKind.ArrowRain, 2f),
+                (MartialPath, PhysicalSkillKind.MartialAptitude, 0f)
+            };
+            foreach (var (path, kind, flatPerRank) in values)
+            {
+                var skill = AssetDatabase.LoadAssetAtPath<PhysicalSkillDefinition>(path);
+                if (skill == null) throw new InvalidOperationException("Missing Physical skill asset: " + path);
+                if (skill.kind != kind) throw new InvalidOperationException("Physical skill kind mismatch: " + path);
+                skill.flatDamagePerRank = flatPerRank;
+                EditorUtility.SetDirty(skill);
+            }
+            AssetDatabase.SaveAssets();
+            Debug.Log("DICEFREE_PHYSICAL_FLAT_DAMAGE_OK: authored five Physical skill assets; no scene changes.");
+            return new { success = true, finalMarker = "DICEFREE_PHYSICAL_FLAT_DAMAGE_OK", authored = values.Length };
+        }
+
         private static AttackDefinition Attack(
             string path,
             string id,
@@ -215,6 +239,12 @@ namespace DiceFree.EditorTools
             skill.displayName = display;
             skill.kind = kind;
             skill.maxRank = 6;
+            skill.flatDamagePerRank = kind switch
+            {
+                PhysicalSkillKind.HeavyStrike => 4f,
+                PhysicalSkillKind.ArrowRain => 2f,
+                _ => 0f
+            };
             EditorUtility.SetDirty(skill);
             return skill;
         }

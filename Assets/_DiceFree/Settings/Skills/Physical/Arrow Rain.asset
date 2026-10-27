@@ -24,6 +24,7 @@ MonoBehaviour:
   attack: {fileID: 11400000, guid: 4f75c27e223eddd4e8247da15940b19a, type: 2}
   damageCoefficientRank1: 0.5
   damageCoefficientPerAdditionalRank: 0.08
+  flatDamagePerRank: 2
   arrowRadius: 3
   arrowHitCount: 3
   arrowHitInterval: 0.35
