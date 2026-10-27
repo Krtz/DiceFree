@@ -33,6 +33,10 @@ namespace DiceFree.EditorTools
         private const string ExistingGroundMeshPath = "Assets/_DiceFree/Settings/Briarback/Briarback ground.asset";
         private const string ExistingGroundBackupPath = "Assets/_DiceFree/Settings/Recovery/Briarback-ground-before-northern-expansion.asset";
         private const string BoundarySceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-north-boundary-relocation.unity";
+        private const string ApproachSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-north-approach-opening.unity";
+        private const string UnderpassSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-underpass-ramp-repair.unity";
+        private const string AscentMeshBackupPath = "Assets/_DiceFree/Settings/Recovery/Briarback-stronghold-ascent-before-underpass-repair.asset";
+        private const string AscentCutSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-ascent-cut-opening.unity";
         private const float West = 190f;
         private const float East = 346f;
         private const float South = 376f;
@@ -349,8 +353,11 @@ namespace DiceFree.EditorTools
                     Box("Natural cliff face below upper terrace", CornbergLandscape.Ground(x + 3, 472) + Vector3.up * 2.6f,
                         new Vector3(6.2f, 5.2f, 0.9f), stone, group.transform);
                 for (var x = 278; x < 316; x += 6)
+                {
+                    if (Mathf.Abs(x + 3 - 293f) < 0.1f) continue;
                     Box("Natural cliff face below upper terrace", CornbergLandscape.Ground(x + 3, 472) + Vector3.up * 2.6f,
                         new Vector3(6.2f, 5.2f, 0.9f), stone, group.transform);
+                }
                 WallRun("West upper palisade", new Vector2(234, 474), new Vector2(234, 497), group.transform, timber, true, UpperFloor);
                 WallRun("East upper palisade", new Vector2(306, 474), new Vector2(306, 497), group.transform, timber, true, UpperFloor);
                 WallRun("North upper palisade", new Vector2(234, 497), new Vector2(306, 497), group.transform, timber, true, UpperFloor);
@@ -358,7 +365,8 @@ namespace DiceFree.EditorTools
                 Tower("Northeast upper watchtower", new Vector2(306, 497), group.transform, timber, stone, UpperFloor);
 
                 var ascent = SaveMeshAsset(RampMeshPath, BuildRamp("Briarback stronghold ascent ramp",
-                    CornbergLandscape.Ground(270, 451), CornbergLandscape.Ground(270, 475.5f) + Vector3.up * UpperFloor, 4.4f, 0.45f));
+                    CornbergLandscape.Ground(294, 460) + Vector3.up * UpperFloor,
+                    CornbergLandscape.Ground(294, 475.5f) + Vector3.up * UpperFloor, 4.4f, 0.45f));
                 MeshObject("Walkable ramp through the cliff cut", ascent, path, group.transform, true);
 
                 // A raised EW timber bridge creates a real over/under route:
@@ -634,7 +642,7 @@ namespace DiceFree.EditorTools
                 hierarchy = "Physical outer edge/North edge",
                 priorCenterZ = 400f,
                 newCenterZ = North + 7f,
-                navObstacleSize = obstacle.size,
+                navObstacleSize = obstacle.size.ToString("F2"),
                 sceneRecoveryCopy = BoundarySceneBackupPath,
                 navMeshBakedAfterRelocation = true
             };
@@ -644,7 +652,7 @@ namespace DiceFree.EditorTools
         public static object InspectBoundaries()
         {
             var scene = SceneManager.GetActiveScene();
-            Need(scene.path == ScenePath && !scene.isDirty, "the saved Cornberg scene must be active and clean.");
+            Need(scene.path == ScenePath, "the Cornberg scene must be active.");
             var query = new Bounds(new Vector3(270f, 1f, 400f), new Vector3(180f, 12f, 24f));
             string Hierarchy(Transform value)
             {
@@ -655,18 +663,282 @@ namespace DiceFree.EditorTools
             var colliders = scene.GetRootGameObjects()
                 .SelectMany(root => root.GetComponentsInChildren<Collider>(true))
                 .Where(collider => collider.enabled && collider.bounds.Intersects(query))
-                .Select(collider => new
+                .Where(collider => collider.name == "North edge" ||
+                                   (collider.name == "Northern wooded ridge" && Mathf.Abs(collider.bounds.center.x - 270f) <= 20f))
+                .ToArray();
+            var obstacleDescriptions = scene.GetRootGameObjects()
+                .SelectMany(root => root.GetComponentsInChildren<NavMeshObstacle>(true))
+                .Where(obstacle => obstacle.name == "North edge")
+                .Where(obstacle =>
+                {
+                    var center = obstacle.transform.position;
+                    var worldSize = Vector3.Scale(obstacle.size, obstacle.transform.lossyScale);
+                    var extents = worldSize * 0.5f;
+                    return obstacle.enabled &&
+                           Mathf.Abs(center.x - query.center.x) <= extents.x + query.extents.x &&
+                           Mathf.Abs(center.y - query.center.y) <= extents.y + query.extents.y &&
+                           Mathf.Abs(center.z - query.center.z) <= extents.z + query.extents.z;
+                })
+                .Select(obstacle => new
+                {
+                    hierarchy = Hierarchy(obstacle.transform),
+                    center = obstacle.transform.position.ToString("F2"),
+                    worldSize = Vector3.Scale(obstacle.size, obstacle.transform.lossyScale).ToString("F2"),
+                    obstacleSize = obstacle.size.ToString("F2"),
+                    shape = obstacle.shape.ToString(),
+                    carving = obstacle.carving
+                }).ToArray();
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_NORTH_BOUNDARIES_INSPECTED",
+                query = query.ToString(),
+                colliders = colliders.Select(collider => new
                 {
                     hierarchy = Hierarchy(collider.transform),
                     type = collider.GetType().Name,
                     layer = collider.gameObject.layer,
                     boundsCenter = collider.bounds.center.ToString("F2"),
-                    boundsSize = collider.bounds.size.ToString("F2"),
-                    obstacle = collider.GetComponent<NavMeshObstacle>() is NavMeshObstacle obstacle
-                        ? $"shape={obstacle.shape}, size={obstacle.size}, carve={obstacle.carving}"
-                        : "none"
+                    boundsSize = collider.bounds.size.ToString("F2")
+                }).ToArray(),
+                obstacles = obstacleDescriptions
+            };
+        }
+
+        [CliCommand("dicefree.briarback.north.inspect-underpass", "List the exact colliders overlapping the player-sized lower-route capsule beneath the bridge.")]
+        public static object InspectUnderpass()
+        {
+            var scene = SceneManager.GetActiveScene();
+            Need(scene.path == ScenePath, "the Cornberg scene must be active.");
+            var ground = CornbergLandscape.Ground(270, 460);
+            var bottom = ground + Vector3.up * 0.55f;
+            var top = ground + Vector3.up * 2.1f;
+            var hits = Physics.OverlapCapsule(bottom, top, 0.32f, Physics.AllLayers,
+                    QueryTriggerInteraction.Ignore)
+                .Where(collider => collider != null && collider.enabled && collider.gameObject.activeInHierarchy)
+                .Select(collider => new
+                {
+                    hierarchy = string.Join("/", Ancestors(collider.transform)),
+                    type = collider.GetType().Name,
+                    layer = LayerMask.LayerToName(collider.gameObject.layer),
+                    boundsCenter = collider.bounds.center.ToString("F2"),
+                    boundsSize = collider.bounds.size.ToString("F2")
                 }).ToArray();
-            return new { marker = "DICEFRE_BRIARBACK_NORTH_BOUNDARIES_INSPECTED", query = query.ToString(), colliders };
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_UNDERPASS_COLLIDERS_INSPECTED",
+                sampleGround = ground.ToString("F2"),
+                capsuleBottom = bottom.ToString("F2"),
+                capsuleTop = top.ToString("F2"),
+                radius = 0.32f,
+                hitCount = hits.Length,
+                hits
+            };
+        }
+
+        [CliCommand("dicefree.briarback.north.inspect-levels", "Inspect baked NavMesh positions across the lower road, bridge, and upper courtyard.")]
+        public static object InspectLevels()
+        {
+            var scene = SceneManager.GetActiveScene();
+            Need(scene.path == ScenePath, "the Cornberg scene must be active.");
+            var owner = scene.GetRootGameObjects().SelectMany(root => root.GetComponentsInChildren<WorldNavigation>(true)).Single();
+            var instance = NavMesh.AddNavMeshData(owner.Data);
+            try
+            {
+                var points = new[]
+                {
+                    (label: "lower underpass", point: CornbergLandscape.Ground(270, 460)),
+                    (label: "east bridge ramp foot", point: CornbergLandscape.Ground(294, 441)),
+                    (label: "bridge deck center", point: CornbergLandscape.Ground(270, 460) + Vector3.up * UpperFloor),
+                    (label: "east bridge landing", point: CornbergLandscape.Ground(294, 460) + Vector3.up * UpperFloor),
+                    (label: "upper ascent mid", point: CornbergLandscape.Ground(294, 468) + Vector3.up * UpperFloor),
+                    (label: "upper courtyard", point: CornbergLandscape.Ground(270, 478) + Vector3.up * UpperFloor)
+                };
+                var samples = points.Select(entry =>
+                {
+                    var found = NavMesh.SamplePosition(entry.point, out var hit, 1.25f, NavMesh.AllAreas);
+                    return new { label = entry.label, query = entry.point.ToString("F2"), found, sample = found ? hit.position.ToString("F2") : "none" };
+                }).ToArray();
+                var routePairs = new[]
+                {
+                    (label: "underpass to east ramp foot", from: points[0].point, to: points[1].point),
+                    (label: "east ramp foot to bridge", from: points[1].point, to: points[2].point),
+                    (label: "bridge to ascent midpoint", from: points[3].point, to: points[4].point),
+                    (label: "ascent midpoint to upper court", from: points[4].point, to: points[5].point),
+                    (label: "east bridge landing to upper court", from: points[3].point, to: points[5].point),
+                    (label: "bridge to upper courtyard", from: points[2].point, to: points[5].point)
+                };
+                var routes = routePairs.Select(route =>
+                {
+                    var from = NavMesh.SamplePosition(route.from, out var fromHit, 2f, NavMesh.AllAreas) ? fromHit.position : route.from;
+                    var to = NavMesh.SamplePosition(route.to, out var toHit, 2f, NavMesh.AllAreas) ? toHit.position : route.to;
+                    var path = new NavMeshPath();
+                    var calculated = NavMesh.CalculatePath(from, to, NavMesh.AllAreas, path);
+                    return new { label = route.label, calculated, status = path.status.ToString(), corners = string.Join(" -> ", path.corners.Select(value => value.ToString("F1"))) };
+                }).ToArray();
+                var triangulation = NavMesh.CalculateTriangulation();
+                var upperVertices = triangulation.vertices.Where(vertex => vertex.y > 3f && vertex.x >= 230f && vertex.x <= 310f && vertex.z >= 438f && vertex.z <= 505f)
+                    .Select(vertex => vertex.ToString("F2")).Take(40).ToArray();
+                return new
+                {
+                    marker = "DICEFRE_BRIARBACK_LEVEL_NAVMESH_INSPECTED",
+                    sampleCount = samples.Length,
+                    samples,
+                    routes,
+                    upperNavVertexCountInStrongholdBounds = triangulation.vertices.Count(vertex => vertex.y > 3f && vertex.x >= 230f && vertex.x <= 310f && vertex.z >= 438f && vertex.z <= 505f),
+                    upperNavVertices = upperVertices
+                };
+            }
+            finally { if (instance.valid) instance.Remove(); }
+        }
+
+        [CliCommand("dicefree.briarback.north.repair-underpass-ramp", "Relocate the upper ascent to the eastern bridge landing, preserving the lower route and mesh before saving.")]
+        public static object RepairUnderpassRamp()
+        {
+            var scene = SceneManager.GetActiveScene();
+            Need(!EditorApplication.isPlayingOrWillChangePlaymode, "stop Play Mode first.");
+            Need(scene.path == ScenePath && !scene.isDirty, "save the Cornberg scene and activate it before changing the ascent.");
+            var region = RegionRoot(scene);
+            var group = region.Find(GroupName);
+            Need(group != null, "the additive northern stronghold is missing.");
+            var rampObject = group.Find("Walkable ramp through the cliff cut");
+            Need(rampObject != null, "the current cliff-cut ramp is missing.");
+            var filter = rampObject.GetComponent<MeshFilter>();
+            var collider = rampObject.GetComponent<MeshCollider>();
+            Need(filter != null && collider != null && filter.sharedMesh != null && collider.sharedMesh == filter.sharedMesh,
+                "the current ascent must have one shared render and collision mesh.");
+            Need(Mathf.Abs(filter.sharedMesh.bounds.center.x - 270f) < 2f && Mathf.Abs(filter.sharedMesh.bounds.center.z - 463f) < 3f,
+                "the ascent mesh does not match the known ramp obstructing the lower underpass; refusing to replace it.");
+            Need(AssetDatabase.LoadMainAssetAtPath(UnderpassSceneBackupPath) == null &&
+                 AssetDatabase.LoadMainAssetAtPath(AscentMeshBackupPath) == null,
+                "a pre-repair recovery copy already exists; refusing to overwrite it.");
+            var folder = System.IO.Path.GetDirectoryName(UnderpassSceneBackupPath).Replace('\\', '/');
+            if (!AssetDatabase.IsValidFolder(folder)) AssetDatabase.CreateFolder("Assets/_DiceFree/Settings", "Recovery");
+            Need(EditorSceneManager.SaveScene(scene, UnderpassSceneBackupPath, true), "could not create the pre-repair scene recovery copy.");
+            var original = UnityEngine.Object.Instantiate(filter.sharedMesh);
+            original.name = "Briarback stronghold ascent before underpass repair";
+            AssetDatabase.CreateAsset(original, AscentMeshBackupPath);
+
+            var repaired = BuildRamp("Briarback stronghold ascent ramp",
+                CornbergLandscape.Ground(294, 460) + Vector3.up * UpperFloor,
+                CornbergLandscape.Ground(294, 475.5f) + Vector3.up * UpperFloor, 4.4f, 0.45f);
+            Undo.RecordObject(filter.sharedMesh, "Move Briarback ascent to bridge landing");
+            Undo.RecordObject(collider, "Move Briarback ascent collision to bridge landing");
+            filter.sharedMesh.vertices = repaired.vertices;
+            filter.sharedMesh.triangles = repaired.triangles;
+            filter.sharedMesh.RecalculateNormals();
+            filter.sharedMesh.RecalculateBounds();
+            UnityEngine.Object.DestroyImmediate(repaired);
+            collider.sharedMesh = null;
+            collider.sharedMesh = filter.sharedMesh;
+            EditorUtility.SetDirty(filter.sharedMesh);
+            EditorUtility.SetDirty(collider);
+            Physics.SyncTransforms();
+            CornbergSceneBuilder.Rebake();
+            Need(EditorSceneManager.SaveScene(scene), "could not save the repaired lower and upper route connection.");
+            AssetDatabase.SaveAssets();
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_UNDERPASS_RAMP_REPAIRED",
+                cause = "the previous northbound ascent ramp crossed the lower road and intersected the player capsule",
+                newLowerLanding = (CornbergLandscape.Ground(294, 460) + Vector3.up * UpperFloor).ToString("F2"),
+                newUpperLanding = (CornbergLandscape.Ground(294, 475.5f) + Vector3.up * UpperFloor).ToString("F2"),
+                sceneRecoveryCopy = UnderpassSceneBackupPath,
+                meshRecoveryCopy = AscentMeshBackupPath,
+                navigationRebaked = true
+            };
+        }
+
+        [CliCommand("dicefree.briarback.north.open-ascent-cut", "Open only the verified cliff-wall segment blocking the upper ramp at the east bridge landing, then rebake navigation.")]
+        public static object OpenAscentCut()
+        {
+            var scene = SceneManager.GetActiveScene();
+            Need(!EditorApplication.isPlayingOrWillChangePlaymode, "stop Play Mode first.");
+            Need(scene.path == ScenePath && !scene.isDirty, "save the Cornberg scene and activate it before opening the ramp cut.");
+            Need(AssetDatabase.LoadMainAssetAtPath(UnderpassSceneBackupPath) != null,
+                "the scene and ramp recovery copies must exist before opening the cut.");
+            Need(AssetDatabase.LoadMainAssetAtPath(AscentCutSceneBackupPath) == null,
+                "the pre-cut recovery copy already exists; refusing to overwrite it.");
+            var group = RegionRoot(scene).Find(GroupName);
+            Need(group != null, "the additive northern stronghold is missing.");
+            var ramp = group.Find("Walkable ramp through the cliff cut");
+            Need(ramp != null && Mathf.Abs(ramp.GetComponent<MeshCollider>().bounds.center.x - 294f) < 2f,
+                "the eastern bridge landing ramp is not in its expected position.");
+            var walls = group.GetComponentsInChildren<Transform>(true)
+                .Where(value => value.name == "Natural cliff face below upper terrace" &&
+                                Mathf.Abs(value.position.x - 293f) < 0.1f && Mathf.Abs(value.position.z - 472f) < 0.1f)
+                .ToArray();
+            Need(walls.Length == 1 && walls[0].GetComponent<Collider>() != null,
+                "the exact x=293 cliff segment was not found; refusing to alter adjacent terrain.");
+            Need(EditorSceneManager.SaveScene(scene, AscentCutSceneBackupPath, true),
+                "could not create the pre-cut scene recovery copy.");
+            var center = walls[0].position.ToString("F2");
+            Undo.DestroyObjectImmediate(walls[0].gameObject);
+            Physics.SyncTransforms();
+            CornbergSceneBuilder.Rebake();
+            Need(EditorSceneManager.SaveScene(scene), "could not save the opened eastern ascent cut.");
+            AssetDatabase.SaveAssets();
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_ASCENT_CUT_OPENED",
+                removedCliffSegmentCenter = center,
+                neighboringCliffSegmentsPreserved = true,
+                sceneRecoveryCopy = AscentCutSceneBackupPath,
+                navigationRebaked = true
+            };
+        }
+
+        private static IEnumerable<string> Ancestors(Transform value)
+        {
+            var names = new Stack<string>();
+            for (var current = value; current != null; current = current.parent)
+                names.Push(current.name);
+            return names;
+        }
+
+        [CliCommand("dicefree.briarback.north.open-approach", "Create a recoverable road gap through only the three central authored ridge rocks, then rebake navigation.")]
+        public static object OpenApproach()
+        {
+            var scene = SceneManager.GetActiveScene();
+            Need(!EditorApplication.isPlayingOrWillChangePlaymode, "stop Play Mode first.");
+            Need(scene.path == ScenePath, "activate the completed Cornberg blockout first.");
+            Need(System.IO.File.Exists(BoundarySceneBackupPath), "the pre-boundary scene recovery copy is missing; refusing to continue.");
+            var region = RegionRoot(scene);
+            var stronghold = region.Find(GroupName);
+            Need(stronghold != null, "the additive northern stronghold is missing.");
+            var boundary = scene.GetRootGameObjects()
+                .SelectMany(root => root.GetComponentsInChildren<Transform>(true))
+                .SingleOrDefault(t => t.name == "North edge" && t.parent != null && t.parent.name == "Physical outer edge");
+            Need(boundary != null && boundary.position.z >= North + 5f,
+                "move the confirmed old z=400 physical boundary first; refusing to alter the ridge before that.");
+            var ridgeRoot = region.Find("Briarback thornwood, rocks and camp clearings");
+            Need(ridgeRoot != null, "the original Briarback woodland blockout is missing.");
+            var ridge = ridgeRoot.GetComponentsInChildren<Transform>(true)
+                .Where(t => t.name == "Northern wooded ridge" && Mathf.Abs(t.position.z - 397f) < 1f)
+                .OrderBy(t => Mathf.Abs(t.position.x - 270f)).Take(3).ToArray();
+            Need(ridge.Length == 3 && ridge.Select(t => t.position.x).OrderBy(x => x)
+                    .Zip(new[] { 266f, 271f, 276f }, (actual, expected) => Mathf.Abs(actual - expected) < 0.1f).All(value => value),
+                "the expected three central z=397 ridge rocks are not present; refusing to alter the scene.");
+            Need(AssetDatabase.LoadMainAssetAtPath(ApproachSceneBackupPath) == null,
+                "the approach scene recovery copy already exists; refusing to overwrite it.");
+            var folder = System.IO.Path.GetDirectoryName(ApproachSceneBackupPath).Replace('\\', '/');
+            if (!AssetDatabase.IsValidFolder(folder)) AssetDatabase.CreateFolder("Assets/_DiceFree/Settings", "Recovery");
+            Need(EditorSceneManager.SaveScene(scene, ApproachSceneBackupPath, true), "could not create the pre-edit scene recovery copy.");
+
+            var removedCenters = ridge.Select(t => t.position.ToString("F2")).ToArray();
+            foreach (var rock in ridge)
+                Undo.DestroyObjectImmediate(rock.gameObject);
+            Physics.SyncTransforms();
+            CornbergSceneBuilder.Rebake();
+            Need(EditorSceneManager.SaveScene(scene), "could not save the northern approach opening.");
+            AssetDatabase.SaveAssets();
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_NORTH_APPROACH_OPENED",
+                removedRidgeRockCenters = removedCenters,
+                physicalNorthBoundaryZ = boundary.position.z,
+                sceneRecoveryCopy = ApproachSceneBackupPath,
+                navigationRebaked = true
+            };
         }
 
         [CliCommand("dicefree.briarback.north.extend-continuous-ground", "Extend the original Briarback ground mesh in place, with an original-mesh recovery copy, eliminating the two-source seam.")]
@@ -746,7 +1018,16 @@ namespace DiceFree.EditorTools
             Need(road != null && road.GetComponent<Collider>() == null, "the visual approach must not add collision over the ground.");
             Need(group.Find("Chieftain longhouse - blockout foundation") != null, "the longhouse blockout is missing.");
             Need(group.Find("Raised upper stronghold terrace")?.GetComponent<MeshCollider>() != null, "the elevated terrace is not walkable collision geometry.");
-            Need(group.Find("Walkable ramp through the cliff cut")?.GetComponent<MeshCollider>() != null, "the upper ascent ramp is missing its collider.");
+            var upperAscent = group.Find("Walkable ramp through the cliff cut");
+            Need(upperAscent?.GetComponent<MeshCollider>() != null, "the upper ascent ramp is missing its collider.");
+            Need(Mathf.Abs(upperAscent.GetComponent<MeshCollider>().bounds.center.x - 294f) < 2f,
+                "the upper ascent must enter from the eastern bridge landing so it does not cross the lower road.");
+            var cliffSegments = group.GetComponentsInChildren<Transform>(true)
+                .Where(value => value.name == "Natural cliff face below upper terrace").ToArray();
+            Need(cliffSegments.Any(value => Mathf.Abs(value.position.x - 287f) < 0.1f) &&
+                 cliffSegments.Any(value => Mathf.Abs(value.position.x - 299f) < 0.1f) &&
+                 !cliffSegments.Any(value => Mathf.Abs(value.position.x - 293f) < 0.1f),
+                "the eastern ascent needs one clear cliff cut while keeping both neighboring cliff segments.");
             Need(group.Find("Raised timber bridge deck over lower road")?.GetComponent<MeshCollider>() != null, "the raised bridge deck is missing its collider.");
             Need(group.Find("West ramp to upper timber bridge")?.GetComponent<MeshCollider>() != null &&
                  group.Find("East ramp to upper timber bridge")?.GetComponent<MeshCollider>() != null,
@@ -770,14 +1051,14 @@ namespace DiceFree.EditorTools
                 var underpass = Sample(CornbergLandscape.Ground(270, 460), "lower road under bridge");
                 var bridgeLow = Sample(CornbergLandscape.Ground(242, 441), "west bridge-ramp foot");
                 var bridgeDeck = Sample(CornbergLandscape.Ground(270, 460) + Vector3.up * UpperFloor, "upper bridge deck", 1.25f);
-                var upperRampFoot = Sample(CornbergLandscape.Ground(270, 451), "upper-terrace ramp foot");
+                var upperRampFoot = Sample(CornbergLandscape.Ground(294, 460) + Vector3.up * UpperFloor, "upper-terrace ramp foot at eastern bridge landing", 1.25f);
                 var upperCourt = Sample(CornbergLandscape.Ground(270, 478) + Vector3.up * UpperFloor, "upper stronghold courtyard", 1.25f);
                 var paths = 0;
                 var routes = new[]
                 {
                     ("lower approach and upper ascent", new[] { lowStart, gate, underpass, upperCourt }),
                     ("overpass and bridge ramps", new[] { bridgeLow, bridgeDeck, Sample(CornbergLandscape.Ground(294, 441), "east bridge-ramp foot") }),
-                    ("cliff-cut ascent", new[] { upperRampFoot, upperCourt })
+                    ("east bridge landing ascent to upper court", new[] { upperRampFoot, upperCourt })
                 };
                 foreach (var route in routes)
                 {

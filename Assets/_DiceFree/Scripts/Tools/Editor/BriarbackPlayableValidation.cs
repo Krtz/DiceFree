@@ -43,16 +43,19 @@ namespace DiceFree.EditorTools
   static IEnumerator Wait(float t){float end=Time.time+t;while(Time.time<end)yield return null;}
   static IEnumerator Frames(int n){for(int i=0;i<n;i++)yield return null;}
   static Vector3 Point(Vector2 p){Need(NavMesh.SamplePosition(new Vector3(p.x,0,p.y),out var hit,2,1),"No live navigation at "+p);return hit.position;}
-  static IEnumerator Walk(CombatActor p,Vector2 point){
-   var target=Point(point);Need(p.Motor.MoveTo(target),"Move order rejected at "+point);float until=Time.time+18;Vector3 previous=p.transform.position;
-   while(Vector3.Distance(p.transform.position,target)>1.0f&&Time.time<until){report.walkMeters+=Vector3.Distance(previous,p.transform.position);previous=p.transform.position;yield return null;}
+  static Vector3 UpperPoint(Vector2 p){Need(NavMesh.SamplePosition(new Vector3(p.x,5.2f,p.y),out var hit,1.5f,1),"No upper-level live navigation at "+p);return hit.position;}
+  static IEnumerator Walk(CombatActor p,Vector2 point)=>WalkTo(p,Point(point),point.ToString());
+  static IEnumerator WalkUpper(CombatActor p,Vector2 point)=>WalkTo(p,UpperPoint(point),"upper "+point);
+  static IEnumerator WalkTo(CombatActor p,Vector3 target,string label){
+   Need(p.Motor.MoveTo(target),"Move order rejected at "+label);float until=Time.realtimeSinceStartup+30;Vector3 previous=p.transform.position;
+   while(Vector3.Distance(p.transform.position,target)>1.0f&&Time.realtimeSinceStartup<until){report.walkMeters+=Vector3.Distance(previous,p.transform.position);previous=p.transform.position;yield return null;}
    if(Vector3.Distance(p.transform.position,target)>1.0f){
     var agent=p.GetComponent<NavMeshAgent>();var attack=p.GetComponent<BasicAttack>();
     var blockers=Physics.OverlapCapsule(p.transform.position+Vector3.up*.35f,p.transform.position+Vector3.up*1.7f,.34f,
      Physics.AllLayers,QueryTriggerInteraction.Ignore).Where(c=>c!=null&&c.enabled&&c.gameObject.activeInHierarchy&&c.transform.root!=p.transform.root)
      .Select(c=>c.transform.root.name+"/"+c.name+" ["+LayerMask.LayerToName(c.gameObject.layer)+"]").Distinct().Take(12).ToArray();
     string corners=agent!=null&&agent.hasPath?string.Join(" -> ",agent.path.corners.Select(c=>c.ToString("F1"))):"<none>";
-    Need(false,"Walking blocked at "+point+" from "+p.transform.position+"; agent="+(agent==null?"missing":$"onMesh={agent.isOnNavMesh}, stopped={agent.isStopped}, hasPath={agent.hasPath}, status={agent.pathStatus}, remaining={agent.remainingDistance:F2}, velocity={agent.velocity:F2}")+"; attack="+(attack?.Target?.name??"none")+"; corners="+corners+"; blockers="+string.Join(", ",blockers));
+    Need(false,"Walking blocked at "+label+" from "+p.transform.position+"; agent="+(agent==null?"missing":$"onMesh={agent.isOnNavMesh}, stopped={agent.isStopped}, hasPath={agent.hasPath}, status={agent.pathStatus}, remaining={agent.remainingDistance:F2}, velocity={agent.velocity:F2}")+"; attack="+(attack?.Target?.name??"none")+"; corners="+corners+"; blockers="+string.Join(", ",blockers));
    }
    p.Motor.Stop();report.walked++;
   }
@@ -170,8 +173,20 @@ namespace DiceFree.EditorTools
    Need(!giver.TurnIn(p),"Unfinished quest granted reward");
    foreach(var point in BriarbackAuthoring.Route)yield return Walk(p,point);
    Need(journal.GetProgress(quest.stableId).stage==1&&journal.GetProgress(quest.stableId).count==0,"Actual watchpost trigger did not advance quest");
-   var fog=Object.FindAnyObjectByType<WorldFogOfWar>();Need(fog.MapMax==new Vector2(353,406)&&fog.IsVisible(p.transform.position),"Northern fog/revealer bounds");
-   Need(Object.FindAnyObjectByType<ExplorationCamera>().MapBounds==BriarbackAuthoring.Bounds,"Camera map bounds");
+   var fog=Object.FindAnyObjectByType<WorldFogOfWar>();var region=Object.FindObjectsByType<OverworldMapBounds>().Single(bounds=>bounds.GetComponentInChildren<QuilboarCombat>(true)!=null);
+   var expectedBounds=region.transform.Find("Briarback northern mountain stronghold - additive")!=null
+    ?new Rect(BriarbackAuthoring.Bounds.xMin,BriarbackAuthoring.Bounds.yMin,BriarbackAuthoring.Bounds.width,615f):BriarbackAuthoring.Bounds;
+   Need(fog.MapMax==new Vector2(expectedBounds.xMax,expectedBounds.yMax)&&fog.IsVisible(p.transform.position),"Northern fog/revealer bounds");
+   Need(Object.FindAnyObjectByType<ExplorationCamera>().MapBounds==expectedBounds,"Camera map bounds");
+   if(region.transform.Find("Briarback northern mountain stronghold - additive")!=null){
+    Phase("multilevel north approach, underpass, overpass and upper court traversal");
+    yield return Walk(p,new Vector2(270,390));yield return Walk(p,new Vector2(270,431));yield return Walk(p,new Vector2(270,460));
+    yield return Walk(p,new Vector2(294,441));yield return WalkUpper(p,new Vector2(270,460));
+    Need(p.transform.position.y>4.5f,"Player did not reach the elevated bridge deck");
+    yield return WalkUpper(p,new Vector2(294,468));yield return WalkUpper(p,new Vector2(270,478));
+    Need(p.transform.position.y>4.5f,"Player did not reach the upper stronghold courtyard");
+    yield return Walk(p,new Vector2(270,460));Need(p.transform.position.y<1.5f,"Player did not return to the lower underpass route");
+   }
    foreach(var point in BriarbackAuthoring.Route.Reverse().Skip(1))yield return Walk(p,point);
    Phase("level-independent pursuit, skinned walking and leash");
    var aggro=first.GetComponent<AggroBehaviour>();var basic=first.GetComponent<BasicAttack>();xp.RestoreState(200,0);p.Health.Restore();

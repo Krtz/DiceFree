@@ -50,7 +50,10 @@ namespace DiceFree.EditorTools
     var quest=AssetDatabase.LoadAssetAtPath<QuestDefinition>(BriarbackAuthoring.Folder+"/The Northern Trail.asset");var item=AssetDatabase.LoadAssetAtPath<ItemDefinition>(BriarbackAuthoring.Folder+"/Bristlehide Mantle.asset");
     Need(quest.stages.Length==3&&quest.stages[0].areaId==BriarbackAuthoring.WatchId&&quest.stages[1].familyId==BriarbackAuthoring.Family&&quest.stages[1].count==8&&quest.stages[2].contentId==BriarbackAuthoring.EliteId&&!quest.completeOnObjectives,"Quest sequence");
     Need(item.slot==EquipmentSlot.Back&&item.allowedClassIds.Length==0&&item.stats.attributes.vitality==3&&item.stats.physicalDefense==3&&item.stats.magicalDefense==2&&quest.reward.items.Single()==item,"Reward data");
-    Need(root.GetComponent<OverworldMapBounds>().Bounds==BriarbackAuthoring.Bounds,"Map extents");
+    var baseMapBounds=BriarbackAuthoring.Bounds;
+    var expectedMapBounds=root.transform.Find("Briarback northern mountain stronghold - additive")!=null
+     ?new Rect(baseMapBounds.xMin,baseMapBounds.yMin,baseMapBounds.width,615f):baseMapBounds;
+    Need(root.GetComponent<OverworldMapBounds>().Bounds==expectedMapBounds,"Map extents");
     Need(Object.FindAnyObjectByType<WorldFogOfWar>().MapMax==new Vector2(353,406),"Fog extent");
     Need(Object.FindObjectsByType<QuestGiver>().Single(g=>g.name=="Scout Runa - northern trail").Quest==quest,"Quest giver");
     var prefab=AssetDatabase.LoadAssetAtPath<GameObject>(BriarbackAuthoring.Art+"/Models/Quilboar.fbx");var model=Object.Instantiate(prefab);model.hideFlags=HideFlags.HideAndDontSave;
