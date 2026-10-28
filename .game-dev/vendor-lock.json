@@ -1,0 +1,15 @@
+{
+  "schema": "game_dev.vendor_lock.v1",
+  "entries": [
+    {
+      "packageId": "pkg_54772145534bcf4795d23561",
+      "assetId": "cosmicwonder_simple_boardgame_dice",
+      "version": "1.0.0",
+      "destination": "SourceArt\\Vendored\\CosmicWonderSimpleBoardgameDice",
+      "modelSha256": "a0814fb5f6d2f035512240a3bef7c8104cd58f26d5fbc42113478d1e48a040e3",
+      "manifestSha256": "6701a3dd5963b1727b40460136ffbcf5f6f0ba30b0d60a0381d7b0443be3d6fa",
+      "license": "CC-BY-4.0",
+      "admittedAt": "2026-10-28T11:57:08.470Z"
+    }
+  ]
+}

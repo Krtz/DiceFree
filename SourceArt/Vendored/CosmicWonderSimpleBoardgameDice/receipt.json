@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-28T11:56:15.686Z",
+  "destination": {
+    "assetId": "cosmicwonder_simple_boardgame_dice",
+    "version": "1.0.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "6701a3dd5963b1727b40460136ffbcf5f6f0ba30b0d60a0381d7b0443be3d6fa",
+  "packageId": "pkg_54772145534bcf4795d23561",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 954840,
+    "fileName": "simple-boardgame-dice.glb",
+    "sha256": "a0814fb5f6d2f035512240a3bef7c8104cd58f26d5fbc42113478d1e48a040e3"
+  }
+}

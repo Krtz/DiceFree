@@ -49,3 +49,6 @@
 # Unity NavMeshData remains binary even with Force Text enabled.
 Assets/_DiceFree/Settings/*NavMesh.asset filter=lfs diff=lfs merge=lfs -text
 Assets/_DiceFree/Settings/Dungeons/*NavMesh.asset filter=lfs diff=lfs merge=lfs -text
+
+# Preserve canonical vendored package bytes for manifest hash verification.
+SourceArt/Vendored/CosmicWonderSimpleBoardgameDice/** -text

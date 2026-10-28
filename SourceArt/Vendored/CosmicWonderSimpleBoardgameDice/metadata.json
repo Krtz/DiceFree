@@ -1,0 +1,57 @@
+{
+  "assetId": "cosmicwonder_simple_boardgame_dice",
+  "category": "environment_prop",
+  "description": "Town resurrection die visual; original by CosmicWonder. FBX converted to GLB, centered and scaled to 1.5 meters; geometry and two flat-color materials retained.",
+  "displayName": "CosmicWonder Simple Boardgame Dice",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.7499998211860657,
+        1.5,
+        0.75
+      ],
+      "min": [
+        -0.7499998211860657,
+        1.7881393432617188e-7,
+        -0.7499998211860657
+      ],
+      "sizeMeters": [
+        1.4999996423721313,
+        1.4999998211860657,
+        1.4999998211860657
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 954840,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.5.1",
+    "hasNormals": true,
+    "hasSkin": false,
+    "hasTangents": false,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": false,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 0,
+    "textureResolutions": [],
+    "triangleCount": 40704,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 22143,
+    "warnings": [
+      "no base colour texture on any material: the asset is untextured and will read as flat colour"
+    ]
+  },
+  "license": "CC-BY-4.0",
+  "schema": "game_dev.asset_metadata.v1"
+}

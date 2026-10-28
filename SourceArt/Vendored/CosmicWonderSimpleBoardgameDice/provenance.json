@@ -1,0 +1,16 @@
+{
+  "conversion": "Blender 4.5.3 FBX to GLB; 1.5m size; bottom origin",
+  "creator": "CosmicWonder",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "origin": "imported",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 954840,
+    "fileName": "simple-boardgame-dice.glb",
+    "sha256": "a0814fb5f6d2f035512240a3bef7c8104cd58f26d5fbc42113478d1e48a040e3"
+  },
+  "sourceArchive": "simple-boardgame-dice.zip",
+  "sourceArchiveSHA256": "9edecd1e2c5b548563dfe2ad818f6896c5ca5b3406b7ec86148c813fdf601247",
+  "sourceFbxSHA256": "358c755bdd61bee553ec639f9818e9d37ee708874bb5dc6cf4a80862bcbff636",
+  "sourceUrl": "https://sketchfab.com/3d-models/simple-boardgame-dice-45c800245b144fc9a8e0e67a33901092"
+}

@@ -1,0 +1,11 @@
+{
+  "unityDerivativeSHA256": "5ea70d5d32f40d5efa2f7591ae65313f42025cbdbc1d0304c9bac65761eb3aed",
+  "canonicalPackageId": "pkg_54772145534bcf4795d23561",
+  "unityDerivative": "Assets/_DiceFree/Art/World/ResurrectionDice/CosmicWonderDice.fbx",
+  "license": "CC-BY-4.0",
+  "tool": "Blender 4.5.3",
+  "canonicalModelSHA256": "a0814fb5f6d2f035512240a3bef7c8104cd58f26d5fbc42113478d1e48a040e3",
+  "source": "https://sketchfab.com/3d-models/simple-boardgame-dice-45c800245b144fc9a8e0e67a33901092",
+  "creator": "CosmicWonder",
+  "changes": "Export admitted GLB to FBX for Unity native import; no topology reduction"
+}

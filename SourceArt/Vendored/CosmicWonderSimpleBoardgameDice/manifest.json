@@ -1,0 +1,45 @@
+{
+  "assetId": "cosmicwonder_simple_boardgame_dice",
+  "category": "environment_prop",
+  "description": "Town resurrection die visual; original by CosmicWonder. FBX converted to GLB, centered and scaled to 1.5 meters; geometry and two flat-color materials retained.",
+  "displayName": "CosmicWonder Simple Boardgame Dice",
+  "files": [
+    {
+      "bytes": 954840,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "a0814fb5f6d2f035512240a3bef7c8104cd58f26d5fbc42113478d1e48a040e3"
+    },
+    {
+      "bytes": 1617,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "2ade0cbfea6683e87dc71423061ef99633f708a20012fe27e85b19eefa427d1f"
+    },
+    {
+      "bytes": 735,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "368de020c883f2e7246fe97b96eb9cb031f1672a5738d7d7c4b70b152a7da5ed"
+    },
+    {
+      "bytes": 2759,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "f48a162a95a8b52bb8ea8518b6d41b61760b893f4560887f88b47a4b2d04f2cb"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "model": "model.glb",
+  "packageId": "pkg_54772145534bcf4795d23561",
+  "provenance": {
+    "origin": "imported"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 0
+  },
+  "version": "1.0.0"
+}
