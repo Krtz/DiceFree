@@ -104,7 +104,9 @@ namespace DiceFree.EditorTools
                 if (nav.valid) nav.Remove();
             }
 
-            var creatures = All<QuilboarCombat>();
+            var patrolGroup = GameObject.Find("Briarback road patrols - additive")?.transform;
+            var creatures = All<QuilboarCombat>().Where(value => patrolGroup == null ||
+                !value.transform.IsChildOf(patrolGroup)).ToArray();
             Need(creatures.Length == 20 && creatures.Count(value =>
                     value.transform.IsChildOf(GameObject.Find(RegionRoot).transform)) == 20,
                 "adding the quest must preserve the existing 20-actor Briarback roster.");

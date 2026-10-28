@@ -8,6 +8,9 @@ namespace DiceFree.AI
     {
         [SerializeField, Min(1)] private float awareness = 7;
         [SerializeField, Min(1)] private float leash = 13;
+        [SerializeField] private bool useAuthoredHome;
+        [SerializeField] private Vector3 authoredHome;
+        [SerializeField] private bool patrolControlled;
         [SerializeReference] private AutoAggroPolicy autoAggroPolicy = new();
         public AutoAggroPolicy AutoAggroPolicy => autoAggroPolicy;
         public void ConfigureAutoAggro(AutoAggroPolicy policy) => autoAggroPolicy = policy ?? new AutoAggroPolicy();
@@ -19,9 +22,17 @@ namespace DiceFree.AI
         public Vector3 Home => home;
         public float Awareness => awareness;
         public float Leash => leash;
+        public bool PatrolControlled => patrolControlled;
         public void Configure(float awarenessRadius, float leashRadius) { awareness = awarenessRadius; leash = leashRadius; }
+        public void ConfigurePatrolMovement(bool enabled) => patrolControlled = enabled;
+        public void ConfigureHomePosition(Vector3 position)
+        {
+            authoredHome = position;
+            useAuthoredHome = true;
+            home = position;
+        }
         public string State => !actor.Alive ? "Defeated" : Returning ? "Returning" : attack.Target != null ? "Aggro" : "Idle";
-        private void Awake() { actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>(); home = transform.position; }
+        private void Awake() { actor = GetComponent<CombatActor>(); attack = GetComponent<BasicAttack>(); home = useAuthoredHome ? authoredHome : transform.position; }
         private void OnEnable() { actor.Health.Damaged += OnDamaged; actor.Health.Restored += ClearState; }
         private void OnDisable() { actor.Health.Damaged -= OnDamaged; actor.Health.Restored -= ClearState; attack.Cancel(); }
         private void ClearState() { attack.ResetForSpawn(); Returning = false; nextPath = 0; }
@@ -56,7 +67,7 @@ namespace DiceFree.AI
                 if (candidateDistance < distance) { nearest = candidate; distance = candidateDistance; }
             }
             if (nearest != null) attack.Order(nearest);
-            else if (Vector3.Distance(transform.position, home) > 0.6f) ReturnHome();
+            else if (!patrolControlled && Vector3.Distance(transform.position, home) > 0.6f) ReturnHome();
         }
         private void ReturnHome() { attack.Cancel(); Returning = true; nextPath = 0; }
         // Explicit debug reset, not a spawn/loot/quest rule. Exactly one actor is reused.

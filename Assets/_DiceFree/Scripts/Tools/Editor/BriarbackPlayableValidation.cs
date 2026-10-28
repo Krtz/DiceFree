@@ -104,6 +104,10 @@ namespace DiceFree.EditorTools
    var save=p.GetComponent<ManifestationPersistence>();while(!save.Ready||!p.Motor.Ready)yield return null;
    p.GetComponent<TraversalInput>().enabled=false;p.GetComponent<CombatInput>().enabled=false;p.GetComponent<BasicAttack>().enabled=false;p.Health.Invulnerable=true;
    var xp=p.GetComponent<ExperienceProgression>();xp.RestoreState(24,0);p.Health.Restore();
+   // Patrol actors have their own focused movement/stop regression. Keep this
+   // legacy combat/quest fixture isolated from their ordinary aggro and route
+   // traffic while preserving its original twenty-creature expectations.
+   var patrolGroup=GameObject.Find("Briarback road patrols - additive");if(patrolGroup!=null)patrolGroup.SetActive(false);
    var creatures=Object.FindObjectsByType<QuilboarCombat>();Need(creatures.Length==20,$"Live creature count: {creatures.Length}");
    var roleRoot=GameObject.Find("Approved Quillboar role prototypes - additive");Need(roleRoot!=null,"Approved role prototypes were not loaded");
    var rolePrototypes=roleRoot.GetComponentsInChildren<QuilboarCombat>();Need(rolePrototypes.Length==7,"Live approved role prototype count");
