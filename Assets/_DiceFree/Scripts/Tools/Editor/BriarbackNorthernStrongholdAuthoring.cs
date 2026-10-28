@@ -32,6 +32,9 @@ namespace DiceFree.EditorTools
         private const string GroundBackupPath = "Assets/_DiceFree/Settings/Recovery/Briarback-north-ground-before-seam-repair.asset";
         private const string ExistingGroundMeshPath = "Assets/_DiceFree/Settings/Briarback/Briarback ground.asset";
         private const string ExistingGroundBackupPath = "Assets/_DiceFree/Settings/Recovery/Briarback-ground-before-northern-expansion.asset";
+        private const string OpenArenaTerraceMeshPath = "Assets/_DiceFree/Art/Blockout/Briarback upper open arena terrace.asset";
+        private const string OpenArenaSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-chieftain-open-arena-20261028.unity";
+        private const string OpenArenaMeshBackupPath = "Assets/_DiceFree/Settings/Recovery/Briarback-upper-terrace-before-open-arena-20261028.asset";
         private const string BoundarySceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-north-boundary-relocation.unity";
         private const string ApproachSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-north-approach-opening.unity";
         private const string UnderpassSceneBackupPath = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-underpass-ramp-repair.unity";
@@ -999,6 +1002,118 @@ namespace DiceFree.EditorTools
             };
         }
 
+        [CliCommand("dicefree.briarback.north.arena.preview", "Preflight an outdoor 25m Chieftain clearing and move the longhouse out of its footprint; no scene changes.")]
+        public static object PreviewChieftainArena()
+        {
+            Need(!EditorApplication.isPlayingOrWillChangePlaymode, "stop Play Mode first.");
+            var scene = SceneManager.GetActiveScene();
+            Need(scene.path == ScenePath && !scene.isDirty, "save and activate the completed Cornberg blockout first.");
+            var region = RegionRoot(scene);
+            var group = region.Find(GroupName);
+            Need(group != null, "the additive northern stronghold is missing.");
+            var foundation = group.Find("Chieftain longhouse - blockout foundation");
+            var hall = group.Find("Chieftain longhouse - timber hall");
+            var roof = group.Find("Chieftain longhouse - roof blockout");
+            Need(foundation != null && hall != null && roof != null, "the exact longhouse blockout trio is required; no scene was changed.");
+            Need(Vector3.Distance(foundation.position, CornbergLandscape.Ground(268, 490) + Vector3.up * (UpperFloor + .45f)) < .2f,
+                "the longhouse has already moved; refusing to infer a new source placement.");
+
+            var houseParts = new[] { foundation, hall, roof };
+            var destinationGround = CornbergLandscape.Ground(248, 483);
+            var boxes = new[]
+            {
+                (position: destinationGround + Vector3.up * (UpperFloor + .45f), size: new Vector3(24, .9f, 17)),
+                (position: destinationGround + Vector3.up * (UpperFloor + 3.7f), size: new Vector3(19, 6.5f, 13)),
+                (position: destinationGround + Vector3.up * (UpperFloor + 7.5f), size: new Vector3(21, 1.2f, 15))
+            };
+            var blockers = boxes.SelectMany(box => Physics.OverlapBox(box.position, box.size * .5f,
+                    Quaternion.identity, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                .Where(collider => collider != null && collider.enabled && collider.gameObject.activeInHierarchy &&
+                    collider.transform != group.Find("Raised upper stronghold terrace") &&
+                    !houseParts.Any(part => collider.transform == part || collider.transform.IsChildOf(part)))
+                .Select(collider => collider.name).Distinct().ToArray();
+            Need(blockers.Length == 0, "the proposed west-side hall position overlaps existing collision: " + string.Join(", ", blockers.Take(12)));
+            Need(AssetDatabase.LoadAssetAtPath<Mesh>(OpenArenaTerraceMeshPath) == null,
+                "the open-arena terrace asset path is already occupied; no scene was changed.");
+            Need(AssetDatabase.LoadAssetAtPath<Mesh>(OpenArenaMeshBackupPath) == null &&
+                 AssetDatabase.LoadMainAssetAtPath(OpenArenaSceneBackupPath) == null,
+                "the arena recovery path already exists; inspect it before proceeding.");
+
+            var center = CornbergLandscape.Ground(282, 484) + Vector3.up * UpperFloor;
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_CHIEFTAIN_ARENA_PREFLIGHT_OK",
+                arenaCenter = center.ToString("F2"),
+                clearDimensions = new { width = 25f, depth = 23f },
+                longhouseDestination = destinationGround.ToString("F2"),
+                destinationColliders = blockers,
+                unchangedRampsAndBridge = true,
+                recoveryCreated = false,
+                navMeshChanged = false
+            };
+        }
+
+        [CliCommand("dicefree.briarback.north.arena.open", "Move the longhouse to the upper terrace's west edge and expand the raised terrace for a clear outdoor Chieftain arena; save recovery copies first.")]
+        public static object OpenChieftainArena()
+        {
+            var preflight = PreviewChieftainArena();
+            var scene = SceneManager.GetActiveScene();
+            var group = RegionRoot(scene).Find(GroupName);
+            var foundation = group.Find("Chieftain longhouse - blockout foundation");
+            var hall = group.Find("Chieftain longhouse - timber hall");
+            var roof = group.Find("Chieftain longhouse - roof blockout");
+            var oldTerrace = AssetDatabase.LoadAssetAtPath<Mesh>(UpperTerraceMeshPath);
+            var filter = group.Find("Raised upper stronghold terrace")?.GetComponent<MeshFilter>();
+            var collider = group.Find("Raised upper stronghold terrace")?.GetComponent<MeshCollider>();
+            Need(oldTerrace != null && filter != null && collider != null && filter.sharedMesh == oldTerrace && collider.sharedMesh == oldTerrace,
+                "the authored terrace filter/collider no longer reference the expected original mesh.");
+            Need(AssetDatabase.CopyAsset(UpperTerraceMeshPath, OpenArenaMeshBackupPath), "could not preserve the original terrace mesh.");
+            Need(EditorSceneManager.SaveScene(scene, OpenArenaSceneBackupPath, true), "could not preserve the pre-arena Cornberg scene.");
+
+            var newTerrace = BuildTerrace("Briarback upper open arena terrace", new Vector2(234, 470),
+                new Vector2(306, 502), UpperFloor, .9f);
+            AssetDatabase.CreateAsset(newTerrace, OpenArenaTerraceMeshPath);
+            newTerrace = AssetDatabase.LoadAssetAtPath<Mesh>(OpenArenaTerraceMeshPath);
+            Need(newTerrace != null && newTerrace.vertexCount > 0, "could not save the widened upper terrace mesh.");
+            Undo.RecordObject(filter, "Extend Chieftain arena terrace south");
+            Undo.RecordObject(collider, "Extend Chieftain arena terrace collision south");
+            filter.sharedMesh = newTerrace;
+            collider.sharedMesh = null;
+            collider.sharedMesh = newTerrace;
+            var destinationGround = CornbergLandscape.Ground(248, 483);
+            var parts = new[]
+            {
+                (target: foundation, position: destinationGround + Vector3.up * (UpperFloor + .45f)),
+                (target: hall, position: destinationGround + Vector3.up * (UpperFloor + 3.7f)),
+                (target: roof, position: destinationGround + Vector3.up * (UpperFloor + 7.5f))
+            };
+            foreach (var part in parts)
+            {
+                Undo.RecordObject(part.target, "Move Chieftain longhouse clear of outdoor arena");
+                part.target.position = part.position;
+                EditorUtility.SetDirty(part.target);
+            }
+            EditorUtility.SetDirty(filter);
+            EditorUtility.SetDirty(collider);
+            AssetDatabase.SaveAssets();
+            Physics.SyncTransforms();
+            EditorSceneManager.MarkSceneDirty(scene);
+            Need(EditorSceneManager.SaveScene(scene), "could not save the open upper arena blockout.");
+            return new
+            {
+                marker = "DICEFRE_BRIARBACK_CHIEFTAIN_ARENA_OPENED",
+                arenaCenter = CornbergLandscape.Ground(282, 484).ToString("F2"),
+                clearDimensions = new { width = 25f, depth = 23f },
+                longhouseDestination = destinationGround.ToString("F2"),
+                originalLonghousePreserved = true,
+                originalTerraceMesh = OpenArenaMeshBackupPath,
+                sceneRecoveryCopy = OpenArenaSceneBackupPath,
+                newTerraceMesh = OpenArenaTerraceMeshPath,
+                navMeshNeedsRebake = true,
+                preflight = preflight
+            };
+        }
+
         [CliCommand("dicefree.briarback.north.validate", "Validate the saved northern terrain, accessible fort gate, cliff-backed blockout, bounds, and navigation connection.")]
         public static object Validate()
         {
@@ -1016,8 +1131,20 @@ namespace DiceFree.EditorTools
                 "the original continuous terrain collider does not reach the new northern edge.");
             var road = group.Find("North approach to the open stronghold gate");
             Need(road != null && road.GetComponent<Collider>() == null, "the visual approach must not add collision over the ground.");
-            Need(group.Find("Chieftain longhouse - blockout foundation") != null, "the longhouse blockout is missing.");
-            Need(group.Find("Raised upper stronghold terrace")?.GetComponent<MeshCollider>() != null, "the elevated terrace is not walkable collision geometry.");
+            var foundation = group.Find("Chieftain longhouse - blockout foundation");
+            var hall = group.Find("Chieftain longhouse - timber hall");
+            var roof = group.Find("Chieftain longhouse - roof blockout");
+            Need(foundation != null && hall != null && roof != null, "the longhouse blockout is missing.");
+            var expectedHouseGround = CornbergLandscape.Ground(248, 483);
+            Need(Vector3.Distance(foundation.position, expectedHouseGround + Vector3.up * (UpperFloor + .45f)) < .2f &&
+                 Vector3.Distance(hall.position, expectedHouseGround + Vector3.up * (UpperFloor + 3.7f)) < .2f &&
+                 Vector3.Distance(roof.position, expectedHouseGround + Vector3.up * (UpperFloor + 7.5f)) < .2f,
+                "the Chieftain longhouse must sit clear at the west side of the highest terrace.");
+            var terrace = group.Find("Raised upper stronghold terrace");
+            Need(terrace?.GetComponent<MeshCollider>() != null &&
+                 terrace.GetComponent<MeshFilter>().sharedMesh == AssetDatabase.LoadAssetAtPath<Mesh>(OpenArenaTerraceMeshPath) &&
+                 terrace.GetComponent<MeshCollider>().sharedMesh == AssetDatabase.LoadAssetAtPath<Mesh>(OpenArenaTerraceMeshPath),
+                "the raised upper arena terrace must use its recoverable widened walkable mesh.");
             var upperAscent = group.Find("Walkable ramp through the cliff cut");
             Need(upperAscent?.GetComponent<MeshCollider>() != null, "the upper ascent ramp is missing its collider.");
             Need(Mathf.Abs(upperAscent.GetComponent<MeshCollider>().bounds.center.x - 294f) < 2f,
@@ -1072,6 +1199,19 @@ namespace DiceFree.EditorTools
                         paths++;
                     }
                 }
+                var arenaCells = 0;
+                var arenaCenter = CornbergLandscape.Ground(282, 484) + Vector3.up * UpperFloor;
+                for (var x = 270f; x <= 294f; x += 2f)
+                for (var z = 473f; z <= 495f; z += 2f)
+                {
+                    var requested = CornbergLandscape.Ground(x, z) + Vector3.up * UpperFloor;
+                    Need(NavMesh.SamplePosition(requested, out var arenaPoint, 1.25f, NavMesh.AllAreas),
+                        "the 25m outdoor arena footprint has no walkable NavMesh at " + new Vector2(x, z));
+                    Need(!Physics.CheckCapsule(arenaPoint.position + Vector3.up * .48f,
+                            arenaPoint.position + Vector3.up * 1.42f, .34f, Physics.AllLayers, QueryTriggerInteraction.Ignore),
+                        "a player-sized capsule is obstructed inside the Chieftain's outdoor arena at " + new Vector2(x, z));
+                    arenaCells++;
+                }
                 var gateSweep = Physics.CapsuleCastAll(CornbergLandscape.Ground(270, 432) + Vector3.up * 0.5f,
                     CornbergLandscape.Ground(270, 432) + Vector3.up * 1.7f, 0.34f, Vector3.forward, 10f,
                     Physics.AllLayers, QueryTriggerInteraction.Ignore).Where(hit => hit.collider != null && hit.collider.enabled && hit.collider.gameObject.activeInHierarchy).ToArray();
@@ -1091,6 +1231,8 @@ namespace DiceFree.EditorTools
                     lowerRoadHasUnderpassClearance = true,
                     gateWidth = 22,
                     gateCollisionFree = true,
+                    chieftainArena = new { center = arenaCenter.ToString("F2"), width = 25f, depth = 23f, clearNavMeshCells = arenaCells },
+                    longhouseOutsideArena = true,
                     mapNorth = root.GetComponent<OverworldMapBounds>().Bounds.yMax,
                     recoveryCopyExists = AssetDatabase.LoadAssetAtPath<NavMeshData>(NavBackupPath) != null,
                     encounterLogicDeferred = true
