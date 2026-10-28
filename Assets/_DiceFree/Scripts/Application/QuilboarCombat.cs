@@ -3,7 +3,7 @@ namespace DiceFree.Briarback
 {
     // Keep the original values stable because the provisional Briarback scene
     // serializes them. New production roles are appended as the region is migrated.
-    public enum QuilboarRole { Raider, SpearThrower, Totemcaller, Harrowtusk, Warrior, Brute, FireShaman, EarthShaman, LightningShaman, IceShaman }
+    public enum QuilboarRole { Raider, SpearThrower, Totemcaller, Harrowtusk, Warrior, Brute, FireShaman, EarthShaman, LightningShaman, IceShaman, Chieftain }
     [DefaultExecutionOrder(-10),DisallowMultipleComponent,RequireComponent(typeof(CombatActor),typeof(BasicAttack),typeof(AggroBehaviour))]
     public sealed class QuilboarCombat:MonoBehaviour,IBasicAttackApproachProvider
     {

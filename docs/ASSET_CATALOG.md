@@ -1,7 +1,7 @@
 # DiceFree Downloaded 3D Asset Catalog
 
-**License audit:** 60 files, 2026-10-17 UTC. **Current local inventory:** 111 ZIP archives + one standalone GLB (112 files), including the 52-file intake dated 2026-10-21 below.
-The original license audit covers only the first 60 files. The newer 52-file intake has not had source-page/license verification and is not cleared for use or redistribution.
+**License audit:** 60 files, 2026-10-17 UTC. **Current local inventory:** 206 ZIP archives + one standalone GLB (207 model packages), including the 52-file intake dated 2026-10-21, 34-file intake dated 2026-10-27, and 61-file intake dated 2026-10-28.
+The original license audit covers only the first 60 files. Later intakes have not had complete source-page/license verification and are not cleared for use or redistribution. The October 27 batch includes one byte-identical copy of a ZIP already present in the October 21 intake; the October 28 batch adds 61 distinct archive hashes. Across the 206 ZIPs, the only exact duplicate pair is `nyra-woman-warrior (1).zip` and `nyra-woman-warrior.zip`.
 
 **The original 60 files** have a stated model-page license and creator/source link.
 55 files: CC BY 4.0; two: Free Standard; Black Dragon: CC BY-NC 4.0;
@@ -162,3 +162,138 @@ No new engine import or runtime credit entry was made by the license audit.
 | `warrior-mage.zip` | 11.1 | GLB; 19326 vertices / 25675 triangles; 2 skins; 0 clips/stacks; 4 materials | **Source/license unverified; do not use or redistribute** |
 | `wasteland-female-warden-3d-model-free.zip` | 47.8 | GLB; 518770 vertices / 941008 triangles; 0 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
 | `werewolf.zip` | 6.1 | GLB; 3666 vertices / 5240 triangles; 1 skins; 0 clips/stacks; 1 materials | **Source/license unverified; do not use or redistribute** |
+
+## Locally installed Unity asset packs omitted from the download inventory — 2026-10-26
+
+The tables below close the gap between the staged download inventory above and
+asset files already present in the local Unity checkout. Counts are current
+non-`.meta` files under each folder, not counts of unique products or assets in
+the 112-file download archive. Several entries are generated/selected runtime
+subsets of the source packs below and must not be double-counted as separate
+licensed products. These folders are ignored by Git or locally installed; this
+catalog entry does not add, publish, or grant a license to any binary.
+
+| Local source folder | Files | What is present / review | Source and license record |
+| --- | ---: | --- | --- |
+| `Assets/AdventureForge` | 25 | Fantasy staff model, prefab, materials and textures. A useful held-weapon/prop source; not a character or environment replacement. | **Fantasy Staff Lite**, Adventure Forge; source and Unity Asset Store terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/AllStarCharacterLibrary` | 8 | Female warrior model, textures and several attack/idle/walk clips. The rig/clip evidence makes this more useful for an actor preview than unrigged staged models; inspect compatibility and silhouette before adoption. | **Female Warrior Princess**, All * Star Characters; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/Blink` | 68 | Modular male character, starter armor, animator/controller, and combat/movement clips. Also contains spell-icon source files; this is two package families in one import folder. | **FREE - Modular Character - Fantasy RPG Human Male** and **Free RPG Fantasy Spell Icons**, Blink; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/Containers pack` | 3 | Three prefabs: barrel, crate, wagon. Potential Trimery/world props; cataloged, but this folder name alone does not identify the publisher or exact product. | **Source/product and license not matched** to the existing credit registry; hold from public redistribution pending source receipt. |
+| `Assets/Low-Poly Medieval Market` | 39 | Market stall, lantern, food/weapon display, and small prop models/materials. Directly relevant to village dressing, subject to scale/style and collision review. | **Low-Poly Medieval Market**, VanillaArt; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/Medieval Village Building Pack` | 17 | Modular wall, thatch roof, door and pillar assets plus textures/shader. Best local candidate for replacing Trimery’s primitive house shells; retain authored footprints, navigation and colliders. | **Medieval Village Building Kit**, Mikes Digital Emporium; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/Polytope Studio` | 14 | Modular male armor model, materials and texture/mask set. Useful as an equipment/body visual source; no gameplay or rig conclusions from this file inventory. | **Low Poly Modular Armors - Free**, Polytope Studio; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/PurePoly` | 8 | Three low-poly sword models and prefabs with shared material/palette. Good candidates for weapon presentation after socket/scale checks. | **Free Low Poly Swords**, Pure Poly; source and terms in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/the_wood_cabin` | 1 | One cabin prefab; plausible environment candidate, but no source files or package metadata in this folder establish its exact origin. | **Source/product and license not matched** to the existing credit registry; hold from public redistribution pending source receipt. |
+| `Assets/Wolf` | 29 | Wolf model, materials, animation controller/clips and three example/demo scenes. Good source for an optional wolf visual; use the project adapter/fallback, not the vendor demo scene or gameplay setup. | **Realistic Furry Wolf**, Rip Vertices Studio; source and terms in [runtime credits](ASSET_CREDITS.md). |
+
+### Local licensed-source and runtime-subset folders
+
+These are additional local-only folders beneath `_DiceFree`; they contain either
+source package files or selected/generated files already referenced by runtime
+wrappers. Their presence does not make the raw package distributable. A folder
+name containing “Licensed” is not itself proof of exact provenance: where the
+source could not be tied to an entry in `ASSET_CREDITS.md`, the status is called
+out below rather than inferred.
+
+| Local folder | Files | Contents / source match | Catalog disposition |
+| --- | ---: | --- | --- |
+| `Assets/_DiceFree/LocalArt/TreesLicensed` | 9 | One oak FBX and eight source textures. `Resources/TreesLicensed` below has four selected prefabs and four materials derived for use. | Source product is not identified by the local folder name or current credits; keep local and verify exact receipt/source before distributing or replacing the portable tree fallback. |
+| `Assets/_DiceFree/Art/MageVfxVendor` | 54 | Local source import: 10 prefabs, five FBX meshes, 19 materials, 16 PNGs, two shaders and two TGA textures. | Matches **Free Game VFX Collection (URP)** by Eric VFX Studio in [runtime credits](ASSET_CREDITS.md). Source remains local-only; selected Mage effects below are derived subsets. |
+| `Assets/_DiceFree/Resources/AbilityIconsLicensed` | 17 | Selected ability icon PNGs. | **Battle Skill Icon** appears in the credit registry; exact per-image mapping has not been independently re-audited here. |
+| `Assets/_DiceFree/Resources/Audio/IronpineLicensed` | 3 | Wolf bark, growl and pack WAVs. | Exact source product is not identified in the current credit registry; keep local-only pending provenance confirmation. |
+| `Assets/_DiceFree/Resources/GreatbladeLicensed` | 9 | One hero prefab, four animations, controller, two avatar assets and material. | Runtime subset exists, but exact source-product mapping is not established by this inventory; keep source/license confirmation outstanding. |
+| `Assets/_DiceFree/Resources/IronpineLicensedWolf` | 6 | Optional wolf visual prefab, controller and four materials. | Selected subset of **Realistic Furry Wolf**; source and terms are in [runtime credits](ASSET_CREDITS.md). |
+| `Assets/_DiceFree/Resources/MageVfxLicensed` | 30 | Ten selected spell/effect prefabs plus 20 materials. | Derived subset of the Eric VFX source folder above; do not count as a second pack. |
+| `Assets/_DiceFree/Resources/MagicalLicensed` | 10 | Magical hero prefab and nine materials. | Exact source-product mapping is not established by this inventory; retain the existing procedural/authored fallback. |
+| `Assets/_DiceFree/Resources/PhysicalLicensed` | 12 | Physical hero prefab and 11 materials. | Exact source-product mapping is not established by this inventory; retain the existing procedural/authored fallback. |
+| `Assets/_DiceFree/Resources/StatusVfxLicensed` | 1 | One stun-glow PNG. | Exact source-product mapping is not established by this inventory; keep local-only until confirmed. |
+| `Assets/_DiceFree/Resources/TreesLicensed` | 8 | Four Oak prefabs and four materials, generated/selected from the local tree source folder above. | Same tree source as above; not a second package. |
+| `Assets/_DiceFree/Resources/TrimeryLicensed` | 4 | Crate, two market stands and timber support prefabs. | Exact per-prefab source mapping is not established by this inventory; keep local-only pending confirmation. |
+| `Assets/_DiceFree/Resources/UiThemesLicensed` | 28 | Pack preview/atlas PNGs for UI and icon packages. These are catalog evidence and should not be mistaken for 28 separate packages. | Source package titles are recorded in [runtime credits](ASSET_CREDITS.md); the table there is the product-level source of truth. |
+| `Assets/_DiceFree/Resources/WorldLoot` | 4 | Treasure chest FBX, texture and two materials. | **Animated Cartoon Treasure Chest**, Flying Saci Game Studio; source and terms are in [runtime credits](ASSET_CREDITS.md). |
+
+The local inventory review also found two resource data assets directly in
+`Assets/Resources` (`Minor Health Potion.asset`, `Minor Mana Potion.asset`);
+these are DiceFree gameplay definitions, not third-party art. `Assets/_Recovery`
+and `Assets/Settings` are scene/settings work rather than asset-pack sources and
+are excluded from this vendor inventory.
+
+**Review outcome:** the most immediately relevant local replacements remain the
+modular village building kit, market props and optional wolf presentation. The
+existing wrappers already use selected wolf, tree, chest, Trimery prop, UI and
+Mage VFX content with portable fallbacks, as summarized in
+[the project asset review](ASSET_REVIEW_2026-10-26.md). The cabin and container
+folders may be useful, but must not be attributed or redistributed until their
+exact product sources are matched. No runtime files were added or changed by
+this catalog update.
+
+## New local intake — 2026-10-27
+
+**34 newly dated ZIP files** were found in `T:\TEMP\ART_ASSETS`. All outer ZIP
+members passed CRC verification. The intake adds 33 distinct archive contents:
+`nyra-woman-warrior (1).zip` is byte-for-byte identical to the existing
+`nyra-woman-warrior.zip`. Three separately named boar ZIPs (`boar.zip`,
+`boar (1).zip`, and `boar (2).zip`) contain the same `Player_SkinBoar.obj`
+payload (SHA-256 `52aca9dc…aeb30ba`) with different texture files, so these are
+texture variants of one mesh rather than three unique models. Other similarly
+named creatures were not considered duplicates unless their bytes matched.
+
+This is a structural, read-only archive inventory. No Blender/Unity import,
+visual review, rig/deformation test, or source-page/license verification was
+performed. Nested ZIP/7z payloads are listed but not recursively parsed. Every
+new archive is **source/license unverified; hold from project use and public
+redistribution**. The filenames `inosuke-hashibira-demon-slayer-3d-model.zip`
+and `impian789-girl-fighter-3d.zip` (whose nested file is named for Xiaoyu from
+Tekken) also indicate recognizable third-party IP; do not use or redistribute
+those based on a “free” filename.
+
+[Full member/hash inventory JSON](assets/incoming-assets-2026-10-27.json) |
+[Searchable intake CSV](assets/incoming-assets-2026-10-27.csv)
+
+| Download | MiB | First-level model payload / contents | Possible DiceFree use | Provenance status |
+| --- | ---: | --- | --- | --- |
+| `1910s-blacksmiths-shop-at-big-basin.zip` | 15.7 | FBX + PNG | Blacksmith/workshop environment candidate; check period/style fit | **Source/license unverified; hold** |
+| `3drt-fantasy-amazon.zip` | 8.7 | FBX + JPG | Amazon/fantasy humanoid candidate; inspect rig and style | **Source/license unverified; hold** |
+| `altea.zip` | 3.5 | Nested ZIP + PNG | Character candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `ancient-ruin-g.zip` | 81.4 | GLB + 4 PNGs | Ruin/encounter prop candidate; check scale and geometry | **Source/license unverified; hold** |
+| `animated-realistic-boar-3d-animal-model.zip` | 28.1 | FBX + 2 PNGs | Briarback creature candidate; verify stylized fit, rig and clips | **Source/license unverified; hold** |
+| `armored-war-boar-dark-fantasy-creature.zip` | 59.6 | Nested ZIP + 4 JPEGs | Armored Briarback elite candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `awful-boar.zip` | 24.5 | Nested 7z + 2 PNGs | Boar creature candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `beautiful-women-in-ancient-china.zip` | 1.1 | Nested ZIP + PNG | Human/NPC visual candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `boar.zip` | 0.4 | OBJ + PNG | Boar texture variant A; shares mesh with next two entries | **Source/license unverified; hold** |
+| `boar (1).zip` | 0.4 | OBJ + PNG | Boar texture variant B; shares mesh with adjacent entries | **Source/license unverified; hold** |
+| `boar (2).zip` | 0.4 | OBJ + PNG | Boar texture variant C; shares mesh with adjacent entries | **Source/license unverified; hold** |
+| `boar-king.zip` | 6.5 | FBX + 5 PNGs | Briarback boss/elite candidate; verify rig and animation | **Source/license unverified; hold** |
+| `crazy-boar.zip` | 1.0 | Blender source + 2 textures | Briarback creature candidate; Blender scene not opened | **Source/license unverified; hold** |
+| `e6cf293c92434943a36fb0612b4c19a5.zip` | 32.8 | Nested ZIP + 24 images | Subject/source not established from archive name; inspect only after provenance | **Source/license unverified; hold** |
+| `fairytale.zip` | 29.0 | Nested ZIP + 10 PNGs | Character/creature contents unclear; nested payload uninspected | **Source/license unverified; hold** |
+| `free-old-tree-stump.zip` | 48.6 | Nested 7z + 4 textures | Potential Trimery stump/forestry prop; nested payload uninspected | **Source/license unverified; hold** |
+| `girl-knight.zip` | 0.6 | OBJ + PNG | Knight visual candidate; verify topology, rig and style | **Source/license unverified; hold** |
+| `girl-with-clothes-worker-set.zip` | 40.6 | Nested ZIP + 7 PNGs | Civilian/workwear candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `goblin-girl.zip` | 62.0 | Nested ZIP + 18 textures | Goblin NPC/creature candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `impian789-girl-fighter-3d.zip` | 4.3 | Nested ZIP + 4 PNGs | Filename identifies a Tekken character; no use without rights review | **IP/provenance/license unverified; hold** |
+| `inosuke-hashibira-demon-slayer-3d-model.zip` | 34.4 | Nested ZIP + JPEG | Filename identifies a Demon Slayer character; no use without rights review | **IP/provenance/license unverified; hold** |
+| `killer-mushroom-anim.zip` | 2.4 | Nested ZIP + PNG | Briarback mushroom enemy candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `nyra-woman-warrior (1).zip` | 151.6 | Nested ZIP + 7 images | Exact duplicate of the already inventoried `nyra-woman-warrior.zip`; no new model | **Duplicate; original remains unverified/hold** |
+| `mushroom-monster.zip` | 0.1 | GLB + PNG | Briarback mushroom creature candidate; verify animation from data | **Source/license unverified; hold** |
+| `oak-tree.zip` | 22.2 | Nested ZIP + 2 PNGs | Tree canopy candidate; nested payload uninspected | **Source/license unverified; hold** |
+| `pine-tree.zip` | 0.1 | GLB + 3 PNGs | Pine forest candidate; inspect silhouette and scale | **Source/license unverified; hold** |
+| `rose-aka-noelle.zip` | 6.9 | Blender source + 3 PNGs | Character candidate; Blender scene not opened | **Source/license unverified; hold** |
+| `sorceress.zip` | 4.4 | FBX + 2 PNGs | Caster visual candidate; verify rig, clips and style | **Source/license unverified; hold** |
+| `stylized-low-poly-fantasy-oak-tree.zip` | 0.4 | FBX + PNG | Strong forest style candidate; validate rig-free prop and materials | **Source/license unverified; hold** |
+| `titan-boar.zip` | 28.3 | GLB + 4 PNGs | Briarback heavy/elite candidate; inspect rig and gameplay silhouette | **Source/license unverified; hold** |
+| `tree-low-poly.zip` | 0.0 | GLB | Tree candidate; small archive, inspect dimensions and geometry | **Source/license unverified; hold** |
+| `tree-low-poly-lowpoly.zip` | 0.2 | FBX + PNG | Tree candidate; compare against other tree variants | **Source/license unverified; hold** |
+| `wild-boar-boy.zip` | 34.6 | GLB + 4 PNGs | Boar humanoid candidate; inspect rig and gameplay silhouette | **Source/license unverified; hold** |
+| `xiaomi-redmi-7-edl-point-test-point-reboot.zip` | 4.1 | USDZ + JPEG; payload named `Free_Pack_-_Tree.usdz` | Filename/payload mismatch; possible tree pack, identify source before review | **Source/license unverified; hold** |
+
+The listed structural formats are based on first-level archive member names only;
+they do not establish animation, engine compatibility, artistic quality, or
+license rights. In particular, the “animated” filename is not evidence that
+usable animation clips are present. Do not copy any of these staged downloads
+into the Unity project until its exact source and license are confirmed.
+
+
+## October 28, 2026 intake
+
+The complete staging count is now 206 ZIPs plus one standalone GLB. The newly added 61-package intake and its current-game placement review are documented in [ASSET_PLACEMENT_REVIEW_2026-10-28.md](ASSET_PLACEMENT_REVIEW_2026-10-28.md), with hashes and packaged format inventory in [incoming-assets-2026-10-28.csv](assets/incoming-assets-2026-10-28.csv). Only the user-selected dice source page was verified during this pass; other new packages remain on hold pending license/provenance review. The named dice is not yet admitted/imported because the required local game-dev package-verification CLI is unavailable in this session.

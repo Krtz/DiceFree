@@ -13,6 +13,11 @@ namespace DiceFree.World
         private float due = float.PositiveInfinity;
         public float Remaining => Mathf.Max(0, due - Time.time);
         public RespawnDefinition Definition => definition;
+        public void ConfigureHomePosition(Vector3 position)
+        {
+            home = position;
+            rotation = transform.rotation;
+        }
         private void Awake() { actor = GetComponent<CombatActor>(); home = transform.position; rotation = transform.rotation; }
         private void OnEnable() { actor.Health.Died += OnDeath; actor.Health.Restored += OnRestored; }
         private void OnDisable() { actor.Health.Died -= OnDeath; actor.Health.Restored -= OnRestored; }

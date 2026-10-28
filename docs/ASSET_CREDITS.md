@@ -79,6 +79,17 @@ the linked Sketchfab page states, independently of source-design or integration 
 
 Potential Thief research leads below are explicitly candidates, not cleared assets. Local archive filenames and geometry counts are suggestive, but do not prove the exact download/source match. Sketchfab page metadata was checked on 2026-10-21; verify the model identity against the staged bytes and review AI/source-image provenance before use.
 
+### Additional local intake — 2026-10-27
+
+34 ZIP copies were added to the staged inventory. Their outer ZIP member CRCs
+passed, but source pages and licenses have not been verified. One is an exact
+duplicate of the earlier `nyra-woman-warrior.zip`; three boar archives share
+one OBJ mesh with different textures. **All new files remain on hold and are
+not cleared for import, runtime credit, public redistribution, or release.**
+Two filenames identify recognizable third-party characters (Inosuke from
+*Demon Slayer* and Xiaoyu from *Tekken*), which require rights review even if a
+download page calls them free. See the [October 27 catalog intake](ASSET_CATALOG.md#new-local-intake--2026-10-27) and its [member/hash inventory](assets/incoming-assets-2026-10-27.json).
+
 | Staged file | Source candidate | Page metadata | Current disposition |
 | --- | --- | --- | --- |
 | `free-magical-assassin.zip` | [FREE Magical Assassin](https://sketchfab.com/3d-models/free-magical-assassin-bb0b4d55b652425aa3edddd039ef4a46), Axinovium | Page states CC Attribution; page lists 30k triangles and says the model was created using Meshy. | Candidate match by title and local 30k-triangle GLB only; source match, underlying-image provenance, and usable license chain remain unverified. Hold. |
@@ -162,3 +173,9 @@ Potential Thief research leads below are explicitly candidates, not cleared asse
 DiceFree's original project-authored assets do not need a third-party attribution row unless their materials incorporate third-party content. A source file's presence in Git does **not** automatically establish rights to distribute it.
 
 Performance decisions (geometry, texture size, LODs, rigs, materials) belong in the [art pipeline](ART_PIPELINE.md), not in this license ledger.
+
+## Pending local-use candidate (2026-10-28)
+
+| Staging file | Creator / title | Source | Stated license | Intended use / status |
+| --- | --- | --- | --- | --- |
+| `ART_ASSETS/simple-boardgame-dice.zip` | CosmicWonder, *Simple Boardgame Dice* | [Sketchfab model page](https://sketchfab.com/3d-models/simple-boardgame-dice-45c800245b144fc9a8e0e67a33901092) | CC BY 4.0 | User-selected town resurrection-anchor visual. License page checked; model is not yet imported or modified pending package verification/admission. If later adapted, note the pip overlay and active-anchor glow as changes. |
