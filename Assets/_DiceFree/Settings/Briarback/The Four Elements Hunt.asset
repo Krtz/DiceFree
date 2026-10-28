@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Four Elements Hunt
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.briarback.four-elements-hunt
+  title: The Four Elements Hunt
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: The Briarback shamans are gathering elemental forces. Defeat one Fire, Earth, Lightning and Ice Shaman, then return to me.
+  activeDialogue: You have faced all four elements. Return here and I will record what you learned.
+  locationHint: Find one Fire, Earth, Lightning and Ice Shaman at their settlements in the Briarback region, then return to Trimery's elemental scholar.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat a Fire Shaman
+    contentId: briarback.fireshaman
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat an Earth Shaman
+    contentId: briarback.earthshaman
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat a Lightning Shaman
+    contentId: briarback.lightningshaman
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat an Ice Shaman
+    contentId: briarback.iceshaman
+    dungeonBossOnly: 0
+    familyId: briarback.quilboar
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 400
+  reward: {fileID: 11400000, guid: a9efa30a8f149004883754ebdec54daa, type: 2}
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

@@ -108,6 +108,7 @@ namespace DiceFree.EditorTools
    // legacy combat/quest fixture isolated from their ordinary aggro and route
    // traffic while preserving its original twenty-creature expectations.
    var patrolGroup=GameObject.Find("Briarback road patrols - additive");if(patrolGroup!=null)patrolGroup.SetActive(false);
+   var elementalGroup=GameObject.Find("Briarback elemental guardians - additive");if(elementalGroup!=null)elementalGroup.SetActive(false);
    var creatures=Object.FindObjectsByType<QuilboarCombat>();Need(creatures.Length==20,$"Live creature count: {creatures.Length}");
    var roleRoot=GameObject.Find("Approved Quillboar role prototypes - additive");Need(roleRoot!=null,"Approved role prototypes were not loaded");
    var rolePrototypes=roleRoot.GetComponentsInChildren<QuilboarCombat>();Need(rolePrototypes.Length==7,"Live approved role prototype count");

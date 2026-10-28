@@ -91,6 +91,7 @@ namespace DiceFree.EditorTools
             var approach = CornbergLandscape.Ground(270f, 369f);
             Need(NavMesh.SamplePosition(approach, out var approachHit, 2f, NavMesh.AllAreas),
                 "the existing northern approach has no saved NavMesh point.");
+            var guardians = RegionRoot(scene).Find("Briarback elemental guardians - additive");
             var points = Sites.Select(site =>
             {
                 var ground = CornbergLandscape.Ground(site.position.x, site.position.y);
@@ -102,7 +103,8 @@ namespace DiceFree.EditorTools
                     site.name + " is disconnected from the existing northern approach.");
                 var obstructions = Physics.OverlapSphere(hit.position + Vector3.up * 1f, 7f,
                         Physics.AllLayers, QueryTriggerInteraction.Ignore)
-                    .Where(c => c.enabled && c.gameObject.activeInHierarchy && !IsGround(c)).ToArray();
+                    .Where(c => c.enabled && c.gameObject.activeInHierarchy && !IsGround(c) &&
+                        (guardians == null || !c.transform.IsChildOf(guardians))).ToArray();
                 Need(obstructions.Length == 0, site.name + " has nearby solid blockers: " +
                      string.Join(", ", obstructions.Select(c => c.name).Distinct().Take(8)));
                 return hit.position;
@@ -399,7 +401,8 @@ namespace DiceFree.EditorTools
                     connectedSiteRoutes = routeCount,
                     savedNavMeshUnchanged = true,
                     recoveryCopyExists = System.IO.File.Exists(RecoveryPath),
-                    gameplayDeferred = true
+                    siteVisualsRemainColliderFree = true,
+                    elementalGuardiansAreSeparateGameplay = region.Find("Briarback elemental guardians - additive") != null
                 };
             }
             finally { if (nav.valid) nav.Remove(); }

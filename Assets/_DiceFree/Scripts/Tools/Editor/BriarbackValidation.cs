@@ -12,8 +12,10 @@ namespace DiceFree.EditorTools
     EditorSceneManager.OpenScene(BriarbackAuthoring.Scene);var root=GameObject.Find(BriarbackAuthoring.RootName);Need(root!=null,"Region missing");
     nav=NavMesh.AddNavMeshData(Object.FindAnyObjectByType<WorldNavigation>().Data);
     var patrolRoot=root.transform.Find("Briarback road patrols - additive");
+    var elementalRoot=root.transform.Find("Briarback elemental guardians - additive");
     var creatures=root.GetComponentsInChildren<QuilboarCombat>()
-     .Where(c=>patrolRoot==null||!c.transform.IsChildOf(patrolRoot)).ToArray();
+     .Where(c=>(patrolRoot==null||!c.transform.IsChildOf(patrolRoot))&&
+      (elementalRoot==null||!c.transform.IsChildOf(elementalRoot))).ToArray();
     var additiveRoot=root.transform.Find("Approved Quillboar role prototypes - additive");
     bool additiveRoles=additiveRoot!=null;
     var roleCreatures=additiveRoot!=null?additiveRoot.GetComponentsInChildren<QuilboarCombat>():Array.Empty<QuilboarCombat>();
