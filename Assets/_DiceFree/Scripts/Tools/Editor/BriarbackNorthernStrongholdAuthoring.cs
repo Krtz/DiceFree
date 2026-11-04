@@ -1207,8 +1207,9 @@ namespace DiceFree.EditorTools
                     var requested = CornbergLandscape.Ground(x, z) + Vector3.up * UpperFloor;
                     Need(NavMesh.SamplePosition(requested, out var arenaPoint, 1.25f, NavMesh.AllAreas),
                         "the 25m outdoor arena footprint has no walkable NavMesh at " + new Vector2(x, z));
-                    Need(!Physics.CheckCapsule(arenaPoint.position + Vector3.up * .48f,
-                            arenaPoint.position + Vector3.up * 1.42f, .34f, Physics.AllLayers, QueryTriggerInteraction.Ignore),
+                    Need(!Physics.OverlapCapsule(arenaPoint.position + Vector3.up * .48f,
+                            arenaPoint.position + Vector3.up * 1.42f, .34f, Physics.AllLayers, QueryTriggerInteraction.Ignore)
+                            .Any(c => c.GetComponentInParent<DiceFree.Combat.CombatActor>() == null),
                         "a player-sized capsule is obstructed inside the Chieftain's outdoor arena at " + new Vector2(x, z));
                     arenaCells++;
                 }

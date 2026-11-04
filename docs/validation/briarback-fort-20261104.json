@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-04",
+  "branch": "art/briarback-elemental-landmarks",
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-122641\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 2,
+    "sceneCount": 7,
+    "bytes": 412658750,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "windowsSmoke": {
+    "status": "passed",
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.3441,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "playerProcessExited": true,
+  "regionalChecks": 234,
+  "regionalWalks": 38,
+  "regionalMeters": 1033.79296875,
+  "chieftainChecks": 16,
+  "elementalQuestChecks": 31,
+  "loadingSmokePassed": true,
+  "architecturePassed": true,
+  "policyPassed": true,
+  "managedReferencesPassed": true,
+  "protectedWipHashesUnchanged": true,
+  "runtimeExceptionLines": 0
+}

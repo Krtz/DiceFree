@@ -28,8 +28,6 @@ namespace DiceFree.Briarback
         Vector3 smashForward;
         CombatActor smashTarget;
         GameObject telegraph;
-        Mesh telegraphMesh;
-        Material telegraphMaterial;
         bool winding;
 
         public bool Winding => winding;
@@ -151,6 +149,7 @@ namespace DiceFree.Briarback
 
         void ResolveSmash()
         {
+            BriarbackChieftainEffects.SmashImpact(transform.position + Vector3.up * .075f, smashForward);
             SmashAttempts++;
             SmashHostileCandidates = SmashLineCandidates = 0;
             foreach (var victim in CombatActor.All.ToArray())
@@ -182,14 +181,11 @@ namespace DiceFree.Briarback
             yield return new WaitForSeconds(.65f); // Provisional wind-up; the design leaves Axe Throw wind-up open.
             AxeThrowStarted = false;
             if (!actor.Alive || !target.Alive || aggro.Returning) yield break;
-            var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            var go = new GameObject();
             go.name = "Briarback Chieftain homing axe";
-            go.transform.localScale = new Vector3(.42f, .12f, .68f);
+            go.layer = 2;
             go.transform.position = transform.position + transform.forward * .9f + Vector3.up * 1.3f;
-            go.GetComponent<Renderer>().sharedMaterial = AxeMaterial;
-            var collider = go.GetComponent<Collider>();
-            collider.enabled = false;
-            Destroy(collider);
+            BriarbackChieftainEffects.DressAxe(go);
             var projectile = go.AddComponent<BriarbackHomingAxe>();
             projectile.Launch(actor, target, axeThrow, axeDamage, axeSpeed);
         }
@@ -226,17 +222,7 @@ namespace DiceFree.Briarback
 
         void ShowSmashTelegraph()
         {
-            telegraph = new GameObject("Chieftain smash - red fracture warning");
-            telegraph.layer = 2;
-            telegraph.transform.position = transform.position + Vector3.up * .07f;
-            telegraph.transform.rotation = Quaternion.LookRotation(smashForward);
-            telegraphMesh = new Mesh { name = "6m x 1m smash warning" };
-            telegraphMesh.vertices = new[] { new Vector3(-.5f, 0, 0), new Vector3(.5f, 0, 0), new Vector3(-.5f, 0, 6), new Vector3(.5f, 0, 6) };
-            telegraphMesh.triangles = new[] { 0, 2, 1, 1, 2, 3 };
-            telegraphMesh.RecalculateNormals();
-            telegraph.AddComponent<MeshFilter>().sharedMesh = telegraphMesh;
-            telegraphMaterial = new Material(Shader.Find("Universal Render Pipeline/Unlit")) { color = new Color(1f, .04f, .02f, .68f) };
-            telegraph.AddComponent<MeshRenderer>().sharedMaterial = telegraphMaterial;
+            telegraph = BriarbackChieftainEffects.Warning(transform.position + Vector3.up * .07f, smashForward);
         }
 
         void CancelSmash()
@@ -246,13 +232,9 @@ namespace DiceFree.Briarback
             AxeThrowStarted = false;
             if (actor != null) { actor.SetActionBlocked(SmashBlock, false); actor.Motor.SetMotionBlocked(SmashBlock, false); }
             if (telegraph != null) Destroy(telegraph);
-            if (telegraphMesh != null) Destroy(telegraphMesh);
-            if (telegraphMaterial != null) Destroy(telegraphMaterial);
-            telegraph = null; telegraphMesh = null; telegraphMaterial = null;
+            telegraph = null;
         }
 
-        static Material axeMaterial;
-        static Material AxeMaterial => axeMaterial != null ? axeMaterial : axeMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit")) { color = new Color(.62f, .48f, .28f) };
     }
 
     /// <summary>Homing axe using the same swept collision policy as the existing Ironpine homing quill.</summary>
@@ -285,6 +267,7 @@ namespace DiceFree.Briarback
                 var hitActor = hit.collider.GetComponentInParent<CombatActor>();
                 if (hitActor == target)
                 {
+                    BriarbackChieftainEffects.AxeImpact(hit.point);
                     if (owner.IsHostileTo(target))
                     {
                         var packet = DamageResolver.Calculate(owner.Stats, target.Stats, definition,
@@ -293,7 +276,7 @@ namespace DiceFree.Briarback
                     }
                     Destroy(gameObject); return;
                 }
-                if (hitActor != null || hit.collider.gameObject.layer == 9) { Destroy(gameObject); return; }
+                if (hitActor != null || hit.collider.gameObject.layer == 9) { BriarbackChieftainEffects.AxeImpact(hit.point); Destroy(gameObject); return; }
             }
             transform.position += direction * length;
             if (direction.sqrMagnitude > .001f) transform.rotation = Quaternion.LookRotation(direction);
