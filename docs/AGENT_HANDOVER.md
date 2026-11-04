@@ -2080,3 +2080,13 @@ Final live solo review passed scholar interaction, acceptance, each ordered kill
 
 See `docs/BRIARBACK_ELEMENTAL_LANDMARKS.md` and `tools/validation/BriarbackLandmarkReview.cs`. No fresh Windows build or multiplayer test has been made. Keep the ritual cave/dungeon separate. Next art opportunities are richer terrain transitions, the remaining northern fort blockout and animation/VFX treatment for these sites.
 Final architecture, architecture-policy and managed-reference checks passed on working source. Unity returned ready in Edit Mode. The local milestone commit includes only these landmark/quest changes; it does not include the prior loading-screen WIP or unrelated settings. No push or merge was performed.
+
+## 2026-11-04 — Living elemental landmark ambience
+
+Continued the same local art branch after milestone 9cb3840. Added ElementalLandmarkAmbience to all four landmark roots: pinned cloth movement, restrained elemental emission variation and a contained fire ember emitter. It clones cloth only at runtime and restores mesh/material properties when disabled; source art assets remain unchanged. A third local recovery scene preserves the pre-ambience state. No collision or gameplay change is authored by the ambience.
+
+The isolated ambience review passed four wind cases, 48 pole-edge pin checks, three emission cases, four cleanup/re-enable cases and one ember emitter capped at 12 particles. The final solo hunt/turn-in review passed again, as did all 31 focused quest checks. Architecture, architecture-policy and managed-reference validation passed after the ambience. Unity is ready in Edit Mode. The 234-check regional traversal/combat/save run remains the preceding landmark milestone result.
+
+The close preview caught cancelled normals on the double-sided ember triangle; explicit normals fixed the bright rendering artifact. Also corrected existing BriarbackMantleVisual material creation to use Unity-object null semantics, avoiding missing/destroyed material errors after script reload. Fresh isolated runtime log review found no new exception/compiler-error lines.
+
+The four-second live preview is VisualBaselines/BriarbackLandmarks/ambience-preview.mp4. The capture helper temporarily hides Editor gizmos/NavMesh visualization and restores them afterward. No Windows build, multiplayer verification, push or merge was performed. Preserve prior loading-screen WIP and all unrelated changes separately.

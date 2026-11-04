@@ -135,6 +135,32 @@ namespace DiceFree.EditorTools
 
         static string ArtFolder(string element) => "Assets/_DiceFree/Art/World/Briarback"+element;
 
+        [CliCommand("dicefree.briarback.landmarks.ambience", "Add visual-only cloth wind, contained embers and elemental emission variation.")]
+        public static object AddAmbience()
+        {
+            Need(!EditorApplication.isPlayingOrWillChangePlaymode, "Stop Play Mode before authoring.");
+            const string backup = "Assets/_DiceFree/Settings/Recovery/Cornberg-before-landmark-ambience-20261104.unity";
+            Need(!File.Exists(backup), "Ambience recovery already exists.");
+            var descriptors = new[] { ("Fire",Landmark) }.Concat(OtherSites).ToArray();
+            var roots = descriptors.Select(s => FindSite(s.Item1).Find(s.Item2)).ToArray();
+            Need(roots.All(r => r!=null && r.GetComponent<DiceFree.World.ElementalLandmarkAmbience>()==null),
+                "Landmark missing or ambience already installed.");
+            Need(EditorSceneManager.SaveScene(roots[0].gameObject.scene,backup,true), "Could not save ambience recovery scene.");
+            for(int i=0;i<roots.Length;i++)
+            {
+                var root=roots[i];
+                bool fire=i==0;
+                var cloth=root.Find(fire?"Oath cloth":"Trail cloth").GetComponent<MeshFilter>();
+                var details=new[] {root.Find(fire?"Amber flame":"Element core").GetComponent<Renderer>(),
+                    root.Find(fire?"Golden flame":"Element facet").GetComponent<Renderer>()};
+                root.gameObject.AddComponent<DiceFree.World.ElementalLandmarkAmbience>().Configure(
+                    (DiceFree.World.LandmarkElement)i,cloth,details);
+            }
+            EditorSceneManager.MarkSceneDirty(roots[0].gameObject.scene);
+            Need(EditorSceneManager.SaveScene(roots[0].gameObject.scene), "Could not save ambience wiring.");
+            return new { configured=4,collidersAdded=0,gameplayChanged=false };
+        }
+
         [CliCommand("dicefree.briarback.fire.validate", "Verify the saved ember landmark and retained original visuals.")]
         public static object Validate()
         {

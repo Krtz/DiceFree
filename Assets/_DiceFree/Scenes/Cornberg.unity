@@ -34358,6 +34358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100497822}
+  - component: {fileID: 100497823}
   m_Layer: 2
   m_Name: Ember oath clearing
   m_TagString: Untagged
@@ -34392,6 +34393,23 @@ Transform:
   - {fileID: 500171422}
   m_Father: {fileID: 1053490997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &100497823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100497821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c108ca9c5458644c96c3b6fede29e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ElementalLandmarkAmbience
+  element: 0
+  cloth: {fileID: 2062232845}
+  emissiveDetails:
+  - {fileID: 1872197712}
+  - {fileID: 1472531361}
 --- !u!1 &100520575
 GameObject:
   m_ObjectHideFlags: 0
@@ -115674,6 +115692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 321893388}
+  - component: {fileID: 321893389}
   m_Layer: 2
   m_Name: Rimeglass vigil
   m_TagString: Untagged
@@ -115705,6 +115724,23 @@ Transform:
   - {fileID: 350741839}
   m_Father: {fileID: 560003677}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &321893389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321893387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c108ca9c5458644c96c3b6fede29e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ElementalLandmarkAmbience
+  element: 3
+  cloth: {fileID: 596446448}
+  emissiveDetails:
+  - {fileID: 396428612}
+  - {fileID: 1088617804}
 --- !u!1 &322035790
 GameObject:
   m_ObjectHideFlags: 0
@@ -414497,6 +414533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1198896689}
+  - component: {fileID: 1198896690}
   m_Layer: 2
   m_Name: Splitroot cairn
   m_TagString: Untagged
@@ -414528,6 +414565,23 @@ Transform:
   - {fileID: 1025827050}
   m_Father: {fileID: 2052520772}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1198896690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198896688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c108ca9c5458644c96c3b6fede29e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ElementalLandmarkAmbience
+  element: 1
+  cloth: {fileID: 783184948}
+  emissiveDetails:
+  - {fileID: 243681472}
+  - {fileID: 1154761002}
 --- !u!1001 &1198900722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -621845,6 +621899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796485526}
+  - component: {fileID: 1796485527}
   m_Layer: 2
   m_Name: Stormcall stakes
   m_TagString: Untagged
@@ -621876,6 +621931,23 @@ Transform:
   - {fileID: 1199120298}
   m_Father: {fileID: 601657370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1796485527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796485525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c108ca9c5458644c96c3b6fede29e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ElementalLandmarkAmbience
+  element: 2
+  cloth: {fileID: 1459240488}
+  emissiveDetails:
+  - {fileID: 1611959820}
+  - {fileID: 242609189}
 --- !u!1 &1796822426
 GameObject:
   m_ObjectHideFlags: 0

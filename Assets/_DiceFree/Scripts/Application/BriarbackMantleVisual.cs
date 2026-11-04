@@ -14,8 +14,8 @@ namespace DiceFree.Briarback
         public void PrepareVisual(Transform root,EquipmentPresentation target,CarriedInventory items){
             if(root==null||target==null||items==null||!prepared.Add(root))return;
             var definition=items.Resolve(ItemId);if(definition==null)return;
-            hide??=new Material(Shader.Find("Universal Render Pipeline/Lit")){name="Original bristlehide mantle",color=new Color(.30f,.22f,.13f)};
-            bone??=new Material(Shader.Find("Universal Render Pipeline/Lit")){name="Original mantle bone trim",color=new Color(.75f,.67f,.43f)};
+            if(hide==null)hide=new Material(Shader.Find("Universal Render Pipeline/Lit")){name="Original bristlehide mantle",color=new Color(.30f,.22f,.13f)};
+            if(bone==null)bone=new Material(Shader.Find("Universal Render Pipeline/Lit")){name="Original mantle bone trim",color=new Color(.75f,.67f,.43f)};
             hide.SetFloat("_Cull",0);hide.SetFloat("_Smoothness",.1f);
             var animator=ClassPresentationSwitcher.FindVisualAnimator(root);if(animator==null||!animator.isHuman)return;
             var spine=animator.GetBoneTransform(HumanBodyBones.Spine);if(spine==null)return;

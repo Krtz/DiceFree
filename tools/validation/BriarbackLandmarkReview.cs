@@ -31,7 +31,7 @@ public static class BriarbackLandmarkReview
     {
         Need(Application.isPlaying,"Play Mode required");
         var gameViewType=typeof(EditorWindow).Assembly.GetType("UnityEditor.GameView");
-        var gizmos=gameViewType?.GetProperty("showGizmos",BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance);
+        var gizmos=gameViewType?.GetProperty("drawGizmos",BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance);
         var gameView=gameViewType!=null ? Resources.FindObjectsOfTypeAll(gameViewType).FirstOrDefault() : null;
         var old=gameView!=null && gizmos!=null ? gizmos.GetValue(gameView) : null;
         var navType=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("UnityEditor.AI.NavMeshVisualizationSettings")).FirstOrDefault(t=>t!=null);

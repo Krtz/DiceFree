@@ -21,3 +21,14 @@ The broader Briarback run passed 234 checks after its visual checkpoint and resu
 
 The live solo review exposed an empty optional runtime family override after a script reload. That hid the guardian's valid definition family and prevented quest credit. `CombatActor.FamilyId` now falls back for both null and empty overrides, while retaining an explicit nonempty override. The final solo review exercised all three cases on each guardian, then all four ordered kills and the scholar turn-in. `tools/validation/BriarbackLandmarkReview.cs` reproduces this review with an isolated save; invoke its `Start` and `Run` entries through Unity Pipeline, then stop Play Mode. It temporarily hides Editor-only NavMesh visualization for captures and restores that setting afterward. The scripted defeat fixtures validate credit, not combat balance.
 Final checks after the family fallback and quest-panel updates: the focused elemental quest suite passed all 31 checks again; architecture, architecture-policy and managed-reference validation passed. Unity returned ready in Edit Mode. No Windows build, multiplayer or balance approval is claimed.
+
+## Ambience follow-up
+
+Each site now has gentle standard movement. The runtime component clones the cloth mesh, pins the pole edges and restores the original mesh/material properties when disabled. Fire emission flickers, lightning details pulse gently, and ice varies slowly; earth minerals stay steady. The fire altar has one small upward ember emitter. The original source meshes and shared materials stay unchanged.
+
+The isolated ambience check passed four wind cases, 48 pinned-edge checks, three emission cases, four disable/re-enable cleanup cases, the single bounded emitter and valid ember normals. The initial double-sided ember mesh had cancelled normals and produced a bright artifact with the lit shader; explicit normals fixed the preview. The ordinary solo hunt and turn-in passed again with all ambience running.
+
+Runtime log review also found a pre-existing mantle material null-reference after script reload. BriarbackMantleVisual now uses Unity-object null checks when recreating its materials, rather than C# null-coalescing. A fresh isolated session after that fix added no exception/compiler-error lines to the captured Editor log.
+
+A four-second sampled live Game View recording is saved as VisualBaselines/BriarbackLandmarks/ambience-preview.mp4. It uses a closer gameplay camera pose, within the existing zoom range. Navigation visualization and Editor gizmos are temporarily hidden during captures and restored afterward. This is visual evidence of the recorded session, not a performance benchmark.
+After ambience: all 31 focused quest checks, architecture, policy, and managed references passed again. Unity is ready in Edit Mode.
