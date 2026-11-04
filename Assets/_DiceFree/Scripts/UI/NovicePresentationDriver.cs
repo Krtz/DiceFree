@@ -22,6 +22,7 @@ namespace DiceFree.UI
         private float stalledWalkFor, stalledIdleFor, attackVisualUntil;
         private int idleState, walkState;
         private bool wasAlive;
+        private PlayerMotionPresentation earlyClassMotion;
         private Vector3 previousPosition;
         private bool hasPreviousPosition;
         private Transform leftUpperArm;
@@ -52,6 +53,7 @@ namespace DiceFree.UI
             previousPosition = transform.position;
             hasPreviousPosition = true;
             wasAlive = actor.Alive;
+            earlyClassMotion=GetComponent<PlayerMotionPresentation>()??gameObject.AddComponent<PlayerMotionPresentation>();
         }
 
         private void LateUpdate()
@@ -59,6 +61,7 @@ namespace DiceFree.UI
             if (animator == null || actor == null) return;
 
             float speed = ResolveMovementSpeed();
+            if(earlyClassMotion!=null&&earlyClassMotion.Drive(animator,speed)){LastDrivenSpeed=actor.Alive?speed:0;return;}
             bool alive = actor.Alive;
             if (!alive)
             {
@@ -170,6 +173,7 @@ namespace DiceFree.UI
 
         public void PlayAttackAnimation()
         {
+            if(earlyClassMotion!=null&&earlyClassMotion.PlayRequestedAttack())return;
             if (animator == null || !animator.isActiveAndEnabled) return;
             attackVisualUntil = Time.time + .45f;
             animator.ResetTrigger(AttackId);

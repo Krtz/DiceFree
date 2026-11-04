@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: ChieftainsBane
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.briarback.chieftains-bane
+  title: Chieftain's Bane
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: The tribes are gathering behind one chieftain. If he unites them, Trimery will face an invasion. Find the level-40 Chieftain in the northern stronghold and defeat him. Return to me here in Trimery for your reward and the title Chieftain's Bane. This hunt is optional; the city road remains yours to travel.
+  activeDialogue: The Chieftain commands the upper court of the northern stronghold. Watch his overhead smash and the two guards at his side. Return to me in Trimery when he falls.
+  locationHint: Northern Briarback stronghold, upper court. Return to Trimery's village elder.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat the level-40 Chieftain in the northern stronghold, then return to Trimery's village elder.
+    contentId: briarback.chieftain
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 400
+  reward: {fileID: 11400000, guid: 25e2fe2e2cc66aa4d94de81a249a70d3, type: 2}
+  rewardTitle: Chieftain's Bane
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

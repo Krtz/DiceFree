@@ -234,7 +234,7 @@ namespace DiceFree.Advancement
                     {
                         classId = value.state.classId,
                         displayName = EchoIdentity.Format(EchoIdentity.ReadName(profile),
-                            definition != null ? definition.displayName : value.state.classId),
+                            DiceFree.Quests.QuestHonorifics.Resolve(value.state.quests,definition != null ? definition.displayName : value.state.classId)),
                         level = value.state.level,
                         tier = menuPresentation?.TierOf(value.state.classId)??-1,
                         available = definition != null,

@@ -84,6 +84,7 @@ namespace DiceFree.UI
         private static string RewardText(QuestDefinition quest)
         {
             var parts = new List<string>();
+            if(!string.IsNullOrEmpty(quest.rewardTitle))parts.Add("Title: "+quest.rewardTitle);
             if (quest.rewardXp > 0) parts.Add(quest.rewardXp + " XP");
             if (quest.reward != null)
             {

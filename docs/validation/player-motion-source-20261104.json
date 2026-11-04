@@ -1,0 +1,23 @@
+{
+  "authoring": "tools/authoring/PlayerMotionAuthoring.cs",
+  "format": "Unity Humanoid .anim and AnimatorController",
+  "source": "Existing project-owned working-copy clips, preserved without modification",
+  "generation": "Original native Unity curve authoring; no provider or DCC conversion",
+  "classes": 3,
+  "clips": 30,
+  "controllers": 3,
+  "inputs": [
+    {
+      "path": "Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceIdle.anim",
+      "sha256": "7342403772fe64b3146d3c10783f5c8d6c3e24bb427e7b30238f50bd6873adf3"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceLocomotion.anim",
+      "sha256": "19baa63b4853612a35a30547902f1e673332286cf6a74fb8c4274173e857ce09"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceUnarmedAttack.anim",
+      "sha256": "ace176765fd9ad382eed8b2839cc6611a004d4bf5ec4747ae0c02d52f03def10"
+    }
+  ]
+}

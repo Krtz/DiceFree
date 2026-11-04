@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-04",
+  "branch": "feature/elder-quest-player-presentation",
+  "baseCommit": "4831460",
+  "quest": {
+    "passed": true,
+    "questId": "quest.briarback.chieftains-bane",
+    "elderApproachable": true,
+    "noCreditBeforeAcceptance": true,
+    "chieftainOnly": true,
+    "noTitleBeforeTurnIn": true,
+    "remoteTurnInRejected": true,
+    "exactlyOnceReward": true,
+    "completedTitle": "Echo the Chieftain's Bane",
+    "menuAndReloadTitle": true,
+    "xpReward": 400,
+    "goldReward": 50,
+    "tuningPlaceholders": true,
+    "fixtureDamageIsNotCombatBalance": true
+  },
+  "playerMotion": {
+    "passed": true,
+    "classes": [
+      {
+        "id": "class.novice",
+        "controller": "Novice",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      },
+      {
+        "id": "class.physically-blessed-novice",
+        "controller": "Physical",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      },
+      {
+        "id": "class.magically-touched-novice",
+        "controller": "Magical",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      }
+    ],
+    "movementAndDamageAuthorityUnchanged": true
+  },
+  "staticValidation": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "elementalQuest": true,
+    "multilevelFortSegments": 6
+  },
+  "regionRegression": {
+    "status": "passed",
+    "error": "",
+    "checks": 234,
+    "walked": 38,
+    "kills": 9,
+    "slamHits": 1,
+    "slamRaw": 160.0,
+    "walkMeters": 1033.259033203125,
+    "animatedFootDegrees": 20.47639274597168,
+    "rewardPersisted": true,
+    "menuPortrait": true
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-214549\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 449905994,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "playerSmoke": {
+    "status": "passed",
+    "chieftainsBane": true,
+    "playerMotionClasses": 3,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.6855,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "protectedInitialWipFiles": 54,
+  "pushed": false,
+  "merged": false,
+  "settledDeathPoseCheck": {
+    "afterSeconds": 1.25,
+    "minimumHipsAboveGameplayRootMetres": 0.15,
+    "passedForAllThree": true
+  },
+  "elderSceneReload": {
+    "interactions": 1,
+    "questId": "quest.briarback.chieftains-bane",
+    "passed": true
+  },
+  "playerProcess": {
+    "pid": 54796,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeExceptionCompilerShaderErrorLines": 0,
+  "buildSettingsRestored": true
+}

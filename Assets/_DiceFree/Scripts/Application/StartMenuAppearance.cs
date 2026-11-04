@@ -106,7 +106,7 @@ namespace DiceFree.Advancement
                 var texture=entry.available?portraitStage.Get(entry.classId,state,menuPresentation):null;
                 if(texture!=null)GUI.DrawTexture(new Rect(x+102,y+69,192,232),texture,ScaleMode.ScaleToFit,true);
                 else GUI.Label(new Rect(x+25,y+122,cardWidth-50,100),"Class preview unavailable",small);
-                GUI.Label(new Rect(x+18,y+294,cardWidth-36,25),"Level "+entry.level,body);
+                GUI.Label(new Rect(x+18,y+294,cardWidth-36,25),(classCatalog?.Resolve(entry.classId)?.displayName??entry.classId)+" · Level "+entry.level,small);
                 GUI.Label(new Rect(x+18,y+320,cardWidth-36,23),entry.active?"Last active manifestation":"Preserved manifestation",small);
                 bool previousEnabled=GUI.enabled;GUI.enabled&=entry.available;
                 if(Button(new Rect(x+18,y+350,cardWidth-36,34),entry.available?"Enter world":"Content unavailable",true))TryPlayManifestation(entry.classId);

@@ -42,6 +42,8 @@ namespace DiceFree.Quests
         public string[] completedQuestIds = Array.Empty<string>();
         [Min(0)] public int rewardXp;
         public DiceFree.Items.FixedRewardDefinition reward;
+        // Cosmetic honorific earned only by the durable Completed quest state.
+        public string rewardTitle;
         // Opt-in story conversations; existing quests retain explicit acceptance/turn-in.
         public bool acceptOnTalk;
         public bool completeOnObjectives;

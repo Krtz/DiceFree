@@ -37,6 +37,8 @@ namespace DiceFree.UI
         }
         private void LateUpdate()
         {
+            var motion=GetComponent<PlayerMotionPresentation>();
+            if(motion!=null&&motion.ControllerClassId==actor.Stats.Definition?.stableId){visual.localScale=normalScale;return;}
             visual.localScale = Vector3.Scale(normalScale, !actor.Alive ? new Vector3(1.3f,0.18f,1.3f) :
                 attack != null && attack.State == "Wind-up" ? new Vector3(1.08f,0.86f,1.08f) : Vector3.one);
         }

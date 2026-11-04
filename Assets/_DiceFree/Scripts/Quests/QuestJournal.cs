@@ -52,6 +52,7 @@ namespace DiceFree.Quests
             puzzleSubscription=null;dungeonBossSubscription=null;monsterKilledSubscription=null;dungeonHub=null;
         }
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
+        public string EarnedTitle => QuestHonorifics.Resolve(progress,null);
         public event Action Changed;
         private void Awake()
         {

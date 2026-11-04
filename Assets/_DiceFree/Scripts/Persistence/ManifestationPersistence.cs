@@ -44,7 +44,7 @@ namespace DiceFree.Persistence
         public string RecoveryStatus => store?.RecoveryMessage;
         public string CurrentClassId => actor?.Stats?.Definition?.stableId;
         public string EchoName => EchoIdentity.ReadName(save);
-        public string DisplayName => EchoIdentity.Format(EchoName, actor?.Stats?.Definition?.displayName);
+        public string DisplayName => EchoIdentity.Format(EchoName, journal?.EarnedTitle ?? actor?.Stats?.Definition?.displayName);
         public event Action<string> ActiveManifestationChanged;
 
         private string CurrentSectionId => ManifestationRoster.SectionIdFor(CurrentClassId);
