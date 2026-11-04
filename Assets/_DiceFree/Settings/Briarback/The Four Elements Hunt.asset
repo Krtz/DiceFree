@@ -17,16 +17,16 @@ MonoBehaviour:
   requiredClassId: 
   requiredLevel: 1
   version: 1
-  offer: The Briarback shamans are gathering elemental forces. Defeat one Fire, Earth, Lightning and Ice Shaman, then return to me.
-  activeDialogue: You have faced all four elements. Return here and I will record what you learned.
-  locationHint: Find one Fire, Earth, Lightning and Ice Shaman at their settlements in the Briarback region, then return to Trimery's elemental scholar.
+  offer: The Briarback shamans are gathering at four ritual sites. Start at the burning altar on the western trail, then seek Earth, Lightning and Ice in that order. Return to me in Trimery when all four are defeated.
+  activeDialogue: Look for the altar and trail standards at each site. Your quest tracker points to the next shaman. I will be here in Trimery when the hunt is done.
+  locationHint: Start at the Ember Oath Clearing on the western Briarback trail. Look for crimson standards and lit braziers.
   stages:
   - kind: 0
     objectiveId: 
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat a Fire Shaman
+    instruction: Defeat a Fire Shaman at Ember Oath Clearing, on the western trail.
     contentId: briarback.fireshaman
     dungeonBossOnly: 0
     familyId: briarback.quilboar
@@ -40,7 +40,7 @@ MonoBehaviour:
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat an Earth Shaman
+    instruction: Defeat an Earth Shaman at Splitroot Cairn, east of the fire site.
     contentId: briarback.earthshaman
     dungeonBossOnly: 0
     familyId: briarback.quilboar
@@ -54,7 +54,7 @@ MonoBehaviour:
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat a Lightning Shaman
+    instruction: Defeat a Lightning Shaman at the Stormcall Stakes, northwest of the earth site.
     contentId: briarback.lightningshaman
     dungeonBossOnly: 0
     familyId: briarback.quilboar
@@ -68,7 +68,7 @@ MonoBehaviour:
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat an Ice Shaman
+    instruction: Defeat an Ice Shaman at Rimeglass Vigil, east of the lightning site.
     contentId: briarback.iceshaman
     dungeonBossOnly: 0
     familyId: briarback.quilboar

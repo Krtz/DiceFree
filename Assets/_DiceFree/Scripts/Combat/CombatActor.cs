@@ -40,7 +40,7 @@ namespace DiceFree.Combat
         private string familyOverride;
         private float nominalRadius;
         private bool footprintInitialized;
-        public string FamilyId => familyOverride ?? Stats.Definition.familyId;
+        public string FamilyId => string.IsNullOrEmpty(familyOverride) ? Stats.Definition.familyId : familyOverride;
         public bool Alive => isActiveAndEnabled && Health != null && Health.Alive;
         private readonly HashSet<string> actionBlocks=new();
         public void SetActionBlocked(string sourceId,bool blocked)

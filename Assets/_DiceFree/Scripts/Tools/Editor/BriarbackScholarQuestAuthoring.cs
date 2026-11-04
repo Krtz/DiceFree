@@ -35,10 +35,10 @@ namespace DiceFree.EditorTools
 
         private static readonly (string site, QuilboarRole role, string definitionAsset, string killText)[] Elements =
         {
-            ("Fire Shaman settlement - provisional", QuilboarRole.FireShaman, "FireShaman-L25 stats", "Defeat a Fire Shaman"),
-            ("Earth Shaman settlement - provisional", QuilboarRole.EarthShaman, "EarthShaman-L25 stats", "Defeat an Earth Shaman"),
-            ("Lightning Shaman settlement - provisional", QuilboarRole.LightningShaman, "LightningShaman-L25 stats", "Defeat a Lightning Shaman"),
-            ("Ice Shaman settlement - provisional", QuilboarRole.IceShaman, "IceShaman-L25 stats", "Defeat an Ice Shaman")
+            ("Fire Shaman settlement - provisional", QuilboarRole.FireShaman, "FireShaman-L25 stats", "Defeat a Fire Shaman at Ember Oath Clearing, on the western trail."),
+            ("Earth Shaman settlement - provisional", QuilboarRole.EarthShaman, "EarthShaman-L25 stats", "Defeat an Earth Shaman at Splitroot Cairn, east of the fire site."),
+            ("Lightning Shaman settlement - provisional", QuilboarRole.LightningShaman, "LightningShaman-L25 stats", "Defeat a Lightning Shaman at the Stormcall Stakes, northwest of the earth site."),
+            ("Ice Shaman settlement - provisional", QuilboarRole.IceShaman, "IceShaman-L25 stats", "Defeat an Ice Shaman at Rimeglass Vigil, east of the lightning site.")
         };
 
         private static void Need(bool value, string message)
@@ -223,9 +223,9 @@ namespace DiceFree.EditorTools
                 quest.title = "The Four Elements Hunt";
                 quest.version = 1;
                 quest.requiredLevel = 1;
-                quest.offer = "The Briarback shamans are gathering elemental forces. Defeat one Fire, Earth, Lightning and Ice Shaman, then return to me.";
-                quest.activeDialogue = "You have faced all four elements. Return here and I will record what you learned.";
-                quest.locationHint = "Find one Fire, Earth, Lightning and Ice Shaman at their settlements in the Briarback region, then return to Trimery's elemental scholar.";
+                quest.offer = "The Briarback shamans are gathering at four ritual sites. Start at the burning altar on the western trail, then seek Earth, Lightning and Ice in that order. Return to me in Trimery when all four are defeated.";
+                quest.activeDialogue = "Look for the altar and trail standards at each site. Your quest tracker points to the next shaman. I will be here in Trimery when the hunt is done.";
+                quest.locationHint = "Start at the Ember Oath Clearing on the western Briarback trail. Look for crimson standards and lit braziers.";
                 quest.rewardXp = 400;
                 quest.reward = reward;
                 quest.completeOnObjectives = false;
