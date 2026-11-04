@@ -1,7 +1,7 @@
 using DiceFree.Persistence;
 using DiceFree.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using DiceFree.ApplicationFlow;
 namespace DiceFree.Dungeons
 {
     [DisallowMultipleComponent,RequireComponent(typeof(ManifestationPersistence))]
@@ -13,9 +13,11 @@ namespace DiceFree.Dungeons
         void Start(){options=FindAnyObjectByType<OptionsPanel>();if(options!=null){options.ReturnToStartMenu=Return;options.QuitToDesktop=QuitToDesktop;}}
         public bool Return()
         {
-            if(returning||!TryPrepareForExit())return false;
+            if(returning||LoadingScreen.Busy||!TryPrepareForExit())return false;
             returning=true;
-            SceneManager.LoadScene("StartMenu",LoadSceneMode.Single);return true;
+            return LoadingScreen.TryLoadScene("StartMenu","Returning to your Echo",exception=>{
+                returning=false;exitPrepared=false;Debug.LogError("Could not return to menu: "+exception.Message);
+            });
         }
         private bool QuitToDesktop()
         {

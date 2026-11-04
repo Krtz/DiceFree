@@ -33,6 +33,7 @@ namespace DiceFree.Advancement
         }
         bool Button(Rect r,string label,bool primary=false){var old=GUI.backgroundColor;GUI.backgroundColor=primary?new Color(.48f,.39f,.22f):new Color(.24f,.30f,.37f);bool hit=GUI.Button(r,label,button);GUI.backgroundColor=old;return hit;}
         void OnGUI(){
+            if(DiceFree.ApplicationFlow.LoadingScreen.Busy)return;
             Styles();var matrix=GUI.matrix;bool enabled=GUI.enabled;
             Fill(new Rect(0,0,Screen.width,Screen.height),new Color(.019f,.028f,.041f));
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/800f);

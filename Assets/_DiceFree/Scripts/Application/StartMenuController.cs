@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DiceFree.ApplicationFlow;
 using DiceFree.Persistence;
 using DiceFree.Progression;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace DiceFree.Advancement
 {
@@ -47,7 +47,7 @@ namespace DiceFree.Advancement
 
         private void Start()
         {
-            Refresh();
+            LoadingScreen.Initialize("Opening your Echo", () => { if (this != null) Refresh(); });
         }
 
         public void Refresh()
@@ -102,11 +102,15 @@ namespace DiceFree.Advancement
 
         public bool TryOpenDevelopmentRoom()
         {
+            if (LoadingScreen.Busy) return false;
             try
             {
                 DiceFree.Foundation.DevelopmentSession.Begin();
-                SceneManager.LoadScene("DevelopmentRoom");
-                return true;
+                return LoadingScreen.TryLoadScene("DevelopmentRoom", "Opening the development room", exception =>
+                {
+                    DiceFree.Foundation.DevelopmentSession.End();
+                    status = "Could not open development room: " + exception.Message;
+                });
             }
             catch (Exception exception)
             {
@@ -120,6 +124,7 @@ namespace DiceFree.Advancement
 
         public bool TryStartNewEcho(string name)
         {
+            if (LoadingScreen.Busy) return false;
             if (loadBlocked || store == null || profile != null)
             {
                 status = "A new Echo cannot be started from the current save state.";
@@ -134,8 +139,11 @@ namespace DiceFree.Advancement
             try
             {
                 EchoIdentity.QueueNewEchoName(name, EchoSaveLocation.ResolveRoot());
-                SceneManager.LoadScene(gameplaySceneName);
-                return true;
+                return LoadingScreen.TryLoadScene(gameplaySceneName, "Preparing your first adventure", exception =>
+                {
+                    EchoIdentity.ClearPendingName();
+                    status = exception.Message;
+                });
             }
             catch (Exception exception)
             {
@@ -176,6 +184,7 @@ namespace DiceFree.Advancement
 
         public bool TryPlayManifestation(string classId)
         {
+            if (LoadingScreen.Busy) return false;
             try
             {
                 if (store == null || profile == null || loadBlocked)
@@ -199,8 +208,8 @@ namespace DiceFree.Advancement
                     profile = candidate;
                 }
 
-                SceneManager.LoadScene(gameplaySceneName);
-                return true;
+                return LoadingScreen.TryLoadScene(gameplaySceneName, "Entering the world",
+                    exception => status = "Could not enter the world: " + exception.Message);
             }
             catch (Exception exception)
             {
