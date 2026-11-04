@@ -1,4 +1,5 @@
 # DiceFree — Visual Overhaul Roadmap
+Implementation checkpoints through 2026-11-04 are listed at the end. The planning status and authorization notes below describe the original 2026-10-09 document; subsequent user-directed milestones have since been implemented on local feature/art branches.
 Status: PLANNING ONLY. Based on approved 90-question interview (see VISUAL_ART_DIRECTION.md), 2026-10-09.
 Do NOT begin art imports, edit Unity scenes or merge without explicit follow-up authorization.
 
@@ -65,3 +66,12 @@ Build a documented evolution ladder for Tier 1–4 and level 200, unique class m
 - Each polished deliverable has an isometric silhouette check, collision/NavMesh/quest test, class gear/transmog integration when applicable, high/low graphics capture and manual review.
 - Work can be autonomous *within* approved art direction; major game-rule changes and milestone merging remain separately controlled.
 - No art implementation authorized at roadmap creation.
+
+## Local implementation checkpoints — 2026-11-04
+
+- Briarback elemental landmarks, connected regional scenery, fort, seven-state creature motion, atmosphere and four graphics presets have local validated implementations. See `BRIARBACK_REGIONAL_MILESTONE.md`.
+- The optional Trimery elder quest, persistent Chieftain's Bane honorific and three distinct early-class motion controllers are implemented. See `CHIEFTAINS_BANE_AND_PLAYER_MOTION.md`.
+- Equipped regional observations, readable combat numbers/health-loss trails/shields/stuns, a movable boss encounter panel, quest step/return/activity feedback and themed death/return UI are implemented. Repeatable reward failure now preserves the full ready quest record. See `BRIARBACK_COMBAT_FEEDBACK.md` and its linked validation record.
+- These are local milestones, not merged visual signoff or completion of every stage above. Existing unrelated class/UI work and locally installed optional art remain separate.
+
+The next gameplay balance evidence should use the actual Tier II advancement path and appropriate equipment, followed by group composition and encounter pacing. Early-class starter/Slime loadouts can win ordinary camp encounters but did not survive the observed level-40 world-boss retreats. Production co-op still needs authoritative progression/quests/loot and durable session/reconnect work; the bounded multiplayer world lab does not supply that full-game integration. The ritual cave and big city retain their separate design boundaries in `QUILLBOAR_REGION_DESIGN.md`; the scholar turn-in remains the permanent per-character dungeon eligibility condition, with no additional unlock NPC.

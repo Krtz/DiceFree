@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using DiceFree.AI;
 using DiceFree.Combat;
+using DiceFree.UI;
 using UnityEngine;
 
 namespace DiceFree.Briarback
 {
     /// <summary>Single-phase outdoor boss behavior for the upper Briarback court.</summary>
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(BasicAttack), typeof(AggroBehaviour))]
-    public sealed class BriarbackChieftainEncounter : MonoBehaviour
+    public sealed class BriarbackChieftainEncounter : MonoBehaviour, IEncounterHudSource
     {
         public AttackDefinition overheadSmash;
         public AttackDefinition axeThrow;
@@ -20,6 +21,7 @@ namespace DiceFree.Briarback
         [Min(0.1f)] public float axeMaxRange = 24f;
 
         const string SmashBlock = "briarback.chieftain.smash";
+        public const float SmashWindupSeconds = 1.5f;
         readonly Dictionary<CombatActor, float> threat = new();
         CombatActor actor;
         BasicAttack basic;
@@ -31,6 +33,15 @@ namespace DiceFree.Briarback
         bool winding;
 
         public bool Winding => winding;
+        public CombatActor EncounterActor => actor;
+        public int LivingGuards => (eliteWarrior != null && eliteWarrior.Alive ? 1 : 0) + (eliteBrute != null && eliteBrute.Alive ? 1 : 0);
+        public string CastLabel => "Overhead smash - leave the red strip";
+        public float CastRemaining => winding ? Mathf.Clamp(smashImpactAt - Time.time, 0, SmashWindupSeconds) : 0;
+        public float CastDuration => SmashWindupSeconds;
+        public bool EngagedWith(CombatActor viewer) => isActiveAndEnabled && actor.Alive && !aggro.Returning && viewer != null &&
+            (basic.Target == viewer || (winding && smashTarget == viewer) ||
+             (eliteWarrior != null && eliteWarrior.Alive && eliteWarrior.GetComponent<BasicAttack>()?.Target == viewer) ||
+             (eliteBrute != null && eliteBrute.Alive && eliteBrute.GetComponent<BasicAttack>()?.Target == viewer));
         public float SmashCooldownRemaining => Mathf.Max(0, smashReadyAt - Time.time);
         public float AxeCooldownRemaining => Mathf.Max(0, axeReadyAt - Time.time);
         public bool AxeThrowStarted { get; private set; }
@@ -49,6 +60,7 @@ namespace DiceFree.Briarback
 
         void OnEnable()
         {
+            EncounterHud.Register(this);
             actor.Health.Damaged += OnDamaged;
             actor.Health.Died += OnDied;
             actor.Health.Restored += OnRestored;
@@ -56,6 +68,7 @@ namespace DiceFree.Briarback
 
         void OnDisable()
         {
+            EncounterHud.Unregister(this);
             if (actor?.Health != null)
             {
                 actor.Health.Damaged -= OnDamaged;
@@ -139,7 +152,7 @@ namespace DiceFree.Briarback
             transform.rotation = Quaternion.LookRotation(smashForward);
             winding = true;
             smashReadyAt = Time.time + 12f;
-            smashImpactAt = Time.time + 1.5f;
+            smashImpactAt = Time.time + SmashWindupSeconds;
             basic.Cancel();
             actor.Motor.Stop();
             actor.SetActionBlocked(SmashBlock, true);

@@ -26,6 +26,33 @@ namespace DiceFree.UI
         private CombatActor player;
         private WorldFogOfWar fog;
         private GameplayPreferences preferences;
+        private readonly Dictionary<CombatActor,HealthBarTrail> trails = new();
+        private readonly List<CombatActor> expired = new();
+        private GUIStyle valueStyle, statusStyle;
+        public float RecentHealthFraction(CombatActor unit) =>
+            unit != null && trails.TryGetValue(unit, out var trail) ? trail.Fraction : 0;
+
+        private void LateUpdate()
+        {
+            foreach (var unit in CombatActor.All)
+            {
+                if (unit == null || !unit.Alive) continue;
+                if (!trails.TryGetValue(unit, out var trail))
+                {
+                    trails[unit] = trail = new HealthBarTrail();
+                    // Later regions use skeletal presentations and may not have the
+                    // old blockout ActorFeedback. Add only its readout, never body squash.
+                    if (!unit.TryGetComponent<ActorFeedback>(out _))
+                        unit.gameObject.AddComponent<ActorFeedback>().ConfigureReadoutOnly();
+                }
+                trail.Sample(unit.Health.Current, unit.Health.Maximum, Time.time, Time.deltaTime);
+            }
+            expired.Clear();
+            foreach (var pair in trails)
+                if (pair.Key == null || !pair.Key.Alive) expired.Add(pair.Key);
+            foreach (var unit in expired) { trails.Remove(unit); heights.Remove(unit); }
+        }
+        private void OnDisable() { trails.Clear(); }
         public static bool ShouldShow(OverheadHealthVisibility visibility,
             float hp,float maximum) =>
             visibility==OverheadHealthVisibility.Always ||
@@ -71,14 +98,23 @@ namespace DiceFree.UI
         }
         private void OnGUI()
         {
-            if(HudPointerBlocker.ModalOpen ||
+            if(HudPointerBlocker.ModalOpen || DeathRespawnHud.HasFallenPlayer ||
                 (HudLayoutManager.Current?.EditMode??false))return;
             var camera=Camera.main;
             if(camera==null)return;
             FindPlayer();
             if(player==null)return;
             if(fog==null)fog=FindAnyObjectByType<WorldFogOfWar>();
+            int oldDepth=GUI.depth;
             GUI.depth=6;
+            try { DrawUnits(camera); }
+            finally { GUI.depth=oldDepth; }
+        }
+        private void DrawUnits(Camera camera)
+        {
+            valueStyle ??= new GUIStyle(GUI.skin.label)
+            { alignment=TextAnchor.MiddleCenter, fontSize=9, fontStyle=FontStyle.Bold, normal={textColor=Color.white} };
+            statusStyle ??= new GUIStyle(valueStyle) { normal={textColor=new Color(1f,.84f,.35f)} };
             foreach(var unit in CombatActor.All)
             {
                 if(unit==null || !unit.Alive || !unit.gameObject.activeInHierarchy)
@@ -98,6 +134,9 @@ namespace DiceFree.UI
                 if(point.z<=.01f || point.z>75f ||
                    point.x<0f || point.x>Screen.width ||
                    point.y<0f || point.y>Screen.height)continue;
+                // Use the same visible HUD regions that block world clicks.
+                // A unit behind a character/quest panel must not paint over it.
+                if(HudPointerBlocker.Covers(new Vector2(point.x,point.y)))continue;
                 float width=Mathf.Clamp(105f-point.z*.45f+unit.Radius*10f,
                     62f,135f);
                 Rect frame=new(point.x-width*.5f,Screen.height-point.y+8f,
@@ -105,32 +144,40 @@ namespace DiceFree.UI
                 if(showHp)
                 {
                 float ratio=Mathf.Clamp01(health.Current/Mathf.Max(1f,health.Maximum));
+                float trail=Mathf.Max(ratio,RecentHealthFraction(unit));
                 Color tint=unit==player?new Color(.20f,.80f,.85f,.97f):
                     unit.Faction==player.Faction?
                     new Color(.29f,.87f,.39f,.97f):
                     new Color(.88f,.25f,.23f,.97f);
                 HudChrome.Fill(frame,new Color(.018f,.020f,.027f,.94f));
                 HudChrome.Fill(new Rect(frame.x+2,frame.y+2,
+                    Mathf.Max(0f,(frame.width-4)*trail),frame.height-4),new Color(.98f,.73f,.36f,.9f));
+                HudChrome.Fill(new Rect(frame.x+2,frame.y+2,
                     Mathf.Max(0f,(frame.width-4)*ratio),frame.height-4),tint);
                 HudChrome.Border(frame,1f,new Color(.9f,.9f,.9f,.72f));
                 GUI.Label(frame,
                     Mathf.CeilToInt(health.Current)+"/"+
                     Mathf.CeilToInt(health.Maximum),
-                    new GUIStyle(GUI.skin.label)
-                    {
-                        alignment=TextAnchor.MiddleCenter,
-                        fontSize=9,
-                        fontStyle=FontStyle.Bold,
-                        normal={textColor=Color.white}
-                    });
+                    valueStyle);
                 }
+                bool showShield=showHp && health.TemporaryShield>0;
+                if(showShield)
+                {
+                    var shield=new Rect(frame.x,frame.yMax+2,frame.width,11);
+                    HudChrome.Fill(shield,new Color(.015f,.04f,.08f,.95f));
+                    HudChrome.Fill(new Rect(shield.x+1,shield.y+1,
+                        (shield.width-2)*Mathf.Clamp01(health.TemporaryShield/health.Maximum),shield.height-2),new Color(.20f,.56f,.88f,.95f));
+                    GUI.Label(shield,"Shield "+Mathf.CeilToInt(health.TemporaryShield),valueStyle);
+                }
+                if(showHp && unit.Effects?.Stunned==true)
+                    GUI.Label(new Rect(frame.x-10,frame.y-15,frame.width+20,15),"STUNNED",statusStyle);
                 // Every channelled unit has a visible, independent cast gauge,
                 // even if the owner disabled that unit's overhead HP display.
                 if(channel!=null)
                 {
                     float completion=Mathf.Clamp01(1f-channel.ChannelRemaining/
                         Mathf.Max(.01f,channel.ChannelDuration));
-                    var castRect=new Rect(frame.x,frame.y+(showHp?18f:0f),
+                    var castRect=new Rect(frame.x,frame.y+(showHp?18f:0f)+(showShield?13f:0f),
                         frame.width,18f);
                     HudChrome.Fill(castRect,new Color(.025f,.045f,.10f,.95f));
                     HudChrome.Fill(new Rect(castRect.x+2,castRect.y+2,
@@ -139,13 +186,7 @@ namespace DiceFree.UI
                     HudChrome.Border(castRect,1f,new Color(.65f,.79f,1f,.90f));
                     GUI.Label(castRect,channel.ChannelLabel+" "+
                         channel.ChannelRemaining.ToString("0.0")+"s",
-                        new GUIStyle(GUI.skin.label)
-                        {
-                            alignment=TextAnchor.MiddleCenter,
-                            fontSize=9,
-                            fontStyle=FontStyle.Bold,
-                            normal={textColor=Color.white}
-                        });
+                        valueStyle);
                 }
             }
         }

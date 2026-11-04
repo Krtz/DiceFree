@@ -54,6 +54,9 @@ namespace DiceFree.Quests
         public IReadOnlyList<QuestDefinition> Definitions => definitions;
         public string EarnedTitle => QuestHonorifics.Resolve(progress,null);
         public event Action Changed;
+        // Semantic gameplay transition only. RestoreState never publishes this:
+        // loading saved history must not replay acceptance/completion feedback.
+        public event Action<QuestDefinition, QuestProgress, QuestProgress> GameplayProgressed;
         private void Awake()
         {
             owner = GetComponent<CombatActor>();
@@ -151,7 +154,9 @@ namespace DiceFree.Quests
         {
             if (!CanAccept(definition)) return false;
             var state = Find(definition.stableId);
-            state.status = QuestStatus.Active; state.stage = state.count = 0; Changed?.Invoke(); return true;
+            var previous = state.Copy();
+            state.status = QuestStatus.Active; state.stage = state.count = 0; Changed?.Invoke();
+            GameplayProgressed?.Invoke(definition, previous, state.Copy()); return true;
         }
         private void OnCredit(ActorDefeated defeat)
         {
@@ -186,6 +191,7 @@ namespace DiceFree.Quests
                 if (state.definitionVersion != definition.version || state.status != QuestStatus.Active) continue;
                 if(!string.IsNullOrEmpty(definition.requiredClassId)&&owner.Stats.Definition.stableId!=definition.requiredClassId)continue;
                 var objective = definition.stages[state.stage];
+                var previous = state.Copy();
                 if (!ObjectiveProgress.Apply(objective, state, leaf => leaf.kind == kind &&
                     (string.IsNullOrEmpty(leaf.contentId) || leaf.contentId == content) &&
                     ((leaf.familyIds == null || leaf.familyIds.Length == 0)
@@ -195,16 +201,18 @@ namespace DiceFree.Quests
                     (kind != ObjectiveKind.ReachArea || leaf.areaId == area) &&
                     (kind != ObjectiveKind.TalkTo || string.IsNullOrEmpty(leaf.conversationId) || leaf.conversationId == conversation) &&
                     (eligible == null || eligible(leaf)))) continue;
+                bool turnedIn = false;
                 if (state.count >= objective.count)
                 {
                     if (state.stage + 1 < definition.stages.Length) { state.stage++; state.count = 0; state.alternatives = Array.Empty<ObjectiveCount>(); }
                     else
                     {
                         state.status = QuestStatus.ReadyToTurnIn;
-                        if (definition.completeOnObjectives) TurnIn(definition);
+                        if (definition.completeOnObjectives) turnedIn = TurnIn(definition);
                     }
                 }
                 Changed?.Invoke();
+                if (!turnedIn) GameplayProgressed?.Invoke(definition, previous, state.Copy());
             }
         }
         public bool TurnIn(QuestDefinition definition)
@@ -212,6 +220,7 @@ namespace DiceFree.Quests
             if (definition == null || Array.IndexOf(definitions,definition) < 0) return false;
             var state = Find(definition.stableId);
             if (state == null || state.definitionVersion != definition.version || state.status != QuestStatus.ReadyToTurnIn) return false;
+            var previous = state.Copy();
             if (!DiceFree.Items.FixedRewardGrant.TryGrant(gameObject, definition.rewardXp, definition.reward,
                 () =>
                 {
@@ -223,8 +232,16 @@ namespace DiceFree.Quests
                     }
                     else state.status=QuestStatus.Completed;
                 },
-                () => state.status = QuestStatus.ReadyToTurnIn)) return false;
-            Changed?.Invoke(); return true;
+                () =>
+                {
+                    // Repeatable completion resets counters before reward callbacks.
+                    // If one fails, restore the entire ready-to-turn-in record.
+                    state.status = previous.status;
+                    state.stage = previous.stage;
+                    state.count = previous.count;
+                    state.alternatives = previous.Copy().alternatives;
+                })) return false;
+            Changed?.Invoke(); GameplayProgressed?.Invoke(definition, previous, state.Copy()); return true;
         }
         public void Configure(params QuestDefinition[] values) => definitions = values;
     }

@@ -1,0 +1,473 @@
+{
+  "date": "2026-11-04",
+  "branch": "feature/briarback-combat-feedback",
+  "baseCommit": "7323dca",
+  "equippedCampAssessment": {
+    "phase": "passed",
+    "failure": null,
+    "normalTimeScale": true,
+    "invulnerable": false,
+    "setupFixtures": "Disposable profile, XP/items, initial placement and between-trial health/resource restore. No fixture damage or disabled AI in combat.",
+    "limitation": "Three early classes with existing starter/Slime gear; one deterministic skill policy, one camp, no party or Tier II balance approval.",
+    "trials": [
+      {
+        "classId": "class.novice",
+        "levelStart": 25,
+        "levelEnd": 25,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat"
+        ],
+        "maximumHp": 490.0,
+        "minimumHp": 85.02338,
+        "incomingHits": 18,
+        "incomingDamage": 769.708435,
+        "outgoingHits": 15,
+        "outgoingDamage": 882.860168,
+        "casts": 6,
+        "combatSeconds": 13.4080353,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 782.1399,
+        "outcome": "retreat-health-threshold",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.novice",
+        "levelStart": 30,
+        "levelEnd": 30,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat"
+        ],
+        "maximumHp": 580.0,
+        "minimumHp": 142.13475,
+        "incomingHits": 21,
+        "incomingDamage": 863.497742,
+        "outgoingHits": 13,
+        "outgoingDamage": 908.2765,
+        "casts": 6,
+        "combatSeconds": 15.5846481,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 756.7236,
+        "outcome": "retreat-health-threshold",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.novice",
+        "levelStart": 35,
+        "levelEnd": 35,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat"
+        ],
+        "maximumHp": 670.0,
+        "minimumHp": 330.886,
+        "incomingHits": 20,
+        "incomingDamage": 839.476,
+        "outgoingHits": 21,
+        "outgoingDamage": 1665.00012,
+        "casts": 6,
+        "combatSeconds": 21.71045,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "levelStart": 25,
+        "levelEnd": 25,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-shield"
+        ],
+        "maximumHp": 655.0,
+        "minimumHp": 310.937042,
+        "incomingHits": 14,
+        "incomingDamage": 467.133423,
+        "outgoingHits": 20,
+        "outgoingDamage": 1839.97607,
+        "casts": 5,
+        "combatSeconds": 9.909103,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "levelStart": 30,
+        "levelEnd": 30,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-shield"
+        ],
+        "maximumHp": 730.0,
+        "minimumHp": 537.429932,
+        "incomingHits": 8,
+        "incomingDamage": 256.149658,
+        "outgoingHits": 17,
+        "outgoingDamage": 1883.81946,
+        "casts": 5,
+        "combatSeconds": 6.61734,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "levelStart": 35,
+        "levelEnd": 35,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-shield"
+        ],
+        "maximumHp": 805.0,
+        "minimumHp": 585.130859,
+        "incomingHits": 10,
+        "incomingDamage": 318.75592,
+        "outgoingHits": 16,
+        "outgoingDamage": 1909.36609,
+        "casts": 5,
+        "combatSeconds": 7.817688,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "levelStart": 25,
+        "levelEnd": 25,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-orb"
+        ],
+        "maximumHp": 580.0,
+        "minimumHp": 268.1917,
+        "incomingHits": 16,
+        "incomingDamage": 644.2444,
+        "outgoingHits": 23,
+        "outgoingDamage": 1916.38293,
+        "casts": 6,
+        "combatSeconds": 12.8954773,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "levelStart": 30,
+        "levelEnd": 30,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-orb"
+        ],
+        "maximumHp": 655.0,
+        "minimumHp": 392.2766,
+        "incomingHits": 11,
+        "incomingDamage": 458.3682,
+        "outgoingHits": 19,
+        "outgoingDamage": 1821.15271,
+        "casts": 5,
+        "combatSeconds": 8.090881,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "levelStart": 35,
+        "levelEnd": 35,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-orb"
+        ],
+        "maximumHp": 730.0,
+        "minimumHp": 433.331451,
+        "incomingHits": 13,
+        "incomingDamage": 519.4902,
+        "outgoingHits": 15,
+        "outgoingDamage": 1838.14587,
+        "casts": 5,
+        "combatSeconds": 9.161072,
+        "targetStartHp": 1665.0,
+        "targetRemainingHp": 0.0,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      }
+    ]
+  },
+  "equippedBossObservation": {
+    "phase": "passed",
+    "failure": null,
+    "normalTimeScale": true,
+    "invulnerable": false,
+    "limitation": "Early classes at 40 in existing starter/Slime gear. Normal-damage dodge/retreat observations, not Tier II/party balance or boss defeats.",
+    "setupFixtures": "Disposable profile; XP, item grants, starting position and between-trial restores. AI and damage unmodified in encounters.",
+    "trials": [
+      {
+        "classId": "class.novice",
+        "level": 40,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat"
+        ],
+        "maximumHp": 760.0,
+        "minimumHp": 0.0,
+        "incomingHits": 4,
+        "incomingDamage": 934.5134,
+        "bossDamage": 81.2945,
+        "casts": 2,
+        "observedSmashes": 1,
+        "dodgedSmashes": 1,
+        "guardsEngaged": true,
+        "readoutVisibleDuringRealWindup": true,
+        "survivedRetreat": false,
+        "elapsedIncludingRetreat": 13.58182,
+        "attackers": [
+          "Elite Brute bodyguard (Lv 35)",
+          "Quillboar Chieftain (Lv 40)"
+        ]
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "level": 40,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-shield"
+        ],
+        "maximumHp": 880.0,
+        "minimumHp": 0.0,
+        "incomingHits": 5,
+        "incomingDamage": 1108.87659,
+        "bossDamage": 436.827637,
+        "casts": 4,
+        "observedSmashes": 1,
+        "dodgedSmashes": 1,
+        "guardsEngaged": true,
+        "readoutVisibleDuringRealWindup": true,
+        "survivedRetreat": false,
+        "elapsedIncludingRetreat": 16.6099319,
+        "attackers": [
+          "Elite Brute bodyguard (Lv 35)",
+          "Quillboar Chieftain (Lv 40)"
+        ]
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "level": 40,
+        "gear": [
+          "item.bronze-dagger",
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.slime.slime-orb"
+        ],
+        "maximumHp": 805.0,
+        "minimumHp": 0.0,
+        "incomingHits": 3,
+        "incomingDamage": 985.8379,
+        "bossDamage": 599.1738,
+        "casts": 3,
+        "observedSmashes": 1,
+        "dodgedSmashes": 1,
+        "guardsEngaged": true,
+        "readoutVisibleDuringRealWindup": true,
+        "survivedRetreat": false,
+        "elapsedIncludingRetreat": 13.6104507,
+        "attackers": [
+          "Elite Brute bodyguard (Lv 35)",
+          "Quillboar Chieftain (Lv 40)"
+        ]
+      }
+    ]
+  },
+  "focusedChecks": {
+    "passed": true,
+    "checks": 30,
+    "boundedEntries": 8,
+    "damageAuthorityUnchanged": true,
+    "questAuthorityUnchanged": true
+  },
+  "questActivityAndRollback": {
+    "passed": true,
+    "acceptedMessage": true,
+    "noRejectedReplay": true,
+    "noRestoreReplay": true,
+    "failedRewardObserverInjected": true,
+    "entireReadyRecordRestored": true,
+    "rewardsRolledBack": true,
+    "noFalseCompletionMessage": true,
+    "retryExactlyOnce": true,
+    "repeatCount": 20,
+    "fixtureQuestProgress": true
+  },
+  "liveFeedback": {
+    "passed": true,
+    "separateHits": true,
+    "healing": true,
+    "absorption": true,
+    "realBasicMiss": true,
+    "restoreClearsFeedback": true,
+    "questStepAndNamedReturn": true,
+    "journalChecklist": true,
+    "bossHealthAndActualWindup": true,
+    "guards": 2,
+    "disabledEncounterHides": true,
+    "deathCleanup": true,
+    "actualDelayedAnchorReturn": true,
+    "fixtureDamage": true
+  },
+  "regionalRegression": {
+    "status": "passed",
+    "error": "",
+    "checks": 234,
+    "walked": 38,
+    "kills": 9,
+    "slamHits": 1,
+    "slamRaw": 160.0,
+    "walkMeters": 1033.0831298828125,
+    "animatedFootDegrees": 20.554637908935547,
+    "rewardPersisted": true,
+    "menuPortrait": true
+  },
+  "validationOrder": "234-check regression follows quest event/rollback changes. Focused live review follows death, cache and countdown corrections; final executable smoke follows all changes, including HUD occlusion and the Unity lookup API update.",
+  "staticChecks": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "fourElementQuest": true,
+    "fortNavMeshSegments": 6,
+    "creaturePresentations": 33
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-223527\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 449925799,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "pushed": false,
+  "merged": false,
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 3,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.1725,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "processExit": {
+    "pid": 58064,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorLines": 0,
+  "preservedOriginalWipFiles": 54,
+  "protectedBuildSettingsRestored": 7,
+  "sceneFilesChanged": false
+}

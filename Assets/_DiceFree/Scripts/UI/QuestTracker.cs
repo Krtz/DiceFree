@@ -29,13 +29,18 @@ namespace DiceFree.UI
 
             GUILayout.BeginArea(new Rect(inner.x, inner.y + header, inner.width, inner.height - header));
             scroll = GUILayout.BeginScrollView(scroll, false, false);
-
-            foreach (var quest in TrackedQuests)
+            var tracked = TrackedQuests;
+            if(tracked.Length==0)
+                GUILayout.Label("No active quests. Speak with a quest giver to begin.",
+                    new GUIStyle(GUI.skin.label) {wordWrap=true,normal={textColor=Theme.textTint}});
+            foreach (var quest in tracked)
             {
                 if (!journal.PrerequisitesMet(quest)) continue;
                 var state = journal.GetProgress(quest.stableId);
                 if(state==null||state.status is not (QuestStatus.Active or QuestStatus.ReadyToTurnIn))continue;
-                GUILayout.Label(quest.title, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
+                bool ready=state.status==QuestStatus.ReadyToTurnIn;
+                Color accent=ready?new Color(1f,.84f,.38f):Theme.textTint;
+                GUILayout.Label(quest.title, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold,wordWrap=true,normal={textColor=accent} });
 
                 if (state.definitionVersion != quest.version)
                 {
@@ -46,23 +51,25 @@ namespace DiceFree.UI
                     continue;
                 }
 
-                string text;
-                if (state.status == QuestStatus.ReadyToTurnIn)
-                    text = $"? {state.count}/{quest.stages[Mathf.Clamp(state.stage, 0, quest.stages.Length - 1)].count} complete · Return to the quest giver.";
-                else
-                {
-                    int stageIndex = Mathf.Clamp(state.stage, 0, Mathf.Max(0, quest.stages.Length - 1));
-                    text = ObjectiveProgress.Describe(quest.stages[stageIndex], state);
-                }
-
-                GUILayout.Label(text, new GUIStyle(GUI.skin.label) { wordWrap = true });
-                GUILayout.Space(4);
+                if(ready)GUILayout.Label("Ready to turn in",new GUIStyle(GUI.skin.label){fontSize=11,normal={textColor=accent}});
+                GUILayout.Label(QuestReadout.Objective(quest,state), new GUIStyle(GUI.skin.label) { wordWrap = true,normal={textColor=Theme.textTint} });
+                var progress=GUILayoutUtility.GetRect(0,4,GUILayout.ExpandWidth(true));
+                HudChrome.Fill(progress,new Color(.04f,.035f,.025f,.85f));
+                HudChrome.Fill(new Rect(progress.x,progress.y,progress.width*QuestReadout.Fraction(quest,state),progress.height),
+                    ready?accent:new Color(.51f,.72f,.48f));
+                GUILayout.Space(9);
             }
 
             GUILayout.EndScrollView();
             GUILayout.EndArea();
         }
 
-        public void Configure(QuestJournal value) => journal = value;
+        private void EnsureActivityFeed()
+        {
+            if(journal!=null && !journal.TryGetComponent<QuestActivityFeed>(out _))
+                journal.gameObject.AddComponent<QuestActivityFeed>();
+        }
+        private void Start() => EnsureActivityFeed();
+        public void Configure(QuestJournal value) { journal = value; if(Application.isPlaying)EnsureActivityFeed(); }
     }
 }
