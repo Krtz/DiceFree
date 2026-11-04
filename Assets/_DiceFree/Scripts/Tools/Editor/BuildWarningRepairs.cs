@@ -16,7 +16,11 @@ namespace DiceFree.EditorTools
         const string VillageShader = "Assets/Medieval Village Building Pack/Shaders/RMHA.shader";
         static readonly string[] CollisionMeshes = {
             "Assets/_DiceFree/Art/Blockout/Trimery continuous playable terrain.asset",
-            "Assets/_DiceFree/Art/World/NaturePass03/CornbergMeadowTerrainUV.asset"
+            "Assets/_DiceFree/Art/World/NaturePass03/CornbergMeadowTerrainUV.asset",
+            "Assets/_DiceFree/Art/Blockout/Briarback stronghold bridge ramps.asset",
+            "Assets/_DiceFree/Art/Blockout/Briarback stronghold ascent ramp.asset",
+            "Assets/_DiceFree/Art/Blockout/Briarback stronghold overpass.asset",
+            "Assets/_DiceFree/Art/Blockout/Briarback upper open arena terrace.asset"
         };
 
         [CliCommand("dicefree.build-warnings.repair", "Repair terrain collision flags and URP debug shader references; guard the optional local village shader macros.")]
@@ -27,10 +31,11 @@ namespace DiceFree.EditorTools
 
             foreach (string path in CollisionMeshes)
             {
-                var mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path);
-                if (mesh == null) throw new InvalidOperationException("Missing terrain mesh: " + path);
-                if (!mesh.HasPreBakeCollisionMesh(false))
+                var meshes = Array.FindAll(AssetDatabase.LoadAllAssetsAtPath(path), value => value is Mesh mesh && mesh.vertexCount > 0);
+                if (meshes.Length == 0) throw new InvalidOperationException("Missing collision mesh: " + path);
+                foreach (Mesh mesh in meshes)
                 {
+                    if (mesh.HasPreBakeCollisionMesh(false)) continue;
                     mesh.SetPreBakeCollisionMesh(false, true);
                     EditorUtility.SetDirty(mesh);
                     AssetDatabase.SaveAssetIfDirty(mesh);
@@ -65,11 +70,32 @@ namespace DiceFree.EditorTools
             AssetDatabase.SaveAssetIfDirty(settings);
 
             bool vendorShaderRepaired = GuardVillageMacros();
+            int readableParticleImports = RepairParticleMeshReadability();
             AssetDatabase.SaveAssets();
             return new {
                 marker = "DICEFREE_BUILD_WARNING_ASSETS_REPAIRED",
-                collisionMeshes = CollisionMeshes.Length, urpDebugShaders = matched, postProcessingShadersRetained = true, vendorShaderRepaired
+                collisionMeshFiles = CollisionMeshes.Length, urpDebugShaders = matched, postProcessingShadersRetained = true, vendorShaderRepaired, readableParticleImports
             };
+        }
+
+        static int RepairParticleMeshReadability()
+        {
+            string[] sources={
+                "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Mesh/sphere_8pl.fbx",
+                "Assets/_DiceFree/Art/MageVfxVendor/Hovl/Hovl Studio/Magic effects pack/Models/Cylinder.fbx"
+            };
+            int repaired=0;
+            foreach(var path in sources)
+            {
+                // Optional, already installed local art. Preserve source bytes and back up its importer.
+                var importer=AssetImporter.GetAtPath(path) as ModelImporter;
+                if(importer==null||importer.isReadable)continue;
+                Directory.CreateDirectory("Library/BuildWarningBackups");
+                string backup="Library/BuildWarningBackups/"+Path.GetFileName(path)+".before-readable.meta";
+                if(!File.Exists(backup))File.Copy(path+".meta",backup);
+                importer.isReadable=true;importer.SaveAndReimport();repaired++;
+            }
+            return repaired;
         }
 
         static Shader InstallCoreShader(string guid, string name)

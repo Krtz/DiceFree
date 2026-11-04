@@ -59,7 +59,7 @@ public static class BuildBriarbackMilestone
             includesExistingWorkspaceWip=true};
         File.WriteAllText(Path.Combine(directory,"build-report.json"),JsonUtility.ToJson(result,true));
         Directory.CreateDirectory("Logs");File.WriteAllText("Logs/BriarbackMilestoneBuildPath.txt",directory);
-        if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("Windows build failed: "+result.result);
+        if(report.summary.result!=BuildResult.Succeeded||report.summary.totalErrors>0)throw new InvalidOperationException("Windows build failed its clean-report gate: "+result.result+", errors="+result.errors);
         return result;
     }
     [Serializable]public sealed class Record{public string result,executable;public int errors,warnings,sceneCount;public long bytes;public bool development,localRuntimeAutomation,includesExistingWorkspaceWip;}

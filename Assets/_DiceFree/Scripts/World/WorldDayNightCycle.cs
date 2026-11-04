@@ -51,6 +51,7 @@ namespace DiceFree.World
             Apply();
         }
         void Update() => Apply();
+        public void RefreshLighting() => Apply();
         public void SetHour(float hour, bool advance = true)
         {
             sessionHour = Mathf.Repeat(hour, 24); epoch = Time.realtimeSinceStartupAsDouble;

@@ -35,6 +35,16 @@ async System.Threading.Tasks.Task Run()
         var root=(string)Call(T("DiceFree.Persistence.EchoSaveLocation"),"ResolveRoot");
         Need(root!=null&&System.IO.Path.GetFullPath(root)==System.IO.Path.GetFullPath(System.IO.Path.Combine(output,"Profile")),"Use this build's QA/Profile isolated save.");
         Phase("startup and loading");var menu=await Menu();Need((bool)Get(menu,"ReadyForNewEcho"),"QA save must be new");
+        var qualityType=T("DiceFree.World.GraphicsQualityRuntime");var presetType=T("DiceFree.World.VisualQuality");
+        object Quality(string property)=>qualityType.GetProperty(property).GetValue(null);
+        Need((string)Quality("SettingsPath")==System.IO.Path.Combine(output,"Profile","Settings","graphics-quality.json"),"Graphics settings must use the QA profile");
+        foreach(var name in new[]{"Low","Medium","High","Ultra"})
+        {
+            Call(qualityType,"Select",Enum.Parse(presetType,name),true);Call(qualityType,"Reload");Need(Quality("Preset").ToString()==name,"Built preset did not persist: "+name);
+            Need(Quality("Pipeline")==QualitySettings.renderPipeline,"Built preset did not apply to the live pipeline");
+        }
+        Call(qualityType,"Select",Enum.Parse(presetType,"High"),true);
+        var graphicsOptions=Find("DiceFree.UI.OptionsPanel");Call(graphicsOptions,"SelectTab",Enum.Parse(T("DiceFree.UI.OptionsPanel+OptionsTab"),"Graphics"));Call(graphicsOptions,"Show");await Capture("graphics-options");Call(graphicsOptions,"Close");
         bool initialized=false;Call(T("DiceFree.ApplicationFlow.LoadingScreen"),"Initialize","Preparing your adventure",(Action)(()=>initialized=true));Need(Busy(),"Initialization overlay missing");await Capture("loading",0);await Until(()=>initialized&&!Busy(),"Initialization cleanup");
         Need((bool)Call(menu,"TryStartNewEcho","Windows milestone"),"New Echo rejected");Need(Busy()&&!(bool)Call(menu,"TryStartNewEcho","Duplicate"),"Duplicate transition accepted");
         var actor=await Player("Cornberg");int firstFrame=Time.frameCount;Set(Get(actor,"Health"),"Invulnerable",true);
@@ -64,7 +74,8 @@ async System.Threading.Tasks.Task Run()
         Need((bool)Call(Part(actor,"DiceFree.Persistence.ManifestationPersistence"),"Flush"),"Save failed");Need((bool)Call(Part(actor,"DiceFree.Dungeons.ReturnToStartMenu"),"Return"),"Save/return failed");menu=await Menu();Need((bool)Get(menu,"HasLoadedProfile"),"Saved profile missing");
         Phase("saved resume");var entry=((System.Collections.IEnumerable)Get(menu,"Entries")).Cast<object>().First(e=>(bool)Get(e,"active"));Need((bool)Call(menu,"TryPlayManifestation",Get(entry,"classId")),"Resume rejected");actor=await Player("Cornberg");Need(Get(Call(Part(actor,"DiceFree.Quests.QuestJournal"),"GetProgress",questId),"status").ToString()=="Completed","Hunt completion not persisted");Need((string)Get(Part(actor,"DiceFree.Persistence.ManifestationPersistence"),"EchoName")=="Windows milestone","Identity changed");Need((bool)Call(Part(actor,"DiceFree.Dungeons.ReturnToStartMenu"),"Return"),"Second return failed");menu=await Menu();
         Phase("development room and normal shutdown");Need((bool)Call(menu,"TryOpenDevelopmentRoom"),"Development entry failed");actor=await Player("DevelopmentRoom");Need((bool)Call(Part(actor,"DiceFree.Dungeons.ReturnToStartMenu"),"Return"),"Development return failed");menu=await Menu();await System.Threading.Tasks.Task.Delay(200);Need(FindAll("DiceFree.ApplicationFlow.LoadingScreen").Length==0,"Overlay leaked");Need(Time.frameCount>firstFrame+100,"Player did not advance");
-        System.IO.File.WriteAllText(report,"{\"status\":\"passed\",\"huntTurnedIn\":true,\"resumePersisted\":true,\"fortWalks\":"+walks+",\"walkedMeters\":"+meters.ToString(System.Globalization.CultureInfo.InvariantCulture)+",\"builtWarningAndAxe\":true,\"developmentRoom\":true,\"quitRequested\":true}");Debug.Log("DICEFREE_WINDOWS_MILESTONE_SMOKE_OK");Need((bool)Call(Find("DiceFree.UI.OptionsPanel"),"RequestQuitToDesktop"),"Normal quit rejected");
+        Need(Quality("Preset").ToString()=="High","Quality selection did not survive scene transitions");
+        System.IO.File.WriteAllText(report,"{\"status\":\"passed\",\"graphicsPresets\":4,\"huntTurnedIn\":true,\"resumePersisted\":true,\"fortWalks\":"+walks+",\"walkedMeters\":"+meters.ToString(System.Globalization.CultureInfo.InvariantCulture)+",\"builtWarningAndAxe\":true,\"developmentRoom\":true,\"quitRequested\":true}");Debug.Log("DICEFREE_WINDOWS_MILESTONE_SMOKE_OK");Need((bool)Call(Find("DiceFree.UI.OptionsPanel"),"RequestQuitToDesktop"),"Normal quit rejected");
     }
     catch(Exception error){System.IO.File.WriteAllText(report,"{\"status\":\"failed\",\"error\":\""+error.ToString().Replace("\\","\\\\").Replace("\"","\\\"").Replace("\r"," ").Replace("\n"," ")+"\"}");Debug.LogError(error);}
 }

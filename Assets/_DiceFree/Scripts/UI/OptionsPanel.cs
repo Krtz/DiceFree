@@ -168,6 +168,7 @@ namespace DiceFree.UI
         private void DrawGraphics()
         {
             GUILayout.Label("Graphics",GUILayout.Height(26));
+            GraphicsQualityControls.Draw();
             GUILayout.Label("Display changes apply immediately and are saved on this PC.");
             GUILayout.Space(12);
             GUILayout.Label("Resolution");

@@ -1,0 +1,193 @@
+{
+  "date": "2026-11-04",
+  "branch": "art/briarback-elemental-landmarks",
+  "scope": [
+    "Regional trails, camps and boundary scenery",
+    "Regional daylight/moonlight atmosphere",
+    "Creature motion",
+    "Normal combat, retreat, guard response and full respawn timers",
+    "Graphics presets and development-build warning repairs"
+  ],
+  "art": {
+    "originalArtwork": true,
+    "meshBatches": 12,
+    "triangles": 110812,
+    "trailSkins": 5,
+    "junctions": 611,
+    "campShelters": 15,
+    "collidersAdded": 0
+  },
+  "animation": {
+    "presentations": 33,
+    "states": [
+      "Attack",
+      "Cast",
+      "Death",
+      "Idle",
+      "Locomotion",
+      "Slam",
+      "Throw"
+    ],
+    "deformingVertices": {
+      "Locomotion": 10202,
+      "Attack": 10376,
+      "Cast": 10372,
+      "Throw": 10380,
+      "Slam": 7176,
+      "Death": 10648
+    }
+  },
+  "staticValidation": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "elementalQuestStages": 4,
+    "guardianPlacements": 4,
+    "fortMultilevelNavMeshSegments": 6,
+    "fortClearArenaCells": 156
+  },
+  "liveAssessment": {
+    "phase": "passed",
+    "failure": "",
+    "limitation": "Single unarmed Novice baseline, not final class or party balance approval.",
+    "passed": true,
+    "invulnerable": false,
+    "enemyAiUnmodified": true,
+    "normalTimeScale": true,
+    "retreatReset": true,
+    "guardsEngaged": true,
+    "smashDodged": true,
+    "pipelineClone": true,
+    "sourcePipelineUnchanged": true,
+    "qualityPersistence": true,
+    "invalidQualityFallback": true,
+    "regionalBlend": true,
+    "interiorRestoration": true,
+    "outdoorRestoration": true,
+    "level": 24,
+    "incomingHits": 15,
+    "outgoingHits": 9,
+    "casts": 4,
+    "presets": 4,
+    "maximumHp": 490.0,
+    "minimumHp": 211.19863891601562,
+    "incomingDamage": 543.8654174804688,
+    "outgoingDamage": 528.8343505859375,
+    "combatSeconds": 9.25882339477539,
+    "regionalFogEnd": 230.0,
+    "combatOutcome": "Retreated at safety threshold / 24 seconds",
+    "respawns": [
+      {
+        "actor": "Quillboar Chieftain (Lv 40)",
+        "expectedSeconds": 600.0,
+        "observedSeconds": 601.2509765625,
+        "killedAt": 34.87176513671875,
+        "passed": true
+      },
+      {
+        "actor": "Elite Warrior bodyguard (Lv 35)",
+        "expectedSeconds": 300.0,
+        "observedSeconds": 301.2873840332031,
+        "killedAt": 34.871864318847656,
+        "passed": true
+      },
+      {
+        "actor": "Elite Brute bodyguard (Lv 35)",
+        "expectedSeconds": 300.0,
+        "observedSeconds": 301.3412780761719,
+        "killedAt": 34.87187957763672,
+        "passed": true
+      },
+      {
+        "actor": "Harrowtusk 13 (Lv 30)",
+        "expectedSeconds": 180.0,
+        "observedSeconds": 181.2462158203125,
+        "killedAt": 34.872047424316406,
+        "passed": true
+      },
+      {
+        "actor": "Raider 1 (Lv 21)",
+        "expectedSeconds": 90.0,
+        "observedSeconds": 91.28865051269531,
+        "killedAt": 34.872074127197266,
+        "passed": true
+      }
+    ]
+  },
+  "regionRegression": {
+    "status": "passed",
+    "error": "",
+    "checks": 234,
+    "walked": 38,
+    "kills": 9,
+    "slamHits": 1,
+    "slamRaw": 160.0,
+    "walkMeters": 1032.9544677734375,
+    "animatedFootDegrees": 20.5673828125,
+    "rewardPersisted": true,
+    "menuPortrait": true
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-173129\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 449230943,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "playerSmoke": {
+    "status": "passed",
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.2622,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "preservedInitialWipFiles": 54,
+  "limitations": [
+    "Single unarmed Novice combat baseline; final equipment, class, party and multiplayer balance remains open.",
+    "Quality presets are not a hardware performance benchmark.",
+    "Windows Development artifact includes pre-existing unrelated workspace WIP."
+  ],
+  "git": {
+    "committed": true,
+    "pushed": false,
+    "merged": false
+  },
+  "qualityLifecycle": {
+    "seededCacheWithSessionClone": true,
+    "exitRestoresAllQualityAssignments": true,
+    "cachedBuildDataUsesProjectAssets": true,
+    "editorPrebuildCleanup": true
+  },
+  "supersededBuild": {
+    "report": {
+      "result": "Succeeded",
+      "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-172451\\DiceFree.exe",
+      "errors": 1,
+      "warnings": 0,
+      "sceneCount": 7,
+      "bytes": 449230943,
+      "development": true,
+      "localRuntimeAutomation": true,
+      "includesExistingWorkspaceWip": true
+    },
+    "playerSmokePassed": true,
+    "playerExitCode": 0,
+    "reason": "Replaced to eliminate the transient Editor CoreBuildData pipeline-cache exception."
+  },
+  "buildSettingsRestored": true,
+  "playerProcess": {
+    "pid": 47492,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeExceptionCompilerShaderErrorLines": 0
+}

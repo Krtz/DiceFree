@@ -155,7 +155,7 @@ Mesh:
     m_Extent: {x: 2.2000122, y: 0.34425473, z: 7.75}
   m_CookingOptions: 30
   m_PreBakeConvexCollisionMesh: 0
-  m_PreBakeTriangleCollisionMesh: 0
+  m_PreBakeTriangleCollisionMesh: 1
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   'm_MeshMetrics[0]': 1

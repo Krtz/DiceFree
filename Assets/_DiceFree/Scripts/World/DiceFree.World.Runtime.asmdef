@@ -3,7 +3,8 @@
   "rootNamespace": "DiceFree.World",
   "references": [
     "DiceFree.Foundation.Runtime",
-    "DiceFree.Gameplay.Runtime"
+    "DiceFree.Gameplay.Runtime",
+    "Unity.RenderPipelines.Universal.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

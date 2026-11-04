@@ -14,6 +14,7 @@
     "Unity.InputSystem",
     "DiceFree.Input.Runtime",
     "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.RenderPipelines.Core.Editor",
     "Unity.Pipeline.Attributes"
   ],
   "includePlatforms": [

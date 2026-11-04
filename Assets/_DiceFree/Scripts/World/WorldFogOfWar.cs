@@ -51,6 +51,7 @@ namespace DiceFree.World
             (revealer.position.x < mapMin.x || revealer.position.x > mapMax.x ||
              revealer.position.z < mapMin.y || revealer.position.z > mapMax.y);
         public Vector2 MapMin => mapMin;
+        public Transform Revealer => revealer;
         public Vector2 MapMax => mapMax;
         public float VisionRadius => visionRadius;
         public int ExploredCellCount { get; private set; }
