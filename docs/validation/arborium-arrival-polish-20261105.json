@@ -1,0 +1,111 @@
+{
+  "date": "2026-11-05",
+  "branch": "art/arborium-arrival-world-tree",
+  "base": "9241ffe",
+  "scope": "Approved arrival-district polish and World Tree artwork",
+  "playMode": {
+    "passed": true,
+    "phase": "passed",
+    "checks": 3065,
+    "walks": 9,
+    "meters": 364.098633,
+    "error": null,
+    "rows": [
+      {
+        "citizens": 8,
+        "moving": 8,
+        "walkingAnimationSamples": 566,
+        "convoyMeters": 23.7355442,
+        "convoyStops": 1,
+        "ambientMute": true,
+        "ambientStopsOutside": true
+      }
+    ]
+  },
+  "gateSightlines": {
+    "passed": true,
+    "outsideGateOccluderFaded": true,
+    "collisionUnchanged": true
+  },
+  "finalGeometry": {
+    "originalGateTriangles": 9688,
+    "replacementGateTriangles": 9688,
+    "gateCollisionUntouched": true,
+    "originalGateObjectsRetained": true,
+    "newMeshReferences": true,
+    "meshFilterTriangles": 95670
+  },
+  "staticChecks": {
+    "architecture": true,
+    "managedReferences": true,
+    "dependencyPolicy": true,
+    "originalFourVillagerRigs": true,
+    "newCityCitizens": 8,
+    "convoys": 1,
+    "meshMaterialReferences": true,
+    "wavHeaders": true
+  },
+  "windowsBuild": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261105-183232\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 459182239,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 5,
+    "tierTwoCleaveSpinBarrierDeath": true,
+    "novemberFeedback": true,
+    "handLoadoutAndWolfOffer": true,
+    "arboriumArrival": true,
+    "arboriumDistrictPolish": true,
+    "well25Heavy10Bane10000": true,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 214.721,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "windowsExit": {
+    "pid": 15884,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorPatternMatches": 0,
+  "preservation": {
+    "protectedSettings": 7,
+    "originalSceneNodes": 36034,
+    "finalSceneNodes": 37068,
+    "allByteIdentical": true,
+    "missingOriginalSceneNodes": 0,
+    "settingsRestored": true,
+    "realUserSavesUsed": false,
+    "preExistingModifiedFiles": 54
+  },
+  "earlierDiagnostics": {
+    "readabilityRun": "QA-diagnostic-readability preserves the first QA run, whose test-only geometry query read protected NPC meshes. The query now filters isReadable and requires zero observed Unity errors. No NPC import flags were changed.",
+    "secondRun": "The corrected run passed, but captures exposed the existing outside-gate tower obstruction. Final scene splits gate render geometry without changing collision.",
+    "build": "Builds/BriarbackMilestone-20261105-182036"
+  },
+  "limits": [
+    "Disposable-profile invulnerability and placement fixtures; not combat-balance acceptance.",
+    "Play Mode assertion count includes repeated movement polling. Nine walk segments, measured distance and observed rig/convoy movement are the useful evidence.",
+    "Presentation captures supplement ordinary gameplay-camera, High/Low and evening views. Audio playback and gain/exit behavior were tested; no listening-quality signoff is claimed.",
+    "Build includes preserved existing local WIP and installed optional art. No new external package, paid generation, push or merge."
+  ]
+}

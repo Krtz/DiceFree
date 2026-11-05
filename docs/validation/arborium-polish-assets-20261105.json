@@ -1,0 +1,848 @@
+{
+  "date": "2026-11-05",
+  "source": "tools/authoring/ArboriumPolishAuthoring.cs",
+  "seed": 41057,
+  "provenance": "Original project-specific procedural meshes, materials, textures and PCM audio. Existing NPC models/animation and split gate geometry retain their existing project provenance; no new external package or paid provider was used.",
+  "files": [
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arborium distant guild chime.wav",
+      "bytes": 176444,
+      "sha256": "E30FAD76FC53184DF4BFDEB48281307D940DBE8AC29EEA276676F49817766C3D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arborium distant guild chime.wav.meta",
+      "bytes": 485,
+      "sha256": "B3FA81F592D7942E9681A51AE07B8F75069C3B709631602FBCA031E4DFB5AD51"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arborium soft street air.wav",
+      "bytes": 705644,
+      "sha256": "7443141949047249571F56808060A526F5B30F96820DAC3F12B0BE1BCD340C28"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arborium soft street air.wav.meta",
+      "bytes": 485,
+      "sha256": "A8E9CA0485DCE681E6A21615A6F99DA372EDF4B1E4DC4B1C46A87A97495E8BA2"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 4.asset",
+      "bytes": 26547,
+      "sha256": "13CDE46559E47CCF882A6259C8925B526DD0377DBC43EF8FAEEEF0A2E09B1A00"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 4.asset.meta",
+      "bytes": 188,
+      "sha256": "9314BD6071451FF828BE320CB6BBE430B484F9F3FE1E5F368AD4BD08B4A14F5D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 6.asset",
+      "bytes": 22051,
+      "sha256": "E3CDE406427AFE20B1B3501F878F76DF0B9B685D61232EF6D99413893A6D708C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 6.asset.meta",
+      "bytes": 188,
+      "sha256": "8382B778D8C21D42E36C7C4CEB81C2C96CCDC4ED5F72094C4B63F193CD6A3194"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 7.asset",
+      "bytes": 7208,
+      "sha256": "65831C1020A2A64A41069D2BBC50001DC33C63D38527971911D46437E2FF68C6"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Arriving convoy - oak handcart 7.asset.meta",
+      "bytes": 188,
+      "sha256": "314231DF8C81DF491950F4EC2AAFDCBF150730DC846FC13CA16FAFCC218AD8B4"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 -1 4.asset",
+      "bytes": 21889,
+      "sha256": "37D42B9682BC46C47436EAD75DFA5B05AC53CE5DF6F4936AB91455DC96B298D2"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 -1 4.asset.meta",
+      "bytes": 188,
+      "sha256": "2C86ADA5687D2AD78BE8906B1476627591D9CDC0C6AF93E2B2794E3252BD7C1A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 -1 6.asset",
+      "bytes": 13333,
+      "sha256": "02349EF07A62278E89AD288C950192A2F1C9F3C31C684AB01231F490A3E7E5BD"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 -1 6.asset.meta",
+      "bytes": 188,
+      "sha256": "483F0C20BE797DB3495431F80F73EE8EB4F01D572FC36A1D41DDB625BCBD4B24"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 1 4.asset",
+      "bytes": 21888,
+      "sha256": "201599D894757C2B8449D27AC31D553422A63A0C8E08573F60F21742529E6684"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 1 4.asset.meta",
+      "bytes": 188,
+      "sha256": "DE1F842E367CCE76DB8CBDFDAD36F60437F74C7827CBDED6A19030775472F067"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 1 6.asset",
+      "bytes": 13332,
+      "sha256": "1795D17B1CB1EAB7E9D979F6D251F36D81DFA68437036FC438DC037B9D411C8E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel -1 1 6.asset.meta",
+      "bytes": 188,
+      "sha256": "8D74742075E88CFE241174A47ECE9AB8A200622E400C117CDA1DA8168BB6EF2B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 -1 4.asset",
+      "bytes": 21888,
+      "sha256": "14A0BB35A080AF2FFD1680FB99515CB8CEEF3642FEC5151F9616E15800C05E53"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 -1 4.asset.meta",
+      "bytes": 188,
+      "sha256": "4F3668717557D668E9E801210C39BF9EF6C72A9FAFEE82338B6274D155AE92F8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 -1 6.asset",
+      "bytes": 13332,
+      "sha256": "A555FDCECB59C07232A5CA3B4E7ED9D0C200B136208B39E10850004324A912E4"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 -1 6.asset.meta",
+      "bytes": 188,
+      "sha256": "0754A8A6E4E66112F10CFD439EE319B8CCCA96FF810DC88CCE3129828BE23A50"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 1 4.asset",
+      "bytes": 21887,
+      "sha256": "5E5DD5AB0D58BB1572559D12ED16C15ABE69D8AF1D4BF63FBCCC89EC25B3AA34"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 1 4.asset.meta",
+      "bytes": 188,
+      "sha256": "65D57ADCAE3C00AF4FBB8D781995C4AE0168ACBF923AFE28B7EC5BF04F6B4158"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 1 6.asset",
+      "bytes": 13331,
+      "sha256": "8749101912EF22E0F302C8F6D902BE3744CF7756C5519333480177B7223D2B02"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Convoy wheel 1 1 6.asset.meta",
+      "bytes": 188,
+      "sha256": "C5E522A315797A77378D52933A89EF47E58C10D9ABE52C8D447A99A72550EF89"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Forged dark bronze.mat",
+      "bytes": 3934,
+      "sha256": "6C5B8FDFB7389FB2D5016F0C58C8ACC9BB8E5F5B479E66C290ACE2AF22D30F7C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Forged dark bronze.mat.meta",
+      "bytes": 188,
+      "sha256": "44E06CDC4F27CA6896E0B912464E0E59D6904C8F325CEA64145E40366A59FE6D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 0.asset",
+      "bytes": 296409,
+      "sha256": "D09E672C6A540D772984CFB3589484AE1C34600D94CD769B889DAF25404A84D1"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "9DD720A317C6B641649A5E3FAA21B22318944203FE58385FC5C6298DB5BAE1B5"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 1.asset",
+      "bytes": 24710,
+      "sha256": "DB3FCB073763DAE7EE68C05EA58EE1ACAD39F5A9FC8F8E536339866B1F1E84BA"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "37765F3579A3CB60E308652A696FFAEE00498EADC7ECF80D9D2581E27F39DA92"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 2.asset",
+      "bytes": 27301,
+      "sha256": "D76EADA9DA96F26DA863027F50B45FA10EF040659EF3FD2A9B5C3472EEECE600"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "9549947A4312FC80C321E99F9027C1DAEAF25A1999F1FBF003B28A7C14E75C47"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 3.asset",
+      "bytes": 5200,
+      "sha256": "43A05355B63EDB7D160337A71CF218F8D63B576F374ED4F38518845F06E5326B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 0 section 3.asset.meta",
+      "bytes": 188,
+      "sha256": "901B87044A07C2DBD3D0524DFC98C10CD35FCDA2042E4F08322836FF6CB904BA"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 0.asset",
+      "bytes": 812242,
+      "sha256": "983E5B585816573C1929ED27C93B5CC263BB67312458E5C125BEA072D5A3E391"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "15190301A1D0650D4A9B15A5996567B00C8DDF22E14F00D601CEBE1475917F37"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 1.asset",
+      "bytes": 31621,
+      "sha256": "E9602A622855192CAC2FB5CC24B63A2607CEC93209210802733408058A0A10F7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "DF30561C7A1C05BBE706D59E38E748DD3FDE9B2F201253FD890F4EC787C35A9A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 2.asset",
+      "bytes": 41991,
+      "sha256": "BE576D3CA85FCB8A685B64AD6DBEF1E5310FAC978EDD4A5EEFE042871D485748"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "CCD8E650E52F310DDE7187862D34FCAB9B9C61F51C1FFC82B3FA94FF06DBD20D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 3.asset",
+      "bytes": 19934,
+      "sha256": "4C223A30A6EDCF401DB01343AFE2BEA362FE825FA9FE62C7294AEC215889FB34"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 1 section 3.asset.meta",
+      "bytes": 188,
+      "sha256": "7FA318AEC60F308F21597F1D7DCA8D84EAB512FCCA3E028D35A875C8E8B1EE97"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 0.asset",
+      "bytes": 296417,
+      "sha256": "96AA9DBDBAD5553CB07F3F591B40774BB84BFBA5CBC6267B98FAF1EA46E7952A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "30DA2E0B7FC4BEE8C18B2CA917920C9F371DC5A2BC7393FD6E01CC67BEF03A21"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 1.asset",
+      "bytes": 21658,
+      "sha256": "F3BF14C0FFD2D7433A5C843135AC1092CCB1FDC4B22A085D5C0FE70D4A9EF277"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "7C204F0E00C757AF1DC04678D40D72AE84EC8D670DDAE13E7C29F41CEF2CDFC8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 2.asset",
+      "bytes": 24248,
+      "sha256": "33AE41A6A4A1FA288FBAF1B6AECADE0656A8C9EF765F78F4C4C266A460AC5FFF"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 2 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "0E5BBB11EEEC5D73BBCE121889DDEADB603CF35A1112E4E6AC6F4AA46165349D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 0.asset",
+      "bytes": 124480,
+      "sha256": "C6D6E1C9EDAB06971BA5267D51C4F3755FE849538F51603F643402582470748B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "C4625FFE2F97B7B0609A72158E06F20D4FB2CD7E5F2766F70FE213AAD0811192"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 1.asset",
+      "bytes": 20772,
+      "sha256": "EF662A57AEDB8FF55B887914E91D45E8647FAC4BDECE203A777669508DD9F080"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "7343E0D15A211391E7B33C2F2A92635467025CC0EC472EB94182635B8E9D337A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 2.asset",
+      "bytes": 20770,
+      "sha256": "4222BDF5516EF971A3ADA5651FC88BECA3C05DBB404664C6F3D1A816D7F146CA"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 3 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "0897866C43E74D8373B963CED76556B7F79E9AD29E1F731D731CADF13021909A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 0.asset",
+      "bytes": 124482,
+      "sha256": "5FF293B76614D133DF854585954A55F2688B253B146F4990D94B0E28215A1EBD"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "8E1CB8DB36A2610B4BBA08F142E56AE051854A70EFB205172A4D921A302667DB"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 1.asset",
+      "bytes": 33349,
+      "sha256": "E3FDAF85C19930F036D624A7575FDA1D61AA3D88E8269A5CFC6BBCCA1A931BC0"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "C0622D45754691715C24219667C8CD314651B8EBFC099FE9FC7447D08EB21D40"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 2.asset",
+      "bytes": 33347,
+      "sha256": "4471808331E7E32D56B7F858B2045D7E407BF68ACF94F65B0FAA6FF3E674C282"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "B912842CB124CD40C93336FD0930AB3A5236AC1C7F47BAA2E6EEDD2114FA9673"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 3.asset",
+      "bytes": 5212,
+      "sha256": "0267779BA81D31D8A0EA0069EA37B8D90287D3FBE73DEBF28859FCBB3AC6F5FB"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 4 section 3.asset.meta",
+      "bytes": 188,
+      "sha256": "7CDA247C3AF0426677377FED3D19FBE7ABCAECE13452E2C9FF35F810B3437DE3"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 0.asset",
+      "bytes": 148672,
+      "sha256": "A12AA8E5C88DCA1470AFA7E6791DFB29570C9C7407ACE56DE2F4D184ECE03CB9"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 0.asset.meta",
+      "bytes": 188,
+      "sha256": "844700B97C49C3460EA5AB20E01CE6B7A609419DE8E1B43394E2A5932BF60775"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 1.asset",
+      "bytes": 24240,
+      "sha256": "185D055B882041F961C4EC1D79B74427D5B8E2B9BC97E8818C297C34DF4883F8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "1036FFA4D2B4D8A360F919AAD82C91F908DB0F0AD5F21BBAAA1CFABE0E531247"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 2.asset",
+      "bytes": 24238,
+      "sha256": "8F3AD9D18003C1C60B9FAF61D3263CC4C84F9BAED8107BA4590DB6F81E467630"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 5 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "3FBA3A036A538828C418D1E1FA7714ADFF6EFD2AF79E7D19357B10D233CA63B4"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 6 section 1.asset",
+      "bytes": 6095,
+      "sha256": "428C32D132445168F20A73F205B8D6D30BEF11098F1BE223F1D59430A01D95D5"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 6 section 1.asset.meta",
+      "bytes": 188,
+      "sha256": "620443157265638B9149307E5607C8C9DA09855D4C579E1CD018A57CA4680008"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 6 section 2.asset",
+      "bytes": 6093,
+      "sha256": "FB63683E88619A5A5899743DF7346DAD15EE4A71BB0E0E1D14DAAB302E78D64B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Gate visibility 6 section 2.asset.meta",
+      "bytes": 188,
+      "sha256": "AEE04C0D41CA1EB70FE550AB625A9CDAEDE462ADF595BD94DEEE41A01ABDBFD4"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild blue canvas.mat",
+      "bytes": 3935,
+      "sha256": "C0AA121A239CB860EF64A0C5FB670E2FB0AE81A2B02D72DE831FD179059578A1"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild blue canvas.mat.meta",
+      "bytes": 188,
+      "sha256": "9E14B35E57B06CCC6115CFD0A09174C9EA157EFDC50E994FADFD0660B5932DBF"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 12.asset",
+      "bytes": 27001,
+      "sha256": "0454A21F762DC5ACDD9942BD7F53EA20EDDD62F88CC9161C09F99ABAC9E649B8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 12.asset.meta",
+      "bytes": 188,
+      "sha256": "749BDF95AE707DCC0E968B0A2A87A3FE3B95B7DEE82B1402E69B5DF0A162A882"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 13.asset",
+      "bytes": 10853,
+      "sha256": "95E8B67F806CEF2571845BEAC670AA932FAD9F18D728DFBD044DBB3B74D6B2A6"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 13.asset.meta",
+      "bytes": 188,
+      "sha256": "85DBF46E63A9C1E6D4056DD35EB865D92E1A6AD60A67417C58942D4D78EF416C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 5.asset",
+      "bytes": 33243,
+      "sha256": "7A447E2E306EBF211F83B5297A790FC6FD93D6A5769B1F8B2BC6A5CDC1799C80"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 5.asset.meta",
+      "bytes": 188,
+      "sha256": "DBE2A3F13A879DF48EA301BB6415D3490D6381FFE0B37C602FD527F7AA3EB166"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 8.asset",
+      "bytes": 8409,
+      "sha256": "E7F69ADE51F7E5BFF5F1D6D4F0C1632AB1906A7D0CAEE5575E9F73C22D97BE87"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Guild forecourt - patterned stone and arrival banners 8.asset.meta",
+      "bytes": 188,
+      "sha256": "1DD72BA2B8ABC31EBF7BE603813C4D7B3B7917A89036B7EC5E77ECDAA98A9451"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market apples.mat",
+      "bytes": 3925,
+      "sha256": "E9733660FC29B16E87F3BB7EECEFE7B6D955220B76133642348B0E35797E279C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market apples.mat.meta",
+      "bytes": 188,
+      "sha256": "CAC5872F16A2B5B54F3289B6F99DBF69F1C452282430CA4EB97F72D3D66159DF"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market herbs.mat",
+      "bytes": 3930,
+      "sha256": "D1B16C3E05DF1D174874002286ABACCF8A9ECB827AC2F84994E9D54DBC2338C7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market herbs.mat.meta",
+      "bytes": 188,
+      "sha256": "8C9D9611095372947464BDEB1066EDD01D1EE2C744DE80436646964A76321B52"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market honey oak.mat",
+      "bytes": 3931,
+      "sha256": "E9B2F432BB1D73F89974B4C38D9A40D3BA301406EDB1778F2398FD8C3433F792"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market honey oak.mat.meta",
+      "bytes": 188,
+      "sha256": "0B8FCBF514712C7695FCE072D199A88EDA29E68C0A57426FC4B2CEB37AFDFFE7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market madder canvas.mat",
+      "bytes": 3937,
+      "sha256": "BD2C02828E1948C20EABE34A0B1796D52BF5F304F9FAD21B614ACB528F9ED6AE"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Market madder canvas.mat.meta",
+      "bytes": 188,
+      "sha256": "0C3FB7C409918AD1252E4156B6E2169671D96D894CA12590FB9A7E2B4CA4DA07"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 4.asset",
+      "bytes": 47017,
+      "sha256": "0F551153866807B382B5711CF3689F4AC0954640F3DCF58EA62D2EFBD61E42DE"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 4.asset.meta",
+      "bytes": 188,
+      "sha256": "A9C9419F01D1C3C92B818082E6654F97AA8BFA7984B099D0B1423DAF419D022E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 6.asset",
+      "bytes": 73643,
+      "sha256": "263A153575D1B6968E5454F9C81BB03F8050F78B7F1877088628200DC6969E5D"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 6.asset.meta",
+      "bytes": 188,
+      "sha256": "DE483D92B23207DE55D43F4D3F7961681791BF79062D3E0B53BDF2144181454B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 7.asset",
+      "bytes": 29106,
+      "sha256": "24DED0ABDBCF59E61EFEFCA8CA53D04CAA4972CCA981DBA1100B805BF0512762"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - deliveries and stored goods 7.asset.meta",
+      "bytes": 188,
+      "sha256": "D32342A1B80AAD33031B4FAB89715C0D8F943A5117C19E1A9D1AD5F65968A911"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 10.asset",
+      "bytes": 161390,
+      "sha256": "0898C292A569E3A6C3BA5792D55383D5B08D98DEF3A733ACA4960BA5E88A96B0"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 10.asset.meta",
+      "bytes": 188,
+      "sha256": "1369E9A8F30B27E1EC004371D29A6A1B7874E8C0667E0DDFC1FA8B8B5DCC18E0"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 11.asset",
+      "bytes": 217828,
+      "sha256": "1B92D5BE4CDFD6A4B9617B3573BDFC65D949D6083668FDD65609C1AE7DCEF35E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 11.asset.meta",
+      "bytes": 188,
+      "sha256": "74140DBFCFD50E4FD67E0ECFB65A1624DC03F0725035AABF4FAB1ACE8B520AB9"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 12.asset",
+      "bytes": 217824,
+      "sha256": "58B3187A15D0E293A1AA8FAA44DD66FA0381A52C062FBBBD2A399B3EAF2CF0C1"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 12.asset.meta",
+      "bytes": 188,
+      "sha256": "4F13DC958FF41F3A45587CF1886D8FDF99CB69A00841BA3AA794BDBB2526515A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 13.asset",
+      "bytes": 5352,
+      "sha256": "17FE2F73E8B3183EBC485621E9CBD2975A1DEAEC8CC06847A0E0EED445BB66F9"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 13.asset.meta",
+      "bytes": 188,
+      "sha256": "BF7C1684EA9E004546D66459C5023D7E1CAF93AB169AA30F37119F7A30CE5909"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 4.asset",
+      "bytes": 54609,
+      "sha256": "AD1A6D47E7CD177E112CD408976FD1484D3B5D3F2E0F9D2B0E09DF9635E66E3F"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 4.asset.meta",
+      "bytes": 188,
+      "sha256": "DE3215CDE2377B9BFBE9B82E3B07148CBE434DE93FF5472150FB12C6064875B7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 7.asset",
+      "bytes": 46122,
+      "sha256": "DBB8950176D9CB688837B291C2188FED8CDFE18A7BC48FD4998A244524F9A6F8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 7.asset.meta",
+      "bytes": 188,
+      "sha256": "44331AB7E09950B534DE9ACE61EEF068EDB52FE4491C4465A1F3B92BE4577D3F"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 8.asset",
+      "bytes": 24841,
+      "sha256": "7B5A9E2AB5093A5AABD598476A33D011D65F600532FA067A179BB73498D4B198"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 8.asset.meta",
+      "bytes": 188,
+      "sha256": "3E9AA36208515A6E6CDC5D511C7B7A9EF9CA5914E8C362536798D152B01A4F35"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 9.asset",
+      "bytes": 24841,
+      "sha256": "B5ACA47809D1F551277B7D5BAD7E4D7C6509B188B3A7C7B463673A945B8B5433"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Merchant quarter - striped cloth and goods 9.asset.meta",
+      "bytes": 188,
+      "sha256": "669EE9B08800FC9B3247FAE00DA796AED8E2A45C4429015F193A5B6735A57EB0"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 10.asset",
+      "bytes": 182734,
+      "sha256": "FA7CD66297897648B602943405802114194A603E639B4F057D592DC2E6733251"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 10.asset.meta",
+      "bytes": 188,
+      "sha256": "66442A113C9D558DF9C52A973F56720C816403E36DA8556822CA512155175E51"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 5.asset",
+      "bytes": 99929,
+      "sha256": "4E30889520D8ECA850DAE22F2C4CA5EACFBF2B5E2AA99D7B85CCCCF57AEA2240"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 5.asset.meta",
+      "bytes": 188,
+      "sha256": "90B35B4523E1263B3C6E22D3269B572527B853BB973E1408190EA14F5E2AD563"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 9.asset",
+      "bytes": 26631,
+      "sha256": "9D220DEAD3252F24B4234AA2283BBC0FC2935124FBC0CD77D111DA325993BDDB"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Northern avenue - flower urns and shaded seats 9.asset.meta",
+      "bytes": 188,
+      "sha256": "A9DFD6501EEB840E006A750BFBC62918EBED35DC419386207E2E8F3D31E13875"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Signboard dark recess.mat",
+      "bytes": 3939,
+      "sha256": "10B46297DC4A4EFC1AF1DD96D2CAAFCBB63C7B2B01227B0D77FD732689CA52F2"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Signboard dark recess.mat.meta",
+      "bytes": 188,
+      "sha256": "5FCC86EA65EDF3357130AEDDD873960C155A6471A29DBEC4D7ED5C92A0C26A34"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Warm engraved brass.mat",
+      "bytes": 3930,
+      "sha256": "6D8A196F17DFD81D02261A83E83980D09008E90FB51A1164AC6BFF233ED3EA0F"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Warm engraved brass.mat.meta",
+      "bytes": 188,
+      "sha256": "DE99E4C1C3308614DF795FC0514BA0AA15CAC364DA6B2B0125A9EE1C0ECE4245"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Warm ivory canvas.mat",
+      "bytes": 3922,
+      "sha256": "2E02D7E50D56334499305A1EE712716BDDF38356896A4DED79C416A9B4E1022C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Warm ivory canvas.mat.meta",
+      "bytes": 188,
+      "sha256": "C7BF74937B23590F41712F38115C985C28B57FF69CB1A23D80F469D08C75DCB7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 12.asset",
+      "bytes": 7382,
+      "sha256": "4094FCC3A225120CC97AA1352686824E18631EEDC4C3B9C7D57541E110CA6D2E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 12.asset.meta",
+      "bytes": 188,
+      "sha256": "BA54366A3DD031CD98346AB38EBA0CFCDFB6B53D2C2090AB509D29F9E6AB9615"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 14.asset",
+      "bytes": 5343,
+      "sha256": "E7C3116D9EF9D54112F432254F4342F94B1C3AA6F2AFBBC825826FB06BEE5605"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 14.asset.meta",
+      "bytes": 188,
+      "sha256": "C5DE4F0BF3FA8674E5FA32726F87E3B65CBD22DBF54529D2299EE2588D39C0CB"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 4.asset",
+      "bytes": 8503,
+      "sha256": "2D452CFFE71A366465143329D99BEAEDD4543738559F085368096FB9316A2DA4"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - EXCHANGE 4.asset.meta",
+      "bytes": 188,
+      "sha256": "BC739FD94AB9BBD7FD3AB898F8A5D019C0A2108BAE84339AA947324F8537BBB7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 12.asset",
+      "bytes": 7373,
+      "sha256": "BCAA32E6A103972072BC427560166A01097CFEF65309AE9568AB6B95E9E4527F"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 12.asset.meta",
+      "bytes": 188,
+      "sha256": "AE1F2533FEC31FCFBD872EE28784E98F76F34E05FE02A311CD4A16C5E5D5B4AD"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 14.asset",
+      "bytes": 5336,
+      "sha256": "DF978C3E8CDF7B4D52A465309637D7D2BC177FD834304D1FCCD6186D71858843"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 14.asset.meta",
+      "bytes": 188,
+      "sha256": "90EC09BF8FC0474AF3ACB5889B46D10F11499C0316BA56EC12B23C1D93C84673"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 4.asset",
+      "bytes": 8506,
+      "sha256": "EEABEF0723B015964785FE9D43260A4D27FB3AF0F7E9BEBFD6F326812465E1FD"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - GUILD 4.asset.meta",
+      "bytes": 188,
+      "sha256": "583210F215049F15EDC14989DDA9E393D55CAE668E146C571FF1B9A4074BCFB5"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 12.asset",
+      "bytes": 7160,
+      "sha256": "1456F9C7A7E3789FE56D35664158FFC120F7A92C0DB20690443F4B8D51F88DFD"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 12.asset.meta",
+      "bytes": 188,
+      "sha256": "D6A409A4AFE3922C3EE2799E150A041F7CF79EB109105D198314FEFABB1DD7A8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 14.asset",
+      "bytes": 5345,
+      "sha256": "2E4EBE5D7CA83074CE2F19568342E412840C6CAB4EB8C07BDEAD2A52E3C3C0A8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 14.asset.meta",
+      "bytes": 188,
+      "sha256": "E8286A5C203FECD04018F71AF9AEE5E5028F4D1E021490B3458C58792C36A747"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 4.asset",
+      "bytes": 8505,
+      "sha256": "D0CC59C6E79A7326F21F0915606BC04A68B940A0278DE06473273FDDF9E9FDAC"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/Wayfinding - WORLD TREE 4.asset.meta",
+      "bytes": 188,
+      "sha256": "7E1135B3FE00150D602A976A156A003A07DBA79D61093ADF0A74BC318AB7B87C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - branching limbs 0.asset",
+      "bytes": 461697,
+      "sha256": "6B0D76D5645F2EE984C931EFDBC2FA0BCB4DDE87EAF95A52156053ED4F847F49"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - branching limbs 0.asset.meta",
+      "bytes": 188,
+      "sha256": "4652AD2FAB312EAA3859E0826BD5CD9BDA0EA13BDD8534B6486E385F81AF5A09"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - gnarled trunk 0.asset",
+      "bytes": 206065,
+      "sha256": "B56264335718C5D1FFB02A881F9CF4AD1CDC9A81E427397E70A67C867B779C3E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - gnarled trunk 0.asset.meta",
+      "bytes": 188,
+      "sha256": "516DA42E8D4E9FA3494D857662E3ED5D9245409C39226E99D382208540749F73"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 1.asset",
+      "bytes": 2160119,
+      "sha256": "3E362235208749E41BA76CBA4701B5919F3A1E57A3E6F8DBFC065E0D929C4635"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 1.asset.meta",
+      "bytes": 188,
+      "sha256": "95C868EE0D5999C880D78B639BA257940AE208B15D79FF06D6A7AEAC070A9520"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 2.asset",
+      "bytes": 2120185,
+      "sha256": "02ED15F32E963451EFCA2A07A9D40B35C931957533F17C68C528025566D1CA31"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 2.asset.meta",
+      "bytes": 188,
+      "sha256": "C7DF41DB2A94F21340831BE4099DEF5F2B0FBC9CB6C835B601484555AA0A1557"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 3.asset",
+      "bytes": 2120189,
+      "sha256": "879B53B4B4DC51DFD5F0D73E5DA1E60DA640C41D1CDE749B2D843A03BA734FE7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - layered leaf canopy 3.asset.meta",
+      "bytes": 188,
+      "sha256": "FC2560C425F58E9ADEE4C8ABE569DCF3FAA840F32565126B63705A4E6F8C499F"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - spreading roots 0.asset",
+      "bytes": 178301,
+      "sha256": "F279A563849A7127F4760EEC6413122AD530C89EA682F670811150022A1598DC"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree - spreading roots 0.asset.meta",
+      "bytes": 188,
+      "sha256": "889A90465111999B51062A869DDDA28863C26823E36C194D832B9720461EF82A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree bark grain.png",
+      "bytes": 1248350,
+      "sha256": "6ADC70A6AE3798DE97C4C20BA8A94D06CE56420F4CA2138C176696488D93BA7A"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree bark grain.png.meta",
+      "bytes": 3069,
+      "sha256": "551F1D7449568A2C2B80A50FC4589E85A7C5B9AC47D20AE723487470295A59C5"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree deeply furrowed bark.mat",
+      "bytes": 4060,
+      "sha256": "5AF2EA73918065CE6FAC0585938A9BAD415295B4C900D332B5FD697DBBEAC3C7"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree deeply furrowed bark.mat.meta",
+      "bytes": 188,
+      "sha256": "37CA054BC790B34F07384CAC48C9535A8156DCA49CD05A2BB0D5C4F9DEDD07B0"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree emerald leaves.mat",
+      "bytes": 4053,
+      "sha256": "22E9A5AB7B8EA243FA60CB013D5F02C7EF401BE5C626B32080E40DEA8B5F3B09"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree emerald leaves.mat.meta",
+      "bytes": 188,
+      "sha256": "127EA2CF7187FDF3850DE6DAEC047B93FF007150BD4B719C9DD883112F5C0804"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree leaf veins.png",
+      "bytes": 11622,
+      "sha256": "D25FE2B929BFF925781DEE86338CD267CD227401BF4CB1E438379E2E18A9E25C"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree leaf veins.png.meta",
+      "bytes": 3069,
+      "sha256": "61567C4EEF47D84EF0BE9A5F4693939086A89056D150999FC3EC98068B72254E"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree shadow leaves.mat",
+      "bytes": 4051,
+      "sha256": "B24D8A3B490C9451B6261548E2028B6A85D3B5C79E81A18C6789FBD72A597411"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree shadow leaves.mat.meta",
+      "bytes": 188,
+      "sha256": "656D1F2BD50DA8B4727D9C190DF6CF135F81FB4AC07C5A37EA37A94E88EAD187"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree sunlit leaves.mat",
+      "bytes": 4051,
+      "sha256": "697F816E2B5C04FB230D66651D3F4DCBD8F7BF27C8AF9329FF18757E9286845B"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/ArboriumPolish/World Tree sunlit leaves.mat.meta",
+      "bytes": 188,
+      "sha256": "AFEAAC4F3FFEC609E8252724FFF78ED3C19FB14E21D87B52FA9CC42B01B5B98C"
+    }
+  ]
+}

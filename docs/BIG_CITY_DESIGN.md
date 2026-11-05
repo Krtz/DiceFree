@@ -3,6 +3,8 @@
 **Current status — 2026-11-05:** The user requested that implementation begin. The first arrival section is implemented locally on `feature/arborium-arrival-and-balance`, following the confirmed decisions in Rounds 1–3 below. Historical interview-only restrictions describe those earlier rounds; they do not revoke this later authorization.
 **Scope:** Northern approach, monumental gate, fortified Adventurers' Guild, initial services, ring streets and a first travel-report quest. This is the beginning of Arborium, not a finished metropolis. See `ARBORIUM_ARRIVAL_AND_BALANCE.md` for implementation evidence and remaining work.
 
+**Approved visual follow-up:** The arrival district and World Tree are further developed on `art/arborium-arrival-world-tree`. See `ARBORIUM_ARRIVAL_POLISH.md` for the original tree artwork, street dressing, ambient citizens/convoy, audio and gameplay-camera checks. The confirmed district order and later story/mentor decisions remain unchanged.
+
 ## Established continuity (previously approved; not new decisions)
 
 - This is the **major city beyond the World 1 Quillboar region**, reached from **Trimery by traveling through Quillboar territory**. The existing traversal is Cornberg → Ironpine → Trimery → Quillboar region → major city. Do not move the city behind a new mandatory Chieftain kill, dungeon or artificial progression gate.

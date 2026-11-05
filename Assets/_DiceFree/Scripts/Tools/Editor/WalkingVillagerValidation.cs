@@ -20,7 +20,7 @@ namespace DiceFree.EditorTools
    var setup=EditorSceneManager.GetSceneManagerSetup();int changed=0;
    try{
     var scene=EditorSceneManager.OpenScene("Assets/_DiceFree/Scenes/Cornberg.unity");
-    var walkers=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<VillageHomeWander>(true)).ToArray();
+    var walkers=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<VillageHomeWander>(true)).Where(w=>w.name.StartsWith("NPCs/",StringComparison.Ordinal)).ToArray();
     Need(walkers.Length==4,"Four village walkers required");
     foreach(var npc in walkers){
      var driver=npc.GetComponent<VillageWalkingAnimator>();Need(driver!=null&&driver.Model!=null,"Missing rig "+npc.name);
