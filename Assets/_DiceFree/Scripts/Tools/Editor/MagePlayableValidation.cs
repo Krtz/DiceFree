@@ -69,6 +69,7 @@ namespace DiceFree.EditorTools
    Need(controller.TrySwitch("class.novice"),controller.Feedback);hub.Publish(new DungeonPuzzleSolvedEvent("dungeon.slime","puzzle.slime-tree"));
    Need(controller.TrySwitch(AdvancementAuthoring.MagicalId),controller.Feedback);Protect(p);
    Need(journal.GetProgress(quest.stableId).status==QuestStatus.Active&&journal.GetProgress(quest.stableId).count==0,"Wrong class puzzle credit or accepted quest lost");
+   var outdoorBounds=OverworldMapBounds.ForScene(p.gameObject.scene,Object.FindAnyObjectByType<DiceFree.Core.ExplorationCamera>().MapBounds);
    Phase("real five-ring dungeon puzzle");
    var portal=Object.FindObjectsByType<DungeonPortal>().Single(t=>t.isActiveAndEnabled&&t.definition.stableId=="dungeon.slime");
    Need(p.Motor.Teleport(portal.ApproachPosition+Vector3.back*1.5f)&&portal.CanInteract(p),"Dungeon portal approach");
@@ -89,7 +90,7 @@ namespace DiceFree.EditorTools
    run.SolvePuzzle(false);Need(journal.GetProgress(quest.stableId).count==1,"Puzzle replay duplicated objective");
    run.Abandon();while(SlimeDungeonRun.Current!=null)yield return null;
    Need(!clock.IsInterior&&!dungeonFog.UsesLocalVisibility,"Outdoor lighting/fog not restored");
-   Need(Object.FindAnyObjectByType<DiceFree.Core.ExplorationCamera>().MapBounds==BriarbackAuthoring.Bounds,"Expanded camera bounds lost after dungeon return");
+   Need(Object.FindAnyObjectByType<DiceFree.Core.ExplorationCamera>().MapBounds==outdoorBounds,"Authored outdoor camera bounds lost after dungeon return");
    Need(save.Flush(),"Ready quest save");Need(controller.TrySwitch("class.novice")&&controller.TrySwitch(AdvancementAuthoring.MagicalId),"Ready quest switch");
    Need(journal.GetProgress(quest.stableId).status==QuestStatus.ReadyToTurnIn,"Ready quest lost");
    Protect(p);Need(p.Motor.Teleport(mentor.ApproachPosition+Vector3.back*1.8f),"Return to brewer");yield return Frames(2);

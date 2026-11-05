@@ -34,11 +34,11 @@ namespace DiceFree.Visuals
         {
             if(kind==Kind.BattleCry){EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalQuickening,transform.position);return;}
             var animator=driver?.VisualAnimator;
-            if(animator!=null){if(kind==Kind.SpinDash)animator.SetTrigger("SpinDash");else driver.PlayAttackAnimation();}
+            if(animator!=null&&GetComponent<PlayerMotionPresentation>()?.SupportsCurrentClass!=true){if(kind==Kind.SpinDash)animator.SetTrigger("SpinDash");else driver.PlayAttackAnimation();}
             if(kind==Kind.WideArc)
             {
                 int mastery=GetComponent<DiceFree.Skills.GreatbladeSkillProgression>().Rank(Kind.GreatswordMastery);
-                float angle=caster.Tuning.arcAngle+(mastery>=3?15+3*(mastery-3):0);
+                float angle=caster.Tuning.arcAngle+GreatbladeProgressionRules.MasteryArcWidth(mastery);
                 float radius=GetComponent<CombatActor>().Radius+caster.Tuning.arcReach;
                 var points=new Vector3[26];points[0]=transform.position+Vector3.up*.12f;points[25]=points[0];
                 for(int i=0;i<24;i++)points[i+1]=points[0]+Quaternion.AngleAxis(-angle*.5f+angle*i/23f,Vector3.up)*transform.forward*radius;
@@ -66,6 +66,7 @@ namespace DiceFree.Visuals
         }
         void LateUpdate()
         {
+            if(GetComponent<PlayerMotionPresentation>()?.SupportsCurrentClass==true)return;
             if(!caster.Busy||GetComponent<ActorStats>().Definition?.stableId!=GreatbladeProgressionRules.ClassId)return;
             var animator=driver?.VisualAnimator;if(animator==null)return;
             if(caster.Feedback==Kind.SpinDash.ToString()&&!animator.GetCurrentAnimatorStateInfo(0).IsName("Spin Dash"))

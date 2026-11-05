@@ -8,6 +8,6 @@ namespace DiceFree.Visuals
   void Awake()=>caster=GetComponent<MageSkillCaster>();
   void OnEnable(){caster??=GetComponent<MageSkillCaster>();caster.Casted+=OnCast;}
   void OnDisable(){if(caster!=null)caster.Casted-=OnCast;}
-  void OnCast(MageProgressionRules.Kind kind){GetComponent<ReturnHomeAbility>()?.Cancel();GetComponent<NovicePresentationDriver>()?.PlayAttackAnimation();}
+  void OnCast(MageProgressionRules.Kind kind){GetComponent<ReturnHomeAbility>()?.Cancel();if(GetComponent<PlayerMotionPresentation>()?.SupportsCurrentClass!=true)GetComponent<NovicePresentationDriver>()?.PlayAttackAnimation();}
  }
 }

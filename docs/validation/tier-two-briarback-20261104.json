@@ -1,0 +1,309 @@
+{
+  "date": "2026-11-04",
+  "branch": "feature/tier-two-briarback-playability",
+  "baseCommit": "5a5f7c4",
+  "rankAndMigration": {
+    "passed": true,
+    "checks": 411
+  },
+  "greatbladeQuest": {
+    "passed": true,
+    "checks": 35,
+    "error": ""
+  },
+  "greatbladeGameplay": {
+    "passed": true,
+    "checks": 78,
+    "error": ""
+  },
+  "mageGameplay": {
+    "status": "passed",
+    "error": "",
+    "checks": 127,
+    "chainTargets": 3,
+    "uniqueElements": 6,
+    "puzzleCaptures": 5,
+    "fullBarrierHp": 50.0,
+    "partialBarrierHp": 99.5,
+    "walkDistance": 9.760221481323242,
+    "questAdvanced": true
+  },
+  "tierTwoField": {
+    "phase": "passed",
+    "failure": null,
+    "advancements": 2,
+    "setupFixtures": "Disposable profile; ordinary XP and existing-item grants, initial placement, between-trial restores. Dungeon miniboss/boss fixture damage is separate from regional combat. Five-ring Mage captures and mentor turn-ins use real runtime systems.",
+    "regionalCombat": "Normal time, normal damage, no invulnerability and no disabled enemy AI until the separately labelled cosmetic phase.",
+    "limitation": "One skill policy and existing item loadouts; no statistical or party balance approval.",
+    "trials": [
+      {
+        "classId": "class.greatblade",
+        "level": 25,
+        "gear": [
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.briarback.bristlehide-mantle",
+          "item.alpha-wolf.greatsword"
+        ],
+        "maximumHp": 1015.0,
+        "minimumHp": 905.4502,
+        "incomingHits": 3,
+        "incomingDamage": 119.344879,
+        "outgoingDamage": 1665.0,
+        "casts": 3,
+        "combatSeconds": 2.263064,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "Raider 7 (Lv 25)",
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.greatblade",
+        "level": 35,
+        "gear": [
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.briarback.bristlehide-mantle",
+          "item.alpha-wolf.greatsword"
+        ],
+        "maximumHp": 1315.0,
+        "minimumHp": 1242.57654,
+        "incomingHits": 2,
+        "incomingDamage": 73.57138,
+        "outgoingDamage": 1665.0,
+        "casts": 2,
+        "combatSeconds": 1.28730679,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.mage",
+        "level": 25,
+        "gear": [
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.briarback.bristlehide-mantle",
+          "item.bronze-dagger"
+        ],
+        "maximumHp": 790.0,
+        "minimumHp": 741.035339,
+        "incomingHits": 2,
+        "incomingDamage": 48.9646835,
+        "outgoingDamage": 2151.214,
+        "casts": 6,
+        "combatSeconds": 1.87122154,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      },
+      {
+        "classId": "class.mage",
+        "level": 35,
+        "gear": [
+          "item.cornberg.work-gloves",
+          "item.cornberg.farmers-pants",
+          "item.cornberg.forest-shoes",
+          "item.slime.slimy-tophat",
+          "item.briarback.bristlehide-mantle",
+          "item.bronze-dagger"
+        ],
+        "maximumHp": 1015.0,
+        "minimumHp": 919.108643,
+        "incomingHits": 4,
+        "incomingDamage": 134.692047,
+        "outgoingDamage": 1665.00012,
+        "casts": 3,
+        "combatSeconds": 3.28224945,
+        "outcome": "raider-defeated",
+        "survivedRetreat": true,
+        "attackers": [
+          "SpearThrower 8 (Lv 25)",
+          "Totemcaller 9 (Lv 25)"
+        ]
+      }
+    ],
+    "motion": [
+      {
+        "classId": "class.greatblade",
+        "walk": true,
+        "skillGesture": true,
+        "stunRecovery": true,
+        "deathAndActualReturn": true,
+        "scalePreserved": true,
+        "cleaveAngles": [
+          110.000214,
+          124.999908,
+          131.000427
+        ],
+        "portableSpinCancel": true
+      },
+      {
+        "classId": "class.mage",
+        "walk": true,
+        "skillGesture": true,
+        "stunRecovery": true,
+        "deathAndActualReturn": true,
+        "scalePreserved": true,
+        "cleaveAngles": [],
+        "portableSpinCancel": false
+      }
+    ]
+  },
+  "impactTiming": {
+    "passed": true,
+    "classes": [
+      {
+        "classId": "class.greatblade",
+        "atRealBasicImpactNormalized": 0.4716769,
+        "chosenImpactNormalized": 0.52,
+        "state": "ArmedAttack"
+      },
+      {
+        "classId": "class.mage",
+        "atRealBasicImpactNormalized": 0.462153077,
+        "chosenImpactNormalized": 0.564705849,
+        "state": "Cast"
+      }
+    ],
+    "greatbladeOverrideRestored": true,
+    "damageTimingUnchanged": true
+  },
+  "earlyClassRegression": {
+    "passed": true,
+    "classes": [
+      {
+        "id": "class.novice",
+        "controller": "Novice",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      },
+      {
+        "id": "class.physically-blessed-novice",
+        "controller": "Physical",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      },
+      {
+        "id": "class.magically-touched-novice",
+        "controller": "Magical",
+        "liveWalk": true,
+        "skillGesture": true,
+        "equippedWeapon": "item.bronze-dagger",
+        "weaponVisible": true,
+        "armedAttack": true,
+        "stunRecovery": true,
+        "deathAndRestoration": true,
+        "bodyScalePreserved": true
+      }
+    ],
+    "movementAndDamageAuthorityUnchanged": true
+  },
+  "nativeFallback": {
+    "controllers": 1,
+    "clips": 1,
+    "source": "Assets/_DiceFree/Resources/PlayerMotion/Physical/ArmedAttack.anim",
+    "sourceSha256": "74C3732C7422EA61C3AED07E656F31BA94E2D0C715B148F1A9547E29D3F7A8B3",
+    "newVendorAssets": false,
+    "optionalInstalledClipsReferencedOnlyAtRuntime": true
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261104-233417\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 449960043,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "pushed": false,
+  "merged": false,
+  "completedDate": "2026-11-05",
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 5,
+    "tierTwoCleaveSpinBarrierDeath": true,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.174,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "windowsExit": {
+    "pid": 66312,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorMatches": 0,
+  "finalStaticChecks": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "fourElementsQuest": true,
+    "fortNavMeshSegments": 6,
+    "creaturePresentations": 33,
+    "vertexDeformationStates": [
+      "Locomotion",
+      "Attack",
+      "Cast",
+      "Throw",
+      "Slam",
+      "Death"
+    ]
+  },
+  "preservation": {
+    "originalModifiedTrackedFiles": 54,
+    "originalWipByteIdentical": true,
+    "protectedBuildPaths": 7,
+    "protectedBuildPathsRestored": true,
+    "scenesChanged": false,
+    "originalMotionAssetsChanged": false,
+    "originalEarlyScreenshotBaselinesRestored": true
+  },
+  "windowsScreenshots": [
+    "VisualBaselines/TierTwo/Windows/greatblade-cleave.png",
+    "VisualBaselines/TierTwo/Windows/greatblade-death.png",
+    "VisualBaselines/TierTwo/Windows/greatblade-spin.png",
+    "VisualBaselines/TierTwo/Windows/mage-barrier.png",
+    "VisualBaselines/TierTwo/Windows/mage-death.png"
+  ]
+}
