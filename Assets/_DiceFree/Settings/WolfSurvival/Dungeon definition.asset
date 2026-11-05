@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.DungeonDefinition
   stableId: dungeon.ironpine.wolf-survival
   sceneId: WolfSurvival
-  stagingSeconds: 60
+  stagingSeconds: 30
   variants: []

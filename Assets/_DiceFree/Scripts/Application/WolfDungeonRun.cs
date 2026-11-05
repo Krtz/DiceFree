@@ -49,6 +49,10 @@ namespace DiceFree.Dungeons
         public IEnumerable<CombatActor> Living=>Participants.Where(a=>a!=null&&a.Alive&&!withdrawn.Contains(a));
         public IReadOnlyList<WolfDungeonEnemy> Wolves=>wolves;
         public int Remaining=>wolves.Count(w=>w!=null&&w.Actor!=null&&w.Actor.Alive);
+        public WolfWaveComposition RemainingComposition=>new WolfWaveComposition(
+            wolves.Count(w=>w!=null&&w.Actor.Alive&&w.Rank==WolfRank.Weak),
+            wolves.Count(w=>w!=null&&w.Actor.Alive&&w.Rank==WolfRank.Strong),
+            wolves.Count(w=>w!=null&&w.Actor.Alive&&w.Rank==WolfRank.Alpha));
         public float SecondsRemaining=>Mathf.Max(0,deadline-Time.time);
         public string Status=>Phase switch
         {
@@ -111,6 +115,11 @@ namespace DiceFree.Dungeons
             foreach(var a in Living)a.GetComponent<RunLoadoutLock>().Locked=true;
             if(dummy!=null)Destroy(dummy);Seed=UnityEngine.Random.Range(1,int.MaxValue);started=Time.time;NextWave();return true;
         }
+        public bool StartNextWave(CombatActor requester)
+        {
+            if(Phase!=WolfRunPhase.Intermission||requester==null||requester!=Initiator||!Living.Contains(requester))return false;
+            NextWave();return true;
+        }
         void Update()
         {
             if(tuning==null||Phase==WolfRunPhase.Loading||Phase==WolfRunPhase.Leaving)return;
@@ -140,7 +149,7 @@ namespace DiceFree.Dungeons
             {
                 int gate=index%3,slot=index/3;var p=gate==0?new Vector3(-23+slot*2.2f,0,9):gate==1?new Vector3(23-slot*2.2f,0,9):new Vector3((slot-1)*2.3f,0,25);
                 var go=Instantiate(tuning.Template(rank),Origin+p,Quaternion.identity);go.name=rank==WolfRank.Weak?"Weak Wolf":rank==WolfRank.Strong?"Strong Wolf":"Alpha Wolf";
-                var member=go.AddComponent<WolfDungeonEnemy>();member.Initialize(this,rank);wolves.Add(member);index++;
+                var member=go.AddComponent<WolfDungeonEnemy>();member.Initialize(this,rank,index);wolves.Add(member);index++;
             }
             IronpineRealisticWolfRuntime.ApplyToWorld();Phase=WolfRunPhase.Fighting;
         }
@@ -205,6 +214,13 @@ namespace DiceFree.Dungeons
             GUI.color=new Color(.2f,.29f,.38f);GUI.DrawTexture(new Rect(27,135,520,4),Texture2D.whiteTexture);GUI.color=new Color(.4f,.75f,.9f);GUI.DrawTexture(new Rect(27,135,520*WavesCleared/10f,4),Texture2D.whiteTexture);GUI.color=old;
             if(Phase!=WolfRunPhase.Loading&&GUI.Button(new Rect(27,148,150,23),Phase==WolfRunPhase.Victory?"Return to entrance":"Leave dungeon"))Abandon();
             if(StagingReady){if(GUI.Button(new Rect(185,148,125,23),"Start waves"))StartNow(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());GUI.Label(new Rect(320,149,230,23),"Weak 1  ·  Strong 2  ·  Alpha 3",body);}
+            else
+            {
+                var counts=Fighting?RemainingComposition:Composition;
+                var detail=Phase==WolfRunPhase.Intermission?$"Next: {Wave+3} points":Phase==WolfRunPhase.Victory?"10 / 10 waves cleared":$"Weak {counts.Weak}  ·  Strong {counts.Strong}  ·  Alpha {counts.Alpha}";
+                GUI.Label(new Rect(320,149,230,23),detail,body);
+                if(Phase==WolfRunPhase.Intermission&&GUI.Button(new Rect(185,148,125,23),"Next wave"))StartNextWave(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());
+            }
         }
     }
 }

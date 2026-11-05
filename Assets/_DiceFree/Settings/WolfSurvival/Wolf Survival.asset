@@ -17,6 +17,6 @@ MonoBehaviour:
   strong: {fileID: 1165348227302106950, guid: 91ad74021dce2d740a9283080ffc6e9f, type: 3}
   alpha: {fileID: 4218630590878286725, guid: 9a2384120edcd874e8a3c8a487004ca5, type: 3}
   dummy: {fileID: 11400000, guid: 1e2a6dcba2459c848a4a677fe2cfcd60, type: 2}
-  intermissionSeconds: 8
+  intermissionSeconds: 4
   warningSeconds: 2
-  victorySeconds: 15
+  victorySeconds: 5

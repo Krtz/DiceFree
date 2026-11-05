@@ -36,7 +36,14 @@ namespace DiceFree.Ironpine
         private int huntingIndex;
         private string familyId;
         private bool encounterOnly;
+        private Vector3? encounterApproach;
         public void ConfigureEncounter() { encounterOnly=true;respawnSites=Array.Empty<Vector3>();huntingGrounds=Array.Empty<Vector3>(); }
+        public void SetEncounterApproach(Vector3? point)
+        {
+            if(!encounterOnly)return;
+            if(encounterApproach.HasValue==point.HasValue&&(!point.HasValue||(point.Value-encounterApproach.Value).sqrMagnitude<.01f))return;
+            encounterApproach=point;attack.Cancel();nextPath=0;
+        }
         public void EngageEncounter(CombatActor opponent)
         {
             if(!encounterOnly||opponent==null||!opponent.Alive||!actor.Alive)return;
@@ -185,6 +192,11 @@ namespace DiceFree.Ironpine
                 if (target == null) { Wander(); return; }
             }
             if (target == null || !actor.CanAct) return;
+            if(encounterOnly&&encounterApproach.HasValue)
+            {
+                if(Time.time>=nextPath){actor.Motor.MoveTo(encounterApproach.Value);nextPath=Time.time+.3f;}
+                return;
+            }
             EnsureBleedReceiver(target);
             // Every Ironpine enemy orients toward its combat target before
             // acting. During locomotion the NavMeshAgent owns body heading;
