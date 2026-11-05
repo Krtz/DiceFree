@@ -2,6 +2,16 @@
 
 User-approved on 2026-11-05: ten survival waves; weak wolves cost 1 point, strong wolves 2, alphas 3; the first wave costs 3 points and the tenth is exactly four alphas (12 points). The user selected a moonlit forest clearing in Ironpine.
 
+## Fight Caves reference — user clarification
+
+The user subsequently described the intended experience as RuneScape's **Fight Caves, but with wolves**. Use its escalating endurance-trial structure as the reference: prepare before entry, finish the waves in one attempt, and make health, consumables, cooldowns, positioning and target choice matter across the whole run. Existing wave clearing, preparation, supply restrictions and wipe/reset behaviour provide the starting implementation.
+
+Keep the confirmed moonlit clearing, ten waves, 3–12 point budgets and four-alpha finale. The analogy does not by itself approve copying RuneScape's wave count, prayer mechanics, Jad, solo-only restrictions or reward items.
+
+Next design proposals, not yet implemented/confirmed: make intermediate packs more recognizable and learnable; provide terrain that supports deliberate positioning and separating enemies; sharpen the different tactical roles of weak, strong and alpha wolves; and choose a distinctive completion reward. Preserve normal class regeneration and existing consumable rules until any endurance-specific balance changes are explicitly chosen. No gameplay values change in this clarification.
+
+Reference: [TzHaar Fight Cave](https://oldschool.runescape.wiki/w/TzHaar_Fight_Cave).
+
 | Wave | Points |
 | --- | ---: |
 | 1 | 3 |
