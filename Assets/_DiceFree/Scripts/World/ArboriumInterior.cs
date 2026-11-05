@@ -18,12 +18,14 @@ namespace DiceFree.World
             public Vector3 outward;
             [NonSerialized] public Renderer[] renderers;
             [NonSerialized] public Collider[] colliders;
+            [NonSerialized] public Light[] lights;
         }
         [SerializeField] private string buildingName;
         [SerializeField] private Vector2 footprint;
         [SerializeField] private float storeyHeight;
         [SerializeField] private int floorCount;
         [SerializeField] private Part[] parts;
+        [SerializeField] private string[] floorNames=Array.Empty<string>();
         private WorldFogOfWar fog;
         private Camera worldCamera;
         private static readonly HashSet<Collider> transparentWalls = new();
@@ -35,12 +37,15 @@ namespace DiceFree.World
         public float StoreyHeight => storeyHeight;
         public string BuildingName => buildingName;
         public Vector2 Footprint => footprint;
+        public string CurrentFloorName => CurrentFloor>=0&&CurrentFloor<floorNames.Length?floorNames[CurrentFloor]:"Floor "+(CurrentFloor+1);
+        public string[] FloorNames => (string[])floorNames.Clone();
+        public void ConfigureFloorNames(params string[] names) => floorNames=names??Array.Empty<string>();
         public void Configure(string title, Vector2 size, float height, int count, Part[] surfaces)
         { buildingName=title; footprint=size; storeyHeight=height; floorCount=count; parts=surfaces; }
         private void Awake()
         {
             foreach(var part in parts)
-            { part.renderers=part.root.GetComponentsInChildren<Renderer>(true); part.colliders=part.root.GetComponentsInChildren<Collider>(true); }
+            { part.renderers=part.root.GetComponentsInChildren<Renderer>(true); part.colliders=part.root.GetComponentsInChildren<Collider>(true);part.lights=part.root.GetComponentsInChildren<Light>(true); }
         }
         private void LateUpdate()
         {
@@ -62,6 +67,7 @@ namespace DiceFree.World
                     _=>true
                 };
                 foreach(var renderer in part.renderers) renderer.enabled=visible;
+                foreach(var light in part.lights)light.enabled=visible;
                 foreach(var collider in part.colliders)
                 {
                     // Solid walls/towers retain collision even when cut away; clicks pass through.
@@ -83,6 +89,7 @@ namespace DiceFree.World
             if(parts!=null)foreach(var part in parts)
             {
                 if(part.renderers!=null)foreach(var renderer in part.renderers)if(renderer!=null)renderer.enabled=true;
+                if(part.lights!=null)foreach(var light in part.lights)if(light!=null)light.enabled=true;
                 if(part.colliders!=null)foreach(var collider in part.colliders){transparentWalls.Remove(collider);if(collider!=null)collider.enabled=true;}
             }
             Inside=false;CurrentFloor=-1;
@@ -90,7 +97,7 @@ namespace DiceFree.World
         private void OnGUI()
         {
             if(!Inside)return;
-            GUI.Box(new Rect(Screen.width*.5f-155,78,310,27),buildingName+"  ·  Floor "+(CurrentFloor+1)+" / "+floorCount);
+            GUI.Box(new Rect(Screen.width*.5f-230,78,460,27),buildingName+"  ·  "+CurrentFloorName+"  ("+(CurrentFloor+1)+" / "+floorCount+")");
         }
     }
 }

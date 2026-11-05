@@ -1,0 +1,114 @@
+{
+  "completed": "2026-11-06",
+  "branch": "feature/wolf-visuals-and-arborium-interiors",
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261106-000831\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 8,
+    "bytes": 470002873,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "standalone": {
+    "status": "passed",
+    "waves": 10,
+    "totalPoints": 75,
+    "finalAlphas": 4,
+    "wolvesDefeated": 38,
+    "naturalWolfBite": true,
+    "alphaSpecialObserved": true,
+    "compactPacing": true,
+    "coverSightAndNavigation": true,
+    "strongFlankObserved": true,
+    "killXpOnce": true,
+    "wipeReset": true,
+    "stagingGearAndActiveLock": true,
+    "menuResumeAndReentry": true,
+    "lightingRestored": true,
+    "slimeDungeonRegression": true,
+    "furnishedFloors": 21,
+    "roomDirectories": 6,
+    "indoorBankDepositWithdraw": true,
+    "guildPracticeNoXp": true,
+    "unityErrors": 0,
+    "quitRequested": true
+  },
+  "process": {
+    "pid": 88880,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "editorCity": {
+    "passed": true,
+    "phase": "passed",
+    "checks": 358,
+    "walks": 39,
+    "levels": 21,
+    "meters": 888.3348,
+    "error": null,
+    "unityErrors": [],
+    "rows": [
+      {
+        "building": "Adventurers Guild",
+        "floors": 4,
+        "ascendedAndDescended": true
+      },
+      {
+        "building": "Artisan Workshop",
+        "floors": 3,
+        "ascendedAndDescended": true
+      },
+      {
+        "building": "East Residence",
+        "floors": 3,
+        "ascendedAndDescended": true
+      },
+      {
+        "building": "Mage Observatory",
+        "floors": 4,
+        "ascendedAndDescended": true
+      },
+      {
+        "building": "Northern Exchange",
+        "floors": 4,
+        "ascendedAndDescended": true
+      },
+      {
+        "building": "West Residence",
+        "floors": 3,
+        "ascendedAndDescended": true
+      }
+    ]
+  },
+  "editorWolf": {
+    "passed": true,
+    "checks": 1014,
+    "walkedMeters": 166.104279,
+    "entrySlots": 12,
+    "treelineSpawns": true,
+    "banners": true,
+    "frozenVictoryTime": true
+  },
+  "preservation": {
+    "Cornberg": {
+      "missingOriginalIds": [],
+      "originalIds": 41050
+    },
+    "WolfSurvival": {
+      "missingOriginalIds": [],
+      "originalIds": 1054
+    },
+    "originalWipCount": 54,
+    "changedOriginalWip": [],
+    "changedProtectedSettings": []
+  },
+  "architecture": {
+    "assemblies": 11,
+    "source": "Editor DICEFRE_ARCHITECTURE_OK after CLI request timeout",
+    "passed": true
+  }
+}

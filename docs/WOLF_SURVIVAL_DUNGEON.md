@@ -1,5 +1,11 @@
 # Wolf Survival — Moonlit Clearing
 
+## Next reward pass — user request, deferred while completing agenda items 3 and 4
+
+Use normal dungeon completion-drop rules, through private reward choices rather than new per-wolf loot: the existing pool has a 5% rare override when defined; otherwise 75% one normal offer / 25% two distinct normal offers, with a private XP/gold alternative. Claiming one choice resolves the other offers. Adapt the existing reward-room flow for Wolf Survival in a later pass; no completion loot or bonus payout is added by the visual/interior work.
+
+Requested loot entries: ring, chest drop (confirm slot when authoring), healer weapon, thief item (slot unspecified), mage weapon, thief weapon, and acolyte weapon. Keep the healer/acolyte weapons and thief item/weapon separate. Names, stats, rarities and further entries remain to be designed.
+
 User-approved on 2026-11-05: ten survival waves; weak wolves cost 1 point, strong wolves 2, alphas 3; the first wave costs 3 points and the tenth is exactly four alphas (12 points). The user selected a moonlit forest clearing in Ironpine.
 
 ## Wave-survival reference — clarified scope

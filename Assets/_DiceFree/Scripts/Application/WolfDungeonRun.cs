@@ -35,7 +35,10 @@ namespace DiceFree.Dungeons
         DungeonOccupancySnapshot lease;
         WolfDungeonTuning tuning;Vector3 entrance;float deadline;GameObject dummy;
         readonly List<GameObject> warnings=new();
-        float started;bool completed;
+        float started,clearDuration;bool completed;
+        string announcement;float announcementUntil;IronpineCreatureAudio announcementAudio;
+        public string Announcement=>Time.unscaledTime<announcementUntil?announcement:null;
+        public float RunSeconds=>completed?clearDuration:Active?Mathf.Max(0,Time.time-started):0;
         public WolfRunPhase Phase {get;private set;}=WolfRunPhase.Loading;
         public int Wave {get;private set;}
         public int Seed {get;private set;}
@@ -136,6 +139,9 @@ namespace DiceFree.Dungeons
         void NextWave()
         {
             ClearWolves();Wave++;Composition=WolfWavePlan.Create(Wave,Seed);Phase=WolfRunPhase.Warning;deadline=Time.time+tuning.warningSeconds;
+            announcement=Wave==10?"FINAL WAVE — FOUR ALPHAS":$"WAVE {Wave} / 10  ·  {Composition.Points} POINTS";announcementUntil=Time.unscaledTime+2;
+            if(announcementAudio==null){announcementAudio=gameObject.AddComponent<IronpineCreatureAudio>();GetComponent<AudioSource>().spatialBlend=0;}
+            announcementAudio.Cue("Howl");
             foreach(var p in new[]{new Vector3(-23,0,9),new Vector3(23,0,9),new Vector3(0,0,25)}.Take(Mathf.Min(3,Composition.Count)))
             {
                 var go=new GameObject("Incoming wolf trail");go.transform.position=Origin+p+Vector3.up*.1f;var line=go.AddComponent<LineRenderer>();line.useWorldSpace=false;line.loop=true;line.positionCount=40;line.widthMultiplier=.15f;line.sharedMaterial=WolfArenaPresentation.WarningMaterial;
@@ -147,17 +153,25 @@ namespace DiceFree.Dungeons
             foreach(var w in warnings)if(w!=null)Destroy(w);warnings.Clear();
             int index=0;foreach(var rank in Composition.Wolves)
             {
-                int gate=index%3,slot=index/3;var p=gate==0?new Vector3(-23+slot*2.2f,0,9):gate==1?new Vector3(23-slot*2.2f,0,9):new Vector3((slot-1)*2.3f,0,25);
-                var go=Instantiate(tuning.Template(rank),Origin+p,Quaternion.identity);go.name=rank==WolfRank.Weak?"Weak Wolf":rank==WolfRank.Strong?"Strong Wolf":"Alpha Wolf";
+                var entrance=PackEntrance(index);
+                if(!NavMesh.SamplePosition(entrance,out var spawn,2,-1))throw new InvalidOperationException("Wolf trail has no navigation at "+entrance);
+                var go=Instantiate(tuning.Template(rank),spawn.position,Quaternion.identity);go.name=rank==WolfRank.Weak?"Weak Wolf":rank==WolfRank.Strong?"Strong Wolf":"Alpha Wolf";
                 var member=go.AddComponent<WolfDungeonEnemy>();member.Initialize(this,rank,index);wolves.Add(member);index++;
             }
             IronpineRealisticWolfRuntime.ApplyToWorld();Phase=WolfRunPhase.Fighting;
+        }
+        static Vector3 PackEntrance(int index)
+        {
+            int gate=index%3,slot=index/3;
+            var trail=gate==0?new Vector3(-23,0,9):gate==1?new Vector3(23,0,9):new Vector3(0,0,25);
+            var direction=trail.normalized;var side=new Vector3(-direction.z,0,direction.x);
+            return Origin+trail+direction*5.5f+side*((slot%2==0?-1:1)*(.8f+slot/2*1.2f));
         }
         void ClearWave()
         {
             WolvesDefeated+=Composition.Count;WavesCleared=Wave;
             if(Wave<WolfWavePlan.WaveCount){Phase=WolfRunPhase.Intermission;deadline=Time.time+tuning.intermissionSeconds;return;}
-            if(completed)return;completed=true;Phase=WolfRunPhase.Victory;deadline=Time.time+tuning.victorySeconds;
+            if(completed)return;completed=true;clearDuration=Time.time-started;Phase=WolfRunPhase.Victory;deadline=Time.time+tuning.victorySeconds;
             registry.TryCompleteDungeon(tuning.definition.stableId,lease.leaseToken,DateTime.UtcNow,out _);
             Publish(new DungeonCompletedEvent(tuning.definition.stableId,"ten-waves",Participants.Count,Time.time-started,deaths.Count==0));
         }
@@ -202,7 +216,7 @@ namespace DiceFree.Dungeons
             if(tuning!=null)registry.ReleaseDungeon(tuning.definition.stableId,lease.leaseToken,"world.face.1",out _);
             foreach(var a in Participants)if(a!=null){if(deathHandlers.TryGetValue(a,out var h))a.Health.Died-=h;if(hubs.TryGetValue(a,out var hub))a.GetComponent<QuestJournal>()?.UnbindDungeonEvents(hub);ClearLock(a);}
         }
-        public static bool CoversPointer(Vector2 p)=>Current!=null&&Current.tuning!=null&&Current.Phase!=WolfRunPhase.Leaving&&new Rect(15,80,550,100).Contains(new Vector2(p.x,Screen.height-p.y));
+        public static bool CoversPointer(Vector2 p)=>Current!=null&&Current.tuning!=null&&Current.Phase!=WolfRunPhase.Leaving&&(new Rect(15,80,550,100).Contains(new Vector2(p.x,Screen.height-p.y))||((Current.Announcement!=null||Current.Phase==WolfRunPhase.Victory)&&new Rect(Screen.width*.5f-220,200,440,100).Contains(new Vector2(p.x,Screen.height-p.y))));
         GUIStyle heading,body;
         void OnGUI()
         {
@@ -211,6 +225,13 @@ namespace DiceFree.Dungeons
             var old=GUI.color;GUI.color=new Color(.08f,.13f,.2f,.94f);GUI.DrawTexture(new Rect(15,80,550,100),Texture2D.whiteTexture);GUI.color=old;
             GUI.Label(new Rect(27,85,520,23),"WOLF SURVIVAL  ·  MOONLIT CLEARING",heading);
             GUI.Label(new Rect(27,109,520,22),Status,body);
+            if(Announcement!=null||Phase==WolfRunPhase.Victory)
+            {
+                GUI.color=new Color(.06f,.11f,.17f,.92f);GUI.DrawTexture(new Rect(Screen.width*.5f-220,200,440,Phase==WolfRunPhase.Victory?90:50),Texture2D.whiteTexture);GUI.color=old;
+                var banner=new GUIStyle(heading){alignment=TextAnchor.MiddleCenter,fontSize=20};
+                GUI.Label(new Rect(Screen.width*.5f-215,207,430,28),Phase==WolfRunPhase.Victory?"MOONLIT CLEARING — CLEARED":Announcement,banner);
+                if(Phase==WolfRunPhase.Victory){int seconds=Mathf.CeilToInt(RunSeconds);GUI.Label(new Rect(Screen.width*.5f-205,241,410,34),$"10 waves  ·  {WolvesDefeated} wolves  ·  {seconds/60}:{seconds%60:00}\nKill XP earned throughout the run",new GUIStyle(body){alignment=TextAnchor.MiddleCenter});}
+            }
             GUI.color=new Color(.2f,.29f,.38f);GUI.DrawTexture(new Rect(27,135,520,4),Texture2D.whiteTexture);GUI.color=new Color(.4f,.75f,.9f);GUI.DrawTexture(new Rect(27,135,520*WavesCleared/10f,4),Texture2D.whiteTexture);GUI.color=old;
             if(Phase!=WolfRunPhase.Loading&&GUI.Button(new Rect(27,148,150,23),Phase==WolfRunPhase.Victory?"Return to entrance":"Leave dungeon"))Abandon();
             if(StagingReady){if(GUI.Button(new Rect(185,148,125,23),"Start waves"))StartNow(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());GUI.Label(new Rect(320,149,230,23),"Weak 1  ·  Strong 2  ·  Alpha 3",body);}
