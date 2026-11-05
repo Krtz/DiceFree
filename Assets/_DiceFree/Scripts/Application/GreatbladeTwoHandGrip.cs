@@ -1,4 +1,6 @@
 using UnityEngine;
+using DiceFree.Items;
+using DiceFree.UI;
 
 namespace DiceFree.Visuals
 {
@@ -7,7 +9,7 @@ namespace DiceFree.Visuals
     /// Adjusts visual bones only; actor movement and combat remain authoritative.
     /// </summary>
     [DisallowMultipleComponent, RequireComponent(typeof(Animator))]
-    public sealed class GreatbladeTwoHandGrip : MonoBehaviour
+    public sealed class GreatbladeTwoHandGrip : MonoBehaviour,IPortraitBonePose
     {
         [SerializeField] private Transform weapon,dominantGrip,supportGrip;
         // A03 palm vertices centre near X=-.060; the closed fingers wrap
@@ -33,6 +35,7 @@ namespace DiceFree.Visuals
         }
         private void Awake(){animator=GetComponent<Animator>();}
         private void LateUpdate(){ApplyPose();}
+        public void ApplyPortraitPose()=>ApplyPose();
         public Vector3 SupportPalm
         {
             get
@@ -85,7 +88,9 @@ namespace DiceFree.Visuals
         public void ApplyPose()
         {
             if(animator==null)animator=GetComponent<Animator>();
-            if(weapon==null || dominantGrip==null || supportGrip==null ||
+            var equipment=GetComponentInParent<Equipment>();
+            if(weapon==null || !weapon.gameObject.activeInHierarchy ||
+                (equipment!=null&&!equipment.UsesTwoHandedStance) || dominantGrip==null || supportGrip==null ||
                 animator==null || !animator.isHuman || !animator.isInitialized)return;
             var ru=animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
             var re=animator.GetBoneTransform(HumanBodyBones.RightLowerArm);

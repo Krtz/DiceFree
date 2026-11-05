@@ -19,6 +19,8 @@ namespace DiceFree.UI
         public string State => state;
         public string ControllerClassId => classId;
         public bool SupportsCurrentClass => Resource(actor?.Stats.Definition?.stableId)!=null;
+        bool controllerTwoHanded;
+        public bool UsesTwoHandedStance=>equipment!=null&&equipment.UsesTwoHandedStance;
         void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();}
         void OnEnable(){if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
         void OnDisable(){if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
@@ -50,12 +52,15 @@ namespace DiceFree.UI
         bool Ensure(Animator animator)
         {
             string id=actor.Stats.Definition?.stableId;string resource=Resource(id);if(resource==null||animator==null){if(sessionController!=null)ReleaseController();return false;}
-            if(model==animator&&classId==id)return true;
+            bool twoHanded=UsesTwoHandedStance;
+            if(model==animator&&classId==id&&controllerTwoHanded==twoHanded)return true;
             var controller=Resources.Load<RuntimeAnimatorController>("PlayerMotion/"+resource);if(controller==null)return false;
             ReleaseController();model=animator;previousController=model.runtimeAnimatorController;classId=id;state=null;hold=0;winding=false;committed=false;alive=actor.Alive;armedDuration=.9f;armedImpact=.48f;
-            model.runtimeAnimatorController=id=="class.greatblade"?GreatbladeController(controller):controller;model.applyRootMotion=false;model.Rebind();model.Update(0);Play("Idle");return true;
+            controllerTwoHanded=twoHanded;
+            model.runtimeAnimatorController=id=="class.greatblade"&&twoHanded?GreatbladeController(controller):controller;model.applyRootMotion=false;model.Rebind();model.Update(0);Play("Idle");return true;
         }
         bool Current()=>Ensure(GetComponent<NovicePresentationDriver>()?.VisualAnimator);
+        public void RefreshForEquipment()=>Current();
         void Play(string next,float seconds=0,float speed=1,bool restart=false)
         {
             if(model==null||state==next&&!restart)return;state=next;playedAt=Time.time;hold=Time.time+seconds;playback=speed;model.speed=speed;model.CrossFadeInFixedTime(next,.07f,0,0);

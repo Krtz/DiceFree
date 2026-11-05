@@ -40,6 +40,7 @@ namespace DiceFree.Visuals
             if(previous==null||presentation==null||inventory==null||!prepared.Add(previous))return;
             metal??=Mat("Plain iron",new Color(.46f,.49f,.51f));cloth??=Mat("Plain cloth",new Color(.25f,.36f,.43f));gold??=Mat("Plain brass",new Color(.65f,.48f,.19f));
             var animator=ClassPresentationSwitcher.FindVisualAnimator(previous);
+            if(animator!=null&&animator.GetComponent<IndependentOffhandPose>()==null)animator.gameObject.AddComponent<IndependentOffhandPose>();
             float headTop=HeadTop(previous,animator);
             var bindings=presentation.Bindings.ToList();
             foreach(var definition in inventory.Definitions.Where(d=>d!=null&&d.modelTestingItem))

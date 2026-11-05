@@ -14,6 +14,7 @@ namespace DiceFree.UI
         private void OnGUI()
         {
             if (HudPointerBlocker.ModalOpen) return;
+            if(player!=null&&player.GetComponent<Interactor>()?.Active!=null)return;
             if (fog != null && target != null && !fog.IsVisible(target.transform.position)) return;
             if (Camera.main == null) return;
             var action = target.Resolve(player);

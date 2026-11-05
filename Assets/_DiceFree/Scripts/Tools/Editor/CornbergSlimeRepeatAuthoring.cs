@@ -66,11 +66,11 @@ namespace DiceFree.EditorTools
                     AssetDatabase.CreateAsset(wolves,"Assets/_DiceFree/Settings/Enemies/Cornberg repeat wolf hunt.asset");}
                 wolves.stableId="quest.cornberg.repeat-wolf-hunt";
                 wolves.title="Another 15 Wolves";wolves.version=2;wolves.repeatable=true;
-                wolves.completedQuestIds=new[]{CornbergSurgeSetup.QuestId};
+                wolves.completedQuestIds=Array.Empty<string>();
                 wolves.offer="The wolves on the old road keep threatening travelers. Defeat fifteen and report back.";
                 wolves.activeDialogue="Fifteen wolves. I'll have your next reward ready.";
                 wolves.locationHint="Return to Mira in Cornberg after killing 15 wolves.";
-                wolves.rewardXp=400;
+                wolves.rewardXp=2920; // Twenty ordinary level-15 Grey Wolves at 146 XP each.
                 wolves.stages=new[]{new QuestObjective{kind=ObjectiveKind.Kill,count=15,
                     familyIds=new[]{"ironpine.wolf","ironpine.alpha-wolf"},
                     creditMode=QuestCreditMode.NearbyParty,creditRadius=50,

@@ -1,0 +1,209 @@
+{
+  "date": "2026-11-05",
+  "branch": "fix/loadout-hand-poses-wolf-bounty",
+  "base": "1b0fb07",
+  "playMode": {
+    "passed": true,
+    "phase": "passed",
+    "checks": 415,
+    "failure": null,
+    "rows": [
+      {
+        "wolfQuest": "quest.cornberg.repeat-wolf-hunt",
+        "npc": "Mira - provisional surge farmer",
+        "killsPerCycle": 15,
+        "cycles": 2,
+        "xpPerTurnIn": 2920,
+        "mixedRegularAndAlpha": true,
+        "midCycleReload": true
+      },
+      {
+        "classId": "class.novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.5353968,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.novice",
+        "twoHanded": true,
+        "idleHandSeparation": 0.220001936,
+        "twoHandSupportError": 1.96695328E-06,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.534721434,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.377634257,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "twoHanded": true,
+        "idleHandSeparation": 0.220008075,
+        "twoHandSupportError": 8.106232E-06,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.physically-blessed-novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.3783579,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.greatblade",
+        "twoHanded": false,
+        "idleHandSeparation": 0.301313519,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.greatblade",
+        "twoHanded": true,
+        "idleHandSeparation": 0.219979227,
+        "twoHandSupportError": 3.68994624E-05,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.greatblade",
+        "twoHanded": false,
+        "idleHandSeparation": 0.30134064,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.283297628,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "twoHanded": true,
+        "idleHandSeparation": 0.227698758,
+        "twoHandSupportError": 0.009507023,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "twoHanded": false,
+        "idleHandSeparation": 0.282838255,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.mage",
+        "twoHanded": false,
+        "idleHandSeparation": 0.283434033,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.mage",
+        "twoHanded": true,
+        "idleHandSeparation": 0.227748036,
+        "twoHandSupportError": 0.009546619,
+        "walkAndActualAttack": true,
+        "menu": true
+      },
+      {
+        "classId": "class.mage",
+        "twoHanded": false,
+        "idleHandSeparation": 0.282812476,
+        "twoHandSupportError": 0.0,
+        "walkAndActualAttack": true,
+        "menu": true
+      }
+    ]
+  },
+  "staticChecks": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "wolfHunt": {
+      "kills": 15,
+      "xp": 2920,
+      "referenceLevel": 15,
+      "referenceKillXp": 146,
+      "mixedFamilies": true,
+      "repeatable": true,
+      "noSlimePrerequisite": true
+    },
+    "twoHandMetadataUnchanged": true
+  },
+  "windowsBuild": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261105-111202\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 450233471,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 5,
+    "tierTwoCleaveSpinBarrierDeath": true,
+    "novemberFeedback": true,
+    "handLoadoutAndWolfOffer": true,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.5673,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "windowsExit": {
+    "pid": 71616,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorPatternMatches": 0,
+  "preservation": {
+    "realUserSavesUsed": false,
+    "settingsRestored": true,
+    "protectedSettings": 7,
+    "allByteIdentical": true,
+    "preExistingModifiedFiles": 54
+  },
+  "screenshots": "VisualBaselines/HandPoseWolf",
+  "limits": [
+    "Disposable-profile fixtures; scripted enemy deaths, restored lives and class/item grants do not establish combat balance or ordinary progression acceptance.",
+    "Pose review maintains basic-attack orders when cancelled; it proves connected attacks and visual playback, not input-order durability.",
+    "Windows smoke includes existing local workspace WIP and installed optional art; no push or merge performed."
+  ]
+}

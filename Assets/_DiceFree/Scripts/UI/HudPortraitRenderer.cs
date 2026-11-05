@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DiceFree.UI
 {
-    [DisallowMultipleComponent]
+    [DefaultExecutionOrder(650),DisallowMultipleComponent]
     public sealed class HudPortraitRenderer : MonoBehaviour
     {
         private const int PortraitLayer = 31;
@@ -36,6 +36,15 @@ namespace DiceFree.UI
                 rebuildRequested = true;
 
             if (rebuildRequested) Rebuild();
+        }
+        private void LateUpdate()=>ApplyClonePose();
+        private void ApplyClonePose()
+        {
+            if(clone==null)return;
+            foreach(var behaviour in clone.GetComponentsInChildren<MonoBehaviour>())
+                if(behaviour is IPortraitBonePose bones)bones.ApplyPortraitPose();
+            foreach(var behaviour in clone.GetComponentsInChildren<MonoBehaviour>())
+                if(behaviour is not IPortraitBonePose&&behaviour is IPortraitPoseable prop)prop.ApplyPortraitPose();
         }
 
         private void OnDestroy()
@@ -98,6 +107,7 @@ namespace DiceFree.UI
             if (next == null) return;
 
             source = next;
+            GetComponent<PlayerMotionPresentation>()?.RefreshForEquipment();
             if (clone != null) Destroy(clone);
 
             clone = Instantiate(next.gameObject, studio);
@@ -125,8 +135,7 @@ namespace DiceFree.UI
                 if(animator.HasState(0,idle))animator.Play(idle, 0, 0f);
                 animator.Update(0f);
             }
-            foreach (var behaviour in clone.GetComponentsInChildren<MonoBehaviour>(true))
-                if (behaviour is IPortraitPoseable poseable) poseable.ApplyPortraitPose();
+            ApplyClonePose();
             FrameVisibleModel();
         }
 

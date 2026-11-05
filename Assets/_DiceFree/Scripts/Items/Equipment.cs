@@ -17,6 +17,22 @@ namespace DiceFree.Items
         public EquippedItem[] Slots => slots.Select(s => s.Copy()).ToArray();
         public bool IsEquipped(string instanceId) =>
             !string.IsNullOrWhiteSpace(instanceId) && slots.Any(s => s.instanceId == instanceId);
+        public ItemDefinition ResolvedDefinition(EquipmentSlot slot)
+        {
+            var equipped=slots.Find(s=>s.slotId==slot.ToString()&&IsResolved(s));
+            return equipped==null?null:inventory.Resolve(inventory.Find(equipped.instanceId)?.definitionId);
+        }
+        public bool UsesTwoHandedStance
+        {
+            get
+            {
+                var main=ResolvedDefinition(EquipmentSlot.MainHand);
+                if(main!=null)return main.handsRequired==2;
+                // Greatblade's unequipped class model carries a default greatsword.
+                return ResolvedDefinition(EquipmentSlot.OffHand)==null&&
+                    stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId;
+            }
+        }
         public ItemInstance[] BagItems => inventory == null
             ? Array.Empty<ItemInstance>()
             : inventory.Items.Where(item => !IsEquipped(item.instanceId)).ToArray();

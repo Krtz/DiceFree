@@ -47,6 +47,11 @@ namespace DiceFree.Advancement
             equipment.Restore(state?.equipment??Array.Empty<EquippedItem>());
             foreach(var a in visual.GetComponentsInChildren<Animator>(true)) {
                 if(!a.isActiveAndEnabled)continue;
+                if(id=="class.greatblade"&&!equipment.UsesTwoHandedStance)
+                {
+                    var singleHanded=Resources.Load<RuntimeAnimatorController>("PlayerMotion/TierTwo/Greatblade");
+                    if(singleHanded!=null)a.runtimeAnimatorController=singleHanded;
+                }
                 a.applyRootMotion=false;a.cullingMode=AnimatorCullingMode.AlwaysAnimate;a.Rebind();
                 int idle=Animator.StringToHash("Base Layer.Idle");
                 if(!a.HasState(0,idle))idle=Animator.StringToHash("Base Layer.Greatblade two-hand ready");
@@ -78,8 +83,9 @@ namespace DiceFree.Advancement
         }
         void LateUpdate() {
             foreach(var p in portraits.Values)if(!p.rendered&&Time.frameCount>=p.readyFrame) {
+                foreach(var offhand in p.root.GetComponentsInChildren<IndependentOffhandPose>())offhand.ApplyPortraitPose();
                 foreach(var grip in p.root.GetComponentsInChildren<GreatbladeTwoHandGrip>())grip.ApplyPose();
-                foreach(var b in p.root.GetComponentsInChildren<MonoBehaviour>())if(b is IPortraitPoseable pose)pose.ApplyPortraitPose();
+                foreach(var b in p.root.GetComponentsInChildren<MonoBehaviour>())if(b is not IPortraitBonePose&&b is IPortraitPoseable pose)pose.ApplyPortraitPose();
                 Frame(p);p.camera.Render();p.rendered=true;
                 foreach(var a in p.root.GetComponentsInChildren<Animator>())a.enabled=false;
             }

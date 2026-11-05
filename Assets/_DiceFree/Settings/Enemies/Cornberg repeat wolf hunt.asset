@@ -14,30 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.cornberg.repeat-wolf-hunt
   title: Another 15 Wolves
+  requiredClassId: 
+  requiredLevel: 1
   version: 2
-  offer: The wolves on the old road keep threatening travelers. Defeat fifteen and report back.
+  offer: Wolves on the old road keep threatening travelers. Defeat fifteen Ironpine wolves, then return to Mira. The bounty pays the experience of twenty regular Grey Wolves.
   activeDialogue: Fifteen wolves. I'll have your next reward ready.
   locationHint: Return to Mira in Cornberg after killing 15 wolves.
   stages:
   - kind: 0
-    objectiveId:
-    requiredTag:
+    objectiveId: 
+    requiredTag: 
     creditMode: 1
     creditRadius: 50
     instruction: Defeat 15 wolves
-    contentId:
-    familyId:
-    areaId:
-    conversationId:
-    count: 15
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: 
     familyIds:
     - ironpine.wolf
     - ironpine.alpha-wolf
+    areaId: 
+    conversationId: 
+    count: 15
     alternatives: []
-  completedQuestIds:
-  - quest.cornberg.break-slime-surge
-  rewardXp: 400
+  completedQuestIds: []
+  rewardXp: 2920
   reward: {fileID: 0}
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 0
   repeatable: 1

@@ -9,7 +9,7 @@ namespace DiceFree.Visuals
     {
         public const string ResourcePath="GreatbladeLicensed/GreatbladeHero";
         [SerializeField] private bool previewSpin;
-        private GameObject model;
+        [SerializeField,HideInInspector] private GameObject model;
         private Animator animator;
         public bool LicensedModelLoaded {get;private set;}
         public Transform Model=>model!=null?model.transform:null;
@@ -71,11 +71,14 @@ namespace DiceFree.Visuals
         }
         private void Awake()
         {
-            var prefab=Resources.Load<GameObject>(ResourcePath);
-            model=prefab!=null?Instantiate(prefab,transform):Fallback();
-            LicensedModelLoaded=prefab!=null;
-            model.name=prefab!=null?"Greatblade shared licensed base":
-                "Greatblade original fallback";
+            // HUD clones already contain the prepared model. Reuse the remapped child.
+            if(model==null)
+            {
+                var prefab=Resources.Load<GameObject>(ResourcePath);
+                model=prefab!=null?Instantiate(prefab,transform):Fallback();
+                model.name=prefab!=null?"Greatblade shared licensed base":"Greatblade original fallback";
+            }
+            LicensedModelLoaded=model.name=="Greatblade shared licensed base";
             model.transform.localPosition=Vector3.zero;
             model.transform.localRotation=Quaternion.identity;
             animator=model.GetComponentInChildren<Animator>(true);
