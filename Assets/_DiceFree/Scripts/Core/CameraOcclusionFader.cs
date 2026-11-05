@@ -56,7 +56,7 @@ namespace DiceFree.Core
                         if (mesh == null || !mesh.enabled) continue;
                         var bounds = mesh.bounds; bounds.Expand(castRadius * 2);
                         var near=bounds.ClosestPoint(focus);
-                        if (new Vector2(near.x-focus.x,near.z-focus.z).sqrMagnitude<=64f&&bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
+                        if (new Vector2(near.x-focus.x,near.z-focus.z).sqrMagnitude<=tree.FocusDistance*tree.FocusDistance&&bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
                     }
                     if (blocks) foreach (var mesh in tree.Renderers)
                         if(mesh!=null) visibleThisFrame.Add(mesh);

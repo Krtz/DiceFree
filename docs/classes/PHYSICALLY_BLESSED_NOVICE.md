@@ -6,7 +6,7 @@
 
 ### Current prototype flat damage
 
-The current implementation adds a small skill-rank-scaled flat term on top of each damage coefficient: Heavy Strike adds **4 raw damage per rank**, and each Arrow Rain wave adds **2 raw damage per rank**. Guard, Quickening and Martial Aptitude are not damage/healing actions and have no such term. These are initial playtest values, not a locked balance rule; connected-Editor validation is pending for the current change.
+The current implementation adds a skill-rank-scaled flat term on top of each damage coefficient: Heavy Strike adds **10 raw damage per rank** (10 at rank 1, 60 at rank 6), and each Arrow Rain wave adds **2 raw damage per rank**. Heavy Strike's value follows the November 5 playtest request; its coefficients, Mana cost and stun duration retain their existing rules. Guard, Quickening and Martial Aptitude are not damage/healing actions and have no such term. See `../ARBORIUM_ARRIVAL_AND_BALANCE.md` for the latest validation.
 
 ## Identity
 

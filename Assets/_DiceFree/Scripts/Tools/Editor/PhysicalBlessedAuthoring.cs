@@ -186,7 +186,7 @@ namespace DiceFree.EditorTools
         {
             var values = new[]
             {
-                (HeavyPath, PhysicalSkillKind.HeavyStrike, 4f),
+                (HeavyPath, PhysicalSkillKind.HeavyStrike, 10f),
                 (GuardPath, PhysicalSkillKind.Guard, 0f),
                 (QuickeningPath, PhysicalSkillKind.Quickening, 0f),
                 (ArrowRainPath, PhysicalSkillKind.ArrowRain, 2f),
@@ -241,7 +241,7 @@ namespace DiceFree.EditorTools
             skill.maxRank = 6;
             skill.flatDamagePerRank = kind switch
             {
-                PhysicalSkillKind.HeavyStrike => 4f,
+                PhysicalSkillKind.HeavyStrike => 10f,
                 PhysicalSkillKind.ArrowRain => 2f,
                 _ => 0f
             };

@@ -36,7 +36,7 @@ MonoBehaviour:
     count: 1
     alternatives: []
   completedQuestIds: []
-  rewardXp: 400
+  rewardXp: 10000
   reward: {fileID: 11400000, guid: 25e2fe2e2cc66aa4d94de81a249a70d3, type: 2}
   rewardTitle: Chieftain's Bane
   acceptOnTalk: 0

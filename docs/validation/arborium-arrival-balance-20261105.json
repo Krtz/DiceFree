@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-05",
+  "branch": "feature/arborium-arrival-and-balance",
+  "base": "4b5ba5a",
+  "scope": "First playable Arborium arrival section and three requested balance changes",
+  "playMode": {
+    "passed": true,
+    "phase": "passed",
+    "checks": 3547,
+    "walks": 15,
+    "meters": 678.9158,
+    "failure": null,
+    "evidence": [
+      {
+        "wellHpPerSecond": 25,
+        "observedHpPerSecond": 25.01878,
+        "outsideRadiusStopped": true,
+        "heavyRank1": 10,
+        "heavyRank6": 60,
+        "rawPacketAdditionVerified": true
+      },
+      {
+        "baneXp": 10000,
+        "exactOnce": true,
+        "title": true,
+        "scriptedBossFixture": true
+      },
+      {
+        "journey": "quest.trimery.road-to-arborium",
+        "finishedByGuildConversation": true,
+        "xp": 1500,
+        "northWestSouth": true,
+        "shopAndBankAvailable": true,
+        "cityAnchor": "anchor.arborium",
+        "directRoadStillBroken": true,
+        "bossAndDungeonNotRequired": true
+      }
+    ]
+  },
+  "presentation": {
+    "passed": true,
+    "blockingGuildTowerFaded": true,
+    "confirmationVisible": true,
+    "acknowledgement": true,
+    "cityAnchorNamed": true
+  },
+  "staticChecks": {
+    "architecture": true,
+    "dependencyPolicy": true,
+    "managedReferences": true,
+    "physicalKit": true,
+    "wellHpPerSecond": 25,
+    "heavyFlatPerRank": 10,
+    "chieftainsBaneXp": 10000,
+    "cityHasNoBossPrerequisite": true,
+    "cityFinishesByGuildConversation": true
+  },
+  "windowsBuild": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261105-160518\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 452802291,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 5,
+    "tierTwoCleaveSpinBarrierDeath": true,
+    "novemberFeedback": true,
+    "handLoadoutAndWolfOffer": true,
+    "arboriumArrival": true,
+    "well25Heavy10Bane10000": true,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 214.82,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "windowsExit": {
+    "pid": 64492,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorPatternMatches": 0,
+  "sceneNodes": {
+    "oldNodes": 35236,
+    "newNodes": 36034,
+    "missingOldNodes": 0,
+    "missingIds": []
+  },
+  "preservation": {
+    "preExistingModifiedFiles": 54,
+    "realUserSavesUsed": false,
+    "protectedSettings": 7,
+    "settingsRestored": true,
+    "allByteIdentical": true
+  },
+  "earlierDiagnostic": {
+    "build": "Builds/BriarbackMilestone-20261105-155809",
+    "smoke": "Original final fort waypoint overlapped frozen Chieftain. Observed hero stopped 1.35m away, with boss at (281.78,5.28,484.17). Final test waypoint moved to open floor (282,5.2,480); no movement-rule change.",
+    "warning": "City floor pre-baked triangle collision flag missing; enabled for final build."
+  },
+  "limits": [
+    "Disposable-profile health, placement and scripted boss-defeat fixtures do not establish encounter balance or ordinary progression difficulty.",
+    "Play Mode assertion count includes repeated deadline checks during walks; 15 completed walk segments and measured distance are the useful traversal evidence.",
+    "City merchant and banker use existing stock and banking systems; remaining districts, mentors, interiors, Roadwarden repair and final World Tree art remain future work.",
+    "Build includes preserved existing local WIP and installed optional art; no push or merge performed."
+  ]
+}

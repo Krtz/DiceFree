@@ -7,6 +7,9 @@ namespace DiceFree.Core
     [DisallowMultipleComponent]
     public sealed class TreeCameraOccluder : MonoBehaviour
     {
+        [SerializeField, Min(1)] private float focusDistance = 8;
+        public float FocusDistance => focusDistance;
+        public void ConfigureFocusDistance(float distance) => focusDistance = Mathf.Max(1, distance);
         internal static readonly HashSet<TreeCameraOccluder> Active = new();
         internal Renderer[] Renderers { get; private set; }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

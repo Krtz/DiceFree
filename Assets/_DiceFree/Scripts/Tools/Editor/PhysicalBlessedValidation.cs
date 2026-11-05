@@ -53,8 +53,8 @@ namespace DiceFree.EditorTools
                 "Physical kit must remain four actives plus one passive, six ranks each.");
             Near(heavy.HeavyStunSeconds(1), .4f, "Heavy Strike R1 stun");
             Near(heavy.HeavyStunSeconds(6), 1.4f, "Heavy Strike R6 stun");
-            Near(heavy.FlatDamage(1),4,"Heavy Strike R1 flat damage");
-            Near(heavy.FlatDamage(6),24,"Heavy Strike R6 flat damage");
+            Near(heavy.FlatDamage(1),10,"Heavy Strike R1 flat damage");
+            Near(heavy.FlatDamage(6),60,"Heavy Strike R6 flat damage");
             Near(rain.FlatDamage(1),2,"Arrow Rain R1 flat damage per wave");
             Near(rain.FlatDamage(6),12,"Arrow Rain R6 flat damage per wave");
             Near(guard.GuardReduction(1), .15f, "Guard R1 reduction");
