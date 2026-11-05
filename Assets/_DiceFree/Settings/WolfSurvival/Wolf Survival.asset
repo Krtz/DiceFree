@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27d8452378afd04b983ac5e710a5688, type: 3}
+  m_Name: Wolf Survival
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.WolfDungeonTuning
+  definition: {fileID: 11400000, guid: 82781e484232f014bb79e7f92c0841a3, type: 2}
+  weak: {fileID: 8413886580752052971, guid: ab57c628f5db41346878b5817bd364b8, type: 3}
+  strong: {fileID: 1165348227302106950, guid: 91ad74021dce2d740a9283080ffc6e9f, type: 3}
+  alpha: {fileID: 4218630590878286725, guid: 9a2384120edcd874e8a3c8a487004ca5, type: 3}
+  dummy: {fileID: 11400000, guid: 1e2a6dcba2459c848a4a677fe2cfcd60, type: 2}
+  intermissionSeconds: 8
+  warningSeconds: 2
+  victorySeconds: 15

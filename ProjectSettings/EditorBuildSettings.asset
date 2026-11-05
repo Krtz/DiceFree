@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/World2TransitionTest.unity
     guid: a63f31989dc91584095b202e579416c4
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/WolfSurvival.unity
+    guid: 3a5f409a16c1e424d83793ea6ff5afb0
   m_configObjects: {}

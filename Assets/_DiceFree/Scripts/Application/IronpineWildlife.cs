@@ -35,6 +35,13 @@ namespace DiceFree.Ironpine
         private bool investigating, responding, specialPending, howling, pouncing, lunging;
         private int huntingIndex;
         private string familyId;
+        private bool encounterOnly;
+        public void ConfigureEncounter() { encounterOnly=true;respawnSites=Array.Empty<Vector3>();huntingGrounds=Array.Empty<Vector3>(); }
+        public void EngageEncounter(CombatActor opponent)
+        {
+            if(!encounterOnly||opponent==null||!opponent.Alive||!actor.Alive)return;
+            target=opponent;investigating=responding=false;unseenSince=-1;
+        }
         public WildlifeKind Kind => kind;
         // Optional licensed creature visual; AI and collision stay unchanged.
         public void UseVisualModel(Transform visual) { if(visual!=null) model=visual; }
@@ -215,6 +222,7 @@ namespace DiceFree.Ironpine
         }
         private bool InsideTerritory(Vector3 point)
         {
+            if(encounterOnly)return true;
             if (IsAlpha && huntingGrounds.Length >= 2)
             {
                 float min = float.PositiveInfinity;
@@ -476,6 +484,7 @@ namespace DiceFree.Ironpine
         }
         private void TryRespawn()
         {
+            if(encounterOnly)return;
             if (Time.time < deadUntil || respawnSites == null || respawnSites.Length == 0) return;
             int start = UnityEngine.Random.Range(0, respawnSites.Length);
             for (int n = 0; n < respawnSites.Length; n++)

@@ -1,6 +1,8 @@
 # World 1 follow-on design interview — Village 2, Tier II classes and Wolf Dungeon
 Date: 2026-10-12. **Status: DISCUSSION DRAFT — no world/class/dungeon authoring yet.**
 
+**Wolf dungeon update — 2026-11-05:** Later direct user instructions approve a ten-wave, point-budget survival dungeon in a moonlit Ironpine clearing: weak 1, strong 2, alpha 3; wave budgets 3 through 12; first wave three weak or weak+strong; final wave four alphas. This supersedes the wolf section's earlier discussion-only restriction and unique-boss proposal for this bounded implementation. See `WOLF_SURVIVAL_DUNGEON.md` for current flow and validation. Unconfirmed lore and reward proposals below remain proposals.
+
 ## Existing approved foundations (not new decisions)
 
 - Village 2 location is reserved beyond the northeastern Ironpine approach (near the clearing centered around world X223/Z149); Ironpine road extends toward it. Village 2's identity, services, quests, architecture and NPC roles remain open.

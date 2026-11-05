@@ -20,6 +20,28 @@ namespace DiceFree.ApplicationFlow
 
         public static bool Busy => current != null;
 
+        public static bool TryLoadAdditive(string scene,string message,Action<Scene> ready,Action<Exception> failed)
+        {
+            if(Busy)return false;
+            var screen=Open(message);screen.progress=0;
+            screen.StartCoroutine(screen.LoadAdditive(scene,ready,failed));return true;
+        }
+        IEnumerator LoadAdditive(string scene,Action<Scene> ready,Action<Exception> failed)
+        {
+            yield return null;AsyncOperation operation=null;Exception error=null;
+            try{operation=SceneManager.LoadSceneAsync(scene,LoadSceneMode.Additive);}catch(Exception e){error=e;}
+            if(operation!=null)
+            {
+                while(!operation.isDone){progress=Mathf.Clamp01(operation.progress/.9f);yield return null;}
+                while(Time.unscaledTime-openedAt<MinimumDisplaySeconds)yield return null;
+                var loaded=SceneManager.GetSceneByName(scene);
+                if(!loaded.isLoaded)error=new InvalidOperationException("Scene did not finish loading: "+scene);
+                else try{ready?.Invoke(loaded);}catch(Exception e){error=e;}
+            }
+            if(operation==null&&error==null)error=new InvalidOperationException("Scene could not be loaded: "+scene);
+            Close();if(error!=null)failed?.Invoke(error);
+        }
+
         public static void Initialize(string message, Action initialize)
         {
             // Returning to the menu already has a screen covering initialization.

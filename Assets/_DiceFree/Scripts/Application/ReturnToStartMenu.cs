@@ -30,7 +30,7 @@ namespace DiceFree.Dungeons
         {
             if(exitPrepared)return true;
             if(DiceFree.Development.DevelopmentRoomController.Current?.Busy==true||!GetComponent<ManifestationPersistence>().Flush())return false;
-            exitPrepared=true;returning=true;SlimeDungeonRun.Current?.ReleaseForSessionExit();options?.Close();
+            exitPrepared=true;returning=true;SlimeDungeonRun.Current?.ReleaseForSessionExit();WolfDungeonRun.Current?.ReleaseForSessionExit();options?.Close();
             GetComponent<SkillTargetingController>()?.Cancel();GetComponent<QuestJournalPanel>()?.Close();
             DiceFree.Foundation.DevelopmentSession.End();
             return true;

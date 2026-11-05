@@ -22,7 +22,7 @@ namespace DiceFree.Ironpine
             ApplyToWorld();
         }
         private static void OnSceneLoaded(Scene scene,LoadSceneMode mode)=>ApplyToWorld();
-        private static void ApplyToWorld()
+        internal static void ApplyToWorld()
         {
             var source=Resources.Load<GameObject>(Licensed);
             if(source==null)return;
