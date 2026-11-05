@@ -16,15 +16,16 @@ namespace DiceFree.UI
   }
   public bool Upgrade(int index)=>index>=0&&index<Count&&skills.Spend((Kind)index);
   public string UpgradeTooltip(int index)=>index<0||index>=Count?"":"Spend 1 skill point\n"+Describe((Kind)index,skills.Rank((Kind)index)+1);
+  float BaseDamage(Kind kind)=>caster.Tuning.attacks[(int)kind].baseDamage;
   string Describe(Kind kind,int rank){
    var rule=MageProgressionRules.For(kind);int r=Mathf.Max(1,rank);
    string text=MageProgressionRules.Name(kind)+" — "+(rule.passive?"Passive":"Spell")+"\n"+(rank>0?"Rank "+rank:"Unlock level "+rule.rankLevels[0])+"\n";
    text+=kind switch{
-    Kind.EmberBolt=>$"Fire projectile: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT magical damage.",
-    Kind.FrostSnare=>$"Ice: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage. Freeze up to {MageProgressionRules.FrostFreezeDuration(r):0.##}s, using shared stun resistance and immunity.",
-    Kind.ArcLightning=>$"Electric damage: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT. Hits up to {MageProgressionRules.ArcLightningTargetCount(r)} distinct enemies; 6m jumps; each jump deals 80% of the previous hit.",
-    Kind.Quicksand=>$"Nature field, 3.5m radius for {4+r}s. Once per second: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage, {MageProgressionRules.QuicksandSlowPercent(r)}% slow.",
-    Kind.HalfLife=>$"Radiation DoT: 15 + {MageProgressionRules.Coefficient(kind,r):0.##} × INT each second for {6+2*r}s. Reduces both defenses by {MageProgressionRules.HalfLifeDefenseReduction(r)}; same caster refreshes rather than stacking.",
+    Kind.EmberBolt=>$"Fire projectile: {BaseDamage(kind)} + {MageProgressionRules.Coefficient(kind,r):0.##} × INT magical damage.",
+    Kind.FrostSnare=>$"Ice: {BaseDamage(kind)} + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage. Freeze up to {MageProgressionRules.FrostFreezeDuration(r):0.##}s, using shared stun resistance and immunity.",
+    Kind.ArcLightning=>$"Electric damage: {BaseDamage(kind)} + {MageProgressionRules.Coefficient(kind,r):0.##} × INT. Hits up to {MageProgressionRules.ArcLightningTargetCount(r)} distinct enemies; 6m jumps; each jump deals 80% of the previous hit.",
+    Kind.Quicksand=>$"Channel Nature field for {4+r}s, 3.5m radius. Move, attack, cast another spell or press Stop to interrupt. Once per second: {BaseDamage(kind)} + {MageProgressionRules.Coefficient(kind,r):0.##} × INT damage, {MageProgressionRules.QuicksandSlowPercent(r)}% slow.",
+    Kind.HalfLife=>$"Radiation DoT: {BaseDamage(kind)} + {MageProgressionRules.Coefficient(kind,r):0.##} × INT each second for {6+2*r}s. Reduces both defenses by {MageProgressionRules.HalfLifeDefenseReduction(r)}; same caster refreshes rather than stacking.",
     Kind.MathBarrier=>$"Self only. For {2*r}s redirects {25+5*r}% of post-shield damage to Mana, at {2-.1f*r:0.#} Mana per damage absorbed. Insufficient Mana absorbs only what is affordable; remaining damage reaches HP.",
     Kind.ElementalWeaving=>$"One stack per unique element cast; repeated elements refresh the shared 8s delay. +5% spell/basic damage per stack. After 8s without an elemental cast, lose one oldest stack per second. Each cast reduces OTHER Mage cooldowns by 0.2s. Nearby enemies within {caster.Tuning.auraRadius:0.#}m lose {MageProgressionRules.WeavingResistanceReduction(r)} percentage points of resistance to the six Mage schools; strongest overlapping aura wins. No hit is needed. Damage ticks, bounces, targets and basic attacks do not create stacks.\nCurrent stacks: {caster.WeavingStacks}",
     _=>$"+{30*r} maximum Mana and +{.5f*r:0.#} Mana regeneration per second."

@@ -21,10 +21,8 @@ namespace DiceFree.Briarback
             var spine=animator.GetBoneTransform(HumanBodyBones.Spine);if(spine==null)return;
             var piece=new GameObject("Bristlehide Mantle");piece.transform.SetParent(root,false);
             piece.transform.SetPositionAndRotation(spine.position-root.forward*.17f,root.rotation);
-            var mesh=new Mesh{name="Original scalloped hide mantle",
-                vertices=new[]{new Vector3(-.24f,.18f,0),new Vector3(.24f,.18f,0),new Vector3(-.29f,-.47f,-.04f),new Vector3(-.15f,-.55f,-.06f),new Vector3(0,-.48f,-.06f),new Vector3(.15f,-.55f,-.06f),new Vector3(.29f,-.47f,-.04f)},
-                triangles=new[]{0,2,3,0,3,4,0,4,1,1,4,5,1,5,6}};
-            mesh.RecalculateNormals();mesh.RecalculateBounds();meshes.Add(mesh);
+            var mesh=CreateMesh();
+            meshes.Add(mesh);
             piece.AddComponent<MeshFilter>().sharedMesh=mesh;piece.AddComponent<MeshRenderer>().sharedMaterial=hide;
             for(int i=0;i<5;i++){
                 var stud=GameObject.CreatePrimitive(PrimitiveType.Capsule);stud.name="Bone mantle quill";
@@ -38,6 +36,12 @@ namespace DiceFree.Briarback
             binding.visuals=binding.visuals.Concat(new[]{piece}).ToArray();
             binding.baselineVisuals=binding.baselineVisuals.Concat(bindings.Where(b=>b.slot==EquipmentSlot.Back&&b!=binding).SelectMany(b=>b.baselineVisuals)).Distinct().ToArray();
             target.Configure(bindings.ToArray());
+        }
+        public static Mesh CreateMesh(){
+            var mesh=new Mesh{name="Original scalloped hide mantle",
+                vertices=new[]{new Vector3(-.24f,.18f,0),new Vector3(.24f,.18f,0),new Vector3(-.29f,-.47f,-.04f),new Vector3(-.15f,-.55f,-.06f),new Vector3(0,-.48f,-.06f),new Vector3(.15f,-.55f,-.06f),new Vector3(.29f,-.47f,-.04f)},
+                triangles=new[]{0,2,3,0,3,4,0,4,1,1,4,5,1,5,6}};
+            mesh.RecalculateNormals();mesh.RecalculateBounds();return mesh;
         }
         void OnDestroy(){if(hide!=null)Destroy(hide);if(bone!=null)Destroy(bone);foreach(var mesh in meshes)if(mesh!=null)Destroy(mesh);}
     }

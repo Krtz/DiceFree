@@ -24,7 +24,7 @@ MonoBehaviour:
     agility: 0
     intelligence: 1
     spirit: 0
-  baseDamage: 15
+  baseDamage: 20
   coefficient: 0.35
   minimumDamageMultiplier: 1
   maximumDamageMultiplier: 1

@@ -71,6 +71,7 @@ namespace DiceFree.UI
             if(!actor.Alive){RestoreSpin();if(state!="Death")Play("Death",float.PositiveInfinity);model.speed=1;alive=false;winding=false;return true;}
             if(!alive){state=null;hold=0;alive=true;Play("Idle");}
             if(actor.Effects?.Stunned==true){model.speed=0;return true;}
+            if(classId=="class.mage"&&mage!=null&&mage.IsChanneling){if(state!="Cast"||model.GetCurrentAnimatorStateInfo(0).normalizedTime>=.95f)Play("Cast",.85f,1,true);model.speed=1;return true;}
             bool now=basic!=null&&basic.State=="Wind-up";
             if(now&&!winding)
             {

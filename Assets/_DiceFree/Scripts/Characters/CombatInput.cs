@@ -97,6 +97,8 @@ namespace DiceFree.Characters
             if (source == null || actor == null || !actor.IsHostileTo(source)) return;
             if (attack == null || attack.Target != null) return;
             if (skillTargeting != null && skillTargeting.Active) return;
+            foreach(var ability in GetComponents<MonoBehaviour>())
+                if(ability is DiceFree.Foundation.IChannelingAbility channel&&channel.IsChanneling)return;
             // Preserve explicit locomotion and queued commands. Auto-retaliate is
             // a fallback only when the player is otherwise idle.
             if (AttackMoving || actor.Motor.Travelling || orders?.HasOrders == true) return;
@@ -132,6 +134,7 @@ namespace DiceFree.Characters
                 selection.Select(null);
                 inspect?.Clear();
                 attack.Cancel();
+                GetComponent<MageSkillCaster>()?.CancelChannel();
             }
             if (select.WasPressedThisFrame() && Mouse.current != null &&
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))

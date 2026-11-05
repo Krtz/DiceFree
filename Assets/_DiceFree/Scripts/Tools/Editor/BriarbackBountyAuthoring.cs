@@ -32,7 +32,8 @@ namespace DiceFree.EditorTools
         private const string GiverObjectName = "Trimery Bounty Hunter - Briarback";
 
         // Round 31 left values open and requires placeholders until playtest tuning.
-        public const int PlaceholderXp = 400;
+        public const int PlaceholderXp = 400; // Other untuned quests retain their own placeholder.
+        public const int BountyXp = 5160; // Twenty regular level-25 Quillboars at 258 XP each.
         public const long PlaceholderGold = 50;
 
         private static T[] All<T>(Scene scene) where T : Component => scene
@@ -151,13 +152,13 @@ namespace DiceFree.EditorTools
                 var quest = ScriptableObject.CreateInstance<QuestDefinition>();
                 quest.name = "Another 20 Quillboars";
                 quest.stableId = QuestId;
-                quest.title = "Another 20 Quillboars";
-                quest.version = 1;
+                quest.title = "Another 15 Quillboars";
+                quest.version = 2;
                 quest.requiredLevel = 1;
-                quest.offer = "Trimery needs the Briarback warband kept off the road. Defeat twenty Quillboars, then return here for your bounty.";
-                quest.activeDialogue = "Twenty down. Return when the bounty is complete and I will pay you.";
-                quest.locationHint = "Return to the Trimery bounty hunter after defeating 20 Quillboars.";
-                quest.rewardXp = PlaceholderXp;
+                quest.offer = "Trimery needs the Briarback warband kept off the road. Defeat fifteen Quillboars, then return here for your bounty.";
+                quest.activeDialogue = "Fifteen down. Return when the bounty is complete and I will pay you.";
+                quest.locationHint = "Return to the Trimery bounty hunter after defeating 15 Quillboars.";
+                quest.rewardXp = BountyXp;
                 quest.reward = reward;
                 quest.completeOnObjectives = false;
                 quest.repeatable = true;
@@ -167,10 +168,10 @@ namespace DiceFree.EditorTools
                     {
                         kind = ObjectiveKind.Kill,
                         familyId = FamilyId,
-                        count = 20,
+                        count = 15,
                         creditMode = QuestCreditMode.NearbyParty,
                         creditRadius = 50,
-                        instruction = "Defeat 20 Quillboars"
+                        instruction = "Defeat 15 Quillboars"
                     }
                 };
                 AssetDatabase.CreateAsset(quest, QuestAssetPath);
@@ -210,11 +211,11 @@ namespace DiceFree.EditorTools
                 {
                     marker = "DICEFRE_BRIARBACK_BOUNTY_AUTHORED",
                     questId = QuestId,
-                    objective = "20 Quillboars, one shared family counter",
+                    objective = "15 Quillboars, one shared family counter",
                     creditMode = QuestCreditMode.NearbyParty.ToString(),
                     giver = giverObject.name,
                     position = placement.ToString("F2"),
-                    rewardXp = PlaceholderXp,
+                    rewardXp = BountyXp,
                     rewardGold = PlaceholderGold,
                     rewardAmountsArePlaytestTuningPlaceholders = true,
                     repeatable = quest.repeatable,

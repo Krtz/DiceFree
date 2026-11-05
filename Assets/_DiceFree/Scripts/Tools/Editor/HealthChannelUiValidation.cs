@@ -73,8 +73,10 @@ namespace DiceFree.EditorTools
                     reloaded.AllyHealthBar==OverheadHealthVisibility.Never &&
                     reloaded.EnemyHealthBar==OverheadHealthVisibility.WhenHurt,
                     "Independent choices not persisted/reloaded.");
-                Check(File.ReadAllText(file).Contains("\"version\": 3") ||
-                      File.ReadAllText(file).Contains("\"version\":3"),
+                var dataType=typeof(GameplayPreferences).Assembly.GetType("DiceFree.Input.GameplayPreferencesData",true);
+                var version=dataType.GetField("version");
+                Check((int)version.GetValue(JsonUtility.FromJson(File.ReadAllText(file),dataType))==
+                      (int)version.GetValue(Activator.CreateInstance(dataType,true)),
                     "Overhead settings JSON version wasn't upgraded.");
                 Check(!reloaded.AutoRetaliate && !reloaded.ShowCastRange,
                     "Saving new options overwrote unrelated old preferences.");

@@ -62,7 +62,7 @@ namespace DiceFree.EditorTools
      int i=(int)rule.kind;string name=MageProgressionRules.Name(rule.kind);
      var element=Asset<ElementDefinition>(MagicalTouchedAuthoring.ElementFolder+"/"+elements[i]+".asset");element.stableId="element."+elements[i].ToLowerInvariant();element.displayName=elements[i];EditorUtility.SetDirty(element);
      var attack=Asset<AttackDefinition>(Folder+"/"+name+" attack.asset");attack.stableId="attack.mage."+rule.kind.ToString().ToLowerInvariant();attack.displayName=name;attack.element=element;attack.channel=DamageChannel.Magical;
-     attack.scaling=AttributeScaling.Weighted;attack.weights=new AttributeValues{intelligence=1};attack.baseDamage=15;attack.coefficient=MageProgressionRules.Coefficient(rule.kind,1);attack.requiresAccuracy=false;attack.reach=18;
+     attack.scaling=AttributeScaling.Weighted;attack.weights=new AttributeValues{intelligence=1};attack.baseDamage=rule.kind==MageProgressionRules.Kind.MathBarrier?15:20;attack.coefficient=MageProgressionRules.Coefficient(rule.kind,1);attack.requiresAccuracy=false;attack.reach=18;
      tuning.attacks[i]=attack;EditorUtility.SetDirty(attack);
     }
     var profile=Asset<ClassResourceProfile>(Folder+"/Mage Mana.asset");

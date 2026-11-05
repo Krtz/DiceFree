@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
   stableId: item.briarback.bristlehide-mantle
   displayName: Bristlehide Mantle
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3f3de15d1b3f3ee49b31ccf2423d6183, type: 3}
   slot: 10
   handsRequired: 1
   itemLevel: 25
@@ -24,6 +24,10 @@ MonoBehaviour:
   bound: 1
   modelTestingItem: 0
   canSell: 0
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId: 
+  restoreResourceAmount: 0
   allowedClassIds: []
   flavor: A sturdy trail mantle, reinforced with the warband's blunt bone quills.
   stats:

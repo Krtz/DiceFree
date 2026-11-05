@@ -98,6 +98,13 @@ namespace DiceFree.Quests
             foreach (var record in records)
             {
                 var copy=record.Copy();
+                if(copy.questId=="quest.briarback.repeat-bounty"&&copy.definitionVersion==1&&
+                   Array.Exists(definitions,d=>d.stableId==copy.questId&&d.version==2))
+                {
+                    copy.definitionVersion=2;copy.stage=0;copy.count=Mathf.Min(15,copy.count);
+                    copy.alternatives=Array.Empty<ObjectiveCount>();
+                    if(copy.status==QuestStatus.Active&&copy.count>=15)copy.status=QuestStatus.ReadyToTurnIn;
+                }
                 if(copy.questId=="quest.cornberg.repeat-slime-hunt"&&
                    copy.definitionVersion==1&&Array.Exists(definitions,d=>d.stableId==copy.questId&&d.version==2))
                 {

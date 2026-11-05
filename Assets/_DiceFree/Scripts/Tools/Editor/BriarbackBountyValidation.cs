@@ -33,7 +33,7 @@ namespace DiceFree.EditorTools
         }
 
         [CliCommand("dicefree.briarback.bounty.validate",
-            "Validate the additive Trimery 20-Quillboar repeatable bounty and its live navigation placement.")]
+            "Validate the Trimery 15-Quillboar repeatable bounty and its live navigation placement.")]
         public static object Run()
         {
             Need(!EditorApplication.isPlayingOrWillChangePlaymode, "run from Edit Mode.");
@@ -46,14 +46,14 @@ namespace DiceFree.EditorTools
                  !quest.completeOnObjectives, "quest ID, repeatability or turn-in behavior.");
             Need(quest.stages != null && quest.stages.Length == 1, "one shared kill objective is required.");
             var objective = quest.stages[0];
-            Need(objective.kind == ObjectiveKind.Kill && objective.count == 20 &&
+            Need(objective.kind == ObjectiveKind.Kill && objective.count == 15 &&
                  objective.familyId == FamilyId &&
                  (objective.familyIds == null || objective.familyIds.Length == 0),
-                "the quest must use one 20-kill counter for the Briarback family.");
+                "the quest must use one 15-kill counter for the Briarback family.");
             Need(objective.creditMode == QuestCreditMode.NearbyParty &&
                  Mathf.Approximately(objective.creditRadius, 50),
                 "the quest must use the shared NearbyParty credit policy.");
-            Need(quest.rewardXp == BriarbackBountyAuthoring.PlaceholderXp && reward != null &&
+            Need(quest.rewardXp == BriarbackBountyAuthoring.BountyXp && reward != null &&
                  reward.gold == BriarbackBountyAuthoring.PlaceholderGold,
                 "the disclosed XP and gold tuning placeholders changed unexpectedly.");
 
@@ -106,22 +106,24 @@ namespace DiceFree.EditorTools
 
             var patrolGroup = GameObject.Find("Briarback road patrols - additive")?.transform;
             var elementalGroup = GameObject.Find("Briarback elemental guardians - additive")?.transform;
+            var chieftainGroup = GameObject.Find("Briarback Chieftain encounter - additive")?.transform;
             var creatures = All<QuilboarCombat>().Where(value => patrolGroup == null ||
                 !value.transform.IsChildOf(patrolGroup)).Where(value => elementalGroup == null ||
-                !value.transform.IsChildOf(elementalGroup)).ToArray();
+                !value.transform.IsChildOf(elementalGroup)).Where(value => chieftainGroup == null ||
+                !value.transform.IsChildOf(chieftainGroup)).ToArray();
             Need(creatures.Length == 20 && creatures.Count(value =>
                     value.transform.IsChildOf(GameObject.Find(RegionRoot).transform)) == 20,
                 "adding the quest must preserve the existing 20-actor Briarback roster.");
             return new
             {
                 marker = "DICEFRE_BRIARBACK_BOUNTY_OK",
-                objective = "one 20-kill Briarback family counter",
+                objective = "one 15-kill Briarback family counter",
                 credit = objective.creditMode.ToString(),
                 giver = giver[0].name,
                 navPath = "complete",
                 collision = "clear",
                 creatureCount = creatures.Length,
-                rewardTuningPlaceholder = true,
+                rewardTuningPlaceholder = false,
                 rewardXp = quest.rewardXp,
                 rewardGold = reward.gold
             };

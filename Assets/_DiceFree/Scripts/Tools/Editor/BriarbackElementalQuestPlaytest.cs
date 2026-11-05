@@ -258,7 +258,7 @@ namespace DiceFree.EditorTools
             progress = journal.GetProgress(quest.stableId);
             Need(progress.status == QuestStatus.Completed, "Turn-in did not permanently complete the character quest.");
             Need(wallet.Gold == beforeGold + 50, "Scholar quest gold tuning placeholder was not granted exactly once.");
-            Need(xp.Level > beforeLevel || xp.CurrentXp - beforeXp == 400,
+            Need(xp.Level > beforeLevel || xp.CurrentXp - beforeXp == 2500,
                 "Scholar quest XP tuning placeholder was not granted.");
             Need(!giver.TurnIn(player, quest) && wallet.Gold == beforeGold + 50,
                 "Completed one-time scholar quest granted rewards twice.");
@@ -269,7 +269,7 @@ namespace DiceFree.EditorTools
             Need(saved.status == QuestStatus.Completed && saved.definitionVersion == quest.version,
                 "Completed four-element eligibility marker did not persist in the character save.");
             report.completionPersisted = true;
-            report.xpAwarded = 400;
+            report.xpAwarded = 2500;
             report.goldAwarded = 50;
         }
     }

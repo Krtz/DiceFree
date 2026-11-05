@@ -122,9 +122,9 @@ namespace DiceFree.UI
                 var health=unit.Health;
                 if(health==null)continue;
                 bool showHp=ShouldShow(ModeFor(unit),health.Current,health.Maximum);
-                IChannelingAbility channel=null;
+                DiceFree.Foundation.IChannelingAbility channel=null;
                 foreach(var behaviour in unit.GetComponents<MonoBehaviour>())
-                    if(behaviour is IChannelingAbility spell && spell.IsChanneling)
+                    if(behaviour is DiceFree.Foundation.IChannelingAbility spell && spell.IsChanneling)
                     {channel=spell;break;}
                 if(!showHp && channel==null)continue;
                 if(fog!=null && !fog.IsVisible(unit.transform.position))continue;

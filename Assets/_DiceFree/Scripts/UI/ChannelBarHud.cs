@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DiceFree.UI
 {
     /// <summary>
-    /// Theme-aware, movable channel progress bar. Reads ANY IChannelingAbility
+    /// Theme-aware, movable channel progress bar. Reads ANY DiceFree.Foundation.IChannelingAbility
     /// on the controlled character, not a hardcoded Return Home timer.
     /// </summary>
     [DisallowMultipleComponent]
@@ -25,13 +25,13 @@ namespace DiceFree.UI
             var home=FindAnyObjectByType<ReturnHomeAbility>();
             if(home!=null)player=home.GetComponent<CombatActor>();
         }
-        public bool TryActive(out IChannelingAbility spell)
+        public bool TryActive(out DiceFree.Foundation.IChannelingAbility spell)
         {
             spell=null;
             AcquirePlayer();
             if(player==null || !player.Alive)return false;
             foreach(var behaviour in player.GetComponents<MonoBehaviour>())
-                if(behaviour is IChannelingAbility channel && channel.IsChanneling)
+                if(behaviour is DiceFree.Foundation.IChannelingAbility channel && channel.IsChanneling)
                 {
                     spell=channel;
                     return true;

@@ -40148,6 +40148,7 @@ GameObject:
   - component: {fileID: 119742261}
   - component: {fileID: 119742263}
   - component: {fileID: 119742262}
+  - component: {fileID: 119742264}
   m_Layer: 2
   m_Name: Briarback northern detour
   m_TagString: Untagged
@@ -40227,6 +40228,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119742260}
   m_Mesh: {fileID: 4300000, guid: f70add97c2125e541af995d4c2039b29, type: 2}
+--- !u!114 &119742264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119742260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TravelSurface
+  stableId: surface-area.briarback.briarback-northern-detour
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 119742263}
+  localRegion:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  heightTolerance: 0.75
 --- !u!1 &120037774
 GameObject:
   m_ObjectHideFlags: 0
@@ -68748,8 +68768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceFree.World.ResurrectionAnchor
   stableId: anchor.cornberg
-  activationPoint: {fileID: 0}
-  activationRadius: 3.5
+  activationPoint: {fileID: 1292343699}
+  activationRadius: 4.5
 --- !u!1001 &192840447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341631,6 +341651,7 @@ GameObject:
   - component: {fileID: 977724526}
   - component: {fileID: 977724528}
   - component: {fileID: 977724527}
+  - component: {fileID: 977724529}
   m_Layer: 2
   m_Name: North approach to the open stronghold gate
   m_TagString: Untagged
@@ -341710,6 +341731,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977724525}
   m_Mesh: {fileID: 4300000, guid: 836969609798df74586a9e24b0b034d6, type: 2}
+--- !u!114 &977724529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977724525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TravelSurface
+  stableId: surface-area.briarback.north-approach-to-the-open-stronghold-gate
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 977724528}
+  localRegion:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  heightTolerance: 0.75
 --- !u!1 &977914685
 GameObject:
   m_ObjectHideFlags: 0
@@ -417175,6 +417215,7 @@ GameObject:
   - component: {fileID: 1196743821}
   - component: {fileID: 1196743823}
   - component: {fileID: 1196743822}
+  - component: {fileID: 1196743824}
   m_Layer: 2
   m_Name: Briarback circular warband road
   m_TagString: Untagged
@@ -417254,6 +417295,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196743820}
   m_Mesh: {fileID: 4300000, guid: 19530129e2e216d4aa038e4272ed5e20, type: 2}
+--- !u!114 &1196743824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196743820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TravelSurface
+  stableId: surface-area.briarback.briarback-circular-warband-road
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 1196743823}
+  localRegion:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  heightTolerance: 0.75
 --- !u!1 &1196881097
 GameObject:
   m_ObjectHideFlags: 0
@@ -672618,6 +672678,7 @@ GameObject:
   - component: {fileID: 1925228594}
   - component: {fileID: 1925228596}
   - component: {fileID: 1925228595}
+  - component: {fileID: 1925228597}
   m_Layer: 2
   m_Name: Briarback western scouting loop
   m_TagString: Untagged
@@ -672697,6 +672758,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925228593}
   m_Mesh: {fileID: 4300000, guid: d0b1dc3c56443ad4f8281888c66fad81, type: 2}
+--- !u!114 &1925228597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925228593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TravelSurface
+  stableId: surface-area.briarback.briarback-western-scouting-loop
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 1925228596}
+  localRegion:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  heightTolerance: 0.75
 --- !u!1 &1925404576
 GameObject:
   m_ObjectHideFlags: 0
@@ -700114,6 +700194,7 @@ GameObject:
   - component: {fileID: 2004081348}
   - component: {fileID: 2004081350}
   - component: {fileID: 2004081349}
+  - component: {fileID: 2004081351}
   m_Layer: 2
   m_Name: Harrowtusk eastern camp trail
   m_TagString: Untagged
@@ -700193,6 +700274,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004081347}
   m_Mesh: {fileID: 4300000, guid: 17ef7abdd8c8d304fadb6dd8bac7f9a5, type: 2}
+--- !u!114 &2004081351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004081347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02182c22ae2259f439cb34c5ee35ee9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.TravelSurface
+  stableId: surface-area.briarback.harrowtusk-eastern-camp-trail
+  definition: {fileID: 11400000, guid: 70eaecdbeb522504e9961d3c8ff28197, type: 2}
+  footprint: {fileID: 2004081350}
+  localRegion:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 5000, y: 5000, z: 5000}
+  heightTolerance: 0.75
 --- !u!1 &2004188658
 GameObject:
   m_ObjectHideFlags: 0

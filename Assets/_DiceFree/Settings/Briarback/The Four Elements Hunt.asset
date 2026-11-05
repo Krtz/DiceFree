@@ -78,8 +78,9 @@ MonoBehaviour:
     count: 1
     alternatives: []
   completedQuestIds: []
-  rewardXp: 400
+  rewardXp: 2500
   reward: {fileID: 11400000, guid: a9efa30a8f149004883754ebdec54daa, type: 2}
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 0
   repeatable: 0

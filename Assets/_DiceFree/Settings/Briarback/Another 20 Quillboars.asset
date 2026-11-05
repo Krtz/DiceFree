@@ -13,31 +13,32 @@ MonoBehaviour:
   m_Name: Another 20 Quillboars
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.briarback.repeat-bounty
-  title: Another 20 Quillboars
+  title: Another 15 Quillboars
   requiredClassId: 
   requiredLevel: 1
-  version: 1
-  offer: Trimery needs the Briarback warband kept off the road. Defeat twenty Quillboars, then return here for your bounty.
-  activeDialogue: Twenty down. Return when the bounty is complete and I will pay you.
-  locationHint: Return to the Trimery bounty hunter after defeating 20 Quillboars.
+  version: 2
+  offer: Trimery needs the Briarback warband kept off the road. Defeat fifteen Quillboars, then return here for your bounty.
+  activeDialogue: Fifteen down. Return when the bounty is complete and I will pay you.
+  locationHint: Return to the Trimery bounty hunter after defeating 15 Quillboars.
   stages:
   - kind: 0
     objectiveId: 
     requiredTag: 
     creditMode: 1
     creditRadius: 50
-    instruction: Defeat 20 Quillboars
+    instruction: Defeat 15 Quillboars
     contentId: 
     dungeonBossOnly: 0
     familyId: briarback.quilboar
     familyIds: []
     areaId: 
     conversationId: 
-    count: 20
+    count: 15
     alternatives: []
   completedQuestIds: []
-  rewardXp: 400
+  rewardXp: 5160
   reward: {fileID: 11400000, guid: 0b5c8a59e5b1e4a4495a9c56c6421e05, type: 2}
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 0
   repeatable: 1

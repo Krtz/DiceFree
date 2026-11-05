@@ -58,8 +58,8 @@ namespace DiceFree.EditorTools
                 "the four ordered elemental quest stages are missing.");
             Need(!quest.repeatable && !quest.completeOnObjectives,
                 "the hunt must be optional, one-time, and require return/turn-in.");
-            Need(quest.rewardXp == 400 && reward != null && reward.gold == 50,
-                "the disclosed placeholder rewards were changed without playtest tuning.");
+            Need(quest.rewardXp == 2500 && reward != null && reward.gold == 50,
+                "the requested 2500 XP / unchanged gold reward is missing.");
 
             var guardians = guardiansRoot.GetComponentsInChildren<QuilboarCombat>(true);
             Need(guardians.Length == Expected.Length, "expected one elemental guardian per settlement.");

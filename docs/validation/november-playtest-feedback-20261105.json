@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "phase": "passed",
+  "checks": 208,
+  "failure": null,
+  "evidence": [
+    {
+      "stoneEdges": true,
+      "deathReturns": 3,
+      "selectedAnchor": "anchor.trimery"
+    },
+    {
+      "roads": 5,
+      "bonusPercent": 15
+    },
+    {
+      "bountyKills": 15,
+      "bountyTurnInXp": 5160,
+      "huntTurnInXp": 2500,
+      "legacyMigrations": 5
+    },
+    {
+      "mageOrbEquippedAndReloaded": true,
+      "spellBaseDamage": 20,
+      "channelSeconds": 5,
+      "interrupts": [
+        "move",
+        "spell",
+        "stun",
+        "attack",
+        "death"
+      ],
+      "channelCompletes": true
+    },
+    {
+      "treeMaximumOpacity": 0.18,
+      "alphaCutoutDisabledWhileFaded": true,
+      "originalMaterialsRestored": true
+    }
+  ],
+  "staticChecks": {
+    "architecture": true,
+    "managedReferences": true,
+    "dependencyPolicy": true,
+    "bounty": {
+      "marker": "DICEFRE_BRIARBACK_BOUNTY_OK",
+      "objective": "one 15-kill Briarback family counter",
+      "credit": "NearbyParty",
+      "giver": "Trimery Bounty Hunter - Briarback",
+      "navPath": "complete",
+      "collision": "clear",
+      "creatureCount": 20,
+      "rewardTuningPlaceholder": false,
+      "rewardXp": 5160,
+      "rewardGold": 50
+    },
+    "hunt": {
+      "marker": "DICEFRE_BRIARBACK_ELEMENTS_QUEST_VALID",
+      "quest": "quest.briarback.four-elements-hunt",
+      "stages": 4,
+      "guardians": 4,
+      "credit": "NearbyParty",
+      "scholarPath": "complete",
+      "guardianSpawns": "NavMesh and collider clear",
+      "returnTurnInRequired": true,
+      "completionIsCharacterDungeonEligibilityFlag": true,
+      "rewardTuningPlaceholder": true,
+      "rewardXp": 2500,
+      "rewardGold": 50
+    },
+    "channelUi": {
+      "success": true,
+      "finalMarker": "DICEFREE_HEALTH_CHANNEL_DATA_OK",
+      "selfAllyEnemyModes": 3,
+      "channelContract": true,
+      "oldSettingsMigrated": true
+    },
+    "ranks": {
+      "success": true,
+      "validation": "class-skill-rank-migration",
+      "finalMarker": "DICEFREE_CLASS_SKILL_RANK_MIGRATION_OK",
+      "checks": 411
+    }
+  },
+  "date": "2026-11-05",
+  "branch": "fix/november-playtest-feedback",
+  "setup": "Disposable profile; class/XP/item and placement fixtures; scripted quest kills with AI disabled. This is functional verification, not balance acceptance.",
+  "queuedOrders": {
+    "replacementInterrupts": true,
+    "shiftAppendedWaits": true,
+    "appendedMoveResumes": true
+  },
+  "physicalStopKeyTested": false,
+  "treeVisualReview": "Clean opaque/faded gameplay comparison inspected; final material fixture excludes inactive LOD renderers.",
+  "pushed": false,
+  "merged": false,
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261105-095007\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 7,
+    "bytes": 450227555,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "windowsSmoke": {
+    "status": "passed",
+    "combatFeedback": true,
+    "questReadout": true,
+    "questActivityNoReplay": true,
+    "bossEncounterHud": true,
+    "actualDelayedAnchorReturn": true,
+    "chieftainsBane": true,
+    "playerMotionClasses": 5,
+    "tierTwoCleaveSpinBarrierDeath": true,
+    "novemberFeedback": true,
+    "graphicsPresets": 4,
+    "huntTurnedIn": true,
+    "resumePersisted": true,
+    "fortWalks": 8,
+    "walkedMeters": 216.6995,
+    "builtWarningAndAxe": true,
+    "developmentRoom": true,
+    "quitRequested": true
+  },
+  "windowsExit": {
+    "pid": 65384,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "runtimeErrorMatches": 0,
+  "preservation": {
+    "originalModifiedTrackedFiles": 54,
+    "byteIdenticalOriginalFiles": 52,
+    "overlappingMageFilesWithPriorLocalChangesPreserved": 2,
+    "protectedBuildPathsRestored": 7,
+    "existingSettingsPreserved": true,
+    "stagedExistingRankFlatBonus": false,
+    "stagedExistingQuickcastWork": false
+  }
+}

@@ -99,6 +99,10 @@ namespace DiceFree.Characters
 
             // Return Home is a rooted channel. Inputting movement or Stop
             // cancels it before executing the normal movement command.
+            var mage=GetComponent<MageSkillCaster>();
+            if(mage!=null&&mage.IsChanneling&&(movement.ReadValue<Vector2>().sqrMagnitude>.001f||
+                stop.WasPressedThisFrame()||interact.WasPressedThisFrame()||closeInteraction.WasPressedThisFrame()))
+                mage.CancelChannel();
             var homeSkill=GetComponent<ReturnHomeAbility>();
             if(homeSkill!=null && homeSkill.Casting)
             {

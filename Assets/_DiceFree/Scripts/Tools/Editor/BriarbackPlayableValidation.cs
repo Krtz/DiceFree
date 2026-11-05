@@ -63,7 +63,7 @@ namespace DiceFree.EditorTools
   static void Defeat(CombatActor p,CombatActor target){target.Health.Invulnerable=false;target.Health.ApplyPacket(p,new DamageResult{mitigated=1000000});Need(!target.Alive,"Scripted fixture defeat failed");}
   static IEnumerator BountyHunt(CombatActor p,QuestJournal journal,ExperienceProgression xp,
    ManifestationPersistence save,QuilboarCombat[] creatures){
-   Phase("repeatable 20-Quillboar bounty, same-giver turn-in, and next-cycle persistence");
+   Phase("repeatable 15-Quillboar bounty, same-giver turn-in, and next-cycle persistence");
    const string questId="quest.briarback.repeat-bounty";
    var giver=Object.FindObjectsByType<QuestGiver>().Single(value=>value.Offers.Any(q=>q!=null&&q.stableId==questId));
    var quest=giver.Offers.Single(value=>value!=null&&value.stableId==questId);
@@ -73,10 +73,10 @@ namespace DiceFree.EditorTools
    Need(giver.Accept(p,quest),"Bounty acceptance failed");
    var count=journal.GetProgress(questId);Need(count.status==QuestStatus.Active&&count.count==0,"Bounty did not start at zero");
    Need(creatures.Length==20,"Bounty fixture did not cover all twenty Quillboars");
-   for(int i=0;i<creatures.Length;i++){
+   for(int i=0;i<quest.stages[0].count;i++){
     var actor=creatures[i].GetComponent<CombatActor>();actor.Health.Restore();
     Defeat(p,actor);count=journal.GetProgress(questId);
-    Need(count.count==i+1&&(i==creatures.Length-1?count.status==QuestStatus.ReadyToTurnIn:count.status==QuestStatus.Active),
+    Need(count.count==i+1&&(i==quest.stages[0].count-1?count.status==QuestStatus.ReadyToTurnIn:count.status==QuestStatus.Active),
      "Shared Briarback family counter failed at kill "+(i+1));
     actor.Health.Restore();
    }
@@ -84,7 +84,7 @@ namespace DiceFree.EditorTools
    Need(p.Motor.Teleport(approach),"Could not return to the same Trimery bounty giver");Physics.SyncTransforms();yield return Frames(2);
    long gold=p.GetComponent<GoldWallet>().Gold,experience=TotalXp(xp);
    Need(giver.TurnIn(p,quest),"Return-to-giver bounty turn-in failed");
-   Need(p.GetComponent<GoldWallet>().Gold==gold+50&&TotalXp(xp)==experience+400,
+   Need(p.GetComponent<GoldWallet>().Gold==gold+50&&TotalXp(xp)==experience+quest.rewardXp,
     "Bounty did not grant the disclosed XP and gold tuning placeholders");
    count=journal.GetProgress(questId);Need(count.status==QuestStatus.Available&&count.count==0,
     "Successful bounty turn-in did not reset its repeatable progress");

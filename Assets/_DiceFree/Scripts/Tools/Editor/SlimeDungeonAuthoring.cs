@@ -120,7 +120,7 @@ namespace DiceFree.EditorTools
         }
         static void Rewards()
         {
-            var orb=Item("Slime Orb",EquipmentSlot.OffHand,new AttributeValues{intelligence=3,spirit=3,vitality=2},0,3);orb.allowedClassIds=new[]{"class.magically-touched-novice"};orb.stats.basicAttackMaximumBonus=1;
+            var orb=Item("Slime Orb",EquipmentSlot.OffHand,new AttributeValues{intelligence=3,spirit=3,vitality=2},0,3);orb.allowedClassIds=new[]{"class.magically-touched-novice","class.mage"};orb.stats.basicAttackMaximumBonus=1;
             var shield=Item("Slime Shield",EquipmentSlot.OffHand,new AttributeValues{vitality=5,strength=2},5,3);shield.allowedClassIds=new[]{"class.physically-blessed-novice"};
             var gloves=Item("Slimy Farmer's Gloves",EquipmentSlot.Hands,new AttributeValues{agility=3},0,0);gloves.stats.attackSpeedPercent=5;
             var hat=Item("Slimy Tophat",EquipmentSlot.Head,new AttributeValues(1),5,5);hat.stats.regeneration=10;

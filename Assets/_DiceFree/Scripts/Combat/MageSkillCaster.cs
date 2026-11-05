@@ -4,7 +4,7 @@ using Kind=DiceFree.Progression.MageProgressionRules.Kind;
 namespace DiceFree.Combat
 {
  [DisallowMultipleComponent,RequireComponent(typeof(CombatActor),typeof(MageSkillProgression),typeof(ActorResourceController))]
- public sealed class MageSkillCaster:MonoBehaviour,IManifestationSessionState,IIncomingDamageRedirector
+ public sealed class MageSkillCaster:MonoBehaviour,IManifestationSessionState,IIncomingDamageRedirector,IChannelingAbility
  {
   [SerializeField] MageCombatTuning tuning;
   readonly Dictionary<Kind,float> readyAt=new();readonly List<string> elements=new();
@@ -14,6 +14,12 @@ namespace DiceFree.Combat
   readonly List<GameObject> sessionVfx=new();
   CombatActor actor;MageSkillProgression skills;ActorResourceController resources;
   float nextDecay,barrierUntil;int barrierRank,serial;ElementalResistanceAura aura;
+  float channelEnds,channelDuration;int channelVersion;Vector3 channelOrigin;GameObject channelVisual;
+  public bool IsChanneling{get;private set;}
+  public string ChannelLabel=>"Quicksand";
+  public float ChannelDuration=>channelDuration;
+  public float ChannelRemaining=>IsChanneling?Mathf.Max(0,channelEnds-Time.time):0;
+  public void CancelChannel(){channelVersion++;IsChanneling=false;if(channelVisual!=null)Destroy(channelVisual);channelVisual=null;}
   public MageCombatTuning Tuning=>tuning;
   public string Feedback{get;private set;}="";
   public int WeavingStacks=>elements.Count;
@@ -26,6 +32,8 @@ namespace DiceFree.Combat
   void OnEnable(){actor??=GetComponent<CombatActor>();if(actor.Health!=null)actor.Health.Died+=ResetForManifestationLoad;skills.Changed+=RefreshAura;RefreshAura();}
   void OnDisable(){if(actor?.Health!=null)actor.Health.Died-=ResetForManifestationLoad;if(skills!=null)skills.Changed-=RefreshAura;ResetForManifestationLoad();aura?.Clear();}
   void Update(){
+   if(IsChanneling&&(!actor.CanAct||!skills.ActiveForCurrentClass||Time.time>=channelEnds||actor.Motor.Travelling||GetComponent<BasicAttack>()?.Target!=null||(transform.position-channelOrigin).sqrMagnitude>.0025f))CancelChannel();
+   if(IsChanneling)foreach(var ability in GetComponents<MonoBehaviour>())if(ability!=this&&ability is IChannelingAbility channel&&channel.IsChanneling){CancelChannel();break;}
    for(int i=sessionVfx.Count-1;i>=0;i--)if(sessionVfx[i]==null)sessionVfx.RemoveAt(i);
    if(!skills.ActiveForCurrentClass){if(elements.Count>0||barrierUntil>0)ResetForManifestationLoad();return;}
    while(elements.Count>0&&Time.time>=nextDecay){elements.RemoveAt(0);nextDecay+=tuning.decayInterval;SyncWeaving();}
@@ -79,7 +87,7 @@ namespace DiceFree.Combat
    int rank=skills.Rank(Kind.Quicksand);Commit(Kind.Quicksand,rank);StartCoroutine(Quicksand(point,rank));return true;
   }
   void Commit(Kind kind,int rank){
-
+   CancelChannel();
    GetComponent<BasicAttack>()?.Cancel();actor.Motor.Stop();
    if(!resources.TrySpend(ResourceIds.Mana,MageProgressionRules.Cost(kind,rank)))throw new InvalidOperationException("Mage cast resource validation changed.");
    readyAt[kind]=Time.time+MageProgressionRules.Cooldown(kind);
@@ -123,13 +131,15 @@ namespace DiceFree.Combat
    }
   }
   IEnumerator Quicksand(Vector3 point,int rank){
-   sessionVfx.Add(MageSpellVfx.Ground(point,tuning.quicksandRadius,4+rank));
+   int version=channelVersion;channelDuration=4+rank;channelEnds=Time.time+channelDuration;channelOrigin=transform.position;IsChanneling=true;
+   channelVisual=MageSpellVfx.Ground(point,tuning.quicksandRadius,channelDuration);sessionVfx.Add(channelVisual);
    for(int i=0;i<4+rank;i++){
-    if(!actor.Alive||!skills.ActiveForCurrentClass)yield break;
+    if(!IsChanneling||version!=channelVersion||!actor.CanAct||!skills.ActiveForCurrentClass)yield break;
     foreach(var t in CombatActor.All.Where(t=>actor.IsHostileTo(t)&&Vector2.Distance(new Vector2(t.transform.position.x,t.transform.position.z),new Vector2(point.x,point.z))<=tuning.quicksandRadius+t.Radius).ToArray()){
      Hit(t,Kind.Quicksand,rank);if(t.Alive)t.Effects?.ApplyMovementSpeedDebuff(EffectId("quicksand"),MageProgressionRules.QuicksandSlowPercent(rank),1.2f);
     }yield return new WaitForSeconds(1);
    }
+   if(version==channelVersion)CancelChannel();
   }
   public float RedirectDamage(float incoming){
    if(!isActiveAndEnabled||!skills.ActiveForCurrentClass||Time.time>=barrierUntil||incoming<=0)return incoming;
@@ -138,6 +148,7 @@ namespace DiceFree.Combat
    return absorbed>0&&resources.TrySpend(ResourceIds.Mana,absorbed*efficiency)?incoming-absorbed:incoming;
   }
   public void ResetForManifestationLoad(){
+   CancelChannel();
    StopAllCoroutines();readyAt.Clear();elements.Clear();dotVersions.Clear();dotVisuals.Clear();barrierUntil=0;barrierRank=0;
    if(actor!=null)actor.Stats.RemoveBasicAttackDamagePercentContribution("mage.weaving");
    foreach(var entry in ownedEffects)if(entry.target!=null)entry.target.Remove(entry.id);ownedEffects.Clear();foreach(var v in sessionVfx)if(v!=null)Destroy(v);sessionVfx.Clear();Feedback="";

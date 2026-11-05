@@ -226,7 +226,7 @@ namespace DiceFree.EditorTools
                 quest.offer = "The Briarback shamans are gathering at four ritual sites. Start at the burning altar on the western trail, then seek Earth, Lightning and Ice in that order. Return to me in Trimery when all four are defeated.";
                 quest.activeDialogue = "Look for the altar and trail standards at each site. Your quest tracker points to the next shaman. I will be here in Trimery when the hunt is done.";
                 quest.locationHint = "Start at the Ember Oath Clearing on the western Briarback trail. Look for crimson standards and lit braziers.";
-                quest.rewardXp = 400;
+                quest.rewardXp = 2500;
                 quest.reward = reward;
                 quest.completeOnObjectives = false;
                 quest.repeatable = false;

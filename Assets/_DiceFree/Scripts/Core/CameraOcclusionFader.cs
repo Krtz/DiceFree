@@ -7,7 +7,7 @@ namespace DiceFree.Core
     [DisallowMultipleComponent]
     public sealed class CameraOcclusionFader : MonoBehaviour
     {
-        [SerializeField, Range(0.05f, 0.95f)] private float fadedAlpha = 0.58f;
+        [SerializeField, Range(0.05f, 0.95f)] private float fadedAlpha = 0.12f;
         [SerializeField, Min(0.05f)] private float castRadius = 0.42f;
         [SerializeField] private LayerMask obstructionMask = 1 << 9;
 
@@ -49,14 +49,14 @@ namespace DiceFree.Core
                 var ray = new Ray(focus, delta / distance);
                 foreach (var tree in TreeCameraOccluder.Active)
                 {
-                    if(tree==null||new Vector2(tree.transform.position.x-focus.x,
-                        tree.transform.position.z-focus.z).sqrMagnitude>64f)continue;
+                    if(tree==null)continue;
                     bool blocks = false;
                     foreach (var mesh in tree.Renderers)
                     {
                         if (mesh == null || !mesh.enabled) continue;
                         var bounds = mesh.bounds; bounds.Expand(castRadius * 2);
-                        if (bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
+                        var near=bounds.ClosestPoint(focus);
+                        if (new Vector2(near.x-focus.x,near.z-focus.z).sqrMagnitude<=64f&&bounds.IntersectRay(ray, out var along) && along < distance) { blocks = true; break; }
                     }
                     if (blocks) foreach (var mesh in tree.Renderers)
                         if(mesh!=null) visibleThisFrame.Add(mesh);
@@ -64,7 +64,6 @@ namespace DiceFree.Core
             }
 
             foreach (var renderer in visibleThisFrame)
-                if(!renderer.name.Contains("Bark")&&!renderer.name.Contains("Trunk"))
                     Fade(renderer);
 
             var restore = new List<Renderer>();
@@ -118,7 +117,8 @@ namespace DiceFree.Core
                 {
                     name = originals[i].name + " (camera fade)"
                 };
-                MakeTransparent(material, fadedAlpha);
+                MakeTransparent(material, Mathf.Min(fadedAlpha,.18f));
+                material.SetShaderPassEnabled("ShadowCaster",false);
                 copies[i] = material;
             }
 
@@ -142,9 +142,11 @@ namespace DiceFree.Core
 
             material.SetOverrideTag("RenderType", "Transparent");
             material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            // Preserve alpha-cutout for textured leaves while fading their opacity.
-            if (!material.HasProperty("_AlphaClip") || material.GetFloat("_AlphaClip") < .5f)
-                material.DisableKeyword("_ALPHATEST_ON");
+            // The source's cutout threshold would discard almost all faded leaves.
+            // Transparent blending still respects the texture alpha silhouette.
+            if(material.HasProperty("_AlphaClip"))material.SetFloat("_AlphaClip",0);
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
             material.renderQueue = (int)RenderQueue.Transparent;
 
             if (material.HasProperty("_BaseColor"))

@@ -65,6 +65,7 @@ namespace DiceFree.Characters
 
         public void ClearOrders()
         {
+            GetComponent<MageSkillCaster>()?.CancelChannel();
             if(!HasOrders)return;
             pending.Clear();
             current=null;
@@ -139,6 +140,7 @@ namespace DiceFree.Characters
             {
                 ClearOrders();
                 attack?.Cancel();
+                GetComponent<MageSkillCaster>()?.CancelChannel();
                 return;
             }
             if(actor==null || !actor.Alive || bindings==null || bindings.Suppressed)
@@ -148,6 +150,8 @@ namespace DiceFree.Characters
             }
             // Limit dispatch to one new order per frame. This prevents queued
             // spells from all firing in one Update and respects cooldown checks.
+            foreach(var ability in GetComponents<MonoBehaviour>())
+                if(ability is DiceFree.Foundation.IChannelingAbility channel&&channel.IsChanneling)return;
             if(current==null)
             {
                 current=pending.Dequeue();

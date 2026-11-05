@@ -5,11 +5,7 @@ namespace DiceFree.UI
     /// start, completion and interruption; the HUD never changes combat state.
     /// Future channelled spells implement this interface on their caster.
     /// </summary>
-    public interface IChannelingAbility
+    public interface IChannelingAbility : DiceFree.Foundation.IChannelingAbility
     {
-        bool IsChanneling { get; }
-        string ChannelLabel { get; }
-        float ChannelDuration { get; }
-        float ChannelRemaining { get; }
     }
 }
