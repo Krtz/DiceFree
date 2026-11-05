@@ -166,8 +166,7 @@ namespace DiceFree.Characters
                         return;
                     }
                     var queuedRay=worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-                    if(Physics.Raycast(queuedRay,out var queuedHit,1500f,
-                        (1<<8)|(1<<9),QueryTriggerInteraction.Ignore) &&
+                    if(ArboriumInterior.RaycastGround(queuedRay,out var queuedHit) &&
                        queuedHit.collider.gameObject.layer==8 &&
                        orders!=null && orders.SubmitMove(queuedHit.point,true))
                         Feedback="Shift queued move ("+orders.PendingOrders+")";
@@ -184,7 +183,7 @@ namespace DiceFree.Characters
 
                 if (mode != ControlMode.Classic) return;
                 var ray = worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (Physics.Raycast(ray, out var hit, 1500f, (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore)
+                if (ArboriumInterior.RaycastGround(ray, out var hit)
                     && hit.collider.gameObject.layer == 8 && motor.MoveTo(hit.point))
                 {
                     interactor?.Cancel();
@@ -259,7 +258,7 @@ namespace DiceFree.Characters
             point = default;
             if (worldCamera == null) return false;
             var ray = worldCamera.ScreenPointToRay(screenPoint);
-            if (!Physics.Raycast(ray, out var hit, 1500f, (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore) ||
+            if (!ArboriumInterior.RaycastGround(ray, out var hit) ||
                 hit.collider.gameObject.layer != 8) return false;
             point = hit.point;
             return true;

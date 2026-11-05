@@ -49,7 +49,7 @@ namespace DiceFree.Core
                 var ray = new Ray(focus, delta / distance);
                 foreach (var tree in TreeCameraOccluder.Active)
                 {
-                    if(tree==null)continue;
+                    if(tree==null||!tree.AllowsFade(focus))continue;
                     bool blocks = false;
                     foreach (var mesh in tree.Renderers)
                     {
