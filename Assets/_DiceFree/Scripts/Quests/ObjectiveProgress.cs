@@ -13,7 +13,7 @@ namespace DiceFree.Quests
         public static int Count(QuestProgress state, string id) => Array.Find(state.alternatives, p => p.objectiveId == id)?.count ?? 0;
         public static bool Apply(QuestObjective objective, QuestProgress state, Func<QuestLeaf, bool> matches)
         {
-            if (objective.kind != ObjectiveKind.Any)
+            if (objective.kind != ObjectiveKind.Any && objective.kind != ObjectiveKind.All)
             {
                 if (!matches(objective)) return false;
                 state.count = Math.Min(objective.count, state.count + 1); return true;
@@ -22,6 +22,7 @@ namespace DiceFree.Quests
             foreach (var leaf in objective.alternatives)
             {
                 if (!matches(leaf)) continue;
+                if(objective.kind==ObjectiveKind.All&&Count(state,leaf.objectiveId)>=leaf.count)continue;
                 var value = Array.Find(state.alternatives, p => p.objectiveId == leaf.objectiveId);
                 if (value == null)
                 {
@@ -30,25 +31,30 @@ namespace DiceFree.Quests
                 }
                 value.count = Math.Min(leaf.count, value.count + 1); changed = true;
             }
-            if (objective.alternatives.Any(a => Count(state, a.objectiveId) >= a.count)) state.count = objective.count;
+            if(objective.kind==ObjectiveKind.All)state.count=objective.alternatives.Sum(a=>Math.Min(a.count,Count(state,a.objectiveId)));
+            else if (objective.alternatives.Any(a => Count(state, a.objectiveId) >= a.count)) state.count = objective.count;
             return changed;
         }
         public static bool Valid(QuestObjective objective, QuestProgress state)
         {
             if (state.alternatives == null || state.alternatives.Any(a => a == null || string.IsNullOrEmpty(a.objectiveId) || a.count < 0) ||
                 state.alternatives.Select(a => a.objectiveId).Distinct().Count() != state.alternatives.Length) return false;
-            if (objective.kind != ObjectiveKind.Any) return state.alternatives.Length == 0;
+            if (objective.kind != ObjectiveKind.Any && objective.kind != ObjectiveKind.All) return state.alternatives.Length == 0;
+            if(objective.kind==ObjectiveKind.All&&(objective.alternatives.Length==0||objective.alternatives.Any(a=>a.count<1||string.IsNullOrEmpty(a.objectiveId))||
+                objective.alternatives.Select(a=>a.objectiveId).Distinct().Count()!=objective.alternatives.Length||objective.count!=objective.alternatives.Sum(a=>a.count)))return false;
             foreach (var value in state.alternatives)
             {
                 var leaf = Array.Find(objective.alternatives, a => a.objectiveId == value.objectiveId);
                 if (leaf == null || value.count > leaf.count) return false;
             }
+            if(objective.kind==ObjectiveKind.All)return state.count==objective.alternatives.Sum(a=>Count(state,a.objectiveId))&&
+                (state.status!=QuestStatus.Available||state.alternatives.Length==0);
             bool complete = objective.alternatives.Any(a => Count(state, a.objectiveId) >= a.count);
             return state.count == (complete ? objective.count : 0) &&
                 (state.status != QuestStatus.Available || state.alternatives.Length == 0);
         }
-        public static string Describe(QuestObjective objective, QuestProgress state) => objective.kind == ObjectiveKind.Any
-            ? string.Join("\nOR\n", objective.alternatives.Select(a => $"{a.instruction}: {Count(state, a.objectiveId)}/{a.count}"))
+        public static string Describe(QuestObjective objective, QuestProgress state) => objective.kind is ObjectiveKind.Any or ObjectiveKind.All
+            ? string.Join(objective.kind==ObjectiveKind.All?"\n":"\nOR\n", objective.alternatives.Select(a => $"{a.instruction}: {Count(state, a.objectiveId)}/{a.count}"))
             : $"{state.count}/{objective.count} · {objective.instruction}";
     }
 }

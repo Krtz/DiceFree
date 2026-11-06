@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace DiceFree.Quests
 {
-    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any, SolvePuzzle }
+    // Append values: existing serialized objective ordinals must remain stable.
+    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any, SolvePuzzle, All, Interact }
     [Serializable]
     public class QuestLeaf
     {

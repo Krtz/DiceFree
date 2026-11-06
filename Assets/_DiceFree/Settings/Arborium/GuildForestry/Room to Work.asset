@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Room to Work
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.room-to-work
+  title: Room to Work
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: Clear the five blue-marked deadfalls along Trimery's southern timberline. Work on each marked pile until it is cleared; moving, attacking or taking damage interrupts the work. Complete the sites in any order, speak to the Guild Foreman, then return here for your reward.
+  activeDialogue: Clear the five blue-marked deadfalls along Trimery's southern timberline. Work on each marked pile until it is cleared; moving, attacking or taking damage interrupts the work. Complete the sites in any order, speak to the Guild Foreman, then return here for your reward.
+  locationHint: Adventurers' Guild reception in Arborium; Trimery sawmill and marked forestry sites.
+  stages:
+  - kind: 5
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Complete every marked site, in any order
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 5
+    alternatives:
+    - kind: 6
+      objectiveId: work.trimery.deadfall.1
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: West palisade deadfall
+      contentId: work.trimery.deadfall.1
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 6
+      objectiveId: work.trimery.deadfall.2
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: Pine-edge deadfall
+      contentId: work.trimery.deadfall.2
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 6
+      objectiveId: work.trimery.deadfall.3
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: Southern worksite
+      contentId: work.trimery.deadfall.3
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 6
+      objectiveId: work.trimery.deadfall.4
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: Eastern timber pile
+      contentId: work.trimery.deadfall.4
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 6
+      objectiveId: work.trimery.deadfall.5
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: East palisade deadfall
+      contentId: work.trimery.deadfall.5
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+  - kind: 2
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Report the cleared timberline to the Guild Foreman
+    contentId: npc.trimery.guild-foreman
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: conversation.trimery.guild-foreman
+    count: 1
+    alternatives: []
+  completedQuestIds:
+  - quest.arborium.timber-commission
+  rewardXp: 2500
+  reward: {fileID: 11400000, guid: c0f0eb981e39d674183497bc477af2c9, type: 2}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

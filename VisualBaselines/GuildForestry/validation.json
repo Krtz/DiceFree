@@ -1,0 +1,54 @@
+{
+  "editor": {
+    "status": "passed",
+    "checks": 2015,
+    "walks": 9,
+    "walkedMeters": 259.223053,
+    "quests": 3,
+    "workSites": 5,
+    "surveySites": 3,
+    "permutations": 120,
+    "cancelAndDamage": true,
+    "partialResume": true,
+    "completedResume": true,
+    "allFloorsByStairs": true,
+    "unityErrors": []
+  },
+  "windows": {
+    "status": "passed",
+    "quests": 3,
+    "workSites": 5,
+    "surveySites": 3,
+    "checks": 1852,
+    "walks": 6,
+    "walkedMeters": 247.3869,
+    "interruptions": true,
+    "partialResume": true,
+    "completedResume": true,
+    "unityErrors": 0,
+    "quitRequested": true
+  },
+  "process": {
+    "pid": 31004,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261107-000052\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 8,
+    "bytes": 476593880,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "architecture": "passed",
+  "originalSceneNodes": 41733,
+  "missingOriginalSceneNodes": 0,
+  "originalWipFilesPreserved": 54,
+  "protectedSettingsPreserved": 7,
+  "navigationByteIdentical": true
+}

@@ -8,3 +8,7 @@ The user proposed the following while asking for immediate wolf-loot polish. The
 - **Explore beyond the city:** what lies west and north of Arborium remains open. The known northern gate and Quillboar arrival route already exist; new geography must extend that continuity, rather than overwrite it.
 
 The immediate implementation pass concerns the visible wolf dungeon equipment. It does not create a new boss, open either passage, invent the magical order's governance, or move advancement mentors.
+
+## Subsequent playable foundation
+
+The next continued-development pass adds the guild timber commission, five persistent clearing sites, and a three-part road survey described in `ARBORIUM_GUILD_FORESTRY.md`. It preserves the established Roadwarden cause and mystery from `TRIMERY_IMPLEMENTATION_V1.md`. Both passage unlocks and the wider world-hub proposal remain future work.

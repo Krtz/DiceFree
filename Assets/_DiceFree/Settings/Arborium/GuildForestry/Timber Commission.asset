@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Timber Commission
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.timber-commission
+  title: The Timber Commission
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: Trimery supplies Arborium with timber, but the ruined trade road has strained the crews. Speak to the Guild Foreman by Trimery's sawmill, then return to the Guild Steward in this reception. Reach Trimery by the existing Briarback detour.
+  activeDialogue: Trimery supplies Arborium with timber, but the ruined trade road has strained the crews. Speak to the Guild Foreman by Trimery's sawmill, then return to the Guild Steward in this reception. Reach Trimery by the existing Briarback detour.
+  locationHint: Adventurers' Guild reception in Arborium; Trimery sawmill and marked forestry sites.
+  stages:
+  - kind: 2
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Discuss the timber crews with Trimery's Guild Foreman
+    contentId: npc.trimery.guild-foreman
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: conversation.trimery.guild-foreman
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 1500
+  reward: {fileID: 11400000, guid: 305cf89803184f54cb68eabe405307f9, type: 2}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

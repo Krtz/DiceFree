@@ -8,6 +8,8 @@ Custom quest logic remains possible for genuinely unusual content, but ordinary 
 
 ## Quest objective building blocks
 
+The guild forestry milestone implements a shallow **All** group and semantic **Interact** completion alongside the existing objectives. All groups require every authored leaf and retain each leaf's count in the current save format; the top-level count equals the sum of the authored leaf counts. Existing Any groups retain their either/or completion behavior. `TimedInteractionTarget` provides interruptible work and inspection, with `QuestWorkGate` supplying quest-specific availability. See `ARBORIUM_GUILD_FORESTRY.md`.
+
 Initial reusable objective types should support at least:
 - **Kill** — defeat actors matching semantic IDs/tags;
 - **Interact** — use an NPC/object/world interaction;

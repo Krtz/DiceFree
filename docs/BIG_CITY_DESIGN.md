@@ -5,6 +5,8 @@
 
 **2026-11-06 tentative world-hub direction:** See `ARBORIUM_WORLD_CONNECTIONS.md` for the user's ideas about Arborium serving later worlds, a guild/forestry quest chain opening a southern World 2 passage, and an optional boss investigation restoring the direct Trimery shortcut. These are future proposals; geography, cause, boss and quest details remain open.
 
+**2026-11-07 continuity audit and guild commissions:** `TRIMERY_DESIGN_V03.md` and `TRIMERY_IMPLEMENTATION_V1.md` already establish that the **Ogre Roadwarden deliberately destroyed the western highway under orders**, remains there, and is approachable from Arborium's side only. The issuer and motive remain unknown; historical open-cause notes below must not override that later confirmation. `ARBORIUM_GUILD_FORESTRY.md` implements the first guild timber/clearing/survey chain while preserving both blocked passages and the later Roadwarden encounter.
+
 **Approved visual follow-up:** The arrival district and World Tree are further developed on `art/arborium-arrival-world-tree`. See `ARBORIUM_ARRIVAL_POLISH.md` for the original tree artwork, street dressing, ambient citizens/convoy, audio and gameplay-camera checks. The confirmed district order and later story/mentor decisions remain unchanged.
 
 ## Established continuity (previously approved; not new decisions)

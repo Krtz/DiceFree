@@ -65,8 +65,12 @@ namespace DiceFree.Quests
                     questId = definition.stableId, definitionVersion = definition.version
                 });
         }
-        private void OnEnable() { DefeatEvents.Reported += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; }
-        private void OnDisable() { UnbindDungeonEvents();DefeatEvents.Reported -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; }
+        private void OnEnable() { DefeatEvents.Reported += OnCredit; AreaEvents.Entered += OnArea; ConversationEvents.Completed += OnTalk; InteractionEvents.Completed+=OnInteraction; }
+        private void OnDisable() { UnbindDungeonEvents();DefeatEvents.Reported -= OnCredit; AreaEvents.Entered -= OnArea; ConversationEvents.Completed -= OnTalk; InteractionEvents.Completed-=OnInteraction; }
+        private void OnInteraction(InteractionCompleted fact)
+        {
+            if(fact.actor==owner)Advance(ObjectiveKind.Interact,fact.contentId,null,null);
+        }
         private QuestProgress Find(string id) => progress.Find(value => value.questId == id);
         public QuestProgress GetProgress(string id) => Find(id)?.Copy();
         // Detached stable-ID records form the future persistence seam; no scene references or UI names.
