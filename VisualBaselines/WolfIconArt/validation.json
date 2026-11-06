@@ -1,0 +1,109 @@
+{
+  "completed": "2026-11-06",
+  "provider": "image_gen built-in",
+  "import": {
+    "passed": true,
+    "items": [
+      {
+        "item": "Duskwake Wand",
+        "itemId": "item.wolf-survival.duskwake-wand",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.duskwake-wand.png",
+        "guid": "5157f910ed0a0b548983b02b98fa375d",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 1087503,
+        "solidPixels": 415517
+      },
+      {
+        "item": "Moonfang Signet",
+        "itemId": "item.wolf-survival.moonfang-signet",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.moonfang-signet.png",
+        "guid": "996b89de8ba58504f9a0f6c3626dfa4e",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 720487,
+        "solidPixels": 806554
+      },
+      {
+        "item": "Moonwell Staff",
+        "itemId": "item.wolf-survival.moonwell-staff",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.moonwell-staff.png",
+        "guid": "7b4dc1891d9aa8949bc8e7da1ff74ce8",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 1194306,
+        "solidPixels": 329736
+      },
+      {
+        "item": "Nightpelt Vest",
+        "itemId": "item.wolf-survival.nightpelt-vest",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.nightpelt-vest.png",
+        "guid": "d14b18e9b558166489aaa929e8cd57bd",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 514046,
+        "solidPixels": 1013823
+      },
+      {
+        "item": "Packhunter's Fang",
+        "itemId": "item.wolf-survival.packhunters-fang",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.packhunters-fang.png",
+        "guid": "217be16d52dda5c449bf74ed47442d52",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 1141871,
+        "solidPixels": 389035
+      },
+      {
+        "item": "Starfall Wand",
+        "itemId": "item.wolf-survival.starfall-wand",
+        "path": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.starfall-wand.png",
+        "guid": "b5277923ab6b8474cbb9eef75505dc30",
+        "width": 512,
+        "alpha": true,
+        "clearPixels": 1027054,
+        "solidPixels": 461391
+      }
+    ]
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261106-181443\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 8,
+    "bytes": 476405173,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "standalone": {
+    "status": "passed",
+    "icons": 6,
+    "importSize": 512,
+    "inventoryCaptured": true,
+    "rewardCardsCaptured": true,
+    "normalClaim": true,
+    "savedResume": true,
+    "unityErrors": 0,
+    "quitRequested": true
+  },
+  "process": {
+    "pid": 23972,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "manualVisualReview": {
+    "rewardPreviewPixels": 44,
+    "reviewed": true,
+    "inventoryPixels": 52
+  },
+  "preservation": {
+    "itemDefinitionsUnchanged": true,
+    "originalWipFiles": 54,
+    "changedWip": [],
+    "curatedArtworkSurvivesAuthoring": true,
+    "protectedSettingsUnchanged": true
+  }
+}

@@ -43,6 +43,18 @@ public static class WolfRewardsAuthoring
  }
  static void RenderIcons(ItemDefinition[] items)
  {
+  // Selected illustration art is authoritative. Keep procedural geometry as a fallback,
+  // but never overwrite the curated set during a later data-authoring pass.
+  if(File.Exists("docs/assets/wolf-dungeon-icon-art.json"))
+  {
+   foreach(var item in items)
+   {
+    string path=Art+"/"+item.stableId+".png";AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+    var icon=AssetDatabase.LoadAssetAtPath<Sprite>(path);if(icon==null)throw new InvalidOperationException("Selected wolf illustration missing: "+path);
+    if(item.icon!=icon){item.icon=icon;EditorUtility.SetDirty(item);}
+   }
+   return;
+  }
   bool asyncShaders=ShaderUtil.allowAsyncCompilation;ShaderUtil.allowAsyncCompilation=false;
   try{MakeMaterials();int index=0;foreach(var item in items){Icon(item,index++);EditorUtility.SetDirty(item);}}
   finally{foreach(var m in new[]{wood,bone,silver,gold,hide,blue,green,purple})if(m!=null)Object.DestroyImmediate(m);ShaderUtil.allowAsyncCompilation=asyncShaders;}

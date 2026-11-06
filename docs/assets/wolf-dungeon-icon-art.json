@@ -1,0 +1,56 @@
+{
+  "created": "2026-11-06",
+  "provider": "image_gen built-in",
+  "style": "Wolf dungeon: weathered silver, ivory fangs, grey fur and moonstones",
+  "transparentBackground": true,
+  "entries": [
+    {
+      "key": "ring",
+      "itemId": "item.wolf-survival.moonfang-signet",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.moonfang-signet.png",
+      "prompt": "Use case: stylized-concept. Asset: finished square fantasy RPG inventory icon for DiceFree's Moonfang Signet, a rare wolf-dungeon ring. Create ONE isolated equipment item, fully inside a square canvas with generous but compact 8% padding, genuinely transparent background, no frame, no text, no watermark. Hand-painted high-fantasy game icon with crisp chunky silhouette and rich sculpted material detail, readable at 48 pixels. Show a substantial weathered silver signet ring in three-quarter view: its entire face is an unmistakable snarling WOLF HEAD with tall pointed ears, long angular muzzle, pronounced ivory canine fangs, icy cyan moonstone eyes and a single small blue moonstone in the forehead. Intertwined claw engravings around the silver band, blackened crevices, bright cool silver edge highlights and restrained warm bronze binding details. Wolf head is large and dominant; the circular band is clearly visible beneath it, so it still reads as a wearable ring. Cool moonlit silver/ivory/navy palette with blue highlights, tactile stylized metal, polished professional RPG item art. This wolf-head ring establishes the cohesive visual style for a six-item wolf equipment set.",
+      "generatedFilename": "exec-7300a98f-611d-4e7e-a96f-dede0d2e47ff.png",
+      "sha256": "358b728c99bbe1ad5be2561437d3db0bbe0513332177e0af29b46f688b786efa"
+    },
+    {
+      "key": "chest",
+      "itemId": "item.wolf-survival.nightpelt-vest",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.nightpelt-vest.png",
+      "prompt": "Use case: stylized-concept. Create a finished square fantasy RPG inventory equipment icon for DiceFree. The attached silver wolf-head ring is STYLE REFERENCE ONLY: match its hand-painted sculptural fantasy game-art quality, substantial weathered silver, ivory fangs, blackened grooves, restrained bronze fastenings and bright moonstone highlights. Create the NEW requested item, not a ring. ONE isolated object, whole silhouette within square canvas, 8% padding, genuinely transparent background, no frame, text, lettering, watermark, extra objects or scenery. Bold readable 48-pixel inventory silhouette, deliberately generous/thick proportions, controlled lighting and crisp edge separation, elaborate details subordinate to the primary shape. Nightpelt Vest: sleeveless dark navy leather CHEST ARMOUR, front three-quarter view, recognizably wearable torso garment without a body inside. Dense shaggy silver-grey WOLF FUR mantle and collar, jagged fur silhouette, two big ivory WOLF FANGS as chest clasps, a large engraved silver WOLF HEAD medallion with blue moonstone eyes on the chest, leather lacing, claw-marked silver belt buckle. Fur, leather and metal must read as separate tactile materials. Broad strong shoulders, no arms, no helmet, no character, no long cloak. Blue moonstone and silver/ivory palette.",
+      "generatedFilename": "exec-bf877884-1886-46c4-a551-3ab59c629bbd.png",
+      "sha256": "cba927f0f86c1f03bf13d9173a03f188f6eabe084a069012e3528781ccc99a7c"
+    },
+    {
+      "key": "healer",
+      "itemId": "item.wolf-survival.moonwell-staff",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.moonwell-staff.png",
+      "prompt": "Use case: stylized-concept. Create a finished square fantasy RPG inventory equipment icon for DiceFree. The attached silver wolf-head ring is STYLE REFERENCE ONLY: match its hand-painted sculptural fantasy game-art quality, substantial weathered silver, ivory fangs, blackened grooves, restrained bronze fastenings and bright moonstone highlights. Create the NEW requested item, not a ring. ONE isolated object, whole silhouette within square canvas, 8% padding, genuinely transparent background, no frame, text, lettering, watermark, extra objects or scenery. Bold readable 48-pixel inventory silhouette, deliberately generous/thick proportions, controlled lighting and crisp edge separation, elaborate details subordinate to the primary shape. Moonwell Staff: a complete two-handed HEALER STAFF, diagonally rising from lower left to upper right within square. Substantial dark wood shaft with short silver-grey wolf-fur grip wraps and bone bindings. Its very large dominant head is a silver crescent embracing an unmistakable upward-howling carved WOLF HEAD with pointed ears and long muzzle; a luminous seafoam-green MOONSTONE sits between silver claw prongs below its throat. Two ivory fang charms hang from the head. Serene protective forest-healer feeling, green/teal accents, no skulls, no purple, no cross symbol. The staff head should take roughly one-third of the icon's length and be broad enough to read at inventory size.",
+      "generatedFilename": "exec-f26ba12c-33e9-4ea2-8c1d-42bcaa918993.png",
+      "sha256": "5abd2bfecc99a27ebc6e93d6f7f464838970c9c56a3722904dc1e6dfabcc168c"
+    },
+    {
+      "key": "mage",
+      "itemId": "item.wolf-survival.starfall-wand",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.starfall-wand.png",
+      "prompt": "Use case: stylized-concept. Create a finished square fantasy RPG inventory equipment icon for DiceFree. The attached silver wolf-head ring is STYLE REFERENCE ONLY: match its hand-painted sculptural fantasy game-art quality, substantial weathered silver, ivory fangs, blackened grooves, restrained bronze fastenings and bright moonstone highlights. Create the NEW requested item, not a ring. ONE isolated object, whole silhouette within square canvas, 8% padding, genuinely transparent background, no frame, text, lettering, watermark, extra objects or scenery. Bold readable 48-pixel inventory silhouette, deliberately generous/thick proportions, controlled lighting and crisp edge separation, elaborate details subordinate to the primary shape. Starfall Wand: a complete ONE-HANDED MAGE WAND, compact and thick, diagonally rising lower left to upper right, substantially shorter in proportion than a staff. Dark wood handle with grey WOLF FUR and silver bands. Its dominant head is an unmistakable carved silver snarling WOLF HEAD, angular pointed ears and long muzzle, framing a large faceted icy CYAN MOONSTONE between its jaws and claw-like silver prongs. A pair of obvious ivory wolf fangs form a hooked guard below the wolf head. Small luminous blue claw scratches and sparse blue spark accents stay close to the object. Strong blue/silver silhouette, no green healing gem, no skull.",
+      "generatedFilename": "exec-5d0b5da6-1689-4d3d-95f6-926ce7d81c74.png",
+      "sha256": "95299d9809d2e141cc840d01f2a1ed74c0cccdc5deeaa71a4f3ebdebcb0a2882"
+    },
+    {
+      "key": "thief",
+      "itemId": "item.wolf-survival.packhunters-fang",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.packhunters-fang.png",
+      "prompt": "Use case: stylized-concept. Create a finished square fantasy RPG inventory equipment icon for DiceFree. The attached silver wolf-head ring is STYLE REFERENCE ONLY: match its hand-painted sculptural fantasy game-art quality, substantial weathered silver, ivory fangs, blackened grooves, restrained bronze fastenings and bright moonstone highlights. Create the NEW requested item, not a ring. ONE isolated object, whole silhouette within square canvas, 8% padding, genuinely transparent background, no frame, text, lettering, watermark, extra objects or scenery. Bold readable 48-pixel inventory silhouette, deliberately generous/thick proportions, controlled lighting and crisp edge separation, elaborate details subordinate to the primary shape. Packhunter's Fang: ONE complete one-handed THIEF DAGGER, diagonally rising lower left to upper right. A broad curved silver blade shaped like an enormous WOLF CANINE with a sharp hooked tip, visible bevel, three dark claw grooves near its base. The crossguard is a sculpted silver WOLF HEAD with tall pointed ears and long snarling muzzle; two exaggerated ivory fangs curve outward to guard the hand. Black leather grip wrapped in short grey wolf fur, claw-ring silver pommel with a small blue moonstone. Wicked predatory hunter silhouette, physically plausible handle distinct from curved blade, no sword-length blade and no double weapons. Make the wolf-themed guard broad and legible.",
+      "generatedFilename": "exec-0f1fced3-172d-4f7d-9e27-a58729b1cc92.png",
+      "sha256": "4ff86b366def993a23776cbd1fab73ce1e7139a153ca05e7131af7649f70ceb2"
+    },
+    {
+      "key": "acolyte",
+      "itemId": "item.wolf-survival.duskwake-wand",
+      "asset": "Assets/_DiceFree/Art/ItemIcons/WolfRewards/item.wolf-survival.duskwake-wand.png",
+      "prompt": "Use case: stylized-concept. Create a finished square fantasy RPG inventory equipment icon for DiceFree. The attached silver wolf-head ring is STYLE REFERENCE ONLY: match its hand-painted sculptural fantasy game-art quality, substantial weathered silver, ivory fangs, blackened grooves, restrained bronze fastenings and bright moonstone highlights. Create the NEW requested item, not a ring. ONE isolated object, whole silhouette within square canvas, 8% padding, genuinely transparent background, no frame, text, lettering, watermark, extra objects or scenery. Bold readable 48-pixel inventory silhouette, deliberately generous/thick proportions, controlled lighting and crisp edge separation, elaborate details subordinate to the primary shape. Duskwake Wand: ONE complete one-handed ACOLYTE WAND, diagonally rising lower left to upper right, compact and substantial rather than a long staff. Head is an unmistakable aged ivory WOLF SKULL with pointed ear-like silver prongs, long canine muzzle, dark sockets and prominent wolf fangs. Three hooked silver WOLF CLAWS rise from the skull setting to clutch a large faceted VIOLET MOONSTONE, subtle violet glow inside the sockets. Dark charcoal wood handle with shaggy grey-black WOLF FUR grip, aged silver bindings and two hanging fang charms. Occult wolf-shaman feeling, strong bone/skull and violet silhouette distinct from the living silver wolf mage wand, no gore and no human skull.",
+      "generatedFilename": "exec-29944309-d0be-4084-b5c5-326ab0887013.png",
+      "sha256": "27d197b50c3c4b46d0a3c267ae8603b498f9701dd5df4fbb93352272a5f16f80"
+    }
+  ]
+}
