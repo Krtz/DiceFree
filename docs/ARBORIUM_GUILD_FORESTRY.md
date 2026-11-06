@@ -32,6 +32,14 @@ The original north → west → south Briarback detour, existing city services, 
 
 The original 41,733 scene nodes remain. Only the player component list/journal, two existing floor child lists and scene-root list gain new references; existing scene-node data is otherwise unchanged. Navigation remains byte-identical. The scene recovery is retained locally under `Settings/Recovery/Cornberg-before-guild-forestry-20261106.unity`.
 
-Final Windows build: `Builds/BriarbackMilestone-20261107-000052/DiceFree.exe`, eight scenes, 476,593,880 bytes, **zero errors and warnings**. The isolated standalone acceptance passed all three quests, five clearing sites, three surveys, interruption handling, partial and completed saved resume, exact rewards, and six actual walks totaling **247.4m**, including the refined fourth-floor map table. It observed zero Unity errors. Normal Quit exited PID 31004 with code 0. All 54 original WIP files and seven protected settings are preserved.
+Guild-chain Windows build: `Builds/BriarbackMilestone-20261107-000052/DiceFree.exe`, eight scenes, 476,593,880 bytes, **zero errors and warnings**. The isolated standalone acceptance passed all three quests, five clearing sites, three surveys, interruption handling, partial and completed saved resume, exact rewards, and six actual walks totaling **247.4m**, including the refined fourth-floor map table. It observed zero Unity errors. Normal Quit exited PID 31004 with code 0. All 54 original WIP files and seven protected settings are preserved.
 
 Combined results and curated standalone captures are in `VisualBaselines/GuildForestry`. Work is local on `feature/arborium-guild-forestry`; no push or merge is included.
+
+## Minimap guidance follow-up
+
+Active unfinished work and survey sites appear as outlined cyan diamonds on explored terrain. Hovering shows the site name. Markers follow both north-up and camera-up orientation, disappear after work is recorded, and omit other floors. Their positions use the safe interaction approach, so furniture does not incorrectly obscure a known survey point. Existing map navigation, attack-move, compass and zoom controls are retained.
+
+The final Editor acceptance passed **2,166 checks** with zero Unity errors, including 135 projection/map-click round trips across rotated views, zoom radii and map positions, active/completed markers and upstairs/downstairs visibility. It repeated the entire quest chain, partial/completed save flows and actual fourth-floor stair approach after the final table refinement.
+
+Final guided build: `Builds/BriarbackMilestone-20261107-001218/DiceFree.exe`, eight scenes, 476,595,316 bytes, **zero build errors and warnings**. The standalone acceptance passed the complete chain again with active/completed minimap-marker assertions, partial and completed saves, exact rewards and six walks totaling 247.4m. Zero Unity errors; normal Quit exited PID 27312 with code 0. The combined evidence points to this final build.

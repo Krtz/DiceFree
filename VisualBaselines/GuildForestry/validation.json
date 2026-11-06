@@ -1,9 +1,9 @@
 {
   "editor": {
     "status": "passed",
-    "checks": 2015,
+    "checks": 2166,
     "walks": 9,
-    "walkedMeters": 259.223053,
+    "walkedMeters": 254.969376,
     "quests": 3,
     "workSites": 5,
     "surveySites": 3,
@@ -19,9 +19,9 @@
     "quests": 3,
     "workSites": 5,
     "surveySites": 3,
-    "checks": 1852,
+    "checks": 1854,
     "walks": 6,
-    "walkedMeters": 247.3869,
+    "walkedMeters": 247.4115,
     "interruptions": true,
     "partialResume": true,
     "completedResume": true,
@@ -29,23 +29,26 @@
     "quitRequested": true
   },
   "process": {
-    "pid": 31004,
+    "pid": 27312,
     "exited": true,
     "exitCode": 0,
     "normalQuitExpected": true
   },
   "build": {
     "result": "Succeeded",
-    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261107-000052\\DiceFree.exe",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261107-001218\\DiceFree.exe",
     "errors": 0,
     "warnings": 0,
     "sceneCount": 8,
-    "bytes": 476593880,
+    "bytes": 476595316,
     "development": true,
     "localRuntimeAutomation": true,
     "includesExistingWorkspaceWip": true
   },
   "architecture": "passed",
+  "markerProjectionCases": 135,
+  "activeAndCompletedMinimapMarkers": true,
+  "floorVisibilityTested": true,
   "originalSceneNodes": 41733,
   "missingOriginalSceneNodes": 0,
   "originalWipFilesPreserved": 54,

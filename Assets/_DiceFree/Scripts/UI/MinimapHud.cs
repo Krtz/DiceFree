@@ -17,6 +17,7 @@ namespace DiceFree.UI
         private WorldFogOfWar fog;
         private IMinimapNavigator navigation;
         private SkillTargetingController targeting;
+        private InteractionRegistry interactions;
         private Texture2D fogMap;
         private Color32[] fogPixels;
         private float nextFogRefresh;
@@ -50,6 +51,7 @@ namespace DiceFree.UI
                 if(behaviour is IMinimapNavigator navigator)
                 {navigation=navigator;break;}
             targeting = GetComponent<SkillTargetingController>();
+            interactions=player!=null?player.GetComponent<InteractionRegistry>():null;
             CreateCamera();
             fog = FindAnyObjectByType<WorldFogOfWar>();
             fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
@@ -175,6 +177,46 @@ namespace DiceFree.UI
             return navigation.TryMoveFromMinimap(worldPoint,append);
         }
 
+        public static Vector2 MapPointForWorld(Vector3 center,Vector3 point,float radius,Rect rect,Vector3 up)
+        {
+            up=MapUpDirection(up);var right=Vector3.Cross(Vector3.up,up).normalized;var delta=point-center;
+            return new Vector2(rect.center.x+Vector3.Dot(delta,right)*rect.width/(radius*2),rect.center.y-Vector3.Dot(delta,up)*rect.height/(radius*2));
+        }
+
+        public bool TryProjectWorkMarker(TimedInteractionTarget target,Rect rect,out Vector2 point)
+        {
+            point=default;
+            if(player==null||target==null||!target.Available(player)||Mathf.Abs(target.ApproachPosition.y-player.transform.position.y)>2.5f||
+                (fog!=null&&!fog.IsExplored(target.ApproachPosition)))return false;
+            point=MapPointForWorld(player.transform.position,target.ApproachPosition,worldRadius,rect,MapUp);
+            return new Rect(rect.x+8,rect.y+8,rect.width-16,rect.height-16).Contains(point);
+        }
+
+        private void DrawWorkMarkers(Rect rect)
+        {
+            if(interactions==null&&player!=null)interactions=player.GetComponent<InteractionRegistry>();
+            if(interactions==null)return;
+            string hovered=null;Vector2 hover=default;
+            foreach(var item in interactions.Targets)
+            {
+                if(item is not TimedInteractionTarget target||!TryProjectWorkMarker(target,rect,out var at))continue;
+                var matrix=GUI.matrix;var color=GUI.color;
+                try
+                {
+                    GUIUtility.RotateAroundPivot(45,at);GUI.color=new Color(.02f,.07f,.10f,.95f);
+                    GUI.DrawTexture(new Rect(at.x-5,at.y-5,10,10),Texture2D.whiteTexture);
+                    GUI.color=new Color(.20f,.80f,1);GUI.DrawTexture(new Rect(at.x-3,at.y-3,6,6),Texture2D.whiteTexture);
+                }
+                finally{GUI.matrix=matrix;GUI.color=color;}
+                if((Event.current.mousePosition-at).sqrMagnitude<=81){hovered=target.DisplayName;hover=at;}
+            }
+            if(hovered!=null)
+            {
+                float width=Mathf.Min(rect.width,220);float x=Mathf.Clamp(hover.x-width*.5f,rect.x,rect.xMax-width);
+                GUI.Box(new Rect(x,Mathf.Clamp(hover.y-31,rect.y,rect.yMax-28),width,27),hovered);
+            }
+        }
+
         private void OnGUI()
         {
             if (HudPointerBlocker.ModalOpen) return;
@@ -196,6 +238,7 @@ namespace DiceFree.UI
                 GUI.Box(mapRect, "Map");
             if(fog!=null && fogMap!=null)
                 GUI.DrawTexture(mapRect,fogMap,ScaleMode.StretchToFill,true);
+            DrawWorkMarkers(mapRect);
 
             var corner=GameplayPreferences.Current.MinimapCompassCorner;
             var compassBounds=MinimapCompass.BoundsFor(mapRect,corner);

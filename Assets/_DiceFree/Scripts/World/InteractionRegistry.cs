@@ -10,6 +10,7 @@ namespace DiceFree.World
     {
         private readonly List<InteractionTarget> targets = new();
         private bool bootstrapped;
+        public IReadOnlyList<InteractionTarget> Targets => targets;
 
         public bool Contains(InteractionTarget target) => target != null && targets.Contains(target);
 
