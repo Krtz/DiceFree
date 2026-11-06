@@ -83,8 +83,7 @@ namespace DiceFree.Advancement
         }
         void LateUpdate() {
             foreach(var p in portraits.Values)if(!p.rendered&&Time.frameCount>=p.readyFrame) {
-                foreach(var offhand in p.root.GetComponentsInChildren<IndependentOffhandPose>())offhand.ApplyPortraitPose();
-                foreach(var grip in p.root.GetComponentsInChildren<GreatbladeTwoHandGrip>())grip.ApplyPose();
+                foreach(var b in p.root.GetComponentsInChildren<MonoBehaviour>())if(b is IPortraitBonePose pose)pose.ApplyPortraitPose();
                 foreach(var b in p.root.GetComponentsInChildren<MonoBehaviour>())if(b is not IPortraitBonePose&&b is IPortraitPoseable pose)pose.ApplyPortraitPose();
                 Frame(p);p.camera.Render();p.rendered=true;
                 foreach(var a in p.root.GetComponentsInChildren<Animator>())a.enabled=false;

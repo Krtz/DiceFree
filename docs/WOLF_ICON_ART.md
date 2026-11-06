@@ -19,6 +19,8 @@ Generated originals remain in the tool's default generated-images directory; all
 
 These are inventory and reward-preview illustrations. Existing in-world class weapon/body presentations are unchanged. Item IDs, definition files, stats, class eligibility, drop rates and reward logic remain unchanged.
 
+**Subsequent equipped-art pass:** `WOLF_EQUIPPED_ART.md` now adds original wolf-themed in-world models and saved outfit previews for all six drops. The illustration-only scope above describes this earlier icon pass.
+
 The source PNGs retain their generated resolution and actual alpha channel. Unity imports them as 512px uncompressed Sprites with alpha edge handling and no mipmaps. The existing texture GUIDs and item Sprite references are preserved. `WolfIconArtImport.cs` checks all six references, dimensions and alpha. The older procedural `WolfRewardsAuthoring.RenderIcons` path now respects the selected-art manifest, preventing a later authoring pass from overwriting the curated images. Calling `RebuildIcons` was verified to leave every selected PNG hash unchanged.
 
 ## Verification

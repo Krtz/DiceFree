@@ -1,0 +1,114 @@
+{
+  "editor": {
+    "status": "passed",
+    "checks": 210,
+    "forms": 5,
+    "items": 6,
+    "rows": [
+      {
+        "classId": "class.physically-blessed-novice",
+        "item": "item.wolf-survival.packhunters-fang",
+        "vertices": 2924,
+        "dominantHandError": 0.0,
+        "supportHandError": 0.0
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "item": "item.wolf-survival.duskwake-wand",
+        "vertices": 3164,
+        "dominantHandError": 0.0,
+        "supportHandError": 0.0
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "item": "item.wolf-survival.moonwell-staff",
+        "vertices": 4110,
+        "dominantHandError": 0.0,
+        "supportHandError": 1.08742133E-05
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "item": "item.wolf-survival.starfall-wand",
+        "vertices": 3500,
+        "dominantHandError": 0.0,
+        "supportHandError": 0.0
+      },
+      {
+        "classId": "class.mage",
+        "item": "item.wolf-survival.starfall-wand",
+        "vertices": 3500,
+        "dominantHandError": 0.0,
+        "supportHandError": 0.0
+      }
+    ],
+    "menuOutfit": true,
+    "savedResume": true,
+    "unityErrors": []
+  },
+  "motion": {
+    "status": "passed",
+    "rows": [
+      {
+        "classId": "class.physically-blessed-novice",
+        "item": "item.wolf-survival.packhunters-fang",
+        "walk": true,
+        "attack": true,
+        "samples": 12,
+        "maxDominantError": 0.0,
+        "maxSupportError": 0.0,
+        "rotationDegrees": 74.83421
+      },
+      {
+        "classId": "class.magically-touched-novice",
+        "item": "item.wolf-survival.moonwell-staff",
+        "walk": true,
+        "attack": true,
+        "samples": 12,
+        "maxDominantError": 0.0,
+        "maxSupportError": 0.0001277043,
+        "rotationDegrees": 0.0
+      },
+      {
+        "classId": "class.mage",
+        "item": "item.wolf-survival.starfall-wand",
+        "walk": true,
+        "attack": true,
+        "samples": 12,
+        "maxDominantError": 0.0,
+        "maxSupportError": 0.0,
+        "rotationDegrees": 47.8981934
+      }
+    ]
+  },
+  "windows": {
+    "status": "passed",
+    "models": 6,
+    "forms": 5,
+    "icons": 6,
+    "normalClaim": true,
+    "savedEquippedResume": true,
+    "unityErrors": 0,
+    "quitRequested": true
+  },
+  "process": {
+    "pid": 27324,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261106-195401\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 8,
+    "bytes": 476426989,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "architecture": "passed",
+  "originalWipFilesPreserved": 54,
+  "protectedSettingsPreserved": 7,
+  "itemDefinitionsUnchanged": 6
+}

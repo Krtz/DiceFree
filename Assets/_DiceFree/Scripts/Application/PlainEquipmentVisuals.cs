@@ -66,6 +66,8 @@ namespace DiceFree.Visuals
                 }
             }
             presentation.Configure(bindings.ToArray());
+            var wolves=GetComponent<WolfRewardEquipmentVisuals>()??gameObject.AddComponent<WolfRewardEquipmentVisuals>();
+            wolves.PrepareVisual(root,presentation,inventory);
             GetComponent<HudPortraitRenderer>()?.RequestRefresh();
         }
         private float HeadTop(Transform root,Animator animator)

@@ -27,6 +27,8 @@ Definitions live under `Resources/DiceFree/DungeonRewards/Wolf`. Inventory regis
 
 ## Presentation and provenance
 
+The subsequent equipped-art pass gives all six items original in-world models, HUD portrait rendering and saved-menu outfit previews. See `WOLF_EQUIPPED_ART.md` for the sculpted weapon/armour designs and verification. The normal reward rules and all item-definition bytes are preserved.
+
 Each item has a distinct wolf-themed illustration, selected with the built-in image-generation tool and imported as a 512px Sprite. The preceding procedural geometry icons are retained as a guarded authoring fallback; the selected art now has visible wolf heads/skulls, fangs, fur and moonstone settings. See `WOLF_ICON_ART.md` and `assets/wolf-dungeon-icon-art.json` for provenance, prompts and visual checks. The existing first-party city materials are reused in the shared treasure room: fitted stone, a blue runner, bronze trim, lit columns and storage props. The original room's ground collider, navigation and scene identities are preserved. Decorative geometry is on the existing nonblocking art layer.
 
 Reward previews show icons and names; hovering displays stats and class eligibility. The corresponding physical chests carry matching numbers. Claims remain owner-only world interactions. `WolfRewardsAuthoring.cs` authors the six definitions/pool/icons; `DungeonTreasuryAuthoring.cs` preserves a recovery of the original reward scene before furnishing it. The first icon render exposed an asynchronous shader warm-up issue; synchronous material creation and corrected front lighting produce the final icons.

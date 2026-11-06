@@ -1,0 +1,24 @@
+{
+  "authored": "2026-11-06",
+  "method": "Original native Unity mesh and surface-texture algorithms",
+  "externalProviders": [],
+  "reference": "Existing wolf dungeon inventory illustrations; see wolf-dungeon-icon-art.json",
+  "sources": [
+    {
+      "path": "Assets/_DiceFree/Scripts/Application/WolfRewardEquipmentVisuals.cs",
+      "sha256": "BDEF96F920B573A44E9591008797274F6258EBE94CAC4BF2F357BDE88714D263"
+    },
+    {
+      "path": "Assets/_DiceFree/Scripts/Application/WolfRewardWeaponPose.cs",
+      "sha256": "A031710A504F8CC0C5AF520D1B1DF0ECDD23AAEFDA547635740B59045DE3D176"
+    }
+  ],
+  "items": [
+    "moonfang-signet",
+    "nightpelt-vest",
+    "moonwell-staff",
+    "starfall-wand",
+    "packhunters-fang",
+    "duskwake-wand"
+  ]
+}

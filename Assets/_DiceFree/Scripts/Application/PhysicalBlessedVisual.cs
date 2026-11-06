@@ -74,7 +74,9 @@ namespace DiceFree.Visuals
                 foreach (var binding in equipment.Bindings)
                 {
                     // Procedural two-handed gear must bind to this rig via WolfGreatswordVisual.
-                    if (binding.slot != DiceFree.Items.EquipmentSlot.MainHand || binding.definition?.modelTestingItem == true || binding.definition?.stableId==WolfGreatswordVisual.ItemId || binding.visuals.Any(g => g != null && g.transform.IsChildOf(transform))) continue;
+                    if (binding.slot != DiceFree.Items.EquipmentSlot.MainHand || binding.definition?.modelTestingItem == true || binding.definition?.stableId==WolfGreatswordVisual.ItemId ||
+                        binding.definition?.stableId?.StartsWith(WolfRewardEquipmentVisuals.Prefix,StringComparison.Ordinal)==true ||
+                        binding.visuals.Any(g => g != null && g.transform.IsChildOf(transform))) continue;
                     var source = binding.visuals.FirstOrDefault(g => g != null);
                     var sourceAnimator = source != null ? source.GetComponentInParent<Animator>() : null;
                     if (sourceAnimator == null)
