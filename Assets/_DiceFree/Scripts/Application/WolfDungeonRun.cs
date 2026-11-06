@@ -15,11 +15,12 @@ using DiceFree.World;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using DiceFree.Items;
 
 namespace DiceFree.Dungeons
 {
-    public enum WolfRunPhase { Loading, Staging, Warning, Fighting, Intermission, Victory, Leaving }
-    public sealed class WolfDungeonRun : MonoBehaviour
+    public enum WolfRunPhase { Loading, Staging, Warning, Fighting, Intermission, Victory, Leaving, LoadingRewards, Rewards }
+    public sealed class WolfDungeonRun : MonoBehaviour, IDungeonRewardRun
     {
         public static WolfDungeonRun Current {get;private set;}
         public static readonly Vector3 Origin=new(40000,0,40000);
@@ -64,7 +65,9 @@ namespace DiceFree.Dungeons
             WolfRunPhase.Warning=>$"Wave {Wave} / 10 • {Composition.Points} points • Incoming in {Mathf.CeilToInt(SecondsRemaining)}s",
             WolfRunPhase.Fighting=>$"Wave {Wave} / 10 • {Composition.Points} points • Wolves remaining: {Remaining}",
             WolfRunPhase.Intermission=>$"Wave {Wave} cleared • Next wave: {Wave+3} points • {Mathf.CeilToInt(SecondsRemaining)}s",
-            WolfRunPhase.Victory=>$"All 10 waves survived! • Returning in {Mathf.CeilToInt(SecondsRemaining)}s",
+            WolfRunPhase.Victory=>$"All 10 waves survived! • Treasure room in {Mathf.CeilToInt(SecondsRemaining)}s",
+            WolfRunPhase.LoadingRewards=>"Travelling to your treasure choices…",
+            WolfRunPhase.Rewards=>"Choose one reward chest",
             _=>"Leaving the clearing…"
         };
         void OnEnable()=>HudPointerBlocker.OverlayCovers+=CoversPointer;
@@ -73,7 +76,7 @@ namespace DiceFree.Dungeons
         {
             if(actor==null||!actor.Alive||actor.GetComponent<DiceFree.Characters.TraversalInput>()==null)return "Only a living player can enter.";
             if(data==null||data.definition==null)return "This entrance is not ready.";
-            if(LoadingScreen.Busy||Phase==WolfRunPhase.Leaving)return "Please wait for the current journey.";
+            if(LoadingScreen.Busy||Phase==WolfRunPhase.Leaving||Phase==WolfRunPhase.LoadingRewards||Phase==WolfRunPhase.Rewards)return "Please wait for the current journey.";
             var state=actor.GetComponent<RunLoadoutLock>();if(state?.Owner!=null&&state.Owner!=this)return "Resolve your current dungeon run first.";
             if(Participants.Contains(actor))return "You have already joined this run.";
             var party=actor.GetComponent<LocalPartyMember>()?.partyId;
@@ -83,7 +86,7 @@ namespace DiceFree.Dungeons
             var map=actor.GetComponent<MinimapHud>();mapNames[actor]=map?.MapName;
             Action died=()=>{deaths.Add(actor);hub.Publish(new DungeonPlayerDiedEvent(data.definition.stableId));};deathHandlers.Add(actor,died);actor.Health.Died+=died;
             state=state??actor.gameObject.AddComponent<RunLoadoutLock>();state.Owner=this;state.InsideDungeon=true;state.Locked=false;
-            state.DeathReturnHandler=()=>{withdrawn.Add(actor);ReturnPlayer(actor,false);return true;};
+            state.DeathReturnHandler=()=>{withdrawn.Add(actor);if(Phase==WolfRunPhase.Rewards)FindAnyObjectByType<DungeonRewardRoom>()?.DiscardForSessionExit(actor);else ReturnPlayer(actor,false);return true;};
             if(tuning==null)
             {
                 Current=this;Initiator=actor;tuning=data;entrance=returnPoint;lease=claim;
@@ -125,7 +128,7 @@ namespace DiceFree.Dungeons
         }
         void Update()
         {
-            if(tuning==null||Phase==WolfRunPhase.Loading||Phase==WolfRunPhase.Leaving)return;
+            if(tuning==null||Phase==WolfRunPhase.Loading||Phase==WolfRunPhase.Leaving||Phase==WolfRunPhase.LoadingRewards||Phase==WolfRunPhase.Rewards)return;
             registry.TouchDungeon(tuning.definition.stableId,lease.leaseToken,DateTime.UtcNow,out _);
             if(!Living.Any()&&Phase!=WolfRunPhase.Victory){Publish(new DungeonWipedEvent(tuning.definition.stableId));StartCoroutine(ExitAll(false));return;}
             if(!Living.Contains(Initiator)&&StagingReady)Initiator=Living.First();
@@ -134,7 +137,7 @@ namespace DiceFree.Dungeons
             else if(Phase==WolfRunPhase.Warning&&Time.time>=deadline)SpawnWave();
             else if(Fighting&&Remaining==0)ClearWave();
             else if(Phase==WolfRunPhase.Intermission&&Time.time>=deadline)NextWave();
-            else if(Phase==WolfRunPhase.Victory&&Time.time>=deadline)StartCoroutine(ExitAll(true));
+            else if(Phase==WolfRunPhase.Victory&&Time.time>=deadline)ClaimRewards(Initiator);
         }
         void NextWave()
         {
@@ -176,7 +179,47 @@ namespace DiceFree.Dungeons
             Publish(new DungeonCompletedEvent(tuning.definition.stableId,"ten-waves",Participants.Count,Time.time-started,deaths.Count==0));
         }
         void Publish<T>(T e) where T:struct,ISemanticGameEvent{foreach(var hub in hubs.Values)hub.Publish(e);}
-        public void Abandon(){if(Phase!=WolfRunPhase.Leaving)StartCoroutine(ExitAll(Phase==WolfRunPhase.Victory||StagingReady));}
+        public void Abandon()
+        {
+            if(Phase==WolfRunPhase.Victory){ClaimRewards(Initiator);return;}
+            if(Phase==WolfRunPhase.Rewards||Phase==WolfRunPhase.LoadingRewards)return;
+            if(Phase!=WolfRunPhase.Leaving)StartCoroutine(ExitAll(StagingReady));
+        }
+        public bool ClaimRewards(CombatActor requester)
+        {
+            if(Phase!=WolfRunPhase.Victory||requester!=Initiator||requester==null)return false;
+            if(tuning.rewards==null){Debug.LogError("Wolf Survival reward pool is missing.");StartCoroutine(ExitAll(true));return false;}
+            Phase=WolfRunPhase.LoadingRewards;
+            if(SceneManager.GetSceneByName("DungeonRewardRoom").isLoaded)RewardsLoaded(SceneManager.GetSceneByName("DungeonRewardRoom"));
+            else if(!LoadingScreen.TryLoadAdditive("DungeonRewardRoom","Opening your wolf dungeon rewards",RewardsLoaded,LoadFailed))LoadFailed(new InvalidOperationException("Reward travel is busy."));
+            return true;
+        }
+        void RewardsLoaded(Scene rewardScene)
+        {
+            if(this==null||Phase!=WolfRunPhase.LoadingRewards)return;
+            var room=rewardScene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<DungeonRewardRoom>()).Single();
+            foreach(var a in Participants.Where(a=>a!=null&&!withdrawn.Contains(a)).ToArray())
+            {
+                if(!a.Alive){ReturnPlayer(a,false);withdrawn.Add(a);continue;}
+                a.GetComponent<RunLoadoutLock>().Locked=false;
+                Relocate(a,SlimeDungeonRun.RewardOrigin+new Vector3(Participants.IndexOf(a)*2,0,0),false);
+                room.Offer(a,tuning.rewards,this,tuning.bonusXp,tuning.bonusGold);
+            }
+            Phase=WolfRunPhase.Rewards;
+            registry.ReleaseDungeon(tuning.definition.stableId,lease.leaseToken,"world.face.1",out _);
+            var arena=SceneManager.GetSceneByName(tuning.definition.sceneId);if(arena.isLoaded)SceneManager.UnloadSceneAsync(arena);
+            if(!room.HasChoice(Initiator)&&!Participants.Any(room.HasChoice))Finish();
+        }
+        public void ObserveReward(CombatActor actor,ItemDefinition item)=>hubs[actor].Publish(new DropObservedEvent(tuning.definition.stableId,item.stableId,true));
+        public void Drop(CombatActor actor,ItemDefinition item)
+        {var inv=actor.GetComponent<CarriedInventory>();inv.Configure(inv.Definitions.Concat(new[]{item}).Distinct().ToArray());inv.Grant(item.stableId);}
+        public void Finish()
+        {
+            Phase=WolfRunPhase.Leaving;
+            var room=FindAnyObjectByType<DungeonRewardRoom>();var scene=SceneManager.GetSceneByName("DungeonRewardRoom");
+            if(scene.isLoaded&&(room==null||room.Pending==0))SceneManager.UnloadSceneAsync(scene);
+            if(Current==this)Current=null;Destroy(gameObject);
+        }
         void ClearWolves(){foreach(var w in wolves)if(w!=null)Destroy(w.gameObject);wolves.Clear();foreach(var w in warnings)if(w!=null)Destroy(w);warnings.Clear();}
         IEnumerator ExitAll(bool atEntrance)
         {
@@ -186,7 +229,7 @@ namespace DiceFree.Dungeons
             var scene=SceneManager.GetSceneByName(tuning.definition.sceneId);if(scene.isLoaded)yield return SceneManager.UnloadSceneAsync(scene);
             if(Current==this)Current=null;Destroy(gameObject);
         }
-        void ReturnPlayer(CombatActor a,bool atEntrance)
+        public void ReturnPlayer(CombatActor a,bool atEntrance)
         {
             a.GetComponent<QuestJournal>()?.UnbindDungeonEvents(hubs[a]);if(deathHandlers.TryGetValue(a,out var handler))a.Health.Died-=handler;
             ClearLock(a);
@@ -199,10 +242,12 @@ namespace DiceFree.Dungeons
             a.GetComponent<BasicAttack>()?.Cancel();a.GetComponent<TargetSelection>()?.Select(null);a.GetComponent<Interactor>()?.Cancel();
             if(!a.Motor.TeleportAcrossMaps(point))throw new InvalidOperationException("Wolf Survival travel failed at "+point);
             ConfigureCamera(a,inside);a.GetComponent<InteractionRegistry>()?.RegisterExistingSceneTargets();
+            if(point.x>29000&&point.x<31000){FindAnyObjectByType<WorldDayNightCycle>()?.SetInterior(true);FindAnyObjectByType<ExplorationCamera>()?.ConfigureMapBounds(new Rect(29988,29988,24,24));FindAnyObjectByType<ExplorationCamera>()?.RecenterForTravel(a.transform);var map=a.GetComponent<MinimapHud>();if(map!=null)map.MapName="Dungeon Treasury";}
         }
         static void ConfigureCamera(CombatActor a,bool inside)
         {
             var camera=FindAnyObjectByType<ExplorationCamera>();if(camera==null)return;
+            if(!inside)FindAnyObjectByType<WorldDayNightCycle>()?.SetInterior(false);
             camera.ConfigureMapBounds(inside?new Rect(39965,39965,70,70):OverworldMapBounds.ForScene(a.gameObject.scene,new Rect(-56,-44,181,116)));camera.RecenterForTravel(a.transform);
         }
         void ClearLock(CombatActor a){var state=a.GetComponent<RunLoadoutLock>();if(state==null||state.Owner!=this)return;state.Locked=false;state.InsideDungeon=false;state.Owner=null;state.DeathReturnHandler=null;}
@@ -216,11 +261,11 @@ namespace DiceFree.Dungeons
             if(tuning!=null)registry.ReleaseDungeon(tuning.definition.stableId,lease.leaseToken,"world.face.1",out _);
             foreach(var a in Participants)if(a!=null){if(deathHandlers.TryGetValue(a,out var h))a.Health.Died-=h;if(hubs.TryGetValue(a,out var hub))a.GetComponent<QuestJournal>()?.UnbindDungeonEvents(hub);ClearLock(a);}
         }
-        public static bool CoversPointer(Vector2 p)=>Current!=null&&Current.tuning!=null&&Current.Phase!=WolfRunPhase.Leaving&&(new Rect(15,80,550,100).Contains(new Vector2(p.x,Screen.height-p.y))||((Current.Announcement!=null||Current.Phase==WolfRunPhase.Victory)&&new Rect(Screen.width*.5f-220,200,440,100).Contains(new Vector2(p.x,Screen.height-p.y))));
+        public static bool CoversPointer(Vector2 p)=>Current!=null&&Current.tuning!=null&&Current.Phase!=WolfRunPhase.Leaving&&Current.Phase!=WolfRunPhase.Rewards&&Current.Phase!=WolfRunPhase.LoadingRewards&&(new Rect(15,80,550,100).Contains(new Vector2(p.x,Screen.height-p.y))||((Current.Announcement!=null||Current.Phase==WolfRunPhase.Victory)&&new Rect(Screen.width*.5f-220,200,440,100).Contains(new Vector2(p.x,Screen.height-p.y))));
         GUIStyle heading,body;
         void OnGUI()
         {
-            if(tuning==null||LoadingScreen.Busy||Phase==WolfRunPhase.Leaving||HudPointerBlocker.ModalOpen)return;
+            if(tuning==null||LoadingScreen.Busy||Phase==WolfRunPhase.Leaving||Phase==WolfRunPhase.LoadingRewards||Phase==WolfRunPhase.Rewards||HudPointerBlocker.ModalOpen)return;
             if(heading==null){heading=new GUIStyle(GUI.skin.label){fontSize=17,fontStyle=FontStyle.Bold};heading.normal.textColor=new Color(.72f,.87f,1);body=new GUIStyle(GUI.skin.label){fontSize=13};body.normal.textColor=new Color(.9f,.93f,.96f);}
             var old=GUI.color;GUI.color=new Color(.08f,.13f,.2f,.94f);GUI.DrawTexture(new Rect(15,80,550,100),Texture2D.whiteTexture);GUI.color=old;
             GUI.Label(new Rect(27,85,520,23),"WOLF SURVIVAL  ·  MOONLIT CLEARING",heading);
@@ -233,7 +278,7 @@ namespace DiceFree.Dungeons
                 if(Phase==WolfRunPhase.Victory){int seconds=Mathf.CeilToInt(RunSeconds);GUI.Label(new Rect(Screen.width*.5f-205,241,410,34),$"10 waves  ·  {WolvesDefeated} wolves  ·  {seconds/60}:{seconds%60:00}\nKill XP earned throughout the run",new GUIStyle(body){alignment=TextAnchor.MiddleCenter});}
             }
             GUI.color=new Color(.2f,.29f,.38f);GUI.DrawTexture(new Rect(27,135,520,4),Texture2D.whiteTexture);GUI.color=new Color(.4f,.75f,.9f);GUI.DrawTexture(new Rect(27,135,520*WavesCleared/10f,4),Texture2D.whiteTexture);GUI.color=old;
-            if(Phase!=WolfRunPhase.Loading&&GUI.Button(new Rect(27,148,150,23),Phase==WolfRunPhase.Victory?"Return to entrance":"Leave dungeon"))Abandon();
+            if(Phase!=WolfRunPhase.Loading&&GUI.Button(new Rect(27,148,150,23),Phase==WolfRunPhase.Victory?"Claim rewards":"Leave dungeon"))Abandon();
             if(StagingReady){if(GUI.Button(new Rect(185,148,125,23),"Start waves"))StartNow(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());GUI.Label(new Rect(320,149,230,23),"Weak 1  ·  Strong 2  ·  Alpha 3",body);}
             else
             {

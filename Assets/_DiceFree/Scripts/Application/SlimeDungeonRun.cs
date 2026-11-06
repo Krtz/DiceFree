@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 namespace DiceFree.Dungeons
 {
-    public sealed class SlimeDungeonRun : MonoBehaviour
+    public sealed class SlimeDungeonRun : MonoBehaviour, IDungeonRewardRun
     {
         public static SlimeDungeonRun Current {get;private set;}
         void OnEnable()=>DiceFree.UI.HudPointerBlocker.OverlayCovers+=CoversPointer;

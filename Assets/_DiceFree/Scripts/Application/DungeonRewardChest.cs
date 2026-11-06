@@ -1,6 +1,7 @@
 using DiceFree.Combat;
 using DiceFree.Characters;
 using DiceFree.World;
+using DiceFree.Items;
 using UnityEngine;
 
 namespace DiceFree.Dungeons
@@ -11,10 +12,14 @@ namespace DiceFree.Dungeons
         private DungeonRewardRoom room;
         private CombatActor owner;
         private int choiceIndex;
+        private int number;
+        public ItemDefinition OfferedItem { get; private set; }
+        public int ChoiceIndex=>choiceIndex;
 
-        public void Configure(DungeonRewardRoom rewardRoom, CombatActor actor, int option, string label)
+        public void Configure(DungeonRewardRoom rewardRoom, CombatActor actor, int option, string label,int chestNumber=1,ItemDefinition item=null)
         {
             room = rewardRoom; owner = actor; choiceIndex = option;
+            number=chestNumber;OfferedItem=item;
             ConfigureName(label);
         }
         public override bool Available(CombatActor actor) =>
@@ -32,9 +37,8 @@ namespace DiceFree.Dungeons
             if (local != null && local.GetComponent<CombatActor>() != owner) return;
             var world = transform.position + Vector3.up * 1.25f;
             var point = Camera.main.WorldToScreenPoint(world);
-            if (point.z <= 0 || point.z > 35) return;
-            GUI.Box(new Rect(point.x - 107, Screen.height - point.y, 214, 46),
-                DisplayName + "\nRight-click / interact to claim");
+            if (point.z <= 0 || point.z > 150) return;
+            GUI.Box(new Rect(point.x - 18, Screen.height - point.y, 36, 26),number.ToString());
         }
     }
 }

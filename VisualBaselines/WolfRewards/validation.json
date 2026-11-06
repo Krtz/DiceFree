@@ -1,0 +1,69 @@
+{
+  "completed": "2026-11-06",
+  "branch": "feature/wolf-dungeon-rewards",
+  "build": {
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Options\\Builds\\BriarbackMilestone-20261106-172739\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 0,
+    "sceneCount": 8,
+    "bytes": 474771397,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+  },
+  "editor": {
+    "status": "passed",
+    "checks": 21694,
+    "items": 6,
+    "rolls": 20000,
+    "rare": 992,
+    "two": 4816,
+    "privateChoices": true,
+    "itemAndBonusExclusive": true,
+    "reentrantClaimRejected": true,
+    "savedItemResolves": true,
+    "unclaimedMenuCleanup": true,
+    "slimeRewardRegression": true,
+    "independentRuns": true,
+    "unityErrors": 0
+  },
+  "standalone": {
+    "status": "passed",
+    "items": 6,
+    "waveRuns": 3,
+    "wavesPerRun": 10,
+    "naturalWolfBite": true,
+    "classEligibility": true,
+    "privateClaims": true,
+    "exclusiveItemOrBonus": true,
+    "reentrantRejected": true,
+    "savedItemResolves": true,
+    "unclaimedMenuCleanup": true,
+    "reentry": true,
+    "slimeRewardRegression": true,
+    "unityErrors": 0,
+    "quitRequested": true
+  },
+  "process": {
+    "pid": 24604,
+    "exited": true,
+    "exitCode": 0,
+    "normalQuitExpected": true
+  },
+  "preservation": {
+    "originalRewardSceneIds": 23,
+    "missingIds": [],
+    "originalWipCount": 54,
+    "changedOriginalWip": [],
+    "recovery": "Assets/_Recovery/0 (1).unity preserved, verified copy in Logs",
+    "cornbergSceneUnchanged": true,
+    "changedProtectedSettings": []
+  },
+  "architecture": {
+    "managedReferences": true,
+    "assemblies": 11,
+    "passed": true
+  },
+  "goldOverflowAndXpReentryVerified": true
+}

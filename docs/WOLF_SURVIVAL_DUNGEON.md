@@ -1,10 +1,10 @@
 # Wolf Survival — Moonlit Clearing
 
-## Next reward pass — user request, deferred while completing agenda items 3 and 4
+## Completion rewards — six requested drops
 
-Use normal dungeon completion-drop rules, through private reward choices rather than new per-wolf loot: the existing pool has a 5% rare override when defined; otherwise 75% one normal offer / 25% two distinct normal offers, with a private XP/gold alternative. Claiming one choice resolves the other offers. Adapt the existing reward-room flow for Wolf Survival in a later pass; no completion loot or bonus payout is added by the visual/interior work.
+Wolf Survival now uses the shared dungeon treasure room after its ten-wave clear. The existing pool rolls a 5% rare override; otherwise 75% one normal offer / 25% two distinct normal offers. Each player chooses one offered item or the private XP/gold alternative. Claiming one chest resolves the other offers and returns that player to the entrance. Individual wolves retain their ordinary kill XP and have no new per-wolf item drops.
 
-Requested loot entries: ring, chest drop (confirm slot when authoring), healer weapon, thief item (slot unspecified), mage weapon, thief weapon, and acolyte weapon. Keep the healer/acolyte weapons and thief item/weapon separate. Names, stats, rarities and further entries remain to be designed.
+The user clarified on 2026-11-06 that “thief drop” was an accidental duplicate of thief weapon and that chest means chest armour. The six entries are Moonfang Signet (rare ring), Nightpelt Vest (chest armour), Moonwell Staff (healer weapon), Starfall Wand (mage weapon), Packhunter's Fang (thief weapon) and Duskwake Wand (acolyte weapon). No extra thief armour item is included. See `WOLF_DUNGEON_REWARDS.md` for eligibility, first-playtest stats, presentation and validation.
 
 User-approved on 2026-11-05: ten survival waves; weak wolves cost 1 point, strong wolves 2, alphas 3; the first wave costs 3 points and the tenth is exactly four alphas (12 points). The user selected a moonlit forest clearing in Ironpine.
 
@@ -12,9 +12,9 @@ User-approved on 2026-11-05: ten survival waves; weak wolves cost 1 point, stron
 
 The user clarified that the Fight Caves comparison refers to **wave survival**, and explicitly rejected a multi-hour grind. The intended experience is a compact ten-wave wolf challenge in the moonlit clearing. This supersedes the earlier endurance/attrition interpretation. Normal regeneration, consumables and class cooldown rules remain in place.
 
-The 3–12 point budgets, both first-wave choices and four-alpha finale are unchanged. Preparation is now 30 seconds with immediate Start waves, between-wave breaks are four seconds with an initiator-only Next wave button, and victory returns after five seconds or immediately on request. Only a fully defeated pack can advance.
+The 3–12 point budgets, both first-wave choices and four-alpha finale are unchanged. Preparation is now 30 seconds with immediate Start waves, between-wave breaks are four seconds with an initiator-only Next wave button, and victory opens the treasure room after five seconds or immediately via Claim rewards. Only a fully defeated pack can advance.
 
-Two cover clusters provide real collision, blocked sight and navigable routes around them. Weak wolves press directly; strong wolves make one brief side approach as they close, then commit to attacking instead of circling indefinitely; alphas retain their existing pounce/howl mechanics. The HUD displays the living pack composition. Wolf stats and rewards have not been retuned in this pass, and no completion item has been invented.
+Two cover clusters provide real collision, blocked sight and navigable routes around them. Weak wolves press directly; strong wolves make one brief side approach as they close, then commit to attacking instead of circling indefinitely; alphas retain their existing pounce/howl mechanics. The HUD displays the living pack composition. Wolf combat stats remain unchanged. Completion items and their separate reward choice are described above.
 
 | Wave | Points |
 | --- | ---: |
@@ -38,7 +38,7 @@ Two cover clusters provide real collision, blocked sight and navigable routes ar
 - Thirty-second preparation with an invulnerable, zero-XP practice target and a **Start waves** button. Existing equipment/class preparation remains available during staging; the run locks the loadout when combat begins.
 - Two-second warnings mark the occupied pack-entry trails. A wave clears only after its final wolf dies; a four-second break precedes the next wave. The HUD shows wave, point budget, living wolf count and overall progress.
 - Existing level-15 Grey, level-18 Dark and level-20 Alpha wolf combat/stats/animations are reused as weak/strong/alpha, with arena-wide pursuit and the compact-pass tactics above. Dungeon wolves have separate content IDs, no respawns and no overworld item-drop component. Original overworld actors/assets remain unchanged. Existing ordinary kill XP and quest-credit rules apply once through the standard defeat pipeline.
-- Victory after wave 10 gives a five-second return window or immediate **Return to entrance**. A solo wipe returns to the active resurrection anchor and resets the instance; re-entry starts at wave 1. Abandoning, death return and Start Menu/desktop exit release locks and the session lease. Dungeon coordinates are not saved as an overworld resume position.
+- Victory after wave 10 gives a five-second summary or immediate **Claim rewards**, then opens the shared treasure room. Choosing one item or the XP/gold alternative returns the player to the entrance. A solo wipe returns to the active resurrection anchor and resets the instance; re-entry starts at wave 1. Abandoning, death return and Start Menu/desktop exit release locks and the session lease. Dungeon coordinates are not saved as an overworld resume position.
 - Uses the existing local-party/staging registry; this work does not establish production network multiplayer. No new boss, item reward table, quest unlock or bonus completion payout was invented.
 
 ## Visuals and provenance

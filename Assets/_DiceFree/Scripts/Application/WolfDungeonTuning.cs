@@ -12,6 +12,8 @@ namespace DiceFree.Dungeons
         [Min(1)] public float intermissionSeconds=4;
         [Min(1)] public float warningSeconds=2;
         [Min(1)] public float victorySeconds=5;
+        public DungeonRewardPool rewards;
+        [Min(0)] public int bonusXp=50,bonusGold=25;
         public GameObject Template(WolfRank rank)=>rank switch{WolfRank.Weak=>weak,WolfRank.Strong=>strong,_=>alpha};
     }
 }

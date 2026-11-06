@@ -16,7 +16,8 @@ namespace DiceFree.Items
         public void Configure(ItemDefinition[] values) { definitions = values; IncludeResourcesPotions(); }
         private void IncludeResourcesPotions()
         {
-            var potions=Resources.LoadAll<ItemDefinition>("DiceFree/Potions");
+            var potions=Resources.LoadAll<ItemDefinition>("DiceFree/Potions")
+                .Concat(Resources.LoadAll<ItemDefinition>("DiceFree/DungeonRewards")).ToArray();
             if(potions.Length==0)return;
             definitions=(definitions??Array.Empty<ItemDefinition>()).Concat(potions)
                 .Where(value=>value!=null).Distinct().ToArray();

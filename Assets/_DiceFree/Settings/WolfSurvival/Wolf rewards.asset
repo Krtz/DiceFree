@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371c339cbaf5a16448bb09319458d262, type: 3}
+  m_Name: Wolf rewards
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardPool
+  stableId: loot.wolf-survival
+  rare: {fileID: 11400000, guid: 061d1d7ba3750c045a3861ff7773a656, type: 2}
+  items:
+  - {fileID: 11400000, guid: b39a3737d31a5844baf1db62b558d841, type: 2}
+  - {fileID: 11400000, guid: 5c860df4f3cecf24bb104d87e1570aa8, type: 2}
+  - {fileID: 11400000, guid: ddbbdb3ce6c60ed4d989987805e6ad7c, type: 2}
+  - {fileID: 11400000, guid: ad4657c48e7f3b64582ae29125379430, type: 2}
+  - {fileID: 11400000, guid: 30d173fda0410884b81eb71bce266609, type: 2}
+  visualVariant: {fileID: 0}
