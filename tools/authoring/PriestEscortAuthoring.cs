@@ -161,7 +161,10 @@ public static class PriestEscortAuthoring
         var site = root.gameObject.AddComponent<PriestEscortSite>();
         var floor = Strip("Rolling forest floor", root, -38, 272, 65, 0, Load<Material>(ForestFloor));
         floor.layer = 8;
-        floor.AddComponent<MeshCollider>().sharedMesh = floor.GetComponent<MeshFilter>().sharedMesh;
+        var floorMesh = floor.GetComponent<MeshFilter>().sharedMesh;
+        floorMesh.SetPreBakeCollisionMesh(false, true);
+        EditorUtility.SetDirty(floorMesh);
+        floor.AddComponent<MeshCollider>().sharedMesh = floorMesh;
         Strip("Packed road to Cornberg", root, -16, 249, 4.5f, .05f, Load<Material>(PackedEarth));
         DressRoad(root);
         DressRoadside(root);
