@@ -136,10 +136,10 @@ namespace DiceFree.UI
                 animator.Update(0f);
             }
             ApplyClonePose();
-            FrameVisibleModel();
+            FrameVisibleModel(animator == null || animator.isHuman);
         }
 
-        private void FrameVisibleModel()
+        private void FrameVisibleModel(bool useBakedPose)
         {
             bool found = false;
             Bounds bounds = default;
@@ -150,7 +150,7 @@ namespace DiceFree.UI
                 {
                     if (!renderer.enabled) continue;
                     Bounds world = renderer.bounds;
-                    if (renderer is SkinnedMeshRenderer skin)
+                    if (useBakedPose && renderer is SkinnedMeshRenderer skin)
                     {
                         skin.BakeMesh(baked);
                         var local = baked.bounds;

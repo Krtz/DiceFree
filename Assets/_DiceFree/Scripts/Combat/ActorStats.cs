@@ -22,6 +22,14 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, float> attackSpeedPercentModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> movementSpeedPercentModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, DamageTakenModifier> damageTakenModifiers = new(StringComparer.Ordinal);
+        private int resurrectionSicknessStacks;
+        internal void SetResurrectionSicknessStacks(int count)
+        {
+            if (resurrectionSicknessStacks == count) return;
+            float previous = MaximumHp;
+            resurrectionSicknessStacks = count;
+            Changed?.Invoke(previous);
+        }
         private readonly SortedDictionary<string, float> basicAttackDamagePercentContributions = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> physicalDefenseContributions = new(StringComparer.Ordinal);
         public void SetResistanceCapModifier(string sourceId, ResistanceCapModifier value)
@@ -65,7 +73,8 @@ namespace DiceFree.Combat
                 var values = AttributeValues.AtLevel(definition.baseAttributes, definition.growth, level);
                 values += EquipmentTotal.attributes;
                 foreach (var contribution in attributeContributions.Values) values += contribution;
-                return values;
+                return resurrectionSicknessStacks == 0 ? values :
+                    values * Mathf.Max(.10f, 1f - .10f * resurrectionSicknessStacks);
             }
         }
         private float? encounterMaximumHp;

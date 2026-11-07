@@ -15,7 +15,8 @@ namespace DiceFree.UI
         FriendlyUnit,
         Ground,
         AttackMove,
-        AnyUnit
+        AnyUnit,
+        Corpse
     }
 
     [DefaultExecutionOrder(-40)]
@@ -30,6 +31,7 @@ namespace DiceFree.UI
         private IQueuedOrders orders;
         private GameplayPreferences preferences;
         private Func<CombatActor, bool> unitConfirm;
+        private Func<CombatActor, bool> unitEligibility;
         private Func<Vector3, bool> groundConfirm;
         private bool repeatShiftAttackMove;
         private int consumedFrame = -1;
@@ -155,6 +157,11 @@ namespace DiceFree.UI
         public void BeginAnyUnit(string skillLabel, Func<CombatActor, bool> confirm, float range = 0f) =>
             BeginUnit(SkillTargetingMode.AnyUnit, skillLabel, confirm, range);
 
+        public void BeginCorpse(string skillLabel, Func<CombatActor, bool> confirm,
+            Func<CombatActor, bool> eligibility, float range) =>
+            BeginUnit(SkillTargetingMode.Corpse, skillLabel, confirm, range,
+                eligibility ?? throw new ArgumentNullException(nameof(eligibility)));
+
         public void BeginGround(
             string skillLabel,
             Func<Vector3, bool> confirm,
@@ -167,6 +174,7 @@ namespace DiceFree.UI
             Feedback = "Choose a ground target.";
             castRange = Mathf.Max(0f, range);
             unitConfirm = null;
+            unitEligibility = null;
             groundConfirm = confirm;
             HoveredActor = null;
             HoverValid = false;
@@ -178,10 +186,10 @@ namespace DiceFree.UI
             SkillTargetingMode mode,
             string skillLabel,
             Func<CombatActor, bool> confirm,
-            float range)
+            float range, Func<CombatActor, bool> eligibility = null)
         {
-            if (mode != SkillTargetingMode.HostileUnit &&
-                mode != SkillTargetingMode.FriendlyUnit && mode != SkillTargetingMode.AnyUnit)
+            if (mode is not (SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit or
+                SkillTargetingMode.AnyUnit or SkillTargetingMode.Corpse))
                 throw new ArgumentOutOfRangeException(nameof(mode));
             if (confirm == null) throw new ArgumentNullException(nameof(confirm));
 
@@ -192,10 +200,12 @@ namespace DiceFree.UI
             {
                 SkillTargetingMode.HostileUnit => "Choose a hostile target.",
                 SkillTargetingMode.FriendlyUnit => "Choose a friendly target.",
+                SkillTargetingMode.Corpse => "Choose a fallen party member.",
                 _ => "Choose a living ally or enemy."
             };
             castRange = Mathf.Max(0f, range);
             unitConfirm = confirm;
+            unitEligibility = eligibility;
             groundConfirm = null;
             HoveredActor = null;
             HoverValid = false;
@@ -212,6 +222,7 @@ namespace DiceFree.UI
             Feedback = "";
             castRange = 0f;
             unitConfirm = null;
+            unitEligibility = null;
             groundConfirm = null;
             HoveredActor = null;
             HoverValid = false;
@@ -306,6 +317,8 @@ namespace DiceFree.UI
                         Orders.SubmitGround(HoveredGroundPoint,castRange,groundConfirm,true),
                     SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit or SkillTargetingMode.AnyUnit =>
                         Orders.SubmitUnit(HoveredActor,castRange,unitConfirm,true),
+                    SkillTargetingMode.Corpse =>
+                        Orders.SubmitUnit(HoveredActor,castRange,unitConfirm,true,unitEligibility),
                     _ => false
                 };
                 if(queued)
@@ -354,7 +367,7 @@ namespace DiceFree.UI
         {
             if (pendingUnit != null)
             {
-                if (!pendingUnit.Alive || !ValidUnitForMode(pendingUnit))
+                if (!ValidUnitForMode(pendingUnit))
                 {
                     ClearPending(true);
                     Feedback = "Target is no longer valid.";
@@ -476,6 +489,7 @@ namespace DiceFree.UI
             SkillTargetingMode.HostileUnit or SkillTargetingMode.AttackMove => owner.IsHostileTo(candidate),
             SkillTargetingMode.FriendlyUnit => owner.IsFriendlyTo(candidate),
             SkillTargetingMode.AnyUnit => owner.IsFriendlyTo(candidate) || owner.IsHostileTo(candidate),
+            SkillTargetingMode.Corpse => unitEligibility?.Invoke(candidate) == true,
             _ => false
         };
 
@@ -515,6 +529,9 @@ namespace DiceFree.UI
             var camera = worldCamera != null ? worldCamera : Camera.main;
             if (camera == null) return null;
 
+            if (Mode == SkillTargetingMode.Corpse)
+                return PickCorpse(camera.ScreenPointToRay(screenPoint));
+
             var hits = Physics.RaycastAll(
                 camera.ScreenPointToRay(screenPoint),
                 1500f,
@@ -528,6 +545,26 @@ namespace DiceFree.UI
             }
 
             return null;
+        }
+
+        private CombatActor PickCorpse(Ray pointer)
+        {
+            float closest = Physics.Raycast(pointer, out var obstruction, 1500f,
+                (1 << 8) | (1 << 9), QueryTriggerInteraction.Ignore) ? obstruction.distance : 1500f;
+            CombatActor selected = null;
+            foreach (var corpse in CombatActor.All)
+            {
+                if (!ValidUnitForMode(corpse)) continue;
+                // Dead actors disable their physical colliders. Give the corpse a
+                // low selection volume without putting a blocker on the road.
+                float width = Mathf.Max(1.1f, corpse.Radius * 2f);
+                var center = corpse.transform.position + Vector3.up * .38f;
+                var selection = new Bounds(center, new Vector3(width, .78f, width));
+                if (!selection.IntersectRay(pointer, out float distance) || distance >= closest) continue;
+                selected = corpse;
+                closest = distance;
+            }
+            return selected;
         }
 
         private bool TryGroundPoint(Vector2 screenPoint, out Vector3 point)
@@ -629,6 +666,7 @@ namespace DiceFree.UI
                 SkillTargetingMode.HostileUnit => "Click hostile",
                 SkillTargetingMode.FriendlyUnit => "Click ally / self",
                 SkillTargetingMode.AnyUnit => "Click ally, self or enemy",
+                SkillTargetingMode.Corpse => "Click fallen party member",
                 SkillTargetingMode.Ground => "Click ground",
                 SkillTargetingMode.AttackMove => "Click enemy / attack-move ground",
                 _ => ""

@@ -288,7 +288,22 @@ Fractional growth should be applied as whole-number increments over levels in th
 
 The user requested a review of **Greatblade and Mage**, particularly free starting ranks, spending level 1's skill point, unlock schedules, max-rank budgets, and compatibility with the newer **rank-0 universal rule** and the level-60 +33% spending philosophy. The audit is **design-only**; no gameplay changes are authorized. See forthcoming cross-class audit report and obtain approval before revising Greatblade/Mage specs or implementing save migrations.
 
-## Remaining design work (not yet approved)
+## Playable Tier II implementation
+
+The Trimery healer promotes a Magically Touched Novice after the Cornberg road escort. A new Priest starts with one point and six unlearned skills. The Development Room also offers direct Priest selection, wounded allies, and a fallen party member for Revive practice. **Reset training targets** restores the practice setup.
+
+| Spell | Rank 1 Mana | Mana per additional rank | Rank 1 → 18 cooldown | Cast range |
+| --- | ---: | ---: | ---: | ---: |
+| Holy Light | 18 | +2 | 13 → 9 s | 18 m |
+| Light Burst | 25 | +2.5 | 15 → 11 s | 16 m |
+| Ice Aegis | 22 | +2 | 18 → 14 s | 15 m |
+| Wild Growth | 18 | +2 | 12 → 8 s | 15 m |
+
+Light Burst has a 4.8 m radius. If any ally receives a zero-overheal heal in the initial burst, that cast awards two Grace. Ice Aegis lasts up to 10 seconds and its empowered Ice aura has a 3.1 m radius. Wild Growth applies its first tick on impact. The coefficients and costs are playtest values.
+
+Revive uses a 12 m cast range and line of sight. It checks the Mana threshold at channel start and awards one Grace on success. Sickness stacks add their penalties up to a 10% remaining attribute floor. Each stack saves its own UTC expiry across reloads and class swaps. Revive uses the current combat party membership interface. The Development Room authors a local party for practice.
+
+## Remaining design work (historical notes)
 
 - Full active/passive roster and rank unlock schedule through Tier II level 60; exact skill effects, targeting, geometry, queues, interruptions, Mana and Grace costs, cooldowns, strengths and tooltip breakdowns.
 - Stat/defense/HP/Mana/Grace baseline and per-level growth; solo damage pacing versus Mage/Greatblade; class equipment allowances.

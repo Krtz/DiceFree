@@ -213,6 +213,19 @@ namespace DiceFree.Combat
             Object.Destroy(root, 2);
         }
 
+        public static void PlayPriestPulse(string name, Vector3 point, float radius, Color tint, bool impact = true)
+        {
+            var root = new GameObject("Skill VFX - " + name);
+            root.transform.position = point;
+            CreateRing(root.transform, tint, radius, impact ? .10f : .055f, impact ? .60f : .37f, true);
+            if (impact)
+            {
+                CreateRing(root.transform, Color.Lerp(tint, Color.white, .55f), radius * .62f, .06f, .48f, true);
+                CreateBurst(root.transform, tint, .5f, radius * .52f, 26, .57f, .15f);
+            }
+            Object.Destroy(root, 1.3f);
+        }
+
         private static void CreateStroke(Transform parent,string name,Vector3[] pts,Color tint,float width,float life,bool loop)
         {
             var go=new GameObject(name);

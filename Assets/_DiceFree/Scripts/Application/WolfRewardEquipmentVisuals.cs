@@ -22,14 +22,16 @@ namespace DiceFree.Visuals
         {
             if(root==null||presentation==null||inventory==null||prepared.Contains(root))return;
             var animator=ClassPresentationSwitcher.FindVisualAnimator(root);
-            if(animator==null||!animator.isHuman)return;
-            var hand=animator.GetBoneTransform(HumanBodyBones.RightHand);
-            var chest=animator.GetBoneTransform(HumanBodyBones.Chest)??animator.GetBoneTransform(HumanBodyBones.Spine);
+            if(animator==null)return;
+            Transform FindBone(string name) => animator.GetComponentsInChildren<Transform>(true)
+                .FirstOrDefault(bone => bone.name == name);
+            var hand=animator.isHuman?animator.GetBoneTransform(HumanBodyBones.RightHand):FindBone("Grip.R");
+            var chest=animator.isHuman?animator.GetBoneTransform(HumanBodyBones.Chest)??animator.GetBoneTransform(HumanBodyBones.Spine):FindBone("Chest");
             if(hand==null||chest==null)return;
             prepared.Add(root);
             EnsurePalette();
-            var head=animator.GetBoneTransform(HumanBodyBones.Head);
-            var foot=animator.GetBoneTransform(HumanBodyBones.LeftFoot);
+            var head=animator.isHuman?animator.GetBoneTransform(HumanBodyBones.Head):FindBone("Head");
+            var foot=animator.isHuman?animator.GetBoneTransform(HumanBodyBones.LeftFoot):FindBone("Foot.L");
             float scale=head!=null&&foot!=null?Mathf.Clamp(Vector3.Distance(head.position,foot.position)/1.55f,.65f,1.5f):1;
             var bindings=presentation.Bindings.ToList();
             foreach(var item in inventory.Definitions.Where(d=>d!=null&&d.stableId!=null&&d.stableId.StartsWith(Prefix,StringComparison.Ordinal)))
@@ -46,14 +48,16 @@ namespace DiceFree.Visuals
                 group.AddComponent<MeshFilter>().sharedMesh=mesh;
                 group.AddComponent<MeshRenderer>().sharedMaterials=palette;
                 Transform bone=item.slot==EquipmentSlot.Chest?chest:item.slot==EquipmentSlot.Ring?
-                    animator.GetBoneTransform(HumanBodyBones.RightMiddleProximal)??hand:hand;
+                    (animator.isHuman?animator.GetBoneTransform(HumanBodyBones.RightMiddleProximal):FindBone("Middle.01.R"))??hand:hand;
                 group.transform.SetPositionAndRotation(bone.position,root.rotation);
                 // World units, independent of imported rig scale.
                 group.transform.localScale=Vector3.Scale(Vector3.one*scale,new Vector3(1/root.lossyScale.x,1/root.lossyScale.y,1/root.lossyScale.z));
                 if(item.slot==EquipmentSlot.MainHand)
                 {
                     var pose=group.AddComponent<WolfRewardWeaponPose>();
-                    pose.Configure(root,animator,item.handsRequired==2);
+                    if(animator.isHuman)pose.Configure(root,animator,item.handsRequired==2);
+                    else pose.ConfigureSockets(root,hand,FindBone("Grip.L"),FindBone("Hand.L"),
+                        FindBone("Forearm.L"),FindBone("UpperArm.L"),item.handsRequired==2);
                 }
                 else
                 {
@@ -64,7 +68,7 @@ namespace DiceFree.Visuals
                 binding.visuals=binding.visuals.Concat(new[]{group}).ToArray();
                 // Every main-hand item suppresses the class's default prop, without consuming an offhand.
                 var defaults=root.GetComponentsInChildren<Transform>(true).Where(t=>
-                    item.slot==EquipmentSlot.MainHand?(t.name=="Caster Staff"||t.name=="Mage Wand"||
+                    item.slot==EquipmentSlot.MainHand?(t.name=="Caster Staff"||t.name=="Mage Wand"||t.name=="Dawn Lantern"||
                         t.name.IndexOf("greatsword",StringComparison.OrdinalIgnoreCase)>=0):
                     item.slot==EquipmentSlot.Chest&&t.name=="Mage layered coat");
                 binding.baselineVisuals=binding.baselineVisuals.Concat(defaults.Select(t=>t.gameObject))

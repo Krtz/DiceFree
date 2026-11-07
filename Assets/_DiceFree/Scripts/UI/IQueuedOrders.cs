@@ -14,7 +14,8 @@ namespace DiceFree.UI
         bool SubmitAttackMove(Vector3 point, Func<Vector3,bool> attackMove, bool append);
         bool SubmitAttackTarget(CombatActor target,
             Func<CombatActor,bool> attack, bool append);
-        bool SubmitUnit(CombatActor target, float range, Func<CombatActor,bool> action, bool append);
+        bool SubmitUnit(CombatActor target, float range, Func<CombatActor,bool> action, bool append,
+            Func<CombatActor,bool> eligible = null);
         bool SubmitGround(Vector3 point, float range, Func<Vector3,bool> action, bool append);
         bool SubmitAction(Func<bool> action, bool append);
     }

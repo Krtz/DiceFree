@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DiceFree.Quests
 {
     public enum QuestCreditMode { Owner, NearbyParty }
-    public interface IQuestPartyMembership { bool SameParty(CombatActor other); }
+    public interface IQuestPartyMembership : ICombatPartyMembership { }
     public static class QuestCreditPolicy
     {
         public static bool Eligible(QuestLeaf objective, CombatActor recipient, ActorDefeated fact)

@@ -21,6 +21,8 @@ namespace DiceFree.Combat
             }
         }
         public void RemoveTemporaryShield(string source)=>shields.Remove(source);
+        public float TemporaryShieldFrom(string source) =>
+            shields.TryGetValue(source, out var shield) && Time.time < shield.until ? shield.amount : 0;
         public void AddTemporaryShield(string source,float amount,float seconds,string elementId=null)
         {
             if(string.IsNullOrWhiteSpace(source)||!float.IsFinite(amount)||!float.IsFinite(seconds)||amount<0||seconds<=0)
@@ -48,6 +50,7 @@ namespace DiceFree.Combat
         public float Current { get; private set; }
         public float Maximum => stats.MaximumHp;
         public bool Alive => Current > 0;
+        public uint DeathSequence { get; private set; }
         public event Action Died;
         public event Action<CombatActor> Defeated;
         public event Action Restored;
@@ -85,7 +88,7 @@ namespace DiceFree.Combat
                 if (result.applied > 0) Damaged?.Invoke(source, result);
             }
             PacketResolved?.Invoke(source, result);
-            if (!Alive) { Died?.Invoke(); Defeated?.Invoke(source); }
+            if (!Alive) { DeathSequence++; Died?.Invoke(); Defeated?.Invoke(source); }
             return result;
         }
         public float Heal(float amount, bool present = true)

@@ -23,6 +23,10 @@ namespace DiceFree.Combat
             agility = a.agility + b.agility, intelligence = a.intelligence + b.intelligence,
             spirit = a.spirit + b.spirit
         };
+        public static AttributeValues operator *(AttributeValues value, float factor) => new AttributeValues {
+            vitality = value.vitality * factor, strength = value.strength * factor, agility = value.agility * factor,
+            intelligence = value.intelligence * factor, spirit = value.spirit * factor
+        };
         public float Weighted(AttributeValues weights) => vitality * weights.vitality + strength * weights.strength +
             agility * weights.agility + intelligence * weights.intelligence + spirit * weights.spirit;
         public float HighestSelected(AttributeValues weights)

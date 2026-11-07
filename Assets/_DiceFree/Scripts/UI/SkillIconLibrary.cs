@@ -82,6 +82,10 @@ namespace DiceFree.UI
                 "guard" => new Color(.40f,.78f,1f),
                 "quickening" => new Color(.89f,.89f,.25f),
                 "arrow-rain" => new Color(.65f,.79f,.96f),
+                "priest-burst" => new Color(1f,.82f,.32f),
+                "priest-aegis" => new Color(.40f,.77f,1f),
+                "priest-growth" => new Color(.50f,.95f,.38f),
+                "priest-revive" => new Color(1f,.61f,.36f),
                 "mend" => new Color(.37f,.95f,.90f),
                 "fire-imbuement" => new Color(1f,.52f,.17f),
                 "ice-burst" => new Color(.51f,.79f,1f),
@@ -140,6 +144,23 @@ namespace DiceFree.UI
             }
             switch(key)
             {
+                case "priest-burst":
+                    Ring(18); Star(8); Dot(32,32,7);
+                    break;
+                case "priest-aegis":
+                    Stroke(32,9,15,24); Stroke(15,24,15,47); Stroke(15,47,32,53);
+                    Stroke(32,53,49,47); Stroke(49,47,49,24); Stroke(49,24,32,9);
+                    Stroke(32,20,32,43); Stroke(23,33,41,33); Dot(32,33,4);
+                    break;
+                case "priest-growth":
+                    Stroke(22,10,32,33); Stroke(32,33,37,51); Stroke(32,30,18,43);
+                    Stroke(18,43,25,29); Stroke(25,29,32,30);
+                    Stroke(33,34,47,47); Stroke(47,47,44,35); Stroke(44,35,33,30);
+                    break;
+                case "priest-revive":
+                    Ring(23); Stroke(32,14,32,45,3.5f); Stroke(19,32,45,32,3.5f);
+                    Stroke(24,42,32,51); Stroke(32,51,40,42); Dot(32,32,4);
+                    break;
                 case "greatblade-widearc":
                     Stroke(21,12,43,48,4);Stroke(14,24,36,11,3);
                     for(int i=0;i<50;i++){float a=Mathf.Lerp(-.2f,2.4f,i/49f);Dot(32+23*Mathf.Cos(a),24+23*Mathf.Sin(a),2);}

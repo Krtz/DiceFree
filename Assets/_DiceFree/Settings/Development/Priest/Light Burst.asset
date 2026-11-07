@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a500e69374414b44d8ea417ad4ceea7b, type: 3}
+  m_Name: Light Burst
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.AttackDefinition
+  stableId: skill.priest.light-burst
+  displayName: Light Burst
+  channel: 1
+  element: {fileID: 11400000, guid: a7d62e9008994e94eab9a1935b049bfa, type: 2}
+  requiresAccuracy: 0
+  scaling: 0
+  weights:
+    vitality: 0
+    strength: 0
+    agility: 0
+    intelligence: 0
+    spirit: 1
+  baseDamage: 10
+  coefficient: 1.15
+  minimumDamageMultiplier: 1
+  maximumDamageMultiplier: 1
+  interval: 1.1
+  windup: 0.25
+  reach: 16

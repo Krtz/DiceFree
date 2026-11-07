@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DiceFree.World
 {
     [RequireComponent(typeof(CombatActor), typeof(BasicAttack))]
-    public sealed class RespawnAtAnchor : MonoBehaviour
+    public sealed class RespawnAtAnchor : MonoBehaviour, ICombatResurrectionTarget
     {
         [SerializeField] private Transform anchor;
         [SerializeField] private ResurrectionAnchor[] registeredAnchors = Array.Empty<ResurrectionAnchor>();
@@ -14,6 +14,7 @@ namespace DiceFree.World
 
         private CombatActor actor;
         private BasicAttack attack;
+        private ResurrectionSickness sickness;
         private float availableAt;
         private Transform fallbackAnchor;
         private Vector3 emergencyFallbackPosition;
@@ -105,6 +106,7 @@ namespace DiceFree.World
         {
             actor = GetComponent<CombatActor>();
             attack = GetComponent<BasicAttack>();
+            sickness = GetComponent<ResurrectionSickness>() ?? gameObject.AddComponent<ResurrectionSickness>();
             fallbackAnchor = anchor;
             emergencyFallbackPosition = transform.position;
             emergencyFallbackReady = true;
@@ -144,6 +146,24 @@ namespace DiceFree.World
                 GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.InsideDungeon != true ||
                 !actor.Motor.TeleportAcrossMaps(exit)) return false;
             ResetAfterRelocation(fullRestore: false);
+            return true;
+        }
+
+        public bool CanReviveInPlace => isActiveAndEnabled && actor != null && !actor.Health.Alive && actor.Motor.Ready;
+
+        public bool ReviveInPlace()
+        {
+            if (!CanReviveInPlace) return false;
+            attack.ResetForSpawn();
+            actor.Stats.ResetTransientModifiers();
+            sickness.AddStack();
+            actor.Health.Restore(.15f);
+            var resources = GetComponent<ActorResourceController>();
+            if (resources != null && resources.Has(ResourceIds.Mana))
+            {
+                resources.TrySpend(ResourceIds.Mana, resources.Current(ResourceIds.Mana));
+                resources.Restore(ResourceIds.Mana, resources.Maximum(ResourceIds.Mana) * .15f);
+            }
             return true;
         }
 

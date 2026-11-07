@@ -11,7 +11,7 @@ namespace DiceFree.UI
     {
         CombatActor actor;BasicAttack basic;Equipment equipment;
         NoviceSkillCaster novice;PhysicalSkillCaster physical;MagicalSkillCaster magical;
-        MageSkillCaster mage;GreatbladeSkillCaster greatblade;
+        MageSkillCaster mage;GreatbladeSkillCaster greatblade;PriestSkillCaster priest;
         AnimatorOverrideController sessionController;RuntimeAnimatorController previousController;
         Transform spinVisual;Quaternion spinRest;float spinStarted,committedUntil;
         bool licensedSpin,spinning,committed;float armedDuration=.9f,armedImpact=.48f;
@@ -21,11 +21,11 @@ namespace DiceFree.UI
         public bool SupportsCurrentClass => Resource(actor?.Stats.Definition?.stableId)!=null;
         bool controllerTwoHanded;
         public bool UsesTwoHandedStance=>equipment!=null&&equipment.UsesTwoHandedStance;
-        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();}
-        void OnEnable(){if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
-        void OnDisable(){if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
+        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();priest=GetComponent<PriestSkillCaster>();}
+        void OnEnable(){if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
+        void OnDisable(){if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
         void EquipmentChanged(){armed=false;if(equipment!=null)foreach(var item in equipment.Slots)if(item.slotId==EquipmentSlot.MainHand.ToString()&&equipment.IsResolved(item))armed=true;}
-        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade",_=>null};
+        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest",_=>null};
         void RestoreSpin(){if(spinning&&spinVisual!=null)spinVisual.localRotation=spinRest;spinning=false;spinVisual=null;}
         void ReleaseController()
         {
@@ -69,7 +69,7 @@ namespace DiceFree.UI
         {
             if(!Current())return false;Play(BasicState(),.5f,1,true);return true;
         }
-        string BasicState()=>classId=="class.mage"?"Cast":armed||classId=="class.greatblade"?"ArmedAttack":"Attack";
+        string BasicState()=>classId=="class.priest"?(UsesTwoHandedStance?"ArmedAttack":"Attack"):classId=="class.mage"?"Cast":armed||classId=="class.greatblade"?"ArmedAttack":"Attack";
         public bool Drive(Animator animator,float speed)
         {
             if(!Ensure(animator))return false;
@@ -77,6 +77,11 @@ namespace DiceFree.UI
             if(!alive){state=null;hold=0;alive=true;Play("Idle");}
             if(actor.Effects?.Stunned==true){model.speed=0;return true;}
             if(classId=="class.mage"&&mage!=null&&mage.IsChanneling){if(state!="Cast"||model.GetCurrentAnimatorStateInfo(0).normalizedTime>=.95f)Play("Cast",.85f,1,true);model.speed=1;return true;}
+            if(classId=="class.priest"&&priest!=null)
+            {
+                if(priest.IsChanneling){Play("Revive");model.speed=1;return true;}
+                if(state=="Revive")hold=0;
+            }
             bool now=basic!=null&&basic.State=="Wind-up";
             if(now&&!winding)
             {
@@ -104,6 +109,17 @@ namespace DiceFree.UI
             if(speed>.15f&&Time.time>playedAt+.12f&&!now&&state!="Death")hold=0;
             if(Time.time<hold){model.speed=playback;return true;}
             Play(speed>.13f?"Locomotion":"Idle");model.speed=speed>.13f?Mathf.Clamp(speed/5,.4f,1.7f):1;return true;
+        }
+        void PriestCast(PriestSkill skill)
+        {
+            if(actor.Stats.Definition?.stableId!=PriestSkillProgression.PriestClassId||!Current())return;
+            string gesture=skill switch
+            {
+                PriestSkill.IceAegis=>"Guard",
+                PriestSkill.HolyLight or PriestSkill.WildGrowth or PriestSkill.Revive=>"Heal",
+                _=>"Cast"
+            };
+            Play(gesture,.82f,1,true);
         }
         void NoviceCast(NoviceSkillDefinition skill)
         {

@@ -11,6 +11,7 @@ namespace DiceFree.Visuals
         [SerializeField] Animator animator;
         [SerializeField] bool twoHanded;
         [SerializeField] Quaternion gripRotation;
+        [SerializeField] Transform rightGrip, leftGrip, leftHand, leftForearm, leftUpperArm;
         public bool TwoHanded=>twoHanded;
         public void Configure(Transform root,Animator model,bool both)
         {
@@ -18,10 +19,36 @@ namespace DiceFree.Visuals
             var hand=model.GetBoneTransform(HumanBodyBones.RightHand);
             gripRotation=Quaternion.Inverse(hand.rotation)*root.rotation*Quaternion.Euler(-12,0,-18);
         }
+        public void ConfigureSockets(Transform root, Transform right, Transform left, Transform wrist,
+            Transform forearm, Transform upperArm, bool both)
+        {
+            visualRoot = root;
+            rightGrip = right;
+            leftGrip = left;
+            leftHand = wrist;
+            leftForearm = forearm;
+            leftUpperArm = upperArm;
+            twoHanded = both;
+        }
+
         void LateUpdate()=>ApplyPortraitPose();
         public void ApplyPortraitPose()
         {
-            if(visualRoot==null||animator==null||!animator.isHuman||!gameObject.activeInHierarchy)return;
+            if(visualRoot==null||!gameObject.activeInHierarchy)return;
+            if(rightGrip!=null)
+            {
+                transform.SetPositionAndRotation(rightGrip.position,
+                    Quaternion.LookRotation(rightGrip.forward, rightGrip.up));
+                if(twoHanded && leftGrip!=null && leftHand!=null && leftForearm!=null && leftUpperArm!=null)
+                {
+                    Vector3 wristPosition = transform.TransformPoint(Vector3.down * .27f) +
+                        leftHand.position - leftGrip.position;
+                    GreatbladeTwoHandGrip.SolveArm(leftUpperArm,leftForearm,leftHand,wristPosition,
+                        leftHand.rotation,-visualRoot.right);
+                }
+                return;
+            }
+            if(animator==null||!animator.isHuman)return;
             var right=animator.GetBoneTransform(HumanBodyBones.RightHand);if(right==null)return;
             if(!twoHanded)
             {

@@ -198,7 +198,7 @@ public static class PriestEscortReview
             Need(advancement.CurrentClassId == PriestSkillProgression.PriestClassId && player.Stats.Level == 1 &&
                 advancement.HasManifestation(PriestMentor.ParentClassId), "New level-one Priest preserves the parent");
             var bar = player.GetComponent<AbilityBarSource>();
-            Need(bar.AbilityCount == 2 && bar.UnspentPoints == 1 && bar.Upgrade(0), "The Priest preview kit is playable after promotion");
+            Need(bar.AbilityCount == 6 && bar.UnspentPoints == 1 && bar.Upgrade(0), "The full Priest bar is playable after promotion");
             Need(bar.Activate(0) && player.GetComponent<SkillTargetingController>().ConfirmSelfFromPortrait(), "Holy Light works in the world");
             Need(advancement.TrySwitch(PriestMentor.ParentClassId) && Status(player) == QuestStatus.Completed &&
                 player.GetComponent<MagicalSkillProgression>().Rank(mend.stableId) == mend.maxRank,

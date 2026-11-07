@@ -103,6 +103,15 @@ namespace DiceFree.Characters
             if(mage!=null&&mage.IsChanneling&&(movement.ReadValue<Vector2>().sqrMagnitude>.001f||
                 stop.WasPressedThisFrame()||interact.WasPressedThisFrame()||closeInteraction.WasPressedThisFrame()))
                 mage.CancelChannel();
+            var priest = GetComponent<DiceFree.Skills.PriestSkillCaster>();
+            if (priest != null && priest.IsChanneling)
+            {
+                bool interrupted = movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
+                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                    interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
+                if (interrupted) priest.CancelRevive();
+                else return;
+            }
             var homeSkill=GetComponent<ReturnHomeAbility>();
             if(homeSkill!=null && homeSkill.Casting)
             {

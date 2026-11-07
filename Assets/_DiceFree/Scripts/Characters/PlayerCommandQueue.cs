@@ -26,6 +26,7 @@ namespace DiceFree.Characters
             public float range;
             public Func<Vector3,bool> ground;
             public Func<CombatActor,bool> unit;
+            public Func<CombatActor,bool> eligible;
             public Func<bool> instant;
             public bool started;
             public float startedAt;
@@ -66,6 +67,7 @@ namespace DiceFree.Characters
         public void ClearOrders()
         {
             GetComponent<MageSkillCaster>()?.CancelChannel();
+            GetComponent<DiceFree.Skills.PriestSkillCaster>()?.CancelRevive();
             if(!HasOrders)return;
             pending.Clear();
             current=null;
@@ -112,11 +114,11 @@ namespace DiceFree.Characters
         }
 
         public bool SubmitUnit(CombatActor target,float range,
-            Func<CombatActor,bool> action,bool append)
+            Func<CombatActor,bool> action,bool append,Func<CombatActor,bool> eligible=null)
         {
-            if(target==null || action==null || !target.Alive)return false;
+            if(target==null || action==null || !(eligible?.Invoke(target) ?? target.Alive))return false;
             return Add(new Order{kind=Kind.UnitSkill,target=target,
-                range=Mathf.Max(0,range),unit=action},append);
+                range=Mathf.Max(0,range),unit=action,eligible=eligible},append);
         }
 
         public bool SubmitGround(Vector3 point,float range,
@@ -206,7 +208,7 @@ namespace DiceFree.Characters
                 }
                 case Kind.UnitSkill:
                 {
-                    if(order.target==null || !order.target.Alive)
+                    if(order.target==null || !(order.eligible?.Invoke(order.target) ?? order.target.Alive))
                     {
                         Complete();return;
                     }
