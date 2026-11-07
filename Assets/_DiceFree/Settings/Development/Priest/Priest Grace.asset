@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7faba38230bdef548bcb11e385a5beca, type: 3}
+  m_Name: Priest Grace
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ClassResourceProfile
+  stableId: resource-profile.priest.grace
+  classId: class.priest
+  resource: {fileID: 11400000, guid: 9e179b260ed4c0146b4388a257f32e7e, type: 2}
+  baseMaximum: 0
+  maximumPerIntelligence: 0
+  maximumPerSpirit: 0
+  baseRegenPerSecond: 0
+  regenPerIntelligence: 0
+  regenPerSpirit: 0
+  initialFraction: 0
+  loadPolicy: 0

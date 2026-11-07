@@ -214,8 +214,11 @@ namespace DiceFree.Development
             if (GUILayout.Button("Restore HP / resources")) RestorePlayer();
             GUILayout.EndHorizontal();
             if (GUILayout.Button("Reset training targets"))
+            {
                 foreach (var dummy in CombatActor.All.Where(value => value != player && value.Stats.Definition.stableId == "dev.practice-target"))
                     dummy.Health.Restore();
+                foreach (var ally in FindObjectsByType<PriestPracticeAlly>()) ally.ResetWounds();
+            }
             GUILayout.Label("Equipment / item testing");
             itemScroll = GUILayout.BeginScrollView(itemScroll,GUILayout.Height(Mathf.Max(80,panel.height*.28f)));
             var inventory = player.GetComponent<CarriedInventory>();

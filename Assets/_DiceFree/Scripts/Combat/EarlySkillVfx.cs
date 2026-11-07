@@ -199,6 +199,20 @@ namespace DiceFree.Combat
             }
         }
 
+        public static void PlayHolyLight(Vector3 origin, Vector3 impact, bool healing)
+        {
+            var root = new GameObject("Skill VFX - Holy Light");
+            root.transform.position = impact;
+            var tint = healing ? new Color(1f, .94f, .56f) : new Color(1f, .63f, .22f);
+            var end = Vector3.up * 1.1f;
+            var start = origin - impact + end;
+            if ((start - end).sqrMagnitude > .01f)
+                CreateStroke(root.transform, "Holy Light arc", new[] { start, (start + end) * .5f + Vector3.up * .4f, end }, tint, .11f, .42f, false);
+            CreateRing(root.transform, tint, .76f, .10f, .62f);
+            CreateBurst(root.transform, tint, 1.1f, .48f, 24, .72f, .22f);
+            Object.Destroy(root, 2);
+        }
+
         private static void CreateStroke(Transform parent,string name,Vector3[] pts,Color tint,float width,float life,bool loop)
         {
             var go=new GameObject(name);

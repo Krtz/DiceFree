@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a89798dbddeb22643810814cba141499, type: 3}
+  m_Name: Development Priest catalog
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Progression.ClassCatalog
+  classes:
+  - {fileID: 11400000, guid: 8a62b7c38167e1c4984262db7f09d0e8, type: 2}
+  - {fileID: 11400000, guid: dc710404bd3a56b468224aded22bf791, type: 2}
+  - {fileID: 11400000, guid: 0da662e4cb42d0844b3a37c8f3254299, type: 2}
+  - {fileID: 11400000, guid: d6c86da6310123d49a8cbdb061bb1f37, type: 2}
+  - {fileID: 11400000, guid: 7c3a6bce67ef3a14f8550bbf6a656df1, type: 2}
+  - {fileID: 11400000, guid: 685ca082674883d4589af170968be2fe, type: 2}

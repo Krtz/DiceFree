@@ -9,6 +9,14 @@
 
 > This document is the forthcoming authoritative **Priest-specific** design as the user answers. Prior proposed skills/quests remain **PROPOSED** until approved here. Do not mistake an implemented NPC service for an implemented playable Tier II class or advancement quest.
 
+## Development Room preview
+
+The first implementation pass starts with Holy Light and Grace. Open the Development Room from the main menu, select Priest, and spend the first skill point on Holy Light. Cast on a blue practice ally to heal, an enemy target to deal Light damage, or the player portrait to heal yourself. At level 5, learn Grace, fill its meter and activate it to empower your next successful Holy Light. The room creates a separate level-one Priest manifestation and keeps the Magically Touched Novice parent.
+
+The preview uses provisional balance values. Holy Light starts with an 18 m cast range, a 7 m bounce range, an 18 Mana cost that rises by 2 per rank, and a cooldown that falls from 13 to 9 seconds. Base potency starts at 14 + 1.8 × SPR and gains 0.16 × SPR per rank. Bounces prioritize wounded allies by health percentage and then target nearby enemies. Each hop requires sight, can revisit an earlier recipient after an intervening hop, and retains 90% of the previous hop's potency. The initial target determines the chain's single Grace award.
+
+The preview reuses the Magically Touched Novice model. Light Burst, Ice Aegis, Wild Growth, Revive and the Trimery escort are pending. The escort will be the world progression route into Priest.
+
 ## Workflow
 
 1. Ask **exactly five questions per round** and wait for user answers.

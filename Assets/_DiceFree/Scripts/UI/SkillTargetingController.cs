@@ -14,7 +14,8 @@ namespace DiceFree.UI
         HostileUnit,
         FriendlyUnit,
         Ground,
-        AttackMove
+        AttackMove,
+        AnyUnit
     }
 
     [DefaultExecutionOrder(-40)]
@@ -149,6 +150,11 @@ namespace DiceFree.UI
             float range = 0f) =>
             BeginUnit(SkillTargetingMode.FriendlyUnit, skillLabel, confirm, range);
 
+        public bool AllowsSelfTarget => Mode is SkillTargetingMode.FriendlyUnit or SkillTargetingMode.AnyUnit;
+
+        public void BeginAnyUnit(string skillLabel, Func<CombatActor, bool> confirm, float range = 0f) =>
+            BeginUnit(SkillTargetingMode.AnyUnit, skillLabel, confirm, range);
+
         public void BeginGround(
             string skillLabel,
             Func<Vector3, bool> confirm,
@@ -175,16 +181,19 @@ namespace DiceFree.UI
             float range)
         {
             if (mode != SkillTargetingMode.HostileUnit &&
-                mode != SkillTargetingMode.FriendlyUnit)
+                mode != SkillTargetingMode.FriendlyUnit && mode != SkillTargetingMode.AnyUnit)
                 throw new ArgumentOutOfRangeException(nameof(mode));
             if (confirm == null) throw new ArgumentNullException(nameof(confirm));
 
             ClearPending(false);
             Mode = mode;
             SkillLabel = skillLabel ?? "Skill";
-            Feedback = mode == SkillTargetingMode.HostileUnit
-                ? "Choose a hostile target."
-                : "Choose a friendly target.";
+            Feedback = mode switch
+            {
+                SkillTargetingMode.HostileUnit => "Choose a hostile target.",
+                SkillTargetingMode.FriendlyUnit => "Choose a friendly target.",
+                _ => "Choose a living ally or enemy."
+            };
             castRange = Mathf.Max(0f, range);
             unitConfirm = confirm;
             groundConfirm = null;
@@ -215,7 +224,7 @@ namespace DiceFree.UI
         /// <summary>Cast a pending friendly skill by clicking the 3D character portrait.</summary>
         public bool ConfirmSelfFromPortrait()
         {
-            if (Mode != SkillTargetingMode.FriendlyUnit || unitConfirm == null ||
+            if (!AllowsSelfTarget || unitConfirm == null ||
                 owner == null || !owner.Alive) return false;
             Consume();
             ClearPending(true);
@@ -295,7 +304,7 @@ namespace DiceFree.UI
                             : QueueAttackMoveFromTargeting(HoveredGroundPoint),
                     SkillTargetingMode.Ground =>
                         Orders.SubmitGround(HoveredGroundPoint,castRange,groundConfirm,true),
-                    SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit =>
+                    SkillTargetingMode.HostileUnit or SkillTargetingMode.FriendlyUnit or SkillTargetingMode.AnyUnit =>
                         Orders.SubmitUnit(HoveredActor,castRange,unitConfirm,true),
                     _ => false
                 };
@@ -466,6 +475,7 @@ namespace DiceFree.UI
         {
             SkillTargetingMode.HostileUnit or SkillTargetingMode.AttackMove => owner.IsHostileTo(candidate),
             SkillTargetingMode.FriendlyUnit => owner.IsFriendlyTo(candidate),
+            SkillTargetingMode.AnyUnit => owner.IsFriendlyTo(candidate) || owner.IsHostileTo(candidate),
             _ => false
         };
 
@@ -618,6 +628,7 @@ namespace DiceFree.UI
             {
                 SkillTargetingMode.HostileUnit => "Click hostile",
                 SkillTargetingMode.FriendlyUnit => "Click ally / self",
+                SkillTargetingMode.AnyUnit => "Click ally, self or enemy",
                 SkillTargetingMode.Ground => "Click ground",
                 SkillTargetingMode.AttackMove => "Click enemy / attack-move ground",
                 _ => ""

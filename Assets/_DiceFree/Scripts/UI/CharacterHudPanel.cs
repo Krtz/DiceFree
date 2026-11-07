@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using DiceFree.Combat;
 using DiceFree.Items;
+using DiceFree.Skills;
 using UnityEngine;
 
 namespace DiceFree.UI
@@ -63,7 +64,10 @@ namespace DiceFree.UI
             float gap = Theme.gap;
             float barHeight = Mathf.Clamp(inner.height * 0.085f, 17f, 25f);
             float slotWidth = Mathf.Clamp(inner.width * 0.135f, 28f, 46f);
-            float contentBottom = inner.yMax - barHeight * 2 - gap * 2;
+            var priest = player.GetComponent<PriestSkillCaster>();
+            bool showGrace = priest != null && priest.GraceMaximum > 0;
+            int barCount = showGrace ? 3 : 2;
+            float contentBottom = inner.yMax - (barHeight + gap) * barCount;
             float portraitX = inner.x + slotWidth + gap;
             float portraitWidth = Mathf.Max(40, inner.width - (slotWidth + gap) * 2);
             var portraitRect = new Rect(
@@ -86,7 +90,7 @@ namespace DiceFree.UI
                 GUI.Label(portraitImageRect, "3D character",
                     new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
             var targeting = player.GetComponent<SkillTargetingController>();
-            if (targeting != null && targeting.Mode == SkillTargetingMode.FriendlyUnit &&
+            if (targeting != null && targeting.AllowsSelfTarget &&
                 !(HudLayoutManager.Current?.EditMode ?? false))
             {
                 if (GUI.Button(portraitImageRect, new GUIContent("",
@@ -128,6 +132,14 @@ namespace DiceFree.UI
             else
             {
                 DrawBar(resourceRect, 0, new Color(0.18f, 0.18f, 0.18f, 1f), "No class resource");
+            }
+
+            if (showGrace)
+            {
+                var graceRect = new Rect(inner.x, resourceRect.yMax + gap, inner.width, barHeight);
+                Color gold = priest.GraceArmed ? new Color(1f, .77f, .20f) : new Color(.70f, .49f, .12f);
+                string label = priest.GraceArmed ? "Grace armed" : $"Grace {priest.Grace:0} / {priest.GraceMaximum:0}";
+                DrawBar(graceRect, priest.Grace / priest.GraceMaximum, gold, label);
             }
 
             HudTooltip.DrawCurrent();
