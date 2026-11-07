@@ -72,11 +72,12 @@ namespace DiceFree.UI
         {
             Binding active = null;
             foreach (var binding in bindings)
+                if (binding?.visualRoot != null && binding.classId == classId) active = binding;
+
+            foreach (var binding in bindings)
             {
                 if (binding?.visualRoot == null) continue;
-                bool selected = binding.classId == classId;
-                binding.visualRoot.gameObject.SetActive(selected);
-                if (selected) active = binding;
+                binding.visualRoot.gameObject.SetActive(active?.visualRoot == binding.visualRoot);
             }
 
             currentClassId = classId;

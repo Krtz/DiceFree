@@ -138,6 +138,15 @@ namespace DiceFree.World
             return true;
         }
 
+        public bool ReturnAtInstanceExit(Vector3 exit)
+        {
+            if (actor == null || actor.Alive ||
+                GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.InsideDungeon != true ||
+                !actor.Motor.TeleportAcrossMaps(exit)) return false;
+            ResetAfterRelocation(fullRestore: false);
+            return true;
+        }
+
         public void Configure(Transform value) => anchor = value;
         public void ConfigureRegisteredAnchors(params ResurrectionAnchor[] values) =>
             registeredAnchors = values ?? Array.Empty<ResurrectionAnchor>();

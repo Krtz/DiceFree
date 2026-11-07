@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DiceFree.Quests
 {
     // Append values: existing serialized objective ordinals must remain stable.
-    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any, SolvePuzzle, All, Interact }
+    public enum ObjectiveKind { Kill, ReachArea, TalkTo, Any, SolvePuzzle, All, Interact, Escort }
     [Serializable]
     public class QuestLeaf
     {
@@ -39,6 +39,7 @@ namespace DiceFree.Quests
         [TextArea] public string offer;
         [TextArea] public string activeDialogue;
         public string locationHint;
+        public string turnInHint;
         public QuestObjective[] stages;
         public string[] completedQuestIds = Array.Empty<string>();
         [Min(0)] public int rewardXp;

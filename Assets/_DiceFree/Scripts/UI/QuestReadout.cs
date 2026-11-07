@@ -17,6 +17,7 @@ namespace DiceFree.UI
             quest.stages != null && quest.stages.Length > 0;
         public static string TurnIn(QuestDefinition quest)
         {
+            if (!string.IsNullOrWhiteSpace(quest.turnInHint)) return quest.turnInHint;
             if (!Application.isPlaying || Time.unscaledTime >= refreshAt || givers.Length == 0 || givers.All(g => g == null))
             {
                 givers = UnityEngine.Object.FindObjectsByType<QuestGiver>();

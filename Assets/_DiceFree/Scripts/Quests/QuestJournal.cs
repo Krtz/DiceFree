@@ -180,6 +180,11 @@ namespace DiceFree.Quests
         {
             if (entered.actor == owner) Advance(ObjectiveKind.ReachArea, null, null, entered.areaId);
         }
+        public void CreditEscort(string routeId)
+        {
+            if (owner.Alive && !string.IsNullOrWhiteSpace(routeId))
+                Advance(ObjectiveKind.Escort, routeId, null, null);
+        }
         private void OnTalk(ConversationCompleted fact)
         {
             if (fact.actor != owner) return;

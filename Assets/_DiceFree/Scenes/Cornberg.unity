@@ -23246,6 +23246,37 @@ MonoBehaviour:
   focusDistance: 40
   exteriorFrame: {fileID: 0}
   exteriorFootprint: {x: 0, y: 0}
+--- !u!1 &58061660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 58061661}
+  m_Layer: 0
+  m_Name: Priest mentor approach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &58061661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58061660}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: -0.019202132, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1067462373}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &58184099
 GameObject:
   m_ObjectHideFlags: 0
@@ -453615,6 +453646,8 @@ GameObject:
   - component: {fileID: 1067462375}
   - component: {fileID: 1067462374}
   - component: {fileID: 1067462378}
+  - component: {fileID: 1067462380}
+  - component: {fileID: 1067462379}
   m_Layer: 10
   m_Name: Trimery priest - placeholder healer
   m_TagString: Untagged
@@ -453637,6 +453670,7 @@ Transform:
   m_Children:
   - {fileID: 323242907}
   - {fileID: 1123072152}
+  - {fileID: 58061661}
   m_Father: {fileID: 1260898923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1067462374
@@ -453651,7 +453685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62013bd95e3008341ab2f38ca5b6f5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.InteractionPrompt
-  target: {fileID: 1067462375}
+  target: {fileID: 1067462379}
   player: {fileID: 1288724053}
 --- !u!114 &1067462375
 MonoBehaviour:
@@ -453668,7 +453702,7 @@ MonoBehaviour:
   displayName: Trimery Priest - free healing
   range: 2.5
   approachPoint: {fileID: 1123072152}
-  context: {fileID: 0}
+  context: {fileID: 1067462379}
 --- !u!114 &1067462376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453725,6 +453759,45 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.85, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1067462379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067462372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd900a26a772d141aabcf745241f868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.ContextualNpc
+  displayName: Trimery Healer
+  range: 2.5
+  approachPoint: {fileID: 58061661}
+  context: {fileID: 0}
+  npcId: npc.trimery.healer
+  actions:
+  - {fileID: 1067462380}
+  - {fileID: 1067462375}
+--- !u!114 &1067462380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067462372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48a2b7e698cf1540895f191fdf1cb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.PriestMentor
+  displayName: "Trimery Healer \u2013 Priest advancement"
+  range: 2.5
+  approachPoint: {fileID: 58061661}
+  context: {fileID: 1067462379}
+  trial: {fileID: 11400000, guid: 604fd60fffbf0ce4990c8f8d52152113, type: 2}
+  treatment: {fileID: 1067462375}
+  cornbergArrival: {x: -30, y: 0.45630354, z: -18}
 --- !u!1 &1067621120
 GameObject:
   m_ObjectHideFlags: 0
@@ -551759,6 +551832,9 @@ GameObject:
   - component: {fileID: 1288724120}
   - component: {fileID: 1288724123}
   - component: {fileID: 1288724124}
+  - component: {fileID: 1288724127}
+  - component: {fileID: 1288724126}
+  - component: {fileID: 1288724125}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -552012,6 +552088,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d2e5283a62a459b4093e675bd5b8843e, type: 2}
   - {fileID: 11400000, guid: 3e9e9a2467a5f0a448ed613955f0b81c, type: 2}
   - {fileID: 11400000, guid: 0ab8747e61c79474a8665e95d2bc2785, type: 2}
+  - {fileID: 11400000, guid: 604fd60fffbf0ce4990c8f8d52152113, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -552342,6 +552419,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc052526909043944862b2d3cf040000, type: 2}
   - {fileID: 11400000, guid: 11c455c064284b045b22a306433705c9, type: 2}
   - {fileID: 11400000, guid: a0c5cb014421f3443bdf50fe5ee00a8f, type: 2}
+  - {fileID: 11400000, guid: ed18fb63c7e44814dab6deff50fd7720, type: 2}
 --- !u!114 &1288724083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552369,6 +552447,9 @@ MonoBehaviour:
     animator: {fileID: 0}
   - classId: class.mage
     visualRoot: {fileID: 1635985400}
+    animator: {fileID: 0}
+  - classId: class.priest
+    visualRoot: {fileID: 1621371690}
     animator: {fileID: 0}
 --- !u!114 &1288724084
 MonoBehaviour:
@@ -552459,6 +552540,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ffc1ec3bd00be4f4a90096449c83bea7, type: 2}
   - {fileID: 11400000, guid: a5b817e78158d3543b5c1f2695591632, type: 2}
   - {fileID: 11400000, guid: 06ce0fb2b6d1c774d957a90d15f4be1d, type: 2}
+  - {fileID: 11400000, guid: cd0a719b36c3c8a4187ee347d6890098, type: 2}
+  - {fileID: 11400000, guid: 08b0ef477e7d8474db63cc7c5189189d, type: 2}
 --- !u!114 &1288724090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552926,6 +553009,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.TimedInteractionPanel
   interactor: {fileID: 1288724062}
+--- !u!114 &1288724125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803054328a846834c8609ae37bc19c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.PriestAbilityProvider
+--- !u!114 &1288724126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a450c35a6097041bad18c452397ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.PriestSkillCaster
+  holyLight: {fileID: 11400000, guid: f195748620e70d448abf8442e3f68b45, type: 2}
+--- !u!114 &1288724127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a573604ad450bf4498eee735a550f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.PriestSkillProgression
 --- !u!1 &1288794739
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,13 @@ namespace DiceFree.World
         public override void Interact(CombatActor actor)
         {
             if (!CanInteract(actor)) return;
-            actor.Health.Heal(actor.Health.Maximum);
+            Treat(actor);
+        }
+
+        public void Treat(CombatActor actor)
+        {
+            if (Available(actor) && WorldTarget.CanInteract(actor))
+                actor.Health.Heal(actor.Health.Maximum);
         }
     }
 }

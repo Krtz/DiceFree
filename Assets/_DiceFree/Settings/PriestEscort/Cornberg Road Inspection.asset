@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg Road Inspection
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.trimery.priest-escort
+  title: The Cornberg Road Inspection
+  requiredClassId: class.magically-touched-novice
+  requiredLevel: 30
+  version: 1
+  offer: To become a Priest, escort our road inspector to Cornberg. The west road was broken deliberately. We want to know whether the Cornberg road is clear. Two guards will fight alongside you. Keep the inspector alive.
+  activeDialogue: Meet the inspector here to depart. Follow the party and heal them when wildlife attacks. If the inspector falls, we can send another escort free of charge.
+  locationHint: Depart from the Trimery healer. Escort the inspector to Cornberg, then return to the healer.
+  turnInHint: Return to the Trimery healer to finish Priest advancement.
+  stages:
+  - kind: 7
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Bring the inspector safely to Cornberg
+    contentId: escort.trimery.cornberg
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

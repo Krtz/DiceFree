@@ -15,7 +15,13 @@ The first implementation pass starts with Holy Light and Grace. Open the Develop
 
 The preview uses provisional balance values. Holy Light starts with an 18 m cast range, a 7 m bounce range, an 18 Mana cost that rises by 2 per rank, and a cooldown that falls from 13 to 9 seconds. Base potency starts at 14 + 1.8 × SPR and gains 0.16 × SPR per rank. Bounces prioritize wounded allies by health percentage and then target nearby enemies. Each hop requires sight, can revisit an earlier recipient after an intervening hop, and retains 90% of the previous hop's potency. The initial target determines the chain's single Grace award.
 
-The preview reuses the Magically Touched Novice model. Light Burst, Ice Aegis, Wild Growth, Revive and the Trimery escort are pending. The escort will be the world progression route into Priest.
+The preview reuses the Magically Touched Novice model. Light Burst, Ice Aegis, Wild Growth and Revive are pending.
+
+## World advancement
+
+The Trimery healer offers **The Cornberg Road Inspection** to a level-30 Magically Touched Novice. Accept the trial and choose **Depart with the inspector**. A private road instance follows the Trimery–Cornberg route through four wolf and slime ambushes. The inspector walks automatically, waits for the player when separated, and stops during fights. Two guards fight alongside the inspector and can die. The trial's combat and walking pace are provisional.
+
+Inspector or player death ends the run in Trimery and keeps the quest active for a free retry. Reaching Cornberg saves the completed objective and returns the player to the Cornberg overworld. The inspector finds nothing unusual. Return to the Trimery healer to turn in the trial and create a separate level-one Priest manifestation with Holy Light and Grace. The promotion keeps the parent and its completed quest. The world uses the existing caster model during this quest implementation.
 
 ## Workflow
 

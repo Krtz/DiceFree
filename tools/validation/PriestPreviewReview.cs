@@ -61,7 +61,7 @@ public static class PriestPreviewReview
             Phase("Development Room entry");
             StartMenuController menu = null;
             await Until(() => (menu = Object.FindAnyObjectByType<StartMenuController>()) != null && !LoadingScreen.Busy, "Start menu");
-            Need(menu.Catalog.Resolve(ClassId) == null, "Priest absent from normal class catalog");
+            Need(menu.Catalog.Resolve(ClassId) != null, "Priest resolves for saved world manifestations");
             Need(menu.TryOpenDevelopmentRoom(), "Open normal Development Room entry");
             await Until(() => DevelopmentRoomController.Current?.Status == "Test Echo ready" && !LoadingScreen.Busy, "Development Room ready");
             await Task.Delay(150);
