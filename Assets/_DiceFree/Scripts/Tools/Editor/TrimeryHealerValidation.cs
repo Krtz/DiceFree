@@ -66,10 +66,10 @@ namespace DiceFree.EditorTools
    float end=Time.time+15;while(Vector3.Distance(actor.transform.position,hit.position)>.65f&&Time.time<end)yield return null;
    Need(Vector3.Distance(actor.transform.position,hit.position)<=.65f,"Could not walk to healer point "+point);report.walked++;
   }
-  static void Capture(Camera camera){
+  static void Capture(Camera camera,string path){
    var target=RenderTexture.GetTemporary(960,600,24);var old=camera.targetTexture;var active=RenderTexture.active;var image=new Texture2D(960,600,TextureFormat.RGB24,false);
    try{camera.targetTexture=target;camera.Render();RenderTexture.active=target;image.ReadPixels(new Rect(0,0,960,600),0,0);image.Apply();
-    Need(image.GetPixels().Average(c=>c.grayscale)>.02f,"Healer capture blank");File.WriteAllBytes("Library/Trimery-Healer.png",image.EncodeToPNG());
+    Need(image.GetPixels().Average(c=>c.grayscale)>.02f,"Healer capture blank");File.WriteAllBytes(path,image.EncodeToPNG());
    }finally{camera.targetTexture=old;RenderTexture.active=active;RenderTexture.ReleaseTemporary(target);Object.Destroy(image);}
   }
   static IEnumerator Flow(){
@@ -81,7 +81,15 @@ namespace DiceFree.EditorTools
    Need(healer.GetComponent<Collider>().gameObject.layer==10,"Not click selectable");
    Need(healer.GetComponentsInChildren<Collider>().All(c=>c.gameObject.layer!=9),"Healer blocks world navigation");
    Need(healer.GetComponentsInChildren<Renderer>().All(r=>r.sharedMaterial!=null&&r.sharedMaterial.shader.isSupported),"Unsupported healer material");
-   var registry=p.GetComponent<InteractionRegistry>();Need(registry.Contains(healer),"Healer absent from interaction registry");
+   var dawnwarden=healer.transform.Find("Dawnwarden Healer");
+   Need(dawnwarden!=null&&healer.transform.Find("Soft priest blob")==null,"Healer did not switch to Dawnwarden.");
+   var animator=dawnwarden.GetComponent<Animator>();
+   Need(animator!=null&&animator.avatar!=null&&animator.avatar.isValid&&!animator.applyRootMotion&&
+    animator.runtimeAnimatorController?.animationClips.Any(clip=>clip.name=="Idle")==true,"Dawnwarden idle rig is not ready.");
+   Need(dawnwarden.GetComponentsInChildren<SkinnedMeshRenderer>().Count()==2&&
+    dawnwarden.GetComponentsInChildren<Collider>().Length==0,"Expected the skinned Priest and staff with visual-only meshes.");
+   var worldTarget=healer.WorldTarget;
+   var registry=p.GetComponent<InteractionRegistry>();Need(registry.Contains(worldTarget),"Healer absent from interaction registry");
    var playerCollider=p.GetComponent<CapsuleCollider>();Need(playerCollider!=null&&playerCollider.enabled&&!playerCollider.isTrigger,"Player gameplay collision capsule missing or invalid");
    Need(NavMesh.SamplePosition(CornbergLandscape.Ground(248,181),out var start,3,1),"Village arrival unreachable");
    Need(p.Motor.Teleport(start.position),"Village relocation");
@@ -109,22 +117,29 @@ namespace DiceFree.EditorTools
     Need(Mathf.Abs(p.Health.Current-p.Health.Maximum)<.01f,"Healer failed to restore HP");
     Need(received>p.Health.Maximum*.5f,"No visible heal feedback event");report.receivedHealing=received;
     p.Health.SetEncounterHp(p.Health.Maximum*.4f);
-    Need(registry.NearestInRange(p)==healer,"Nearest interaction selects wrong NPC");
+    Need(registry.NearestInRange(p)==worldTarget&&worldTarget.Resolve(p)==healer,"Nearest interaction selects wrong NPC or service");
     Need(interactor.InteractNearest(),"Keyboard interaction path rejected");report.nearest=true;yield return Wait(.1f);
     Need(Mathf.Abs(p.Health.Current-p.Health.Maximum)<.01f,"Nearest treatment failed");
     float full=received;healer.Interact(p);Need(Mathf.Approximately(received,full),"Full HP produces spurious heal events");
     p.Health.AddTemporaryShield("healer-test",17,20);healer.Interact(p);Need(p.Health.TemporaryShield==17,"Treatment clears shields");
     p.Health.RemoveTemporaryShield("healer-test");
     p.Configure(1,p.Radius);Need(!healer.Available(p),"Enemy eligible for player service");p.Configure(0,p.Radius);
-    healer.enabled=false;Need(!registry.Contains(healer)&&!healer.CanInteract(p),"Disabled healer remains active");
-    healer.enabled=true;Need(registry.Contains(healer),"Healer does not re-register");
+    worldTarget.enabled=false;Need(!registry.Contains(worldTarget)&&!healer.CanInteract(p),"Disabled healer remains active");
+    worldTarget.enabled=true;Need(registry.Contains(worldTarget),"Healer does not re-register");
     yield return Walk(p,CornbergLandscape.Ground(248,198));
     p.Health.SetEncounterHp(p.Health.Maximum*.5f);float before=p.Health.Current;healer.Interact(p);
     Need(Mathf.Approximately(before,p.Health.Current),"Out-of-range treatment");
     yield return Wait(.1f);Need(p.Health.Current<p.Health.Maximum*.75f,"Healer has unintended passive healing area");
     yield return Walk(p,CornbergLandscape.Ground(246,190));
     var clock=Object.FindAnyObjectByType<WorldDayNightCycle>();clock?.SetHour(10,false);
-    Object.FindAnyObjectByType<ExplorationCamera>().RecenterForTravel(p.transform);yield return Wait(.2f);Capture(Camera.main);
+    var exploration=Object.FindAnyObjectByType<ExplorationCamera>();
+    exploration.RecenterForTravel(p.transform);yield return Wait(.2f);
+    Capture(Camera.main,"Library/Trimery-Healer.png");
+    var position=healer.transform.position+new Vector3(3.2f,2.5f,-2.4f);
+    var look=healer.transform.position+Vector3.up*1.10f-position;
+    exploration.SetPresentationPose(position,Quaternion.LookRotation(look),39);
+    try{Capture(Camera.main,"Library/Trimery-Dawnwarden-Close.png");}
+    finally{exploration.ClearPresentationPose();}
     // Real death packet; the isolated profile cannot affect the user's characters.
     p.Health.Invulnerable=false;p.Health.ApplyDamage(null,new DamageResult{mitigated=p.Health.Maximum*10});
     Need(!p.Alive,"Death fixture failed");Need(!healer.CanInteract(p),"Dead player eligible");healer.Interact(p);Need(!p.Health.Alive,"Treatment resurrects dead player");
