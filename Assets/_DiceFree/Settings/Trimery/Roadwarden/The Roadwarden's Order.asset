@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Roadwarden's Order
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.roadwarden
+  title: The Roadwarden's Order
+  requiredClassId:
+  requiredLevel: 1
+  version: 1
+  offer: The survey confirms it. That road was torn up from the Arborium side. Follow the old track south from our East Gate and deal with the Ogre who still holds it. The Guild crew will wait until you give them the all-clear.
+  activeDialogue: Take Arborium's East Gate and follow the old track south. Watch the Ogre's hammer. Once he's down, lend the Guild road crew a hand at the barricade.
+  locationHint: Arborium East Gate, then south along the old Trimery highway.
+  turnInHint: The Guild road crew is waiting on the Arborium side of the barricade.
+  stages:
+  - kind: 0
+    objectiveId:
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat the Ogre Roadwarden on the Arborium side of the highway
+    contentId: enemy.ogre-roadwarden
+    dungeonBossOnly: 0
+    familyId: ogre.roadwarden
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  - kind: 6
+    objectiveId:
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Help the Guild crew reopen the road. The Ogre's unsigned order says to keep it closed.
+    contentId: work.trimery.reopen-highway
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds:
+  - quest.arborium.road-survey
+  rewardXp: 6000
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 1
+  repeatable: 0
