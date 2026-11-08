@@ -31,6 +31,9 @@ MonoBehaviour:
   - classId: class.acolyte
     tier: 2
     preview: {fileID: 2272672115885069015, guid: 34e5c00d95f9a1746a936259cd20b9fa, type: 3}
+  - classId: class.priest
+    tier: 2
+    preview: {fileID: 2470267147790187079, guid: dac2c98c99294114f9359475faa5b1fd, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}

@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2470267147790187079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8269768299024734975}
+  - component: {fileID: 953512904449840845}
+  - component: {fileID: 1485748034879795129}
+  - component: {fileID: 1559122020442467568}
+  - component: {fileID: 7669713102757360382}
+  m_Layer: 0
+  m_Name: Priest menu presentation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8269768299024734975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470267147790187079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 47706230263704441}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &953512904449840845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470267147790187079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2f38359e91ea045b43b19c3938d2c9, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ActorStats
+  definition: {fileID: 11400000, guid: 685ca082674883d4589af170968be2fe, type: 2}
+  level: 1
+--- !u!114 &1485748034879795129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470267147790187079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3b7dd45b39f054bbe077007a7490be, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.CarriedInventory
+  definitions:
+  - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
+  - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
+  - {fileID: 11400000, guid: 2a8274656d6b65049804a4cd08dc172f, type: 2}
+  - {fileID: 11400000, guid: b688bab5c1961174caaf5ea4e6ebe9ac, type: 2}
+  - {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
+  - {fileID: 11400000, guid: c121e31e7a7355c4183c9543ddc9d7f3, type: 2}
+  - {fileID: 11400000, guid: 725d53cadff67cc41b58826e21a8407e, type: 2}
+  - {fileID: 11400000, guid: 92e02734ec2a3ba4898ea379aecc4d2c, type: 2}
+  - {fileID: 11400000, guid: 645c0926dff69c444a8734877b4b0ae1, type: 2}
+  - {fileID: 11400000, guid: 10ba21b36b2f8084dad05c0ecf0bca95, type: 2}
+  - {fileID: 11400000, guid: 8c91ba3c0a1ca4b47832001228ed2c73, type: 2}
+  - {fileID: 11400000, guid: 69d646f07338f8b4981d016dc7130a89, type: 2}
+  - {fileID: 11400000, guid: d51fa7d194a5bb64eae86775b1717991, type: 2}
+  - {fileID: 11400000, guid: 9fbf79ea2b24cb24aa7e579f899d78e8, type: 2}
+  - {fileID: 11400000, guid: 9fd1603b2755b4f44b2e445506c524c7, type: 2}
+  - {fileID: 11400000, guid: e75062e0b77882640a14dbd628b72b27, type: 2}
+  - {fileID: 11400000, guid: ed81e723107d4de4894982858fa30354, type: 2}
+  - {fileID: 11400000, guid: 8508db9dcbb7745448bb788eb03ee77f, type: 2}
+  - {fileID: 11400000, guid: 3fb60e45f41df794094b44ad9baa7d84, type: 2}
+  - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
+  - {fileID: 11400000, guid: ebcc26185f9ce1247bec9b8ab8770e4c, type: 2}
+  - {fileID: 11400000, guid: 413758f2cf924ed5b29dce1c0a41dd01, type: 2}
+  - {fileID: 11400000, guid: 413758f2cf924ed5b29dce1c0a41dd02, type: 2}
+  - {fileID: 11400000, guid: 30d173fda0410884b81eb71bce266609, type: 2}
+  - {fileID: 11400000, guid: 061d1d7ba3750c045a3861ff7773a656, type: 2}
+  - {fileID: 11400000, guid: 5c860df4f3cecf24bb104d87e1570aa8, type: 2}
+  - {fileID: 11400000, guid: b39a3737d31a5844baf1db62b558d841, type: 2}
+  - {fileID: 11400000, guid: ad4657c48e7f3b64582ae29125379430, type: 2}
+  - {fileID: 11400000, guid: ddbbdb3ce6c60ed4d989987805e6ad7c, type: 2}
+--- !u!114 &1559122020442467568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470267147790187079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f148c252758505f4c86ca88eaeedbb9f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.Equipment
+--- !u!114 &7669713102757360382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470267147790187079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713e4d943a5a91d46ae560ebb948778f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.EquipmentPresentation
+  bindings: []
+--- !u!1 &6216399103210447320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47706230263704441}
+  m_Layer: 0
+  m_Name: Class visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47706230263704441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6216399103210447320}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4957709722219497113}
+  m_Father: {fileID: 8269768299024734975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4848102754471223666
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 47706230263704441}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2161293999657133914, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_Name
+      value: Dawnwarden
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_Controller
+      value:
+      objectReference: {fileID: 9100000, guid: c1e17a8694e4f3a4ebd39aea64f962cc, type: 2}
+    - target: {fileID: 7952812107714691422, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+--- !u!4 &4957709722219497113 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1de001afd63b14e408aefd66a8475256, type: 3}
+  m_PrefabInstance: {fileID: 4848102754471223666}
+  m_PrefabAsset: {fileID: 0}
