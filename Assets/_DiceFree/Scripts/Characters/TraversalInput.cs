@@ -112,6 +112,15 @@ namespace DiceFree.Characters
                 if (interrupted) priest.CancelRevive();
                 else return;
             }
+            var acolyte = GetComponent<DiceFree.Skills.AcolyteSkillCaster>();
+            if (acolyte != null && acolyte.IsChanneling)
+            {
+                bool interrupted = movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
+                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                    interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
+                if (interrupted) acolyte.CancelChannel();
+                else return;
+            }
             var homeSkill=GetComponent<ReturnHomeAbility>();
             if(homeSkill!=null && homeSkill.Casting)
             {

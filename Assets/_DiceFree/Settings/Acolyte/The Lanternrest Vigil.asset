@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Lanternrest Vigil
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.acolyte-lanterns
+  title: The Lanternrest Vigil
+  requiredClassId: class.magically-touched-novice
+  requiredLevel: 30
+  version: 1
+  offer: Two travelers died far from their kin. Their remains have been prepared in Cornberg and Trimery. Bring them to Lanternrest and light their candles at the burial stone. Then we can speak of the Acolyte's Way.
+  activeDialogue: Find one wrapped bundle near the magical well in Cornberg and one near the healer in Trimery. Carry both to the stone bier at Lanternrest and complete the burial rite.
+  locationHint: Cornberg magical well and Trimery healer. Bring both bundles to Lanternrest Cemetery in southwest Arborium.
+  turnInHint: Speak to Mara at Lanternrest after the burial rite.
+  stages:
+  - kind: 5
+    objectiveId:
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction:
+    contentId:
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 2
+    alternatives:
+    - kind: 6
+      objectiveId: cornberg-remains
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Collect the prepared remains near Cornberg's magical well
+      contentId: work.cornberg.acolyte-remains
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: trimery-remains
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Collect the prepared remains near the Trimery healer
+      contentId: work.trimery.acolyte-remains
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+  - kind: 6
+    objectiveId:
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Lay the remains to rest and light the candles at Lanternrest
+    contentId: work.arborium.acolyte-burial
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

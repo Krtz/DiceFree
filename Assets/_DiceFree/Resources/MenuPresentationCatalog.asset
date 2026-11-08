@@ -28,6 +28,9 @@ MonoBehaviour:
   - classId: class.mage
     tier: 2
     preview: {fileID: 4040013528572641884, guid: 79233400b3991fd4294d0a1b7f5f988b, type: 3}
+  - classId: class.acolyte
+    tier: 2
+    preview: {fileID: 2272672115885069015, guid: 34e5c00d95f9a1746a936259cd20b9fa, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}

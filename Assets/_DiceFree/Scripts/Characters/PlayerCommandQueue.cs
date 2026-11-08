@@ -68,6 +68,7 @@ namespace DiceFree.Characters
         {
             GetComponent<MageSkillCaster>()?.CancelChannel();
             GetComponent<DiceFree.Skills.PriestSkillCaster>()?.CancelRevive();
+            GetComponent<DiceFree.Skills.AcolyteSkillCaster>()?.CancelChannel();
             if(!HasOrders)return;
             pending.Clear();
             current=null;

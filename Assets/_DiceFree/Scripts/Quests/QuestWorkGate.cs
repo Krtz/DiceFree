@@ -19,7 +19,9 @@ namespace DiceFree.Quests
         }
         public bool WorkAvailable(CombatActor actor)
         {
-            var journal=actor!=null?actor.GetComponent<QuestJournal>():null;var state=journal?.GetProgress(quest.stableId);
+            if (actor == null || (!string.IsNullOrEmpty(quest.requiredClassId) &&
+                actor.Stats.Definition.stableId != quest.requiredClassId)) return false;
+            var journal=actor.GetComponent<QuestJournal>();var state=journal?.GetProgress(quest.stableId);
             return state!=null&&state.definitionVersion==quest.version&&state.status==QuestStatus.Active&&state.stage==0&&
                 quest.stages[0].alternatives.Any(a=>a.objectiveId==objectiveId)&&!Completed(journal);
         }
