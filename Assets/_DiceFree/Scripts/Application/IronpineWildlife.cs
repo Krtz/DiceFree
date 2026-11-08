@@ -146,7 +146,7 @@ namespace DiceFree.Ironpine
         }
         private void OnDamaged(CombatActor source, DamageResult result)
         {
-            if (source != null && actor.IsHostileTo(source) && source.Faction == 0 &&
+            if (source != null && actor.CanTargetHostile(source) && source.Faction == 0 &&
                 InsideTerritory(source.transform.position))
             {
                 target = source;
@@ -176,7 +176,7 @@ namespace DiceFree.Ironpine
                 }
                 return;
             }
-            if (target != null && (!actor.IsHostileTo(target) || !InsideTerritory(target.transform.position)))
+            if (target != null && (!actor.CanTargetHostile(target) || !InsideTerritory(target.transform.position)))
                 Disengage();
             if (target != null && IsAlpha)
             {
@@ -220,7 +220,7 @@ namespace DiceFree.Ironpine
             float bestDistance = IsAlpha ? 15f : 10f;
             foreach (var candidate in CombatActor.All)
             {
-                if (candidate.Faction != 0 || !actor.IsHostileTo(candidate) ||
+                if (candidate.Faction != 0 || !actor.CanTargetHostile(candidate) ||
                     !InsideTerritory(candidate.transform.position) || !actor.HasSightOf(candidate)) continue;
                 float distance = Vector3.Distance(transform.position, candidate.transform.position);
                 if (distance < bestDistance) { best = candidate; bestDistance = distance; }

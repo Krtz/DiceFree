@@ -26,7 +26,11 @@ namespace DiceFree.World
             if (pending != null && pending.CanInteract(actor))
             {
                 actor.Motor.Stop(); Active = pending.Resolve(actor); pending = null;
-                if (Active != null) Active.Interact(actor);
+                if (Active != null)
+                {
+                    actor.Reveal();
+                    Active.Interact(actor);
+                }
             }
             else if (pending != null && !actor.Motor.Travelling) pending = null;
         }

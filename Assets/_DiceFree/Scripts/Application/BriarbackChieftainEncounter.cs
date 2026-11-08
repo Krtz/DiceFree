@@ -64,11 +64,13 @@ namespace DiceFree.Briarback
             actor.Health.Damaged += OnDamaged;
             actor.Health.Died += OnDied;
             actor.Health.Restored += OnRestored;
+            CombatActor.ThreatReduced += ReduceThreat;
         }
 
         void OnDisable()
         {
             EncounterHud.Unregister(this);
+            CombatActor.ThreatReduced -= ReduceThreat;
             if (actor?.Health != null)
             {
                 actor.Health.Damaged -= OnDamaged;
@@ -83,6 +85,11 @@ namespace DiceFree.Briarback
             if (source == null || source.Faction != 0 || !source.Alive) return;
             threat[source] = threat.TryGetValue(source, out var total) ? total + Mathf.Max(1, result.applied) : Mathf.Max(1, result.applied);
             EngageGuards(source);
+        }
+
+        void ReduceThreat(CombatActor source, float retained)
+        {
+            if (threat.TryGetValue(source,out float amount)) threat[source] = amount * retained;
         }
 
         void OnDied()
@@ -193,7 +200,7 @@ namespace DiceFree.Briarback
             if (facing.sqrMagnitude > .001f) transform.rotation = Quaternion.LookRotation(facing);
             yield return new WaitForSeconds(.65f); // Provisional wind-up; the design leaves Axe Throw wind-up open.
             AxeThrowStarted = false;
-            if (!actor.Alive || !target.Alive || aggro.Returning) yield break;
+            if (!actor.CanTargetHostile(target) || aggro.Returning) yield break;
             var go = new GameObject();
             go.name = "Briarback Chieftain homing axe";
             go.layer = 2;
@@ -206,7 +213,7 @@ namespace DiceFree.Briarback
         CombatActor HighestThreatOutsideMelee()
         {
             float melee = (basic.Definition?.reach ?? 1.1f) + actor.Radius;
-            return threat.Where(pair => pair.Key != null && pair.Key.Alive && pair.Key.Faction == 0 &&
+            return threat.Where(pair => actor.CanTargetHostile(pair.Key) && pair.Key.Faction == 0 &&
                     Vector3.Distance(transform.position, pair.Key.transform.position) > melee)
                 .OrderByDescending(pair => pair.Value).ThenBy(pair => (pair.Key.transform.position - transform.position).sqrMagnitude)
                 .Select(pair => pair.Key).FirstOrDefault();

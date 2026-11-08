@@ -1,0 +1,527 @@
+{
+  "sourceSha256": "7afe3f8f1cd788d19b12d77a8c4598dd95d9544c7536caaeffc2cb2a75d70e0e",
+  "materials": [
+    {
+      "name": "Umber-skin",
+      "color": [
+        0.41788506507873535,
+        0.18447498977184296,
+        0.11697066575288773,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.48000001907348633,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Warm-sclera",
+      "color": [
+        0.6104955673217773,
+        0.4793201684951782,
+        0.4125426113605499,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5600000023841858,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Green-glass-bead",
+      "color": [
+        0.19120168685913086,
+        0.42869049310684204,
+        0.31854677200317383,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.14000000059604645,
+      "smoothness": 0.6699999868869781,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Deep-petrol-quilted-cotton",
+      "color": [
+        0.015208514407277107,
+        0.05780543014407158,
+        0.05612849071621895,
+        1.0
+      ],
+      "baseMap": "Deep-petrol-quilted-cotton-dyed-threads.png",
+      "normalMap": "Woven-linen-tangent-normal.png",
+      "metallic": 0.0,
+      "smoothness": 0.25999999046325684,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Soot-linen",
+      "color": [
+        0.02518685907125473,
+        0.03433980792760849,
+        0.040915198624134064,
+        1.0
+      ],
+      "baseMap": "Soot-linen-dyed-threads.png",
+      "normalMap": "Woven-linen-tangent-normal.png",
+      "metallic": 0.0,
+      "smoothness": 0.24000000953674316,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Weathered-brick-lining",
+      "color": [
+        0.18116424977779388,
+        0.05448027700185776,
+        0.0382043719291687,
+        1.0
+      ],
+      "baseMap": "Weathered-brick-lining-dyed-threads.png",
+      "normalMap": "Woven-linen-tangent-normal.png",
+      "metallic": 0.0,
+      "smoothness": 0.3500000238418579,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Tarnished-rose-brass",
+      "color": [
+        0.4019777774810791,
+        0.23074005544185638,
+        0.09530746936798096,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.7200000286102295,
+      "smoothness": 0.6200000047683716,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Waxed-walnut-leather",
+      "color": [
+        0.05951123684644699,
+        0.03433980792760849,
+        0.02518685907125473,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5300000011920929,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Worn-silvery-copper",
+      "color": [
+        0.7529422044754028,
+        0.5520114302635193,
+        0.30946892499923706,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.6499999761581421,
+      "smoothness": 0.6399999856948853,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Carved-horn",
+      "color": [
+        0.7605245113372803,
+        0.5520114302635193,
+        0.366252601146698,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5800000131130219,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Pale-flax-stitching",
+      "color": [
+        0.4507857859134674,
+        0.3324515223503113,
+        0.15292614698410034,
+        1.0
+      ],
+      "baseMap": "Pale-flax-stitching-dyed-threads.png",
+      "normalMap": "Woven-linen-tangent-normal.png",
+      "metallic": 0.0,
+      "smoothness": 0.42000001668930054,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Moonlit-hair",
+      "color": [
+        0.12213877588510513,
+        0.06480326503515244,
+        0.0423114113509655,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5699999928474426,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Blue-black-hair",
+      "color": [
+        0.03189603239297867,
+        0.024157632142305374,
+        0.01850022003054619,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.6200000047683716,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Warm-umber-shadow",
+      "color": [
+        0.18116424977779388,
+        0.05780543014407158,
+        0.03071344457566738,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.44999998807907104,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Umber-leather-overcoat",
+      "color": [
+        0.14702726900577545,
+        0.07818742096424103,
+        0.04373503103852272,
+        1.0
+      ],
+      "baseMap": "Umber-leather-overcoat-dyed-threads.png",
+      "normalMap": "Woven-linen-tangent-normal.png",
+      "metallic": 0.0,
+      "smoothness": 0.3399999737739563,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Grey-olive-iris",
+      "color": [
+        0.17144110798835754,
+        0.21952620148658752,
+        0.11697066575288773,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.7400000095367432,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Natural-warm-nails",
+      "color": [
+        0.533276379108429,
+        0.21952620148658752,
+        0.14126329123973846,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5699999928474426,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Iris-edge",
+      "color": [
+        0.0666259378194809,
+        0.09758734703063965,
+        0.06301001459360123,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.6599999964237213,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Wine-tinted-lip",
+      "color": [
+        0.2462013214826584,
+        0.07818742096424103,
+        0.09989872574806213,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5300000011920929,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Deep-eye-and-lash",
+      "color": [
+        0.024157632142305374,
+        0.009721217676997185,
+        0.021219009533524513,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.0,
+      "smoothness": 0.5800000131130219,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Worn-teal-enamel",
+      "color": [
+        0.06301001459360123,
+        0.20507873594760895,
+        0.16826939582824707,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.30000001192092896,
+      "smoothness": 0.5800000131130219,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Brushed-blade-steel",
+      "color": [
+        0.533276379108429,
+        0.5972017645835876,
+        0.6307571530342102,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.7599999904632568,
+      "smoothness": 0.6699999868869781,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    },
+    {
+      "name": "Honed-blade-edge",
+      "color": [
+        0.8307698965072632,
+        0.8468732237815857,
+        0.7379103899002075,
+        1.0
+      ],
+      "baseMap": "",
+      "normalMap": "",
+      "metallic": 0.5899999737739563,
+      "smoothness": 0.7299999892711639,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionStrength": 0.0
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "first": 1,
+      "last": 61,
+      "loop": true
+    },
+    {
+      "name": "Locomotion",
+      "first": 66,
+      "last": 90,
+      "loop": true
+    },
+    {
+      "name": "Attack",
+      "first": 95,
+      "last": 121,
+      "loop": false
+    },
+    {
+      "name": "ArmedAttack",
+      "first": 126,
+      "last": 153,
+      "loop": false
+    },
+    {
+      "name": "Heal",
+      "first": 158,
+      "last": 183,
+      "loop": false
+    },
+    {
+      "name": "Cast",
+      "first": 188,
+      "last": 213,
+      "loop": false
+    },
+    {
+      "name": "Guard",
+      "first": 218,
+      "last": 241,
+      "loop": false
+    },
+    {
+      "name": "AttackLeft",
+      "first": 246,
+      "last": 272,
+      "loop": false
+    },
+    {
+      "name": "Hit",
+      "first": 287,
+      "last": 299,
+      "loop": false
+    },
+    {
+      "name": "Death",
+      "first": 304,
+      "last": 332,
+      "loop": false
+    }
+  ]
+}

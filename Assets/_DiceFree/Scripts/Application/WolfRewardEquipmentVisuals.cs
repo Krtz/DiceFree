@@ -68,7 +68,7 @@ namespace DiceFree.Visuals
                 binding.visuals=binding.visuals.Concat(new[]{group}).ToArray();
                 // Every main-hand item suppresses the class's default prop, without consuming an offhand.
                 var defaults=root.GetComponentsInChildren<Transform>(true).Where(t=>
-                    item.slot==EquipmentSlot.MainHand?(t.name=="Caster Staff"||t.name=="Mage Wand"||t.name=="Dawn Lantern"||t.name=="Foxglove Wand"||
+                    item.slot==EquipmentSlot.MainHand?(t.name=="Caster Staff"||t.name=="Mage Wand"||t.name=="Dawn Lantern"||t.name=="Foxglove Wand"||t.name=="Thief Right Dagger"||
                         t.name.IndexOf("greatsword",StringComparison.OrdinalIgnoreCase)>=0):
                     item.slot==EquipmentSlot.Chest&&t.name=="Mage layered coat");
                 binding.baselineVisuals=binding.baselineVisuals.Concat(defaults.Select(t=>t.gameObject))

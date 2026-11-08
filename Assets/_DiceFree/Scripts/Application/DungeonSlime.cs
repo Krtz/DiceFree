@@ -49,7 +49,7 @@ namespace DiceFree.Dungeons
         public bool TryCastRegentAttack(bool rolling)
         {
             if(Role!=SlimeRole.Regent||busy||!Run.Active)return false;
-            var players=Run.Living.ToArray();if(players.Length==0)return false;
+            var players=Run.Living.Where(Actor.CanTargetHostile).ToArray();if(players.Length==0)return false;
             StartCoroutine(rolling?Roll(players):Bounce(players));return true;
         }
         void Update()
@@ -58,10 +58,10 @@ namespace DiceFree.Dungeons
             if(Role==SlimeRole.Dummy){if(!Actor.Alive||Actor.Health.Current<Actor.Health.Maximum*.2f)Actor.Health.Restore();return;}
             if(!Run.Active||!Actor.Alive)return;
             if(IsBoss&&!Actor.CanAct){Actor.Motor.Stop();return;}
-            if(!IsBoss)return;
-            var living=Run.Living.ToArray();if(living.Length==0)return;
+            if(!IsBoss||busy)return;
+            var living=Run.Living.Where(Actor.CanTargetHostile).ToArray();
+            if(living.Length==0){PursuitTarget=null;Actor.Motor.Stop();return;}
             if(!engaged){if(living.All(p=>Vector3.Distance(p.transform.position,home)>12))return;engaged=true;nextAttack=Time.time+2;nextBump=Time.time+.5f;}
-            if(busy)return;
             Pursue(living);
             float ratio=Actor.Health.Current/Actor.Health.Maximum;
             if(ThresholdsConsumed==0&&ratio<=.7f||ThresholdsConsumed==1&&ratio<=.3f){ThresholdsConsumed++;StartCoroutine(Divide());return;}
@@ -73,7 +73,7 @@ namespace DiceFree.Dungeons
         }
         void OnDamaged(CombatActor source,DamageResult result)
         {
-            if(!IsBoss || Run==null || !Run.Active || !Actor.IsHostileTo(source) ||
+            if(!IsBoss || Run==null || !Run.Active || !Actor.CanTargetHostile(source) ||
                 !Run.Living.Contains(source))return;
             if(!engaged){engaged=true;nextAttack=Time.time+2;nextBump=Time.time+.5f;}
             PursuitTarget=source;
@@ -121,7 +121,7 @@ namespace DiceFree.Dungeons
             nextBump=Time.time+Mathf.Max(1.35f,definition.interval);
             yield return new WaitForSeconds(Mathf.Max(.18f,definition.windup));
             if(!busy&&Run!=null&&Run.Active&&Actor.Alive&&Actor.CanAct&&
-               victim!=null&&victim.Alive&&Actor.IsHostileTo(victim)&&
+               Actor.CanTargetHostile(victim)&&
                Vector3.Distance(transform.position,victim.transform.position)<=
                    Actor.Radius+victim.Radius+definition.reach+.1f)
             {

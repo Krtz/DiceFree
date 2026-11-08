@@ -30,7 +30,8 @@ namespace DiceFree.Combat
             float rawMultiplier = 1f,
             float basicAttackBonus = 0f,
             float basicAttackRangeOffset = 0f,
-            float skillFlatDamage = 0f)
+            float skillFlatDamage = 0f,
+            float finalRawMultiplier = 1f)
         {
             float baseRaw = coefficientOverride.HasValue
                 ? attack.RawDamage(source.Attributes, coefficientOverride.Value)
@@ -46,6 +47,7 @@ namespace DiceFree.Combat
                 baseRaw += source.BasicAttackFlatBonus;
                 baseRaw=Mathf.Max(0,baseRaw+Mathf.Clamp(basicAttackRangeOffset,source.Definition.basicAttackMinimumOffset,source.Definition.basicAttackMaximumOffset));
             }
+            baseRaw *= Mathf.Max(0, finalRawMultiplier);
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
             var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
@@ -63,12 +65,14 @@ namespace DiceFree.Combat
             ActionResolution action,
             float rawMultiplier = 1f,
             float basicAttackBonus = 0f,
-            float basicAttackRangeOffset = 0f)
+            float basicAttackRangeOffset = 0f,
+            float finalRawMultiplier = 1f)
         {
             if (action == null) throw new System.ArgumentNullException(nameof(action));
             // A miss never constructs raw packets or consults mitigation, and cannot resolve crit here.
             if (action.Hit.missed) return new DamageResult { action = action, channel = attack.channel, element = attack.element };
-            var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier, basicAttackBonus,basicAttackRangeOffset);
+            var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier, basicAttackBonus,
+                basicAttackRangeOffset, finalRawMultiplier: finalRawMultiplier);
             result.action = action;
             return result;
         }

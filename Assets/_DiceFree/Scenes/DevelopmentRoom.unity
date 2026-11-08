@@ -29893,6 +29893,9 @@ GameObject:
   - component: {fileID: 1724212351}
   - component: {fileID: 1724212350}
   - component: {fileID: 1724212349}
+  - component: {fileID: 1724212355}
+  - component: {fileID: 1724212354}
+  - component: {fileID: 1724212353}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -29922,6 +29925,7 @@ Transform:
   - {fileID: 1635985400}
   - {fileID: 1968122185}
   - {fileID: 1349983512}
+  - {fileID: 577845233}
   m_Father: {fileID: 1562633928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724212271
@@ -30302,6 +30306,9 @@ MonoBehaviour:
   - classId: class.acolyte
     visualRoot: {fileID: 1349983512}
     animator: {fileID: 464118837}
+  - classId: class.thief
+    visualRoot: {fileID: 577845233}
+    animator: {fileID: 1362352897}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30384,7 +30391,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1692bd4b38be5c248880802dbf5b31f2, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.ActorResourceController
   profiles:
   - {fileID: 11400000, guid: 5230fae6f1fedd746a22173b23caa3eb, type: 2}
@@ -30395,6 +30402,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08b0ef477e7d8474db63cc7c5189189d, type: 2}
   - {fileID: 11400000, guid: 616f232f5c8afc241bbbead3333ae244, type: 2}
   - {fileID: 11400000, guid: 2ced4e1facdb53a43a196f482945e1d2, type: 2}
+  - {fileID: 11400000, guid: 7edba6ce60fb9334fbfaf5865b58d0d3, type: 2}
 --- !u!114 &1724212303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30418,7 +30426,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a0b1cc43f356d545a75d85386af6753, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.AdvancementController
   classCatalog: {fileID: 11400000, guid: a6191b54f2db4df4183fabba04d0433d, type: 2}
   advancements:
@@ -30428,6 +30436,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0c5cb014421f3443bdf50fe5ee00a8f, type: 2}
   - {fileID: 11400000, guid: 9bea0c13d050ba54fabfaf879b0b195b, type: 2}
   - {fileID: 11400000, guid: 73fc493ae7fdb834a92fce193cbd2dde, type: 2}
+  - {fileID: 11400000, guid: 435eb1d9bd4fd0c4db26b67226233878, type: 2}
 --- !u!114 &1724212305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30650,6 +30659,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 06cafe21a41dbee43bb01fd9819b1e42, type: 2}
   - {fileID: 11400000, guid: ebcc26185f9ce1247bec9b8ab8770e4c, type: 2}
   - {fileID: 11400000, guid: 8de1a2de41902ba4b80cfa161076f06c, type: 2}
+  - {fileID: 11400000, guid: 462d973c6a4c405489e1a468f69dd13f, type: 2}
+  - {fileID: 11400000, guid: 0234ab6f3f412b24ea004def65e34506, type: 2}
 --- !u!114 &1724212316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38694,6 +38705,169 @@ Transform:
   - {fileID: 464118836}
   m_Father: {fileID: 1724212270}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &577845232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 577845233}
+  - component: {fileID: 577845234}
+  m_Layer: 0
+  m_Name: Quiet Hands Thief
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &577845233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577845232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1362352896}
+  m_Father: {fileID: 1724212270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577845234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577845232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03792ca3bfb59874a93945cc66c0cce7, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.ThiefStealthPresentation
+--- !u!1001 &1362352895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 577845233}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_Name
+      value: QuietHandsThief
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+      propertyPath: m_Controller
+      value:
+      objectReference: {fileID: 9100000, guid: 2c839283f9db2474ab5f649f7cf133fb, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+--- !u!4 &1362352896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+  m_PrefabInstance: {fileID: 1362352895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1362352897 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 501c0905ecd85be4c8f942a1b2ff94f4, type: 3}
+  m_PrefabInstance: {fileID: 1362352895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1724212353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba915e06ce4d2c499bed62de2ea1529, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.ThiefAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: 376d7ad5455283b47924aad73e2385f0, type: 2}
+  - {fileID: 2800000, guid: 0a443a570f69cdc4d8a1abdefbfed5bd, type: 2}
+  - {fileID: 2800000, guid: c4fedd2da8c088c4f908dc6d468cf521, type: 2}
+  - {fileID: 2800000, guid: dd9b1fd2e64262e45b75226d4c6ddca4, type: 2}
+  - {fileID: 2800000, guid: 464f43a541ccf424f9c44bdfe120eb15, type: 2}
+  - {fileID: 2800000, guid: 3984bf36a5269d44bb8312bf9778ae14, type: 2}
+--- !u!114 &1724212354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241f73cb0295fd941aeaea680f5cee9b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.ThiefSkillCaster
+  stab: {fileID: 11400000, guid: b56c19f3573fb4b479020669c72cdc96, type: 2}
+  naturePoison: {fileID: 11400000, guid: a62c212f57c41cb4d893ba835a536962, type: 2}
+  fan: {fileID: 11400000, guid: a46fb53ff911b874b9732eb724335c13, type: 2}
+  techSmoke: {fileID: 11400000, guid: 7326ef20ebf371a4ab67ee86471afa69, type: 2}
+--- !u!114 &1724212355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55a3e7683c068c4fbedb4ccfdc1ac7c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.ThiefSkillProgression
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

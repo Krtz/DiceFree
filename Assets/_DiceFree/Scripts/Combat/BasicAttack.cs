@@ -34,7 +34,7 @@ namespace DiceFree.Combat
         private void OnDisable() => Cancel();
         public bool Order(CombatActor target)
         {
-            if (!actor.CanAct || !actor.IsHostileTo(target) || Definition == null) return false;
+            if (!actor.CanAct || !actor.CanTargetHostile(target) || Definition == null) return false;
             if (Target != target) { Cancel(); Target = target; }
             return true;
         }
@@ -51,7 +51,7 @@ namespace DiceFree.Combat
         {
             if (Target == null) return;
             if (!actor.CanAct) { winding = false; actor.Motor.Stop(); State = "Disabled"; return; }
-            if (!actor.IsHostileTo(Target)) { Cancel(); return; }
+            if (!actor.CanTargetHostile(Target)) { Cancel(); return; }
             if (!InRange(Target) || !actor.HasSightOf(Target))
             {
                 winding = false; State = "Approaching";
@@ -70,7 +70,9 @@ namespace DiceFree.Combat
                 State = "Wind-up";
                 if (Time.time < impactAt) return;
                 winding = false;
-                var resolution = AccuracyResolver.Resolve(actor, Definition);
+                var thief = GetComponent<DiceFree.Skills.ThiefSkillCaster>();
+                float opener = thief?.ConsumeOpener() ?? 1;
+                var resolution = AccuracyResolver.Resolve(actor, Definition, critical: thief?.BasicCriticalRule());
                 var packet = DamageResolver.CalculatePacket(
                     actor.Stats,
                     Target.Stats,
@@ -78,7 +80,8 @@ namespace DiceFree.Combat
                     resolution,
                     Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                     Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
-                    Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset));
+                    Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
+                    finalRawMultiplier: opener);
                 packet = Target.Health.ApplyPacket(actor, packet);
                 if (!packet.Missed) Connected?.Invoke(Target, packet);
                 if (packet.Missed) Misses++;

@@ -13,6 +13,7 @@ namespace DiceFree.UI
         NoviceSkillCaster novice;PhysicalSkillCaster physical;MagicalSkillCaster magical;
         MageSkillCaster mage;GreatbladeSkillCaster greatblade;PriestSkillCaster priest;
         AcolyteSkillCaster acolyte;
+        ThiefSkillCaster thief;
         AnimatorOverrideController sessionController;RuntimeAnimatorController previousController;
         Transform spinVisual;Quaternion spinRest;float spinStarted,committedUntil;
         bool licensedSpin,spinning,committed;float armedDuration=.9f,armedImpact=.48f;
@@ -20,13 +21,13 @@ namespace DiceFree.UI
         public string State => state;
         public string ControllerClassId => classId;
         public bool SupportsCurrentClass => Resource(actor?.Stats.Definition?.stableId)!=null;
-        bool controllerTwoHanded;
+        bool controllerTwoHanded, thiefLeft;
         public bool UsesTwoHandedStance=>equipment!=null&&equipment.UsesTwoHandedStance;
-        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();priest=GetComponent<PriestSkillCaster>();acolyte=GetComponent<AcolyteSkillCaster>();}
-        void OnEnable(){if(acolyte!=null)acolyte.Casted+=AcolyteCast;if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
-        void OnDisable(){if(acolyte!=null)acolyte.Casted-=AcolyteCast;if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
+        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();priest=GetComponent<PriestSkillCaster>();acolyte=GetComponent<AcolyteSkillCaster>();thief=GetComponent<ThiefSkillCaster>();}
+        void OnEnable(){if(thief!=null)thief.Casted+=ThiefCast;if(acolyte!=null)acolyte.Casted+=AcolyteCast;if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
+        void OnDisable(){if(thief!=null)thief.Casted-=ThiefCast;if(acolyte!=null)acolyte.Casted-=AcolyteCast;if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
         void EquipmentChanged(){armed=false;if(equipment!=null)foreach(var item in equipment.Slots)if(item.slotId==EquipmentSlot.MainHand.ToString()&&equipment.IsResolved(item))armed=true;}
-        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte",_=>null};
+        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte","class.thief"=>"TierTwo/Thief",_=>null};
         void RestoreSpin(){if(spinning&&spinVisual!=null)spinVisual.localRotation=spinRest;spinning=false;spinVisual=null;}
         void ReleaseController()
         {
@@ -57,7 +58,7 @@ namespace DiceFree.UI
             if(model==animator&&classId==id&&controllerTwoHanded==twoHanded)return true;
             var controller=Resources.Load<RuntimeAnimatorController>("PlayerMotion/"+resource);if(controller==null)return false;
             ReleaseController();model=animator;previousController=model.runtimeAnimatorController;classId=id;state=null;hold=0;winding=false;committed=false;alive=actor.Alive;armedDuration=.9f;armedImpact=.48f;
-            controllerTwoHanded=twoHanded;
+            controllerTwoHanded=twoHanded;thiefLeft=false;
             model.runtimeAnimatorController=id=="class.greatblade"&&twoHanded?GreatbladeController(controller):controller;model.applyRootMotion=false;model.Rebind();model.Update(0);Play("Idle");return true;
         }
         bool Current()=>Ensure(GetComponent<NovicePresentationDriver>()?.VisualAnimator);
@@ -92,7 +93,12 @@ namespace DiceFree.UI
             if(now&&!winding)
             {
                 float windup=basic.Definition.windup/Mathf.Max(.1f,actor.Stats.AttackSpeed);bool weapon=armed||classId=="class.greatblade";float rate=(weapon?armedImpact:.48f)/Mathf.Max(.05f,windup);
-                Play(BasicState(),(weapon?armedDuration:.85f)/rate,rate,true);
+                if(classId==ThiefSkillProgression.ThiefClassId)
+                {
+                    Play(thiefLeft?"AttackLeft":"Attack",.86f/rate,rate,true);
+                    thiefLeft=!thiefLeft;
+                }
+                else Play(BasicState(),(weapon?armedDuration:.85f)/rate,rate,true);
             }
             winding=now;
             if(classId=="class.greatblade"&&greatblade!=null&&committed)
@@ -131,6 +137,11 @@ namespace DiceFree.UI
         {
             if(!Current())return;
             Play(acolyte.IsChanneling?"Channel":"Cast",.82f,1,true);
+        }
+        void ThiefCast(ThiefSkill skill)
+        {
+            if(!Current())return;
+            Play(skill==ThiefSkill.Envenom?"Attack":"Cast",.6f,1.2f,true);
         }
         void NoviceCast(NoviceSkillDefinition skill)
         {

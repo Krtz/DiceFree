@@ -11,8 +11,9 @@ namespace DiceFree.Combat
     {
         private static readonly List<CombatActor> actors = new();
         public static IReadOnlyList<CombatActor> All => actors;
+        public static event System.Action<CombatActor,float> ThreatReduced;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void ResetSessionRegistry() => actors.Clear();
+        private static void ResetSessionRegistry() { actors.Clear(); ThreatReduced = null; }
         [SerializeField] private int faction;
         [SerializeField, Min(0.1f)] private float radius = 0.45f;
         public int Faction => faction;
@@ -122,6 +123,17 @@ namespace DiceFree.Combat
         private void OnRestore() { Motor.SetMotionAllowed(true); SetColliders(true); }
         private void SetColliders(bool value) { foreach (var collider in GetComponents<Collider>()) collider.enabled = value; }
         public bool IsHostileTo(CombatActor other) => Alive && other != null && other.Alive && other != this && faction != other.faction;
+        public bool Concealed { get; private set; }
+        public bool CanTargetHostile(CombatActor other) => IsHostileTo(other) && !other.Concealed;
+        public void Conceal(float threatRetention)
+        {
+            Concealed = true;
+            ThreatReduced?.Invoke(this, Mathf.Clamp01(threatRetention));
+            foreach (var other in actors)
+                if (other.IsHostileTo(this) && other.GetComponent<BasicAttack>() is { } attack && attack.Target == this)
+                    attack.Cancel();
+        }
+        public void Reveal() => Concealed = false;
         public bool IsFriendlyTo(CombatActor other) => Alive && other != null && other.Alive && faction == other.faction;
         public bool HasSightOf(CombatActor other) => !Physics.Linecast(transform.position + Vector3.up * 0.8f,
             other.transform.position + Vector3.up * 0.8f, 1 << 9, QueryTriggerInteraction.Ignore);
