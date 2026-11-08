@@ -1,5 +1,6 @@
 using DiceFree.Combat;
 using DiceFree.Input;
+using DiceFree.Skills;
 using DiceFree.UI;
 using DiceFree.World;
 using UnityEngine;
@@ -33,6 +34,11 @@ namespace DiceFree.Characters
         public void BeginAttackTargeting()
         {
             if(!actor.CanAct||skillTargeting==null)return;
+            if (SelectedSkeleton is AcolyteSkeleton skeleton)
+            {
+                skillTargeting.BeginAttackMove(skeleton.OrderAttack, skeleton.OrderMove);
+                return;
+            }
             GetComponent<ReturnHomeAbility>()?.Cancel();
             // Starting the targeting cursor is not issuing the order.
             // In WC3 you may press X first, THEN hold Shift when choosing
@@ -67,6 +73,7 @@ namespace DiceFree.Characters
             skillTargeting = GetComponent<SkillTargetingController>();
             actor = GetComponent<CombatActor>();
             gameplayPreferences = GameplayPreferences.Current;
+            GetComponent<AcolyteSkillCaster>()?.SetAutoRetaliateSource(() => gameplayPreferences.AutoRetaliate);
             bindings = InputBindings.Current;
             foreach(var item in GetComponents<MonoBehaviour>())
                 if(item is IQueuedOrders found){orders=found;break;}
@@ -191,6 +198,36 @@ namespace DiceFree.Characters
             CancelAttackMove();
             selection.Select(target);
             return attack.Order(target);
+        }
+
+        private AcolyteSkeleton SelectedSkeleton
+        {
+            get
+            {
+                var target = selection?.Selected;
+                if (target == null || !target.Alive) return null;
+                var skeleton = target.GetComponent<AcolyteSkeleton>();
+                return skeleton != null && skeleton.Owner == actor ? skeleton : null;
+            }
+        }
+
+        public bool TryOrderSelectedSkeleton(Vector2 pointer, Camera camera)
+        {
+            var skeleton = SelectedSkeleton;
+            if (skeleton == null || camera == null) return false;
+            var target = Pick(pointer);
+            if (target != null && skeleton.Actor.IsHostileTo(target)) skeleton.OrderAttack(target);
+            else if (ArboriumInterior.RaycastGround(camera.ScreenPointToRay(pointer), out var ground))
+                skeleton.OrderMove(ground.point);
+            return true;
+        }
+
+        public bool TryStopSelectedSkeleton()
+        {
+            var skeleton = SelectedSkeleton;
+            if (skeleton == null) return false;
+            skeleton.Stop();
+            return true;
         }
     }
 }

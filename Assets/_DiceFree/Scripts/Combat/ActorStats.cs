@@ -20,6 +20,7 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, ResistanceCapModifier> capModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, AttributeValues> attributeContributions = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> attackSpeedPercentModifiers = new(StringComparer.Ordinal);
+        private readonly SortedDictionary<string, float> attackRateReductions = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> movementSpeedPercentModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, DamageTakenModifier> damageTakenModifiers = new(StringComparer.Ordinal);
         private int resurrectionSicknessStacks;
@@ -131,6 +132,17 @@ namespace DiceFree.Combat
         {
             if (attackSpeedPercentModifiers.Remove(sourceId)) Changed?.Invoke(MaximumHp);
         }
+        public void SetAttackRateReduction(string sourceId, float attacksPerSecond)
+        {
+            if (string.IsNullOrWhiteSpace(sourceId) || !float.IsFinite(attacksPerSecond) || attacksPerSecond < 0)
+                throw new ArgumentException("Attack-rate reduction needs a stable source and non-negative rate.");
+            attackRateReductions[sourceId] = attacksPerSecond;
+            Changed?.Invoke(MaximumHp);
+        }
+        public void RemoveAttackRateReduction(string sourceId)
+        {
+            if (attackRateReductions.Remove(sourceId)) Changed?.Invoke(MaximumHp);
+        }
         public void SetMovementSpeedPercentModifier(string sourceId, float percent)
         {
             if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(percent) || float.IsInfinity(percent) || percent <= -95)
@@ -215,7 +227,7 @@ namespace DiceFree.Combat
             float previous = MaximumHp;
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
             resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear();
-            attackSpeedPercentModifiers.Clear(); movementSpeedPercentModifiers.Clear(); damageTakenModifiers.Clear(); Changed?.Invoke(previous);
+            attackSpeedPercentModifiers.Clear(); attackRateReductions.Clear(); movementSpeedPercentModifiers.Clear(); damageTakenModifiers.Clear(); Changed?.Invoke(previous);
         }
         private readonly SortedDictionary<string, EquipmentStats> equipment = new(StringComparer.Ordinal);
         public void SetEquipmentContribution(string sourceId, EquipmentStats value)
@@ -262,9 +274,19 @@ namespace DiceFree.Combat
                 return total;
             }
         }
-        public float AttackSpeed => (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed))
-                                    * (1 + EquipmentTotal.attackSpeedPercent / 100f)
-                                    * (1 + TemporaryAttackSpeedPercent / 100f);
+        public float AttackSpeed
+        {
+            get
+            {
+                float speed = (1 + Attributes.agility * SecondaryCoefficient(SecondaryStat.AttackSpeed)) *
+                    (1 + EquipmentTotal.attackSpeedPercent / 100f) * (1 + TemporaryAttackSpeedPercent / 100f);
+                if (attackRateReductions.Count == 0 || definition.basicAttack == null) return speed;
+                float reduction = 0;
+                foreach (float value in attackRateReductions.Values) reduction += value;
+                float interval = Mathf.Max(definition.basicAttack.interval, definition.basicAttack.windup);
+                return Mathf.Max(.05f, speed - reduction * interval);
+            }
+        }
         public float HealingDone => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingDone);
         public float HealingReceived => 1 + Attributes.spirit * SecondaryCoefficient(SecondaryStat.HealingReceived);
         // Underlying reference includes class, attributes and equipped gear.

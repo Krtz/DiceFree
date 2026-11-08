@@ -48,8 +48,7 @@ public static class PriestCompleteAuthoring
         try
         {
             AssetDatabase.Refresh();
-            var export = Newtonsoft.Json.JsonConvert.DeserializeObject<Export>(Load<TextAsset>(Art + "DawnwardenImport.json").text);
-            var controller = PrepareArt(export);
+            var controller = PrepareArt(Model, Art, Controller, Art + "DawnwardenImport.json");
             var burst = Attack(PriestSkill.LightBurst, "skill.priest.light-burst", SkillAssets + "Light.asset", 10);
             var aegis = Attack(PriestSkill.IceAegis, "skill.priest.ice-aegis", Elements + "Ice.asset", .65f);
             var growth = Attack(PriestSkill.WildGrowth, "skill.priest.wild-growth", Elements + "Nature.asset", .9f);
@@ -70,9 +69,10 @@ public static class PriestCompleteAuthoring
         finally { EditorSceneManager.RestoreSceneManagerSetup(setup); }
     }
 
-    private static AnimatorController PrepareArt(Export export)
+    public static AnimatorController PrepareArt(string modelPath, string artFolder, string controllerPath, string manifestPath)
     {
-        var importer = (ModelImporter)AssetImporter.GetAtPath(Model);
+        var export = Newtonsoft.Json.JsonConvert.DeserializeObject<Export>(Load<TextAsset>(manifestPath).text);
+        var importer = (ModelImporter)AssetImporter.GetAtPath(modelPath);
         importer.animationType = ModelImporterAnimationType.Generic;
         importer.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
         importer.importAnimation = true;
@@ -85,7 +85,7 @@ public static class PriestCompleteAuthoring
         importer.skinWeights = ModelImporterSkinWeights.Custom;
         importer.maxBonesPerVertex = 8;
         var take = importer.defaultClipAnimations.FirstOrDefault();
-        if (take == null) throw new InvalidOperationException("Dawnwarden FBX is missing its action take.");
+        if (take == null) throw new InvalidOperationException(modelPath + " is missing its action take.");
         importer.clipAnimations = export.clips.Select(c => new ModelImporterClipAnimation
         {
             name = c.name, takeName = take.takeName,
@@ -93,23 +93,23 @@ public static class PriestCompleteAuthoring
             loopTime = c.loop, loopPose = c.loop,
             lockRootRotation = true, lockRootHeightY = true, lockRootPositionXZ = true
         }).ToArray();
-        if (!AssetDatabase.IsValidFolder(Art + "Materials"))
-            AssetDatabase.CreateFolder(Art.TrimEnd('/'), "Materials");
+        if (!AssetDatabase.IsValidFolder(artFolder + "Materials"))
+            AssetDatabase.CreateFolder(artFolder.TrimEnd('/'), "Materials");
         foreach (var entry in export.materials)
         {
-            string path = Art + "Materials/" + entry.name + ".mat";
+            string path = artFolder + "Materials/" + entry.name + ".mat";
             var material = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (material == null)
             {
                 material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
                 AssetDatabase.CreateAsset(material, path);
             }
-            var baseMap = Texture(entry.baseMap, false);
+            var baseMap = Texture(artFolder, entry.baseMap, false);
             material.SetColor("_BaseColor", baseMap == null ? ColorOf(entry.color).gamma : Color.white);
             material.SetFloat("_Metallic", entry.metallic);
             material.SetFloat("_Smoothness", entry.smoothness);
             material.SetTexture("_BaseMap", baseMap);
-            var normal = Texture(entry.normalMap, true);
+            var normal = Texture(artFolder, entry.normalMap, true);
             material.SetTexture("_BumpMap", normal);
             if (normal != null) material.EnableKeyword("_NORMALMAP");
             if (entry.emissionStrength > 0)
@@ -121,10 +121,10 @@ public static class PriestCompleteAuthoring
             importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), entry.name), material);
         }
         importer.SaveAndReimport();
-        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(Controller) ??
-            AnimatorController.CreateAnimatorControllerAtPath(Controller);
+        var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(controllerPath) ??
+            AnimatorController.CreateAnimatorControllerAtPath(controllerPath);
         var stateMachine = controller.layers[0].stateMachine;
-        foreach (var clip in AssetDatabase.LoadAllAssetsAtPath(Model).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__")))
+        foreach (var clip in AssetDatabase.LoadAllAssetsAtPath(modelPath).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__")))
         {
             var state = stateMachine.states.SingleOrDefault(s => s.state.name == clip.name).state ?? stateMachine.AddState(clip.name);
             state.motion = clip;
@@ -134,16 +134,16 @@ public static class PriestCompleteAuthoring
         return controller;
     }
 
-    private static Texture2D Texture(string file, bool normal)
+    private static Texture2D Texture(string artFolder, string file, bool normal)
     {
         if (string.IsNullOrEmpty(file)) return null;
-        if (normal && AssetImporter.GetAtPath(Art + file) is TextureImporter importer &&
+        if (normal && AssetImporter.GetAtPath(artFolder + file) is TextureImporter importer &&
             importer.textureType != TextureImporterType.NormalMap)
         {
             importer.textureType = TextureImporterType.NormalMap;
             importer.SaveAndReimport();
         }
-        return Load<Texture2D>(Art + file);
+        return Load<Texture2D>(artFolder + file);
     }
 
     private static Color ColorOf(float[] values) => new(values[0], values[1], values[2], values[3]);

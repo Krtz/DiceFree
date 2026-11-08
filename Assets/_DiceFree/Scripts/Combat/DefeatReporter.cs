@@ -9,6 +9,7 @@ namespace DiceFree.Combat
         [SerializeField] private CombatActor creditOwner;
         private CombatActor actor;
         private bool reported;
+        public void SetCreditOwner(CombatActor owner) => creditOwner = owner;
         private void Awake() => actor = GetComponent<CombatActor>();
         private void OnEnable() { actor.Health.Defeated += OnDefeated; actor.Health.Restored += OnRestored; }
         private void OnDisable() { actor.Health.Defeated -= OnDefeated; actor.Health.Restored -= OnRestored; }

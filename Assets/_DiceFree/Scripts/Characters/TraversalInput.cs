@@ -97,6 +97,12 @@ namespace DiceFree.Characters
                 return;
             }
 
+            if (stop.WasPressedThisFrame() && combatInput?.TryStopSelectedSkeleton() == true) return;
+            if (click.WasPressedThisFrame() && Mouse.current != null &&
+                (skillTargeting == null || (!skillTargeting.Active && !skillTargeting.InputConsumedThisFrame)) &&
+                !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()) &&
+                combatInput?.TryOrderSelectedSkeleton(Mouse.current.position.ReadValue(), worldCamera) == true) return;
+
             // Return Home is a rooted channel. Inputting movement or Stop
             // cancels it before executing the normal movement command.
             var mage=GetComponent<MageSkillCaster>();

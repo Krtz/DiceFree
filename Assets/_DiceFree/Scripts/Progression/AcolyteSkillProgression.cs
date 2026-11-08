@@ -7,15 +7,23 @@ using UnityEngine;
 
 namespace DiceFree.Skills
 {
-    public enum AcolyteSkill { DrainLife, MortalCoil }
+    public enum AcolyteSkill { DrainLife, MortalCoil, WitheringCurse, RadiationPlague, SummonSkeleton, OccultAdept }
 
     [DisallowMultipleComponent, RequireComponent(typeof(ExperienceProgression))]
     public sealed class AcolyteSkillProgression : MonoBehaviour, IClassSkillState
     {
         public const string AcolyteClassId = "class.acolyte";
         public const string SoulResourceId = "resource.soul-charge";
-        private static readonly string[] Ids = { "skill.acolyte.drain-life", "skill.acolyte.mortal-coil" };
-        public const int SkillCount = 2;
+        private static readonly string[] Ids = {
+            "skill.acolyte.drain-life", "skill.acolyte.mortal-coil", "skill.acolyte.withering-curse",
+            "skill.acolyte.radiation-plague", "skill.acolyte.summon-skeleton", "skill.acolyte.occult-adept"
+        };
+        private static readonly string[] Names = {
+            "Drain Life", "Mortal Coil", "Withering Curse", "Radiation Plague", "Summon Skeleton", "Occult Adept"
+        };
+        private static readonly int[] Caps = { 20, 10, 14, 16, 12, 8 };
+        private static readonly int[] RankIntervals = { 4, 7, 5, 5, 6, 10 };
+        public const int SkillCount = 6;
         private readonly int[] ranks = new int[SkillCount];
         private ExperienceProgression experience;
 
@@ -30,10 +38,10 @@ namespace DiceFree.Skills
         private void Notify() => Changed?.Invoke();
 
         private static bool Known(AcolyteSkill skill) => (uint)skill < SkillCount;
-        public static string Name(AcolyteSkill skill) => skill == AcolyteSkill.DrainLife ? "Drain Life" : "Mortal Coil";
-        public static int MaxRank(AcolyteSkill skill) => !Known(skill) ? 0 : skill == AcolyteSkill.DrainLife ? 20 : 10;
+        public static string Name(AcolyteSkill skill) => Known(skill) ? Names[(int)skill] : "";
+        public static int MaxRank(AcolyteSkill skill) => Known(skill) ? Caps[(int)skill] : 0;
         public static int RequiredLevel(AcolyteSkill skill, int rank) =>
-            skill == AcolyteSkill.DrainLife ? 1 + 4 * (rank - 1) : 6 + 7 * (rank - 1);
+            Known(skill) ? (skill == AcolyteSkill.MortalCoil ? 6 : 1) + RankIntervals[(int)skill] * (rank - 1) : int.MaxValue;
         public int Rank(AcolyteSkill skill) => Active && Known(skill) ? ranks[(int)skill] : 0;
 
         public bool CanSpend(AcolyteSkill skill)
