@@ -9,7 +9,7 @@ namespace DiceFree.Briarback
 {
     /// <summary>Single-phase outdoor boss behavior for the upper Briarback court.</summary>
     [DisallowMultipleComponent, RequireComponent(typeof(CombatActor), typeof(BasicAttack), typeof(AggroBehaviour))]
-    public sealed class BriarbackChieftainEncounter : MonoBehaviour, IEncounterHudSource
+    public sealed class BriarbackChieftainEncounter : MonoBehaviour, IEncounterHudSource, IInterruptibleCombatCast, IChallengeThreatReceiver
     {
         public AttackDefinition overheadSmash;
         public AttackDefinition axeThrow;
@@ -33,6 +33,20 @@ namespace DiceFree.Briarback
         bool winding;
 
         public bool Winding => winding;
+        public bool AllowsForcedChallenge => false;
+
+        public void AddChallengeThreat(CombatActor source, float amount)
+        {
+            threat.TryGetValue(source, out float previous);
+            threat[source] = previous + amount;
+        }
+
+        public bool TryInterruptCast()
+        {
+            if (!winding) return false;
+            CancelSmash();
+            return true;
+        }
         public CombatActor EncounterActor => actor;
         public int LivingGuards => (eliteWarrior != null && eliteWarrior.Alive ? 1 : 0) + (eliteBrute != null && eliteBrute.Alive ? 1 : 0);
         public string CastLabel => "Overhead smash - leave the red strip";

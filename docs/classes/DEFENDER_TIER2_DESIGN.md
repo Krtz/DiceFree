@@ -5,6 +5,15 @@
 **Branch:** `integration/world1-foundation`  
 **References:** [Tier II roster v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [original five skill concepts](../TIER2_CORE_CLASSES_DESIGN_V01.md), [class progression](../CLASS_PROGRESSION.md), [stats and shields](../STATS_AND_DAMAGE.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Greatblade/Mage rank audit](../TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md).
 
+## Development Room implementation
+
+Choose **Defender** in the Development Room to try the six skills and approved 80-rank progression. The test room creates a separate level-1 manifestation and retains the Physically Blessed Novice parent in the test session. The current visuals use the existing physical rig with a new Trimery sword and shield.
+
+First-pass tuning uses 8s Shield Bash, 15s Challenge, 22s Bulwark, 11s Shield Sweep, and 22s Iron Guard cooldowns. Iron Guard preserves normal crowd-control behavior. Resolve starts empty, decays by one every three seconds out of combat, and uses a 12-point burst limit replenished at 12 points per second for incoming hits. Bulwark spends 25 Resolve. Shield Sweep snapshots the allies in range on cast.
+
+The Trimery gate-defense trial, permanent overworld unlock, and final character art are separate from this development build. The original design interview below records the approved mechanics and open decisions.
+
+
 ## Confirmed Defender decisions — updated through Round 5 (2026-10-19)
 
 | Area | Confirmed by user | Still awaiting specific design |

@@ -5,7 +5,7 @@ namespace DiceFree.Briarback
     // serializes them. New production roles are appended as the region is migrated.
     public enum QuilboarRole { Raider, SpearThrower, Totemcaller, Harrowtusk, Warrior, Brute, FireShaman, EarthShaman, LightningShaman, IceShaman, Chieftain }
     [DefaultExecutionOrder(-10),DisallowMultipleComponent,RequireComponent(typeof(CombatActor),typeof(BasicAttack),typeof(AggroBehaviour))]
-    public sealed class QuilboarCombat:MonoBehaviour,IBasicAttackApproachProvider
+    public sealed class QuilboarCombat:MonoBehaviour,IBasicAttackApproachProvider,IInterruptibleCombatCast
     {
         public QuilboarRole role;public AttackDefinition slam;
         [Min(0)] public float protectionRadius=6f;
@@ -142,6 +142,13 @@ namespace DiceFree.Briarback
             warningMaterial=new Material(Shader.Find("Universal Render Pipeline/Unlit")){color=new Color(1,.5f,.06f)};
             warning.AddComponent<MeshRenderer>().sharedMaterial=warningMaterial;
         }
+        public bool TryInterruptCast()
+        {
+            if (!Winding) return false;
+            Cancel();
+            return true;
+        }
+
         public void Cancel(){
             if(actor==null||!actor.Alive)ClearWarriorShield();
             Winding=false;if(actor!=null){actor.SetActionBlocked(Block,false);actor.Motor.SetMotionBlocked(Block,false);}

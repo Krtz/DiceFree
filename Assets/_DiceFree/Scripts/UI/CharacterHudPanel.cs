@@ -118,14 +118,16 @@ namespace DiceFree.UI
                 $"{player.Health.Current:0} / {hpMaximum:0}");
 
             var resourceRect = new Rect(inner.x, hpRect.yMax + gap, inner.width, barHeight);
-            string resourceId=resources!=null&&resources.Has(GreatbladeSkillCaster.MomentumId)?GreatbladeSkillCaster.MomentumId:ResourceIds.Mana;
+            bool defender = resources?.Has(DiceFree.Skills.DefenderSkillCaster.ResolveId) == true;
+            string resourceId = defender ? DiceFree.Skills.DefenderSkillCaster.ResolveId :
+                resources?.Has(GreatbladeSkillCaster.MomentumId) == true ? GreatbladeSkillCaster.MomentumId : ResourceIds.Mana;
             if (resources != null && resources.Has(resourceId))
             {
                 float maximum = Mathf.Max(1, resources.Maximum(resourceId));
                 bool momentum=resourceId==GreatbladeSkillCaster.MomentumId;
                 DrawBar(resourceRect,resources.Current(resourceId)/maximum,
-                    momentum?new Color(.88f,.48f,.08f,1f):new Color(.08f,.30f,.80f,1f),
-                    $"{(momentum?"Momentum ":"")}{resources.Current(resourceId):0} / {maximum:0}");
+                    defender ? new Color(.74f,.51f,.23f,1f) : momentum ? new Color(.88f,.48f,.08f,1f) : new Color(.08f,.30f,.80f,1f),
+                    $"{(defender ? "Resolve " : momentum ? "Momentum " : "")}{resources.Current(resourceId):0} / {maximum:0}");
                 if(player.Health.TemporaryShield>0)
                     GUI.Label(new Rect(hpRect.x,hpRect.y-18,hpRect.width,18),"Shield "+player.Health.TemporaryShield.ToString("0"));
             }

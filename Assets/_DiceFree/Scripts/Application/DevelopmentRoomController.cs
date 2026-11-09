@@ -200,13 +200,25 @@ namespace DiceFree.Development
             GUILayout.Label(player.DisplayName);
             GUILayout.Label(Map == null ? "Loading map..." : Map.worldId);
             GUI.enabled = !Busy && player.GetComponent<ManifestationPersistence>().Ready;
-            GUILayout.BeginHorizontal();
-            foreach (var definition in player.GetComponent<AdvancementController>().Classes)
-                if (GUILayout.Button(definition.stableId == "class.novice" ? "Novice" :
-                    definition.stableId.Contains("physical") ? "Physical" :
-                    definition.stableId.Contains("magical") ? "Magical" : definition.displayName))
-                    SelectClass(definition.stableId);
-            GUILayout.EndHorizontal();
+            var classes = player.GetComponent<AdvancementController>().Classes;
+            const int classesPerRow = 4;
+            for (int first = 0; first < classes.Count; first += classesPerRow)
+            {
+                GUILayout.BeginHorizontal();
+                for (int i = first; i < Mathf.Min(first + classesPerRow, classes.Count); i++)
+                {
+                    var definition = classes[i];
+                    string label = definition.stableId switch
+                    {
+                        "class.physically-blessed-novice" => "Physical",
+                        "class.magically-touched-novice" => "Magical",
+                        _ => definition.displayName
+                    };
+                    if (GUILayout.Button(label, GUILayout.ExpandWidth(true))) SelectClass(definition.stableId);
+                }
+                GUILayout.EndHorizontal();
+            }
+
             GUILayout.BeginHorizontal();
             GUILayout.Label("Level",GUILayout.Width(40));
             levelText = GUILayout.TextField(levelText,3,GUILayout.Width(55));
