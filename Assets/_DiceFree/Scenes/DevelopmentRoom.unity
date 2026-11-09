@@ -29933,7 +29933,7 @@ Transform:
   - {fileID: 1349983512}
   - {fileID: 577845233}
   - {fileID: 1745647351}
-  - {fileID: 971213500}
+  - {fileID: 2124746672}
   m_Father: {fileID: 1562633928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724212271
@@ -30321,8 +30321,8 @@ MonoBehaviour:
     visualRoot: {fileID: 1745647351}
     animator: {fileID: 303448953}
   - classId: class.defender
-    visualRoot: {fileID: 971213500}
-    animator: {fileID: 971213501}
+    visualRoot: {fileID: 2124746672}
+    animator: {fileID: 1300515625}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30681,6 +30681,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0234ab6f3f412b24ea004def65e34506, type: 2}
   - {fileID: 11400000, guid: e11b413f51c476541b04f607d56e93e5, type: 2}
   - {fileID: 11400000, guid: ad533e6c55f853442ab94e02cfe696a7, type: 2}
+  - {fileID: 11400000, guid: 33a588416843964498a890f16f1307a0, type: 2}
+  - {fileID: 11400000, guid: b0c5f00b66cd40544994a28aa2579908, type: 2}
 --- !u!114 &1724212316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39067,73 +39069,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.Skills.RangerBowPresentation
   shortbow: {fileID: 303448951}
   longbow: {fileID: 303448952}
---- !u!1001 &971213499
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1724212270}
-    m_Modifications:
-    - target: {fileID: 4099878734232877292, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_Name
-      value: Trimery Defender presentation
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
---- !u!4 &971213500 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7688993778521339335, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-  m_PrefabInstance: {fileID: 971213499}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &971213501 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1516831766637487009, guid: 23585c42e8bcec445a83494eef8b31f4, type: 3}
-  m_PrefabInstance: {fileID: 971213499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1724212359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39179,6 +39114,134 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4e342fd9fcd9d489ceb82712fa893e, type: 3}
   m_Name:
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.DefenderSkillProgression
+--- !u!1001 &1300515621
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2124746672}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_Name
+      value: TrimeryDefender
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+      propertyPath: m_Controller
+      value:
+      objectReference: {fileID: 9100000, guid: 5f136e7189a894f4abe85303a22d9f00, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+--- !u!4 &1300515622 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+  m_PrefabInstance: {fileID: 1300515621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1300515623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4820503104150609365, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+  m_PrefabInstance: {fileID: 1300515621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1300515624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1517178433923448080, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+  m_PrefabInstance: {fileID: 1300515621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1300515625 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: d77a67317e5f0a646bb7b6345afbcd1f, type: 3}
+  m_PrefabInstance: {fileID: 1300515621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2124746671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124746672}
+  - component: {fileID: 2124746673}
+  m_Layer: 0
+  m_Name: Trimery Defender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2124746672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124746671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1300515622}
+  m_Father: {fileID: 1724212270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2124746673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124746671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611694e7c13276a4ab3e8e380c060eb7, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.DefenderGearPresentation
+  sword: {fileID: 1300515623}
+  shield: {fileID: 1300515624}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

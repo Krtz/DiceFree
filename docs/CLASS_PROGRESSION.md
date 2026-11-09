@@ -202,7 +202,7 @@ This four-plus-four split is still a working direction rather than locked final 
 | Tier I parent | Standard World 1 Tier II class | Design status |
 | --- | --- | --- |
 | Physically Blessed Novice | **Greatblade** | Designed |
-| Physically Blessed Novice | **Defender** | Playable in the Development Room. [Defender Tier II](classes/DEFENDER_TIER2_DESIGN.md) |
+| Physically Blessed Novice | **Defender** | Playable through Hold the North Gate. [Defender Tier II](classes/DEFENDER_TIER2_DESIGN.md) |
 | Physically Blessed Novice | **Ranger** | Playable through The Ironpine Hunt. [Ranger Tier II](classes/RANGER_TIER2_DESIGN.md) |
 | Physically Blessed Novice | **Thief** | **TIER II GAMEPLAY DESIGN COMPLETE Rounds1–8**; user-approved 80-rank gates, Mana/CD and six-skill combat kit, finale Envenom-direct-only stealth opener / crit buff real-time while hidden / miss-consumption / interaction rules. Assets and quest DEFERRED, NO Unity implementation. [Completed Thief Tier II](classes/THIEF_TIER2_DESIGN.md) |
 | Magically Touched Novice | **Mage** | Designed |

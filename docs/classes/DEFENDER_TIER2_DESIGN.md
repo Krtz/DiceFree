@@ -5,13 +5,15 @@
 **Branch:** `integration/world1-foundation`  
 **References:** [Tier II roster v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md), [original five skill concepts](../TIER2_CORE_CLASSES_DESIGN_V01.md), [class progression](../CLASS_PROGRESSION.md), [stats and shields](../STATS_AND_DAMAGE.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Greatblade/Mage rank audit](../TIER2_GREATBLADE_MAGE_SKILL_RANK_AUDIT_2026_10_19.md).
 
-## Development Room implementation
+## Playable implementation
 
-Choose **Defender** in the Development Room to try the six skills and approved 80-rank progression. The test room creates a separate level-1 manifestation and retains the Physically Blessed Novice parent in the test session. The current visuals use the existing physical rig with a new Trimery sword and shield.
+A level-30 Physically Blessed Novice can accept **Hold the North Gate** from Veteran Mara by Trimery's north gate. The private yard has three Briarback assaults of 3, 4, and 5 attackers. Keep both timber workers and at least one guard alive. A failed or abandoned attempt returns the player to Mara for a retry. A successful turn-in unlocks a separate level-1 Tier II Defender and retains the Physically Blessed Novice.
+
+The original armored form uses separate sword and shield attachments, custom combat motion, and a Tier II menu portrait. Trimery's lumber trader sells the Watch Sword and Watch Shield. The Development Room also offers Defender directly for testing.
 
 First-pass tuning uses 8s Shield Bash, 15s Challenge, 22s Bulwark, 11s Shield Sweep, and 22s Iron Guard cooldowns. Iron Guard preserves normal crowd-control behavior. Resolve starts empty, decays by one every three seconds out of combat, and uses a 12-point burst limit replenished at 12 points per second for incoming hits. Bulwark spends 25 Resolve. Shield Sweep snapshots the allies in range on cast.
 
-The Trimery gate-defense trial, permanent overworld unlock, and final character art are separate from this development build. The original design interview below records the approved mechanics and open decisions.
+The interview below records the approved mechanics and design history.
 
 
 ## Confirmed Defender decisions — updated through Round 5 (2026-10-19)

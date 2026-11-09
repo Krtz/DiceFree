@@ -29,7 +29,7 @@ namespace DiceFree.UI
         void OnEnable(){if(defender!=null)defender.Casted+=DefenderCast;if(ranger!=null)ranger.Casted+=RangerCast;if(thief!=null)thief.Casted+=ThiefCast;if(acolyte!=null)acolyte.Casted+=AcolyteCast;if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
         void OnDisable(){if(defender!=null)defender.Casted-=DefenderCast;if(ranger!=null)ranger.Casted-=RangerCast;if(thief!=null)thief.Casted-=ThiefCast;if(acolyte!=null)acolyte.Casted-=AcolyteCast;if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
         void EquipmentChanged(){armed=false;if(equipment!=null)foreach(var item in equipment.Slots)if(item.slotId==EquipmentSlot.MainHand.ToString()&&equipment.IsResolved(item))armed=true;}
-        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte","class.thief"=>"TierTwo/Thief","class.ranger"=>"TierTwo/Ranger","class.defender"=>"Physical",_=>null};
+        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte","class.thief"=>"TierTwo/Thief","class.ranger"=>"TierTwo/Ranger","class.defender"=>"TierTwo/Defender",_=>null};
         void RestoreSpin(){if(spinning&&spinVisual!=null)spinVisual.localRotation=spinRest;spinning=false;spinVisual=null;}
         void ReleaseController()
         {
@@ -143,9 +143,10 @@ namespace DiceFree.UI
         void DefenderCast(DefenderSkill skill)
         {
             if (!Current()) return;
-            if (skill == DefenderSkill.IronGuard) Play("Guard", 2f, .44f, true);
-            else if (skill == DefenderSkill.ShieldSweep) Play("ArmedAttack", .72f, 1.18f, true);
-            else Play("Guard", .63f, 1.2f, true);
+            if (skill == DefenderSkill.IronGuard) Play("IronGuard", 2f, 1, true);
+            else if (skill == DefenderSkill.ShieldSweep) Play("ShieldSweep", .84f, 1.18f, true);
+            else if (skill == DefenderSkill.ShieldBash) Play("ShieldBash", .62f, 1f, true);
+            else Play(skill == DefenderSkill.Challenge ? "Cast" : "Guard", .76f, 1.1f, true);
         }
 
         void RangerCast(RangerSkill skill)

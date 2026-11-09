@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Hold the North Gate
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.trimery.defender-gate-trial
+  title: Hold the North Gate
+  requiredClassId: class.physically-blessed-novice
+  requiredLevel: 30
+  version: 1
+  offer: Briarback raiders have been following the timber crews home. Two workers are still in the north gate yard. Take your post with the watch and keep them alive until the last raiders fall.
+  activeDialogue: I can send you to the gate yard when you're ready. Watch both lanes, draw attackers away from the workers, and keep at least one guard on their feet.
+  locationHint: Take your post with Veteran Mara by Trimery's north gate.
+  turnInHint: Report to Veteran Mara at Trimery's north gate.
+  stages:
+  - kind: 7
+    objectiveId: hold-the-yard
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Hold three waves and protect both workers and a guard
+    contentId: defense.trimery.gate
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/PriestEscort.unity
     guid: f21dd841e0944344ebdb38dcf36f1abb
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/DefenderGate.unity
+    guid: 6e966400e381b4140923166229a6cd5e
   m_configObjects: {}
