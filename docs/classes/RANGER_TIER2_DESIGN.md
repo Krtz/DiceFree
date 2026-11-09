@@ -5,6 +5,15 @@
 **Branch:** `integration/world1-foundation`  
 **References:** [Class Progression](../CLASS_PROGRESSION.md), [Physically Blessed Novice](PHYSICALLY_BLESSED_NOVICE.md), [Tier II original four classes](../TIER2_CORE_CLASSES_DESIGN_V02.md), [Defender Tier II interview](DEFENDER_TIER2_DESIGN.md), [Stats and Damage](../STATS_AND_DAMAGE.md).
 
+## Playable implementation
+
+The Ironpine Hunt advances a level-30 Physically Blessed Novice to a separate level-1 Ranger. Ilyra offers the hunt beside Trimery's priest. The quest uses the existing level-20 overworld Alpha Wolf. Trimery's lumber trader sells the Ironpine Scout Shortbow and Ironpine Yew Longbow.
+
+The playable build uses the six approved skill gates and the first-playtest tuning table below. It spends Mana and starts cooldown on activation for interrupted shots. The Ranger has an original Wood Elf rig and starts with a training bow for its basic attack. The two purchased bows share class range and have their own damage, speed and models.
+
+The interview below records the design history and distinguishes approved mechanics from first-pass balance choices.
+
+
 ## Existing confirmed foundations (before Ranger Round 1)
 
 - **CONFIRMED RANGER-005:** Ranger advances from **Physically Blessed Novice at Tier I level 30**, to its own **Tier II level-1 child manifestation** while preserving parent. A **wounded Ranger NPC near the Priest in Trimery** offers a **simple kill Alpha Wolf quest**. Returning to the wounded Ranger after defeating the Alpha Wolf completes the advancement (turn-in as normal class-fork flow). Details such as quest kill credit, boss level/respawn and exact NPC position remain open; no complex tracking or precision trial.

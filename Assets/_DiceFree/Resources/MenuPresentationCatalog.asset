@@ -37,6 +37,9 @@ MonoBehaviour:
   - classId: class.thief
     tier: 2
     preview: {fileID: 7748177195231278514, guid: 2d1f03d0470ec3747921abdc3257fd6b, type: 3}
+  - classId: class.ranger
+    tier: 2
+    preview: {fileID: 2411312797493545984, guid: de10e078e2cd5a34e8f638f0c123f5cc, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
@@ -62,3 +65,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8de1a2de41902ba4b80cfa161076f06c, type: 2}
   - {fileID: 11400000, guid: 462d973c6a4c405489e1a468f69dd13f, type: 2}
   - {fileID: 11400000, guid: 0234ab6f3f412b24ea004def65e34506, type: 2}
+  - {fileID: 11400000, guid: e11b413f51c476541b04f607d56e93e5, type: 2}
+  - {fileID: 11400000, guid: ad533e6c55f853442ab94e02cfe696a7, type: 2}

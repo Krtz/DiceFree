@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Ironpine Scout Shortbow
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.trimery.ironpine-shortbow
+  displayName: Ironpine Scout Shortbow
+  icon: {fileID: -6098903336904033607, guid: fbe030cdd6dcc284390e6fdf5f5617b2, type: 2}
+  slot: 6
+  handsRequired: 2
+  itemLevel: 1
+  rarityId: rarity.provisional
+  sourceId: shop.trimery.lumber
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId:
+  restoreResourceAmount: 0
+  allowedClassIds:
+  - class.ranger
+  flavor: Ironpine scouts favor this quick-drawing bow for moving between shots.
+  stats:
+    attributes:
+      vitality: 0
+      strength: 0
+      agility: 0
+      intelligence: 0
+      spirit: 0
+    physicalDefense: 0
+    magicalDefense: 0
+    attackSpeedPercent: 20
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 5

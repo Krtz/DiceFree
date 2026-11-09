@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Ironpine Hunt
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.trimery.ranger-ironpine-hunt
+  title: The Ironpine Hunt
+  requiredClassId: class.physically-blessed-novice
+  requiredLevel: 30
+  version: 1
+  offer: The Alpha Wolf nearly took my bow arm. The healer can mend it, but that wolf is still on the Ironpine trail. Bring it down and return to me. I'll teach you how we hunt.
+  activeDialogue: Head to Ironpine and defeat the Alpha Wolf out in the woods. Come back to me here by the priest in Trimery when the trail is clear.
+  locationHint: Find the level 20 Alpha Wolf out in Ironpine.
+  turnInHint: Return to Ilyra, the wounded Ranger by Trimery's priest.
+  stages:
+  - kind: 0
+    objectiveId: ironpine-alpha
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat the Alpha Wolf in Ironpine
+    contentId:
+    dungeonBossOnly: 0
+    familyId: ironpine.alpha-wolf
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

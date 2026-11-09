@@ -6,6 +6,8 @@ namespace DiceFree.Combat
     public sealed class BasicAttack : MonoBehaviour
     {
         private CombatActor actor;
+        private DiceFree.Skills.RangerSkillCaster ranger;
+        private Vector3 windupOrigin;
         private float readyAt, impactAt, repathAt;
         private bool winding;
         public CombatActor Target { get; private set; }
@@ -30,11 +32,16 @@ namespace DiceFree.Combat
                     Mathf.Max(0,(raw.y+stats.BasicAttackMaximumBonus)*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMaximumOffset));
             }
         }
-        private void Awake() => actor = GetComponent<CombatActor>();
+        private void Awake()
+        {
+            actor = GetComponent<CombatActor>();
+            ranger = GetComponent<DiceFree.Skills.RangerSkillCaster>();
+        }
         private void OnDisable() => Cancel();
         public bool Order(CombatActor target)
         {
             if (!actor.CanAct || !actor.CanTargetHostile(target) || Definition == null) return false;
+            ranger?.CancelChannel();
             if (Target != target) { Cancel(); Target = target; }
             return true;
         }
@@ -46,7 +53,7 @@ namespace DiceFree.Combat
         }
         public void ResetForSpawn() { Cancel(); readyAt = impactAt = repathAt = 0; }
         public bool InRange(CombatActor target) => Vector3.Distance(transform.position, target.transform.position)
-            <= actor.Radius + target.Radius + Definition.reach;
+            <= actor.Radius + target.Radius + Definition.reach + (ranger?.RangeBonus ?? 0);
         private void Update()
         {
             if (Target == null) return;
@@ -62,6 +69,12 @@ namespace DiceFree.Combat
                 }
                 return;
             }
+            if (ranger?.Active == true && winding &&
+                (actor.Motor.Travelling || (transform.position - windupOrigin).sqrMagnitude > .025f))
+            {
+                Cancel();
+                return;
+            }
             actor.Motor.Stop();
             var facing = Vector3.ProjectOnPlane(Target.transform.position-transform.position, Vector3.up);
             if (facing.sqrMagnitude > 0.001f) transform.rotation = Quaternion.LookRotation(facing);
@@ -70,36 +83,49 @@ namespace DiceFree.Combat
                 State = "Wind-up";
                 if (Time.time < impactAt) return;
                 winding = false;
-                var thief = GetComponent<DiceFree.Skills.ThiefSkillCaster>();
-                float opener = thief?.ConsumeOpener() ?? 1;
-                var resolution = AccuracyResolver.Resolve(actor, Definition, critical: thief?.BasicCriticalRule());
-                var packet = DamageResolver.CalculatePacket(
-                    actor.Stats,
-                    Target.Stats,
-                    Definition,
-                    resolution,
-                    Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
-                    Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
-                    Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
-                    finalRawMultiplier: opener);
-                packet = Target.Health.ApplyPacket(actor, packet);
-                if (!packet.Missed) Connected?.Invoke(Target, packet);
-                if (packet.Missed) Misses++;
-                else
+                var target = Target;
+                if (ranger?.Active == true)
                 {
-                    Hits++;
-                    actor.Effects?.ResolveBasicAttackAugments(actor, Target);
+                    ranger.Launch(target, DiceFree.Skills.RangerVfx.ArrowTint, () => ResolveImpact(target));
+                    State = "Recovery";
                 }
-                State = packet.Missed ? "Miss" : "Recovery";
+                else State = ResolveImpact(target) ? "Miss" : "Recovery";
             }
             else if (Time.time >= readyAt)
             {
                 winding = true; State = "Wind-up";
                 impactAt = Time.time + Definition.windup / actor.Stats.AttackSpeed;
-                MagicalBasicMissileVfx.Launch(actor, Target, impactAt - Time.time);
+                windupOrigin = transform.position;
+                if (ranger?.Active != true) MagicalBasicMissileVfx.Launch(actor, Target, impactAt - Time.time);
                 readyAt = Time.time + Mathf.Max(Definition.interval, Definition.windup) / actor.Stats.AttackSpeed;
             }
             else State = "Recovery";
+        }
+
+        private bool ResolveImpact(CombatActor target)
+        {
+            var thief = GetComponent<DiceFree.Skills.ThiefSkillCaster>();
+            float opener = thief?.ConsumeOpener() ?? 1;
+            var resolution = AccuracyResolver.Resolve(actor, Definition,
+                critical: ranger?.CriticalRule() ?? thief?.BasicCriticalRule(), target: target);
+            var packet = DamageResolver.CalculatePacket(
+                actor.Stats,
+                target.Stats,
+                Definition,
+                resolution,
+                Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
+                Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
+                Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
+                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1));
+            packet = target.Health.ApplyPacket(actor, packet);
+            if (packet.Missed) Misses++;
+            else
+            {
+                Connected?.Invoke(target, packet);
+                Hits++;
+                actor.Effects?.ResolveBasicAttackAugments(actor, target);
+            }
+            return packet.Missed;
         }
     }
 }

@@ -127,6 +127,15 @@ namespace DiceFree.Characters
                 if (interrupted) acolyte.CancelChannel();
                 else return;
             }
+            var ranger = GetComponent<DiceFree.Skills.RangerSkillCaster>();
+            if (ranger != null && ranger.IsChanneling)
+            {
+                bool interrupted = movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
+                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                    interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
+                if (interrupted) ranger.CancelChannel();
+                else return;
+            }
             var homeSkill=GetComponent<ReturnHomeAbility>();
             if(homeSkill!=null && homeSkill.Casting)
             {

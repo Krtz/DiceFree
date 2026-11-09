@@ -558442,6 +558442,9 @@ GameObject:
   - component: {fileID: 1288724134}
   - component: {fileID: 1288724133}
   - component: {fileID: 1288724132}
+  - component: {fileID: 1288724137}
+  - component: {fileID: 1288724136}
+  - component: {fileID: 1288724135}
   m_Layer: 10
   m_Name: Echo - traversal placeholder
   m_TagString: Untagged
@@ -558472,6 +558475,7 @@ Transform:
   - {fileID: 1925803751}
   - {fileID: 2108822761}
   - {fileID: 1163750855}
+  - {fileID: 1612902245}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288724050
@@ -558702,6 +558706,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b56104d13be1334593a60d091d8da84, type: 2}
   - {fileID: 11400000, guid: 4dadcb5156819424eb1553e0b32df540, type: 2}
   - {fileID: 11400000, guid: f48a2223617315643960bed1e4ce0e52, type: 2}
+  - {fileID: 11400000, guid: ef58ac8498e59a34fa296f2daf6bf14a, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -558841,6 +558846,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8de1a2de41902ba4b80cfa161076f06c, type: 2}
   - {fileID: 11400000, guid: 462d973c6a4c405489e1a468f69dd13f, type: 2}
   - {fileID: 11400000, guid: 0234ab6f3f412b24ea004def65e34506, type: 2}
+  - {fileID: 11400000, guid: e11b413f51c476541b04f607d56e93e5, type: 2}
+  - {fileID: 11400000, guid: ad533e6c55f853442ab94e02cfe696a7, type: 2}
 --- !u!114 &1288724073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559038,6 +559045,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed18fb63c7e44814dab6deff50fd7720, type: 2}
   - {fileID: 11400000, guid: 73fc493ae7fdb834a92fce193cbd2dde, type: 2}
   - {fileID: 11400000, guid: 435eb1d9bd4fd0c4db26b67226233878, type: 2}
+  - {fileID: 11400000, guid: c7bbf885d45a30d4289f2a384e20a804, type: 2}
 --- !u!114 &1288724083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559075,6 +559083,9 @@ MonoBehaviour:
   - classId: class.thief
     visualRoot: {fileID: 1163750855}
     animator: {fileID: 577845234}
+  - classId: class.ranger
+    visualRoot: {fileID: 1612902245}
+    animator: {fileID: 1745647354}
 --- !u!114 &1288724084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559169,6 +559180,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 616f232f5c8afc241bbbead3333ae244, type: 2}
   - {fileID: 11400000, guid: 2ced4e1facdb53a43a196f482945e1d2, type: 2}
   - {fileID: 11400000, guid: 7edba6ce60fb9334fbfaf5865b58d0d3, type: 2}
+  - {fileID: 11400000, guid: 2086b5bdc58bd444b8eac451139af3ca, type: 2}
 --- !u!114 &1288724090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665001,7 +665013,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af4da895307ab54dbb53b10b3ff1450, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Items.ItemShop
   displayName: Trimery lumber trader
   range: 2.5
@@ -665010,6 +665022,12 @@ MonoBehaviour:
   offers:
   - item: {fileID: 11400000, guid: 98a59d7d380396d42ad0364ca922e56e, type: 2}
     goldPrice: 15
+    provisionalPrice: 1
+  - item: {fileID: 11400000, guid: e11b413f51c476541b04f607d56e93e5, type: 2}
+    goldPrice: 22
+    provisionalPrice: 1
+  - item: {fileID: 11400000, guid: ad533e6c55f853442ab94e02cfe696a7, type: 2}
+    goldPrice: 31
     provisionalPrice: 1
   resaleFraction: 0.5
   provisionalFallbackResaleGold: 1
@@ -983470,6 +983488,402 @@ Transform:
   - {fileID: 1190893566}
   m_Father: {fileID: 1103232858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &124925444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 124925449}
+  - component: {fileID: 124925448}
+  - component: {fileID: 124925447}
+  - component: {fileID: 124925446}
+  - component: {fileID: 124925445}
+  m_Layer: 11
+  m_Name: The Ironpine Hunt - Trimery Ranger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &124925445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124925444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62013bd95e3008341ab2f38ca5b6f5a3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.InteractionPrompt
+  target: {fileID: 124925446}
+  player: {fileID: 1288724053}
+--- !u!114 &124925446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124925444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810ee7199767cff48bb7ddb4d2488142, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Advancement.RangerMentor
+  displayName: Ilyra, Wounded Ranger
+  range: 2.5
+  approachPoint: {fileID: 1083118060}
+  context: {fileID: 0}
+  trial: {fileID: 11400000, guid: ef58ac8498e59a34fa296f2daf6bf14a, type: 2}
+  advancement: {fileID: 11400000, guid: c7bbf885d45a30d4289f2a384e20a804, type: 2}
+--- !u!114 &124925447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124925444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bfafd6a077cca40ab6f3a84239e596, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.Skills.RangerBowPresentation
+  shortbow: {fileID: 303448952}
+  longbow: {fileID: 303448950}
+--- !u!136 &124925448
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124925444}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.42
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!4 &124925449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124925444}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 246.8, y: 0.019398473, z: 186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 303448951}
+  - {fileID: 1083118060}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &303448949
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 124925449}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6246972814909322341, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_Name
+      value: IronpineRanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_Controller
+      value:
+      objectReference: {fileID: 9100000, guid: 13845e03573497a4ca21aac9c8090d23, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+--- !u!1 &303448950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6246972814909322341, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 303448949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &303448951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 303448949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &303448952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7903268528584455323, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 303448949}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1083118059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083118060}
+  m_Layer: 0
+  m_Name: Ilyra approach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083118060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083118059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00000011920929, y: -0.017988712, z: 1.4499971}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 124925449}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1288724135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae836fdd289db64aa189acb061646fe, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.RangerAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: a6b6462539e4382489129ba6a83a6867, type: 2}
+  - {fileID: 2800000, guid: 8f73ab41209cbe142bd4e2346c7dd6c8, type: 2}
+  - {fileID: 2800000, guid: f2a392bfbebb932439d2116631c02d30, type: 2}
+  - {fileID: 2800000, guid: 6be6ea2ad613c3b4d858f97de5bad9c5, type: 2}
+  - {fileID: 2800000, guid: bd812890b06f9d648861201f1d4b7eef, type: 2}
+  - {fileID: 2800000, guid: 6cf4996be2e72504ea55d65203d3e01d, type: 2}
+--- !u!114 &1288724136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55e3a082dab7fd44910a502b1728753, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.RangerSkillCaster
+  aimed: {fileID: 11400000, guid: adad2a44161f03a42824cdfa48367957, type: 2}
+  explosive: {fileID: 11400000, guid: 8c924a0701c03144eb287515fd4bb2a2, type: 2}
+  rain: {fileID: 11400000, guid: 458ed20c417433c4885c847e8d077e2f, type: 2}
+  hawk: {fileID: 11400000, guid: b48a71fdbfe0cb041b51b4c818ac8cd5, type: 2}
+--- !u!114 &1288724137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70cbc3572e16d4b4db3e5aafc51ada39, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.RangerSkillProgression
+--- !u!1 &1612902244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1612902245}
+  - component: {fileID: 1612902246}
+  m_Layer: 0
+  m_Name: Ironpine Ranger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1612902245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612902244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1745647351}
+  m_Father: {fileID: 1288724049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612902246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612902244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2bfafd6a077cca40ab6f3a84239e596, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.Skills.RangerBowPresentation
+  shortbow: {fileID: 1745647352}
+  longbow: {fileID: 1745647353}
+--- !u!1001 &1745647350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1612902245}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6246972814909322341, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_Name
+      value: IronpineRanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+      propertyPath: m_Controller
+      value:
+      objectReference: {fileID: 9100000, guid: 13845e03573497a4ca21aac9c8090d23, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+--- !u!4 &1745647351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 1745647350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745647352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7903268528584455323, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 1745647350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745647353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6246972814909322341, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 1745647350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1745647354 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e136c4eb77e1d934f8c7658c9113fdcd, type: 3}
+  m_PrefabInstance: {fileID: 1745647350}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -983733,3 +984147,4 @@ SceneRoots:
   - {fileID: 1097932897}
   - {fileID: 1528321244}
   - {fileID: 867962564}
+  - {fileID: 124925449}
