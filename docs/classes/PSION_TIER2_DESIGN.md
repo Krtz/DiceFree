@@ -1,8 +1,12 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. DESIGN ONLY — no Unity implementation or playtest validation.** Historical earlier entries below are superseded by latest rounds. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
+**Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. The first combat implementation is available in the Development Room.** Historical earlier entries below are superseded by latest rounds. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
+
+## Development Room implementation
+
+Select Psion in the Development Room and set level 10 to access all five skills for testing. The prototype uses the Magically Touched Novice rig and a training loadout. It uses the approved rank gates and combat rules, with provisional Mana tuning and a 9 m placement range for Lightning Storm. The final model, dedicated equipment, and world advancement remain outside this combat pass.
 
 ## Locked project-wide context — not Psion-specific approvals
 

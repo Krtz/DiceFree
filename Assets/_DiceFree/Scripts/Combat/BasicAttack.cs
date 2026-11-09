@@ -7,6 +7,7 @@ namespace DiceFree.Combat
     {
         private CombatActor actor;
         private DiceFree.Skills.RangerSkillCaster ranger;
+        private DiceFree.Skills.PsionSkillCaster psion;
         private Vector3 windupOrigin;
         private float readyAt, impactAt, repathAt;
         private bool winding;
@@ -36,12 +37,14 @@ namespace DiceFree.Combat
         {
             actor = GetComponent<CombatActor>();
             ranger = GetComponent<DiceFree.Skills.RangerSkillCaster>();
+            psion = GetComponent<DiceFree.Skills.PsionSkillCaster>();
         }
         private void OnDisable() => Cancel();
         public bool Order(CombatActor target)
         {
             if (!actor.CanAct || !actor.CanTargetHostile(target) || Definition == null) return false;
             ranger?.CancelChannel();
+            psion?.CancelChannel();
             if (Target != target) { Cancel(); Target = target; }
             return true;
         }
@@ -89,6 +92,11 @@ namespace DiceFree.Combat
                     ranger.Launch(target, DiceFree.Skills.RangerVfx.ArrowTint, () => ResolveImpact(target));
                     State = "Recovery";
                 }
+                else if (psion?.Active == true)
+                {
+                    psion.LaunchBlade(target, recipient => ResolveImpact(recipient));
+                    State = "Recovery";
+                }
                 else State = ResolveImpact(target) ? "Miss" : "Recovery";
             }
             else if (Time.time >= readyAt)
@@ -107,7 +115,7 @@ namespace DiceFree.Combat
             var thief = GetComponent<DiceFree.Skills.ThiefSkillCaster>();
             float opener = thief?.ConsumeOpener() ?? 1;
             var resolution = AccuracyResolver.Resolve(actor, Definition,
-                critical: ranger?.CriticalRule() ?? thief?.BasicCriticalRule(), target: target);
+                critical: psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ?? thief?.BasicCriticalRule(), target: target);
             var packet = DamageResolver.CalculatePacket(
                 actor.Stats,
                 target.Stats,
@@ -116,7 +124,8 @@ namespace DiceFree.Combat
                 Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                 Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                 Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
-                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1));
+                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1),
+                flatDefensePenetration: psion?.BasicPenetration ?? 0);
             packet = target.Health.ApplyPacket(actor, packet);
             if (packet.Missed) Misses++;
             else

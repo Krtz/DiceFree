@@ -24,6 +24,7 @@ namespace DiceFree.Combat
         private readonly SortedDictionary<string, float> movementSpeedPercentModifiers = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, DamageTakenModifier> damageTakenModifiers = new(StringComparer.Ordinal);
         private int resurrectionSicknessStacks;
+        private float incomingDamageScale = 1;
         internal void SetResurrectionSicknessStacks(int count)
         {
             if (resurrectionSicknessStacks == count) return;
@@ -160,12 +161,14 @@ namespace DiceFree.Combat
             damageTakenModifiers[sourceId] = value;
         }
         public void RemoveDamageTakenModifier(string sourceId) => damageTakenModifiers.Remove(sourceId);
+        internal void ConfigureIncomingDamageScale(float scale) => incomingDamageScale = Mathf.Max(0, scale);
+
         public float IncomingDamageMultiplier(DamageChannel channel)
         {
             float multiplier = 1f;
             foreach (var modifier in damageTakenModifiers.Values)
                 if (modifier.channel == channel) multiplier *= 1f - modifier.reductionFraction;
-            return Mathf.Clamp(multiplier, 0.01f, 4f);
+            return Mathf.Clamp(multiplier, 0.01f, 4f) * incomingDamageScale;
         }
         public void SetBasicAttackDamagePercentContribution(string sourceId, float percent)
         {

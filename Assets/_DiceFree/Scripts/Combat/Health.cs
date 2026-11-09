@@ -8,6 +8,7 @@ namespace DiceFree.Combat
     {
         private ActorStats stats;
         private IIncomingDamageRedirector[] redirectors;
+        private readonly System.Collections.Generic.List<SharedDamageShield> sharedShields = new();
         private readonly System.Collections.Generic.SortedDictionary<string,(float amount,float until,string elementId)> shields = new(System.StringComparer.Ordinal);
         public float TemporaryShield
         {
@@ -17,6 +18,8 @@ namespace DiceFree.Combat
                 float total=0;
                 foreach(var pair in shields)if(Time.time>=pair.Value.until)expired.Add(pair.Key);else total+=pair.Value.amount;
                 foreach(string id in expired)shields.Remove(id);
+                sharedShields.RemoveAll(pool => pool.Remaining <= 0);
+                foreach (var pool in sharedShields) total += pool.Remaining;
                 return total;
             }
         }
@@ -29,6 +32,11 @@ namespace DiceFree.Combat
                 throw new System.ArgumentException("Shield requires finite positive tuning and stable source.");
             if(Alive)shields[source]=(amount,Time.time+seconds,elementId);
         }
+        public void AddSharedShield(SharedDamageShield pool)
+        {
+            if (Alive && pool != null && pool.Remaining > 0 && !sharedShields.Contains(pool)) sharedShields.Add(pool);
+        }
+
         private float Absorb(float damage,ElementDefinition incomingElement)
         {
             _=TemporaryShield;
@@ -36,12 +44,16 @@ namespace DiceFree.Combat
             foreach(string id in new System.Collections.Generic.List<string>(shields.Keys))
             {
                 var value=shields[id];
-                float shieldPerDamage=string.IsNullOrEmpty(value.elementId)?1f:
-                    (incomingElement!=null&&incomingElement.stableId==value.elementId ? .8f : 1.2f);
+                float shieldPerDamage=SharedDamageShield.CostPerDamage(value.elementId,incomingElement);
                 float blocked=Mathf.Min(remaining,value.amount/shieldPerDamage);
                 remaining-=blocked;float spent=blocked*shieldPerDamage;
                 if(value.amount<=spent)shields.Remove(id);else shields[id]=(value.amount-spent,value.until,value.elementId);
                 if(remaining<=0)break;
+            }
+            foreach (var pool in sharedShields)
+            {
+                if (remaining <= 0) break;
+                remaining = pool.Absorb(remaining, incomingElement);
             }
             return remaining;
         }
@@ -88,7 +100,7 @@ namespace DiceFree.Combat
                 if (result.applied > 0) Damaged?.Invoke(source, result);
             }
             PacketResolved?.Invoke(source, result);
-            if (!Alive) { DeathSequence++; Died?.Invoke(); Defeated?.Invoke(source); }
+            if (!Alive) { sharedShields.Clear(); DeathSequence++; Died?.Invoke(); Defeated?.Invoke(source); }
             return result;
         }
         public float Heal(float amount, bool present = true)
@@ -105,6 +117,7 @@ namespace DiceFree.Combat
         public void Restore(float fraction = 1)
         {
             shields.Clear();
+            sharedShields.Clear();
             Current = Maximum * Mathf.Clamp(fraction, 0.01f, 1);
             Restored?.Invoke();
         }

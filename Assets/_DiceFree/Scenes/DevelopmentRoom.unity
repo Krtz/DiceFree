@@ -29902,6 +29902,9 @@ GameObject:
   - component: {fileID: 1724212361}
   - component: {fileID: 1724212360}
   - component: {fileID: 1724212359}
+  - component: {fileID: 1724212364}
+  - component: {fileID: 1724212363}
+  - component: {fileID: 1724212362}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -30323,6 +30326,9 @@ MonoBehaviour:
   - classId: class.defender
     visualRoot: {fileID: 2124746672}
     animator: {fileID: 1300515625}
+  - classId: class.psion
+    visualRoot: {fileID: 1810539047}
+    animator: {fileID: 0}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30419,6 +30425,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7edba6ce60fb9334fbfaf5865b58d0d3, type: 2}
   - {fileID: 11400000, guid: 2086b5bdc58bd444b8eac451139af3ca, type: 2}
   - {fileID: 11400000, guid: adb6396b9c709994bb4cc8f4b82eb662, type: 2}
+  - {fileID: 11400000, guid: c2b09f5edaccbdd49a5d17d059513057, type: 2}
 --- !u!114 &1724212303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30455,6 +30462,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 435eb1d9bd4fd0c4db26b67226233878, type: 2}
   - {fileID: 11400000, guid: c7bbf885d45a30d4289f2a384e20a804, type: 2}
   - {fileID: 11400000, guid: e3bc8142925e51745a20171352b93246, type: 2}
+  - {fileID: 11400000, guid: a983a0392e9e20e45b8bccbd99f44e95, type: 2}
 --- !u!114 &1724212305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39242,6 +39250,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.DefenderGearPresentation
   sword: {fileID: 1300515623}
   shield: {fileID: 1300515624}
+--- !u!114 &1724212362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c69ffefdea0ca146a8f5cd009d91a69, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.PsionAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: 056ed52a3d8af4c41969d39c30d0f503, type: 2}
+  - {fileID: 2800000, guid: d2da3c6eeda64cd42b4764f18d3d7ad1, type: 2}
+  - {fileID: 2800000, guid: 05a787974eb976747829044f126c6acf, type: 2}
+  - {fileID: 2800000, guid: 583f5e2c5b68801488887f78ab8913c9, type: 2}
+  - {fileID: 2800000, guid: 5beee01b0a1b1fd44b1aabaf22b2fdfb, type: 2}
+--- !u!114 &1724212363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2934cb6ab6aa95641aac313604efa983, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.PsionSkillCaster
+  bolt: {fileID: 11400000, guid: e572af4eec31a4145a7119afebd559ff, type: 2}
+  storm: {fileID: 11400000, guid: 362241d824bc71e47abf62e6c129ed85, type: 2}
+  imageBlade: {fileID: 11400000, guid: 26baa013cf46fc6469d609f0f7429b57, type: 2}
+  imageRupture: {fileID: 11400000, guid: 5ec4cb75a0a6be2418689d636d151989, type: 2}
+  metal: {fileID: 11400000, guid: ec50e014e9808b24b96ab300848830b5, type: 2}
+--- !u!114 &1724212364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43250fc8e8a4b84b9b2f620cd30fe72, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.PsionSkillProgression
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

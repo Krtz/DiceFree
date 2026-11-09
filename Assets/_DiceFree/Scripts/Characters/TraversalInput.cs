@@ -136,6 +136,15 @@ namespace DiceFree.Characters
                 if (interrupted) ranger.CancelChannel();
                 else return;
             }
+            var psion = GetComponent<DiceFree.Skills.PsionSkillCaster>();
+            if (psion != null && psion.IsChanneling)
+            {
+                bool interrupted = movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
+                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                    interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
+                if (interrupted) psion.CancelChannel();
+                else return;
+            }
             var defender = GetComponent<DiceFree.Skills.DefenderSkillCaster>();
             if (defender != null && defender.Charging)
             {

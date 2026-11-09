@@ -208,7 +208,7 @@ This four-plus-four split is still a working direction rather than locked final 
 | Magically Touched Novice | **Mage** | Designed |
 | Magically Touched Novice | **Priest** | Designed |
 | Magically Touched Novice | **Acolyte** | **TIER II CLASS DESIGN COMPLETE, Rounds1–8**, six-skill kit with exact 80-rank user-approved gates (curse, Radiation plague, skeletons, Void Drain Life, Mortal Coil dual-target spell, INT/SPR/poison passive). [Acolyte Tier II design](classes/ACOLYTE_TIER2_DESIGN.md) |
-| Magically Touched Novice | **NOW ACTIVE — PSION ROUND 1**, regular eighth/final World1 Tier II class. Psychic theme, damage element, skills, stats, resource, weapons, model and mentor/quest OPEN. [Psion Tier II design](classes/PSION_TIER2_DESIGN.md) |
+| Magically Touched Novice | **Psion**, regular eighth World 1 Tier II class. The five-skill combat kit is playable in the Development Room. [Psion Tier II design](classes/PSION_TIER2_DESIGN.md) |
 
 **USER-APPROVED DESIGN AND WORLD ORDER:**
 1. Finish all eight NORMAL World 1 Tier II class designs, specifically **Acolyte → Thief → Psion** for the three unfinished classes.

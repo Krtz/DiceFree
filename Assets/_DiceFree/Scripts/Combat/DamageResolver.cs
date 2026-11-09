@@ -31,7 +31,8 @@ namespace DiceFree.Combat
             float basicAttackBonus = 0f,
             float basicAttackRangeOffset = 0f,
             float skillFlatDamage = 0f,
-            float finalRawMultiplier = 1f)
+            float finalRawMultiplier = 1f,
+            float flatDefensePenetration = 0f)
         {
             float baseRaw = coefficientOverride.HasValue
                 ? attack.RawDamage(source.Attributes, coefficientOverride.Value)
@@ -48,8 +49,16 @@ namespace DiceFree.Combat
                 baseRaw=Mathf.Max(0,baseRaw+Mathf.Clamp(basicAttackRangeOffset,source.Definition.basicAttackMinimumOffset,source.Definition.basicAttackMaximumOffset));
             }
             baseRaw *= Mathf.Max(0, finalRawMultiplier);
+            return CalculateRaw(source, target, attack, baseRaw, critical, flatDefensePenetration);
+        }
+
+        internal static DamageResult CalculateRaw(ActorStats source, ActorStats target, AttackDefinition attack, float baseRaw,
+            ActionCriticalResolution critical = null, float flatDefensePenetration = 0f)
+        {
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
-            float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), source.DefenseModifiers(attack.channel));
+            var penetration = source.DefenseModifiers(attack.channel);
+            penetration.penetrationFlat += flatDefensePenetration;
+            float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), penetration);
             var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
             float resistance = elemental.effective;
             float afterDefense = raw * DefenseMath.DamageMultiplier(defense, target.Definition.tuning);
@@ -66,13 +75,14 @@ namespace DiceFree.Combat
             float rawMultiplier = 1f,
             float basicAttackBonus = 0f,
             float basicAttackRangeOffset = 0f,
-            float finalRawMultiplier = 1f)
+            float finalRawMultiplier = 1f,
+            float flatDefensePenetration = 0f)
         {
             if (action == null) throw new System.ArgumentNullException(nameof(action));
             // A miss never constructs raw packets or consults mitigation, and cannot resolve crit here.
             if (action.Hit.missed) return new DamageResult { action = action, channel = attack.channel, element = attack.element };
             var result = Calculate(source, target, attack, action.Critical, null, rawMultiplier, basicAttackBonus,
-                basicAttackRangeOffset, finalRawMultiplier: finalRawMultiplier);
+                basicAttackRangeOffset, finalRawMultiplier: finalRawMultiplier, flatDefensePenetration: flatDefensePenetration);
             result.action = action;
             return result;
         }
