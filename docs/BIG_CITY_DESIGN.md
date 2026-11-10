@@ -140,3 +140,33 @@ This diagram is conceptual, not the finalized street map: actual districts occup
 Subsequent direct user requests authorized the initial city and arrival-district polish, followed by removing the green scenery intersecting the city, adding west/east gates, and making multi-storey houses accessible upstairs. This supersedes the earlier interview-only restriction for those bounded features. The six established main buildings now have three or four walkable levels each. Gate aprons connect to existing city avenues; the broken direct Trimery road is preserved. See `ARBORIUM_ARRIVAL_AND_BALANCE.md`, `ARBORIUM_ARRIVAL_POLISH.md`, and `ARBORIUM_GATES_AND_FLOORS.md` for implementation and validation boundaries. Governance names, additional district institutions, story and further regional road connections remain open.
 
 The later request to complete agenda items 3 and 4 also authorizes furnishing these existing floors and giving them practical uses. The current pass adds room directories, a guild practice target and an indoor counter for the existing bank service. See `WOLF_VISUALS_AND_ARBORIUM_ROOMS.md`. It does not settle the open governance, magical-order, class-mentor or road-design questions.
+
+
+## Round 4 — 2026-11-10 (LATEST; USER CONFIRMED)
+
+The user's freeform note is authoritative: **the World Tree itself does not need quests or gameplay functions**, and **the magical order (not necessarily the Tree) will eventually send the adventurer toward the next world**. Do not transform a proposed World Tree quest chain/buff system into approved scope.
+
+| ID | Topic | Approved direction | Open / guardrails |
+| --- | --- | --- | --- |
+| CITY-019 | **Magical order's ethics and mission** | The ancient order governing Arborium are **benevolent guardians**, actively protecting **both the World Tree and Arborium's ordinary citizens**. Do not characterize the core institution as sinister, oppressive or secretly villainous without later story approval. | Order name, leaders, ranks, visible attire, guard responsibilities and internal politics remain open. |
+| CITY-020 | **Access to the World Tree** | **Anyone can walk directly up to the enormous World Tree trunk**. The landmark and its gardens/plazas are openly accessible; there is no required noble status, mage membership, reputation, or story-unlock gate just to approach the trunk. | Specific nearby buildings may have their own access rules; do not invent barriers around the trunk. |
+| CITY-021 | **Public reputation of magical order** | Arborium's citizens **generally love and respect** the magical order as trusted protectors. Do not make widespread fear, resentment or class-based hostility the default city atmosphere. | Individual characters may differ in later quests, but widespread political resentment is not the baseline. |
+| CITY-022 | **World Tree's gameplay role** | The World Tree is **primarily an extraordinary visual landmark and important story setting**. It **does not need to be a quest hub, repeatable activity, mandatory blessing station, buff mechanic, or central questline driver**. Story importance is compatible with remaining mostly scenic. | Any special interaction, exploration or quest at the Tree requires a later distinct approval. |
+| CITY-023 | **World 1/Arborium principal conflict** | The city's biggest ongoing concern is **increasing monsters and instability outside the city**. The order's protective role and adventurers' activities should have a credible reason to respond to external danger. | Exact source, factions, escalation, events and quests remain open; don't assume the World Tree is sick or causing the instability. |
+| CITY-024 | **Order-led journey to the next world** | **At a later point the magical order should be the institution that sends/directs the adventurer to the next world**. This belongs in the story/progression arc, not as an automatic Tree power or direct Tree interaction. | Timing, quest prerequisites, destination, method of crossing, cutscene, player freedoms and rewards are OPEN. Preserve earlier tentative Adventurers' Guild forestry/southern-passage world-travel ideas as *potential supporting work*, not as finalized contradictions. |
+
+### Updated city story pillars
+
+- **Arborium:** magnificent concentric-ring capital encircling the World Tree; public sacred gardens and plazas, merchant/adventurer outer districts, artisan/mage middle districts, noble inner districts; openly accessible Tree trunk.
+- **Rulers:** an **ancient benevolent magical order**, beloved and respected by the population; they defend the citizenry as well as the Tree.
+- **Atmosphere:** a safe, lively, functional metropolis using mostly practical magic, with more eccentric phenomena in mage quarters; wider regions increasingly unsafe.
+- **Campaign direction:** the adventurer arrives via Briarback and the northern gate, meets the Adventurers' Guild representative, tackles threats and later receives **the order's mission to travel to another world**. The World Tree is not obligated to power the journey or dispense quests.
+- **Implementation boundary:** this round **records design only**. It does not request Unity edits, Psion class work, scene creation, or a full new-world questline at this time.
+
+### Round 5 topics (OPEN, not yet decisions)
+
+1. Name the order (or decide later).
+2. Determine how it is led.
+3. Decide where its headquarters sit in Arborium.
+4. Decide how it responds to worsening monster activity outside the walls.
+5. Establish the high-level trigger for sending adventurers to the next world, without prematurely deciding transport mechanics or undermining existing world-crossing infrastructure.
