@@ -170,3 +170,30 @@ The user's freeform note is authoritative: **the World Tree itself does not need
 3. Decide where its headquarters sit in Arborium.
 4. Decide how it responds to worsening monster activity outside the walls.
 5. Establish the high-level trigger for sending adventurers to the next world, without prematurely deciding transport mechanics or undermining existing world-crossing infrastructure.
+
+
+## Round 5 — 2026-11-10 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Approved direction | Open / guardrails |
+| --- | --- | --- | --- |
+| CITY-025 | **Magical order name** | The ancient, benevolent order protecting Arborium and the publicly accessible World Tree is formally named **The Verdant Order**. Use that name in future city, NPC and campaign design. | Emblem, regalia, public rituals, order history and individual member names undecided. |
+| CITY-026 | **Order leadership** | The Verdant Order is led/governed by **a council of SIX powerful mages**. Do not install a king, solitary archmage, immortal ruler or mayor as its primary authority without later user approval. | Whether councilors hold distinct responsibilities, vote democratically or have rotating leadership remains undecided. Don't conflate council of six with the six cube-world faces without later approval. |
+| CITY-027 | **Order headquarters** | The Verdant Order's headquarters is **a GRAND MAGICAL ACADEMY in Arborium's MAGE DISTRICT** (the middle ring). This is its civic/institutional headquarters and should feel important in the capital. | Academy name separate from order name, interiors, layout, students, player services and unrestricted/restricted areas undecided. Does not replace the fortified Adventurers' Guild near northern gate. |
+| CITY-028 | **External threat response** | As monster activity and instability increase OUTSIDE Arborium, the order **sends Adventurers' Guild members on investigations and expeditions** rather than primarily deploying its own battle-mage army or leading every excursion personally. | Missions, reporting system, potential magical support and guild/order chain of command not yet set. City guards and ordinary defenses can still exist; the choice establishes the preferred ACTIVE RESPONSE. |
+| CITY-029 | **World 2 expedition eligibility** | The Verdant Order eventually sends **the player to World 2 BECAUSE the player has proved themselves through Arborium's main questline**. This establishes a meaningful quest/progression arc before the order entrusts the player with the expedition. | Exact mission count, tasks, reason to select World 2, travel mechanism, scene transition, prerequisites and story beats not yet approved. In-game cube/face transition architecture remains the technical reference and should not be overwritten by assumed teleportation. |
+
+### Approved organizational relationship and story arc
+
+- **The Verdant Order** is a benevolent and broadly beloved government/guardian institution, with **six powerful mage councilors** and a **grand academy headquarters in the middle-ring mage district**.
+- The **Adventurers' Guild** retains its own huge fortified hall at the northern gate and its ordinary quests/commissions. When regional dangers intensify, the Verdant Order commissions/instructs **guild adventurers** to investigate, rather than collapsing the two organizations into one.
+- Arborium's **main questline** is the player's route to earning the six councilors' trust. **After proving their capability**, the Verdant Order sends them onward to **World 2**. Neither the World Tree itself nor a direct Tree interaction is required to function as a quest giver or transport device.
+- **The World Tree stays publicly approachable**, primarily a visual landmark and story setting. No World Tree buffs or compulsory tree-centered quest chain introduced.
+- **Implementation boundary:** Record in GitHub for Codex to use later. No Unity code, scene or class changes authorized, and Psion is intentionally outside this design scope.
+
+### Round 6 open questions
+
+1. Council's six seats: distinct disciplines/responsibilities or collective generalist guardians?
+2. How should adventurers first earn an audience with the Verdant Order?
+3. How many connected main-story missions should establish the player's competence?
+4. What category of increasing external monster danger provides the main quest's investigative focus?
+5. Whether academy access should be open to the public, visitors restricted to certain wings, or progression-gated.
