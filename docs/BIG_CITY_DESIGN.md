@@ -197,3 +197,35 @@ The user's freeform note is authoritative: **the World Tree itself does not need
 3. How many connected main-story missions should establish the player's competence?
 4. What category of increasing external monster danger provides the main quest's investigative focus?
 5. Whether academy access should be open to the public, visitors restricted to certain wings, or progression-gated.
+
+
+## Round 6 — 2026-11-10 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Approved direction | Open / guardrails |
+| --- | --- | --- | --- |
+| CITY-030 | **Six council specialties** | The six Verdant Order council members each specialize in **a different magical element**. | The **exact six elements are not yet selected**; do not assume all elements are the same as the six world faces. Names, genders, personalities, assignments, ranks and appearances remain open. |
+| CITY-031 | **Player introduction to order** | The **Adventurers' Guild introduces the player to the Verdant Order AFTER they complete several guild quests**. The guild acts as the player's connection to the order. | Exact number/type of introductory tasks and which guild/order NPC performs the introduction are open. The first-time arrival report alone must not be silently treated as sufficient. |
+| CITY-032 | **Main questline length** | The Arborium main questline leading toward World 2 should be **short: approximately 3–4 MAIN quests**. | Whether earlier qualifying Adventurers' Guild jobs count separately from those 3–4 main quests, narrative stages, exact rewards and pacing remain to decide. Avoid expanding into a compulsory 10–12-step plot without approval. |
+| CITY-033 | **Main regional antagonist direction** | The growing monster activity outside Arborium centers on **a powerful MONSTER LEADER uniting different hostile groups**. It is a cross-faction threat, not merely naturally increasing unrelated monsters. | Leader identity, factions recruited, motive, map/arena placement and whether the leader must be defeated before World 2 remain open. |
+| CITY-034 | **Public magical academy** | The Verdant Order's **grand magical academy in the mage district is ENTIRELY OPEN TO THE PUBLIC**. Visitors can enter the institution without requiring an exclusive magical rank, noble status or mandatory quest unlock. | Staff, services, internal architectural detail and guided/optional interactions remain open; do not create a general public-access gate absent later approval. |
+| CITY-035 | **DiceBound first boss as possible antagonist** | User suggested: *"the powerful monster could be the first boss of [DiceBound]"*. **This is a candidate direction, NOT finalized identity.** Verification against the connected `Krtz/DiceBound` `main` branch's `runtime/js/board/registry.js` shows **Board 1 `Green Road` final boss `ancient-road-dragon` = Ancient Road Dragon**; Board 1's **miniboss** is `ogre-roadwarden`. A design-ideas source `docs/ENCOUNTER_IDENTITY_IDEAS.md` proposes a remembering/repeating-journey character for the Ancient Road Dragon. | **OPEN for user approval:** whether the Ancient Road Dragon is the cross-faction organizer in DiceFree, how it can exist outside DiceBound, its motivation, lore continuity and combat identity. Do not imply this connection is already established canon, or confuse the Ancient Road Dragon with the Ogre Roadwarden. |
+
+### Confirmed Arborium story flow (high level)
+
+1. Player reaches Arborium, completes existing arrival report with the Adventurers' Guild.
+2. Player handles **several Adventurers' Guild quests** to prove reliability.
+3. The guild introduces the player to **the Verdant Order**, six element-specialist mage councilors governing from the publicly accessible academy.
+4. **Approximately 3–4 main-story quests** focus on the danger of a powerful monster leader gathering formerly distinct hostile factions.
+5. Having proved themselves through this questline, the player is **sent toward World 2 by the Verdant Order**. Do not yet decide the specific transport system, unlock flags or boss gate.
+
+The Ancient Road Dragon is an **interesting crossover candidate only**. DiceBound source: `https://github.com/Krtz/DiceBound/blob/main/runtime/js/board/registry.js`; identity design ideas: `https://github.com/Krtz/DiceBound/blob/main/docs/ENCOUNTER_IDENTITY_IDEAS.md`. No existing Arborium story choices, the World Tree's primarily landmark role, or the Roadwarden's earlier mystery should be overridden by this option without user approval.
+
+### Round 7 questions to resolve next
+
+1. Confirm, reject or revise the **Ancient Road Dragon** as Arborium's unifying monster antagonist.
+2. Choose the six **distinct magical elements** for the Verdant Order council or delegate their selection for a later round.
+3. Define the dragon/leader's role: exposed early, slowly revealed, or only during finale.
+4. Decide whether the player fights the leader in World 1 or investigates and moves to World 2 while the threat continues.
+5. Determine how the first audience with the council happens at its publicly accessible academy (guild escort, official summons, ceremony, etc.).
+
+**Documentation-only round. No Unity, class/Psion, quest-code, scene or asset changes requested.**
