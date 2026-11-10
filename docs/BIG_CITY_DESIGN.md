@@ -353,3 +353,14 @@ Detailed region authority: [Arborium World Connections](ARBORIUM_WORLD_CONNECTIO
 - The **northwest dragon lair is a normal repeatable dungeon**, freely accessible with no required story quest. **Only a kill performed while the specific final dragon quest is active counts as story completion**; earlier kills are nonretroactive. Keep it repayable so a qualifying later kill is always possible. Don't mistake a repeatable gameplay boss for a canonical surviving dragon after the story concludes.
 - The canon World 1 finale is still to **kill the original DiceBound Ancient Road Dragon** and then travel to World 2 to investigate why it was outside the Dice. The clue remains undecided.
 - New areas, creatures and dungeon rules here are **design decisions, not Unity implementation authorization**.
+
+
+## Arborium surroundings Round 3 — 2026-11-10 (latest)
+
+See [Arborium World Connections](ARBORIUM_WORLD_CONNECTIONS.md), SURR-014–018, for the detailed authoritative region decisions.
+
+- The western level **30–40** forest's official name is **The Verdant Wilds**, a lush magical forest populated chiefly by living plants and mushrooms with **species-specific behavior, including neutral species**, and relatively little other wildlife.
+- The northern tribal lizardmen **serve the original Ancient Road Dragon directly**. Their reasons, society and post-boss fate remain undesigned.
+- The northwest **Ancient Road Dragon dungeon** is reached by a **mountain path northwest of Arborium**. It is freely enterable and repeatable, like other dungeons, with **main quest credit ONLY if the story quest is active when the dragon is killed**. Prior optional clears never give retroactive credit.
+- These decisions do not change the World 1 story ending (slay the dragon, then visit World 2 to investigate why it appeared) or explain the dragon's DiceBound continuity mysteries.
+- Design/documentation only; no Unity or Psion changes authorized.
