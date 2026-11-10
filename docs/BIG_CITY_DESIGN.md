@@ -259,3 +259,45 @@ The Ancient Road Dragon is an **interesting crossover candidate only**. DiceBoun
 5. What type of quest/event occurs between the council's summons and authorizing the World 2 expedition?
 
 **Design/documentation only. Do not modify Unity, scene, gameplay or Psion work as a result of this round.**
+
+
+## Round 8 — 2026-11-10 (LATEST USER DECISIONS; EXPLICIT OVERRIDE OF ROUND 7)
+
+**Continuity reviewed before recording:** `docs/WORLD_AND_LORE.md`, `README.md`, `docs/ARBORIUM_WORLD_CONNECTIONS.md`, and `docs/ARBORIUM_GUILD_FORESTRY.md` on this branch; `Krtz/DiceBound/runtime/js/board/registry.js` for the original Board 1 final boss. The user's newest freeform answer explicitly **overrides** the earlier Round 7 conclusion that the player would pursue a still-living Ancient Road Dragon to World 2. The dragon **must be killed in the final Arborium main quest**, and World 2 then investigates **why it was there**. No invented explanation is approved.
+
+| ID | Topic | Approved direction / interpretation | Status and safeguards |
+| --- | --- | --- | --- |
+| CITY-041 | **Ancient Road Dragon's arrival** | The presence of **the original DiceBound Ancient Road Dragon outside the Dice** is a **long-term mystery** the player learns about much later. No early explanation of how the dragon crossed from the inside to the outside, survived, or manifested should be treated as canon. | USER CONFIRMED; exact metaphysics OPEN. Align with `WORLD_AND_LORE.md` on the Echo, Last Equation and unresolved origin mysteries. |
+| CITY-042 | **Dragon's motive** | Its **true reasons for gathering different hostile monsters around Arborium remain mysterious initially**. The monster coalition and recognizable leader are known early, but the underlying motivation is not. | USER CONFIRMED; don't silently select conquest, revenge, Tree corruption or invasion of World 2. |
+| CITY-043 | **Adventurers' Guild investigation gameplay** | Use **a mixture of combat, exploration and intelligence gathering** as the investigation playstyle. The Guild introduces the player to the Verdant Order after several quests, as previously decided. | USER CONFIRMED; exact locations, enemy mix, documents, evidence and quest breakdown OPEN. Preserve existing Guild forestry/survey commission chain instead of deleting or contradicting it; whether it serves as qualification for the formal council recommendation is OPEN. |
+| CITY-044 | **Nature of World 2 clue** | No specific answer was selected for the nature of the dragon's World 2 connection. The later freeform direction establishes **World 2 as the place to investigate WHY the dragon appeared in World 1**, rather than finding/chasing the dragon itself. | PARTIALLY CONFIRMED direction; exact clue, investigative premise, trail and reason World 2 specifically are OPEN. |
+| CITY-045 | **FINAL ARBORIUM MAIN QUEST — KILL DRAGON** | **The final main quest in Arborium is to KILL the original Ancient Road Dragon.** It is the climactic World 1 boss, not merely a monster army repelled or a lieutenant defeat. **This explicitly supersedes CITY-039, Round 7's “no mandatory World 1 dragon kill / pursue leader into World 2” interpretation**. The dragon is dead by successful World 1 storyline completion. | USER-CONFIRMED OVERRIDE; arena, level, attacks, allies, loot, individual/group kill credit, repeatability, quest stage and cinematic OPEN. |
+| CITY-046 | **Aftermath and next-world mission** | **After killing the dragon, the player travels to World 2 to learn why it was in World 1 and uncover the larger mystery.** The Verdant Order remains the approved institution that sends/commissions this expedition after the player proves themselves. No literal pursuit of a surviving dragon. | USER CONFIRMED; do not force a magical portal, replace physical cube-edge travel, or prematurely explain DiceBound/DiceFree metaphysics. |
+
+### Supersession notes for Codex
+
+1. **CITY-039 is superseded by CITY-045 / CITY-046.** Earlier Round 7 language claiming the player never needs to fight the dragon or chases the dragon into World 2 is historical only and MUST NOT drive implementation.
+2. **CITY-036 stays in force:** this is the ORIGINAL Ancient Road Dragon, DiceBound Board 1's final boss, not an alternate dragon. The Ogre Roadwarden is a different DiceBound Board 1 miniboss and already has its own DiceFree story/encounter.
+3. **Main narrative length remains short: around three to four Arborium main quests (CITY-032)**, with Guild introduction after several tasks and council formal summons (CITY-031 / CITY-040). Placement of the existing guild commissions relative to this count is an unresolved integration decision, not permission to discard them.
+4. **Foundational world lore remains authoritative:** DiceBound = inside Dice; DiceFree = outside six-sided cube; the Echo emerges after The Last Equation; face crossings are physically walkable with gravity transitions (see `docs/WORLD_AND_LORE.md`). Do not invent Tree teleportation, a portal, pre-explained dragon escape, or a quest-giving Tree.
+5. **World 2 narrative objective is investigation of the slain dragon's anomalous presence, NOT tracking a live enemy.** World 2's exact geographical clue, landing area, monster involvement, larger villain and mystery explanation have not been decided.
+6. Do not conflate the already-implemented `ARBORIUM_GUILD_FORESTRY.md` chain or Ogre Roadwarden quest with the yet-to-be-designed full Arborium main story or dragon finale.
+7. **Design/documentation only.** No Unity implementation, save-schema, asset, Psion or gameplay changes authorized by this round.
+
+### Candidate main-quest skeleton (DESIGNER PROPOSAL ONLY, not new confirmed details)
+
+- **Prelude:** existing Arborium arrival report and several Adventurers' Guild activities, combining exploration, investigation and combat.
+- **Main quest A:** guild-recommended formal audience with Verdant Council; discuss the known dragon threat and assign further inquiry.
+- **Main quest B:** uncover evidence of how the dragon commands distinct monsters, without revealing its ultimate motive or arrival mechanism.
+- **Main quest C:** prepare/find an approach to confront the Ancient Road Dragon.
+- **Main quest D (FINAL):** defeat and kill the Ancient Road Dragon; Verdant Order directs World 2 investigation into WHY it appeared on the outside of the Dice.
+
+This 4-quest sample is optional scaffolding for the next design round. Do not implement exact chapters or force four stages until user approval.
+
+### Round 9 recommended five design questions (OPEN)
+
+1. How should the **Ancient Road Dragon's boss battle** be structured and located in World 1?
+2. What kind of **monster factions** does it unite (choose or delegate)?
+3. How does the dragon **communicate or behave** toward the Echo without prematurely explaining its DiceBound connection?
+4. What **evidence after its death** gives the Verdant Order a concrete reason to send the player toward World 2?
+5. Are the **existing Arborium forestry/road commissions** a required part of guild qualification or optional supporting quests?
