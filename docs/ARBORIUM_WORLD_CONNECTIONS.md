@@ -81,3 +81,36 @@ The following decisions establish macro geography and level/quest intent. These 
 3. Choose what lives in the northern dragon-linked region (lizardmen, kobolds, both, or another faction).
 4. Decide whether Nature creatures belong between Trimery and Arborium or as a distinct eastern subzone without rewriting existing geography.
 5. Outline the lair's instance access/repeatability and baseline party rules, respecting free access and quest-only main-story credit.
+
+
+## Arborium Surroundings — Round 2 (2026-11-10, LATEST USER CONFIRMATIONS)
+
+This round refines the already-approved west-forest / north-region / northwest-dragon geography (SURR-001–008); no Unity implementation was requested.
+
+| ID | Question / feature | Decision | Still open |
+| --- | --- | --- | --- |
+| SURR-009 | Western forest character | **A lush MAGICAL forest**, rich in wildlife and unusual plants. Preserve a living, vibrant enchanted woodland identity, rather than defaulting to an exclusively dark/dead forest or a rocky barren biome. | Name, landmarks, specific colors, scenery, subzones and ambient events. |
+| SURR-010 | Western forest leveling | **LEVELS 30–40**. Intended as a follow-up leveling/exploration region beyond Briarback. The larger Arborium surroundings can still encompass other levels up to 50 under SURR-007. | Per-creature level distribution, density, XP, rare spawns and transition to northern zone. |
+| SURR-011 | Northern region inhabitants | **Lizardmen with a TRIBAL civilization** occupy the new region north of the west forest. Their prior proposed connection to dragons is a candidate to explore, not yet a locked worship/servitude/religion relationship. | Region name, levels, alignment, settlements, chiefs, combat roles, whether/why they associate with dragons. Kobolds were offered but **not selected** as the region's defining population. |
+| SURR-012 | Nature enemies placement | **Living plants and mushroom creatures belong IN THE WESTERN FOREST** west of Arborium. The previous east-of-city/Trimery nature-monster idea was exploratory and is superseded as the chosen main placement. | Specific species, hostility, behaviors, levels, drops and frequency; no approval to remove every such species from other future biomes. |
+| SURR-013 | Dragon lair dungeon lifecycle | The **northwest Ancient Road Dragon lair is fundamentally ANOTHER NORMAL DUNGEON**, with **freely available entry**, **repeatable boss fights** and **main-story kill credit ONLY if the dragon-kill quest is already active when the kill occurs**. Players may kill it without that quest; such earlier kills never count retroactively, and a later eligible kill must remain possible. | Details of normal dungeon staging timer, party/occupancy model, loot, difficulty, encounter mechanics, repeat rewards, lockouts, instance boundaries and respawn/reset require further design or reuse of existing agreed dungeon rules. Do **not** special-case the lair as a one-off non-replayable cinematic or impose a quest entry gate. |
+
+### Current geographic progression snapshot
+
+- **East of Arborium:** Trimery (existing direct-road/Roadwarden continuity and Briarback detour preserved). No new eastern nature biome is approved.
+- **West of Arborium:** lush magical forest, **level 30–40**, with wildlife, animated/living plants, and mushroom enemies. Optional exploration, side quests, rare monsters and treasures remain core goals.
+- **Further north AFTER western forest:** a separate **tribal lizardman region**. Dragon connection to be developed; exact geography and level bracket open.
+- **Northwest of Arborium:** repeatable, freely accessible **Ancient Road Dragon dungeon**. Main quest requires a **fresh qualifying kill while the quest is active**. Its lair's precise entrance and path through neighboring areas are undecided.
+- The original DiceBound Ancient Road Dragon dies in the **canonical World 1 main-story completion**. Repeatable instanced encounters do not imply that the dragon survives in the canon after the credited kill; use existing game dungeon/replay conventions without rewriting lore.
+
+### Guardrails for Codex
+
+Do not confuse **encounter availability** with **quest-state credit**, or interpret repeatable gameplay as a second canon dragon. Do not invent a second forest east of Arborium merely to host plant/mushroom enemies. Avoid committing the lizardmen to dragon worship until approved. The World Tree remains publicly reachable and primarily scenic; dragon's origin and motive stay mysteries. **Design only: no gameplay, scenes, Psion or asset changes in this round.**
+
+### Round 3 design prompts (OPEN)
+
+1. Name and distinctive landmarks for the western magical forest.
+2. Choose western-forest living plant and mushroom enemy identities, behavior and relative frequency.
+3. Choose conventional wildlife, rare monster(s), and gameplay hazards for level 30–40 forest encounters.
+4. Determine the tribal lizardmen's actual connection to dragons and how friendly/hostile they are.
+5. Decide how the player physically accesses the northwest dragon dungeon, keeping entry freely available and repeatable.
