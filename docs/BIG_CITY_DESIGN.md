@@ -329,3 +329,16 @@ This 4-quest sample is optional scaffolding for the next design round. Do not im
 Prioritize a **geographical and gameplay design pass around Arborium**, including the already approved **north (Briarback approach)**, **direct road toward Trimery** and **east/west city gates**, before settling new areas. Five questions per round to determine surrounding terrain/biomes, nearby settlements, levels, purpose and how the dragon's secret lair fits the broader map. The user specifically asked to expand city surroundings, so do not use the next round solely for the dragon's spell mechanics.
 
 **Documentation only:** This round does NOT authorize edits to Unity, Psion, scene assets, navmesh or quests.
+
+
+## Arborium surroundings Round 1 — 2026-11-10 (latest regional decisions)
+
+**Authoritative detailed record:** [Arborium World Connections](ARBORIUM_WORLD_CONNECTIONS.md), SURR-001–008.
+
+- New western ancient forest with dangerous creatures and **post-Briarback leveling**; northward beyond the western forest lies another playable region (dragon-associated **lizardmen/kobolds suggested, not yet selected**).
+- **Trimery lies east of Arborium** in the larger regional orientation. Nature monsters like animated plants and mushrooms to the east were suggested, **not yet confirmed**, and must be reconciled with the existing Trimery and Roadwarden routes.
+- **Ancient Road Dragon's hidden instanced lair is northwest of Arborium**, exact entrance undecided.
+- **Critical quest rule:** players MAY fight/kill the dragon even BEFORE obtaining the story quest. The dragon kill advances/completes the final main quest **only if the corresponding quest is already active at the kill event**. A previous voluntary dragon kill does NOT count retroactively. Therefore, **do not quest-gate the lair entrance**, and allow a future qualifying fight.
+- Several surrounding zones span levels **25–50** with **side quests, exploration, rare monsters and hidden treasures**. Terrain overall includes fields, forests, rivers, hills and rocks.
+- The original Dragon still dies in the World 1 story; Verdant Order sends the player onward to investigate why it appeared here. The nature of the World 2 clue remains undecided.
+- This round records **design only**; no new Unity scenes, enemy data, instance code or class changes authorized.
