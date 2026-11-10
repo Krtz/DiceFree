@@ -342,3 +342,14 @@ Prioritize a **geographical and gameplay design pass around Arborium**, includin
 - Several surrounding zones span levels **25–50** with **side quests, exploration, rare monsters and hidden treasures**. Terrain overall includes fields, forests, rivers, hills and rocks.
 - The original Dragon still dies in the World 1 story; Verdant Order sends the player onward to investigate why it appeared here. The nature of the World 2 clue remains undecided.
 - This round records **design only**; no new Unity scenes, enemy data, instance code or class changes authorized.
+
+
+## Arborium Surroundings — Round 2 (2026-11-10, latest)
+
+Detailed region authority: [Arborium World Connections](ARBORIUM_WORLD_CONNECTIONS.md), SURR-009–013.
+
+- **Western forest = lush magical wildlife/plant biome, levels 30–40**, with **living plants and mushroom monsters actually placed in the west**, not a newly invented eastern forest.
+- The region **north after the western forest is home to a tribal lizardman civilization**. Any relation to the Ancient Road Dragon is currently unspecified; kobolds are not selected as the main inhabitants.
+- The **northwest dragon lair is a normal repeatable dungeon**, freely accessible with no required story quest. **Only a kill performed while the specific final dragon quest is active counts as story completion**; earlier kills are nonretroactive. Keep it repayable so a qualifying later kill is always possible. Don't mistake a repeatable gameplay boss for a canonical surviving dragon after the story concludes.
+- The canon World 1 finale is still to **kill the original DiceBound Ancient Road Dragon** and then travel to World 2 to investigate why it was outside the Dice. The clue remains undecided.
+- New areas, creatures and dungeon rules here are **design decisions, not Unity implementation authorization**.
