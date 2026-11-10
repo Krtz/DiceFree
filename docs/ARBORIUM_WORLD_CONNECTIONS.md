@@ -114,3 +114,33 @@ Do not confuse **encounter availability** with **quest-state credit**, or interp
 3. Choose conventional wildlife, rare monster(s), and gameplay hazards for level 30–40 forest encounters.
 4. Determine the tribal lizardmen's actual connection to dragons and how friendly/hostile they are.
 5. Decide how the player physically accesses the northwest dragon dungeon, keeping entry freely available and repeatable.
+
+
+## Arborium Surroundings — Round 3 (2026-11-10, LATEST USER CONFIRMATIONS)
+
+The following supersedes the outstanding questions from Round 2. This is design-only preparation for Codex, not an instruction to implement immediately.
+
+| ID | Subject | Confirmed decision | Still open |
+| --- | --- | --- | --- |
+| SURR-014 | **Western forest name** | The lush magical level **30–40** forest WEST of Arborium is officially called **The Verdant Wilds**. Use this name in future region documents, quests and map labels. | Exact boundaries, paths, settlements and internal subregions. |
+| SURR-015 | **Plant/mushroom behavior** | Living plants and mushrooms have **different behaviors by species**, including **some neutral/nonhostile creatures**. Do NOT make every mushroom and plant automatically hostile or share one simple attack behavior. | Species roster, aggro rules per species, attacks, movement, drops, stats. |
+| SURR-016 | **Wildlife balance** | The Verdant Wilds is **predominantly inhabited by plants and mushroom creatures**, with **relatively few other animal/magical creatures**. Existing woodland wildlife may appear sparingly but should not dominate the population. | Specific secondary species and population ratio. |
+| SURR-017 | **Northern lizardmen allegiance** | The **tribal lizardmen in the region NORTH of the Verdant Wilds serve the original Ancient Road Dragon DIRECTLY**. They are part of its aligned factions, not independent neutral dragon worshippers or dragon hunters. | Reasons for allegiance, ranks, dragon communication, tribal settlement, encounter design, post-dragon consequences. The broader dragon's ultimate motive remains mysterious. |
+| SURR-018 | **Dragon lair approach** | The Ancient Road Dragon's repeatable instanced dungeon is reached via a **MOUNTAIN PATH NORTHWEST OF ARBORIUM**. Retain free access without a main-quest prerequisite and give dragon-kill story credit only for an eligible kill while the story quest is active. | Mountain/path geometry, hazards, path connection to Verdant Wilds and lizardman region, entry/party mechanics, difficulty and rewards. |
+
+### Updated regional design picture
+
+- **Arborium:** benevolent Verdant Order capital; the massive World Tree is openly reachable, primarily a landmark.
+- **East:** Trimery, respecting the existing broken/restored-road and Ogre Roadwarden storyline, not a replacement eastern nature-monster zone.
+- **West:** **The Verdant Wilds** (level 30–40), luminous magical forest with a mostly botanical and fungal monster ecology, including neutral species.
+- **Further north beyond the western forest:** tribal **lizardmen directly serving the Ancient Road Dragon**; exact level range and society not yet designed.
+- **Northwest:** mountain path to **Ancient Road Dragon's Lair**, a normal repeatable dungeon (available even without the story quest); World 1's canonical final quest requires a qualifying dragon kill. Existing lizardman allegiance does not require making the lair entrance quest-locked.
+- The original DiceBound dragon's origin, recognition of the Echo, reasons for gathering enemies, and the World 2 clue remain long-term mysteries. Do not invent explanations in Codex implementation.
+
+### Next design focus (OPEN, not yet approved)
+
+1. Name 3–5 signature plant and mushroom species and their individual aggression/behavior.
+2. Define whether neutral plants/fungi can react defensively or remain strictly passive.
+3. Choose special mechanics for the botanical creatures (spores, roots, healing, camouflage etc.).
+4. Pick the Verdant Wilds' distinguishing landmark/side activity and a rare monster.
+5. Set any basic rules for forest routes and access to the north without changing the dragon mountain approach.
