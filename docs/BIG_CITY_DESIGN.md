@@ -229,3 +229,33 @@ The Ancient Road Dragon is an **interesting crossover candidate only**. DiceBoun
 5. Determine how the first audience with the council happens at its publicly accessible academy (guild escort, official summons, ceremony, etc.).
 
 **Documentation-only round. No Unity, class/Psion, quest-code, scene or asset changes requested.**
+
+
+## Round 7 — 2026-11-10 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Approved direction | Open / continuity guardrails |
+| --- | --- | --- | --- |
+| CITY-036 | **Monster leader confirmed** | The monster leader rallying multiple hostile factions around Arborium is **the ORIGINAL Ancient Road Dragon from DiceBound** (Board 1 / Green Road final boss). This is the same narrative entity, **not** a different manifestation, remake, lookalike or unrelated dragon. Supersedes Round 6's tentative candidate status. | Precisely how the original dragon crosses from DiceBound's in-die reality into DiceFree's external cube world, its appearance/powers and its survival/persistence are OPEN. Do not make up the explanation as canon. |
+| CITY-037 | **Six Verdant Council elements** | Six powerful council mages each represent a DISTINCT element: **Fire, Ice, Lightning, Nature, Light and Void**. One member per selected element; not Earth. | Names, appearances, personalities, rank hierarchies, interpersonal dynamics, spell sets and battle involvement OPEN. Do not infer these correspond to the six world faces. |
+| CITY-038 | **Antagonist reveal timing** | The Ancient Road Dragon is **known as the primary regional threat from the start of the Arborium main storyline**. Adventurers' Guild quests primarily **gather intelligence** on its activities and the factions under its influence. This is not a secret last-minute identity twist. | How guild/order initially learned its identity, what evidence to collect, which enemy groups cooperate, and exact quest objectives OPEN. |
+| CITY-039 | **World 1 campaign ending** | The player **discovers the Ancient Road Dragon's connection to World 2 and PURSUES that lead into World 2** as the ending/next step of the World 1 main storyline. Do **not** mandate defeating or killing it in World 1, or assume a World 1 final dragon boss fight. | The nature of its World 2 connection, its movement, whether direct pursuit is possible, specific World 2 arrival circumstances and subsequent boss encounter are OPEN. |
+| CITY-040 | **First formal council audience** | **After the Adventurers' Guild recommends the player**, the **Verdant Council formally summons the player** for their initial official meeting. The academy is entirely publicly accessible, so the formal summons means a specific audience/meeting, **not** a locked entrance to the academy. | Messenger, summons delivery, council chamber layout, attendees/dialogue and placement in the ~3–4 main questline OPEN. |
+
+### Updated approved World 1 → World 2 narrative spine
+
+- Arborium's outer rings support the Adventurers' Guild; the **benevolent Verdant Order** governs from a **publicly accessible mage-district academy** with **six element-specialist councilors**: Fire, Ice, Lightning, Nature, Light and Void.
+- **The original Ancient Road Dragon from DiceBound**, Board 1's final boss, is known early as the powerful leader uniting separate monster groups outside Arborium. It is distinct from DiceBound's Board 1 **Ogre Roadwarden miniboss** already referenced in DiceFree.
+- After **several guild quests** investigating the dragon and its forces, the guild formally recommends the player. The council **summons** the player for an official audience. The exact boundaries between these preliminary guild quests and the approximately **3–4 Arborium main quests** remain to be sequenced.
+- The short World 1 capital main storyline culminates in **identifying the dragon's World 2 connection**, leading the player to pursue that trail with Verdant Order backing, thereby motivating the transition toward World 2.
+- The gigantic World Tree remains **publicly approachable, primarily a landmark**; it need not power the transition or grant quests.
+- **Lore-sensitive outstanding question:** DiceBound's premise places its characters/bosses inside the Dice, whereas DiceFree begins outside it. Shared identity is confirmed; the explanation of how the *same* Ancient Road Dragon is active here must be carefully designed rather than implied.
+
+### Round 8 questions to resolve (NOT decisions yet)
+
+1. What continuity explanation allows the original Ancient Road Dragon to exist in DiceFree outside DiceBound?
+2. Why is it uniting hostile groups near Arborium?
+3. What actual clues are gathered through the first guild investigation?
+4. Which central World 2 lead is revealed at the end of World 1?
+5. What type of quest/event occurs between the council's summons and authorizing the World 2 expedition?
+
+**Design/documentation only. Do not modify Unity, scene, gameplay or Psion work as a result of this round.**
