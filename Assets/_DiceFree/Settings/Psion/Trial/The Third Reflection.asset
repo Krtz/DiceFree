@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Third Reflection
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.psion.advancement
+  title: The Third Reflection
+  requiredClassId: class.magically-touched-novice
+  requiredLevel: 30
+  version: 1
+  offer: Three reflections wait beneath the Guild. Only one has a will of its own. Walk sideways and watch their turns. Two move together, while the real one follows you. Strike the one that follows and defeat it.
+  activeDialogue: The chamber is ready. Move before you strike. A hit on a false reflection ends the attempt.
+  locationHint: "Speak to Ilyra in the Adventurers\u2019 Guild reception in Arborium."
+  turnInHint: "Return to Ilyra at the Adventurers\u2019 Guild in Arborium."
+  stages:
+  - kind: 4
+    objectiveId: third-reflection
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Identify and defeat the real reflection in the Guild's mirror chamber
+    contentId: puzzle.arborium.mirror-trial
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

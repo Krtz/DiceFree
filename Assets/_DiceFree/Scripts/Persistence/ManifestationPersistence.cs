@@ -379,12 +379,16 @@ namespace DiceFree.Persistence
         }
 
         public bool TryForkAndActivate(ActorDefinition targetDefinition, out string error)=>
-            TryForkInternal(targetDefinition,null,out error);
+            TryForkInternal(targetDefinition, null, Array.Empty<ItemDefinition>(), out error);
 
-        public bool TryCompleteAdvancementQuest(ActorDefinition targetDefinition,QuestDefinition quest,out string error)=>
-            TryForkInternal(targetDefinition,quest,out error);
+        public bool TryCompleteAdvancementQuest(ActorDefinition targetDefinition, QuestDefinition quest, out string error) =>
+            TryCompleteAdvancementQuest(targetDefinition, quest, Array.Empty<ItemDefinition>(), out error);
 
-        private bool TryForkInternal(ActorDefinition targetDefinition,QuestDefinition completedQuest,out string error)
+        public bool TryCompleteAdvancementQuest(ActorDefinition targetDefinition, QuestDefinition quest,
+            ItemDefinition[] starterGear, out string error) => TryForkInternal(targetDefinition, quest, starterGear, out error);
+
+        private bool TryForkInternal(ActorDefinition targetDefinition, QuestDefinition completedQuest,
+            ItemDefinition[] starterGear, out string error)
         {
             if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) { error = "Class is locked during this dungeon run."; return false; }
             error = null;
@@ -419,6 +423,7 @@ namespace DiceFree.Persistence
                 ValidateState(actor.Stats.Definition, parent);
 
                 var child = ManifestationProfileTransactions.CreateChildSnapshot(parent, targetDefinition.stableId);
+                AddStarterGear(child, starterGear);
                 ValidateState(targetDefinition, child);
                 ManifestationProfileTransactions.CommitFork(candidate, parent, child, CurrentClassId);
                 CaptureEchoWideState(candidate);
@@ -438,6 +443,34 @@ namespace DiceFree.Persistence
             {
                 return Reject(exception.Message, out error);
             }
+        }
+
+        private void AddStarterGear(ManifestationSave child, ItemDefinition[] gear)
+        {
+            if (gear == null || gear.Length == 0) return;
+            var slots = new HashSet<EquipmentSlot>();
+            var items = new List<ItemInstance>(child.inventory);
+            var equipped = new List<EquippedItem>(child.equipment);
+            foreach (var definition in gear)
+            {
+                if (definition == null || inventory.Resolve(definition.stableId) != definition || definition.questItem ||
+                    definition.consumable || definition.handsRequired != 1 || !Enum.IsDefined(typeof(EquipmentSlot), definition.slot) ||
+                    !slots.Add(definition.slot) ||
+                    (definition.allowedClassIds?.Length > 0 && !definition.allowedClassIds.Contains(child.classId)))
+                    throw new InvalidOperationException("Advancement starter equipment is invalid.");
+                var item = items.Find(owned => owned.definitionId == definition.stableId);
+                if (item == null)
+                {
+                    item = new ItemInstance { instanceId = Guid.NewGuid().ToString("D"),
+                        definitionId = definition.stableId, bound = definition.bound };
+                    items.Add(item);
+                }
+                string slot = definition.slot.ToString();
+                equipped.RemoveAll(value => value.slotId == slot || value.instanceId == item.instanceId);
+                equipped.Add(new EquippedItem { slotId = slot, instanceId = item.instanceId });
+            }
+            child.inventory = items.ToArray();
+            child.equipment = equipped.ToArray();
         }
 
         public bool TryActivateExisting(string classId, out string error)

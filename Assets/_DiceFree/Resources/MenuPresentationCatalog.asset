@@ -43,6 +43,9 @@ MonoBehaviour:
   - classId: class.defender
     tier: 2
     preview: {fileID: 6781905498074425775, guid: eb0456fce07e8564db83aa11aab0f231, type: 3}
+  - classId: class.psion
+    tier: 2
+    preview: {fileID: 7973752590219349374, guid: 47d3f3fc3fdaf4e498acc8bc1131fba5, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
@@ -72,3 +75,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad533e6c55f853442ab94e02cfe696a7, type: 2}
   - {fileID: 11400000, guid: 33a588416843964498a890f16f1307a0, type: 2}
   - {fileID: 11400000, guid: b0c5f00b66cd40544994a28aa2579908, type: 2}
+  - {fileID: 11400000, guid: 21b420ec6f7aca7469f366f6da86d8d2, type: 2}
+  - {fileID: 11400000, guid: 86edff9c7d661594ba12d5b600e9385f, type: 2}

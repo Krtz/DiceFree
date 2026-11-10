@@ -26,6 +26,11 @@ namespace DiceFree.Core
         private CameraOcclusionFader occlusionFader;
         private Rect mapBounds = new(-56, -44, 181, 116);
         public Rect MapBounds=>mapBounds;
+        public float ZoomDistance
+        {
+            get => distance;
+            set => distance = Mathf.Clamp(value, minimumDistance, maximumDistance);
+        }
         public void ConfigureMapBounds(Rect bounds) => mapBounds = bounds;
         public void RecenterForTravel(Transform follow) { target = follow; following = true; lookingOut = false; initialized = false; velocity = Vector3.zero; }
 

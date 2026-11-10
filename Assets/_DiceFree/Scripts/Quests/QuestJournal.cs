@@ -43,7 +43,7 @@ namespace DiceFree.Quests
             if(hub!=null)monsterKilledSubscription=hub.Subscribe<MonsterKilledEvent>(fact=>
                 Advance(ObjectiveKind.Kill,fact.monsterId,fact.familyId,null,null,leaf=>!leaf.dungeonBossOnly));
             if(hub!=null)puzzleSubscription=hub.Subscribe<DungeonPuzzleSolvedEvent>(fact=>
-                Advance(ObjectiveKind.SolvePuzzle,fact.puzzleId,null,null));
+                CreditPuzzle(fact.puzzleId));
         }
         public void UnbindDungeonEvents(SemanticGameEventHub hub=null)
         {
@@ -180,6 +180,8 @@ namespace DiceFree.Quests
         {
             if (entered.actor == owner) Advance(ObjectiveKind.ReachArea, null, null, entered.areaId);
         }
+        public void CreditPuzzle(string puzzleId) => Advance(ObjectiveKind.SolvePuzzle, puzzleId, null, null);
+
         public void CreditEscort(string routeId)
         {
             if (owner.Alive && !string.IsNullOrWhiteSpace(routeId))

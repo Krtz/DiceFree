@@ -163,17 +163,14 @@ public static class PsionModelAuthoring
 
         if (old != null && old.name == FormName) Object.DestroyImmediate(old.gameObject);
         var visualRoot = (GameObject)PrefabUtility.InstantiatePrefab(prefab,actor.transform);
-        var bladePose = Quaternion.FromToRotation(Vector3.up,new Vector3(.38f,.72f,.56f));
-        var bookPose = Quaternion.LookRotation(new Vector3(-.10f,.92f,.38f),new Vector3(0,.38f,-.92f));
-        var bladeVisual = Mount(visualRoot,blade,"Grip.R",bladePose);
-        var bookVisual = Mount(visualRoot,book,"Grip.L",bookPose);
+        var gearBindings = FitGear(visualRoot,blade,book);
         visualRoot.SetActive(false);
         entry.FindPropertyRelative("visualRoot").objectReferenceValue = visualRoot.transform;
         entry.FindPropertyRelative("animator").objectReferenceValue = visualRoot.GetComponent<Animator>();
         switcherData.ApplyModifiedPropertiesWithoutUndo();
 
         equipment.Configure(equipment.Bindings.Where(value=>value.definition!=blade&&value.definition!=book)
-            .Concat(new[] { Binding(blade,bladeVisual), Binding(book,bookVisual) }).ToArray());
+            .Concat(gearBindings).ToArray());
         EditorUtility.SetDirty(equipment);
         var caster = new SerializedObject(actor.GetComponent<PsionSkillCaster>());
         caster.FindProperty("imageVisual").objectReferenceValue = prefab;
@@ -183,6 +180,15 @@ public static class PsionModelAuthoring
         if (!EditorSceneManager.SaveScene(scene)) throw new InvalidOperationException("Could not save the Mirrorweave form.");
         AssetDatabase.SaveAssets();
         Debug.Log("DICEFREE_MIRRORWEAVE_AUTHOR_OK");
+    }
+
+    internal static EquipmentPresentation.Binding[] FitGear(GameObject root,ItemDefinition blade,ItemDefinition book)
+    {
+        var bladePose = Quaternion.FromToRotation(Vector3.up,new Vector3(.38f,.72f,.56f));
+        var bookPose = Quaternion.LookRotation(new Vector3(-.10f,.92f,.38f),new Vector3(0,.38f,-.92f));
+        var bladeVisual = Mount(root,blade,"Grip.R",bladePose);
+        var bookVisual = Mount(root,book,"Grip.L",bookPose);
+        return new[] { Binding(blade,bladeVisual), Binding(book,bookVisual) };
     }
 
     private static GameObject Mount(GameObject root,ItemDefinition item,string socket,Quaternion rotation)

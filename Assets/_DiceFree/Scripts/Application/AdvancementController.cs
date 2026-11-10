@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DiceFree.Combat;
+using DiceFree.Items;
 using DiceFree.Persistence;
 using DiceFree.Progression;
 using DiceFree.Quests;
@@ -61,13 +62,16 @@ namespace DiceFree.Advancement
             return true;
         }
 
-        public bool TryTurnInAdvancementQuest(AdvancementDefinition definition,QuestDefinition quest)
+        public bool TryTurnInAdvancementQuest(AdvancementDefinition definition, QuestDefinition quest) =>
+            TryTurnInAdvancementQuest(definition, quest, Array.Empty<ItemDefinition>());
+
+        public bool TryTurnInAdvancementQuest(AdvancementDefinition definition, QuestDefinition quest, ItemDefinition[] starterGear)
         {
             if(definition==null||quest==null||definition.requiredQuestId!=quest.stableId||
                 !definition.Eligible(stats)||persistence==null||!persistence.Ready||
                 persistence.HasManifestation(definition.targetClass.stableId))
                 return SetFeedback("That advancement quest is not available.",false);
-            if(!persistence.TryCompleteAdvancementQuest(definition.targetClass,quest,out string error))
+            if(!persistence.TryCompleteAdvancementQuest(definition.targetClass, quest, starterGear, out string error))
                 return SetFeedback(error,false);
             return SetFeedback("Advanced into "+definition.targetClass.displayName+". Parent manifestation preserved.",true);
         }
