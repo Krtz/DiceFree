@@ -104,6 +104,8 @@ public static class PsionFoundationAuthoring
             index = bindings.arraySize;
             bindings.InsertArrayElementAtIndex(index);
         }
+        else if (bindings.GetArrayElementAtIndex(index).FindPropertyRelative("visualRoot").objectReferenceValue is Transform existing &&
+            existing != visual) return;
         var entry = bindings.GetArrayElementAtIndex(index);
         entry.FindPropertyRelative("classId").stringValue = ClassId;
         entry.FindPropertyRelative("visualRoot").objectReferenceValue = visual;

@@ -27,6 +27,7 @@ public static class PsionGearAuthoring
         var player = Object.FindObjectsByType<AdvancementController>(FindObjectsInactive.Include).Single();
         var rig = player.GetComponent<ClassPresentationSwitcher>().Resolve(PsionSkillProgression.PsionClassId);
         if (rig == null) throw new InvalidOperationException("Author the Psion foundation first.");
+        if (rig.GetComponentsInChildren<Transform>(true).Any(value => value.name == "Grip.R")) return;
         var equipment = player.GetComponent<EquipmentPresentation>();
         var blade = Item(BladeName, "item.psion.mirrorsteel-mindblade", EquipmentSlot.MainHand,
             new EquipmentStats { basicAttackFlatBonus = 5, attributes = new AttributeValues { agility = 2, intelligence = 1 } },

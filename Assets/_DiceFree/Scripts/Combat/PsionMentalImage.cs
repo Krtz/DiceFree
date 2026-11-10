@@ -12,6 +12,7 @@ namespace DiceFree.Skills
         private static readonly Color Glass = new(.53f, .39f, .95f, .72f);
         private static readonly Color Edge = new(.83f, .76f, 1f, .85f);
         private CombatActor actor, windupTarget;
+        private Animator imageAnimator;
         private BasicAttack ownerBasic;
         private TargetSelection selection;
         private ActorDefinition definition;
@@ -28,7 +29,8 @@ namespace DiceFree.Skills
         public float SnapshotAttackInterval => interval;
 
         public static PsionMentalImage Summon(CombatActor owner, BasicAttack basic, Vector3 point, int rank,
-            AttackDefinition blade, AttackDefinition blast, CriticalRule crit, float masteryPenetration)
+            AttackDefinition blade, AttackDefinition blast, CriticalRule crit, float masteryPenetration,
+            GameObject visual = null, Material material = null)
         {
             var root = new GameObject("Psion Mental Image") { layer = 10 };
             root.SetActive(false);
@@ -78,7 +80,7 @@ namespace DiceFree.Skills
             capsule.center = Vector3.up * .77f;
             capsule.height = 1.54f;
             capsule.radius = .32f;
-            image.BuildVisual();
+            image.BuildVisual(visual, material);
             image.expires = Time.time + PsionSkillCaster.ImageDuration(rank);
             image.nextAttack = Time.time;
             root.SetActive(true);
@@ -130,6 +132,7 @@ namespace DiceFree.Skills
             if (preferred == null) return;
             windupTarget = preferred;
             launchAt = Time.time + windup;
+            if (imageAnimator != null) imageAnimator.CrossFadeInFixedTime("Cast", .06f);
             nextAttack = Time.time + interval;
             var heading = Vector3.ProjectOnPlane(preferred.transform.position - transform.position, Vector3.up);
             if (heading.sqrMagnitude > .001f) transform.rotation = Quaternion.LookRotation(heading);
@@ -185,8 +188,21 @@ namespace DiceFree.Skills
             Destroy(gameObject);
         }
 
-        private void BuildVisual()
+        private void BuildVisual(GameObject visual, Material spectralMaterial)
         {
+            if (visual != null && spectralMaterial != null)
+            {
+                var doubleVisual = Instantiate(visual, transform);
+                doubleVisual.name = "Mirrorweave double";
+                imageAnimator = doubleVisual.GetComponentInChildren<Animator>(true);
+                foreach (var renderer in doubleVisual.GetComponentsInChildren<Renderer>(true))
+                {
+                    renderer.sharedMaterial = spectralMaterial;
+                    renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                }
+                return;
+            }
+
             var material = Resources.Load<Material>("EarlySkillVfx/SoftRing");
             var tint = new MaterialPropertyBlock();
             tint.SetColor("_BaseColor", Glass);

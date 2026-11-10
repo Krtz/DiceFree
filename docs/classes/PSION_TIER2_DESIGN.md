@@ -1,14 +1,14 @@
 # DiceFree — Psion Tier II — design interview
 
-**Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. The first combat implementation is available in the Development Room.** Historical earlier entries below are superseded by latest rounds. Appearance/model and advancement quest deferred; future descendant specializations World2+ only.
+**Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. The first combat implementation is available in the Development Room.** Historical earlier entries below are superseded by latest rounds. The Mirrorweave presentation is implemented in the Development Room. World advancement and World 2 specializations are future work.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
 
 ## Development Room implementation
 
-Select Psion in the Development Room and set level 10 to access all five skills for testing. The prototype uses the Magically Touched Novice training rig, the approved rank gates and combat rules, provisional Mana tuning, and a 9 m placement range for Lightning Storm.
+Select Psion in the Development Room and set level 10 to access all five skills for testing. The purple-and-silver Mirrorweave rig uses the existing magical animations. The Mindblade fits the right hand and the Codex fits the left. Mental Image uses the same silhouette with a translucent violet material. The approved rank gates and combat rules are in place, with provisional Mana tuning and a 9 m placement range for Lightning Storm.
 
-Grant the **Mirrorsteel Mindblade** and **Mirrorleaf Codex** from **Equipment / item testing**, then equip them from the bag. The main-hand blade adds 5 flat basic damage, 2 Agility and 1 Intelligence. The off-hand codex adds 3 Intelligence, 2 Spirit and 2 Magical Defense. These are level-one test items restricted to Psion. Their stats are provisional. The final character model, world acquisition and advancement quest remain deferred.
+Grant the **Mirrorsteel Mindblade** and **Mirrorleaf Codex** from **Equipment / item testing**, then equip them from the bag. The main-hand blade adds 5 flat basic damage, 2 Agility and 1 Intelligence. The off-hand codex adds 3 Intelligence, 2 Spirit and 2 Magical Defense. These are level-one test items restricted to Psion. Their stats are provisional. World acquisition and advancement remain future work. Card Magic Girl is the visual reference for the future Tier III caster path, and Warrior Mage is the reference for the basic-attack path.
 
 ## Locked project-wide context — not Psion-specific approvals
 

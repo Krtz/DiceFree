@@ -23,6 +23,8 @@ namespace DiceFree.Skills
 
         [SerializeField] private AttackDefinition bolt, storm, imageBlade, imageRupture;
         [SerializeField] private ElementDefinition metal;
+        [SerializeField] private GameObject imageVisual;
+        [SerializeField] private Material imageMaterial;
         private CombatActor actor, selected;
         private BasicAttack basic;
         private ActorResourceController resources;
@@ -177,7 +179,7 @@ namespace DiceFree.Skills
                 case PsionSkill.MentalImage:
                     if (FreeImagePoint(area))
                         images.Add(PsionMentalImage.Summon(actor, basic, area, castRank, imageBlade, imageRupture,
-                            BasicCriticalRule(), BasicPenetration));
+                            BasicCriticalRule(), BasicPenetration, imageVisual, imageMaterial));
                     break;
                 case PsionSkill.MetalShield:
                     ApplyShield(castRank);
