@@ -12,8 +12,9 @@ namespace DiceFree.AI
     public class AutoAggroPolicy
     {
         public bool alwaysAutoAggro;
+        public bool retaliationOnly;
         [Min(1)] public int trivialLevelGap = 10; // Provisional working default.
         public virtual bool Allows(CombatActor enemy, CombatActor candidate) =>
-            alwaysAutoAggro || (long)candidate.Stats.Level - enemy.Stats.Level < Mathf.Max(1, trivialLevelGap);
+            !retaliationOnly && (alwaysAutoAggro || (long)candidate.Stats.Level - enemy.Stats.Level < Mathf.Max(1, trivialLevelGap));
     }
 }

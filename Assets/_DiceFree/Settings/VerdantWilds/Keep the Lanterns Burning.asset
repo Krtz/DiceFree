@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Keep the Lanterns Burning
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.verdant.lanternmere
+  title: Keep the Lanterns Burning
+  requiredClassId: 
+  requiredLevel: 30
+  version: 1
+  offer: I tend the lamps around Lanternmere. Thornlashes have crept onto the lower bank, and Sporecaps are puffing into the upper trail. Thin them out so I can make the circuit. The amber Lanterncaps leave us alone if we leave them alone.
+  activeDialogue: Follow the lamplit trail around the spring. Clear three Thornlashes and two Sporecaps, then come back to me.
+  locationHint: Leave Arborium's West Gate and follow the lanterns to the forest trailhead.
+  turnInHint: Return to Warden Lethen at the Lanternmere trailhead.
+  stages:
+  - kind: 5
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Clear the Lanternmere trail
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 5
+    alternatives:
+    - kind: 0
+      objectiveId: verdant.thornlash
+      requiredTag: 
+      creditMode: 1
+      creditRadius: 50
+      instruction: Defeat 3 Thornlashes
+      contentId: 
+      dungeonBossOnly: 0
+      familyId: verdant.thornlash
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 3
+    - kind: 0
+      objectiveId: verdant.sporecap
+      requiredTag: 
+      creditMode: 1
+      creditRadius: 50
+      instruction: Defeat 2 Sporecaps
+      contentId: 
+      dungeonBossOnly: 0
+      familyId: verdant.sporecap
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 2
+  completedQuestIds: []
+  rewardXp: 2800
+  reward: {fileID: 11400000, guid: 725d6202be249704daaaf29aa22a53c8, type: 2}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

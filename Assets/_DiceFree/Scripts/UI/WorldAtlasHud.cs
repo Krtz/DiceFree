@@ -8,7 +8,9 @@ namespace DiceFree.UI
     [DisallowMultipleComponent]
     public sealed class WorldAtlasHud : MonoBehaviour
     {
-        private static readonly Rect Extents = Rect.MinMaxRect(-54, -53, 332, 431);
+        private static readonly Rect Extents = Rect.MinMaxRect(-83, -53, 332, 431);
+        private static readonly Rect VerdantBounds = Rect.MinMaxRect(-77, 264, 4, 353);
+        public const string VerdantName = "Verdant Wilds";
         private static readonly Color Gold = new(.83f,.69f,.43f);
         private static readonly Color Ink = new(.88f,.83f,.70f);
         private static readonly Color Road = new(.66f,.53f,.35f);
@@ -21,6 +23,7 @@ namespace DiceFree.UI
             new("Trimery",new Vector2(248,183),"Timber town. Ilyra, Wounded Ranger, waits beside the priest. Her advancement quest opens at level 30 as a Physically Blessed Novice."),
             new("Briarback",new Vector2(265,311),"Quillboar territory. The open road to Arborium passes through the northern ridge."),
             new("Arborium",new Vector2(98,305),"World Tree capital. Enter through the north gate. The Adventurers’ Guild is just inside."),
+            new(VerdantName,new Vector2(-33,320),"Level 30–40 magical forest. Leave Arborium through the West Gate and follow the trail to Lanternmere. Warden Lethen has work at the trailhead."),
         };
         private static readonly Vector2[] SouthernRoad =
         {
@@ -31,6 +34,7 @@ namespace DiceFree.UI
             new(248,183),new(255,251),new(265,311),new(250,378),new(219,377),new(164,393),new(98,383),new(98,305)
         };
         private static readonly Vector2[] BrokenRoad = { new(248,183),new(218,214),new(166,255),new(98,305) };
+        private static readonly Vector2[] VerdantTrail = { new(98,305),new(20,305),new(-17,305),new(-30,309) };
 
         private readonly struct Landmark
         {
@@ -70,6 +74,8 @@ namespace DiceFree.UI
         private void OnDisable() => HudPointerBlocker.OverlayCovers -= Covers;
         private void OnDestroy() { if (softDisk != null) Destroy(softDisk); }
         private bool Covers(Vector2 _) => Open;
+        internal bool InVerdantWilds => player != null &&
+            VerdantBounds.Contains(new Vector2(player.transform.position.x,player.transform.position.z));
 
         public void Toggle()
         {
@@ -95,7 +101,7 @@ namespace DiceFree.UI
 
         private void DrawAtlas()
         {
-            label ??= new GUIStyle(GUI.skin.label) { alignment=TextAnchor.MiddleLeft, fontStyle=FontStyle.Bold,
+            label ??= new GUIStyle(GUI.skin.label) { alignment=TextAnchor.MiddleLeft, fontStyle=FontStyle.Bold, wordWrap=false,
                 normal={textColor=Ink} };
             heading ??= new GUIStyle(label) { fontSize=19 };
             body ??= new GUIStyle(GUI.skin.label) { wordWrap=true, normal={textColor=Ink}, fontSize=13 };
@@ -134,15 +140,17 @@ namespace DiceFree.UI
 
         private void DrawMap(Rect plot)
         {
-            for(int x=0;x<=300;x+=50)
-                Line(Project(plot,new Vector2(x,-53)),Project(plot,new Vector2(x,431)),1,new Color(.42f,.50f,.42f,.20f));
+            for(int x=-50;x<=300;x+=50)
+                Line(Project(plot,new Vector2(x,Extents.yMin)),Project(plot,new Vector2(x,Extents.yMax)),1,new Color(.42f,.50f,.42f,.20f));
             for(int z=0;z<=400;z+=50)
-                Line(Project(plot,new Vector2(-54,z)),Project(plot,new Vector2(332,z)),1,new Color(.42f,.50f,.42f,.20f));
+                Line(Project(plot,new Vector2(Extents.xMin,z)),Project(plot,new Vector2(Extents.xMax,z)),1,new Color(.42f,.50f,.42f,.20f));
             Region(plot,new Vector2(101,52),new Vector2(200,131),new Color(.24f,.43f,.33f,.62f));
             Region(plot,new Vector2(257,302),new Vector2(114,178),new Color(.51f,.33f,.24f,.54f));
             Region(plot,new Vector2(94,307),new Vector2(169,163),new Color(.35f,.39f,.49f,.63f));
+            Region(plot,new Vector2(-35,317),new Vector2(85,114),new Color(.28f,.58f,.40f,.76f));
             Route(plot,SouthernRoad,Road);
             Route(plot,NorthernRoad,Road);
+            Route(plot,VerdantTrail,Road);
             if (HighwayOpen) Route(plot,BrokenRoad,Road);
             else for (int i=1;i<BrokenRoad.Length;i++)
             {
@@ -155,7 +163,9 @@ namespace DiceFree.UI
                 var p=Project(plot,entry.point);
                 var marker=new Rect(p.x-7,p.y-7,14,14);
                 Fill(marker,i==selected?new Color(.98f,.81f,.45f):Gold);
-                if(GUI.Button(new Rect(p.x+9,p.y-12,91,24),entry.name,label)) selected=i;
+                var text = new GUIContent(entry.name);
+                float labelWidth = label.CalcSize(text).x + 8;
+                if(GUI.Button(new Rect(p.x+9,p.y-12,labelWidth,24),text,label)) selected=i;
                 if(Event.current.type==EventType.MouseDown&&marker.Contains(Event.current.mousePosition))
                 { selected=i; Event.current.Use(); }
             }
