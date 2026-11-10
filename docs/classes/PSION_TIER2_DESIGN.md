@@ -6,7 +6,9 @@
 
 ## Development Room implementation
 
-Select Psion in the Development Room and set level 10 to access all five skills for testing. The prototype uses the Magically Touched Novice rig and a training loadout. It uses the approved rank gates and combat rules, with provisional Mana tuning and a 9 m placement range for Lightning Storm. The final model, dedicated equipment, and world advancement remain outside this combat pass.
+Select Psion in the Development Room and set level 10 to access all five skills for testing. The prototype uses the Magically Touched Novice training rig, the approved rank gates and combat rules, provisional Mana tuning, and a 9 m placement range for Lightning Storm.
+
+Grant the **Mirrorsteel Mindblade** and **Mirrorleaf Codex** from **Equipment / item testing**, then equip them from the bag. The main-hand blade adds 5 flat basic damage, 2 Agility and 1 Intelligence. The off-hand codex adds 3 Intelligence, 2 Spirit and 2 Magical Defense. These are level-one test items restricted to Psion. Their stats are provisional. The final character model, world acquisition and advancement quest remain deferred.
 
 ## Locked project-wide context — not Psion-specific approvals
 

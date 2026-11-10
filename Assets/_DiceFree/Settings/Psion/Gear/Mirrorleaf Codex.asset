@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Mirrorleaf Codex
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.psion.mirrorleaf-codex
+  displayName: Mirrorleaf Codex
+  icon: {fileID: -6250510961597518661, guid: b335a4617943f8c4e901ffae036dbcad, type: 2}
+  slot: 7
+  handsRequired: 1
+  itemLevel: 1
+  rarityId: rarity.provisional
+  sourceId: dev.psion.training-kit
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId:
+  restoreResourceAmount: 0
+  allowedClassIds:
+  - class.psion
+  flavor: Pale leaves hold impressions of thoughts their readers never spoke.
+  stats:
+    attributes:
+      vitality: 0
+      strength: 0
+      agility: 0
+      intelligence: 3
+      spirit: 2
+    physicalDefense: 0
+    magicalDefense: 2
+    attackSpeedPercent: 0
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0
