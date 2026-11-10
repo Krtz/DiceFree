@@ -301,3 +301,31 @@ This 4-quest sample is optional scaffolding for the next design round. Do not im
 3. How does the dragon **communicate or behave** toward the Echo without prematurely explaining its DiceBound connection?
 4. What **evidence after its death** gives the Verdant Order a concrete reason to send the player toward World 2?
 5. Are the **existing Arborium forestry/road commissions** a required part of guild qualification or optional supporting quests?
+
+
+## Round 9 — 2026-11-10 (LATEST; USER CONFIRMED)
+
+| ID | Topic | Approved direction | Open details / safeguards |
+| --- | --- | --- | --- |
+| CITY-047 | **Ancient Road Dragon boss location** | The final World 1 main-quest battle against the ORIGINAL Ancient Road Dragon takes place in **a dragon's lair hidden somewhere in World 1**. It is **not** an ordinary public Arborium street/city-wall battle, and need not be a brand-new separate dungeon scene unless later decided. | Exact region, entrance, terrain, lair visuals, quest discovery, travel, fight arena and mechanics OPEN. |
+| CITY-048 | **Dragon's forces** | The dragon commands/recruits **existing World 1 factions, including Quillboars, wolves and other existing monsters**. The threat spans familiar groups rather than requiring newly invented monster armies or exclusively corrupted variants. | Which additional groups, each group's degree of agency, commanders and encounter compositions OPEN. Avoid assuming every individual wolf/Quillboar is in its army. |
+| CITY-049 | **Dragon–Echo interaction** | The dragon **recognizes the Echo but refuses to explain why**. This may be displayed in encounter dialogue/behavior without revealing the crossover mechanism or its hidden motive. | Exact lines, whether Echo recognizes dragon, how explicitly prior meetings are acknowledged and any final words OPEN. |
+| CITY-050 | **World 2 evidence** | The player explicitly **left the form of evidence/clue after the dragon's death unanswered until World 2 is designed**. Preserve the confirmed higher-level goal: after killing the dragon, the Verdant Order sends the player to investigate **why the original DiceBound dragon was in World 1**. | No approved object, portal, letter, dying message, relic, magic signal or other specific lead. Codex must not fabricate an explanation or required loot. |
+| CITY-051 | **Guild investigation vs forestry** | **The dragon investigation has its own REQUIRED Adventurers' Guild quests.** The existing Arborium guild forestry/timber/road survey commissions are **NOT prerequisites** for the dragon main quest and must remain independently playable. | Investigation objectives, count and eligibility to meet the council OPEN; keep short ~3–4 Arborium main quests distinct from any introductory required guild investigations. |
+| CITY-052 | **Expand Arborium surroundings** | User wants to **design additional areas AROUND Arborium**, beyond its established city districts. This is a request to begin a new region-design interview, **not authorization to invent or immediately implement geography**. | Biomes, directions, levels, settlements, enemies, quest hooks, dragon-lair location and World 2 crossing route all OPEN until approved. |
+
+### Current authoritative story continuity
+
+- DiceBound took place **inside** the Dice; DiceFree follows the Echo **outside** on its six connected faces. The dragon is the **original** DiceBound Board 1 Ancient Road Dragon. The mechanics of its presence outside are deliberately unknown.
+- Arborium is protected by the benevolent Verdant Order, whose six elemental mage councilors publicly govern from the mage district academy. The World Tree is publicly accessible and primarily scenic/story-setting, not a mandatory quest mechanism.
+- Dragon leads some familiar World 1 factions, including wolves and Quillboars; its true objectives remain mysterious. It knows the Echo but does not explain why.
+- The Adventurers' Guild provides a **new dedicated line of required dragon-investigation quests** featuring combat, exploration and intelligence gathering. Those are **separate from optional existing forestry commissions**. Guild recommendation leads to the Verdant Council's formal summons.
+- A compact ~3–4 main quest arc culminates in **finding a hidden World 1 dragon lair and KILLING the Ancient Road Dragon**. No World 1 ending that merely repels the beast or has the still-living beast escape to World 2.
+- After its death, the order commissions the player to travel physically toward World 2 to investigate **why it appeared in World 1**. The exact clue is *intentionally not designed yet*. Preserve the physical edge/gravity transition rather than inventing a new teleport mechanic.
+- The old Roadwarden, damaged highway, Briarback route, existing town/guild quests and all implemented class quests remain independent and protected.
+
+### Next interview: surrounding Arborium regions (not yet approved)
+
+Prioritize a **geographical and gameplay design pass around Arborium**, including the already approved **north (Briarback approach)**, **direct road toward Trimery** and **east/west city gates**, before settling new areas. Five questions per round to determine surrounding terrain/biomes, nearby settlements, levels, purpose and how the dragon's secret lair fits the broader map. The user specifically asked to expand city surroundings, so do not use the next round solely for the dragon's spell mechanics.
+
+**Documentation only:** This round does NOT authorize edits to Unity, Psion, scene assets, navmesh or quests.
