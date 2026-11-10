@@ -72,7 +72,7 @@ namespace DiceFree.Skills
                         lastDamage.TryGetValue(victim,out var last) && tick-last<Interval-.00001) continue;
                     lastDamage[victim] = tick;
                     victim.Health.ApplyPacket(owner,DamageResolver.Calculate(owner.Stats,victim.Stats,attack,
-                        rawMultiplier:1 + .05f * (rank - 1)));
+                        rawMultiplier:ThiefSkillCaster.PeriodicScale(rank)));
                 }
             }
             if (now > expires) Dismiss();

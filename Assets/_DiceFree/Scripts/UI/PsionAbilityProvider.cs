@@ -61,16 +61,16 @@ namespace DiceFree.UI
             return true;
         }
 
-        private static string Describe(PsionSkill skill, int rank)
+        private string Describe(PsionSkill skill, int rank)
         {
             int preview = Mathf.Max(1, rank);
             string detail = skill switch
             {
-                PsionSkill.PsychicBolt => $"Fire a Metal bolt for {30 + 8*preview} + 1.2 × INT damage. Stuns for {.15f*preview:0.00}s before resistance.",
+                PsionSkill.PsychicBolt => $"Fire a Metal bolt for {caster.PreviewAmount(skill, preview):0.#} raw Magical damage. Stuns for {.15f*preview:0.00}s before resistance.",
                 PsionSkill.PsionicBladesMastery => $"Basic attacks ignore {preview} Physical Defense and gain {2.5f*preview:0.#}% chance to crit for 1.5× damage.",
-                PsionSkill.MentalImage => $"Place an image for {PsionSkillCaster.ImageDuration(preview):0.0}s. It strikes at 10% of your basic damage and bursts for Void damage on death or expiry.",
-                PsionSkill.LightningStorm => $"Channel three waves. Each deals {15 + 5*preview} + 0.6 × INT Lightning damage to enemies currently within 4m. Moving interrupts remaining waves.",
-                _ => $"You and nearby allies share {100 + 30*preview} + 0.75 × INT shield capacity for 8s. Applies to allies within 8m at cast."
+                PsionSkill.MentalImage => $"Place an image for {PsionSkillCaster.ImageDuration(preview):0.0}s. It strikes at 10% of your basic damage and bursts for {caster.PreviewAmount(skill, preview):0.#} raw Void damage on death or expiry.",
+                PsionSkill.LightningStorm => $"Channel three waves. Each deals {caster.PreviewAmount(skill, preview):0.#} raw Lightning damage to enemies currently within 4m. Moving interrupts remaining waves.",
+                _ => $"You and nearby allies share {caster.PreviewAmount(skill, preview):0.#} shield capacity for 8s. Applies to allies within 8m at cast."
             };
             if (skill != PsionSkill.PsionicBladesMastery)
                 detail += $"\nMana {PsionSkillCaster.Cost(skill, preview)} · Cooldown {PsionSkillCaster.Cooldown(skill)}s";

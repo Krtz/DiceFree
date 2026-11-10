@@ -60,6 +60,24 @@ namespace DiceFree.Skills
         public static int Cooldown(PsionSkill skill) => Cooldowns[(int)skill];
         public static float CastTime(PsionSkill skill) => skill is PsionSkill.PsychicBolt or PsionSkill.LightningStorm ? .1f : .2f;
         public static float ImageDuration(int rank) => 1.6f + .2f * (rank - 1);
+        public float PreviewAmount(PsionSkill skill, int rank) =>
+            RawAmount(skill, rank, actor.Stats.Level, actor.Stats.Attributes);
+
+        internal static float RawAmount(PsionSkill skill, int rank, int level, AttributeValues attributes)
+        {
+            int ranks = Mathf.Max(0, rank - 1);
+            int levels = Mathf.Max(0, level - 1);
+            return skill switch
+            {
+                PsionSkill.PsychicBolt => 30 + 8 * rank + (1.2f + .04f * ranks) * attributes.intelligence + 1.1f * levels,
+                PsionSkill.LightningStorm => 15 + 5 * rank + (.6f + .025f * ranks) * attributes.intelligence + .55f * levels,
+                PsionSkill.MentalImage => 30 + 10 * rank + (.6f + .035f * ranks) *
+                    (attributes.agility + attributes.intelligence) + .8f * levels,
+                PsionSkill.MetalShield => 100 + 30 * rank + (.75f + .04f * ranks) * attributes.intelligence + 1.25f * levels,
+                _ => 0
+            };
+        }
+
         public float Remaining(PsionSkill skill) => Mathf.Max(0, readyAt[(int)skill] - Time.time);
         public CriticalRule BasicCriticalRule()
         {
@@ -132,8 +150,7 @@ namespace DiceFree.Skills
         private bool Begin(PsionSkill skill)
         {
             int rank = progression.Rank(skill);
-            if (!resources.TrySpend(ResourceIds.Mana, Cost(skill, rank))) return false;
-            readyAt[(int)skill] = Time.time + Cooldown(skill);
+            if (!resources.CanSpend(ResourceIds.Mana, Cost(skill, rank))) return false;
             basic.Cancel();
             casting = skill;
             castRank = rank;
@@ -143,6 +160,13 @@ namespace DiceFree.Skills
             wave = 0;
             if (skill == PsionSkill.LightningStorm) WavesReleased = 0;
             Casted?.Invoke(skill);
+            return true;
+        }
+
+        private bool CommitCast()
+        {
+            if (!resources.TrySpend(ResourceIds.Mana, Cost(casting, castRank))) return false;
+            readyAt[(int)casting] = Time.time + Cooldown(casting);
             return true;
         }
 
@@ -162,6 +186,7 @@ namespace DiceFree.Skills
                 // Stun or movement wins if it arrives before the final pulse is processed.
                 while (IsChanneling && actor.CanAct && wave < 3 && elapsed >= .1f + .3f * wave)
                 {
+                    if (wave == 0 && !CommitCast()) { CancelChannel(); return; }
                     StormPulse();
                     wave++;
                     WavesReleased++;
@@ -174,15 +199,15 @@ namespace DiceFree.Skills
             switch (casting)
             {
                 case PsionSkill.PsychicBolt:
-                    if (actor.CanTargetHostile(selected) && BoltInRange(selected)) LaunchBolt(selected, castRank);
+                    if (actor.CanTargetHostile(selected) && BoltInRange(selected) && CommitCast()) LaunchBolt(selected, castRank);
                     break;
                 case PsionSkill.MentalImage:
-                    if (FreeImagePoint(area))
+                    if (FreeImagePoint(area) && CommitCast())
                         images.Add(PsionMentalImage.Summon(actor, basic, area, castRank, imageBlade, imageRupture,
                             BasicCriticalRule(), BasicPenetration, imageVisual, imageMaterial));
                     break;
                 case PsionSkill.MetalShield:
-                    ApplyShield(castRank);
+                    if (CommitCast()) ApplyShield(castRank);
                     break;
             }
             CancelChannel();
@@ -190,11 +215,11 @@ namespace DiceFree.Skills
 
         private bool BoltInRange(CombatActor target) =>
             Vector3.Distance(transform.position, target.transform.position) <= BoltRange + actor.Radius + target.Radius &&
-            actor.HasSightOf(target);
+            TargetedCombatProjectile.HasClearLaunch(actor, target);
 
         private void LaunchBolt(CombatActor target, int rank)
         {
-            float raw = 30 + 8 * rank + 1.2f * actor.Stats.Attributes.intelligence;
+            float raw = PreviewAmount(PsionSkill.PsychicBolt, rank);
             int version = sessionVersion;
             TargetedCombatProjectile.Launch(actor, target, "Psychic Bolt", Silver, .23f, 24, recipient =>
             {
@@ -217,7 +242,7 @@ namespace DiceFree.Skills
 
         private void StormPulse()
         {
-            float raw = 15 + 5 * castRank + .6f * actor.Stats.Attributes.intelligence;
+            float raw = PreviewAmount(PsionSkill.LightningStorm, castRank);
             victims.Clear();
             foreach (var other in CombatActor.All)
                 if (actor.IsHostileTo(other) && (other.transform.position - area).sqrMagnitude <= StormRadius * StormRadius)
@@ -231,7 +256,7 @@ namespace DiceFree.Skills
         private void ApplyShield(int rank)
         {
             shield?.Expire();
-            shield = new SharedDamageShield(100 + 30 * rank + .75f * actor.Stats.Attributes.intelligence, 8, metal);
+            shield = new SharedDamageShield(PreviewAmount(PsionSkill.MetalShield, rank), 8, metal);
             var party = actor.GetComponent<ICombatPartyMembership>();
             foreach (var ally in CombatActor.All)
             {

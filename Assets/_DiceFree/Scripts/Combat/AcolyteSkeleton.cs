@@ -25,6 +25,9 @@ namespace DiceFree.Skills
         public CombatActor Actor => actor;
         public float Remaining => Mathf.Max(0, expires - Time.time);
 
+        internal static float AttackDamage(float intelligence, int rank) =>
+            (3 + .18f * intelligence) * (1 + .06f * (rank - 1));
+
         public static AcolyteSkeleton Raise(CombatActor owner, int rank, System.Func<bool> autoRetaliate)
         {
             if (!owner.Motor.Ready || !SpawnPoint(owner, out var point)) return null;
@@ -39,7 +42,7 @@ namespace DiceFree.Skills
             skeleton.weapon.stableId = "attack.acolyte.skeleton";
             skeleton.weapon.displayName = "Rusty Blade";
             skeleton.weapon.channel = DamageChannel.Physical;
-            skeleton.weapon.baseDamage = (3 + .18f * attributes.intelligence) * (1 + .06f * (rank - 1));
+            skeleton.weapon.baseDamage = AttackDamage(attributes.intelligence, rank);
             skeleton.weapon.coefficient = 0;
             skeleton.weapon.reach = .85f;
             skeleton.weapon.windup = .32f;

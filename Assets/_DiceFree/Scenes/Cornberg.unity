@@ -336637,6 +336637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: DiceFree.World.Runtime::DiceFree.World.WorldDayNightCycle
   celestialLight: {fileID: 1904093694}
+  arboriumLampDistrict: {fileID: 2040363308}
   cycleMinutes: 48
   startingHour: 10
   running: 1

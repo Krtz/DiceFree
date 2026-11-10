@@ -48,7 +48,7 @@ namespace DiceFree.Skills
             image.interval = Mathf.Max(basic.Definition.interval, basic.Definition.windup) / owner.Stats.AttackSpeed;
             image.windup = basic.Definition.windup / owner.Stats.AttackSpeed;
             var attributes = owner.Stats.Attributes;
-            image.blastRaw = 30 + 10 * rank + .6f * (attributes.agility + attributes.intelligence);
+            image.blastRaw = PsionSkillCaster.RawAmount(PsionSkill.MentalImage, rank, owner.Stats.Level, attributes);
             image.definition = ScriptableObject.CreateInstance<ActorDefinition>();
             image.definition.stableId = "summon.psion.mental-image";
             image.definition.displayName = "Mental Image";

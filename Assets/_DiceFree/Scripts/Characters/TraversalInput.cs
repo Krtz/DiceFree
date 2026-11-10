@@ -139,8 +139,10 @@ namespace DiceFree.Characters
             var psion = GetComponent<DiceFree.Skills.PsionSkillCaster>();
             if (psion != null && psion.IsChanneling)
             {
-                bool interrupted = movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
-                    click.WasPressedThisFrame() || stop.WasPressedThisFrame() ||
+                bool moveClick = click.WasPressedThisFrame() && Mouse.current != null &&
+                    skillTargeting?.InputConsumedThisFrame != true && !HudPointerBlocker.Covers(Mouse.current.position.ReadValue());
+                bool interrupted = mode == ControlMode.Direct && movement.ReadValue<Vector2>().sqrMagnitude > .001f ||
+                    moveClick || stop.WasPressedThisFrame() ||
                     interact.WasPressedThisFrame() || closeInteraction.WasPressedThisFrame();
                 if (interrupted) psion.CancelChannel();
                 else return;
@@ -218,9 +220,8 @@ namespace DiceFree.Characters
                         return;
                     }
                     var queuedRay=worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-                    if(ArboriumInterior.RaycastGround(queuedRay,out var queuedHit) &&
-                       queuedHit.collider.gameObject.layer==8 &&
-                       orders!=null && orders.SubmitMove(queuedHit.point,true))
+                    if(ArboriumInterior.RaycastWalkableGround(queuedRay,out var queuedHit) &&
+                       orders!=null && motor.TryFindReachablePoint(queuedHit.point,out var queuedPoint) && orders.SubmitMove(queuedPoint,true))
                         Feedback="Shift queued move ("+orders.PendingOrders+")";
                     return;
                 }
@@ -235,17 +236,14 @@ namespace DiceFree.Characters
 
                 if (mode != ControlMode.Classic) return;
                 var ray = worldCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (ArboriumInterior.RaycastGround(ray, out var hit)
-                    && hit.collider.gameObject.layer == 8 && motor.MoveTo(hit.point))
+                if (ArboriumInterior.RaycastWalkableGround(ray, out var hit) &&
+                    motor.TryFindReachablePoint(hit.point,out var walkPoint))
                 {
                     interactor?.Cancel();
-                    if (attack != null && attack.Target != null)
-                    {
-                        attack.Cancel();
-                        motor.MoveTo(hit.point);
-                    }
-                    destinationMarker.position = hit.point + Vector3.up * 0.08f;
-                    Feedback = "";
+                    if (attack != null && attack.Target != null) attack.Cancel();
+                    bool moved = motor.MoveTo(walkPoint);
+                    if (moved && destinationMarker != null) destinationMarker.position = walkPoint + Vector3.up * .08f;
+                    Feedback = moved ? "" : "That spot is not reachable. Choose open ground.";
                 }
                 else Feedback = "That spot is not reachable. Choose open ground.";
             }
@@ -273,15 +271,14 @@ namespace DiceFree.Characters
 
             // Snap the proposed map point to the same walkable NavMesh as
             // ordinary movement. The actual route must be fully reachable.
-            if (!UnityEngine.AI.NavMesh.SamplePosition(worldPoint, out var nearby,
-                    2f, UnityEngine.AI.NavMesh.AllAreas))
+            if (!motor.TryFindReachablePoint(worldPoint, out var nearby))
             {
                 Feedback = "No walkable ground at that minimap location.";
                 return false;
             }
             if(append && orders!=null)
             {
-                bool queued=orders.SubmitMove(nearby.position,true);
+                bool queued=orders.SubmitMove(nearby,true);
                 if(queued) Feedback="Shift queued move ("+orders.PendingOrders+")";
                 return queued;
             }
@@ -291,14 +288,14 @@ namespace DiceFree.Characters
             combatInput?.CancelAttackMove();
             interactor?.Cancel();
             attack?.Cancel();
-            if (!motor.MoveTo(nearby.position))
+            if (!motor.MoveTo(nearby))
             {
                 Feedback = "No walkable path to that minimap location.";
                 return false;
             }
             if (destinationMarker != null)
             {
-                destinationMarker.position=nearby.position+Vector3.up*.08f;
+                destinationMarker.position=nearby+Vector3.up*.08f;
                 destinationMarker.gameObject.SetActive(true);
             }
             Feedback="";

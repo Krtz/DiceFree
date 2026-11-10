@@ -53,16 +53,17 @@ namespace DiceFree.UI
             return true;
         }
 
-        private static string Describe(ThiefSkill skill,int rank)
+        private string Describe(ThiefSkill skill,int rank)
         {
             int preview=Mathf.Max(1,rank);
+            var stab = skill == ThiefSkill.Envenom ? caster.PreviewStab() : Vector2.zero;
             string detail=skill switch
             {
                 ThiefSkill.Stealth => $"Hide for {ThiefSkillCaster.StealthDuration(preview):0.0}s and drop 95% of enemy threat. The first basic attack or Envenom stab reveals you and deals {ThiefSkillCaster.StealthOpener(preview):0.00}× raw damage.",
-                ThiefSkill.Envenom => "Stab for twice your normal basic damage and apply a three-second Nature poison. Only the initial stab gets the Stealth bonus.",
+                ThiefSkill.Envenom => $"Stab for {stab.x:0.#}–{stab.y:0.#} raw Physical damage and apply a three-second poison for {caster.PreviewDamage(skill, preview):0.#} raw Nature damage per tick. Only the stab gets the Stealth bonus.",
                 ThiefSkill.KeenEdge => $"Guarantee 1.5× critical basic attacks for {ThiefSkillCaster.KeenDuration(preview):0.0}s. Can be used while hidden.",
-                ThiefSkill.FanOfKnives => "Strike once around you within 4m. Can be cast while moving. Reveals you without an opener bonus.",
-                ThiefSkill.SmokeBomb => "Throw a 4m cloud for 5s. Enemies inside take Tech damage and have a 20% basic-attack miss chance. Overlapping clouds do not stack.",
+                ThiefSkill.FanOfKnives => $"Deal {caster.PreviewDamage(skill, preview):0.#} raw Physical damage to each foe within 4m. Can be cast while moving. Reveals you without an opener bonus.",
+                ThiefSkill.SmokeBomb => $"Throw a 4m cloud for 5s. Enemies inside take {caster.PreviewDamage(skill, preview):0.#} raw Tech damage per tick and have a 20% basic-attack miss chance. Overlapping clouds do not stack.",
                 _ => $"+{preview} AGI and +{preview}% basic critical chance. Critical basic attacks deal 1.5× raw damage."
             };
             if (skill!=ThiefSkill.Cutpurse) detail += $"\nMana {ThiefSkillCaster.Cost(skill)} · Cooldown {ThiefSkillCaster.Cooldown(skill)}s";

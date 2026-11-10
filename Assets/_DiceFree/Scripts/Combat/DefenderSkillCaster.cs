@@ -53,6 +53,15 @@ namespace DiceFree.Skills
         public static int Cost(DefenderSkill skill) => Costs[(int)skill];
         public static float BulwarkReduction(int rank) => .30f + .008f * (rank - 1);
         public static float ChallengeDuration(int rank) => 2f + .08f * (rank - 1);
+        private const float BashDamagePerRank = 5f, SweepDamagePerRank = 4f;
+
+        public float PreviewDamage(DefenderSkill skill, int rank)
+        {
+            var attack = skill == DefenderSkill.ShieldBash ? bash : sweep;
+            float bonus = skill == DefenderSkill.ShieldBash ? BashDamagePerRank : SweepDamagePerRank;
+            return attack.RawDamage(actor.Stats.Attributes) + bonus * (rank - 1);
+        }
+
         public float Remaining(DefenderSkill skill) => Mathf.Max(0, readyAt[(int)skill] - Time.time);
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -269,7 +278,7 @@ namespace DiceFree.Skills
         {
             Face(target.transform.position - transform.position);
             int rank = skills.Rank(DefenderSkill.ShieldBash);
-            if (!Hit(target, bash, rank, 5f)) return;
+            if (!Hit(target, bash, rank, BashDamagePerRank)) return;
             foreach (var component in target.GetComponents<MonoBehaviour>())
                 if (component is IInterruptibleCombatCast cast) cast.TryInterruptCast();
             target.Effects?.TryApplyStun(.75f, false);
@@ -313,7 +322,7 @@ namespace DiceFree.Skills
             SelectHostiles(3.3f, true);
             int hits = 0;
             foreach (var target in targets)
-                if (actor.IsHostileTo(target) && Hit(target, sweep, rank, 4f)) hits++;
+                if (actor.IsHostileTo(target) && Hit(target, sweep, rank, SweepDamagePerRank)) hits++;
             EarlySkillVfx.Play(EarlySkillVfx.Cue.PhysicalHeavy, transform.position + transform.forward * 1.25f);
             ClearSweep();
             if (hits == 0) return true;

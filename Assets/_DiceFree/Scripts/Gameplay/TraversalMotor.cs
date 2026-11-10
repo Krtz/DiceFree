@@ -54,6 +54,45 @@ namespace DiceFree.Characters
             return agent.SetPath(candidatePath);
         }
 
+        // Ground clicks may fall just inside a prop's clearance or on a disconnected
+        // sliver. Keep the click on its intended storey and prefer the closest usable ring.
+        public bool TryFindReachablePoint(Vector3 destination, out Vector3 point)
+        {
+            point = default;
+            if (!MotionAllowed || !Ready) return false;
+            if (TryCandidate(destination, destination.y, .75f, out point)) return true;
+
+            var toward = Vector3.ProjectOnPlane(transform.position - destination, Vector3.up);
+            if (toward.sqrMagnitude < .001f) toward = Vector3.forward;
+            toward.Normalize();
+            for (int ring = 1; ring <= 4; ring++)
+            {
+                float bestDistance = float.PositiveInfinity;
+                for (int i = 0; i < 8; i++)
+                {
+                    var probe = destination + Quaternion.Euler(0, i * 45f, 0) * toward * (ring * .85f);
+                    if (!TryCandidate(probe, destination.y, .48f, out var sample)) continue;
+                    float score = (sample - destination).sqrMagnitude + .025f * (sample - transform.position).magnitude;
+                    if (score >= bestDistance) continue;
+                    bestDistance = score;
+                    point = sample;
+                }
+                if (!float.IsPositiveInfinity(bestDistance)) return true;
+            }
+            return false;
+        }
+
+        private bool TryCandidate(Vector3 probe, float intendedHeight, float radius, out Vector3 point)
+        {
+            point = default;
+            if (!NavMesh.SamplePosition(probe, out var hit, radius, agent.areaMask) ||
+                Mathf.Abs(hit.position.y - intendedHeight) > .70f ||
+                !agent.CalculatePath(hit.position, candidatePath) || candidatePath.status != NavMeshPathStatus.PathComplete)
+                return false;
+            point = hit.position;
+            return true;
+        }
+
         public void Stop()
         {
             if (Ready) agent.ResetPath();

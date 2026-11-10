@@ -158,6 +158,27 @@ namespace DiceFree.Skills
             return chance > 0 ? new CriticalRule(ThiefSkillProgression.ThiefClassId,"thief.basic-crit",true,chance,1.5f) : null;
         }
 
+        internal static float PeriodicScale(int rank) => 1 + .05f * (rank - 1);
+        private static float FanScale(int rank) => 1 + .06f * (rank - 1);
+
+        public Vector2 PreviewStab()
+        {
+            float opener = Hidden ? StealthOpener(progression.Rank(ThiefSkill.Stealth)) : 1;
+            return basic.DamageRange * (2 * opener) + Vector2.one * stab.RawDamage(actor.Stats.Attributes);
+        }
+
+        public float PreviewDamage(ThiefSkill skill, int rank)
+        {
+            var attributes = actor.Stats.Attributes;
+            return skill switch
+            {
+                ThiefSkill.Envenom => naturePoison.RawDamage(attributes) * PeriodicScale(rank),
+                ThiefSkill.FanOfKnives => fan.RawDamage(attributes) * FanScale(rank),
+                ThiefSkill.SmokeBomb => techSmoke.RawDamage(attributes) * PeriodicScale(rank),
+                _ => 0
+            };
+        }
+
         private void ResolveEnvenom(CombatActor target, int rank)
         {
             float opener = ConsumeOpener();
@@ -182,7 +203,7 @@ namespace DiceFree.Skills
             foreach (var target in fanTargets)
                 if (actor.IsHostileTo(target))
                     target.Health.ApplyPacket(actor,DamageResolver.Calculate(actor.Stats,target.Stats,fan,
-                        rawMultiplier:1 + .06f * (rank - 1)));
+                        rawMultiplier:FanScale(rank)));
             fanTargets.Clear();
             ThiefSmokeCloud.KnifeFan(transform.position);
         }
@@ -253,7 +274,7 @@ namespace DiceFree.Skills
             {
                 nextTick++;
                 target.Health.ApplyPacket(source,DamageResolver.Calculate(source.Stats,target.Stats,attack,
-                    rawMultiplier:1 + .05f * (rank - 1)));
+                    rawMultiplier:ThiefSkillCaster.PeriodicScale(rank)));
             }
             if (!Valid() || now > expires)
             {

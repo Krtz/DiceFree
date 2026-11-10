@@ -80,7 +80,7 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
-            if (HudPointerBlocker.ModalOpen) return;
+            if (HudPointerBlocker.ModalOpen || (TryGetComponent<WorldAtlasHud>(out var atlas) && atlas.Open)) return;
             float alpha = Alpha;
             if (alpha <= 0.01f) return;
 

@@ -54,7 +54,7 @@ namespace DiceFree.World
             if(fog?.Revealer==null) return;
             var p=transform.InverseTransformPoint(fog.Revealer.position);
             Inside=Mathf.Abs(p.x)<footprint.x*.5f+.1f && Mathf.Abs(p.z)<footprint.y*.5f+.1f && p.y>-.6f && p.y<floorCount*storeyHeight;
-            CurrentFloor=Inside?Mathf.Clamp(Mathf.FloorToInt((p.y+.10f)/storeyHeight),0,floorCount-1):-1;
+            CurrentFloor=Inside?FloorAtHeight(p.y,storeyHeight,floorCount):-1;
             var toCamera=worldCamera!=null?transform.InverseTransformDirection(worldCamera.transform.position-transform.position):new Vector3(-1,1,-1);
             foreach(var part in parts)
             {
@@ -77,6 +77,12 @@ namespace DiceFree.World
                 }
             }
         }
+        public static int FloorAtHeight(float height, float storeyHeight, int count) =>
+            Mathf.Clamp(Mathf.FloorToInt(height / storeyHeight + .5f), 0, count - 1);
+
+        public static bool RaycastWalkableGround(Ray ray, out RaycastHit hit) =>
+            Physics.Raycast(ray, out hit, 1500f, 1 << 8, QueryTriggerInteraction.Ignore);
+
         public static bool RaycastGround(Ray ray,out RaycastHit hit)
         {
             var hits=Physics.RaycastAll(ray,1500f,(1<<8)|(1<<9),QueryTriggerInteraction.Ignore);

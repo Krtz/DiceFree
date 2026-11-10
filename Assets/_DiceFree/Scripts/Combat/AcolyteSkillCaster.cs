@@ -194,6 +194,30 @@ namespace DiceFree.Skills
             }
         }
 
+        private static float ChannelScale(AcolyteSkill skill, int rank) =>
+            1 + (skill == AcolyteSkill.DrainLife ? .06f : .08f) * (rank - 1);
+
+        public float PreviewDamage(AcolyteSkill skill, int rank)
+        {
+            var attributes = actor.Stats.Attributes;
+            return skill switch
+            {
+                AcolyteSkill.DrainLife => drainLife.RawDamage(attributes) * ChannelScale(skill, rank),
+                AcolyteSkill.MortalCoil => mortalCoil.RawDamage(attributes) * ChannelScale(skill, rank),
+                AcolyteSkill.RadiationPlague => radiation.RawDamage(attributes) * AcolyteAfflictions.PlagueScale(rank),
+                AcolyteSkill.SummonSkeleton => AcolyteSkeleton.AttackDamage(attributes.intelligence, rank),
+                AcolyteSkill.OccultAdept => coffeePoison.RawDamage(attributes) + AcolyteAfflictions.PoisonBonus(rank),
+                _ => 0
+            };
+        }
+
+        public float PreviewCoilHealing(int rank)
+        {
+            var attributes = actor.Stats.Attributes;
+            return (10 + .25f * attributes.intelligence + .70f * attributes.spirit) *
+                ChannelScale(AcolyteSkill.MortalCoil, rank);
+        }
+
         private void Pulse()
         {
             var recipient = target;
@@ -203,8 +227,7 @@ namespace DiceFree.Skills
                 friendly ? new Color(.70f,.63f,1f) : new Color(.61f,.22f,.93f));
             if (friendly)
             {
-                var attributes = actor.Stats.Attributes;
-                float raw = (10 + .25f * attributes.intelligence + .70f * attributes.spirit) * (1 + .08f * (rank - 1));
+                float raw = PreviewCoilHealing(rank);
                 var resistance = recipient.Stats.ResolveResistance(mortalCoil.element, ElementalContext.Healing, actor.Stats);
                 var heal = new ElementalHealingResult(raw, mortalCoil.element, resistance);
                 if (heal.InversionDamage > 0)
@@ -215,7 +238,7 @@ namespace DiceFree.Skills
             }
 
             var attack = draining ? drainLife : mortalCoil;
-            float scale = 1 + (draining ? .06f : .08f) * (rank - 1);
+            float scale = ChannelScale(channel, rank);
             var hit = recipient.Health.ApplyPacket(actor, DamageResolver.Calculate(actor.Stats, recipient.Stats, attack, rawMultiplier: scale));
             if (hit.applied > 0 || (draining && hit.absorbed > 0))
                 resources.Restore(AcolyteSkillProgression.SoulResourceId, 1);

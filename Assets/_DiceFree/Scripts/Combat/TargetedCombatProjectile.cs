@@ -11,6 +11,11 @@ namespace DiceFree.Combat
         private Action<CombatActor> onImpact;
         private float speed, expires;
 
+        private static Vector3 Origin(CombatActor unit) => unit.transform.position + Vector3.up * 1.10f;
+        private static Vector3 Destination(CombatActor unit) => unit.transform.position + Vector3.up * .84f;
+        public static bool HasClearLaunch(CombatActor source, CombatActor target) =>
+            !Physics.Linecast(Origin(source), Destination(target), 1 << 9, QueryTriggerInteraction.Ignore);
+
         public static void Launch(CombatActor source, CombatActor target, string name, Color tint, float scale, float speed,
             Action<CombatActor> impact)
         {
@@ -22,7 +27,7 @@ namespace DiceFree.Combat
             var collider = missile.GetComponent<Collider>();
             collider.enabled = false;
             Destroy(collider);
-            missile.transform.position = source.transform.position + Vector3.up * 1.10f;
+            missile.transform.position = Origin(source);
             missile.transform.localScale = Vector3.one * scale;
             var renderer = missile.GetComponent<Renderer>();
             renderer.sharedMaterial = Resources.Load<Material>("EarlySkillVfx/SoftRing");
@@ -53,7 +58,7 @@ namespace DiceFree.Combat
                 return;
             }
             Vector3 start = transform.position;
-            Vector3 destination = recipient.transform.position + Vector3.up * .84f;
+            Vector3 destination = Destination(recipient);
             Vector3 next = Vector3.MoveTowards(start, destination, speed * Time.deltaTime);
             if (Physics.Linecast(start, next, 1 << 9, QueryTriggerInteraction.Ignore))
             {

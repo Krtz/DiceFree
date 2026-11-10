@@ -8,6 +8,7 @@ namespace DiceFree.World
     public sealed class WorldDayNightCycle : MonoBehaviour
     {
         [SerializeField] Light celestialLight;
+        [SerializeField] Transform arboriumLampDistrict;
         [SerializeField, Min(1)] float cycleMinutes = 48;
         [SerializeField, Range(0, 24)] float startingHour = 10;
         [SerializeField] bool running = true;
@@ -21,6 +22,8 @@ namespace DiceFree.World
         float originalIntensity;
         Light originalSun;
         bool interior;
+        private GameObject arboriumLamps;
+        public bool ArboriumLampsLit => arboriumLamps != null && arboriumLamps.activeSelf;
         public float Hour => Mathf.Repeat(sessionHour + (running ? (float)((Time.realtimeSinceStartupAsDouble - epoch) / (cycleMinutes * 60) * 24) : 0), 24);
         public float CycleMinutes => cycleMinutes;
         public bool IsInterior => interior;
@@ -48,6 +51,7 @@ namespace DiceFree.World
             originalIntensity = celestialLight.intensity;
             originalLightColor = celestialLight.color;
             if (originalSky != null) { ownedSky = new Material(originalSky) { name = "World sky (session)" }; RenderSettings.skybox = ownedSky; }
+            CreateArboriumLamps();
             Apply();
         }
         void Update() => Apply();
@@ -63,6 +67,8 @@ namespace DiceFree.World
             if (celestialLight == null) return;
             if (interior) { RestoreLighting(); return; }
             float elevation = SunElevation(Hour);
+            if (arboriumLamps != null && arboriumLamps.activeSelf != (elevation < 0))
+                arboriumLamps.SetActive(elevation < 0);
             float day = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.10f, .30f, elevation));
             float warmth = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(0, .40f, Mathf.Abs(elevation)));
             bool moon = elevation < 0;
@@ -84,6 +90,44 @@ namespace DiceFree.World
                 if (ownedSky.HasProperty("_GroundColor")) ownedSky.SetColor("_GroundColor", RenderSettings.ambientGroundColor);
             }
         }
+        private void CreateArboriumLamps()
+        {
+            if (arboriumLampDistrict == null) return;
+            arboriumLamps = new GameObject("Arborium night lamp cores");
+            arboriumLamps.transform.SetParent(arboriumLampDistrict, false);
+            var material = Resources.Load<Material>("EarlySkillVfx/SoftRing");
+            var glow = new MaterialPropertyBlock();
+            glow.SetColor("_BaseColor", new Color(1f, .65f, .27f, .92f));
+            // Centers match the three twelve-lamp rings in ArboriumArrivalAuthoring.
+            for (int ring = 0; ring < 3; ring++)
+                for (int i = 0; i < 12; i++)
+                {
+                    float radius = ring == 0 ? 28 : ring == 1 ? 48 : 70;
+                    float angle = (i * 30 + 12) * Mathf.Deg2Rad;
+                    var core = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    core.name = "Warm magical lamp";
+                    core.layer = 2;
+                    var collider = core.GetComponent<Collider>();
+                    collider.enabled = false;
+                    Destroy(collider);
+                    core.transform.SetParent(arboriumLamps.transform, false);
+                    core.transform.localPosition = new Vector3(Mathf.Sin(angle)*radius,5.18f,Mathf.Cos(angle)*radius);
+                    core.transform.localScale = new Vector3(.57f,.60f,.57f);
+                    var renderer = core.GetComponent<Renderer>();
+                    renderer.sharedMaterial = material;
+                    renderer.SetPropertyBlock(glow);
+                    renderer.shadowCastingMode = ShadowCastingMode.Off;
+                    var lamp = core.AddComponent<Light>();
+                    lamp.type = LightType.Point;
+                    lamp.color = new Color(1f,.69f,.35f);
+                    lamp.range = 11;
+                    lamp.intensity = 7f;
+                    lamp.shadows = LightShadows.None;
+                    lamp.cullingMask = ~(1 << 31);
+                }
+            arboriumLamps.SetActive(false);
+        }
+
         void RestoreLighting()
         {
             celestialLight.transform.rotation = originalRotation;
@@ -96,11 +140,16 @@ namespace DiceFree.World
             RenderSettings.fogColor = originalFog;
             RenderSettings.skybox = originalSky;
         }
-        void OnDisable() { if (celestialLight != null) RestoreLighting(); }
+        void OnDisable()
+        {
+            if (arboriumLamps != null) arboriumLamps.SetActive(false);
+            if (celestialLight != null) RestoreLighting();
+        }
         void OnDestroy()
         {
             if (celestialLight != null) RestoreLighting();
             if (ownedSky != null) Destroy(ownedSky);
+            if (arboriumLamps != null) Destroy(arboriumLamps);
         }
         void OnEnable() { if (ownedSky != null && !interior) RenderSettings.skybox = ownedSky; }
         void LateUpdate() { if (!interior && ownedSky != null && RenderSettings.skybox != ownedSky) RenderSettings.skybox = ownedSky; }

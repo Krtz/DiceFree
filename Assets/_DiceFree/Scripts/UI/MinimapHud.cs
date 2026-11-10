@@ -13,6 +13,7 @@ namespace DiceFree.UI
         [SerializeField] private float worldRadius = 22f;
 
         private Camera mapCamera;
+        private WorldAtlasHud atlas;
         private RenderTexture mapTexture;
         private WorldFogOfWar fog;
         private IMinimapNavigator navigation;
@@ -52,6 +53,7 @@ namespace DiceFree.UI
                 {navigation=navigator;break;}
             targeting = GetComponent<SkillTargetingController>();
             interactions=player!=null?player.GetComponent<InteractionRegistry>():null;
+            if (gameObject.scene.name == "Cornberg") atlas = gameObject.AddComponent<WorldAtlasHud>();
             CreateCamera();
             fog = FindAnyObjectByType<WorldFogOfWar>();
             fogMap = new Texture2D(FogResolution,FogResolution,TextureFormat.RGBA32,false)
@@ -228,8 +230,12 @@ namespace DiceFree.UI
             var headerRect = new Rect(inner.x, inner.y, inner.width, header);
             bool isAttackMap=targeting!=null &&
                 targeting.Mode==SkillTargetingMode.AttackMove;
-            HudChrome.DrawHeader(headerRect, Theme,
+            var titleRect = atlas == null ? headerRect : new Rect(headerRect.x, headerRect.y, headerRect.width-64, headerRect.height);
+            HudChrome.DrawHeader(titleRect, Theme,
                 isAttackMap?MapName+"  /  ATTACK-MOVE":MapName);
+
+            if (atlas != null && GUI.Button(new Rect(headerRect.xMax-63,headerRect.y+1,62,header-2),"World [M]"))
+                atlas.Toggle();
 
             var mapRect = new Rect(inner.x, inner.y + header, inner.width, inner.height - header);
             if (mapTexture != null)

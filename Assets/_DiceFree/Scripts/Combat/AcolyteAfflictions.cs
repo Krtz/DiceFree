@@ -106,6 +106,9 @@ namespace DiceFree.Skills
             current.expires = now + 3;
         }
 
+        internal static float PlagueScale(int rank) => 1 + .05f * (rank - 1);
+        internal static float PoisonBonus(int rank) => .35f * (rank - 1);
+
         public void Tick(AttackDefinition radiation, AttackDefinition coffee, int passiveRank)
         {
             double now = Time.timeAsDouble;
@@ -121,7 +124,7 @@ namespace DiceFree.Skills
                 while (Living(victim, infection.life) && Due(infection.nextTick, infection.expires, now))
                 {
                     infection.resolvingTick = true;
-                    try { Deal(victim, radiation, 1 + .05f * (infection.rank - 1)); }
+                    try { Deal(victim, radiation, PlagueScale(infection.rank)); }
                     finally { infection.resolvingTick = false; }
                     infection.nextTick += PlagueInterval;
                 }
@@ -142,7 +145,7 @@ namespace DiceFree.Skills
                 var poison = entry.Value;
                 while (passiveRank > 0 && Living(victim, poison.life) && Due(poison.nextTick, poison.expires, now))
                 {
-                    Deal(victim, coffee, 1, .35f * (passiveRank - 1));
+                    Deal(victim, coffee, 1, PoisonBonus(passiveRank));
                     poison.nextTick += 1;
                 }
                 if (passiveRank == 0 || !Living(victim, poison.life) || now > poison.expires) expired.Add(victim);

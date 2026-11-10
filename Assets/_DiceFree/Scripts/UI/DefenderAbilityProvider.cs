@@ -57,15 +57,15 @@ namespace DiceFree.UI
             };
         }
 
-        private static string Describe(DefenderSkill skill, int rank)
+        private string Describe(DefenderSkill skill, int rank)
         {
             int preview = Mathf.Max(1, rank);
             string detail = skill switch
             {
-                DefenderSkill.ShieldBash => "Charge a hostile within 5m and strike with your shield. The impact interrupts vulnerable casts, briefly stuns and grants Resolve.",
+                DefenderSkill.ShieldBash => $"Charge a hostile within 5m and deal {caster.PreviewDamage(skill, preview):0.#} raw Physical damage. The impact interrupts vulnerable casts, briefly stuns and grants Resolve.",
                 DefenderSkill.Challenge => $"Raise your threat against nearby foes. Susceptible enemies focus you for {DefenderSkillCaster.ChallengeDuration(preview):0.0}s. Gain Resolve if enemies respond.",
                 DefenderSkill.Bulwark => $"Reduce Physical and Magical damage by {100 * DefenderSkillCaster.BulwarkReduction(preview):0.#}% for 4s. Full incoming hits still build Resolve.",
-                DefenderSkill.ShieldSweep => $"Strike foes in front of you. You and allies within 5m gain +{preview} Physical and Magical Defense per enemy hit for 4s, counting up to five.",
+                DefenderSkill.ShieldSweep => $"Deal {caster.PreviewDamage(skill, preview):0.#} raw Physical damage to each foe in front of you. You and allies within 5m gain +{preview} Physical and Magical Defense per enemy hit for 4s, counting up to five.",
                 DefenderSkill.HoldTheLine => $"You gain +{preview * 2} Physical Defense, +{preview} Magical Defense and build Resolve faster. You and allies within 5m gain {preview}% elemental resistance.",
                 _ => $"Brace for 2s with +{500 * preview} Physical and Magical Defense. You cannot move or act while braced."
             };
