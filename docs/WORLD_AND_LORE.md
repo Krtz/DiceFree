@@ -119,3 +119,19 @@ Open questions:
 ## Tone
 
 The world can be sincere and mysterious without losing DiceBound's capacity for absurdity. Serious ancient ruins and horrifying cosmic truths can coexist with bizarre classes, strange loot and NPCs with personality.
+
+
+## World 1 finale and Ancient Road Dragon continuity (2026-11-10)
+
+This section records the **user-approved high-level World 1 story outcome** while preserving the foundational mysteries above. Detailed Arborium quest implementation and latest supersession notes live in [Arborium design interview](BIG_CITY_DESIGN.md), Round 8 (CITY-041–046).
+
+- **Same narrative being, not a lookalike:** the Ancient Road Dragon threatening Arborium is the **original DiceBound Board 1 / Green Road final boss**. The Ogre Roadwarden is that board's separate miniboss.
+- **Its presence on the OUTSIDE of the Dice is intentionally mysterious**; how it came to be there must not be prematurely explained as escape, reincarnation, Last Equation release or another invented mechanism.
+- The dragon is a **known monster leader gathering different hostile groups** around Arborium; **its true motive is initially unknown**.
+- The **Adventurers' Guild** investigates through combat, exploration and intelligence gathering, then recommends the Echo for a formal audience with Arborium's **Verdant Order** (six mage councilors specializing in Fire, Ice, Lightning, Nature, Light and Void).
+- The **final Arborium main quest of World 1 requires defeating/killing the Ancient Road Dragon**. This **supersedes previous proposed “pursue the still-living dragon into World 2” wording**.
+- **World 2 follows the dragon's DEATH**, with the Verdant Order sending the proven adventurer there to investigate **why the original DiceBound dragon appeared in World 1** and the larger mystery. The concrete clue and World 2 plot are not yet decided.
+- **Existing six-face travel remains physical**: walking across cube edges/gravity transitions as described above. No magical portal or World Tree transportation mechanism has been approved.
+- **Do not impose mandatory World Tree quest gameplay**; the Tree is an openly approachable landmark and story setting, not a required world-travel device.
+
+**Implementation status:** Story DESIGN only; not evidence of an authored dragon boss encounter or World 2 main quest. Preserve the existing Arborium forestry guild quests, road history, and six-world mystery when fleshing out the short (~3–4-quest) main arc.
