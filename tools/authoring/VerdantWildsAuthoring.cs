@@ -58,7 +58,6 @@ public static class VerdantWildsAuthoring
         var journal = Object.FindObjectsByType<QuestJournal>().Single(j => j.Definitions.Any(q => q.stableId == "quest.arborium.roadwarden"));
         var template = GameObject.Find("Adventurers Guild Registrar");
         if (template == null) throw new InvalidOperationException("Arborium guard appearance missing.");
-        var giver = BuildWarden(root, template, BuildQuest(journal));
         var tuning = AssetDatabase.LoadAssetAtPath<CombatTuning>("Assets/_DiceFree/Settings/Combat/Cornberg provisional tuning.asset");
         var nature = AssetDatabase.LoadAssetAtPath<ElementDefinition>("Assets/_DiceFree/Settings/Combat/Elements/Nature.asset");
         if (tuning == null || nature == null) throw new InvalidOperationException("Verdant combat assets missing.");
@@ -68,6 +67,11 @@ public static class VerdantWildsAuthoring
         var lash = Species(Thornlash, "Thornlash", "Briar lash", tuning, null, 2050, 53, .9f, 4.2f, 395);
         var puff = Species(Sporecap, "Sporecap", "Spore puff", tuning, nature, 1820, 66, 4.8f, 2.6f, 430);
         var bump = Species(Lanterncap, "Lanterncap", "Cap bump", tuning, null, 1570, 42, .7f, 2.3f, 0);
+        var lanternmereQuest = BuildQuest();
+        var plantBounty = BuildPlantBounty(lash);
+        journal.Configure(journal.Definitions.Concat(new[] { lanternmereQuest, plantBounty }).ToArray());
+        EditorUtility.SetDirty(journal);
+        var giver = BuildWarden(root, template, lanternmereQuest, plantBounty);
         var enemies = Group(root, "Wilds creatures", Vector3.zero);
         var actors = Thorns.Select((at,i) => Spawn(enemies, lash, 31+i, at, respawn))
             .Concat(Spores.Select((at,i) => Spawn(enemies, puff, 33+i, at, respawn)))
@@ -506,7 +510,7 @@ public static class VerdantWildsAuthoring
         return value;
     }
 
-    private static QuestDefinition BuildQuest(QuestJournal journal)
+    private static QuestDefinition BuildQuest()
     {
         var reward = Asset<FixedRewardDefinition>("Lanternmere reward");
         reward.gold = 110;
@@ -528,8 +532,27 @@ public static class VerdantWildsAuthoring
         };
         EditorUtility.SetDirty(quest);
         EditorUtility.SetDirty(reward);
-        journal.Configure(journal.Definitions.Append(quest).ToArray());
-        EditorUtility.SetDirty(journal);
+        return quest;
+    }
+
+    private static QuestDefinition BuildPlantBounty(ActorDefinition thornlash)
+    {
+        var quest = Asset<QuestDefinition>("Another 15 Plant Monsters");
+        quest.stableId = "quest.verdant.repeat-plant-hunt";
+        quest.title = "Another 15 Plant Monsters";
+        quest.requiredLevel = 30;
+        quest.offer = "The Thornlashes keep creeping back onto the trail. Defeat fifteen plant monsters, then return to me. The bounty pays the experience of twenty Thornlashes.";
+        quest.activeDialogue = "Clear fifteen plant monsters and return for your bounty. Thornlashes count toward the hunt.";
+        quest.locationHint = "Warden Lethen stands at the Lanternmere trailhead beyond Arborium's West Gate.";
+        quest.turnInHint = "Return to Warden Lethen at the Lanternmere trailhead.";
+        quest.stages = new[]
+        {
+            new QuestObjective { kind = ObjectiveKind.Kill, requiredTag = "plant", count = 15,
+                instruction = "Defeat 15 plant monsters", creditMode = QuestCreditMode.NearbyParty }
+        };
+        quest.rewardXp = 20 * thornlash.experienceReward;
+        quest.repeatable = true;
+        EditorUtility.SetDirty(quest);
         return quest;
     }
 
@@ -537,7 +560,7 @@ public static class VerdantWildsAuthoring
         new() { kind=ObjectiveKind.Kill, objectiveId=species, familyId=species, count=count,
             instruction=instruction, creditMode=QuestCreditMode.NearbyParty };
 
-    private static QuestGiver BuildWarden(Transform root,GameObject template,QuestDefinition quest)
+    private static QuestGiver BuildWarden(Transform root,GameObject template,QuestDefinition quest,QuestDefinition plantBounty)
     {
         var npc = Object.Instantiate(template,root);
         npc.name = "Warden Lethen - Lanternmere trailhead";
@@ -549,6 +572,7 @@ public static class VerdantWildsAuthoring
         var giver = npc.AddComponent<QuestGiver>();
         giver.ConfigureName("Warden Lethen");
         giver.Configure(quest);
+        giver.ConfigureAdditional(plantBounty);
         giver.ConfigureApproach(Group(root,"Warden Lethen interaction approach",Ground(Warden+new Vector2(0,-1.7f))));
         return giver;
     }

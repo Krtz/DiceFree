@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Another 15 Plant Monsters
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.verdant.repeat-plant-hunt
+  title: Another 15 Plant Monsters
+  requiredClassId:
+  requiredLevel: 30
+  version: 1
+  offer: The Thornlashes keep creeping back onto the trail. Defeat fifteen plant monsters, then return to me. The bounty pays the experience of twenty Thornlashes.
+  activeDialogue: Clear fifteen plant monsters and return for your bounty. Thornlashes count toward the hunt.
+  locationHint: Warden Lethen stands at the Lanternmere trailhead beyond Arborium's West Gate.
+  turnInHint: Return to Warden Lethen at the Lanternmere trailhead.
+  stages:
+  - kind: 0
+    objectiveId:
+    requiredTag: plant
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat 15 plant monsters
+    contentId:
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 15
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 7900
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 1

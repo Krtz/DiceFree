@@ -558720,6 +558720,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 49f7e374bc50f0f42bb117c74bce7f22, type: 2}
   - {fileID: 11400000, guid: 42338a308dc1a404ab1e3a083c73701a, type: 2}
   - {fileID: 11400000, guid: 0839a364acbc1e847b3ecbc9e31cc1d5, type: 2}
+  - {fileID: 11400000, guid: 6c53c1fb0f3b4ad5a9eef9f56679c447, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -1017595,7 +1017596,8 @@ MonoBehaviour:
   approachPoint: {fileID: 1915535944}
   context: {fileID: 0}
   quest: {fileID: 11400000, guid: 0839a364acbc1e847b3ecbc9e31cc1d5, type: 2}
-  additionalQuests: []
+  additionalQuests:
+  - {fileID: 11400000, guid: 6c53c1fb0f3b4ad5a9eef9f56679c447, type: 2}
   ambientOutsideQuest: 0
 --- !u!114 &702465455
 MonoBehaviour:
