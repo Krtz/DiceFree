@@ -289,14 +289,15 @@ namespace DiceFree.EditorTools
                 "Skill cooldown did not begin after a successful cast.");
             NoviceSkillsValidation.Require(persistence.Flush(), "Could not flush Novice skill allocation.");
             var profile = persistence.CaptureProfile();
-            NoviceSkillsValidation.Require(profile != null && profile.schemaVersion == 5,
-                "Saved Echo did not use schema v5.");
+            NoviceSkillsValidation.Require(profile != null && profile.schemaVersion == SaveMigrations.CurrentSchema,
+                "Saved Echo did not use the current save schema.");
             var savedSection = profile.sections.Single(value => value.id == "manifestation:" + player.Stats.Definition.stableId);
-            NoviceSkillsValidation.Require(savedSection.version == 5, "Saved manifestation did not use v5.");
+            NoviceSkillsValidation.Require(savedSection.version == SaveMigrations.ManifestationVersion,
+                "Saved manifestation did not use the current version.");
             var saved = JsonUtility.FromJson<ManifestationSave>(savedSection.json);
             RequireRanks(saved.classSkills);
 
-            Debug.Log("DICEFREE_NOVICE_SKILLS_PHASE1_OK: passive/point notification, four real casts, friendly targeting, status rules and v5 save passed.");
+            Debug.Log("DICEFREE_NOVICE_SKILLS_PHASE1_OK: passive/point notification, four real casts, friendly targeting, status rules and current save schema passed.");
             SessionState.SetInt(Prefix + "phase", 2);
             EditorApplication.ExitPlaymode();
         }
@@ -327,8 +328,8 @@ namespace DiceFree.EditorTools
             NoviceSkillsValidation.Require(skills.SpentPoints == 5 && skills.UnspentPoints == 1,
                 "Reloaded Novice skill point accounting changed.");
             var profile = persistence.CaptureProfile();
-            NoviceSkillsValidation.Require(profile != null && profile.schemaVersion == 5,
-                "Reloaded Echo is not schema v5.");
+            NoviceSkillsValidation.Require(profile != null && profile.schemaVersion == SaveMigrations.CurrentSchema,
+                "Reloaded Echo is not on the current save schema.");
 
             skills.ResetAllocatedRanks();
             NoviceSkillsValidation.Require(skills.SpentPoints == 0 && skills.UnspentPoints == 6,

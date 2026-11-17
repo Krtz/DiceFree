@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,6 +24,9 @@ namespace DiceFree.World
         Light originalSun;
         bool interior;
         private GameObject arboriumLamps;
+        private MeshRenderer[] arboriumGlassRenderers;
+        private Material arboriumGlassSource, arboriumGlass;
+        private float previousWindowGlow = -1;
         public bool ArboriumLampsLit => arboriumLamps != null && arboriumLamps.activeSelf;
         public float Hour => Mathf.Repeat(sessionHour + (running ? (float)((Time.realtimeSinceStartupAsDouble - epoch) / (cycleMinutes * 60) * 24) : 0), 24);
         public float CycleMinutes => cycleMinutes;
@@ -52,6 +56,7 @@ namespace DiceFree.World
             originalLightColor = celestialLight.color;
             if (originalSky != null) { ownedSky = new Material(originalSky) { name = "World sky (session)" }; RenderSettings.skybox = ownedSky; }
             CreateArboriumLamps();
+            CreateArboriumWindowLighting();
             Apply();
         }
         void Update() => Apply();
@@ -69,6 +74,7 @@ namespace DiceFree.World
             float elevation = SunElevation(Hour);
             if (arboriumLamps != null && arboriumLamps.activeSelf != (elevation < 0))
                 arboriumLamps.SetActive(elevation < 0);
+            SetWindowGlow(1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.26f, .10f, elevation)));
             float day = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-.10f, .30f, elevation));
             float warmth = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(0, .40f, Mathf.Abs(elevation)));
             bool moon = elevation < 0;
@@ -89,6 +95,43 @@ namespace DiceFree.World
                 if (ownedSky.HasProperty("_SkyTint")) ownedSky.SetColor("_SkyTint", Color.Lerp(new Color(.14f,.22f,.38f),new Color(.48f,.57f,.67f),day));
                 if (ownedSky.HasProperty("_GroundColor")) ownedSky.SetColor("_GroundColor", RenderSettings.ambientGroundColor);
             }
+        }
+
+        private void CreateArboriumWindowLighting()
+        {
+            if (arboriumLampDistrict == null) return;
+            var renderers = arboriumLampDistrict.GetComponentsInChildren<MeshRenderer>(true)
+                .Concat(FindObjectsByType<ArboriumInterior>(FindObjectsInactive.Include)
+                    .Where(building => building.gameObject.scene == gameObject.scene)
+                    .SelectMany(building => building.GetComponentsInChildren<MeshRenderer>(true)))
+                .Distinct().ToArray();
+            arboriumGlassSource = renderers.SelectMany(renderer => renderer.sharedMaterials)
+                .FirstOrDefault(material => material != null && material.name == "Arborium evening glass");
+            if (arboriumGlassSource == null) return;
+
+            arboriumGlassRenderers = renderers.Where(renderer => renderer.sharedMaterials.Contains(arboriumGlassSource)).ToArray();
+            arboriumGlass = new Material(arboriumGlassSource) { name = "Arborium evening glass (session)" };
+            ReplaceWindowMaterial(arboriumGlassSource, arboriumGlass);
+        }
+
+        private void ReplaceWindowMaterial(Material original, Material replacement)
+        {
+            foreach (var pane in arboriumGlassRenderers)
+            {
+                if (pane == null) continue;
+                var materials = pane.sharedMaterials;
+                if (!materials.Contains(original)) continue;
+                for (int i = 0; i < materials.Length; i++)
+                    if (materials[i] == original) materials[i] = replacement;
+                pane.sharedMaterials = materials;
+            }
+        }
+
+        private void SetWindowGlow(float glow)
+        {
+            if (arboriumGlass == null || Mathf.Abs(previousWindowGlow - glow) < .006f) return;
+            arboriumGlass.SetColor("_EmissionColor", new Color(.74f, .31f, .10f) * glow);
+            previousWindowGlow = glow;
         }
         private void CreateArboriumLamps()
         {
@@ -143,6 +186,7 @@ namespace DiceFree.World
         void OnDisable()
         {
             if (arboriumLamps != null) arboriumLamps.SetActive(false);
+            SetWindowGlow(0);
             if (celestialLight != null) RestoreLighting();
         }
         void OnDestroy()
@@ -150,6 +194,11 @@ namespace DiceFree.World
             if (celestialLight != null) RestoreLighting();
             if (ownedSky != null) Destroy(ownedSky);
             if (arboriumLamps != null) Destroy(arboriumLamps);
+            if (arboriumGlass != null)
+            {
+                ReplaceWindowMaterial(arboriumGlass, arboriumGlassSource);
+                Destroy(arboriumGlass);
+            }
         }
         void OnEnable() { if (ownedSky != null && !interior) RenderSettings.skybox = ownedSky; }
         void LateUpdate() { if (!interior && ownedSky != null && RenderSettings.skybox != ownedSky) RenderSettings.skybox = ownedSky; }

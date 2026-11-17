@@ -79,9 +79,7 @@ namespace DiceFree.Dungeons
         {
             string Name(string id)=>string.Join(" ",id.Replace("class.","").Split('-').Select(s=>s.Length==0?s:char.ToUpperInvariant(s[0])+s.Substring(1)));
             string classes=item.allowedClassIds==null||item.allowedClassIds.Length==0?"All classes":string.Join(", ",item.allowedClassIds.Select(Name));
-            string extra=item.stats.regeneration!=0?$"\n+{item.stats.regeneration:0.#} Health regeneration":"";
-            if(item.stats.basicAttackMaximumBonus!=0)extra+=$"\n+{item.stats.basicAttackMaximumBonus:0.#} Maximum basic attack damage";
-            return HudTooltip.Item(item)+extra+"\n\nUsable by: "+classes;
+            return HudTooltip.Item(item)+"\n\nUsable by: "+classes;
         }
         void OnGUI()
         {

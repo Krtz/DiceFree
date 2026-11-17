@@ -36,6 +36,12 @@ namespace DiceFree.UI
         private bool repeatShiftAttackMove;
         private int consumedFrame = -1;
         private float castRange;
+        private QuickCastMode requestedQuickCastMode=QuickCastMode.Reticle;
+        private InputAction requestedQuickCastAction;
+        private QuickCastMode activeQuickCastMode=QuickCastMode.Reticle;
+        private InputAction activeQuickCastAction;
+        private Func<bool> deferredAction;
+        private InputAction deferredActionTrigger;
 
         private CombatActor pendingUnit;
         private Vector3 pendingGround;
@@ -53,6 +59,41 @@ namespace DiceFree.UI
         public Vector3 HoveredGroundPoint { get; private set; }
         public bool HoverValid { get; private set; }
         public float CastRange => castRange;
+
+        public void ArmQuickCast(QuickCastMode mode,InputAction trigger)
+        {
+            requestedQuickCastMode=mode;
+            requestedQuickCastAction=trigger;
+        }
+
+        public void ClearArmedQuickCast()
+        {
+            requestedQuickCastMode=QuickCastMode.Reticle;
+            requestedQuickCastAction=null;
+        }
+
+        public bool RunSelfAction(Func<bool> action)
+        {
+            if(action==null)return false;
+            if(requestedQuickCastMode==QuickCastMode.OnRelease && requestedQuickCastAction!=null)
+            {
+                deferredAction=action;
+                deferredActionTrigger=requestedQuickCastAction;
+                ClearArmedQuickCast();
+                return true;
+            }
+            ClearArmedQuickCast();
+            return action();
+        }
+
+        private void ConsumeQuickCastRequest()
+        {
+            activeQuickCastMode=requestedQuickCastMode;
+            activeQuickCastAction=requestedQuickCastAction;
+            ClearArmedQuickCast();
+            if(activeQuickCastMode==QuickCastMode.OnRelease && activeQuickCastAction==null)
+                activeQuickCastMode=QuickCastMode.Reticle;
+        }
 
         private IQueuedOrders Orders
         {
@@ -176,6 +217,7 @@ namespace DiceFree.UI
             unitConfirm = null;
             unitEligibility = null;
             groundConfirm = confirm;
+            ConsumeQuickCastRequest();
             HoveredActor = null;
             HoverValid = false;
             Cursor.visible = false;
@@ -207,6 +249,7 @@ namespace DiceFree.UI
             unitConfirm = confirm;
             unitEligibility = eligibility;
             groundConfirm = null;
+            ConsumeQuickCastRequest();
             HoveredActor = null;
             HoverValid = false;
             Cursor.visible = false;
@@ -224,6 +267,10 @@ namespace DiceFree.UI
             unitConfirm = null;
             unitEligibility = null;
             groundConfirm = null;
+            activeQuickCastMode=QuickCastMode.Reticle;
+            activeQuickCastAction=null;
+            deferredAction=null;
+            deferredActionTrigger=null;
             HoveredActor = null;
             HoverValid = false;
             if (rangeLine != null) rangeLine.enabled = false;
@@ -249,6 +296,22 @@ namespace DiceFree.UI
 
         private void Update()
         {
+            if(deferredAction!=null)
+            {
+                if((bindings!=null&&bindings.Suppressed)||
+                    (Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame))
+                {
+                    deferredAction=null;deferredActionTrigger=null;
+                    return;
+                }
+                if(deferredActionTrigger!=null&&deferredActionTrigger.WasReleasedThisFrame())
+                {
+                    var action=deferredAction;
+                    deferredAction=null;deferredActionTrigger=null;
+                    action();
+                }
+                return;
+            }
             if (!Active) return;
 
             if (bindings != null && bindings.Suppressed)
@@ -291,11 +354,37 @@ namespace DiceFree.UI
             Vector2 pointer = Mouse.current.position.ReadValue();
             UpdateHover(pointer);
 
+            if(activeQuickCastMode==QuickCastMode.OnPress)
+            {
+                activeQuickCastMode=QuickCastMode.Reticle;
+                activeQuickCastAction=null;
+                ConfirmPointer(pointer,shiftedAttackRightClick);
+                return;
+            }
+            if(activeQuickCastMode==QuickCastMode.OnRelease &&
+                activeQuickCastAction!=null&&activeQuickCastAction.WasReleasedThisFrame())
+            {
+                activeQuickCastMode=QuickCastMode.Reticle;
+                activeQuickCastAction=null;
+                ConfirmPointer(pointer,shiftedAttackRightClick);
+                return;
+            }
+
             if ((!Mouse.current.leftButton.wasPressedThisFrame &&
                  !shiftedAttackRightClick) ||
                 HudPointerBlocker.Covers(pointer))
                 return;
 
+            ConfirmPointer(pointer,shiftedAttackRightClick);
+        }
+
+        private void ConfirmPointer(Vector2 pointer,bool shiftedAttackRightClick)
+        {
+            if(HudPointerBlocker.Covers(pointer))
+            {
+                Feedback="Move the pointer off the HUD to choose a target.";
+                return;
+            }
             Consume();
             if (!HoverValid)
             {

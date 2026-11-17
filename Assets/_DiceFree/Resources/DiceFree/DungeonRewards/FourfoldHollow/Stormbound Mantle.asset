@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Stormbound Mantle
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.fourfold.stormbound
+  displayName: Stormbound Mantle
+  icon: {fileID: 21300000, guid: a65b7f75e4c2df1449621d8b847eec15, type: 3}
+  slot: 1
+  handsRequired: 1
+  itemLevel: 40
+  rarityId: rarity.rare
+  sourceId: dungeon.fourfold-hollow
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId: 
+  restoreResourceAmount: 0
+  allowedClassIds: []
+  flavor: Silver wire stitched through dyed hide carries a charge from the Stormcall ward.
+  stats:
+    attributes:
+      vitality: 8
+      strength: 0
+      agility: 9
+      intelligence: 0
+      spirit: 6
+    physicalDefense: 10
+    magicalDefense: 12
+    attackSpeedPercent: 0
+    movementSpeedPercent: 3
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

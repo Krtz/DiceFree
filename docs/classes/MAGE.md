@@ -11,6 +11,8 @@ As a level-30 Magically Touched Novice, speak to Cornberg's brewer / retired mag
 
 ## Abilities
 
+The current source adds **2 flat raw damage per skill rank** to Ember Bolt, Frost Snare, Arc Lightning, Quicksand ticks and each Half-Life tick, in addition to each ability's existing `15 + coefficient × INT` damage. This is a provisional playtest baseline; it does not change utility abilities or passives. The Gameplay Options Quickcast modes also apply to Mage skill hotkeys. Both changes await connected-Editor validation.
+
 Six active abilities and two passives use the extensible class ability provider. They are not limited to four actives.
 
 | Ability | Element | Behavior | Rank unlock levels |

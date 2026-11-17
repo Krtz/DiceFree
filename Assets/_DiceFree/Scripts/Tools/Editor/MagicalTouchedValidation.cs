@@ -59,11 +59,14 @@ namespace DiceFree.EditorTools
                     sand.attack.scaling == AttributeScaling.Weighted &&
                     Near(sand.attack.weights.intelligence, 1),
                 "Magic Sand tuning/element/INT scaling changed.");
+            Require(Near(sand.FlatDamage(1),10)&&Near(sand.FlatDamage(6),60),
+                "Magic Sand rank-scaled flat damage changed.");
 
             var mend = Skill(MagicalTouchedAuthoring.MendPath, MagicalTouchedAuthoring.MendId, MagicalSkillKind.Mend);
             Require(Near(mend.cooldownSeconds, 10) && Near(mend.ManaCost(1), 12) &&
-                    Near(mend.HealAmount(new AttributeValues { spirit = 10 }, 1), 80) &&
-                    Near(mend.HealAmount(new AttributeValues { spirit = 10 }, 6), 180),
+                    Near(mend.HealAmount(new AttributeValues { spirit = 10 }, 1), 85) &&
+                    Near(mend.HealAmount(new AttributeValues { spirit = 10 }, 6), 210) &&
+                    Near(mend.flatHealPerRank,5),
                 "Mend SPI-only tuning changed.");
 
             var fire = Skill(MagicalTouchedAuthoring.FirePath, MagicalTouchedAuthoring.FireId, MagicalSkillKind.FireImbuement);
@@ -72,13 +75,15 @@ namespace DiceFree.EditorTools
                     Near(fire.durationSeconds, 8) && Near(fire.ManaCost(1), 15) &&
                     Near(fire.ManaCost(6), 75) &&
                     Near(fire.ImbuementCoefficient(1), .25f) &&
-                    Near(fire.ImbuementCoefficient(6), .5f),
+                    Near(fire.ImbuementCoefficient(6), .5f) &&
+                    Near(fire.FlatDamage(1),3) && Near(fire.FlatDamage(6),18),
                 "Fire Imbuement tuning/element changed.");
 
             var ice = Skill(MagicalTouchedAuthoring.IcePath, MagicalTouchedAuthoring.IceId, MagicalSkillKind.IceBurst);
             Require(ice.attack != null && ice.attack.element != null &&
                     ice.attack.element.stableId == "element.ice" &&
                     Near(ice.ManaCost(1), 18) && Near(ice.ManaCost(6), 100) &&
+                    Near(ice.FlatDamage(1),5) && Near(ice.FlatDamage(6),30) &&
                     Near(ice.IceSlowPercent(1), 2) && Near(ice.IceSlowPercent(6), 12) &&
                     Near(ice.iceDelaySeconds, .75f) && Near(ice.iceRadius, 3.5f) &&
                     Near(ice.slowDurationSeconds, 4),

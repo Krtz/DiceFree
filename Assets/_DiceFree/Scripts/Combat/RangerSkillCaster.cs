@@ -109,7 +109,7 @@ namespace DiceFree.Skills
             castAt = 0;
             if (castSkill == RangerSkill.ArrowRain)
             {
-                var damage = basic.DamageRange * (.4f + .035f * (castRank - 1));
+                var damage = basic.DamageRange * BowScale(RangerSkill.ArrowRain,castRank);
                 StartCoroutine(Rainfall(rainPoint, damage));
             }
             else if (actor.CanTargetHostile(aimedTarget) && InRange(RangerSkill.AimedShot, aimedTarget))
@@ -117,7 +117,7 @@ namespace DiceFree.Skills
                 var target = aimedTarget;
                 int rank = castRank;
                 var action = AccuracyResolver.Resolve(actor, aimed, critical: CriticalRule());
-                float raw = RollBow() * (1.8f + .12f * (rank - 1));
+                float raw = RollBow() * BowScale(RangerSkill.AimedShot,rank);
                 if (target == MarkedTarget) raw += .5f * actor.Stats.Attributes.agility * (1 + .05f * (rank - 1));
                 Launch(target, RangerVfx.ArrowTint, () => Hit(target, aimed, raw, action));
             }
@@ -163,7 +163,7 @@ namespace DiceFree.Skills
             }
             else
             {
-                float raw = RollBow() * (.85f + .10f * (rank - 1));
+                float raw = RollBow() * BowScale(RangerSkill.HawkDive,rank);
                 StartCoroutine(Dive(target, raw, rank));
             }
             Casted?.Invoke(skill);
@@ -272,8 +272,8 @@ namespace DiceFree.Skills
         {
             Vector3 point = primary.transform.position;
             SelectArea(point, BlastRadius);
-            Hit(primary, explosive, bow * (1.10f + .07f * (rank - 1)), action);
-            float splash = bow * (.55f + .035f * (rank - 1));
+            Hit(primary, explosive, bow * BowScale(RangerSkill.ExplodingArrow,rank), action);
+            float splash = bow * BowScale(RangerSkill.ExplodingArrow,rank,true);
             foreach (var target in areaTargets)
                 if (actor.IsHostileTo(target)) Hit(target, explosive, splash, action);
             RangerVfx.Explosion(point);
@@ -297,6 +297,29 @@ namespace DiceFree.Skills
                     finalRawMultiplier: DamageMultiplier(target));
             packet.action = action;
             target.Health.ApplyPacket(actor, packet);
+        }
+
+        private static float BowScale(RangerSkill skill,int rank,bool splash=false) => skill switch
+        {
+            RangerSkill.AimedShot => 1.8f + .12f * (rank - 1),
+            RangerSkill.ExplodingArrow => splash ? .55f + .035f * (rank - 1) : 1.10f + .07f * (rank - 1),
+            RangerSkill.ArrowRain => .4f + .035f * (rank - 1),
+            _ => .85f + .10f * (rank - 1)
+        };
+
+        public float PreviewBowScale(RangerSkill skill,int rank,bool splash=false) => BowScale(skill,rank,splash);
+
+        public Vector2 PreviewDamage(RangerSkill skill,int rank,bool splash=false)
+        {
+            var attack = skill switch
+            {
+                RangerSkill.AimedShot => aimed,
+                RangerSkill.ExplodingArrow => explosive,
+                RangerSkill.ArrowRain => rain,
+                _ => hawk
+            };
+            return basic.DamageRange * BowScale(skill,rank,splash) +
+                Vector2.one * attack.RawDamage(actor.Stats.Attributes);
         }
 
         private float RollBow()

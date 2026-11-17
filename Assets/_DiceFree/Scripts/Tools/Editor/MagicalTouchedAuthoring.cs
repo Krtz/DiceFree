@@ -106,22 +106,25 @@ namespace DiceFree.EditorTools
             var sand = Skill(SandPath, SandId, "Magic Sand", MagicalSkillKind.MagicSand);
             Tune(sand, cooldown: 7, duration: 5, range: 12,
                 mana1: 10, linear: 6, quadratic: 2.4f,
-                attack: sandAttack, coefficient: 1.4f, coefficientPerRank: 0.18f);
+                attack: sandAttack, coefficient: 1.4f, coefficientPerRank: 0.18f,
+                flatDamagePerRank: 10);
 
             var mend = Skill(MendPath, MendId, "Mend", MagicalSkillKind.Mend);
             Tune(mend, cooldown: 10, duration: 0, range: 12,
                 mana1: 12, linear: 4, quadratic: 1,
-                healCoefficient: 8, healCoefficientPerRank: 2);
+                healCoefficient: 8, healCoefficientPerRank: 2,flatHealPerRank:5);
 
             var imbuement = Skill(FirePath, FireId, "Fire Elemental Imbuement", MagicalSkillKind.FireImbuement);
             Tune(imbuement, cooldown: 18, duration: 8, range: 12,
                 mana1: 15, linear: 5, quadratic: 1.4f,
-                secondaryAttack: fireAugment, coefficient: 0.25f, coefficientPerRank: 0.05f);
+                secondaryAttack: fireAugment, coefficient: 0.25f, coefficientPerRank: 0.05f,
+                flatDamagePerRank:3);
 
             var iceBurst = Skill(IcePath, IceId, "Ice Burst", MagicalSkillKind.IceBurst);
             Tune(iceBurst, cooldown: 12, duration: 4, range: 12,
                 mana1: 18, linear: 6, quadratic: 2.08f,
-                attack: iceAttack, coefficient: 1, coefficientPerRank: 0.15f);
+                attack: iceAttack, coefficient: 1, coefficientPerRank: 0.15f,
+                flatDamagePerRank:5);
             iceBurst.iceDelaySeconds = 0.75f;
             iceBurst.iceRadius = 3.5f;
             iceBurst.slowDurationSeconds = 4;
@@ -293,7 +296,9 @@ namespace DiceFree.EditorTools
             float coefficient = 0,
             float coefficientPerRank = 0,
             float healCoefficient = 0,
-            float healCoefficientPerRank = 0)
+            float healCoefficientPerRank = 0,
+            float flatDamagePerRank = 0,
+            float flatHealPerRank = 0)
         {
             skill.cooldownSeconds = cooldown;
             skill.durationSeconds = duration;
@@ -307,6 +312,8 @@ namespace DiceFree.EditorTools
             skill.coefficientPerRank = coefficientPerRank;
             skill.healCoefficientRank1 = healCoefficient;
             skill.healCoefficientPerRank = healCoefficientPerRank;
+            skill.flatDamagePerRank=flatDamagePerRank;
+            skill.flatHealPerRank=flatHealPerRank;
             EditorUtility.SetDirty(skill);
         }
 

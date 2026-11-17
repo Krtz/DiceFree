@@ -68,14 +68,27 @@ namespace DiceFree.UI
             {
                 PsionSkill.PsychicBolt => $"Fire a Metal bolt for {caster.PreviewAmount(skill, preview):0.#} raw Magical damage. Stuns for {.15f*preview:0.00}s before resistance.",
                 PsionSkill.PsionicBladesMastery => $"Basic attacks ignore {preview} Physical Defense and gain {2.5f*preview:0.#}% chance to crit for 1.5× damage.",
-                PsionSkill.MentalImage => $"Place an image for {PsionSkillCaster.ImageDuration(preview):0.0}s. It strikes at 10% of your basic damage and bursts for {caster.PreviewAmount(skill, preview):0.#} raw Void damage on death or expiry.",
+                PsionSkill.MentalImage => $"Place an image for {PsionSkillCaster.ImageDuration(preview):0.0}s. Its attacks inherit your basic attack crit chance and deal 10% of your basic damage. It bursts for {caster.PreviewAmount(skill, preview):0.#} raw Void damage on death or expiry.",
                 PsionSkill.LightningStorm => $"Channel three waves. Each deals {caster.PreviewAmount(skill, preview):0.#} raw Lightning damage to enemies currently within 4m. Moving interrupts remaining waves.",
                 _ => $"You and nearby allies share {caster.PreviewAmount(skill, preview):0.#} shield capacity for 8s. Applies to allies within 8m at cast."
+            };
+            int extraRanks = preview - 1;
+            detail += skill switch
+            {
+                PsionSkill.PsychicBolt => $"\nScaling: {30+8*preview} + {1.2f+.04f*extraRanks:0.###} × INT + 1.1 × (level − 1).",
+                PsionSkill.MentalImage => $"\nRupture scaling: {30+10*preview} + {.6f+.035f*extraRanks:0.###} × (AGI + INT) + 0.8 × (level − 1). Blade hit: {SkillTooltips.Range(caster.PreviewImageBladeDamage())} raw.",
+                PsionSkill.LightningStorm => $"\nPer-wave scaling: {15+5*preview} + {.6f+.025f*extraRanks:0.###} × INT + 0.55 × (level − 1). Full storm: {3*caster.PreviewAmount(skill,preview):0.##} raw per target.",
+                PsionSkill.MetalShield => $"\nShield scaling: {100+30*preview} + {.75f+.04f*extraRanks:0.###} × INT + 1.25 × (level − 1).",
+                _ => ""
             };
             if (skill != PsionSkill.PsionicBladesMastery)
                 detail += $"\nMana {PsionSkillCaster.Cost(skill, preview)} · Cooldown {PsionSkillCaster.Cooldown(skill)}s";
             if (rank < PsionSkillProgression.MaxRank(skill))
+            {
+                if (skill != PsionSkill.PsionicBladesMastery && rank > 0)
+                    detail += $"\nNext rank costs {PsionSkillCaster.Cost(skill, rank + 1)} Mana.";
                 detail += $"\nNext rank requires level {PsionSkillProgression.RequiredLevel(skill, rank+1)}.";
+            }
             return detail;
         }
 

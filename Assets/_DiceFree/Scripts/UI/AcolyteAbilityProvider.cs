@@ -67,6 +67,17 @@ namespace DiceFree.UI
                 AcolyteSkill.SummonSkeleton => $"Raise one skeleton for 15s. Its attacks deal {caster.PreviewDamage(skill, preview):0.#} raw Physical damage. Up to four can fight at once. Left-click a skeleton to select it, then right-click a destination or enemy.",
                 _ => $"+{2 * preview} INT and +{preview} SPR. Landed wand attacks apply or refresh a 3s Magical Coffee poison for {caster.PreviewDamage(skill, preview):0.#} raw damage per second, without restarting its tick."
             };
+            float damage = caster.PreviewDamage(skill,preview);
+            string scaling = SkillTooltips.Scaling(caster.DamageDefinition(skill));
+            detail += skill switch
+            {
+                AcolyteSkill.DrainLife => $"\nScaling: ({scaling}) × {AcolyteSkillCaster.ChannelScale(skill,preview):0.##}. Full channel: {5*damage:0.##} raw.",
+                AcolyteSkill.MortalCoil => $"\nDamage scaling: ({scaling}) × {AcolyteSkillCaster.ChannelScale(skill,preview):0.##}. Healing scaling: (10 + 0.25 × INT + 0.70 × SPI) × {AcolyteSkillCaster.ChannelScale(skill,preview):0.##}.",
+                AcolyteSkill.RadiationPlague => $"\nScaling: ({scaling}) × {AcolyteSkillCaster.PlagueDamageScale(preview):0.##}. Full infection: {damage*10*(3+(preview-1)/3):0.##} raw per target.",
+                AcolyteSkill.SummonSkeleton => $"\nPer attack scaling: (3 + 0.18 × INT) × {1+.06f*(preview-1):0.##}.",
+                AcolyteSkill.OccultAdept => $"\nPoison scaling: {SkillTooltips.Scaling(caster.DamageDefinition(skill),flat:AcolyteSkillCaster.OccultDamageBonus(preview))}. Full poison: {3*damage:0.##} raw.",
+                _ => ""
+            };
             if (skill == AcolyteSkill.SummonSkeleton) detail += "\n4 Soul Charges · Cooldown 3s";
             else if (skill != AcolyteSkill.OccultAdept)
                 detail += $"\nMana {AcolyteSkillCaster.ManaCost(skill)} · Cooldown {AcolyteSkillCaster.Cooldown(skill)}s";

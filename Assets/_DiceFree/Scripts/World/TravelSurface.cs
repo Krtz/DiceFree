@@ -24,12 +24,19 @@ namespace DiceFree.World
         private void OnDisable() { active.Remove(this); }
         public bool Contains(Vector3 worldPosition)
         {
-            if (!isActiveAndEnabled || definition == null || footprint == null || footprint.sharedMesh == null) return false;
+            if (!isActiveAndEnabled || definition == null || footprint == null) return false;
+            var mesh = footprint.sharedMesh;
+            if (mesh == null) return false;
             var p = footprint.transform.InverseTransformPoint(worldPosition);
             if (!localRegion.Contains(p)) return false;
-            if (cachedMesh != footprint.sharedMesh)
+            var bounds = mesh.bounds;
+            bounds.Expand(new Vector3(.002f, heightTolerance * 2, .002f));
+            if (!bounds.Contains(p)) return false;
+            if (cachedMesh != mesh)
             {
-                cachedMesh = footprint.sharedMesh; vertices = cachedMesh.vertices; triangles = cachedMesh.triangles;
+                cachedMesh = mesh;
+                vertices = mesh.vertices;
+                triangles = mesh.triangles;
             }
             for (int i = 0; i < triangles.Length; i += 3)
             {

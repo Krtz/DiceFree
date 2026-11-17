@@ -1,3 +1,14 @@
+## 2026-11-17 - Windows working-tree checkpoint
+
+This is a source checkpoint of the saved DiceFree-Options workspace on feat/verdant-wilds, based on 296313c. It includes the authored World 1 trails, Reedscale Highlands link toward Briarback, Arborium story, Fourfold Hollow, Ancient Road Dragon encounter, Slime Regent and shared waiting-room changes, plus WorldTwoArrival and Ashfall Reach work.
+
+WorldTwoArrival contains the saved Ashfall Reach arrival area. AshfallReachExpansionAuthoring.cs contains the in-progress expansion and Cinderwatch outpost (wayhouse, kitchen, supply store and spring). Cinderwatch was not found in the saved scene at checkpoint time. The expansion was not run and this checkpoint was not built or played.
+
+The earlier Roadwarden QA player build DungeonWaitingRooms-20261117-075102 compiled successfully and passed the 18-check Wolf/Slime staging review. Separate DungeonCoOp QA builds exercised Fourfold Hollow and the Ancient Road Dragon in two local processes. Those reports do not validate this combined source checkpoint. The temporary QA dungeon networking implementation was not found in the saved NetworkWorldLab source of either project; the local QA build and logs remain available.
+
+The local-only Ancient Road Dragon prototype model and its source textures are excluded from the public repository; see SourceArt/Credits/AncientRoadDragon.md. A checkout without those local assets will not have the prototype dragon visuals. Local settings, recovery scenes and build artifacts stay on Kratz. Source checkpoints for both Windows project folders are under T:\TEMP\DiceFree-Options-Checkpoints\Publish-20261117.
+
+
 ## 2026-10-28 — Briarback elemental scholar hunt
 
 Continued the Briarback work on `integration/world1-foundation` after the pushed road-patrol increment `3d8f86e`; `main` was not changed. Added the optional “The Four Elements Hunt” at Trimery, requiring one Fire, Earth, Lightning and Ice Shaman in order and a return to the visible Elemental Scholar for turn-in. Each stage uses the ordinary Briarback family and 50m `NearbyParty` credit. The reward is currently 400 XP and 50 gold as tuning placeholders. The saved completion state marks character eligibility for the future ritual dungeon; no dungeon interior or entrance was implemented.

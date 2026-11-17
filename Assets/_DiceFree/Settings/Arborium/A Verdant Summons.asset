@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: A Verdant Summons
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.verdant-summons
+  title: A Verdant Summons
+  requiredClassId: 
+  requiredLevel: 35
+  version: 1
+  offer: The Verdant Council has read your report and formally summoned you. Present yourself to the Council Clerk outside the Mage Observatory in Arborium's mage district.
+  activeDialogue: Take the summons to the Council Clerk outside the Mage Observatory, west of the World Tree.
+  turnInDialogue: 
+  locationHint: Meet the Council Clerk in the courtyard north of the Mage Observatory, west of the World Tree.
+  turnInHint: 
+  stages:
+  - kind: 2
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Present the summons to the Council Clerk at the Mage Observatory
+    contentId: npc.arborium.council-clerk
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: conversation.arborium.verdant-summons
+    count: 1
+    alternatives: []
+  completedQuestIds:
+  - quest.arborium.routes-under-orders
+  rewardXp: 1500
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 1
+  repeatable: 0

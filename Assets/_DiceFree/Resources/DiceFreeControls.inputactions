@@ -70,6 +70,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Select hero",
+                    "type": "Button",
+                    "id": "9de0dc17-dfe8-40d5-aab7-3e8238a9f59f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Cycle hostile",
                     "type": "Button",
                     "id": "b58d97e3-5152-4759-84db-4d5dd3c58a04",
@@ -324,6 +333,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select target",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da2ca67c-a5d3-4ca9-8dad-c7d9cb15f28b",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select hero",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

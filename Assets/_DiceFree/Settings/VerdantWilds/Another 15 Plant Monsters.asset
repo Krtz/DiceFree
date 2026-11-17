@@ -14,32 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.verdant.repeat-plant-hunt
   title: Another 15 Plant Monsters
-  requiredClassId:
+  requiredClassId: 
   requiredLevel: 30
   version: 1
   offer: The Thornlashes keep creeping back onto the trail. Defeat fifteen plant monsters, then return to me. The bounty pays the experience of twenty Thornlashes.
-  activeDialogue: Clear fifteen plant monsters and return for your bounty. Thornlashes count toward the hunt.
-  locationHint: Warden Lethen stands at the Lanternmere trailhead beyond Arborium's West Gate.
-  turnInHint: Return to Warden Lethen at the Lanternmere trailhead.
+  activeDialogue: Clear fifteen plant monsters and return for your bounty. Thornlashes, Sporecaps, and Lanterncaps all count.
+  locationHint: Speak to the Guild Steward inside the Adventurers' Guild reception in Arborium.
+  turnInHint: Return to the Guild Steward inside the Adventurers' Guild in Arborium.
   stages:
   - kind: 0
-    objectiveId:
+    objectiveId: 
     requiredTag: plant
     creditMode: 1
     creditRadius: 50
     instruction: Defeat 15 plant monsters
-    contentId:
+    contentId: 
     dungeonBossOnly: 0
-    familyId:
+    familyId: 
     familyIds: []
-    areaId:
-    conversationId:
+    areaId: 
+    conversationId: 
     count: 15
     alternatives: []
   completedQuestIds: []
   rewardXp: 7900
   reward: {fileID: 0}
-  rewardTitle:
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 0
   repeatable: 1

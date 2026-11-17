@@ -13,6 +13,7 @@ namespace DiceFree.UI
         private Vector2 scroll;
         private QuestDefinition visibleQuest;
         private QuestDefinition selectedOffer;
+        private string actionFeedback;
         public QuestDefinition[] OfferChoices
         {
             get
@@ -59,6 +60,7 @@ namespace DiceFree.UI
             {
                 visibleQuest = quest;
                 scroll = Vector2.zero;
+                actionFeedback = null;
             }
             var r = Bounds;
             var theme = HudLayoutManager.Current?.Theme ?? HudThemes.Get(HudThemes.CompactStone);
@@ -71,12 +73,13 @@ namespace DiceFree.UI
                 var text = new GUIStyle(GUI.skin.label) { wordWrap = true, normal = { textColor = theme.textTint } };
                 var title = new GUIStyle(text) { fontStyle = FontStyle.Bold, fontSize = 15 };
                 bool supported = state.definitionVersion == quest.version;
+                var journal = actor.GetComponent<QuestJournal>();
+                bool canAccept = supported && journal.CanAccept(quest);
                 GUILayout.BeginArea(new Rect(r.x + 12, r.y + 39, r.width - 24, r.height - 85));
                 scroll = GUILayout.BeginScrollView(scroll, false, false);
                 var choices=OfferChoices;
                 if(choices.Length>1)
                 {
-                    var journal=actor.GetComponent<QuestJournal>();
                     GUILayout.Label("Choose a quest",title);
                     foreach(var offer in choices)
                     {
@@ -90,25 +93,37 @@ namespace DiceFree.UI
                 GUILayout.Label(quest.title, title);
                 string dialogue = state.status switch
                 {
-                    QuestStatus.ReadyToTurnIn => "You have completed the objectives. Turn in this quest to claim your reward.",
+                    QuestStatus.ReadyToTurnIn => string.IsNullOrWhiteSpace(quest.turnInDialogue)
+                        ? "You have completed the objectives. Turn in this quest to claim your reward."
+                        : quest.turnInDialogue,
                     QuestStatus.Completed => "Quest completed. Thank you.",
                     QuestStatus.Active when !string.IsNullOrEmpty(quest.activeDialogue) => quest.activeDialogue,
                     _ => quest.offer
                 };
                 GUILayout.Label(dialogue, text);
                 if (!supported) GUILayout.Label("Saved quest unavailable; progress preserved.", text);
+                else if (state.status == QuestStatus.Available && !canAccept)
+                {
+                    if (actor.Stats.Level < quest.requiredLevel)
+                        GUILayout.Label("Requires level " + quest.requiredLevel + ".", text);
+                    else if (!journal.PrerequisitesMet(quest))
+                        GUILayout.Label("Complete the prerequisite quests first.", text);
+                    else
+                        GUILayout.Label("This manifestation does not meet the quest requirements.", text);
+                }
                 else if (state.status == QuestStatus.Active && quest.stages is { Length: > 0 })
                     GUILayout.Label(ObjectiveProgress.Describe(quest.stages[Mathf.Clamp(state.stage, 0, quest.stages.Length - 1)], state), text);
                 string reward = RewardText(quest);
                 if (reward.Length > 0) GUILayout.Label("Reward: " + reward, text);
+                if (!string.IsNullOrEmpty(actionFeedback)) GUILayout.Label(actionFeedback, text);
                 GUILayout.EndScrollView();
                 GUILayout.EndArea();
 
                 var action = new Rect(r.x + 12, r.yMax - 39, Mathf.Min(340, r.width - 140), 28);
-                if (supported && state.status == QuestStatus.Available && GUI.Button(action, "Accept quest"))
-                    giver.Accept(actor, quest);
+                if (canAccept && GUI.Button(action, "Accept quest"))
+                    actionFeedback = giver.Accept(actor, quest) ? null : "Could not accept the quest. Move closer and try again.";
                 else if (supported && state.status == QuestStatus.ReadyToTurnIn && GUI.Button(action, "Turn in"))
-                    giver.TurnIn(actor, quest);
+                    actionFeedback = giver.TurnIn(actor, quest) ? null : "Could not claim the reward. Check your bag space and try again.";
                 if (GUI.Button(new Rect(r.xMax - 120, r.yMax - 39, 108, 28), "Close [Esc]"))
                     interactor.Cancel();
             }

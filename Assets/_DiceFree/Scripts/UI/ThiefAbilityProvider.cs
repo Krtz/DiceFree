@@ -66,6 +66,15 @@ namespace DiceFree.UI
                 ThiefSkill.SmokeBomb => $"Throw a 4m cloud for 5s. Enemies inside take {caster.PreviewDamage(skill, preview):0.#} raw Tech damage per tick and have a 20% basic-attack miss chance. Overlapping clouds do not stack.",
                 _ => $"+{preview} AGI and +{preview}% basic critical chance. Critical basic attacks deal 1.5× raw damage."
             };
+            if (skill is ThiefSkill.Envenom or ThiefSkill.FanOfKnives or ThiefSkill.SmokeBomb)
+            {
+                float scale = skill == ThiefSkill.FanOfKnives ? ThiefSkillCaster.FanScale(preview) : ThiefSkillCaster.PeriodicScale(preview);
+                detail += $"\nScaling: ({SkillTooltips.Scaling(caster.DamageDefinition(skill))}) × {scale:0.###}.";
+                float tick = caster.PreviewDamage(skill,preview);
+                if (skill == ThiefSkill.Envenom)
+                    detail += $"\nStab scaling: 2 × basic damage + {SkillTooltips.Scaling(caster.StabDefinition)}, with the Stealth opener on the basic portion. Total with three poison ticks: {SkillTooltips.Range(stab+Vector2.one*tick*3)} raw.";
+                if (skill == ThiefSkill.SmokeBomb) detail += $" Total over 20 ticks: {tick*20:0.##} raw per target.";
+            }
             if (skill!=ThiefSkill.Cutpurse) detail += $"\nMana {ThiefSkillCaster.Cost(skill)} · Cooldown {ThiefSkillCaster.Cooldown(skill)}s";
             if (rank<ThiefSkillProgression.MaxRank(skill)) detail += $"\nNext rank requires level {ThiefSkillProgression.RequiredLevel(skill,rank+1)}.";
             return detail;

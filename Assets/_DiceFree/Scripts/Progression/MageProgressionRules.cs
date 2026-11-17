@@ -27,6 +27,7 @@ namespace DiceFree.Progression
   public static float Cooldown(Kind k)=>k switch {Kind.EmberBolt=>5,Kind.FrostSnare=>8,Kind.ArcLightning=>12,Kind.Quicksand=>14,Kind.HalfLife=>10,Kind.MathBarrier=>18,_=>0};
   public static float Cost(Kind k,int r)=>k switch {Kind.EmberBolt=>10+2*r,Kind.FrostSnare=>12+2*r,Kind.ArcLightning=>20+3*r,Kind.Quicksand=>18+3*r,Kind.HalfLife=>16+2*r,Kind.MathBarrier=>12+2*r,_=>0};
   public static float Coefficient(Kind k,int r)=>k switch {Kind.EmberBolt=>2+.4f*(r-1),Kind.FrostSnare=>1.2f+.25f*(r-1),Kind.ArcLightning=>1.8f+.35f*(r-1),Kind.Quicksand=>.35f+.1f*(r-1),Kind.HalfLife=>.45f+.12f*(r-1),_=>0};
+  public static float FlatDamage(Kind k,int r)=>k switch {Kind.EmberBolt or Kind.FrostSnare or Kind.ArcLightning or Kind.Quicksand or Kind.HalfLife=>r>0?2*r:0,_=>0};
   public static float BarrierDuration(int rank)=>rank*2;
   public static float BarrierFraction(int rank)=>(25+rank*5)/100f;
   public static float ManaPerDamage(int rank)=>2-rank*.1f;

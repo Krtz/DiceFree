@@ -73,6 +73,13 @@ namespace DiceFree.Progression
         public static float MasteryShieldCapacity(float maximumHp)=>100+Mathf.Max(0,maximumHp)*.05f;
         public static float DamageBonusPct(int rank)=>
             Mathf.Max(0,rank)*2f;
+        public static float FlatDamage(Kind kind,int rank)=>kind switch
+        {
+            Kind.WideArc=>2f*Mathf.Max(0,rank),
+            Kind.SpinDash=>2f*Mathf.Max(0,rank),
+            Kind.OverheadBreaker=>5f*Mathf.Max(0,rank),
+            _=>0f
+        };
         public static float StrengthBonus(int rank)=>
             Mathf.Max(0,rank)*1f;
         public static float MomentumGainFactor(int rhythmRank)=>

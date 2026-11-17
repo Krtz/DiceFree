@@ -91,7 +91,7 @@ namespace DiceFree.Skills
         public float ShieldAmount(int rank) => PriestSpellRules.Shield(actor.Stats.Attributes.spirit, rank);
         public float Remaining(PriestSkill skill) => Mathf.Max(0, readyAt[(int)skill] - Time.time);
 
-        private AttackDefinition Attack(PriestSkill skill) => skill switch
+        public AttackDefinition Attack(PriestSkill skill) => skill switch
         {
             PriestSkill.HolyLight => holyLight,
             PriestSkill.LightBurst => lightBurst,

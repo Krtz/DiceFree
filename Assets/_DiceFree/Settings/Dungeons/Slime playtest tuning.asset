@@ -37,7 +37,8 @@ MonoBehaviour:
   regentReunion: 15
   minibossSlamRadius: 2.5
   bossSlamRadius: 4
-  regentSlamRadius: 5
+  regentSlamRadius: 5.5
+  regentTrailMultiplier: 0.18
   slam: {fileID: 11400000, guid: 55dc6da775084e446b5583bba5be8e3c, type: 2}
   regentSlam: {fileID: 11400000, guid: b90c438a78f4995449d2d0b85630c5fb, type: 2}
   addAttack: {fileID: 11400000, guid: a0a9db4d5f4da9a47a02b71231d4b366, type: 2}
@@ -61,13 +62,13 @@ MonoBehaviour:
   minibossGold: 15
   bossXp: 70
   bossGold: 35
-  regentXp: 140
-  regentGold: 70
+  regentXp: 3600
+  regentGold: 280
   puzzleXp: 30
   bluePuzzleXp: 80
   bonusXp: 50
   bonusGold: 25
-  regentBonusXp: 100
-  regentBonusGold: 50
+  regentBonusXp: 1800
+  regentBonusGold: 140
   normalRewards: {fileID: 11400000, guid: 297eaeb157b43774fb734736cd2573f4, type: 2}
   regentRewards: {fileID: 11400000, guid: e6b6109ea2a3ce34e9fbc743b2ae9ee1, type: 2}

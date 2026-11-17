@@ -35,6 +35,8 @@ namespace DiceFree.Skills
         [Min(0)] public float coefficientPerRank;
         [Min(0)] public float healCoefficientRank1;
         [Min(0)] public float healCoefficientPerRank;
+        [Min(0)] public float flatDamagePerRank;
+        [Min(0)] public float flatHealPerRank;
 
         [Header("Ice Burst")]
         [Min(0)] public float iceDelaySeconds = 0.75f;
@@ -61,7 +63,10 @@ namespace DiceFree.Skills
 
         public float HealAmount(AttributeValues attributes, int rank) =>
             attributes.spirit *
-            (healCoefficientRank1 + healCoefficientPerRank * Mathf.Max(0, ClampRank(rank) - 1));
+            (healCoefficientRank1 + healCoefficientPerRank * Mathf.Max(0, ClampRank(rank) - 1))+
+            flatHealPerRank*ClampRank(rank);
+
+        public float FlatDamage(int rank) => flatDamagePerRank*ClampRank(rank);
 
         public float MagicSandMissChance(int rank) => Mathf.Clamp01(ClampRank(rank) * 0.075f);
         public float ImbuementCoefficient(int rank) => DamageCoefficient(rank);

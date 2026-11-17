@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/PsionMirrorTrial.unity
     guid: 925468dd5975a8a409889a49dfa84b2c
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/FourfoldHollow.unity
+    guid: ab3b74a86203a5147964d51e19993514
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/AncientRoadDragonLair.unity
+    guid: abbf0be46b34a1541a021de45212da79
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/WorldTwoArrival.unity
+    guid: 4d08898e224b33640b92e89d679c7c61
   m_configObjects: {}

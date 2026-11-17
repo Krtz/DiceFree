@@ -28,6 +28,8 @@ MonoBehaviour:
   coefficientPerRank: 0.15
   healCoefficientRank1: 0
   healCoefficientPerRank: 0
+  flatDamagePerRank: 5
+  flatHealPerRank: 0
   iceDelaySeconds: 0.75
   iceRadius: 3.5
   slowDurationSeconds: 4

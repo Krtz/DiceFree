@@ -69,6 +69,8 @@ namespace DiceFree.UI
                 DefenderSkill.HoldTheLine => $"You gain +{preview * 2} Physical Defense, +{preview} Magical Defense and build Resolve faster. You and allies within 5m gain {preview}% elemental resistance.",
                 _ => $"Brace for 2s with +{500 * preview} Physical and Magical Defense. You cannot move or act while braced."
             };
+            if (skill is DefenderSkill.ShieldBash or DefenderSkill.ShieldSweep)
+                detail += "\nScaling: " + SkillTooltips.Scaling(caster.DamageDefinition(skill),flat:DefenderSkillCaster.RankDamage(skill,preview)) + ".";
             if (skill != DefenderSkill.HoldTheLine)
                 detail += $"\nResolve {DefenderSkillCaster.Cost(skill)} · Cooldown {DefenderSkillCaster.Cooldown(skill)}s";
             if (rank < DefenderSkillProgression.MaxRank(skill))

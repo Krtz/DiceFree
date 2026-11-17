@@ -45,7 +45,7 @@ public static class WolfCompactAuthoring
    var settings=NavMesh.GetSettingsByID(0);settings.agentRadius=.75f;settings.agentHeight=2.2f;settings.agentClimb=.4f;settings.agentSlope=40;settings.overrideVoxelSize=true;settings.voxelSize=.16f;
    var data=NavMeshBuilder.BuildNavMeshData(settings,sources,bounds,Vector3.zero,Quaternion.identity);if(data==null)throw new InvalidOperationException("Cover navigation failed");
    var saved=AssetDatabase.LoadAssetAtPath<NavMeshData>(Folder+"/Wolf Survival NavMesh.asset");EditorUtility.CopySerialized(data,saved);Object.DestroyImmediate(data);EditorUtility.SetDirty(saved);
-   var tuning=AssetDatabase.LoadAssetAtPath<WolfDungeonTuning>(Folder+"/Wolf Survival.asset");tuning.definition.stagingSeconds=30;tuning.intermissionSeconds=4;tuning.victorySeconds=5;EditorUtility.SetDirty(tuning.definition);EditorUtility.SetDirty(tuning);
+   var tuning=AssetDatabase.LoadAssetAtPath<WolfDungeonTuning>(Folder+"/Wolf Survival.asset");tuning.definition.stagingSeconds=60;tuning.intermissionSeconds=4;tuning.victorySeconds=5;EditorUtility.SetDirty(tuning.definition);EditorUtility.SetDirty(tuning);
    AssetDatabase.SaveAssets();EditorSceneManager.MarkSceneDirty(scene);if(!EditorSceneManager.SaveScene(scene))throw new InvalidOperationException("Arena save failed");
    var result=new{coverClusters=2,solidRocks=4,staging=30,intermission=4,victory=5,warning=2,waveBudgetsPreserved=true};File.WriteAllText("Logs/WolfCompactAuthoring.json",Newtonsoft.Json.JsonConvert.SerializeObject(result,Newtonsoft.Json.Formatting.Indented));return result;
   }

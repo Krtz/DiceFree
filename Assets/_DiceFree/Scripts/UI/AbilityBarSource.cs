@@ -23,7 +23,7 @@ namespace DiceFree.UI
             public readonly bool learned,passive,canUpgrade;
             public readonly Texture2D icon;
             public SlotView(string name,string key,int rank,int maxRank,float cooldown,bool learned,string tooltip,Texture2D icon,string iconKey,bool passive=false,bool canUpgrade=false)
-            {this.name=name;this.key=key;this.rank=rank;this.maxRank=maxRank;this.cooldown=cooldown;this.learned=learned;this.tooltip=tooltip;this.icon=icon;this.iconKey=iconKey;this.passive=passive;this.canUpgrade=canUpgrade;}
+            {this.name=name;this.key=key;this.rank=rank;this.maxRank=maxRank;this.cooldown=cooldown;this.learned=learned;this.tooltip=WithTitle(name,tooltip);this.icon=icon;this.iconKey=iconKey;this.passive=passive;this.canUpgrade=canUpgrade;}
             public bool Exists=>!string.IsNullOrEmpty(name);
         }
         private ActorStats stats;
@@ -37,6 +37,8 @@ namespace DiceFree.UI
         private IQueuedOrders orders;
         private readonly List<IClassAbilityProvider> providers=new();
         private string shownClass;
+        private string activationFeedback="";
+        private float activationFeedbackUntil;
         private int page;
         private void Awake()
         {
@@ -94,10 +96,22 @@ namespace DiceFree.UI
         public int UnspentPoints=>CurrentProvider?.UnspentPoints??0;
         public bool CanUpgrade(int slot)=>View(slot).canUpgrade;
         public bool Upgrade(int slot){int index=AbilityIndex(slot);return index>=0&&CanUpgrade(slot)&&CurrentProvider.Upgrade(index);}
-        public string UpgradeTooltip(int slot){int index=AbilityIndex(slot);return index>=0&&CanUpgrade(slot)?CurrentProvider.UpgradeTooltip(index):"";}
+        public string UpgradeTooltip(int slot)
+        {
+            int index=AbilityIndex(slot);
+            return index>=0&&CanUpgrade(slot)?WithTitle(View(slot).name,CurrentProvider.UpgradeTooltip(index)):"";
+        }
+        private static string WithTitle(string name, string detail)
+        {
+            if (string.IsNullOrEmpty(name)) return detail;
+            if (string.IsNullOrEmpty(detail)) return name;
+            return detail.StartsWith(name, StringComparison.Ordinal) ? detail : name + "\n" + detail;
+        }
         public bool HomeCasting=>returnHome!=null&&returnHome.Casting;
         public float HomeCastRemaining=>returnHome?.CastRemaining??0;
+        public string Feedback=>Time.time<=activationFeedbackUntil?activationFeedback:"";
         public bool WasPressedThisFrame(int slot)=>actions!=null&&slot>=0&&slot<actions.Length&&actions[slot]!=null&&actions[slot].WasPressedThisFrame();
+        public InputAction ActionFor(int slot)=>actions!=null&&slot>=0&&slot<actions.Length?actions[slot]:null;
         public SlotView View(int slot)
         {
             if(slot<0||slot>=SlotCount||stats?.Definition==null)return default;
@@ -116,20 +130,56 @@ namespace DiceFree.UI
             if(slot==11&&returnHome!=null){description+=" Destination: "+GetComponent<RespawnAtAnchor>()?.AnchorName+".";if(returnHome.Casting)description+=" Casting: "+returnHome.CastRemaining.ToString("0.0")+"s.";}
             return new SlotView(name,key,1,1,cooldown,true,name+" ["+key+"]\n"+description,SkillIconLibrary.Get(iconId),iconId);
         }
-        public bool Activate(int slot)
+        public bool Activate(int slot,InputAction trigger=null)
         {
+            activationFeedback="";
+            activationFeedbackUntil=0;
             if(slot<0||slot>=SlotCount||stats?.Definition==null||targeting==null)return false;
             if(slot<9)
             {
                 int index=AbilityIndex(slot);var view=View(slot);
-                if(index<0||!view.Exists||view.passive||!view.learned)return false;
+                if(index<0||!view.Exists||view.passive)return false;
+                if(!view.learned)return RejectActivation("Learn this skill before using it.");
+                if(view.cooldown>0f)
+                    return RejectActivation(view.name+" is cooling down ("+
+                        (Mathf.Ceil(view.cooldown*10f)/10f).ToString("0.0")+"s).");
                 if(returnHome!=null&&returnHome.Casting)returnHome.Cancel();
-                return CurrentProvider.Activate(index,targeting,orders,Keyboard.current!=null&&Keyboard.current.shiftKey.isPressed);
+                if(trigger!=null)targeting.ArmQuickCast(GameplayPreferences.Current.QuickCastMode,trigger);
+                bool activated=CurrentProvider.Activate(index,targeting,orders,Keyboard.current!=null&&Keyboard.current.shiftKey.isPressed);
+                targeting.ClearArmedQuickCast();
+                if(!activated)
+                {
+                    string reason=GetCasterFeedback();
+                    return RejectActivation(string.IsNullOrWhiteSpace(reason)
+                        ? "Skill could not start. Check your resources and current status."
+                        : reason);
+                }
+                return activated;
             }
             if(slot!=11&&returnHome!=null&&returnHome.Casting)returnHome.Cancel();
             if(slot==9){combatInput?.BeginAttackTargeting();return combatInput!=null&&actor!=null&&actor.CanAct;}
             if(slot==10){combatInput?.CancelAttackMove();return interactor!=null&&interactor.InteractNearest();}
             return returnHome!=null&&returnHome.TryBegin();
+        }
+
+        private bool RejectActivation(string message)
+        {
+            activationFeedback=message;
+            activationFeedbackUntil=Time.time+4f;
+            return false;
+        }
+
+        private string GetCasterFeedback()
+        {
+            foreach(var component in GetComponents<MonoBehaviour>())
+            {
+                if(component is MagicalSkillCaster magical && !string.IsNullOrWhiteSpace(magical.Feedback))return magical.Feedback;
+                if(component is MageSkillCaster mage && !string.IsNullOrWhiteSpace(mage.Feedback))return mage.Feedback;
+                if(component is GreatbladeSkillCaster greatblade && !string.IsNullOrWhiteSpace(greatblade.Feedback))return greatblade.Feedback;
+                if(component is NoviceSkillCaster novice && !string.IsNullOrWhiteSpace(novice.Feedback))return novice.Feedback;
+                if(component is PhysicalSkillCaster physical && !string.IsNullOrWhiteSpace(physical.Feedback))return physical.Feedback;
+            }
+            return "";
         }
     }
 }

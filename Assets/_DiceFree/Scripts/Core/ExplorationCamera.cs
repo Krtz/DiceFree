@@ -1,4 +1,5 @@
 using DiceFree.Input;
+using DiceFree.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,7 @@ namespace DiceFree.Core
         private bool following = true;
         private bool lookingOut;
         private bool initialized;
+        private bool waitForPointerToLeaveEdge;
         private Camera viewCamera;
         private CameraOcclusionFader occlusionFader;
         private Rect mapBounds = new(-56, -44, 181, 116);
@@ -33,6 +35,13 @@ namespace DiceFree.Core
         }
         public void ConfigureMapBounds(Rect bounds) => mapBounds = bounds;
         public void RecenterForTravel(Transform follow) { target = follow; following = true; lookingOut = false; initialized = false; velocity = Vector3.zero; }
+        public void FocusOnHero()
+        {
+            following = true;
+            initialized = false;
+            velocity = Vector3.zero;
+            waitForPointerToLeaveEdge = true;
+        }
 
         public bool LookingOut => lookingOut;
         public bool Following => following;
@@ -85,7 +94,10 @@ namespace DiceFree.Core
 
             yaw += rotate.ReadValue<float>() * 70f * Time.deltaTime;
             var panInput = pan.ReadValue<Vector2>() * (22f * Time.deltaTime);
-            if (drag.IsPressed()) panInput -= pointerDelta.ReadValue<Vector2>() * (distance * 0.0012f);
+            if (drag.IsPressed())
+                panInput -= pointerDelta.ReadValue<Vector2>() * (distance * 0.0012f);
+            else
+                panInput += ReadEdgePan() * (Mathf.Clamp(distance * .75f, 17f, 45f) * Time.deltaTime);
 
             if (panInput.sqrMagnitude > 0.00001f)
             {
@@ -120,6 +132,30 @@ namespace DiceFree.Core
                 ? Quaternion.Slerp(transform.rotation, rotation, 12f * Time.deltaTime)
                 : rotation;
             initialized = true;
+        }
+
+        private Vector2 ReadEdgePan()
+        {
+            var mouse = Mouse.current;
+            if (mouse == null || !Application.isFocused || bindings.Suppressed ||
+                HudPointerBlocker.ModalOpen || target.GetComponent<WorldAtlasHud>()?.Open == true)
+                return Vector2.zero;
+
+            var direction = EdgeDirection(mouse.position.ReadValue(), viewCamera.pixelRect);
+            if (!waitForPointerToLeaveEdge) return direction;
+            if (direction == Vector2.zero) waitForPointerToLeaveEdge = false;
+            return Vector2.zero;
+        }
+
+        private static Vector2 EdgeDirection(Vector2 cursor, Rect viewport)
+        {
+            if (!viewport.Contains(cursor)) return Vector2.zero;
+            float edge = Mathf.Clamp(Mathf.Min(viewport.width, viewport.height) * .017f, 8f, 24f);
+            float x = Mathf.Clamp01(1f - (viewport.xMax - cursor.x) / edge) -
+                Mathf.Clamp01(1f - (cursor.x - viewport.xMin) / edge);
+            float y = Mathf.Clamp01(1f - (viewport.yMax - cursor.y) / edge) -
+                Mathf.Clamp01(1f - (cursor.y - viewport.yMin) / edge);
+            return Vector2.ClampMagnitude(new Vector2(x, y), 1f);
         }
 
         public void Configure(Transform follow) => target = follow;

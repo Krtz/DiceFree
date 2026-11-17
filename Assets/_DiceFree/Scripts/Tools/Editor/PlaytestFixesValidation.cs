@@ -140,6 +140,36 @@ namespace DiceFree.EditorTools
             journal.RestoreState(journal.CaptureState());
             Check(journal.GetProgress(wolfQuest.stableId).count==15,
                 "Wolf progress migration repeated or lost progress after reload.");
+            var experience=hero.GetComponent<ExperienceProgression>();
+            int savedLevel=experience.Level,savedXp=experience.CurrentXp;
+            Check(journal.TurnIn(wolfQuest),"Completed repeatable wolf quest could not be turned in.");
+            var turnedInWolf=journal.GetProgress(wolfQuest.stableId);
+            Check(turnedInWolf.status==QuestStatus.Available&&turnedInWolf.stage==0&&turnedInWolf.count==0,
+                "Wolf quest turn-in did not reset the repeatable cycle.");
+            var secondCycleState=journal.CaptureState();
+            foreach(string prerequisiteId in wolfQuest.completedQuestIds??Array.Empty<string>())
+            {
+                var prerequisite=journal.Definitions.Single(q=>q.stableId==prerequisiteId);
+                var prerequisiteProgress=secondCycleState.Single(p=>p.questId==prerequisiteId);
+                prerequisiteProgress.definitionVersion=prerequisite.version;
+                prerequisiteProgress.stage=prerequisite.stages.Length-1;
+                prerequisiteProgress.count=prerequisite.stages.Last().count;
+                prerequisiteProgress.status=QuestStatus.Completed;
+                prerequisiteProgress.alternatives=Array.Empty<ObjectiveCount>();
+            }
+            journal.RestoreState(secondCycleState);
+            int cycleLevel=Mathf.Max(savedLevel,wolfQuest.requiredLevel);
+            Check(experience.CanRestore(cycleLevel,0),"Wolf quest reacceptance level fixture is outside the XP curve.");
+            if(cycleLevel!=savedLevel)experience.RestoreState(cycleLevel,0);
+            Check(journal.CanAccept(wolfQuest)&&journal.Accept(wolfQuest),
+                "Wolf quest could not be accepted again after saved turn-in.");
+            var nextWolfCycle=new SemanticGameEventHub();journal.BindDungeonEvents(nextWolfCycle);
+            nextWolfCycle.Publish(new MonsterKilledEvent("ordinary-wolf-next-cycle","ironpine.wolf"));
+            var secondCycle=journal.GetProgress(wolfQuest.stableId);
+            Check(secondCycle.status==QuestStatus.Active&&secondCycle.count==1,
+                "Wolf quest did not count kills in its second repeat cycle.");
+            journal.UnbindDungeonEvents();
+            experience.RestoreState(savedLevel,savedXp);
             journal.RestoreState(wolfBaseline);
             repeatRecord.status=QuestStatus.Active;journal.RestoreState(repeatState);
             var dungeonFacts=new SemanticGameEventHub();journal.BindDungeonEvents(dungeonFacts);

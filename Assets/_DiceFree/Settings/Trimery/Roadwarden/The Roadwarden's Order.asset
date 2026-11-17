@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.roadwarden
   title: The Roadwarden's Order
-  requiredClassId:
+  requiredClassId: 
   requiredLevel: 1
-  version: 1
-  offer: The survey confirms it. That road was torn up from the Arborium side. Follow the old track south from our East Gate and deal with the Ogre who still holds it. The Guild crew will wait until you give them the all-clear.
-  activeDialogue: Take Arborium's East Gate and follow the old track south. Watch the Ogre's hammer. Once he's down, lend the Guild road crew a hand at the barricade.
+  version: 2
+  offer: Follow the old track south from Arborium's East Gate and defeat the Ogre Roadwarden. Help the crew clear the barricade, then report to the Guild Foreman by Trimery's sawmill.
+  activeDialogue: Defeat the Ogre, help the Guild road crew reopen the highway, then take your report to Trimery's Guild Foreman.
   locationHint: Arborium East Gate, then south along the old Trimery highway.
-  turnInHint: The Guild road crew is waiting on the Arborium side of the barricade.
+  turnInHint: Speak to the Guild Foreman by Trimery's sawmill to claim the Roadwarden's Amulet.
   stages:
   - kind: 0
-    objectiveId:
-    requiredTag:
+    objectiveId: 
+    requiredTag: 
     creditMode: 0
     creditRadius: 50
     instruction: Defeat the Ogre Roadwarden on the Arborium side of the highway
@@ -32,29 +32,43 @@ MonoBehaviour:
     dungeonBossOnly: 0
     familyId: ogre.roadwarden
     familyIds: []
-    areaId:
-    conversationId:
+    areaId: 
+    conversationId: 
     count: 1
     alternatives: []
   - kind: 6
-    objectiveId:
-    requiredTag:
+    objectiveId: 
+    requiredTag: 
     creditMode: 0
     creditRadius: 50
-    instruction: Help the Guild crew reopen the road. The Ogre's unsigned order says to keep it closed.
+    instruction: Help the Guild crew reopen the highway. The Ogre's unsigned order says to keep it closed.
     contentId: work.trimery.reopen-highway
     dungeonBossOnly: 0
-    familyId:
+    familyId: 
     familyIds: []
-    areaId:
-    conversationId:
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  - kind: 2
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Report to the Guild Foreman by Trimery's sawmill
+    contentId: npc.trimery.guild-foreman
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: conversation.trimery.guild-foreman
     count: 1
     alternatives: []
   completedQuestIds:
   - quest.arborium.road-survey
   rewardXp: 6000
-  reward: {fileID: 0}
-  rewardTitle:
+  reward: {fileID: 11400000, guid: 94a57842423503a4e9e501830f76daed, type: 2}
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 1
   repeatable: 0

@@ -17,7 +17,6 @@ namespace DiceFree.Skills
         private TargetSelection selection;
         private ActorDefinition definition;
         private AttackDefinition blade, blast;
-        private CriticalRule crit;
         private float expires, interval, windup, launchAt, nextAttack, blastRaw, attackRange;
         private Vector2 bladeDamage;
         private int faction;
@@ -29,7 +28,7 @@ namespace DiceFree.Skills
         public float SnapshotAttackInterval => interval;
 
         public static PsionMentalImage Summon(CombatActor owner, BasicAttack basic, Vector3 point, int rank,
-            AttackDefinition blade, AttackDefinition blast, CriticalRule crit, float masteryPenetration,
+            AttackDefinition blade, AttackDefinition blast, float masteryPenetration,
             GameObject visual = null, Material material = null)
         {
             var root = new GameObject("Psion Mental Image") { layer = 10 };
@@ -42,9 +41,8 @@ namespace DiceFree.Skills
             image.faction = owner.Faction;
             image.blade = blade;
             image.blast = blast;
-            image.crit = crit;
             image.bladeDamage = basic.DamageRange * .1f;
-            image.attackRange = basic.Definition.reach;
+            image.attackRange = basic.Reach;
             image.interval = Mathf.Max(basic.Definition.interval, basic.Definition.windup) / owner.Stats.AttackSpeed;
             image.windup = basic.Definition.windup / owner.Stats.AttackSpeed;
             var attributes = owner.Stats.Attributes;
@@ -149,7 +147,7 @@ namespace DiceFree.Skills
             var sourceStats = actor.Stats;
             var source = actor;
             var definition = blade;
-            var action = AccuracyResolver.Resolve(actor, blade, critical: crit, target: target, isBasicAttack: true);
+            var action = AccuracyResolver.Resolve(actor, blade, critical: ownerBasic?.CriticalRule, target: target, isBasicAttack: true);
             TargetedCombatProjectile.Launch(actor, target, "Mental Image blade", Edge, .14f, 25, recipient =>
             {
                 if (dismissed || sourceStats == null) return;

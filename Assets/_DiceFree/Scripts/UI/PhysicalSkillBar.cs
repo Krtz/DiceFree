@@ -93,6 +93,8 @@ namespace DiceFree.UI
 
             const float gap = 4;
             float width = (r.width - 16 - gap * 3) / 4;
+            string hoveredTooltip = null;
+            Rect hoveredTooltipAnchor = default;
             for (int i = 0; i < 4; i++)
             {
                 var definition = progression.ActiveAtSlot(i);
@@ -103,10 +105,16 @@ namespace DiceFree.UI
                 string label = "[" + key + "] " + definition.displayName + "\nR" + rank + "/" + definition.maxRank;
                 if (remaining > 0) label += "  " + remaining.ToString("0.0") + "s";
                 var button = new Rect(r.x + 8 + i * (width + gap), r.y + 26, width, 44);
+                if (button.Contains(HudTooltip.CurrentGuiPointerPosition()))
+                {
+                    hoveredTooltip = SkillTooltips.Describe(definition, rank, key, GetComponent<DiceFree.Combat.ActorStats>());
+                    hoveredTooltipAnchor = button;
+                }
                 if (GUI.Button(button, new GUIContent(label,
-                    SkillTooltips.Describe(definition,rank,key)))) Prepare(definition);
+                    SkillTooltips.Describe(definition,rank,key,GetComponent<DiceFree.Combat.ActorStats>())))) Prepare(definition);
             }
-            HudTooltip.DrawCurrent();
+            if (!string.IsNullOrWhiteSpace(hoveredTooltip))
+                HudTooltip.DrawAt(hoveredTooltip, hoveredTooltipAnchor);
         }
     }
 }

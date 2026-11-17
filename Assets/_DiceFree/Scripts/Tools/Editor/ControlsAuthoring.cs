@@ -35,6 +35,7 @@ namespace DiceFree.EditorTools
                 Button(gameplay, "Interact", "<Keyboard>/i");
                 Button(gameplay, "Close interaction", "<Keyboard>/escape");
                 Button(gameplay, "Select target", "<Mouse>/leftButton");
+                Button(gameplay, "Select hero", "<Keyboard>/f1");
                 Button(gameplay, "Cycle hostile", "<Keyboard>/tab");
                 Button(gameplay, "Attack selected", "<Keyboard>/x");
                 Button(gameplay, "Clear target", "<Keyboard>/backspace");

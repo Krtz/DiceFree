@@ -88,6 +88,18 @@ namespace DiceFree.UI
                     $"Heal a living ally or deal Light damage to an enemy.\nBase effect {caster.BaseAmount(preview):0.#} before modifiers.\nGrace adds up to {preview} bounces. Each hop retains 90% potency and prioritizes wounded allies."
             };
             if (skill is not (PriestSkill.Grace or PriestSkill.Revive))
+            {
+                float amount = caster.BaseAmount(skill,preview);
+                text += $"\nScaling: {SkillTooltips.Scaling(caster.Attack(skill),PriestSpellRules.Coefficient(skill,preview))}.";
+                text += skill switch
+                {
+                    PriestSkill.IceAegis => $"\nShield: {caster.ShieldAmount(preview):0.#} capacity. Shield scaling: {38+5*(preview-1)} + {2.6f+.20f*(preview-1):0.##} × SPI. Grace aura: {amount:0.##} raw per tick while the shield holds.",
+                    PriestSkill.WildGrowth => $"\nCurrent: {amount:0.##} raw per tick, {amount*PriestSpellRules.GrowthTicks:0.##} total. Empowered healing: {2*amount*PriestSpellRules.GrowthTicks:0.##} total before modifiers.",
+                    PriestSkill.LightBurst => $"\nCurrent: {amount:0.##} raw per target per burst. Grace: up to {3*amount:0.##} per target across three bursts.",
+                    _ => $"\nCurrent: {amount:0.##} raw damage or base healing on the first target."
+                };
+            }
+            if (skill is not (PriestSkill.Grace or PriestSkill.Revive))
                 text += $"\nMana {PriestSpellRules.ManaCost(skill, preview):0.#}, cooldown {PriestSpellRules.Cooldown(skill, preview):0.#}s, range {PriestSpellRules.Range(skill):0}m.";
             if (rank < PriestSkillProgression.MaxRank(skill))
                 text += $"\nNext rank requires level {PriestSkillProgression.RequiredLevel(skill, rank + 1)} and 1 skill point.";

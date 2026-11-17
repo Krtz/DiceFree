@@ -158,8 +158,17 @@ namespace DiceFree.Skills
             return chance > 0 ? new CriticalRule(ThiefSkillProgression.ThiefClassId,"thief.basic-crit",true,chance,1.5f) : null;
         }
 
-        internal static float PeriodicScale(int rank) => 1 + .05f * (rank - 1);
-        private static float FanScale(int rank) => 1 + .06f * (rank - 1);
+        public static float PeriodicScale(int rank) => 1 + .05f * (rank - 1);
+        public static float FanScale(int rank) => 1 + .06f * (rank - 1);
+
+        public AttackDefinition DamageDefinition(ThiefSkill skill) => skill switch
+        {
+            ThiefSkill.Envenom => naturePoison,
+            ThiefSkill.FanOfKnives => fan,
+            ThiefSkill.SmokeBomb => techSmoke,
+            _ => null
+        };
+        public AttackDefinition StabDefinition => stab;
 
         public Vector2 PreviewStab()
         {

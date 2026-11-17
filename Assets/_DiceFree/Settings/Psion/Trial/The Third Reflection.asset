@@ -19,27 +19,27 @@ MonoBehaviour:
   version: 1
   offer: Three reflections wait beneath the Guild. Only one has a will of its own. Walk sideways and watch their turns. Two move together, while the real one follows you. Strike the one that follows and defeat it.
   activeDialogue: The chamber is ready. Move before you strike. A hit on a false reflection ends the attempt.
-  locationHint: "Speak to Ilyra in the Adventurers\u2019 Guild reception in Arborium."
-  turnInHint: "Return to Ilyra at the Adventurers\u2019 Guild in Arborium."
+  locationHint: Speak to Ilyra on the second floor of the West Residence in Arborium.
+  turnInHint: Return to Ilyra on the second floor of the West Residence in Arborium.
   stages:
   - kind: 4
     objectiveId: third-reflection
-    requiredTag:
+    requiredTag: 
     creditMode: 0
     creditRadius: 50
     instruction: Identify and defeat the real reflection in the Guild's mirror chamber
     contentId: puzzle.arborium.mirror-trial
     dungeonBossOnly: 0
-    familyId:
+    familyId: 
     familyIds: []
-    areaId:
-    conversationId:
+    areaId: 
+    conversationId: 
     count: 1
     alternatives: []
   completedQuestIds: []
   rewardXp: 0
   reward: {fileID: 0}
-  rewardTitle:
+  rewardTitle: 
   acceptOnTalk: 0
   completeOnObjectives: 0
   repeatable: 0

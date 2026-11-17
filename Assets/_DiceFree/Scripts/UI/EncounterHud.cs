@@ -14,6 +14,7 @@ namespace DiceFree.UI
         string CastLabel { get; }
         float CastRemaining { get; }
         float CastDuration { get; }
+        string EncounterStatus => $"World boss  ·  {LivingGuards} guards standing";
     }
 
     [DisallowMultipleComponent]
@@ -79,7 +80,7 @@ namespace DiceFree.UI
                 float completion = 1 - Mathf.Clamp01(remaining / Mathf.Max(.01f, current.CastDuration));
                 DrawBar(cue, completion, new Color(.83f, .31f, .11f), current.CastLabel + $"  {remaining:0.0}s");
             }
-            else GUI.Label(cue, boss != null ? $"World boss  ·  {current.LivingGuards} guards standing" : "Attack warning / surviving guards",
+            else GUI.Label(cue, boss != null ? current.EncounterStatus : "Attack warning / surviving guards",
                 new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontSize = 11, normal = { textColor = Theme.textTint } });
         }
     }

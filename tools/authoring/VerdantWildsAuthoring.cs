@@ -71,7 +71,10 @@ public static class VerdantWildsAuthoring
         var plantBounty = BuildPlantBounty(lash);
         journal.Configure(journal.Definitions.Concat(new[] { lanternmereQuest, plantBounty }).ToArray());
         EditorUtility.SetDirty(journal);
-        var giver = BuildWarden(root, template, lanternmereQuest, plantBounty);
+        var giver = BuildWarden(root, template, lanternmereQuest);
+        var steward = GameObject.Find("Guild Steward - timber commissions").GetComponent<QuestGiver>();
+        steward.ConfigureAdditional(steward.Offers.Skip(1).Append(plantBounty).ToArray());
+        EditorUtility.SetDirty(steward);
         var enemies = Group(root, "Wilds creatures", Vector3.zero);
         var actors = Thorns.Select((at,i) => Spawn(enemies, lash, 31+i, at, respawn))
             .Concat(Spores.Select((at,i) => Spawn(enemies, puff, 33+i, at, respawn)))
@@ -542,9 +545,9 @@ public static class VerdantWildsAuthoring
         quest.title = "Another 15 Plant Monsters";
         quest.requiredLevel = 30;
         quest.offer = "The Thornlashes keep creeping back onto the trail. Defeat fifteen plant monsters, then return to me. The bounty pays the experience of twenty Thornlashes.";
-        quest.activeDialogue = "Clear fifteen plant monsters and return for your bounty. Thornlashes count toward the hunt.";
-        quest.locationHint = "Warden Lethen stands at the Lanternmere trailhead beyond Arborium's West Gate.";
-        quest.turnInHint = "Return to Warden Lethen at the Lanternmere trailhead.";
+        quest.activeDialogue = "Clear fifteen plant monsters and return for your bounty. Thornlashes, Sporecaps, and Lanterncaps all count.";
+        quest.locationHint = "Speak to the Guild Steward inside the Adventurers' Guild reception in Arborium.";
+        quest.turnInHint = "Return to the Guild Steward inside the Adventurers' Guild in Arborium.";
         quest.stages = new[]
         {
             new QuestObjective { kind = ObjectiveKind.Kill, requiredTag = "plant", count = 15,
@@ -560,7 +563,7 @@ public static class VerdantWildsAuthoring
         new() { kind=ObjectiveKind.Kill, objectiveId=species, familyId=species, count=count,
             instruction=instruction, creditMode=QuestCreditMode.NearbyParty };
 
-    private static QuestGiver BuildWarden(Transform root,GameObject template,QuestDefinition quest,QuestDefinition plantBounty)
+    private static QuestGiver BuildWarden(Transform root,GameObject template,QuestDefinition quest)
     {
         var npc = Object.Instantiate(template,root);
         npc.name = "Warden Lethen - Lanternmere trailhead";
@@ -572,7 +575,6 @@ public static class VerdantWildsAuthoring
         var giver = npc.AddComponent<QuestGiver>();
         giver.ConfigureName("Warden Lethen");
         giver.Configure(quest);
-        giver.ConfigureAdditional(plantBounty);
         giver.ConfigureApproach(Group(root,"Warden Lethen interaction approach",Ground(Warden+new Vector2(0,-1.7f))));
         return giver;
     }
@@ -596,7 +598,7 @@ public static class VerdantWildsAuthoring
         actor.stableId = "enemy."+id;
         actor.displayName = label;
         actor.familyId = id;
-        actor.tags = new[]{ "verdant-wilds", id == Thornlash ? "plant" : "fungus" };
+        actor.tags = id == Thornlash ? new[]{ "verdant-wilds", "plant" } : new[]{ "verdant-wilds", "fungus", "plant" };
         actor.tuning = tuning;
         actor.baseAttributes = new AttributeValues { strength=9, agility=10, intelligence=9, vitality=8 };
         actor.growth = default;

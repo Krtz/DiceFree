@@ -58,7 +58,7 @@ namespace DiceFree.UI
             return true;
         }
 
-        private static string Describe(RangerSkill skill, int rank)
+        private string Describe(RangerSkill skill, int rank)
         {
             int preview = Mathf.Max(1, rank);
             string detail = skill switch
@@ -70,6 +70,20 @@ namespace DiceFree.UI
                 RangerSkill.EvasiveStep => $"Leap toward the cursor. Gain 10% move speed and {preview}% basic-attack evasion for 3s. Requires freedom to move.",
                 _ => $"+{2 * preview} AGI. Basic attacks and Aimed Shot gain {preview * .1f:0.0}m range and {preview}% chance to crit for 1.4× raw damage."
             };
+            if (skill is RangerSkill.AimedShot or RangerSkill.ExplodingArrow or RangerSkill.ArrowRain or RangerSkill.HawkDive)
+            {
+                var damage = caster.PreviewDamage(skill,preview);
+                detail += $"\nScaling: {caster.PreviewBowScale(skill,preview):0.###} × bow damage.";
+                detail += $"\nCurrent: {SkillTooltips.Range(damage)} raw before the mark bonus" +
+                    (skill == RangerSkill.ArrowRain ? " per wave." : ".");
+                if (skill == RangerSkill.ArrowRain)
+                    detail += $" Total over four waves: {SkillTooltips.Range(damage*4)} raw per target.";
+                if (skill == RangerSkill.ExplodingArrow)
+                {
+                    var blast = caster.PreviewDamage(skill,preview,true);
+                    detail += $"\nBlast: {caster.PreviewBowScale(skill,preview,true):0.###} × bow damage, {SkillTooltips.Range(blast)} raw. Direct hit plus blast: {SkillTooltips.Range(damage+blast)} raw.";
+                }
+            }
             if (skill != RangerSkill.BowMastery)
                 detail += $"\nMana {RangerSkillCaster.Cost(skill)} · Cooldown {RangerSkillCaster.Cooldown(skill)}s";
             if (rank < RangerSkillProgression.MaxRank(skill))

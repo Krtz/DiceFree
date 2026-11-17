@@ -89,6 +89,7 @@ namespace DiceFree.AI
         }
         private void OnDamaged(CombatActor source, DamageResult result)
         {
+            if (source != null && !source.Alive) source = Summoner(source);
             if (Returning || !actor.IsHostileTo(source) || Vector3.Distance(source.transform.position, home) > leash) return;
             threat.TryGetValue(source, out float amount);
             threat[source] = amount + result.applied;
@@ -100,6 +101,12 @@ namespace DiceFree.AI
             }
             if (actor.CanTargetHostile(source)) attack.Order(source);
         }
+        private static CombatActor Summoner(CombatActor target) =>
+            target != null ? target.GetComponent<DefeatReporter>()?.CreditOwner : null;
+
+        private bool CanPursue(CombatActor target) => actor.CanTargetHostile(target) &&
+            Vector3.Distance(target.transform.position, home) <= leash && actor.HasSightOf(target);
+
         private void Update()
         {
             if (!actor.Alive) { attack.Cancel(); return; }
@@ -107,14 +114,20 @@ namespace DiceFree.AI
             {
                 if (Vector3.Distance(transform.position, home) < 0.5f)
                 {
-                    actor.Motor.Stop(); actor.Health.Restore(); Returning = false;
+                    actor.Motor.Stop();
+                    var tags = actor.Stats.Definition.tags;
+                    if (tags != null && (System.Array.IndexOf(tags, "quilboar") >= 0 || System.Array.IndexOf(tags, "verdant-wilds") >= 0))
+                        ClearState();
+                    else
+                        actor.Health.Restore();
                 }
                 else if (Time.time > nextPath) { actor.Motor.MoveTo(home); nextPath = Time.time + 0.5f; }
                 return;
             }
-            if (Vector3.Distance(transform.position, home) > leash || (attack.Target != null &&
-                (!attack.Target.Alive || Vector3.Distance(attack.Target.transform.position, home) > leash)))
+            if (Vector3.Distance(transform.position, home) > leash || (attack.Target != null && attack.Target.Alive &&
+                Vector3.Distance(attack.Target.transform.position, home) > leash))
             { ReturnHome(); return; }
+            if (attack.Target != null && !attack.Target.Alive) attack.Cancel();
             if (Time.time < challengeUntil && ValidChallenger)
             {
                 attack.Order(challenger);
@@ -129,7 +142,12 @@ namespace DiceFree.AI
             {
                 var target = entry.Key;
                 if (target == null || !target.Alive || Vector3.Distance(target.transform.position,home)>leash)
+                {
                     departed.Add(target);
+                    var owner = Summoner(target);
+                    if (entry.Value > strongest && CanPursue(owner))
+                    { known = owner; strongest = entry.Value; }
+                }
                 else if (target.Concealed) concealedPursuit = true;
                 else if (retainedPursuits.Contains(target) && entry.Value>strongest && actor.HasSightOf(target))
                 { known=target; strongest=entry.Value; }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ironwater pool 3
+  m_Shader: {fileID: 4800000, guid: e8ac608006d478b409899addfe7b02be, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats: []
+    m_Colors:
+    - _DeepColor: {r: 0.071999975, g: 0.064999975, b: 0.07299996, a: 1}
+    - _GlintColor: {r: 0.83, g: 0.63, b: 0.43999997, a: 1}
+    - _Pond: {r: 95, g: 119, b: 13, a: 6}
+    - _ShallowColor: {r: 0.34, g: 0.23, b: 0.14, a: 1}
+    - _SkyColor: {r: 0.28999996, g: 0.39999998, b: 0.41999996, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

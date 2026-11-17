@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cornberg repeat red slime hunt
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.cornberg.repeat-red-slime-hunt
+  title: Another 15 Red Slimes
+  requiredClassId: 
+  requiredLevel: 40
+  version: 1
+  offer: Red Slimes are spreading through Crimson Mire. Defeat fifteen and report back to me. The bounty pays the experience of twenty Red Slimes.
+  activeDialogue: Follow the trail north from Cornberg into Crimson Mire. Return after defeating fifteen Red Slimes.
+  turnInDialogue: 
+  locationHint: Crimson Mire lies north of Cornberg. Follow the north meadow trail.
+  turnInHint: Return to Mira in Cornberg.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat 15 Red Slimes
+    contentId: enemy.slime.red
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 15
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 16300
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 1

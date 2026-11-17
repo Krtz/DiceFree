@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Regent rewards
   m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardPool
   stableId: loot.slime-regent
-  rare: {fileID: 11400000, guid: b688bab5c1961174caaf5ea4e6ebe9ac, type: 2}
+  rare: {fileID: 11400000, guid: c74021602e7efdc41a0dae618962e21a, type: 2}
   items:
-  - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
-  - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
-  - {fileID: 11400000, guid: 2a8274656d6b65049804a4cd08dc172f, type: 2}
+  - {fileID: 11400000, guid: e42eced6a8951f64f99dba5f7b339b50, type: 2}
+  - {fileID: 11400000, guid: 56faf36611d0c854c96f510e7d21f4dc, type: 2}
+  - {fileID: 11400000, guid: 7c63d2175cd3de24a8fe7d774bb47dc6, type: 2}
   visualVariant: {fileID: 0}

@@ -21,6 +21,12 @@ namespace DiceFree.Combat
   public float ChannelRemaining=>IsChanneling?Mathf.Max(0,channelEnds-Time.time):0;
   public void CancelChannel(){channelVersion++;IsChanneling=false;if(channelVisual!=null)Destroy(channelVisual);channelVisual=null;}
   public MageCombatTuning Tuning=>tuning;
+  public Vector2 PreviewDamage(Kind kind,int rank)
+  {
+   var attack=tuning.attacks[(int)kind];
+   var range=attack.RawDamageRange(actor.Stats.Attributes,MageProgressionRules.Coefficient(kind,rank));
+   return (range+Vector2.one*MageProgressionRules.FlatDamage(kind,rank))*(1+WeavingStacks*.05f);
+  }
   public string Feedback{get;private set;}="";
   public int WeavingStacks=>elements.Count;
   public string[] WovenElements=>elements.ToArray();
@@ -109,7 +115,9 @@ namespace DiceFree.Combat
   void Hit(CombatActor target,Kind kind,int rank,float falloff=1){
    if(!actor.IsHostileTo(target))return;
    var attack=tuning.attacks[(int)kind];
-   DamageResolver.Hit(actor,target,attack,coefficientOverride:MageProgressionRules.Coefficient(kind,rank),rawMultiplier:(1+WeavingStacks*.05f)*falloff);
+   DamageResolver.Hit(actor,target,attack,coefficientOverride:MageProgressionRules.Coefficient(kind,rank),
+    rawMultiplier:(1+WeavingStacks*.05f)*falloff,
+    skillFlatDamage:MageProgressionRules.FlatDamage(kind,rank)*(1+WeavingStacks*.05f)*falloff);
   }
   IEnumerator Ember(CombatActor target,int rank){
    Vector3 from=transform.position+Vector3.up*1.2f;float delay=Mathf.Clamp(Vector3.Distance(transform.position,target.transform.position)/16,.1f,.7f);

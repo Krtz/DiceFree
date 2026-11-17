@@ -17,12 +17,14 @@ namespace DiceFree.EditorTools
         public const string QuestId="quest.cornberg.repeat-slime-hunt";
         private const string AssetPath=
             "Assets/_DiceFree/Settings/Enemies/Cornberg repeat slime hunt.asset";
+        private const string RedSlimeQuestPath =
+            "Assets/_DiceFree/Settings/CrimsonMire/Cornberg repeat red slime hunt.asset";
         private const string ScenePath="Assets/_DiceFree/Scenes/Cornberg.unity";
         private static T[] All<T>(Scene scene) where T:Component =>
             scene.GetRootGameObjects()
                 .SelectMany(root=>root.GetComponentsInChildren<T>(true)).ToArray();
         [CliCommand("dicefree.cornberg.repeat-slime.install",
-            "Install repeatable 15-Slime and 15-Wolf hunts on Mira after Break the Slime Surge.")]
+            "Install Mira's repeatable Slime, Wolf, and Red Slime hunts.")]
         public static object Install()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode)
@@ -80,7 +82,8 @@ namespace DiceFree.EditorTools
                     journal.Configure(journal.Definitions.Concat(new[]{quest}).ToArray());
                 if(!journal.Definitions.Contains(wolves))
                     journal.Configure(journal.Definitions.Concat(new[]{wolves}).ToArray());
-                mira.ConfigureAdditional(mira.Offers.Skip(1).Concat(new[]{quest,wolves})
+                var redSlimes = InstallRedSlimeHunt(journal, mira);
+                mira.ConfigureAdditional(mira.Offers.Skip(1).Concat(new[]{quest,wolves,redSlimes})
                     .Distinct().ToArray());
                 if(mira.GetComponent<QuestWorldMarker>()==null)
                     mira.gameObject.AddComponent<QuestWorldMarker>();
@@ -97,6 +100,41 @@ namespace DiceFree.EditorTools
                     prerequisites=quest.completedQuestIds};
             }
             finally{if(backup.Length>0)EditorSceneManager.RestoreSceneManagerSetup(backup);}
+        }
+
+        public static QuestDefinition InstallRedSlimeHunt(QuestJournal journal, QuestGiver mira)
+        {
+            var quest = AssetDatabase.LoadAssetAtPath<QuestDefinition>(RedSlimeQuestPath);
+            if (quest == null)
+            {
+                quest = ScriptableObject.CreateInstance<QuestDefinition>();
+                AssetDatabase.CreateAsset(quest, RedSlimeQuestPath);
+            }
+            var redSlime = AssetDatabase.LoadAssetAtPath<ActorDefinition>("Assets/_DiceFree/Settings/CrimsonMire/Red Slime.asset");
+            quest.stableId = "quest.cornberg.repeat-red-slime-hunt";
+            quest.title = "Another 15 Red Slimes";
+            quest.requiredLevel = 40;
+            quest.repeatable = true;
+            quest.offer = "Red Slimes are spreading through Crimson Mire. Defeat fifteen and report back to me. The bounty pays the experience of twenty Red Slimes.";
+            quest.activeDialogue = "Follow the trail north from Cornberg into Crimson Mire. Return after defeating fifteen Red Slimes.";
+            quest.locationHint = "Crimson Mire lies north of Cornberg. Follow the north meadow trail.";
+            quest.turnInHint = "Return to Mira in Cornberg.";
+            quest.rewardXp = 20 * redSlime.experienceReward;
+            quest.stages = new[]
+            {
+                new QuestObjective
+                {
+                    kind = ObjectiveKind.Kill, contentId = redSlime.stableId, count = 15,
+                    creditMode = QuestCreditMode.NearbyParty, creditRadius = 50,
+                    instruction = "Defeat 15 Red Slimes"
+                }
+            };
+            if (!journal.Definitions.Contains(quest)) journal.Configure(journal.Definitions.Append(quest).ToArray());
+            if (!mira.Offers.Contains(quest)) mira.ConfigureAdditional(mira.Offers.Skip(1).Append(quest).ToArray());
+            EditorUtility.SetDirty(quest);
+            EditorUtility.SetDirty(journal);
+            EditorUtility.SetDirty(mira);
+            return quest;
         }
         [CliCommand("dicefree.cornberg.oct13.scene-inspect",
             "Inspect village merchant positions and Ironpine road colliders.")]

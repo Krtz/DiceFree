@@ -11,17 +11,27 @@ namespace DiceFree.Input
         WalkIntoRange = 1
     }
 
+    public enum QuickCastMode
+    {
+        Reticle = 0,
+        OnPress = 1,
+        OnRelease = 2
+    }
+
     public enum OverheadHealthVisibility { Always = 0, WhenHurt = 1, Never = 2 }
+    public enum RetaliationMode { Off = 0, AttackAttacker = 1, AttackNearbyEnemies = 2 }
     public enum MinimapOrientation { NorthUp = 0, CameraUp = 1 }
     public enum MinimapCompassCorner { Off = 0, BottomLeft = 1, BottomRight = 2, TopLeft = 3, TopRight = 4 }
 
     [Serializable]
     internal sealed class GameplayPreferencesData
     {
-        public int version = 4;
+        public int version = 6;
         public bool autoRetaliate = true;
+        public RetaliationMode retaliationMode = RetaliationMode.AttackAttacker;
         public OutOfRangeSkillBehavior outOfRangeSkillBehavior = OutOfRangeSkillBehavior.WalkIntoRange;
         public bool showCastRange = true;
+        public QuickCastMode quickCastMode = QuickCastMode.Reticle;
         public OverheadHealthVisibility selfHealthBar = OverheadHealthVisibility.WhenHurt;
         public OverheadHealthVisibility allyHealthBar = OverheadHealthVisibility.WhenHurt;
         public OverheadHealthVisibility enemyHealthBar = OverheadHealthVisibility.Always;
@@ -55,9 +65,11 @@ namespace DiceFree.Input
         private readonly string path;
         private GameplayPreferencesData data = new();
 
-        public bool AutoRetaliate => data.autoRetaliate;
+        public RetaliationMode Retaliation => data.retaliationMode;
+        public bool AutoRetaliate => Retaliation != RetaliationMode.Off;
         public OutOfRangeSkillBehavior OutOfRangeSkillBehavior => data.outOfRangeSkillBehavior;
         public bool ShowCastRange => data.showCastRange;
+        public QuickCastMode QuickCastMode => data.quickCastMode;
         public OverheadHealthVisibility SelfHealthBar => data.selfHealthBar;
         public OverheadHealthVisibility AllyHealthBar => data.allyHealthBar;
         public OverheadHealthVisibility EnemyHealthBar => data.enemyHealthBar;
@@ -70,10 +82,15 @@ namespace DiceFree.Input
             Load();
         }
 
-        public void SetAutoRetaliate(bool value)
+        public void SetAutoRetaliate(bool value) =>
+            SetRetaliation(value ? RetaliationMode.AttackAttacker : RetaliationMode.Off);
+
+        public void SetRetaliation(RetaliationMode value)
         {
-            if (data.autoRetaliate == value) return;
-            data.autoRetaliate = value;
+            if (!Enum.IsDefined(typeof(RetaliationMode), value)) throw new ArgumentOutOfRangeException(nameof(value));
+            if (data.retaliationMode == value) return;
+            data.retaliationMode = value;
+            data.autoRetaliate = value != RetaliationMode.Off;
             Save();
         }
 
@@ -88,6 +105,14 @@ namespace DiceFree.Input
         {
             if (data.showCastRange == value) return;
             data.showCastRange = value;
+            Save();
+        }
+
+        public void SetQuickCastMode(QuickCastMode value)
+        {
+            if(!Enum.IsDefined(typeof(QuickCastMode),value))throw new ArgumentOutOfRangeException(nameof(value));
+            if(data.quickCastMode==value)return;
+            data.quickCastMode=value;
             Save();
         }
 
@@ -126,7 +151,7 @@ namespace DiceFree.Input
             try
             {
                 var loaded = JsonUtility.FromJson<GameplayPreferencesData>(File.ReadAllText(path));
-                if(loaded!=null && (loaded.version>=1 && loaded.version<=4))
+                if(loaded!=null && (loaded.version>=1 && loaded.version<=6))
                 {
                     // Unity's JsonUtility does not guarantee field initializers
                     // for missing fields: preserve the existing v1 settings,
@@ -141,9 +166,15 @@ namespace DiceFree.Input
                         loaded.minimapOrientation=MinimapOrientation.NorthUp;
                     if(loaded.version<4)
                         loaded.minimapCompassCorner=MinimapCompassCorner.BottomLeft;
+                    if(loaded.version<5)
+                        loaded.quickCastMode=QuickCastMode.Reticle;
+                    if(loaded.version<6 || !Enum.IsDefined(typeof(RetaliationMode),loaded.retaliationMode))
+                        loaded.retaliationMode=loaded.autoRetaliate ? RetaliationMode.AttackAttacker : RetaliationMode.Off;
+                    if(!Enum.IsDefined(typeof(QuickCastMode),loaded.quickCastMode))
+                        loaded.quickCastMode=QuickCastMode.Reticle;
                     if(!Enum.IsDefined(typeof(MinimapCompassCorner),loaded.minimapCompassCorner))
                         loaded.minimapCompassCorner=MinimapCompassCorner.BottomLeft;
-                    loaded.version=4;
+                    loaded.version=6;
                     data=loaded;
                 }
             }

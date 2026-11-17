@@ -1,4 +1,5 @@
 using System;
+using DiceFree.Characters;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ namespace DiceFree.World
         [SerializeField] private int seed = 1;
         private System.Random random;
         private NavMeshPath path;
+        private NavMeshObstacle avoidance;
+        private CapsuleCollider body;
         private Vector3 home;
         private float pause, heightOffset;
         private int corner;
@@ -25,8 +28,23 @@ namespace DiceFree.World
         private void OnEnable()
         {
             home = transform.position; random = new System.Random(seed); path = null; Pause();
+            body = GetComponent<CapsuleCollider>();
+            if (body == null) return;
+            TraversalMotor.TrackPedestrian(body);
+            if (!TryGetComponent(out avoidance)) avoidance = gameObject.AddComponent<NavMeshObstacle>();
+            avoidance.shape = NavMeshObstacleShape.Capsule;
+            avoidance.center = body.center;
+            avoidance.radius = body.radius;
+            avoidance.height = body.height;
+            avoidance.carving = false;
+            avoidance.enabled = true;
         }
-        private void OnDisable() { path = null; }
+        private void OnDisable()
+        {
+            path = null;
+            if (body != null) TraversalMotor.ForgetPedestrian(body);
+            if (avoidance != null) avoidance.enabled = false;
+        }
         private void Pause() { pause = Mathf.Lerp(Mathf.Clamp(minimumIdle, 2, 7), Mathf.Clamp(Mathf.Max(minimumIdle, maximumIdle), 2, 7), (float)random.NextDouble()); }
         public bool TryChoosePath()
         {

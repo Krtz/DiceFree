@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Routes Under Orders
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.routes-under-orders
+  title: Routes Under Orders
+  requiredClassId: 
+  requiredLevel: 35
+  version: 1
+  offer: The lookout report names the Ancient Road Dragon. We need to know what it is asking of the Reedscale. Follow the Eastwatch trail toward Briarback and search the two highland camps. Bring back the watch ledger and the sealed dispatch, and defeat three Reedscale defenders.
+  activeDialogue: The first hide shelter is on the north side of the trail out of Eastwatch. The second camp is farther east, on the south side. Read the ledger and recover the dispatch in either order. Bring the evidence back to me in Arborium.
+  turnInDialogue: The ledger assigns the Reedscale to watch the mountain path northwest of Arborium. The dispatch names Quillboar and wolf companies and sets the same signal for their march. The Council needs to see both records. I'll send our recommendation with them.
+  locationHint: Follow the highland trail east from Eastwatch. Search the north camp for the ledger and the south camp for the dispatch.
+  turnInHint: Return to the Guild Steward in Arborium.
+  stages:
+  - kind: 5
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Recover the two records and defeat three Reedscale defenders
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 5
+    alternatives:
+    - kind: 6
+      objectiveId: work.arborium.reedscale-watch-ledger
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: Read the north camp's watch ledger
+      contentId: work.arborium.reedscale-watch-ledger
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 6
+      objectiveId: work.arborium.reedscale-sealed-dispatch
+      requiredTag: 
+      creditMode: 0
+      creditRadius: 50
+      instruction: Recover the south camp's sealed dispatch
+      contentId: work.arborium.reedscale-sealed-dispatch
+      dungeonBossOnly: 0
+      familyId: 
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 1
+    - kind: 0
+      objectiveId: defeat-reedscale-defenders
+      requiredTag: 
+      creditMode: 1
+      creditRadius: 50
+      instruction: Defeat Reedscale defenders
+      contentId: 
+      dungeonBossOnly: 0
+      familyId: reedscale.lizardman
+      familyIds: []
+      areaId: 
+      conversationId: 
+      count: 3
+  completedQuestIds:
+  - quest.trimery.road-to-arborium
+  - quest.arborium.reedscale-lookout
+  rewardXp: 5200
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

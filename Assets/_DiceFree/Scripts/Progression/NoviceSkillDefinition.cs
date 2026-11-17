@@ -37,6 +37,8 @@ namespace DiceFree.Skills
         [Min(0)] public float range = 1;
         [Min(0)] public float durationSeconds = 5;
         public AttackDefinition attack;
+        [Min(0)] public float flatDamagePerRank;
+        [Min(0)] public float flatHealPerRank;
 
         public bool Active => kind != NoviceSkillKind.AllStatPassive;
 
@@ -48,6 +50,9 @@ namespace DiceFree.Skills
                 ? 10f + ClampRank(rank) * 0.2f * attributes.agility
                 : 0;
         public float HealAmount(AttributeValues attributes, int rank) =>
-            kind == NoviceSkillKind.SpiritHeal && rank > 0 ? attributes.spirit * 10f : 0;
+            kind == NoviceSkillKind.SpiritHeal && rank > 0
+                ? attributes.spirit * 10f + flatHealPerRank * ClampRank(rank)
+                : 0;
+        public float FlatDamage(int rank) => flatDamagePerRank * ClampRank(rank);
     }
 }

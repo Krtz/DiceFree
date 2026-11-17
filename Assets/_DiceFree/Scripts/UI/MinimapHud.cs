@@ -231,7 +231,9 @@ namespace DiceFree.UI
             bool isAttackMap=targeting!=null &&
                 targeting.Mode==SkillTargetingMode.AttackMove;
             var titleRect = atlas == null ? headerRect : new Rect(headerRect.x, headerRect.y, headerRect.width-64, headerRect.height);
-            string region = atlas != null && atlas.InVerdantWilds ? WorldAtlasHud.VerdantName : MapName;
+            string region = atlas != null && atlas.InLookout ? WorldAtlasHud.LookoutName :
+                atlas != null && atlas.InVerdantWilds ? WorldAtlasHud.VerdantName :
+                atlas != null && atlas.InCrimsonMire ? WorldAtlasHud.CrimsonName : MapName;
             HudChrome.DrawHeader(titleRect, Theme,
                 isAttackMap?region+"  /  ATTACK-MOVE":region);
 

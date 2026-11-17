@@ -82,6 +82,10 @@ namespace DiceFree.EditorTools
 
         private static void ValidateMageCeilings()
         {
+            Need(Mathf.Approximately(MageProgressionRules.FlatDamage(MageProgressionRules.Kind.EmberBolt,1),2) &&
+                 Mathf.Approximately(MageProgressionRules.FlatDamage(MageProgressionRules.Kind.EmberBolt,18),36) &&
+                 Mathf.Approximately(MageProgressionRules.FlatDamage(MageProgressionRules.Kind.MathBarrier,5),0),
+                "Mage rank-scaled spell flat damage changed or leaked onto a non-damage skill.");
             for (int rank = 1; rank <= 12; rank++) Need(MageProgressionRules.FrostFreezeDuration(rank) <= 2.5f, "Frost freeze exceeded its approved ceiling.");
             for (int rank = 1; rank <= 12; rank++) Need(MageProgressionRules.ArcLightningTargetCount(rank) <= 8, "Arc Lightning exceeded eight unique targets.");
             for (int rank = 1; rank <= 8; rank++)
@@ -91,6 +95,11 @@ namespace DiceFree.EditorTools
             }
             for (int rank = 1; rank <= 10; rank++) Need(MageProgressionRules.QuicksandSlowPercent(rank) <= 40, "Quicksand exceeded its 40% slow ceiling.");
             Need(Mathf.Approximately(MageProgressionRules.BarrierDuration(5), 10) && Mathf.Approximately(MageProgressionRules.BarrierFraction(5), .5f), "Math Barrier approved formula changed.");
+            Need(Mathf.Approximately(GreatbladeProgressionRules.FlatDamage(GreatbladeProgressionRules.Kind.WideArc,20),40) &&
+                 Mathf.Approximately(GreatbladeProgressionRules.FlatDamage(GreatbladeProgressionRules.Kind.SpinDash,16),32) &&
+                 Mathf.Approximately(GreatbladeProgressionRules.FlatDamage(GreatbladeProgressionRules.Kind.OverheadBreaker,18),90) &&
+                 Mathf.Approximately(GreatbladeProgressionRules.FlatDamage(GreatbladeProgressionRules.Kind.BattleCry,9),0),
+                "Greatblade rank-scaled skill flat damage changed or leaked onto a non-damage skill.");
         }
 
         private static void ValidateMigration(string root)

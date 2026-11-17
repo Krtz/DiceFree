@@ -56,7 +56,22 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
+            var inspection=player==null?null:player.GetComponent<InspectSelection>();
             if (player == null || HudPointerBlocker.ModalOpen) return;
+
+            if(inspection?.SelectedTransform!=null)
+            {
+                var targetInfo=FindAnyObjectByType<TargetInspectionHud>();
+                if(targetInfo!=null)
+                {
+                    targetInfo.DrawReplacement(Bounds);
+                    return;
+                }
+                Rect selectedPanel=Bounds;
+                DrawPanel(selectedPanel);
+                GUI.Label(Inner(selectedPanel),inspection.SelectedTransform.name);
+                return;
+            }
 
             Rect panel = Bounds;
             DrawPanel(panel);
@@ -106,8 +121,12 @@ namespace DiceFree.UI
                     });
             }
 
-            DrawEquipmentColumn(inner.x, inner.y, slotWidth, portraitRect.height, LeftSlots);
-            DrawEquipmentColumn(inner.xMax - slotWidth, inner.y, slotWidth, portraitRect.height, RightSlots);
+            string hoveredTooltip = null;
+            Rect hoveredTooltipAnchor = default;
+            DrawEquipmentColumn(inner.x, inner.y, slotWidth, portraitRect.height, LeftSlots,
+                ref hoveredTooltip, ref hoveredTooltipAnchor);
+            DrawEquipmentColumn(inner.xMax - slotWidth, inner.y, slotWidth, portraitRect.height, RightSlots,
+                ref hoveredTooltip, ref hoveredTooltipAnchor);
 
             float hpMaximum = Mathf.Max(1, player.Health.Maximum);
             var hpRect = new Rect(inner.x, contentBottom + gap, inner.width, barHeight);
@@ -144,7 +163,8 @@ namespace DiceFree.UI
                 DrawBar(graceRect, priest.Grace / priest.GraceMaximum, gold, label);
             }
 
-            HudTooltip.DrawCurrent();
+            if (!string.IsNullOrWhiteSpace(hoveredTooltip))
+                HudTooltip.DrawAt(hoveredTooltip, hoveredTooltipAnchor);
         }
 
         private void DrawEquipmentColumn(
@@ -152,7 +172,9 @@ namespace DiceFree.UI
             float y,
             float width,
             float availableHeight,
-            EquipmentSlot[] slots)
+            EquipmentSlot[] slots,
+            ref string hoveredTooltip,
+            ref Rect hoveredTooltipAnchor)
         {
             float gap = Theme.gap;
             float height = Mathf.Min(width, (availableHeight - gap * (slots.Length - 1)) / slots.Length);
@@ -179,12 +201,16 @@ namespace DiceFree.UI
                     }
                 }
 
-                bool hovered = rect.Contains(Event.current.mousePosition);
-                HudChrome.DrawSlot(rect, Theme, equipped != null, hovered);
-
                 string finalTooltip = equipped != null
                     ? tooltip + " — click to unequip"
                     : tooltip;
+                bool hovered = rect.Contains(HudTooltip.CurrentGuiPointerPosition());
+                if (hovered)
+                {
+                    hoveredTooltip = finalTooltip;
+                    hoveredTooltipAnchor = rect;
+                }
+                HudChrome.DrawSlot(rect, Theme, equipped != null, hovered);
 
                 if (equipped != null && !(HudLayoutManager.Current?.EditMode ?? false))
                 {

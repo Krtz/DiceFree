@@ -7,10 +7,11 @@ namespace DiceFree.Briarback
     {
         public Animator model;
         CombatActor actor;BasicAttack basic;QuilboarCombat creature;BriarbackChieftainEncounter chieftain;
-        Vector3 previous;string state;float hold,actionSpeed=1;bool winding,smashing,axeThrowing;
+        DiceFree.Dungeons.ShamanRitualCasts ritual;
+        Vector3 previous;string state;float hold,actionSpeed=1;bool winding,smashing,axeThrowing,ritualWindup;
         public string PresentationState => state;
         public float ActionSpeed => actionSpeed;
-        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();creature=GetComponent<QuilboarCombat>();chieftain=GetComponent<BriarbackChieftainEncounter>();previous=transform.position;}
+        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();creature=GetComponent<QuilboarCombat>();chieftain=GetComponent<BriarbackChieftainEncounter>();ritual=GetComponent<DiceFree.Dungeons.ShamanRitualCasts>();previous=transform.position;}
         void Play(string value,float seconds=0,float speed=1,bool restart=false)
         {
             if(state==value&&!restart)return;
@@ -26,9 +27,17 @@ namespace DiceFree.Briarback
         {
             if(model==null)return;
             float speed=Vector3.ProjectOnPlane(transform.position-previous,Vector3.up).magnitude/Mathf.Max(.001f,Time.deltaTime);previous=transform.position;
-            if(!actor.Alive){winding=smashing=axeThrowing=false;Play("Death");model.speed=1;return;}
+            if(!actor.Alive){winding=smashing=axeThrowing=ritualWindup=false;Play("Death");model.speed=1;return;}
             if(state=="Death"){state=null;hold=0;}
             if(actor.Effects?.Stunned==true){model.speed=0;return;}
+            if (ritual != null && ritual.Winding)
+            {
+                if (!ritualWindup) Action("Cast", ritual.CastDuration, .75f, 1.2f);
+                ritualWindup = true;
+                model.speed = actionSpeed;
+                return;
+            }
+            if (ritualWindup) { ritualWindup = false; hold = 0; }
             bool smash=(chieftain!=null&&chieftain.Winding)||(creature!=null&&creature.Winding);
             if(smash)
             {

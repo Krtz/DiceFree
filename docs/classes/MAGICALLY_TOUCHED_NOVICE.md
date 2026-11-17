@@ -4,7 +4,7 @@
 
 **Implemented prototype Tier 1 on `feature/52-magically-touched`.** The class is playable through the real Novice advancement/start-menu flow, has its dedicated presentation, Mana economy, ranged basic attack, five-skill progression, persistence, and automated combat/save/reload coverage. Exact coefficients, costs, art polish and equipment permissions remain balance/content work rather than final release values.
 
-Current implemented casting UX is normal/confirm cast: pressing a targeted skill enters a WC3/League/Dota-style targeting reticle and does **not** auto-cast on the currently selected unit. Left-click confirms; right-click or Escape cancels without spending Mana or starting cooldown. Ground skills use a ground reticle. Guard and Quickening remain immediate self-casts because they require no external target.
+The current source offers three Gameplay Options modes for skill hotkeys: **Targeting reticle** (press, then left-click; the default), **Quickcast on press**, or **Quickcast on release**. Quickcast uses the pointer position at the chosen input moment and does not use the previously selected unit. Right-click or Escape cancels a reticle without spending Mana or starting cooldown. Clicking a skill icon still opens the reticle. Self-only casts follow the selected press/release mode. These changes still need Unity validation. Current prototype flat additions are **Magic Sand +10 raw damage/rank**, **Mend +5 raw healing/rank**, **Fire Imbuement +3 raw fire damage per basic hit/rank**, and **Ice Burst +5 raw damage/rank**. These small additions sit alongside the attribute coefficient and are provisional playtest tuning, not approved final balance.
 
 ## Identity
 

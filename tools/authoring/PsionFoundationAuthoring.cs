@@ -57,7 +57,7 @@ public static class PsionFoundationAuthoring
         mana.stableId = "resource-profile.psion.mana";
         mana.classId = ClassId;
         mana.baseMaximum = 84;
-        mana.maximumPerIntelligence = 1.45f;
+        mana.maximumPerIntelligence = 3f;
         mana.baseRegenPerSecond = 4.5f;
         var edge = Asset<AdvancementDefinition>("Psion development edge");
         edge.stableId = "advance.magically-touched.psion";

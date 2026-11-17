@@ -35,6 +35,7 @@ namespace DiceFree.Characters
         private void Awake()
         {
             motor = GetComponent<TraversalMotor>();
+            motor.ConsiderMovingPedestrians();
             attack = GetComponent<BasicAttack>();
             combatInput = GetComponent<CombatInput>();
             var queue=GetComponent<PlayerCommandQueue>();
@@ -61,7 +62,13 @@ namespace DiceFree.Characters
             bindings.SuppressionStarted += SuppressCommands;
         }
 
-        private void OnDisable() => SuppressCommands();
+        private void OnDisable()
+        {
+            HudPointerBlocker.OverlayCovers -= CoversStairButtons;
+            SuppressCommands();
+        }
+
+        private void OnEnable() => HudPointerBlocker.OverlayCovers += CoversStairButtons;
 
         private void OnDestroy()
         {
@@ -300,6 +307,28 @@ namespace DiceFree.Characters
             }
             Feedback="";
             return true;
+        }
+
+        private static Rect StairButtons => new(Screen.width * .5f - 113, 107, 226, 26);
+        private bool CoversStairButtons(Vector2 point) => ArboriumInterior.Occupied != null &&
+            StairButtons.Contains(new Vector2(point.x, Screen.height - point.y));
+
+        private void OnGUI()
+        {
+            var building = ArboriumInterior.Occupied;
+            if (building == null || HudPointerBlocker.ModalOpen || (HudLayoutManager.Current?.EditMode ?? false)) return;
+            var area = StairButtons;
+            bool enabled = GUI.enabled;
+            DrawStairButton(building, false, new Rect(area.x, area.y, 110, area.height), "Downstairs", enabled);
+            DrawStairButton(building, true, new Rect(area.x + 116, area.y, 110, area.height), "Upstairs", enabled);
+            GUI.enabled = enabled;
+        }
+
+        private void DrawStairButton(ArboriumInterior building, bool up, Rect rect, string text, bool enabled)
+        {
+            bool hasLanding = building.TryGetStairLanding(transform.position, up, out var landing);
+            GUI.enabled = enabled && hasLanding && motor.Ready && actor != null && actor.CanAct;
+            if (GUI.Button(rect, text) && hasLanding) TryMoveFromMinimap(landing);
         }
 
         public bool TryWorldPoint(Vector2 screenPoint, out Vector3 point)

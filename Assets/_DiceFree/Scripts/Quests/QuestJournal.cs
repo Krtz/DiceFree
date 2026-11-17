@@ -102,6 +102,22 @@ namespace DiceFree.Quests
             foreach (var record in records)
             {
                 var copy=record.Copy();
+                if (copy.questId == "quest.arborium.roadwarden" && copy.definitionVersion == 1 &&
+                    Array.Exists(definitions, d => d.stableId == copy.questId && d.version == 2))
+                {
+                    copy.definitionVersion = 2;
+                    if (copy.status == QuestStatus.Completed)
+                    {
+                        copy.stage = 2;
+                        copy.count = 1;
+                    }
+                    else if (copy.status == QuestStatus.ReadyToTurnIn)
+                    {
+                        copy.status = QuestStatus.Active;
+                        copy.stage = 2;
+                        copy.count = 0;
+                    }
+                }
                 if(copy.questId=="quest.briarback.repeat-bounty"&&copy.definitionVersion==1&&
                    Array.Exists(definitions,d=>d.stableId==copy.questId&&d.version==2))
                 {
@@ -197,9 +213,37 @@ namespace DiceFree.Quests
                     first.contentId == fact.npcId &&
                     (string.IsNullOrEmpty(first.conversationId) || first.conversationId == fact.conversationId) && CanAccept(definition))
                     Accept(definition);
+                var state = Find(definition.stableId);
+                if (definition.completeOnObjectives && state?.status == QuestStatus.ReadyToTurnIn &&
+                    state.definitionVersion == definition.version &&
+                    MatchesConversation(definition.stages[state.stage], fact.npcId, fact.conversationId))
+                    TurnIn(definition);
             }
             Advance(ObjectiveKind.TalkTo, fact.npcId, null, null, fact.conversationId);
         }
+
+        internal bool NeedsConversation(string npcId, string conversationId)
+        {
+            foreach (var definition in definitions)
+            {
+                var state = Find(definition.stableId);
+                if (state == null || state.definitionVersion != definition.version ||
+                    (!string.IsNullOrEmpty(definition.requiredClassId) && owner.Stats.Definition.stableId != definition.requiredClassId))
+                    continue;
+                if (state.status != QuestStatus.Active &&
+                    !(definition.completeOnObjectives && state.status == QuestStatus.ReadyToTurnIn)) continue;
+                var objective = definition.stages[state.stage];
+                if (MatchesConversation(objective, npcId, conversationId)) return true;
+                if (state.status == QuestStatus.Active && objective.kind is ObjectiveKind.All or ObjectiveKind.Any &&
+                    Array.Exists(objective.alternatives, leaf => MatchesConversation(leaf, npcId, conversationId) &&
+                        ObjectiveProgress.Count(state, leaf.objectiveId) < leaf.count)) return true;
+            }
+            return false;
+        }
+
+        private static bool MatchesConversation(QuestLeaf leaf, string npcId, string conversationId) =>
+            leaf.kind == ObjectiveKind.TalkTo && leaf.contentId == npcId &&
+            (string.IsNullOrEmpty(leaf.conversationId) || leaf.conversationId == conversationId);
         private void Advance(ObjectiveKind kind, string content, string family, string area, string conversation = null,
             Func<QuestLeaf, bool> eligible = null)
         {

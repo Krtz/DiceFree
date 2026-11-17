@@ -14,7 +14,7 @@ namespace DiceFree.Combat
         public bool Valid(CombatActor target) => ValidHostile(target);
         public bool ValidHostile(CombatActor target) => owner.CanTargetHostile(target) && InScope(target);
         public bool ValidFriendly(CombatActor target) => owner.IsFriendlyTo(target) && target != owner && InScope(target);
-        public bool ValidSelection(CombatActor target) => target != null && target != owner && target.Alive &&
+        public bool ValidSelection(CombatActor target) => target != null && target.Alive &&
             (!target.Concealed || owner.IsFriendlyTo(target)) && InScope(target);
         public void Select(CombatActor target) => Selected = ValidSelection(target) ? target : null;
         private bool InScope(CombatActor target) => target != null &&

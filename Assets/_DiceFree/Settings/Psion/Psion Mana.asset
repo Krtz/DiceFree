@@ -16,7 +16,7 @@ MonoBehaviour:
   classId: class.psion
   resource: {fileID: 11400000, guid: 79c923ba14d8c3e48b29525389b9d548, type: 2}
   baseMaximum: 84
-  maximumPerIntelligence: 1.45
+  maximumPerIntelligence: 3
   maximumPerSpirit: 1
   baseRegenPerSecond: 4.5
   regenPerIntelligence: 0.075

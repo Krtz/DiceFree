@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace DiceFree.Combat
 {
+    /// <summary>Optional tactical approach point for an actor pursuing a target.</summary>
+    public interface IBasicAttackApproachProvider
+    {
+        bool TryGetApproachPosition(CombatActor target, out Vector3 position);
+    }
+
     [RequireComponent(typeof(CombatActor))]
     public sealed class BasicAttack : MonoBehaviour
     {
@@ -9,18 +15,29 @@ namespace DiceFree.Combat
         private DiceFree.Skills.RangerSkillCaster ranger;
         private DiceFree.Skills.PsionSkillCaster psion;
         private Vector3 windupOrigin;
+        private IBasicAttackApproachProvider approachProvider;
         private float readyAt, impactAt, repathAt;
         private bool winding;
         public CombatActor Target { get; private set; }
         public string State { get; private set; } = "Idle";
         public int Hits { get; private set; }
         public int Misses { get; private set; }
+        // Per-actor override for the authored melee stance of a ranged attacker.
+        // Negative values retain the attack definition's reach.
+        public float ReachOverride { get; set; } = -1f;
+        public float Reach => (ReachOverride >= 0 ? ReachOverride : Definition?.reach ?? 0f) + (ranger?.RangeBonus ?? 0f);
+        internal CriticalRule CriticalRule => psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
+            GetComponent<DiceFree.Skills.ThiefSkillCaster>()?.BasicCriticalRule();
         public event System.Action<CombatActor,DamageResult> Connected;
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
         /// <summary>Extra damage only for actual auto-attack impacts.
         /// Abilities, scripted lunges and boss special hits are unaffected.</summary>
         public float BasicAttackDamageScale { get; set; } = 1f;
         public AttackDefinition Definition => actor.Stats.Definition.basicAttack;
+        private bool HasClassDamageSpread =>
+            actor.Stats.Definition.stableId?.StartsWith("class.", System.StringComparison.Ordinal) == true;
+        private const float ClassMinimumDamage = .95f;
+        private const float ClassMaximumDamage = 1.05f;
         public Vector2 DamageRange
         {
             get
@@ -28,9 +45,12 @@ namespace DiceFree.Combat
                 if(Definition==null)return Vector2.zero;
                 var stats=actor.Stats;
                 Vector2 raw=Definition.RawDamageRange(stats.Attributes)*BasicAttackDamageScale;
-                return new Vector2(
+                var range = new Vector2(
                     Mathf.Max(0,raw.x*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMinimumOffset),
                     Mathf.Max(0,(raw.y+stats.BasicAttackMaximumBonus)*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMaximumOffset));
+                return HasClassDamageSpread
+                    ? new Vector2(range.x * ClassMinimumDamage, range.y * ClassMaximumDamage)
+                    : range;
             }
         }
         private void Awake()
@@ -38,6 +58,7 @@ namespace DiceFree.Combat
             actor = GetComponent<CombatActor>();
             ranger = GetComponent<DiceFree.Skills.RangerSkillCaster>();
             psion = GetComponent<DiceFree.Skills.PsionSkillCaster>();
+            approachProvider = GetComponent<IBasicAttackApproachProvider>();
         }
         private void OnDisable() => Cancel();
         public bool Order(CombatActor target)
@@ -54,9 +75,9 @@ namespace DiceFree.Combat
             if (actor != null) actor.Motor.Stop();
             // Deliberately preserve the cooldown: changing targets cannot grant free hits.
         }
-        public void ResetForSpawn() { Cancel(); readyAt = impactAt = repathAt = 0; }
+        public void ResetForSpawn() { Cancel(); ReachOverride=-1f; readyAt = impactAt = repathAt = 0; }
         public bool InRange(CombatActor target) => Vector3.Distance(transform.position, target.transform.position)
-            <= actor.Radius + target.Radius + Definition.reach + (ranger?.RangeBonus ?? 0);
+            <= actor.Radius + target.Radius + Reach;
         private void Update()
         {
             if (Target == null) return;
@@ -68,7 +89,12 @@ namespace DiceFree.Combat
                 if (Time.time >= repathAt)
                 {
                     repathAt = Time.time + 0.2f;
-                    if (!actor.Motor.MoveTo(Target.transform.position)) Cancel();
+                    var targetPosition = Target.transform.position;
+                    bool moved = approachProvider != null &&
+                        approachProvider.TryGetApproachPosition(Target, out var tacticalPosition) &&
+                        actor.Motor.MoveTo(tacticalPosition);
+                    if (!moved) moved = actor.Motor.MoveTo(targetPosition);
+                    if (!moved) Cancel();
                 }
                 return;
             }
@@ -115,7 +141,7 @@ namespace DiceFree.Combat
             var thief = GetComponent<DiceFree.Skills.ThiefSkillCaster>();
             float opener = thief?.ConsumeOpener() ?? 1;
             var resolution = AccuracyResolver.Resolve(actor, Definition,
-                critical: psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ?? thief?.BasicCriticalRule(), target: target);
+                critical: CriticalRule, target: target);
             var packet = DamageResolver.CalculatePacket(
                 actor.Stats,
                 target.Stats,
@@ -124,7 +150,8 @@ namespace DiceFree.Combat
                 Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                 Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                 Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
-                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1),
+                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) *
+                    (HasClassDamageSpread ? Random.Range(ClassMinimumDamage, ClassMaximumDamage) : 1),
                 flatDefensePenetration: psion?.BasicPenetration ?? 0);
             packet = target.Health.ApplyPacket(actor, packet);
             if (packet.Missed) Misses++;

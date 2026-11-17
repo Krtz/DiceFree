@@ -62,8 +62,8 @@ public static class PsionMirrorAuthoring
         quest.requiredLevel = edge.requiredLevel;
         quest.offer = "Three reflections wait beneath the Guild. Only one has a will of its own. Walk sideways and watch their turns. Two move together, while the real one follows you. Strike the one that follows and defeat it.";
         quest.activeDialogue = "The chamber is ready. Move before you strike. A hit on a false reflection ends the attempt.";
-        quest.locationHint = "Speak to Ilyra in the Adventurers’ Guild reception in Arborium.";
-        quest.turnInHint = "Return to Ilyra at the Adventurers’ Guild in Arborium.";
+        quest.locationHint = "Speak to Ilyra on the second floor of the West Residence in Arborium.";
+        quest.turnInHint = "Return to Ilyra on the second floor of the West Residence in Arborium.";
         quest.stages = new[] { new QuestObjective { kind=ObjectiveKind.SolvePuzzle, contentId=PsionMirrorSite.PuzzleId,
             objectiveId="third-reflection",count=1,instruction="Identify and defeat the real reflection in the Guild's mirror chamber" } };
         EditorUtility.SetDirty(quest);
@@ -125,19 +125,19 @@ public static class PsionMirrorAuthoring
         equipment.Configure(equipment.Bindings.Where(value=>!gear.Contains(value.definition)).Concat(fitted).ToArray());
         EditorUtility.SetDirty(equipment);
 
-        var guild = Object.FindObjectsByType<ArboriumInterior>(FindObjectsInactive.Include)
-            .Single(value=>value.BuildingName.StartsWith("Adventurers",StringComparison.Ordinal));
-        var reception = guild.transform.Find("Floor 1 - oak rooms and stairwell");
-        var oldMentor = reception.Find("Ilyra - Psion mentor");
+        var residence = Object.FindObjectsByType<ArboriumInterior>(FindObjectsInactive.Include)
+            .Single(value=>value.BuildingName=="West Residence");
+        var upper = residence.transform.Find("Floor 2 - oak rooms and stairwell");
+        var oldMentor = Object.FindAnyObjectByType<PsionMentor>(FindObjectsInactive.Include);
         if (oldMentor != null) Object.DestroyImmediate(oldMentor.gameObject);
-        var mentor = Group("Ilyra - Psion mentor",reception,Vector3.zero);
+        var mentor = Group("Ilyra - Psion mentor",upper,Vector3.zero);
         mentor.gameObject.layer = 11;
         var nav = NavMesh.AddNavMeshData(Object.FindAnyObjectByType<WorldNavigation>().Data);
         try
         {
             Physics.SyncTransforms();
-            mentor.SetPositionAndRotation(OpenPoint(guild.transform.TransformPoint(new Vector3(3.2f,0,2.95f))),
-                guild.transform.rotation*Quaternion.Euler(0,180,0));
+            mentor.SetPositionAndRotation(OpenPoint(residence.transform.TransformPoint(new Vector3(2.3f,residence.StoreyHeight+.12f,2.3f))),
+                residence.transform.rotation*Quaternion.Euler(0,-90,0));
             var approach = Group("Ilyra conversation point",mentor,Vector3.zero);
             approach.position = OpenPoint(mentor.position+mentor.forward*1.5f);
             var collider = mentor.gameObject.AddComponent<CapsuleCollider>();

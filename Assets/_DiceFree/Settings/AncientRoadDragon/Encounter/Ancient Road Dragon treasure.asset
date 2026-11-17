@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371c339cbaf5a16448bb09319458d262, type: 3}
+  m_Name: Ancient Road Dragon treasure
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardPool
+  stableId: loot.ancient-road-dragon
+  rare: {fileID: 11400000, guid: 4ff504b3a0120014380406a446304c1e, type: 2}
+  items:
+  - {fileID: 11400000, guid: ce55628200fcba741a8543656dc51b03, type: 2}
+  - {fileID: 11400000, guid: 51cf3c3c435d1bc4a986a30f626ddf13, type: 2}
+  visualVariant: {fileID: 0}

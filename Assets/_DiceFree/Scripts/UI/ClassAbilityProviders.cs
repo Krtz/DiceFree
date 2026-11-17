@@ -72,13 +72,14 @@ namespace DiceFree.UI
     {
         public static IEnumerable<IClassAbilityProvider> ExistingKits(GameObject owner)
         {
+            var stats=owner.GetComponent<ActorStats>();
             var novice=owner.GetComponent<NoviceSkillProgression>();var nc=owner.GetComponent<NoviceSkillCaster>();
             if(novice!=null&&nc!=null)yield return new DefinitionAbilityProvider<NoviceSkillDefinition>(
                 novice.ClassId,()=>novice.Definitions,d=>d.Active,()=>novice.UnspentPoints,
                 (d,key)=>new AbilityBarSource.SlotView(d.displayName,key,novice.Rank(d.stableId),d.maxRank,d.Active?nc.CooldownRemaining(d):0,
-                    novice.Rank(d.stableId)>0,SkillTooltips.Describe(d,novice.Rank(d.stableId),key),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
+                    novice.Rank(d.stableId)>0,SkillTooltips.Describe(d,novice.Rank(d.stableId),key,stats),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
                     novice.Rank(d.stableId)<d.maxRank&&novice.UnspentPoints>0),
-                d=>novice.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,novice.Rank(d.stableId)+1),
+                d=>novice.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,novice.Rank(d.stableId)+1,stats:stats),
                 (d,targeting,orders,append)=>{
                     if(!nc.CanPrepare(d))return false;
                     if(d.kind==NoviceSkillKind.StrengthMeleeStun||d.kind==NoviceSkillKind.MagicSand)
@@ -90,26 +91,28 @@ namespace DiceFree.UI
             if(physical!=null&&pc!=null)yield return new DefinitionAbilityProvider<PhysicalSkillDefinition>(
                 physical.ClassId,()=>physical.Definitions,d=>d.Active,()=>physical.UnspentPoints,
                 (d,key)=>new AbilityBarSource.SlotView(d.displayName,key,physical.Rank(d.stableId),d.maxRank,d.Active?pc.CooldownRemaining(d):0,
-                    physical.Rank(d.stableId)>0,SkillTooltips.Describe(d,physical.Rank(d.stableId),key),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
+                    physical.Rank(d.stableId)>0,SkillTooltips.Describe(d,physical.Rank(d.stableId),key,stats),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
                     physical.Rank(d.stableId)<d.maxRank&&physical.UnspentPoints>0),
-                d=>physical.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,physical.Rank(d.stableId)+1),
+                d=>physical.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,physical.Rank(d.stableId)+1,stats:stats),
                 (d,targeting,orders,append)=>{
                     if(!pc.CanPrepare(d))return false;
                     switch(d.kind){
                         case PhysicalSkillKind.HeavyStrike:targeting.BeginHostile(d.displayName,target=>pc.Cast(d,target),d.range);return true;
                         case PhysicalSkillKind.ArrowRain:targeting.BeginGround(d.displayName,point=>pc.CastArrowRain(d,point),d.range);return true;
                         case PhysicalSkillKind.Guard:case PhysicalSkillKind.Quickening:
-                            if(append&&orders!=null)return orders.SubmitAction(()=>pc.Cast(d),true);
-                            orders?.ClearOrders();targeting.Cancel();return pc.Cast(d);
+                            if(!append)orders?.ClearOrders();
+                            targeting.Cancel();
+                            return targeting.RunSelfAction(()=>append&&orders!=null
+                                ?orders.SubmitAction(()=>pc.Cast(d),true):pc.Cast(d));
                         default:return false;}
                 });
             var magical=owner.GetComponent<MagicalSkillProgression>();var mc=owner.GetComponent<MagicalSkillCaster>();
             if(magical!=null&&mc!=null)yield return new DefinitionAbilityProvider<MagicalSkillDefinition>(
                 magical.ClassId,()=>magical.Definitions,d=>d.Active,()=>magical.UnspentPoints,
                 (d,key)=>new AbilityBarSource.SlotView(d.displayName,key,magical.Rank(d.stableId),d.maxRank,d.Active?mc.CooldownRemaining(d):0,
-                    magical.Rank(d.stableId)>0,SkillTooltips.Describe(d,magical.Rank(d.stableId),key),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
+                    magical.Rank(d.stableId)>0,SkillTooltips.Describe(d,magical.Rank(d.stableId),key,stats),SkillIconLibrary.Get(d.kind),SkillIconLibrary.Key(d.kind),!d.Active,
                     magical.Rank(d.stableId)<d.maxRank&&magical.UnspentPoints>0),
-                d=>magical.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,magical.Rank(d.stableId)+1),
+                d=>magical.Spend(d.stableId),d=>"Spend 1 skill point\n"+SkillTooltips.Describe(d,magical.Rank(d.stableId)+1,stats:stats),
                 (d,targeting,orders,append)=>{
                     if(!mc.CanPrepare(d))return false;
                     switch(d.kind){

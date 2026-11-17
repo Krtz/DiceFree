@@ -1,5 +1,9 @@
 # Novice
 
+## Current prototype skill additions
+
+The current source adds **4 raw damage per rank** to Strength Melee Stun, **10 raw damage per rank** to Magic Sand, and **5 raw healing per rank** to Spirit Heal, on top of the existing attribute scaling. The All-Stat passive has no direct damage/healing term. These are provisional playtest values, not final balance. Gameplay Options also supports targeting-reticle, cast-on-press and cast-on-release modes for skill hotkeys; icon clicks retain reticle targeting. Unity validation is pending for these changes.
+
 ## Role
 
 **Novice** is DiceFree's Tier 0 starting class.

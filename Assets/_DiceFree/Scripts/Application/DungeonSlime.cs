@@ -33,6 +33,7 @@ namespace DiceFree.Dungeons
         readonly List<GameObject> markers=new();
         readonly List<DungeonSlime> fragments=new();
         readonly List<DungeonSlime> adds=new();
+        readonly Dictionary<CombatActor,float> nextTrailHit = new();
         public void Initialize(SlimeDungeonRun run,SlimeRole role,bool blue)
         {
             Run=run;Role=role;Blue=blue;Actor=GetComponent<CombatActor>();home=transform.position;
@@ -238,6 +239,7 @@ namespace DiceFree.Dungeons
         IEnumerator Roll(CombatActor[] players)
         {
             busy=true;Run.Witness(BossId,"mechanic.slime-regent-roll");
+            nextTrailHit.Clear();
             var destination=players.OrderByDescending(a=>Vector3.Distance(a.transform.position,transform.position)).First().transform.position;
             LastCastSnapshot=destination;
             var origin=transform.position;var marker=TrackMarker(destination,2,Color.yellow);yield return new WaitForSeconds(1.5f);Destroy(marker);
@@ -252,7 +254,7 @@ namespace DiceFree.Dungeons
         IEnumerator Trail(Vector3 p)
         {
             var marker=TrackMarker(p,1.2f,new Color(.8f,.75f,.1f,.7f));float end=Time.time+5;
-            while(Time.time<end){if(Run.Active)HitCircle(p,1.2f);yield return new WaitForSeconds(.5f);}Destroy(marker);
+            while(Time.time<end){HitCircle(p,1.2f,trail:true);yield return new WaitForSeconds(.5f);}Destroy(marker);
         }
         IEnumerator Bounce(CombatActor[] players)
         {
@@ -262,10 +264,22 @@ namespace DiceFree.Dungeons
             yield return new WaitForSeconds(2);
             for(int i=0;i<positions.Length;i++){Actor.Motor.Teleport(positions[i]);LastImpactPosition=transform.position;HitCircle(positions[i],2);Destroy(markers[i]);yield return new WaitForSeconds(.75f);}busy=false;nextAttack=Time.time+Run.Tuning.slamInterval;
         }
-        void HitCircle(Vector3 p,float radius)
+        void HitCircle(Vector3 p,float radius,bool trail=false)
         {
             if(!Run.Active)return;
-            foreach(var a in Run.Living.ToArray())if(Vector3.Distance(a.transform.position,p)<=radius+a.Radius)DamageResolver.Hit(Actor,a,Role==SlimeRole.Regent?Run.Tuning.regentSlam:Run.Tuning.slam,rawMultiplier:DamageMultiplier);
+            var attack=Role==SlimeRole.Regent?Run.Tuning.regentSlam:Run.Tuning.slam;
+            foreach(var victim in Run.Living.ToArray())
+            {
+                if(Vector3.Distance(victim.transform.position,p)>radius+victim.Radius)continue;
+                if(trail)
+                {
+                    // Several nearby trail patches can overlap. Treat them as one damaging surface.
+                    if(nextTrailHit.TryGetValue(victim,out float readyAt)&&Time.time<readyAt)continue;
+                    nextTrailHit[victim]=Time.time+.55f;
+                }
+                DamageResolver.Hit(Actor,victim,attack,
+                    rawMultiplier:trail?Run.Tuning.regentTrailMultiplier:DamageMultiplier);
+            }
         }
         public static GameObject Marker(Vector3 p,float radius,Color color)
         {
@@ -296,6 +310,7 @@ namespace DiceFree.Dungeons
             foreach(var f in fragments)if(f!=null)Destroy(f.gameObject);fragments.Clear();
             foreach(var a in adds)if(a!=null)Destroy(a.gameObject);adds.Clear();
             PursuitTarget=null;PursuitState="Idle";nextPursuit=0;
+            nextTrailHit.Clear();
             ThresholdsConsumed=0;Dividing=busy=engaged=bossBumpWinding=false;BossBumpState="Idle";nextBump=0;Actor.Health.Invulnerable=false;Actor.Health.Restore();Actor.Motor.Teleport(home);
             foreach(var r in GetComponentsInChildren<Renderer>())r.enabled=true;foreach(var c in GetComponents<Collider>())c.enabled=true;
             if(visual!=null){visual.localPosition=new Vector3(0,visualHeight,0);visual.localScale=visualScale;}

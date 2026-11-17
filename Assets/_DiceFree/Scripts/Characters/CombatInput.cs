@@ -1,4 +1,6 @@
+using DiceFree.AI;
 using DiceFree.Combat;
+using DiceFree.Core;
 using DiceFree.Input;
 using DiceFree.Skills;
 using DiceFree.UI;
@@ -19,11 +21,22 @@ namespace DiceFree.Characters
         private GameplayPreferences gameplayPreferences;
         private CombatActor actor;
         private IQueuedOrders orders;
-        private InputAction select, cycle, attackSelected, clear, respawn;
+        private InputAction select, selectHero, cycle, attackSelected, clear, respawn;
+        private InputAction directMovement, moveDestination, stop;
+        private TraversalInput traversal;
+        private Interactor interactor;
+        private const float NearbyAttackRadius = 6f;
+        private float nextNearbyAttack;
+        private const float HeroDoublePressSeconds = .32f;
+        private double lastHeroPress = double.NegativeInfinity;
         public bool AttackMoving {get;private set;}
         private Vector3 attackMoveDestination;
         public void CancelAttackMove()=>AttackMoving=false;
-        public void ResetForManifestationLoad()=>CancelAttackMove();
+        public void ResetForManifestationLoad()
+        {
+            CancelAttackMove();
+            lastHeroPress = double.NegativeInfinity;
+        }
         public bool OrderAttackMove(Vector3 point)
         {
             if(!actor.CanAct)return false;
@@ -70,6 +83,8 @@ namespace DiceFree.Characters
             inspect=GetComponent<InspectSelection>();
             if(inspect==null)inspect=gameObject.AddComponent<InspectSelection>();
             attack = GetComponent<BasicAttack>();
+            traversal = GetComponent<TraversalInput>();
+            interactor = GetComponent<Interactor>();
             skillTargeting = GetComponent<SkillTargetingController>();
             actor = GetComponent<CombatActor>();
             gameplayPreferences = GameplayPreferences.Current;
@@ -79,6 +94,10 @@ namespace DiceFree.Characters
                 if(item is IQueuedOrders found){orders=found;break;}
             bindings.SuppressionStarted+=CancelAttackMove;
             select = bindings.Action("Gameplay/Select target");
+            selectHero = bindings.Action("Gameplay/Select hero");
+            directMovement = bindings.Action("Gameplay/Direct movement");
+            moveDestination = bindings.Action("Gameplay/Move destination");
+            stop = bindings.Action("Gameplay/Stop");
             cycle = bindings.Action("Gameplay/Cycle hostile");
             attackSelected = bindings.Action("Gameplay/Attack selected");
             clear = bindings.Action("Gameplay/Clear target");
@@ -94,30 +113,59 @@ namespace DiceFree.Characters
         private void OnDisable()
         {
             CancelAttackMove();
+            lastHeroPress = double.NegativeInfinity;
             if (actor != null && actor.Health != null) actor.Health.Damaged -= OnDamaged;
         }
         private void OnDestroy(){if(bindings!=null)bindings.SuppressionStarted-=CancelAttackMove;}
 
         private void OnDamaged(CombatActor source, DamageResult result)
         {
-            if (gameplayPreferences == null || !gameplayPreferences.AutoRetaliate) return;
-            if (source == null || actor == null || !actor.IsHostileTo(source)) return;
-            if (attack == null || attack.Target != null) return;
-            if (skillTargeting != null && skillTargeting.Active) return;
-            foreach(var ability in GetComponents<MonoBehaviour>())
-                if(ability is DiceFree.Foundation.IChannelingAbility channel&&channel.IsChanneling)return;
-            // Preserve explicit locomotion and queued commands. Auto-retaliate is
-            // a fallback only when the player is otherwise idle.
-            if (AttackMoving || actor.Motor.Travelling || orders?.HasOrders == true) return;
-
+            if (gameplayPreferences?.Retaliation != RetaliationMode.AttackAttacker ||
+                !CanAutoAttack() || !actor.IsHostileTo(source) || !attack.Order(source)) return;
             selection.Select(source);
-            GetComponent<Interactor>()?.Cancel();
-            attack.Order(source);
+            interactor?.Cancel();
         }
 
+        private bool CanAutoAttack()
+        {
+            if (bindings.Suppressed || actor == null || !actor.CanAct || attack == null || !attack.isActiveAndEnabled ||
+                attack.Target != null || skillTargeting?.Active == true || AttackMoving || actor.Motor.Travelling ||
+                orders?.HasOrders == true || moveDestination.WasPressedThisFrame() || stop.IsPressed() ||
+                (traversal?.Mode == TraversalInput.ControlMode.Direct && directMovement.ReadValue<Vector2>().sqrMagnitude > .001f))
+                return false;
+            foreach (var ability in GetComponents<MonoBehaviour>())
+                if (ability is DiceFree.Foundation.IChannelingAbility channel && channel.IsChanneling) return false;
+            return true;
+        }
+
+        private void StepNearbyAttack()
+        {
+            if (gameplayPreferences.Retaliation != RetaliationMode.AttackNearbyEnemies) return;
+            if (stop.WasPressedThisFrame() || clear.WasPressedThisFrame() || select.WasPressedThisFrame() ||
+                selectHero.WasPressedThisFrame() || cycle.WasPressedThisFrame())
+                nextNearbyAttack = Time.time + 1f;
+            if (Time.time < nextNearbyAttack) return;
+            nextNearbyAttack = Time.time + .25f;
+            if (actor.Concealed || interactor?.Active != null || GetComponent<WorldAtlasHud>()?.Open == true ||
+                !CanAutoAttack()) return;
+
+            CombatActor nearest = null;
+            float best = NearbyAttackRadius * NearbyAttackRadius;
+            foreach (var enemy in CombatActor.All)
+            {
+                if (enemy == null) continue;
+                float distance = (enemy.transform.position - transform.position).sqrMagnitude;
+                if (distance > best || !selection.ValidHostile(enemy) ||
+                    enemy.GetComponent<AggroBehaviour>()?.AutoAggroPolicy?.retaliationOnly == true ||
+                    !actor.HasSightOf(enemy)) continue;
+                best = distance;
+                nearest = enemy;
+            }
+            if (nearest != null && attack.Order(nearest)) selection.Select(nearest);
+        }
         private void Update()
         {
-            if (bindings.Suppressed) {CancelAttackMove();return;}
+            if (bindings.Suppressed) {CancelAttackMove();lastHeroPress=double.NegativeInfinity;return;}
             if (!actor.Alive)
             {
                 CancelAttackMove();
@@ -127,6 +175,8 @@ namespace DiceFree.Characters
                     GetComponent<RespawnAtAnchor>()?.Return();
                 return;
             }
+            if (selectHero.WasPressedThisFrame() && GetComponent<WorldAtlasHud>()?.Open != true)
+                SelectHero();
             if (skillTargeting != null && (skillTargeting.Active || skillTargeting.InputConsumedThisFrame)) return;
             if(AttackMoving&&Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame){CancelAttackMove();attack.Cancel();return;}
 
@@ -159,6 +209,21 @@ namespace DiceFree.Characters
                 BeginAttackTargeting();
             }
             StepAttackMove();
+            StepNearbyAttack();
+        }
+
+        private void SelectHero()
+        {
+            selection.Select(actor);
+            inspect.Clear();
+
+            double now = Time.unscaledTimeAsDouble;
+            if (now - lastHeroPress <= HeroDoublePressSeconds)
+            {
+                GetComponent<TraversalInput>()?.WorldCamera?.GetComponent<ExplorationCamera>()?.FocusOnHero();
+                lastHeroPress = double.NegativeInfinity;
+            }
+            else lastHeroPress = now;
         }
 
         private CombatActor Pick(Vector2 screenPoint)

@@ -10,11 +10,13 @@ namespace DiceFree.Quests
         [SerializeField] private QuestDefinition beat;
         [SerializeField] private CombatActor localPlayer;
         [SerializeField] private GameObject presentation;
+        [SerializeField] private bool onlyWhileActive;
         public bool Available(CombatActor actor)
         {
             var journal = actor != null ? actor.GetComponent<QuestJournal>() : null;
             var state = journal != null ? journal.GetProgress(beat.stableId) : null;
-            return state != null && state.definitionVersion == beat.version && journal.PrerequisitesMet(beat);
+            return state != null && state.definitionVersion == beat.version && journal.PrerequisitesMet(beat) &&
+                (!onlyWhileActive || state.status == QuestStatus.Active);
         }
         private void Update()
         {
@@ -22,5 +24,7 @@ namespace DiceFree.Quests
         }
         public void Configure(QuestDefinition value, CombatActor player, GameObject body)
         { beat = value; localPlayer = player; presentation = body; }
+
+        public void LimitToActiveQuest() => onlyWhileActive = true;
     }
 }

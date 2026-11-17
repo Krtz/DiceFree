@@ -61,7 +61,7 @@ namespace DiceFree.Dungeons
         public string Status=>Phase switch
         {
             WolfRunPhase.Loading=>"Travelling to the moonlit clearing…",
-            WolfRunPhase.Staging=>$"Prepare your party • {Mathf.CeilToInt(SecondsRemaining)}s • 10 waves",
+            WolfRunPhase.Staging=>$"Shared staging • {Mathf.CeilToInt(SecondsRemaining)}s • Practice and prepare gear",
             WolfRunPhase.Warning=>$"Wave {Wave} / 10 • {Composition.Points} points • Incoming in {Mathf.CeilToInt(SecondsRemaining)}s",
             WolfRunPhase.Fighting=>$"Wave {Wave} / 10 • {Composition.Points} points • Wolves remaining: {Remaining}",
             WolfRunPhase.Intermission=>$"Wave {Wave} cleared • Next wave: {Wave+3} points • {Mathf.CeilToInt(SecondsRemaining)}s",
@@ -279,7 +279,7 @@ namespace DiceFree.Dungeons
             }
             GUI.color=new Color(.2f,.29f,.38f);GUI.DrawTexture(new Rect(27,135,520,4),Texture2D.whiteTexture);GUI.color=new Color(.4f,.75f,.9f);GUI.DrawTexture(new Rect(27,135,520*WavesCleared/10f,4),Texture2D.whiteTexture);GUI.color=old;
             if(Phase!=WolfRunPhase.Loading&&GUI.Button(new Rect(27,148,150,23),Phase==WolfRunPhase.Victory?"Claim rewards":"Leave dungeon"))Abandon();
-            if(StagingReady){if(GUI.Button(new Rect(185,148,125,23),"Start waves"))StartNow(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());GUI.Label(new Rect(320,149,230,23),"Weak 1  ·  Strong 2  ·  Alpha 3",body);}
+            if(StagingReady){if(GUI.Button(new Rect(185,148,125,23),"Start Now"))StartNow(FindAnyObjectByType<DiceFree.Characters.TraversalInput>()?.GetComponent<CombatActor>());GUI.Label(new Rect(320,149,230,23),"Weak 1  ·  Strong 2  ·  Alpha 3",body);}
             else
             {
                 var counts=Fighting?RemainingComposition:Composition;

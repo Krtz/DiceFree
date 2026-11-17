@@ -33,7 +33,8 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
-            if (player == null || progression == null || HudPointerBlocker.ModalOpen) return;
+            var inspection=player==null?null:player.GetComponent<InspectSelection>();
+            if (player == null || progression == null || inspection?.SelectedTransform!=null || HudPointerBlocker.ModalOpen) return;
 
             Rect panel = Bounds;
             DrawPanel(panel);
@@ -69,6 +70,7 @@ namespace DiceFree.UI
                     basicAttack.Definition.interval,
                     basicAttack.Definition.windup) / Mathf.Max(0.01f, stats.AttackSpeed);
                 attackTooltip =
+                    $"Attack range: {basicAttack.Reach:0.##} m between hitbox edges\n" +
                     $"Attack Speed: {stats.AttackSpeed:0.###}x\n" +
                     $"Basic attack interval: {interval:0.###} sec\n" +
                     "Damage shown is raw pre-mitigation damage.";
@@ -81,6 +83,8 @@ namespace DiceFree.UI
                 ? 0f
                 : (effectiveMoveSpeed / stats.MoveSpeed - 1f) * 100f;
 
+            string hoveredTooltip = null;
+            Rect hoveredTooltipAnchor = default;
             DrawRows(left, new[]
             {
                 new Row("Attack", $"{attackMin:0}–{attackMax:0}", attackTooltip),
@@ -100,7 +104,7 @@ namespace DiceFree.UI
                     (Mathf.Abs(contextualBonus) < 0.05f
                         ? "No contextual movement bonus is active."
                         : $"Current surface/context bonus: {contextualBonus:+0.#;-0.#}%."))
-            });
+            }, ref hoveredTooltip, ref hoveredTooltipAnchor);
 
             DrawRows(right, new[]
             {
@@ -109,7 +113,7 @@ namespace DiceFree.UI
                 new Row("INT", attributes.intelligence.ToString("0.#"), AttributeTooltip(stats, attributes, AttributeKind.Intelligence)),
                 new Row("SPI", attributes.spirit.ToString("0.#"), AttributeTooltip(stats, attributes, AttributeKind.Spirit)),
                 new Row("VIT", attributes.vitality.ToString("0.#"), AttributeTooltip(stats, attributes, AttributeKind.Vitality))
-            });
+            }, ref hoveredTooltip, ref hoveredTooltipAnchor);
 
             float required = Mathf.Max(1, progression.RequiredXp);
             var xpRect = new Rect(inner.x, inner.yMax - xpHeight, inner.width, xpHeight);
@@ -119,7 +123,8 @@ namespace DiceFree.UI
                 new Color(0.48f, 0.12f, 0.72f, 1f),
                 $"XP {progression.CurrentXp:0} / {progression.RequiredXp:0}");
 
-            HudTooltip.DrawCurrent();
+            if (!string.IsNullOrWhiteSpace(hoveredTooltip))
+                HudTooltip.DrawAt(hoveredTooltip, hoveredTooltipAnchor);
         }
 
         private enum AttributeKind
@@ -217,19 +222,29 @@ namespace DiceFree.UI
             return $"{label} Defense currently increases {label.ToLowerInvariant()} damage taken by {-percent:0.#}% before resistances and separate damage-taken effects.";
         }
 
-        private static void DrawRows(Rect rect, Row[] rows)
+        private static void DrawRows(
+            Rect rect,
+            Row[] rows,
+            ref string hoveredTooltip,
+            ref Rect hoveredTooltipAnchor)
         {
             float row = rect.height / Mathf.Max(1, rows.Length);
+            Vector2 pointer = HudTooltip.CurrentGuiPointerPosition();
             for (int i = 0; i < rows.Length; i++)
             {
                 var line = new Rect(rect.x, rect.y + row * i, rect.width, row);
-                var content = new GUIContent(rows[i].label, rows[i].tooltip);
+                if (line.Contains(pointer))
+                {
+                    hoveredTooltip = rows[i].tooltip;
+                    hoveredTooltipAnchor = line;
+                }
+                var content = new GUIContent(rows[i].label);
                 GUI.Label(
                     new Rect(line.x, line.y, line.width * 0.68f, line.height),
                     content);
                 GUI.Label(
                     new Rect(line.x + line.width * 0.68f, line.y, line.width * 0.32f, line.height),
-                    new GUIContent(rows[i].value, rows[i].tooltip),
+                    new GUIContent(rows[i].value),
                     new GUIStyle(GUI.skin.label) { alignment = TextAnchor.UpperRight });
             }
         }

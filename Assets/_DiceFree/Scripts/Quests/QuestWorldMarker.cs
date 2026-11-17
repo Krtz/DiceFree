@@ -1,4 +1,4 @@
-using DiceFree.Combat;
+using DiceFree.Foundation;
 using UnityEngine;
 
 namespace DiceFree.Quests
@@ -8,24 +8,27 @@ namespace DiceFree.Quests
     /// gold ! for ordinary quests, blue ! for repeatable quests, green ? for turn-ins.
     /// No UI screen-space text and no hit-test/collision.
     /// </summary>
-    [DisallowMultipleComponent,RequireComponent(typeof(QuestGiver))]
+    [DisallowMultipleComponent]
     public sealed class QuestWorldMarker : MonoBehaviour
     {
         private QuestGiver giver;
+        private DiceFree.World.ConversationTarget conversation;
         private QuestJournal journal;
+        private float nextJournalLookup;
         private Transform pivot;
         private GameObject exclamation,repeatExclamation,question;
         private float baseHeight=2.9f;
         private static Material gold,blue,green;
-        public bool IsExclamation => exclamation!=null && exclamation.activeSelf;
-        public bool IsRepeatExclamation => repeatExclamation!=null && repeatExclamation.activeSelf;
+        public bool IsExclamation => exclamation!=null && exclamation.activeInHierarchy;
+        public bool IsRepeatExclamation => repeatExclamation!=null && repeatExclamation.activeInHierarchy;
         public static bool IsRepeatAvailable(QuestDefinition quest,bool canAccept) =>
             quest!=null && quest.repeatable && canAccept;
-        public bool IsQuestion => question!=null && question.activeSelf;
+        public bool IsQuestion => question!=null && question.activeInHierarchy;
 
         private void Awake()
         {
             giver=GetComponent<QuestGiver>();
+            conversation=GetComponent<DiceFree.World.ConversationTarget>();
         }
         private static Material MaterialFor(Color color,string name)
         {
@@ -101,15 +104,21 @@ namespace DiceFree.Quests
         private void LateUpdate()
         {
             if(pivot==null)return;
-            if(journal==null)journal=FindAnyObjectByType<QuestJournal>();
-            bool ready=false,available=false,repeatAvailable=false;
-            if(journal!=null)
+            if ((journal == null || !journal.isActiveAndEnabled) && Time.unscaledTime >= nextJournalLookup)
+            {
+                nextJournalLookup = Time.unscaledTime + .5f;
+                journal = FindLocalJournal();
+            }
+            var currentJournal = journal != null && journal.isActiveAndEnabled ? journal : null;
+            bool ready=currentJournal!=null && conversation!=null && currentJournal.NeedsConversation(conversation.NpcId, conversation.ConversationId);
+            bool available=false,repeatAvailable=false;
+            if(currentJournal!=null && giver!=null)
                 foreach(var quest in giver.Offers)
                 {
                     if(quest==null)continue;
-                    var state=journal.GetProgress(quest.stableId);
+                    var state=currentJournal.GetProgress(quest.stableId);
                     if(state?.status==QuestStatus.ReadyToTurnIn)ready=true;
-                    if(journal.CanAccept(quest))
+                    if(currentJournal.CanAccept(quest))
                     {
                         if(IsRepeatAvailable(quest,true))repeatAvailable=true;
                         else available=true;
@@ -131,6 +140,15 @@ namespace DiceFree.Quests
                     pivot.rotation=Quaternion.LookRotation(toward.normalized);
             }
             pivot.Rotate(Vector3.up,10f*Mathf.Sin(Time.time*2f),Space.Self);
+        }
+
+        private static QuestJournal FindLocalJournal()
+        {
+            var journals = FindObjectsByType<QuestJournal>();
+            foreach (var candidate in journals)
+                if (candidate.isActiveAndEnabled && candidate.GetComponent<ITraversalUiState>() is Behaviour input && input.isActiveAndEnabled)
+                    return candidate;
+            return null;
         }
     }
 }

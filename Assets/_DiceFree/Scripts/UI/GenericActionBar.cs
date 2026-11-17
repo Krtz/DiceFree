@@ -7,7 +7,9 @@ namespace DiceFree.UI
     {
         [SerializeField] private AbilityBarSource source;
         private string hoveredSkillTooltip;
+        private Rect hoveredSkillTooltipAnchor;
         private IQueuedOrders queuedOrders;
+        private SkillTargetingController targeting;
         private Vector2 tooltipPointer;
 
         public override string LayoutId => "action-bar";
@@ -19,7 +21,10 @@ namespace DiceFree.UI
         {
             if (source == null) source = GetComponent<AbilityBarSource>();
             foreach(var component in GetComponents<MonoBehaviour>())
-                if(component is IQueuedOrders queue){queuedOrders=queue;break;}
+            {
+                if(component is IQueuedOrders queue)queuedOrders=queue;
+                if(component is SkillTargetingController skillTargeting)targeting=skillTargeting;
+            }
         }
 
         private void Update()
@@ -30,7 +35,7 @@ namespace DiceFree.UI
 
             for (int i = 0; i <= AbilityBarSource.UltimateSlot; i++)
                 if (source.WasPressedThisFrame(i))
-                    source.Activate(i);
+                    source.Activate(i,source.ActionFor(i));
         }
 
         private void OnGUI()
@@ -38,15 +43,34 @@ namespace DiceFree.UI
             if (source == null || HudPointerBlocker.ModalOpen) return;
 
             hoveredSkillTooltip=null;
+            hoveredSkillTooltipAnchor=default;
             tooltipPointer=HudTooltip.CurrentGuiPointerPosition();
             if(queuedOrders==null)
                 foreach(var component in GetComponents<MonoBehaviour>())
                     if(component is IQueuedOrders queue){queuedOrders=queue;break;}
             Rect panel = Bounds;
             DrawPanel(panel);
+            int headerRow=0;
+            if(targeting!=null && targeting.Active && !string.IsNullOrWhiteSpace(targeting.Feedback))
+            {
+                DrawStatus(new Rect(panel.x+12,panel.y-21,panel.width-24,20),targeting.Feedback);
+                headerRow++;
+            }
+            else if(!string.IsNullOrWhiteSpace(source.Feedback))
+            {
+                DrawStatus(new Rect(panel.x+12,panel.y-21,panel.width-24,20),source.Feedback);
+                headerRow++;
+            }
+            if(queuedOrders!=null && queuedOrders.PendingOrders>0)
+            {
+                GUI.Label(new Rect(panel.x+12,panel.y-21*(headerRow+1),panel.width-24,20),
+                    "Queued orders: "+queuedOrders.PendingOrders+
+                    "   (Shift+click to append; Stop to clear)");
+                headerRow++;
+            }
             if(source.HasPurchasableUpgrade)
             {
-                Rect label=new(panel.x+12f,panel.y-23f,panel.width-24f,21f);
+                Rect label=new(panel.x+12f,panel.y-21*(headerRow+1),panel.width-24f,20f);
                 HudChrome.Fill(label,new Color(.10f,.23f,.15f,.96f));
                 GUI.Label(label,"+"+source.UnspentPoints+
                     " skill point"+(source.UnspentPoints==1?"":"s")+
@@ -57,10 +81,6 @@ namespace DiceFree.UI
                         fontSize=11,normal={textColor=new Color(.85f,1f,.72f)}
                     });
             }
-            if(queuedOrders!=null && queuedOrders.PendingOrders>0)
-                GUI.Label(new Rect(panel.x+12,source.HasPurchasableUpgrade?panel.y-45:panel.y-21,panel.width-20,20),
-                    "Queued orders: "+queuedOrders.PendingOrders+
-                    "   (Shift+click to append; Stop to clear)");
             if (source.PageCount > 1)
             {
                 var y = panel.y + 2f;
@@ -89,7 +109,7 @@ namespace DiceFree.UI
             if(!(HudLayoutManager.Current?.EditMode ?? false))
             {
                 if(!string.IsNullOrWhiteSpace(hoveredSkillTooltip))
-                    HudTooltip.DrawAt(hoveredSkillTooltip,tooltipPointer);
+                    HudTooltip.DrawAt(hoveredSkillTooltip,hoveredSkillTooltipAnchor);
             }
         }
 
@@ -103,11 +123,14 @@ namespace DiceFree.UI
             }
 
             bool interactable = !view.passive && view.learned &&
-                                view.cooldown <= 0.001f &&
+                                view.cooldown <= 0f &&
                                 !(HudLayoutManager.Current?.EditMode ?? false);
             bool hovered = rect.Contains(tooltipPointer);
             if(hovered)
+            {
                 hoveredSkillTooltip=view.tooltip;
+                hoveredSkillTooltipAnchor=rect;
+            }
             HudChrome.DrawSlot(rect, Theme, view.learned, hovered);
 
             // Draw the actual ability art before the interaction layer, not a
@@ -198,7 +221,7 @@ namespace DiceFree.UI
                 GUI.color = old;
                 GUI.Label(
                     rect,
-                    view.cooldown.ToString("0.0"),
+                    (Mathf.Ceil(view.cooldown*10f)/10f).ToString("0.0"),
                     new GUIStyle(GUI.skin.label)
                     {
                         alignment = TextAnchor.MiddleCenter,
@@ -234,7 +257,11 @@ namespace DiceFree.UI
                 Rect plus=new(rect.xMax-27f,rect.y+2f,25f,23f);
                 bool over=plus.Contains(tooltipPointer);
                 string details=source.UpgradeTooltip(slot);
-                if(over)hoveredSkillTooltip=details;
+                if(over)
+                {
+                    hoveredSkillTooltip=details;
+                    hoveredSkillTooltipAnchor=plus;
+                }
                 HudChrome.Fill(plus,over?new Color(.28f,.58f,.16f,.98f):
                     new Color(.17f,.43f,.13f,.98f));
                 if(GUI.Button(plus,new GUIContent("+",details),
@@ -253,10 +280,21 @@ namespace DiceFree.UI
 
         private void DrawEmpty(Rect rect, int index)
         {
-            bool hovered = rect.Contains(Event.current.mousePosition);
+            bool hovered = rect.Contains(tooltipPointer);
             HudChrome.DrawSlot(rect, Theme, false, hovered);
             // Future class/utility slots are deliberately left blank.
             // They cannot be mistaken for an equipped action.
+        }
+
+        private void DrawStatus(Rect rect,string message)
+        {
+            HudChrome.Fill(rect,new Color(.20f,.12f,.08f,.96f));
+            GUI.Label(rect,message,new GUIStyle(GUI.skin.label)
+            {
+                alignment=TextAnchor.MiddleCenter,
+                fontSize=11,
+                normal={textColor=new Color(1f,.87f,.70f)}
+            });
         }
     }
 }

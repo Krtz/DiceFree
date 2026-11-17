@@ -28,6 +28,22 @@ namespace DiceFree.Combat
         public bool Busy{get;private set;}
         public string Feedback{get;private set;}="";
         public GreatbladeCombatTuning Tuning=>tuning;
+        private float DamageBonus() =>
+            1 + GreatbladeProgressionRules.DamageBonusPct(skills.Rank(Kind.GreatswordMastery))/100f +
+            (cryUntil>Time.time ? (tuning.cryDamagePercent+3*(skills.Rank(Kind.BattleCry)-1))/100f : 0);
+
+        public Vector2 PreviewDamage(Kind kind, int rank)
+        {
+            var (attack, coefficient) = kind switch
+            {
+                Kind.WideArc => (tuning.wideArc, tuning.ArcCoefficient(rank)),
+                Kind.SpinDash => (tuning.spinDash, tuning.SpinCoefficient(rank)),
+                _ => (tuning.overheadBreaker, tuning.BreakerCoefficient(rank))
+            };
+            var range = attack.RawDamageRange(actor.Stats.Attributes, coefficient);
+            range += Vector2.one * GreatbladeProgressionRules.FlatDamage(kind, rank);
+            return range * DamageBonus() * (kind == Kind.OverheadBreaker ? 1 + Momentum * .015f : 1);
+        }
         public float Momentum=>resources?.Current(MomentumId)??0;
         public int LastCastHits{get;private set;}
         public float LastMomentumSpent{get;private set;}
@@ -81,7 +97,8 @@ namespace DiceFree.Combat
                 if(!actor.IsHostileTo(target)||!actor.HasSightOf(target))continue;
                 Vector3 delta=Vector3.ProjectOnPlane(target.transform.position-transform.position,Vector3.up);
                 if(delta.magnitude>actor.Radius+target.Radius+tuning.arcReach||Vector3.Angle(transform.forward,delta)>angle*.5f)continue;
-                Hit(target,tuning.wideArc,tuning.ArcCoefficient(skills.Rank(Kind.WideArc)),true);
+                Hit(target,tuning.wideArc,tuning.ArcCoefficient(skills.Rank(Kind.WideArc)),true,
+                    flat:GreatbladeProgressionRules.FlatDamage(Kind.WideArc,skills.Rank(Kind.WideArc)));
             }
             if(GreatbladeProgressionRules.GetsMasteryCleaveHaste(mastery)){hasteUntil=Time.time+GreatbladeProgressionRules.MasteryHasteDuration(mastery);actor.Stats.SetAttackSpeedPercentModifier(HasteSource,GreatbladeProgressionRules.MasteryHastePercent(mastery));}
             Finish(Kind.WideArc);
@@ -123,7 +140,8 @@ namespace DiceFree.Combat
                     foreach(var target in new List<CombatActor>(CombatActor.All))
                         if(actor.IsHostileTo(target)&&!hitOnce.Contains(target)&&actor.HasSightOf(target)&&
                             Vector3.ProjectOnPlane(target.transform.position-transform.position,Vector3.up).magnitude<=tuning.spinRadius+target.Radius)
-                        {hitOnce.Add(target);Hit(target,tuning.spinDash,tuning.SpinCoefficient(skills.Rank(Kind.SpinDash)),true);}
+                        {hitOnce.Add(target);Hit(target,tuning.spinDash,tuning.SpinCoefficient(skills.Rank(Kind.SpinDash)),true,
+                            flat:GreatbladeProgressionRules.FlatDamage(Kind.SpinDash,skills.Rank(Kind.SpinDash)));}
                     if(stalled>.3f){corner=corners.Length;Feedback="Spin Dash stopped at an obstacle.";break;}
                 }
                 elapsed+=Time.deltaTime;yield return null;
@@ -146,7 +164,8 @@ namespace DiceFree.Combat
             LastCastHits=0;
             if(actor.IsHostileTo(target)&&actor.HasSightOf(target)&&Vector3.Distance(transform.position,target.transform.position)<=actor.Radius+target.Radius+tuning.breakerReach)
             {
-                bool connected=Hit(target,tuning.overheadBreaker,tuning.BreakerCoefficient(skills.Rank(Kind.OverheadBreaker)),false,1+spent/100f*1.5f);
+                bool connected=Hit(target,tuning.overheadBreaker,tuning.BreakerCoefficient(skills.Rank(Kind.OverheadBreaker)),false,
+                    1+spent/100f*1.5f,GreatbladeProgressionRules.FlatDamage(Kind.OverheadBreaker,skills.Rank(Kind.OverheadBreaker)));
                 int mastery=skills.Rank(Kind.GreatswordMastery);
                 if(connected&&GreatbladeProgressionRules.GetsMasteryFinisherProtection(mastery))
                     actor.Health.AddTemporaryShield("greatblade.mastery",GreatbladeProgressionRules.MasteryShieldCapacity(actor.Health.Maximum),5,"element.metal");
@@ -161,13 +180,13 @@ namespace DiceFree.Combat
             actor.Stats.SetBasicAttackDamagePercentContribution(CrySource,tuning.cryDamagePercent+3*(skills.Rank(Kind.BattleCry)-1));
             Feedback="Battle Cry";CastStarted?.Invoke(Kind.BattleCry);CastFinished?.Invoke(Kind.BattleCry);return true;
         }
-        bool Hit(CombatActor target,AttackDefinition attack,float coefficient,bool generates,float extra=1)
+        bool Hit(CombatActor target,AttackDefinition attack,float coefficient,bool generates,float extra=1,float flat=0)
         {
             var resolution=AccuracyResolver.Resolve(actor,attack);
-            float bonus=1+GreatbladeProgressionRules.DamageBonusPct(skills.Rank(Kind.GreatswordMastery))/100f;
-            if(cryUntil>Time.time)bonus+= (tuning.cryDamagePercent+3*(skills.Rank(Kind.BattleCry)-1))/100f;
+            float bonus=DamageBonus();
             var packet=resolution.Hit.missed?new DamageResult{action=resolution,channel=attack.channel}:
-                DamageResolver.Calculate(actor.Stats,target.Stats,attack,resolution.Critical,coefficient,attack.RollDamageMultiplier(actor.Stats.Attributes,bonus*extra,coefficient));
+                DamageResolver.Calculate(actor.Stats,target.Stats,attack,resolution.Critical,coefficient,
+                    attack.RollDamageMultiplier(actor.Stats.Attributes,bonus*extra,coefficient),skillFlatDamage:flat*extra*bonus);
             packet.action=resolution;packet=target.Health.ApplyPacket(actor,packet);
             if(packet.applied+packet.absorbed<=0)return false;
             LastCastHits++;

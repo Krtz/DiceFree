@@ -30,7 +30,9 @@ namespace DiceFree.UI
             Append(text, stats.magicalDefense, "Magical Defense");
             Append(text, stats.attackSpeedPercent, "% Attack Speed");
             Append(text, stats.movementSpeedPercent, "% Move Speed");
+            Append(text, stats.regeneration, "Health regeneration");
             Append(text, stats.basicAttackFlatBonus, "Basic Attack Damage (min and max)");
+            Append(text, stats.basicAttackMaximumBonus, "Maximum basic attack damage");
 
             if (!string.IsNullOrWhiteSpace(definition.flavor))
                 text.AppendLine().AppendLine().Append(definition.flavor.Trim());
@@ -44,9 +46,6 @@ namespace DiceFree.UI
 
             return text.ToString();
         }
-
-        public static void DrawCurrent() =>
-            DrawAt(GUI.tooltip,CurrentGuiPointerPosition());
 
         // Input System coordinates are bottom-left-origin screen pixels while
         // IMGUI uses top-left-origin coordinates. When a mouse device exists,
@@ -64,7 +63,7 @@ namespace DiceFree.UI
                 Event.current.mousePosition;
         }
 
-        public static void DrawAt(string tooltip,Vector2 position)
+        public static void DrawAt(string tooltip,Rect anchor)
         {
             if (string.IsNullOrWhiteSpace(tooltip) ||
                 Event.current.type!=EventType.Repaint) return;
@@ -84,8 +83,11 @@ namespace DiceFree.UI
             float width = Mathf.Min(400f, Mathf.Max(235f, style.CalcSize(content).x + 22f));
             float height = Mathf.Min(Screen.height - 20f,
                 Mathf.Min(470f, style.CalcHeight(content, width - 12f) + 14f));
-            float x = Mathf.Max(8,Mathf.Min(Screen.width - width - 8, position.x + 18));
-            float y = Mathf.Max(8,Mathf.Min(Screen.height - height - 8, position.y + 18));
+            float x = anchor.center.x-width*.5f;
+            float y = anchor.y-height-8f;
+            if(y<8f)y=anchor.yMax+8f;
+            x=Mathf.Max(8f,Mathf.Min(Screen.width-width-8f,x));
+            y=Mathf.Max(8f,Mathf.Min(Screen.height-height-8f,y));
             var rect = new Rect(x, y, width, height);
             int oldDepth=GUI.depth;
             GUI.depth=-180;

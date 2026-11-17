@@ -155,6 +155,18 @@ namespace DiceFree.World
             return true;
         }
 
+        public bool TryLeaveDungeon(string dungeonId, string leaseToken, string participantId,
+            string fallbackFaceId, out string error)
+        {
+            Require(fallbackFaceId, nameof(fallbackFaceId));
+            if (!TryOwned(dungeonId, leaseToken, out var state, out error)) return false;
+            if (!state.participants.Contains(participantId, StringComparer.Ordinal))
+                return Reject("Player is not in this dungeon.", out error);
+            state.participants = state.participants.Where(id => id != participantId).ToArray();
+            PlaceOnWorldFace(participantId, fallbackFaceId);
+            return true;
+        }
+
         public bool TryBeginDungeon(
             string dungeonId,
             string leaseToken,

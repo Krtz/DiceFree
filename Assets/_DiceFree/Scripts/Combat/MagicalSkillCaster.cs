@@ -77,7 +77,7 @@ namespace DiceFree.Combat
                     EarlySkillVfx.Play(EarlySkillVfx.Cue.MagicalSand, target.transform.position);
                     if (definition.attack == null) return FailAfterSpend("Magic Sand attack data is missing.", cost);
                     DamageResolver.Hit(actor, target, definition.attack, null,
-                        definition.DamageCoefficient(rank), skillFlatDamage: 10f * rank);
+                        definition.DamageCoefficient(rank), skillFlatDamage: definition.FlatDamage(rank));
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(
                             EffectId(definition),
@@ -98,7 +98,8 @@ namespace DiceFree.Combat
                         EffectId(definition),
                         definition.secondaryAttack,
                         definition.ImbuementCoefficient(rank),
-                        definition.durationSeconds);
+                        definition.durationSeconds,
+                        definition.FlatDamage(rank));
                     break;
 
                 default:
@@ -155,7 +156,8 @@ namespace DiceFree.Combat
                 var flatB = new Vector2(point.x, point.z);
                 if (Vector2.Distance(flatA, flatB) > definition.iceRadius + target.Radius) continue;
 
-                DamageResolver.Hit(actor, target, definition.attack, null, definition.DamageCoefficient(rank));
+                DamageResolver.Hit(actor, target, definition.attack, null,
+                    definition.DamageCoefficient(rank),definition.FlatDamage(rank));
                 if (target.Alive && target.Effects != null)
                     target.Effects.ApplyMovementSpeedDebuff(
                         EffectId(definition),

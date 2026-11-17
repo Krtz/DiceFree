@@ -1,6 +1,6 @@
 # Input and Controls
 
-## Current prototype implementation (#48 + #49 + #52 targeting, through 2026-10-07)
+## Current prototype implementation (#48 + #49 + #52 targeting; Quickcast follow-up 2026-10-26)
 
 The current Cornberg prototype now has one shared Unity Input System source of truth instead of separate hard-coded `InputAction` instances in traversal, combat, camera, and inventory code.
 
@@ -35,6 +35,7 @@ First-pass rebindable controls:
 - Interact;
 - Close interaction;
 - Select target;
+- Select hero;
 - Cycle hostile;
 - Attack selected;
 - Clear target;
@@ -61,12 +62,14 @@ Current prototype defaults remain:
 - I = interact;
 - Escape = close interaction / clear target contextually;
 - left mouse = select target;
+- F1 = select your hero. Press F1 twice quickly to center the camera and follow them;
 - Tab = cycle hostile;
 - X = attack selected;
 - R = return to anchor;
 - B = inventory;
 - V = look toward World 1;
 - arrow keys = camera pan;
+- move the pointer to a screen edge to pan the camera in that direction;
 - middle mouse = camera drag;
 - Home = recenter;
 - F = toggle follow;
@@ -76,7 +79,7 @@ Current prototype defaults remain:
 - K = Novice skill-allocation menu;
 - Escape = close Options while open.
 
-The current playable classes now use **Normal / confirm cast** as the implemented prototype casting mode. Pressing a targeted ability hotkey enters a separate targeting state rather than consuming the ordinary selected target: hostile-unit, friendly-unit, and ground reticles are supported; left-click confirms; right-click or Escape cancels without spending resources or starting cooldown. Ordinary target selection remains useful for basic attacks/Tab targeting but no longer causes a skill to auto-cast merely because a unit was already selected. Self-only actives such as Guard and Quickening still cast immediately. Semi-quick/quick cast configuration, final range/area preview art, queued move-into-range casting, summon control scheme, controller layout, and final settings UX remain future work.
+The playable classes support three configurable **Quickcast** modes in Gameplay Options: **Targeting reticle** (the default: press the skill key, then click to confirm), **Quickcast on press**, and **Quickcast on release**. The quickcast modes use the current pointer position for the skill target; release mode waits for the bound skill action to release. Right-click or Escape cancels a reticle cast without spending resources or starting cooldown. This setting applies to skill hotkeys on the shared action bar; clicking a skill icon continues to open the targeting reticle. Self-only acts execute on press in the first two modes and on key release in release mode. Ordinary target selection does not cause a skill to auto-cast merely because a unit was already selected. These are implemented source behaviors awaiting connected-Editor validation; final range/area preview art, queued move-into-range casting, summon control scheme and controller layout remain future work.
 
 ## Philosophy
 

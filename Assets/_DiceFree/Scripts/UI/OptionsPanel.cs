@@ -246,11 +246,21 @@ namespace DiceFree.UI
         private void DrawGameplay()
         {
             GUILayout.Label("Gameplay");
-            bool retaliate=GUILayout.Toggle(gameplayPreferences.AutoRetaliate,
-                "Auto retaliate when attacked");
-            if(retaliate!=gameplayPreferences.AutoRetaliate)
-                gameplayPreferences.SetAutoRetaliate(retaliate);
-            GUILayout.Label("Only retaliates while you aren't already attacking a selected target.");
+            GUILayout.Label("Spell casting");
+            string[] castLabels={"Targeting reticle","Quickcast on press","Quickcast on release"};
+            int castIndex=Mathf.Clamp((int)gameplayPreferences.QuickCastMode,0,castLabels.Length-1);
+            int nextCastIndex=GUILayout.SelectionGrid(castIndex,castLabels,3,GUILayout.MinHeight(42));
+            if(nextCastIndex!=castIndex)
+                gameplayPreferences.SetQuickCastMode((QuickCastMode)nextCastIndex);
+            GUILayout.Label("Reticle: press a skill, then click a target. Quickcast uses the pointer when the skill key is pressed or released.");
+            GUILayout.Space(12);
+            GUILayout.Label("Automatic attacks");
+            int retaliation=(int)gameplayPreferences.Retaliation;
+            int nextRetaliation=GUILayout.SelectionGrid(retaliation,
+                new[] { "Off", "Retaliate when attacked", "Attack nearby enemies" },3,GUILayout.MinHeight(38));
+            if(nextRetaliation!=retaliation)
+                gameplayPreferences.SetRetaliation((RetaliationMode)nextRetaliation);
+            GUILayout.Label("Attack nearby enemies engages visible enemies within 6 m while you are idle.");
             GUILayout.Space(12);
             GUILayout.Label("When a targeted skill is out of range:");
             GUILayout.BeginHorizontal();

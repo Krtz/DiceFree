@@ -105,7 +105,15 @@ namespace DiceFree.UI
             float contentHeight = rows * SlotSize + Mathf.Max(0, rows - 1) * SlotGap + 4f;
             var content = new Rect(0, 0, contentWidth, contentHeight);
 
-            scroll = GUI.BeginScrollView(viewport, scroll, content, false, contentHeight > viewport.height);
+            string hoveredTooltip = null;
+            Rect hoveredTooltipAnchor = default;
+            Vector2 pointer = HudTooltip.CurrentGuiPointerPosition();
+            bool hasScrollbar = contentHeight > viewport.height;
+            var itemViewport = viewport;
+            if (hasScrollbar)
+                itemViewport.width -= GUI.skin.verticalScrollbar.fixedWidth + GUI.skin.verticalScrollbar.margin.left;
+            bool pointerOverItems = itemViewport.Contains(pointer);
+            scroll = GUI.BeginScrollView(viewport, scroll, content, false, hasScrollbar);
             for (int index = 0; index < totalSlots; index++)
             {
                 int row = index / Columns;
@@ -131,7 +139,14 @@ namespace DiceFree.UI
                         : HudTooltip.Item(definition);
                 }
 
-                bool hovered = slotRect.Contains(Event.current.mousePosition);
+                var screenSlot = new Rect(
+                    viewport.position + slotRect.position - scroll, slotRect.size);
+                bool hovered = pointerOverItems && screenSlot.Contains(pointer);
+                if (hovered && occupied)
+                {
+                    hoveredTooltip = tooltip;
+                    hoveredTooltipAnchor = screenSlot;
+                }
                 HudChrome.DrawSlot(slotRect, theme, occupied, hovered);
 
                 if (occupied && definition != null)
@@ -140,7 +155,7 @@ namespace DiceFree.UI
                     // The popup is drawn after EndScrollView in screen coordinates.
                     if(Event.current.type==EventType.MouseDown &&
                        Event.current.button==1 &&
-                       slotRect.Contains(Event.current.mousePosition))
+                       hovered)
                     {
                         selectedItemId=items[index].instanceId;
                         contextBounds=new Rect(
@@ -189,7 +204,8 @@ namespace DiceFree.UI
                 GUI.Label(new Rect(inner.x,header.yMax+3,inner.width,22),itemFeedback);
 
             DrawItemContext(theme);
-            if(selectedItemId==null)HudTooltip.DrawCurrent();
+            if(selectedItemId==null && !string.IsNullOrWhiteSpace(hoveredTooltip))
+                HudTooltip.DrawAt(hoveredTooltip, hoveredTooltipAnchor);
         }
 
         public bool RunItemAction(string instanceId,string action,out string message)

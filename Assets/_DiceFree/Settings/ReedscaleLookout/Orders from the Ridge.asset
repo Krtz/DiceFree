@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Orders from the Ridge
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.reedscale-lookout
+  title: Orders from the Ridge
+  requiredClassId: 
+  requiredLevel: 35
+  version: 1
+  offer: Scouts have seen lizardmen moving north of Lanternmere. Cross the creek and find their lookout. Bring back a patrol report so the Guild can learn what they're guarding.
+  activeDialogue: Follow the trail north from Lanternmere and cross the larch footbridge. Look for the ochre-roofed watchtower. The patrol report is on a table beneath a hide canopy in the camp.
+  turnInDialogue: These orders name the Ancient Road Dragon. The Reedscale lizardmen answer to it directly, and their patrols watch a mountain path northwest of Arborium. I'll pass your report to the Guild.
+  locationHint: Speak to the Guild Steward inside Arborium's Adventurers' Guild.
+  turnInHint: Bring the Reedscale patrol report back to the Guild Steward in Arborium.
+  stages:
+  - kind: 6
+    objectiveId: work.reedscale.patrol-report
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Recover the patrol report at Reedscale Lookout, north of Lanternmere
+    contentId: work.reedscale.patrol-report
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 3600
+  reward: {fileID: 11400000, guid: 848c640c76f6af046a08a28750f82036, type: 2}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

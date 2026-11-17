@@ -38,6 +38,7 @@ namespace DiceFree.Quests
         [Min(1)] public int version = 1;
         [TextArea] public string offer;
         [TextArea] public string activeDialogue;
+        [TextArea] public string turnInDialogue;
         public string locationHint;
         public string turnInHint;
         public QuestObjective[] stages;

@@ -18,11 +18,13 @@ namespace DiceFree.Combat
         {
             public readonly AttackDefinition attack;
             public readonly float coefficient;
+            public readonly float flatDamage;
             public readonly float until;
-            public TimedAttackAugment(AttackDefinition definition, float coefficientOverride, float expiresAt)
+            public TimedAttackAugment(AttackDefinition definition, float coefficientOverride, float flatDamage, float expiresAt)
             {
                 attack = definition;
                 coefficient = coefficientOverride;
+                this.flatDamage=flatDamage;
                 until = expiresAt;
             }
         }
@@ -153,12 +155,15 @@ namespace DiceFree.Combat
             string effectId,
             AttackDefinition attack,
             float coefficient,
-            float durationSeconds)
+            float durationSeconds,
+            float flatDamage = 0)
         {
             ValidateEffect(effectId, durationSeconds);
             if (attack == null || float.IsNaN(coefficient) || float.IsInfinity(coefficient) || coefficient < 0)
                 throw new ArgumentException("Basic-attack augment requires attack data and a finite non-negative coefficient.");
-            basicAttackAugments[effectId] = new TimedAttackAugment(attack, coefficient, Time.time + durationSeconds);
+            if(float.IsNaN(flatDamage)||float.IsInfinity(flatDamage)||flatDamage<0)
+                throw new ArgumentOutOfRangeException(nameof(flatDamage));
+            basicAttackAugments[effectId] = new TimedAttackAugment(attack, coefficient,flatDamage,Time.time + durationSeconds);
         }
 
         public void ResolveBasicAttackAugments(CombatActor source, CombatActor target)
@@ -167,7 +172,8 @@ namespace DiceFree.Combat
             CleanupExpired();
             foreach (var augment in basicAttackAugments.Values)
                 if (augment.attack != null)
-                    DamageResolver.Hit(source, target, augment.attack, null, augment.coefficient);
+                    DamageResolver.Hit(source, target, augment.attack, null,
+                        augment.coefficient,augment.flatDamage);
         }
 
         public void ClearTransient()

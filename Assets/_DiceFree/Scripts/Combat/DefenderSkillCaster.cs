@@ -55,11 +55,13 @@ namespace DiceFree.Skills
         public static float ChallengeDuration(int rank) => 2f + .08f * (rank - 1);
         private const float BashDamagePerRank = 5f, SweepDamagePerRank = 4f;
 
+        public AttackDefinition DamageDefinition(DefenderSkill skill) => skill == DefenderSkill.ShieldBash ? bash : sweep;
+        public static float RankDamage(DefenderSkill skill,int rank) =>
+            (skill == DefenderSkill.ShieldBash ? BashDamagePerRank : SweepDamagePerRank) * (rank - 1);
+
         public float PreviewDamage(DefenderSkill skill, int rank)
         {
-            var attack = skill == DefenderSkill.ShieldBash ? bash : sweep;
-            float bonus = skill == DefenderSkill.ShieldBash ? BashDamagePerRank : SweepDamagePerRank;
-            return attack.RawDamage(actor.Stats.Attributes) + bonus * (rank - 1);
+            return DamageDefinition(skill).RawDamage(actor.Stats.Attributes) + RankDamage(skill,rank);
         }
 
         public float Remaining(DefenderSkill skill) => Mathf.Max(0, readyAt[(int)skill] - Time.time);

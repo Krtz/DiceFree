@@ -111,6 +111,13 @@ namespace DiceFree.EditorTools
             value.range = range;
             value.durationSeconds = duration;
             value.attack = attack;
+            value.flatDamagePerRank = kind switch
+            {
+                NoviceSkillKind.StrengthMeleeStun => 4f,
+                NoviceSkillKind.MagicSand => 10f,
+                _ => 0f
+            };
+            value.flatHealPerRank = kind == NoviceSkillKind.SpiritHeal ? 5f : 0f;
             EditorUtility.SetDirty(value);
             return value;
         }

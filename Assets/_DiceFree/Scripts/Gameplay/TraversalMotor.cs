@@ -11,6 +11,10 @@ namespace DiceFree.Characters
         [SerializeField, Min(0.1f)] private float speed = 5f;
         private NavMeshAgent agent;
         private NavMeshPath candidatePath;
+        private static readonly HashSet<CapsuleCollider> movingPedestrians = new();
+        private bool pedestriansMatter, detouring;
+        private float checkPedestriansAt;
+        private Vector3 requestedDestination;
         private bool motionAllowed = true;
         private readonly HashSet<string> motionBlocks = new(StringComparer.Ordinal);
         private readonly SortedDictionary<string, float> speedFactors = new(StringComparer.Ordinal);
@@ -21,7 +25,14 @@ namespace DiceFree.Characters
         // Context providers refresh their own named contribution; inputs never calculate speed.
         public event Action RefreshSpeedSources;
         public bool Ready => agent != null && agent.isOnNavMesh;
-        public bool Travelling => Ready && agent.hasPath;
+        public bool Travelling => Ready && (agent.hasPath || detouring);
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetPedestrians() => movingPedestrians.Clear();
+
+        public static void TrackPedestrian(CapsuleCollider body) => movingPedestrians.Add(body);
+        public static void ForgetPedestrian(CapsuleCollider body) => movingPedestrians.Remove(body);
+        public void ConsiderMovingPedestrians() => pedestriansMatter = true;
 
         private void Awake()
         {
@@ -31,6 +42,7 @@ namespace DiceFree.Characters
             agent.acceleration = 35f;
             agent.angularSpeed = 720f;
             agent.stoppingDistance = 0.15f;
+            agent.autoRepath = true;
         }
 
         private void Start()
@@ -47,11 +59,17 @@ namespace DiceFree.Characters
             RefreshSpeed();
             if (!MotionAllowed || !Ready || !NavMesh.SamplePosition(destination, out var hit, 0.75f, agent.areaMask))
                 return false;
+            if (detouring && (hit.position - requestedDestination).sqrMagnitude < .1f) return true;
             if (!agent.CalculatePath(hit.position, candidatePath) ||
                 candidatePath.status != NavMeshPathStatus.PathComplete)
                 return false; // Keep the previous valid command when a click is unreachable.
             agent.isStopped = false;
-            return agent.SetPath(candidatePath);
+            if (!agent.SetPath(candidatePath)) return false;
+            requestedDestination = hit.position;
+            detouring = false;
+            checkPedestriansAt = 0;
+            AvoidPedestrianAhead();
+            return true;
         }
 
         // Ground clicks may fall just inside a prop's clearance or on a disconnected
@@ -65,12 +83,13 @@ namespace DiceFree.Characters
             var toward = Vector3.ProjectOnPlane(transform.position - destination, Vector3.up);
             if (toward.sqrMagnitude < .001f) toward = Vector3.forward;
             toward.Normalize();
-            for (int ring = 1; ring <= 4; ring++)
+            for (int ring = 1; ring <= 5; ring++)
             {
                 float bestDistance = float.PositiveInfinity;
-                for (int i = 0; i < 8; i++)
+                float offset = ring == 1 ? .42f : (ring - 1) * .85f;
+                for (int i = 0; i < 12; i++)
                 {
-                    var probe = destination + Quaternion.Euler(0, i * 45f, 0) * toward * (ring * .85f);
+                    var probe = destination + Quaternion.Euler(0, i * 30f, 0) * toward * offset;
                     if (!TryCandidate(probe, destination.y, .48f, out var sample)) continue;
                     float score = (sample - destination).sqrMagnitude + .025f * (sample - transform.position).magnitude;
                     if (score >= bestDistance) continue;
@@ -95,7 +114,75 @@ namespace DiceFree.Characters
 
         public void Stop()
         {
+            detouring = false;
             if (Ready) agent.ResetPath();
+        }
+
+        private void AvoidPedestrianAhead()
+        {
+            if (!pedestriansMatter || !MotionAllowed || !Ready || agent.pathPending) return;
+            if (detouring)
+            {
+                if (agent.hasPath && agent.remainingDistance > .23f) return;
+                detouring = false;
+                if (agent.CalculatePath(requestedDestination, candidatePath) &&
+                    candidatePath.status == NavMeshPathStatus.PathComplete) agent.SetPath(candidatePath);
+            }
+            if (!agent.hasPath || Time.time < checkPedestriansAt) return;
+            checkPedestriansAt = Time.time + .08f;
+
+            var start = agent.nextPosition;
+            var leg = agent.steeringTarget - start;
+            leg.y = 0;
+            float length = leg.magnitude;
+            if (length < .25f) return;
+            var heading = leg / length;
+            var side = Vector3.Cross(Vector3.up, heading);
+            float lookahead = Mathf.Min(length, Mathf.Max(2.5f, effectiveSpeed * .58f));
+            float nearest = float.PositiveInfinity, clearance = 0;
+            Vector3 obstruction = default;
+            foreach (var body in movingPedestrians)
+            {
+                if (body == null || !body.enabled || !body.gameObject.activeInHierarchy) continue;
+                var center = body.transform.TransformPoint(body.center);
+                var fromStart = center - start;
+                if (Mathf.Abs(fromStart.y - agent.height * .5f) > .95f) continue;
+                float forward = Vector3.Dot(fromStart, heading);
+                if (forward <= 0 || forward > lookahead || forward >= nearest) continue;
+                var scale = body.transform.lossyScale;
+                float safeRadius = agent.radius + body.radius * Mathf.Max(Mathf.Abs(scale.x), Mathf.Abs(scale.z)) + .32f;
+                if (Mathf.Abs(Vector3.Dot(fromStart, side)) >= safeRadius) continue;
+                nearest = forward;
+                clearance = safeRadius;
+                obstruction = new Vector3(center.x, start.y, center.z);
+            }
+
+            if (float.IsPositiveInfinity(nearest))
+            {
+                if (agent.isStopped) agent.isStopped = false;
+                return;
+            }
+            var preferred = Vector3.Dot(start - obstruction, side) < 0 ? -side : side;
+            if (!TryPedestrianDetour(start, obstruction, heading, preferred, clearance) &&
+                !TryPedestrianDetour(start, obstruction, heading, -preferred, clearance))
+            {
+                // In a narrow doorway, wait briefly for a crossing NPC to clear an actual route.
+                agent.isStopped = nearest <= clearance;
+                return;
+            }
+            agent.isStopped = false;
+            detouring = true;
+        }
+
+        private bool TryPedestrianDetour(Vector3 start, Vector3 obstruction, Vector3 heading, Vector3 side, float clearance)
+        {
+            var bypass = obstruction + side * (clearance * 1.77f) - heading * (clearance * .24f);
+            if (!NavMesh.SamplePosition(bypass, out var hit, .38f, agent.areaMask) ||
+                Mathf.Abs(hit.position.y - start.y) > .58f ||
+                NavMesh.Raycast(start, hit.position, out _, agent.areaMask) ||
+                !agent.CalculatePath(hit.position, candidatePath) || candidatePath.status != NavMeshPathStatus.PathComplete)
+                return false;
+            return agent.SetPath(candidatePath);
         }
 
         public void MoveDirect(Vector3 direction, float deltaTime)
@@ -105,8 +192,18 @@ namespace DiceFree.Characters
             direction = Vector3.ClampMagnitude(Vector3.ProjectOnPlane(direction, Vector3.up), 1f);
             var start = agent.nextPosition;
             var end = start + direction * (Speed * deltaTime);
-            // Both schemes respect the same baked radius, slopes and natural boundaries.
-            if (NavMesh.Raycast(start, end, out var hit, agent.areaMask)) end = hit.position;
+            // Keep the component of input parallel to a wall or an inside corner.
+            // The second ray keeps that slide inside the same connected surface.
+            if (NavMesh.Raycast(start, end, out var hit, agent.areaMask))
+            {
+                var normal = Vector3.ProjectOnPlane(hit.normal, Vector3.up).normalized;
+                var slide = Vector3.ProjectOnPlane(end - hit.position, normal);
+                slide.y = 0;
+                var edge = Vector3.MoveTowards(hit.position, start, .025f);
+                end = edge + slide;
+                if (NavMesh.Raycast(edge, end, out var boundary, agent.areaMask)) end = boundary.position;
+                end = Vector3.MoveTowards(end, start, .01f);
+            }
             // Direct movement also respects live unit footprints, not only the static bake.
             var displacement = end - start;
             var distance = displacement.magnitude;
@@ -131,7 +228,11 @@ namespace DiceFree.Characters
         }
 
         private void OnDisable() => Stop();
-        private void Update() => RefreshSpeed();
+        private void Update()
+        {
+            RefreshSpeed();
+            AvoidPedestrianAhead();
+        }
         public void SetSpeed(float value) { speed = Mathf.Max(0.1f, value); RefreshSpeed(); }
         public void SetSpeedFactor(string sourceId, float factor)
         {

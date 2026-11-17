@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Crownguard Gauntlets
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.slime-regent.gauntlets
+  displayName: Crownguard Gauntlets
+  icon: {fileID: 21300000, guid: b49fdc8459082664ba9fffcb25cdd0ea, type: 3}
+  slot: 3
+  handsRequired: 1
+  itemLevel: 50
+  rarityId: rarity.uncommon
+  sourceId: boss.slime-regent
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId: 
+  restoreResourceAmount: 0
+  allowedClassIds: []
+  flavor: 
+  stats:
+    attributes:
+      vitality: 8
+      strength: 7
+      agility: 9
+      intelligence: 0
+      spirit: 0
+    physicalDefense: 6
+    magicalDefense: 0
+    attackSpeedPercent: 8
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

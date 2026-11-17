@@ -68,7 +68,8 @@ namespace DiceFree.Combat
                     if (definition.attack == null) return Fail("Strength skill attack data is missing.");
                     vfx?.PlayMeleeStun(actor, target);
                     EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceStrike, target.transform.position);
-                    DamageResolver.Hit(actor, target, definition.attack);
+                    DamageResolver.Hit(actor, target, definition.attack,
+                        skillFlatDamage: definition.FlatDamage(rank));
                     if (target.Alive)
                         target.Effects.TryApplyStun(definition.StunDuration(rank), true);
                     break;
@@ -78,7 +79,7 @@ namespace DiceFree.Combat
                     vfx?.PlayMagicSand(actor, target);
                     EarlySkillVfx.Play(EarlySkillVfx.Cue.NoviceSand, target.transform.position);
                     DamageResolver.Hit(actor, target, definition.attack,
-                        skillFlatDamage: 10f * rank);
+                        skillFlatDamage: definition.FlatDamage(rank));
                     if (target.Alive)
                         target.Effects.ApplyAccuracyPenalty(definition.stableId, definition.MagicSandMissChance(rank), definition.durationSeconds);
                     break;

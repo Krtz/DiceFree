@@ -18,6 +18,7 @@ MonoBehaviour:
   tags:
   - verdant-wilds
   - fungus
+  - plant
   experienceReward: 0
   baseAttributes:
     vitality: 8

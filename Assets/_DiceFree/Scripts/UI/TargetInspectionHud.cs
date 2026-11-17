@@ -24,9 +24,7 @@ namespace DiceFree.UI
         public override Rect DefaultNormalizedBounds=>
             new Rect(.006f,.434f,.255f,.268f);
         public override Vector2 MinimumPixelSize=>new(305,173);
-        public override bool BlocksPointer =>
-            (HudLayoutManager.Current?.EditMode??false) ||
-            selected!=null && selected.SelectedTransform!=null;
+        public override bool BlocksPointer => HudLayoutManager.Current?.EditMode??false;
         private void Awake()
         {
             texture=new RenderTexture(320,320,16,RenderTextureFormat.ARGB32)
@@ -138,8 +136,23 @@ namespace DiceFree.UI
             Acquire();
             var unit=selected?.SelectedTransform;
             bool editing=HudLayoutManager.Current?.EditMode??false;
+            // A selected unit is drawn by CharacterHudPanel in the hero's
+            // existing lower-left slot, so it never creates a second window.
+            if(unit!=null)return;
             if(unit==null && !editing)return;
-            Rect panel=Bounds;
+            DrawInspection(Bounds);
+        }
+
+        public void DrawReplacement(Rect panel)
+        {
+            if(HudPointerBlocker.ModalOpen)return;
+            Acquire();
+            if(selected?.SelectedTransform==null)return;
+            DrawInspection(panel);
+        }
+
+        private void DrawInspection(Rect panel)
+        {
             DrawPanel(panel);
             Rect inner=Inner(panel);
             var actor=selected?.Actor;
@@ -148,7 +161,8 @@ namespace DiceFree.UI
                 actor.DisplayName+"  Lv "+actor.Stats.Level:
                 npc!=null && !string.IsNullOrWhiteSpace(npc.DisplayName)?
                     npc.DisplayName:
-                    unit!=null?unit.name:"Select a creature or NPC";
+                    selected?.SelectedTransform!=null?
+                        selected.SelectedTransform.name:"Select a creature or NPC";
             GUI.Label(new Rect(inner.x+3,inner.y,inner.width-6,23),title,
                 new GUIStyle(GUI.skin.label)
                 {

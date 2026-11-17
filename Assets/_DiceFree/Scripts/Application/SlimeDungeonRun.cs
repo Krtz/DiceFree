@@ -31,6 +31,7 @@ namespace DiceFree.Dungeons
         public bool SecretSolved {get;private set;}
         public string Status {get;private set;}="Loading staging";
         public static readonly Vector3 Origin=new(20000,0,20000);
+        public static readonly Vector3 RegentArenaCenter=Origin+new Vector3(55,0,9);
         public static readonly Vector3 RewardOrigin=new(30000,0,30000);
         DungeonDefinition definition; DungeonOccupancySnapshot lease;
         readonly SemanticGameEventHub events=new();
@@ -158,7 +159,7 @@ namespace DiceFree.Dungeons
             Publish(new DungeonPuzzleSolvedEvent(definition.stableId,"puzzle.slime-tree"));
             bossGate.SetActive(false);Grant(secret?Tuning.bluePuzzleXp:Tuning.puzzleXp,0);
             Spawn(Tuning.boss,Origin+new Vector3(68,0,76),3.2f,SlimeRole.Boss);
-            if(secret){secretGate.SetActive(false);Spawn(Tuning.regent,Origin+new Vector3(52,0,22),4.4f,SlimeRole.Regent);Publish(new DungeonSecretDiscoveredEvent(definition.stableId,"secret.slime-regent"));}
+            if(secret){secretGate.SetActive(false);Spawn(Tuning.regent,RegentArenaCenter,4.4f,SlimeRole.Regent);Publish(new DungeonSecretDiscoveredEvent(definition.stableId,"secret.slime-regent"));}
             Status=secret?"Both final routes open — defeat either boss":"Normal Slime Boss route open";
         }
         void PlayerDied(CombatActor a){if(!Active&&!Completing)return;deaths.Add(a);playerEvents[a].Publish(new DungeonPlayerDiedEvent(definition.stableId));}
@@ -218,7 +219,7 @@ namespace DiceFree.Dungeons
         {
             FindAnyObjectByType<WorldDayNightCycle>()?.SetInterior(point.x>19000);
             var camera=FindAnyObjectByType<DiceFree.Core.ExplorationCamera>();if(camera==null)return;
-            camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19994,96,108):OverworldMapBounds.ForScene(actor.gameObject.scene,new Rect(-56,-44,181,116)));
+            camera.ConfigureMapBounds(point.x>29000?new Rect(29988,29988,24,24):point.x>19000?new Rect(19994,19982,96,120):OverworldMapBounds.ForScene(actor.gameObject.scene,new Rect(-56,-44,181,116)));
             camera.RecenterForTravel(actor.transform);
         }
         public static bool CoversPointer(Vector2 screenPoint)

@@ -23,6 +23,8 @@ namespace DiceFree.UI
             if(last!=shop){message="";last=shop;buyScroll=sellScroll=Vector2.zero;}
             var actor=GetComponent<CombatActor>();var wallet=GetComponent<GoldWallet>();var inventory=GetComponent<CarriedInventory>();var r=Bounds;
             GUI.Box(r,GUIContent.none);GUI.Label(new Rect(r.x+12,r.y+10,260,25),shop.DisplayName);
+            string hoveredTooltip=null;
+            Rect hoveredTooltipAnchor=default;
             if(GUI.Button(new Rect(r.x+280,r.y+10,90,25),"Buy"))selling=false;
             if(GUI.Button(new Rect(r.x+378,r.y+10,100,25),"Sell"))selling=true;
             var area=new Rect(r.x+12,r.y+44,476,r.height-130);
@@ -48,8 +50,17 @@ namespace DiceFree.UI
                     GUILayout.BeginHorizontal(GUILayout.Height(58));
                     var iconRect=GUILayoutUtility.GetRect(48,48,GUILayout.Width(48));
                     if(!ItemIconGUI.Draw(iconRect,offer.item))GUI.Label(iconRect,offer.item.slot.ToString().Substring(0,2));
-                    GUI.Label(iconRect,new GUIContent("",HudTooltip.Item(offer.item)),GUIStyle.none);
-                    GUILayout.BeginVertical();GUILayout.Label(new GUIContent(offer.item.displayName,HudTooltip.Item(offer.item)));
+                    string itemTooltip=HudTooltip.Item(offer.item);
+                    GUI.Label(iconRect,new GUIContent("",itemTooltip),GUIStyle.none);
+                    Rect pointerScreen=new Rect(GUIUtility.GUIToScreenPoint(Event.current.mousePosition),Vector2.zero);
+                    Rect iconScreen=new Rect(GUIUtility.GUIToScreenPoint(iconRect.position),iconRect.size);
+                    if(iconScreen.Contains(pointerScreen.position))
+                    {hoveredTooltip=itemTooltip;hoveredTooltipAnchor=iconScreen;}
+                    GUILayout.BeginVertical();GUILayout.Label(new GUIContent(offer.item.displayName,itemTooltip));
+                    Rect nameRect=GUILayoutUtility.GetLastRect();
+                    Rect nameScreen=new Rect(GUIUtility.GUIToScreenPoint(nameRect.position),nameRect.size);
+                    if(nameScreen.Contains(pointerScreen.position))
+                    {hoveredTooltip=itemTooltip;hoveredTooltipAnchor=nameScreen;}
                     GUILayout.Label(offer.goldPrice+" gold"+(offer.provisionalPrice?" (provisional)":""));GUILayout.EndVertical();
                     bool prior=GUI.enabled;GUI.enabled=prior&&wallet.CanSpend(offer.goldPrice)&&shop.CanInteract(actor);
                     if(GUILayout.Button("Buy",GUILayout.Width(88),GUILayout.Height(32)))shop.Purchase(actor,i,out message);
@@ -61,7 +72,8 @@ namespace DiceFree.UI
             GUI.Label(new Rect(r.x+12,r.yMax-36,300,30),"Gold: "+wallet.Gold);
             string close=InputBindings.Display(InputBindings.Current.Action("Gameplay/Close interaction"));
             if(GUI.Button(new Rect(r.x+366,r.yMax-36,122,30),"Close ["+close+"]"))interactor.Cancel();
-            HudTooltip.DrawCurrent();
+            if(!string.IsNullOrWhiteSpace(hoveredTooltip))
+                HudTooltip.DrawAt(hoveredTooltip,hoveredTooltipAnchor);
         }
     }
 }

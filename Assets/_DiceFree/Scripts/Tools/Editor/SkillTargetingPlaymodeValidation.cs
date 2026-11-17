@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Reflection;
 using DiceFree.AI;
 using DiceFree.Combat;
+using DiceFree.Input;
 using DiceFree.Progression;
 using DiceFree.Skills;
 using DiceFree.UI;
@@ -10,6 +12,7 @@ using Unity.Pipeline.Commands;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -22,11 +25,14 @@ namespace DiceFree.EditorTools
 
         private static Keyboard keyboard;
         private static Mouse mouse;
+        private static readonly MethodInfo TargetingUpdateMethod=typeof(SkillTargetingController)
+            .GetMethod("Update",BindingFlags.Instance|BindingFlags.NonPublic);
         private static IEnumerator routine;
         private static float deadline;
         private static bool ticking;
         private static InputSettings.BackgroundBehavior priorBackgroundBehavior;
         private static InputSettings.EditorInputBehaviorInPlayMode priorEditorInputBehavior;
+        private static QuickCastMode priorQuickCastMode;
 
         static SkillTargetingPlaymodeValidation() =>
             EditorApplication.playModeStateChanged += OnPlayState;
@@ -42,6 +48,7 @@ namespace DiceFree.EditorTools
 
         private static object StartCore(bool selfOnly)
         {
+            priorQuickCastMode=GameplayPreferences.Current.QuickCastMode;
             SessionState.SetBool(Prefix + "selfOnly", selfOnly);
             MagicalTouchedValidation.Require(
                 !EditorApplication.isPlayingOrWillChangePlaymode,
@@ -173,6 +180,12 @@ namespace DiceFree.EditorTools
             enemy.GetComponent<BasicAttack>()?.Cancel();
             enemy.Health.Restore();
             enemy.Effects?.ClearTransient();
+            var explorationCamera = traversal.WorldCamera
+                .GetComponent<DiceFree.Core.ExplorationCamera>();
+            MagicalTouchedValidation.Require(explorationCamera != null,
+                "Exploration camera is required for screen-space targeting validation.");
+            explorationCamera.ConfigureZoom(14f, 14f, 0.6f);
+            yield return null;
 
             MagicalTouchedValidation.Require(
                 enemy.Motor.Teleport(player.transform.position + player.transform.forward * 2.5f),
@@ -207,7 +220,7 @@ namespace DiceFree.EditorTools
                 !HudPointerBlocker.Covers(enemyScreen),
                 "Validation enemy projected under a HUD blocker: " + enemyScreen);
             LeftClick(enemyScreen);
-            targeting.SendMessage("Update");
+            TargetingUpdateMethod.Invoke(targeting,null);
             string clickState = "active=" + targeting.Active +
                                 "; hover=" + (targeting.HoveredActor == null ? "null" : targeting.HoveredActor.name) +
                                 "; valid=" + targeting.HoverValid +
@@ -226,6 +239,11 @@ namespace DiceFree.EditorTools
             enemy.Effects?.ClearTransient();
             enemy.Health.Restore();
             resources.RefillAll();
+            MagicalTouchedValidation.Require(
+                enemy.Motor.Teleport(player.transform.position + player.transform.right * 6f),
+                "Could not move the validation enemy clear of the ground-target test lane.");
+            Physics.SyncTransforms();
+            yield return null;
 
             float groundMana = resources.Current(ResourceIds.Mana);
             Press(Key.Digit4);
@@ -284,12 +302,48 @@ namespace DiceFree.EditorTools
             bar.SendMessage("Update");
             ReleaseKeyboard();
 
-            Vector3 desiredGround = player.transform.position + player.transform.forward * 3f;
-            Vector3 groundScreen3 = traversal.WorldCamera.WorldToScreenPoint(desiredGround);
-            var groundScreen = new Vector2(groundScreen3.x, groundScreen3.y);
-            MagicalTouchedValidation.Require(
-                traversal.TryWorldPoint(groundScreen, out _),
-                "Could not resolve a valid visible ground target.");
+            Vector2 groundScreen = default;
+            bool foundGroundTarget = false;
+            var ice = skills.Definitions.First(value =>
+                value.stableId == MagicalTouchedAuthoring.IceId);
+            float maxGroundRange = ice.range + player.Radius;
+            float nearestCenterDistance = float.MaxValue;
+            int coveredSamples = 0, terrainMisses = 0, outOfRangeSamples = 0, offNavMeshSamples = 0;
+            var nearGround3 = traversal.WorldCamera.WorldToScreenPoint(
+                player.transform.position + player.transform.forward * 3f);
+            var nearGroundScreen = new Vector2(nearGround3.x, nearGround3.y);
+            if (nearGround3.z > 0f && !HudPointerBlocker.Covers(nearGroundScreen) &&
+                traversal.TryWorldPoint(nearGroundScreen, out var nearGroundHit) &&
+                Vector3.Distance(player.transform.position, nearGroundHit) <= maxGroundRange &&
+                NavMesh.SamplePosition(nearGroundHit, out _, 1.5f, NavMesh.AllAreas))
+            {
+                groundScreen = nearGroundScreen;
+                foundGroundTarget = true;
+            }
+            for (int column = 1; column <= 9; column++)
+            for (int row = 1; row <= 7; row++)
+            {
+                var screen = new Vector2(Screen.width * column / 10f,
+                    Screen.height * row / 8f);
+                if (HudPointerBlocker.Covers(screen)) { coveredSamples++; continue; }
+                if (!traversal.TryWorldPoint(screen, out var hit)) { terrainMisses++; continue; }
+                if (Vector3.Distance(player.transform.position, hit) > maxGroundRange)
+                { outOfRangeSamples++; continue; }
+                if (!NavMesh.SamplePosition(hit, out _, 1.5f, NavMesh.AllAreas))
+                { offNavMeshSamples++; continue; }
+                float centerDistance = Vector2.Distance(screen,
+                    new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
+                if (centerDistance >= nearestCenterDistance) continue;
+                nearestCenterDistance = centerDistance;
+                groundScreen = screen;
+                foundGroundTarget = true;
+            }
+            MagicalTouchedValidation.Require(foundGroundTarget,
+                "Could not resolve a valid visible ground target from the player's clear surroundings. " +
+                "screen=" + Screen.width + "x" + Screen.height + "; covered=" + coveredSamples +
+                "; noTerrain=" + terrainMisses + "; outOfRange=" + outOfRangeSamples +
+                "; offNavMesh=" + offNavMeshSamples + "; player=" + player.transform.position.ToString("F2") +
+                "; camera=" + traversal.WorldCamera.name + ".");
 
             LeftClick(groundScreen);
             targeting.SendMessage("Update");
@@ -303,9 +357,73 @@ namespace DiceFree.EditorTools
                 caster.CooldownRemaining(
                     skills.Definitions.First(value => value.stableId == MagicalTouchedAuthoring.IceId)) > 0,
                 "Confirmed Ice Burst did not start its cooldown.");
+            MagicalTouchedValidation.Require(
+                enemy.Motor.Teleport(player.transform.position + player.transform.forward * 2.5f),
+                "Could not restore the visible hostile target for quickcast checks.");
+            Physics.SyncTransforms();
+            yield return null;
+
+            var preferences=GameplayPreferences.Current;
+            var generic=player.GetComponent<GenericActionBar>();
+            MagicalTouchedValidation.Require(generic!=null,
+                "Generic action bar is required to validate quickcast input.");
+            targeting.Configure(traversal.WorldCamera);
+            Vector3 hostileScreen3=traversal.WorldCamera.WorldToScreenPoint(
+                enemy.transform.position+Vector3.up*.6f);
+            var hostileScreen=new Vector2(hostileScreen3.x,hostileScreen3.y);
+            MagicalTouchedValidation.Require(!HudPointerBlocker.Covers(hostileScreen),
+                "Quickcast target is obstructed by a HUD panel.");
+
+            caster.ResetForManifestationLoad();resources.RefillAll();enemy.Health.Restore();
+            QueuePointer(hostileScreen);
+            float pressHealth=enemy.Health.Current;
+            preferences.SetQuickCastMode(QuickCastMode.OnPress);
+            var abilitySource=player.GetComponent<AbilityBarSource>();
+            MagicalTouchedValidation.Require(abilitySource!=null,
+                "Ability bar input source is required for quickcast validation.");
+            bool actionBarEnabled=generic.enabled;
+            generic.enabled=false;
+            Press(Key.Digit1);
+            MagicalTouchedValidation.Require(abilitySource.Activate(0,abilitySource.ActionFor(0)),
+                "Magic Sand did not activate through the ability source for quickcast-on-press.");
+            TargetingUpdateMethod.Invoke(targeting,null);
+            ReleaseKeyboard();
+            generic.enabled=actionBarEnabled;
+            var quickcastRay = traversal.WorldCamera.ScreenPointToRay(hostileScreen);
+            var quickcastHits = Physics.RaycastAll(quickcastRay, 1500f,
+                    (1 << 8) | (1 << 9) | (1 << 10), QueryTriggerInteraction.Ignore)
+                .OrderBy(hit => hit.distance)
+                .Select(hit => hit.collider.name + "@" +
+                    LayerMask.LayerToName(hit.collider.gameObject.layer)).Take(5).ToArray();
+            MagicalTouchedValidation.Require(!targeting.Active&&enemy.Health.Current<pressHealth,
+                "Quickcast-on-press did not cast at the pointer target. active="+targeting.Active+
+                "; mode="+targeting.Mode+"; hovered="+(targeting.HoveredActor==null?"null":targeting.HoveredActor.name)+
+                "; valid="+targeting.HoverValid+"; feedback="+targeting.Feedback+
+                "; pointer="+(Mouse.current==null?"null":Mouse.current.position.ReadValue().ToString())+
+                "; targetScreen="+hostileScreen+"; rayHits="+string.Join(",",quickcastHits)+
+                "; enemyHp="+enemy.Health.Current+"/"+pressHealth+".");
+
+            caster.ResetForManifestationLoad();resources.RefillAll();enemy.Health.Restore();
+            QueuePointer(hostileScreen);
+            float releaseHealth=enemy.Health.Current;
+            preferences.SetQuickCastMode(QuickCastMode.OnRelease);
+            actionBarEnabled=generic.enabled;
+            generic.enabled=false;
+            Press(Key.Digit1);
+            MagicalTouchedValidation.Require(abilitySource.Activate(0,abilitySource.ActionFor(0)),
+                "Magic Sand did not activate through the ability source for quickcast-on-release.");
+            MagicalTouchedValidation.Require(targeting.Active&&
+                Mathf.Approximately(enemy.Health.Current,releaseHealth),
+                "Quickcast-on-release cast before the skill key was released.");
+            ReleaseKeyboard();
+            TargetingUpdateMethod.Invoke(targeting,null);
+            generic.enabled=actionBarEnabled;
+            MagicalTouchedValidation.Require(!targeting.Active&&enemy.Health.Current<releaseHealth,
+                "Quickcast-on-release did not cast at the pointer target on key release.");
+            preferences.SetQuickCastMode(priorQuickCastMode);
 
             Debug.Log(
-                "DICEFREE_SKILL_TARGETING_OK: selected target no longer auto-casts; hostile and ground reticles require explicit click; RMB/Escape cancel without spending resources.");
+                "DICEFREE_SKILL_TARGETING_OK: selected target no longer auto-casts; reticle, quickcast-on-press and quickcast-on-release are verified; RMB/Escape cancel without spending resources.");
             yield break;
         }
 
@@ -324,6 +442,12 @@ namespace DiceFree.EditorTools
         private static void LeftClick(Vector2 position)
         {
             InputSystem.QueueStateEvent(mouse, new MouseState { position = position, buttons = 1 });
+            InputSystem.Update();
+        }
+
+        private static void QueuePointer(Vector2 position)
+        {
+            InputSystem.QueueStateEvent(mouse,new MouseState{position=position});
             InputSystem.Update();
         }
 
@@ -384,6 +508,7 @@ namespace DiceFree.EditorTools
 
             InputSystem.settings.backgroundBehavior = priorBackgroundBehavior;
             InputSystem.settings.editorInputBehaviorInPlayMode = priorEditorInputBehavior;
+            GameplayPreferences.Current.SetQuickCastMode(priorQuickCastMode);
         }
     }
 }

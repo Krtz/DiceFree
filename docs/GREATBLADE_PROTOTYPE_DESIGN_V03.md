@@ -79,3 +79,7 @@ Use the local Asset Store catalog before making substitutes:
 - Greatblade's future Berserker, Swordmaster→Samurai, or secret Witcher-style class precise advancement mechanics (their existence as possible branches is recorded in Tier II v0.2).
 
 **Branch:** `feature/visual-overhaul-vis00`; do not merge into `main` without approval; preserve current user character saves and unrelated licensed shader/material changes.
+
+## As-built source follow-up (2026-10-26)
+
+Current Greatblade source adds provisional rank-scaled raw damage on top of the attribute coefficient: **Wide Arc +2/rank**, **Spin Dash +2/rank per enemy hit**, and **Overhead Breaker +5/rank**, with the finisher addition multiplied by its existing Momentum bonus. Battle Cry and passive ranks do not add a separate damage packet. Greatblade skill hotkeys use the three Gameplay Options Quickcast modes; skill-icon clicks retain reticle targeting. These source changes have not yet been compiled or runtime-validated in Unity.

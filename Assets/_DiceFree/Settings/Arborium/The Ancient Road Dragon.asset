@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Ancient Road Dragon
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.arborium.ancient-road-dragon
+  title: The Ancient Road Dragon
+  requiredClassId: 
+  requiredLevel: 35
+  version: 1
+  offer: "The Reedscale watch the old mountain road for their master. Follow the trail northwest of Arborium into the Ancient Road Dragon\u2019s lair. End his command over the factions and report back to the Council."
+  activeDialogue: Follow the old mountain road northwest of Arborium. The lair entrance is marked by green lamps. Return here after the Ancient Road Dragon has fallen.
+  turnInDialogue: With the Ancient Road Dragon dead, Arborium has time to recover. I have sent word to Ironpine. Follow the trail south of the main road. A small fire will clear the pines blocking the pass to World 2. Find out there why the dragon came to Arborium.
+  locationHint: Take the mountain path northwest of Arborium, above the Verdant Wilds.
+  turnInHint: Return to the Verdant Council Clerk outside the Mage Observatory.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat the Ancient Road Dragon in his lair
+    contentId: boss.ancient-road-dragon
+    dungeonBossOnly: 1
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds:
+  - quest.arborium.verdant-summons
+  rewardXp: 10500
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

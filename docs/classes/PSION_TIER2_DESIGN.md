@@ -12,7 +12,7 @@ Grant the **Mirrorsteel Mindblade** and **Mirrorleaf Codex** from **Equipment / 
 
 ## Arborium advancement
 
-At level 30 as a **Magically Touched Novice**, speak to **Ilyra, Keeper of Mirrors** in the Adventurers’ Guild reception. Accept **The Third Reflection**, then enter the mirror chamber. Walk sideways to spot the reflection that tracks you while the other two turn in sync. Strike the real one and defeat it. A false strike, defeat, or leaving sends you back to Ilyra for a fresh attempt.
+At level 30 as a **Magically Touched Novice**, speak to **Ilyra, Keeper of Mirrors** on the second floor of Arborium's West Residence. Accept **The Third Reflection**, then enter the mirror chamber. Walk sideways to spot the reflection that tracks you while the other two turn in sync. Strike the real one and defeat it. A false strike, defeat, or leaving sends you back to Ilyra for a fresh attempt.
 
 Return to Ilyra to awaken a level-one Psion. The Mindblade and Codex are awarded and equipped on the new manifestation when the unlock is saved. The Magically Touched Novice retains its own level, equipment, and completed trial.
 

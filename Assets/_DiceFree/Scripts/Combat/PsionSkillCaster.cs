@@ -51,15 +51,16 @@ namespace DiceFree.Skills
 
         public static int Cost(PsionSkill skill, int rank) => skill switch
         {
-            PsionSkill.PsychicBolt => 8 + 3 * rank,
-            PsionSkill.MentalImage => 14 + 5 * rank,
-            PsionSkill.LightningStorm => 20 + 7 * rank,
-            PsionSkill.MetalShield => 18 + 6 * rank,
+            PsionSkill.PsychicBolt => 7 + 4 * rank,
+            PsionSkill.MentalImage => 12 + 7 * rank,
+            PsionSkill.LightningStorm => 18 + 9 * rank,
+            PsionSkill.MetalShield => 16 + 8 * rank,
             _ => 0
         };
         public static int Cooldown(PsionSkill skill) => Cooldowns[(int)skill];
         public static float CastTime(PsionSkill skill) => skill is PsionSkill.PsychicBolt or PsionSkill.LightningStorm ? .1f : .2f;
         public static float ImageDuration(int rank) => 1.6f + .2f * (rank - 1);
+        public Vector2 PreviewImageBladeDamage() => basic.DamageRange * .1f;
         public float PreviewAmount(PsionSkill skill, int rank) =>
             RawAmount(skill, rank, actor.Stats.Level, actor.Stats.Attributes);
 
@@ -204,7 +205,7 @@ namespace DiceFree.Skills
                 case PsionSkill.MentalImage:
                     if (FreeImagePoint(area) && CommitCast())
                         images.Add(PsionMentalImage.Summon(actor, basic, area, castRank, imageBlade, imageRupture,
-                            BasicCriticalRule(), BasicPenetration, imageVisual, imageMaterial));
+                            BasicPenetration, imageVisual, imageMaterial));
                     break;
                 case PsionSkill.MetalShield:
                     if (CommitCast()) ApplyShield(castRank);

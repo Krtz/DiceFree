@@ -17,7 +17,10 @@ namespace DiceFree.Trimery
         [SerializeField] private GameObject repairCrew;
         [SerializeField] private GameObject restoredHighway;
 
-        public bool Reopened => journal.GetProgress(QuestId)?.status == QuestStatus.Completed;
+        public bool Reopened => HighwayReopened(journal.GetProgress(QuestId));
+
+        private static bool HighwayReopened(QuestProgress progress) => progress != null &&
+            (progress.status == QuestStatus.Completed || progress.stage >= 2);
 
         private void OnEnable()
         {
@@ -36,7 +39,7 @@ namespace DiceFree.Trimery
         private void Refresh()
         {
             var progress = journal.GetProgress(QuestId);
-            bool reopened = progress?.status == QuestStatus.Completed;
+            bool reopened = HighwayReopened(progress);
             bool fighting = progress?.status == QuestStatus.Active && progress.stage == 0;
             // Leave the defeated Ogre where he fell until the crew clears the site.
             bool corpse = !reopened && roadwarden.gameObject.activeSelf &&

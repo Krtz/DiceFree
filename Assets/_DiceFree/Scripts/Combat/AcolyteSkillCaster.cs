@@ -194,8 +194,19 @@ namespace DiceFree.Skills
             }
         }
 
-        private static float ChannelScale(AcolyteSkill skill, int rank) =>
+        public static float ChannelScale(AcolyteSkill skill, int rank) =>
             1 + (skill == AcolyteSkill.DrainLife ? .06f : .08f) * (rank - 1);
+
+        public AttackDefinition DamageDefinition(AcolyteSkill skill) => skill switch
+        {
+            AcolyteSkill.DrainLife => drainLife,
+            AcolyteSkill.MortalCoil => mortalCoil,
+            AcolyteSkill.RadiationPlague => radiation,
+            AcolyteSkill.OccultAdept => coffeePoison,
+            _ => null
+        };
+        public static float PlagueDamageScale(int rank) => AcolyteAfflictions.PlagueScale(rank);
+        public static float OccultDamageBonus(int rank) => AcolyteAfflictions.PoisonBonus(rank);
 
         public float PreviewDamage(AcolyteSkill skill, int rank)
         {

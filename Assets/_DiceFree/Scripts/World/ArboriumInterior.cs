@@ -29,8 +29,9 @@ namespace DiceFree.World
         private WorldFogOfWar fog;
         private Camera worldCamera;
         private static readonly HashSet<Collider> transparentWalls = new();
+        public static ArboriumInterior Occupied { get; private set; }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void ResetPicking() => transparentWalls.Clear();
+        private static void ResetPicking() { transparentWalls.Clear(); Occupied = null; }
         public bool Inside { get; private set; }
         public int CurrentFloor { get; private set; }
         public int FloorCount => floorCount;
@@ -54,6 +55,8 @@ namespace DiceFree.World
             if(fog?.Revealer==null) return;
             var p=transform.InverseTransformPoint(fog.Revealer.position);
             Inside=Mathf.Abs(p.x)<footprint.x*.5f+.1f && Mathf.Abs(p.z)<footprint.y*.5f+.1f && p.y>-.6f && p.y<floorCount*storeyHeight;
+            if (Inside) Occupied = this;
+            else if (Occupied == this) Occupied = null;
             CurrentFloor=Inside?FloorAtHeight(p.y,storeyHeight,floorCount):-1;
             var toCamera=worldCamera!=null?transform.InverseTransformDirection(worldCamera.transform.position-transform.position):new Vector3(-1,1,-1);
             foreach(var part in parts)
@@ -80,6 +83,18 @@ namespace DiceFree.World
         public static int FloorAtHeight(float height, float storeyHeight, int count) =>
             Mathf.Clamp(Mathf.FloorToInt(height / storeyHeight + .5f), 0, count - 1);
 
+        public bool TryGetStairLanding(Vector3 from, bool upstairs, out Vector3 point)
+        {
+            point = default;
+            if (!Inside || storeyHeight <= 0) return false;
+            float height = (transform.InverseTransformPoint(from).y - .12f) / storeyHeight;
+            int floor = upstairs ? Mathf.FloorToInt(height + .07f) + 1 : Mathf.CeilToInt(height - .07f) - 1;
+            if (floor < 0 || floor >= floorCount) return false;
+            // The strip behind the stairwell joins both flights on every storey.
+            point = transform.TransformPoint(new Vector3(0, .12f + floor * storeyHeight, -footprint.y * .5f + 1.2f));
+            return true;
+        }
+
         public static bool RaycastWalkableGround(Ray ray, out RaycastHit hit) =>
             Physics.Raycast(ray, out hit, 1500f, 1 << 8, QueryTriggerInteraction.Ignore);
 
@@ -99,6 +114,7 @@ namespace DiceFree.World
                 if(part.colliders!=null)foreach(var collider in part.colliders){transparentWalls.Remove(collider);if(collider!=null)collider.enabled=true;}
             }
             Inside=false;CurrentFloor=-1;
+            if (Occupied == this) Occupied = null;
         }
         private void OnGUI()
         {

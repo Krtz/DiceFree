@@ -39,12 +39,17 @@ namespace DiceFree.EditorTools
             Require(passive.maxRank == 160 && !passive.Active, "Novice all-stat passive must cap at 160 and remain passive.");
             Approximately(strength.StunDuration(1), 0.2f, "Rank-1 stun duration");
             Approximately(strength.StunDuration(10), 2f, "Rank-10 stun duration");
+            Approximately(strength.FlatDamage(1),4f,"Rank-1 Strength strike flat damage");
+            Approximately(strength.FlatDamage(10),40f,"Rank-10 Strength strike flat damage");
             Approximately(sand.MagicSandMissChance(1), 0.075f, "Rank-1 Magic Sand miss chance");
             Approximately(sand.MagicSandMissChance(10), 0.75f, "Rank-10 Magic Sand miss chance");
+            Approximately(sand.FlatDamage(1),10f,"Rank-1 Magic Sand flat damage");
+            Approximately(sand.FlatDamage(10),100f,"Rank-10 Magic Sand flat damage");
             var sample = new AttributeValues { agility = 10, spirit = 7 };
             Approximately(agility.AttackSpeedBonusPercent(sample, 1), 12f, "Rank-1 AGI buff at 10 AGI");
             Approximately(agility.AttackSpeedBonusPercent(sample, 10), 30f, "Rank-10 AGI buff at 10 AGI");
-            Approximately(spirit.HealAmount(sample, 1), 70f, "SPI heal at 7 SPI");
+            Approximately(spirit.HealAmount(sample, 1), 75f, "SPI heal plus rank-1 flat healing at 7 SPI");
+            Approximately(spirit.HealAmount(sample, 10), 120f, "SPI heal plus rank-10 flat healing at 7 SPI");
             Require(sand.durationSeconds == 5f && agility.durationSeconds == 5f, "Magic Sand and AGI buff must use the current 5s duration.");
             Require(strength.attack != null && sand.attack != null, "Offensive Novice skills require authored attack definitions.");
             Require(!strength.attack.requiresAccuracy && !sand.attack.requiresAccuracy,
