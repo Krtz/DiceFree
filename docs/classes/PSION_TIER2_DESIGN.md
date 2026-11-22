@@ -1,5 +1,7 @@
 # DiceFree — Psion Tier II — design interview
 
+**2026-11-22 evolution design update:** The user has explicitly begun [Psion Tier III Round 1](PSION_TIER3_EVOLUTIONS_DESIGN.md): **Psionic Knight** (shorter-range basic-attacker with a mobile attack-focused illusion) and **Mirage Mage** (longer-range spellcaster emphasizing high-damage spells, barriers, mirrors and illusion explosions), both **Mana only**. **Tier III specifics remain design-only, not implemented**. This current authorization supersedes older "do not design Tier III yet" notes for these two evolutions; preserve all approved Tier II mechanics unchanged.
+
 **Status:** **TIER II GAMEPLAY DESIGN COMPLETE, ROUNDS 1–20 (2026-10-26). All 80 exact rank gates user approved. The first combat implementation is available in the Development Room.** Historical earlier entries below are superseded by latest rounds. The Mirrorweave presentation is implemented in the Development Room. The Arborium advancement trial unlocks Psion in World 1. World 2 specializations remain future work.
 
 **References:** [Class Progression](../CLASS_PROGRESSION.md) · [Magically Touched Novice](MAGICALLY_TOUCHED_NOVICE.md) · [Tier II Core Classes](../TIER2_CORE_CLASSES_DESIGN_V02.md) · [Combat](../COMBAT.md) · [Stats and Damage](../STATS_AND_DAMAGE.md) · [Elements](../ELEMENTS.md) · [Completed Acolyte Tier II](ACOLYTE_TIER2_DESIGN.md) · [Completed Thief Tier II](THIEF_TIER2_DESIGN.md) · [Class Requirements and Discovery](../CLASS_REQUIREMENTS_AND_DISCOVERY.md)
