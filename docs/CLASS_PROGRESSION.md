@@ -1,5 +1,7 @@
 # Class Progression
 
+**2026-11-22 explicit Tier III design authorization, Psion lineage only:** The user approved starting two World 2 Tier III evolution designs, **Psionic Knight** (closer-ranged basic-attack focus, mobile attacking illusion) and **Mirage Mage** (longer-ranged high-damage spells/barriers/mirrors, explosion-focused illusion). Both use Mana only. See [Psion Tier III evolution design](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md), Round 1. Historical "do not design Tier III yet" notes predate this direct request and do **not** prohibit this newly authorized design work; no Unity implementation is authorized. Standard Tier II level 60 advancement into a new level-1 preserved-manifestation branch continues to apply.
+
 ## Current Tier II additions (2026-10-16)
 
 Both first branches now have a level-30 quest advancement: Physically Blessed Novice to Greatblade through the retired swordswoman's normal Slime Boss trial, and Magically Touched Novice to Mage through the brewer / retired mage's Slime Dungeon puzzle trial. Both require returning to the mentor and create a level-1 child manifestation while preserving the parent.
