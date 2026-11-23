@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–13**, latest **2026-11-23**. Round 13 updates the rank-cap allocation to Knight **30/25/29/34/32** and Mage **34/25/30/29/32** and confirms mastery crit values plus Tier III/Tier IV basic-attack stat scaling. Exact level-by-level rank gates and their initial unlock levels remain **designer proposals pending user approval**. Earlier Round 11/12 tables are historical/superseded. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–14 USER-APPROVED progression through 2026-11-23**. Round 13's revised caps **Knight 30/25/29/34/32**, **Mage 34/25/30/29/32**, and **ALL exact Round 13 unlock levels/individual rank eligibility gates** are now **USER-APPROVED** following the user's 'Yeah that's good!' response. These override historical Round 11/12 drafts. Both classes have 150 earnable skill points, one per class level through 150; Tier IV advancement eligibility remains level 120. Gameplay mechanics still open include spell cooldowns, Mana costs, certain attack channels and balance values. **DESIGN ONLY, not implemented in Unity.**
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -615,3 +615,22 @@ The user explicitly revised the *Round 12 draft*: move **4 points from Knight Ps
 2. Confirm Knight crit multiplier baseline treatment of **160% at rank0→190% at rank30** (versus exactly160% at rank1), if relevant.
 3. Decide the still-open **Physical or Magical channel** for Knight's extra Void empowerment damage, Knight Mana cost / cooldown / charge expiration, Mirage Mage improved spell damage coefficients and mirror low-rank scaling, and exact cast/clone edge cases.
 4. Preserve all previously confirmed shield, aura, mana-only and world progression rules. **Documentation only; no Unity code/assets/WIP modifications or branch merges authorized.**
+
+
+## Round 14 — 2026-11-23 (LATEST: EXACT RANK-GATE APPROVAL)
+
+**USER APPROVED** the regenerated **Round 13 per-rank eligibility schedules and first-rank unlock levels AS WRITTEN** in the two "latest PROPOSED eligibility gates" tables directly above. Those tables are hereby **CONFIRMED**, not merely proposals. Earlier Round 11 / Round 12 gate tables are **HISTORICAL AND SUPERSEDED**. No reroll of the level-gate schedules is authorized here.
+
+### Fully approved progression, effective Round 14
+
+- **Psionic Knight approved caps (150 ranks):** Psionic Blades Mastery **30**, Mental Image **25**, personal Void Shield **29**, Empowered Attacks **34**, Speed Presence **32**.
+- **Mirage Mage approved caps (150 ranks):** Psychic Bolt **34**, Mental Image **25**, Lightning Storm **30**, Metal Shield **29**, Speed Presence **32**.
+- **Approved first-rank unlock levels:** Knight Mastery **1**, Image **1**, Void Shield **6**, Empowered Attacks **1**, Speed Presence **10**. Mage Psychic Bolt **1**, Image **1**, Lightning Storm **5**, Metal Shield **8**, Speed Presence **10**.
+- **All 150 individual rank gates per class** in Round 13's exact five-row tables are **approved**. Every gate is a required class level for the purchased rank; prior rank must be purchased. Rank points are earned **one per Tier III class level 1–150**. Both gate tables passed the all-level audit: no earned skill point is forced to remain unspendable at any level 1–150; last eligible ranks arrive by Knight level **148** and Mage level **149**.
+- Tier III level **120** continues to unlock *optional* Tier IV advancement. A player remaining Tier III may keep leveling and spending skill points through 150. The existing Psion and Novice manifestations remain saved when evolving.
+- **This approval covers rank caps, unlock levels, and exact rank-purchase gates only.** It does **not** approve outstanding cooldown/Mana numbers, Knight bonus Void channel or mirrored damage lower-rank coefficients, nor grant Unity implementation, branch merges or updates to locally uncommitted gameplay assets.
+- When Codex implements the class progression later, **use the exact approved Round 13 gate lists without generating different schedules**. The historical proposal wording adjacent to those tables should be read as **superseded by this later approval**.
+
+### Next design phase (OPEN)
+
+Resolve per-skill Mana costs/cooldowns/cast times, Knight Void packet Physical/Magical channel, Mental Image intermediate-rank interpolation and mirror copy strengths, shield scaling and the remaining targeting/snapshot edge cases. Do not reopen approved gates except by a new user instruction.
