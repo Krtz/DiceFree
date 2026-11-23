@@ -1,5 +1,7 @@
 # Codex
 
+**2026-11-23 hidden-teacher discovery and map presentation (latest Round19, USER APPROVED):** Any hidden teacher for ANY class is permanently discovered by any manifestation within **2m** and recorded in this **Echo-wide Codex** even if that manifestation cannot accept their quest. The **Codex is the only automatic UI record** of teacher discovery for now: **NO map pins/markers** are generated from this Echo-wide knowledge, and teacher positions may be moved freely by the Codex development agent within World 1 or World 2 during world construction. For the two Psion Tier III teachers, interaction/quest access is restricted to **Tier II Psion level60+**; wrong-class and below-level encounters get different rejection dialogue. Either eligible Psion may have BOTH advancement quests active concurrently. Each quest needs a newly initiated **SOLO dungeon completion** after quest acceptance on the same Psion, followed by **RETURN TO ITS TEACHER** for advancement; Codex solo-clear records alone cannot fulfill quest proof. Knight: Wolf Survival: Moonlit Clearing; Mage: EXISTING Quillboar Shaman/Fourfold Hollow dungeon, which has a Unity scene and QA handover on the current branch. See [Tier III Round19](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md).
+
 ## Ownership
 
 Codex progression is **Echo-wide**.
