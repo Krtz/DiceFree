@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–11 confirmed through 2026-11-23**; one class skill point per level through 150 and complete five-ability rosters are approved. **Round 11 designer cap/rank-gate tables are proposed for user approval, not yet confirmed**. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–11 approved structure; Round 12 latest 2026-11-23 user corrections**. Both Mental Image caps are now **USER-APPROVED at 25**, and empowered-attack charge counts use **1 + floor(rank/3)**. **All other new rank caps, exact gates/unlocks and crit coefficients below are designer proposals AWAITING APPROVAL**. The superseded Round 11 numeric tables are historical, not current. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -452,3 +452,75 @@ All listed eligibility gates refer to **the required Tier III class level to buy
 The user may **approve the designer's 150-point caps/unlock tables as-is** or request revisions to individual caps/unlocks. **Do not label them confirmed before explicit approval.** After the rank table is approved, remaining engineering-facing decisions include cooldowns and Mana costs for new Knight tools, Knight Void damage channel, Mental Image scaling interpolation by rank, aura name/stack priority at equal strength, exact Mage upgraded spells, copy-shield radius and targeting, and advancement quest/content.
 
 **Scope restriction:** This round changes design documentation only; it does not authorize Unity implementation, asset modifications, branch merges, or cleanup of local uncommitted WIP.
+
+## Round 12 — 2026-11-23 (LATEST: user corrections, revised numeric proposal)
+
+**IMPORTANT:** The user did NOT approve the Round 11 allocation as-is. Their newest instructions supersede its proposed 40-rank Mental Image cap and the earlier approved Knight empowerment count formula. Distinguish confirmed direction from numerical proposals below.
+
+### User-approved corrections and direction
+
+| ID | Confirmed | Remains OPEN |
+| --- | --- | --- |
+| PSION3-063 | **Mental Image MAX RANK 25 in BOTH Psionic Knight and Mirage Mage**. The 15 ranks freed by lowering the previously proposed 40-rank image to 25 must be **redistributed across the OTHER FOUR abilities in EACH class**, preserving 150 skill ranks in total. | Exact redistribution and revised caps, rank gates and first unlock levels require the user's approval of a new proposal. |
+| PSION3-064 | **Knight Empowered Attacks charges per cast = `1 + floor(empowermentSkillRank / 3)`**. This replaces the OLD `1 + floor(rank/2)` formula everywhere. E.g. r1=1, r2=1, r3=2, r6=3, r30=11, r34=12. Attacks still spend rank-scaling Mana, deal regular Physical basic hit PLUS separately approved Void RAW bonus `30+17r+0.4AGI+0.1INT`. | Mana formula, cooldown and duration; whether the bonus Void packet is Physical or Magical (user deferred channel). The on/off toggle remains an unimplemented **Tier IV concept**. |
+| PSION3-065 | **Psionic Blades Mastery**: reduce its **critical-chance gain per rank** compared with the Tier II provisional **+2.5 percentage points/rank**, **KEEP the +1 flat Physical Defense penetration per rank**, and **ADD a small critical-DAMAGE bonus per rank**. Interpret the user's 'tabs' as the Blades passive based on context; confirm only if they meant something else. | No exact new critical chance/damage coefficients were provided. Candidate numerical values below are designer suggestions only; base ordinary crit multiplier remains 150% pending approved Tier III tuning. |
+
+### Revised per-skill caps: DESIGNER PROPOSAL awaiting confirmation
+
+Allocate the **15 freed ranks per class as +4/+4/+4/+3** to the four non-Mental-Image skills. Keep Round 11 first unlock proposals until amended. The user's 25-rank Image cap itself is not provisional.
+
+| Class | Blades/Bolt | Mental Image | Void Shield/Storm | Empowered Attacks/Metal Shield | Speed passive/aura | Sum |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Psionic Knight | **34** | **25** | **29** | **34** | **28** | **150** |
+| Mirage Mage | **34** | **25** | **34** | **29** | **28** | **150** |
+
+For Mage, the last four columns correspond to Bolt, Image, Lightning Storm, Metal Shield, and Speed Presence. For Knight, they correspond to Blades Mastery, Image, personal Void Shield, Empowered Attacks, and Speed Presence.
+
+**Consequences ONLY IF proposed caps approved:** Knight Image rank25 reaches user-confirmed 50% normal basic-attack damage and its +50% attack speed for 5s end buff; Mirage Mage Image rank25 reaches user-confirmed 25% mirror damage / matching copied Metal Shield capacity. The shape of the intermediate image rank progression remains open. At Knight Empowered Attacks rank34 the **new confirmed count formula grants 12**, rather than **18** under the superseded rank÷2 formula. Rank30 would give **11** rather than **16**. At proposed Speed Presence rank28, personal +28% attack/movement speed and +2.8% shared allied aura in 12m, with strongest same-name aura only. Images receive aura but do not emit it.
+
+### Blades Mastery rank-by-rank crit adjustment: DESIGNER PROPOSAL only
+
+Propose **+0.5 percentage points of basic-attack critical chance per purchased rank** (instead of Tier II's provisional +2.5pp), **KEEP +1 flat Physical Defense bypass per rank**, and **ADD +1 percentage point of basic-attack critical damage per rank** relative to the existing 150% critical-damage baseline. At the proposed 34-rank cap this gives **+17 percentage points crit chance**, **34 flat Physical Defense penetration**, and **184% critical damage multiplier** (150% + 34 percentage points) before any other modifiers. The user approved the *direction* of lower chance/same penetration/higher crit damage, **not these numeric crit percentages**. Do NOT implement/claim them as approved without separate confirmation. Define how this interacts with the Knight's illusion inheriting passives IN FULL, and with the additional empowered Void damage packet, in future design.
+
+### Revised full eligibility-gate schedules: DESIGNER PROPOSAL only
+
+These **replace the Round 11 proposed numeric tables** as the latest draft. Each number is the class level where its successive rank becomes purchasable; prior ranks must be purchased first. All class skill points are earned 1 per level through150, and all skills start at rank0.
+
+#### Psionic Knight — proposed 150-rank eligibility table
+
+| Ability | First rank unlock | Proposed cap | Last rank available | Rank eligibility levels (in rank order) |
+| --- | ---: | ---: | ---: | --- |
+| Psionic Blades Mastery | 1 | 34 | 147 | 1, 2, 5, 14, 18, 23, 27, 31, 35, 40, 45, 48, 53, 58, 62, 66, 71, 75, 80, 84, 88, 93, 98, 101, 106, 111, 115, 119, 123, 128, 132, 137, 142, 147 |
+| Mental Image | 1 | 25 | 144 | 1, 4, 13, 20, 25, 30, 38, 43, 51, 56, 61, 68, 74, 79, 86, 91, 96, 104, 109, 117, 122, 127, 134, 139, 144 |
+| Personal Void Shield | 6 | 29 | 146 | 6, 7, 9, 16, 21, 26, 33, 37, 42, 47, 52, 57, 64, 69, 73, 78, 83, 90, 95, 100, 105, 110, 114, 121, 126, 131, 136, 141, 146 |
+| Empowered Attacks | 1 | 34 | 148 | 1, 3, 8, 15, 19, 24, 28, 32, 36, 41, 46, 49, 54, 59, 63, 67, 72, 76, 81, 85, 89, 94, 99, 102, 107, 112, 116, 120, 124, 129, 133, 138, 143, 148 |
+| Speed Presence | 10 | 28 | 145 | 10, 11, 12, 17, 22, 29, 34, 39, 44, 50, 55, 60, 65, 70, 77, 82, 87, 92, 97, 103, 108, 113, 118, 125, 130, 135, 140, 145 |
+
+#### Mirage Mage — proposed 150-rank eligibility table
+
+| Ability | First rank unlock | Proposed cap | Last rank available | Rank eligibility levels (in rank order) |
+| --- | ---: | ---: | ---: | --- |
+| Psychic Bolt | 1 | 34 | 148 | 1, 2, 4, 15, 19, 23, 28, 32, 36, 41, 46, 49, 54, 58, 63, 67, 72, 76, 81, 85, 89, 94, 98, 102, 107, 112, 116, 120, 124, 129, 133, 138, 143, 148 |
+| Mental Image | 1 | 25 | 145 | 1, 3, 14, 21, 26, 31, 39, 44, 52, 57, 62, 69, 75, 80, 87, 92, 97, 105, 110, 118, 123, 128, 135, 140, 145 |
+| Lightning Storm | 5 | 34 | 149 | 5, 6, 7, 16, 20, 24, 29, 33, 37, 42, 47, 50, 55, 59, 64, 68, 73, 77, 82, 86, 90, 95, 99, 103, 108, 113, 117, 121, 125, 130, 134, 139, 144, 149 |
+| Metal Shield | 8 | 29 | 147 | 8, 9, 12, 17, 22, 27, 34, 38, 43, 48, 53, 60, 65, 70, 74, 79, 84, 91, 96, 101, 106, 111, 115, 122, 127, 132, 137, 142, 147 |
+| Speed Presence | 10 | 28 | 146 | 10, 11, 13, 18, 25, 30, 35, 40, 45, 51, 56, 61, 66, 71, 78, 83, 88, 93, 100, 104, 109, 114, 119, 126, 131, 136, 141, 146 |
+
+
+#### Mechanical audit and review status
+
+- **Both plans total 150 ranks**. Image is exactly **25** in each; other 4 ranks collectively increase **15** per class. First unlock levels are **proposals**, not user-set.
+- **Verified no stranded earned point:** for each class level `L = 1..150`, cumulative rank gates eligible by `L` are at least `L`; previous-rank prerequisites are ordered; there are 150 gates total and all 150 may be legally purchased by level150.
+- Audit check samples: Knight **1:3, 10:12, 60:62, 120:122, 150:150**; Mage **1:2, 10:11, 60:61, 120:121, 150:150**. Each entry is class level : total eligible gate count.
+- Latest gate by Knight class level **148**; Mage **149**. It is not an error for ranks to be available before the final class level; players keep earning the remaining points through150.
+- At rank34 Knight empowered Void bonus is `30+17×34+0.4AGI+0.1INT = 608+0.4AGI+0.1INT` RAW **per eligible empowered attack**, up to 12 attacks per activation under proposed cap. This may need balancing against cost and cooldown and does NOT decide Physical/Magical channel.
+- **All revised skill caps except Mental Image25, all detailed gate timings, and proposed new crit coefficients are PENDING USER APPROVAL**. Previous 40-rank-image schedules are obsolete proposals, not accepted requirements.
+
+### Next approval and design questions (OPEN)
+
+1. Approve or adjust the **new Knight 34/25/29/34/28 and Mage 34/25/34/29/28 cap allocation**, first unlock levels and audited individual gate lists.
+2. Approve or adjust proposed Blades Mastery **+0.5pp crit chance, +1 flat PDEF penetration, +1pp critical damage per rank**.
+3. Once confirmed, settle Knight bonus Void Physical/Magical damage channel, Mana cost/cooldown and duration, Mage mirror early-rank percentage and upgraded spell coefficient/ranges.
+4. Retain all previously user-approved skills, hero-only aura emitters, clone behavior, mage shield copy, and Tier III level150 progression; no Unity/gameplay coding authorized in this round.
+
+**GitHub design documentation only. Preserve the user's substantial uncommitted local game changes.**
