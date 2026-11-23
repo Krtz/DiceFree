@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–4 USER-CONFIRMED**, latest **2026-11-23**. Read Round 4 as the latest authority where its decisions supersede Round 3. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–5 USER-CONFIRMED**, latest **2026-11-23**. Read the latest round as authority wherever it supersedes earlier rounds. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -185,3 +185,42 @@ The user's freeform response to question 4 **explicitly rescinds** Round 3's tog
 5. **Mirror echo timing and target invalidation:** choose ~0.2s/~0.4s delay or another interval, and target behavior when an enemy moves/dies before its echo; decide whether mirrors copy casts only while present at the original cast start.
 
 Keep the next interview focused on these choices. Never mark proposed answers as approved.
+
+
+## Round 5 — 2026-11-23 (LATEST USER-CONFIRMED)
+
+This round finalizes the Knight empowered-basic attack **charge formula**, selects the Knight illusion's end buff, and defines the Mirage Mage's **shield mirroring**, **bounded secondary images**, and **echo delay**. The user's extra thoughts are authoritative even when they differ from earlier proposed examples.
+
+| ID | Topic | USER-CONFIRMED rule | OPEN / do not assume |
+| --- | --- | --- | --- |
+| PSION3-030 | **Knight empowered charges: exact rank formula** | Each activation empowers the next **`1 + floor(purchasedSkillRank / 2)`** normal basic attacks, using whole-number floor rounding. Examples: rank1 → **1** attack; rank2 → **2**; rank3 → **2**; rank4 → **3**; rank5 → **3**. Each empowered attack **costs Mana, with Mana cost scaling by this skill's rank**, and adds a separate **VOID-element damage component**. The earlier toggle and earlier simple `floor(rank/2)` / `ceil(rank/2)` proposals are SUPERSEDED; toggle is reserved as an unimplemented Tier IV idea. | Exact bonus Void RAW damage/rank/scaling, Physical vs Magical **damage channel** for bonus Void component, Mana cost formula, cooldown, casting cost, charges' expiration, misses/shield consumption, insufficient Mana, stacking/recast and whether illusion attacks consume Knight charges. Preserve the ordinary non-empowered basic strike as distinct from its added Void packet, rather than assuming all normal auto attacks turn Void. |
+| PSION3-031 | **Knight illusion grants attack speed on ending** | Psionic Knight's mobile, attack-focused Mental Image **does NOT explode**. Instead, **when it ends, the Knight gains a TEMPORARY ATTACK-SPEED BUFF**. | Attack-speed %/flat increase, duration, stacking/replacing, whether granted when illusion is killed early versus expires naturally, and whether Knight must be alive/nearby. No extra damage/death explosion automatically approved. |
+| PSION3-032 | **Mirage Mage mirrored Metal Shield** | When Mage casts Metal Shield, eligible Mental Images produce a **SMALLER INDEPENDENT GROUP-SHIELD POOL**, **not** extra capacity added to the Mage's original shared pool, not a full-strength duplicate, and not an illusion-only shield. Preserve existing elemental Metal shield rules and group protection semantics unless further refined. | Independent pool size/formula, radius/position (image centered vs Mage centered), duration, affected targets, pool order/stacking relative to original and multiple mirrors, cast time/echo timing, resource accounting. **Do not apply the 25% damage-copy cap to shield capacity without separate user approval.** |
+| PSION3-033 | **Mental Image copying Mental Image, bounded** | If a Mirage Mage image mirrors a Mage's **Mental Image** cast, it creates **ONE EXTRA WEAKER ILLUSION** that **CANNOT COPY SPELLS OR CREATE FURTHER ILLUSIONS**. The weaker extra image **EXPLODES FOR THE SAME DAMAGE as the original Mirage Mage Mental Image** when it ends, per user's explicit extra thoughts. The previously approved Mage image automatic explosion on expiry/destruction remains in force. | What makes secondary illusion 'weaker' (e.g. lower HP/basic damage/lifetime) and the secondary image's attack permissions/AI, plus how many base images may mirror one cast. **Its explosion must not be reduced to the 25%-at-max spell-copy damage amount**: user specifically approved equal explosion damage. Whether explosion radius, target limits and exact snapshot stats match the original needs tuning/confirmation; parent-class enemy-only explosion remains default reference. Bound mirror **generation depth to 1**: no self-replication chain. |
+| PSION3-034 | **Echo timing** | Mirrored casts occur after a **fixed 0.4-second delay**, visibly following the Mage's original spell at the **same selected target / ground location**, where relevant. This applies as the current default to offensive casts and other mirrored spell types, subject to appropriate definition of target/context. | When to snapshot targets/stats, behavior if targets die, move or are out of range/LoS, copied self-centered spell center, whether echo resolves if originating image dies in the 0.4s wait, and whether the Mage pays extra Mana. Delay scaling with skill rank was NOT selected. |
+
+### Current mechanics (use this instead of superseded Round 3/4 text when implementing)
+
+**Psionic Knight (Tier III)**
+- Normal basic-attack range **3m**; swings mindblade to project short psychic slashes.
+- Basic-attack specialist retains **Psionic Blades Mastery + Mental Image**, with a separate **self-only Void elemental shield**.
+- Empowered strike ability is a **finite buff**, NOT a toggle. Normal basic attack count empowered per activation = **`1 + floor(rank/2)`**. Each empowered basic attack consumes **rank-scaling Mana** and deals extra **Void-element** damage. Whether added Void damage is Physical or Magical is OPEN; normal basic attacks are Physical by default.
+- Mobile image **follows Knight**, attacks the Knight's selected target or independently acquires nearby hostiles; when it ends it gives Knight a **temporary ATTACK SPEED buff**, with **no explosion**.
+
+**Mirage Mage (Tier III)**
+- Normal basic-attack range **9m**; Tier IV caster-descendant goal is full normal caster range.
+- Retains **Psychic Bolt, Lightning Storm, Metal Shield and Mental Image**. Bolt lower CD/higher scaling, Storm higher damage, Shield larger original cast AoE/pool, Image higher explosion damage.
+- Stationary image performs its existing minor basic attacks and mirrors **ALL Mage spells**, including shields and Mental Image, with **0.4s delayed same-target visible echoes**. Mirrored offensive spell damage scales from weak at lower Image rank to **25% at max Image rank**, with **NO copied stuns/control effects**.
+- Mirrored Metal Shield creates a **smaller, independent shared group pool**.
+- Mirrored Mental Image spawns **one weaker secondary illusion**, which **cannot echo magic or summon descendants**. Despite its general weakness, its **expiry/destruction explosion deals the SAME DAMAGE as the main Mirage Mage Mental Image**, not a scaled-down 25% mirror hit.
+- Original and secondary images retain ordinary automatic end/death explosion concept, with exact radius/stat snapshot for secondary to be settled.
+
+### Round 6 interview topics (ALL OPEN)
+
+1. **Knight empowerment's Void damage channel and formula:** Physical vs Magical Void packet; additional damage scaling (AGI, INT, flat per rank) and Mana per empowered attack.
+2. **Knight illusion's end buff:** attack-speed bonus and duration; should it trigger on both natural expiry and enemy kill, and what happens on overlapping clones?
+3. **Mirage Mage image's extra illusion:** which stats and attacks are weakened while keeping full explosion damage (HP, autoattack damage, lifetime, attack speed)?
+4. **Mirage Mage shield copy:** independent pool percentage or formula, AoE center (image or Mage), party membership and pool stacking/consumption order.
+5. **Mirrored casts and 0.4s delay:** target dies/vanishes or Image dies before echo; Mana cost and ability to mirror the mage's newly-designed future spells.
+
+**Scope:** This is a documentation/design round only, not Unity implementation, numeric balancing approval beyond the explicitly selected formula/0.4s, or authorization to touch the developer's uncommitted local work. Maintain compatible class-lineage progression and spell/elemental rules.
