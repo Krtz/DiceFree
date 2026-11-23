@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–8 USER-CONFIRMED**, latest **2026-11-23**. Round 8 and subsequent decisions supersede earlier open/proposed details, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–8 confirmed plus a Round 9 partial roster update**, latest **2026-11-23**. Round 9 records two approved roster decisions, but the overall Tier III rank budget and all other Round 9 prompts remain open. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -329,3 +329,35 @@ Since the user deferred Mental Image rank cap until the **full Tier III skill-po
 5. Whether Knight's empowered bonus Void packet should be Physical or Magical NOW that its formula is approved, or defer pending actual damage comparisons with real World 2 enemies.
 
 The above are only options. **No Unity implementation or local WIP changes authorized by design approvals**.
+
+
+## Round 9 — 2026-11-23 (PARTIAL USER-CONFIRMED CLASS ROSTER; rank budget still OPEN)
+
+The user supplied two concrete changes instead of answers to the five previously suggested Round 9 prompts. **Only the following two decisions are approved**. Do not assume a Tier III total rank budget, ability cap, Knight damage channel, or other unchosen Round 9 details.
+
+| ID | Topic | USER-CONFIRMED direction | OPEN details |
+| --- | --- | --- | --- |
+| PSION3-051 | **Psionic Knight new passive: personal attack and movement speed + aura** | Psionic Knight gets a **new rankable PASSIVE**. Per purchased rank `r`, the Knight itself gains **+1% ATTACK SPEED per rank** and **+1% MOVEMENT SPEED per rank** as personal passive bonuses, and provides an **AURA increasing others' ATTACK SPEED by +0.1% per rank and MOVEMENT SPEED by +0.1% per rank** (the user's words: "increases everyone's"). At rank10, the component values are personal +10% attack speed/+10% movement speed and aura +1% attack speed/+1% movement speed, *before deciding interaction/stacking of self and aura*. This is **a separate passive from retained Psionic Blades Mastery**, not an addition to or replacement for Blades Mastery. Apply modifiers to the global equal unmodified speed baseline: do NOT create a unique faster class base speed. | Passive **name**, rank cap and gates, aura radius, which entities are affected (user said **everyone**; clarify whether friendly players, self, summoned units, nearby NPCs or even hostile units), line of sight, aura activation and indicators, stacking with other Knights and the Knight's self buff, whether clones inherit aura effects or generate their own aura, skill-rank scaling limits, exact additive/multiplicative stacking rules. Avoid assuming the aura buffs enemies or self until explicitly selected. |
+| PSION3-052 | **Mirage Mage has enough spells for now** | The user states **"Mage has enough spells for now."** Keep **Mirage Mage's FOUR already approved inherited/evolved Psion active abilities** as its current kit: **Psychic Bolt, Mental Image, Lightning Storm, Metal Shield**. Mirror-casting is embedded in Mental Image, not an automatic fifth standalone spell; the existing abilities receive the previously confirmed Tier III improvements. **Do NOT add a new Mirage Mage spell now solely to fill a presumed class-ability count.** | Any future Mage passive or additional skills, and final ability count/rank budget, may be revisited only if the user requests them. Exact Tier III skill ranks/caps are not set. |
+
+### Provisional roster based on actual decisions, NOT finalized rank budget
+
+| Psionic Knight | Category | Mirage Mage | Category |
+| --- | --- | --- | --- |
+| Psionic Blades Mastery (retained/evolved) | Passive | Psychic Bolt (stronger/lower CD) | Active |
+| Mobile Mental Image (attacks; end grants attack-speed buff) | Active | Stationary Mental Image (copies all spells, explodes) | Active |
+| Personal Void Shield (new) | Active | Lightning Storm (higher damage) | Active |
+| Empowered mindblade attacks: `1 + floor(r/2)` strikes, Mana and extra Void packet (new) | Active | Metal Shield (wider/stronger shared group pool) | Active |
+| **NEW personal attack-/move-speed passive with weaker AoE aura** | Passive | *No additional spell approved at this time* | — |
+
+Thus the **currently known proposed roster count** is Knight **5 abilities** (3 actives, 2 passives) and Mage **4 abilities** (4 actives), subject to future design revisions. There is no requirement to force the two classes to equal counts, as the shared ability framework can support flexible class ability numbers. **Do not infer skill point budgets, rank caps, unlocked skills or progression from these counts.** Retain Mirage Mage's existing replicated-Mental-Image logic and shields as already approved.
+
+### Next five design questions (OPEN)
+
+1. Does the Knight's passive **aura** apply to *allies and Knight only*, friendly summons/pets too, or literally every nearby character including hostile enemies?
+2. What **radius** should the aura have (e.g. 8m, 12m, 15m), and does it need line of sight?
+3. If multiple Knights are nearby, do their auras **stack**, use highest value only, or refresh/reassign? Does Knight also benefit from their own aura in addition to the +1%/rank personal buff?
+4. Are we happy with **5 Knight abilities and 4 Mage abilities for now**, possibly adding passives later, or should we design further Knight actives and Mage passives before choosing budgets?
+5. What **total Tier III rank-point budget** is intended: one per class level through **120**, or a larger rank capacity earned after the level-120 advancement threshold, as was done for Tier II? Do not commit an answer without user approval.
+
+**Design-only; no Unity implementation, local WIP changes, or unrequested skills.**
