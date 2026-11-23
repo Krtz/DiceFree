@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–11 approved structure; Round 12 latest 2026-11-23 user corrections**. Both Mental Image caps are now **USER-APPROVED at 25**, and empowered-attack charge counts use **1 + floor(rank/3)**. **All other new rank caps, exact gates/unlocks and crit coefficients below are designer proposals AWAITING APPROVAL**. The superseded Round 11 numeric tables are historical, not current. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–13**, latest **2026-11-23**. Round 13 updates the rank-cap allocation to Knight **30/25/29/34/32** and Mage **34/25/30/29/32** and confirms mastery crit values plus Tier III/Tier IV basic-attack stat scaling. Exact level-by-level rank gates and their initial unlock levels remain **designer proposals pending user approval**. Earlier Round 11/12 tables are historical/superseded. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -524,3 +524,94 @@ These **replace the Round 11 proposed numeric tables** as the latest draft. Each
 4. Retain all previously user-approved skills, hero-only aura emitters, clone behavior, mage shield copy, and Tier III level150 progression; no Unity/gameplay coding authorized in this round.
 
 **GitHub design documentation only. Preserve the user's substantial uncommitted local game changes.**
+
+
+## Round 13 — 2026-11-23 (LATEST USER-CONFIRMED CORRECTIONS AND REBUILT GATES)
+
+The user explicitly revised the *Round 12 draft*: move **4 points from Knight Psionic Blades Mastery to Knight speed/aura passive**, and **4 points from Mage Lightning Storm to Mage speed/aura passive**. Also specified exact Knight critical statistics and basic-attack scaling for both Tier III descendants, plus *future Tier IV directional scaling*.
+
+### User-approved skill rank redistribution
+
+| Psionic Knight skill | Previous Round 12 PROPOSED cap | **NEW USER-SELECTED cap** |
+| --- | ---: | ---: |
+| Psionic Blades Mastery | 34 | **30** |
+| Mobile Mental Image | 25 | **25** |
+| Personal Void Shield | 29 | **29** |
+| Empowered Attacks | 34 | **34** |
+| Speed Presence + allied aura | 28 | **32** |
+| **Total** | **150** | **150** |
+
+| Mirage Mage skill | Previous Round 12 PROPOSED cap | **NEW USER-SELECTED cap** |
+| --- | ---: | ---: |
+| Psychic Bolt | 34 | **34** |
+| Stationary mirroring Mental Image | 25 | **25** |
+| Lightning Storm | 34 | **30** |
+| Metal Shield | 29 | **29** |
+| Speed Presence + allied aura | 28 | **32** |
+| **Total** | **150** | **150** |
+
+**These revised five cap totals are the user's latest explicit allocation.** Previous Round 12 **34 Blades / 34 Storm / 28 Speed** were *proposed* values and are now **superseded**. Preserve identical +1% *personal* and +0.1% *same-name aura* attack-speed/movement-speed PER RANK for both classes, hero-only aura emitter, strongest-name-only semantics, all allies within 12m including self. At cap32 the **nominal** personal source grants +32% attack speed and +32% movement speed and the separately sourced aura grants +3.2% of each to eligible allies (self included if strongest aura). Don't invent new movement-speed baselines or silently multiply effects without the shared stat rules.
+
+### Knight Psionic Blades Mastery exact critical rules — USER CONFIRMED
+
+- The passive's **rank cap = 30**.
+- **Each purchased Psionic Blades Mastery rank grants +1 percentage point BASIC-ATTACK critical-hit chance**. With the game's opt-in crit baseline of **0%**, the intended class mastery component reaches **30% at rank 30**, before other explicitly authored modifiers. The previous Round 12 +0.5pp/rank designer proposal is superseded.
+- **Critical damage multiplier starts at 160% before purchased ranks**, then gains **+1 percentage point per purchased Mastery rank**, reaching **190% at rank 30**. `criticalMultiplier(r)=1.60+0.01r` for `r=0...30`. Example rank1: 161%, rank15: 175%, rank30: 190%. If "start at 160%" was intended for rank1 rather than the unranked baseline, clarify next time; this definition exactly matches the user's explicit rank30 190% target with 1pp/rank increases.
+- Preserve **+1 flat PHYSICAL DEFENSE bypass per purchased Mastery rank** from the parent Psion mastery, for **30 flat PDEF ignored at rank30**, on eligible normal basic attacks. Do not replace this with percentage armor penetration.
+- Damage-crit permission remains **BASIC/AUTOATTACK-specific** unless separately authorized; critical status of the *separate additional Void-element empowered-hit packet* is **still not specified**. Knight illusion applies eligible passives in full, but autoattack raw damage remains its own 10–50% image-rank fraction. No universal global critical rule change intended.
+
+### Approved class-specific BASIC/AUTOATTACK stat scaling
+
+| Evolution | Tier | **Ordinary basic-attack stat coefficients** | Total coefficient | Status |
+| --- | --- | --- | ---: | --- |
+| Psion (baseline reference only) | II | `0.45×AGI + 0.45×INT` | 0.90 | Parent unchanged |
+| **Psionic Knight** | **III** | **`0.60×AGI + 0.40×INT`** | **1.00** | **USER APPROVED** |
+| **Mirage Mage** | **III** | **`0.60×INT + 0.40×AGI`** | **1.00** | **USER APPROVED** |
+| Knight descendant (unnamed) | IV | **`0.90×AGI + 0.20×INT`** | **1.10** | **USER-APPROVED FUTURE DIRECTION ONLY; no Tier IV design/implementation authorized** |
+| Mirage Mage descendant (unnamed) | IV | **`0.90×INT + 0.20×AGI`** | **1.10** | **USER-APPROVED FUTURE DIRECTION ONLY; no Tier IV design/implementation authorized** |
+
+**Critical distinction:** These changes apply to the **ordinary BASIC/AUTOATTACK stat contribution**, not to all spell damage. They do **NOT** modify the already approved additional Knight empowered-hit **Void damage formula `30+17r+0.4AGI+0.1INT`**, nor do they change the Physical/Magical damage channel of that bonus (still OPEN). The parent Psion's basic attack remains ordinarily Physical; this stat-scaling approval alone does not change basic hit channel, attack timing, gear requirements, targeting, rank effects or illusion explosion coefficients. The class IV formulas are future lineage intent, NOT unlock/quest/skill design or blanket every-class rules.
+
+### Rank eligibility tables recomputed for latest caps — DESIGNER PROPOSAL ONLY
+
+**DO NOT CONFUSE the USER-SELECTED per-skill MAX CAPS above with unapproved exact eligibility gates and first unlock levels below.** First unlock levels retained from the Round 11/12 draft for continuity, but the user never explicitly accepted the numerical gates; review them before implementation. Skills rank 0 initially, one earned point per Tier III class level 1–150, earlier purchased rank is prerequisite to the next.
+
+#### Psionic Knight — latest PROPOSED eligibility gates
+
+| Ability | First unlock level (proposed) | Maximum ranks | Final rank gate | Exact proposed eligible class levels for each purchased rank |
+| --- | ---: | ---: | ---: | --- |
+| Psionic Blades Mastery | 1 | 30 | 146 | 1, 3, 8, 16, 21, 26, 30, 35, 41, 46, 51, 56, 60, 65, 70, 77, 82, 87, 91, 96, 101, 106, 112, 117, 121, 126, 131, 136, 141, 146 |
+| Mental Image | 1 | 25 | 144 | 1, 4, 13, 19, 25, 31, 38, 44, 50, 55, 61, 68, 74, 79, 86, 92, 97, 103, 109, 116, 122, 128, 134, 139, 144 |
+| Personal Void Shield | 6 | 29 | 145 | 6, 7, 9, 17, 22, 27, 33, 37, 42, 47, 53, 59, 64, 69, 73, 78, 83, 89, 94, 100, 105, 110, 114, 120, 125, 130, 135, 140, 145 |
+| Empowered Attacks | 1 | 34 | 148 | 1, 2, 5, 14, 18, 23, 28, 32, 36, 40, 45, 49, 54, 58, 63, 67, 72, 75, 80, 84, 88, 93, 98, 102, 107, 111, 115, 119, 124, 129, 133, 138, 143, 148 |
+| Speed Presence | 10 | 32 | 147 | 10, 11, 12, 15, 20, 24, 29, 34, 39, 43, 48, 52, 57, 62, 66, 71, 76, 81, 85, 90, 95, 99, 104, 108, 113, 118, 123, 127, 132, 137, 142, 147 |
+
+**Audit:** 150 total ranks; all earned points legally spendable at every class level 1–150; latest rank gate class level 148.
+
+#### Mirage Mage — latest PROPOSED eligibility gates
+
+| Ability | First unlock level (proposed) | Maximum ranks | Final rank gate | Exact proposed eligible class levels for each purchased rank |
+| --- | ---: | ---: | ---: | --- |
+| Psychic Bolt | 1 | 34 | 148 | 1, 2, 4, 15, 19, 24, 28, 32, 36, 41, 46, 50, 55, 59, 64, 68, 73, 76, 81, 85, 89, 94, 98, 103, 108, 112, 116, 120, 125, 130, 134, 139, 144, 148 |
+| Mental Image | 1 | 25 | 145 | 1, 3, 14, 21, 26, 33, 39, 45, 51, 56, 62, 69, 75, 80, 87, 93, 99, 104, 110, 117, 123, 129, 135, 140, 145 |
+| Lightning Storm | 5 | 30 | 147 | 5, 6, 7, 17, 22, 27, 31, 37, 42, 47, 52, 57, 61, 66, 71, 78, 83, 88, 92, 97, 102, 107, 113, 118, 122, 127, 132, 137, 142, 147 |
+| Metal Shield | 8 | 29 | 146 | 8, 9, 13, 18, 23, 29, 34, 38, 43, 49, 54, 60, 65, 70, 74, 79, 84, 90, 95, 101, 106, 111, 115, 121, 126, 131, 136, 141, 146 |
+| Speed Presence | 10 | 32 | 149 | 10, 11, 12, 16, 20, 25, 30, 35, 40, 44, 48, 53, 58, 63, 67, 72, 77, 82, 86, 91, 96, 100, 105, 109, 114, 119, 124, 128, 133, 138, 143, 149 |
+
+**Audit:** 150 total ranks; all earned points legally spendable at every class level 1–150; latest rank gate class level 149.
+
+#### Gate audit and consequences
+
+- **Exact totals:** each class contains exactly 150 eligible purchases; all approved skill caps above are matched. **For EVERY class level 1–150**, cumulative eligible rank purchases meet/exceed points earned, so there is **no level at which a point must be stranded**. Strict increasing rank gates and first-rank unlocks checked for each skill.
+- Checkpoint eligible gate counts **Knight: 1→3, 10→12, 60→62, 120→122, 150→150**; **Mage: 1→2, 10→11, 60→61, 120→121, 150→150**. Latest gates at level **148 Knight / 149 Mage**; all 150 rank points can be spent by class level150.
+- Knight Empowered Attacks still max34 and uses the **APPROVED `1+floor(rank/3)`**, hence 12 empowered strikes per cast at rank34, with rank-scaling Mana cost and bonus Void packet `30+17r+0.4AGI+0.1INT`. The **new normal 0.6AGI+0.4INT attack scaling does not replace the separate empowered Void formula**.
+- Knight Image max25: basic attacks 10%→50% of caster normal basic value; its ending speed buff +1% for 1s→+50% for5s; full inherited passives and scaled temporary buffs. Mage image max25: primary basic damage 10% of owner basic; mirrors all spells in 0.4s including independent Metal group shield with copied strength reaching 25% at max; weaker half-HP / half-basic / half-duration secondary full-explosion image remains as approved.
+- At shared Speed Presence max32, the self+allies values are large and require real-world playtesting. No balance simulation was performed in Unity.
+- Tier III→IV eligibility remains level120; Tier III skill progression still through150, one point per class level. Tier IV scaling numbers above are future intentions only.
+
+### Next review points
+
+1. Approve or adjust the **exact rank eligibility gates** and unlock levels for the **newly confirmed caps**. The individual cap totals themselves were selected by the user; only purchase timing remains a proposal.
+2. Confirm Knight crit multiplier baseline treatment of **160% at rank0→190% at rank30** (versus exactly160% at rank1), if relevant.
+3. Decide the still-open **Physical or Magical channel** for Knight's extra Void empowerment damage, Knight Mana cost / cooldown / charge expiration, Mirage Mage improved spell damage coefficients and mirror low-rank scaling, and exact cast/clone edge cases.
+4. Preserve all previously confirmed shield, aura, mana-only and world progression rules. **Documentation only; no Unity code/assets/WIP modifications or branch merges authorized.**
