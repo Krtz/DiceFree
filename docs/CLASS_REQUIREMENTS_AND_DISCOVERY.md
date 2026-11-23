@@ -1,6 +1,14 @@
 # Class Requirements, Convergence and Discovery
 
 ## Progression shape
+## Hidden teacher discovery versus advancement proof (2026-11-23 USER APPROVED)
+
+- **Any hidden teacher, across all class lineages**, when actually found by ANY manifestation, must be permanently registered in the **Echo-wide Codex**. This adds a teacher-discovery record distinct from already-authorized Echo-wide hidden **Way/class discovery** and **advancement completion**. A teacher can be recorded as found even when the current manifestation is the wrong class/level; this is knowledge, not automatic class eligibility or creation of a new manifestation.
+- Finding a teacher is designed to use a **combination of NPC rumors, found lore and environmental exploration clues**. Do not reveal undiscovered teachers with spoiler placeholder UI entries or auto-list them in the class advancement menu solely because some rumors exist.
+- Specific **Psion Tier III** descendants each have their own separately found hidden teacher. The **Psionic Knight** teacher requires a **SOLO Wolf Cave completion**, and the **Mirage Mage** teacher requires a **SOLO Shaman Cave completion**. These are actual successful dungeon clear challenges, not simply an NPC conversation or a multi-party completion. The teacher find and solo-clear are logically distinct requirements; whether a solo clear earned before meeting the teacher counts retroactively remains open.
+- Keep the established **Tier II Psion level60 → new Tier III level1 manifestation** advancement prerequisite. Maintain the usual **Echo-wide discovery and milestone durability** while checking class/manifestation-specific eligibility and progression independently. The existing 150-point skill-rank gate tables are unchanged.
+- **Content naming caution:** the existing authored **Wolf Survival: Moonlit Clearing** is not automatically the requested **Wolf Cave**. The Shaman Cave's implementation/zone/content has not yet been established. Do not synthesize nonexistent dungeon IDs, mobs, NPC locations, or a different requirement from these names. See [Psion Tier III Round 17](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md), [Codex](CODEX.md), and [Wolf Survival](WOLF_SURVIVAL_DUNGEON.md).
+
 
 DiceFree's class progression is best treated as a **directed class graph / web**, not a strict tree.
 
