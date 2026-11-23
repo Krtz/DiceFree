@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–2 USER-CONFIRMED**, latest **2026-11-23**. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–3 USER-CONFIRMED**, latest **2026-11-23**. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -106,3 +106,49 @@ The user's additional freeform notes expressly override/expand the third multipl
 5. **Mirage Mage mirror mechanics:** should new spells copy existing casts, bounce between illusions/enemies, or trigger explosive interactions? Clarify how this differs from automatic Mental Image expiry/death.
 
 Do NOT treat these Round 3 options as user approvals. **Documentation/design only**; this round does not authorize Unity implementation, asset changes or local WIP cleanup.
+
+
+## Round 3 — 2026-11-23 (LATEST USER-CONFIRMED)
+
+These five answers supersede the prior Round 3 option prompts. **Question 5 was intentionally left unanswered**; the user's freeform idea is a promising **proposal, not yet locked spell-copy rules**.
+
+| ID | Topic | Approved choice / scope | Open implementation details |
+| --- | --- | --- | --- |
+| PSION3-020 | **Tier III basic-attack ranges** | **Psionic Knight 3 meters**, **Mirage Mage 9 meters**. These are the actual approved **normal basic/autoattack ranges**, not the parent Psion's 5m range. The Mirage Mage's future Tier IV caster evolution should achieve full normal caster basic range, pending Tier IV design. | Skill ranges, illusion attack ranges, engagement distances and range modifiers from equipment remain independently designed. |
+| PSION3-021 | **Knight illusion idle targeting** | The Knight's **mobile Mental Image** follows the Knight, prioritizes **the Knight's current target**, and **AUTOMATICALLY ATTACKS nearby valid hostile enemies when the Knight has no current target**. It does not remain idle merely because no explicit target is selected. | Search radius, follow/leash range, if it may chase targets outside that range, behavior when an explicit current target becomes unreachable, attack-completion retargeting and persistence after caster death. Preserve no manual RTS control unless later expressly changed. |
+| PSION3-022 | **Knight personal Void shield** | Knight gains a **SELF-ONLY Void-element shield**. It uses the project's **ordinary elemental shield rules**, not neutral 1:1 shield handling, and it is *not* a copy of Mirage Mage's ally Metal Shield. | Shield capacity, scaling, Mana cost, cooldown, duration, activation cast, whether it can cover Knight's illusion, source-recast handling. Under current global elemental-shield policy, ordinary eligible damage costs **0.8 shield HP per damage prevented when element matches Void**, otherwise **1.2 shield HP**; if global policy changes, follow global rules. |
+| PSION3-023 | **Knight empowered basic-attacks as toggle** | Knight's empowered attack ability is a **PLAYER-CONTROLLED ON/OFF TOGGLE**, not a limited number of charges nor a fixed duration. **Every normal basic attack performed while toggled ON costs Mana and deals extra damage**. With toggle OFF, Knight uses normal unempowered basic attacks and does not pay this empowerment tax. **Mana-only** class still; no new class-specific resource. | Mana spent per attempted/landed attack, handling insufficient Mana, exact extra damage, whether each slash is its own basic attack event, toggle activation cost/cooldown, whether cloning gains or pays for empowered hits, auto-off on death/class swap. No free empowered attacks assumed when Mana is zero. |
+
+### Mirage Mage mirror-spell proposal from extra thoughts (NOT YET USER-CONFIRMED AS MECHANICS)
+
+The user suggested: **"what if mirage mage mental image casts a weaker mirror version of the spells the main casts?"** This is the proposed direction for answering unanswered Round 3 question 5. The idea is **genuinely new** beyond the already confirmed stationary image with basic attacks and enhanced automatic expiry/death explosion. **Do not mark the mirror casts as approved implementation specifications until follow-up choices establish their scope.**
+
+Conceptual draft to review:
+- Whenever Mirage Mage casts a qualifying offensive spell while its Mental Image is alive, the image **mirrors that cast at reduced effectiveness**. The caster's real spell is never replaced by the reflected copy.
+- Keep **the image itself stationary** and **retain the stronger Magical Void explosion on expiry or destruction**, as already approved.
+- The image's spell mirrors should be secondary damage, not a way to reproduce an entire additional full-strength Mage, shield the whole party twice without approval, generate recursive clones, or turn on a second casting/resource system.
+- **Unanswered critical questions**: which spells mirror (Bolt and Storm? Metal Shield? future new spells?), mirror damage coefficient and rank scaling, whether status effects or stun are replicated, cast destination/target/line of sight, copy timing, Mana costs (likely owner only, but undecided), limits when multiple clones overlap, whether mirrored casts themselves can trigger further copies, and whether image still does its inherited 10% basic attacks.
+- Preserve the approved parent image's **automatic enhanced explosion** on death/expiry; never silently replace it with a spell-copy trigger.
+
+### Current side-by-side identity snapshot
+
+| Property | Psionic Knight | Mirage Mage |
+| --- | --- | --- |
+| Tier | III, new preserved Echo manifestation | III, new preserved Echo manifestation |
+| Normal basic-attack range | **3m** | **9m** |
+| Primary damage | Short-range Physical-style mindblade psychic slashes; empowered attacks spend Mana | High-damage magical single target / AoE spells |
+| Mental Image | **Mobile; follows Knight, attacks current target or auto-acquires nearby hostiles** | **Stationary parent-style image** with stronger automatic enemy-only Void explosion; weaker mirrored spellcasts **proposed, not finalized** |
+| Retained Psion skills | Psionic Blades Mastery; Mental Image | Psychic Bolt; Mental Image; Lightning Storm; Metal Shield |
+| New/changed shield | New **self-only Void elemental shield** | Enhanced **group Metal Shield** with bigger initial cast area and absorption |
+| Additional class feature | On/off empowerment; every basic attack while on costs Mana and does extra damage | Mirror-based spell interaction **to design** |
+| Resource | **Mana only** | **Mana only** |
+
+### Round 4: five focused questions (OPEN, do not infer answers)
+
+1. **Mirror copy scope:** should Mirage Mage's image copy only offensive spells (e.g., Psychic Bolt and Lightning Storm), including shield casting, or every magic spell? Should it copy future Tier III spells too?
+2. **Mirror output:** what percentage of Mage's real spell damage should each image reproduce (for example 20%, 30% or 40%)? Should CC/debuff/stun be mirrored, reduced or omitted?
+3. **Mirror targeting/timing:** should the image cast at the Mage's chosen target/ground point, at its own target, or use the same direction relative to the image? Instant echo versus a delay?
+4. **Knight empowered-buff Mana/cadence:** fixed Mana per attack versus scaling Mana with tier/skill rank; how should it behave on low Mana and when the Knight's illusion attacks?
+5. **Knight image on death:** does the mobile image retain any Void explosion on expiry/death, lose explosion entirely, or get a modest weaker burst? Exact combat tuning stays later.
+
+**Continuity safeguard:** The Knight autoattacks' *presentation* is psychic slashes, but that alone does not authorize changing the standard Physical basic-attack damage channel. Neither class gains a secondary resource. This round is **documentation-only**. Do not modify live Unity code, uncommitted local World 2 work, gameplay assets or quests.
