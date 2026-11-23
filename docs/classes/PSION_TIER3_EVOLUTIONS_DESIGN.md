@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–7 USER-CONFIRMED**, latest **2026-11-23**. Read the latest round as authority wherever it supersedes earlier rounds. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–8 USER-CONFIRMED**, latest **2026-11-23**. Round 8 and subsequent decisions supersede earlier open/proposed details, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -290,3 +290,42 @@ The Mage casts its original enlarged Metal Shield: that is one **shared pool** p
 5. **Mirage Mage secondary clone ecology:** decide secondary lifetime, attack speed/reach, what happens if original image dies immediately after spawning the weaker image, and whether secondary explosions use the full primary damage/radius and snapshot attributes.
 
 **Document status:** only Round 7 table values above are USER CONFIRMED; Round 8 options are questions, not decisions. Preserve local uncommitted Unity work.
+
+
+## Round 8 — 2026-11-23 (LATEST USER CONFIRMATIONS)
+
+The user's freeform answer to question 3 is an **exact newly approved damage formula**, not an unanswered question. The listed alternative formula examples have been declined. Other choices supersede earlier uncertainty about passives and copied Metal Shield strength.
+
+| ID | Topic | **USER-CONFIRMED** rule | Remaining open / implementation caution |
+| --- | --- | --- | --- |
+| PSION3-046 | **Knight Mental Image max rank deferred** | **Do not select the Tier III Knight Mental Image max rank until designing the ENTIRE Tier III skill-point budget**. The endpoints already established still hold: clone basic damage from 10% at rank 1 to 50% at max; end buff +1% for 1 second at rank 1 to +50% for 5 seconds at max. | Whole Tier III ability roster, max spendable rank budget, individual caps and exact interpolation/gates. Do not silently reuse Tier II's 18 Image ranks. |
+| PSION3-047 | **Knight image passive versus temporary-buff inheritance** | The Knight's mobile image **inherits applicable PASSIVE bonuses in full**, while **TEMPORARY BUFF effect strengths are copied at the image's rank-dependent 10%→50% scaling**. This supersedes the Round 7 wording implying both passive bonuses and temporary buffs are reduced. | Precise list of applicable passives, duration of copied buffs, live updates vs on-spawn snapshot, how to handle toggles/empowerment charges, shield/CC/utility effects. Never double-reduce base basic damage simply because image's inherited temporary buff is itself scaled. The clone's baseline basic damage is still 10%→50% of the Knight's appropriate raw basic damage. |
+| PSION3-048 | **Knight additional Void damage: EXACT formula** | Each *eligible empowered basic attack* adds a separate **VOID-element** damage packet with RAW value **`30 + 17 × skillRank + 0.5 × (0.8 × AGI + 0.2 × INT)`**, with `skillRank` the **empowered-attack ability's purchased rank**, not the Mental Image rank. This is **flat 30 base + 17/rank + AGI-weighted/INT-weighted scaling**. As algebra: `30 + 17r + 0.4AGI + 0.1INT`. It remains alongside the ordinary base basic hit, not a replacement for it. At r=1, added raw `47 + 0.4AGI + 0.1INT`; at r=10, `200 + 0.4AGI + 0.1INT`. | **Physical vs Magical damage CHANNEL deliberately still OPEN**. Do not infer from Void affinity that the channel must be Magical. Rank cap, Mana cost per empowered hit (rank-scaling per earlier decision), cooldown, charge lifecycle, crit/proc eligibility, mitigation/hit event ordering, gear interactions. The number of buffed attacks remains **`1 + floor(r/2)`**, as approved in Round 5. |
+| PSION3-049 | **Mirage Mage independent mirror Metal Shield scales like copied damage** | **YES**: the independent **Metal-element shared group-shield pool** cast by an image **0.4s after the Mage's shield** has a **capacity equal to the same rank-dependent percentage of the Mage's original shield capacity used for mirrored SPELL DAMAGE**, starting weak and reaching **25% of the original shield pool at the image's maximum rank**. Its AoE is **centered on the IMAGE** and covers nearby eligible allies, not a subset of the Mage's existing pool. This now makes the prior proposed shield curve APPROVED, superseding Round 6/7 hedging about needing user confirmation. | Precise rank-1 percentage, rank progression/gates, copied AoE radius, group-target snapshot, element shield priority, whether an applied copy remains after the source image dies. The full-sized Mage shield still has its own upgraded capacity and separate cast radius. |
+| PSION3-050 | **Mirage Mage secondary image lifetime and independent survival** | A **secondary illusion created by the primary image mirroring Mental Image** has **HALF THE PRIMARY IMAGE'S LIFETIME** and **continues existing if its spawning primary image is destroyed**, until its own expiration or destruction. Retain Round 7: 50% primary image HP, 50% primary image basic attack damage (primary is Psion-like 10% caster basic; secondary ~5%), same FULL-strength Mirage Mage Mental Image explosion upon secondary expiration/death, and inability to copy spells or summon further images. | Exact start/expiry timestamps, whether the 50% HP rounds up, secondary movement/range/attack speed and how buff/snapshot inheritance works. Secondary is not auto-despawned on primary destruction. No control effects from mirrored spells. |
+
+### Status after Round 8 (implementation-facing summary)
+
+**Psionic Knight**
+- 3m basic attack range, sword-projecting short psychic slashes; regular autoattack baseline still Physical.
+- Retains Psionic Blades Mastery, plus **mobile Mental Image** following the Knight and attacking its target / auto-acquiring nearby hostiles. Image basic damage scales **10%→50%** by Mental Image rank, with **full applicable passive bonuses and 10%→50%-strength copied temporary buffs**; image **does not explode** and instead grants Knight **+1% attack speed for 1s → +50% for 5s** after natural expiration or destruction.
+- Gains self-only **Void-element shield**.
+- Gains finite empowered-attack buff affecting **`1 + floor(r/2)`** normal basic attacks. **Each empowered attack costs rank-scaling Mana** and adds Void-element RAW damage **`30+17r+0.4AGI+0.1INT`** as a separate packet. Physical/Magical channel, Mana formula and charge expiry are NOT settled; the old toggle is reserved as a potential Tier IV ability.
+- **Defer ALL Tier III max-rank allocations until a complete skill roster and global Tier III point budget are agreed**, especially Mental Image.
+
+**Mirage Mage**
+- 9m basic range, 4 inherited Psion abilities: higher-scaling lower-CD Psychic Bolt, harder-hitting Lightning Storm, larger/bigger group Metal Shield, enhanced Mental Image. Primary image still attacks at **10% of the caster's basic damage**.
+- Images mirror ALL spells, including utility/shield and image summons, at **0.4s delay**, with NO mirrored control effects. Mirrored damage and copied independent Metal-shield capacity use **the same rank-based percentage rising to 25% at maximum Mental Image rank** (precise lower endpoint unselected).
+- Independent copied Metal Shield is cast around the illusion's location and protects nearby eligible allies. A mirror of Mental Image creates one **non-copying, non-reproducing secondary image**, with **50% HP, 50% basic attack damage and 50% lifetime** versus primary. **Secondary's explosion is FULL damage matching the primary's explosion**; on destruction of the original image the secondary does NOT disappear.
+- If a primary illusion dies during the 0.4s mirror delay, pending echoes from that illusion cancel; already applied independent shields/secondary images are not automatically erased without an explicit rule.
+
+### Round 9 — next design focus (QUESTIONS, NOT YET LOCKED)
+
+Since the user deferred Mental Image rank cap until the **full Tier III skill-point budget** is designed, start by deciding **how many purchased skill-rank points and how many different abilities Tier III classes should offer**, then design missing Knight/Mage skills before caps/rank gates. Potential five-question interview:
+1. Target Tier III full-build rank budget around 120, 150, 160 or another figure (progression unlock at Tier II Lv60; Tier III level-120 evolution eligibility, but players can overlevel; avoid conflating unlock with final skill-point budget).
+2. Tier III number of distinct active/passive abilities per class: roughly 6, 7, 8+, or class-specific flexibly.
+3. Knight remaining abilities: mobility/gap closer; defense-piercing multi-hit; AoE psychic slash; other concept.
+4. Mirage Mage additional abilities beyond four inherited skills: new signature high-damage mirror spell, reflective AoE, damage-amplifying mirror field, or other concept.
+5. Whether Knight's empowered bonus Void packet should be Physical or Magical NOW that its formula is approved, or defer pending actual damage comparisons with real World 2 enemies.
+
+The above are only options. **No Unity implementation or local WIP changes authorized by design approvals**.
