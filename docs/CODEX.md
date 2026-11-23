@@ -14,17 +14,20 @@ The Codex records what the player has actually discovered.
 
 Do not spoil unseen content with mystery placeholder rows. If the Echo has not discovered something yet, it normally does not appear.
 
+## Hidden class teachers (USER-APPROVED; latest Round 18, 2026-11-23)
+
+A player manifestation finding **ANY hidden class teacher for ANY class** records a durable, **ECHO-WIDE CODEX discovery** keyed by stable teacher identity.
+
+- **Exact finding trigger:** the player-controlled manifestation comes **within 2 meters** of the teacher (distance ≤ 2.0m), whether the player talks to that teacher or not. No interaction, conversation, class level or quest acceptance is required. Discoveries are idempotent and saved Echo-wide, persisting across manifestation switches, archiving and deletion.
+- **Never spoil unseen teachers:** undiscovered hidden teachers are absent from the Codex; rumors, lore clues and environment hints help exploration but **do not count as finding** a teacher until the actual physical proximity trigger is met.
+- **Teacher knowledge versus advancement:** discovery does **NOT** accept an advancement quest, grant the resulting Way, or complete its dungeon trial. The related quest must be specifically accepted by the qualifying manifestation. General Echo-wide Codex dungeon solo-clear history is informational, not automatic quest-completion proof.
+- **Psion Tier III specific:** the Psionic Knight hidden teacher requires an eligible Tier II **Psion** to accept their quest and then **SOLO CLEAR the existing Wolf Survival: Moonlit Clearing dungeon**. The Mirage Mage teacher requires that same appropriate Tier II Psion manifestation to accept its *different* quest and then **SOLO CLEAR the Quillboar Shaman ritual cave/dungeon**. The run must START only AFTER that manifestation accepted the relevant teacher quest, and be completed solo by that same manifestation. **No retroactive clears**, even from the same Psion or another class in this Echo.
+- **Dungeon ID and content guard:** Wolf Survival: Moonlit Clearing is established in `WOLF_SURVIVAL_DUNGEON.md`. The Quillboar Shaman cave is described in `QUILLBOAR_REGION_DESIGN.md` as a hidden cliff entrance whose permanent *per-character dungeon access* follows the Trimery scholar's four-element Shaman hunt turn-in; user identifies this as the existing dungeon, although the historical region documentation had called its implementation future. Verify its current runtime dungeon identifier before quest wiring; **do not create a duplicate cave or waive its scholar access gate**.
+- Suggested semantic discovery event is `hidden_teacher_discovered(teacherId, echoId)` only as a design-interface example, not evidence an implementation exists. Use normal Echo-wide durable save and semantic event systems when authorized.
+
+See [Psion Tier III design, Round 18](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md) and [Class Requirements and Discovery](CLASS_REQUIREMENTS_AND_DISCOVERY.md).
+
 ## Monsters
-## Hidden class teachers (USER-APPROVED, 2026-11-23)
-
-**Every hidden teacher for ANY class**, not just the Psion lineage, earns a permanent **Echo-wide Codex discovery** when actually found by a player manifestation. This discovery is independent of which class is exploring, and remains visible after changing, archiving or deleting class-specific manifestations because it belongs to the Echo. The hidden teacher discovery itself must NOT automatically grant its target class or count as a completed advancement challenge.
-
-- Stable hidden teacher identity: one idempotent discovery keyed by **teacher ID**. The Codex shows genuinely **discovered teachers only**, consistent with the global discovery principle: no silhouettes, question-mark filler entries, or spoiled teacher lists before discovery.
-- A hidden teacher's **discovered** status is distinct from knowing rumors, seeing lore clues, meeting class-level eligibility, starting an advancement quest, and **finishing** its challenge. Those may be separate records/requirements; "discovered" must be tied to an actual teacher-find event, not automatically triggered by merely reading a rumor, unless separately authored and approved.
-- For **Psionic Knight** and **Mirage Mage** specifically, exploration uses rumors, lore and environment clues to find **separate teachers**. Their advancement trials are respectively **solo Wolf Cave completion** and **solo Shaman Cave completion**. Trial progress must not be silently treated as the same thing as teacher discovery. See [Psion Tier III Round 17](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md).
-- Codex dungeon section already records **solo clears**. Consume the ordinary dungeon completion+solo participation event to provide advancement evidence when the relevant trial is defined, without modifying generic dungeon reward rules. **Wolf Cave's precise identity is currently unconfirmed**, because existing Wolf Survival is explicitly a moonlit clearing; do not assume the same dungeon. Shaman Cave content is not yet verified/located. Whether past solo clears retroactively satisfy a newly discovered teacher's request remains OPEN.
-- Suggested semantic-event name for future implementation: `hidden_teacher_discovered(teacherId, echoId)` as an **interface proposal only**; do not assume an existing code event or API. Use standard Echo-wide durable-state save transactions and idempotent discovery handling when implementation is separately authorized.
-
 
 Monster families may group related variants, but exact variants keep exact records.
 
