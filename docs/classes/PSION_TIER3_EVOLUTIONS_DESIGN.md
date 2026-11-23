@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–8 plus Round 9 roster and Round 10 aura/progression decisions USER-CONFIRMED**, latest **2026-11-23**. Tier III skills may keep progressing through class level 150; exact skill-point earnings, per-skill rank caps and rank gates remain open. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
+**Status:** Tier III **Rounds 1–11 confirmed through 2026-11-23**; one class skill point per level through 150 and complete five-ability rosters are approved. **Round 11 designer cap/rank-gate tables are proposed for user approval, not yet confirmed**. Latest confirmations supersede earlier proposals, without changing Tier II Psion. These classes are **DESIGN ONLY**, **not implemented in Unity**. Identity and which parent abilities are retained are now partly approved; precise ranges, spell upgrade coefficients, new skill mechanics, rank gates and advancement quests remain **OPEN**.
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -392,3 +392,63 @@ The user answered all five follow-up questions to the new speed/aura passive. Th
 5. Now that the skill roster and level-150 horizon are known, would you rather **delegate skill cap/rank gate allocation** to a balanced proposal, or decide the five skill caps explicitly for each class?
 
 **Implementation boundary:** design documents only. No Unity or local WIP edits; no new active spells, aura names, talent formulas or point budgets invented beyond confirmed decisions.
+
+## Round 11 — 2026-11-23 (LATEST USER-APPROVED STRUCTURE; RANK-GATE TABLES PROPOSED BELOW)
+
+The user answered **YES to all five Round 10 follow-up questions**. This approves the following specific mechanics, but "yes" to drafting rank caps **does NOT approve the designer's yet-to-be-presented numeric allocation**.
+
+| ID | Approved decision | Explicit scope / caution |
+| --- | --- | --- |
+| PSION3-058 | **Mirage Mage gets the SAME FULL speed passive as Knight.** At its own rank `r`, Mage personally gains **+1% attack speed AND +1% movement speed per rank**, plus the **12m all-allies aura giving +0.1% attack and move speed per rank**. Mage also receives its own aura on top of the personal component, just like Knight. | Both classes use the SAME-NAME strongest-only aura: same-named auras from Knight and Mage never stack. Personal +1%/rank component remains independently applied to each class. Previous Round 10 question of Mage self-only bonus is settled YES. |
+| PSION3-059 | **Both Tier III classes earn ONE spendable class-skill point at every Tier III class level from level 1 through LEVEL 150, totaling exactly 150 skill-rank purchases.** Skills start unranked (rank 0) in the new Tier III manifestation. | Tier III -> Tier IV advancement may still be taken at class level 120; choosing to remain Tier III allows rank-up progression through 150. Do not move Tier IV eligibility to 150. No post-150 skill points or rank-cap extension approved. |
+| PSION3-060 | **Exactly FIVE currently established skills per Tier III evolution are an APPROVED COMPLETE ROSTER for now.** Knight: Psionic Blades Mastery, mobile Mental Image, personal Void Shield, empowered attacks, speed/aura passive. Mage: Psychic Bolt, stationary mirroring Mental Image, Lightning Storm, Metal Shield, identical full speed/aura passive. | Do not add additional Mage spells, Knight passives, stand-alone spell mirror action, or aura toggle just to expand the kit. Other future evolution content requires separately approved design. |
+| PSION3-061 | **Illusions RECEIVE applicable allied aura buffs but DO NOT EMIT/REPLICATE the shared aura.** Only actual Knight/Mage class heroes are aura sources. | This is a specific exception to the Knight illusion's generally FULL passive inheritance: it inherits its own passive-derived effects/stat bonuses where applicable, but does not spawn a second shared aura source; avoid aura multiplication/recursion through Mage clones. |
+| PSION3-062 | User asks the designer to **PROPOSE** individual caps and unlock gates and provide a rank-purchase audit. | ALL NUMERIC CAPS, first unlock levels and exact rank gates in the tables below are **DESIGNER PROPOSAL AWAITING USER APPROVAL**. They were not themselves selected by the user in this round. |
+
+### Designer-proposed complete 150-point skill rank distribution (NOT USER APPROVED)
+
+Rationale: Each class has exactly five approved abilities and 150 points. Make **Mental Image** the deepest 40-rank investment in both, retain a substantial 30-rank attack tool, place the personal/aura speed passive at **25 ranks** for matching cross-class scaling, and reserve **25 ranks** for defensive shielding. For Knight, Mastery30 + Image40 + Void Shield25 + Empowered Attacks30 + Speed Presence25 = **150**. For Mage, Bolt30 + Image40 + Lightning Storm30 + Metal Shield25 + Speed Presence25 = **150**. This is **not** an extension of the Tier II Psion 80-rank table.
+
+Proposed starting unlocks deliberately offer meaningful low-level play, without gifting all rank purchases: Knight **Blades Mastery, Mental Image and Empowered Attacks at class level 1; Void Shield at level 6; Speed Presence at level 10**. Mage **Psychic Bolt and Mental Image at class level 1; Lightning Storm at level 5; Metal Shield at level 8; Speed Presence at level 10**.
+
+All listed eligibility gates refer to **the required Tier III class level to buy that rank**, not automatic rank awards. Previous rank purchase remains a prerequisite. Every class gains 1 unspent point per level. Delayed unlocks and overlapping rank gates allow build flexibility without trapping players with no legal purchase.
+
+#### Psionic Knight — DESIGNER PROPOSAL ONLY
+
+| Ability | First rank unlock | Proposed max rank | Final rank eligible at | Exact eligibility levels for ranks 1 through max |
+| --- | ---: | ---: | ---: | --- |
+| Psionic Blades Mastery | 1 | 30 | 146 | 1, 3, 8, 16, 21, 26, 30, 35, 40, 46, 51, 56, 60, 65, 70, 76, 81, 86, 90, 95, 100, 106, 111, 116, 120, 125, 130, 136, 141, 146 |
+| Mental Image | 1 | 40 | 148 | 1, 2, 5, 12, 15, 19, 23, 28, 29, 34, 39, 42, 45, 48, 53, 58, 59, 64, 68, 72, 75, 79, 83, 88, 89, 94, 98, 102, 105, 108, 113, 118, 119, 124, 129, 132, 135, 138, 143, 148 |
+| Personal Void Shield | 6 | 25 | 144 | 6, 7, 13, 18, 24, 32, 37, 43, 49, 54, 62, 67, 73, 78, 84, 92, 97, 103, 109, 114, 122, 127, 133, 139, 144 |
+| Empowered Attacks | 1 | 30 | 147 | 1, 4, 9, 17, 22, 27, 31, 36, 41, 47, 52, 57, 61, 66, 71, 77, 82, 87, 91, 96, 101, 107, 112, 117, 121, 126, 131, 137, 142, 147 |
+| Speed Presence (personal speed + allied aura) | 10 | 25 | 145 | 10, 11, 14, 20, 25, 33, 38, 44, 50, 55, 63, 69, 74, 80, 85, 93, 99, 104, 110, 115, 123, 128, 134, 140, 145 |
+
+**Audit examples (class level → total rank gates available):** 1 → 3; 5 → 7; 10 → 12; 30 → 32; 60 → 62; 120 → 122; 148 → 150; 149 → 150; 150 → 150.
+
+#### Mirage Mage — DESIGNER PROPOSAL ONLY
+
+| Ability | First rank unlock | Proposed max rank | Final rank eligible at | Exact eligibility levels for ranks 1 through max |
+| --- | ---: | ---: | ---: | --- |
+| Psychic Bolt | 1 | 30 | 147 | 1, 3, 7, 17, 22, 27, 31, 36, 41, 47, 52, 57, 61, 66, 71, 77, 82, 87, 91, 96, 101, 107, 112, 117, 121, 126, 131, 137, 142, 147 |
+| Mental Image | 1 | 40 | 148 | 1, 2, 4, 13, 16, 19, 24, 28, 30, 35, 39, 43, 46, 49, 54, 58, 60, 65, 68, 73, 76, 79, 84, 88, 90, 95, 98, 103, 106, 109, 114, 118, 120, 125, 129, 133, 136, 139, 144, 148 |
+| Lightning Storm | 5 | 30 | 149 | 5, 6, 12, 18, 23, 29, 32, 37, 42, 48, 53, 59, 62, 67, 72, 78, 83, 89, 92, 97, 102, 108, 113, 119, 122, 127, 132, 138, 143, 149 |
+| Metal Shield | 8 | 25 | 145 | 8, 9, 14, 20, 25, 33, 38, 44, 50, 55, 63, 69, 74, 80, 85, 93, 99, 104, 110, 115, 123, 128, 134, 140, 145 |
+| Speed Presence (personal speed + allied aura) | 10 | 25 | 146 | 10, 11, 15, 21, 26, 34, 40, 45, 51, 56, 64, 70, 75, 81, 86, 94, 100, 105, 111, 116, 124, 130, 135, 141, 146 |
+
+**Audit examples (class level → total rank gates available):** 1 → 2; 5 → 6; 10 → 11; 30 → 31; 60 → 61; 120 → 121; 148 → 149; 149 → 150; 150 → 150.
+
+
+#### Exact schedule verification (performed on these tables)
+
+- **Point sum:** `30+40+25+30+25=150` Knight; `30+40+30+25+25=150` Mage.
+- **Gate count:** Exactly 150 proposed rank gates per class, one per purchased rank; strict monotonically increasing gates within each ability; every first rank is gated by its listed unlock level. Every last rank is eligible by Tier III level 150 (Knight latest at **148**, Mage latest at **149**).
+- **No wasted level points:** for **EVERY class level `L = 1..150`**, the number of cumulative eligible gates is **at least `L`**. Because each ability's rank gates appear in increasing rank order and earlier ranks are prerequisites, any legal `L-1` purchases must leave at least one currently eligible next rank from some ability, so the level-`L` skill point can be spent. This is a rank-access audit, not a claim that specific skill builds are balanced.
+- **Early choices:** Knight has 3 rank-1 choices available at level1; Mage has 2. The remaining initial gates arrive through level10, and by level120 the Knight has **122** eligible rank gates, Mage **121**, enough to allocate all 120 earned points without waiting for Tier IV. At level150 all **150** may be spent.
+- **Current numeric effects at *proposed* cap (NOT approved caps):** both personal speed passives at rank25 would provide **+25% self attack speed and movement speed plus +2.5% same-name aura to allies within 12m** (self receives strongest aura as well). Knight image cap40 would reach its already user-confirmed **50% owner basic attack** and **+50% attack speed for 5s** on death/expiry, while Mage image cap40 reaches its previously approved **25% max mirror spell damage and copied independent group shield strength**. Knight Empowered Attacks at proposed rank30 would empower **16 basic attacks** with `30+17×30+0.4AGI+0.1INT = 540+0.4AGI+0.1INT` extra RAW Void damage per eligible hit, assuming no other rank/gear modifiers. **Its damage channel and Mana costs are still OPEN.**
+- **Balance warning:** if Tier II Psionic Blades Mastery's existing provisional **+2.5 percentage points basic crit chance per rank** were simply retained at a 30-rank cap, it would grant **+75 percentage points**, which may saturate crit chance. This and very long rank30 empowerment charge sequences need deliberate balance review. **Do not assume all Tier II per-rank numeric coefficients automatically carry over to Tier III.** Rank-based speed passive at cap25 may likewise need playtesting. No class-to-class damage comparison or Unity test has been performed.
+
+### Pending approval and focused follow-up
+
+The user may **approve the designer's 150-point caps/unlock tables as-is** or request revisions to individual caps/unlocks. **Do not label them confirmed before explicit approval.** After the rank table is approved, remaining engineering-facing decisions include cooldowns and Mana costs for new Knight tools, Knight Void damage channel, Mental Image scaling interpolation by rank, aura name/stack priority at equal strength, exact Mage upgraded spells, copy-shield radius and targeting, and advancement quest/content.
+
+**Scope restriction:** This round changes design documentation only; it does not authorize Unity implementation, asset modifications, branch merges, or cleanup of local uncommitted WIP.
