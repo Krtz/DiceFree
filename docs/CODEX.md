@@ -15,6 +15,16 @@ The Codex records what the player has actually discovered.
 Do not spoil unseen content with mystery placeholder rows. If the Echo has not discovered something yet, it normally does not appear.
 
 ## Monsters
+## Hidden class teachers (USER-APPROVED, 2026-11-23)
+
+**Every hidden teacher for ANY class**, not just the Psion lineage, earns a permanent **Echo-wide Codex discovery** when actually found by a player manifestation. This discovery is independent of which class is exploring, and remains visible after changing, archiving or deleting class-specific manifestations because it belongs to the Echo. The hidden teacher discovery itself must NOT automatically grant its target class or count as a completed advancement challenge.
+
+- Stable hidden teacher identity: one idempotent discovery keyed by **teacher ID**. The Codex shows genuinely **discovered teachers only**, consistent with the global discovery principle: no silhouettes, question-mark filler entries, or spoiled teacher lists before discovery.
+- A hidden teacher's **discovered** status is distinct from knowing rumors, seeing lore clues, meeting class-level eligibility, starting an advancement quest, and **finishing** its challenge. Those may be separate records/requirements; "discovered" must be tied to an actual teacher-find event, not automatically triggered by merely reading a rumor, unless separately authored and approved.
+- For **Psionic Knight** and **Mirage Mage** specifically, exploration uses rumors, lore and environment clues to find **separate teachers**. Their advancement trials are respectively **solo Wolf Cave completion** and **solo Shaman Cave completion**. Trial progress must not be silently treated as the same thing as teacher discovery. See [Psion Tier III Round 17](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md).
+- Codex dungeon section already records **solo clears**. Consume the ordinary dungeon completion+solo participation event to provide advancement evidence when the relevant trial is defined, without modifying generic dungeon reward rules. **Wolf Cave's precise identity is currently unconfirmed**, because existing Wolf Survival is explicitly a moonlit clearing; do not assume the same dungeon. Shaman Cave content is not yet verified/located. Whether past solo clears retroactively satisfy a newly discovered teacher's request remains OPEN.
+- Suggested semantic-event name for future implementation: `hidden_teacher_discovered(teacherId, echoId)` as an **interface proposal only**; do not assume an existing code event or API. Use standard Echo-wide durable-state save transactions and idempotent discovery handling when implementation is separately authorized.
+
 
 Monster families may group related variants, but exact variants keep exact records.
 
