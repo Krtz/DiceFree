@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–19** through **2026-11-23**. Both classes' 150-rank progressions are USER APPROVED. Round 19 confirms flexible World 1/2 hidden teacher placement, level-60-only quest acceptance with class/level-specific dialogue, Codex-only teacher tracking, return-to-teacher advancement, and BOTH specialization quests active concurrently. Round 18's fresh solo dungeon clear requirements remain unchanged. **Fourfold Hollow (`Assets/_DiceFree/Scenes/FourfoldHollow.unity`) is present in the current feat/verdant-wilds source and cited in QA handover, superseding historical 'future Shaman dungeon' remarks.** This supersedes Round 17's ambiguous Wolf Cave and Shaman Cave names. Prior Round 16 balance formulas remain DESIGNER-PROVISIONAL. All costs and numeric balancing remain playtest values, not locked. These override historical Round 11/12 drafts. Both classes have 150 earnable skill points, one per class level through 150; Tier IV advancement eligibility remains level 120. Gameplay mechanics still open include spell cooldowns, Mana costs, certain attack channels and balance values. **DESIGN ONLY, not implemented in Unity.**
+**Status:** Tier III **Rounds 1–19 approved; Round 20 starting-stat direction USER CONFIRMED and numeric proposals dated 2026-11-24**. Both classes' 150-rank progressions are USER APPROVED. Round 19 confirms flexible World 1/2 hidden teacher placement, level-60-only quest acceptance with class/level-specific dialogue, Codex-only teacher tracking, return-to-teacher advancement, and BOTH specialization quests active concurrently. Round 18's fresh solo dungeon clear requirements remain unchanged. **Fourfold Hollow (`Assets/_DiceFree/Scenes/FourfoldHollow.unity`) is present in the current feat/verdant-wilds source and cited in QA handover, superseding historical 'future Shaman dungeon' remarks.** This supersedes Round 17's ambiguous Wolf Cave and Shaman Cave names. Prior Round 16 balance formulas remain DESIGNER-PROVISIONAL. All costs and numeric balancing remain playtest values, not locked. These override historical Round 11/12 drafts. Both classes have 150 earnable skill points, one per class level through 150; Tier IV advancement eligibility remains level 120. Gameplay mechanics still open include spell cooldowns, Mana costs, certain attack channels and balance values. **DESIGN ONLY, not implemented in Unity.**
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -865,3 +865,61 @@ The user resolved ALL FIVE Round 18 questions. This section is **authoritative o
 ### Remaining later design questions (not approved)
 
 Exact teacher placements/visuals/personas/dialogue, whether normal/harder dungeon difficulties count, details for abandoning/accepting a quest anew, local/world quest guidance that does not spoil Codex-only discovery, and implementation behavior of the second active quest when forking an Echo to the first Tier III manifestation. Continue with design-only updates until the user requests coding.
+
+
+## Round 20 — 2026-11-24 (LATEST: Tier III base attributes and per-level growth; NUMBERS PROPOSED)
+
+### User-confirmed requirements
+
+User specifically requests that **Psionic Knight and Mirage Mage have HIGHER starting stats than parent Tier II Psion and HIGHER overall per-level attribute growth**, despite beginning a fresh Tier III class manifestation at level 1, with a sharp specialization:
+- Knight: **large AGILITY growth, some INTELLIGENCE**, enough Vitality to survive near-melee 3m combat.
+- Mage: **large INTELLIGENCE growth, some AGILITY**, caster survival.
+- **BOTH: VERY LOW Strength and Spirit growth**. Do NOT assign full Psion-type STR/SPR per-level gains to these specialized Tier III classes. Their per-class total growth is greater than Psion, **not every individual attribute's growth**, since the latter conflicts with intentionally reduced STR/SPR.
+- These are each class's OWN base attributes and growth for the new Tier III Lv1 manifestation. They do NOT add the parent Psion's level 60+ accumulated attributes on top of the new class stats; no permanent bonus or excess XP carries across advancement. Parent remains saved.
+
+### Verified current Psion baseline (source, not a proposal)
+
+On `feat/verdant-wilds`, the actual asset `Assets/_DiceFree/Settings/Psion/Psion class.asset` includes:
+- Level-1 `baseAttributes`: **VIT12 / STR7 / AGI14 / INT18 / SPR10** = **61**.
+- Per-level `growth`: **VIT1.55 / STR0.65 / AGI2.10 / INT2.95 / SPR1.10** = **8.35 total attributes per class level**.
+- `baseHp=10`, `hpPerVitality=15`, `regenerationPerVitality=0.1`, `moveSpeed=5`, baseline Physical Defense0/Magical Defense0. These additional settings are **NOT** implicitly approved for Tier III inheritance.
+- Psion's separate Mana profile `Assets/_DiceFree/Settings/Psion/Psion Mana.asset` currently uses `baseMaximum=84`, `+3 maximum Mana per INT`, `+1 per SPR`, `baseRegenPerSecond=4.5`, `+0.075 regen per INT` and `+0.075 per SPR`. This is a REFERENCE ONLY; Tier III Mana profiles/capacity/regeneration must be reviewed against their rank20 Mana costs before finalizing.
+
+### Proposed level-1 class attributes (DESIGNER PROPOSAL, NOT yet user-approved NUMBERS)
+
+| Attribute | Actual Tier II Psion | Knight PROPOSED | Mage PROPOSED |
+| --- | ---: | ---: | ---: |
+| Vitality | 12 | **22** | **19** |
+| Strength | 7 | **8** | **8** |
+| Agility | 14 | **30** | **22** |
+| Intelligence | 18 | **22** | **32** |
+| Spirit | 10 | **11** | **11** |
+| **Total starting attributes** | **61** | **93** | **92** |
+
+**All five starting values are strictly higher than Psion for EACH Tier III class.** The +1 Strength/Spirit base values intentionally remain barely higher, reserving budget for AGI/INT/VIT.
+
+### Proposed per-level growth (DESIGNER PROPOSAL, NOT yet user-approved NUMBERS)
+
+| Attribute | Actual Tier II Psion | Knight PROPOSED | Mage PROPOSED |
+| --- | ---: | ---: | ---: |
+| Vitality | +1.55 | **+2.30** | **+2.00** |
+| Strength | +0.65 | **+0.20** | **+0.20** |
+| Agility | +2.10 | **+5.00** | **+1.70** |
+| Intelligence | +2.95 | **+1.70** | **+5.00** |
+| Spirit | +1.10 | **+0.20** | **+0.20** |
+| **Total per class level** | **+8.35** | **+9.40** | **+9.10** |
+
+- Each class grows MOST in its signature attribute, but still gains a smaller part of the other hybrid attribute. Knight's slightly greater VIT growth reflects 3m basic-attack engagement and self-only shield, versus Mage's 9m basic reach and stronger group Metal Shield. Both get very low STR/SPR growth.
+- Growth applies per **LEVEL UP**, so the expected base attribute at level `L` is `base + (L - 1) × growth`, before equipment/temporary effects, with eventual engine stat precision/rounding applied under existing systems.
+- At Tier III level **60** before equipment: Knight **VIT149.8 STR19.8 AGI325 INT122.3 SPR22.8**; Mage **VIT137 STR19.8 AGI122.3 INT327 SPR22.8** (examples should be recalculated by actual growth arithmetic on use). These are examples, not caps.
+- **Verified level150** with this proposal: Knight VIT364.7 STR37.8 AGI775 INT275.3 SPR40.8; Mage VIT317 STR37.8 AGI275.3 INT777 SPR40.8 (examples should be recalculated by actual growth arithmetic on use). Numerical gameplay economy must be playtested.
+- Tier III base basic-attack weighting stays **Knight 0.6AGI+0.4INT**, **Mage 0.6INT+0.4AGI** (previously user confirmed). These proposed larger attributes do NOT change the already approved relative coefficients, crit mechanics, rank gates, aura +movement or Mage spell formulas. All auto attacks remain Physical; Knight bonus Void packet remains separate Magical.
+- **Mana viability warning:** Knight's proposed +1.70 INT/level and extremely low +0.20 SPR/level can make sustaining the earlier provisional 20-Mana/rank costs challenging without adequate Tier III base Mana/per-INT/regen. Mage's high INT makes its resource trajectory different. Therefore **design each Tier III Mana resource profile separately** and run cost/regen/resource feasibility tests; do not silently reuse Psion's Mana profile or assert balance from raw stats alone.
+
+### Proposed next explicit approval
+
+1. Does the user approve **both proposed base stat rows and per-level growth values** as the initial playtest target, or want e.g. stronger Knight VIT, more Mage INT, or even less STR/SPR?
+2. If approved, establish **Tier III Mana maximum/regeneration formula** per class that supports both sustained spellcasting and high-rank Mana costs (provisional Round16 ~+20 per active-skill rank).
+3. Retain Round 19 remaining quest and teacher edge-case questions for subsequent design, not a new class-skill-point allocation.
+
+**Status boundary:** USER APPROVED the specialization DIRECTION; numeric base/growth values in this Round20 are a **DESIGNER PROPOSAL AWAITING USER APPROVAL**, not implementation authorization. Do not modify the Psion baseline actor, any Unity class assets, save state or live character stats in this documentation round.
