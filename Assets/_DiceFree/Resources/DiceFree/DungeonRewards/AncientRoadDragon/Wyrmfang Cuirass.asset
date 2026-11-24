@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Wyrmfang Cuirass
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.ancient-road-dragon.wyrmfang-cuirass
+  displayName: Wyrmfang Cuirass
+  icon: {fileID: 21300000, guid: 4a492de50fd6b1545b3b1bb0e582c893, type: 3}
+  slot: 2
+  handsRequired: 1
+  itemLevel: 55
+  rarityId: rarity.rare
+  sourceId: boss.ancient-road-dragon
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId:
+  restoreResourceAmount: 0
+  allowedClassIds: []
+  flavor: Light overlapping jade scales let the wearer strike between a dragon's breaths.
+  stats:
+    attributes:
+      vitality: 18
+      strength: 8
+      agility: 24
+      intelligence: 0
+      spirit: 0
+    physicalDefense: 24
+    magicalDefense: 16
+    attackSpeedPercent: 5
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 4

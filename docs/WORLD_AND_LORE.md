@@ -135,3 +135,10 @@ This section records the **user-approved high-level World 1 story outcome** whil
 - **Do not impose mandatory World Tree quest gameplay**; the Tree is an openly approachable landmark and story setting, not a required world-travel device.
 
 **Implementation status:** Story DESIGN only; not evidence of an authored dragon boss encounter or World 2 main quest. Preserve the existing Arborium forestry guild quests, road history, and six-world mystery when fleshing out the short (~3–4-quest) main arc.
+
+**Implementation update, 2026-11-24:** The saved World One dragon finale now
+continues into a three-quest Verdant Order field expedition in World Two. See
+[Dragon rewards and the World Two expedition](WORLD_TWO_EXPEDITION_2026-11-24.md)
+for the implemented objectives and validation. This establishes Cinderwatch,
+both pip surveys and Willowford's report station without resolving the dragon's
+appearance or the foundational mysteries above.

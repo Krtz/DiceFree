@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: The Ancient Road Dragon
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.ancient-road-dragon
-  category: 1
   title: The Ancient Road Dragon
+  category: 1
   requiredClassId: 
   requiredLevel: 35
   version: 1
   offer: "The Reedscale watch the old mountain road for their master. Follow the trail northwest of Arborium into the Ancient Road Dragon\u2019s lair. End his command over the factions and report back to the Council."
   activeDialogue: Follow the old mountain road northwest of Arborium. The lair entrance is marked by green lamps. Return here after the Ancient Road Dragon has fallen.
-  turnInDialogue: With the Ancient Road Dragon dead, Arborium has time to recover. I have sent word to Ironpine. Follow the trail south of the main road. A small fire will clear the pines blocking the pass to World 2. Find out there why the dragon came to Arborium.
+  turnInDialogue: With the Ancient Road Dragon dead, Arborium has time to recover. Follow the trail south of Ironpine's main road; the small fire will clear the pines blocking the pass to World 2. The Verdant Order's expedition awaits you there. Speak to Expedition Warden Ivara inside Cinderwatch's southern gate. Find out why the dragon came to Arborium.
   locationHint: Take the mountain path northwest of Arborium, above the Verdant Wilds.
   turnInHint: Return to the Verdant Council Clerk outside the Mage Observatory.
   stages:

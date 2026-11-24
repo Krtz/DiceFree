@@ -1,5 +1,6 @@
 using DiceFree.Combat;
 using DiceFree.Quests;
+using DiceFree.Foundation;
 using UnityEngine;
 
 namespace DiceFree.World
@@ -9,8 +10,18 @@ namespace DiceFree.World
         [SerializeField] CombatActor player;
         [SerializeField] QuestWorkGate gate;
         [SerializeField] GameObject untouched,finished,beacon;
+        private float nextPlayerLookup;
         void LateUpdate()
         {
+            // Additive-world sites cannot serialize a reference to the hero in
+            // another scene. Resolve the local traversal owner after travel.
+            if(player==null && Time.unscaledTime>=nextPlayerLookup)
+            {
+                nextPlayerLookup=Time.unscaledTime+.5f;
+                foreach(var candidate in FindObjectsByType<QuestJournal>())
+                    if(candidate.isActiveAndEnabled && candidate.GetComponent<ITraversalUiState>() is Behaviour input && input.isActiveAndEnabled)
+                    {player=candidate.GetComponent<CombatActor>();break;}
+            }
             var journal=player!=null?player.GetComponent<QuestJournal>():null;
             bool complete=journal!=null&&gate.Completed(journal);
             if(untouched!=null)untouched.SetActive(!complete);

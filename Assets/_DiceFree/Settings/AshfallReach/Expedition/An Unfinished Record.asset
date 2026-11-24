@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: An Unfinished Record
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.world2.unfinished-record
+  title: An Unfinished Record
+  category: 1
+  requiredClassId:
+  requiredLevel: 35
+  version: 1
+  offer: Take the field report west along the road to Willowford. Envoy Tamsin has a desk near the inn and spring. Tell her what you found at the two watchposts; she will send a careful account to the Verdant Council.
+  activeDialogue: Follow the western road from Cinderwatch into Steamroot Vale. Meet Envoy Tamsin just north of Willowford's main road, beside the expedition banner.
+  turnInDialogue: Willowford now holds the expedition's first complete field record. The reason for the dragon's appearance remains an open question.
+  locationHint: Speak to Envoy Tamsin in Willowford, north of the spring and east of the inn.
+  turnInHint: Acknowledge Tamsin's conversation to file the field report.
+  stages:
+  - kind: 2
+    objectiveId:
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Deliver Ivara's field report to Envoy Tamsin in Willowford
+    contentId: npc.willowford.envoy-tamsin
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId: report.world2.two-pips
+    count: 1
+    alternatives: []
+  completedQuestIds:
+  - quest.world2.two-watchfires
+  rewardXp: 10000
+  reward: {fileID: 11400000, guid: 451ad4f5715d20c41acb189388eb2941, type: 2}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 1
+  repeatable: 0

@@ -1,0 +1,9 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\DragonExpedition-20261124-183506\\DiceFree.exe",
+  "exeSha256": "4c93a4bb060a12b9044ab2103835dd1565aec9aa8381372fa84fbbc14a19b989",
+  "development": true,
+  "localOnly": true,
+  "gameplayChecks": 50,
+  "restartChecks": 19,
+  "runtimeErrors": 0
+}

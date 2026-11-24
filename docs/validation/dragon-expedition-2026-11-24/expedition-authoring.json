@@ -1,0 +1,28 @@
+{
+    "quests": 3,
+    "npcs": 2,
+    "surveySites": 2,
+    "firstQuest": "quest.world2.first-foothold",
+    "surveyQuest": "quest.world2.two-watchfires",
+    "reportQuest": "quest.world2.unfinished-record",
+    "ivara": {
+        "x": 64006.0,
+        "y": 0.5669280290603638,
+        "z": 63942.69921875
+    },
+    "tamsin": {
+        "x": 63857.0,
+        "y": 0.9443778991699219,
+        "z": 63940.6015625
+    },
+    "needle": {
+        "x": 63887.80078125,
+        "y": 2.0684773921966553,
+        "z": 63887.25
+    },
+    "crown": {
+        "x": 64050.19921875,
+        "y": 6.564000129699707,
+        "z": 63621.75
+    }
+}

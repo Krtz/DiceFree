@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-24",
+  "workflow": "Reuse of already imported library assets; no new package admission",
+  "armorPack": "Polytope Studio Low Poly Modular Armors - Free",
+  "runtime": "Items depend on rendered PNGs; expedition uses existing tracked native FBXs",
+  "sources": [
+    {
+      "path": "Assets/Polytope Studio/Lowpoly_Characters/Sources/Modular_Armors/Meshes/PT_Lowpoly_Armors_Male_Moduar_Free.fbx",
+      "sha256": "87ac4e3a085c8ea1876ee5f00e5c247b72c8ef780f5b5c460c4865aa83d9ce18",
+      "usedFor": "Rendered item icon only; raw source not added to Git"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Guard.fbx",
+      "sha256": "5fcf34704788febe3e45d5c0df6a01ddb73c88bcd0f70672294ddec0c126f274",
+      "usedFor": "Existing tracked expedition model"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/CornbergBatch/NPCs/NPC_Herbalist.fbx",
+      "sha256": "aaebf4ca4d45920b92b1edd6c7a862ee93948a10d8151891dab93a04ca6a63f2",
+      "usedFor": "Existing tracked expedition model"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/cart_01.fbx",
+      "sha256": "79b868ff6b0f0de5928c4d99312946b57ee7a044a1c2b5b7b6073bd0017ff4b6",
+      "usedFor": "Existing tracked expedition model"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/crate_01.fbx",
+      "sha256": "f8ae2e6766da97edaf3968d57a578eddbccd61a340371a664e8b14df7950e5b7",
+      "usedFor": "Existing tracked expedition model"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/barrel_01.fbx",
+      "sha256": "224ab136e06bf3e9e753e76dd522ed753b1973e312fab948f3b24db53c6a75f6",
+      "usedFor": "Existing tracked expedition model"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/lantern_01.fbx",
+      "sha256": "b8a5e0bf87042d945c1979a8fa7c7339ade3e4836c8cce55005035ae0a13f5de",
+      "usedFor": "Existing tracked expedition model"
+    }
+  ]
+}

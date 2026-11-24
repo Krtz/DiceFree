@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: A Foothold Beyond the Pines
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.world2.first-foothold
+  title: A Foothold Beyond the Pines
+  category: 1
+  requiredClassId:
+  requiredLevel: 35
+  version: 1
+  offer: The Verdant Council's dispatch reached us before you. We can investigate the dragon's appearance only if this outpost stays supplied. Break eight Ashscale patrol fighters, then report back. Spearhands and ridgebows both count.
+  activeDialogue: Keep to the roads outside the palisade and defeat eight Ashscales. Do not assume they serve the dragon you killed; that is what we are here to investigate.
+  turnInDialogue: 'The supply road is breathing again. Now we can do the work the Order sent us for: observe this face carefully, and separate what we know from what we only suspect.'
+  locationHint: Hunt Ashscale spearhands and ridgebows outside Cinderwatch in Ashfall Reach.
+  turnInHint: Return to Expedition Warden Ivara, beside the southern gate inside Cinderwatch.
+  stages:
+  - kind: 0
+    objectiveId:
+    requiredTag:
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat 8 Ashscale patrol fighters
+    contentId:
+    dungeonBossOnly: 0
+    familyId: ashscale.lizardman
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 8
+    alternatives: []
+  completedQuestIds:
+  - quest.arborium.ancient-road-dragon
+  rewardXp: 8000
+  reward: {fileID: 11400000, guid: 181e73e1688e9c545b3bee1de2dec282, type: 2}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

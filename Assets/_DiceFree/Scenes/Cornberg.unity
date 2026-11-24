@@ -3998,6 +3998,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &8681529
 CapsuleCollider:
@@ -25931,6 +25932,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &64803643
 CapsuleCollider:
@@ -45073,6 +45075,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &104574483
 CapsuleCollider:
@@ -57137,6 +57140,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &139503052
 CapsuleCollider:
@@ -57596,6 +57600,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &139730923
 CapsuleCollider:
@@ -59905,6 +59910,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &142406790
 CapsuleCollider:
@@ -63141,6 +63147,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &149368478
 CapsuleCollider:
@@ -80157,6 +80164,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &184023151
 CapsuleCollider:
@@ -103130,6 +103138,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &229226964
 CapsuleCollider:
@@ -121797,6 +121806,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &271765779
 CapsuleCollider:
@@ -122077,6 +122087,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &271862965
 CapsuleCollider:
@@ -122683,6 +122694,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &272824693
 CapsuleCollider:
@@ -129564,6 +129576,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &288314951
 CapsuleCollider:
@@ -143270,6 +143283,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &320829187
 CapsuleCollider:
@@ -145644,6 +145658,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &326931040
 CapsuleCollider:
@@ -147832,6 +147847,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &332453676
 CapsuleCollider:
@@ -154632,6 +154648,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &347162624
 CapsuleCollider:
@@ -155832,6 +155849,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &349503458
 CapsuleCollider:
@@ -158128,6 +158146,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &356180989
 CapsuleCollider:
@@ -158757,6 +158776,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &357323187
 CapsuleCollider:
@@ -166129,6 +166149,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &370187077
 CapsuleCollider:
@@ -168321,6 +168342,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &374935144
 CapsuleCollider:
@@ -220783,6 +220805,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &509120390
 CapsuleCollider:
@@ -228744,6 +228767,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &524902008
 CapsuleCollider:
@@ -235844,6 +235868,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &541193237
 CapsuleCollider:
@@ -252755,6 +252780,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &585708274
 CapsuleCollider:
@@ -253832,6 +253858,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &586931964
 CapsuleCollider:
@@ -263409,6 +263436,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &608871448
 CapsuleCollider:
@@ -264144,6 +264172,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!114 &611103066
 MonoBehaviour:
@@ -270156,6 +270185,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &625188179
 CapsuleCollider:
@@ -289975,6 +290005,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &666464917
 CapsuleCollider:
@@ -323627,6 +323658,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &740502124
 CapsuleCollider:
@@ -324538,6 +324570,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &742063324
 CapsuleCollider:
@@ -332355,6 +332388,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &759679457
 CapsuleCollider:
@@ -348872,6 +348906,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &803883544
 CapsuleCollider:
@@ -363848,6 +363883,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &840926747
 CapsuleCollider:
@@ -391705,6 +391741,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &905793254
 CapsuleCollider:
@@ -404467,6 +404504,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &938445952
 CapsuleCollider:
@@ -406976,6 +407014,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &943291530
 CapsuleCollider:
@@ -408827,6 +408866,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &945856869
 CapsuleCollider:
@@ -414649,6 +414689,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &961233559
 CapsuleCollider:
@@ -418179,6 +418220,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &966736500
 CapsuleCollider:
@@ -432715,6 +432757,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1000702924
 CapsuleCollider:
@@ -439720,6 +439763,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1017708036
 CapsuleCollider:
@@ -453242,6 +453286,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1050203956
 CapsuleCollider:
@@ -460365,6 +460410,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1069277854
 CapsuleCollider:
@@ -461899,6 +461945,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1072491629
 CapsuleCollider:
@@ -464768,6 +464815,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1077580793
 CapsuleCollider:
@@ -469683,6 +469731,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1090421913
 CapsuleCollider:
@@ -499290,6 +499339,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1158495131
 CapsuleCollider:
@@ -502607,6 +502657,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1166984365
 CapsuleCollider:
@@ -504837,6 +504888,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1174305486
 CapsuleCollider:
@@ -536394,6 +536446,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1239952704
 CapsuleCollider:
@@ -541528,6 +541581,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1251535384
 CapsuleCollider:
@@ -541943,6 +541997,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1252153167
 CapsuleCollider:
@@ -547920,6 +547975,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1269258273
 CapsuleCollider:
@@ -549603,6 +549659,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1272005367
 CapsuleCollider:
@@ -553938,6 +553995,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1281170602
 CapsuleCollider:
@@ -558744,6 +558802,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11012bca20a346c4fa4c2665d166f5cb, type: 2}
   - {fileID: 11400000, guid: 7cf2c610cd6eca04bb82a176933bc909, type: 2}
   - {fileID: 11400000, guid: aeb88f7ed14baaa4881539ffbc15e6cb, type: 2}
+  - {fileID: 11400000, guid: 9f98ea90b0e9d094198cd09d711ba006, type: 2}
+  - {fileID: 11400000, guid: 10989b138080acf429ad180743c74535, type: 2}
+  - {fileID: 11400000, guid: 9f11c2ddf4058bd4bb56b070437ef5a2, type: 2}
   progress: []
 --- !u!114 &1288724064
 MonoBehaviour:
@@ -594228,6 +594289,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1373972684
 CapsuleCollider:
@@ -615771,6 +615833,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1419655336
 CapsuleCollider:
@@ -631092,6 +631155,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1454658019
 CapsuleCollider:
@@ -645618,6 +645682,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1488478707
 CapsuleCollider:
@@ -655916,6 +655981,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1512183033
 CapsuleCollider:
@@ -658652,6 +658718,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1517571788
 CapsuleCollider:
@@ -665489,6 +665556,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1536410330
 CapsuleCollider:
@@ -669060,6 +669128,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1542993383
 CapsuleCollider:
@@ -688015,6 +688084,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1590799486
 CapsuleCollider:
@@ -692299,6 +692369,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1600045687
 CapsuleCollider:
@@ -701368,6 +701439,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1620849261
 CapsuleCollider:
@@ -711814,6 +711886,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1640587819
 CapsuleCollider:
@@ -713492,6 +713565,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1644256386
 CapsuleCollider:
@@ -733261,6 +733335,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1693845853
 CapsuleCollider:
@@ -747570,6 +747645,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1732094308
 CapsuleCollider:
@@ -758853,6 +758929,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1756858772
 CapsuleCollider:
@@ -768374,6 +768451,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1779087024
 CapsuleCollider:
@@ -768798,6 +768876,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1779650649
 CapsuleCollider:
@@ -777700,6 +777779,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1799478336
 CapsuleCollider:
@@ -778074,6 +778154,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1799580284
 CapsuleCollider:
@@ -788646,6 +788727,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1824808539
 CapsuleCollider:
@@ -799870,6 +799952,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1851929937
 CapsuleCollider:
@@ -813852,6 +813935,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1885521747
 CapsuleCollider:
@@ -826439,6 +826523,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1910364581
 CapsuleCollider:
@@ -829656,6 +829741,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1917572406
 CapsuleCollider:
@@ -839643,6 +839729,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1940068298
 CapsuleCollider:
@@ -849565,6 +849652,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &1964150037
 CapsuleCollider:
@@ -884160,6 +884248,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &2044117892
 CapsuleCollider:
@@ -885973,6 +886062,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &2048034154
 CapsuleCollider:
@@ -896396,6 +896486,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &2076244606
 CapsuleCollider:
@@ -921965,6 +922056,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 0
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!136 &2142658782
 CapsuleCollider:
@@ -964833,6 +964925,7 @@ MonoBehaviour:
       type: {class: AutoAggroPolicy, ns: DiceFree.AI, asm: DiceFree.AI.Runtime}
       data:
         alwaysAutoAggro: 1
+        retaliationOnly: 0
         trivialLevelGap: 10
 --- !u!114 &1786248812
 MonoBehaviour:
