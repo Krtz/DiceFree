@@ -1,6 +1,6 @@
 # DiceFree — Psion Tier III evolutions — design interview
 
-**Status:** Tier III **Rounds 1–19 approved; Round 20 starting-stat direction USER CONFIRMED and numeric proposals dated 2026-11-24**. Both classes' 150-rank progressions are USER APPROVED. Round 19 confirms flexible World 1/2 hidden teacher placement, level-60-only quest acceptance with class/level-specific dialogue, Codex-only teacher tracking, return-to-teacher advancement, and BOTH specialization quests active concurrently. Round 18's fresh solo dungeon clear requirements remain unchanged. **Fourfold Hollow (`Assets/_DiceFree/Scenes/FourfoldHollow.unity`) is present in the current feat/verdant-wilds source and cited in QA handover, superseding historical 'future Shaman dungeon' remarks.** This supersedes Round 17's ambiguous Wolf Cave and Shaman Cave names. Prior Round 16 balance formulas remain DESIGNER-PROVISIONAL. All costs and numeric balancing remain playtest values, not locked. These override historical Round 11/12 drafts. Both classes have 150 earnable skill points, one per class level through 150; Tier IV advancement eligibility remains level 120. Gameplay mechanics still open include spell cooldowns, Mana costs, certain attack channels and balance values. **DESIGN ONLY, not implemented in Unity.**
+**Status:** Tier III **Rounds 1–19 approved; Round 20 working level-1 attributes and Round 21 explicitly revised per-level growth (2026-11-24)**. User-approved growth deltas: Knight INT+1 (to 2.70), Knight VIT to 2.50, Mage AGI+1 (to 2.70), both STR and SPR to 1.00 per level. Previously proposed starting attributes are retained as working candidates, not independently confirmed. Round 21 also provides provisional implementation defaults for resources and remaining combat edge cases (NOT final user-approved balance). Both classes' 150-rank progressions are USER APPROVED. Round 19 confirms flexible World 1/2 hidden teacher placement, level-60-only quest acceptance with class/level-specific dialogue, Codex-only teacher tracking, return-to-teacher advancement, and BOTH specialization quests active concurrently. Round 18's fresh solo dungeon clear requirements remain unchanged. **Fourfold Hollow (`Assets/_DiceFree/Scenes/FourfoldHollow.unity`) is present in the current feat/verdant-wilds source and cited in QA handover, superseding historical 'future Shaman dungeon' remarks.** This supersedes Round 17's ambiguous Wolf Cave and Shaman Cave names. Prior Round 16 balance formulas remain DESIGNER-PROVISIONAL. All costs and numeric balancing remain playtest values, not locked. These override historical Round 11/12 drafts. Both classes have 150 earnable skill points, one per class level through 150; Tier IV advancement eligibility remains level 120. Gameplay mechanics still open include spell cooldowns, Mana costs, certain attack channels and balance values. **DESIGN ONLY, not implemented in Unity.**
 
 **Authoritative prerequisites:** [Psion Tier II](PSION_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md), [Combat](../COMBAT.md). Earlier admonitions not to design Tier III date from when World 2 was not yet being planned. The user's explicit **2026-11-22 request to design Psion's two evolutions supersedes that *timing restriction for these two classes only***; it is not general approval to design all Tier III or implement either class.
 
@@ -923,3 +923,95 @@ On `feat/verdant-wilds`, the actual asset `Assets/_DiceFree/Settings/Psion/Psion
 3. Retain Round 19 remaining quest and teacher edge-case questions for subsequent design, not a new class-skill-point allocation.
 
 **Status boundary:** USER APPROVED the specialization DIRECTION; numeric base/growth values in this Round20 are a **DESIGNER PROPOSAL AWAITING USER APPROVAL**, not implementation authorization. Do not modify the Psion baseline actor, any Unity class assets, save state or live character stats in this documentation round.
+
+
+## Round 21 — 2026-11-24 (LATEST: USER-SELECTED STAT GROWTH; CODEx implementation blockers evaluated)
+
+The user specifically requested:
+1. "**Increase agi for mage by 1 and int for knight by 1**" in the context of the immediately preceding attribute **growth per level** table: interpret as **Mage AGI growth 1.70→2.70** and **Knight INT growth 1.70→2.70**, **NOT starting AGI/INT +1**.
+2. "**Increase Str and spi to 1 per level for both**": **STR+1.00 and SPR+1.00 per class level for BOTH**, superseding earlier proposed +0.20.
+3. "**Increase vit to 2.5 for knight**": Knight VIT growth **2.30→2.50**. Mage VIT remains +2.00.
+4. The user quoted current Codex implementation planning observations requesting explicit decisions for class Mana/HP and for Knight empowerment miss/no-Mana/crit/image/haste/mirror snapshot behavior and conflicting old-vs-new damage formulas. Provide an actionable **PROVISIONAL default handoff** rather than inventing final user approval where not given.
+
+### Exact user-selected growth changes (CONFIRMED)
+
+| Primary attribute | Existing Tier II Psion asset reference | Knight latest selected growth | Mage latest selected growth |
+| --- | ---: | ---: | ---: |
+| VIT per level | 1.55 | **2.50** | **2.00** |
+| STR per level | 0.65 | **1.00** | **1.00** |
+| AGI per level | 2.10 | **5.00** | **2.70** |
+| INT per level | 2.95 | **2.70** | **5.00** |
+| SPR per level | 1.10 | **1.00** | **1.00** |
+| **TOTAL per class level** | **8.35** | **12.20** | **11.70** |
+
+Use these as the **latest USER-CORRECTED growth values**. Note "very low STR/SPR" from Round20 was relative to primary AGI/INT, and the user has now expressly selected +1.00/rank each; do not revert to +0.20 because an older line says "very low". Knight STR growth exceeds parent +0.65; Knight SPR slightly below parent +1.10; no "every individual growth must be higher" rule exists. Total growth for both is higher than Psion.
+
+### Working level-1 base stats (prior proposal RETAINED, NOT separately confirmed numerically this round)
+
+| Base stat | Tier II Psion actual | Knight existing working proposal | Mage existing working proposal |
+| --- | ---: | ---: | ---: |
+| VIT | 12 | 22 | 19 |
+| STR | 7 | 8 | 8 |
+| AGI | 14 | 30 | 22 |
+| INT | 18 | 22 | 32 |
+| SPR | 10 | 11 | 11 |
+| Total | 61 | 93 | 92 |
+
+**No explicit starting-attribute correction was requested**: do not add 1 to Knight's starting INT or Mage's starting AGI. These base numbers are the Round20 candidates carried forward, pending acceptance as first playable implementation baselines.
+
+### Verified growth projections before equipment, formula `base + (classLevel−1)×perLevelGrowth`
+
+| Class | Tier III Lv1 | Lv60 | Lv120 | Lv150 |
+| --- | --- | --- | --- | --- |
+| Knight VIT/STR/AGI/INT/SPR | 22/8/30/22/11 | 169.5/67/325/181.3/70 | 319.5/127/625/343.3/130 | **394.5/157/775/424.3/160** |
+| Mage VIT/STR/AGI/INT/SPR | 19/8/22/32/11 | 137/67/181.3/327/70 | 257/127/343.3/627/130 | **317/157/424.3/777/160** |
+
+Do **not** mutate parent Psion's current asset, or add Psion's Lv60 attributes to the freshly created Tier III Lv1 manifestation. All previously approved normal physical basic attack scaling remains Knight `0.6AGI+0.4INT`, Mage `0.6INT+0.4AGI`; future Tier IV paths remain Knight `0.9AGI+0.2INT` and Mage `0.9INT+0.2AGI`. Rank gates and ability caps remain unchanged.
+
+### Designer-selected PROVISIONAL Tier III HP and Mana resource profiles (NOT user-approved numerical balances)
+
+The actual Tier II Psion has **baseHp10**, `hpPerVitality15`, `regenerationPerVitality0.1`, `moveSpeed5`; its Mana profile is `baseMaximum84 + 3×INT+1×SPR` and `regenPerSecond4.5+0.075×INT+0.075×SPR`. Proposed Tier III profiles must be tested together with HIGH Round16 spell costs of **516/598 Knight** and **520/680/690/658 Mage** at skill cap. For consistency with existing `ClassResourceProfile`, use:
+
+| Class | Provisional base HP | HP / VIT | HP regen / VIT | Provisional maximum Mana | Provisional Mana regen per second |
+| --- | ---: | ---: | ---: | --- | --- |
+| Knight | **30** | 15 | 0.1 | **`140 + 4.0×INT + 1.5×SPR`** | **`3.5 + 0.045×INT + 0.035×SPR`** |
+| Mage | **20** | 15 | 0.1 | **`160 + 5.5×INT + 2.0×SPR`** | **`4.0 + 0.070×INT + 0.055×SPR`** |
+
+Unmodified base movement speed remains **5** for both, by ordinary same-baseline rule (user-approved Speed Presence is the source of class-based speed improvements). Both base PDEF/MDEF **0 initially** as conservative reuse of parent defense convention; armor, VIT and self/group shields carry defense instead of inventing special class-only defense coefficients. HP assumes standard `baseHp + 15×VIT` in an ordinary actor without other overrides. Preserve engine rounding and regeneration intervals (no forced integer truncation in this design note).
+
+| Class | Lv1 Mana / regen/s | Lv60 Mana / regen/s | Lv120 Mana / regen/s | Lv150 Mana / regen/s |
+| --- | --- | --- | --- | --- |
+| Knight | **244.5 / 4.875** | **970.2 / 14.1085** | **1708.2 / 23.4985** | **2077.2 / 28.1935** |
+| Mage | **358 / 6.845** | **2098.5 / 30.74** | **3868.5 / 55.04** | **4753.5 / 67.19** |
+
+**Sanity check:** With level150 no-gear stats, Knight can nominally spend `516 (Image)+598 (Void shield)+12×72 (12 ranked empowerment hits)=1,978 Mana`, within its proposed 2,077 Mana pool **if all other spending is zero**, leaving ≈99 Mana. Mage can spend `690+520+680+658=2,548 Mana` for one of each max-rank active spell, within 4,753 Mana. This demonstrates **one viable finite test sequence**, not sustainable sustained-combat balance. In actual play, note damage, movement windows, cooldowns, regen, consumables and stat gear; test level1, level60, level120 and level150. Future resource gear can change those budgets; if gameplay is frustrating, tune resource coefficients and cooldowns rather than reducing the user's explicit steep Mana cost progression without consultation.
+
+### PROVISIONAL Knight empowered-hit edge-case implementation defaults for Codex review (NOT yet user-confirmed)
+
+All below are **recommended test behavior** that preserves user's confirmed finite `1+floor(rank/3)` empowerment, per-hit `4+2r` Mana cost and dual Physical + separate MAGICAL Void packet. User did **not** select these additional edge-case behaviors in this message.
+
+- **Hit vs miss:** charge and `4+2r` Mana are consumed on a **successfully landed eligible basic attack event**. A miss, evasion or invalidated attack (no landed hit) consumes **neither**. A valid hit whose damage is fully absorbed by a shield **DOES** consume both (contact occurred).
+- **Insufficient Mana:** execute the normal Physical basic attack if it is otherwise legal, with **NO Magical Void bonus**, **NO empowerment charge spent and NO partial Mana spending**. Empowerment remains until a later valid empowered hit or its already proposed **12s expiry**, preventing negative-Mana/free-Void exploit. UI should indicate insufficient Mana; no endless autoattack cancel loop.
+- **Critical rule:** The normal Physical basic attack may use Knight's authored mastery **30%-at-rank30 crit chance / 160→190% multiplier**, while its **additional MAGICAL Void packet does NOT crit** by default. This honors opt-in crit semantics and avoids transferring flat physical armor bypass or crit multiplier to an unapproved separate Magical damage category. Crit permissions can be widened later by explicit decision.
+- **Illusions & empowerment:** Knight image receives **full compatible passive bonuses** and **10→50%-strength copies of eligible TEMPORARY buffs** as already user confirmed, but must **NOT draw down the owner's empowerment charges or owner's Mana**. Designer proposal: on image creation, snapshot the owner's ACTIVE Empowered Attacks buff as a separate, local set of the **remaining charges**, giving the image its own capped charge counter and a COPY of the separate Magical Void bonus at **one Image-rank scaling percentage**; spend the image's LOCAL charge on its landed basic hits, 0 Mana to owner/image, expire the copied charges with the illusion or original remaining buff duration (whichever ends earlier). This preserves meaningful copied temporary buff benefit without infinite extra empower hits, no duplicate aura emitters and no double-applying the image's base basic-damage multiplier to the copied buff potency. A Knight image created when empowerment is inactive receives NO charges. Need test overpowered free copies; tweak while preserving the already approved 10→50% temp-buff strength lineage.
+- **Recast/death:** Recasting Knight Empowered Attacks after cooldown **replaces**, does not stack, remaining owner charges and resets proposed 12s expiry. Unused charges expire. Death cancels the Knight's own empowerment buff; pre-existing independent images persist to their normal end per user approval. At clone end while Knight dead, discard the haste bonus (already user approved).
+
+### Explicit resolution of the OLD versus NEW Knight Magical Void damage formulas
+
+- OLD directly approved raw damage in earlier round: **`30 + 17r + 0.4AGI + 0.1INT`**. This keeps its stat coefficients constant as ranks increase.
+- The user subsequently explicitly instructed that **damage coefficients should ALSO scale with skill rank**, described as `flat + flat×rank + (AGI/INT×coefficient×rank)`. This more recent instruction requires a rank-dependent stat multiplier for damage skills, including the Knight's empowered additional packet if applying that general rule.
+- **SELECT the NEW Round16 rank-scaling implementation CANDIDATE for the FIRST PROVISIONAL PLAYTEST**, pending user numeric sign-off: **`RAW_Magical_Void(r) = 30 + 17r + [0.4+0.016(r−1)]AGI + [0.1+0.004(r−1)]INT`**. At rank1 this equals the older original formula; at rank34 the coefficients become 0.928 AGI and 0.232 INT, preserving the previously approved 4:1 AGI:INT relative ratio. Knight normal Physical basic attack remains `0.6AGI+0.4INT` separately. PDEF bypass from Blades Mastery affects only the Physical hit; Mage-like Magical Defense/Void affinity processing affects only Magical packet. No implicit crit on packet.
+- **Interpretation and approval boundary:** user's newest general scaling direction, coupled with Codex's call to resolve the inconsistency, supports USING this newer PROVISIONAL candidate instead of silently choosing old fixed coefficients. The exact **+0.016 / +0.004 per-rank coefficients were chosen by the designer**, not explicitly user-approved. Do not label them final balance without playtesting and numerical approval. Older exact formula remains the rank1 anchor and historical baseline, NOT a competing live implementation target.
+
+### PROVISIONAL illusion-end haste and Mage mirror edge-case defaults for Codex review (NOT user confirmed)
+
+- **Knight same-name Mental Image end haste:** bonuses from multiple images **DO NOT ADD**. Keep the **strongest active** end-haste amount; when a stronger new one arrives, replace the prior effect; equal amount **refreshes duration** from that trigger, weaker doesn't reduce existing magnitude or duration. Independent unrelated effects remain subject to general stacking rules. This is the end haste buff, **distinct** from the already user-confirmed strongest-only SAME-NAME *speed aura*.
+- **Rank progression endpoints** are user confirmed: Knight Image r1 +1% speed for1s, r25 +50% for5s; approximate designer-linear interpolation over 24 intervening ranks, rounding only for display. Trigger on expiry OR enemy destruction. Knight must be alive at the event or buff is **LOST** (not queued after resurrection).
+- **Mirage Mage primary spell-copy snapshot:** at the ORIGINAL Mage cast, record the original target/ground location, spell rank, class stats and original RAW damage/shield capacity, and relevant unique spell identity. When image's scheduled **0.4s delay** expires, confirm source image STILL alive. At resolution, use snapshot raw values multiplied **once** by the primary image's current Mental Image rank's approved curve (provisionally 5% at r1 →25% at r25). If original target died during delay, retarget nearest eligible enemy within ordinary copy targeting rules; if none valid, that particular targeted copy fizzles. Ground AoE uses its original ground position; shields center on image and create an independent shared pool; don't retarget shield to hostiles. No extra Mana and NO mirrored CC/stun (user approved behavior). A copy's independent shield, once applied, remains until its own 8s duration or exhaustion, even if source image dies thereafter. Original/copies use oldest-active shared pool first (user approved).
+- **Mage mirrored Mental Image** creates **one non-copying secondary** with half original image HP / ordinary basic damage / configured lifetime, but SAME full original explosion damage (USER APPROVED). Snapshot that original approved explosion formula at secondary creation so later parent death doesn't cancel or alter damage; the secondary lasts independently and does not recursively echo any spells. Both primary and secondary survive Mage owner death until natural expiry/enemy destruction under user confirmed rules.
+
+### Summary of implementation handoff status (do not silently auto-implement from this conversation)
+
+**USER-CONFIRMED:** Growth changes (Knight VIT2.5/STR1/AGI5/INT2.7/SPR1; Mage VIT2/STR1/AGI2.7/INT5/SPR1), previously confirmed damage channels, clone end-death rules, class rank gates, quest and equipment identity.
+
+**DESIGNER-PROVISIONAL pending test and approval:** Retained level1 base stats, base HP, Mana max/regen formula, missed-hit/insufficient Mana/crit/copy-charge rules, strongest-only clone-end haste, mirror snapshot/expiration precision, NEW rank-dependent empowered bonus raw coefficients. Do not claim these choices are user-approved or implemented. If Codex is separately authorized to implement, use these as a coherent first-test baseline and surface material balance disagreements after tests. No Unity assets, branch merges, or local WIP modifications made during this Round21 design update.
