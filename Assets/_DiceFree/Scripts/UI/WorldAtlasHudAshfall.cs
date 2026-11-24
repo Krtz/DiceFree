@@ -51,12 +51,15 @@ namespace DiceFree.UI
             AshfallRoute(plot, AshfallReach.SettlementRoad, Road, 2.6f);
             AshfallRoute(plot, AshfallReach.NeedlePath, Footpath, 1.65f);
             AshfallRoute(plot, AshfallReach.CrownPath, Footpath, 1.65f);
+            AshfallRoute(plot, AshfallReach.SouthernCircuit, Footpath, 1.65f);
+            AshfallRoute(plot, AshfallReach.WesternTrail, Footpath, 1.65f);
             AshfallRoute(plot, AshfallReach.WillowfordRoad, Road, 2.6f);
             AshfallRoute(plot, AshfallReach.RiverbankTrail, Footpath, 1.65f);
             AshfallRoute(plot, AshfallReach.River, new Color(.30f,.66f,.74f), 4.0f);
-            for(int i=0;i<58;i++)
+            for(int i=0;i<170;i++)
             {
-                float x=-221+Mathf.Repeat(i*37.7f,152),z=22-Mathf.Repeat(i*17.9f,166);
+                float x=AshfallReach.LocalBounds.xMin+10+Mathf.Repeat(i*37.7f,172),
+                    z=22-Mathf.Repeat(i*17.9f,AshfallReach.FaceHeight-35);
                 if(Mathf.Abs(x-AshfallReach.RiverX(z))>10)
                     ForestMark(AshfallProject(plot,new Vector2(x,z)));
             }

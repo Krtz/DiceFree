@@ -6,12 +6,14 @@ namespace DiceFree.World
     public static class AshfallReach
     {
         public static readonly Vector3 Origin = new(64000, 0, 64000);
-        public static readonly Rect LocalBounds = Rect.MinMaxRect(-230, -155, 60, 35);
+        // Matches Cornberg's authored OverworldMapBounds, including Briarback.
+        public const float FaceWidth = 438, FaceHeight = 615;
+        public static readonly Rect LocalBounds = new(-248, 35-FaceHeight, FaceWidth, FaceHeight);
         public static readonly Rect Bounds = new(LocalBounds.position + new Vector2(Origin.x, Origin.z), LocalBounds.size);
         public static readonly Vector2 NorthGate = new(0, 25);
         public static readonly Vector2 Cinderwatch = new(5, -47);
-        public static readonly Vector2 BasaltNeedle = new(-29, -4);
-        public static readonly Vector2 EmberCrown = new(31, -64);
+        public static readonly Vector2 BasaltNeedle = new(LocalBounds.xMin+FaceWidth*.25f, LocalBounds.yMin+FaceHeight*.75f);
+        public static readonly Vector2 EmberCrown = new(LocalBounds.xMin+FaceWidth*.75f, LocalBounds.yMin+FaceHeight*.25f);
         public static readonly Vector2 Willowford = new(-150, -62);
         public const float WorldOneGateX = 163;
         public const float WorldOneRiverEdgeZ = -53;
@@ -36,10 +38,10 @@ namespace DiceFree.World
         public static IReadOnlyList<Vector2> River { get; } = RiverPoints();
         private static Vector2[] RiverPoints()
         {
-            var points = new Vector2[39];
+            var points = new Vector2[Mathf.CeilToInt(FaceHeight/5)+1];
             for (int i = 0; i < points.Length; i++)
             {
-                float z = NorthEdgeZ - i * 5;
+                float z = Mathf.Max(LocalBounds.yMin,NorthEdgeZ - i * 5);
                 points[i] = new Vector2(RiverX(z), z);
             }
             return points;
@@ -71,12 +73,30 @@ namespace DiceFree.World
 
         public static IReadOnlyList<Vector2> NeedlePath { get; } = new Vector2[]
         {
-            new(-5, -3), new(-10, -5), new(-15, -5), new(-20, -3), new(-23, -3)
+            new(-61,-50), new(-78,-61), new(-95,-78), new(-112,-91), new(-112,-112),
+            BasaltNeedle+new Vector2(24,4)
         };
 
         public static IReadOnlyList<Vector2> CrownPath { get; } = new Vector2[]
         {
-            new(4, -51), new(5, -58), new(5, -65), new(12, -68), new(19, -68), new(19, -65)
+            new(4,-51),new(7,-80),new(13,-115),new(22,-152),new(32,-195),
+            new(39,-239),new(43,-286),new(52,-333),new(65,-374),
+            EmberCrown+new Vector2(-28,48)
+        };
+
+        public static IReadOnlyList<Vector2> SouthernCircuit { get; } = new Vector2[]
+        {
+            BasaltNeedle+new Vector2(24,4),new(-105,-149),new(-94,-193),new(-79,-237),
+            new(-59,-285),new(-37,-324),new(-11,-352),new(23,-374),
+            EmberCrown+new Vector2(-28,48),new(24,-424),new(-12,-454),new(-48,-480),
+            new(-85,-506),new(-124,-526),new(-152,-534),new(-154,-487),new(-147,-438),
+            new(-143,-387),new(-147,-333),new(-145,-278),new(-149,-222),new(-151,-168),new(-164,-140),
+            new(-170,-116),new(-158,-94),new(-139,-87),new(-115,-96),BasaltNeedle+new Vector2(24,4)
+        };
+        public static IReadOnlyList<Vector2> WesternTrail { get; } = new Vector2[]
+        {
+            new(-209,-64),new(-216,-100),new(-218,-147),new(-220,-200),new(-216,-255),
+            new(-215,-300),new(-196,-318),new(-169,-318),new(-147,-333)
         };
     }
 }

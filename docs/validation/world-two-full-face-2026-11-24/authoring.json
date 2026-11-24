@@ -1,0 +1,21 @@
+{
+    "worldOneWidth": 438.0,
+    "worldOneHeight": 615.0,
+    "worldTwoWidth": 438.0,
+    "worldTwoHeight": 615.0,
+    "needleScale": 3.4000000953674316,
+    "crownScale": 4.400000095367432,
+    "cornbergHealing": 25.0,
+    "cinderwatchHealing": 125.0,
+    "needle": {
+        "x": -138.5,
+        "y": -118.75
+    },
+    "crown": {
+        "x": 80.5,
+        "y": -426.25
+    },
+    "newTrees": 612,
+    "newPatrols": 34,
+    "relocatedTrees": 85
+}

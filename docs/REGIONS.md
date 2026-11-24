@@ -75,6 +75,8 @@ The user confirmed that World 1's World Tree represents its single pip. World 2 
 
 The November 23 expansion adds a larger Cinderwatch with a physical timber palisade and three open gates. Steamroot Vale is the second biome, with broadleaf river woods, a timber bridge and the seven-building Willowford settlement. The Cornberg stream continues across World 1's southern edge into the northern edge of World 2. Its transverse position is preserved relative to the Ironpine crossing, placing the river roughly 180 metres west of the World 2 arrival. Travel in both directions uses a camera fly-out, a quarter-turn cube with captures of the actual worlds, and a camera fly-in. Steamroot Vale and Willowford are implementation names chosen for this requested expansion.
 
+The November 24 full-face expansion matches World One's current 438 × 615 metre bounds. Basalt Needle and Ember Crown occupy the northwest and southeast quarter positions of the complete face, enlarged to 3.4× and 4.4× their former scales. The region now includes a southern road circuit, a second river bridge and more forest and Ashscale patrols. Cinderwatch's passive spring heals 125 base HP/second, five times Cornberg's rate. See [World Two full-size face](WORLD_TWO_FULL_FACE_2026-11-24.md) for implementation and validation evidence.
+
 Regions should contain distinct landmarks arranged so the map/minimap can evoke the corresponding d6 pip arrangement.
 
 Exactly how literally each pip position maps to a city/mountain/lake/etc. is still open.

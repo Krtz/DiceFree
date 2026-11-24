@@ -31,10 +31,10 @@ public static class WorldFacePreviewAuthoring
     {
         if(!AssetDatabase.IsValidFolder(Output.TrimEnd('/')))
             AssetDatabase.CreateFolder("Assets/_DiceFree/Resources","WorldFaceCrossing");
-        var sourceRect=new Rect(-163.5f,-53,576,576);
+        var sourceRect=new Rect(-85,AshfallReach.WorldOneRiverEdgeZ,AshfallReach.FaceWidth,AshfallReach.FaceHeight);
         float riverX=-18+Mathf.Sin(-53*.065f)*2;
         float riverU=(riverX-sourceRect.xMin)/sourceRect.width;
-        var targetRect=new Rect(AshfallReach.RiverX(35)-riverU*400,35-400,400,400);
+        var targetRect=AshfallReach.LocalBounds;
         if(Mathf.Abs((AshfallReach.RiverX(35)-targetRect.xMin)/targetRect.width-riverU)>.0001f)
             throw new InvalidOperationException("The face textures disagree about the river seam.");
         var source=EditorSceneManager.OpenScene("Assets/_DiceFree/Scenes/Cornberg.unity");
@@ -78,6 +78,7 @@ public static class WorldFacePreviewAuthoring
         var cameraObject=new GameObject("Authoring face capture");
         var camera=cameraObject.AddComponent<Camera>();
         camera.enabled=false;camera.orthographic=true;camera.orthographicSize=bounds.height*.5f;
+        camera.aspect=bounds.width/bounds.height;
         camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.18f,.26f,.17f);
         camera.nearClipPlane=.3f;camera.farClipPlane=1500;
         camera.cullingMask=~((1<<31)|(1<<29));
@@ -149,15 +150,18 @@ public static class WorldFacePreviewAuthoring
     private static void AddFeatures(Transform root,Proxy[] proxies,Rect bounds,Vector3 origin,bool front)
     {
         var orientation=front?Quaternion.Euler(-90,0,0):Quaternion.identity;
-        float scale=18/bounds.width;
+        var frame=new GameObject(front?"World 2 landmark frame":"World 1 landmark frame").transform;
+        frame.SetParent(root,false);frame.gameObject.layer=31;
+        frame.localPosition=(front?Vector3.back:Vector3.up)*9.03f;frame.localRotation=orientation;
+        frame.localScale=new Vector3(18/bounds.width,18/Mathf.Max(bounds.width,bounds.height),18/bounds.height);
         foreach(var proxy in proxies)
         {
             var go=new GameObject(front?"World 2 pip landmark":"World Tree pip");
-            go.layer=31;go.transform.SetParent(root,false);
+            go.layer=31;go.transform.SetParent(frame,false);
             var p=proxy.position-origin-new Vector3(bounds.center.x,0,bounds.center.y);
-            go.transform.localPosition=orientation*(p*scale)+(front?Vector3.back:Vector3.up)*9.03f;
-            go.transform.localRotation=orientation*proxy.rotation;
-            go.transform.localScale=proxy.scale*scale;
+            go.transform.localPosition=p;
+            go.transform.localRotation=proxy.rotation;
+            go.transform.localScale=proxy.scale;
             go.AddComponent<MeshFilter>().sharedMesh=proxy.mesh;
             var renderer=go.AddComponent<MeshRenderer>();
             renderer.sharedMaterials=proxy.materials;

@@ -41,6 +41,8 @@ public static partial class AshfallReachExpansionAuthoring
 
     public static void Batch()
     {
+        if(AssetDatabase.IsValidFolder("Assets/_DiceFree/Settings/AshfallReach/FullWorld"))
+            throw new InvalidOperationException("World Two has already migrated to a full face. Preserve its towns and authored content; do not replace it with the legacy arrival-region rebuild.");
         LoadMaterials();
         LoadRiverTraderStock();
         var scene = EditorSceneManager.OpenScene(ScenePath);
@@ -123,6 +125,17 @@ public static partial class AshfallReachExpansionAuthoring
         float ashfall = Mathf.Lerp(oldHeight, variation * .33f + .70f + rim * 5.3f + Mathf.Sin(z * .13f) * .27f, south);
         float riverlands = 1.08f + variation * .40f + Mathf.Sin(z * .027f) * .15f;
         float ground = Mathf.Lerp(ashfall, riverlands, AshfallReach.RiverlandsWeight(x));
+        float southDetail=Mathf.SmoothStep(0,1,Mathf.InverseLerp(-125,-190,z));
+        ground+=southDetail*(Mathf.PerlinNoise(13+x*.018f,61+z*.018f)*5.5f+
+            Mathf.Sin(x*.031f+z*.019f)*1.4f);
+        float needleDistance=Vector2.Distance(new Vector2(x,z),AshfallReach.BasaltNeedle);
+        ground+=4.5f*(1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(14,32,needleDistance)));
+        float crownDistance=Vector2.Distance(new Vector2(x,z),AshfallReach.EmberCrown);
+        ground=Mathf.Lerp(ground,6.5f,1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(62,88,crownDistance)));
+        // The second timber bridge meets level banks on both sides of the river.
+        float bridge=Mathf.SmoothStep(0,1,Mathf.InverseLerp(24,7,Mathf.Abs(z+318))) *
+            Mathf.SmoothStep(0,1,Mathf.InverseLerp(30,15,Mathf.Abs(x-AshfallReach.RiverX(z))));
+        ground=Mathf.Lerp(ground,1.08f,bridge);
         float bank = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(AshfallReach.RiverHalfWidth(z) - .2f,
             AshfallReach.RiverHalfWidth(z) + 5, Mathf.Abs(x - AshfallReach.RiverX(z))));
         return Mathf.Lerp(AshfallReach.RiverWaterHeight - 1.8f, ground, bank);
@@ -144,7 +157,8 @@ public static partial class AshfallReachExpansionAuthoring
             int a = row * columns + col;
             float x = col * stride - west, z = row * stride + south;
             vertices[a] = Ground(x, z);
-            uv[a] = new Vector2((x + 300) / 450f, (z + 400) / 490f);
+            uv[a] = new Vector2((x-AshfallReach.LocalBounds.xMin)/AshfallReach.FaceWidth,
+                (z-AshfallReach.LocalBounds.yMin)/AshfallReach.FaceHeight);
             if (row == rows - 1 || col == columns - 1) continue;
             triangles.AddRange(new[] { a, a + columns, a + 1, a + 1, a + columns, a + columns + 1 });
         }
@@ -166,8 +180,8 @@ public static partial class AshfallReachExpansionAuthoring
             for (int row = 0; row < size; row++)
             for (int col = 0; col < size; col++)
             {
-                float x = (col + .5f) / size * 450 - 300;
-                float z = (row + .5f) / size * 490 - 400;
+                float x = AshfallReach.LocalBounds.xMin+(col+.5f)/size*AshfallReach.FaceWidth;
+                float z = AshfallReach.LocalBounds.yMin+(row+.5f)/size*AshfallReach.FaceHeight;
                 float variation = Mathf.PerlinNoise(x * .14f + 48, z * .14f + 69);
                 float edge = -34 + 3 * Mathf.Sin(x * .20f) + (variation - .5f) * 6;
                 float transition = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(edge + 5, edge - 5, z));
@@ -176,6 +190,7 @@ public static partial class AshfallReachExpansionAuthoring
                 float shore = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(3.5f, 8.5f, Mathf.Abs(x - AshfallReach.RiverX(z))));
                 soil = Color.Lerp(soil, new Color(.38f, .345f, .255f), shore);
                 float rock = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(1.7f, 3.0f, Height(x, z)));
+                rock*=1-.8f*AshfallReach.RiverlandsWeight(x);
                 Color tone = Color.Lerp(soil, slate.color, rock);
                 var grain = source.GetPixelBilinear(Mathf.Repeat(x * .2f, 1), Mathf.Repeat(z * .2f, 1));
                 float flecks = .91f + variation * .17f;
@@ -265,6 +280,7 @@ public static partial class AshfallReachExpansionAuthoring
         }
         Solid(well, "Well collision", Vector3.up * .48f, new(1.74f, 1.0f, 1.74f));
         var healer = well.gameObject.AddComponent<HealerInteraction>();
+        well.gameObject.AddComponent<HealingArea>().Configure(125,5);
         healer.ConfigureName("Drink from the Cinderwatch spring");
         healer.ConfigureApproach(Group(village, "Spring approach", Ground(3.33f, -47.5f)));
         // Interaction targets use an outer selectable collider independently from pathing blockers.

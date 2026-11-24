@@ -155,7 +155,7 @@ public static partial class AshfallReachExpansionAuthoring
         var uv=new List<Vector2>();
         var triangles=new List<int>();
         int index=0;
-        for(float z=35;z>=-390;z-=1)
+        for(float z=AshfallReach.NorthEdgeZ;z>=AshfallReach.LocalBounds.yMin;z-=1)
         {
             float x=AshfallReach.RiverX(z),width=AshfallReach.RiverHalfWidth(z);
             vertices.Add(new Vector3(x-width,AshfallReach.RiverWaterHeight,z));
@@ -166,7 +166,7 @@ public static partial class AshfallReachExpansionAuthoring
                 int a=(index-1)*2;
                 triangles.AddRange(new[]{a,a+1,a+2,a+1,a+3,a+2});
             }
-            if(z>-155&&Mathf.Abs(z+62)>2.9f)
+            if(Mathf.Abs(z+62)>2.9f&&Mathf.Abs(z+318)>2.9f)
                 Solid(river,"River channel excludes walking",new Vector3(x,AshfallReach.RiverWaterHeight,z),
                     new Vector3(width*2+.25f,3.4f,1.2f));
             if(index%5==0&&z>-150)

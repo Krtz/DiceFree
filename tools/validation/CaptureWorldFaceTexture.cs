@@ -8,12 +8,11 @@ var region=FindType("DiceFree.World.AshfallReach");
 var origin=(Vector3)region.GetField("Origin").GetValue(null);
 var bounds=(Rect)region.GetField("Bounds").GetValue(null);
 bool second=bounds.Contains(new Vector2(hero.transform.position.x,hero.transform.position.z));
-var face=new Rect(-163.5f,-53,576,576);
+float width=(float)region.GetField("FaceWidth").GetRawConstantValue(),height=(float)region.GetField("FaceHeight").GetRawConstantValue();
+var face=new Rect(-85,-53,width,height);
 if(second)
 {
-    float seamU=(-18+Mathf.Sin(-53*.065f)*2-face.xMin)/face.width;
-    float riverX=(float)region.GetMethod("RiverX").Invoke(null,new object[]{35f});
-    face=new Rect(riverX-seamU*400,-365,400,400);
+    face=(Rect)region.GetField("LocalBounds").GetValue(null);
 }
 var project=System.IO.Directory.GetParent(Application.dataPath);
 while(project!=null&&!System.IO.Directory.Exists(System.IO.Path.Combine(project.FullName,"Assets/_DiceFree/Scenes")))
@@ -24,15 +23,18 @@ System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(output));
 var root=new GameObject("Runtime world-face photograph");
 var camera=root.AddComponent<Camera>();
 camera.enabled=false;camera.orthographic=true;camera.orthographicSize=face.height*.5f;
+camera.aspect=face.width/face.height;
 camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.18f,.26f,.17f);
 camera.nearClipPlane=.3f;camera.farClipPlane=1500;camera.cullingMask=~((1<<31)|(1<<29));
 camera.transform.SetPositionAndRotation((second?origin:Vector3.zero)+new Vector3(face.center.x,650,face.center.y),Quaternion.Euler(90,0,0));
 var frame=new RenderTexture(1536,1536,24,RenderTextureFormat.ARGB32);frame.Create();
 var pixels=new Texture2D(1536,1536,TextureFormat.RGB24,false);
 var previous=RenderTexture.active;bool fog=RenderSettings.fog;
+var faders=UnityEngine.Object.FindObjectsByType(FindType("DiceFree.Core.CameraOcclusionFader")).Cast<Behaviour>().Where(f=>f.enabled).ToArray();
 try
 {
     RenderSettings.fog=false;camera.targetTexture=frame;
+    foreach(var fader in faders)fader.enabled=false;
     var requestType=FindType("UnityEngine.Rendering.Universal.UniversalRenderPipeline+SingleCameraRequest");
     var request=Activator.CreateInstance(requestType);requestType.GetField("destination").SetValue(request,frame);
     typeof(UnityEngine.Rendering.RenderPipeline).GetMethods().Single(method=>method.Name=="SubmitRenderRequest")
@@ -43,6 +45,7 @@ try
 finally
 {
     camera.targetTexture=null;RenderTexture.active=previous;RenderSettings.fog=fog;
+    foreach(var fader in faders)if(fader!=null)fader.enabled=true;
     UnityEngine.Object.Destroy(root);frame.Release();UnityEngine.Object.Destroy(frame);UnityEngine.Object.Destroy(pixels);
 }
 return "Captured "+output;
