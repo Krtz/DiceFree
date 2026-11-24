@@ -24,6 +24,7 @@ namespace DiceFree.Skills
             public int Rank, PulsesLeft;
             public float NextPulse, NextVisual;
             public bool Empowered, Friendly;
+            public GroundAuraVisual Aura;
         }
 
         private readonly List<TimedSpell> bursts = new(), shields = new(), growths = new();
@@ -206,9 +207,12 @@ namespace DiceFree.Skills
 
         private int IceAegis(CombatActor target, int rank, bool empowered)
         {
-            shields.RemoveAll(effect => effect.Target == target);
+            shields.RemoveAll(effect => { if(effect.Target != target) return false; if(effect.Aura!=null) effect.Aura.Remove(); return true; });
             target.Health.AddTemporaryShield(shieldId, ShieldAmount(rank), PriestSpellRules.AegisDuration, iceAura.element.stableId);
-            shields.Add(Effect(target, rank, empowered, 0, PriestSpellRules.AegisTick));
+            var effect=Effect(target, rank, empowered, 0, PriestSpellRules.AegisTick);
+            shields.Add(effect);
+            if(empowered) effect.Aura=GroundAuraVisual.Create(this,target,GroundAuraStyle.Frost,
+                ()=>actor.Alive&&skills.Active&&Valid(effect)&&effect.Target.Health.TemporaryShieldFrom(shieldId)>0);
             EarlySkillVfx.PlayPriestPulse("Ice Aegis", target.transform.position,
                 empowered ? PriestSpellRules.AegisRadius : 1.1f, new Color(.33f, .78f, 1f));
             return 1;
@@ -290,6 +294,7 @@ namespace DiceFree.Skills
                 if (!Valid(effect) || effect.Target.Health.TemporaryShieldFrom(shieldId) <= 0)
                 {
                     if (effect.Target != null) effect.Target.Health.RemoveTemporaryShield(shieldId);
+                    if(effect.Aura!=null) effect.Aura.Remove();
                     shields.RemoveAt(i);
                     continue;
                 }
@@ -417,7 +422,10 @@ namespace DiceFree.Skills
         private void ClearEffects()
         {
             foreach (var effect in shields)
+            {
                 if (effect.Target != null) effect.Target.Health.RemoveTemporaryShield(shieldId);
+                if(effect.Aura!=null) effect.Aura.Remove();
+            }
             foreach (var effect in growths)
                 if (effect.Target != null) effect.Target.Stats.RemoveMovementSpeedPercentModifier(growthId);
             shields.Clear();

@@ -16,7 +16,11 @@ namespace DiceFree.Combat
         public float Radius => radius;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetRegistry() => Active.Clear();
-        void Awake() => owner = GetComponent<CombatActor>();
+        void Awake()
+        {
+            owner = GetComponent<CombatActor>();
+            GroundAuraVisual.Create(this,owner,GroundAuraStyle.Elements,()=>reduction>0 && radius>0 && schools.Count>0);
+        }
         void OnEnable() => Active.Add(this);
         void OnDisable() => Active.Remove(this);
         public void Configure(ElementDefinition[] elements, float fraction, float distance)

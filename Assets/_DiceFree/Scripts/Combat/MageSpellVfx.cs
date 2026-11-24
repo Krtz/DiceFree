@@ -102,6 +102,7 @@ namespace DiceFree.Combat
    var root=Spawn("RadiationAura",target.transform.position+Vector3.up*.5f,seconds,.6f,new Color(.65f,1,.35f,.8f),true);
    root.transform.SetParent(target.transform,true);
    var life=root.GetComponent<MageSpellVfx>();life.follow=target.transform;life.watched=target;life.tracked=true;life.offset=Vector3.up*.5f;
+   GroundAuraVisual.Create(life,target,GroundAuraStyle.Radiation,()=>true);
    Ring(root.transform,"Radiation ground halo",.62f,new Color(.34f,1f,.12f,.95f),.055f,Quaternion.identity).transform.localPosition=Vector3.down*.42f;
    Ring(root.transform,"Radiation vertical orbit",.62f,new Color(.55f,1f,.18f,.9f),.045f,Quaternion.Euler(90,0,0));
    Ring(root.transform,"Radiation cross orbit",.62f,new Color(.26f,.9f,.1f,.78f),.035f,Quaternion.Euler(0,0,90));

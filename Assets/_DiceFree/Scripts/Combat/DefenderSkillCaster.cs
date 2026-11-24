@@ -36,7 +36,7 @@ namespace DiceFree.Skills
         private DefenderSkillProgression skills;
         private IChannelingAbility[] channels;
         private Coroutine charge;
-        private GameObject aura;
+        private GroundAuraVisual aura;
         private float guardUntil, bulwarkUntil, sweepUntil, nextDecay, combatUntil, gainBudget, gainUpdatedAt;
         private string sweepKey;
 
@@ -99,7 +99,7 @@ namespace DiceFree.Skills
             skills.Changed -= RefreshPassive;
             ResetForManifestationLoad();
             RemoveDefense(actor.Stats, Passive);
-            if (aura != null) Destroy(aura);
+            if (aura != null) aura.Remove();
             aura = null;
         }
 
@@ -157,34 +157,14 @@ namespace DiceFree.Skills
             else
             {
                 RemoveDefense(actor.Stats, Passive);
-                if (aura != null) Destroy(aura);
+                if (aura != null) aura.Remove();
                 aura = null;
             }
         }
 
-        private GameObject CreateAura()
+        private GroundAuraVisual CreateAura()
         {
-            var ring = new GameObject("Hold the Line - allied radius");
-            ring.transform.SetParent(transform, false);
-            ring.transform.localPosition = Vector3.up * .09f;
-            var line = ring.AddComponent<LineRenderer>();
-            line.useWorldSpace = false;
-            line.loop = true;
-            line.widthMultiplier = .027f;
-            line.sharedMaterial = Resources.Load<Material>("EarlySkillVfx/SoftRing");
-            if (line.sharedMaterial == null)
-            {
-                Destroy(ring);
-                return null;
-            }
-            line.startColor = line.endColor = new Color(.46f, .73f, .90f, .32f);
-            line.positionCount = 56;
-            for (int i = 0; i < line.positionCount; i++)
-            {
-                float angle = Mathf.PI * 2 * i / line.positionCount;
-                line.SetPosition(i, new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * AllyRadius);
-            }
-            return ring;
+            return GroundAuraVisual.Create(this,actor,GroundAuraStyle.Defender,()=>AuraRank>0);
         }
 
         private bool Protects(CombatActor ally) =>

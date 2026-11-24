@@ -70,7 +70,7 @@ namespace DiceFree.Skills
         public float Preview(int i,int r)=>Raw(Knight,i,r,actor.Stats.Attributes);
         public float Remaining(int i)=>Mathf.Max(0,cooldowns[i]-Time.time);
         public CriticalRule BasicCriticalRule()=>Active&&Knight?new CriticalRule(PsionEvolutionProgression.KnightId,"knight.basic-crit",true,Progression.Rank(0)*.01f,1.60f+Progression.Rank(0)*.01f):null;
-        private void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();mana=GetComponent<ActorResourceController>();knight=GetComponent<PsionicKnightProgression>();mage=GetComponent<MirageMageProgression>();}
+        private void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();mana=GetComponent<ActorResourceController>();knight=GetComponent<PsionicKnightProgression>();mage=GetComponent<MirageMageProgression>();GroundAuraVisual.Create(this,actor,GroundAuraStyle.Speed,()=>Active&&Progression.Rank(4)>0);}
         private void OnEnable(){basic.Connected+=OnLanded;actor.Health.Died+=OnDeath;PsionSpeedPresence.Register(this);}
         private void OnDisable(){basic.Connected-=OnLanded;actor.Health.Died-=OnDeath;PsionSpeedPresence.Unregister(this);ResetForManifestationLoad();}
         private void OnDeath(){CancelChannel();Charges=0;actor.Stats.RemoveAttackSpeedPercentModifier("knight.image-end");haste=0;}

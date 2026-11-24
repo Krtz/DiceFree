@@ -20,7 +20,11 @@ namespace DiceFree.Combat
         public bool Contributing => actor != null && actor.Alive && bonusPerSecond > 0 && radius > 0 &&
                                     !string.IsNullOrWhiteSpace(resourceId);
 
-        private void Awake() => actor = GetComponent<CombatActor>();
+        private void Awake()
+        {
+            actor = GetComponent<CombatActor>();
+            GroundAuraVisual.Create(this,actor,GroundAuraStyle.Mana,()=>Contributing);
+        }
         private void OnEnable() => Active.Add(this);
         private void OnDisable() => Active.Remove(this);
 
