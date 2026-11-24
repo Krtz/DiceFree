@@ -1,0 +1,26 @@
+[
+  {
+    "scene": "Cornberg",
+    "preserved": 71882,
+    "changed": 2,
+    "added": 18,
+    "replacedTrunkColliders": 0,
+    "semanticMatch": true
+  },
+  {
+    "scene": "DevelopmentRoom",
+    "preserved": 1887,
+    "changed": 1,
+    "added": 0,
+    "replacedTrunkColliders": 0,
+    "semanticMatch": true
+  },
+  {
+    "scene": "WorldTwoArrival",
+    "preserved": 13677,
+    "changed": 780,
+    "added": 2652,
+    "replacedTrunkColliders": 0,
+    "semanticMatch": true
+  }
+]

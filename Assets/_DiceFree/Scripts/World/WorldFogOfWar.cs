@@ -44,6 +44,9 @@ namespace DiceFree.World
         private Vector3 lastPaintPosition;
         private bool initialized;
         private int blockersCount;
+        private Vector2 homeMin, homeMax;
+        private bool secondWorld;
+        private bool[] homeExplored, secondExplored;
 
         // Dungeons occupy remote map coordinates. Preserve overworld exploration while
         // resolving local visibility through the same obstacle layer.
@@ -67,13 +70,42 @@ namespace DiceFree.World
             worldCamera = camera;
             mapMin = min;
             mapMax = max;
+            homeMin = min; homeMax = max; secondWorld = false;
             visionRadius = Mathf.Max(8f, radius);
             if(Application.isPlaying) Initialize();
         }
 
         private void Awake()
         {
+            homeMin = mapMin; homeMax = mapMax;
             if(Application.isPlaying) Initialize();
+        }
+
+        // Keep each overworld's exploration while sharing the same softened fog
+        // and minimap path. Remote dungeon coordinates still use local visibility.
+        private void SelectOverworld()
+        {
+            if(revealer == null) return;
+            var p = new Vector2(revealer.position.x, revealer.position.z);
+            bool inSecond = AshfallReach.Bounds.Contains(p);
+            bool inHome = p.x >= homeMin.x && p.x <= homeMax.x && p.y >= homeMin.y && p.y <= homeMax.y;
+            if ((!inSecond && !inHome) || secondWorld == inSecond) return;
+            if(secondWorld) secondExplored = explored; else homeExplored = explored;
+            secondWorld = inSecond;
+            mapMin = inSecond ? AshfallReach.Bounds.min : homeMin;
+            mapMax = inSecond ? AshfallReach.Bounds.max : homeMax;
+            Initialize();
+            var saved = inSecond ? secondExplored : homeExplored;
+            if(saved != null && explored != null && saved.Length == explored.Length)
+            {
+                explored = saved;
+                ExploredCellCount = 0;
+                foreach(bool cell in explored) if(cell) ExploredCellCount++;
+                // Repaint retained explored regions as dim, rather than leaving
+                // them black until the player revisits each one.
+                PaintRegion((new Vector3(mapMin.x,0,mapMin.y)+new Vector3(mapMax.x,0,mapMax.y))*.5f, true);
+                RefreshVisionNow();
+            }
         }
 
         private void Initialize()
@@ -90,7 +122,7 @@ namespace DiceFree.World
 
             fogTexture = new Texture2D(TextureWidth, TextureHeight,
                 TextureFormat.RGBA32, false, true);
-            fogTexture.name = "World 1 exploration map (smooth)";
+            fogTexture.name = secondWorld ? "World 2 exploration map (smooth)" : "World 1 exploration map (smooth)";
             fogTexture.filterMode = FilterMode.Bilinear;
             fogTexture.wrapMode = TextureWrapMode.Clamp;
             baseAlpha = new byte[TextureWidth * TextureHeight];
@@ -287,13 +319,13 @@ namespace DiceFree.World
             hasPaintPosition = true;
         }
 
-        private void PaintRegion(Vector3 center)
+        private void PaintRegion(Vector3 center, bool wholeMap = false)
         {
             if(fogTexture==null || revealer==null)return;
             const int blurRadius=3;
             float stepX=(mapMax.x-mapMin.x)/TextureWidth;
             float stepZ=(mapMax.y-mapMin.y)/TextureHeight;
-            float padding=visionRadius+4f;
+            float padding=wholeMap ? Mathf.Max(mapMax.x-mapMin.x,mapMax.y-mapMin.y) : visionRadius+4f;
             if(center.x+padding<mapMin.x || center.x-padding>mapMax.x ||
                center.z+padding<mapMin.y || center.z-padding>mapMax.y) return;
 
@@ -349,6 +381,7 @@ namespace DiceFree.World
         private void LateUpdate()
         {
             if(!Application.isPlaying || !initialized || revealer==null) return;
+            SelectOverworld();
             if(Time.unscaledTime<nextRefresh) return;
             nextRefresh=Time.unscaledTime+refreshSeconds;
             if(hasPosition && (revealer.position-lastPosition).sqrMagnitude<.0025f)

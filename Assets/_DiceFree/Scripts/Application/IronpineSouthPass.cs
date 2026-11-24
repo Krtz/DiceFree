@@ -257,6 +257,9 @@ namespace DiceFree.ApplicationFlow
             CancelOrders();
             exit = landing;
             exit.entrance = this;
+            journal.RegisterDefinitions(scene.GetRootGameObjects()
+                .SelectMany(root => root.GetComponentsInChildren<QuestGiver>())
+                .SelectMany(giver => giver.Offers));
             foreach (var root in scene.GetRootGameObjects())
             foreach (var target in root.GetComponentsInChildren<InteractionTarget>())
             {

@@ -171,6 +171,14 @@ namespace DiceFree.Quests
                         copy.status=QuestStatus.Active;
                     if(copy.status==QuestStatus.Available)copy.count=0;
                 }
+                var currentDefinition = Array.Find(definitions, d => d.stableId == copy.questId);
+                if(currentDefinition != null && currentDefinition.repeatable &&
+                   copy.definitionVersion == currentDefinition.version && copy.status == QuestStatus.Completed)
+                {
+                    copy.status = QuestStatus.Available;
+                    copy.stage = copy.count = 0;
+                    copy.alternatives = Array.Empty<ObjectiveCount>();
+                }
                 progress.Add(copy);
             }
             foreach (var definition in definitions)
@@ -331,5 +339,20 @@ namespace DiceFree.Quests
             Changed?.Invoke(); GameplayProgressed?.Invoke(definition, previous, state.Copy()); return true;
         }
         public void Configure(params QuestDefinition[] values) => definitions = values;
+        public void RegisterDefinitions(IEnumerable<QuestDefinition> values)
+        {
+            var merged = new List<QuestDefinition>(definitions ?? Array.Empty<QuestDefinition>());
+            bool added = false;
+            foreach(var value in values)
+            {
+                if(value == null || merged.Exists(d => d != null && d.stableId == value.stableId)) continue;
+                merged.Add(value); added = true;
+                if(Find(value.stableId) == null) progress.Add(new QuestProgress {
+                    questId = value.stableId, definitionVersion = value.version
+                });
+            }
+            definitions = merged.ToArray();
+            if(added) Changed?.Invoke();
+        }
     }
 }

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Cinderwatch repeat ashscale hunt
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.cinderwatch.repeat-ashscale-hunt
+  title: Another 15 Ashscales
+  category: 0
+  requiredClassId: 
+  requiredLevel: 1
+  version: 1
+  offer: Ashscale patrols are closing around Cinderwatch. Defeat fifteen Ashscales, then return for a bounty worth twenty Ashscale spearhands.
+  activeDialogue: Both spearhands and ridgebows count. Return when fifteen Ashscales have fallen.
+  turnInDialogue: The roads are safer for another day. Here is your bounty; there is always another patrol to break.
+  locationHint: Hunt Ashscale spearhands and ridgebows in Ashfall Reach and Steamroot Vale.
+  turnInHint: Return to the Cinderwatch Bounty Warden inside the palisade.
+  stages:
+  - kind: 0
+    objectiveId: 
+    requiredTag: 
+    creditMode: 1
+    creditRadius: 50
+    instruction: Defeat 15 Ashscales
+    contentId: 
+    dungeonBossOnly: 0
+    familyId: ashscale.lizardman
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 15
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 19700
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 1
