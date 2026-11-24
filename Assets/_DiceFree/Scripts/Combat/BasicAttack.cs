@@ -26,7 +26,7 @@ namespace DiceFree.Combat
         // Negative values retain the attack definition's reach.
         public float ReachOverride { get; set; } = -1f;
         public float Reach => (ReachOverride >= 0 ? ReachOverride : Definition?.reach ?? 0f) + (ranger?.RangeBonus ?? 0f);
-        internal CriticalRule CriticalRule => psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
+        internal CriticalRule CriticalRule => GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicCriticalRule() ?? psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
             GetComponent<DiceFree.Skills.ThiefSkillCaster>()?.BasicCriticalRule();
         public event System.Action<CombatActor,DamageResult> Connected;
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
@@ -66,6 +66,7 @@ namespace DiceFree.Combat
             if (!actor.CanAct || !actor.CanTargetHostile(target) || Definition == null) return false;
             ranger?.CancelChannel();
             psion?.CancelChannel();
+            GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.CancelChannel();
             if (Target != target) { Cancel(); Target = target; }
             return true;
         }
@@ -152,7 +153,7 @@ namespace DiceFree.Combat
                 Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
                 finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) *
                     (HasClassDamageSpread ? Random.Range(ClassMinimumDamage, ClassMaximumDamage) : 1),
-                flatDefensePenetration: psion?.BasicPenetration ?? 0);
+                flatDefensePenetration: (psion?.BasicPenetration ?? 0) + (GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicPenetration ?? 0));
             packet = target.Health.ApplyPacket(actor, packet);
             if (packet.Missed) Misses++;
             else

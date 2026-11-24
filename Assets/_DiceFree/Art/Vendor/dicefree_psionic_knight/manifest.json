@@ -1,0 +1,43 @@
+{
+  "assetId": "dicefree_psionic_knight",
+  "displayName": "DiceFree Psionic Knight",
+  "files": [
+    {
+      "bytes": 4396400,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "0d6df97e2c9d15b2eaa414f17e16257154a08f40a3bbbf2263eef98dbe6aad73"
+    },
+    {
+      "bytes": 2568,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "16411e0bda9e2b0fdf567fe1d2c1d30509b3d990c089359238a5e17f9c8f3d86"
+    },
+    {
+      "bytes": 240,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "6091d063eee909de095ae60867efd7b6468e261f8454b4e2830564cb784592ec"
+    },
+    {
+      "bytes": 3871,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "271c2203211ff588f509727e31b1701bd6455a7a4c523a949a76db2be6731db0"
+    }
+  ],
+  "license": "LicenseRef-UserSupplied",
+  "model": "model.glb",
+  "packageId": "pkg_631a2ca226a6b9374186a0bf",
+  "provenance": {
+    "origin": "imported"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 1
+  },
+  "version": "1.0.0"
+}

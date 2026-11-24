@@ -71,6 +71,10 @@ This is a worldbuilding/design principle, not a demand for uniform gradient blen
 
 The one-dot face is the starting region, then two-dot through six-dot in intended progression order.
 
+The user confirmed that World 1's World Tree represents its single pip. World 2 needs two large landmarks for its two pips. Ashfall Reach's initial implementation places Basalt Needle northwest and Ember Crown southeast, with a connecting valley road and the small Cinderwatch outpost between them. These two landmarks also appear in the World 2 atlas. The names and Ashscale encounter levels are working implementation choices.
+
+The November 23 expansion adds a larger Cinderwatch with a physical timber palisade and three open gates. Steamroot Vale is the second biome, with broadleaf river woods, a timber bridge and the seven-building Willowford settlement. The Cornberg stream continues across World 1's southern edge into the northern edge of World 2. Its transverse position is preserved relative to the Ironpine crossing, placing the river roughly 180 metres west of the World 2 arrival. Travel in both directions uses a camera fly-out, a quarter-turn cube with captures of the actual worlds, and a camera fly-in. Steamroot Vale and Willowford are implementation names chosen for this requested expansion.
+
 Regions should contain distinct landmarks arranged so the map/minimap can evoke the corresponding d6 pip arrangement.
 
 Exactly how literally each pip position maps to a city/mountain/lake/etc. is still open.

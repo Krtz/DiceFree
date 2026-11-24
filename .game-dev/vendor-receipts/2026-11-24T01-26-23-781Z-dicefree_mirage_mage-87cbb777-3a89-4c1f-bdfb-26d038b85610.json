@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_607fd1941c9d4133637e283a",
+  "assetId": "dicefree_mirage_mage",
+  "version": "1.0.0",
+  "destination": "Assets\\_DiceFree\\Art\\Vendor\\dicefree_mirage_mage",
+  "modelSha256": "4ec6078bfbbea1688b4c6f1d756c091803002d57ac182f0fd01111f5ca8939a7",
+  "manifestSha256": "bcc69f6491f93e61722338c925131dfc612a90b9da4027c0180df50e8daf7e78",
+  "license": "LicenseRef-UserSupplied",
+  "admittedAt": "2026-11-24T01:26:23.781Z",
+  "sourcePackagePath": "T:\\TEMP\\assets\\generated\\.game-dev\\packages\\dicefree_mirage_mage\\1.0.0",
+  "projectRoot": "T:\\TEMP\\DiceFree-Options",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

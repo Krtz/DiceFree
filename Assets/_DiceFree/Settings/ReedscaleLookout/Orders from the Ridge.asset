@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Orders from the Ridge
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.reedscale-lookout
+  category: 1
   title: Orders from the Ridge
   requiredClassId: 
   requiredLevel: 35

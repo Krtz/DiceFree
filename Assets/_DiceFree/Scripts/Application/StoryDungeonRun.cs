@@ -154,6 +154,7 @@ namespace DiceFree.Dungeons
                 return false;
             lease = activeLease;
             foreach (var actor in living) members[actor].loadout.Locked = true;
+            Publish(new DungeonStartedEvent(DefinitionId,roster.Count));
             Phase = RunPhase.Loading;
             if (!LoadingScreen.TryLoadAdditive(ArenaScene, "Entering " + Title, ArenaLoaded, LoadFailed))
                 LoadFailed(new InvalidOperationException("Travel is busy."));

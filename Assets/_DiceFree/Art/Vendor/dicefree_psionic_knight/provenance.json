@@ -1,0 +1,9 @@
+{
+  "origin": "imported",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 4396400,
+    "fileName": "PsionicKnight-canonical.glb",
+    "sha256": "0d6df97e2c9d15b2eaa414f17e16257154a08f40a3bbbf2263eef98dbe6aad73"
+  }
+}

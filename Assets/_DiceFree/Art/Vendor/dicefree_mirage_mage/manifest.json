@@ -1,0 +1,43 @@
+{
+  "assetId": "dicefree_mirage_mage",
+  "displayName": "DiceFree Mirage Mage",
+  "files": [
+    {
+      "bytes": 3966576,
+      "kind": "model",
+      "path": "model.glb",
+      "sha256": "4ec6078bfbbea1688b4c6f1d756c091803002d57ac182f0fd01111f5ca8939a7"
+    },
+    {
+      "bytes": 2765,
+      "kind": "metadata",
+      "path": "metadata.json",
+      "sha256": "b6b1eb76870fab05633685cd21baa3187b077216e3a9c0796d810010d9ff9c6a"
+    },
+    {
+      "bytes": 237,
+      "kind": "provenance",
+      "path": "provenance.json",
+      "sha256": "c008182b0fb6662d850988c0fd31e2f991480689387c2ecfc0ce0789d09dbba1"
+    },
+    {
+      "bytes": 3782,
+      "kind": "validation",
+      "path": "validation.json",
+      "sha256": "41c87a23da899d5fb97e22132dc570b3aebc72a2a4d50163bf2d9fd473946f88"
+    }
+  ],
+  "license": "LicenseRef-UserSupplied",
+  "model": "model.glb",
+  "packageId": "pkg_607fd1941c9d4133637e283a",
+  "provenance": {
+    "origin": "imported"
+  },
+  "schema": "game_dev.asset_package.v1",
+  "validation": {
+    "errorCount": 0,
+    "passed": true,
+    "warningCount": 1
+  },
+  "version": "1.0.0"
+}

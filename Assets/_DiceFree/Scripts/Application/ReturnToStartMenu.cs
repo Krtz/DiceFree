@@ -29,6 +29,7 @@ namespace DiceFree.Dungeons
         private bool TryPrepareForExit()
         {
             if(exitPrepared)return true;
+            if(WorldFaceCrossing.Busy)return false;
             if(DiceFree.Development.DevelopmentRoomController.Current?.Busy==true||!GetComponent<ManifestationPersistence>().Flush())return false;
             exitPrepared=true;returning=true;SlimeDungeonRun.Current?.ReleaseForSessionExit();WolfDungeonRun.Current?.ReleaseForSessionExit();ShamanDungeonRun.Current?.ReleaseForSessionExit();AncientRoadDragonLairPortal.ReleaseForSessionExit();options?.Close();
             FindAnyObjectByType<DungeonRewardRoom>()?.DiscardForSessionExit(GetComponent<DiceFree.Combat.CombatActor>());

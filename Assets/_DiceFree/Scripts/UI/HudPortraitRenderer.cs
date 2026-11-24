@@ -150,7 +150,10 @@ namespace DiceFree.UI
                 {
                     if (!renderer.enabled) continue;
                     Bounds world = renderer.bounds;
-                    if (useBakedPose && renderer is SkinnedMeshRenderer skin)
+                    // Centimetre imports already expose correctly scaled renderer bounds.
+                    // Their baked vertices must not receive the unit conversion twice.
+                    if (useBakedPose && renderer is SkinnedMeshRenderer skin &&
+                        (skin.transform.lossyScale-Vector3.one).sqrMagnitude < .0001f)
                     {
                         skin.BakeMesh(baked);
                         var local = baked.bounds;

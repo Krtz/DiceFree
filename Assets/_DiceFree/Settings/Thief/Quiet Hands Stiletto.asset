@@ -30,6 +30,7 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.thief
+  - class.psionic-knight
   flavor: A slim companion blade for the other hand.
   stats:
     attributes:

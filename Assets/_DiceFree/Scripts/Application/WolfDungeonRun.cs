@@ -119,6 +119,7 @@ namespace DiceFree.Dungeons
             var context=new DungeonConditionContext{participants=Living.Select(a=>new DungeonParticipantSnapshot{participantId=a.GetEntityId().ToString(),classId=a.Stats.Definition.stableId,level=a.Stats.Level}).ToArray()};
             if(!registry.TryBeginDungeon(tuning.definition.stableId,lease.leaseToken,DungeonConditionEvaluator.Evaluate(tuning.definition,context),DateTime.UtcNow,out lease,out var error))return false;
             foreach(var a in Living)a.GetComponent<RunLoadoutLock>().Locked=true;
+            Publish(new DungeonStartedEvent(tuning.definition.stableId,Participants.Count));
             if(dummy!=null)Destroy(dummy);Seed=UnityEngine.Random.Range(1,int.MaxValue);started=Time.time;NextWave();return true;
         }
         public bool StartNextWave(CombatActor requester)

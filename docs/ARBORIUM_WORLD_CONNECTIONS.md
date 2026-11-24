@@ -1,5 +1,11 @@
 # Arborium world connections — working direction, 2026-11-06
 
+## Current travel direction — 2026-11-19
+
+The user has reserved Trimery's forestry clearing for a future World 3 passage. World 2 is reached through the southern Ironpine pass after completing the Ancient Road Dragon quest. The older southern World 2 forestry proposal below is superseded by this placement.
+
+World 2's first playable region is Ashfall Reach. The user requested enemies, a short road to a small settlement, and two large landmarks representing the two pips of Face 2. Cinderwatch is the small roadside outpost. Basalt Needle and Ember Crown occupy the northwest and southeast diagonal. These working landmark names and the initial level 53–55 Ashscale encounters are implementation choices for this first region.
+
 The user proposed the following while asking for immediate wolf-loot polish. These are recorded as **tentative future direction**, not final geography, quest writing or implemented travel unlocks.
 
 - **Arborium as the continuing hub:** consider making the city useful across later worlds, rather than abandoning it after World 1. Its guild, banking, artisans and magical services should have room to grow. The exact inter-world travel method and unlocks remain open.

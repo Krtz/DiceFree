@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Brigitte",
+    "images": [
+      {
+        "name": "brigitte_default_diff",
+        "file": "brigitte_default_diff.png"
+      },
+      {
+        "name": "brigitte_default_spec",
+        "file": "brigitte_default_spec.png"
+      },
+      {
+        "name": "brigitte_default_norm",
+        "file": "brigitte_default_norm.png"
+      }
+    ]
+  },
+  {
+    "name": "Brigitte_Hair",
+    "images": [
+      {
+        "name": "brigitte_hair_diff",
+        "file": "brigitte_hair_diff.png"
+      },
+      {
+        "name": "brigitte_hair_bump",
+        "file": "brigitte_hair_bump.png"
+      }
+    ]
+  },
+  {
+    "name": "Brigitte_Weapon",
+    "images": [
+      {
+        "name": "weapon_diff",
+        "file": "weapon_diff.png"
+      },
+      {
+        "name": "weapon_spec",
+        "file": "weapon_spec.png"
+      },
+      {
+        "name": "weapon_norm",
+        "file": "weapon_norm.png"
+      }
+    ]
+  }
+]

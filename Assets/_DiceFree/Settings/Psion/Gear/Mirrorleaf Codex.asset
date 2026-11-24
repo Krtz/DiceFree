@@ -30,6 +30,8 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.psion
+  - class.psionic-knight
+  - class.mirage-mage
   flavor: Pale leaves hold impressions of thoughts their readers never spoke.
   stats:
     attributes:

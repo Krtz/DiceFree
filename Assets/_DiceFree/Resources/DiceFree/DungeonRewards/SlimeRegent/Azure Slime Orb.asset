@@ -34,6 +34,8 @@ MonoBehaviour:
   - class.psion
   - class.priest
   - class.acolyte
+  - class.psionic-knight
+  - class.mirage-mage
   flavor: 
   stats:
     attributes:

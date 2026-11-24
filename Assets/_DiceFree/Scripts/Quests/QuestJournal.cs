@@ -35,9 +35,26 @@ namespace DiceFree.Quests
         private CombatActor owner;
         private SemanticGameEventHub dungeonHub;
         private IDisposable dungeonBossSubscription,puzzleSubscription,monsterKilledSubscription;
+        private IDisposable soloStartSubscription,soloCompleteSubscription,soloWipeSubscription;
+        private readonly HashSet<string> soloQuestsAtStart=new();
+        private string soloClassAtStart,soloDungeonAtStart;
         public void BindDungeonEvents(SemanticGameEventHub hub)
         {
             UnbindDungeonEvents();dungeonHub=hub;
+            if(hub!=null)
+            {
+                soloStartSubscription=hub.Subscribe<DungeonStartedEvent>(fact=>{
+                    soloQuestsAtStart.Clear();soloClassAtStart=owner.Stats.Definition.stableId;soloDungeonAtStart=fact.dungeonId;
+                    if(fact.partySize!=1)return;
+                    foreach(var d in definitions)if(GetProgress(d.stableId)?.status==QuestStatus.Active&&d.stages.Any(s=>s.kind==ObjectiveKind.SoloDungeon&&s.contentId==fact.dungeonId))soloQuestsAtStart.Add(d.stableId);
+                });
+                soloCompleteSubscription=hub.Subscribe<DungeonCompletedEvent>(fact=>{
+                    if(fact.partySize==1&&fact.dungeonId==soloDungeonAtStart&&owner.Stats.Definition.stableId==soloClassAtStart&&soloQuestsAtStart.Count>0)
+                        Advance(ObjectiveKind.SoloDungeon,fact.dungeonId,null,null,null,leaf=>definitions.Any(d=>soloQuestsAtStart.Contains(d.stableId)&&d.stages.Contains(leaf)));
+                    soloQuestsAtStart.Clear();
+                });
+                soloWipeSubscription=hub.Subscribe<DungeonWipedEvent>(_=>soloQuestsAtStart.Clear());
+            }
             if(hub!=null)dungeonBossSubscription=hub.Subscribe<DungeonBossKilledEvent>(fact=>
                 Advance(ObjectiveKind.Kill,fact.bossId,null,null,null,leaf=>leaf.dungeonBossOnly));
             if(hub!=null)monsterKilledSubscription=hub.Subscribe<MonsterKilledEvent>(fact=>
@@ -48,6 +65,8 @@ namespace DiceFree.Quests
         public void UnbindDungeonEvents(SemanticGameEventHub hub=null)
         {
             if(hub!=null&&hub!=dungeonHub)return;
+            soloStartSubscription?.Dispose();soloCompleteSubscription?.Dispose();soloWipeSubscription?.Dispose();
+            soloStartSubscription=soloCompleteSubscription=soloWipeSubscription=null;soloQuestsAtStart.Clear();
             dungeonBossSubscription?.Dispose();puzzleSubscription?.Dispose();monsterKilledSubscription?.Dispose();
             puzzleSubscription=null;dungeonBossSubscription=null;monsterKilledSubscription=null;dungeonHub=null;
         }
@@ -224,6 +243,12 @@ namespace DiceFree.Quests
 
         internal bool NeedsConversation(string npcId, string conversationId)
         {
+            foreach (var definition in QuestsNeedingConversation(npcId, conversationId)) return true;
+            return false;
+        }
+
+        public IEnumerable<QuestDefinition> QuestsNeedingConversation(string npcId, string conversationId)
+        {
             foreach (var definition in definitions)
             {
                 var state = Find(definition.stableId);
@@ -233,12 +258,12 @@ namespace DiceFree.Quests
                 if (state.status != QuestStatus.Active &&
                     !(definition.completeOnObjectives && state.status == QuestStatus.ReadyToTurnIn)) continue;
                 var objective = definition.stages[state.stage];
-                if (MatchesConversation(objective, npcId, conversationId)) return true;
-                if (state.status == QuestStatus.Active && objective.kind is ObjectiveKind.All or ObjectiveKind.Any &&
+                if (MatchesConversation(objective, npcId, conversationId) ||
+                    state.status == QuestStatus.Active && objective.kind is ObjectiveKind.All or ObjectiveKind.Any &&
                     Array.Exists(objective.alternatives, leaf => MatchesConversation(leaf, npcId, conversationId) &&
-                        ObjectiveProgress.Count(state, leaf.objectiveId) < leaf.count)) return true;
+                        ObjectiveProgress.Count(state, leaf.objectiveId) < leaf.count))
+                    yield return definition;
             }
-            return false;
         }
 
         private static bool MatchesConversation(QuestLeaf leaf, string npcId, string conversationId) =>

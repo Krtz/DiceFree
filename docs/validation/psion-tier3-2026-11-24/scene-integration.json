@@ -1,0 +1,29 @@
+[
+  {
+    "scene": "Cornberg",
+    "originalObjects": 71830,
+    "finalObjects": 71884,
+    "newObjects": 54,
+    "modifiedObjects": 11,
+    "preservedDocuments": 71819,
+    "semanticComparison": "passed"
+  },
+  {
+    "scene": "DevelopmentRoom",
+    "originalObjects": 1843,
+    "finalObjects": 1888,
+    "newObjects": 45,
+    "modifiedObjects": 10,
+    "preservedDocuments": 1833,
+    "semanticComparison": "passed"
+  },
+  {
+    "scene": "WorldTwoArrival",
+    "originalObjects": 14449,
+    "finalObjects": 14457,
+    "newObjects": 8,
+    "modifiedObjects": 1,
+    "preservedDocuments": 14448,
+    "semanticComparison": "passed"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-11-24T01:25:25.413Z",
+  "destination": {
+    "assetId": "dicefree_psionic_knight",
+    "version": "1.0.0"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "5c16ef0bab822e30f52d0a5673115bd3a34d4fcbcc2adf330805bb78a568245c",
+  "packageId": "pkg_631a2ca226a6b9374186a0bf",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 4396400,
+    "fileName": "PsionicKnight-canonical.glb",
+    "sha256": "0d6df97e2c9d15b2eaa414f17e16257154a08f40a3bbbf2263eef98dbe6aad73"
+  }
+}

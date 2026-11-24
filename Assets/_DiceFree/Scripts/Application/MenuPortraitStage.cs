@@ -95,7 +95,7 @@ namespace DiceFree.Advancement
                 if(!renderer.enabled)continue;var world=renderer.bounds;
                 // Match the HUD portrait: imported generic rigs already report world bounds.
                 // Baking them here can apply the FBX's unit conversion twice.
-                if(renderer is SkinnedMeshRenderer skin && skin.GetComponentInParent<Animator>()?.isHuman != false) {
+                if(renderer is SkinnedMeshRenderer skin && skin.GetComponentInParent<Animator>()?.isHuman != false && (skin.transform.lossyScale-Vector3.one).sqrMagnitude < .0001f) {
                     skin.BakeMesh(mesh);var b=mesh.bounds;world=new Bounds(skin.transform.TransformPoint(b.center),Vector3.zero);
                     for(int x=-1;x<=1;x+=2)for(int y=-1;y<=1;y+=2)for(int z=-1;z<=1;z+=2)
                         world.Encapsulate(skin.transform.TransformPoint(b.center+Vector3.Scale(b.extents,new Vector3(x,y,z))));

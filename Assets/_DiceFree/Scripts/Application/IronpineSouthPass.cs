@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DiceFree.Characters;
@@ -160,7 +161,8 @@ namespace DiceFree.ApplicationFlow
 
         public override void Interact(CombatActor actor)
         {
-            if (!CanInteract(actor) || LoadingScreen.Busy || !actor.CanAct || actor.InCombat) return;
+            if (!CanInteract(actor) || LoadingScreen.Busy || WorldFaceCrossing.Busy ||
+                HudPointerBlocker.ModalOpen || !actor.CanAct || actor.InCombat) return;
             if (returnToIronpine)
             {
                 entrance.Return();
@@ -168,21 +170,81 @@ namespace DiceFree.ApplicationFlow
             }
             if (actor.GetComponent<RunLoadoutLock>()?.Owner != null) return;
 
+            StartCrossing(true);
+        }
+
+        private void StartCrossing(bool towardWorldTwo)
+        {
+            if (loading) return;
             loading = true;
             CancelOrders();
-            if (!LoadingScreen.TryLoadAdditive(DestinationScene, "Crossing the southern pass", Arrive, OnLoadFailed))
+            StartCoroutine(Cross(towardWorldTwo));
+        }
+
+        private IEnumerator Cross(bool towardWorldTwo)
+        {
+            var presentation = GetComponent<WorldFaceCrossing>() ?? gameObject.AddComponent<WorldFaceCrossing>();
+            bool ready = !towardWorldTwo, cancelled = false;
+            Exception failure = null;
+            try
+            {
+                try { presentation.Begin(player, explorationCamera, towardWorldTwo); }
+                catch (Exception error) { failure = error; }
+                if (failure != null) { OnLoadFailed(failure); yield break; }
+                yield return presentation.PullBack();
+                if (towardWorldTwo)
+                {
+                    presentation.WaitingForScene = true;
+                    bool requested = LoadingScreen.TryLoadAdditive(DestinationScene, "Crossing to World 2", scene =>
+                    {
+                        if (cancelled || this == null || !isActiveAndEnabled || player == null)
+                        {
+                            if (scene.isLoaded) SceneManager.UnloadSceneAsync(scene);
+                            return;
+                        }
+                        destination = scene;
+                        ready = true;
+                    }, error => failure = error, false);
+                    if (!requested) failure = new InvalidOperationException("The World 2 load could not start.");
+                }
+                yield return presentation.Turn();
+                float deadline = Time.realtimeSinceStartup + 45;
+                while (!ready && failure == null && Time.realtimeSinceStartup < deadline) yield return null;
+                if (!ready && failure == null) failure = new TimeoutException("World 2 did not finish loading.");
+                if (failure == null)
+                {
+                    try
+                    {
+                        if (towardWorldTwo) Arrive(destination);
+                        else
+                        {
+                            if (!player.Motor.TeleportAcrossMaps(returnPoint.position))
+                                throw new InvalidOperationException("The World 1 return point is unavailable.");
+                            CancelOrders();
+                            ReleaseDestination();
+                        }
+                    }
+                    catch (Exception error) { failure = error; }
+                }
+                if (failure != null) { OnLoadFailed(failure); yield break; }
+                yield return presentation.Settle();
+            }
+            finally
+            {
+                cancelled = true;
+                presentation.End();
                 loading = false;
+            }
         }
 
         private void Arrive(Scene scene)
         {
             destination = scene;
-            if (this == null || player == null || !player.CanAct || player.InCombat || !DragonQuestComplete(journal))
+            if (this == null || player == null || !player.Alive || player.InCombat || !DragonQuestComplete(journal))
             {
                 if (scene.isLoaded) SceneManager.UnloadSceneAsync(scene);
                 destination = default;
-                loading = false;
-                return;
+                throw new InvalidOperationException("The crossing is no longer available for this hero.");
             }
 
             var landing = scene.GetRootGameObjects()
@@ -204,7 +266,6 @@ namespace DiceFree.ApplicationFlow
             }
             originalMapName = minimap?.MapName;
             SetView(DestinationBounds, DestinationName);
-            loading = false;
         }
 
         private void OnLoadFailed(Exception error)
@@ -218,8 +279,7 @@ namespace DiceFree.ApplicationFlow
 
         private void Return()
         {
-            CancelOrders();
-            if (player.Motor.TeleportAcrossMaps(returnPoint.position)) ReleaseDestination();
+            StartCrossing(false);
         }
 
         private void CancelOrders()

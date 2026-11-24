@@ -1,0 +1,112 @@
+{
+  "assetId": "dicefree_mirage_mage",
+  "displayName": "DiceFree Mirage Mage",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.004763512214226065,
+        0.015239793330236229,
+        0.1558290041787977
+      ],
+      "min": [
+        -0.004763508683762846,
+        -0.0030232011225305153,
+        0.1487267722040961
+      ],
+      "sizeMeters": [
+        0.009527020897988911,
+        0.018262994452766745,
+        0.007102231974701584
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 3966576,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.5.1",
+    "hasNormals": true,
+    "hasSkin": true,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 3,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": true,
+      "hasNormalTexture": true,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 3,
+    "sceneGraphFallback": false,
+    "textureCount": 8,
+    "textureResolutions": [
+      {
+        "bytes": 1113827,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "brigitte_default_norm",
+        "width": 1024
+      },
+      {
+        "bytes": 1059834,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "brigitte_default_diff",
+        "width": 1024
+      },
+      {
+        "bytes": 186374,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "brigitte_default_spec",
+        "width": 1024
+      },
+      {
+        "bytes": 66085,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "brigitte_hair_bump",
+        "width": 512
+      },
+      {
+        "bytes": 67951,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "brigitte_hair_diff",
+        "width": 512
+      },
+      {
+        "bytes": 265527,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "weapon_norm",
+        "width": 512
+      },
+      {
+        "bytes": 229550,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "weapon_diff",
+        "width": 512
+      },
+      {
+        "bytes": 52510,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "weapon_spec",
+        "width": 512
+      }
+    ],
+    "triangleCount": 14980,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 11693,
+    "warnings": [
+      "texture is below 1024px on an axis and will blur at close range: brigitte_hair_bump (512x512), brigitte_hair_diff (512x512), weapon_norm (512x512), weapon_diff (512x512) (+1 more)"
+    ]
+  },
+  "license": "LicenseRef-UserSupplied",
+  "schema": "game_dev.asset_metadata.v1"
+}

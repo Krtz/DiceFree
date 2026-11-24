@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Routes Under Orders
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.routes-under-orders
+  category: 1
   title: Routes Under Orders
   requiredClassId: 
   requiredLevel: 35

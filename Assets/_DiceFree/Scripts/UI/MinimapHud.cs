@@ -185,10 +185,19 @@ namespace DiceFree.UI
             return new Vector2(rect.center.x+Vector3.Dot(delta,right)*rect.width/(radius*2),rect.center.y-Vector3.Dot(delta,up)*rect.height/(radius*2));
         }
 
+        public bool TryProjectServiceMarker(Vector3 position, Rect rect, out Vector2 point)
+        {
+            point = default;
+            if (player == null || (fog != null && !fog.IsExplored(position))) return false;
+            point = MapPointForWorld(player.transform.position, position, worldRadius, rect, MapUp);
+            return new Rect(rect.x + 12, rect.y + 12, rect.width - 24, rect.height - 24).Contains(point);
+        }
+
         public bool TryProjectWorkMarker(TimedInteractionTarget target,Rect rect,out Vector2 point)
         {
             point=default;
-            if(player==null||target==null||!target.Available(player)||Mathf.Abs(target.ApproachPosition.y-player.transform.position.y)>2.5f||
+            if(!GameplayPreferences.Current.IsMapIconVisible(MapIconCategory.QuestObjective)||
+                player==null||target==null||!target.Available(player)||Mathf.Abs(target.ApproachPosition.y-player.transform.position.y)>2.5f||
                 (fog!=null&&!fog.IsExplored(target.ApproachPosition)))return false;
             point=MapPointForWorld(player.transform.position,target.ApproachPosition,worldRadius,rect,MapUp);
             return new Rect(rect.x+8,rect.y+8,rect.width-16,rect.height-16).Contains(point);
@@ -221,7 +230,7 @@ namespace DiceFree.UI
 
         private void OnGUI()
         {
-            if (HudPointerBlocker.ModalOpen) return;
+            if (HudPointerBlocker.ModalOpen || atlas?.Open == true) return;
 
             Rect panel = Bounds;
             DrawPanel(panel);
@@ -230,13 +239,18 @@ namespace DiceFree.UI
             var headerRect = new Rect(inner.x, inner.y, inner.width, header);
             bool isAttackMap=targeting!=null &&
                 targeting.Mode==SkillTargetingMode.AttackMove;
-            var titleRect = atlas == null ? headerRect : new Rect(headerRect.x, headerRect.y, headerRect.width-64, headerRect.height);
-            string region = atlas != null && atlas.InLookout ? WorldAtlasHud.LookoutName :
+            float controlsWidth = atlas == null ? 46 : 110;
+            var titleRect = new Rect(headerRect.x, headerRect.y, headerRect.width-controlsWidth, headerRect.height);
+            string region = player != null && AshfallReach.Bounds.Contains(new Vector2(player.transform.position.x,player.transform.position.z))
+                ? AshfallReach.RegionName(player.transform.position) :
+                atlas != null && atlas.InLookout ? WorldAtlasHud.LookoutName :
                 atlas != null && atlas.InVerdantWilds ? WorldAtlasHud.VerdantName :
                 atlas != null && atlas.InCrimsonMire ? WorldAtlasHud.CrimsonName : MapName;
             HudChrome.DrawHeader(titleRect, Theme,
                 isAttackMap?region+"  /  ATTACK-MOVE":region);
 
+            if (GUI.Button(new Rect(headerRect.xMax-controlsWidth,headerRect.y+1,44,header-2),"Icons"))
+                FindAnyObjectByType<OptionsPanel>()?.ShowMapIconSettings();
             if (atlas != null && GUI.Button(new Rect(headerRect.xMax-63,headerRect.y+1,62,header-2),"World [M]"))
                 atlas.Toggle();
 
@@ -266,6 +280,7 @@ namespace DiceFree.UI
             float zoomX=corner==MinimapCompassCorner.BottomRight?mapRect.x:mapRect.xMax-52;
             var plus=new Rect(zoomX,mapRect.yMax-26,24,24);
             var minus=new Rect(zoomX+26,mapRect.yMax-26,24,24);
+            atlas?.DrawMinimapMarkers(this,mapRect,compassBounds,plus,minus);
             if(GUI.Button(plus,"+"))Zoom(.8f);
             if(GUI.Button(minus,"-"))Zoom(1.25f);
 
@@ -282,6 +297,7 @@ namespace DiceFree.UI
                     TryMoveFromMapClick(mapRect,evt.mousePosition);
                 evt.Use(); // A minimap click must never leak to world interactions.
             }
+            atlas?.DrawMinimapTooltip();
         }
 
 

@@ -1,0 +1,100 @@
+{
+  "assetId": "dicefree_psionic_knight",
+  "displayName": "DiceFree Psionic Knight",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        -2.0593782338695377,
+        0.017075237872966834,
+        0.24522073833776326
+      ],
+      "min": [
+        -2.072504420096844,
+        -0.00048070090604222077,
+        0.2364124868549727
+      ],
+      "sizeMeters": [
+        0.013126186227306214,
+        0.017555938779009055,
+        0.008808251482790547
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 4396400,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.5.1",
+    "hasNormals": true,
+    "hasSkin": true,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 2,
+    "meshCount": 1,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": true,
+      "hasMetallicRoughnessTexture": true,
+      "hasNormalTexture": true,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 6,
+    "textureResolutions": [
+      {
+        "bytes": 1165077,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "Isaac__GuildWar_A_diff",
+        "width": 1024
+      },
+      {
+        "bytes": 438854,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "Isaac__GuildWar_A_mask",
+        "width": 1024
+      },
+      {
+        "bytes": 1368908,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "Isaac__GuildWar_A_norm",
+        "width": 1024
+      },
+      {
+        "bytes": 409645,
+        "height": 1024,
+        "mimeType": "image/png",
+        "name": "Isaac__GuildWar_A_mask",
+        "width": 1024
+      },
+      {
+        "bytes": 62026,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "_ShiftTexture01",
+        "width": 512
+      },
+      {
+        "bytes": 65620,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "_DiffuseTexture",
+        "width": 512
+      }
+    ],
+    "triangleCount": 14018,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 11305,
+    "warnings": [
+      "glTF reader: Missing optional extension, \"KHR_materials_specular\".",
+      "glTF reader: Missing optional extension, \"KHR_materials_ior\".",
+      "texture is below 1024px on an axis and will blur at close range: _ShiftTexture01 (512x512), _DiffuseTexture (512x512)"
+    ]
+  },
+  "license": "LicenseRef-UserSupplied",
+  "schema": "game_dev.asset_metadata.v1"
+}

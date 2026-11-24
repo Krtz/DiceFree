@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: A Verdant Summons
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.verdant-summons
+  category: 1
   title: A Verdant Summons
   requiredClassId: 
   requiredLevel: 35

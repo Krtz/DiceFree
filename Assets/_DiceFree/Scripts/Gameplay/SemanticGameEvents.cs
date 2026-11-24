@@ -4,6 +4,12 @@ using System.Collections.Generic;
 namespace DiceFree.Gameplay
 {
     public interface ISemanticGameEvent { }
+    public readonly struct DungeonStartedEvent : ISemanticGameEvent
+    {
+        public readonly string dungeonId;
+        public readonly int partySize;
+        public DungeonStartedEvent(string id,int size){dungeonId=id;partySize=size;}
+    }
     public readonly struct DungeonPuzzleSolvedEvent : ISemanticGameEvent
     {
         public readonly string dungeonId,puzzleId;

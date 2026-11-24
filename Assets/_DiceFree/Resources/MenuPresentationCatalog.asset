@@ -46,6 +46,12 @@ MonoBehaviour:
   - classId: class.psion
     tier: 2
     preview: {fileID: 7973752590219349374, guid: 47d3f3fc3fdaf4e498acc8bc1131fba5, type: 3}
+  - classId: class.psionic-knight
+    tier: 3
+    preview: {fileID: 3022119992504703385, guid: 22a2a18b2e989604fb4f7effe5c69a07, type: 3}
+  - classId: class.mirage-mage
+    tier: 3
+    preview: {fileID: 4413704458194111491, guid: bf4bffeaf797b204c866b15c6b9cf17a, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
@@ -78,3 +84,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21b420ec6f7aca7469f366f6da86d8d2, type: 2}
   - {fileID: 11400000, guid: 86edff9c7d661594ba12d5b600e9385f, type: 2}
   - {fileID: 11400000, guid: 79536b25a8db80949aea69148c9f2a8d, type: 2}
+  - {fileID: 11400000, guid: 9b681858c18d3e64dab70212ae98385f, type: 2}
+  - {fileID: 11400000, guid: 3102269900d5d394aa57ce642e8e067e, type: 2}
+  - {fileID: 11400000, guid: 1c9b1eaf56266164bab8ce7abcf5570c, type: 2}
+  - {fileID: 11400000, guid: 38b85b94e79601f49a8ce64fe863bcfd, type: 2}

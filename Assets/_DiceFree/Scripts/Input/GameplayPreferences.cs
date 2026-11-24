@@ -22,11 +22,15 @@ namespace DiceFree.Input
     public enum RetaliationMode { Off = 0, AttackAttacker = 1, AttackNearbyEnemies = 2 }
     public enum MinimapOrientation { NorthUp = 0, CameraUp = 1 }
     public enum MinimapCompassCorner { Off = 0, BottomLeft = 1, BottomRight = 2, TopLeft = 3, TopRight = 4 }
+    // Append categories to preserve the visibility bits in existing settings.
+    public enum MapIconCategory { Merchant, ResurrectionDice, MainQuest, RepeatableQuest, SideQuest, QuestObjective }
 
     [Serializable]
     internal sealed class GameplayPreferencesData
     {
-        public int version = 6;
+        public const int AllMapIcons = (1 << 6) - 1;
+        public int version = 7;
+        public int visibleMapIcons = AllMapIcons;
         public bool autoRetaliate = true;
         public RetaliationMode retaliationMode = RetaliationMode.AttackAttacker;
         public OutOfRangeSkillBehavior outOfRangeSkillBehavior = OutOfRangeSkillBehavior.WalkIntoRange;
@@ -75,6 +79,18 @@ namespace DiceFree.Input
         public OverheadHealthVisibility EnemyHealthBar => data.enemyHealthBar;
         public MinimapOrientation MinimapOrientation => data.minimapOrientation;
         public MinimapCompassCorner MinimapCompassCorner => data.minimapCompassCorner;
+        public bool IsMapIconVisible(MapIconCategory category) =>
+            (data.visibleMapIcons & (1 << (int)category)) != 0;
+
+        public void SetMapIconVisible(MapIconCategory category, bool visible)
+        {
+            if (!Enum.IsDefined(typeof(MapIconCategory), category)) throw new ArgumentOutOfRangeException(nameof(category));
+            int bit = 1 << (int)category;
+            int next = visible ? data.visibleMapIcons | bit : data.visibleMapIcons & ~bit;
+            if (data.visibleMapIcons == next) return;
+            data.visibleMapIcons = next;
+            Save();
+        }
 
         private GameplayPreferences(string directory)
         {
@@ -151,7 +167,7 @@ namespace DiceFree.Input
             try
             {
                 var loaded = JsonUtility.FromJson<GameplayPreferencesData>(File.ReadAllText(path));
-                if(loaded!=null && (loaded.version>=1 && loaded.version<=6))
+                if(loaded!=null && (loaded.version>=1 && loaded.version<=7))
                 {
                     // Unity's JsonUtility does not guarantee field initializers
                     // for missing fields: preserve the existing v1 settings,
@@ -174,7 +190,9 @@ namespace DiceFree.Input
                         loaded.quickCastMode=QuickCastMode.Reticle;
                     if(!Enum.IsDefined(typeof(MinimapCompassCorner),loaded.minimapCompassCorner))
                         loaded.minimapCompassCorner=MinimapCompassCorner.BottomLeft;
-                    loaded.version=6;
+                    if(loaded.version<7)loaded.visibleMapIcons=GameplayPreferencesData.AllMapIcons;
+                    loaded.visibleMapIcons&=GameplayPreferencesData.AllMapIcons;
+                    loaded.version=7;
                     data=loaded;
                 }
             }

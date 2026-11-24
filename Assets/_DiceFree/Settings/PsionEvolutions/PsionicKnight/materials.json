@@ -1,0 +1,78 @@
+[
+  {
+    "name": "Isaac",
+    "images": [
+      {
+        "name": "Isaac_diff_1",
+        "file": "Isaac_diff_1.png"
+      },
+      {
+        "name": "Isaac_diff_1",
+        "file": "Isaac_diff_1.png"
+      },
+      {
+        "name": "Isaac_mask",
+        "file": "Isaac_mask.png"
+      },
+      {
+        "name": "Isaac_norm",
+        "file": "Isaac_norm.png"
+      },
+      {
+        "name": "Isaac_mask.001",
+        "file": "Isaac_mask_001.png"
+      }
+    ]
+  },
+  {
+    "name": "Isaac_GuildWar_A",
+    "images": [
+      {
+        "name": "Isaac__GuildWar_A_diff",
+        "file": "Isaac__GuildWar_A_diff.png"
+      },
+      {
+        "name": "Isaac__GuildWar_A_diff",
+        "file": "Isaac__GuildWar_A_diff.png"
+      },
+      {
+        "name": "Isaac__GuildWar_A_mask",
+        "file": "Isaac__GuildWar_A_mask.png"
+      },
+      {
+        "name": "Isaac__GuildWar_A_norm",
+        "file": "Isaac__GuildWar_A_norm.png"
+      },
+      {
+        "name": "Isaac__GuildWar_A_mask.001",
+        "file": "Isaac__GuildWar_A_mask_001.png"
+      }
+    ]
+  },
+  {
+    "name": "Isaac_GuildWar_A_Hair",
+    "images": [
+      {
+        "name": "_DiffuseTexture",
+        "file": "_DiffuseTexture.png"
+      },
+      {
+        "name": "_ShiftTexture01",
+        "file": "_ShiftTexture01.png"
+      }
+    ]
+  },
+  {
+    "name": "Isaac_Hair",
+    "images": [
+      {
+        "name": "_DiffuseTexture",
+        "file": "_DiffuseTexture.png"
+      },
+      {
+        "name": "_ShiftTexture01",
+        "file": "_ShiftTexture01.png"
+      }
+    ]
+  }
+]

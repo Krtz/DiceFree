@@ -85,6 +85,8 @@ namespace DiceFree.Combat
         public float Regeneration => Attributes.vitality * VitalityCoefficient(true) + EquipmentTotal.regeneration;
         public float BasicAttackMaximumBonus => EquipmentTotal.basicAttackMaximumBonus;
         public float BasicAttackFlatBonus => EquipmentTotal.basicAttackFlatBonus;
+        public float EquipmentAttackSpeedPercent => EquipmentTotal.attackSpeedPercent;
+        public float EquipmentMovementSpeedPercent => EquipmentTotal.movementSpeedPercent;
         public float HpPerVitality => VitalityCoefficient(false);
         public float RegenerationPerVitality => VitalityCoefficient(true);
         private float VitalityCoefficient(bool regeneration)

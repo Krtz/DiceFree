@@ -30,6 +30,7 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.thief
+  - class.psionic-knight
   flavor: Rook's broad blade for a straight cut.
   stats:
     attributes:

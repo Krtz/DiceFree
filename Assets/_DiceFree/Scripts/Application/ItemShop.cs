@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DiceFree.Items
 {
     /// <summary>Reusable authored shop. Ownership is granted only by an explicit funded purchase.</summary>
-    public sealed class ItemShop : InteractionTarget
+    public sealed class ItemShop : InteractionTarget, IMapMerchant
     {
         [Serializable] public sealed class Offer
         {

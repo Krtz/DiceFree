@@ -11,6 +11,7 @@ namespace DiceFree.Visuals
     {
         public void ApplyPortraitPose()
         {
+            if(GetComponent<PsionEvolutionHandPose>()!=null)return;
             if(!gameObject.activeInHierarchy)return;
             var equipment=GetComponentInParent<Equipment>();
             if(equipment==null||equipment.UsesTwoHandedStance||equipment.ResolvedDefinition(EquipmentSlot.OffHand)==null)return;

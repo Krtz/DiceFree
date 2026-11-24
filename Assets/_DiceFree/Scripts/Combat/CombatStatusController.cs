@@ -176,6 +176,23 @@ namespace DiceFree.Combat
                         augment.coefficient,augment.flatDamage);
         }
 
+        // Snapshot supported positive timed buffs without copying control effects or emitters.
+        // Each copy keeps its original remaining timer, bounded by the summon lifetime.
+        internal void CopyPositiveBuffsTo(CombatStatusController recipient,float potency,float maximumDuration)
+        {
+            if(recipient==null||recipient==this||potency<=0||maximumDuration<=0)return;
+            CleanupExpired();
+            float Duration(float until)=>Mathf.Min(maximumDuration,until-Time.time);
+            foreach(var pair in attackSpeedBuffs)
+                recipient.ApplyAttackSpeedBuff("image-copy:"+pair.Key,pair.Value.value*potency,Duration(pair.Value.until));
+            foreach(var pair in movementSpeedBuffs)
+                recipient.ApplyMovementSpeedBuff("image-copy:"+pair.Key,pair.Value.value*potency,Duration(pair.Value.until));
+            foreach(var pair in damageReductionBuffs)
+                recipient.ApplyDamageReduction("image-copy:"+pair.Key,pair.Value.value*potency,Duration(pair.Value.until));
+            foreach(var pair in basicAttackAugments)
+                recipient.ApplyBasicAttackAugment("image-copy:"+pair.Key,pair.Value.attack,pair.Value.coefficient*potency,Duration(pair.Value.until),pair.Value.flatDamage*potency);
+        }
+
         public void ClearTransient()
         {
             if (actor != null)

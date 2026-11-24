@@ -31,6 +31,7 @@ MonoBehaviour:
   allowedClassIds:
   - class.physically-blessed-novice
   - class.thief
+  - class.psionic-knight
   flavor: "Packhunter's Fang \u2014 recovered from the moonlit clearing."
   stats:
     attributes:

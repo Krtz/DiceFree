@@ -9,6 +9,7 @@ namespace DiceFree.Combat
         private readonly string elementId;
         private float capacity;
         public float Remaining => Time.time < expires ? capacity : 0;
+        public float DurationRemaining => Mathf.Max(0,expires-Time.time);
 
         public SharedDamageShield(float amount, float duration, ElementDefinition element)
         {

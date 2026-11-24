@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_631a2ca226a6b9374186a0bf",
+  "assetId": "dicefree_psionic_knight",
+  "version": "1.0.0",
+  "destination": "Assets\\_DiceFree\\Art\\Vendor\\dicefree_psionic_knight",
+  "modelSha256": "0d6df97e2c9d15b2eaa414f17e16257154a08f40a3bbbf2263eef98dbe6aad73",
+  "manifestSha256": "5c16ef0bab822e30f52d0a5673115bd3a34d4fcbcc2adf330805bb78a568245c",
+  "license": "LicenseRef-UserSupplied",
+  "admittedAt": "2026-11-24T01:26:23.358Z",
+  "sourcePackagePath": "T:\\TEMP\\assets\\generated\\.game-dev\\packages\\dicefree_psionic_knight\\1.0.0",
+  "projectRoot": "T:\\TEMP\\DiceFree-Options",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

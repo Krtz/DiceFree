@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using DiceFree.AI;
 using DiceFree.Combat;
+using DiceFree.UI;
 using DiceFree.Verdant;
 using DiceFree.World;
 using UnityEditor;
@@ -12,7 +13,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
-public static class AshfallReachExpansionAuthoring
+public static partial class AshfallReachExpansionAuthoring
 {
     private const string ScenePath = "Assets/_DiceFree/Scenes/WorldTwoArrival.unity";
     private const string Art = "Assets/_DiceFree/Art/World/";
@@ -26,11 +27,11 @@ public static class AshfallReachExpansionAuthoring
     private static readonly Vector2 Well = new(1.6f, -47.5f);
     private static readonly Vector2[] SpearHomes =
     {
-        new(-20,-9), new(-24,4), new(-10,-30), new(23,-43), new(16,-66), new(31,-75)
+        new(-20,-9), new(-24,4), new(-10,-30), new(23,-43), new(16,-66), new(31,-77)
     };
     private static readonly Vector2[] BowHomes =
     {
-        new(-28,8), new(-15,-34), new(29,-43), new(25,-73)
+        new(-28,8), new(-15,-34), new(29,-43), new(24,-77)
     };
     private static readonly string[] ClutterNames = { "Ashfall overlook", "High ridges beyond Ashfall Reach" };
 
@@ -41,6 +42,7 @@ public static class AshfallReachExpansionAuthoring
     public static void Batch()
     {
         LoadMaterials();
+        LoadRiverTraderStock();
         var scene = EditorSceneManager.OpenScene(ScenePath);
         var root = scene.GetRootGameObjects().Single(go => go.GetComponent<WorldNavigation>() != null).transform;
         RemoveOldClutter(root);
@@ -48,16 +50,18 @@ public static class AshfallReachExpansionAuthoring
             Object.DestroyImmediate(previous.gameObject);
         var expansion = Group(root, "Cinderwatch and the two pips", Vector3.zero);
         var ground = root.Find("Slate ridges and alpine heath");
-        ground.GetComponent<MeshFilter>().sharedMesh = GroundMesh(104, -104, 96, 2, "Expanded valley surface");
-        ground.GetComponent<MeshRenderer>().sharedMaterials = new[] { heath, slate, ash };
-        ground.GetComponent<MeshCollider>().sharedMesh = GroundMesh(45, -82, 36, 1, "Expanded valley collider", 49);
+        ground.GetComponent<MeshFilter>().sharedMesh = GroundMesh(300, -400, 90, 2, "Expanded valley surface", 150);
+        ground.GetComponent<MeshRenderer>().sharedMaterials = new[] { BlendedGround() };
+        ground.GetComponent<MeshCollider>().sharedMesh = GroundMesh(230, -155, 35, 1, "Expanded valley collider", 60);
 
         Road(expansion, "Road to Cinderwatch", AshfallReach.SettlementRoad, 2.57f);
         Road(expansion, "Footpath to the Basalt Needle", AshfallReach.NeedlePath, 1.28f);
         Road(expansion, "Footpath to Ember Crown", AshfallReach.CrownPath, 1.35f);
         BuildSettlement(expansion);
+        FortifyCinderwatch(expansion);
         BuildLandmarks(expansion);
         DressValley(expansion);
+        BuildRiverlands(expansion);
         BakeNavigation(root, expansion);
         AssetDatabase.SaveAssets();
         if (!EditorSceneManager.SaveScene(scene)) throw new IOException("Could not save Ashfall Reach.");
@@ -94,7 +98,8 @@ public static class AshfallReachExpansionAuthoring
         foreach (Transform t in backdrop.Cast<Transform>().ToArray())
         {
             var p = t.localPosition;
-            if (p.z < -29 && p.z > -81 && p.x > -41 && p.x < 45)
+            if (p.z < -29 && p.z > -81 && p.x > -41 && p.x < 45 ||
+                p.x < -18 && p.x > -78 && p.z > -62 && p.z < -25)
                 Object.DestroyImmediate(t.gameObject);
         }
 
@@ -103,7 +108,7 @@ public static class AshfallReachExpansionAuthoring
         {
             var p = t.localPosition;
             bool ridgePiece = t.name == "Fractured ridge stone" || t.name == "Slate ridge" || PrefabUtility.IsPartOfPrefabInstance(t);
-            if (ridgePiece && p.x <= -13 && p.x >= -33 && p.z >= -8 && p.z <= 1)
+            if (ridgePiece && p.x <= -13 && p.x >= -33 && p.z >= -15 && p.z <= 15)
                 Object.DestroyImmediate(t.gameObject);
         }
     }
@@ -115,7 +120,12 @@ public static class AshfallReachExpansionAuthoring
         float oldHeight = variation + edge * (5.4f + 1.55f * Mathf.Sin(z * .22f));
         float south = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-24, -40, z));
         float rim = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(23, 47, Mathf.Abs(x - 2)));
-        return Mathf.Lerp(oldHeight, variation * .33f + .70f + rim * 5.3f + Mathf.Sin(z * .13f) * .27f, south);
+        float ashfall = Mathf.Lerp(oldHeight, variation * .33f + .70f + rim * 5.3f + Mathf.Sin(z * .13f) * .27f, south);
+        float riverlands = 1.08f + variation * .40f + Mathf.Sin(z * .027f) * .15f;
+        float ground = Mathf.Lerp(ashfall, riverlands, AshfallReach.RiverlandsWeight(x));
+        float bank = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(AshfallReach.RiverHalfWidth(z) - .2f,
+            AshfallReach.RiverHalfWidth(z) + 5, Mathf.Abs(x - AshfallReach.RiverX(z))));
+        return Mathf.Lerp(AshfallReach.RiverWaterHeight - 1.8f, ground, bank);
     }
 
     private static Vector3 Ground(Vector2 p) => new(p.x, Height(p.x, p.y), p.y);
@@ -127,22 +137,66 @@ public static class AshfallReachExpansionAuthoring
         int rows = (north - south) / stride + 1;
         var vertices = new Vector3[columns * rows];
         var uv = new Vector2[vertices.Length];
-        var triangles = new[] { new List<int>(), new List<int>(), new List<int>() };
+        var triangles = new List<int>();
         for (int row = 0; row < rows; row++)
         for (int col = 0; col < columns; col++)
         {
             int a = row * columns + col;
             float x = col * stride - west, z = row * stride + south;
             vertices[a] = Ground(x, z);
-            uv[a] = new Vector2(x, z) * .2f;
+            uv[a] = new Vector2((x + 300) / 450f, (z + 400) / 490f);
             if (row == rows - 1 || col == columns - 1) continue;
-            float y = Height(x + stride * .5f, z + stride * .5f);
-            int section = y > 2.1f ? 1 : z < -34 + 3 * Mathf.Sin(x * .20f) ? 2 : 0;
-            triangles[section].AddRange(new[] { a, a + columns, a + 1, a + 1, a + columns, a + columns + 1 });
+            triangles.AddRange(new[] { a, a + columns, a + 1, a + 1, a + columns, a + columns + 1 });
         }
-        var mesh = new Mesh { name = name, vertices = vertices, uv = uv, subMeshCount = triangles.Length };
-        for (int i = 0; i < triangles.Length; i++) mesh.SetTriangles(triangles[i], i);
+        var mesh = new Mesh { name = name, vertices = vertices, uv = uv };
+        mesh.SetTriangles(triangles, 0);
         return SaveMesh(mesh);
+    }
+
+    private static Material BlendedGround()
+    {
+        var source = new Texture2D(2, 2);
+        if (!ImageConversion.LoadImage(source, File.ReadAllBytes(
+            "Assets/_DiceFree/Settings/Briarback/FourfoldHollow/Slate grain.png")))
+            throw new IOException("Could not read the existing slate grain for Ashfall ground.");
+        const int size = 2048;
+        var pixels = new Color[size * size];
+        try
+        {
+            for (int row = 0; row < size; row++)
+            for (int col = 0; col < size; col++)
+            {
+                float x = (col + .5f) / size * 450 - 300;
+                float z = (row + .5f) / size * 490 - 400;
+                float variation = Mathf.PerlinNoise(x * .14f + 48, z * .14f + 69);
+                float edge = -34 + 3 * Mathf.Sin(x * .20f) + (variation - .5f) * 6;
+                float transition = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(edge + 5, edge - 5, z));
+                Color soil = Color.Lerp(heath.color, ash.color, transition);
+                soil = Color.Lerp(soil, new Color(.245f, .365f, .205f), AshfallReach.RiverlandsWeight(x));
+                float shore = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(3.5f, 8.5f, Mathf.Abs(x - AshfallReach.RiverX(z))));
+                soil = Color.Lerp(soil, new Color(.38f, .345f, .255f), shore);
+                float rock = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(1.7f, 3.0f, Height(x, z)));
+                Color tone = Color.Lerp(soil, slate.color, rock);
+                var grain = source.GetPixelBilinear(Mathf.Repeat(x * .2f, 1), Mathf.Repeat(z * .2f, 1));
+                float flecks = .91f + variation * .17f;
+                pixels[row * size + col] = new Color(tone.r * grain.r * flecks, tone.g * grain.g * flecks,
+                    tone.b * grain.b * flecks, 1);
+            }
+        }
+        finally { Object.DestroyImmediate(source); }
+        var texture = new Texture2D(size, size, TextureFormat.RGBA32, true)
+        {
+            name = "Heath fading into volcanic soil",
+            wrapMode = TextureWrapMode.Clamp,
+            anisoLevel = 4
+        };
+        texture.SetPixels(pixels);
+        texture.Apply();
+        var material = new Material(heath) { name = "Ashfall blended ground", color = Color.white };
+        material.SetTexture("_BaseMap", Save(texture, Output + texture.name + ".asset"));
+        material.SetTextureScale("_BaseMap", Vector2.one);
+        material.SetTextureOffset("_BaseMap", Vector2.zero);
+        return Save(material, Output + material.name + ".mat");
     }
 
     private static void Road(Transform parent, string name, IReadOnlyList<Vector2> points, float width)
@@ -186,10 +240,16 @@ public static class AshfallReachExpansionAuthoring
         Cabin(village, "Wayhouse", 11.6f, -44.7f, 7.6f, 5.5f, -90);
         Cabin(village, "Ridge kitchen", -4.25f, -46.6f, 6.6f, 5.0f, 75);
         Cabin(village, "Supply store", 10.8f, -51, 5.8f, 4.45f, -103);
+        Cabin(village, "Watch house", -3, -35.8f, 6, 4.5f, 180);
+        Cabin(village, "Hideworker cabin", -4, -56, 6.2f, 4.6f, 70);
         Waypost(village, "CINDERWATCH", Ground(2, -37.0f), 166, 3.3f);
         Lantern(village, Ground(8.1f, -39.5f));
         Lantern(village, Ground(5.1f, -53.5f));
         Lantern(village, Ground(-1.8f, -42.0f));
+        Resident(village, "Cinderwatch Keeper", "keeper", "Villager", new(8, -42.3f), new(6.8f, -41.8f), 255,
+            "Welcome to Cinderwatch. The spring is safe to drink from. The valley road leads back to Ironpine; the side trails run toward the Basalt Needle and Ember Crown. Watch for Ashscale patrols on the ridges.");
+        Resident(village, "Ridge Cook", "cook", "Herbalist", new(-.1f, -43.6f), new(1.1f, -43.4f), 100,
+            "Leave the ash on the doorstep. We keep a warm kitchen and a clean spring here. The spearhands travel in loose patrols, and their ridgebows have a long reach.");
 
         // A recessed spring and a dressed stone rim mark the safe center of the outpost.
         var well = Group(village, "Cinderwatch spring", Ground(Well));
@@ -209,7 +269,7 @@ public static class AshfallReachExpansionAuthoring
         healer.ConfigureApproach(Group(village, "Spring approach", Ground(3.33f, -47.5f)));
         // Interaction targets use an outer selectable collider independently from pathing blockers.
         var selectable = well.gameObject.AddComponent<BoxCollider>();
-        well.gameObject.layer = 12;
+        well.gameObject.layer = 11;
         selectable.center = Vector3.up * .62f;
         selectable.size = new Vector3(2.35f, 1.18f, 2.35f);
 
@@ -222,7 +282,29 @@ public static class AshfallReachExpansionAuthoring
         }
     }
 
-    private static void Cabin(Transform parent, string name, float x, float z, float width, float depth, float facing)
+    private static GameObject Resident(Transform parent, string name, string id, string model,
+        Vector2 point, Vector2 approach, float facing, string dialogue, string npcPrefix = "npc.ashfall.cinderwatch.")
+    {
+        var resident = Group(parent, name, Ground(point));
+        resident.localRotation = Quaternion.Euler(0, facing, 0);
+        resident.gameObject.layer = 11;
+        var capsule = resident.gameObject.AddComponent<CapsuleCollider>();
+        capsule.radius = .38f;
+        capsule.height = 1.90f;
+        capsule.center = Vector3.up * .95f;
+        var prefab = Load<GameObject>(Art + "WalkingVillagers/Prefabs/" + model + ".prefab");
+        var rig = (GameObject)PrefabUtility.InstantiatePrefab(prefab, resident);
+        rig.transform.localScale = Vector3.one * 1.08f;
+        var talk = resident.gameObject.AddComponent<ConversationTarget>();
+        talk.ConfigureName(name);
+        talk.Configure(npcPrefix + id, "arrival", dialogue);
+        talk.ConfigureApproach(Group(parent, name + " approach", Ground(approach)));
+        Solid(resident, "Resident footprint", Vector3.up * .85f, new(.55f, 1.75f, .55f));
+        return resident.gameObject;
+    }
+
+    private static void Cabin(Transform parent, string name, float x, float z, float width, float depth, float facing,
+        Material roofMaterial = null)
     {
         var home = Group(parent, name, Ground(x, z));
         home.localRotation = Quaternion.Euler(0, facing, 0);
@@ -245,7 +327,7 @@ public static class AshfallReachExpansionAuthoring
             Part(home, "Lit window", new(xWindow, 1.8f, depth * .5f + .21f), new(.70f, .79f, .09f), light);
             Part(home, "Window mullion", new(xWindow, 1.8f, depth * .5f + .28f), new(.075f, .81f, .075f), oak);
             Part(home, "Window sill", new(xWindow, 1.24f, depth * .5f + .21f), new(1.13f, .13f, .39f), slate);
-            Gable(home, side, width, depth);
+            Gable(home, side, width, depth, roofMaterial ?? roof);
         }
         Part(home, "Door frame", new(0, 1.19f, depth * .5f + .16f), new(1.60f, 2.35f, .23f), oak);
         Part(home, "Door", new(0, 1.16f, depth * .5f + .31f), new(1.18f, 1.9f, .14f), cedar);
@@ -255,7 +337,7 @@ public static class AshfallReachExpansionAuthoring
         Part(home, "Chimney cap", new(width * .31f, 4.87f, -depth * .24f), new(.97f, .20f, .96f), slate);
     }
 
-    private static void Gable(Transform home, int side, float width, float depth)
+    private static void Gable(Transform home, int side, float width, float depth, Material cover)
     {
         float half = depth * .5f + .44f;
         const float rise = 1.55f;
@@ -263,7 +345,7 @@ public static class AshfallReachExpansionAuthoring
         var leaf = Group(home, "Slate roof pitch", new(0, 3.08f + rise * .5f, side * half * .5f));
         leaf.localRotation = Quaternion.Euler(side * pitch, 0, 0);
         float length = Mathf.Sqrt(half * half + rise * rise);
-        Part(leaf, "Roof decking", Vector3.zero, new(width + .84f, .20f, length + .16f), roof);
+        Part(leaf, "Roof decking", Vector3.zero, new(width + .84f, .20f, length + .16f), cover);
         int columns = Mathf.CeilToInt(width / .75f);
         float tileWidth = (width + .70f) / columns;
         for (int row = 0; row < 5; row++)
@@ -272,7 +354,7 @@ public static class AshfallReachExpansionAuthoring
             float z = ((row + .5f) / 5 - .5f) * length;
             float x = (col + .5f - columns * .5f) * tileWidth;
             Part(leaf, "Split slate shingle", new(x, .13f + Range(0, .035f), z), new(tileWidth - .021f, .085f, length * .218f),
-                (col + row * 3) % 9 == 0 ? slate : roof);
+                (col + row * 3) % 9 == 0 ? slate : cover);
         }
         float inset = depth * .5f;
         for (int row = 0; row < 6; row++)
@@ -365,6 +447,22 @@ public static class AshfallReachExpansionAuthoring
         fog.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
         fog.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
         fog.SetFloat("_ZWrite", 0);
+        var texture = new Texture2D(64, 64, TextureFormat.RGBA32, false)
+        {
+            name = "Soft crater steam",
+            wrapMode = TextureWrapMode.Clamp
+        };
+        var pixels = new Color[64 * 64];
+        for (int y = 0; y < 64; y++)
+        for (int x = 0; x < 64; x++)
+        {
+            float radius = new Vector2((x + .5f) / 32 - 1, (y + .5f) / 32 - 1).magnitude;
+            float alpha = Mathf.SmoothStep(1, 0, Mathf.Clamp01(radius));
+            pixels[y * 64 + x] = new Color(1, 1, 1, alpha * alpha);
+        }
+        texture.SetPixels(pixels);
+        texture.Apply();
+        fog.SetTexture("_BaseMap", Save(texture, Output + texture.name + ".asset"));
         fog.SetOverrideTag("RenderType", "Transparent");
         fog.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
         fog.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
@@ -380,8 +478,10 @@ public static class AshfallReachExpansionAuthoring
             float x = Range(-44, 46), z = Range(-86, -29);
             var p = new Vector2(x, z);
             if ((p - AshfallReach.Cinderwatch).magnitude < 15 ||
+                new Rect(-14,-64,36,35).Contains(p) ||
                 (p - AshfallReach.EmberCrown).magnitude < 11 ||
                 DistanceToRoad(p, AshfallReach.SettlementRoad) < 4.0f ||
+                DistanceToRoad(p, AshfallReach.WillowfordRoad) < 4.0f ||
                 DistanceToRoad(p, AshfallReach.CrownPath) < 3.2f) continue;
             var ground = Ground(p);
             if (i % 5 == 0 && x < 15)
@@ -425,7 +525,7 @@ public static class AshfallReachExpansionAuthoring
         NavMeshBuilder.CollectSources(root, (1 << WalkableLayer) | (1 << SolidLayer),
             NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), sources);
         var data = NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0), sources,
-            new Bounds(AshfallReach.Origin + new Vector3(2, 4, -23), new Vector3(95, 35, 118)),
+            new Bounds(AshfallReach.Origin + new Vector3(-85, 4, -60), new Vector3(294, 35, 194)),
             Vector3.zero, Quaternion.identity);
         if (data == null) throw new InvalidOperationException("Ashfall Reach navigation could not bake.");
         data.name = "Cinderwatch navigation";
@@ -438,8 +538,21 @@ public static class AshfallReachExpansionAuthoring
             RequirePath(start, new Vector2(3.33f, -47.5f));
             RequirePath(start, AshfallReach.NeedlePath[^1]);
             RequirePath(start, AshfallReach.CrownPath[^1]);
+            RequirePath(start, AshfallReach.Willowford);
+            foreach(var waypoint in AshfallReach.WillowfordRoad)
+            {
+                RequirePath(start,waypoint);
+                var p=AshfallReach.Origin+Ground(waypoint);
+                if(Physics.CheckCapsule(p+Vector3.up*.5f,p+Vector3.up*1.6f,.4f,1<<SolidLayer))
+                    throw new InvalidOperationException($"A solid object blocks the Willowford road at {waypoint}.");
+            }
+            RequirePath(start, new Vector2(-170, -62));
+            RequirePath(start, new Vector2(-198, -62));
+            RequirePath(start, AshfallReach.RiverbankTrail[^1]);
             Populate(expansion, start, SpearHomes, false);
             Populate(expansion, start, BowHomes, true);
+            Populate(expansion, start, new[] { new Vector2(-103,-89), new Vector2(-207,-20), new Vector2(-216,-116) }, false);
+            Populate(expansion, start, new[] { new Vector2(-114,-96), new Vector2(-207,-118) }, true);
         }
         finally { instance.Remove(); }
         root.GetComponent<WorldNavigation>().Configure(Save(data, Output + data.name + ".asset"));

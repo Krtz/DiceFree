@@ -10,7 +10,8 @@ namespace DiceFree.UI
         private enum Tab
         {
             Monsters,
-            Dungeons
+            Dungeons,
+            Teachers
         }
 
         [SerializeField] private CodexProgression codex;
@@ -77,6 +78,7 @@ namespace DiceFree.UI
                 tab = Tab.Monsters;
             if (GUI.Toggle(dungeons, tab == Tab.Dungeons, "Dungeons", "Button"))
                 tab = Tab.Dungeons;
+            if(GUI.Toggle(new Rect(dungeons.xMax+Theme.gap,tabsY,110,26),tab==Tab.Teachers,"Teachers","Button"))tab=Tab.Teachers;
 
             var content = new Rect(
                 contentPage.x,
@@ -87,11 +89,23 @@ namespace DiceFree.UI
             GUILayout.BeginArea(content);
             scroll = GUILayout.BeginScrollView(scroll);
             if (tab == Tab.Monsters) DrawMonsters();
-            else DrawDungeons();
+            else if(tab==Tab.Dungeons) DrawDungeons();
+            else DrawTeachers();
             GUILayout.EndScrollView();
             GUILayout.EndArea();
         }
 
+        private void DrawTeachers()
+        {
+            if(codex.Teachers.Length==0){GUILayout.Label("No hidden teachers discovered yet.");return;}
+            foreach(var id in codex.Teachers)
+            {
+                GUILayout.BeginVertical(GUI.skin.box);
+                GUILayout.Label(CodexProgression.TeacherName(id));
+                GUILayout.Label(id=="teacher.psion.psionic-knight"?"Teaches Psionic Knight. A path of blades and living reflections.":id=="teacher.psion.mirage-mage"?"Teaches Mirage Mage. A path of mirrored spells and barriers.":"A hidden teacher encountered by your Echo.");
+                GUILayout.EndVertical();
+            }
+        }
         private void DrawMonsters()
         {
             var monsters = codex.Monsters;

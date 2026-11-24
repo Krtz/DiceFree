@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace DiceFree.UI
 {
     [DisallowMultipleComponent]
-    public sealed class WorldAtlasHud : MonoBehaviour
+    public sealed partial class WorldAtlasHud : MonoBehaviour
     {
         private static readonly Rect Extents = Rect.MinMaxRect(-83, -53, 332, 475);
         private static readonly Rect VerdantBounds = Rect.MinMaxRect(-77, 264, 4, 353);
@@ -205,11 +205,16 @@ namespace DiceFree.UI
 
         public void Toggle()
         {
-            if (!HudPointerBlocker.ModalOpen) Open = !Open;
+            if (!HudPointerBlocker.ModalOpen)
+            {
+                Open = !Open;
+                if (Open) RefreshMapMarkers();
+            }
         }
 
         private void Update()
         {
+            if (DiceFree.Input.InputBindings.Current.Suppressed) return;
             var keyboard = Keyboard.current;
             if (keyboard == null) return;
             if (Open && keyboard.escapeKey.wasPressedThisFrame) Open = false;
@@ -227,6 +232,7 @@ namespace DiceFree.UI
 
         private void DrawAtlas()
         {
+            mapLabelRects.Clear();
             if (relief == null) CreateArtwork();
             label ??= new GUIStyle(GUI.skin.label) { alignment=TextAnchor.MiddleLeft, fontStyle=FontStyle.Bold, wordWrap=false,
                 normal={textColor=Ink} };
@@ -239,7 +245,8 @@ namespace DiceFree.UI
             float height = Mathf.Min(760,Screen.height-24);
             var panel = new Rect((Screen.width-width)*.5f,(Screen.height-height)*.5f,width,height);
             HudChrome.DrawPanel(panel,theme);
-            HudChrome.DrawHeader(new Rect(panel.x+6,panel.y+6,width-12,34),theme,"WORLD 1  /  TRAVELLER’S ATLAS");
+            HudChrome.DrawHeader(new Rect(panel.x+6,panel.y+6,width-12,34),theme,
+                InAshfall ? "WORLD 2  /  TRAVELLER’S ATLAS" : "WORLD 1  /  TRAVELLER’S ATLAS");
             if (GUI.Button(new Rect(panel.xMax-105,panel.y+10,92,25),"Close  [M]")) { Open=false; return; }
 
             float railWidth = Mathf.Clamp(width*.25f,145,250);
@@ -248,7 +255,7 @@ namespace DiceFree.UI
             Fill(canvas, MapInk);
             Fill(rail,new Color(.088f,.109f,.095f));
             var plot = new Rect(canvas.x+29,canvas.y+27,canvas.width-103,canvas.height-59);
-            GUI.DrawTexture(plot,relief);
+            if (!InAshfall) GUI.DrawTexture(plot,relief);
             var previousColor = GUI.color;
             GUI.color = new Color(.29f,.29f,.17f,.15f);
             GUI.DrawTextureWithTexCoords(plot, mapGrain, new Rect(0, 0, plot.width / 256, plot.height / 256));
@@ -258,7 +265,20 @@ namespace DiceFree.UI
             HudChrome.Border(rail,1,Frame);
             HudChrome.Border(plot,1,new Color(.56f,.48f,.30f,.31f));
             DrawCorners(canvas);
+            if (InAshfall)
+            {
+                DrawAshfall(plot, rail);
+                DrawMapMarkers(plot);
+                DrawMapMarkerLegend(rail);
+                DrawCompass(new Vector2(canvas.xMax-40, canvas.y+46));
+                DrawMapMarkerTooltip();
+                var input = Event.current;
+                if (input.type is EventType.MouseDown or EventType.MouseUp or EventType.ScrollWheel) input.Use();
+                return;
+            }
             DrawMap(plot);
+            DrawMapMarkers(plot);
+            DrawMapMarkerLegend(rail);
             DrawCompass(new Vector2(canvas.xMax-40, canvas.y+46));
 
             Fill(new Rect(rail.x+1,rail.y+1,rail.width-2,48),new Color(.20f,.19f,.125f));
@@ -271,7 +291,7 @@ namespace DiceFree.UI
                 : landmark.description;
             GUI.Label(new Rect(rail.x+14,rail.y+54,rail.width-28,100),description,body);
             float y = rail.y+Mathf.Clamp(rail.height-166,106,157);
-            float spacing = Mathf.Clamp((rail.yMax-y-12)/Landmarks.Length, 16, 29);
+            float spacing = Mathf.Clamp((rail.yMax-y-12-MapMarkerLegendHeight)/Landmarks.Length, 16, 29);
             for (int i=0;i<Landmarks.Length;i++,y+=spacing)
             {
                 var row = new Rect(rail.x+10,y,rail.width-20,spacing-2);
@@ -286,7 +306,7 @@ namespace DiceFree.UI
                     Event.current.Use();
                 }
             }
-            if (y+93 < rail.yMax)
+            if (y+93 < rail.yMax-MapMarkerLegendHeight)
             {
                 Line(new Vector2(rail.x+14,y+9),new Vector2(rail.xMax-14,y+9),1,Frame);
                 Legend(rail.x+16,y+24,Road,"Open road");
@@ -294,6 +314,7 @@ namespace DiceFree.UI
                 Legend(rail.x+16,y+62,Closure,"Broken highway",true);
                 Legend(rail.x+16,y+81,PlayerTint,"Your location");
             }
+            DrawMapMarkerTooltip();
             var current = Event.current;
             if (current.type is EventType.MouseDown or EventType.MouseUp or EventType.ScrollWheel) current.Use();
         }
@@ -334,6 +355,7 @@ namespace DiceFree.UI
                 var text = new GUIContent(entry.name);
                 float labelWidth = label.CalcSize(text).x + 8;
                 var labelRect = new Rect(p.x+12,p.y-12,labelWidth,24);
+                mapLabelRects.Add(labelRect);
                 Fill(new Rect(labelRect.x-2,p.y-8,labelRect.width,16),new Color(.036f,.063f,.057f,i==selected?.95f:.82f));
                 if(GUI.Button(labelRect,text,label)) selected=i;
                 if(Event.current.type==EventType.MouseDown&&marker.Contains(Event.current.mousePosition))
@@ -346,6 +368,7 @@ namespace DiceFree.UI
                 if (Extents.Contains(point))
                 {
                     var p=Project(plot,point);
+                    mapLabelRects.Add(new Rect(p.x-10,p.y-10,20,20));
                     Diamond(p,12,1.2f,new Color(PlayerTint.r,PlayerTint.g,PlayerTint.b,.55f));
                     Diamond(p,8,4,MapInk);
                     Diamond(p,7,2,PlayerTint);

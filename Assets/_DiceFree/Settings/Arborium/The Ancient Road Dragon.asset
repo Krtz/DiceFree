@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: The Ancient Road Dragon
   m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
   stableId: quest.arborium.ancient-road-dragon
+  category: 1
   title: The Ancient Road Dragon
   requiredClassId: 
   requiredLevel: 35

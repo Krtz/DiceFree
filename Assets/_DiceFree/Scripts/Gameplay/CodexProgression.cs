@@ -61,6 +61,7 @@ namespace DiceFree.Gameplay
     [Serializable]
     public sealed class CodexSaveData
     {
+        public string[] teachers = Array.Empty<string>();
         public CodexMonsterRecord[] monsters = Array.Empty<CodexMonsterRecord>();
         public CodexDungeonRecord[] dungeons = Array.Empty<CodexDungeonRecord>();
     }
@@ -92,6 +93,13 @@ namespace DiceFree.Gameplay
                 .Select(CloneDungeon).ToArray() ?? Array.Empty<CodexDungeonRecord>();
 
         public string CaptureJson() => JsonUtility.ToJson(state ?? new CodexSaveData());
+        public string[] Teachers => state.teachers?.Where(s=>!string.IsNullOrWhiteSpace(s)).Distinct().OrderBy(s=>s,StringComparer.Ordinal).ToArray() ?? Array.Empty<string>();
+        public bool DiscoverTeacher(string id)
+        {
+            RequireId(id,nameof(id));if(Teachers.Contains(id))return false;
+            state.teachers=Teachers.Append(id).ToArray();Touch();return true;
+        }
+        public static string TeacherName(string id)=>id=="teacher.psion.psionic-knight"?"Seren, the Whispered Blade":id=="teacher.psion.mirage-mage"?"Vaelis, the Glass Seer":id;
 
         public void RestoreJson(int version, string json)
         {

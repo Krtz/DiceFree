@@ -16,14 +16,16 @@ namespace DiceFree.ApplicationFlow
         string message;
         float? progress;
         float openedAt;
+        bool displayScreen = true;
         const float MinimumDisplaySeconds = .25f;
 
         public static bool Busy => current != null;
 
-        public static bool TryLoadAdditive(string scene,string message,Action<Scene> ready,Action<Exception> failed)
+        public static bool TryLoadAdditive(string scene,string message,Action<Scene> ready,Action<Exception> failed,
+            bool displayScreen = true)
         {
             if(Busy)return false;
-            var screen=Open(message);screen.progress=0;
+            var screen=Open(message);screen.progress=0;screen.displayScreen=displayScreen;
             screen.StartCoroutine(screen.LoadAdditive(scene,ready,failed));return true;
         }
         IEnumerator LoadAdditive(string scene,Action<Scene> ready,Action<Exception> failed)
@@ -129,6 +131,7 @@ namespace DiceFree.ApplicationFlow
 
         void OnGUI()
         {
+            if (!displayScreen) return;
             var input = Event.current;
             if (input.isKey || input.isMouse || input.type == EventType.ScrollWheel)
             {

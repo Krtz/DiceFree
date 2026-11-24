@@ -1,0 +1,11 @@
+{
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\PsionTier3-20261124-030810\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 1,
+    "sceneCount": 14,
+    "bytes": 688532123,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+}

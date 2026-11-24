@@ -1,0 +1,140 @@
+{
+  "schema": "dicefree.psion-tier3.native-derivatives.v1",
+  "created": "2026-11-24",
+  "packages": [
+    "pkg_631a2ca226a6b9374186a0bf",
+    "pkg_607fd1941c9d4133637e283a"
+  ],
+  "files": [
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage form.prefab",
+      "bytes": 120189,
+      "sha256": "470a44e68430cb52fa5fc85a7918a6a760e606ba5fddac3a7ba937cfa1d01c87"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage Humanoid.asset",
+      "bytes": 116549,
+      "sha256": "814802dc1f5f40b4c1e35815289e569dd3432ada1e62c2eb756de8451db51b24"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage retargeted skin 0.asset",
+      "bytes": 2078257,
+      "sha256": "9095e433eac1e4e5d9aacc19682a6977f9b1470b6bc66fd0bad86efa47d02530"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight form.prefab",
+      "bytes": 100304,
+      "sha256": "e16b8050e8bb40d7b41da23d3a6bbb99c859366a5edb2d24076de3ddea007baa"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight Humanoid.asset",
+      "bytes": 98807,
+      "sha256": "02e39d65c5759b005ee4550f7617cb59687750a2b96b179ac7280e0bcdf0155a"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight retargeted skin 0.asset",
+      "bytes": 1980286,
+      "sha256": "5435eb96e17fdc848dd2cb6f0b5d7100a6b9a27c7c08fe0bce77a2b7dabec330"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/brigitte_default_diff.png",
+      "bytes": 1059768,
+      "sha256": "427f27f29f4807089dbb168479bc36b7750362991e6be3d968d90b379243ce1f"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/brigitte_default_norm.png",
+      "bytes": 1113761,
+      "sha256": "a281a59c7a558c6d100be2cac8f47c023aa56c27dd1a2eb02b354c88479d127e"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/brigitte_default_spec.png",
+      "bytes": 186308,
+      "sha256": "bb74766f141c540eb93b3db4627e0b1afe4efc0168bdda5ff148aef9ea1c9bf0"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/brigitte_hair_bump.png",
+      "bytes": 66019,
+      "sha256": "4995b8932323f9a124b1e0f65da2c47b82e7bd7a9cac62d73e97e946905c0900"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/brigitte_hair_diff.png",
+      "bytes": 67885,
+      "sha256": "52dfa0d8a1d147b7891a496658bd10b59d5d5c0f0e7dee3a9f4b7987c5aeb00a"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/MirageMage.fbx",
+      "bytes": 835836,
+      "sha256": "70dcc187b33a7cab991c6ba1c79fbf8936a3bd2ac5af16737bd4a03e0b248385"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/weapon_diff.png",
+      "bytes": 229484,
+      "sha256": "89d52cbed289ba96182c21ae909fa4824c81d2d77a766d8dba4a763e114d8474"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/weapon_norm.png",
+      "bytes": 265461,
+      "sha256": "b668eb4f74d79c95aa7e09959e67bb99fcc42fc402458ea446f29d8be22f9dea"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/MirageMage/weapon_spec.png",
+      "bytes": 52444,
+      "sha256": "5e0083738edf05a3fc5c5d4f2ce838169d3486991979eb9a3d1dad755bbd522e"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/_DiffuseTexture.png",
+      "bytes": 67885,
+      "sha256": "52dfa0d8a1d147b7891a496658bd10b59d5d5c0f0e7dee3a9f4b7987c5aeb00a"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/_ShiftTexture01.png",
+      "bytes": 66019,
+      "sha256": "4995b8932323f9a124b1e0f65da2c47b82e7bd7a9cac62d73e97e946905c0900"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac__GuildWar_A_diff.png",
+      "bytes": 1177331,
+      "sha256": "f0d859a47b44611907a6881eaba36cb9a5019bc6b502b62c524b71aaefd4b015"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac__GuildWar_A_mask_001.png",
+      "bytes": 438788,
+      "sha256": "dc6f586164e59053f6fb7f111dc85b535a22d982022fda4150ab6a27e9b09650"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac__GuildWar_A_mask.png",
+      "bytes": 409579,
+      "sha256": "07147d6ba07e5d83ad3f521e47ff69dfa1232cc70e640a1b52ae64f7b642a299"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac__GuildWar_A_norm.png",
+      "bytes": 1368237,
+      "sha256": "e54dfebd202e4c7ce21e215d2aaea85ede228e890932612f1b86d914c02368c6"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac_diff_1.png",
+      "bytes": 316999,
+      "sha256": "ef08a8caa4f22dc9f9e297e2ebbf77d163138448b48b84be924b805cdc0278a1"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac_mask_001.png",
+      "bytes": 110986,
+      "sha256": "439a506f5eb0e5ca8be1a82dfff4208535aa171871e84f8886d4408f2ab95c74"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac_mask.png",
+      "bytes": 104567,
+      "sha256": "c2799fe74a66c82f747269fcad456c798ee22cd5bfb1e90ad7c391da8f96e20b"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/Isaac_norm.png",
+      "bytes": 1428556,
+      "sha256": "f5fb3c042569c07a3383cc578f33046f3c296cf2a8308e4dfd20f00b69aba3b7"
+    },
+    {
+      "path": "Assets/_DiceFree/Settings/PsionEvolutions/PsionicKnight/PsionicKnight.fbx",
+      "bytes": 741900,
+      "sha256": "f9cabd49c7b6fc827583dacd095c270d891677950a94db6a2a37b41c9b1e0593"
+    }
+  ]
+}

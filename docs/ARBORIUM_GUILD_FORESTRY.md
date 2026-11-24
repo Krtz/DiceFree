@@ -1,5 +1,7 @@
 # Arborium guild forestry commissions — 2026-11-07
 
+**Current placement, 2026-11-19.** The user has reserved the Trimery forestry clearing for a future passage to World 3. The original World 2 proposal described below is historical. World 2 uses the southern Ironpine pass after the Ancient Road Dragon quest.
+
 The Adventurers' Guild now has a playable three-quest chain linking Arborium's reception and planning room with Trimery's sawmill, southern timberline and ruined western highway. The user authorized continued game development after proposing a guild-led forestry route toward World 2.
 
 ## Playable chain

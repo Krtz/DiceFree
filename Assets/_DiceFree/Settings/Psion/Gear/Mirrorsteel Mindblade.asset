@@ -30,6 +30,8 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.psion
+  - class.psionic-knight
+  - class.mirage-mage
   flavor: A faceted edge that catches light a heartbeat before the strike.
   stats:
     attributes:

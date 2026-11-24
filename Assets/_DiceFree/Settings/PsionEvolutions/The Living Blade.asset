@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Living Blade
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.psionic-knight.advancement
+  title: The Living Blade
+  category: 0
+  requiredClassId: class.psion
+  requiredLevel: 60
+  version: 1
+  offer: A blade is only as strong as the will beside it. Enter the Moonlit Clearing alone and survive all ten waves. Begin a fresh trial after accepting my challenge; your reflections may accompany you. Then return to me.
+  activeDialogue: Complete a new solo Moonlit Clearing run, then return. Earlier clears do not prove this trial.
+  turnInDialogue: You and your reflection have learned to fight as one. Take the path of the Psionic Knight.
+  locationHint: Find the Whispered Blade among Ironpine's quieter trees.
+  turnInHint: Return to the hidden teacher who gave you this challenge.
+  stages:
+  - kind: 8
+    objectiveId: fresh-solo-clear
+    requiredTag: 
+    creditMode: 0
+    creditRadius: 50
+    instruction: Complete all ten Moonlit Clearing waves solo after accepting this quest
+    contentId: dungeon.ironpine.wolf-survival
+    dungeonBossOnly: 0
+    familyId: 
+    familyIds: []
+    areaId: 
+    conversationId: 
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle: 
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

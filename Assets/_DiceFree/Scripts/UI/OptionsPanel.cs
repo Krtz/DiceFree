@@ -73,6 +73,12 @@ namespace DiceFree.UI
             if(bindings.Listening)bindings.CancelRebind();
             SelectedTab=tab;
         }
+        public void ShowMapIconSettings()
+        {
+            SelectTab(OptionsTab.HUD);
+            tabScroll[(int)OptionsTab.HUD] = Vector2.zero;
+            Show();
+        }
         public void Close()
         {
             if(bindings==null)return;
@@ -406,6 +412,14 @@ namespace DiceFree.UI
         {
             GUILayout.Label("HUD");
             GUILayout.Space(4);
+            GUILayout.Label("Map icons");
+            foreach (MapIconCategory category in System.Enum.GetValues(typeof(MapIconCategory)))
+            {
+                bool current = gameplayPreferences.IsMapIconVisible(category);
+                bool visible = GUILayout.Toggle(current, WorldAtlasHud.MapIconName(category));
+                if (visible != current) gameplayPreferences.SetMapIconVisible(category, visible);
+            }
+            GUILayout.Space(12);
             GUILayout.Label("Health bars above units");
             var self=DrawOverheadSetting("Your character",gameplayPreferences.SelfHealthBar);
             var allies=DrawOverheadSetting("Allies",gameplayPreferences.AllyHealthBar);
