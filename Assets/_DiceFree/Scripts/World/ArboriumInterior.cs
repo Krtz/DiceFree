@@ -97,6 +97,7 @@ namespace DiceFree.World
 
         public static bool RaycastWalkableGround(Ray ray, out RaycastHit hit) =>
             Physics.Raycast(ray, out hit, 1500f, 1 << 8, QueryTriggerInteraction.Ignore);
+        public static bool IsTransparentToPointer(Collider collider) => transparentWalls.Contains(collider);
 
         public static bool RaycastGround(Ray ray,out RaycastHit hit)
         {

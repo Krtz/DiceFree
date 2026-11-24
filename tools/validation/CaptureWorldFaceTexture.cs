@@ -25,7 +25,7 @@ var camera=root.AddComponent<Camera>();
 camera.enabled=false;camera.orthographic=true;camera.orthographicSize=face.height*.5f;
 camera.aspect=face.width/face.height;
 camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.18f,.26f,.17f);
-camera.nearClipPlane=.3f;camera.farClipPlane=1500;camera.cullingMask=~((1<<31)|(1<<29));
+camera.nearClipPlane=.3f;camera.farClipPlane=1500;camera.cullingMask=~((1<<31)|(1<<29)|(1<<30));
 camera.transform.SetPositionAndRotation((second?origin:Vector3.zero)+new Vector3(face.center.x,650,face.center.y),Quaternion.Euler(90,0,0));
 var frame=new RenderTexture(1536,1536,24,RenderTextureFormat.ARGB32);frame.Create();
 var pixels=new Texture2D(1536,1536,TextureFormat.RGB24,false);

@@ -87,6 +87,7 @@ namespace DiceFree.Characters
             interactor = GetComponent<Interactor>();
             skillTargeting = GetComponent<SkillTargetingController>();
             actor = GetComponent<CombatActor>();
+            if(GetComponent<WorldHoverFeedback>() == null) gameObject.AddComponent<WorldHoverFeedback>();
             gameplayPreferences = GameplayPreferences.Current;
             GetComponent<AcolyteSkillCaster>()?.SetAutoRetaliateSource(() => gameplayPreferences.AutoRetaliate);
             bindings = InputBindings.Current;
@@ -197,9 +198,9 @@ namespace DiceFree.Characters
                 !HudPointerBlocker.Covers(Mouse.current.position.ReadValue()))
             {
                 Vector2 point=Mouse.current.position.ReadValue();
-                var actorTarget=Pick(point);
-                selection.Select(actorTarget);
-                inspect?.Show(actorTarget,actorTarget==null?PickNpc(point):null);
+                var picked=WorldTargetPicker.Pick(actor,Camera.main,point);
+                selection.Select(picked.Actor);
+                inspect?.Show(picked.Actor,picked.Interaction);
             }
             if (attackSelected.WasPressedThisFrame())
             {
@@ -228,20 +229,7 @@ namespace DiceFree.Characters
 
         private CombatActor Pick(Vector2 screenPoint)
         {
-            var camera = Camera.main;
-            if (camera != null && Physics.Raycast(camera.ScreenPointToRay(screenPoint), out var hit, 1500,
-                (1 << 8) | (1 << 9) | (1 << 10), QueryTriggerInteraction.Ignore))
-                return hit.collider.GetComponentInParent<CombatActor>();
-            return null;
-        }
-
-        private InteractionTarget PickNpc(Vector2 screenPoint)
-        {
-            var camera=Camera.main;
-            if(camera!=null && Physics.Raycast(camera.ScreenPointToRay(screenPoint),
-                out var hit,1500,(1<<11),QueryTriggerInteraction.Ignore))
-                return hit.collider.GetComponentInParent<InteractionTarget>();
-            return null;
+            return WorldTargetPicker.Pick(actor,Camera.main,screenPoint).Actor;
         }
 
         public bool ContextAttack(Vector2 point)

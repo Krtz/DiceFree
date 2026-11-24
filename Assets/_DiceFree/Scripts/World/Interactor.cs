@@ -52,9 +52,7 @@ namespace DiceFree.World
         }
         public bool ContextInteract(Ray ray)
         {
-            if (!Physics.Raycast(ray,out var hit,1500,
-                (1<<8)|(1<<9)|(1<<10)|(1<<11),QueryTriggerInteraction.Ignore)) return false;
-            var target = hit.collider.GetComponentInParent<InteractionTarget>();
+            var target = WorldTargetPicker.Pick(actor,ray).Interaction;
             if (target == null) return false;
             registry.Register(target.WorldTarget); // Explicitly clicked transient targets join this session catalog.
             return Order(target);

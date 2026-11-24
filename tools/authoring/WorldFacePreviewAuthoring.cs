@@ -81,7 +81,7 @@ public static class WorldFacePreviewAuthoring
         camera.aspect=bounds.width/bounds.height;
         camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.18f,.26f,.17f);
         camera.nearClipPlane=.3f;camera.farClipPlane=1500;
-        camera.cullingMask=~((1<<31)|(1<<29));
+        camera.cullingMask=~((1<<31)|(1<<29)|(1<<30));
         camera.transform.SetPositionAndRotation(origin+new Vector3(bounds.center.x,650,bounds.center.y),
             Quaternion.Euler(90,0,0));
         var texture=new RenderTexture(1536,1536,24,RenderTextureFormat.ARGB32);

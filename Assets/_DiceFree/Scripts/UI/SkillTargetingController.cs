@@ -3,6 +3,7 @@ using System.Linq;
 using DiceFree.Combat;
 using DiceFree.Foundation;
 using DiceFree.Input;
+using DiceFree.World;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -621,19 +622,7 @@ namespace DiceFree.UI
             if (Mode == SkillTargetingMode.Corpse)
                 return PickCorpse(camera.ScreenPointToRay(screenPoint));
 
-            var hits = Physics.RaycastAll(
-                camera.ScreenPointToRay(screenPoint),
-                1500f,
-                (1 << 8) | (1 << 9) | (1 << 10),
-                QueryTriggerInteraction.Ignore);
-
-            foreach (var hit in hits.OrderBy(value => value.distance))
-            {
-                var candidate = hit.collider.GetComponentInParent<CombatActor>();
-                if (candidate != null && candidate.Alive) return candidate;
-            }
-
-            return null;
+            return WorldTargetPicker.Pick(owner,camera,screenPoint).Actor;
         }
 
         private CombatActor PickCorpse(Ray pointer)
@@ -736,10 +725,13 @@ namespace DiceFree.UI
             const float size = 28f;
             const float arm = 8f;
             const float thickness = 2f;
+            var previousColor = GUI.color;
+            GUI.color = GetComponent<WorldHoverFeedback>()?.CursorOutlineColor ?? Color.white;
             GUI.Box(new Rect(pointer.x - thickness / 2f, pointer.y - size / 2f, thickness, arm), GUIContent.none);
             GUI.Box(new Rect(pointer.x - thickness / 2f, pointer.y + size / 2f - arm, thickness, arm), GUIContent.none);
             GUI.Box(new Rect(pointer.x - size / 2f, pointer.y - thickness / 2f, arm, thickness), GUIContent.none);
             GUI.Box(new Rect(pointer.x + size / 2f - arm, pointer.y - thickness / 2f, arm, thickness), GUIContent.none);
+            GUI.color = previousColor;
 
             string target = "";
             if (Mode != SkillTargetingMode.Ground && HoveredActor != null)
