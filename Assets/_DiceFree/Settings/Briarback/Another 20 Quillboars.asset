@@ -30,7 +30,8 @@ MonoBehaviour:
     contentId: 
     dungeonBossOnly: 0
     familyId: briarback.quilboar
-    familyIds: []
+    familyIds:
+    - fourfold.wardens
     areaId: 
     conversationId: 
     count: 15

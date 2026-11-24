@@ -48,8 +48,8 @@ namespace DiceFree.EditorTools
             var objective = quest.stages[0];
             Need(objective.kind == ObjectiveKind.Kill && objective.count == 15 &&
                  objective.familyId == FamilyId &&
-                 (objective.familyIds == null || objective.familyIds.Length == 0),
-                "the quest must use one 15-kill counter for the Briarback family.");
+                 objective.familyIds != null && objective.familyIds.SequenceEqual(new[] { "fourfold.wardens" }),
+                "the quest must share one 15-kill counter across Briarback and Fourfold Hollow quillboars.");
             Need(objective.creditMode == QuestCreditMode.NearbyParty &&
                  Mathf.Approximately(objective.creditRadius, 50),
                 "the quest must use the shared NearbyParty credit policy.");

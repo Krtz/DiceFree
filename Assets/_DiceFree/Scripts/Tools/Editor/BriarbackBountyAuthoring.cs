@@ -168,6 +168,7 @@ namespace DiceFree.EditorTools
                     {
                         kind = ObjectiveKind.Kill,
                         familyId = FamilyId,
+                        familyIds = new[] { "fourfold.wardens" },
                         count = 15,
                         creditMode = QuestCreditMode.NearbyParty,
                         creditRadius = 50,
