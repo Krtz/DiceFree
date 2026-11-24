@@ -1,5 +1,7 @@
 # Wolf Survival — Moonlit Clearing
 
+**2026-11-23 class advancement reuse (Tier III Psionic Knight, USER CONFIRMED):** The hidden Psionic Knight teacher's shorthand "Wolf Cave" trial is **THIS EXACT EXISTING Wolf Survival: Moonlit Clearing 10-wave dungeon**, **not a newly created cave**. Only a fresh **SOLO full clear** by the **Tier II Psion manifestation that accepted the Knight teacher quest before the run began** satisfies the Tier III advancement proof; previous solo clears stored Echo-wide, other manifestations' clears, runs begun before accepting the quest and group clears do not count. Finding the teacher within **2m** registers an Echo-wide hidden-teacher Codex entry, but does not autoaccept the quest or clear the trial. See [Psion Tier III Round 18](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md) and [Class Requirements and Discovery](CLASS_REQUIREMENTS_AND_DISCOVERY.md). Existing wave schedule, boss compositions, dungeon gear rewards, player death/reset behavior and mechanics are **UNCHANGED**. This is design documentation only, not a new Unity implementation.
+
 ## Completion rewards — six requested drops
 
 Wolf Survival now uses the shared dungeon treasure room after its ten-wave clear. The existing pool rolls a 5% rare override; otherwise 75% one normal offer / 25% two distinct normal offers. Each player chooses one offered item or the private XP/gold alternative. Claiming one chest resolves the other offers and returns that player to the entrance. Individual wolves retain their ordinary kill XP and have no new per-wolf item drops.

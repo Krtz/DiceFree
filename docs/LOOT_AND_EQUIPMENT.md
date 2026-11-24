@@ -624,3 +624,15 @@ Existing glove/shoe definitions omit this field and therefore contribute zero.
 Pants author only Vitality=1. Default Novice coefficients yield +15 maximum HP
 and +0.1 HP/sec regeneration. Changes preserve missing HP. Saves still store
 item definition IDs; this does not change the durable save schema.
+
+
+## Psion lineage Tier III weapon/offhand and gear identities (2026-11-23, USER APPROVED CONCEPT; NOT IMPLEMENTED)
+
+This equipment note reflects the ongoing [Psion Tier III Round 15](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md) design, not an authorization to create or equip item assets in Unity yet.
+
+- **Psionic Knight**, Tier III Agility-oriented basic-attack melee specialization: uses signature **mental blades / psionic blades** as its main-hand fantasy. **Generic AGI-oriented one-hand melee blades are also allowed** and should remain broadly usable by other eligible Agility melee classes. The Knight primarily equips **melee AGI gear**. Its approved projected 3m mindblade basic slashes remain class behavior, not proof that every item must have an exclusive psychic property.
+- **Mirage Mage**, Tier III Intelligence-oriented caster: uses **tomes and cards as signature MAIN-HAND weapon families**, and may also use other **generic INT-focused main-hand weapons** permitted by the game's equipment eligibility rules. Its ordinary equipment identity is primarily **caster gear**.
+- **Shared signature OFFHAND family: Ionic Stones**, spelled per user request. Both Knight and Mage can equip these. Some individual Ionic Stones are **AGI-oriented and favor normal basic attacks**, while other stones are **INT-oriented and favor spellcasting**, using the ordinary item stat/affix/Intrinsic system. These are item build choices, not a mandatory separate resource bar or a new class-specific spell system. Design both orientations; do not class-lock all stones exclusively to one evolution.
+- **Other offhands remain eligible:** Knight may equip compatible **generic AGI-oriented offhands** and Mage may equip compatible **generic INT-oriented offhands**. Neither evolution requires an Ionic Stone to be functional. The ordinary compatibility matrix and weapon slot rules still control actual combinations; do not invent a universal free dual wield permission or let arbitrary 2H main hands carry an extra offhand.
+- **Gear preference is not armor weight:** this project's broader equipment design explicitly avoids a universal armor-weight defense taxonomy. "Melee AGI gear" versus "caster gear" means stat budgets, affix themes, aesthetics and authored item eligibility, without automatically inventing medium/light/heavy class restrictions. Mixed AGI/INT hybrid items remain viable where authored compatibility permits.
+- **No forced retroactive changes to Tier II Psion** already implemented with its Mindblade and Codex; future shared items can be authored in the usual item catalog once gameplay implementation is separately approved. Specific Ionic Stone stats, slot restrictions for new family IDs, item drops/crafting, models, rarity and acquisition remain content tasks.

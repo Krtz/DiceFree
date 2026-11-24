@@ -1,5 +1,7 @@
 # Codex
 
+**2026-11-23 hidden-teacher discovery and map presentation (latest Round19, USER APPROVED):** Any hidden teacher for ANY class is permanently discovered by any manifestation within **2m** and recorded in this **Echo-wide Codex** even if that manifestation cannot accept their quest. The **Codex is the only automatic UI record** of teacher discovery for now: **NO map pins/markers** are generated from this Echo-wide knowledge, and teacher positions may be moved freely by the Codex development agent within World 1 or World 2 during world construction. For the two Psion Tier III teachers, interaction/quest access is restricted to **Tier II Psion level60+**; wrong-class and below-level encounters get different rejection dialogue. Either eligible Psion may have BOTH advancement quests active concurrently. Each quest needs a newly initiated **SOLO dungeon completion** after quest acceptance on the same Psion, followed by **RETURN TO ITS TEACHER** for advancement; Codex solo-clear records alone cannot fulfill quest proof. Knight: Wolf Survival: Moonlit Clearing; Mage: EXISTING Quillboar Shaman/Fourfold Hollow dungeon, which has a Unity scene and QA handover on the current branch. See [Tier III Round19](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md).
+
 ## Ownership
 
 Codex progression is **Echo-wide**.
@@ -13,6 +15,19 @@ Map terrain exploration remains manifestation-specific and is not Codex progress
 The Codex records what the player has actually discovered.
 
 Do not spoil unseen content with mystery placeholder rows. If the Echo has not discovered something yet, it normally does not appear.
+
+## Hidden class teachers (USER-APPROVED; latest Round 18, 2026-11-23)
+
+A player manifestation finding **ANY hidden class teacher for ANY class** records a durable, **ECHO-WIDE CODEX discovery** keyed by stable teacher identity.
+
+- **Exact finding trigger:** the player-controlled manifestation comes **within 2 meters** of the teacher (distance ≤ 2.0m), whether the player talks to that teacher or not. No interaction, conversation, class level or quest acceptance is required. Discoveries are idempotent and saved Echo-wide, persisting across manifestation switches, archiving and deletion.
+- **Never spoil unseen teachers:** undiscovered hidden teachers are absent from the Codex; rumors, lore clues and environment hints help exploration but **do not count as finding** a teacher until the actual physical proximity trigger is met.
+- **Teacher knowledge versus advancement:** discovery does **NOT** accept an advancement quest, grant the resulting Way, or complete its dungeon trial. The related quest must be specifically accepted by the qualifying manifestation. General Echo-wide Codex dungeon solo-clear history is informational, not automatic quest-completion proof.
+- **Psion Tier III specific:** the Psionic Knight hidden teacher requires an eligible Tier II **Psion** to accept their quest and then **SOLO CLEAR the existing Wolf Survival: Moonlit Clearing dungeon**. The Mirage Mage teacher requires that same appropriate Tier II Psion manifestation to accept its *different* quest and then **SOLO CLEAR the Quillboar Shaman ritual cave/dungeon**. The run must START only AFTER that manifestation accepted the relevant teacher quest, and be completed solo by that same manifestation. **No retroactive clears**, even from the same Psion or another class in this Echo.
+- **Dungeon ID and content guard:** Wolf Survival: Moonlit Clearing is established in `WOLF_SURVIVAL_DUNGEON.md`. The Quillboar Shaman cave is described in `QUILLBOAR_REGION_DESIGN.md` as a hidden cliff entrance whose permanent *per-character dungeon access* follows the Trimery scholar's four-element Shaman hunt turn-in; user identifies this as the existing dungeon, although the historical region documentation had called its implementation future. Verify its current runtime dungeon identifier before quest wiring; **do not create a duplicate cave or waive its scholar access gate**.
+- Suggested semantic discovery event is `hidden_teacher_discovered(teacherId, echoId)` only as a design-interface example, not evidence an implementation exists. Use normal Echo-wide durable save and semantic event systems when authorized.
+
+See [Psion Tier III design, Round 18](classes/PSION_TIER3_EVOLUTIONS_DESIGN.md) and [Class Requirements and Discovery](CLASS_REQUIREMENTS_AND_DISCOVERY.md).
 
 ## Monsters
 

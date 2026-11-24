@@ -1059,4 +1059,3 @@ These start higher and grow faster **in total** than the actual Tier II Psion as
 ### Approved for Codex implementation handoff, not a claim of delivery
 
 All the above are fully approved **game design decisions and first-playtest numbers**. Other unspecified UI/asset/state integration details should follow existing project systems, but never invent incompatible stacking or charge mechanics. The existing **Round16 high Mana cost and rank-scaling spell/shield formulas and cooldowns remain current initial test values**, as previously delegated and now encompassed by user's agreement. Any operational adoption by Codex/Unity requires separate implementation, source changes, tests and QA; **this GitHub commit updates design documentation only**. Prior sections in this document retained as historical round audit are superseded when their approval statuses conflict with this latest Round22 decision.
-
