@@ -1,8 +1,8 @@
 # DiceFree — Marksman (Tier III Ranger evolution) — design interview
 
-**2026-11-25 — ROUNDS 1–2 USER DECISIONS RECORDED; ROUND 3 OPEN.** User explicitly selected **Ranger → Marksman** as the FIRST Tier III evolution to design in the new **at least one Tier III per Tier II class** coverage pass. **Greatblade → Berserker follows next**, then choose first evolution for the five other uncovered Tier II parents. This is an AUTHORIZED DESIGN INTERVIEW, **NOT Unity code/asset/build implementation permission**.
+**2026-11-25 — ROUNDS 1–3 USER DECISIONS RECORDED; ROUND 4 OPEN.** User explicitly selected **Ranger → Marksman** as the FIRST Tier III evolution to design in the new **at least one Tier III per Tier II class** coverage pass. **Greatblade → Berserker follows next**, then choose first evolution for the five other uncovered Tier II parents. This is an AUTHORIZED DESIGN INTERVIEW, **NOT Unity code/asset/build implementation permission**.
 
-**Status:** Round 1 establishes Marksman as a **stationary ranged damage dealer**, with **11m initial range growing to 15m via skill ranks**, compatible with both longbows and shortbows (longbows favored), **NO Hawk Dive / Hunter's Mark**, and retained **Aimed Shot, Arrow Rain, Bow Mastery** plus the proposed **Strafe** active. The permanent **Ranged Damage Aura** and 80%-per-target piercing **Power Shot** are now **USER-APPROVED ROSTER MEMBERS**, along with the other four skills. All 150 skill-rank points are earned 1 per level 1–150. Exact per-ability caps/rank gates and several damage/resource numbers remain open. The **Marksman class name and the choice of Ranger as its parent in this rollout are USER CONFIRMED**. A precision-focused, longer-ranged longbow archetype was discussed in Ranger's earlier Tier II interviews as an **IDEA**; it is NOT YET an approved detailed Tier III skill set or a numerical range. Questions below are open, with suggested directions clearly marked as suggestions. Do not confuse this with an already implemented Tier III class.
+**Status:** Rounds 1–3 establish Marksman as a **stationary ranged damage dealer** with **11m→15m bow autoattack reach via Bow Mastery20**, Power Shot **12m→16m** reach with **1.5m width and solid-wall collision**, longbows favored while shortbows remain equippable, **NO Hawk Dive/Hunter's Mark**, exact **six skill rank caps 30/25/20/30/20/25 =150** and 1 earned point per level1–150. Strafe gains +2% attack speed/rank with −2% move speed/rank and rank-scaling duration; aura improves allied RANGED BASIC ATTACKS ONLY, strongest same-name source, no skills; Aimed Shot has a slower windup, NORMAL existing crit handling and percentage PDEF penetration (about10% at cap as a USER-FLOATED target, not exact locked formula). The permanent **Ranged Damage Aura** and 80%-per-target piercing **Power Shot** are now **USER-APPROVED ROSTER MEMBERS**, along with the other four skills. All 150 skill-rank points are earned 1 per level 1–150. Exact per-ability caps/rank gates and several damage/resource numbers remain open. The **Marksman class name and the choice of Ranger as its parent in this rollout are USER CONFIRMED**. A precision-focused, longer-ranged longbow archetype was discussed in Ranger's earlier Tier II interviews as an **IDEA**; it is NOT YET an approved detailed Tier III skill set or a numerical range. Questions below are open, with suggested directions clearly marked as suggestions. Do not confuse this with an already implemented Tier III class.
 
 **Source documents:** [Tier III coverage roadmap](../TIER3_ONE_PER_TIER2_ROADMAP.md), [Ranger Tier II design](RANGER_TIER2_DESIGN.md), [Class Progression](../CLASS_PROGRESSION.md), [Stats and Damage](../STATS_AND_DAMAGE.md).
 
@@ -132,3 +132,82 @@ With normal Marksman class bow reach **11m** at 0 Bow Mastery and approved **15m
 5. **150-point skill allocation:** Initial designer suggestion to review: **Aimed Shot34 / Arrow Rain28 / Bow Mastery20 / Strafe28 / Ranged Damage Aura16 / Power Shot24 =150**; Bow Mastery20 gives exactly **+0.2m per purchased rank**, reaching15m. Strafe28 with floated +2%/rank gives +56% attack speed/−56% move speed and `ceil(1+28/5)=7s` at cap. Aura16 implies a 16% potential ranged damage group aura (significant! check raid/party balance). Do you want those caps or to redistribute? Need subsequently author and audit exact eligibility gates.
 
 **Important:** The parent Ranger's original class skills, 80 ranks, mark and 11m basic range remain unchanged. The new six-skill roster is user-approved, but exact costs, damage, crit/defense, level1 base stats/growth, Mana profile, visuals, advancement teacher/quest and Unity implementation remain unapproved/not implemented in this design round.
+
+
+## Round 3 — 2026-11-25 (LATEST USER-APPROVED CAPS, AURA, STRAFE AND SHOT BEHAVIOR)
+
+All five user answers are incorporated. The user's first answer is the **sole authoritative rank-redistribution instruction**, and answer 5 explicitly points back to it. This section **supersedes** earlier Round 2 statements suggesting bonus Aimed Shot critical chance, possible aura buffs to ranged *skills*, Power Shot using identical autoattack range, or previous 34/28/20/28/16/24 proposed caps.
+
+### Exact user-selected ranks: 150 total
+
+Starting designer proposal was **Aimed34 / Arrow Rain28 / Bow Mastery20 / Strafe28 / Aura16 / Power Shot24**.
+Apply user's movements **in order**:
+
+1. Increase **Strafe 28→30** by moving **2 from Aimed Shot 34→32**.
+2. Move **2 MORE from Aimed Shot 32→30** to **Ranged Damage Aura 16→18**.
+3. Move **2 from Arrow Rain 28→26** to **Ranged Damage Aura 18→20**.
+4. Move **1 from Arrow Rain 26→25** to **Power Shot 24→25**.
+5. Bow Mastery unchanged at **20**.
+
+| Ability | USER-APPROVED FINAL MAX RANK | Status |
+| --- | ---: | --- |
+| **Aimed Shot** | **30** | Ranged Physical precision attack, longer windup, percentage PDEF ignore, normal crit |
+| **Arrow Rain** | **25** | Ground multiwave Physical ranged ability, no mark requirement |
+| **Bow Mastery** | **20** | Range AGI/crit passive; **+0.2m base attack reach PER purchased mastery rank** (11m at0, 15m at20); keep ordinary ranged basic + Aimed crit permission |
+| **Strafe** | **30** | Speed-for-mobility timed self buff |
+| **Ranged Damage Aura** | **20** | Permanent ranged basic-attack damage aura, dynamic radius, strongest same-name only |
+| **Power Shot** | **25** | Piercing line Physical ranged skill, 1.5m wide, solid-wall stops, auto range+1m |
+| **TOTAL** | **150** | **One spendable class skill point per Tier III Marksman level1–150** |
+
+The **individual purchased-rank level eligibility gates and ability first-unlock levels are NOT YET APPROVED**. Design/audit them separately using approved caps, with strict rank order and spendability at every class level1–150. None of Ranger Tier II's historical 80 skill purchases transfer automatically into Marksman.
+
+### MARKSMAN3-006 — Strafe: numerical speed/duration now USER APPROVED
+
+The user says "**Strafe should have 30 levels, but keep the values**", referencing the previously proposed `+2% attack speed/rank`, its exactly matching movement-speed penalty and `ceil(1 + purchasedRank/5)` seconds. These are now CONFIRMED for first playtest:
+
+- For purchased Strafe rank **r=1..30**, **attack speed +2r percentage points**, **movement speed −2r percentage points** for **`ceil(1+r/5)` seconds**.
+- At rank1 **+2% AS/−2% MS 2s**, rank10 **+20%/−20% 3s**, rank20 **+40%/−40% 5s**, rank30 **+60%/−60% 7s**.
+- It does **not** allow attacking while walking/running; Marksman remains a stationary archer. Slowing is actual movement-speed reduction if repositioning during the buff, not a root. Percentages apply to ordinary speed modifier pipeline (exact stacking with other sources / speed floors under global movement rules).
+- Cooldown, Mana cost, animation, interruption, reactivation and interaction with attack-speed caps are **still OPEN**, and should not be fabricated as already approved.
+
+### MARKSMAN3-007 — Permanent aura: ALL allied ranged ATTACKS, NO SKILLS, strongest-only
+
+- Permanent **passive** Ranged Damage Aura potency was originally **suggested at +1% ranged attack damage per aura skill rank**; Round3 confirms **what it affects and how it stacks**, not an explicitly final numerical percentage. Treat `+1%×auraRank` as the retained FIRST-PLAYTEST POTENCY CANDIDATE pending final signoff, yielding possible **+20%** at aura rank20.
+- It affects **ranged BASIC/AUTOATTACK damage from ALL eligible allied units with ranged attacks** within range. This includes other allied ranged heroes and appropriate allied ranged summons/units, and may include owner Marksman's ranged normal attacks under standard friendly self-inclusion. Ordinary autoattack definition governs eligibility rather than whether the actor happens to be standing far away.
+- **NOT SKILLS**: No buff to Aimed Shot, Arrow Rain waves, Power Shot, Exploding Arrow or any other active ability damage; no automatic spell damage buff, healing, ground DoTs or ranged spell damage merely because skill uses a projectile. If an ability calls a generic basic attack event, the implementation must distinguish the **actual BASIC hit from skill-specific damage** to avoid double benefits; exact engine semantics should be tested.
+- **NONSTACKING:** Multiple sources of the **same named Ranged Damage Aura** in overlapping range grant **ONLY THE STRONGEST eligible effect**. Prefer highest active damage bonus magnitude/rank, with deterministic tie selection; no additive/multiplicative stacking of identical aura names.
+- Radius is always the **current Marksman BASIC/AUTOATTACK reach**, not a separately authored fixed 12m aura. Bow Mastery r=0→20: `basicReach=11+0.2r` metres, `auraRadius=basicReach` (11m→15m), live updated on passive rank purchase/equipment/stat changes where ordinary class effective range applies. Aura strength rank is independent of Bow Mastery rank.
+
+### MARKSMAN3-008 — Aimed Shot: NO SPECIAL CRIT, percentage-based Physical Defense penetration
+
+- Round2's "**increased critical chance**" was **EXPLICITLY REVERSED**: user changed mind and says **"not improved crit chance or crit bonus, just have the normal crit chance and crit damage apply to the shot as well"**.
+- Hence Aimed Shot can critically hit using **its usual applicable crit chance and crit damage**, including the ordinary Bow Mastery opt-in crit rules as they apply to the basic/Aimed pair; **NO Aimed-Shot-specific bonus chance and NO Aimed-Shot-specific crit damage multiplier**.
+- Retain **LONGER WINDUP** and meaningful **PERCENTAGE of target Physical Defense ignored**, not flat PDEF points. Working high-rank balance target: **around 10% of target PDEF ignored at Aimed Shot rank30**, as user said "**like 10% at max rank or something**". Exact rank curve, whether r1 starts at 0/0.33/other and effects of boss resistance are **NOT YET STRICTLY LOCKED NUMERICALLY**. Suggested candidate `PDEF_ignoredPct(r)=0.10*(r/30)` for r1..30 (1/3 percentage point per rank) pending review. Do not silently change Physical Defense with a permanent debuff; this is a per-Aimed-Shot mitigation calculation.
+- Damage remains **ranged Physical AGI-based**, independent of Hunter's Mark/Hawk Dive. Exact damage formula, whether default accuracy-miss rules apply, cooldown, Mana cost and windup length remain to be designed.
+
+### MARKSMAN3-009 — Power Shot: 1m extra reach, 1.5m wide, blocked by solid walls
+
+- **Base Power Shot reach 12 metres**, **current autoattack reach +1 metre**, extending with identical Bow Mastery EXTRA RANGE; with mastery rank0→20 at +0.2m/rank, `PowerShotReach=12+0.2×BowMasteryRank`, hence **12m→16m**. This does **NOT** increase Marksman's normal basic attack range beyond its fixed 15m maximum.
+- **PROJECTILE WIDTH = 1.5 metres** along its damaging line (precise capsule/rectangle hit detection and collision tie priority follow shared combat geometry when implemented).
+- **SOLID WORLD WALLS STOP the projectile**. No piercing through solid cover, cliffs or blocking terrain; no hit behind the first solid obstruction. Does pierce successive ENEMY UNITS in unobstructed line.
+- Approved previous compound falloff remains unchanged: sequential distinct enemies in collision order receive `rawHit(n)=BasePowerShotRaw×0.8^(n-1)` (first100%, second80%, third64%, fourth51.2%, etc.); each victim's own Physical Defense and other applicable mitigation apply afterward. No implicit hit more than once per enemy per projectile.
+- Mana, cooldown, cast/windup/channel timing, initial raw damage/rank AGI scaling, projectile speed, crit eligibility and maximum units pierced remain open. If changing projectiles from aiming at an enemy to a cursor direction requires design, choose and confirm later; do not author new shooting controls here.
+
+### Resulting six-skill design summary, prioritizing current decisions
+
+- **Aimed Shot r30:** stationary longer windup, regular eligible crit and crit multiplier, percent PDEF ignored (~10% at cap as target), no Hunter's Mark.
+- **Arrow Rain r25:** retain the stationary sky-arrow channel and successive area waves as the class foundation; stronger Tier III formulas to design.
+- **Bow Mastery r20:** AGI/crit/range passive; **11m +0.2m per rank** to 15m; buffs radius of the aura and length of Power Shot by exactly the range gained.
+- **Strafe r30:** **+2%AS/−2%MS/rank**, duration `ceil(1+r/5)` secs (cap +60/−60 for7s).
+- **Ranged Damage Aura r20:** permanent, all allied ranged BASIC attacks only, never active-skill damage; strongest same-name aura wins; radius11m→15m.
+- **Power Shot r25:** Physical piercing line, width1.5m, effective reach12m→16m, stops at walls, raw per victim D,0.8D,0.64D,...
+
+### Round 4 next FIVE open design questions (NOT YET USER APPROVED)
+
+1. **Aimed Shot percent PDEF:** Shall we lock exact **`PDEF ignored = 10%×(AimedShotRank/30)`**, reaching 10% at rank30? Or prefer, e.g., **5% at rank1→20% at rank30**? What windup length should it have, e.g. 1.0s or 1.5s?
+2. **Bow Mastery AGI + crit:** Should it retain Tier II's **+2 AGI and +1 percentage point applicable basic/Aimed crit chance PER mastery rank** with the same **1.4× crit damage**, or increase this as a Tier III evolution? (+0.2m range/rank is already fixed.)
+3. **Aura potency:** Finalize the originally floated **+1% ranged BASIC damage per aura rank**, rank20=**+20%** for eligible ranged basic attacks? Should the Marksman himself benefit (default recommendation: YES), alongside all other allied ranged attackers/summons?
+4. **Power Shot damage and criticals:** Should it be a **heavy AGI-scaling Physical hit without crit** (simpler), or use normal applicable crit on each enemy? Does its target mitigation occur separately after each 80% raw reduction (current approved interpretation)?
+5. **First-unlock levels / progression:** Shall the six skills become available at **Aimed Shot Lv1 / Bow Mastery Lv1 / Strafe Lv1 / Arrow Rain Lv5 / Power Shot Lv7 / Aura Lv10**, then design and audit **all 150 per-rank level eligibility gates** against the approved 30/25/20/30/20/25 caps? Other unlock level arrangements welcome.
+
+**Source and scope:** these decisions are from user Round3, not Unity implementation. Previous Round2 history remains for audit, but superseded statements should NOT appear as current design. Advance Greatblade→Berserker only AFTER the Marksman design is completed, following [coverage roadmap](../TIER3_ONE_PER_TIER2_ROADMAP.md).
