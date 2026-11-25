@@ -924,3 +924,14 @@ Miss chance is expressed as an explicit percentage. Ordinary miss-chance modifie
 A **shared base regen component** is accepted in principle. Previous proposed equation `Global Base Regen +0.10×SPR` is a **candidate**, but the user has **not supplied an exact base regen constant or explicitly settled the final SPR coefficient**. Audit all affected classes, propose/tune those same global regeneration parameters and test them together. Do not silently choose different INT/SPR coefficients per actor. Preserve non-Mana resource semantics and class-specific base Mana as separate parameters.
 
 See [Marksman Tier III Round 8](classes/MARKSMAN_TIER3_DESIGN.md) for the linked simultaneous implementation request and approved initial rank-scaling damage formulas.
+
+## 2026-11-25 — Round 9 approved shared Mana baseline
+
+The user explicitly approves these two **GAME-WIDE Mana-user formulas FOR INITIAL PLAYTEST**:
+
+- `MaximumMana = ClassBaseMana + 5 × INT`
+- `ManaRegenPerSecond = 4 + 0.1 × SPR`
+
+The **same** numeric Mana/INT and Mana-regeneration/SPR coefficients apply to every Mana-using class, not uniquely tuned per class asset. Class starting/base Mana, starting INT, INT growth, gear and skill costs may still vary. Existing class-specific resource types other than Mana retain their own rules. These coefficients can be retuned globally following playtests; **+5/INT is the initial approved minimum target**, not a permanent upper bound.
+
+**Coordinated implementation requirement:** implement the universal Mana refactor **together with** Ranger→Marksman Tier III first-playtest implementation and Ranger basic +1.0×AGI correction. Audit affected current class resources (Mage, Priest, Psion evolutions and any other Mana users) for regressions, cooldown/cost affordability and state replication. **Documentation update ≠ implementation.** See [Marksman Round 9](classes/MARKSMAN_TIER3_DESIGN.md).
