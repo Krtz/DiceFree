@@ -8,6 +8,8 @@ The user explicitly chose: **"try to make one tier three per class so all classe
 
 This means **at least one playable Tier III advancement choice for EVERY one of the eight normal Tier II World 1 classes**, before spending design time on numerous extra Tier III branches. **NOT** an arbitrary restriction of one Tier III *maximum* per Tier II. Existing extra evolutions remain available and future branches may be added later.
 
+**2026-11-25 MARKSMAN ROUND 1 USER DECISIONS (latest):** Ranger → Marksman is confirmed as a **stationary AGI ranged damage dealer** using bows, **11m base range upgraded by skill ranks up to 15m**, favoring longbows but still equipping shortbows. **NO Hawk Dive and NO Hunter's Mark** on Marksman. Retains **Aimed Shot, Arrow Rain, Bow Mastery**; adds **Strafe** attack-speed buff with movement-speed tradeoff (illustrative +2% attack speed/rank, duration `ceil(1+rank/5)` seconds, numerical strength not fully locked). **Ranged-damage aura** and **line-piercing Power Shot with per-enemy damage falloff** are user-floated potential additions, not yet finalized abilities. Beastmaster later should favor shortbows (user repeated "still able to equip shortbows" for second category; other permitted bow family needs clarification during Beastmaster work). Final full class roster and rank caps/gates not yet approved. Latest user answers and next five questions: [Marksman Tier III Round1](classes/MARKSMAN_TIER3_DESIGN.md).
+
 **Fixed immediate order:**
 1. **Ranger → Marksman**, first new Tier III design round NOW. See [Marksman Tier III design](classes/MARKSMAN_TIER3_DESIGN.md).
 2. **Greatblade → Berserker**, immediately after the Marksman design phase.
