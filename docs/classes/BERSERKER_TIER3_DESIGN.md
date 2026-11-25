@@ -84,3 +84,27 @@ Potential DiceFree tank identities:
 5. **Identity/tank lineage:** Tentatively reserve **Swordmaster→Samurai**, **Warbringer→Warlord**, old **secret hybrid**; decide whether **Juggernaut remains Defender** or becomes a separate Greatblade-derived tank and whether Berserker retains Greatsword Mastery in evolved form.
 
 **Reminder:** after every completed answer round, update relevant docs, COMMIT and PUSH.
+
+## Round 3 — 2026-11-25 (USER ANSWERS: axes, Rage spending, missing-HP bonus, elemental shield, branching)
+
+**USER-APPROVED first-playtest decisions, subject to balancing:**
+
+1. **Weapon specialty changed:** Berserker **favors two-handed AXES**, but **may also equip any eligible two-handed SWORDS**. This updates Round1's preferred greatswords. Future Swordmaster/sword and Samurai/katana concepts are separately **tentative**, not finalized equipment policy for those classes.
+2. **Rage is a SPENDABLE resource**, not an additional passive damage multiplier simply for being held. Rage is gained by dealing and receiving damage (Round1), with Heavy Rhythm increasing generation and retention (Round2). How much gained per damage, resource cap, decay, skill costs and spending outputs remain open. Do not combine default stored-Rage damage multipliers with the already approved low-HP modifier.
+3. **Gradual missing-HP damage:** Accept **up to +40% outgoing damage at 1% current HP** as a **first-playtest target**, smoothly scaling with HP missing, not discrete thresholds. Suggested mathematical interpolation candidate `bonus = 0.40 × clamp((1-currentHP/maxHP)/0.99,0,1)`, pending precise formula/rounding/interaction tuning. At full HP bonus =0; at 1% HP bonus=+40%; no unbounded amplification at 0 HP. Ensure useful DPS at full HP, and combat testing with healing/shields.
+4. **Survival ability concept:** **Spend Rage to gain an ELEMENTAL SHIELD lasting X seconds** (element, cap/amount, cost, duration, cooldown and whether the shield follows global matching/nonmatching elemental rules still open). Rather than adding conventional lifesteal, use bounded shield scaling. User offered an alternative where any shield REMAINING ON EXPIRY turns into healing, then suggested perhaps **reserve that shield-to-heal effect for a Tier IV Berserker evolution**. This Tier IV reservation is **a suggestion rather than a confirmed trigger/rule**; Tier III shield itself is approved. Avoid asserting healing-on-expiry already belongs to Tier III or Tier IV until resolved.
+5. **Sibling evolution identities accepted in principle:** **Berserker** (sustained Rage/missing-HP melee), future **Swordmaster→Samurai** (technique), future **Warbringer→Warlord** (Battle Cry and deployable buff banners), plus a secret *Witcher-style* same-Echo martial/magic convergence candidate (working name requires IP-distinct alternative). The latter three are **future lineage intentions, not approved ability numbers/implementation**. **Juggernaut may be Defender OR Greatblade** depending on future Defender evolution coverage. User does **not** require perfectly symmetrical numbers of branches but wants to avoid extremely lopsided offerings, e.g. one ancestor gets 1 while another gets 37; meaningful differences matter more than numeric equality.
+
+### Verified previous Defender evolution candidates
+
+The historic [Tier II Core Classes v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md) mentions **Guardian (party protection), Templar/Paladin (martial magic, possible convergence), Juggernaut (bruiser)**. [v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md) also uses Guardian, Templar, Juggernaut; later [Tier III Roadmap](../TIER3_ONE_PER_TIER2_ROADMAP.md) proposes **Guardian or Vanguard** and reserves **damage-storing/retaliation Iron Guard-inspired mechanics** for a later Defender path. None of these Defender Tier III class names is finalized by Round3. Potential distinct tank design identities: Guardian ally protection, Templar elemental/magical mitigation and support, Vanguard mobility/interception, Juggernaut damage delay/poise and punishment management. Avoid assigning the same combat mechanic to several classes automatically.
+
+### Next design decisions (NOT YET APPROVED)
+
+- Decide the **element** of Rage shield, cap/duration/cooldown and resource cost; confirm whether its remaining strength converts into HP **only at Tier IV** (possibly only on natural expiration).
+- Decide Rage generation/maximum/decay, spent amounts and whether Heavy Rhythm modifies both gain and decay.
+- Decide exact bounded +40% missing-HP multiplier and interactions with skills, shields and global damage rules.
+- Decide what evolved Greatsword Mastery becomes now that Berserker favors two-handed axes; possibly replace with two-handed weapon mastery while keeping shared greatsword eligibility.
+- Audit total Tier III skill rank cap and unlock/advancement quest later.
+
+**Documentation-only interview:** No Unity implementation, asset, build or QA result is implied.
