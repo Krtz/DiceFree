@@ -1,0 +1,9 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\WorldTwoRoutes-20261125-094008\\DiceFree.exe",
+  "executableSha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "runtimeChecks": 97,
+  "actualTreeFadeChecks": 2,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "note": "WorldTwoArrival scene records normalized after copying from QA. New asset hashes match QA; static authoring also verifies no private source dependencies. Existing package settings and recovery work excluded."
+}

@@ -1,0 +1,25 @@
+World 2 · Ashfall Reach/Ashfall trail | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Ashfall trail
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Road to Cinderwatch | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Road to Cinderwatch
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford timber bridge/Walkable timber bridge | speed=MISSING | pos=(-180.36, 1.10, -62.00) | mesh=Cube
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford timber bridge/Solid bridge railing | speed=MISSING | pos=(-180.36, 2.05, -64.90) | mesh=Cube
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford timber bridge/Solid bridge railing | speed=MISSING | pos=(-180.36, 2.05, -59.10) | mesh=Cube
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford timber bridge/Bridge footing | speed=MISSING | pos=(-187.76, -0.10, -62.00) | mesh=Cube
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford timber bridge/Bridge footing | speed=MISSING | pos=(-172.96, -0.10, -62.00) | mesh=Cube
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford bridge and riverbank trail | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Willowford bridge and riverbank trail
+World 2 · Ashfall Reach/Cinderwatch and the two pips/Steamroot Vale/Willowford/Willowford south street | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Willowford south street
+World 2 · Ashfall Reach/World Two full face/Road to the Basalt Needle | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Road to the Basalt Needle
+World 2 · Ashfall Reach/World Two full face/Road to Ember Crown | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Road to Ember Crown
+World 2 · Ashfall Reach/World Two full face/Southern world circuit | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Southern world circuit
+World 2 · Ashfall Reach/World Two full face/Western river road | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Western river road
+World 2 · Ashfall Reach/World Two full face/Southern Steamroot timber bridge/Walkable timber bridge | speed=MISSING | pos=(-182.90, 1.10, -318.00) | mesh=Cube
+World 2 · Ashfall Reach/World Two full face/Southern Steamroot timber bridge/Solid bridge railing | speed=MISSING | pos=(-182.90, 2.05, -320.90) | mesh=Cube
+World 2 · Ashfall Reach/World Two full face/Southern Steamroot timber bridge/Solid bridge railing | speed=MISSING | pos=(-182.90, 2.05, -315.10) | mesh=Cube
+World 2 · Ashfall Reach/World Two full face/Southern Steamroot timber bridge/Bridge footing | speed=MISSING | pos=(-190.30, -0.10, -318.00) | mesh=Cube
+World 2 · Ashfall Reach/World Two full face/Southern Steamroot timber bridge/Bridge footing | speed=MISSING | pos=(-175.50, -0.10, -318.00) | mesh=Cube
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach - city of the hearth/Anvilreach paved exchange | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach paved exchange
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach - city of the hearth/Anvilreach paved main avenue | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach paved main avenue
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach - city of the hearth/Anvilreach paved guild road | speed=MISSING | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach paved guild road
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach crown trade road | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach crown trade road
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach northern trade road | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach northern trade road
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach foundry avenue | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach foundry avenue
+World 2 · Ashfall Reach/Anvilreach and the southern biomes/Anvilreach artisans lane | speed=15 | pos=(0.00, 0.00, 0.00) | mesh=Anvilreach artisans lane

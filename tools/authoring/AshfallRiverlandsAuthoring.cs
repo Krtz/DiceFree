@@ -196,6 +196,7 @@ public static partial class AshfallReachExpansionAuthoring
         var deck=Part(bridge,"Walkable timber bridge",Vector3.zero,new(23,.35f,6),oak);
         deck.gameObject.layer=WalkableLayer;
         deck.gameObject.AddComponent<BoxCollider>().center=Vector3.up*.34f;
+        WorldTwoRouteAuthoring.Configure(deck.GetComponent<MeshFilter>());
         for(int i=0;i<43;i++)
             Part(bridge,"Weathered deck plank",new(-11.3f+i*.535f,.23f,0),new(.51f,.12f,5.9f),i%6==0?oak:cedar);
         for(int side=-1;side<=1;side+=2)

@@ -1,0 +1,25 @@
+{
+    "surfaces": 18,
+    "added": 10,
+    "bonusPercent": 15,
+    "routes": [
+        "Ashfall trail",
+        "Road to Cinderwatch",
+        "Cinderwatch to Willowford",
+        "Walkable timber bridge",
+        "Willowford bridge and riverbank trail",
+        "Willowford south street",
+        "Road to the Basalt Needle",
+        "Road to Ember Crown",
+        "Southern world circuit",
+        "Western river road",
+        "Walkable timber bridge",
+        "Anvilreach paved exchange",
+        "Anvilreach paved main avenue",
+        "Anvilreach paved guild road",
+        "Anvilreach crown trade road",
+        "Anvilreach northern trade road",
+        "Anvilreach foundry avenue",
+        "Anvilreach artisans lane"
+    ]
+}

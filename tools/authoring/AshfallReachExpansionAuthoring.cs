@@ -246,7 +246,7 @@ public static partial class AshfallReachExpansionAuthoring
         mesh.SetVertices(vertices);
         mesh.SetUVs(0, uv);
         mesh.SetTriangles(triangles, 0);
-        Surface(parent, name, SaveMesh(mesh), trail);
+        WorldTwoRouteAuthoring.Configure(Surface(parent, name, SaveMesh(mesh), trail).GetComponent<MeshFilter>());
     }
 
     private static void BuildSettlement(Transform parent)

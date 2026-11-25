@@ -136,7 +136,7 @@ public static partial class AshfallReachExpansionAuthoring
     {
         int nx=Mathf.CeilToInt(rect.width),nz=Mathf.CeilToInt(rect.height);var v=new List<Vector3>();var uv=new List<Vector2>();var indices=new List<int>();
         for(int z=0;z<=nz;z++)for(int x=0;x<=nx;x++){var p=rect.position+new Vector2(x/(float)nx*rect.width,z/(float)nz*rect.height);v.Add(Ground(p)+Vector3.up*.18f);uv.Add(p*.35f);if(x<nx&&z<nz){int i=z*(nx+1)+x;indices.AddRange(new[]{i,i+nx+1,i+1,i+1,i+nx+1,i+nx+2});}}
-        var mesh=new Mesh{name=name};mesh.SetVertices(v);mesh.SetUVs(0,uv);mesh.SetTriangles(indices,0);mesh.RecalculateNormals();Surface(city,name,Save(mesh,Industry+name+".asset"),material);
+        var mesh=new Mesh{name=name};mesh.SetVertices(v);mesh.SetUVs(0,uv);mesh.SetTriangles(indices,0);mesh.RecalculateNormals();WorldTwoRouteAuthoring.Configure(Surface(city,name,Save(mesh,Industry+name+".asset"),material).GetComponent<MeshFilter>());
     }
     public static void FinishIndustry()
     {
@@ -178,8 +178,7 @@ public static partial class AshfallReachExpansionAuthoring
     }
     static void IndustryStreet(string name,IReadOnlyList<Vector2> route,float halfWidth)
     {
-        Road(industryRoot,name,route,halfWidth);var node=industryRoot.Find(name);node.gameObject.AddComponent<TravelSurface>().Configure("travel.anvilreach."+name,
-            Load<TravelSurfaceDefinition>("Assets/_DiceFree/Settings/Travel/Cornberg dirt road.asset"),node.GetComponent<MeshFilter>(),new Bounds(Vector3.zero,Vector3.one*10000));
+        Road(industryRoot,name,route,halfWidth);
     }
     static int ClearIndustrySpace(Transform world)
     {

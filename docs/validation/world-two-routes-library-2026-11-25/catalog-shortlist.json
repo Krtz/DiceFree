@@ -1,0 +1,155 @@
+[
+  {
+    "name": "AA Low Poly Medieval Environment",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\AHMET ALP\\3D ModelsEnvironments\\AA Low Poly Medieval Environment.unitypackage",
+    "models": 855,
+    "prefabs": 855,
+    "candidatePaths": [
+      "Assets/AA Low Poly Medieval Environment/Models/Table_5_White.fbx",
+      "Assets/AA Low Poly Medieval Environment/Prefabs/Buckets/Bucket_3_Brown.prefab",
+      "Assets/AA Low Poly Medieval Environment/Prefabs/Books/Book_1_White.prefab",
+      "Assets/AA Low Poly Medieval Environment/Models/Terrain_4_Red.fbx",
+      "Assets/AA Low Poly Medieval Environment/Models/Plate_5_White.fbx"
+    ]
+  },
+  {
+    "name": "Basic Natures Models Pack",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Double Impact Workshop\\3D ModelsEnvironments\\Basic Natures Models Pack.unitypackage",
+    "models": 30,
+    "prefabs": 30,
+    "candidatePaths": [
+      "Assets/NaturePack/Prefabs/Tree/Tree13.prefab",
+      "Assets/NaturePack/Prefabs/Tree/Tree9.prefab",
+      "Assets/NaturePack/Prefabs/Tree/Stump.prefab",
+      "Assets/NaturePack/Resources/Objects/timber.FBX",
+      "Assets/NaturePack/Prefabs/Bush/Bush2.prefab"
+    ]
+  },
+  {
+    "name": "Cursed Cozy Village Free Pack",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Serwus Studio\\3D ModelsEnvironments\\Cursed Cozy Village Free Pack.unitypackage",
+    "models": 23,
+    "prefabs": 23,
+    "candidatePaths": [
+      "Assets/SerwusStudio/Cursed Cozy Village/Free Starter Pack/Models/Roof_full.fbx",
+      "Assets/SerwusStudio/Cursed Cozy Village/Free Starter Pack/Prefabs/Plank_v3.prefab",
+      "Assets/SerwusStudio/Cursed Cozy Village/Free Starter Pack/Models/Roof_half.fbx",
+      "Assets/SerwusStudio/Cursed Cozy Village/Free Starter Pack/Models/plank_3.fbx",
+      "Assets/SerwusStudio/Cursed Cozy Village/Free Starter Pack/Prefabs/Irionbound_2.prefab"
+    ]
+  },
+  {
+    "name": "EMBERHOLD - FREE - Low Poly Modular Dungeon Kit",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\ForgeWorks\\3D ModelsEnvironmentsDungeons\\EMBERHOLD - FREE - Low Poly Modular Dungeon Kit.unitypackage",
+    "models": 205,
+    "prefabs": 201,
+    "candidatePaths": [
+      "Assets/LowPolyDungeonFree/Prefabs/01_Structure/SM_LPD_Struct_ArchFree_01.prefab",
+      "Assets/LowPolyDungeonFree/Prefabs/05_Containers/SM_LPD_Crate_CrateOpen_01.prefab",
+      "Assets/LowPolyDungeonFree/Models/01_Structure/SM_LPD_Struct_PillarSquare_01.fbx",
+      "Assets/LowPolyDungeonFree/Prefabs/05_Containers/SM_LPD_Crate_SackOpen_01.prefab",
+      "Assets/LowPolyDungeonFree/Prefabs/04_Lighting/SM_LPD_Light_ChandelierRing_01.prefab"
+    ]
+  },
+  {
+    "name": "Environment Forest - Low Poly 3D",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\LineAcroos\\3D ModelsEnvironments\\Environment Forest - Low Poly 3D.unitypackage",
+    "models": 131,
+    "prefabs": 131,
+    "candidatePaths": [
+      "Assets/lineAcross_ENV.forest/Prefabs/TreesPreFabs/tree_2c.prefab",
+      "Assets/lineAcross_ENV.forest/Prefabs/GrassFlowersPreFabs/Bush_3a.prefab",
+      "Assets/lineAcross_ENV.forest/Trees/tree_1c.fbx",
+      "Assets/lineAcross_ENV.forest/Logs/woodboard_5b.fbx",
+      "Assets/lineAcross_ENV.forest/Prefabs/RocksPreFabs/rock_3b_001.prefab"
+    ]
+  },
+  {
+    "name": "Kyles Rock Pack",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Kyle Fuji\\3D ModelsEnvironmentsLandscapes\\Kyles Rock Pack.unitypackage",
+    "models": 68,
+    "prefabs": 612,
+    "candidatePaths": [
+      "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Mossy Rocks 2/rock_2_tl.prefab",
+      "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Mossy Rocks 2/boulder_7_tl.prefab",
+      "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Arid Rocks 1/boulder_9_bl.prefab",
+      "Assets/Kyle's Rock Pack/Kyle Fuji/Prefabs/Snow Rocks 3/rock_7_tl.prefab",
+      "Assets/Kyle's Rock Pack/Kyle Fuji/Models/boulder_8_bl.fbx"
+    ]
+  },
+  {
+    "name": "Low-Poly Medieval Market",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\VanillaArt\\3D ModelsEnvironments\\Low-Poly Medieval Market.unitypackage",
+    "models": 116,
+    "prefabs": 158,
+    "candidatePaths": [
+      "Assets/Low-Poly Medieval Market/Prefabs/Weapons/dagger.prefab",
+      "Assets/Low-Poly Medieval Market/Models/section_04.fbx",
+      "Assets/Low-Poly Medieval Market/Prefabs/section_05.prefab",
+      "Assets/Low-Poly Medieval Market/Models/piece_of_cheese.fbx",
+      "Assets/Low-Poly Medieval Market/Models/FBX Weapon market/one_handed_sword.fbx"
+    ]
+  },
+  {
+    "name": "lowpoly medieval buildings",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Szymon ukaszuk\\3D ModelsEnvironmentsHistoric\\lowpoly medieval buildings.unitypackage",
+    "models": 21,
+    "prefabs": null,
+    "candidatePaths": [
+      "Assets/low poly medieval buildings/quarry.fbx",
+      "Assets/low poly medieval buildings/wall.fbx",
+      "Assets/low poly medieval buildings/tower.fbx",
+      "Assets/low poly medieval buildings/gate.fbx",
+      "Assets/low poly medieval buildings/stairs.fbx"
+    ]
+  },
+  {
+    "name": "Medieval Village Building Kit",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Mikes Digital Emporium\\3D ModelsEnvironments\\Medieval Village Building Kit.unitypackage",
+    "models": 2,
+    "prefabs": 285,
+    "candidatePaths": [
+      "Assets/Medieval Village Building Pack/Prefabs/Wood_Support_1.prefab",
+      "Assets/Medieval Village Building Pack/Prefabs/Window_2_Shutter.prefab",
+      "Assets/Medieval Village Building Pack/Prefabs/Wall_Roof_Support_Tall.prefab",
+      "Assets/Medieval Village Building Pack/Prefabs/Wall_Wood_2x2.prefab",
+      "Assets/Medieval Village Building Pack/Prefabs/Roof_Wood_Short_2x1.prefab"
+    ]
+  },
+  {
+    "name": "Stylised Fantasy House",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\Naasz Arts\\3D ModelsEnvironmentsFantasy\\Stylised Fantasy House.unitypackage",
+    "models": 1,
+    "prefabs": 1,
+    "candidatePaths": [
+      "Assets/NaaszArts/Fantasy House/FBX/FantasyHouse.fbx",
+      "Assets/NaaszArts/Fantasy House/Prefabs/FantasyHouse.prefab"
+    ]
+  },
+  {
+    "name": "Stylized Dungeon Props Pack",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\CobraGamesAssets\\3D ModelsEnvironmentsDungeons\\Stylized Dungeon Props Pack.unitypackage",
+    "models": 39,
+    "prefabs": 71,
+    "candidatePaths": [
+      "Assets/CobraGamesAssets/Stylized_Dungeon_Props_Pack/Models/Crate_Large_low.fbx",
+      "Assets/CobraGamesAssets/Stylized_Dungeon_Props_Pack/Models/Chest_Door_Right_low.fbx",
+      "Assets/CobraGamesAssets/Stylized_Dungeon_Props_Pack/Prefabs/Doors & Doorways/Cabinet_Door_Left.prefab",
+      "Assets/CobraGamesAssets/Stylized_Dungeon_Props_Pack/Prefabs/Props/Moss/Bed_Frame_Moss.prefab",
+      "Assets/CobraGamesAssets/Stylized_Dungeon_Props_Pack/Prefabs/Props/Moss/Barrel_Moss.prefab"
+    ]
+  },
+  {
+    "name": "Willowwood - Free Low Poly Nature Pack",
+    "package": "C:\\Users\\Axel\\AppData\\Roaming\\Unity\\Asset Store-5.x\\BluBlu Games\\3D ModelsEnvironmentsFantasy\\Willowwood - Free Low Poly Nature Pack.unitypackage",
+    "models": 61,
+    "prefabs": 67,
+    "candidatePaths": [
+      "Assets/BluBlu Games/Low Poly Forest Mini Pack/Models/SM_Rock_11.fbx",
+      "Assets/BluBlu Games/Low Poly Forest Mini Pack/FX/Fire.prefab",
+      "Assets/BluBlu Games/Low Poly Forest Mini Pack/Models/Props/SM_Rune_01.fbx",
+      "Assets/BluBlu Games/Low Poly Forest Mini Pack/Models/Environment/Nature/SM_Grass_02.fbx",
+      "Assets/BluBlu Games/Low Poly Forest Mini Pack/Prefabs/SM_StoneWall_03.prefab"
+    ]
+  }
+]

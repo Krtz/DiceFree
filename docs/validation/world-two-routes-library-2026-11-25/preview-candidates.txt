@@ -1,0 +1,10 @@
+Assets/the_wood_cabin/Prefabs/THE_WOOD_CABIN_LOD0.prefab | bounds=(9.52, 7.79, 12.12) | renderers=39 | missingMeshes=39 | enabled=39
+Assets/Low-Poly Medieval Market/Prefabs/section_06.prefab | bounds=(2.00, 1.07, 0.76) | renderers=1 | missingMeshes=0 | enabled=1
+Assets/Low-Poly Medieval Market/Prefabs/stand_01.prefab | bounds=(2.00, 1.27, 0.93) | renderers=8 | missingMeshes=0 | enabled=8
+Assets/Low-Poly Medieval Market/Prefabs/stand_02.prefab | bounds=(2.05, 1.15, 1.02) | renderers=23 | missingMeshes=0 | enabled=23
+Assets/Low-Poly Medieval Market/Prefabs/table_01.prefab | bounds=(2.24, 0.97, 0.96) | renderers=1 | missingMeshes=0 | enabled=1
+Assets/_DiceFree/Art/World/VisualBatch01/Models/bridge_01.fbx | bounds=(2.75, 1.45, 4.44) | renderers=17 | missingMeshes=0 | enabled=17
+Assets/_DiceFree/Art/World/VisualBatch01/Models/bridge_02.fbx | bounds=(2.75, 1.45, 4.44) | renderers=17 | missingMeshes=0 | enabled=17
+Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Willow.fbx | bounds=(4.20, 4.49, 3.91) | renderers=3 | missingMeshes=0 | enabled=3
+Assets/_DiceFree/Art/World/CornbergBatch/Trees/Tree_Birch.fbx | bounds=(2.81, 6.61, 3.12) | renderers=4 | missingMeshes=0 | enabled=4
+Assets/_DiceFree/Art/World/VisualBatch01/Models/anvil_02.fbx | bounds=(1.39, 0.60, 0.45) | renderers=3 | missingMeshes=0 | enabled=3

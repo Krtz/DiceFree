@@ -385,7 +385,8 @@ public static class IronpineSouthPassAuthoring
         mesh.SetUVs(0,uv);
         mesh.SetTriangles(triangles,0);
         SaveMesh(mesh);
-        Surface(parent,name,Load<Mesh>(Output+name+".asset"),path);
+        var surface=Surface(parent,name,Load<Mesh>(Output+name+".asset"),path);
+        if(name=="Ashfall trail")WorldTwoRouteAuthoring.Configure(surface.GetComponent<MeshFilter>());
     }
 
     private static void BakeLanding(Transform root)

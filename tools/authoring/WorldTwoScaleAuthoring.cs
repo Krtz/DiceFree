@@ -53,14 +53,14 @@ public static partial class AshfallReachExpansionAuthoring
         foreach(Transform road in full.Cast<Transform>().Where(t=>t.GetComponent<MeshFilter>()!=null&&t.name.Contains("oad")||t.name=="Southern world circuit"))
         {
             var filter=road.GetComponent<MeshFilter>();if(filter==null)continue;
-            road.gameObject.AddComponent<TravelSurface>().Configure("travel.ashfall."+road.name,
-                Load<TravelSurfaceDefinition>("Assets/_DiceFree/Settings/Travel/Cornberg dirt road.asset"),filter,new Bounds(Vector3.zero,Vector3.one*10000));
+            WorldTwoRouteAuthoring.Configure(filter);
         }
         var vale=expansion.Find("Steamroot Vale");
         Object.DestroyImmediate(vale.Find("Cornberg river continuing across the south face").gameObject);
         BuildRiver(vale);
         var bridge=Object.Instantiate(vale.Find("Willowford timber bridge").gameObject,full);
         bridge.name="Southern Steamroot timber bridge";bridge.transform.localPosition=new Vector3(AshfallReach.RiverX(-318),1.10f,-318);
+        WorldTwoRouteAuthoring.Configure(bridge.transform.Find("Walkable timber bridge").GetComponent<MeshFilter>());
 
         var spring=expansion.Find("Cinderwatch/Cinderwatch spring");
         (spring.GetComponent<HealingArea>()??spring.gameObject.AddComponent<HealingArea>()).Configure(healing*5,5);
