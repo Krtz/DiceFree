@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ea032785b17084ca2f40a71e93f5bc, type: 3}
+  m_Name: Stormscale Leggings
+  m_EditorClassIdentifier: DiceFree.Items.Runtime::DiceFree.Items.ItemDefinition
+  stableId: item.crimson-crucible.stormscale-legs
+  displayName: Stormscale Leggings
+  icon: {fileID: 21300000, guid: 44def7c602418294185591b0fc42505f, type: 3}
+  slot: 4
+  handsRequired: 1
+  itemLevel: 55
+  rarityId: rarity.rare
+  sourceId: dungeon.crimson-crucible
+  questItem: 0
+  bound: 0
+  modelTestingItem: 0
+  canSell: 1
+  consumable: 0
+  restoreHealth: 0
+  restoreResourceId:
+  restoreResourceAmount: 0
+  allowedClassIds: []
+  flavor: Lightning-blue scale and deep cloth, marked by the stormcaller trial.
+  stats:
+    attributes:
+      vitality: 18
+      strength: 0
+      agility: 0
+      intelligence: 24
+      spirit: 8
+    physicalDefense: 14
+    magicalDefense: 26
+    attackSpeedPercent: 0
+    movementSpeedPercent: 0
+    regeneration: 0
+    basicAttackMaximumBonus: 0
+    basicAttackFlatBonus: 0

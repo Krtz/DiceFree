@@ -1,0 +1,11 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\CrimsonCrucible-20261125-091545\\DiceFree.exe",
+  "executableSha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "runtimeReviewBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\CrimsonCrucible-20261125-090151",
+  "deliveredLifecycleBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\CrimsonCrucible-20261125-091545",
+  "runtimeChecks": 137,
+  "deliveredLifecycleChecks": 17,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "note": "Cornberg scene records normalized after sync; only the new entrance was added. Review build and delivered build share gameplay code. Delivered build adds brighter icons and entrance ornament."
+}

@@ -1,0 +1,566 @@
+[
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden basic.asset",
+    "sha256": "402CC553BD0785DFB7B72FF0E485BC90962642CFCCEC2E8E810D805D3DEB38F3"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden basic.asset.meta",
+    "sha256": "506CD1A6C7996B01D9D1F1357F148AEC8BF9DE99C691823E6ABBB57406BE60B1"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden special.asset",
+    "sha256": "696F7596EEAE3839D59AFB429BA3B4ED505DF96FCC0D94C0B2CFEB9CFD293129"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden special.asset.meta",
+    "sha256": "F0707DE9F91942CC3FD799C8F2C2E377DAFA7EE0AF35DE95C8BA79AD16CBF87B"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden.asset",
+    "sha256": "2B245B392758BDB24B71177D5546A3ED80754D583BE0ADDB24DF4774A228F99C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bloomheart Thornwarden.asset.meta",
+    "sha256": "EC821B1E1C4C267BD56A1E240A0EB34143FFFFAA3E20FCA0C585611503BBABA5"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker basic.asset",
+    "sha256": "8516ECD559A83260CE44A91053E240CE37EFA71B1074A6232B633C994BB50F24"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker basic.asset.meta",
+    "sha256": "983FEA129AADCE706E6A07910AE760CE573DEFD62215B3867EAB7C2B3D50119C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker special.asset",
+    "sha256": "35BFACFCCCB5D38CC27BCE3C46AA234A95B948061C160B435C04DED98111AA83"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker special.asset.meta",
+    "sha256": "A92D640086A3FF2B6BE086FB4796BBEF9B4C2E6092101AF90AF03971B65F8805"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker.asset",
+    "sha256": "1E4CA2A999F0338D2743A068C129184CB6CECCBB512498DE57F0D302883ACAEE"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Bristlebreaker.asset.meta",
+    "sha256": "8A14C17FE8807630A139BC2789A7607E3BFB2001EB62C21836CE07B8E073228A"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 1 floor.mat",
+    "sha256": "08CB64DBEC9BA11BE8F59E1ECB485AC8E8C9B0B911FBD5AFFC7086E4790C6C9A"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 1 floor.mat.meta",
+    "sha256": "58E965452758DA71CBA546FC0BB04DB3DF3803D27AA3BBAA9CC6AF614A14013D"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 2 floor.mat",
+    "sha256": "EEDACFCC11F812BE9331FD555142C81BBB1EA08BA282B4D6DA48D1A12E2F312C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 2 floor.mat.meta",
+    "sha256": "E0841417FE416C3ECB72E949A21D3ED0C34AECA6D91A2A527A3A836C8BE1D34B"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 3 floor.mat",
+    "sha256": "EA77DCDF9751ED4738086FF461A470ED8169CBFDD2FB3956F4A4E909C37ABA80"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 3 floor.mat.meta",
+    "sha256": "3A4960D38688D79377E789C058E4BBDAE2B2F062BA2BDA02CB3E212FCF863115"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 4 floor.mat",
+    "sha256": "45B61DBDB0593B055E68B83F1A8BE60865ABEEA4903B1D4A42D96542C4A0B35D"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 4 floor.mat.meta",
+    "sha256": "08EF8EDB7B18840C214F6CA486449712AB848472833A4303CE7D80D2A5092A4B"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 5 floor.mat",
+    "sha256": "CD7E096933EB8C03E758873CC4F65EF066F73EDE644FEEA62E1397C99FA9439A"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 5 floor.mat.meta",
+    "sha256": "106A5742127F1C23AC6F246FB696A11F6086A1BFF88396ED4FD74B2375A6A375"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 6 floor.mat",
+    "sha256": "B1D8B743D3382B6AB10DB2300173C3ECA07DBE5897A02A4024A5EE5F44003F5F"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Cell 6 floor.mat.meta",
+    "sha256": "AE788242BAA7573BC0B39D822ED9E32F94CC641F4E7B490E4174866796BF5EE2"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign basic.asset",
+    "sha256": "D4F142AF5A53B4FD99B6F6122C645AFCAF80930D97D7D2F51141779032C1D3BB"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign basic.asset.meta",
+    "sha256": "87A5D75FAFB37C187299F0EE76D35156A888BB0FFB2B1FD30F9F8387A9ECD757"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign special.asset",
+    "sha256": "3B08B93FBD300E24DD424EEA4948955D74B9A111403E87E70505F3115F67A214"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign special.asset.meta",
+    "sha256": "6059E137ED8D238A7154EBA02FAE0494C07BF4945AECF96368C9FF7C5CDFD9DF"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign.asset",
+    "sha256": "732E6B3311D1F75A8CDCD473A9D8B468142C6C5DC52D233EE5E23E0275AF40FA"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crimson Sovereign.asset.meta",
+    "sha256": "BD9514F33A856CE272101764623A73459F64435EAA84A6AD950E8D7613FEE452"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible attack warning.mat",
+    "sha256": "6A5AEA57EDBE3C5141499BA9AC5053C276EC07EEFCF8D3C0A220B66BCBE3D7E2"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible attack warning.mat.meta",
+    "sha256": "B1446CDF0FB29D39C6CE386CF1BA37D2F84D88248FC4ABFE909AF96A66261575"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible black iron.mat",
+    "sha256": "7CDD6C9E03092DDCC39D240874E92C72F0D1423FFB9366C8F36EA02CA5134F2C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible black iron.mat.meta",
+    "sha256": "7FE2586DBFD79CE1F39C9A35384955667F5A20F87D3BC72C63BE01AB9757A732"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible cut stone.mat",
+    "sha256": "8806211DDBA53C445AAFF69B76CACA088BDE2D2357F76ED29E004C18B867418F"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible cut stone.mat.meta",
+    "sha256": "62A4F36E4199AA999E5F3E975EDD48AECBBF8CD62923BFA54BAF67C966495C63"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible dark masonry.mat",
+    "sha256": "F56D0936C4015D70057A03178076A68E7263D17559D5CC1BADEFB52E0962344B"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible dark masonry.mat.meta",
+    "sha256": "6CD696C614D030356C3AF0C677F94852BC50C93B1E35FAE026D2555890C2ECB5"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible living ruby.mat",
+    "sha256": "FA2DB620DF4C1E99285E73A2A9BD7CE84812BB3F4F174C9A330E1CD7EF180AB6"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible living ruby.mat.meta",
+    "sha256": "8E715C36C766471FC0260EC969D7C28F4407AFE867B5265EB7A5752247D9CA13"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible navigation.asset",
+    "sha256": "68448208CEE3A1CE8EB03AA5D5FA1765659C34F608A11CEBAD7A8F2204AD8F09"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible navigation.asset.meta",
+    "sha256": "9FE958C0715686B315295292CED635669703E66EB6761267E24BAA256B7CB69C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible old gold.mat",
+    "sha256": "2C150E2CD35A6DF274D22D7D520CD999958244E0E94CA47D45DF842BE7AD3A48"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible old gold.mat.meta",
+    "sha256": "6983D5F29605975CE3268F264F4F4B40ADE7AF7918D8FC69EFC1A2D65BC8570A"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible treasury.asset",
+    "sha256": "A2D4872FC08E932F05B952157F4A39F978840FFCDD3C446D6426D195BD058FEE"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Crucible treasury.asset.meta",
+    "sha256": "6E0F641E43E09B6AE2FC6A9CF96F628F2A47A076A53FD2DBD489E9E543B5C6B3"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha basic.asset",
+    "sha256": "4C4C47096ACA52A161C9AF2D709E58BA489A6BAED220A7C4252362505A90238C"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha basic.asset.meta",
+    "sha256": "B1DF23C66AABC6EC3FB504D976D133BB6FC67FDA56D09C613EC43413CDE7AEE5"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha special.asset",
+    "sha256": "B2CF507DD08E3A2917238325DC64DF2DCDC0553BA5783AB737F217B4CF0443B7"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha special.asset.meta",
+    "sha256": "7432C3C0798AE97A6AB66D2F1D3B5129FB12BC9B49C2390DC46C53471C37A675"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha.asset",
+    "sha256": "B7DDB8691ADE771AE04C39AC2279DF9C918AE4628242536FC86A27FA8EB674F8"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Moonfang Alpha.asset.meta",
+    "sha256": "8C4854A991EE911BE163017FBD936868915A562CCBA9CC1E7039C19A172960B2"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant basic.asset",
+    "sha256": "116BD67B76C730D7B1BD8BB6543089918699C4EF23E1A4F6C0D59E4F7EEA0E35"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant basic.asset.meta",
+    "sha256": "9ECA480D11B202D9706F8D6C96EEE6A07465AD2A5D90AC680EE5434ABD315C56"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant special.asset",
+    "sha256": "04441A9A9D2705D5203544AC9A9001F3288909B97C108E3D2E81811E66E77FF6"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant special.asset.meta",
+    "sha256": "D251C28A4E7A592A1ECD2EAAE65CB3960676ECCEEB532C43406145587A48B468"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant.asset",
+    "sha256": "85772394F8E0BECDEC3FE753D8FAA31A1E2321BE24A78BB22B4EEB3939121310"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Stormscale Hierophant.asset.meta",
+    "sha256": "36C80B2824AE1B46D822F948539B9CE6667595E2C34775AEA5D1147EBA302EC2"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule basic.asset",
+    "sha256": "E3851FA4A23AEEF548BCEEC745AFC4568F1956E375A15BDF76D6925300AB5D81"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule basic.asset.meta",
+    "sha256": "64B3BB9E01AB0E9121AB374F9D2C5872735604C0F4C4B8B7A7117DD2C2F1F70E"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule special.asset",
+    "sha256": "C5EC257C969617214FDD1809E995D69C2FCC1369CEBDF2357EFA1C71DD3C10A5"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule special.asset.meta",
+    "sha256": "50D9D0DC7506BF37CA35B9DFD7B9F10EB336EC6A641A7BA432A7F72369618620"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule.asset",
+    "sha256": "CFB2BAA76B36C61135CB8388B650A26CD080DE601E58E511FD617B1C9260CA67"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/CrimsonCrucible/Verdigris Globule.asset.meta",
+    "sha256": "6081EBAD5DFD725EFB4E0A7F09DC1049342CF5DF205DB64DA019C4D41DBDC02E"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Legwraps.asset",
+    "sha256": "047FBB8E9599DD4266BDD88A2EEBBAF9E9C65E9F9DD537F7BEF7221946A3D7D5"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Legwraps.asset.meta",
+    "sha256": "0442B0DF5A8F3BE7635AC0C9347C6EF9720BD38B0640202A42C53D57C5675260"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Prayer Cape.asset",
+    "sha256": "FBC2684D73C22721241D804A11E02A7C650083BC2BC8C2DA55225A09612F4497"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Prayer Cape.asset.meta",
+    "sha256": "08F554E91AE68AB091B907320626C9642C60389698723372A1567F332E9C9C99"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Shawl.asset",
+    "sha256": "7AB0C348FAB5D4C28E5D9250043D483A098CB6BAF91024C58FD78F8B46BF8059"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Shawl.asset.meta",
+    "sha256": "1B1C8C6C9385F47A5A99C5A3B4E01B90EDCE1E355941F25ED2BDA565039A7550"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Veil.asset",
+    "sha256": "972CD0CF78CCB98F41B78A6F5A6C0E2282E8BE52EA1E01B425341A3E958CD7C2"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bloomkeeper Veil.asset.meta",
+    "sha256": "C52802F8ACA9E496566F906D9F53909DB5BA8E61A2DFA7FCBF03A5164E6D61AA"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Cuisses.asset",
+    "sha256": "0C3AEBF5D28612FDE727CB10C82BBCCE120752C5BFD796A33A3A6E22519FE343"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Cuisses.asset.meta",
+    "sha256": "1131AEA97D2BCA55FFF70412D3AB40C074A6314C4C6E34E6D3635481BA9344DD"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Pauldrons.asset",
+    "sha256": "419FA7F9F45B5ED190C393F874E3B9D5CAE3390F902A1D498811F69C2FDF56B6"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Pauldrons.asset.meta",
+    "sha256": "0C341D9EADC57D0316DD66294FE530ABA8E0E41E05EAF93B98B924425D8270C0"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Warcloak.asset",
+    "sha256": "B94A630A29CAF24315380A51608E0593B6509845115E331535E591F8B7E11906"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Warcloak.asset.meta",
+    "sha256": "D5C690433C24AFC34991C143DEC40721E9B64E86C76DC382DED3B15E7B5047C5"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Warhelm.asset",
+    "sha256": "4E52740A59EB064E8D012DE4F4DEEA744E06916BBAFFBC9226D20B2B7FC90459"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Bristleforged Warhelm.asset.meta",
+    "sha256": "AEE55714EBBC8C40787B527274188AEA038BFFFFEA1B1BBD3833B6127CF45787"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Crucible Victor's Shroud.asset",
+    "sha256": "1000D53D87749C017284D85999A5CB8E8BB370D2B658DEA2898BD52A7B3CBCF1"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Crucible Victor's Shroud.asset.meta",
+    "sha256": "E236A9E6160B782538755B823446C9339E904AA014B052105D08F49FECE8AF90"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Cowl.asset",
+    "sha256": "A210C5B1A1393DEA09F7DD0BC0BF464AA660DDE0A9C5621D5217B9D38826F415"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Cowl.asset.meta",
+    "sha256": "CBC0D264D42BB0043AE0DBA4F76D315E69CF093716E76D690AFFC69BFA63BEAC"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Hunting Cape.asset",
+    "sha256": "C2C8783C89034B2B2C91756F66699B40841B5BDDDF5DA55DA83036557BD711EB"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Hunting Cape.asset.meta",
+    "sha256": "2B46B53FA98B4BD96423385A15515D835511F2A4630BC4105575141E21A6763C"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Legwraps.asset",
+    "sha256": "BCCA5B4BDD17903BCC94A3312AD399CD9507067691CD13D261FAE29CB244F440"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Legwraps.asset.meta",
+    "sha256": "9CB0E48298BD0445008D4A9F9AF5C89CB092D550BF6819C4C6FB567E93605997"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Mantle.asset",
+    "sha256": "E115E1CF760A765151EF497B82C5BC222BD08BE9F919442D46177D41385EED19"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Moonfang Mantle.asset.meta",
+    "sha256": "49C9BA0D5FB292277503A61BA0946D1734CCB1B7F86EC043F3479368760DFE80"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Epaulets.asset",
+    "sha256": "93CACC4E5BDA51936B7A1C1F54F4B046A7F34C564040441689DCE1F80FE6317D"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Epaulets.asset.meta",
+    "sha256": "318A3808ADE4329F6D96292AD115022EB6C400EDEECC95356109B6A0AE4E5D37"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Hood.asset",
+    "sha256": "7FDB7824218CCD2F20A61AD6B6FD0917170DC8DE1D3CBAA7648073A76FA2E1BE"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Hood.asset.meta",
+    "sha256": "9E3BA281EBBDE25BDF557E133B17ED59D9424AA45EEA8CF0B4566C16EC21D809"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Leggings.asset",
+    "sha256": "250920C4B73F6D0596634FBFAEACFB822ADD59A145DEEADEC397E457CA2A05B2"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Leggings.asset.meta",
+    "sha256": "5755DC289477835B481CDAA8078A8ED725B109C8CB9624552DAA473512AC4083"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Spellcloak.asset",
+    "sha256": "08EE686F1D340A4D7B38294D9A29ED35D0C422A4BAEFA5EF3E8CFB05A78632B1"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/CrimsonCrucible/Stormscale Spellcloak.asset.meta",
+    "sha256": "A0861C697FF5359BE7FD2823C932C11D249D38A45E730151DAA2E3C5D8B813D5"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-back.png",
+    "sha256": "513D5F670B8F67D779B9B4526513960D6EB881EE589C9FFA6C3696B57357302A"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-back.png.meta",
+    "sha256": "ACE12A1ADB11631B1BFA92048BBD37EAD38F0379415AA7739D85452BE85F171A"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-head.png",
+    "sha256": "F2F63EF100FB4DD795305C0BAF5CEB1D0B36B81FBBAFFE143E86C8EC2A6B7F99"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-head.png.meta",
+    "sha256": "07F31EFCC6671BE800C7CF4C7338BF0264AFFAFC84E11D58B45ACDBEE41257CB"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-legs.png",
+    "sha256": "09D8384344F163A5E93897C4E7FB0EEAC2D449367EEB47FB18C2E2CC59EA51AD"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-legs.png.meta",
+    "sha256": "D7A287E2AE75C211F1BB6471F34454C2215D4107AD2F8B49ECC67DC7F1A7C13B"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-shoulders.png",
+    "sha256": "961863BA350D369D8989977C2E2E9296E49BB31EEB2ED137416FCCD084ADB915"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bloomkeeper-shoulders.png.meta",
+    "sha256": "A97FE603124646B0128BF3AD036CB87BA7D9940DC91DEA7FB31C1615A94AC43C"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-back.png",
+    "sha256": "306709A120F97495C9C5C12CBE2D89261D87F945202CD20C457DD891BE7FADF3"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-back.png.meta",
+    "sha256": "306773961038CB693CB60AF2E64C266BE69BBF63263BFF14071229CF795F1FC5"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-head.png",
+    "sha256": "1E1640483D45A918312947902C3F101B7A55AFCACE92E4974222B0C33A0A256D"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-head.png.meta",
+    "sha256": "388E8C791937706B6642A4E7BF9B4C0D440F797BBD42B1048BD2582EAB379EAC"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-legs.png",
+    "sha256": "FEBFDDEC149B298A1A5688746CFF46CF68551E02EAE90BD4791921655F6206A6"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-legs.png.meta",
+    "sha256": "A46D5CC0D9C4197CE1CC5EA86C0FA7D93BB97EF4A4778991E112E16A06E4E072"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-shoulders.png",
+    "sha256": "A07C0B080FC5EE0309D7AAEFC526D4ACFFB43AC0287D0C6B2930111F9D4C8812"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.bristleforged-shoulders.png.meta",
+    "sha256": "1EF473504B696720E2FC7DB9E9C4B114362937222FB3A0927643173272046507"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-back.png",
+    "sha256": "BD75E5C2BDBF2DB63D120B849F2757301A145ADD71DC4E763732D131343C7B5C"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-back.png.meta",
+    "sha256": "D99FE074577EFF36D267339AF19BE9065DAE5E0F5AF833BB2EC5CBA8D8F4DE71"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-head.png",
+    "sha256": "55486125AB22647AFE8B9690F8EED8347CD57F123B9BCFCFEF6D6F6A8D122764"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-head.png.meta",
+    "sha256": "3909A6F71D16DE8AAE60F7A120A574DEC5163C53AFD37B62AE2D8C8604587714"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-legs.png",
+    "sha256": "12B0857ACFE98C7DC101940A33E1873CF1254BE7E2889CCDB349EBAE69E30816"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-legs.png.meta",
+    "sha256": "68B39184CE32AB1EDB47FCB801D2EED4DE502F3DDE74D9C2AD22D55575A10E64"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-shoulders.png",
+    "sha256": "CE9BC8C8E6681C1CF80803A63411D1E4EA2BE84F0B6B3BC51D8563F3BE7580D8"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.moonfang-shoulders.png.meta",
+    "sha256": "DA7864C8DE9CB5EC6D82090BF44BDAB6D7525B127ADF8A486A1FC67C98ED512A"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-back.png",
+    "sha256": "55D988E04710EE19A7EC570221E3B3AA2E00677A6106A6820298AA83058FBF01"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-back.png.meta",
+    "sha256": "20867092798D0D20B2F262972F63A35388808B35856853793309FCDE97234D1F"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-head.png",
+    "sha256": "C00F5EDFDF6E490D6E9E06395B93EE4B6DA096AB6AD1CF1F7B5070265224E96E"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-head.png.meta",
+    "sha256": "D2858C72F37FE1CE8C03F496CF9969BA7E8C6B37699CDE851A5520A084E4552B"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-legs.png",
+    "sha256": "83FF35E61CE4B793C2CBEAD5ED8CE938C2E29DAC1C588070E691744A9E3D0E82"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-legs.png.meta",
+    "sha256": "14EB20338CDB6D884E7C9250031EC93E86053FBE3C0944760EC66E595633647A"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-shoulders.png",
+    "sha256": "B132C3A2D82B5B0054CCD41EFDAD0FABA83494142DADD66AB5C0C9E68339AAAB"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.stormscale-shoulders.png.meta",
+    "sha256": "E074C040AAD219A2FEB59198EC178039728D8F2C35095D31F950AEDB0456D157"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.victors-shroud.png",
+    "sha256": "B6DB89350E8127B216D68DDEFAB2AA4AACECD684B98A36BD41811F04DEB72E60"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/ItemIcons/CrimsonCrucible/item.crimson-crucible.victors-shroud.png.meta",
+    "sha256": "CFC4315267A731FB7170C010852A53A22D34AD440C1AC56DD98B792CF54ACAC5"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrimsonCruciblePortal.cs",
+    "sha256": "0A4CC0146400EAF332D61182093A4EAC5AE5C74F742561DF66C253663E070874"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrimsonCrucibleRun.cs",
+    "sha256": "FC1C1830B831436CA8AC5851B53835202E79B4A63FD862D134C8FF028AF609D1"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrucibleArena.cs",
+    "sha256": "C1EE16C0FE7C54C2A33BC0FAE57A13BCE7F8D0B4EFB14D96C39DF448A1079B2A"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrucibleBoss.cs",
+    "sha256": "FC5B1A8CCC428430024FF0D2C241C959F5995A089A7E0C39FF014E1F9E1EFA60"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrucibleGate.cs",
+    "sha256": "E28718488543D07491DA15840F547FFE621A493E98BAAD195F54013291EEA4BB"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/ReturnToStartMenu.cs",
+    "sha256": "5CB32CFAE00F544EA9D2BEC3237ADAB6291E7AE48B7CB1327FAB7169BE207139"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/WorldAtlasHud.cs",
+    "sha256": "52EBD234F345A930A288C1B868C2D8AAF54169F6C6FAACA901E49CF8CBD0672F"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/CrimsonCrucible.unity",
+    "sha256": "BFD4C800E5D4576FEB347C4B76F6D5BE48F7C17C01DD84E5532854BAD2CB3355"
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "sha256": "9DC2FC6B7655830B13CD1A3400E597547FEAC80BDB6579318AC8C821D7CC128B"
+  }
+]

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371c339cbaf5a16448bb09319458d262, type: 3}
+  m_Name: Crucible treasury
+  m_EditorClassIdentifier: DiceFree.Application.Runtime::DiceFree.Dungeons.DungeonRewardPool
+  stableId: loot.crimson-crucible
+  rare: {fileID: 11400000, guid: 96878fb8a75f8a44ea0cc664f314c7e5, type: 2}
+  items:
+  - {fileID: 11400000, guid: e0cb7acd784c8fb418ff3f55729082b7, type: 2}
+  - {fileID: 11400000, guid: 4cf99385cf776e949aa64972cf877668, type: 2}
+  - {fileID: 11400000, guid: 3ae0b300aecf75e46a9ca7e73b75a065, type: 2}
+  - {fileID: 11400000, guid: 9f8eabc41df21024793e4c3f0e60f691, type: 2}
+  - {fileID: 11400000, guid: e05921eafa964af4f949dc6f4a5f5418, type: 2}
+  - {fileID: 11400000, guid: 866bffcddcf6d9645b7136f9ebcbca21, type: 2}
+  - {fileID: 11400000, guid: ae1977ffc4c4f594ea1ae3f1b40585f0, type: 2}
+  - {fileID: 11400000, guid: 7e39600ee144a614bbde06495946cc8b, type: 2}
+  - {fileID: 11400000, guid: 0e23e82fc2fd90641b513e97a1be3e6b, type: 2}
+  - {fileID: 11400000, guid: bb063181d9124a74196262043489cc1d, type: 2}
+  - {fileID: 11400000, guid: c1ed65a9a705e414c991641944237770, type: 2}
+  - {fileID: 11400000, guid: e331b36ec1f9e854c94db3189a882d58, type: 2}
+  - {fileID: 11400000, guid: 857f8560800bbc04cb1ca1657d3ce17b, type: 2}
+  - {fileID: 11400000, guid: feed8d6201286144880735485155fd50, type: 2}
+  - {fileID: 11400000, guid: 1b363839a9894bc40b51f645aed3b929, type: 2}
+  - {fileID: 11400000, guid: 4e8335962797475408e9ff233dafc72c, type: 2}
+  visualVariant: {fileID: 0}

@@ -36,7 +36,7 @@ namespace DiceFree.UI
             new("Arborium",new Vector2(98,305),"World Tree capital. Enter through the north gate. The Adventurers’ Guild is just inside."),
             new(VerdantName,new Vector2(-33,320),"Level 30–40 forest west of Arborium. Warden Lethen waits at Lanternmere. Follow the southern trail through Fernhollow to Crimson Mire."),
             new(LookoutName,new Vector2(-42,400),"Level 39–41 lizardmen. Cross the footbridge north of Lanternmere, or follow the highland trail west from Briarback through Eastwatch."),
-            new(CrimsonName,new Vector2(65,144),"Level 50 red slimes gather around the rust-colored pools. Trails lead to Cornberg, Ironpine, and Fernhollow in the Verdant Wilds."),
+            new(CrimsonName,new Vector2(65,144),"Level 50 red slimes gather around the rust-colored pools. The Crimson Crucible's red-crystal arch stands just east of the central trail: a six-boss gauntlet for level 55 adventurers. Trails connect Cornberg, Ironpine and Fernhollow."),
             new(SouthPassName,new Vector2(163,13),"Dense pines block this trail south of Ironpine. Complete The Ancient Road Dragon to open the way."),
         };
         private static readonly Vector2[] SouthPassTrail =

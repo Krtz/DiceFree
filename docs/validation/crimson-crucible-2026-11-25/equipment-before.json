@@ -1,0 +1,278 @@
+[
+  {
+    "name": "Ancient Road Mantle",
+    "slot": 1,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Ancient Road Mantle.asset"
+  },
+  {
+    "name": "Dragontrail Greaves",
+    "slot": 5,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Dragontrail Greaves.asset"
+  },
+  {
+    "name": "Embermender Vestments",
+    "slot": 2,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Embermender Vestments.asset"
+  },
+  {
+    "name": "Jadescale Arcanist Robe",
+    "slot": 2,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Jadescale Arcanist Robe.asset"
+  },
+  {
+    "name": "Jadescale Pendant",
+    "slot": 9,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Jadescale Pendant.asset"
+  },
+  {
+    "name": "Roadwarden's Dragon Signet",
+    "slot": 8,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Roadwarden's Dragon Signet.asset"
+  },
+  {
+    "name": "Roostguard Bulwark",
+    "slot": 2,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Roostguard Bulwark.asset"
+  },
+  {
+    "name": "Rooststalker's Grips",
+    "slot": 3,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Rooststalker's Grips.asset"
+  },
+  {
+    "name": "Wyrmfang Cuirass",
+    "slot": 2,
+    "level": 55,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/AncientRoadDragon/Wyrmfang Cuirass.asset"
+  },
+  {
+    "name": "Fourfold Band",
+    "slot": 8,
+    "level": 38,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/FourfoldHollow/Fourfold Band.asset"
+  },
+  {
+    "name": "Rimeglass Pendant",
+    "slot": 9,
+    "level": 38,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/FourfoldHollow/Rimeglass Pendant.asset"
+  },
+  {
+    "name": "Stormbound Mantle",
+    "slot": 1,
+    "level": 40,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/FourfoldHollow/Stormbound Mantle.asset"
+  },
+  {
+    "name": "Azure Slime Orb",
+    "slot": 7,
+    "level": 50,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/SlimeRegent/Azure Slime Orb.asset"
+  },
+  {
+    "name": "Crownguard Gauntlets",
+    "slot": 3,
+    "level": 50,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/SlimeRegent/Crownguard Gauntlets.asset"
+  },
+  {
+    "name": "Regent's Signet",
+    "slot": 8,
+    "level": 50,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/SlimeRegent/Regent's Signet.asset"
+  },
+  {
+    "name": "Slime Regent's Crown",
+    "slot": 0,
+    "level": 50,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/SlimeRegent/Slime Regent's Crown.asset"
+  },
+  {
+    "name": "Duskwake Wand",
+    "slot": 6,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Duskwake Wand.asset"
+  },
+  {
+    "name": "Moonfang Signet",
+    "slot": 8,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Moonfang Signet.asset"
+  },
+  {
+    "name": "Moonwell Staff",
+    "slot": 6,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Moonwell Staff.asset"
+  },
+  {
+    "name": "Nightpelt Vest",
+    "slot": 2,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Nightpelt Vest.asset"
+  },
+  {
+    "name": "Packhunter's Fang",
+    "slot": 6,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Packhunters Fang.asset"
+  },
+  {
+    "name": "Starfall Wand",
+    "slot": 6,
+    "level": 20,
+    "path": "Assets/_DiceFree/Resources/DiceFree/DungeonRewards/Wolf/Starfall Wand.asset"
+  },
+  {
+    "name": "Lanternrest Grimoire",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Acolyte/Lanternrest Grimoire.asset"
+  },
+  {
+    "name": "Bristlehide Mantle",
+    "slot": 10,
+    "level": 25,
+    "path": "Assets/_DiceFree/Settings/Briarback/Bristlehide Mantle.asset"
+  },
+  {
+    "name": "Trimery Watch Shield",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Defender/Trimery Watch Shield.asset"
+  },
+  {
+    "name": "Trimery Watch Sword",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Defender/Trimery Watch Sword.asset"
+  },
+  {
+    "name": "Slime Orb",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Dungeons/Slime Orb.asset"
+  },
+  {
+    "name": "Slime Shield",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Dungeons/Slime Shield.asset"
+  },
+  {
+    "name": "Slimy Farmer's Gloves",
+    "slot": 3,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Dungeons/Slimy Farmer's Gloves.asset"
+  },
+  {
+    "name": "Slimy Tophat",
+    "slot": 0,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Dungeons/Slimy Tophat.asset"
+  },
+  {
+    "name": "BRONZE DAGGER",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Items/Bronze Dagger.asset"
+  },
+  {
+    "name": "Cornberg Work Gloves",
+    "slot": 3,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Items/Cornberg Work Gloves.asset"
+  },
+  {
+    "name": "Farmer's Pants",
+    "slot": 4,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Items/Farmer's Pants.asset"
+  },
+  {
+    "name": "Forest Travel Shoes",
+    "slot": 5,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Items/Forest Travel Shoes.asset"
+  },
+  {
+    "name": "Wolf-Fang Greatsword",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Items/Wolf-Fang Greatsword.asset"
+  },
+  {
+    "name": "Mirrorleaf Codex",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Psion/Gear/Mirrorleaf Codex.asset"
+  },
+  {
+    "name": "Mirrorsteel Mindblade",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Psion/Gear/Mirrorsteel Mindblade.asset"
+  },
+  {
+    "name": "Ionic Stone of Motion",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Ionic Stone of Motion.asset"
+  },
+  {
+    "name": "Ionic Stone of Reflection",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Ionic Stone of Reflection.asset"
+  },
+  {
+    "name": "Prismbound Grimoire",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Prismbound Grimoire.asset"
+  },
+  {
+    "name": "Whispersteel Mindblade",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Whispersteel Mindblade.asset"
+  },
+  {
+    "name": "Ironpine Scout Shortbow",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Ranger/Ironpine Scout Shortbow.asset"
+  },
+  {
+    "name": "Ironpine Yew Longbow",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Ranger/Ironpine Yew Longbow.asset"
+  },
+  {
+    "name": "Quiet Hands Dagger",
+    "slot": 6,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Thief/Quiet Hands Dagger.asset"
+  },
+  {
+    "name": "Quiet Hands Stiletto",
+    "slot": 7,
+    "level": 1,
+    "path": "Assets/_DiceFree/Settings/Thief/Quiet Hands Stiletto.asset"
+  },
+  {
+    "name": "Roadwarden's Amulet",
+    "slot": 9,
+    "level": 30,
+    "path": "Assets/_DiceFree/Settings/Trimery/Roadwarden/Roadwarden's Amulet.asset"
+  }
+]
