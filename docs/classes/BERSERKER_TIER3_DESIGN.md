@@ -145,3 +145,27 @@ The historic [Tier II Core Classes v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md) me
 5. For Greatblade tank/Defender DPS families, should **Juggernaut** be provisionally reserved under Greatblade and **Vanguard** under Defender, or should both lineage decisions remain open while defining tank/DPS role kits?
 
 **Status:** Round4 documented, committed/pushed through GitHub workflow. **NO Unity implementation implied.**
+
+## Round 5 — 2026-11-25 (USER APPROVED: Rage Breaker, Anger Management, Coffee shield, sibling roles)
+
+**This is the newest USER-directed Berserker design round; supersedes historical questions/proposals above where they conflict. This update is documentation-only, NOT a Unity ability implementation.**
+
+1. **RAGE BREAKER:** Rename/evolve parent **Overhead Breaker → Rage Breaker**. It is the **heavy Rage-consuming finisher**; **do not introduce a second redundant Rage finisher skill**. Rage Breaker replaces Overhead Breaker in the Tier III kit, with rank-scaled coefficients, Rage cost, cast time/cooldown, and whether spent Rage increases its damage to be designed. Parent Greatblade's skill remains unchanged.
+2. **ONE COMBINED PASSIVE, working name ANGER MANAGEMENT:** Rename/evolve **Heavy Rhythm → Anger Management** (user says "something like Anger Management"; name is favored rather than irrevocably fixed). Fold all effects previously proposed for separate **Great Weapon Master** into this same passive; **REMOVE a separate weapon-mastery rankable passive from Berserker's roster**. The combined passive covers **Rage gain and retention**, **smooth bonus damage as HP falls (initial target up to +40% at 1% HP)** and **general two-handed eligible weapon mastery**. **No exclusive bonus for two-handed axes**; Berserker *favors* axes stylistically, but mechanical weapon bonuses apply equally to eligible two-handed axes and two-handed swords. Exact rank-dependent modifiers, max rank and whether missing-HP effect begins at rank0 or requires purchase are still open.
+3. **COFFEE IS A CANONICAL ELEMENT, not just fire-themed art.** User explicitly says "Coffee is an element. We have all the elements from DiceBound" and recalls a skill using it. **Verified current source:** `Assets/_DiceFree/Settings/Combat/Elements/Magical Coffee.asset` has `stableId: element.magical-coffee`, `displayName: Magical Coffee`; `Assets/_DiceFree/Scripts/Combat/AcolyteAfflictions.cs` and `AcolyteSkillCaster.cs` use it for Acolyte's poison effect. Berserker's **Rage-cost Coffee-element shield** must use the real shared element/resistance and existing shield compatibility rules, **NOT substitute Fire**. Match/nonmatch shield effectiveness follows global rules unless separately changed. The specific final shield ability display name (e.g. Coffee Shield), Rage cost, capacity, duration and cooldown are open. **Unused capacity → healing upon natural expiry remains RESERVED FOR TIER IV**, already approved Round4; TierIII shield does NOT heal on expiry.
+4. **SIBLING LINEAGES, provisional future plans:** User agrees to provisionally reserve **Greatblade→Juggernaut** as a **TANK** choice, and **Defender→Vanguard** as a **DPS** choice, while Guardian and Templar remain prospective Defender tank/support evolutions. These are *future preferred branches*, not fully specced classes/committed implementation; preserve previous lore/design and distinct tank/DPS combat identities. The earlier Swordmaster→Samurai, Warbringer→Warlord (Battle Cry and planted party banners), and secret martial-magic lineage remain candidate future Greatblade branches.
+
+### Current Berserker ability count (Round 5)
+
+| Ability | Status | Role |
+| --- | --- | --- |
+| **Wide Arc** | Approved carryover | Sweeping melee cleave |
+| **Spin Dash** | Approved carryover | Offensive mobility/AoE |
+| **Rage Breaker** | **Approved** replacement for Overhead Breaker | Heavy Rage-consuming finisher |
+| **Anger Management** | Approved merged passive concept, name favored | Heavy Rhythm's Rage management + missing-HP bonus + 2H weapon mastery |
+| **Coffee-element shield** | Approved shield element and skill concept | Rage-consuming temporary elemental shield; no TierIII expiry heal |
+| **Frenzy** | User previously liked its purpose, numbers and final independent slot not yet specifically signed off | Attack-speed buff for sustained melee offense |
+
+**Accounting:** **Five approved core ability identities + one well-liked provisional Frenzy = six candidate rankable skills**. There is **NO separate Great Weapon Master**, **NO separate Rage finisher**, and **Battle Cry stays available to a future Warbringer**. TierIII 150-point skill budget is an established other-class precedent, not yet explicitly approved for Berserker. Keep class-specific skill counts flexible under the existing combat-bar design.
+
+**Suggested next Round 6 decisions, OPEN:** (1) formally lock Anger Management as the passive name and Frenzy as the sixth skill, (2) specify how +40% missing-HP damage is apportioned across Anger Management ranks, (3) Coffee shield Rage cost/HP-based absorb/duration/cooldown, (4) Rage gain/decay and Rage Breaker cost/damage scaling, (5) initial rank caps and class stats, plus eventual teacher quest.
