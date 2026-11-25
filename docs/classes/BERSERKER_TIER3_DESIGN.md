@@ -37,3 +37,50 @@ The current class-progression documentation lists Greatblade Tier II skill caps 
 ## Workflow
 
 **After EVERY answered design-question round:** update relevant GitHub design docs, commit, **push** to active agreed development branch and report commit SHAs. Preserve concurrent Codex work; do not alter Unity source/assets during design-only rounds without explicit implementation request.
+
+## Round 2 — 2026-11-25 (USER ANSWERS, priorities and older lineage reconciliation)
+
+**Status:** Round 2 user directions recorded; this is still design only, not code, assets or playtest. Do not silently promote weapon/branch comparison ideas to canon.
+
+### Round 2 answers: APPROVED / PREFERRED
+
+1. **Rage resource name and gain:** User likes **Rage OR Anger**, delegates the choice. **Working class resource name: Rage** (chosen by designer to align with previous Round 1). Rage replaces Momentum and is generated from dealing/receiving damage. Whether held Rage provides passive damage, or only empowered spending, **remains open** because this question was not specifically answered; avoid inventing a passive high-Rage bonus.
+2. **Low-HP output:** **SMOOTH/GRADUAL scaling with missing HP APPROVED**, rather than discrete 75/50/25% breakpoints. Exact damage curve, multiplier cap and defenses remain open, design should allow Berserker to deal viable DPS at high HP.
+3. **Heavy Rhythm:** **APPROVED** to evolve from Momentum management into a **Rage-management passive** that improves Rage gain and retention. Quantitative gain and decay/rank effects remain open.
+4. **Self-sustain should NOT use lifesteal tied to damage numbers.** User is concerned about exceedingly large late-game damage and HP values making lifesteal explode. **PREFERRED direction: spend/consume Rage for a discrete heal, shield or other defensively useful effect**, using HP%/max HP or other bounded carefully tuned formulas instead of a percentage of raw damage output. **Exact ability form (heal vs shield or mix), cost, cooldown, scaling and thresholds are not yet settled.**
+5. **Sibling class preferences:** **Warbringer → Warlord** is a favored **future evolution chain**, focused on **Battle Cry development and placeable buff banners**. Not an approved finalized Tier III/Tier IV skill tree, tier assignment, or request to implement now. User is also open to **multiple distinct viable tank archetypes** beyond Defender, requiring genuinely different defensive/resource identities.
+6. **Weapon discussion OPEN:** User proposes maybe Berserker should FAVOR **two-handed AXES** while also equipping qualifying **two-handed swords**; maybe Swordmaster/Blademaster should focus sword/katana; asks whether every Greatblade evolution must use 2H weapons and whether Assassin should be dual-wield. **Existing Round1 2H greatswords remains the confirmed preference until user explicitly settles a change.** Do not silently switch Berserker to axes or canonize Assassin dual-wield. Allow future specialization vs broad equip eligibility distinction as a designer recommendation only.
+
+### Verified OLDER DiceFree history, not a newly invented branch
+
+[Core Tier II v0.2](../TIER2_CORE_CLASSES_DESIGN_V02.md) explicitly includes:
+```
+Greatblade Tier II
+  |-- Berserker, Tier III candidate
+  |-- Swordmaster, Tier III candidate (precision / disciplined swordplay)
+  |      |-- Samurai, possible Tier IV (advanced refined blade)
+  |-- Witcher*, secret hybrid Tier III candidate
+         requires eligible Greatblade and same-Echo
+         Magically Touched Novice manifestation level 30+
+```
+The exact Samurai path **Swordmaster → Samurai** was written as a *recommendation* and was **not confirmed final**. `Witcher` is a **working name** that should be replaced/differentiated from existing outside fictional IP before publication. [Core Tier II v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md) previously floated **Defender → Guardian / Templar / Juggernaut**, so Juggernaut is **historically a DEFENDER candidate**, not an established Greatblade sibling; if moving its role to a Greatblade tank path, that requires a distinct new class decision. `Warbringer → Warlord` with battle cries and placeable banners is a NEWLY USER-FAVORED additional path as of Round 2, not present in this old evolution graph.
+
+### Tank archetype comparison and possible differentiation (DESIGNER NOTES, NOT LOCKED)
+
+FFXIV four tank identities: **Paladin** shield/party protection, **Warrior** high-HP/strong personal sustain with beast gauge, **Dark Knight** greatsword/dark magic/resource barriers, **Gunbreaker** gunblade/cartridge offense and planned mitigation. WoW six tank specs: **Protection Warrior** active shield blocks, **Protection Paladin** holy mitigation/protection utility, **Blood Death Knight** reactive post-hit healing and Death Strike, **Guardian Druid** bear-health/armor, **Brewmaster Monk** stagger/delayed damage management, **Vengeance Demon Hunter** mobile souls/magic damage and self-sustain. These are INSPIRATIONS, not mechanics to copy directly or claims of one game providing unique archetypes absent in the other.
+
+Potential DiceFree tank identities:
+- **Defender:** existing sword/shield **Resolve** and ally protection/control; dependable conventional tank.
+- **Juggernaut:** armor/stagger/poise or delayed damage absorption; tank by preventing knockbacks, soaking damage and controlling position, not copying Defender's shield/buffs. Could branch from Defender as older docs suggested, or be reconsidered under Greatblade *only after approval*.
+- **Dark/Mana barrier tank:** manage absorb shields and resources, closer to FFXIV Dark Knight than Defender, perhaps a future hybrid/evolution separate from Berserker; should not inherit a class identity by default.
+- **Reactive damage-conversion tank:** bank staggered or mitigated damage and reduce/pay it off with skillful sequencing (Brewmaster-inspired). Existing user idea of a damage-storage/retaliation Iron Guard-style class should not be silently reassigned.
+
+### Round 3 unresolved questions to ask
+
+1. **Weapons:** Approve change from Berserker's Round1 greatsword-only specialization to **2H axes preferred, compatible 2H greatswords equipped**, and should Swordmaster favor 2H swords while Samurai ultimately favors katana?
+2. **Rage function:** Primarily **spend** Rage on attacks and defense, or also a passive bonus while stocked? Define maximum Rage and its gain/decay direction.
+3. **Low-HP power:** Select a mild bounded linear percent bonus vs stronger curve and maximum at low HP; ensure high-HP DPS remains viable.
+4. **Self sustain:** Choose **Rage-consuming heal**, **Rage-consuming shield**, or a hybrid and plan bounded scaling based on Max HP, VIT, or resource spent rather than percentage of damage inflicted.
+5. **Identity/tank lineage:** Tentatively reserve **Swordmaster→Samurai**, **Warbringer→Warlord**, old **secret hybrid**; decide whether **Juggernaut remains Defender** or becomes a separate Greatblade-derived tank and whether Berserker retains Greatsword Mastery in evolved form.
+
+**Reminder:** after every completed answer round, update relevant docs, COMMIT and PUSH.
