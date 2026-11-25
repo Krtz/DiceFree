@@ -169,3 +169,34 @@ The historic [Tier II Core Classes v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md) me
 **Accounting:** **Five approved core ability identities + one well-liked provisional Frenzy = six candidate rankable skills**. There is **NO separate Great Weapon Master**, **NO separate Rage finisher**, and **Battle Cry stays available to a future Warbringer**. TierIII 150-point skill budget is an established other-class precedent, not yet explicitly approved for Berserker. Keep class-specific skill counts flexible under the existing combat-bar design.
 
 **Suggested next Round 6 decisions, OPEN:** (1) formally lock Anger Management as the passive name and Frenzy as the sixth skill, (2) specify how +40% missing-HP damage is apportioned across Anger Management ranks, (3) Coffee shield Rage cost/HP-based absorb/duration/cooldown, (4) Rage gain/decay and Rage Breaker cost/damage scaling, (5) initial rank caps and class stats, plus eventual teacher quest.
+
+
+## Round 6 — 2026-11-25: USER APPROVED final five-skill roster
+
+**LATEST DECISIONS, superseding older tentative sixth-skill Frenzy and a separate weapon-mastery passive. Design only; no Unity code has been changed.**
+
+1. **Frenzy is REMOVED entirely.** User specifically says "frenzy is gone, it's not gonna happen." Instead **Rage Breaker grants a temporary ATTACK SPEED BUFF AFTER USING it**. Rage Breaker remains the single Rage-consuming heavy finisher evolving Greatblade's Overhead Breaker. No separately purchased or activated Frenzy and no duplicate finisher. Haste percentage, duration, rank scaling, trigger on ability execution versus successfully resolved hit, refresh/stacking and Rage Breaker cooldown remain OPEN.
+2. **Anger Management** is the APPROVED combined passive name replacing Heavy Rhythm. Every purchased rank improves **Rage gain**, **two-handed axe/sword damage** (no axe-exclusive bonus), and the **gradual damage bonus for missing HP**. Selected ranks improve **Rage retention/reduce decay**. The initial max-rank missing-HP target remains **up to +40% outgoing damage at 1% current HP**; exact per-rank progression and rank0 baseline are OPEN. No separate Great Weapon Master skill.
+3. **Coffee Shield is SELF-ONLY**, not castable on allies. User agrees to **25 Rage activation cost and 5-second duration** as first-playtest defaults. Shield capacity scales with skill rank and max HP; exact coefficient, cooldown, Coffee-element mitigation/other interactions TBD under shared combat rules. The Coffee element already exists in Unity with ID element.magical-coffee and is used by Acolyte's poison. **Unspent capacity converting into healing on expiration is reserved for a future Tier IV upgrade, NOT Tier III**.
+4. **100 max Rage**, from dealt and received damage, **normalized relative to appropriate maximum HP** to avoid scaling explosions. The user agrees to this generation approach; numeric generation factors, what counts as damage vs shield, anti-exploit/caps and decay speed are still OPEN. Rage decays outside combat, and Anger Management improves retention. Holding Rage does not inherently increase outgoing damage; Rage is spent.
+5. **Rage Breaker Rage-cost model is NOT decided.** The last answer removed Frenzy and attached its attack-speed effect to Rage Breaker; it did not answer whether Rage Breaker costs a fixed amount versus all Rage. A fixed cost, for example 30 Rage, remains a designer PROPOSAL.
+
+### Berserker authoritative rankable-skill roster: FIVE abilities
+
+| Skill | Role |
+| --- | --- |
+| Wide Arc | Evolved melee sweeping attack |
+| Spin Dash | Evolved offensive movement and AoE |
+| Rage Breaker | Rage-consuming heavy finisher with post-use attack-speed buff |
+| Anger Management | Single passive: Rage gain/retention, missing-HP damage, general 2H axe/sword mastery |
+| Coffee Shield (working ability name) | Self-only Coffee-element shield, 25 Rage / 5s first-playtest target |
+
+**NOT present:** Frenzy, separate Great Weapon Master, another Rage finisher, Battle Cry. Five distinct skills, not six. The shared Tier III 150-rank precedent is still a **proposal** for Berserker, not specifically reapproved; rank caps, unlock levels, advancement teacher/quest and numerical damage/haste formulas remain open.
+
+### Round 7 questions, NOT YET ANSWERED
+
+1. Should Rage Breaker consume a fixed 30 Rage or all current Rage?
+2. What attack-speed bonus and duration should Rage Breaker give, and does a blocked/missed attack qualify?
+3. How should Rage gain from dealt/taken damage normalized by Max HP and out-of-combat decay be numerically defined?
+4. How much does Coffee Shield absorb per rank and maximum HP, and what cooldown should it have?
+5. Confirm 150 total Berserker rank purchases across five skills and first-unlock levels; proceed to eligibility audit, stats and quest design.
