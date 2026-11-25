@@ -1,6 +1,6 @@
 # DiceFree — Marksman (Tier III Ranger evolution) — design interview
 
-**2026-11-25 — ROUNDS 1–5 USER DECISIONS RECORDED; ROUND 6 OPEN.** User explicitly selected **Ranger → Marksman** as the FIRST Tier III evolution to design in the new **at least one Tier III per Tier II class** coverage pass. **Greatblade → Berserker follows next**, then choose first evolution for the five other uncovered Tier II parents. This is an AUTHORIZED DESIGN INTERVIEW, **NOT Unity code/asset/build implementation permission**.
+**2026-11-25 — ROUNDS 1–6 USER DECISIONS RECORDED; ROUND 7 OPEN.** User explicitly selected **Ranger → Marksman** as the FIRST Tier III evolution to design in the new **at least one Tier III per Tier II class** coverage pass. **Greatblade → Berserker follows next**, then choose first evolution for the five other uncovered Tier II parents. This is an AUTHORIZED DESIGN INTERVIEW, **NOT Unity code/asset/build implementation permission**.
 
 **Status:** Rounds 1–3 establish Marksman as a **stationary ranged damage dealer** with **11m→15m bow autoattack reach via Bow Mastery20**, Power Shot **12m→16m** reach with **1.5m width and solid-wall collision**, longbows favored while shortbows remain equippable, **NO Hawk Dive/Hunter's Mark**, exact **six skill rank caps 30/25/20/30/20/25 =150** and 1 earned point per level1–150. Strafe gains +2% attack speed/rank with −2% move speed/rank and rank-scaling duration; aura improves allied RANGED BASIC ATTACKS ONLY, strongest same-name source, no skills; Aimed Shot has a slower windup, NORMAL existing crit handling and percentage PDEF penetration (about10% at cap as a USER-FLOATED target, not exact locked formula). The permanent **Ranged Damage Aura** and 80%-per-target piercing **Power Shot** are now **USER-APPROVED ROSTER MEMBERS**, along with the other four skills. All 150 skill-rank points are earned 1 per level 1–150. Exact per-ability caps/rank gates and several damage/resource numbers remain open. The **Marksman class name and the choice of Ranger as its parent in this rollout are USER CONFIRMED**. A precision-focused, longer-ranged longbow archetype was discussed in Ranger's earlier Tier II interviews as an **IDEA**; it is NOT YET an approved detailed Tier III skill set or a numerical range. Questions below are open, with suggested directions clearly marked as suggestions. Do not confuse this with an already implemented Tier III class.
 
@@ -304,3 +304,106 @@ This puts Marksman above its parent in EVERY Lv1 attribute, strongly AGI primary
 5. **Rank eligibility & advancement:** Shall I **author and mathematically validate the complete 150-point skill-rank gate schedule** against approved unlock levels, then work on the Marksman hidden teacher / advancement trial? Existing Tier II Ranger's Alpha Wolf quest should not be silently reused as the Tier III challenge.
 
 **Status boundary:** The user approved Round5 mechanics, not numerical Marksman base/growth, skill raw damage, per-rank full gate schedule, Mana formulas or quest. Do not edit Unity or declare implementation done in this design-only round.
+
+
+## Round 6 — 2026-11-25 (LATEST: USER-APPROVED STATS AND DAMAGE ROLES; DESIGNER'S FIRST NUMERICAL PLAYTEST AND AUDITED RANK-GATE PROPOSALS)
+
+### Five USER-APPROVED answers (MARKSMAN3-020–024)
+
+1. **MARKSMAN3-020 — Exact starting attributes and growth APPROVED.** User explicitly approved the prior Round5 suggested values: **Marksman Tier III Lv1 VIT19 / STR10 / AGI34 / INT9 / SPR11**, and **growth per level VIT+2.00 / STR+0.90 / AGI+6.00 / INT+1.00 / SPR+1.20**. **Total base =83, total growth=11.10 per class level**, from parent Ranger actual base55/growth7.25. These are now USER APPROVED, NOT still proposals. A new Marksman starts at its OWN Lv1 class values, preserving Ranger manifestation and NOT inheriting additive Lv60 parent attributes.
+2. **MARKSMAN3-021 — Arrow Rain's SIX waves are a TRUE raw-damage upgrade mainly because there are TWO EXTRA WAVES.** Do not divide the previous four-wave damage evenly into six smaller waves and pretend the longer sequence is stronger. Preserve **1.5-second interruptible stationary channel**, **six waves across two seconds after completion**, and **3m radius**. Start from per-wave damage roughly in line with the parent Ranger's per-wave values, rather than doubling each pulse AND increasing number of pulses. Exact Tier III per-wave scaling remains a designer first-test recommendation, not yet user-approved.
+3. **MARKSMAN3-022 — Aimed Shot stronger SINGLE TARGET; Power Shot efficient MULTI-ENEMY line damage.** Aimed should have substantially HIGHER raw first-target damage than Power Shot, even before the Aimed-only eligible 1.6× crit and per-rank 10%-at-cap target PDEF ignore; Power is noncritical and progressively falls off 80% per new enemy. Those damage roles are USER CONFIRMED; the exact multipliers below are DESIGNER-PROPOSED.
+4. **MARKSMAN3-023 — DESIGNER AUTHORIZED to present first-playtest Mana costs, cooldowns and Mana pool/regen for the entire kit.** Numeric proposals and plausibility checks below are **NOT YET USER APPROVED**. Strafe's prior 18s cooldown and single rank-scaled Mana payment on activation, rather than per hit, are ALREADY USER APPROVED and remain fixed.
+5. **MARKSMAN3-024 — DESIGNER AUTHORIZED to construct, mathematically verify, and present all 150 individual rank eligibility gates**, using exact approved caps/unlock levels, then proceed to teacher/trial design AFTER progression. Tables below are a **DESIGNER PROPOSAL awaiting numeric/gate approval**, not silently locked by permission to author them.
+
+### Locked stat budget and projected no-equipment base values
+
+The ordinary class attribute function is `stat(L)=initialStat+(L−1)×growthPerLevel`, before Bow Mastery, equipment and temporary effects. Parents and child manifestations use separate class level.
+
+| Stat | Tier II Ranger actual Lv1 | Tier II Ranger growth | Marksman USER-APPROVED Lv1 | Marksman USER-APPROVED growth | Marksman Tier III Lv150 BEFORE passives |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Vitality | 13 | +1.50 | **19** | **+2.00** | **317** |
+| Strength | 8 | +0.70 | **10** | **+0.90** | **144.1** |
+| Agility | 18 | +3.10 | **34** | **+6.00** | **928** |
+| Intelligence | 7 | +0.80 | **9** | **+1.00** | **158** |
+| Spirit | 9 | +1.15 | **11** | **+1.20** | **189.8** |
+| **TOTAL** | **55** | **+7.25** | **83** | **+11.10** | **1736.9** |
+
+**Bow Mastery** supplies +3 AGI per purchased rank (USER APPROVED), so at Tier III Lv150 with Bow Mastery20, **effective AGI=928+60=988 BEFORE EQUIPMENT**, not 928. Its +1.5 percentage point critical chance per rank, 1.6× eligible crit damage, and +0.2m range/rank also stay locked.
+
+### Designer's first-playtest basic-attack and ability damage baselines (NOT USER APPROVED NUMERIC FORMULAS)
+
+Notation `r` = purchased rank of THAT specific skill, `A` = CURRENT effective AGI (including Bow Mastery +3 per rank and ordinary gear, excluding temporary unrelated damage multipliers), and `B` = Marksman's uncritical ordinary **Physical ranged bow BASIC RAW damage** before the ranged-damage aura, critical multiplier or target PDEF mitigation.
+
+**PROPOSED Marksman bow basic for early QA:** `B = 8 + 1.20×A` before item contributions; baseline attack interval **1.42s** and windup **0.47s** (Ranger's current rhythm), physical/normal non-elemental, initial reach **11m + 0.2m×BowMasteryRank**, capped15m. Ordinary shortbow/longbow item stats modify bow power/speed but should not make their intrinsic category alter CLASS range. This is a NEW TIER III PROPOSED ACTOR definition, not a rewrite of Ranger's current baseDamage5 +1.05AGI.
+
+| Skill | Proposed RAW output formula (per user-approved roles) | Why |
+| --- | --- | --- |
+| **Aimed Shot**, r1–30 | **`RAW_Aimed = [1.90+0.075(r−1)]×B + [0.25+0.016(r−1)]×A`**, with **1.5s stationary windup** | r1: `1.90B+0.25A`; r30: **`4.075B+0.714A`**; single-target heavy bow shot. Approved guaranteed accuracy, normal eligible Bow Mastery crit at 1.6× on crit, ignores **`0.10×r/30` fraction target PDEF** on this attack; never imports Ranger Hunter's Mark. |
+| **Arrow Rain**, r1–25 | **RAW EACH of 6 waves** `[0.400+0.022(r−1)]×B` | r1 each **0.400B**, total **2.4B** if all six hit; cap r25 each **0.928B**, total **5.568B** over two seconds. Tier II Ranger former r16 cap had `[0.4+0.035(16−1)]B =0.925B/wave×4=3.70B`; thus the Marksman cap has comparable per-wave power but **~50% more aggregate unmitigated waves against a stationary full-duration target with SAME B**, before its stronger Tier III attributes. **This directly respects user's 'primarily 2 waves making it stronger'**. No crit permission, no aura damage bonus to skill waves. |
+| **Power Shot**, r1–25 | **First target RAW** `[1.15+0.05(r−1)]×B + [0.10+0.008(r−1)]×A`, then **`RAW_target_n=RAW_first×0.80^(n−1)`** for each successive distinct target in geometric collision order | r1 first **`1.15B+0.10A`**; r25 first **`2.35B+0.292A`**, purposely below Aimed first-target raw at comparable investment. Approved noncritical Physical 1.5m-wide projectile reach `12+0.2BowMasteryRank` metres (12→16m); all unobstructed intersected hostiles hit, first SOLID wall stops; target-specific Physical mitigation occurs AFTER raw falloff. |
+| **Bow Mastery** | **Passive USER APPROVED** +3 AGI, +1.5pp basic+Aimed crit, +0.2m bow range per rank; eligible crit is **1.6×** | At mastery20 +60 AGI/+30pp crit and +4m reach; aura range auto-follows bow range, Power line has bow range+1m. |
+| **Strafe** | **Timed buff USER APPROVED** +2r% attack speed, −2r% move speed for `ceil(1+r/5)` seconds, 18s CD | No cast Mana-per-hit; activation-only cost. Rank30: +60%AS/−60%MS 7s; still stationary auto attacks. |
+| **Ranged Damage Aura** | **Passive USER APPROVED** +1% ranged BASIC attack RAW damage per aura rank (max +20%) for self/allied ranged basic attackers; **strongest same-name only**; aura radius=current 11–15m normal attack reach | Does NOT boost Aimed, Arrow Rain, Power Shot or any skill packet. Apply to eligible RAW ranged BASIC once before critical and Physical/Magical defense; do not double-buff the same attack event; for nonphysical ranged basics use that basic's ordinary damage channel/defense. |
+
+All class skill damage numbers above are **designer-chosen QA proposals**, not approval by the user to change normal game-wide Physical crit/armor/mana logic. Explicit noncritical Power Shot and Arrow Rain; eligible Aimed crit follows user-approved Bow Mastery only.
+
+### Designer's first-playtest cooldown and Mana suggestions (NOT YET USER-APPROVED except already-locked Strafe CD)
+
+| Ability | First unlock | Max rank | Cooldown candidate | Single activation/cast Mana candidate | Cost at skill max |
+| --- | ---: | ---: | --- | --- | ---: |
+| **Aimed Shot** | 1 | 30 | **7 seconds PROPOSED** | **`18+12r`** | **378** |
+| **Arrow Rain** | 5 | 25 | **22 seconds PROPOSED** | **`20+15r`** | **395** |
+| **Power Shot** | 7 | 25 | **12 seconds PROPOSED** | **`18+13r`** | **343** |
+| **Strafe** | 1 | 30 | **18 seconds USER APPROVED** | **`10+9r`** on activation once, NO per-attack charge | **280** |
+| **Bow Mastery** | 1 | 20 | Passive | **0** | **0** |
+| **Ranged Damage Aura** | 10 | 20 | Permanent passive | **0** | **0** |
+
+**Recast/interrupt notes for initial QA:** Strafe CD begins when activated; buff cannot be stacked with a second instance from the same owner; reactivation while active would replace/refresh if such timing ever becomes possible, but its 18s CD exceeds max7s uptime. Aimed Shot is a 1.5s windup requiring target validity and line of sight, canceled on movement/stun/explicit interrupts under usual player cast framework. Arrow Rain's 1.5s channel likewise cancels before successful release on ordinary movement/stun; independent SIX waves keep going if source moves after channel. The *precise* spell-cast interrupt handling/cooldown-on-interrupt should follow existing common game rules until author separately approves a class-specific change.
+
+### Designer's initial HP/Mana class resource proposal (NOT USER-APPROVED)
+
+All following numbers should be test-validated using class resource asset fields currently supported in the Unity project.
+
+- **Base HP:** `20`; `hpPerVitality=15`, `regenerationPerVitality=0.1` (same VIT-to-HP approach as parent Ranger), unmodified movement speed5 and base PDEF/MDEF0.
+- **Maximum Mana:** `180 + 5.0×INT + 3.0×SPR`, independent of AGI unless gear gives Mana explicitly. Current Ranger profile is only `60+1×INT`, so copying its Mana formula would not fund the user's enhanced Tier III high-rank abilities.
+- **Mana regen/sec:** `4.5 + 0.075×INT + 0.075×SPR`, independent of AGI. Mana resources remain **Mana ONLY**, no Focus/Ammo secondary resource invented.
+- At level1 no gear: VIT19/INT9/SPR11: **HP305**, **Mana258**, **Mana regen6.0/sec**. At level150 no gear: VIT317/INT158/SPR189.8: **HP4775**, **Mana1539.4**, **Mana regen30.585/sec**. Ordinary mana/HP engine rounding can affect display; these are analytical projections, not build-test measurements.
+- At max skill rank, one of each of Aimed, Arrow Rain, Power Shot and Strafe costs **378+395+343+280 =1,396 Mana**, below the proposed no-gear lvl150 maximum Mana1539.4 **before regen**; repeat-spam over long boss fights may still exceed recovery, so test in real combat. Cooldowns should be evaluated with boss movement and shot cancellation, longbow/shortbow item speed variations, Strafe uptime and ranged-buff stacking. First-playtest threshold viability is NOT proof of sustained-combat balance.
+
+### DESIGNER-PROPOSED EXACT 150 individual rank eligibility gates (mathematically AUDITED; NOT YET USER APPROVED)
+
+Authoring intent:
+- Lock the exact user-approved caps **Aimed30 / ArrowRain25 / BowMastery20 / Strafe30 / Aura20 / PowerShot25** =150 and the exact user-approved first purchase unlock levels **Aimed1, Rain5, Mastery1, Strafe1, Aura10, Power7**.
+- Skills begin at rank0. Each rank purchase requires owning previous rank, being that class and meeting its individual level gate; no auto-upgrading or Ranger skill rank transfer.
+- The table gives **gates in purchased-rank order**: the 1st integer is rank1's minimum Marksman class level, second is rank2's, ...; all strictly increase per skill. A player's spend order may vary after their ranks are available; this gate schedule does NOT force a purchase at a particular level.
+- For each class level from2 through148, one **additional** rank becomes eligible globally, while three Tier III level1 first ranks were already available at level1. Late unlock skills have rank1 gates EXACTLY at5/7/10. All rank gates available by **level148**; last two earned points at levels149 and150 can purchase any remaining legal ranks, provided prerequisite rank ordering.
+- Deterministic designer distribution picks the lowest **current progress ratio** `purchasedEligibleRanks / abilityCap` among skills already unlocked that have remaining cap, with ties by larger skill cap then earlier unlock and skill name; special initial rank1 unlocks are forced to the user's first-availability level. This is only an eligibility authoring strategy, NOT any requirement that a player spend point(s) according to this schedule.
+
+| Skill | Cap | Rank1 eligible at | **Exact consecutive rank1 → max-rank eligibility gates (proposal)** |
+| --- | ---: | ---: | --- |
+| Aimed Shot | 30 | 1 | `1, 2, 9, 15, 21, 27, 29, 35, 41, 45, 51, 57, 59, 65, 71, 75, 81, 87, 89, 95, 101, 105, 111, 117, 119, 125, 131, 135, 141, 147` |
+| Arrow Rain | 25 | 5 | `5, 6, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, 91, 97, 103, 109, 115, 121, 127, 133, 139, 145` |
+| Bow Mastery | 20 | 1 | `1, 4, 17, 23, 33, 39, 47, 53, 63, 69, 77, 83, 93, 99, 107, 113, 123, 129, 137, 143` |
+| Strafe | 30 | 1 | `1, 3, 12, 16, 22, 28, 30, 36, 42, 46, 52, 58, 60, 66, 72, 76, 82, 88, 90, 96, 102, 106, 112, 118, 120, 126, 132, 136, 142, 148` |
+| Ranged Damage Aura | 20 | 10 | `10, 11, 18, 24, 34, 40, 48, 54, 64, 70, 78, 84, 94, 100, 108, 114, 124, 130, 138, 144` |
+| Power Shot | 25 | 7 | `7, 8, 14, 20, 26, 32, 38, 44, 50, 56, 62, 68, 74, 80, 86, 92, 98, 104, 110, 116, 122, 128, 134, 140, 146` |
+
+**Audit PASS**, independently enforced while generating this document:
+1. **150 distinct skill-rank entries**; per-ability entries 30+25+20+30+20+25 exactly sum150.
+2. For all six skills, rank1 gate EXACTLY equals its user-selected unlock level; every subsequent rank has a STRICTLY HIGHER gate than its preceding rank.
+3. Every gate is within class levels1–148; no skill purchased before its unlock and **no rank past its cap**.
+4. For **EVERY level L = 1..150**, total eligible rank slots with gate≤L satisfies `eligible(L)≥L`, hence there is a valid path to spend **one new class skill point every level** (or store then spend later). At level1 three different rank1 choices are available. Checkpoints: **1: 3 eligible / 1 earned; 5: 7 eligible / 5 earned; 7: 9 eligible / 7 earned; 10: 12 eligible / 10 earned; 30: 32 eligible / 30 earned; 60: 62 eligible / 60 earned; 80: 82 eligible / 80 earned; 100: 102 eligible / 100 earned; 120: 122 eligible / 120 earned; 140: 142 eligible / 140 earned; 148: 150 eligible / 148 earned; 150: 150 eligible / 150 earned**.
+5. At level148 all150 ranks are eligible, and the earned points count is148; levels149–150 yield the final2 points and all150 ranks can be filled. Last rank gates: **Aimed147, ArrowRain145, BowMastery143, Strafe148, Aura144, PowerShot146**. All 150 legal purchases are possible by Marksman level150 without requiring additional late levels, Tier IV evolution or hidden prerequisite.
+
+**Important distinction:** Arithmetic audit proves *level-gate feasibility* and authoring consistency. It does **not** validate actual game implementation, UI point-spending, combat balance, or use of player-chosen class-specific purchase order. **The user authorized preparing and auditing these exact gates; they have NOT yet approved the designer's specific numbers**. Do not promote them to a final implementation contract until the user reviews and approves the schedule.
+
+### Round 7: Next targeted design approvals (UNANSWERED)
+
+1. **Exact gate schedule:** Approve the audited six rank-gate sequences above as the official first-playtest Marksman 150-point rank schedule, or request adjustments (for example, faster early Bow Mastery ranks)?
+2. **Aimed Shot and Power Shot damage:** Approve designer candidate RAW formulas `Aimed=[1.90+0.075(r−1)]B+[0.25+0.016(r−1)]A` and `Power=[1.15+0.05(r−1)]B+[0.10+0.008(r−1)]A` (Power then ×0.8 for each further enemy), along with basic `B=8+1.20A` before item contributions? The Aimed skill is intentionally much stronger against a single target; Power cannot crit.
+3. **Arrow Rain power:** Approve `[0.400+0.022(r−1)]B` RAW EACH of the **six** waves, keeping six total waves in2s, 1.5s channel and 3m circle? This gives ~50% more per-target full-duration raw than the four-wave Ranger at their respective skill caps with equal B.
+4. **Mana/cooldowns:** Approve initial Aimed **7s / 18+12r Mana**, Arrow Rain **22s / 20+15r**, Power Shot **12s / 18+13r**, Strafe **18s already approved / 10+9r Mana on activation once**, plus Marksman maximum Mana `180+5INT+3SPR`, regen/s `4.5+.075INT+.075SPR`, baseHP20 and HP15/VIT?
+5. **Teacher/trial direction:** Shall Marksman advance from Ranger Lv60 via **a hidden teacher found in World1/World2 through exploration** and then complete a **solo precision challenge** (suggested) before returning to teacher? Or use a non-dungeon dedicated shooting-range/survival-trial quest? Don't assume every Tier III must copy Psion's Wolf or Shaman dungeons; Ranger's original Alpha Wolf quest is Tier II only.
+
+**NEXT IN ROSTER:** after Marksman design completion, Greatblade→Berserker, per [coverage roadmap](../TIER3_ONE_PER_TIER2_ROADMAP.md).
