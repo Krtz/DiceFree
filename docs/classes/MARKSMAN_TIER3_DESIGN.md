@@ -479,3 +479,32 @@ This section **supersedes the Round 7 "Round 8 questions OPEN" prompts** above w
 4. **COORDINATED IMPLEMENTATION:** User explicitly requests **Marksman class implementation and game-wide uniform Mana formula migration AT THE SAME TIME**, not separated into independent stages; plan integration/testing together so other Mana classes (Mage, Priest, Psion and evolutions, etc.) remain functional. Also apply Ranger basic AGI coefficient correction. User agrees later playtesting may require numerical retuning. **This document update does not itself implement or verify Unity changes.**
 
 **Confirmed up to Round 8:** skills/caps/rank gates from Rounds 1–7 remain approved; first-playtest damage now approved, while shared Mana base regeneration constants and open-world quest's exact target placements remain under design.
+
+## Round 9 — 2026-11-25 (USER APPROVED: cross-world settlement targets, journal, shared Mana coefficients)
+
+**Supersedes** the remaining Round 8 open questions on quest geography, target hiding difficulty, and shared Mana numeric coefficients. These are USER-APPROVED FIRST-PLAYTEST DESIGN decisions, not an assertion that Unity implementation has been completed.
+
+### Open-world Marksman teacher quest: visit BOTH worlds
+
+- After a qualifying Tier II Ranger **accepts the hidden Marksman teacher quest**, spawn/enable **one small shootable archery target in EACH established village/city in both World 1 AND World 2**. The exact list must be derived from the actual canonical settlement definitions/scenes before implementation. **Do not invent missing villages, duplicate target count across neighborhoods, or require non-settlement dungeon/biome locations as part of "each village/city."**
+- A **quest journal lists settlement names and marks which target locations are complete vs still remaining**. The list makes required destinations discoverable; players should know which settlements still need visits, while finding the actual target at the settlement supplies a light exploration element. The aim is **world touring**, NOT difficult target hiding.
+- Targets should be **reasonably visible and straightforward to locate on arrival**, not tucked into obscure rooftops, concealed trees or punishing pixel hunts. Tougher searching is an optional idea for **Tier IV later**, NOT Marksman Tier III.
+- A qualifying Ranger shoots each local target using ordinary eligible ranged attack/quest-hit rules, records progress once per settlement in that player's appropriate quest state, then visits the remaining settlements in either world. **No instanced shooting range, timer, fixed-arrow budget, accuracy-score requirement or separate precision minigame**.
+- On completion of all listed settlements, **return to the teacher** to advance into a new Tier III **Marksman level 1 manifestation**, preserving original Ranger and existing established class-advancement rules.
+- Quest authoring/implementation follow-up: inspect actual World 1/World 2 settlements; agree explicit eligible list and whether special hubs count; determine exact quest-target spawn placement, interactability/visibility for nonquest players, multiplayer progression ownership, travel accessibility, quest persistence and journal UI implementation. Do not claim these details already designed or built.
+
+### Shared Mana baseline: APPROVED FOR FIRST PLAYTEST
+
+All **Mana-using** classes follow the SAME global resource formulas, without individual class-specific attribute coefficients:
+
+`MaximumMana = ClassBaseMana + 5 × INT`
+
+`ManaRegenPerSecond = 4 + 0.1 × SPR`
+
+- **+5 Mana per INT** is the approved initial game-wide coefficient and matches the user's "at least 5" preference. Treat it as a baseline/minimum for a future **GLOBAL** playtest retune, not a permanent upper limit.
+- **Global regeneration base 4 and +0.1 per SPR** now expressly approved as first-playtest numbers, superseding Round 8 provisional note that these exact regeneration constants were undecided.
+- Individual **ClassBaseMana**, starting INT, INT growth, SPR from actor stats, equipment, buffs and skill costs can remain class-authored according to the global engine rules; **do not introduce different per-class Mana-per-INT or Mana-per-SPR/regeneration coefficients**. Confirm how equipped stats and general-purpose additive buffs integrate using the existing engine pipeline.
+- Migrate and test **ALL Mana users** along with Marksman and Ranger basic AGI correction as **ONE coordinated implementation scope** per user's Round 8 instruction. Check Priest, Mage, Psion and their evolutions as well as any other Mana users for affordability and regressions; current heterogeneous source asset coefficients are not proof of completion.
+- Values **subject to playtest adjustments**. Document current formulas before changes, validate in combat and test rather than assuming current skill costs already balanced.
+
+**Status:** Marksman design rounds 1–9 decisions recorded. Mark initial-playtest numbers as approved and outstanding scene/quest implementation details as open; no Unity/gameplay implementation or manual playtest performed by this documentation-only update.
