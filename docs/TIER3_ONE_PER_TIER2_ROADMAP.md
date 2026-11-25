@@ -53,3 +53,7 @@ This means **at least one playable Tier III advancement choice for EVERY one of 
 ## Marksman first design round
 
 See [Marksman Tier III](classes/MARKSMAN_TIER3_DESIGN.md) for the Ranger baseline, preliminary identity and first **five open design questions**. All answers are pending. Update the canonical design documents after each new user decision.
+
+## Marksman Round 8 update (2026-11-25)
+
+**Ranger → Marksman:** Rounds 1–8 complete for the agreed first-playtest damage formulas and six-skill 150-rank progression. Its hidden-teacher advancement quest is now specifically **open-world target discovery after quest acceptance**, with small archery targets to locate/shoot around villages and cities (approximately one per settlement proposed), NOT a dedicated shooting-range instance or a timed/limited-arrow minigame. Exact eligible settlements/target placement and final Mana regeneration constant remain design follow-ups. **Implementation requested to coordinate Marksman + Ranger basic adjustment + global Mana standardization in a single tested change**, not declared implemented by this documentation. **Greatblade → Berserker remains the next Tier III design** after Marksman.
