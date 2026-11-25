@@ -1,0 +1,9 @@
+{
+    "buildings": 16,
+    "newBiomes": 3,
+    "checkedApproaches": 15,
+    "clearedClutter": 75,
+    "relocatedPatrols": 4,
+    "healing": 125,
+    "anchor": "anchor.anvilreach"
+}

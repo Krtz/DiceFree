@@ -1,0 +1,10 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Anvilreach-20261125-005656\\DiceFree.exe",
+  "sha256": "4c93a4bb060a12b9044ab2103835dd1565aec9aa8381372fa84fbbc14a19b989",
+  "development": true,
+  "fullGameplayReviewBuild": "Anvilreach-20261125-005336",
+  "fullGameplayChecks": 51,
+  "worldDimensions": "438 x 615",
+  "newBuildings": 26,
+  "newBiomes": 3
+}

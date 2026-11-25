@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-25",
+  "workflow": "Existing tracked library reuse; no new package admission",
+  "catalog": "DiceFree-AssetCatalog/packages.json",
+  "sources": [
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/anvil_01.fbx",
+      "sha256": "7d91beed725da5c5bb024756054f51a1e528b2a65426422c5b1d19cdda3125eb"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/anvil_02.fbx",
+      "sha256": "982a880dd297e101ee67e0c7ef2bee86a078470e182d59d76b6315f806099590"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/cart_01.fbx",
+      "sha256": "79b868ff6b0f0de5928c4d99312946b57ee7a044a1c2b5b7b6073bd0017ff4b6"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/cart_02.fbx",
+      "sha256": "5a3a6b0d0a6912a46caf6a7f9a6f7290eab474044585d428caf5a158095dca13"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/rock_01.fbx",
+      "sha256": "01abd09f4eab499ae3f618c575600845518328cf0ea7671e0349e164daee982e"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/pine_01.fbx",
+      "sha256": "7711f32619ece46c6ebb5bcae841ccf00810bac8a4b3d7ee3b16d3dba41e8be8"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/VisualBatch01/Models/mushroom_01.fbx",
+      "sha256": "fd47a293b9620537e87b13f5c2b0dcbe0e8c18919ac45f45a9ed230760496345"
+    },
+    {
+      "path": "Assets/_DiceFree/Art/World/WalkingVillagers/Prefabs/Farmer.prefab",
+      "sha256": "4622bee90c33d31a86452c97feea48d4b1a266f41217570cdc4d0a79e6be940b"
+    }
+  ]
+}

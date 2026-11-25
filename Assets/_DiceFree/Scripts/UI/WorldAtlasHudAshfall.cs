@@ -9,18 +9,22 @@ namespace DiceFree.UI
         private int ashfallSelected;
         private bool InAshfall => player != null && AshfallReach.Bounds.Contains(PlayerPoint);
         private static readonly Color CinderInk = new(.89f, .51f, .27f);
-        private static readonly string[] AshfallNames = { "Ironpine Gate", "Cinderwatch", "Basalt Needle", "Ember Crown", "Willowford" };
+        private static readonly string[] AshfallNames = { "Ironpine Gate", "Cinderwatch", "Basalt Needle", "Ember Crown", "Willowford", "Anvilreach", "Coppervein Highlands", "Glasswind Barrens", "Deepmoss Fen" };
         private static readonly string[] AshfallDescriptions =
         {
             "The stone gate returns to Ironpine in World 1.",
             "A small refuge beside the valley road. Drink from the spring to recover health.",
             "Tall fractured columns rise above the northwest ridge. Ashscale spearhands and ridgebows patrol its slopes.",
             "An open volcanic crown marks the southeast of the reach. Ashscale patrols guard the trails around its base.",
-            "A larger river settlement in Steamroot Vale. Follow the road west from Cinderwatch. The outfitter, spring and timber bridge serve travellers along the Cornberg river."
+            "A larger river settlement in Steamroot Vale. Follow the road west from Cinderwatch. The outfitter, spring and timber bridge serve travellers along the Cornberg river.",
+            "A walled city of miners, smiths and metalworkers. Take the eastern branch of the Crown road. The foundry, ore yards, market, bank, healing spring and resurrection dice serve travellers.",
+            "Copper-stained hills around Anvilreach. Ore seams, quarry workings and mine galleries supply the city's furnaces.",
+            "Pale ash flats and black volcanic glass south of the foundry country. Follow the southern circuit around Ember Crown.",
+            "A damp southern woodland of blue-green moss, luminous fungi and dark pools. The river road and southern circuit cross its margins."
         };
         private static readonly Vector2[] AshfallPlaces =
         {
-            AshfallReach.NorthGate, AshfallReach.Cinderwatch, AshfallReach.BasaltNeedle, AshfallReach.EmberCrown, AshfallReach.Willowford
+            AshfallReach.NorthGate, AshfallReach.Cinderwatch, AshfallReach.BasaltNeedle, AshfallReach.EmberCrown, AshfallReach.Willowford, AshfallReach.Anvilreach, AshfallReach.Coppervein, AshfallReach.Glasswind, AshfallReach.Deepmoss
         };
 
         private void DrawAshfall(Rect plot, Rect rail)
@@ -28,6 +32,11 @@ namespace DiceFree.UI
             Fill(plot, new Color(.115f, .102f, .081f));
             var forestEdge=AshfallProject(plot,new Vector2(-60,0));
             Fill(new Rect(plot.x,plot.y,forestEdge.x-plot.x,plot.height),new Color(.075f,.135f,.095f));
+            foreach(var wash in new[]{(new Vector2(90,-210),new Vector2(160,200),new Color(.30f,.17f,.10f,.65f)),(new Vector2(65,-465),new Vector2(225,225),new Color(.29f,.29f,.25f,.65f)),(new Vector2(-147,-456),new Vector2(160,200),new Color(.06f,.22f,.19f,.75f))})
+            {
+                var a=AshfallProject(plot,wash.Item1-wash.Item2*.5f);var b=AshfallProject(plot,wash.Item1+wash.Item2*.5f);
+                Fill(Rect.MinMaxRect(a.x,b.y,b.x,a.y),wash.Item3);
+            }
             for (int i = 0; i < 6; i++)
             {
                 float fraction = (i + 1) / 7f;
@@ -55,6 +64,8 @@ namespace DiceFree.UI
             AshfallRoute(plot, AshfallReach.WesternTrail, Footpath, 1.65f);
             AshfallRoute(plot, AshfallReach.WillowfordRoad, Road, 2.6f);
             AshfallRoute(plot, AshfallReach.RiverbankTrail, Footpath, 1.65f);
+            AshfallRoute(plot, AshfallReach.AnvilreachRoad, Road, 2.6f);
+            AshfallRoute(plot, AshfallReach.AnvilreachNorthRoad, Road, 2.6f);
             AshfallRoute(plot, AshfallReach.River, new Color(.30f,.66f,.74f), 4.0f);
             for(int i=0;i<170;i++)
             {
@@ -119,11 +130,11 @@ namespace DiceFree.UI
             float y = rail.y + 207;
             for (int i = 0; i < AshfallNames.Length; i++)
             {
-                var row = new Rect(rail.x + 12, y, rail.width - 24, 30);
+                var row = new Rect(rail.x + 12, y, rail.width - 24, 23);
                 Fill(row, i == ashfallSelected ? new Color(.295f, .244f, .147f) : new Color(.13f, .16f, .131f));
                 if (GUI.Button(new Rect(row.x + 7, row.y, row.width - 14, row.height), AshfallNames[i], label))
                     ashfallSelected = i;
-                y += 34;
+                y += 25;
             }
             if (y + 130 < rail.yMax - MapMarkerLegendHeight)
             {

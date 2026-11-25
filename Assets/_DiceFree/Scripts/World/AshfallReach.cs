@@ -15,6 +15,12 @@ namespace DiceFree.World
         public static readonly Vector2 BasaltNeedle = new(LocalBounds.xMin+FaceWidth*.25f, LocalBounds.yMin+FaceHeight*.75f);
         public static readonly Vector2 EmberCrown = new(LocalBounds.xMin+FaceWidth*.75f, LocalBounds.yMin+FaceHeight*.25f);
         public static readonly Vector2 Willowford = new(-150, -62);
+        public static readonly Vector2 Anvilreach = new(92, -205);
+        public static readonly Rect AnvilreachBounds = new(30,-282,140,146);
+        public static readonly Vector2 Coppervein = new(105,-120), Glasswind = new(126,-520), Deepmoss = new(-111,-444);
+        public static float CopperveinWeight(Vector2 p) => Mathf.SmoothStep(0,1,Mathf.InverseLerp(-15,40,p.x))*Mathf.SmoothStep(0,1,Mathf.InverseLerp(-78,-120,p.y))*Mathf.SmoothStep(0,1,Mathf.InverseLerp(-345,-300,p.y));
+        public static float GlasswindWeight(Vector2 p) => Mathf.SmoothStep(0,1,Mathf.InverseLerp(-55,-5,p.x))*Mathf.SmoothStep(0,1,Mathf.InverseLerp(-330,-380,p.y));
+        public static float DeepmossWeight(Vector2 p) => Mathf.SmoothStep(0,1,Mathf.InverseLerp(-40,-90,p.x))*Mathf.SmoothStep(0,1,Mathf.InverseLerp(-325,-375,p.y));
         public const float WorldOneGateX = 163;
         public const float WorldOneRiverEdgeZ = -53;
         public const float NorthEdgeZ = 35;
@@ -32,8 +38,17 @@ namespace DiceFree.World
         public static float RiverlandsWeight(float x) =>
             Mathf.SmoothStep(0, 1, Mathf.InverseLerp(-38, -70, x));
 
-        public static string RegionName(Vector3 position) =>
-            position.x - Origin.x < -60 ? "Steamroot Vale" : "Ashfall Reach";
+        public static string RegionName(Vector3 position)
+        {
+            var p=new Vector2(position.x-Origin.x,position.z-Origin.z);
+            if(AnvilreachBounds.Contains(p))return "Anvilreach";
+            if(DeepmossWeight(p)>.5f)return "Deepmoss Fen";
+            if(GlasswindWeight(p)>.5f)return "Glasswind Barrens";
+            if(CopperveinWeight(p)>.5f)return "Coppervein Highlands";
+            return p.x < -60 ? "Steamroot Vale" : "Ashfall Reach";
+        }
+        public static IReadOnlyList<Vector2> AnvilreachRoad {get;}=new Vector2[]{new(32,-195),new(26,-205),new(42,-205),Anvilreach,new(92,-244),new(92,-290),new(43,-286)};
+        public static IReadOnlyList<Vector2> AnvilreachNorthRoad {get;}=new Vector2[]{new(13,-115),new(40,-112),new(72,-120),new(92,-128),new(92,-165),Anvilreach};
 
         public static IReadOnlyList<Vector2> River { get; } = RiverPoints();
         private static Vector2[] RiverPoints()
