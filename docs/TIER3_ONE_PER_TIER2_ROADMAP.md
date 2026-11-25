@@ -1,5 +1,7 @@
 # DiceFree — Tier III coverage roadmap: at least one evolution per Tier II class
 
+**2026-11-25 Marksman Tier III Round2 LATEST UPDATE:** **All six Marksman abilities are now USER APPROVED as class identities:** Aimed Shot (long precision windup, more critical chance, Physical Defense penetration); Arrow Rain; Bow Mastery (11m base→15m max reach); Strafe (faster attacks with exactly equivalent percentage MOVEMENT slowdown); PERMANENT ranged damage aura (radius **always equals current Marksman bow attack range**, dynamically expanding with Bow Mastery); Power Shot (pierces in line, each additional enemy receives **80% of the previous one's RAW damage**, individually mitigated afterward). **150 total spendable skill points, 1 per Marksman class level1–150 are USER APPROVED**. Exact per-skill caps, rank eligibility, aura ally/attack eligibility, skill damage and costs, Stats, teacher, and implementation are OPEN. Prior wording calling Aura/Power Shot unconfirmed or six-skill roster tentative is **SUPERSEDED**; initial +1% aura/rank and +2% Strafe attack speed/rank remain working candidate coefficients. [Marksman Round2 details](classes/MARKSMAN_TIER3_DESIGN.md). Greatblade→Berserker next once Marksman design is complete.
+
 **2026-11-25 USER-APPROVED WORKFLOW / DESIGN PLANNING, NOT IMPLEMENTATION AUTHORIZATION**
 
 ## Objective and sequence
