@@ -1,0 +1,11 @@
+Assets/_DiceFree/Settings/Acolyte/Acolyte Mana.asset | class=class.acolyte | base=80 | old max=2INT + 1SPR | old regen=2.5 + 0.075INT + 0.075SPR
+Assets/_DiceFree/Settings/Development/Priest/Priest Mana.asset | class=class.priest | base=70 | old max=0INT + 4SPR | old regen=0.7 + 0INT + 0.015SPR
+Assets/_DiceFree/Settings/Marksman/Marksman Mana.asset | class=class.marksman | base=180 | old max=1INT + 0SPR | old regen=4 + 0INT + 0.1SPR
+Assets/_DiceFree/Settings/Psion/Psion Mana.asset | class=class.psion | base=84 | old max=3INT + 1SPR | old regen=4.5 + 0.075INT + 0.075SPR
+Assets/_DiceFree/Settings/PsionEvolutions/Mirage Mage Mana.asset | class=class.mirage-mage | base=160 | old max=5.5INT + 2SPR | old regen=4 + 0.07INT + 0.055SPR
+Assets/_DiceFree/Settings/PsionEvolutions/Psionic Knight Mana.asset | class=class.psionic-knight | base=140 | old max=4INT + 1.5SPR | old regen=3.5 + 0.045INT + 0.035SPR
+Assets/_DiceFree/Settings/Ranger/Ranger Mana.asset | class=class.ranger | base=60 | old max=1INT + 0SPR | old regen=4 + 0INT + 0.1SPR
+Assets/_DiceFree/Settings/Resources/Magically Touched Mana.asset | class=class.magically-touched-novice | base=80 | old max=2INT + 1SPR | old regen=2.5 + 0.075INT + 0.075SPR
+Assets/_DiceFree/Settings/Resources/Physically Blessed Mana.asset | class=class.physically-blessed-novice | base=60 | old max=1INT + 0SPR | old regen=4 + 0INT + 0.1SPR
+Assets/_DiceFree/Settings/Skills/Mage/Mage Mana.asset | class=class.mage | base=80 | old max=10INT + 0SPR | old regen=2 + 0.04INT + 0SPR
+Assets/_DiceFree/Settings/Thief/Thief Mana.asset | class=class.thief | base=60 | old max=1INT + 0SPR | old regen=4 + 0INT + 0.1SPR

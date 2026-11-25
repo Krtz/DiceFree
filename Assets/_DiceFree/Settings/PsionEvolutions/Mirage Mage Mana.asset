@@ -16,10 +16,10 @@ MonoBehaviour:
   classId: class.mirage-mage
   resource: {fileID: 11400000, guid: 79c923ba14d8c3e48b29525389b9d548, type: 2}
   baseMaximum: 160
-  maximumPerIntelligence: 5.5
-  maximumPerSpirit: 2
+  maximumPerIntelligence: 5
+  maximumPerSpirit: 0
   baseRegenPerSecond: 4
-  regenPerIntelligence: 0.07
-  regenPerSpirit: 0.055
+  regenPerIntelligence: 0
+  regenPerSpirit: 0.1
   initialFraction: 1
   loadPolicy: 1

@@ -1,0 +1,806 @@
+[
+  {
+    "path": "Assets/_DiceFree/Resources/MenuPresentationCatalog.asset",
+    "mainSha256": "2CA06B189A19ACE5F2D97FAFDC8A8758AC58B415B860A469AE8794119F224E7A",
+    "qaSha256": "2CA06B189A19ACE5F2D97FAFDC8A8758AC58B415B860A469AE8794119F224E7A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/Cornberg.unity",
+    "mainSha256": "9C701C9ABC9FCF2EC0AF9333A25198B5848D204099F4CEB8814ED1354CBF0D32",
+    "qaSha256": "4CF309272EAA4C6A854AD9E0BD10480EDAE7D64760BBB9D6E08EB40665E36A81",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/DevelopmentRoom.unity",
+    "mainSha256": "67CB0C54278B24D399CE7DD6DA7062985A691B39D7D5616B482B869894B4B5F6",
+    "qaSha256": "9035D8E9A09F017A99BA829AF3C6B2C8D11789D1357E69573E5E8C3A9EF5B3BA",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/WorldTwoArrival.unity",
+    "mainSha256": "7F7D9EE4D5C1850F890EE6ADE575513397F83EC86253D939F8E171C716429F4A",
+    "qaSha256": "EC05FCA0252E84FB64EEFB642ECA1601ADBD15AEA63A30B5690BDE7DD65E18A0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/MarksmanArcheryTarget.cs",
+    "mainSha256": "EC7EFABD6BFD27A2D3E89125477B23B6C143C5AA5005BA57AD2DA22DA06BB6F3",
+    "qaSha256": "EC7EFABD6BFD27A2D3E89125477B23B6C143C5AA5005BA57AD2DA22DA06BB6F3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/MarksmanArcheryTarget.cs.meta",
+    "mainSha256": "F5E3A632FB49DD3D937FAF466C50A7CD9C9A0E4C6A13CB8B0354ED7AC55003D0",
+    "qaSha256": "F5E3A632FB49DD3D937FAF466C50A7CD9C9A0E4C6A13CB8B0354ED7AC55003D0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/MarksmanMentor.cs",
+    "mainSha256": "27715E87C70C8D85A318F4C6D6EA69BD9D830AB1FFEE37C1762078B1D84F89AE",
+    "qaSha256": "27715E87C70C8D85A318F4C6D6EA69BD9D830AB1FFEE37C1762078B1D84F89AE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/MarksmanMentor.cs.meta",
+    "mainSha256": "8992817F37E77E2E1DF5DACA78A143C148FF5819C93E2DCBF35CB4A4D33784B5",
+    "qaSha256": "8992817F37E77E2E1DF5DACA78A143C148FF5819C93E2DCBF35CB4A4D33784B5",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/ActorResourceController.cs",
+    "mainSha256": "C70A1AF7FD8F42B78AEA99B2B0595FFA1261D47E0AB831600159536C3182DF8A",
+    "qaSha256": "C70A1AF7FD8F42B78AEA99B2B0595FFA1261D47E0AB831600159536C3182DF8A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/BasicAttack.cs",
+    "mainSha256": "AA1723D87E72C3F8F6E969232FB6A5E02194EC5ABCF3B03FD915CCDD1C697ABD",
+    "qaSha256": "AA1723D87E72C3F8F6E969232FB6A5E02194EC5ABCF3B03FD915CCDD1C697ABD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/ClassResourceProfile.cs",
+    "mainSha256": "B3BBC7F0482E23A2A070908DB52A3FC9C6358AA6017A0882390F42A5477F91C1",
+    "qaSha256": "B3BBC7F0482E23A2A070908DB52A3FC9C6358AA6017A0882390F42A5477F91C1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/DamageResolver.cs",
+    "mainSha256": "7B6524E9262D741230748E5F2401D3928973D0C93A38EEC7A5D266E8FB627225",
+    "qaSha256": "7B6524E9262D741230748E5F2401D3928973D0C93A38EEC7A5D266E8FB627225",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/GroundAuraVisual.cs",
+    "mainSha256": "B11DF298935E706BB75BF90A02E541465F6BE3EE3F19B08DD6DBA1015EA09E81",
+    "qaSha256": "B11DF298935E706BB75BF90A02E541465F6BE3EE3F19B08DD6DBA1015EA09E81",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/MarksmanCaster.cs",
+    "mainSha256": "3D8FF5EFB63EE7D6A98E6314B7BCA1575978D4F3F911FF75B46E803DFB545298",
+    "qaSha256": "3D8FF5EFB63EE7D6A98E6314B7BCA1575978D4F3F911FF75B46E803DFB545298",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/MarksmanCaster.cs.meta",
+    "mainSha256": "E7D0B6359038E230E94A90F096F3636D037AA84DAD6DECE1C160FB3EC0D990E7",
+    "qaSha256": "E7D0B6359038E230E94A90F096F3636D037AA84DAD6DECE1C160FB3EC0D990E7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Gameplay/CodexProgression.cs",
+    "mainSha256": "0062BF21066301556A0C70A592B42196FD1671DA710F5F01213F4F17E653FE90",
+    "qaSha256": "0062BF21066301556A0C70A592B42196FD1671DA710F5F01213F4F17E653FE90",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Persistence/ManifestationPersistence.cs",
+    "mainSha256": "3372C262218049291C07476F12506BB4A456D232BB6BB7CD67E6ECF6785B14C1",
+    "qaSha256": "3372C262218049291C07476F12506BB4A456D232BB6BB7CD67E6ECF6785B14C1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/MarksmanProgression.cs",
+    "mainSha256": "0021776113BD6ED1045B435FA66BFBAE742C39A2768B445FEFD81049D777BEEA",
+    "qaSha256": "0021776113BD6ED1045B435FA66BFBAE742C39A2768B445FEFD81049D777BEEA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/MarksmanProgression.cs.meta",
+    "mainSha256": "AFCC240272F9A24C5FA81419FD20B92884CC4B573355A27F67E3029AB05D48F4",
+    "qaSha256": "AFCC240272F9A24C5FA81419FD20B92884CC4B573355A27F67E3029AB05D48F4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Quests/QuestJournal.cs",
+    "mainSha256": "B5177B76D9C15E8ECA6F03522380566FA496CF30B520A9954B699396734EB738",
+    "qaSha256": "B5177B76D9C15E8ECA6F03522380566FA496CF30B520A9954B699396734EB738",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/CharacterStatsHud.cs",
+    "mainSha256": "D6A231BAFF37416FBEAACBD0199D57EFD8207BE8221811D2763080089C75042B",
+    "qaSha256": "D6A231BAFF37416FBEAACBD0199D57EFD8207BE8221811D2763080089C75042B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/MarksmanAbilityProvider.cs",
+    "mainSha256": "A04585F9E606D7B5FE504C75B450B13125855562A02BC0BAEAE6FE5B862D8061",
+    "qaSha256": "A04585F9E606D7B5FE504C75B450B13125855562A02BC0BAEAE6FE5B862D8061",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/MarksmanAbilityProvider.cs.meta",
+    "mainSha256": "2F7B9E03824E38C9EA4801D2967D131F65C70B31551B6BC7D74C4055EA72935B",
+    "qaSha256": "2F7B9E03824E38C9EA4801D2967D131F65C70B31551B6BC7D74C4055EA72935B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs",
+    "mainSha256": "7B5A1419F94BCFC340FE4D1F8C6C4525D998415E926AE72C682EFC14C34933B3",
+    "qaSha256": "7B5A1419F94BCFC340FE4D1F8C6C4525D998415E926AE72C682EFC14C34933B3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/RangerBowPresentation.cs",
+    "mainSha256": "187F6BDC894E790D78FEAB98C25414A220E314E0E5E0C4023337241CC39B42F4",
+    "qaSha256": "187F6BDC894E790D78FEAB98C25414A220E314E0E5E0C4023337241CC39B42F4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/TargetInspectionHud.cs",
+    "mainSha256": "61CD09F301E525D4D0BC6C68797BFDCDCB41AE78FE0AAE106F3ACFF61389FFAE",
+    "qaSha256": "61CD09F301E525D4D0BC6C68797BFDCDCB41AE78FE0AAE106F3ACFF61389FFAE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/World/TravelSurface.cs",
+    "mainSha256": "756112ABE9112F1B0359F1B5C1987280AC65C62E3DD592D4C7E999976EBAFF32",
+    "qaSha256": "756112ABE9112F1B0359F1B5C1987280AC65C62E3DD592D4C7E999976EBAFF32",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Acolyte/Acolyte Mana.asset",
+    "mainSha256": "B4FAA7DD63476EBE3399A8DFAB36B8A3B41BE12C2909E348B2D8ED9A142F3F79",
+    "qaSha256": "B4FAA7DD63476EBE3399A8DFAB36B8A3B41BE12C2909E348B2D8ED9A142F3F79",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Development/Priest/Development Priest catalog.asset",
+    "mainSha256": "F92A28D3B22455FFBC258B889FCE9179AC558B9B0DC755D7F99EAA8B40A2BEAF",
+    "qaSha256": "F92A28D3B22455FFBC258B889FCE9179AC558B9B0DC755D7F99EAA8B40A2BEAF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Development/Priest/Priest Mana.asset",
+    "mainSha256": "0734ECAB4E9CD212907A0AF042CC572CA0B95DB08DFF58811ABDF824C8FEB304",
+    "qaSha256": "0734ECAB4E9CD212907A0AF042CC572CA0B95DB08DFF58811ABDF824C8FEB304",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman.meta",
+    "mainSha256": "2848D31F9C4DE2457302B21E8FAB62B8ED809DB0BB65419D8020ECFF0C8C8121",
+    "qaSha256": "2848D31F9C4DE2457302B21E8FAB62B8ED809DB0BB65419D8020ECFF0C8C8121",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Aimed Shot icon.asset",
+    "mainSha256": "DA80F0DC3D22C3A28BD0B9EEAA6DBEA533B3522ED7129717C0076F3193337CB1",
+    "qaSha256": "DA80F0DC3D22C3A28BD0B9EEAA6DBEA533B3522ED7129717C0076F3193337CB1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Aimed Shot icon.asset.meta",
+    "mainSha256": "874B032E4291C7D9D6CEE86528AD108B3DEBF784E7456C68CDA1FA96D23F4DC3",
+    "qaSha256": "874B032E4291C7D9D6CEE86528AD108B3DEBF784E7456C68CDA1FA96D23F4DC3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Aimed Shot.asset",
+    "mainSha256": "0B6ACBD72C25EAD831C86ADF29E0E906C712065DFB23AD68FA214A4B08D06729",
+    "qaSha256": "0B6ACBD72C25EAD831C86ADF29E0E906C712065DFB23AD68FA214A4B08D06729",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Aimed Shot.asset.meta",
+    "mainSha256": "B151BAE0C00B060189349AD9C62A0E23F9BAD02827ED105440D892C27C43FAFF",
+    "qaSha256": "B151BAE0C00B060189349AD9C62A0E23F9BAD02827ED105440D892C27C43FAFF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 0.mat",
+    "mainSha256": "4781BA46B1A2B64A0D39B3007086251A3C470E63BA6D2761D0B001CFB51385FE",
+    "qaSha256": "4781BA46B1A2B64A0D39B3007086251A3C470E63BA6D2761D0B001CFB51385FE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 0.mat.meta",
+    "mainSha256": "A894E4E8F2EF452058CAC2FC3F0A34142752783B04079AD4429DCD3791382BA1",
+    "qaSha256": "A894E4E8F2EF452058CAC2FC3F0A34142752783B04079AD4429DCD3791382BA1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 1.mat",
+    "mainSha256": "C737EED0C5AC6240D00020355BA745EF29645DBA75070FCA0E7819C1956C140A",
+    "qaSha256": "C737EED0C5AC6240D00020355BA745EF29645DBA75070FCA0E7819C1956C140A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 1.mat.meta",
+    "mainSha256": "E20A42D4D2D4B02CE669ED118E65F74E65C2FF462B1EF1F4D98F6703F0C9B641",
+    "qaSha256": "E20A42D4D2D4B02CE669ED118E65F74E65C2FF462B1EF1F4D98F6703F0C9B641",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 2.mat",
+    "mainSha256": "966DDB4674C408FC44FB9272E3A5530FD637A2BCF5ADEB1981D11060763136D9",
+    "qaSha256": "966DDB4674C408FC44FB9272E3A5530FD637A2BCF5ADEB1981D11060763136D9",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery ring 2.mat.meta",
+    "mainSha256": "AB17FFDE24C24CB0E2C552DA8C3AC4BB88FC0535971B30E6176B8E4356EB3DDD",
+    "qaSha256": "AB17FFDE24C24CB0E2C552DA8C3AC4BB88FC0535971B30E6176B8E4356EB3DDD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery target.asset",
+    "mainSha256": "B8639EF9C954A7B5527F270BA86521282C028E751745CE1EA557CA4DAA292460",
+    "qaSha256": "B8639EF9C954A7B5527F270BA86521282C028E751745CE1EA557CA4DAA292460",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Archery target.asset.meta",
+    "mainSha256": "9FBEA9931D4016AC89D52F8E6D425D80317035491C0AB5C939B3B1FECFEBDCD0",
+    "qaSha256": "9FBEA9931D4016AC89D52F8E6D425D80317035491C0AB5C939B3B1FECFEBDCD0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Arrow Rain icon.asset",
+    "mainSha256": "F65D631B77338296F0991BF5ED0A0F7B26DA1104D3A59831967BE2B85A39C340",
+    "qaSha256": "F65D631B77338296F0991BF5ED0A0F7B26DA1104D3A59831967BE2B85A39C340",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Arrow Rain icon.asset.meta",
+    "mainSha256": "635427E561EA1AABEB534B51E93CFDD4B75B4E8FC8496460B60EBAA0A3DCC8CE",
+    "qaSha256": "635427E561EA1AABEB534B51E93CFDD4B75B4E8FC8496460B60EBAA0A3DCC8CE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Arrow Rain.asset",
+    "mainSha256": "FA6DF0DB8760F2C98EFECDC78D502FD6E5461237BE24255464400D4B7AD607CB",
+    "qaSha256": "FA6DF0DB8760F2C98EFECDC78D502FD6E5461237BE24255464400D4B7AD607CB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Arrow Rain.asset.meta",
+    "mainSha256": "5A3B243F4D0B40F92768A260D2C4DC1F899D65096A1FEF39EBF9E2BBF2AD5607",
+    "qaSha256": "5A3B243F4D0B40F92768A260D2C4DC1F899D65096A1FEF39EBF9E2BBF2AD5607",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Bow Mastery icon.asset",
+    "mainSha256": "4B95453ACDC1645C8F7EE4EC92598BD0FDA06104FE116853A72969B7DA4AAD51",
+    "qaSha256": "4B95453ACDC1645C8F7EE4EC92598BD0FDA06104FE116853A72969B7DA4AAD51",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Bow Mastery icon.asset.meta",
+    "mainSha256": "D2E9B53B8E2876707C0017201230B9E828F391AFB1799725A55C1423BAB6A91E",
+    "qaSha256": "D2E9B53B8E2876707C0017201230B9E828F391AFB1799725A55C1423BAB6A91E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Ash-laminate.mat",
+    "mainSha256": "DBE930DD3FDF782EEF20CCB89E7A65FEF798585F43CA2CDA25ED3E3A0A8A4B68",
+    "qaSha256": "DBE930DD3FDF782EEF20CCB89E7A65FEF798585F43CA2CDA25ED3E3A0A8A4B68",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Ash-laminate.mat.meta",
+    "mainSha256": "0D53DCAE47AC1F0338BF3FF81CFC4297C40BF00F89DE15659B2512AC16D05169",
+    "qaSha256": "0D53DCAE47AC1F0338BF3FF81CFC4297C40BF00F89DE15659B2512AC16D05169",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Blue-black-hair.mat",
+    "mainSha256": "FACBA62B3617819C38353FE940C9C061437168BB800589120A41393ADD4F6734",
+    "qaSha256": "FACBA62B3617819C38353FE940C9C061437168BB800589120A41393ADD4F6734",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Blue-black-hair.mat.meta",
+    "mainSha256": "A5D3FFFBDD5E5B9D324BC77AC75A1F2C5538A7A36402F7392F27A61AEA27F27A",
+    "qaSha256": "A5D3FFFBDD5E5B9D324BC77AC75A1F2C5538A7A36402F7392F27A61AEA27F27A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Carved-horn.mat",
+    "mainSha256": "1A8DA8469CAFB665101D28A1D066044EF44110B57F92F8EA5E1A1F5040D26272",
+    "qaSha256": "1A8DA8469CAFB665101D28A1D066044EF44110B57F92F8EA5E1A1F5040D26272",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Carved-horn.mat.meta",
+    "mainSha256": "C521A53FD1F18ED1EBCDC782F28F9157E49AE4B58B98C489A44625EB1B3A7B30",
+    "qaSha256": "C521A53FD1F18ED1EBCDC782F28F9157E49AE4B58B98C489A44625EB1B3A7B30",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Deep-eye-and-lash.mat",
+    "mainSha256": "850FA286F0B42297ACF8A960B0FEDA4A38D82B4C5A5AD112A783121A00BB2CB2",
+    "qaSha256": "850FA286F0B42297ACF8A960B0FEDA4A38D82B4C5A5AD112A783121A00BB2CB2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Deep-eye-and-lash.mat.meta",
+    "mainSha256": "2668B0B2874EB21EED53AFB1132D6526746C51FB2C32B42E54A2E1921B9781CC",
+    "qaSha256": "2668B0B2874EB21EED53AFB1132D6526746C51FB2C32B42E54A2E1921B9781CC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Deep-petrol-quilted-cotton.mat",
+    "mainSha256": "0AE383DF36E0A69C4282864A797C287D34CC9E2824D37BA824591B37C60D7373",
+    "qaSha256": "0AE383DF36E0A69C4282864A797C287D34CC9E2824D37BA824591B37C60D7373",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Deep-petrol-quilted-cotton.mat.meta",
+    "mainSha256": "CA100321052A8A5AF19FDCCCE71E35F896F7A41F28E6DE7B730E73FCE4232F01",
+    "qaSha256": "CA100321052A8A5AF19FDCCCE71E35F896F7A41F28E6DE7B730E73FCE4232F01",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Flax-bowstring.mat",
+    "mainSha256": "8D5FFE824ACCBB72C20E3F35EBCF3474C5173B00D5E9D7957F0ECF89FD981452",
+    "qaSha256": "8D5FFE824ACCBB72C20E3F35EBCF3474C5173B00D5E9D7957F0ECF89FD981452",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Flax-bowstring.mat.meta",
+    "mainSha256": "798A6401E8D2368F7FF4FF03A1AFEBCAC94C641E55D3F61DB0342833FB38DDD7",
+    "qaSha256": "798A6401E8D2368F7FF4FF03A1AFEBCAC94C641E55D3F61DB0342833FB38DDD7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Green-glass-bead.mat",
+    "mainSha256": "FC3E6AB5BC373E152794C20B65F1325F05CC2AB292255260F74F6493BFE95520",
+    "qaSha256": "FC3E6AB5BC373E152794C20B65F1325F05CC2AB292255260F74F6493BFE95520",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Green-glass-bead.mat.meta",
+    "mainSha256": "E443F95FD0B8E17F79748E7D7A8A7AD5D96D88F9229201E292C83819DD946014",
+    "qaSha256": "E443F95FD0B8E17F79748E7D7A8A7AD5D96D88F9229201E292C83819DD946014",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Grey-olive-iris.mat",
+    "mainSha256": "D9AA90A71791B9C78B2C8439E1B89459A3717E2CC7AB28383283B53D27E6198E",
+    "qaSha256": "D9AA90A71791B9C78B2C8439E1B89459A3717E2CC7AB28383283B53D27E6198E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Grey-olive-iris.mat.meta",
+    "mainSha256": "25E731400D74D3BDF833C16D9EE5A40ED956BAA2CBF72377F27A6C6777DFF36A",
+    "qaSha256": "25E731400D74D3BDF833C16D9EE5A40ED956BAA2CBF72377F27A6C6777DFF36A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Honey-yew-heartwood.mat",
+    "mainSha256": "BA10568DC5206FD5EF56890A0C4A1B6A7A2F04071EE41318AAB6DC1BC199533A",
+    "qaSha256": "BA10568DC5206FD5EF56890A0C4A1B6A7A2F04071EE41318AAB6DC1BC199533A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Honey-yew-heartwood.mat.meta",
+    "mainSha256": "F593F910AC9252DCA7869E88837BC0DA5D917F4B02478A981471D6FE91ADEB7B",
+    "qaSha256": "F593F910AC9252DCA7869E88837BC0DA5D917F4B02478A981471D6FE91ADEB7B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Iris-edge.mat",
+    "mainSha256": "818020EB4927F8F1F1A3A899EAD6B97CA827EA431006EB2A7CD7D589378C4DEC",
+    "qaSha256": "818020EB4927F8F1F1A3A899EAD6B97CA827EA431006EB2A7CD7D589378C4DEC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Iris-edge.mat.meta",
+    "mainSha256": "C47B6F012FDF1C5A5F9D7998288F996F0B1B8AF97ECFD0AA0266102FAB0BC9D7",
+    "qaSha256": "C47B6F012FDF1C5A5F9D7998288F996F0B1B8AF97ECFD0AA0266102FAB0BC9D7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Marksman.prefab",
+    "mainSha256": "3A16CB712B356FBAA5007B9403A46036230C50DF323B03019B0C571E19F75DF3",
+    "qaSha256": "3A16CB712B356FBAA5007B9403A46036230C50DF323B03019B0C571E19F75DF3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Marksman.prefab.meta",
+    "mainSha256": "70EB3226C355CB633372FE7A0F8D3BEDC1ED84C1557642C49514442AF84A0178",
+    "qaSha256": "70EB3226C355CB633372FE7A0F8D3BEDC1ED84C1557642C49514442AF84A0178",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Moonlit-hair.mat",
+    "mainSha256": "F1F982CD87618435B541DE2128AB1E70C61BDDDC714F38DE730D0B2C4894B0C7",
+    "qaSha256": "F1F982CD87618435B541DE2128AB1E70C61BDDDC714F38DE730D0B2C4894B0C7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Moonlit-hair.mat.meta",
+    "mainSha256": "FA8A41995A9AC38C8AD36295EA169ECFE51346B7B62D2817A6399B5739361055",
+    "qaSha256": "FA8A41995A9AC38C8AD36295EA169ECFE51346B7B62D2817A6399B5739361055",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Natural-warm-nails.mat",
+    "mainSha256": "A95445F65DFD1F5B451A54F6017FC7E4182CFEBADD1A256637F38A0933F9BD77",
+    "qaSha256": "A95445F65DFD1F5B451A54F6017FC7E4182CFEBADD1A256637F38A0933F9BD77",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Natural-warm-nails.mat.meta",
+    "mainSha256": "8BB9883605999F296A99F88545326989EFB96A247444C0CD4412380BFF623940",
+    "qaSha256": "8BB9883605999F296A99F88545326989EFB96A247444C0CD4412380BFF623940",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Pale-flax-stitching.mat",
+    "mainSha256": "1947737B32EA456ECEA2A978EA2E7C865F1BAD775B492F90C26554A0BCFF94D4",
+    "qaSha256": "1947737B32EA456ECEA2A978EA2E7C865F1BAD775B492F90C26554A0BCFF94D4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Pale-flax-stitching.mat.meta",
+    "mainSha256": "943F307F32DA1EC2CFBC822E74F7C26A73C674380242BF79062420532E57151C",
+    "qaSha256": "943F307F32DA1EC2CFBC822E74F7C26A73C674380242BF79062420532E57151C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Soot-linen.mat",
+    "mainSha256": "1D8C8A772422AF49801B5AF51A69F4EBE19F78A466604DE2CBD7D4F4EC233238",
+    "qaSha256": "1D8C8A772422AF49801B5AF51A69F4EBE19F78A466604DE2CBD7D4F4EC233238",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Soot-linen.mat.meta",
+    "mainSha256": "81B59B18EF841D804B88672E64B755DC74EA18B1959C4B45055E60A79A6A7B1C",
+    "qaSha256": "81B59B18EF841D804B88672E64B755DC74EA18B1959C4B45055E60A79A6A7B1C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Tarnished-rose-brass.mat",
+    "mainSha256": "9D631CAC3ED09CB43B2EB23DCC9ED332A55CAD5A920397EE20DCE1F19765F486",
+    "qaSha256": "9D631CAC3ED09CB43B2EB23DCC9ED332A55CAD5A920397EE20DCE1F19765F486",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Tarnished-rose-brass.mat.meta",
+    "mainSha256": "0747CE73E5F6D17942ABDE3D9EA91B23D873CA05C7E09DBD4EFF07B1845BD43E",
+    "qaSha256": "0747CE73E5F6D17942ABDE3D9EA91B23D873CA05C7E09DBD4EFF07B1845BD43E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Umber-leather-overcoat.mat",
+    "mainSha256": "02371A1A88365FF99F3E5CEF3C4676EDCF75D6CEAD8772B9D4E9C8AB4A649C5F",
+    "qaSha256": "02371A1A88365FF99F3E5CEF3C4676EDCF75D6CEAD8772B9D4E9C8AB4A649C5F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Umber-leather-overcoat.mat.meta",
+    "mainSha256": "0053B02B49688D26DE7363C45A13E9CBC1684841B9500C123A70B04B99EFE4DF",
+    "qaSha256": "0053B02B49688D26DE7363C45A13E9CBC1684841B9500C123A70B04B99EFE4DF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Umber-skin.mat",
+    "mainSha256": "C5F7D13149AC582AFC22356677B74BC3ECBA0AD9E52DBF7CF2F085D1B9B4BE81",
+    "qaSha256": "C5F7D13149AC582AFC22356677B74BC3ECBA0AD9E52DBF7CF2F085D1B9B4BE81",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Umber-skin.mat.meta",
+    "mainSha256": "A230EDD3A06DE493F7476D258D647D16D580A0DDDE51912874AB41B8499A88ED",
+    "qaSha256": "A230EDD3A06DE493F7476D258D647D16D580A0DDDE51912874AB41B8499A88ED",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Warm-sclera.mat",
+    "mainSha256": "2421251BA445BDE1F05A9ABC82BBD331F4810D0E2B4D3570925D8D1D4A0992AA",
+    "qaSha256": "2421251BA445BDE1F05A9ABC82BBD331F4810D0E2B4D3570925D8D1D4A0992AA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Warm-sclera.mat.meta",
+    "mainSha256": "603A7980FC60AC06715B42B5612618774C2E27A37036DBD06DDADAFA3957F479",
+    "qaSha256": "603A7980FC60AC06715B42B5612618774C2E27A37036DBD06DDADAFA3957F479",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Warm-umber-shadow.mat",
+    "mainSha256": "418F9F262CF70BA65FA7447AE38F968754A9F1F7ECC323B0F806602008B15151",
+    "qaSha256": "418F9F262CF70BA65FA7447AE38F968754A9F1F7ECC323B0F806602008B15151",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Warm-umber-shadow.mat.meta",
+    "mainSha256": "C99733C78EDC3556D70B97F4EB590FD8E410769A034E3BDBBC3A15259CDF16A8",
+    "qaSha256": "C99733C78EDC3556D70B97F4EB590FD8E410769A034E3BDBBC3A15259CDF16A8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Waxed-walnut-leather.mat",
+    "mainSha256": "D9F79DEBFC2B82A105DCE75B48062FC210189855251FB997AF3B82E438F84E7B",
+    "qaSha256": "D9F79DEBFC2B82A105DCE75B48062FC210189855251FB997AF3B82E438F84E7B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Waxed-walnut-leather.mat.meta",
+    "mainSha256": "5B1C0145C02FAC07D63454D04DB0E5CB4BCAF01CFEDAE9DE9060AC01D58D8EAB",
+    "qaSha256": "5B1C0145C02FAC07D63454D04DB0E5CB4BCAF01CFEDAE9DE9060AC01D58D8EAB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Weathered-brick-lining.mat",
+    "mainSha256": "60C0C75457CA5ADB9100F16CE1CE61E94D385480CAF1C80821659CFCF882F798",
+    "qaSha256": "60C0C75457CA5ADB9100F16CE1CE61E94D385480CAF1C80821659CFCF882F798",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Weathered-brick-lining.mat.meta",
+    "mainSha256": "7D34B9C6A83B78A789B0F3FFF5F6D9C50B015E7DF47D6CA97B12F4DA04D56B9B",
+    "qaSha256": "7D34B9C6A83B78A789B0F3FFF5F6D9C50B015E7DF47D6CA97B12F4DA04D56B9B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Wine-tinted-lip.mat",
+    "mainSha256": "43DFA4EEE96684295FAB5527BDBCF55CBC48047003F3B45896A01850D79CF343",
+    "qaSha256": "43DFA4EEE96684295FAB5527BDBCF55CBC48047003F3B45896A01850D79CF343",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Wine-tinted-lip.mat.meta",
+    "mainSha256": "E0B0E67BA8851510CFC5B0D3DCC3060B6993C3DABC72984832D3DC5B497D2183",
+    "qaSha256": "E0B0E67BA8851510CFC5B0D3DCC3060B6993C3DABC72984832D3DC5B497D2183",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Worn-silvery-copper.mat",
+    "mainSha256": "8905A92C3035DFB244384638EE72B95BE842588123DA9AB605EF6C19E5F27678",
+    "qaSha256": "8905A92C3035DFB244384638EE72B95BE842588123DA9AB605EF6C19E5F27678",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Worn-silvery-copper.mat.meta",
+    "mainSha256": "7D1C044C57AB1688F7257B13195FE692B19F13913BB403747A0408FCB806228F",
+    "qaSha256": "7D1C044C57AB1688F7257B13195FE692B19F13913BB403747A0408FCB806228F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Worn-teal-enamel.mat",
+    "mainSha256": "818661B1BF691B47BEE663BCCD0C771DF9F945B3D67CB891D86585BF333F2E06",
+    "qaSha256": "818661B1BF691B47BEE663BCCD0C771DF9F945B3D67CB891D86585BF333F2E06",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Farwatch Worn-teal-enamel.mat.meta",
+    "mainSha256": "EDC17218384D0CB9C855E2D10AD3E136881D3BBE50B446E4CF49D4012043BD06",
+    "qaSha256": "EDC17218384D0CB9C855E2D10AD3E136881D3BBE50B446E4CF49D4012043BD06",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman advancement.asset",
+    "mainSha256": "4FF08D4BF16B08D368FB04F6812908CE2BBE956FBCA1044EB54E2860D15F59E1",
+    "qaSha256": "4FF08D4BF16B08D368FB04F6812908CE2BBE956FBCA1044EB54E2860D15F59E1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman advancement.asset.meta",
+    "mainSha256": "C010736430D5F9F4A2EB7AC2291DE61C2E4AD67643B007F777D2E6E6F59BB510",
+    "qaSha256": "C010736430D5F9F4A2EB7AC2291DE61C2E4AD67643B007F777D2E6E6F59BB510",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman bow basic.asset",
+    "mainSha256": "69D5E6B183265346E2038E2F234B3651C7CADF36FC28D393F73F3E3D43031B7F",
+    "qaSha256": "69D5E6B183265346E2038E2F234B3651C7CADF36FC28D393F73F3E3D43031B7F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman bow basic.asset.meta",
+    "mainSha256": "B23DA64DA4E6F0A4FA8AC80624DA05104880675BFACA7FE6F1FCA21502E452D8",
+    "qaSha256": "B23DA64DA4E6F0A4FA8AC80624DA05104880675BFACA7FE6F1FCA21502E452D8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman class.asset",
+    "mainSha256": "1CE998815F8562662E3EFC70BDDDC9B3D54D62415A7A7CF698AE2311654EDDB9",
+    "qaSha256": "1CE998815F8562662E3EFC70BDDDC9B3D54D62415A7A7CF698AE2311654EDDB9",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman class.asset.meta",
+    "mainSha256": "4FCD5842DC8E433F27D13AA2BF5C825CD4F1B19D6BADC895091DA7FD61D6CB67",
+    "qaSha256": "4FCD5842DC8E433F27D13AA2BF5C825CD4F1B19D6BADC895091DA7FD61D6CB67",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman Mana.asset",
+    "mainSha256": "E57E5A2686C552C00D5EE4DC23121DFD7A52B6FCE9FE564A3328AAD1449A9BA7",
+    "qaSha256": "E57E5A2686C552C00D5EE4DC23121DFD7A52B6FCE9FE564A3328AAD1449A9BA7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman Mana.asset.meta",
+    "mainSha256": "CF8E90BA1BA1D84236C61E9B3B66929CE3A5A5B460383D97DCD6762C1FA658EC",
+    "qaSha256": "CF8E90BA1BA1D84236C61E9B3B66929CE3A5A5B460383D97DCD6762C1FA658EC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman menu.prefab",
+    "mainSha256": "B9C3B072A7B62E801574C381B62124FBE4FFDF6ECD04D6EB5C43119D08190131",
+    "qaSha256": "B9C3B072A7B62E801574C381B62124FBE4FFDF6ECD04D6EB5C43119D08190131",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Marksman menu.prefab.meta",
+    "mainSha256": "CF109B86B7807A6EDB7C15CB57996973F2A939D6766C56017A215A44B3AA6D23",
+    "qaSha256": "CF109B86B7807A6EDB7C15CB57996973F2A939D6766C56017A215A44B3AA6D23",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Power Shot icon.asset",
+    "mainSha256": "438434CF63A34F193DD861073E4440728C34BA4C2A32B05C92B3521ECBC7EB55",
+    "qaSha256": "438434CF63A34F193DD861073E4440728C34BA4C2A32B05C92B3521ECBC7EB55",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Power Shot icon.asset.meta",
+    "mainSha256": "35F5B4D6FF20701152CE6C6820CBECF751FAD461162254B9DE11244216D24F81",
+    "qaSha256": "35F5B4D6FF20701152CE6C6820CBECF751FAD461162254B9DE11244216D24F81",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Power Shot.asset",
+    "mainSha256": "95CF02A695F87C3DC75AAF4AF165764BE546A8E385344B631ACEA1D411165FF2",
+    "qaSha256": "95CF02A695F87C3DC75AAF4AF165764BE546A8E385344B631ACEA1D411165FF2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Power Shot.asset.meta",
+    "mainSha256": "5D3C5CF7562729F0F9C77CA6010141732D6650E76156513A74B8F035F1FE2491",
+    "qaSha256": "5D3C5CF7562729F0F9C77CA6010141732D6650E76156513A74B8F035F1FE2491",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Ranged Damage Aura icon.asset",
+    "mainSha256": "C2F83352F346DA300B8D97A09F01194849782887CF33DC2457CAF8080F6E498C",
+    "qaSha256": "C2F83352F346DA300B8D97A09F01194849782887CF33DC2457CAF8080F6E498C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Ranged Damage Aura icon.asset.meta",
+    "mainSha256": "8647727EAB1D2472C83C53082EB59D6E6B15C6B2D8B140F772EB1C340ED43E00",
+    "qaSha256": "8647727EAB1D2472C83C53082EB59D6E6B15C6B2D8B140F772EB1C340ED43E00",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Strafe icon.asset",
+    "mainSha256": "3F234CAFA657EC4DAC0933847488104659B01E84A2657577A395989A3D6EBC1E",
+    "qaSha256": "3F234CAFA657EC4DAC0933847488104659B01E84A2657577A395989A3D6EBC1E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Strafe icon.asset.meta",
+    "mainSha256": "673D485D277CD723B06DB1CEE05916CB0CCE19DB3B43479CE968A845AB6108D8",
+    "qaSha256": "673D485D277CD723B06DB1CEE05916CB0CCE19DB3B43479CE968A845AB6108D8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Target oak.mat",
+    "mainSha256": "85A84B8B2C0852CD9F290D9D3866A79534722330631A07B5F48DB152EE6DFF09",
+    "qaSha256": "85A84B8B2C0852CD9F290D9D3866A79534722330631A07B5F48DB152EE6DFF09",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/Target oak.mat.meta",
+    "mainSha256": "60F7B5E8D17DE818E9934D94025BE512371DB5E5F7B805CE2C379E7CB7EE12CB",
+    "qaSha256": "60F7B5E8D17DE818E9934D94025BE512371DB5E5F7B805CE2C379E7CB7EE12CB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/The Farwatch Pilgrimage.asset",
+    "mainSha256": "A477737611045AEA7F0C886E288C2F28DA51AD5D449A6D1AD14D809B7798EE67",
+    "qaSha256": "A477737611045AEA7F0C886E288C2F28DA51AD5D449A6D1AD14D809B7798EE67",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Marksman/The Farwatch Pilgrimage.asset.meta",
+    "mainSha256": "5CD38C9986BEE4C18AC399CDF79F9EA531332AE43ABFE88609D109A8446B8D4E",
+    "qaSha256": "5CD38C9986BEE4C18AC399CDF79F9EA531332AE43ABFE88609D109A8446B8D4E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Progression/Class catalog.asset",
+    "mainSha256": "26EFB1D58ACCB191822A36C3CE6FEE01EE72812D63DF269541C95B966F6D546B",
+    "qaSha256": "26EFB1D58ACCB191822A36C3CE6FEE01EE72812D63DF269541C95B966F6D546B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Psion/Psion Mana.asset",
+    "mainSha256": "0ADD7C5A8518FBB7600B961147080EF51DEDA790D6729922EF757422E134E7E5",
+    "qaSha256": "0ADD7C5A8518FBB7600B961147080EF51DEDA790D6729922EF757422E134E7E5",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Mirage Mage Mana.asset",
+    "mainSha256": "A475D89BCEBCD93B6337D634C00161B57E8AC5806BA69FF86346604669CDDC8A",
+    "qaSha256": "A475D89BCEBCD93B6337D634C00161B57E8AC5806BA69FF86346604669CDDC8A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/PsionEvolutions/Psionic Knight Mana.asset",
+    "mainSha256": "02CE72D9F3DDB1D014618C7E5ACC0AEC769C1D6A1B3E9508C2A1B02FF399A379",
+    "qaSha256": "02CE72D9F3DDB1D014618C7E5ACC0AEC769C1D6A1B3E9508C2A1B02FF399A379",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Ranger/Ironpine Scout Shortbow.asset",
+    "mainSha256": "03A6F19A8CA552E8887F29613FB4AF570C7753748D175B3D669BB841913C5FFF",
+    "qaSha256": "03A6F19A8CA552E8887F29613FB4AF570C7753748D175B3D669BB841913C5FFF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Ranger/Ironpine Yew Longbow.asset",
+    "mainSha256": "FE742A9CA51F4E97E07AC90848292732BF4920A425C4B7C35EFFBE16B586BBDB",
+    "qaSha256": "FE742A9CA51F4E97E07AC90848292732BF4920A425C4B7C35EFFBE16B586BBDB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Ranger/Ranger bow basic.asset",
+    "mainSha256": "A9D28714EB26321DEAC46632E03EA0EE339C4DFB185F31A346BF081AF65B8FE3",
+    "qaSha256": "A9D28714EB26321DEAC46632E03EA0EE339C4DFB185F31A346BF081AF65B8FE3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Ranger/Ranger Mana.asset",
+    "mainSha256": "98459CD5101F704916586765FE5D017F48D4F6CD6E2FCB3BC8A6B0338E214862",
+    "qaSha256": "98459CD5101F704916586765FE5D017F48D4F6CD6E2FCB3BC8A6B0338E214862",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Resources/Magically Touched Mana.asset",
+    "mainSha256": "2B07217F87CA6EC27DB793FFD26F7B4ABC7FC2E4934DDCBF9A46EEBE61FDD463",
+    "qaSha256": "2B07217F87CA6EC27DB793FFD26F7B4ABC7FC2E4934DDCBF9A46EEBE61FDD463",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Resources/Physically Blessed Mana.asset",
+    "mainSha256": "29FBCAC7853E99FE3528ED15FB544C309B720EBAE9BB581FC799ACB591D080FC",
+    "qaSha256": "29FBCAC7853E99FE3528ED15FB544C309B720EBAE9BB581FC799ACB591D080FC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Skills/Mage/Mage Mana.asset",
+    "mainSha256": "3905DAA0EC590D8F52AB38D80B5879F18E846E76CF4A1EAA1CC88733ADCFE429",
+    "qaSha256": "3905DAA0EC590D8F52AB38D80B5879F18E846E76CF4A1EAA1CC88733ADCFE429",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Thief/Thief Mana.asset",
+    "mainSha256": "A7C538E7A44EBFEC4913FE4AC813548B62E233767015F2A064D9381BD2C6A599",
+    "qaSha256": "A7C538E7A44EBFEC4913FE4AC813548B62E233767015F2A064D9381BD2C6A599",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/GroundAuraSigil.shader",
+    "mainSha256": "A2B949995675DD3FDEA344C1A56581A33D8CC2C2901DD22190746C65C9800A70",
+    "qaSha256": "A2B949995675DD3FDEA344C1A56581A33D8CC2C2901DD22190746C65C9800A70",
+    "comparison": "byte-identical"
+  }
+]

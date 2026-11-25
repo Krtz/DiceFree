@@ -18,13 +18,15 @@ namespace DiceFree.Combat
         [Range(0, 1)] public float initialFraction = 1;
         public ResourceRetentionPolicy loadPolicy = ResourceRetentionPolicy.Persist;
 
-        public float Maximum(AttributeValues attributes) => Mathf.Max(
+        public const float ManaPerIntelligence=5, ManaBaseRegeneration=4, ManaRegenerationPerSpirit=.1f;
+        private bool IsMana=>resource!=null&&resource.stableId==ResourceIds.Mana;
+        public float Maximum(AttributeValues attributes) => IsMana?Mathf.Max(0,baseMaximum+ManaPerIntelligence*attributes.intelligence):Mathf.Max(
             0,
             baseMaximum +
             attributes.intelligence * maximumPerIntelligence +
             attributes.spirit * maximumPerSpirit);
 
-        public float Regeneration(AttributeValues attributes) => Mathf.Max(
+        public float Regeneration(AttributeValues attributes) => IsMana?Mathf.Max(0,ManaBaseRegeneration+ManaRegenerationPerSpirit*attributes.spirit):Mathf.Max(
             0,
             baseRegenPerSecond +
             attributes.intelligence * regenPerIntelligence +

@@ -30,6 +30,7 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.ranger
+  - class.marksman
   flavor: Ironpine scouts favor this quick-drawing bow for moving between shots.
   stats:
     attributes:

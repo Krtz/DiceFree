@@ -52,6 +52,9 @@ MonoBehaviour:
   - classId: class.mirage-mage
     tier: 3
     preview: {fileID: 4413704458194111491, guid: bf4bffeaf797b204c866b15c6b9cf17a, type: 3}
+  - classId: class.marksman
+    tier: 3
+    preview: {fileID: 920909527777988624, guid: 51e27fbbc986bdb489a2526063fe429d, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}

@@ -186,7 +186,7 @@ namespace DiceFree.UI
                 var attack=actor.GetComponent<BasicAttack>()?.Definition;
                 if(attack!=null)
                 {
-                    Vector2 values=actor.GetComponent<BasicAttack>().DamageRange;
+                    Vector2 values=actor.GetComponent<BasicAttack>().DisplayDamageRange;
                     damage=$"{values.x:0} - {values.y:0}";
                 }
                 GUI.Label(stats,"HP: "+actor.Health.Current.ToString("0")+

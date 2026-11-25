@@ -1,0 +1,7 @@
+Cornberg target | (15.02, 0.20, 11.87)
+Trimery target | (248.00, -0.01, 172.00)
+Arborium target | (101.00, 0.08, 321.00)
+Cinderwatch target | (64013.00, 0.95, 63960.00)
+Willowford target | (63855.39, 0.95, 63936.26)
+Anvilreach target | (64084.90, 7.59, 63789.33)
+Teacher Aelwen | (63870.00, 1.78, 63908.00)

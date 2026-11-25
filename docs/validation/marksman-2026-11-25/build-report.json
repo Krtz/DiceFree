@@ -1,0 +1,11 @@
+{
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261125-235648\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 1,
+    "sceneCount": 15,
+    "bytes": 694891903,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+}

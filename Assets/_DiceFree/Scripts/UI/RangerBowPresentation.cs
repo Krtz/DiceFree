@@ -24,7 +24,9 @@ namespace DiceFree.Skills
         }
         private void Refresh()
         {
-            bool usesLongbow = equipment?.ResolvedDefinition(EquipmentSlot.MainHand)?.stableId == LongbowId;
+            string item=equipment?.ResolvedDefinition(EquipmentSlot.MainHand)?.stableId;
+            bool marksman=GetComponentInParent<DiceFree.Combat.ActorStats>()?.Definition?.stableId==MarksmanProgression.Id;
+            bool usesLongbow = item == LongbowId || marksman && item != ShortbowId;
             shortbow.SetActive(!usesLongbow);
             longbow.SetActive(usesLongbow);
         }

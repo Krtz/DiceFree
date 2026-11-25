@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace DiceFree.Combat
 {
+    public interface IBasicAttackHitReceiver
+    {
+        void OnBasicAttackHit(CombatActor source,DamageResult packet);
+    }
     /// <summary>Optional tactical approach point for an actor pursuing a target.</summary>
     public interface IBasicAttackApproachProvider
     {
@@ -13,6 +17,7 @@ namespace DiceFree.Combat
     {
         private CombatActor actor;
         private DiceFree.Skills.RangerSkillCaster ranger;
+        private DiceFree.Skills.MarksmanCaster marksman;
         private DiceFree.Skills.PsionSkillCaster psion;
         private Vector3 windupOrigin;
         private IBasicAttackApproachProvider approachProvider;
@@ -25,8 +30,8 @@ namespace DiceFree.Combat
         // Per-actor override for the authored melee stance of a ranged attacker.
         // Negative values retain the attack definition's reach.
         public float ReachOverride { get; set; } = -1f;
-        public float Reach => (ReachOverride >= 0 ? ReachOverride : Definition?.reach ?? 0f) + (ranger?.RangeBonus ?? 0f);
-        internal CriticalRule CriticalRule => GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicCriticalRule() ?? psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
+        public float Reach => (ReachOverride >= 0 ? ReachOverride : Definition?.reach ?? 0f) + (ranger?.RangeBonus ?? 0f) + (marksman?.RangeBonus ?? 0f);
+        internal CriticalRule CriticalRule => marksman?.CriticalRule() ?? GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicCriticalRule() ?? psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
             GetComponent<DiceFree.Skills.ThiefSkillCaster>()?.BasicCriticalRule();
         public event System.Action<CombatActor,DamageResult> Connected;
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
@@ -38,6 +43,9 @@ namespace DiceFree.Combat
             actor.Stats.Definition.stableId?.StartsWith("class.", System.StringComparison.Ordinal) == true;
         private const float ClassMinimumDamage = .95f;
         private const float ClassMaximumDamage = 1.05f;
+        // Skill/summon snapshots use DamageRange; the ranged aura belongs only to
+        // the eventual basic packet and its HUD preview, never ability formulas.
+        public Vector2 DisplayDamageRange=>DamageRange*DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor);
         public Vector2 DamageRange
         {
             get
@@ -48,15 +56,17 @@ namespace DiceFree.Combat
                 var range = new Vector2(
                     Mathf.Max(0,raw.x*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMinimumOffset),
                     Mathf.Max(0,(raw.y+stats.BasicAttackMaximumBonus)*stats.BasicAttackDamageMultiplier+stats.BasicAttackFlatBonus+stats.Definition.basicAttackMaximumOffset));
-                return HasClassDamageSpread
+                var result = HasClassDamageSpread
                     ? new Vector2(range.x * ClassMinimumDamage, range.y * ClassMaximumDamage)
                     : range;
+                return result;
             }
         }
         private void Awake()
         {
             actor = GetComponent<CombatActor>();
             ranger = GetComponent<DiceFree.Skills.RangerSkillCaster>();
+            marksman = GetComponent<DiceFree.Skills.MarksmanCaster>();
             psion = GetComponent<DiceFree.Skills.PsionSkillCaster>();
             approachProvider = GetComponent<IBasicAttackApproachProvider>();
         }
@@ -65,6 +75,7 @@ namespace DiceFree.Combat
         {
             if (!actor.CanAct || !actor.CanTargetHostile(target) || Definition == null) return false;
             ranger?.CancelChannel();
+            marksman?.CancelChannel();
             psion?.CancelChannel();
             GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.CancelChannel();
             if (Target != target) { Cancel(); Target = target; }
@@ -99,7 +110,7 @@ namespace DiceFree.Combat
                 }
                 return;
             }
-            if (ranger?.Active == true && winding &&
+            if ((ranger?.Active == true || marksman?.Active == true) && winding &&
                 (actor.Motor.Travelling || (transform.position - windupOrigin).sqrMagnitude > .025f))
             {
                 Cancel();
@@ -119,6 +130,10 @@ namespace DiceFree.Combat
                     ranger.Launch(target, DiceFree.Skills.RangerVfx.ArrowTint, () => ResolveImpact(target));
                     State = "Recovery";
                 }
+                else if (marksman?.Active == true)
+                {
+                    marksman.Launch(target,()=>ResolveImpact(target));State="Recovery";
+                }
                 else if (psion?.Active == true)
                 {
                     psion.LaunchBlade(target, recipient => ResolveImpact(recipient));
@@ -131,7 +146,7 @@ namespace DiceFree.Combat
                 winding = true; State = "Wind-up";
                 impactAt = Time.time + Definition.windup / actor.Stats.AttackSpeed;
                 windupOrigin = transform.position;
-                if (ranger?.Active != true) MagicalBasicMissileVfx.Launch(actor, Target, impactAt - Time.time);
+                if (ranger?.Active != true && marksman?.Active != true) MagicalBasicMissileVfx.Launch(actor, Target, impactAt - Time.time);
                 readyAt = Time.time + Mathf.Max(Definition.interval, Definition.windup) / actor.Stats.AttackSpeed;
             }
             else State = "Recovery";
@@ -151,7 +166,7 @@ namespace DiceFree.Combat
                 Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                 Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                 Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
-                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) *
+                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) * DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor) *
                     (HasClassDamageSpread ? Random.Range(ClassMinimumDamage, ClassMaximumDamage) : 1),
                 flatDefensePenetration: (psion?.BasicPenetration ?? 0) + (GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicPenetration ?? 0));
             packet = target.Health.ApplyPacket(actor, packet);
@@ -159,6 +174,7 @@ namespace DiceFree.Combat
             else
             {
                 Connected?.Invoke(target, packet);
+                target.GetComponent<IBasicAttackHitReceiver>()?.OnBasicAttackHit(actor,packet);
                 Hits++;
                 actor.Effects?.ResolveBasicAttackAugments(actor, target);
             }

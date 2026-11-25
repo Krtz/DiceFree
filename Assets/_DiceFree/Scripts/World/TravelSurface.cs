@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DiceFree.World
 {
     // Samples the existing visible mesh, without new physics colliders or a navigation bake.
-    public sealed class TravelSurface : MonoBehaviour
+    public sealed class TravelSurface : MonoBehaviour,DiceFree.Combat.IAuraGroundSurface
     {
         private static readonly List<TravelSurface> active = new();
         public static IReadOnlyList<TravelSurface> Active => active;
@@ -20,10 +20,14 @@ namespace DiceFree.World
         private int[] triangles;
         public string StableId => stableId;
         public TravelSurfaceDefinition Definition => definition;
-        private void OnEnable() { if (!active.Contains(this)) active.Add(this); }
-        private void OnDisable() { active.Remove(this); }
-        public bool Contains(Vector3 worldPosition)
+        private void OnEnable() { if (!active.Contains(this)) active.Add(this); DiceFree.Combat.GroundAuraVisual.RegisterGround(this); }
+        private void OnDisable() { active.Remove(this); DiceFree.Combat.GroundAuraVisual.UnregisterGround(this); }
+        public bool Contains(Vector3 worldPosition)=>Sample(worldPosition,out _,false);
+        // Presentation can follow the visible road above its walkable collider.
+        public bool TryGetHeight(Vector3 worldPosition,out float height)=>Sample(worldPosition,out height,true);
+        private bool Sample(Vector3 worldPosition,out float height,bool highest)
         {
+            height=float.NegativeInfinity;bool found=false;
             if (!isActiveAndEnabled || definition == null || footprint == null) return false;
             var mesh = footprint.sharedMesh;
             if (mesh == null) return false;
@@ -46,10 +50,14 @@ namespace DiceFree.World
                 float u = ((b.z - c.z) * (p.x - c.x) + (c.x - b.x) * (p.z - c.z)) / denominator;
                 float v = ((c.z - a.z) * (p.x - c.x) + (a.x - c.x) * (p.z - c.z)) / denominator;
                 float w = 1 - u - v;
-                if (u >= -.00001f && v >= -.00001f && w >= -.00001f &&
-                    Mathf.Abs(p.y - (a.y * u + b.y * v + c.y * w)) <= heightTolerance) return true;
+                float y=a.y*u+b.y*v+c.y*w;
+                if (u >= -.00001f && v >= -.00001f && w >= -.00001f && Mathf.Abs(p.y-y)<=heightTolerance)
+                {
+                    height=Mathf.Max(height,footprint.transform.TransformPoint(new Vector3(p.x,y,p.z)).y);
+                    found=true;if(!highest)return true;
+                }
             }
-            return false;
+            return found;
         }
         public void Configure(string id, TravelSurfaceDefinition data, MeshFilter mesh, Bounds region)
         { stableId = id; definition = data; footprint = mesh; localRegion = region; cachedMesh = null; }

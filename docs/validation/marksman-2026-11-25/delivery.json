@@ -1,0 +1,19 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261125-235648\\DiceFree.exe",
+  "executableSha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "combatReviewBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261125-233955",
+  "reloadReviewBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261125-235015",
+  "finalVisualAndRoadReviewBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261125-235648",
+  "staticChecks": 198,
+  "runtimeChecks": {
+    "aura-proof.json": 5,
+    "world-two-roads-review.json": 97,
+    "reload-review.json": 20,
+    "combat-review.json": 426
+  },
+  "totalChecks": 746,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "finalDifference": "Final delivery adds only the shared aura road-height projection and render order; combat and quest implementation unchanged from the full combat review.",
+  "limitations": "Automated disposable-profile checks; no manual balance acceptance or live network co-op validation. Batch screenshots omit screen-space overlay UI."
+}

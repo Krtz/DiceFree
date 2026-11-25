@@ -115,12 +115,19 @@ Shader "DiceFree/Ground Aura Sigil"
                     detail+=Stroke(snow,.018);
                     primary+=Stroke(Polygon(Rotate(p,t*.08),6,.57),.013)*.8;
                 }
-                else // Radiation: three toxic blades around an unstable core.
+                else if(_Style<5.5) // Radiation: three toxic blades around an unstable core.
                 {
                     float spin=a+t*.33;
                     float blade=smoothstep(.25,.37,r)*(1-smoothstep(.55,.59,r))*smoothstep(.25,.4,cos(spin*3));
                     primary+=blade*.65+Stroke(r-.16,.021);
                     detail+=Stroke(r-.61,.014)*smoothstep(-.1,.15,sin(spin*9));
+                }
+                else // Marksman: arrowheads around a sighting ring.
+                {
+                    float angle=round(a/(TWO_PI/4))*(TWO_PI/4);float2 q=Rotate(p,-angle);
+                    detail+=Stroke(Segment(q,float2(.20,0),float2(.58,0)),.014);
+                    detail+=Stroke(min(Segment(q,float2(.40,-.11),float2(.58,0)),Segment(q,float2(.40,.11),float2(.58,0))),.020);
+                    primary+=Stroke(r-.35,.014)+Stroke(r-.66,.012)*(.7+.3*sin(a*8+t));
                 }
                 float alpha=saturate((primary+detail)*_Opacity*breath)*(1-smoothstep(.94,1,r));
                 clip(alpha-.008);

@@ -1,15 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace DiceFree.Combat
 {
-    public enum GroundAuraStyle { Mana, Elements, Defender, Speed, Frost, Radiation }
+    public interface IAuraGroundSurface { bool TryGetHeight(Vector3 position,out float height); }
+    public enum GroundAuraStyle { Mana, Elements, Defender, Speed, Frost, Radiation, Ranged }
 
     // Presentation only. The ability owns eligibility, duration, range and stacking.
     [DefaultExecutionOrder(650)]
     public sealed class GroundAuraVisual : MonoBehaviour
     {
+        static readonly HashSet<IAuraGroundSurface> groundSurfaces=new();
+        public static void RegisterGround(IAuraGroundSurface surface)=>groundSurfaces.Add(surface);
+        public static void UnregisterGround(IAuraGroundSurface surface)=>groundSurfaces.Remove(surface);
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]static void ResetGround()=>groundSurfaces.Clear();
         private const int Grid = 8;
         private Behaviour source;
         private CombatActor recipient;
@@ -44,6 +50,7 @@ namespace DiceFree.Combat
             var template = Resources.Load<Material>("AuraVfx/GroundSigil");
             if(template == null) { Destroy(gameObject); return; }
             material = new Material(template) { name = "Aura sigil - " + Style, hideFlags = HideFlags.DontSave };
+            material.renderQueue=3040; // Draw after transparent road overlays; depth still hides it beneath actors.
             material.SetFloat("_Style", (int)Style);
             var colors = Style switch
             {
@@ -52,6 +59,7 @@ namespace DiceFree.Combat
                 GroundAuraStyle.Defender => (new Color(1,.68f,.18f), new Color(.42f,.77f,1)),
                 GroundAuraStyle.Speed => (new Color(.61f,.30f,1), new Color(.84f,.90f,1)),
                 GroundAuraStyle.Frost => (new Color(.22f,.76f,1), new Color(.87f,.98f,1)),
+                GroundAuraStyle.Ranged => (new Color(.35f,.85f,.45f),new Color(1,.85f,.35f)),
                 _ => (new Color(.28f,1,.10f), new Color(.80f,1,.29f))
             };
             material.SetColor("_TintA", colors.Item1); material.SetColor("_TintB", colors.Item2);
@@ -93,6 +101,8 @@ namespace DiceFree.Combat
                 {
                     var p=position+new Vector3((x/(float)Grid*2-1)*Radius,0,(z/(float)Grid*2-1)*Radius);
                     if(Physics.Raycast(p+Vector3.up*.7f,Vector3.down,out var ground,2.1f,1<<8,QueryTriggerInteraction.Ignore)) p.y=ground.point.y;
+                    foreach(var road in groundSurfaces)
+                        if(road.TryGetHeight(p,out float roadHeight))p.y=Mathf.Max(p.y,roadHeight);
                     vertices[z*(Grid+1)+x]=p-position+Vector3.up*.045f;
                 }
                 mesh.vertices=vertices;mesh.RecalculateBounds();

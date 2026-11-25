@@ -50,7 +50,7 @@ namespace DiceFree.Combat
                 float value = Current(pair.Key);
                 float maximum = Maximum(pair.Key);
                 if (value >= maximum) continue;
-                float next = Mathf.Min(maximum, value + pair.Value.Regeneration(stats.Attributes) * Time.deltaTime);
+                float next = Mathf.Min(maximum, value + Regeneration(pair.Key) * Time.deltaTime);
                 if (!Mathf.Approximately(next, value))
                 {
                     current[pair.Key] = next;

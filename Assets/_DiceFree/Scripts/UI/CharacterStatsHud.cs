@@ -62,7 +62,7 @@ namespace DiceFree.UI
             string attackTooltip = "No basic attack.";
             if (basicAttack?.Definition != null)
             {
-                Vector2 range = basicAttack.DamageRange;
+                Vector2 range = basicAttack.DisplayDamageRange;
                 attackMin = range.x;
                 attackMax = range.y;
 

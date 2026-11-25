@@ -29831,6 +29831,9 @@ GameObject:
   - component: {fileID: 1724212367}
   - component: {fileID: 1724212366}
   - component: {fileID: 1724212365}
+  - component: {fileID: 1724212372}
+  - component: {fileID: 1724212371}
+  - component: {fileID: 1724212370}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -29866,6 +29869,7 @@ Transform:
   - {fileID: 1825997745}
   - {fileID: 649459489}
   - {fileID: 1183300544}
+  - {fileID: 1643636306}
   m_Father: {fileID: 1562633928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724212271
@@ -30265,6 +30269,9 @@ MonoBehaviour:
   - classId: class.mirage-mage
     visualRoot: {fileID: 1183300544}
     animator: {fileID: 1183300547}
+  - classId: class.marksman
+    visualRoot: {fileID: 1643636306}
+    animator: {fileID: 1643636307}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30364,6 +30371,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c2b09f5edaccbdd49a5d17d059513057, type: 2}
   - {fileID: 11400000, guid: 792bfd20b0fe82d4587437b88cedf51a, type: 2}
   - {fileID: 11400000, guid: ce317438fe1de4e4a80976f1faeba04a, type: 2}
+  - {fileID: 11400000, guid: 05be04658290f6247a439c0c51646b8c, type: 2}
 --- !u!114 &1724212303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30403,6 +30411,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a983a0392e9e20e45b8bccbd99f44e95, type: 2}
   - {fileID: 11400000, guid: 9883528ed159c8a4cb582815b8993988, type: 2}
   - {fileID: 11400000, guid: 31b55ad9850b2f44a8ce98cf868e8119, type: 2}
+  - {fileID: 11400000, guid: 045e6506e25b6fa4dbbd1258683f8f52, type: 2}
 --- !u!114 &1724212305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30774,6 +30783,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f98ea90b0e9d094198cd09d711ba006, type: 2}
   - {fileID: 11400000, guid: 10989b138080acf429ad180743c74535, type: 2}
   - {fileID: 11400000, guid: 9f11c2ddf4058bd4bb56b070437ef5a2, type: 2}
+  - {fileID: 11400000, guid: 549636e2f7d6b1d478acd8325e255931, type: 2}
   progress: []
 --- !u!114 &1724212321
 MonoBehaviour:
@@ -40636,3 +40646,120 @@ SceneRoots:
   - {fileID: 1902970536}
   - {fileID: 1562633928}
   - {fileID: 1493020884}
+--- !u!1001 &1643636305
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1724212270}
+    m_Modifications:
+    - target: {fileID: 621949405832359863, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_Name
+      value: Farwatch Marksman
+      objectReference: {fileID: 0}
+    - target: {fileID: 621949405832359863, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+--- !u!4 &1643636306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5571067880690555642, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+  m_PrefabInstance: {fileID: 1643636305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1643636307 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2263158069272987851, guid: de4e3c2d1fde5c7488acb51b80c6d2c0, type: 3}
+  m_PrefabInstance: {fileID: 1643636305}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1724212370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee902ec1d32c09b40aeae516e5f5290a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.MarksmanAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: c6f548a29b70687429b35b789652a3b4, type: 2}
+  - {fileID: 2800000, guid: f8204f5109e13054198f20a56b34de8f, type: 2}
+  - {fileID: 2800000, guid: 78a2aa4ee3916b740a9428d84ab0b3a8, type: 2}
+  - {fileID: 2800000, guid: b8108db9d04aab540a0a1043511ac140, type: 2}
+  - {fileID: 2800000, guid: 5f2cf9977b206cc4ea49ba3c83e6d883, type: 2}
+  - {fileID: 2800000, guid: e41bb2b889c9e184f821a9f2166e08fe, type: 2}
+--- !u!114 &1724212371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1332aaf7a080b42bd69ed0c0990926, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.MarksmanCaster
+  aimed: {fileID: 11400000, guid: bc2441a1b884b3f4d95a40c3aced306a, type: 2}
+  rain: {fileID: 11400000, guid: 9208fb63569da3d4a8426e8ee64194c1, type: 2}
+  power: {fileID: 11400000, guid: 43361774d2886dd40b83809aec148f44, type: 2}
+--- !u!114 &1724212372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70af559ba276374dbefebfe48ce34d0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.MarksmanProgression

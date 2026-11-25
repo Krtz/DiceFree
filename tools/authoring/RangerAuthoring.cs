@@ -38,7 +38,7 @@ public static class RangerAuthoring
         var ranger = Asset<ActorDefinition>("Ranger class");
         var basic = Attack("Ranger bow basic", "attack.ranger.bow", true);
         basic.baseDamage = 5;
-        basic.weights = new AttributeValues { agility = 1.05f };
+        basic.weights = new AttributeValues { agility = 1f };
         basic.reach = 11f;
         basic.interval = 1.42f;
         basic.windup = .47f;

@@ -16,10 +16,10 @@ MonoBehaviour:
   classId: class.magically-touched-novice
   resource: {fileID: 11400000, guid: 79c923ba14d8c3e48b29525389b9d548, type: 2}
   baseMaximum: 80
-  maximumPerIntelligence: 2
-  maximumPerSpirit: 1
-  baseRegenPerSecond: 2.5
-  regenPerIntelligence: 0.075
-  regenPerSpirit: 0.075
+  maximumPerIntelligence: 5
+  maximumPerSpirit: 0
+  baseRegenPerSecond: 4
+  regenPerIntelligence: 0
+  regenPerSpirit: 0.1
   initialFraction: 1
   loadPolicy: 1

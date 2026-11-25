@@ -30,6 +30,7 @@ MonoBehaviour:
   restoreResourceAmount: 0
   allowedClassIds:
   - class.ranger
+  - class.marksman
   flavor: Laminated heartwood trades a slower draw for a heavier arrow.
   stats:
     attributes:

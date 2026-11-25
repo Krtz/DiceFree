@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Farwatch Pilgrimage
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.marksman.world-tour
+  title: The Farwatch Pilgrimage
+  category: 0
+  requiredClassId: class.ranger
+  requiredLevel: 60
+  version: 1
+  offer: 'The whole world is your shooting range. I have placed one target in each town and city: Cornberg, Trimery, Arborium, Cinderwatch, Willowford and Anvilreach. Visit both worlds and strike each target with an ordinary bow shot. Your journal will keep the list. Return to me when all six are struck.'
+  activeDialogue: Six settlements, two worlds. Check your journal for the places you still need. The targets stand in the open near the roads; this is a journey, not a hunt for a hidden speck.
+  turnInDialogue: You have learned to see the world beyond a single hunting ground. Take the path of the Marksman.
+  locationHint: Aelwen waits at the woodland edge south of Willowford in Steamroot Vale.
+  turnInHint: Return to Aelwen, the Farwatch, south of Willowford.
+  stages:
+  - kind: 5
+    objectiveId: settlement-tour
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Shoot one archery target in every town or city across both worlds
+    contentId:
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 6
+    alternatives:
+    - kind: 6
+      objectiveId: cornberg
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Cornberg
+      contentId: target.marksman.cornberg
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: trimery
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Trimery
+      contentId: target.marksman.trimery
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: arborium
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Arborium
+      contentId: target.marksman.arborium
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: cinderwatch
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Cinderwatch
+      contentId: target.marksman.cinderwatch
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: willowford
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Willowford
+      contentId: target.marksman.willowford
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+    - kind: 6
+      objectiveId: anvilreach
+      requiredTag:
+      creditMode: 0
+      creditRadius: 50
+      instruction: Anvilreach
+      contentId: target.marksman.anvilreach
+      dungeonBossOnly: 0
+      familyId:
+      familyIds: []
+      areaId:
+      conversationId:
+      count: 1
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

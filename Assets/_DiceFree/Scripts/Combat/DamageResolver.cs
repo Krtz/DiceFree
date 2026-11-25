@@ -53,11 +53,12 @@ namespace DiceFree.Combat
         }
 
         internal static DamageResult CalculateRaw(ActorStats source, ActorStats target, AttackDefinition attack, float baseRaw,
-            ActionCriticalResolution critical = null, float flatDefensePenetration = 0f)
+            ActionCriticalResolution critical = null, float flatDefensePenetration = 0f, float percentDefensePenetration = 0f)
         {
             float raw = critical == null ? baseRaw : critical.ApplyToRaw(baseRaw);
             var penetration = source.DefenseModifiers(attack.channel);
             penetration.penetrationFlat += flatDefensePenetration;
+            penetration.penetrationPercent += Mathf.Clamp01(percentDefensePenetration);
             float defense = DefenseMath.Effective(target.Defense(attack.channel), target.DefenseModifiers(attack.channel), penetration);
             var elemental = target.ResolveResistance(attack.element, ElementalContext.Damage, source);
             float resistance = elemental.effective;

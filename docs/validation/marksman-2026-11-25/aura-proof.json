@@ -1,0 +1,1 @@
+{"status":"passed","phase":"startup","checks":5,"passed":["Load final Marksman for road-sigil proof","Active ranged sigil is included by the gameplay camera","Sigil contributes visible rendered pixels above the raised road: 3492","Road proof returns to menu","No runtime errors in final road-sigil capture"],"error":null,"unityErrors":[]}

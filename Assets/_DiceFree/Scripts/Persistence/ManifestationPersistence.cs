@@ -448,13 +448,16 @@ namespace DiceFree.Persistence
         private void AddStarterGear(ManifestationSave child, ItemDefinition[] gear)
         {
             if (gear == null || gear.Length == 0) return;
+            if(gear.Any(d=>d!=null&&d.handsRequired==2)&&gear.Any(d=>d!=null&&d.slot==EquipmentSlot.OffHand))
+                throw new InvalidOperationException("Two-handed starter equipment cannot include an offhand.");
             var slots = new HashSet<EquipmentSlot>();
             var items = new List<ItemInstance>(child.inventory);
             var equipped = new List<EquippedItem>(child.equipment);
             foreach (var definition in gear)
             {
                 if (definition == null || inventory.Resolve(definition.stableId) != definition || definition.questItem ||
-                    definition.consumable || definition.handsRequired != 1 || !Enum.IsDefined(typeof(EquipmentSlot), definition.slot) ||
+                    definition.consumable || definition.handsRequired < 1 || definition.handsRequired > 2 ||
+                    definition.handsRequired == 2 && definition.slot != EquipmentSlot.MainHand || !Enum.IsDefined(typeof(EquipmentSlot), definition.slot) ||
                     !slots.Add(definition.slot) ||
                     (definition.allowedClassIds?.Length > 0 && !definition.allowedClassIds.Contains(child.classId)))
                     throw new InvalidOperationException("Advancement starter equipment is invalid.");
@@ -468,6 +471,7 @@ namespace DiceFree.Persistence
                 string slot = definition.slot.ToString();
                 equipped.RemoveAll(value => value.slotId == slot || value.instanceId == item.instanceId);
                 equipped.Add(new EquippedItem { slotId = slot, instanceId = item.instanceId });
+                if(definition.handsRequired==2)equipped.RemoveAll(value=>value.slotId==EquipmentSlot.OffHand.ToString());
             }
             child.inventory = items.ToArray();
             child.equipment = equipped.ToArray();
