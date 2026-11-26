@@ -1055,3 +1055,46 @@ Choose independent **linear per-rank** raw damage to match the existing Fireball
 - **NO inherent criticals from any Fire Mage ability**, potential future item spell crit exception unimplemented. TierIV Pyromancer, later Frost Mage/Cryomancer and hidden Hydromancer remain future design ideas.
 
 **DOCS ONLY. No Unity gameplay, scene, asset, or build changes; no merge.**
+
+
+## Fire Mage Tier III Round 25 — 2026-11-26: USER APPROVES 25%-MAX-HP FIRE BURSTS, LAVA EVERY SECOND, ENTRANCE RETRY, CONSUMABLES, REPEATING WARNED HAZARDS; SHORT DURATION NOT STRICT 5 MIN
+
+**LATEST USER ANSWERS, authoritative over any prior designer defaults:**
+1. **Fire burst damage exact USER APPROVED: 25% of the PLAYER'S MAXIMUM HP PER HIT.** This is a percentage of max HP, NOT fixed flat damage scaled to Mage Lv60 and NOT 25% of current HP. It is the first-test hazard's nominal hit severity. Whether environmental Fire resistance, ordinary mitigation, invulnerability or special damage rules modify the hit after deriving nominal raw 25%-max-HP amount remains to be reconciled with global combat system; do not silently create unapproved bypass mechanics. Each actual separately damaging burst contact applies its own hit only according to hazard overlap/rehit policy, which still needs a fair warning/cadence design.
+2. **On death during maze**, USER APPROVES **respawn at the MAZE ENTRANCE and retry immediately**, rather than at mentor camp or a midway checkpoint. A LIVING PLAYER WHO SUFFERS FIRE/LAVA DAMAGE STILL CONTINUES from current location, consistent with Round24; only actual death invokes entrance respawn. Keep trial active for retries, no quest lockout, no mandatory camp revisit on death, and no auto class advancement. Respawn HP/consumable resource restoration and any anti-exploit safeguards require later user design.
+3. **Lava is a hazard which damages an exposed player ONCE PER SECOND while standing in it.** User selected this frequency, not an on-entry one-shot with temporary immunity. Its actual per-tick magnitude **NOT YET APPROVED**; do not copy the separately approved fire-burst25% max HP unless user explicitly approves that for lava too. Contact with lava does not automatically teleport/restart a surviving player. Use deterministic, clearly visible per-player one-second damage intervals so fractional overlaps do not multiply pulses accidentally; exact initial tick at entry vs after first full elapsed second still open.
+4. **Healing potions and normal consumables ALLOWED** during the challenge. This EXPLICITLY OVERRIDES any proposed ban on consumables from prior round. Normal walking remains allowed, while **abilities/spells/teleports/activated movement skills remain disabled**. Passive gear effects and any normal underlying potion usage rules should remain under existing inventory/resource system; do not invent extra consumable restrictions, infinite free potions, free refills or bypass gadgets. If some consumable duplicates an expressly prohibited activated mobility/teleport ability, specific policy requires later clarification rather than globally disabling ALL consumables.
+5. **Fire hazard timing is PREDICTABLE, REPEATING and CLEARLY TELEGRAPHED.** Pattern warns before each damaging wave, with readable visible indicators on tiles/lanes. Not randomized per run or hidden untelegraphed punishments. A player's run can be learned and improved through timing, safe-path navigation and movement.
+6. **User duration correction (important):** "**it doesnt need to be exactly 5 minutes, but yeah, a shorter maze thing**". Thus approximate FIVE MINUTES from Rounds23–24 is now **soft creative context ONLY**, NOT a strict target/stopwatch, forced timer, guaranteed finish time, time limit or minimum/maximum. Make it a **SHORT solo obstacle course**, driven by traversing a continuous Point A→Point B marked route; different players may take more/less time due to caution, retries and potion use.
+
+### Locked advancement venue and completion from earlier rounds
+
+- New experienced controlled-fire **pyromancer specialist NPC** at small SAFE training CAMP at BASE of existing Ember Crown volcano, southeast World2 Ashfall Reach, not Trimery. TierII Mage Lv60+ eligible for advancement; World2 passage normally accessible via southern Ironpine pass following Ancient Road Dragon story progress.
+- **Solo instanced** ONE CONTINUOUS fire/lava walk-and-dodge hazard maze inspired by classic WC3 Run Kitty Run / Pyramid Escape, no discrete three sections, no boss DPS/fetch task.
+- All activated class abilities, movement skills and teleports DISABLED during instance; normal chosen movement controls allowed. Healing potions and normal consumables NOW EXPRESSLY ALLOWED.
+- **Win** by reaching Point B alive, leave maze and **RETURN TO FIRE MENTOR AT CAMP to turn in**, upon which character changes to Fire Mage TierIII new Lv1 manifestation; exiting alone doesn't auto-advance.
+- Death before B is entrance respawn/immediate retry. Ordinary damaging mistakes do NOT reset player if HP remains >0.
+
+### Suggested Round26 details, NOT YET APPROVED
+
+1. **Lava damage magnitude**: choose, e.g., 8%, 10%, 12% or 15% of MAX HP per one-second tick, balancing fire bursts25%, potion use, TierII Mage Lv60 survival and expected recovery. Avoid unapproved25%/sec equivalence.
+2. **Fire burst trigger frequency**: while standing in a burst, one hit per specific hazard pulse vs multi-hit overlaps; prefer deliberate hits with clear warnings, no frame-based repeated HP loss.
+3. **First lava tick timing**: immediate on entry or at 1.0sec continuous exposure, and reset tick clock upon exit/re-entry.
+4. **Respawn resources**: restore full HP/Mana on maze entrance death retry, preserve spent potions and earned quest progress, or use existing death/respawn rules; user hasn't decided.
+5. **Mentor identity and trial title**: NPC name and tone, quest name, details of camp and escape visuals; distinguish designer working titles from signed-off names.
+6. **World2 accessibility**: confirm intentional progress requirement for TierIII mentor in World2 given main World2 access after World1 dragon.
+
+### Existing approved Fire Mage combat systems preserved, no change
+
+- New TierIII Lv1 VIT19 STR7 AGI12 INT33 SPR13, per-level gains2/.75/1/6/1.5 and ClassBaseMana160, universal MaxMana=160+5INT, regen/s4+.1SPR.
+- Six skills Fireball cap35, FlameWard25, Ignite30, LivingBomb30, Overheat Mastery15, Infernal Presence15; exact150 purchased rank level-gate table approved Round18; one rank point/classLv1..150, rank0 starter.
+- Mana casts Fireball20+15r, Ignite30+15r, LivingBomb50+15r, Ward10+6r upfront plus Mana redirect while protecting. Normal empowered cast mana+100 Heat.
+- Fireball normal direct Fire Magical raw `30+8r+(0.3+0.04r)*INT`; empowered4m ground six ticks each25% own projectile raw, snapshots rank/INT/ALL outgoing damage bonuses at patch creation and overlapping areas independently tick.
+- Ignite own rank tick `9.5+68*(r-1)/29+(0.085+0.34*(r-1)/29)*INT`,8 ticks over8s, empowered3x; same-caster recast refreshes timer/duration and strongest actual captured potency wins, multiple caster-owned Ignite effects coexist.
+- Living Bomb own rank normal3m AoE raw `57+408*(r-1)/29+(0.51+2.04*(r-1)/29)*INT`,3s fuse; empowered original detonation2x and creates one generation normal AoE3m bombs. Independent bombs may all coexist; target death causes immediate 3m AoE detonation of all attached bombs individually, no extra propagation from secondary.
+- Four active casts Fireball0.2s, Ignite instant, Bomb0.2s, Ward instant self-only, cooldowns 14→7s/14→10s/22→15s/28→20s linear across own purchased ranks.
+- Ward self-only timed Mana damage redirection, 30→65% incoming HP to Mana, 1.9→1.3 Mana per prevented HP, duration4→10s, bonus empowered genuine Fire elemental shield `50+(0.5+0.1r)*INT` capacity/10s, global matching Fire0.8 shieldHP per prevented damage and other ordinary1.2, shield absorbs first then Mana Ward then HP.
+- Heat successful normal active Fire cast incl Ward grants10+Overheat Mastery purchased rank, max100, next eligible empowered cast spends100 no same-cast gain, after10s inactivity lose10 Heat/s. Infernal Presence permanent15m aura +0.5pp/rank Fire resistance allies including self, -0.5pp/rank enemies, identical aura strongest only.
+- **No innate crits from any Fire Mage abilities**; potential explicitly future spell-crit items only. TierIV Pyromancer ideas Fire LAZOR/Meteor/toggle Ward/combined passive+aura, Frost Mage→Cryomancer and hidden Hydromancer at Fire+FrostMage Lv120 remain future ideas only.
+
+**DOCUMENTATION ONLY; no Unity code, scenes, assets, builds, tests or branch merge.**
