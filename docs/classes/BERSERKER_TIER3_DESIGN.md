@@ -578,3 +578,21 @@ Let `r` be purchased Anger Management rank in 0..25 and `h=clamp(CurrentHP/MaxHP
 Anger Management passive has no activation cooldown. Suggested 7/14/12/20 are deliberately longer than 5/10/8/15; **none of these new values should be implemented without user signoff**. Overall pacing and actual Rage economy / cooldown utilization still require playtesting.
 
 **NEXT QUESTION TO USER:** approve/adjust each of WideArc7, SpinDash14, RageBreaker12, CoffeeShield20. The established 15s Coffee Shield stays authoritative until explicit replacement. Documentation only; no Unity gameplay changes.
+
+
+## Final Berserker combat-cooldown approval — 2026-11-26 (LATEST USER DECISION)
+
+**USER APPROVED the longer cooldown proposal with TWO exact edits:** "coffee shield 25 sec and spin dash 15 sec. otherwise it looks good." Therefore lock the following as **AUTHORITATIVE final first-playtest cooldown values**, superseding all previous suggested durations and the earlier Coffee Shield 15-second baseline:
+
+| Berserker active skill | USER-APPROVED cooldown | Previously approved Rage action | Other notes |
+| --- | ---: | --- | --- |
+| **Wide Arc** | **7 seconds** | Spend 10 Rage | No crit, physical cleave |
+| **Spin Dash** | **15 seconds** | +2 Rage per unique enemy hit, capped at 20 per cast | No crit; outgoing movement/AoE |
+| **Rage Breaker** | **12 seconds** | Spend fixed 30 Rage | Guaranteed hit on valid target; can crit ONLY with external crit chance; on successful hit +2% attack speed/rank for 4s, refresh not stack |
+| **Coffee Shield** | **25 seconds** | Spend 25 Rage | Self-only Coffee-element shield lasting 5 seconds; rank1=5% maxHP to rank30=35% maxHP |
+
+**Cooldown timing USER APPROVED in preceding round:** start the cooldown only **after the relevant cast or attack FINISHES/resolves**, never when the button is first pressed. Coffee Shield's cooldown begins after its actual activation/cast finishes, **not after its five-second shield lifespan expires**. Anger Management is a permanent 25-rank passive with **no activation cooldown**.
+
+**Anger Management numeric damage is ALREADY APPROVED**: +0.5% eligible 2H axe/sword Physical damage per purchased rank; low HP damage `0.40*(rank/25)*clamp((1-CurrentHP/MaxHP)/0.99,0,1)`; multiply damage effects `(1+0.005rank)*(1+lowHpBonus)`, up to **+57.5% combined at rank25 and 1% HP** for valid 2H weapons. No built-in crit chance. No need to reopen this topic merely because prior sections contain old proposals.
+
+**USER SAYS CODEX IS HAPPY WITH EVERYTHING, AND REQUESTS MOVING TO NEXT DESIGN TOPIC.** Record this as the user's report, not verified implementation, deployment, tests, or external Codex signoff. The class's foundational design and advancement quest can now be considered approved for the initial implementation handoff; no Unity source or playtest changes were made here. Implementation details such as interruption semantics, damage snapshot timing and visuals may be resolved through existing shared systems or brought back as focused questions only if necessary.
