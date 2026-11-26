@@ -723,3 +723,8 @@ USER wants Flame Ward rank25 Mana-cost efficiency ~**1.3 Mana/HP prevented**, an
 ## 2026-11-26 — Fire Mage TierIII Round11 exact Ward curves and Fireball timing (USER APPROVED)
 
 USER clarifies Fireball **cast time0.2s** and **cooldown7s at maximum rank35** (rank1..34 CD curve OPEN). Flame Ward purchased rank1..25 **Mana per prevented HP** `1.9-0.6*(r-1)/24` (to1.3 rank25); **main ward duration** `4+6*(r-1)/24` sec (4s→10s); **ability CD20s**; redirect fraction remains `0.30+0.35*(r-1)/24`. Extra empowered Fire shield separately lasts10s with capacity `50+(0.5+0.1*r)*INT`. Pyromancer TierIV may evolve this timed ability to a Mana-absorption TOGGLE, a future evolution note NOT a TierIII mechanic or implementation. Exact flat+INT damage coefficients, mana costs and per-rank purchase gates still pending. [Design details](classes/MAGE_TIER3_DESIGN.md). No Unity implementation.
+
+
+## 2026-11-26 — Fire Mage TierIII Round12 exact Fireball cooldown and other cast timings
+
+User approves Fireball cooldown `14-7*(r-1)/34` seconds for ranks1..35 (14s→7s) with existing0.2-second cast time. Ignite **instant cast,10s cooldown**; Living Bomb **0.2-second cast,15s cooldown**, distinct from normal3-second bomb fuse. Flame Ward cooldown20s previously accepted, its cast time still open. Cooldowns apply to active purchased ranks1+; no rank0 free casts. All damaging flat and INT coefficients must scale with skill rank, exact formulas/Mana costs TBD. [Fire Mage spec](classes/MAGE_TIER3_DESIGN.md). Documentation-only.

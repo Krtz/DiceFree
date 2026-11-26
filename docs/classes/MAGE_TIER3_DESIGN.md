@@ -469,3 +469,45 @@ The user says "**just a thought that i want written down**" and requests:
 5. **150-level purchase eligibility audit** with actual first-unlock levels and cap split; verify every class level has >=one eligible future rank and no orphan points; show exact gate plan for user approval before gameplay implementation.
 
 **Documentation-only; NO Unity source/assets/build/tests/implementation modified.**
+
+
+## Fire Mage Tier III Round 12 — 2026-11-26 USER APPROVES FIREBALL 14s→7s CD, IGNITE AND LIVING BOMB COOLDOWNS/CAST TIMES
+
+**LATEST USER ANSWERS, authoritative.** Q1 free-text note overrides the "Different curve" placeholder, supplying the precise new Fireball cooldown start and interpolation.
+
+### Approved first-playtest cast/cooldown mechanics
+
+| Active spell | Purchased ranks | Cast time | Cooldown | User approval |
+| --- | --- | --- | --- | --- |
+| **Fireball** | r1..35 | **0.2 seconds** (previous approved) | **LINEAR 14s at r1 DOWN TO 7s at r35** | User explicit Round12 note: "14 seconds at rank 1 scaling linearly down to 7 seconds" |
+| **Ignite** | r1..30 | **INSTANT** | **10 seconds**, no rank-scaling CD requested | User explicit Round12 |
+| **Living Bomb** | r1..30 | **0.2 seconds** | **15 seconds**, no rank-scaling CD requested | User explicit Round12 |
+| **Flame Ward** | r1..25 | **NOT YET DECIDED** | **20 seconds** (previously approved), no rank CD scaling requested | Prior round |
+
+**Exact approved Fireball cooldown formula:** `FireballCooldownSeconds(r) = 14 - 7*(r-1)/34` with purchased rank `r=1..35` (clamp to valid rank range). Examples r1=14s, r5≈13.1765s, r10≈12.1471s, r15≈11.1176s, r20≈10.0882s, r25≈9.0588s, r30≈8.0294s, r35=7s. Do not conflate this 7 seconds with its already approved **0.2-second cast time**. Cooldown start should follow agreed global class cooldown timing after a cast finishes, not before beginning the cast.
+
+**Ignite** is an **instant cast** Fire DoT application; its eight DoT ticks still occur at 1,2,...,8 seconds after a successful application, and same-caster reapplication refreshes rather than stacking, empowered3x normal total for unchanged duration. Instant spell can still incur cooldown/GCD/animation rules from global architecture, unapproved independently.
+
+**Living Bomb** takes a **0.2-second cast**, with a separate **3-second fuse AFTER successful application** (do not confuse with cast time) and **15-second cooldown**. Normal detonation radius3m. Empowered original explosion2x normal damage and one-hop spread of normal bombs inside3m; copied bombs use the normal3-second fuse and normal full damage, may explode but cannot spread or grant new Heat.
+
+No Fire Mage damage formulas/Mana costs/other cast times are accepted in this round.
+
+### Previous Fire Mage approvals retained
+
+- Six abilities + 150 rank split: Fireball35, Flame Ward25, Ignite30, Living Bomb30, Overheat Mastery15, Infernal Presence15; 1 point per class level1..150; all initially purchased rank0. Initial first skill unlocks Fireball+Overheat Mastery Lv1; Ignite Lv3; Flame Ward Lv5; Living Bomb Lv8; aura Lv10. Rank 2+ eligibility gates and audited point availability still open.
+- Flame Ward fraction redirected to Mana `0.30+0.35*(r-1)/24`, Mana cost per prevented HP `1.9-0.6*(r-1)/24`, main effect lifetime `4+6*(r-1)/24` seconds, cooldown20 seconds. Extra empowered Fire shield capacity `50+(0.5+0.1*r)*INT`, life10 seconds. Cast-time, mana upfront cost, targeting and damage absorption ordering open.
+- Fireball empowered ground burn4m radius,6s fixed under hit target, damage ticks at t1..6sec. No immediate splash explosion assumed.
+- Normal eligible Fire spell cast Heat `10+OverheatMasteryPurchasedRank`, cap100; next eligible spell after reaching100 empowered, consumes100 and self-awards zero Heat. Decay after10 seconds of Fire cast inactivity then -10 Heat/sec. Note 14-second rank1 Fireball cooldown means other successful Fire casts or idle Heat decay may matter before Fireball rank investment.
+- Aura permanently15m, includes caster and allied +0.5pp Fire resistance/rank, enemy -0.5pp Fire resistance/rank, strongest identical aura only.
+- Universal Mana `ClassBaseMana+5*INT`, natural regen `4+0.1*SPR` for ALL Mana users; Fire Mage adjustments through class base/stats/gear, not custom coefficients.
+- Future-only Pyromancer TierIV toggle-Mana Ward, combined aura+passive, Fire LAZOR and possible Meteor; Frost Mage→Cryomancer later; hidden Hydromancer TierIV concept after both Fire Mage and Frost Mage Lv120. Remain unimplemented future plans, not current TierIII skills.
+
+### Round13 follow-up design priorities — NOT YET APPROVED
+
+1. Confirm Fireball raw Fire magical hit damage `flatBase + flatPerRank*(r-1) + (intBase+intPerRank*(r-1))*INT`, with all rank coefficients increasing. Choose scale against Mage TierII Ember Bolt and existing monster HP/damage expectations rather than arbitrary damage explosion.
+2. Set separate empowered Fireball burning ground per-tick damage formula, increasing flat and INT coefficient with Fireball rank (6 ticks within4m).
+3. Set Ignite per-tick damage (8 ticks/8s, empowered3x) and Living Bomb normal explosion formula (empowered original2x; secondary normal).
+4. Decide **Mana costs of ALL FOUR active spells** and Fireball/Flame Ward upfront mana cost policy; ensure Ward redirection additionally consumes Mana during absorption, no unclear double charge. Shared global Mana max/regen must remain.
+5. Determine **Flame Ward cast time**, other target restrictions, rank-gate audit for 150 points, and after numerical combat tuning the Fire Mage base stats/quest.
+
+**Documentation only. NO Unity gameplay code, assets, builds or runtime implementation touched.**
