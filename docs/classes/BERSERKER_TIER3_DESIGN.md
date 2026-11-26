@@ -596,3 +596,15 @@ Anger Management passive has no activation cooldown. Suggested 7/14/12/20 are de
 **Anger Management numeric damage is ALREADY APPROVED**: +0.5% eligible 2H axe/sword Physical damage per purchased rank; low HP damage `0.40*(rank/25)*clamp((1-CurrentHP/MaxHP)/0.99,0,1)`; multiply damage effects `(1+0.005rank)*(1+lowHpBonus)`, up to **+57.5% combined at rank25 and 1% HP** for valid 2H weapons. No built-in crit chance. No need to reopen this topic merely because prior sections contain old proposals.
 
 **USER SAYS CODEX IS HAPPY WITH EVERYTHING, AND REQUESTS MOVING TO NEXT DESIGN TOPIC.** Record this as the user's report, not verified implementation, deployment, tests, or external Codex signoff. The class's foundational design and advancement quest can now be considered approved for the initial implementation handoff; no Unity source or playtest changes were made here. Implementation details such as interruption semantics, damage snapshot timing and visuals may be resolved through existing shared systems or brought back as focused questions only if necessary.
+
+## Character asset selection — 2026-11-26 (USER APPROVED)
+
+The user selected recommendation **2, Orc Warrior**, for **BOTH the playable Berserker class and its retired Berserker mentor**. This supersedes the earlier recommended Viking Shieldmaiden player model and removes any need to select different base characters for these roles.
+
+- **Exact library source:** `T:/TEMP/ART_ASSETS/orc-warrior (2).zip`, containing `source/Orc Character.zip` and its `Orc Character/Model/Character.fbx`. Do not substitute the separately named `orc-warrior.zip` or `orc-warrior (1).zip`; those were inspected and are unrigged alternatives.
+- **Publisher/model:** [Orc Warrior by Callan McEntee](https://sketchfab.com/3d-models/orc-warrior-21eaa407bf164cdea21135a1d1b2b8f3).
+- **Verified source contents:** archive CRC passed; Blender inspection found 9,310 triangles, five mesh objects, four meshes with vertex groups, a 71-bone character armature and a one-bone auxiliary armature. The publisher describes an idle animation. Multiple imported action datablocks belong to the same `Take 001`; they are not evidence of a complete combat animation library.
+- **Presentation direction:** retain the hand-painted orc identity for both roles. Distinguish the mentor with an aged, weathered appearance and the player with a readable combat appearance. Exact ageing, palette, equipment and animation adaptations are implementation/art choices; no exact new colours or armour designs were approved by this selection.
+- **Weapon and animation work:** preserve the approved preference for two-handed axes and compatibility with eligible two-handed swords. Replace/adapt the source spear presentation as needed; verify two-handed grip, swing/spin animation retargeting and gameplay-camera readability during implementation.
+
+This records the selected source and roles. It does not claim that the asset has been imported, combat-retargeted, visually approved in DiceFree or wired to an implemented Berserker class.
