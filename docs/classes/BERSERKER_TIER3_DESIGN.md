@@ -516,3 +516,40 @@ These newest user decisions **supersede the prior open quest questions**; this i
 - Actual teacher placement left to Codex; evaluate **north-of-Trimery Quillboar area** vs **Crimson Mire vicinity** in existing level layout, choose a grounded reachable camp rather than inventing premature coordinates; communicate placement in the implementation handover.
 
 **Latest approved direction is complete enough for implementation planning; Unity source/assets were NOT edited in this documentation round.**
+
+
+## Combat tuning round — 2026-11-26: Anger Management damage and all four active cooldowns, DESIGNER PROPOSALS
+
+**USER REQUESTED:** explicitly design how Anger Management's damage bonuses work and provide cooldowns for Berserker skills. The **specific new damage percentages, interpolation/stacking approach, and proposed cooldowns below are NOT YET USER APPROVED**, unless already previously approved (Coffee Shield cooldown15s). No Unity implementation is authorized in this documentation-only design round.
+
+### Prior approved anchors retained
+
+- Anger Management is one passive with **25 ranks**, improving basic attack Rage `1+ceil(0.1×r)`, two-handed axe/sword weapon damage and missing-HP damage; smooth missing-HP bonus reaches **up to +40% at 1% HP when rank25** and applies to basic attacks and all damaging Berserker abilities. Berserker has no innate critical chance.
+- Out-of-combat Rage decay `5−4.9×r/25` Rage/sec (approved), cap100 Rage. Rank0 Rage per successful basic hit1, rank1–10 2, rank11–20 3, rank21–25 4; fully shield-absorbed successful basics count.
+- Skill costs: Wide Arc10 Rage, Spin Dash0 cost and +2 Rage per unique enemy hit max20 per cast, Rage Breaker30 Rage, Coffee Shield25 Rage. Rage Breaker +2% attack speed per rank for4s on successful hit; refresh/no stack. Coffee Shield5s duration, **15s cooldown user already approved**.
+- Existing live Greatblade tuning for reference only: `arcCooldown=5`, `spinCooldown=10`, `breakerCooldown=7` seconds (verified `Assets/_DiceFree/Settings/Skills/Greatblade/Greatblade combat tuning.asset`), not evidence Berserker cooldowns have been implemented.
+
+### NEW PROPOSAL A: Anger Management two damage channels (NOT APPROVED)
+
+Let `r` be purchased Anger Management rank in 0..25 and `h=clamp(CurrentHP/MaxHP,0,1)`. If `r=0`, both of these passively granted damage bonuses are zero.
+
+1. **Weapon mastery:** `WeaponDamageBonus = 0.005×r` (**+0.5% Physical damage per purchased rank, max +12.5% at r25**), conditional on wielding an eligible **two-handed AXE OR two-handed SWORD**, equally. Designer suggestion: apply to Berserker's physical basic and the three damaging offensive skills, not shields, heals, elemental shield absorb or other classes. This is a general 2H physical damage modifier, **not extra weapon-base damage** and not an axe-exclusive perk. Exact 0.5% coefficient and affected skills await user approval.
+2. **Bloodied Fury** (working label for the missing-HP effect, not a separate skill): `MissingHpBonus = 0.40×(r/25)×clamp((1−h)/0.99,0,1)`. At full HP bonus0, at **1% HP or below** reaches `40%×r/25`, so max rank r25 gives the already approved 40% ceiling. No sudden low-HP breakpoint. At passive r25 / HP50% the new formula yields `0.40×(0.5/0.99)=20.202...%`; at HP25% gives30.303...%; r1 max1.6%, r10 max16%, r25 max40%. The **40% endpoint is APPROVED**, the exact rank/hp interpolation is a designer candidate.
+3. **Stacking proposal:** compute approved raw Physical skill/basic damage with current rank coefficient and STR, then multiply exactly once by `(1+WeaponDamageBonus)×(1+MissingHpBonus)` if both conditions apply, then use shared enemy defense/mitigation. At r25, HP1%, matching eligible 2H weapon, total combined modifier `1.125×1.40=1.575`, i.e. **+57.5% raw Physical damage combined** (not +40% total). Weapon condition does not change the already-approved missing-HP bonus scope: missing-HP scaling still applies to normal basics and ALL damaging Berserker skills. Alternative ADDITIVE stacking `1+WeaponDamageBonus+MissingHpBonus` would cap at +52.5% combined; this distinction needs user approval. Avoid applying existing equipment weapon damage twice, and don't accidentally multiply or stack the rank25 effect on shield/DoT packets.
+4. **Potential snapshot behavior:** current HP at the moment the damage packet is resolved, not at skill cast initiation; no retroactive changes to already resolved attacks. Exact implementation policy requires user agreement/engine compatibility.
+
+### NEW PROPOSAL B: All active cooldowns (NOT APPROVED except Coffee Shield15s)
+
+| Active skill | Proposed cooldown | Previous Greatblade reference | Approved resource action | Other notes |
+| --- | ---: | ---: | --- | --- |
+| Wide Arc | **5 seconds** | 5s | Spend 10 Rage | Keep as repeatable cleave; no crit |
+| Spin Dash | **10 seconds** | 10s | Gain 2 Rage per unique enemy, cap20 | Movement and AoE; no crit |
+| Rage Breaker | **8 seconds** | Greatblade Overhead Breaker7s | Spend fixed30 Rage | Guaranteed hit on valid target, can crit only via external crit chance, grants 4s +2% attack speed/rank on successful hit |
+| Coffee Shield | **15 seconds APPROVED EARLIER** | Not present | Spend25 Rage | Self-only Coffee element, lasts5s, rank1 5%→rank30 35% maxHP absorb |
+
+- **Anger Management is PASSIVE**, has no activation cooldown.
+- Designer suggestion: **start cooldown on accepted cast**, subject to ability target/geometry validation and skill cast rejection rules; not after damage lands or after the 5-second Coffee Shield expires. Cancel/interrupt/Rage refund semantics should follow global cast rules; do not silently introduce a free resource refund.
+- A 4s Rage Breaker attack-speed buff on an 8s proposed cooldown has at most 50% uptime from isolated uses; actual Rage economy can lower uptime.
+- **User decisions needed:** confirm damage rank curve and +0.5% 2H bonus/rank, additive vs multiplicative stacking, proposed cooldown values and cooldown start/invalid/interrupt behavior, and whether to treat working "Bloodied Fury" solely as a descriptive passive sub-effect or rename it.
+
+**No Unity code modified, built, or tested in this design discussion.**
