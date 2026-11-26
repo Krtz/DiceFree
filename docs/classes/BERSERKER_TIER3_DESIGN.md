@@ -302,3 +302,41 @@ This is the LATEST Berserker resource/first-unlock design. It overrides the olde
 - Check that **level1 Wide Arc cost 10 Rage** and **Anger Management availability** provide reasonable initial Rage accumulation, and that 30-Rage Rage Breaker does not starve on bosses.
 
 **Workflow:** User requires relevant design docs be committed and pushed after every answered question round. No Unity source/gameplay implementation is claimed by this update.
+
+
+## Round 10 — 2026-11-26 (USER APPROVED: shielded basics, linear Rage retention, uncapped incoming hits, unique Spin Dash targets; stat design NEXT)
+
+**LATEST USER-APPROVED Berserker decisions. Documentation only; no Unity changes or playtest claimed.**
+
+1. **Successful BASIC ATTACKS generate the full previously approved Rage even if all damage is absorbed by the enemy's shield**: `1+ceil(0.1×AngerManagementRank)`, rank0=1, rank1–10=2, rank11–20=3, rank21–25=4 Rage. No Rage from a miss or invalid target; shield absorption counts as successful contact. This mirrors the previously confirmed Rage Breaker haste trigger on shielded successful hits. Do not inadvertently award additional Rage for the same hit from both damage and a separate shield mechanic.
+2. **Anger Management's out-of-combat Rage decay progression is LINEAR by purchased rank** from **5 Rage/sec at rank0** to **0.1 Rage/sec at rank25**: `OutOfCombatRageDecayPerSecond(r)=5−(4.9/25)×clamp(r,0,25)`. For example r1=4.804, r10=3.04, r20=1.08, r25=0.1. Preserve fractional accumulation/time deltas rather than rounding 0.1 Rage/sec down to zero. This replaces the previous unresolved milestone-based alternative.
+3. **NO additional per-incoming-hit Rage cap** beyond the **existing total 100 Rage resource ceiling**. Incoming HP damage and Coffee Shield absorption grant Rage at the SAME normal rate, **1 Rage per 1% of Berserker's own maximum HP worth of damage taken/absorbed**, with no double-counting a packet's shielded and HP portions. Thus a huge incoming hit can fill Rage to 100, rather than being artificially capped at 20 per hit. Combat event eligibility, overkill, and whether a lethal hit pays Rage before death still require implementation-specific decisions.
+4. **Spin Dash generates 2 Rage per UNIQUE enemy hit ONCE PER activation**, to a maximum of **20 Rage per Spin Dash use**. Repeated contact with a previously counted enemy in the same dash does NOT grant more Rage. Use target identity deduplication on the same activation; don't grant extra Rage from repeated hitboxes/colliders.
+5. **Next priority chosen by user: Berserker starting stats and per-level growth.** No attribute numbers were approved in the user's Round10 answers. Ground the new proposals in the actual Greatblade source baseline before asking approval.
+
+### Existing Greatblade baseline verified from Unity repo
+
+`Assets/_DiceFree/Settings/Skills/Greatblade/Greatblade class.asset` currently records starting **VIT14 / STR18 / AGI9 / INT5 / SPR5**, and per-level growth **VIT+2 / STR+3 / AGI+1 / INT+0.5 / SPR+0.5** (=7 total). Its current HP parameters are `baseHp=10`, `hpPerVitality=15`, `regenerationPerVitality=0.1` with no class-specific overrides. The future Berserker uses its OWN TierIII level1 stats and level growth (do not add accumulated parent Greatblade stats on top) under the existing class manifestation progression approach.
+
+### Round11 designer-only STAT PROPOSAL, NOT APPROVED
+
+| Attribute | Greatblade current Lv1 | Berserker PROPOSED Lv1 | Berserker PROPOSED gain/level |
+|---|---:|---:|---:|
+| Vitality | 14 | **22** | **+2.8** |
+| Strength | 18 | **32** | **+6.0** |
+| Agility | 9 | **13** | **+1.3** |
+| Intelligence | 5 | **7** | **+0.7** |
+| Spirit | 5 | **7** | **+0.7** |
+| Growth total | **7.0** | | **11.5** |
+
+At Berserker level150, without gear/passive stat bonuses, **STR=32+149×6=926** and **VIT=22+149×2.8=439.2** before gameplay rounding; if inheriting Greatblade's current HP equation `10+15×VIT`, proposed HP ~**6598** at 150. **This is merely an illustrative proposal and NOT an approval of HP coefficients, stat values, rounding or class resource specifics.** Greatblade's actual class growth is 7.0 and TierIII Marksman has independently approved stronger progression, so Berserker may scale more than parent while staying melee STR-focused. User should choose/refine starting stats and gains in Round11 before locking them.
+
+### Still-open design after these choices
+
+- Validate stat proposal, starting health/regen, crit/attack speed and attack coefficient link to STR; decide shield capacity snapshots and interplay with low-HP +40% damage passive.
+- Offensive damage numeric coefficients scaling with purchased rank for Wide Arc, Spin Dash, Rage Breaker; Anger Management rank benefits to damage and Rage generation.
+- Full 150-point rank eligibility gates preserving first unlocks WideArc1/AngerManagement1/SpinDash3/RageBreaker6/CoffeeShield8, ability to spend point at every class level.
+- Advancement teacher/story quest and visual/asset requirements.
+- Retain previously approved Wide Arc10 Rage, SpinDash+2 per unique enemy to20, RageBreaker30 Rage/+2% AS per rank for4s on successful hit, CoffeeShield25 Rage/5s/15s linear5%→35%MaxHP, and maximum Rage100.
+
+**Workflow:** after every question round, commit and push relevant design docs; no Unity code altered during this Round10 docs update.
