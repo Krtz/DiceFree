@@ -453,3 +453,8 @@ Preserve exact approved skill caps **Wide Arc35, Spin Dash30, Rage Breaker30, An
 **Audit result:** 150/150 rank gates, **0 failing class levels** from 1..150, minimum `availableRanks(L)−L` is **0** at level150, maximum surplus16. All ranks have unlocked by class level148, so the level149–150 points remain spendable. One-point-per-level purchase stays possible, and no starter ranks are free.
 
 **Complete exact gate lists, rank formulas and sampled audit counts:** [BERSERKER_TIER3_RANK_GATE_AUDIT.md](BERSERKER_TIER3_RANK_GATE_AUDIT.md). Ask user to approve/adjust before implementation. No Unity game files changed; documentation only.
+
+
+## Round 14 follow-up (2026-11-26): FULL RANK-GATE SCHEDULE USER APPROVED
+
+The user explicitly approved the previously proposed, exhaustively validated 150-rank Berserker eligibility schedule. **It is now the authorized initial-playtest design, not a pending proposal.** Wide Arc ranks 1-4 first become eligible at class levels 1/2/3/4 then every 4 levels through cap35 at level128. Spin Dash cap30 begins at level3, then every 5 levels to level148. Rage Breaker cap30 begins at level6, then every 4 levels to level122. Anger Management cap25 begins at level1, then every 6 levels to level145. Coffee Shield cap30 begins at level8, then every 4 levels to level124. Exactly 150 total purchasable ranks with one class point each level 1-150; all levels pass numerical eligibility audit and no free starting ranks are granted. Any older "awaiting user approval" references to this exact schedule are superseded. [Approved exact 150-rank gate audit](BERSERKER_TIER3_RANK_GATE_AUDIT.md). Next step: design Berserker's advancement quest and mentor, which are NOT yet approved. Design-doc approval only; no Unity code changed.

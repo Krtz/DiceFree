@@ -68,3 +68,8 @@ For each level `L`, `availableRanks(L)=sum_over_skills(count(gate <= L))`; `earn
 1. Approve or adjust this proposed level-gate schedule, especially Wide Arc's ranks 1–4 rapid start and later four-level intervals.
 2. Decide any later unlock milestones for special effects, if desired, separate from raw damage coefficients.
 3. After gate approval, draft advancement quest/teacher and audit interactions with class level 1 manifested stats and point refunds.
+
+
+## USER APPROVAL FOLLOW-UP (2026-11-26)
+
+**AUTHORITATIVE STATUS: USER APPROVED for first playtest.** User explicitly answered "i approve" to the exact 150-rank gate schedule in this document, including Wide Arc's rapid first four ranks. All earlier labels within this file such as "proposed" and "not yet user approved" are historical and SUPERSEDED by this approval. Exact gates, mathematical audit and 150-rank budget remain unchanged. No Unity gameplay implementation has occurred.
