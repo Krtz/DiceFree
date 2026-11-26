@@ -425,3 +425,47 @@ The user says "**just a thought that i want written down**" and requests:
 5. Generate full mathematical 150-rank gate schedule and audit with user signoff, consistent with first unlocks and rank caps. Do not silently implement source changes.
 
 **Docs-only. No Unity gameplay files/assets/build/test changed.**
+
+
+## Fire Mage Tier III Round 11 — 2026-11-26 USER APPROVES FIREBALL 0.2s CAST AND 7s CD, LINEAR WARD EFFICIENCY/DURATION, FUTURE PYROMANCER TOGGLE WARD
+
+**USER ANSWERED all five Round11 questions; the free-text addition for Q4 is authoritative and supersedes the form's "other seconds" placeholder.** All values here refer to DESIGN, not existing Unity implementation.
+
+### USER-APPROVED Flame Ward (main Mana redirection)
+
+- **Mana efficiency explicitly approved EXACT LINEAR** from `1.9 Mana per 1 HP damage prevented at purchased Flame Ward rank1` to `1.3 Mana per HP prevented at rank25`. Formula for valid `r=1..25`: `ManaPerPreventedHP(r)=1.9 - 0.6*(r-1)/24`. This supersedes Round10's tentative efficiency target and earlier unapproved parent-preserving endpoint1.5. Rank25 is meaningfully more efficient than TierII Mage Math Barrier rank5=1.5; always positive, never extend beyond valid rank range. Actual prevented HP damage is constrained by both approved fraction `RedirectFraction(r)=0.30+0.35*(r-1)/24` AND current available Mana divided by `ManaPerPreventedHP(r)` (partial redirection allowed); pay Mana corresponding to actual prevented HP.
+- **Normal/main Flame Ward duration explicitly approved EXACT LINEAR** from `4 seconds at r1` to `10 seconds at r25`: `WardMainDurationSeconds(r)=4 + 6*(r-1)/24`, r=1..25. This resolves previous question about intermediate ranks. **Flame Ward cooldown fixed at20 seconds**, previously accepted Round10, remains approved.
+- **Empowered EXTRA elemental Fire shield** remains separate: `AdditionalFireShieldCapacity(r,INT)=50+(0.5+0.1*r)*INT`, lifespan **10 seconds**. Do not confuse its fixed10s lifespan with main rank-scaling ward lifespan or ability cooldown. The exact handling/priority of Fire shield damage-type absorption, self-only vs allied targeting, refresh/stack interaction and cooldown-start semantics still require engine rules/design confirmation.
+- Sample rank table (derived): r1 efficiency1.9 duration4s; r5 efficiency1.8 duration5s; r10 efficiency1.675 duration6.25s; r15 efficiency1.55 duration7.5s; r20 efficiency1.425 duration8.75s; r25 efficiency1.3 duration10s.
+
+### USER-APPROVED Fireball casting/cooldown
+
+- **Fireball cast time = 0.2 SECONDS** (user typed "0.2 sec cast time fore fireball" in additional notes). This intentionally overrides all prior designer suggestions of 1–2 seconds or a seven-second cast. It is short but a cast, not necessarily instant; interrupt/animation/movement restrictions must follow shared casting architecture.
+- **Fireball cooldown = 7 SECONDS AT MAXIMUM purchased Fireball rank35**. This is explicitly a COOLDOWN, not a cast time, now user-confirmed. The cooldown at ranks1..34 and its interpolation are still OPEN; do not imply a fixed seven seconds at all ranks unless the user approves that separately.
+- Base Fireball direct projectile; empowered variant leaves fixed 4m-radius/6s ground fire under target hit, ticks at t1..6s, and consumes100 Heat with no same-cast gain.
+- User endorsed Fireball as repeatable primary Fire attack, while delayed Living Bomb provides AoE burst. All flat magical damage and INT coefficients scale with purchased damaging skill rank; the exact formulas, costs, and other skill cooldowns are still TBD.
+
+### Future Tier IV Pyromancer user request (NOTE / DESIGN DIRECTION, NOT IMPLEMENT NOW)
+
+- User explicitly answers: "**Record toggle-style Mana Ward evolution as future design direction**" for TierIV **Pyromancer**. When designing Pyromancer later, evolve Fire Mage's rank-scaled timed Mana Ward into a **toggle-style Mana damage-absorption ability**, subject to future rules for activation, resource depletion, efficiency, cooldown, UI and balancing. This is **not** authorization to change Fire Mage's TierIII timed 4–10s ward into a toggle.
+- Previously recorded future Pyromancer possibilities persist: combine Heat-generation passive and dual resistance aura into one skill, add giant windup Fire LAZOR, maybe Meteor. Separate Frost Mage→Cryomancer later and hidden Hydromancer requiring Fire Mage Lv120 AND Frost Mage Lv120 remain future ideas; do not create new TierIII branch or implement until coverage priority is met.
+
+### Existing Fire Mage TierIII locked anchors (unchanged)
+
+- Exactly six skills, total150 purchased ranks: Fireball35, Flame Ward25, Ignite30, Living Bomb30, Overheat Mastery15, Infernal Presence15. Fireball+Heat passive first unlock Lv1, Ignite Lv3, Ward Lv5, Bomb Lv8, aura Lv10. One purchased point/class level1..150, rank0 starters. Exact rank2+ level gates still not audited/approved.
+- Normal successful Fire cast Heat gain `10+OverheatMasteryRank`; at100 NEXT eligible cast is empowered, spends100 and generates zero new Heat; after10 seconds inactive decay10 Heat/s.
+- Infernal Presence passive always-on radius15m, allied Fire resistance +0.5 percentage points/rank incl caster, enemy Fire resistance -0.5pp/rank, strongest identical aura only.
+- Ignite eight ticks over8s at t1..8, same caster reapply refresh/no stacking, empowered does3x normal DoT total at same duration on single target.
+- Living Bomb normal fuse3s, radius3m; empowered primary detonation2x normal damage, spreads normal 3s-fuse/full-normal-damage bombs one hop only, never recursively.
+- Flame Ward normal Mana damage redirection percent0.30+0.35*(r-1)/24; extra empowered shield as above. No Fire LAZOR in TierIII, future TierIV Pyromancer only.
+- One global Mana formula: `MaxMana=ClassBaseMana+5*INT`, natural regen `4+0.1*SPR`. Fire Mage class resource differences via class base/start INT/SPR/gear, no special class-specific mana coefficient.
+
+### Proposed Round 12 priorities (UNAPPROVED)
+
+1. **Fireball rank1 cooldown and curve** to rank35=7s: e.g. r1=10s improving linearly to7s, or fixed7s for all ranks. Its cast time stays approved0.2s.
+2. **Spell damage flat+INT rank coefficients** for normal Fireball hit, empowered Fireball ground tick, Ignite per tick, Living Bomb normal detonation, plus actual natural Fire resistance mitigation, all increasing with own rank. Build sensible relative power per spell time/cooldown to avoid runaway AoE.
+3. **Mana costs** for Fireball, Flame Ward, Ignite, Living Bomb using universal pool, and rank growth as agreed overall skill system. Explicitly check whether Ward cast cost plus spent-mana redirection should double charge and whether empowered cast shares ordinary Mana cost.
+4. **Other cooldowns, cast times, movement/target legality** for Ignite and Living Bomb; Ward casting rules and cooldown start upon cast finishing.
+5. **150-level purchase eligibility audit** with actual first-unlock levels and cap split; verify every class level has >=one eligible future rank and no orphan points; show exact gate plan for user approval before gameplay implementation.
+
+**Documentation-only; NO Unity source/assets/build/tests/implementation modified.**
