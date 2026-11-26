@@ -325,3 +325,32 @@ Four TierIII active skills Fireball, Flame Ward, Ignite, Living Bomb; passive Ov
 5. **Skill-point gate audit:** construct mathematical per-rank eligibility curves consistent with six first unlocks and caps, guarantee enough eligible ranks at EVERY level1..150 for one spendable point per earned class level, and user signoff prior to calling gate sequence approved. Then choose stats, cooldowns, mana costs, teacher/quest.
 
 **Documentation only. No Unity gameplay code/assets/build/implementation changed.**
+
+
+## Fire Mage Tier III Round 8 — 2026-11-26 USER APPROVALS: BURNING GROUND, BOMB FUSE, WARD ENDPOINTS, IGNITE TICKS
+
+**LATEST USER-APPROVED ANSWERS** to Round8, superseding the earlier larger/smaller timing alternatives. These are newly agreed anchors for the first-playtest design, not evidence of Unity implementation.
+
+1. **Empowered Fireball burning ground:** On hit, create a **FIXED WORLD-POSITION 4-metre radius Fire ground hazard**, persisting **6 seconds**, applying **one Fire-damage tick per second** to eligible enemies in its area. Follow the originally approved placement *under the target hit*, at the impact location; the ground does not follow target movement. Tick start timing (immediate vs t=1s), unique-field overlapping/stacking, exact flat + INT × skill-rank per-tick formula, and target evaluation remain UNAPPROVED. The empowered Fireball does not gain an additional instant splash explosion in lieu of the ground hazard.
+2. **Living Bomb standard fuse and radius:** **3-second fuse**, **3m radial explosion**. The empowered original explosion has *stronger damage* and creates one-hop propagated Living Bomb copies on other valid targets INSIDE 3m; each copied bomb has the **same normal 3s fuse and full normal damage** (not empowered), and the copies **never re-propagate**. Exact raw flat + INT damage coefficient, enhanced detonation multiplier, per-owner same-target overwrite and duplicate propagation suppression remain UNAPPROVED. No heat gain from bomb detonation/proc.
+3. **Flame Ward standard Mana redirection endpoints:** at skill rank **1 redirect 30%** of applicable incoming post-mitigation damage from HP to spent Mana; by maximum skill rank **25 redirect 65%**. Percentage-based Mana absorption from TierII Math Barrier is retained. **The endpoint percentages are USER APPROVED, but the exact interpolation between ranks1..25 is NOT separately approved.** Suggested designer-only linear first-playtest curve `redirectFraction(r) = 0.30 + 0.35*(r-1)/24` with r1=0.30, r25=0.65; no extrapolation beyond cap. Mana consumed per prevented HP, duration and ordering relative to other shield absorption remain undecided. At zero Mana, use shared Mana Barrier semantics with no HP absorption; final resource ordering should follow tested engine behavior.
+4. **Empowered Flame Ward extra Fire shield:** user **requires its capacity to scale with BOTH purchased Flame Ward rank AND caster INT**, beyond ordinary Mana redirection. Its exact strength expression, whether it adds a flat base, lifespan, absorption order, Fire-specific versus universal damage absorption, and refresh/stack policy remain **to be designed**. No unranked `50+2*INT` formula approved.
+5. **Ignite tick cadence:** first Fire damage tick at **t=1s** after successful application, and then once every second for **EIGHT total ticks over exactly 8 seconds** (t1,2,3,4,5,6,7,8s). Repeat Ignite from same source **refreshes** the DoT rather than adding stacked copies, as already approved. Empowered version **3× normal Ignite's full single-target damage over identical 8s / eight-tick schedule**. Exact reapplication timer restart and normal-versus-empowered potency replacement, tick formula, Mana cost and cooldown remain open.
+
+### Previously approved core conditions still apply
+
+TierIII Fire Mage: Fireball35 / Flame Ward25 / Ignite30 / Living Bomb30 / Overheat Mastery15 / Infernal Presence15, **total150 bought skill ranks**, one earned skill point/class level1..150, rank0 starters. Unlock first rank Fireball Lv1 / Overheat Mastery Lv1 / Ignite Lv3 / Flame Ward Lv5 / Living Bomb Lv8 / Infernal Presence Lv10. Other ranks' exact gating still need full audit and user approval.
+
+Overheat: max100; ordinary successfully cast Fire spell awards `10+OverheatMasteryPurchasedRank` Heat (range10..25). At100 Heat, the NEXT eligible Fire cast is uniquely empowered, consumes all100, awards zero replacement Heat. After10s with no Fire spell casting Heat falls10/sec. Passive remains separate from permanent radius15m Fire resistance aura; aura +0.5 percentage points allied Fire resistance/rank and -0.5pp hostile Fire resistance/rank, includes caster, strongest copy only.
+
+Normal Flame Ward percentage based Mana redirect and empowered extra Fire shield; empowered Ignite 3x single target; empowered Fireball ground field; empowered Living Bomb stronger first explosion+one-hop normal copied bombs. Reserve long-windup giant Fire LAZOR for future TierIV Pyromancer; not a TierIII spell. Shared Mana max `ClassBaseMana+5*INT`, regen `4+0.1*SPR` without special Fire Mage per-INT coefficient.
+
+### Next design / numerical round proposals (NOT YET USER APPROVED)
+
+1. Confirm/adjust linear Flame Ward redirection `0.30+0.35*(r-1)/24`. Propose a separate Mana-per-HP ratio curve consistent with safe TierII Math Barrier behavior, and a Fire shield capacity formula that **scales with INT and skill rank** plus lifespan. Require exact signoff.
+2. Specify raw Fireball direct attack and empowered ground damage `flat(r)+coefficient(r)*INT` with **ALL offensive flats and INT coefficients scaling with the purchased skill rank** (consistent class design intent). Determine 6 field ticks with first at1s as a candidate.
+3. Specify Living Bomb normal and empowered initial explosion formulas; the copied normal-fuse/normal-damage bombs must be free of recursive spread and duplicate-target infinite refresh loops.
+4. Specify Ignite raw eight-tick total/each tick scaling and reapplication semantics; empowered triple normal damage over identical timing.
+5. Generate mathematical gate schedules with approved first-unlock levels/rank caps; audit that every earned point at class levels1..150 has an eligible rank to purchase, no rank gates unreachable, and caps total150. Submit exact schedule for user's approval before treating it as canon. Then class starting stats, Mana costs, cooldowns, advancement quest/mentor.
+
+**Only design documentation updated; no Unity code/assets/tests/build or game implementation performed.**
