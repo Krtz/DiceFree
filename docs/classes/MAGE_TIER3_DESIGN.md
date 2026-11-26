@@ -196,3 +196,46 @@ Only the identities/roles above are LOCKED. No rank caps or 150-rank allocation 
 5. Nail down normal/empowered Fireball, Ignite and Living Bomb effects and interaction with existing DoT/Fire resistance.
 
 **Workflow:** GitHub docs updated, committed, pushed after answered round. No Unity source/assets changed.
+
+
+## Fire Mage Tier III Round 5 — 2026-11-26: USER APPROVED SIX-ABILITY ROSTER, LOW-RANK HEAT, MANA WARD, AURA STACKING, STRONGER SINGLE-TARGET BURN
+
+**These decisions supersede open questions and prior contradictory designer suggestions.**
+
+### User-approved constraints
+
+1. **Exactly FOUR active spell concepts + ONE separate Heat passive + ONE separate two-sided resistance aura** for the first TierIII Fire Mage evolution: **Fireball, Flame Ward, Ignite, Living Bomb, Overheat Mastery (working name) and Infernal Presence (working name)**. The user explicitly chooses **NO replacement for the deferred TierIV Pyromancer Fire LAZOR**. Thus SIX ability concepts total, not seven; the prior seven-ability layout was superseded when the beam moved to future TierIV. Final numerical skill-rank caps/150-point budget still pending approval.
+2. **Passive Heat generation at rank0 = 10 Heat per successfully completed eligible Fire spell cast**, scaling upward to **25 Heat per cast at the passive's maximum purchased rank**. Both endpoints are NOW USER APPROVED. Rank cap and interpolation formula remain open; a simple linear curve is a DESIGNER PROPOSAL, not a user-approved coefficient. The prior Round3 `25` figure is thus the maximum-rank endpoint, NOT a constant base.
+3. **Flame Ward evolves the Mage Math Barrier's PERCENTAGE-BASED MANA DAMAGE REDIRECTION / ABSORPTION mechanic**, adjusted/scaled for TierIII. It is NOT a fixed independent Mana pool as its basic effect. When empowered, Flame Ward also creates an **ADDITIONAL FIRE-element absorption shield**, per approved Round4. Exact percentage, per-HP Mana efficiency, duration/rank curve and extra Fire shield strength remain undecided. Follow shared elemental shield mechanics and shared global Mana capacity/regeneration formula; no Fire Mage-only Mana multiplier.
+4. **Infernal Presence resistance aura INCLUDES THE CASTER** in allied Fire resistance. **Identical same-name auras DO NOT STACK**: strongest applicable aura wins per entity/effect, including hostile vulnerability where multiple Fire Mages overlap. Approved numeric delta remains **+0.5 percentage points allied Fire resistance per aura rank** and **-0.5 percentage points enemy Fire resistance per aura rank**. Rank cap/radius/floors still open. Hostile effect never affects allied actors.
+5. **Empowered Ignite is a MUCH STRONGER SINGLE-TARGET Fire Burn/DoT**, NOT a spread to nearby units, nor an opening explosion as its defining empowerment. Exact tick damage multiplier, duration, burn refresh/stack and mitigation are open. Keep consistent with global Fire magical damage/DoT and avoid unapproved splash on empowered Ignite.
+
+### Still-user-approved Overheat mechanics
+
+- Heat meter 0..100; successful casts of an eligible Fire SPELL contribute Heat; ordinary successful spell cast gain is passive-rank-dependent, ranging **10 at rank0 to25 at passive cap**.
+- When heat reaches100, **the NEXT eligible Fire spell** receives its own empowered effect, consumes all100, and **that empowered spell contributes zero new Heat**.
+- Decay begins after **10 seconds with no successful Fire spell casting**, then falls **10 Heat/second** until zero; make fractional time accumulation safe.
+- Heat is a SECONDARY gauge alongside standard Mana; for all Mana users use globally approved `MaxMana=ClassBaseMana+5*INT` and `ManaRegenPerSecond=4+0.1*SPR`, class differences via class bases, starting INT/SPR, stat growth and equipment. No new class-specific mana coefficient.
+- Fireball direct Fire projectile evolving Ember Bolt; Flame Ward Mana redirect+bonus Fire shield when empowered; Ignite Fire single-target DoT with stronger single-target empowered burn; Living Bomb delayed Fire blast with its empowered effect still to be chosen.
+- Fire LAZOR reserved for future **Mage→Fire Mage→Pyromancer TierIV**, not TierIII; no Unity changes in this round.
+
+### Round6 proposed numerical starting point (DESIGNER ONLY, NOT USER APPROVED)
+
+For the **six approved TierIII ability concepts**, follow the existing TierIII convention of **150 purchasable skill ranks total with 1 skill point/class level1..150** as a candidate requiring explicit user approval for this class. Designer split:
+- **Fireball35**, **Flame Ward20**, **Ignite30**, **Living Bomb30**, **Overheat Mastery20**, **Infernal Presence15** = **150** total ranks.
+- A suggested **linear Heat-per-cast formula for passive purchased rank r0..20** is `HeatPerSuccessfulFireCast(r) = 10 + 15*r/20 = 10+0.75*r` (rank0=10, rank10=17.5, rank20=25). Preserve fractional Heat internally; 100 capped. Different rounding choices change empowerment frequency. No Heat from individual DoT ticks, bomb explosions or any extra beam tick.
+- Proposed aura at rank15 gives **+7.5pp allied Fire resistance and -7.5pp enemy Fire resistance** if user approves rank cap15. Aura is strongest same-name effect only, incl caster, with candidate **10m radius** (NOT approved); aura frequency/performance should use existing stat modifier architecture.
+- Suggested single-target empowered Ignite outcome **2× normal Ignite total damage over the same duration**, or **+50% duration plus +50% tick damage** as alternative. No numeric multiplier approved; the only accepted constraint is *stronger single-target Burn*, no spread.
+- Proposed Flame Ward normal baseline: reuse **shape** of Math Barrier redirect ratio and Mana efficiency (tierIII may rescale as ranks differ), and empowered extra Fire shield capacity scaling with own MaxHP or INT; not locked.
+- Living Bomb empowerment suggested larger blast radius or stronger main detonation; no approved direction.
+- Exact first-unlock levels, mathematical rank eligibility gates, INT/VIT/SPR attributes, offensive flat+INT coefficients, Mana costs and cooldowns deferred to later rounds; confirm ability cap totals before building a 150-level audit.
+
+### Follow-up questions for user
+
+1. Approve/adjust **150 skill-point total** and preliminary six rank caps `35/20/30/30/20/15`?
+2. Approve **linear Heat 10+0.75r** if passive cap20, or choose different rank scaling/rounding?
+3. Should the resistance aura be **always on** with **10m** radius, or an activated aura/range tied to class behavior?
+4. Should empowered Ignite deliver **2× its ordinary total DoT damage for unchanged duration**, or more intense/longer burn?
+5. Should empowered Living Bomb expand splash, intensify damage, or add a safe secondary effect (e.g. burning ground) without infinite chaining?
+
+**Documentation ONLY; no Unity gameplay/code/assets/build performed. Update/commit/push every answered design round.**
