@@ -487,3 +487,32 @@ Exact source `docs/CRIMSON_CRUCIBLE_2026-11-25.md` documents the already-built *
 - All mentor specifics, narrative beats, encounter difficulty, class quest item reward, exact quest flags, whether group kills count for participants, and any requirement beyond eligible Greatblade level60 remain open for user approval.
 
 **User decision to request next:** confirm Bristlebreaker specifically as objective, old orc mentor in/near Crimson Mire versus other world location, whether first two mandatory guardians are acceptable, and whether to offer a safe exit at Cell3 or use persistent objective completion plus normal abandon. **No Unity implementation authorized by this design-only discussion.**
+
+
+## Advancement quest follow-up — 2026-11-26: USER APPROVED Bristlebreaker hunt, normal abandon persistence, mentor location delegated to Codex
+
+These newest user decisions **supersede the prior open quest questions**; this is a design-document handoff, not a Unity implementation.
+
+### Confirmed quest design
+
+1. **Old Berserker mentor:** quest-giving retired Berserker, with a suggested old orc identity. The general setting is an outdoor camp near the Crimson Mire, BUT user explicitly says **"we leave that up to codex... maybe the bristleboar area north of triimery is a good area?"**. Therefore **Codex owns the exact NPC camp placement** within the existing world and its navigation/asset constraints; **Quillboar/bristleboar region north of Trimery is a favored CANDIDATE**, not a fixed coordinate, final approved location or required new area. In existing world docs the biome north of Trimery is formally called the **Quillboar region**, levels25–35. Keep the user's informal "bristleboar area" referent while using correct authored region name. No invented camp coordinates or NPC identity are approved.
+2. **Quest objective:** An eligible Greatblade TierII manifestation (ordinary TierIII advancement at level60+, subject to global lineage/quest checks) accepts the old Berserker's challenge, enters the NORMAL **Crimson Crucible**, defeats **Verdigris Globule in cell1** and **Moonfang Alpha in cell2** as required by existing sequential gates, then kills **Bristlebreaker in cell3**. **Bristlebreaker is the objective**, NOT a separate one-boss encounter or renamed optional target. **Do not require the full six-boss clear**, cells4–6 are optional for this quest; do not alter ordinary dungeon encounters/reward requirements.
+3. **Normal abandon/leave, with PERSISTENT QUEST CREDIT:** User specifically prefers **the EXISTING dungeon abandon/leave interaction** after Bristlebreaker, with the qualifying boss kill saved independently of ephemeral dungeon run state. No special exit portal/button/early treasury needed. Persist quest progress for the eligible quest owner before the dungeon resets on leave/abandon/wipe/menu exit. On re-entry the dungeon itself resets normally, while completed quest kill credit stays intact. After exiting, return to the Old Berserker to turn in the quest and unlock a **separate Lv1 Berserker TierIII class manifestation**, retaining Greatblade class save/progression and respecting zero free skill ranks and prior approved 150-rank gates.
+4. **Quest attribution and coexistence:** Only an eligible accepted/active quest should be completed by a valid Bristlebreaker kill. Prefer existing party participation/kill-credit conventions; no obligation that the player lands the last hit, but party credit specifics still need Codex to adapt/validate existing engine contracts. Ordinary dungeon final treasure, XP/gold full-clear reward, gates and cells4–6 remain intact; do not award all-six treasury on cell3 kill.
+5. **Suggested quest identity:** "Trial of Fury" remains a working title, not confirmed final NPC name/dialogue or cutscene. The story combines an experienced retired Berserker teaching controlled rage with an existing-world hunt rather than a bespoke arena. Mentor visuals/placement, exact dialogue, quest flag/save migration, marker guidance, and demonstration/balance testing are Codex implementation decisions as consistent with existing class systems.
+
+### Existing content references
+
+- `docs/CRIMSON_CRUCIBLE_2026-11-25.md`: World1 Crimson Mire arch (X80/Z149), level55 recommended, 6 bosses, cell3 **Bristlebreaker** with broad frontal slam, 5 portcullises, repeatable `StoryDungeonRun` and normal abandon reset.
+- `docs/WORLD_1.md` / `docs/QUILLBOAR_REGION_DESIGN.md`: **Quillboar region north of Trimery**, levels25–35, contains hostile tribal camps and hills, potential mentor camp staging candidate. This is a location option, NOT a final fixed quest source or required dungeon relocation.
+
+### Codex handoff acceptance criteria, not yet implemented
+
+- Teacher NPC can offer the quest only to correctly eligible player Greatblade lineage; quest appears and persists using normal quest framework.
+- Bristlebreaker kill in ordered **cell3** grants durable quest credit after cells1–2, independent of the transient instance; exiting via **normal Abandon/Leave** retains credit while resetting dungeon as usual.
+- Report to mentor upgrades/unlocks Berserker TierIII Lv1 manifestation, does NOT destroy Greatblade, and does not add phantom starter ranks. Repeat interaction cannot award duplicate unlocks.
+- Bristlebreaker quest completion does NOT prematurely award any six-boss final treasure or force cells4–6; ordinary six-cell full-clear unaffected.
+- Multiplayer party participation, save/load, abandon and menu return should be covered by relevant end-to-end tests, including quest restoration after a fresh session.
+- Actual teacher placement left to Codex; evaluate **north-of-Trimery Quillboar area** vs **Crimson Mire vicinity** in existing level layout, choose a grounded reachable camp rather than inventing premature coordinates; communicate placement in the implementation handover.
+
+**Latest approved direction is complete enough for implementation planning; Unity source/assets were NOT edited in this documentation round.**
