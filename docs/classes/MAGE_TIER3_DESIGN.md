@@ -239,3 +239,60 @@ For the **six approved TierIII ability concepts**, follow the existing TierIII c
 5. Should empowered Living Bomb expand splash, intensify damage, or add a safe secondary effect (e.g. burning ground) without infinite chaining?
 
 **Documentation ONLY; no Unity gameplay/code/assets/build performed. Update/commit/push every answered design round.**
+
+
+## Fire Mage Tier III Round 6 — 2026-11-26 USER-APPROVED 150 RANK CAPS, LINEAR HEAT, 15m AURA, IGNITE x3 AND ONE-HOP LIVING BOMB
+
+**LATEST AUTHORITATIVE USER DECISIONS:** Explicit additional notes OVERRIDE the earlier multiple-choice cap split and further ADD to Living Bomb's empowerment. Supersedes any older "proposed 35/20/30/30/20/15" rank split or generic empowered Living Bomb alternatives.
+
+### Final first-playtest 150-rank distribution USER APPROVED
+
+| Fire Mage TierIII ability | Max purchasable ranks | Type | Status |
+| --- | ---: | --- | --- |
+| Fireball | **35** | Active Fire projectile evolving Ember Bolt | User approved cap |
+| Flame Ward | **25** | Active Mana-redirection defense; empowered gains Fire-element shield | User approved cap; **+5 ranks** vs Round6 form's original selection |
+| Ignite | **30** | Active single-target Fire DoT | User approved cap |
+| Living Bomb | **30** | Active delayed Fire explosion | User approved cap |
+| Overheat Mastery | **15** | Passive for heat generation | User approved cap; **-5 ranks** vs Round6 form's original selection |
+| Infernal Presence | **15** | Permanent dual-sided Fire resistance aura | User approved cap |
+| **TOTAL** | **150** | 4 active + 1 passive + 1 aura | **USER APPROVED** |
+
+Progression follows shared TierIII precedent: **one spendable skill-rank point per Fire Mage class level1..150, zero free starter ranks**. Exact first unlock levels / rank eligibility cadence need a full 150-level gate audit in a later round; do not silently assign rank-1 points or reuse Berserker's rank gates.
+
+### Heat-per-cast final USER-APPROVED formula
+
+User approves LINEAR interpolation between rank0 **10 Heat/successful Fire cast** and max passive rank15 **25 Heat/cast**. Therefore exact formula:
+`HeatGainedOnOrdinarySuccessfulFireCast(r)=10 + r`, for integer `r=clamp(OverheatMasteryRank,0,15)`.
+
+Examples: rank0=10, rank5=15, rank10=20, rank15=25. 0..100 Heat meter. Once at100, **NEXT eligible Fire spell** is empowered, **consumes all100** and **generates NO same-cast Heat**; the cast that reaches100 is NOT retroactively empowered. No heat from separate DoT ticks, bomb explosions or extra target hit packets without a distinct valid cast. After **10s without a successful Fire cast**, lose **10 Heat/s**, smoothly/time-delta safe; preserve previous approval.
+
+### Aura latest USER APPROVAL
+
+**Infernal Presence is PERMANENT, 15 METRE RADIUS**, includes caster in ally side, applies ally **+0.5 percentage points Fire resistance per aura rank** and hostile **-0.5 percentage points Fire resistance per aura rank**. At approved cap15, this becomes ally **+7.5pp**, hostile **-7.5pp** (where all rules/eligibility permit). **Strongest same-name aura only per recipient; no stacking**. Use existing aura resistance modifiers and robust combat affiliation; do not confuse percentage points with a Fire damage multiplier. Non-Fire resistance channels unaffected. Exact resistance floor/cap handling through global system; no special arbitrary bypass approved.
+
+### Empowered Ignite latest USER APPROVAL
+
+At100 Heat, an empowered successful **Ignite** consumes100 and applies a **SINGLE-TARGET Fire Burn with exactly THREE TIMES the total damage of normal Ignite at identical skill rank and stats, over the SAME duration**. Prefer 3x tick damage at unchanged tick count/schedule, subject to shared DoT timing architecture. **No secondary targets, no spread, no altered total duration**; previous two-times and +50% duration/tick alternatives SUPERSEDED. Exact normal DoT flat+INT scaling, duration, ticks, reapplication refresh rules and Mana cost remain undecided.
+
+### Empowered Living Bomb latest USER APPROVAL
+
+User selected **"Stronger detonation damage"** and additionally insists **"make empowered living bomb spread to others within the explosion radius (but can only spread once)"**. Therefore BOTH effects are REQUIRED:
+- Primary empowered Living Bomb causes **stronger detonation damage** than its normal version (multiplier / formula still unapproved).
+- At its explosion, it **applies a propagated Living Bomb to other eligible enemies inside that explosion radius**. Use normal appropriate target/geometry/ownership rules. **Spread is ONE GENERATION ONLY**. A bomb created by the original empowered explosion may still explode as designed, but its explosion **MUST NOT spawn more Living Bombs** or allow infinite/chained recursions. Define explicit propagated-bomb marker / hop depth, owner, duration, and duplicate target rules during implementation.
+- Whether second-generation bombs have full normal detonation damage, reduced damage, inherited fuse, or detonate immediately is **NOT yet user approved**. Neither a global chain reaction nor limitless target multiplication may be inferred.
+- No award of new Overheat from triggered bomb explosions/propagation, only separate successfully cast Fire spells.
+- The blast radius itself and exact stronger explosion damage still to be chosen.
+
+### Current skill structure (unchanged)
+
+Four TierIII active skills Fireball, Flame Ward, Ignite, Living Bomb; passive Overheat Mastery; aura Infernal Presence. Fire LAZOR deferred to future **TierIV Pyromancer**, not an extra TierIII spell. Flame Ward keeps Math Barrier-style **percentage-based Mana redirection** and grants **ADDITIONAL Fire-element shield on empowerment**. Universal Mana `ClassBaseMana+5*INT`, regen `4+0.1*SPR`. No per-class Mana coefficients invented.
+
+### Proposed Round 7 priorities (NOT YET USER APPROVED)
+
+1. **Living Bomb propagated version:** copied bombs explode after the normal fuse or immediately? Damage at normal rank or reduced? Duplicate-target replacement rules?
+2. **Normal Fireball and empowered Fireball:** define single-target base hit vs splash empowerment, AoE radius and crit eligibility, then later flat+INT coefficient per rank.
+3. **Flame Ward:** adjust Math Barrier's ratio/duration/Mana-per-HP scaling to rank cap25, determine empowered extra Fire shield maxHP/INT-derived amount and duration/stack.
+4. **Ignite:** normal Fire DoT duration, tick cadence and refresh policy; empowered 3x normal over same timing.
+5. **Skill unlocks and rank gate budget:** choose initial unlock levels and devise audited level1–150 purchasing schedule for cap split 35/25/30/30/15/15.
+
+**Design documentation ONLY; no Unity files, builds, tests or game implementation changed in this round.**
