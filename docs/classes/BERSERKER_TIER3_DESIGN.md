@@ -458,3 +458,32 @@ Preserve exact approved skill caps **Wide Arc35, Spin Dash30, Rage Breaker30, An
 ## Round 14 follow-up (2026-11-26): FULL RANK-GATE SCHEDULE USER APPROVED
 
 The user explicitly approved the previously proposed, exhaustively validated 150-rank Berserker eligibility schedule. **It is now the authorized initial-playtest design, not a pending proposal.** Wide Arc ranks 1-4 first become eligible at class levels 1/2/3/4 then every 4 levels through cap35 at level128. Spin Dash cap30 begins at level3, then every 5 levels to level148. Rage Breaker cap30 begins at level6, then every 4 levels to level122. Anger Management cap25 begins at level1, then every 6 levels to level145. Coffee Shield cap30 begins at level8, then every 4 levels to level124. Exactly 150 total purchasable ranks with one class point each level 1-150; all levels pass numerical eligibility audit and no free starting ranks are granted. Any older "awaiting user approval" references to this exact schedule are superseded. [Approved exact 150-rank gate audit](BERSERKER_TIER3_RANK_GATE_AUDIT.md). Next step: design Berserker's advancement quest and mentor, which are NOT yet approved. Design-doc approval only; no Unity code changed.
+
+
+## Advancement quest design round — 2026-11-26: Old Berserker mentor + partial Crimson Crucible boss hunt
+
+**Latest USER DIRECTION:** user prefers option (1) "The Old Berserker" mentor with some of option (2) boss-combat trial. They suggest using the existing NEW RED SLIME AREA DUNGEON as the quest activity, ideally **NOT requiring all six bosses**, e.g. "kill the bristleboar". **This is an approved design DIRECTION, not explicit final approval of precise quest steps, mentor location, reward handling or quest title.**
+
+### Verified dungeon facts; use actual authored names
+
+Exact source `docs/CRIMSON_CRUCIBLE_2026-11-25.md` documents the already-built **Crimson Crucible** in **Crimson Mire**, an optional/repeatable level-55 six-boss gauntlet entered through a **red-crystal arch at World1 X80/Z149**, east of the central trail. Ordered cells:
+1. **Verdigris Globule** (slime)
+2. **Moonfang Alpha** (wolf)
+3. **Bristlebreaker** (boar-themed guardian, broad frontal slam; this is likely the user's "bristleboar" referent)
+4. **Bloomheart Thornwarden** (plant)
+5. **Stormscale Hierophant** (lizardman)
+6. **Crimson Sovereign** (red slime)
+
+**Critical world constraint:** Five sequential portcullises require each current boss to die before the next becomes reachable. The user CANNOT currently go directly to Bristlebreaker without first defeating Verdigris Globule and Moonfang Alpha. The dungeon's normal final treasury/reward happens ONLY after all six bosses. Existing abandonment/exit/wipe resets the run. Thus a Berserker quest rewarding a boss-3 defeat requires a **quest-specific persistent kill-event credit + safe interim exit/return-to-mentor UX**, NOT pretending the first two bosses can be skipped or that the normal final treasury is awarded early.
+
+### Quest concept proposed for review, not finalized
+
+- An **Old Berserker** (mentor, suggested aging orc warrior; location/name/look/unlock dialogue NOT YET DECIDED) teaches that Rage should be directed, not merely unleashed.
+- A qualified Greatblade seeking TierIII Berserker accepts a **Bristlebreaker hunt** in existing Crimson Crucible, not a separate instanced arena. Suggested quest title **"Trial of Fury"** is provisional.
+- Clear the required first two guardians and **defeat Bristlebreaker in Cell 3**. Track an explicit successful **guardian-kill event**, preferably for the quest owner's participation under existing party/kill-credit conventions, and persist quest progress immediately.
+- **No need to defeat guardian cells 4, 5, or 6** for the class quest. Player may still choose to finish the full dungeon to earn its ordinary final treasury, but quest progression must not require that.
+- Returning to mentor after qualifying kill unlocks a **new Lv1 Berserker TierIII manifestation**, preserving the Greatblade manifestation, its progression, equipment/inventory and other class state under existing advancement rules. Do not transform the current level60+ Greatblade in place or grant free rank1 to each skill.
+- **OPEN technical issue for implementation:** Once Bristlebreaker dies, how to let the player leave **without** losing quest progress or claiming inappropriate full clear rewards. Reusing the existing dungeon Abandon/exit might be acceptable ONLY if kill-credit state persists outside the transient run; otherwise add a quest-specific safe exit. Do not alter existing normal dungeon six-boss reward conditions, gate sequence or final completion.
+- All mentor specifics, narrative beats, encounter difficulty, class quest item reward, exact quest flags, whether group kills count for participants, and any requirement beyond eligible Greatblade level60 remain open for user approval.
+
+**User decision to request next:** confirm Bristlebreaker specifically as objective, old orc mentor in/near Crimson Mire versus other world location, whether first two mandatory guardians are acceptable, and whether to offer a safe exit at Cell3 or use persistent objective completion plus normal abandon. **No Unity implementation authorized by this design-only discussion.**
