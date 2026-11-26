@@ -354,3 +354,43 @@ Normal Flame Ward percentage based Mana redirect and empowered extra Fire shield
 5. Generate mathematical gate schedules with approved first-unlock levels/rank caps; audit that every earned point at class levels1..150 has an eligible rank to purchase, no rank gates unreachable, and caps total150. Submit exact schedule for user's approval before treating it as canon. Then class starting stats, Mana costs, cooldowns, advancement quest/mentor.
 
 **Only design documentation updated; no Unity code/assets/tests/build or game implementation performed.**
+
+
+## Fire Mage Tier III Round 9 — 2026-11-26 USER-APPROVED WARD CURVE, INT SHIELD, 10s EXTRA SHIELD, FIREBALL FIELD TIMING + FUTURE CLASS IDEA BANK
+
+**AUTHORITATIVE USER APPROVALS:**
+
+1. **Flame Ward rank scaling EXACT LINEAR curve now APPROVED**: for purchased Flame Ward rank `r=1..25`, `RedirectFraction(r)=0.30+0.35*(r-1)/24`. At r1 redirect30%, at r25 redirect65%, clamp r to valid ranks. Retains percentage-based damage redirection from incoming HP loss to consuming available Mana; partial Mana safely reduces only affordable prevented damage, and at zero Mana no HP prevention. This is not a direct heal or independent flat Mana absorption pool.
+2. **Mana efficiency choice:** user says **"Scale existing Math Barrier efficiency to TierIII"**, thereby approving the *rank-improving efficiency model* rather than a new constant1 Mana/HP model or unrelated curve. Actual TierII source `Assets/_DiceFree/Scripts/Progression/MageProgressionRules.cs` has `ManaPerDamage(rank)=2-0.1*rank` for Math Barrier rank1..5 (1.9 at rank1, 1.5 at rank5). **Do not directly extend `2-0.1*r` to rank25**: that becomes negative and would violate spend/absorb rules. Exact TierIII 25-rank interpolation/target efficiency is **STILL OPEN**; future designer candidate can preserve starting1.9 and endpoint1.5 across25 ranks, or choose a different endpoint with explicit user agreement. Treat the shared Math Barrier implementation as reference rather than accidental accepted TierIII numeric formula.
+3. **Empowered Flame Ward EXTRA elemental Fire shield EXACT formula USER APPROVED:** for Flame Ward purchased rank `r=1..25` and current caster `INT`, `AdditionalFireShieldCapacity = 50 + (0.5 + 0.1*r)*INT`. This **scales with both INT and purchased Ward rank**, and is an ADDITIONAL Fire shield on an empowered Flame Ward cast; normal percentage-based Mana redirection remains. Example INT500 gives rank1=350, rank10=800, rank25=1550 absorb points. Existing element-specific shield handling, mitigation ordering, target rules and stacking/refresh policy still require integration design.
+4. **Empowered Flame Ward additional Fire shield lifetime USER APPROVED: TEN (10) seconds**. This is the **ADDITIONAL Fire shield duration**, **NOT automatically the Mana-redirection parent buff duration or ability cooldown**; main Ward duration, cooldown and spend cost still need user approval.
+5. **Empowered Fireball burning ground ticking USER APPROVED:** stationary ground at impacted target, **4m radius**, **6s duration**, Fire-damage ticks at **t=1,2,3,4,5,6 seconds after the ground is created**. Six total delayed ticks; no immediate t=0 tick. Exact damage/INT coefficient, area overlap/stacking rules and normal Fireball raw magic damage remain pending.
+
+### Existing Fire Mage TierIII approved design retained
+
+- Exactly SIX abilities: active Fireball35, Flame Ward25, Ignite30, Living Bomb30; passive Overheat Mastery15; aura Infernal Presence15, caps total150, one earned class point/level1..150, all rank0 initially. First unlocks Fireball Lv1, Overheat Mastery Lv1, Ignite Lv3, Flame Ward Lv5, Living Bomb Lv8, Infernal Presence Lv10; rank2+ gate audit not yet approved.
+- Overheat ordinary successful eligible Fire cast adds `10+OverheatMasteryRank` Heat (rank0..15), cap100. At100, next eligible cast is uniquely empowered, spends all100 with NO same-cast Heat gain. 10s without Fire casts then gradual -10 Heat/sec.
+- Permanent radius15m Infernal Presence aura includes caster: +0.5 percentage points allied Fire resistance per rank and -0.5pp hostile Fire resistance per rank; strongest same-name copy only, no stacking.
+- Ignite 8s duration, ticks at t1..8, refreshes not stacks, empowered Ignite has 3x normal total DoT at same 8s single-target.
+- Living Bomb 3s fuse, 3m blast. Empowered initial explosion stronger and applies one generation of NORMAL full damage, NORMAL 3s fuse Living Bomb copies to other nearby valid targets within3m. Propagated copies never spawn further bombs.
+- Empowered Fireball leaves fixed-position ground at hit target, and does not gain an unapproved immediate splash detonation.
+- Preserve shared global Mana rules `MaxMana=ClassBaseMana+5*INT`, `ManaRegenPerSecond=4+0.1*SPR`; do not create Fire Mage-only mana multipliers.
+
+### USER REQUESTED FUTURE CLASS IDEA BANK — write down faithfully, DO NOT implement now
+
+The user says "**just a thought that i want written down**" and requests:
+- **Tier IV PYROMANCER** (future proposed Fire Mage advancement) could **COMBINE TierIII Infernal Presence aura + Overheat Mastery passive into ONE rankable skill**, to leave space for **the Fire LAZOR**, and possibly **a METEOR spell**. Exact merged mechanics, retained abilities, budget/rank schedule and Meteor are **future ideas**, not approved ready-to-build TierIV skill specification. The giant Fire LAZOR was previously explicitly deferred from TierIII; do not reinsert it in current Fire Mage.
+- **Tier III FROST MAGE** should be designed *later* as an alternative Mage evolution, leading to **Tier IV CRYOMANCER**. This is a future additional Mage branch, not part of the present **first-TierIII-per-each-parent** design sprint. Not user request to immediately design second TierIII Mage class.
+- **HIDDEN Tier IV HYDROMANCER** future secret class concept: **unlock prerequisite is having BOTH Fire Mage AND Frost Mage manifestations at LEVEL 120**. The user suggests a secret cross-element TierIV class. Whether both manifests must be on the same character, how to unlock it, special quest, progression rules, elemental abilities or class naming in runtime are NOT YET DESIGNED, and the user framed this as an idea to record rather than immediate implementation authorization. Explicit prerequisite **level120 Fire Mage + level120 Frost Mage** is the proposed unlock gating; do NOT silently alter to Pyromancer/Cryomancer levels or require either TierIV to unlock.
+
+**Do not misrepresent these future brainstorming notes as implemented abilities or as approval to interrupt the existing TierIII coverage priority.** Keep them available for future evolution-roadmap planning.
+
+### Next numerical design tasks / questions (NOT YET USER APPROVED)
+
+1. Decide the exact **Flame Ward Mana-spend ratio across r1..25** based on parent `ManaPerDamage(r)=2-0.1*r` at r1..5; designer candidate `1.9-(0.4*(r-1)/24)` to preserve parent efficiency endpoints 1.9→1.5 or alternative user-defined end efficiency. Main Ward duration and cooldown still open.
+2. Design rank-scaling flat and INT damage coefficients for **Fireball normal projectile** and **empowered burning ground per tick** (all coefficients grow with purchased skill rank).
+3. Design **Ignite** eight tick raw Fire damage `flat(r)+INTCoeff(r)*INT` and **Living Bomb** normal/empowered single detonation raw Magic Fire damage, empowered multiplier; bomb copies retain normal damage, no recursive spread.
+4. Build exact **150-level rank gate schedule** with first unlock levels and approved cap counts, computationally verify spendable rank per earned point for each class level1..150; seek user signoff.
+5. Determine TierIII base INT/VIT/SPR stats and growth, default Mana base, all active Mana costs/cooldowns/cast animations, teacher/quest unlock.
+
+**Documentation-only round. Do not edit Unity gameplay, assets or run builds without explicit authorization.**
