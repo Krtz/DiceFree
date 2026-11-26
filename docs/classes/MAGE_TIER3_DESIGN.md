@@ -792,3 +792,61 @@ For each SPELL'S OWN purchased rank `r`: Fireball `20+15*r` (rank1=35, rank35=54
 5. Fire Mage TierIII advancement quest, mentoring NPC, audiovisual theme and test plan/handover after mechanics complete.
 
 **Only docs updated. NO Unity gameplay code/assets/build/tests, no branch merge.**
+
+
+## Fire Mage Tier III Round 19 — 2026-11-26 USER APPROVES THREE MANA COST CURVES AND EXACT FIREBALL GROUND TICK; INDEPENDENT IGNITE/BOMB DAMAGE
+
+**LATEST USER DECISIONS (explicit)** to Round19: (1) offensive Mana costs `Fireball20+15r, Ignite30+15r, LivingBomb50+15r` APPROVED, (2) empowered Fireball ground tick is EXACTLY25% of its OWN Fireball rank-based raw-hit formula, (3) Ignite uses INDEPENDENT rank-scaling flat and INT coefficient calibrated to ~2x comparable Fireball hit total over eight ticks, (4) Living Bomb uses INDEPENDENT rank-scaling flat and INT coefficient calibrated to ~1.5x comparable Fireball hit per enemy. These override former proposals and resolve earlier open ground-damage numeric formula.
+
+### USER-APPROVED rank-based Mana cast costs: ALL FOUR ACTIVES NOW LOCKED
+
+| Skill | Purchased ranks | EXACT Mana cast cost | Rank1 Mana | Max-rank Mana | Empowered cast |
+| --- | --- | --- | ---: | ---: | --- |
+| **Fireball** | r1..35 | `20+15*r` | 35 | 545 | Normal cast Mana PLUS100 Heat, no Mana surcharge |
+| **Ignite** | r1..30 | `30+15*r` | 45 | 480 | Normal cast Mana PLUS100 Heat, no Mana surcharge |
+| **Living Bomb** | r1..30 | `50+15*r` | 65 | 500 | Normal cast Mana PLUS100 Heat, no Mana surcharge |
+| **Flame Ward** | r1..25 | `10+6*r` | 16 | 160 | Normal cast Mana PLUS100 Heat; its continuing Mana redirection has additional resource spend |
+
+All four casts award `10+OverheatMasteryPurchasedRank` Heat if ordinary successful Fire casts, and never grant replacement Heat on the empowered cast. A 100 Heat empowered cast still requires the usual Mana to complete, and failed casts should follow shared resource rules. Mana max/regen remains GLOBAL `ClassBaseMana+5*INT`, `4+0.1*SPR`; approved Fire Mage ClassBaseMana160, Lv1 VIT19/STR7/AGI12/INT33/SPR13, growth2/0.75/1/6/1.5. At Lv150 no gear Mana4795 and regen27.65/s. All three max-rank offensive spells together cost `545+480+500=1525 Mana`, ~31.8% of an unmodified Lv150 full pool before natural regen. Do not replace global Mana coefficients or silently omit Ward's separate damage-prevention Mana spending.
+
+### Empowered Fireball GROUND TICK RAW DAMAGE EXACTLY USER APPROVED
+
+Previously USER approved normal Fireball RAW Magical Fire direct hit (before Magical DEF, Fire resistance, buffs etc.) for its own purchased rank `r=1..35` and caster INT:
+`FireballRawHit(r,INT)=30+8*r+(0.3+0.04*r)*INT`.
+
+**Each of its six empowered burning-ground Fire ticks is EXACTLY 25% of that caster's own Fireball RAW HIT formula at the same purchased Fireball rank**:
+`GroundRawFireTick(r,INT)=0.25*FireballRawHit(r,INT) = 7.5+2*r+(0.075+0.01*r)*INT`.
+
+- At r1, tick raw `9.5+0.085*INT`; at r35, `77.5+0.425*INT`. Both flat raw damage and INT coefficient grow with purchased Fireball rank as required.
+- After empowered normal projectile hits an enemy, it creates **fixed world-position 4m radius ground Fire hazard** directly under the impacted target. Ground lasts6s; pulses t=1,2,3,4,5,6sec, no t0 packet. Ground raw total across six ticks for one victim remaining in area = `1.5*FireballRawHit`, on top of the original direct Fireball hit. Each pulse is its own Magical Fire damage packet passed through standard target Magical DEF/Fire resistance/etc.; don't derive each actual post-mitigation tick from post-mitigation initial projectile hit, since independent enemy resistances/area targets exist. Whether multiple own ground patches overlap/stack remains open. No new immediate AoE explosion.
+- Empowered Fireball consumes100 Heat and its ordinary Mana cost `20+15r`; ground ticks grant no extra Heat.
+
+### Ignite and Living Bomb have INDEPENDENT rank coefficients (USER APPROVED POLICY, NOT YET NUMERIC COEFFICIENTS)
+
+- **Ignite**, its OWN purchased `r=1..30`, must use its own formula `IgniteRawFireTick(r,INT)=FlatIgnite(r)+CoefficientIgnite(r)*INT`; BOTH flat and INT coefficient MUST increase with purchased Ignite rank. Normal Ignite has exactly8 independent ticks at elapsed t=1..8 seconds after successful application, `NormalTotalRawIgnite=8*IgniteRawFireTick` before each tick's mitigation. Relative first-playtest target total ≈2x a comparable progression Fireball *direct hit*, not 2x Fireball at equal numeric rank when rank caps differ, and do not link runtime Ignite to Fireball rank or investment. Empowered Ignite exact3x **its own** normal total, same8sec eight ticks on single target, no propagation; self-reapplication refreshes not stacks. Exact `FlatIgnite`, `CoefficientIgnite`, refresh priority and ticker restart remain OPEN.
+- **Living Bomb**, its OWN purchased `r=1..30`, must use independent `LivingBombRawExplosion(r,INT)=FlatBomb(r)+CoefficientBomb(r)*INT`; both parts increase with purchased Bomb rank. Target normal explosion raw≈1.5x a comparable progression Fireball direct hit per enemy within3m, **NOT** hard-linked to Fireball's purchased rank or runtime formula. Fuse3sec after application; original empowered detonation EXACT2x its own NORMAL explosion raw, and then copies NORMAL full damage with their own normal3sec fuse onto other valid enemies within3m. Copies do not spread, and neither explosions nor propagation generate Heat. Exact `FlatBomb`, `CoefficientBomb`, reapplication/duplicate marker policy and damage snapshot timing remain OPEN.
+
+### Designer-only example formulas to inspect in next round (NOT USER-APPROVED)
+
+Choose independent **linear per-rank** raw damage to match the existing Fireball rank1 and max-rank endpoints at similar *normalized skill investment*, without any runtime dependency on Fireball rank:
+- Ignite tick candidate (r1..30): `9.5 + (68/29)*(r-1) + [0.085 + (0.34/29)*(r-1)]*INT`. At Ignite r1 total8 ticks = `76+0.68*INT` (exactly2x Fireball r1), at Ignite r30 total = `620+3.4*INT` (exactly2x Fireball r35); interpolate own rank independently in between. Empowered ticks each3x these normal ticks.
+- Living Bomb initial NORMAL explosion candidate (r1..30): `57 + (408/29)*(r-1) + [0.51 + (2.04/29)*(r-1)]*INT`. At Bomb r1 `57+0.51*INT` (exactly1.5x Fireball r1), Bomb r30 `465+2.55*INT` (exactly1.5x Fireball r35), with independent rank growth. Empowered original twice this; spawned secondaries are normal.
+- They are **mathematical DESIGNER SUGGESTIONS only**, not approved exact damage coefficients. A simpler rounded formulation might be preferred over fractional increments, but changing endpoints should require user signoff. Any status comparison must align starting vs fully purchased skill progression, not assume rank30 equals rank35.
+
+### Existing Fire Mage approvals preserved
+
+- Six skill caps exact35 Fireball /25 Ward /30 Ignite /30 Bomb /15 Overheat Mastery /15 Infernal Presence, total150 purchased rank points from Fire Mage Lv1..150, initial rank0. **Exact six-skill 150-gate table** already listed in Round16 was USER APPROVED Round18, do not regenerate. First unlock Lv1 Fireball, Lv5 Ward, Lv3 Ignite, Lv8 Bomb, Lv1 Overheat, Lv10 aura.
+- CDs: Fireball14→7s linear r1..35, Ignite14→10s r1..30, Bomb22→15s r1..30, Ward28→20s r1..25. Casts Fireball0.2s, Ignite instant, Bomb0.2s, Ward instant self only.
+- Ward main time4→10s, redirect percent30→65%, Mana/HP prevented1.9→1.3, all linear r1..25. Empowered extra TRUE Fire elemental shield capacity `50+(0.5+0.1r)*INT` duration10s, ordinary eligible damage absorbed with global0.8 Fire matched/1.2 others consumption, extra shield first, Mana Ward second, HP last.
+- Heat0..100, ordinary cast Heat `10+passiveRank`, next eligible Fire spell at100 empowered spends100 then gains zero replacement Heat, idle10s then decay10/s. Aura15m permanent allies incl self +0.5pp Fire resist/rank, enemies -0.5pp Fire resist/rank, overlapping identical strongest-only.
+- Future TierIV Pyromancer could combine aura+Heat passive, toggle Ward, Fire LAZOR, maybe Meteor; later Frost Mage→Cryomancer and hidden Hydromancer after both TierIII Fire Mage+Frost Mage reach120, idea bank only.
+
+### Next design questions (PENDING USER APPROVAL)
+
+1. Approve/simplify independent Ignite tick and Living Bomb initial raw explosion example coefficients above, while preserving rank-linear flat+INT coefficients and relative 2x/1.5x balance endpoints.
+2. Decide Ignite refreshed normal vs empowered precedence and timer reset, multi-caster stack rules.
+3. Decide Living Bomb duplicate/recast and snapshot rules; suppress recursive one-hop secondary copies.
+4. Decide empowered Fireball overlapping ground field interaction with itself and other Fire Mages.
+5. Plan Fire Mage TierIII class advancement quest / teacher after spell mechanics and rank gates fully specified.
+
+**Documentation-only; NO Unity gameplay source/assets/build/testing, no class implementation or merge.**
