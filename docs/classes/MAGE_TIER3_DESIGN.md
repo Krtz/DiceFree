@@ -394,3 +394,34 @@ The user says "**just a thought that i want written down**" and requests:
 5. Determine TierIII base INT/VIT/SPR stats and growth, default Mana base, all active Mana costs/cooldowns/cast animations, teacher/quest unlock.
 
 **Documentation-only round. Do not edit Unity gameplay, assets or run builds without explicit authorization.**
+
+
+## Fire Mage Tier III Round 10 — 2026-11-26: USER DIRECTION ON WARD EFFICIENCY AND TIMING, BOMB DOUBLE DAMAGE, OFFENSIVE RANK SCALING
+
+**LATEST USER ANSWERS** to Round10 are authoritative, but several answers leave exact curves and the intended meaning of "7 sec" open. Do NOT infer explicit signoff on numeric values not actually approved.
+
+1. **Flame Ward Mana efficiency improves MORE than the parent Mage**: user says "i think we should improve it a bit from the parent mage, maybe like **1.3 at rank 25**?" This is the user-selected first-test **target of 1.3 Mana per 1 HP damage prevented at Flame Ward purchased rank25**, phrased tentatively ("maybe"). Retain improving efficiency through rank1..25, modeled on parent Math Barrier. Parent verified formula `2-0.1*r` with 5-rank range r1=1.9, r5=1.5. **DESIGNER PROPOSAL, NOT YET FULL FORMULA SIGNOFF:** reuse same starting efficiency 1.9 at r1 then smoothly interpolate to suggested 1.3 at r25 as `ManaPerPreventedHP(r)=1.9-0.6*(r-1)/24`; this is safe, always positive and more efficient than the parent max1.5. Future review should confirm both the 1.9 start and exact interpolation, as well as the 1.3 endpoint if not yet final. In all cases partial Mana must absorb only an affordable fraction, and zero Mana cannot absorb HP.
+2. **Flame Ward's primary Mana-redirect ward duration scales with purchased rank and reaches 10 seconds at MAX rank25**, and Flame Ward **cooldown =20 seconds** (user: "10 second at max rank with 20 sec cd sounds good"). **Ward main duration at rank1 and interpolation not specified**, so no flat10s at all ranks. Previously empowered EXTRA Fire-element shield separately has approved **10-second duration** and `50+(0.5+0.1*r)*INT` capacity. Do NOT conflate main duration with extra shield duration.
+3. **Fireball is a fairly repeatable but not overly fast offensive spell** (user responds "yes, but not too quick, like maybe 7 sec at max rank?" to a question describing a "relatively quick, repeatable spell with short cast time"). **AMBIGUOUS whether 7 sec refers to cooldown or CAST TIME.** The contextual first-test assumption to offer is **7-second COOLDOWN at max Fireball rank35**, with its windup/cast-time separate and unapproved, since a 7-second cast would conflict with repeatable main spell and 10-second Overheat activity grace; DO NOT mark 7s cooldown as definitively approved until user confirms. Neither cast time nor cooldown lower-rank behavior is defined.
+4. **Empowered Living Bomb detonation damage multiplier APPROVED = 2× the NORMAL explosion damage of the original empowered bomb** at the same rank and caster. Upon original detonation, propagate normal Living Bomb effects to other valid enemies inside3m radius, copies inherit normal full damage, normal3s fuse and have **ZERO further propagation hops**. Empowered explosion multiplier applies ONLY to original empowered explosion; propagated copies NEVER inherit it. No Heat from explosions, only separately successful Fire casts. Exact normal base+INT damage function still OPEN.
+5. **Every damaging Fire Mage spell/packet's FLAT RAW DAMAGE and INT SCALING COEFFICIENT should BOTH grow with its OWN purchased skill rank**, including Fireball primary impact + empowered burning ground ticks, Ignite ticks, and Living Bomb normal/explosive hit. This follows user answer "yes" to Round10 question. Do not make damage scale with rank only through one side or use unranked static INT coefficient. User approved principle, not any particular coefficient numbers.
+
+### Current locked anchors, for reference
+
+- Fire Mage TierIII six abilities caps **Fireball35, Flame Ward25, Ignite30, Living Bomb30, Overheat Mastery15, Infernal Presence15** =150 bought ranks, rank0 starter, one point/level1..150; first unlocks Fireball1, Overheat Mastery1, Ignite3, Flame Ward5, Living Bomb8, Infernal Presence10. Exact later rank eligibility gates still unapproved.
+- Flame Ward normal redirect ratio `0.30+0.35*(r-1)/24` rank1..25 approved. Empowered EXTRA Fire-element shield capacity `50+(0.5+0.1*r)*INT`, 10sec lifetime, stacks with Mana redirection. Main Ward now duration max10s and CD20s user-selected; rank curve open.
+- Overheat 0..100, ordinary successfully completed eligible Fire cast awards `10+OverheatMasteryRank` Heat (0..15 ranks); at100 next eligible Fire spell empowered consumes100 and generates none on that cast; after10s without eligible casts decays10 Heat/sec. Extra TierIV Pyromancer / Frost Mage→Cryomancer / hidden Hydromancer at BOTH Mage evolutions Lv120 remain future ideas only.
+- Empowered Ignite =3x ordinary eight-tick single-target Fire DoT over8sec, tick times1..8sec; same-source recasts refresh not stack.
+- Empowered Fireball leaves 4m-radius fixed-position burning ground under impacted target,6sec duration, tick1..6sec, separate from base Fireball projectile damage.
+- Living Bomb normal3sec fuse and3m blast; empowered original2x normal damage, one-hop spread to NORMAL copies.
+- Infernal Presence permanent15m radius ally Fire resist +0.5pp/rank, enemy Fire resist -0.5pp/rank, includes caster, strongest identical aura wins; Fire LAZOR reserved TierIV Pyromancer.
+
+### Proposed Round11 actions/questions (NOT USER APPROVED YET)
+
+1. Confirm whether **Fireball's "7 seconds at max rank" means cooldown rather than cast/windup**. Propose Fireball rank35 cooldown7s while cast time around1.0–1.5s, separately approved.
+2. Confirm exact **Flame Ward Mana efficiency curve** rank1=1.9 to rank25=1.3 linear, or supply alternate rank1 start/curve.
+3. Choose **Flame Ward MAIN duration** at rank1 and intermediate rank scale, ending at approved10s at rank25 (e.g. rank1=4s, rank25=10s, linear); cooldown20s.
+4. Design complete initial raw spell formula values `flatBase+flatPerRank*(r-1)+(intBase+intPerRank*(r-1))*INT` for Fireball impact, ground tick, Ignite tick, Living Bomb original and normal copies, empowered multiplier, crit defaults and Mana costs; ask for numerical approval.
+5. Generate full mathematical 150-rank gate schedule and audit with user signoff, consistent with first unlocks and rank caps. Do not silently implement source changes.
+
+**Docs-only. No Unity gameplay files/assets/build/test changed.**
