@@ -405,3 +405,32 @@ At **max rank**, before other effects: Wide Arc `148+5.2S`; Spin Dash `95+3.52S`
 **Implementation guidance, still subject to damage-system audit:** Resolve Basic Auto damage using the game's GLOBAL selected-main-stat 1×STR policy; physical autos remain distinct from skill damage. Ensure all skill ranks update both the flat and stat-derived terms. Apply Anger Management's weapon effect and smooth missing-HP damage to basic/skill RAW damage precisely once, including all affected targets of Wide Arc/Spin Dash; do not accidentally apply a damage bonus again to a packet after mitigation. Rage Breaker **guaranteed-hit** bypasses accuracy RNG on valid in-range enemies; it **still** must resolve target validity, path/range constraints and hit/absorb. Rage Breaker's **4-second haste (+2% attack speed per Rage Breaker rank)** activates upon successful attack resolution, including an enemy shield-absorbed hit, which is compatible with guaranteed-hit unless the target vanishes/is invalid. Keep cost **30 Rage** and earlier approved behavior.
 
 **Open questions for Round 13:** user approval/adjustment of these three FLAT and STR scaling proposals, attack/skill coefficient interaction with two-handed axe/sword equipped weapon base, accuracy/crit eligibility for Wide Arc & Spin Dash, and 150-point rank eligibility gates. No changes to five-skill roster, 100 Rage cap, or Coffee Shield 5%→35% rules. No Unity code/asset/test was modified by Round12 documentation.
+
+
+## Round 13 — 2026-11-26 (USER APPROVED three offensive formulas, equipment interaction and crit eligibility)
+
+**LATEST USER APPROVED, superseding the Round12 "designer proposals only" label for exactly these three formulas and rules.** Treat as locked **initial playtest targets**, not evidence that the Unity Berserker has been implemented or numerically playtested.
+
+### Approved physical raw damage per hit before defense / buffs
+
+Let `r` be the purchased rank of the INDIVIDUAL offensive skill, and `S` be the caster's resolved STR. For all skills, both FLAT damage and STR coefficient grow with rank.
+
+| Berserker skill | Approved rank range | **APPROVED** raw Physical damage per valid enemy hit | At skill rank cap | Can crit? |
+| --- | ---: | --- | --- | --- |
+| **Wide Arc** | 1..35 | `12 + 4×(r−1) + [1.8 + 0.10×(r−1)]×S` | `148 + 5.2×S` | **NO, never crit** |
+| **Spin Dash** | 1..30 | `8 + 3×(r−1) + [1.2 + 0.08×(r−1)]×S` | `95 + 3.52×S` | **NO, never crit** |
+| **Rage Breaker** | 1..30 | `25 + 8×(r−1) + [2.5 + 0.16×(r−1)]×S` | `257 + 7.14×S` | **YES, normal global crit chance/multiplier** |
+
+**Rage Breaker remains GUARANTEED HIT** against valid targets, but guaranteed accuracy is **not a guaranteed critical hit**. The crit roll on Rage Breaker is ordinary game-wide critical hit determination and can succeed or fail, independent of the guaranteed-hit property. Keep valid target, range, collision/geometry and shield absorption rules. Upon a successful hit, including an enemy shield-absorbed hit, grant the preapproved **+2% attack speed per purchased Rage Breaker rank for 4 seconds**; repeated buff applications refresh rather than stack. Cost remains 30 Rage.
+
+**Wide Arc and Spin Dash cannot critically hit even if the attacker has significant critical strike chance from AGI, gear, items or auras.** This is a class-skill-specific prohibition, not a nerf to Berserker basic attacks or a global crit rule. Both still use their ordinary hit/accuracy and damage/defense interactions unless explicitly overridden later. Wide Arc costs 10 Rage, Spin Dash generates 2 Rage per unique enemy hit per activation up to20.
+
+**Weapon interaction confirmed:** keep the standalone skill raw formulas above based on FLAT + rank-scaled STR, as the Greatblade parent skills do. Apply eligible two-handed axe/sword equipment/item bonuses through the EXISTING shared equipment/combat system, not by adding a second weapon base term inside each skill formula. The global BASIC attack still uses the ordinary physical **weapon/base damage + 1×STR** rule. Anger Management's general two-handed weapon damage passive and smooth missing-HP damage bonus (all basics and damaging skills, up to +40% at rank25 and 1% HP) must each be applied in the correct pipeline **once**, without double-dipping.
+
+**Balance note:** first-test coefficients are approved, but damage/DPS and high-HP encounters still require runtime simulation and balance validation before final release.
+
+### Next design: 150-rank eligibility audit, NOT YET USER APPROVED
+
+Preserve exact approved skill caps **Wide Arc35, Spin Dash30, Rage Breaker30, Anger Management25, Coffee Shield30** = 150 ranks with one point per Berserker class level 1..150. Preserve FIRST-unlock levels **Wide Arc1 / Anger Management1 / Spin Dash3 / Rage Breaker6 / Coffee Shield8**. Choose rank-2+ level gates that collectively allow **at least L eligible purchases by every class level L from 1..150**, with all 150 ranks eligible by level150 and each skill cap reachable, while preserving the user's previous preference for a staggered unlock progression. Verify numerically with a small eligibility validator before requesting approval.
+
+**Status:** Round13 user decisions documented; no Unity source/asset/build/test change in this design-doc commit.
