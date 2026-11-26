@@ -266,3 +266,39 @@ The user selected the presented first-test proposal of **5 Rage per 10% of an en
 - Round 9 should settle boss-safe Rage generation and incoming damage/shield interactions, staggered first-unlock levels, and Anger Management retention/rank gain numbers before full gate audit/advancement quest.
 
 **STATUS:** Design docs updated and committed/pushed for this round; no gameplay files or save data touched.
+
+
+## Round 9 — 2026-11-26 (USER-APPROVED attack-event Rage, Spin Dash gain, Wide Arc cost, shielded hits, low-decay endpoint, staggered unlock levels)
+
+This is the LATEST Berserker resource/first-unlock design. It overrides the older suggestions in Round 8 wherever they differ. **Design documentation only; not implemented or verified in Unity.**
+
+### Round 9 approved decisions
+
+1. **BASIC ATTACK RAGE GENERATION:** Successful eligible normal/basic attacks award the fixed, rank-scaled amount **`1 + ceil(0.1 × AngerManagementRank)` Rage**. This is the user's exact expression, "attacks generate 1 + (anger management rank x 0.1 rounded up)"; the fixed amount does NOT divide outgoing damage by enemy maximum HP, addressing the boss-scaling starvation concern. At passive rank **0: 1 Rage**; ranks **1–10: 2 Rage**; ranks **11–20: 3 Rage**; ranks **21–25: 4 Rage** per successful basic attack. Make the rounding rule explicit; apply only to actual eligible **successful BASIC/AUTO ATTACK events**, not to every skill damage packet, damage-over-time tick, or every target of an AoE. If a basic is fully shield-absorbed, the general hit/absorb policy still needs explicit agreement before implementation; do not infer a free on-miss gain. **No additional outgoing percent-target-HP Rage bonus was approved**; any optional contribution remains an open *proposal*.
+2. **SPIN DASH RAGE GENERATION:** **+2 Rage per enemy hit**, with an absolute **20 Rage maximum from ONE Spin Dash use**. Count enemies hit as unique eligible enemies per activation unless the user decides that repeat contacts should award additional Rage; proposed deduplication is a protective implementation detail, not a user-approved new mechanic. No Rage cost for Spin Dash was specified. Prevent the same enemy from farming infinite Rage from repeated collider events; no Rage on pure movement without hit.
+3. **WIDE ARC COST:** **10 Rage to activate Wide Arc.** This overrides any implication from earlier Greatblade Momentum-based resource handling that Wide Arc is free or grants Rage. Wide Arc stays the sweeping melee ability. Whether rank changes cost or Wide Arc on-hit grants extra Rage is not approved; current fixed-cost reading is **10 Rage per accepted cast**.
+4. **COFFEE SHIELD ABSORBED DAMAGE GENERATES RAGE AT THE SAME RATE AS HEALTH DAMAGE RECEIVED.** The user explicitly rejects reduced-rate gain. Use the existing Round8 **10 Rage per 10% of BERSERKER maximum HP received**, equivalent to **1 Rage per 1% of Berserker MaxHP**, for both **actual incoming HP damage AND damage absorbed by the user's Coffee Shield** (with no double-counting of the same damage packet). For a packet partially shielded and partially applied to HP, count the **sum of absorbed shield damage and applied HP damage ONCE** against Berserker MaxHP. Exact damage event eligibility, prevented vs shield absorbed, caps/rounding and whether other shields count are still open. This is an **incoming** resource rule and is independent of the new fixed basic-attack generation. Rage remains max100.
+5. **OUT-OF-COMBAT RAGE DECAY:** Starts at **5 Rage per second at Anger Management rank0** and reaches **0.1 Rage/sec (1 Rage per 10 seconds) at Anger Management rank25**. The user's chosen endpoints supersede earlier proposals to end at 1 Rage/sec or zero decay. Exact intermediate step progression vs linear coefficient, accumulator precision and combat-state transitions remain open. Do not round 0.1/sec to 0 in integer-only resource ticks; preserve fractional accumulation or periodic drain.
+6. **STAGGERED FIRST UNLOCK LEVELS APPROVED:** **Wide Arc at class level1, Anger Management at level1, Spin Dash at level3, Rage Breaker at level6, Coffee Shield at level8.** This is the set user accepted via "sure". Exact rank 2+ purchasing gates remain to be authored/audited; they must support the already approved **150 points total** and five caps **Wide Arc35 / Spin Dash30 / Rage Breaker30 / Anger Management25 / Coffee Shield30** with one skill point available per class level1..150. A level1 character needs at least one legal purchase among Wide Arc and Anger Management.
+
+### Five-skill Rage economy summary (latest approved)
+
+| Skill | First unlock class level | Cap | Resource action |
+| --- | ---: | ---: | --- |
+| **Wide Arc** | **1** | 35 | **Spends 10 Rage** on use |
+| **Spin Dash** | **3** | 30 | **Generates 2 Rage per enemy hit, capped at 20 per activation** |
+| **Rage Breaker** | **6** | 30 | **Spends fixed 30 Rage**; after successfully hitting an enemy, including a shield-absorbed hit, grants +2% attack speed per purchased rank for 4s, refresh/nonstack |
+| **Anger Management** | **1** | 25 | Passive gives basic attacks **1+ceil(0.1r)** Rage; scales missing-HP damage and general 2H axe/sword damage; reduces OOC Rage decay from 5 to 0.1/sec by rank25 |
+| **Coffee Shield** | **8** | 30 | **Spends 25 Rage**, self-only Coffee-element shield 5s, 15s cooldown, capacity linearly 5%→35% MaxHP across ranks1..30; shield-absorbed incoming damage builds Rage at SAME rate as HP damage |
+
+**Global class traits unchanged:** max Rage100; Berserker favors 2H axes but can equip eligible 2H swords, no axe-exclusive mastery damage; Tier IV, not Tier III, may convert unused Coffee Shield capacity to healing on natural expiration. Missing-HP damage scales smoothly up to +40% at 1% HP at max Anger Management rank25. No Frenzy, separate Great Weapon Master, duplicate Rage finisher or Battle Cry.
+
+### Open points for Round 10, NOT yet approved
+
+- Is **every successful basic attack**, including a fully shield-absorbed basic hit, eligible for the 1+ceil(0.1r) Rage? Are environmental props/dummies/immortal summons valid combat targets?
+- How does Rage gain from incoming damage apply to enemy shields other than Coffee Shield, if any; establish anti-exploit protection, fractional Rage behavior and per-hit/per-second caps.
+- Exact Anger Management rank progression for out-of-combat **5→0.1 Rage/sec**; earlier design suggested selected-rank retention milestones while user's endpoint could use a smooth rank-based curve.
+- Rank-scaled full damage and flat/STR coefficients for Wide Arc, Spin Dash and Rage Breaker; Rage Breaker success trigger and Coffee Shield cap rules already broadly defined, skill rank gates and starting attributes/advancement quest still open.
+- Check that **level1 Wide Arc cost 10 Rage** and **Anger Management availability** provide reasonable initial Rage accumulation, and that 30-Rage Rage Breaker does not starve on bosses.
+
+**Workflow:** User requires relevant design docs be committed and pushed after every answered question round. No Unity source/gameplay implementation is claimed by this update.
