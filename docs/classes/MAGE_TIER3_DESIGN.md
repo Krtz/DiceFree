@@ -156,3 +156,43 @@ Only the identities/roles above are LOCKED. No rank caps or 150-rank allocation 
 5. **Incineration Beam:** do all enemies intersected by the line take full damage (geometry-blocked) and what empowered version does? Suggest longer-range/wider vs larger flat/INT hit, not approved.
 
 **IMPLEMENTATION STATUS:** Documentation-only design round; no Unity files, assets, tests, or implementation changed. User requires documentation update, commit and push after every answered design round.
+
+
+## Fire Mage Tier III Round 4 — 2026-11-26: USER CORRECTIONS OVERRIDE FORM SELECTIONS
+
+**LATEST USER DECISIONS ARE AUTHORITATIVE.** The separately typed "Additional notes" explicitly override the multiple-choice selection where they differ. This update supersedes the previous Round3 roster and laser placement where affected. This is DESIGN DOCUMENTATION ONLY, not Unity implementation.
+
+### User-approved mechanics
+
+1. **Heat generation through passive:** Heat per completed Fire spell cast begins **LOWER than 25** and rises to **25 Heat per successful Fire cast AT MAXIMUM PURCHASED PASSIVE RANK**. The user chose "Lower initial Heat rising to 25 at maximum passive rank." Exact starting Heat at passive rank0 or rank1, the rank cap and interpolation remain **UNDECIDED**; do NOT assume 25 per cast at every passive rank, 25 at rank1, or an already-approved linear curve. At full100 Heat next eligible spell consumes all100 and does not refill its own Heat, as approved Round3. No DoT/bomb proc tick should be counted as a separate cast without a later explicit design decision.
+2. **Heat decay OVERRIDE:** user explicitly corrects form selection to "**begin after 10 sec losing 10 heat/sec**". Therefore inactivity wait is **10s**, NOT 5s. Once threshold passes, decrease heat **10/sec** continuously (fractional per-frame permitted, clamp at 0). Exact reset semantics on ordinary/empowered casts or combat/scene state remain for implementation design.
+3. **Aura approved numeric rate:** EACH purchased aura rank gives **+0.5 percentage points Fire resistance to eligible allies** and **-0.5 percentage points Fire resistance to eligible enemies**. This is resistance percentage-point shift, NOT 0.5% damage bonus; ally protection and hostile vulnerability coexist as separate directions. Exact maximum aura ranks, radius, caster inclusion, overlapping same-name auras/stacking and resistance floors remain open.
+4. **Flame Ward OVERRIDE:** preserve TierII Math Barrier's **Mana-based incoming damage absorption / damage redirection**, rather than replacing the protection with a plain separate Fire-only absorption shield. When **EMPOWERED by spending 100 Heat**, Flame Ward **ADDITIONALLY grants a Fire-element shield**. User's direct note "retain mana-based damage absorption, empowered version adds a fire shield also" supersedes the form option and earlier proposed empowered explosion on break/expiration. Exact inheritance of Math Barrier's level-specific ratios, Mana efficiency/duration/rank scaling and size/duration/element interaction of the additional Fire shield are open.
+5. **Fire LAZOR / Pyromancer TierIV OVERRIDE:** the user explicitly changes mind: **Fire LAZOR is REMOVED from the TierIII Fire Mage roster**, deferred as an envisioned signature spell of **TierIV Pyromancer**. User proposes/chooses **Pyromancer** as the TierIV Fire Mage evolution name, with TierIV ability design intentionally deferred until after first-coverage TierIII paths are complete. The previously chosen long-windup, single enormous Fire beam shape is preserved as **future TierIV idea**, not an authorized TierIII active or implementation feature. The form's "broad heavy AoE beam / empowered burning ground" would pertain to the now-DEFERRED beam, **not** to TierIII. No TierIII fire laser exists after this decision.
+
+### Current TierIII Fire Mage spell roster after laser deferral
+
+| Kind | Working name | User-authorized theme | Mechanics awaiting numerical details |
+| --- | --- | --- | --- |
+| Active | Fireball | Ember Bolt evolution, direct Fire projectile | Damage, cast timing, cooldown, distinct empowered effect |
+| Active | Flame Ward | Math Barrier evolution, **retains Mana-based protection** | Redirect ratio/efficiency, duration, cooldown; **empowered adds Fire-element shield**, not explosion |
+| Active | Ignite | Fire DoT | Duration/tick/refresh and distinct empowered effect |
+| Active | Living Bomb | Delayed Fire explosion | Fuse, AoE, refresh/explosion and distinct empowered effect |
+| Passive | Overheat Mastery | Controls Heat gain per successful Fire cast, growing to **25 at max passive rank** | Rank cap and early-rank Heat formula; decay-related ranks if any |
+| Aura | Infernal Presence | **+0.5pp allied Fire resistance, -0.5pp hostile Fire resistance per rank** | Radius, rank cap, caster inclusion, strongest aura stack policy |
+
+**TierIII presently has FOUR approved active themes + ONE passive + ONE aura = SIX ability themes.** Previous "5 actives +1 passive +1 aura" is now HISTORICAL, not a mandate to invent a substitute skill. **Next explicit user decision:** either keep exactly four actives or add a fifth distinct TierIII active skill (e.g. Fire Nova area blast, Flame Step mobility, Cinderstorm area hazard, or another user-chosen ability). This also affects eventual 150-rank point budget and exact gates; no final 150 split is approved.
+
+**TierIV future reservation:** **Pyromancer (Mage→Fire Mage→Pyromancer)** with a gigantic Fire LAZOR, whose long windup and one enormous beam were discussed, but the complete TierIV kit, name finalization in runtime, resources and advancement timing remain future design, not current implementation authorization.
+
+**Still approved:** Fire Mage TierIII burst magical DPS, global Mana plus Overheat, 100 Heat max, successful Fire cast Heat event, spell-specific empowerment, full Heat consumption with no same-cast refill, slow inactivity decay, all Fire-themed, distinct Heat passive and resistance aura; shared game-wide max Mana `ClassBaseMana+5*INT` and regeneration `4+0.1*SPR`. No TierIV design work until coverage goal is met.
+
+### Next question round (not answered)
+
+1. Do we keep FOUR TierIII active spells, or add one more to replace deferred Fire LAZOR? Candidate fifth spells: Fire Nova AoE explosion, Flame Step short-range movement with fire trail, or Cinderstorm persistent burning ground. User chooses.
+2. How low is starting Heat per cast at passive rank0 or first purchased rank; what passive rank cap yields 25?
+3. Is Fire Ward's Mana redirect formula unchanged from Mage Math Barrier (with rank scaling adjusted for TierIII), and what is the empowered additional Fire shield's duration/capacity?
+4. What maximum aura rank and radius; include caster, and strongest-only aura stacking versus additive?
+5. Nail down normal/empowered Fireball, Ignite and Living Bomb effects and interaction with existing DoT/Fire resistance.
+
+**Workflow:** GitHub docs updated, committed, pushed after answered round. No Unity source/assets changed.
