@@ -434,3 +434,22 @@ Let `r` be the purchased rank of the INDIVIDUAL offensive skill, and `S` be the 
 Preserve exact approved skill caps **Wide Arc35, Spin Dash30, Rage Breaker30, Anger Management25, Coffee Shield30** = 150 ranks with one point per Berserker class level 1..150. Preserve FIRST-unlock levels **Wide Arc1 / Anger Management1 / Spin Dash3 / Rage Breaker6 / Coffee Shield8**. Choose rank-2+ level gates that collectively allow **at least L eligible purchases by every class level L from 1..150**, with all 150 ranks eligible by level150 and each skill cap reachable, while preserving the user's previous preference for a staggered unlock progression. Verify numerically with a small eligibility validator before requesting approval.
 
 **Status:** Round13 user decisions documented; no Unity source/asset/build/test change in this design-doc commit.
+
+
+## Round 14 — 2026-11-26: CRIT SOURCE CORRECTION + math-audited 150-rank gate proposal
+
+**USER CLARIFIED (APPROVED): Berserker has NO built-in crit chance.** The class, its baseline and Anger Management must not grant intrinsic critical chance. Rage Breaker can crit using the shared critical-hit rules **only when crit chance is supplied from gear or another external source**; its guaranteed HIT remains separate from its possible critical-roll. Wide Arc and Spin Dash **never crit**, even with gear or external buffs; Berserker's basic attacks follow global basic-attack crit rules without a Berserker-specific chance bonus. Do not assume this statement disables normal externally sourced crit chance.
+
+**Next task user requested:** proceed to design the 150-rank level gates. Designed a proposed skill-specific schedule, then **exhaustively audited all 150 levels** for spendability. **THIS GATE SCHEDULE IS A DESIGNER PROPOSAL, NOT YET USER-APPROVED.** The user's earlier approved FIRST unlocks and rank caps are preserved.
+
+| Ability | Approved cap | Approved first unlock | Proposed rank-gate cadence | Proposed last rank gate |
+| --- | ---: | ---: | --- | ---: |
+| Wide Arc | 35 | 1 | First four ranks at class 1/2/3/4, then rank5 at8 and every4 levels | 128 |
+| Spin Dash | 30 | 3 | Every5 class levels | 148 |
+| Rage Breaker | 30 | 6 | Every4 class levels | 122 |
+| Anger Management | 25 | 1 | Every6 class levels | 145 |
+| Coffee Shield | 30 | 8 | Every4 class levels | 124 |
+
+**Audit result:** 150/150 rank gates, **0 failing class levels** from 1..150, minimum `availableRanks(L)−L` is **0** at level150, maximum surplus16. All ranks have unlocked by class level148, so the level149–150 points remain spendable. One-point-per-level purchase stays possible, and no starter ranks are free.
+
+**Complete exact gate lists, rank formulas and sampled audit counts:** [BERSERKER_TIER3_RANK_GATE_AUDIT.md](BERSERKER_TIER3_RANK_GATE_AUDIT.md). Ask user to approve/adjust before implementation. No Unity game files changed; documentation only.
