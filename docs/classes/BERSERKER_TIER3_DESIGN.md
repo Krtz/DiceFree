@@ -340,3 +340,43 @@ At Berserker level150, without gear/passive stat bonuses, **STR=32+149×6=926** 
 - Retain previously approved Wide Arc10 Rage, SpinDash+2 per unique enemy to20, RageBreaker30 Rage/+2% AS per rank for4s on successful hit, CoffeeShield25 Rage/5s/15s linear5%→35%MaxHP, and maximum Rage100.
 
 **Workflow:** after every question round, commit and push relevant design docs; no Unity code altered during this Round10 docs update.
+
+
+## Round 11 — 2026-11-26 (USER-APPROVED Berserker starting attributes, growth and GLOBAL 15 HP/VIT)
+
+**This is the AUTHORITATIVE Round 11 correction. The Round 10 suggested VIT22/STR32/AGI13/INT7/SPR7 and proposed gains 2.8/6/1.3/0.7/0.7 are superseded.**
+
+### USER-APPROVED Berserker Tier III base/growth (VIT, STR, AGI, INT, SPR)
+
+User says: "**move 3 agi into vit, and move 2 points from int into str**" in starting stats, and "**move 0.2 int into vit and 0.1 agi into spi**" in per-level growth.
+
+| Attribute | Greatblade Tier II source, Lv1 | Berserker Tier III **APPROVED Lv1** | Greatblade current per level | Berserker Tier III **APPROVED growth/level** |
+| --- | ---: | ---: | ---: | ---: |
+| VIT | 14 | **25** | +2.0 | **+3.0** |
+| STR | 18 | **34** | +3.0 | **+6.0** |
+| AGI | 9 | **10** | +1.0 | **+1.2** |
+| INT | 5 | **5** | +0.5 | **+0.5** |
+| SPR | 5 | **7** | +0.5 | **+0.8** |
+| **Sum** | **51** | **81** | **+7.0** | **+11.5** |
+
+Approved no-gear class-level 150 illustrative unrounded attributes: **VIT = 25 + 149×3 = 472**, **STR = 34 + 149×6 = 928**, **AGI = 10 +149×1.2 = 188.8**, **INT=5+149×0.5=79.5**, **SPR=7+149×0.8=126.2**. Determine engine rounding/display rules from shared implementation, do not invent one. Tier III Berserker is a separate class manifestation with its own class Lv1 stats and growth, NOT Greatblade Lv60's accumulated stats stacked atop these.
+
+### Global player-class vitality policy: USER APPROVED
+
+**1 VIT = +15 MAX HP globally for ALL player classes.** No unique Berserker HP-per-VIT multiplier, and no class-specific 20 HP/VIT or other coefficient for later classes. Base HP, items, temporary buffs and special cases (e.g. summoned clones with intentionally altered HP computations) should be evaluated separately, but must not be used as excuses to diverge player-class VIT scaling. Existing Unity `CombatTuning.hpPerVitality` defaults to **15**, and `ActorDefinition.hpPerVitality` also defaults to **15**, but code supports class overrides through `overrideVitalityHp` and additive modifiers. **Implementation follow-up:** audit all player class assets/active overrides and runtime modifiers for actual uniform VIT-to-HP contribution before claiming global runtime compliance. Approval is a *design rule*, not a confirmation that every runtime class currently follows it.
+
+At Lv1 Berserker, attribute-contributed max HP = 25×15 = **375**, PLUS the shared/base HP component, equipment and buffs. At Lv150, VIT-contributed max HP = 472×15 = **7,080**, PLUS base HP/gear/buffs. Do not approve a Berserker-specific base HP or regen multiplier by implication.
+
+### Existing Berserker identity preserved
+
+The established 150 rank skill allocation **Wide Arc35 / Spin Dash30 / Rage Breaker30 / Anger Management25 / Coffee Shield30**, 100 Rage cap, fixed basic-hit Rage `1+ceil(0.1×AngerManagementRank)`, unique Spin Dash target Rage gain, Wide Arc10 Rage cost, Rage Breaker30 Rage cost and post-hit haste, Coffee Shield25 Rage/5s/15s and linear rank-based MaxHP absorption remain as documented in Rounds 1–10. Class stats do not implicitly change those coefficients or add axe-only damage bonuses.
+
+### Next design work, NOT YET APPROVED
+
+- Decide basic attack raw damage structure for Berserker (generally Physical, two-handed weapon eligibility, and class primary STR coefficient consistent with current global basic-attack standard), and rank-scaling flat+STR coefficients for Wide Arc, Spin Dash and Rage Breaker; confirm no unexpected double-application of Anger Management weapon bonus.
+- Decide Anger Management exact per-rank STR/weapon or all-damage contribution, missing-HP +40% bonus distribution, and whether passive effects begin only when rank1 is purchased.
+- Create/validate all **150 skill-rank level eligibility gates** while preserving approved first-unlocks Wide Arc1, Anger Management1, Spin Dash3, Rage Breaker6, Coffee Shield8, and spendability each class level 1..150.
+- Design advancement quest/mentor and origin/transformation model; identify if HP and Rage regeneration need further class-specific decisions.
+- **Validate global 15 HP per VIT** across playable class assets when Unity implementation is later authorized.
+
+**No gameplay implementation or runtime testing is claimed by this design-only approval.**

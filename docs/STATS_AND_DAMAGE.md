@@ -1606,3 +1606,10 @@ User also states **at least +5 maximum Mana per INT** under **one shared Mana fo
 ## 2026-11-25 — Round 9 Mana finalization for first playtest
 
 **User-approved global formulas** for **ALL Mana-using classes**: `MaxMana = ClassBaseMana + 5×INT`, `ManaRegenPerSecond = 4 + 0.1×SPR`. These replace prior proposals with unspecified global regeneration parameters or class-specific Mana attribute coefficients. Other class-defined starting/base Mana, attribute profiles and item stats still differentiate classes; global values may change after testing. Do not assume the current class assets have already been migrated. Implement/test together with Marksman and Ranger basic-attack coefficient correction, ensuring existing Mana classes remain viable. See [shared combat rules](COMBAT.md) and [Marksman Round 9](classes/MARKSMAN_TIER3_DESIGN.md).
+
+
+## 2026-11-26 — Global +15 MaxHP per VIT: USER APPROVED across all playable classes
+
+**Authoritative universal player-class progression rule: each point of VIT contributes exactly +15 MAX HP for every playable class.** This is a SHARED HP-per-VIT coefficient, **not per-class configurable balance**. Apply to base VIT, growth-derived VIT and eligible VIT bonuses according to shared stat-resolution rules; class base HP, item-granted flat HP, temporary effects and special summoned-unit mechanics are separate. Unity `CombatTuning.hpPerVitality` and `ActorDefinition.hpPerVitality` default to 15, but `overrideVitalityHp` and `VitalityModifier.hpPerVitalityAdd` allow deviations: **audit playable class assets and modifiers in the implementation round** rather than claiming all live class paths already meet the new policy. The user explicitly adopted this during Berserker Round11; see [Berserker Tier III design](classes/BERSERKER_TIER3_DESIGN.md).
+
+**Berserker TierIII APPROVED Lv1:** VIT25 STR34 AGI10 INT5 SPR7; **growth/level:** +3/+6/+1.2/+0.5/+0.8. Lv1 VIT contributes 375 MaxHP plus separate base components, and Lv150 VIT472 contributes 7,080 MaxHP plus separate components, before equipment. Exact Berserker-specific baseHP remains OPEN. This is a design decision, NOT a gameplay implementation confirmation.
