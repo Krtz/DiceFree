@@ -975,3 +975,42 @@ Choose independent **linear per-rank** raw damage to match the existing Fireball
 5. Decide how best to convey no innate spell crit but potential future equipment-granted spell crit, without implementing equipment exceptions yet.
 
 **DESIGN DOCS ONLY. No Unity gameplay/source/assets/build/test changes, no branch merge.**
+
+
+## Fire Mage Tier III Round 23 — 2026-11-26 USER REVISES LOCATION TO WORLD2 VOLCANO; SOLO 5-MIN FIRE-DODGE ESCAPE MAZE
+
+**LATEST USER ANSWERS, AUTHORITATIVE, including free-text overrides:** Original form option said "Trimery, near a forge/training area" but user explicitly adds "**1. at the volcano in world 2**". Thus NEW Fire-specialist NPC must be located at the **World 2 volcano**, **NOT Trimery**. The user explicitly replaces the generic "fire-control trial with hazards, targets and final challenge" with "**it should be a fire dodging maze escaperoom thingy. like, a very short 'run kitty run' or 'pyramid escape' or something simiilar from wc3. you walk from point A to point B avoiding fire and walking on a path avoiding stepping in lava and stuff.**" Preserve this specific traversal/survival identity, NOT a standard DPS boss arena, gathering quest, puzzles requiring shooting targets, or conventional kill objective.
+
+### USER-APPROVED advancement quest identity / encounter
+
+1. **Mentor**: a BRAND NEW Fire-specialist NPC, experienced controlled-fire **pyromancer** who teaches TierII Mage → TierIII Fire Mage advancement. Do not reuse TierII Brewer/Mage mentor or make mentor a smith/researcher by default. **Position NPC at a volcano in World 2**. Name, precise dialogue, appearance, exact coordinate/settlement location, and quest-specific background NOT YET user-decided.
+2. **World 2 volcano placement**: Existing grounded World2 World geography includes **Ember Crown**, the large volcanic cone in the southeast of World2's Ashfall Reach, according to `docs/WORLD_TWO_FULL_FACE_2026-11-24.md`; Basalt Needle is the other landmark, not the volcano. **Designer placement candidate: Ember Crown volcano or its accessible foot/rim**, NOT a user-approved exact coordinate. Confirm NPC accessible route without changing World2 structure. A separate unplanned World2 volcano should NOT be created from this request; use existing volcanic landmark unless user chooses otherwise. World2 access currently via southern Ironpine pass after Ancient Road Dragon quest (see `docs/ARBORIUM_WORLD_CONNECTIONS.md`), so Fire Mage advancement Lv60+ may depend on World2 story access; ensure progression gating does not unintentionally render required TierIII advancement impossible or require retroactive bypasses, and discuss whether this is intended.
+3. **Quest format:** SOLO instance, not open-world cooperative completion, and no mandatory multiplayer party. Designed to take **approximately FIVE minutes**. Eligibility: prior approved at least Mage TierII Lv60 to advance to TierIII Fire Mage Lv1; quest award requires successfully reaching goal/returning to mentor under existing advancement system.
+4. **Challenge/gameplay:** a **VERY SHORT fire-dodging maze/escape-room obstacle course**, inspired in FEEL by WarcraftIII custom minigames **Run Kitty Run / Pyramid Escape**. Player travels **from Point A (entrance) to Point B (exit)**, managing movement along navigable SAFE ground while **avoiding fire bursts, travelling or timed flame obstacles, lava patches or lava gaps, and stepping off safe path**. The terrain route is clear enough to read at speed; safe ground visibly distinguished from hazardous lava and active fire, with timing/pattern recognition and movement control central. Actual hazard patterns, checkpoint/failure/HP consequences, reset mechanism, movement speed modification, shortcuts and exact level layout remain TO DESIGN. Do NOT invent a boss kill, multiple-room combat, mandatory target shooting, or elaborate item collection as required winning objectives: the user specifically wants a short MOVEMENT/SURVIVAL maze.
+5. **Outcome:** If successfully navigating route A→B, complete the trial toward Fire Mage advancement under normal quest turn-in/manifestation requirements; honor new Fire Mage TierIII stat/skills/level1 model. User has not specified whether exit automatically advances class or requires talking to the mentor, and whether death fails/resets checkpoint or requires restarting; leave open.
+6. **Environment theme:** existing World2 volcanic/lava environment is the chosen venue. Use recognizable fire telegraphs and safe lanes, avoid instant undodgeable random damage; simple execution appropriate for approximately five minutes and nontechnical players. This is designer advice pending specific choices, not a new numerical mechanic approved by user.
+
+### Existing World2 source context inspected for this round
+
+- `docs/WORLD_TWO_FULL_FACE_2026-11-24.md` says the Ember Crown is a large volcanic cone in the **southeast**, whose rim is terrain-connected by talus apron.
+- `docs/ARBORIUM_WORLD_CONNECTIONS.md` says World2's initial region is Ashfall Reach, and World2 is entered via **southern Ironpine pass** after Ancient Road Dragon story quest.
+- `docs/WORLD_TWO_FRONTIER_2026-11-23.md` documents Ember Crown/Basalt Needle as existing landmark pair; World2 is not a blank map. This quest must not assume a new World2 zone is already created for it.
+
+### Proposed next Round24 decisions (NOT APPROVED)
+
+1. NPC **precise placement** at Ember Crown: safe rim access vs lower base/camp near lava vs furnace-shrine in volcanic slope, and NPC name/visual.
+2. Maze **hazard failure model**: touching a flame/lava returns player to last checkpoint vs full reset vs heavy damage; how far checkpoints apart?
+3. **Movement rules:** WASD/mouse movement with existing player control; whether skills, teleport, healing, invulnerability, dash or movement buffs are restricted to protect intended dodge difficulty.
+4. **Maze format:** single continuous marked trail vs two or three short sections with different flame timing patterns, total ~5min.
+5. Quest completion: reach finish then auto exit/advance or speak with pyromancer after exit; replayability/retry rules.
+
+### All previously approved combat rules RETAINED
+
+- Lv1 Fire Mage stat VIT19 STR7 AGI12 INT33 SPR13; per-level VIT+2 STR+0.75 AGI+1 INT+6 SPR+1.5, baseMana160; universal maxMana=160+5INT, regen4+0.1SPR.
+- Six purchased skill caps Fireball35, Ward25, Ignite30, Bomb30, Overheat Mastery15, Infernal Presence15; 150 rank point budget, exact rank gate table user approved Round18, rank0 initial.
+- Fireball/ Ignite/ Bomb/Ward approved Mana formulas `20+15r`, `30+15r`, `50+15r`, `10+6r` (Ward also consumes Mana per prevented HP). Cooldowns all linear rank-dependent14→7/14→10/22→15/28→20; casts0.2s/instant/0.2s/instant.
+- Fireball raw Magical Fire `30+8r+(0.3+0.04r)INT`, empowered ground4m six ticks each exactly25% initial raw, fully snapshots offensive bonuses, independently overlapping. Ignite own independent raw tick `9.5+68*(r-1)/29+[0.085+0.34*(r-1)/29]INT`,8sec8 ticks, empowered3x, one per caster/target keeps stronger actual snapshot tick potency on recast, separate caster ignites coexist. Bomb own independent snapshot raw3m AoE detonation `57+408*(r-1)/29+[0.51+2.04*(r-1)/29]INT`,3sec fuse, empowered original2x and one-hop full NORMAL secondary AoE3m bombs, independent stacking, ALL bombs on attached dead target explode immediately independently at death location. No innate Fire Mage ability crits; potential external late-game spell-crit items FUTURE only.
+- Flame Ward timed self-only Mana redirection with rank-dependent percent and efficiency and empowered separate Fire elemental shield global rules; Heat gauge ordinary cast gain10+OverheatMastery rank and100-spend empowered next cast; 15m Fire resistance Infernal Presence aura strongest matching aura only.
+- TierIV Pyromancer Fire LAZOR/toggle Ward/possible Meteor/merged passive+aura, later Frost Mage→Cryomancer and hidden Hydromancer at both Fire and Frost Mage Lv120 all FUTURE IDEA BANK, not current implementation.
+
+**DESIGN DOCS ONLY. Do not modify Unity code or scenes/assets, run builds or merge.**
