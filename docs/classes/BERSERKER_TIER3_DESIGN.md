@@ -553,3 +553,28 @@ Let `r` be purchased Anger Management rank in 0..25 and `h=clamp(CurrentHP/MaxHP
 - **User decisions needed:** confirm damage rank curve and +0.5% 2H bonus/rank, additive vs multiplicative stacking, proposed cooldown values and cooldown start/invalid/interrupt behavior, and whether to treat working "Bloodied Fury" solely as a descriptive passive sub-effect or rename it.
 
 **No Unity code modified, built, or tested in this design discussion.**
+
+
+## Combat tuning approval follow-up — 2026-11-26: Anger Management damage APPROVED, longer cooldowns pending
+
+**LATEST USER APPROVAL:**
+1. **Anger Management weapon bonus** at rank `r` in 0..25: `W = 0.005*r` = **+0.5% eligible two-handed axe/sword Physical damage per rank**, max +12.5% at rank25. Applies to ordinary Berserker basic physical attacks and its three damaging physical active abilities while wielding a valid two-handed axe OR sword, equally. No innate crit chance, no axe-only advantage.
+2. **Anger Management missing-HP damage bonus:** `B = 0.40*(r/25)*clamp((1-h)/0.99,0,1)` where `h = clamp(CurrentHP/MaxHP,0,1)`. Smooth linear rank scaling and missing-HP scaling; max **+40% at 1% HP and rank25**; zero bonus at full health or zero passive rank. Applies to basics and all damaging Berserker skills. "Bloodied Fury" is a WORKING effect description within Anger Management, NOT a separate sixth skill or independently rankable ability.
+3. **MULTIPLICATIVE stacking approved:** `FinalAngerManagementMultiplier = (1+W)*(1+B)` when both applicable. With rank25, HP1%, eligible 2H weapon this yields `1.125*1.40 = 1.575` **(+57.5% combined damage)**, not additive +52.5%. Apply each component only once in ordinary outgoing raw-damage pipeline without re-adding weapon base, repeated hitboxes, or post-mitigation double-dipping. The exact damage-resolution HP sampling point remains an implementation detail to confirm with existing combat behavior.
+
+**USER REJECTED THE SHORTER NEW COOLDOWN SUGGESTIONS AS FINAL:** response was "Prefer longer cooldowns, discuss specifics". No new cooldown numbers were approved by that reply; do not mark new candidate values as accepted. The previously approved Coffee Shield 15-second cooldown remains the existing baseline **until explicitly changed**.
+
+**APPROVED COOLDOWN START TIMING:** cooldown starts **AFTER the relevant skill cast/attack finishes** rather than upon cast acceptance or initiation. For instantaneous/quick activation, trigger after actual activation completion; for attacks, after the ability finishes resolving, not merely on click. For Coffee Shield this means after *activation animation/cast finishes*, **NOT after its full 5-second shield duration expires**. A rejected cast should not start cooldown; interruption/resource-refund policy should follow shared game rules and be examined separately.
+
+### NEXT ROUND DESIGNER-ONLY LONGER COOLDOWN PROPOSAL (NOT USER APPROVED)
+
+| Active skill | Previous Round proposal | New suggested longer cooldown | Rage |
+| --- | ---: | ---: | --- |
+| Wide Arc | 5 seconds | **7 seconds** | Cost10 |
+| Spin Dash | 10 seconds | **14 seconds** | Gain2/unique enemy hit, max20/cast |
+| Rage Breaker | 8 seconds | **12 seconds** | Cost30; on successful hit grants rank-scaled 4s attack-speed buff |
+| Coffee Shield | **15 seconds (ALREADY APPROVED baseline)** | **20 seconds (PROPOSAL to replace old baseline)** | Cost25; 5s shield duration |
+
+Anger Management passive has no activation cooldown. Suggested 7/14/12/20 are deliberately longer than 5/10/8/15; **none of these new values should be implemented without user signoff**. Overall pacing and actual Rage economy / cooldown utilization still require playtesting.
+
+**NEXT QUESTION TO USER:** approve/adjust each of WideArc7, SpinDash14, RageBreaker12, CoffeeShield20. The established 15s Coffee Shield stays authoritative until explicit replacement. Documentation only; no Unity gameplay changes.
