@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DiceFree/Scenes/CrimsonCrucible.unity
     guid: 603623f6a84a2b54486743910da45bf2
+  - enabled: 1
+    path: Assets/_DiceFree/Scenes/EmberCrownTrial.unity
+    guid: 1ea74e0792a16394ab48546cebb1274c
   m_configObjects: {}

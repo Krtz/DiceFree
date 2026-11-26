@@ -58,6 +58,9 @@ MonoBehaviour:
   - classId: class.berserker
     tier: 3
     preview: {fileID: 3793898878836468614, guid: 1cec81676ba228544aa7ad5058786d11, type: 3}
+  - classId: class.fire-mage
+    tier: 3
+    preview: {fileID: 6878818015539491462, guid: 74f146e975b311548816ff467e1b8b5f, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}

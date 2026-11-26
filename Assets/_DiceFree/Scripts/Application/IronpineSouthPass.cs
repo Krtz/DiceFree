@@ -144,7 +144,7 @@ namespace DiceFree.ApplicationFlow
             }
 
             // Return spells, resurrection and manifestation changes can relocate the hero directly.
-            if (exit != null)
+            if (exit != null && player.GetComponent<RunLoadoutLock>()?.InsideDungeon != true)
             {
                 var position = player.transform.position;
                 if (!DestinationBounds.Contains(new Vector2(position.x, position.z)))

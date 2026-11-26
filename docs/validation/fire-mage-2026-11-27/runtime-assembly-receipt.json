@@ -1,0 +1,52 @@
+[
+  {
+    "assembly": "DiceFree.AI.Runtime.dll",
+    "sha256": "D49C7FA5A7C34DD5D8D7629B9A7F1CF2E65D8BE9C5732F7FE36701BECD82C37A",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Application.Runtime.dll",
+    "sha256": "D7154AFBF4BAC7C07943F7518C3EF2D730B93E90AB8D6BD5A486CCABA60409C5",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Foundation.Runtime.dll",
+    "sha256": "C4A8F4BF988CE5FB2E2E1F469DB49FBECD333A1A6D0A7BEE83AE6253A12F5E8E",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Gameplay.Runtime.dll",
+    "sha256": "F78DBB0718F747A74D737F48D8CA1C025E5D2398BEBACA06134D851E2DDC6A02",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Input.Runtime.dll",
+    "sha256": "48077E36C5CEA1AEA3FDCC9761681434946214B06496097976E75C803A25BD83",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Items.Runtime.dll",
+    "sha256": "8C31C1D8F28080A79DAF2F8E71DF8D888540872116087F857A54C7CB8E631A6C",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Persistence.Runtime.dll",
+    "sha256": "021098BB5FFA977D4301144B634F9D90F66EBDEE1AC61B5C6D8293E847613D0D",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.Quests.Runtime.dll",
+    "sha256": "6F6FCE28F35DF013CAED89FCAC7356232F4AAB3513F4B7A67E27E426F69D2559",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.UI.Runtime.dll",
+    "sha256": "E97FC19355E11CF58448087D62E62DA6441A90FD23E2677F3F2ADC56A11652F9",
+    "combatAndDeliveryIdentical": true
+  },
+  {
+    "assembly": "DiceFree.World.Runtime.dll",
+    "sha256": "9B3A5EE65DAF2F30CBD47CDC4AF5999330BAC78E3C740888DF066E5861DE7EF7",
+    "combatAndDeliveryIdentical": true
+  }
+]

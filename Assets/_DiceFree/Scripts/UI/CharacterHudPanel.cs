@@ -81,7 +81,8 @@ namespace DiceFree.UI
             float slotWidth = Mathf.Clamp(inner.width * 0.135f, 28f, 46f);
             var priest = player.GetComponent<PriestSkillCaster>();
             bool showGrace = priest != null && priest.GraceMaximum > 0;
-            int barCount = showGrace ? 3 : 2;
+            bool showHeat = resources?.Has(FireMageCaster.HeatId)==true;
+            int barCount = showGrace || showHeat ? 3 : 2;
             float contentBottom = inner.yMax - (barHeight + gap) * barCount;
             float portraitX = inner.x + slotWidth + gap;
             float portraitWidth = Mathf.Max(40, inner.width - (slotWidth + gap) * 2);
@@ -161,6 +162,12 @@ namespace DiceFree.UI
                 Color gold = priest.GraceArmed ? new Color(1f, .77f, .20f) : new Color(.70f, .49f, .12f);
                 string label = priest.GraceArmed ? "Grace armed" : $"Grace {priest.Grace:0} / {priest.GraceMaximum:0}";
                 DrawBar(graceRect, priest.Grace / priest.GraceMaximum, gold, label);
+            }
+            if(showHeat)
+            {
+                float current=resources.Current(FireMageCaster.HeatId);
+                var heatRect=new Rect(inner.x,resourceRect.yMax+gap,inner.width,barHeight);
+                DrawBar(heatRect,current/100,new Color(1,.28f,.025f),current>=100?"Heat 100 — empowered spell ready":$"Heat {current:0} / 100");
             }
 
             if (!string.IsNullOrWhiteSpace(hoveredTooltip))

@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 namespace DiceFree.Combat
 {
     public interface IAuraGroundSurface { bool TryGetHeight(Vector3 position,out float height); }
-    public enum GroundAuraStyle { Mana, Elements, Defender, Speed, Frost, Radiation, Ranged, Coffee }
+    public enum GroundAuraStyle { Mana, Elements, Defender, Speed, Frost, Radiation, Ranged, Coffee, Infernal }
 
     // Presentation only. The ability owns eligibility, duration, range and stacking.
     [DefaultExecutionOrder(650)]
@@ -61,6 +61,7 @@ namespace DiceFree.Combat
                 GroundAuraStyle.Frost => (new Color(.22f,.76f,1), new Color(.87f,.98f,1)),
                 GroundAuraStyle.Ranged => (new Color(.35f,.85f,.45f),new Color(1,.85f,.35f)),
                 GroundAuraStyle.Coffee => (new Color(.86f,.43f,.12f),new Color(1,.84f,.48f)),
+                GroundAuraStyle.Infernal => (new Color(1,.20f,.025f),new Color(1,.78f,.13f)),
                 _ => (new Color(.28f,1,.10f), new Color(.80f,1,.29f))
             };
             material.SetColor("_TintA", colors.Item1); material.SetColor("_TintB", colors.Item2);

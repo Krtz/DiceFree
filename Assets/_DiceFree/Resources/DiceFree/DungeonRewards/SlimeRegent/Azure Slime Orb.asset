@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 76bbd7e9f1543e9449f89b01377aa29c, type: 3}
   slot: 7
   handsRequired: 1
+  greatWeaponFamily: 0
   itemLevel: 50
   rarityId: rarity.uncommon
   sourceId: boss.slime-regent
@@ -36,6 +37,7 @@ MonoBehaviour:
   - class.acolyte
   - class.psionic-knight
   - class.mirage-mage
+  - class.fire-mage
   flavor: 
   stats:
     attributes:
@@ -51,3 +53,5 @@ MonoBehaviour:
     regeneration: 0
     basicAttackMaximumBonus: 6
     basicAttackFlatBonus: 0
+    criticalChancePercent: 0
+    criticalDamageMultiplier: 0

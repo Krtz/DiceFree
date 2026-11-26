@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b5277923ab6b8474cbb9eef75505dc30, type: 3}
   slot: 6
   handsRequired: 1
+  greatWeaponFamily: 0
   itemLevel: 20
   rarityId: rarity.uncommon
   sourceId: dungeon.ironpine.wolf-survival
@@ -32,6 +33,7 @@ MonoBehaviour:
   - class.magically-touched-novice
   - class.mage
   - class.mirage-mage
+  - class.fire-mage
   flavor: "Starfall Wand \u2014 recovered from the moonlit clearing."
   stats:
     attributes:
@@ -47,3 +49,5 @@ MonoBehaviour:
     regeneration: 0
     basicAttackMaximumBonus: 0
     basicAttackFlatBonus: 3
+    criticalChancePercent: 0
+    criticalDamageMultiplier: 0

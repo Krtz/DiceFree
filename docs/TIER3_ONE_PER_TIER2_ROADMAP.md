@@ -1,5 +1,7 @@
 # DiceFree — Tier III coverage roadmap: at least one evolution per Tier II class
 
+> **Implementation update — 2026-11-27:** Mage → Fire Mage is playable with all six skills, Heat, the Ember Crown mentor and solo Ember Walk trial. There is now implemented Tier III coverage for Psion, Ranger, Greatblade and Mage. See [Fire Mage delivery](FIRE_MAGE_IMPLEMENTATION_2026-11-27.md).
+
 > **Implementation update — 2026-11-26:** Greatblade → Berserker now has a playable Tier III implementation, mentor trial, approved Orc Warrior art and 815 automated checks. Ranger → Marksman was already implemented. See [Berserker delivery](BERSERKER_IMPLEMENTATION_2026-11-26.md); the design history below remains unchanged.
 
 **Implementation checkpoint — 2026-11-26:** Marksman is implemented and verified with its six-settlement advancement, library model, all 150 ranks, shared Mana normalization and Ranger basic correction. See [implementation and evidence](MARKSMAN_IMPLEMENTATION_2026-11-25.md). Earlier design-only status below is historical; Berserker remains the next separate class project.

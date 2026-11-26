@@ -129,13 +129,20 @@ Shader "DiceFree/Ground Aura Sigil"
                     detail+=Stroke(min(Segment(q,float2(.40,-.11),float2(.58,0)),Segment(q,float2(.40,.11),float2(.58,0))),.020);
                     primary+=Stroke(r-.35,.014)+Stroke(r-.66,.012)*(.7+.3*sin(a*8+t));
                 }
-                else // Coffee: amber bean seal and warm rising steam.
+                else if(_Style<7.5) // Coffee: amber bean seal and warm rising steam.
                 {
                     float2 q=Rotate(p,.45);
                     primary+=Stroke(length(q*float2(1.5,1))-.34,.021);
                     detail+=Stroke(q.x+.045*sin(q.y*12),.018)*(1-smoothstep(.25,.30,abs(q.y)));
                     primary+=Stroke(Polygon(Rotate(p,t*.07),8,.62),.014);
                     detail+=Stroke(abs(p.x)-(.14+.025*sin(p.y*15-t)),.012)*smoothstep(.35,.39,p.y)*(1-smoothstep(.58,.65,p.y));
+                }
+                else // Infernal Presence: eight tongues of flame around an ember sun.
+                {
+                    float wave=sin(a*8-t*1.3);
+                    primary+=Stroke(r-(.48+.08*wave),.025);
+                    detail+=Stroke(r-.23,.023)+Stroke(Polygon(Rotate(p,-t*.07),8,.68),.014);
+                    primary+=smoothstep(.25,.65,r)*(1-smoothstep(.70,.80,r))*pow(saturate(wave),5)*.6;
                 }
                 float alpha=saturate((primary+detail)*_Opacity*breath)*(1-smoothstep(.94,1,r));
                 clip(alpha-.008);

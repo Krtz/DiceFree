@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: The Ember Walk
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.fire-mage.ember-walk
+  title: The Ember Walk
+  category: 0
+  requiredClassId: class.mage
+  requiredLevel: 60
+  version: 1
+  offer: A flame rewards attention, not haste. Walk the marked stone trail through my Ember Walk and reach the far beacon alive. Amber tiles warn before fire erupts; molten ground is never safe. Your spells will be sealed, but walking and healing potions remain yours. If you fall, you may try again from the entrance. Return to me when you reach the beacon.
+  activeDialogue: Follow the pale path. Watch the rhythm of the fire. You need no spell to understand it. Spent potions stay spent, even when the trial lets you begin again.
+  turnInDialogue: You listened to the fire without letting it command you. Now carry that patience into every spell you cast.
+  locationHint: Maelis Cinderweave's safe training camp at the base of Ember Crown, southeast Ashfall Reach, World 2.
+  turnInHint: Return to Maelis Cinderweave at Ember Crown's base camp.
+  stages:
+  - kind: 7
+    objectiveId: ember-walk-exit
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Reach the far beacon alive in the solo Ember Walk; return to Maelis
+    contentId: trial.fire-mage.ember-walk
+    dungeonBossOnly: 0
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0

@@ -46,6 +46,7 @@ namespace DiceFree.Combat
   }
   public float CooldownRemaining(Kind kind)=>readyAt.TryGetValue(kind,out float t)?Mathf.Max(0,t-Time.time):0;
   public bool CanPrepare(Kind kind){
+   if(GetComponent<RunLoadoutLock>()?.AbilitiesBlocked==true)return Fail("Class abilities are sealed during this trial.");
    if(!skills.ActiveForCurrentClass||!actor.CanAct||tuning==null)return Fail("Mage skills are not available.");
    if(MageProgressionRules.For(kind).passive||skills.Rank(kind)==0)return Fail("Learn this spell first.");
    if(CooldownRemaining(kind)>0)return Fail("Spell is cooling down.");

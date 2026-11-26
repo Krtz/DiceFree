@@ -6,6 +6,7 @@ namespace DiceFree.Foundation
     {
         public bool Locked { get; set; }
         public bool InsideDungeon { get; set; }
+        public bool AbilitiesBlocked { get; set; }
         public Object Owner { get; set; }
         public System.Func<bool> DeathReturnHandler { get; set; }
     }

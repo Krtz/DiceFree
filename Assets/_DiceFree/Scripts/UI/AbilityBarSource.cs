@@ -135,6 +135,8 @@ namespace DiceFree.UI
             activationFeedback="";
             activationFeedbackUntil=0;
             if(slot<0||slot>=SlotCount||stats?.Definition==null||targeting==null)return false;
+            if(slot<9&&GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.AbilitiesBlocked==true)
+                return RejectActivation("Only walking and consumables are available during this trial.");
             if(slot<9)
             {
                 int index=AbilityIndex(slot);var view=View(slot);

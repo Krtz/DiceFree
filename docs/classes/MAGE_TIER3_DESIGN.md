@@ -1,5 +1,7 @@
 # Mage Tier III — First Coverage Evolution: Design Round 1 (2026-11-26)
 
+> **Implementation checkpoint — 2026-11-27:** The final Fire Mage design through Round 27 is implemented and validated. See [implementation and evidence](../FIRE_MAGE_IMPLEMENTATION_2026-11-27.md). Earlier interview status and open questions below are historical; later approved rounds supersede them.
+
 **STATUS: INTERVIEW OPEN. No Mage Tier III subclass identity, name, skill roster, mechanics, numbers, trainer or implementation has been user approved in this round.**
 
 ## Strategic scope (USER APPROVED PREVIOUSLY)

@@ -327,7 +327,7 @@ namespace DiceFree.Combat
                 { raw = entry.fraction; break; }
             foreach (var value in resistanceModifiers.Values)
                 if (value.elementId == element.stableId) raw += value.delta;
-            return raw + DiceFree.Skills.DefenderSkillCaster.StrongestResistance(this) -
+            return raw + FireMageCaster.ResistanceFor(this,element) + DiceFree.Skills.DefenderSkillCaster.StrongestResistance(this) -
                 ElementalResistanceAura.StrongestAgainst(this, element);
         }
         public ElementalResistanceResolution ResolveResistance(ElementDefinition element, ElementalContext context, ActorStats source = null) =>

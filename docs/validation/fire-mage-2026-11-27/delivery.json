@@ -1,0 +1,19 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\FireMage-20261127-000732\\DiceFree.exe",
+  "executableSha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "combatBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\FireMage-20261127-000208",
+  "reloadAndVisualBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\FireMage-20261127-000732",
+  "staticChecks": 355,
+  "combatAndTrialChecks": 242,
+  "reloadChecks": 22,
+  "visualChecks": 8,
+  "totalChecks": 627,
+  "sourceComparisons": 196,
+  "identicalRuntimeAssemblies": 10,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "finalBuildErrors": 0,
+  "finalBuildWarnings": 1,
+  "finalDifference": "Only authored hand attachment scale and warning-tile height changed after full combat review; all DiceFree runtime DLLs are byte-identical. Fresh-process reload and presentation checks ran on final delivery.",
+  "limitations": "Automated disposable-profile validation. No manual balance acceptance or live network co-op acceptance. The advancement course is intentionally solo. Batch captures omit screen-space overlay UI."
+}

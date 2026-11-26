@@ -29837,6 +29837,9 @@ GameObject:
   - component: {fileID: 1724212375}
   - component: {fileID: 1724212374}
   - component: {fileID: 1724212373}
+  - component: {fileID: 1724212378}
+  - component: {fileID: 1724212377}
+  - component: {fileID: 1724212376}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -29874,6 +29877,7 @@ Transform:
   - {fileID: 1183300544}
   - {fileID: 1643636306}
   - {fileID: 1055772757}
+  - {fileID: 2050568127}
   m_Father: {fileID: 1562633928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724212271
@@ -30279,6 +30283,9 @@ MonoBehaviour:
   - classId: class.berserker
     visualRoot: {fileID: 1055772757}
     animator: {fileID: 1055772758}
+  - classId: class.fire-mage
+    visualRoot: {fileID: 2050568127}
+    animator: {fileID: 2050568128}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30380,6 +30387,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce317438fe1de4e4a80976f1faeba04a, type: 2}
   - {fileID: 11400000, guid: 05be04658290f6247a439c0c51646b8c, type: 2}
   - {fileID: 11400000, guid: 592ccb43fab8fb84faf6378a2a6ddfb7, type: 2}
+  - {fileID: 11400000, guid: 74f4775c77f809848a752a4729542d32, type: 2}
+  - {fileID: 11400000, guid: 31076742ada66a94db816761f3a74226, type: 2}
 --- !u!114 &1724212303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30421,6 +30430,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 31b55ad9850b2f44a8ce98cf868e8119, type: 2}
   - {fileID: 11400000, guid: 045e6506e25b6fa4dbbd1258683f8f52, type: 2}
   - {fileID: 11400000, guid: bcd0d6c8b9898294f9e741d8e3f8765a, type: 2}
+  - {fileID: 11400000, guid: 37a1d0c6ba3acfc4693b099559d9e8ef, type: 2}
 --- !u!114 &1724212305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30818,6 +30828,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f11c2ddf4058bd4bb56b070437ef5a2, type: 2}
   - {fileID: 11400000, guid: 549636e2f7d6b1d478acd8325e255931, type: 2}
   - {fileID: 11400000, guid: 598b239a2d2bba5459c7be50a9adf325, type: 2}
+  - {fileID: 11400000, guid: 3533df55c8ded934aa73ec599bb28e83, type: 2}
   progress: []
 --- !u!114 &1724212321
 MonoBehaviour:
@@ -40913,3 +40924,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b76caa8f4dd54b4f9ab0be9e7345009, type: 3}
   m_Name:
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.BerserkerProgression
+--- !u!114 &1724212376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79afc2df5946043ac9573f340cdf77, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.FireMageAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: 33106d2e9076b6645af8a4def15a103b, type: 2}
+  - {fileID: 2800000, guid: 1e929718e4b8a3d4b9e89cb8fcbf3c8d, type: 2}
+  - {fileID: 2800000, guid: 946657d63a4c5e643b74d398d86ed2e6, type: 2}
+  - {fileID: 2800000, guid: f1fa0fb958127dc4aabc77e77639908a, type: 2}
+  - {fileID: 2800000, guid: 193a1ff16c57d1146bedc9047a7c00d7, type: 2}
+  - {fileID: 2800000, guid: 376868297d44ea64cba5bd5a92ddf4c0, type: 2}
+--- !u!114 &1724212377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4ad7d2ebb9aa248811f1531282b072, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.FireMageCaster
+  fire: {fileID: 11400000, guid: 04cf0885623f38f48a7c20c946476cd2, type: 2}
+--- !u!114 &1724212378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693a179c63850134fac6dd8911c5db5b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.FireMageProgression
+--- !u!1001 &2050568126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1724212270}
+    m_Modifications:
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603395753655495125, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_Name
+      value: Fire Mage form
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603395753655495125, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+--- !u!4 &2050568127 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+  m_PrefabInstance: {fileID: 2050568126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2050568128 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 387186686998166210, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
+  m_PrefabInstance: {fileID: 2050568126}
+  m_PrefabAsset: {fileID: 0}

@@ -1,0 +1,1178 @@
+[
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden.meta",
+    "mainSha256": "D168761ACE5E4C6C4074788516D2284D7F188CB99EACA7B49FD02AF6B57413E8",
+    "qaSha256": "D168761ACE5E4C6C4074788516D2284D7F188CB99EACA7B49FD02AF6B57413E8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Amber-lining-dyed-threads.png",
+    "mainSha256": "6479D5CE5C240783B3A34792A285B86CA3DDB29F62C3DAFDAC9BA07E0621534F",
+    "qaSha256": "6479D5CE5C240783B3A34792A285B86CA3DDB29F62C3DAFDAC9BA07E0621534F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Amber-lining-dyed-threads.png.meta",
+    "mainSha256": "D99D7BFE97E6DA0BA808F45FAD0ED69F2EA5957A12077330B576F9FA41111F61",
+    "qaSha256": "D99D7BFE97E6DA0BA808F45FAD0ED69F2EA5957A12077330B576F9FA41111F61",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Candlelight-silk-edge-dyed-threads.png",
+    "mainSha256": "49059FFD3239E99EE5531274E1D839C7A6714C160B52AE79BB226623BB521329",
+    "qaSha256": "49059FFD3239E99EE5531274E1D839C7A6714C160B52AE79BB226623BB521329",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Candlelight-silk-edge-dyed-threads.png.meta",
+    "mainSha256": "31CA481DC9B1D3CEEB5AF81D58D4AF4624AD8CA7FF6317A6CEAE28E9DFF12188",
+    "qaSha256": "31CA481DC9B1D3CEEB5AF81D58D4AF4624AD8CA7FF6317A6CEAE28E9DFF12188",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx",
+    "mainSha256": "90D7765A0D888BAF1607D10C304A74338B4434A7356CC63564E98A5EBED1318A",
+    "qaSha256": "90D7765A0D888BAF1607D10C304A74338B4434A7356CC63564E98A5EBED1318A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx.meta",
+    "mainSha256": "0CDD8D99A6A447719FA8290DDC42F5A296C7AE23DF9C1405F9D2A12F6E052191",
+    "qaSha256": "0CDD8D99A6A447719FA8290DDC42F5A296C7AE23DF9C1405F9D2A12F6E052191",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/DawnwardenImport.json",
+    "mainSha256": "1B213DFEA8A9D045108A0EB5A3A180E18677B0195E827F8EE51B78539E17E2CF",
+    "qaSha256": "1B213DFEA8A9D045108A0EB5A3A180E18677B0195E827F8EE51B78539E17E2CF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/DawnwardenImport.json.meta",
+    "mainSha256": "EED7D40C03E8BCF563B6693BCBE13D40DEDBDD8727D027920C8738154537DA18",
+    "qaSha256": "EED7D40C03E8BCF563B6693BCBE13D40DEDBDD8727D027920C8738154537DA18",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Deep-kingfisher-wool-dyed-threads.png",
+    "mainSha256": "492183BB9D8347CE74604521398DA449FB3AFC6A8FD419A8CE684EB007D817E4",
+    "qaSha256": "492183BB9D8347CE74604521398DA449FB3AFC6A8FD419A8CE684EB007D817E4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Deep-kingfisher-wool-dyed-threads.png.meta",
+    "mainSha256": "F7C46FF80E31008147E45B0B9EA9A547CA66D39CBA0EC9B9F3672C3876D34167",
+    "qaSha256": "F7C46FF80E31008147E45B0B9EA9A547CA66D39CBA0EC9B9F3672C3876D34167",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials.meta",
+    "mainSha256": "9BA8470BEE546232CC38FCE71750CEBF3CE6E734BBE5577D914FBA1C36D5058F",
+    "qaSha256": "9BA8470BEE546232CC38FCE71750CEBF3CE6E734BBE5577D914FBA1C36D5058F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Amber-lining.mat",
+    "mainSha256": "32907ECD789A1AFAA429C80F924BF68C5CA97BAD3652ADED20049A09207E016D",
+    "qaSha256": "32907ECD789A1AFAA429C80F924BF68C5CA97BAD3652ADED20049A09207E016D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Amber-lining.mat.meta",
+    "mainSha256": "2C06212235D2AB068A42E60C37075CDA5D52162ACADEE95A1D6E92AD30118DC2",
+    "qaSha256": "2C06212235D2AB068A42E60C37075CDA5D52162ACADEE95A1D6E92AD30118DC2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Antique-brass.mat",
+    "mainSha256": "1DD65DE48E8CF6E51CC683F644C0C3C6DF2F3EA018CB85C3B557D59873BC6C9C",
+    "qaSha256": "1DD65DE48E8CF6E51CC683F644C0C3C6DF2F3EA018CB85C3B557D59873BC6C9C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Antique-brass.mat.meta",
+    "mainSha256": "A3ADEC5264BEB42C88A0E6A97A0C633ECD03C230B547FAE617244930C8286AAA",
+    "qaSha256": "A3ADEC5264BEB42C88A0E6A97A0C633ECD03C230B547FAE617244930C8286AAA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Candlelight-silk-edge.mat",
+    "mainSha256": "B04BDA5AE7235F8CAD075D87B6791A51449C827B835D097271CE3DDF940E49B6",
+    "qaSha256": "B04BDA5AE7235F8CAD075D87B6791A51449C827B835D097271CE3DDF940E49B6",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Candlelight-silk-edge.mat.meta",
+    "mainSha256": "362E65AE392B94F9848BCDC525A7DAA298243704210B98E47779294255CAF38C",
+    "qaSha256": "362E65AE392B94F9848BCDC525A7DAA298243704210B98E47779294255CAF38C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Chestnut-highlights.mat",
+    "mainSha256": "DD0BC79EDBEDE486AB2E82F98BDD2283AC89DE58F790D8319D6FDC7C4E641E6C",
+    "qaSha256": "DD0BC79EDBEDE486AB2E82F98BDD2283AC89DE58F790D8319D6FDC7C4E641E6C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Chestnut-highlights.mat.meta",
+    "mainSha256": "889FDA5E144881D4586C201B930DB3D770C84FC4B78D98D4E2D2D2E992D56510",
+    "qaSha256": "889FDA5E144881D4586C201B930DB3D770C84FC4B78D98D4E2D2D2E992D56510",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Dark-iris-limbus.mat",
+    "mainSha256": "4147B3EF83BE09674CBDC799632A237C507F698E47D2A8FF14B4D68E46E0878B",
+    "qaSha256": "4147B3EF83BE09674CBDC799632A237C507F698E47D2A8FF14B4D68E46E0878B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Dark-iris-limbus.mat.meta",
+    "mainSha256": "E015AD668E5DCF7FFD96FE7F86D27AE766F85661BEF1366EE414E42246DB15D9",
+    "qaSha256": "E015AD668E5DCF7FFD96FE7F86D27AE766F85661BEF1366EE414E42246DB15D9",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Dark-sole-and-straps.mat",
+    "mainSha256": "9B9D6FA789094750F85E9831F3D989CE1A21780E8D00D3A335A83D9D8FB5FEFD",
+    "qaSha256": "9B9D6FA789094750F85E9831F3D989CE1A21780E8D00D3A335A83D9D8FB5FEFD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Dark-sole-and-straps.mat.meta",
+    "mainSha256": "916DF766001DD90FB8421828E21426A495F9C2D40B8670F085E1C35D60EB4A20",
+    "qaSha256": "916DF766001DD90FB8421828E21426A495F9C2D40B8670F085E1C35D60EB4A20",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Deep-kingfisher-wool.mat",
+    "mainSha256": "AB11CBB0E0106AA7D077DF0C8F09B4A286F6DC7F90B6E40CF7DD8F38A9FCA6DB",
+    "qaSha256": "AB11CBB0E0106AA7D077DF0C8F09B4A286F6DC7F90B6E40CF7DD8F38A9FCA6DB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Deep-kingfisher-wool.mat.meta",
+    "mainSha256": "17C602C9579F9670028658D7ED476C28690FE3BF7E52FB9D1558020205F4F930",
+    "qaSha256": "17C602C9579F9670028658D7ED476C28690FE3BF7E52FB9D1558020205F4F930",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Espresso-hair.mat",
+    "mainSha256": "F73803330C9E6BA2A7DD0D4A12B6A0AC01205F34CD3D54C528B8BA3A4C40FE0A",
+    "qaSha256": "F73803330C9E6BA2A7DD0D4A12B6A0AC01205F34CD3D54C528B8BA3A4C40FE0A",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Espresso-hair.mat.meta",
+    "mainSha256": "F13B670635770530885D21BF49636C24FB989AC75E094668BF40DCCA9E5E5D2B",
+    "qaSha256": "F13B670635770530885D21BF49636C24FB989AC75E094668BF40DCCA9E5E5D2B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Eye-and-lash.mat",
+    "mainSha256": "1BF9BBC2B32A0FA09ADEA9CF02A02E40BA792C1D7801ECF14C455D27576DE6DF",
+    "qaSha256": "1BF9BBC2B32A0FA09ADEA9CF02A02E40BA792C1D7801ECF14C455D27576DE6DF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Eye-and-lash.mat.meta",
+    "mainSha256": "CD7522FB78C65856F99AA0035CB046C1FC62C311D18BC47816B21A54A3F4E0AC",
+    "qaSha256": "CD7522FB78C65856F99AA0035CB046C1FC62C311D18BC47816B21A54A3F4E0AC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Honey-iris.mat",
+    "mainSha256": "948607E5F84CFA2E79D175EFBE44D22DCE13312D92423C650B235346C210B11C",
+    "qaSha256": "948607E5F84CFA2E79D175EFBE44D22DCE13312D92423C650B235346C210B11C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Honey-iris.mat.meta",
+    "mainSha256": "74B555B43AB32569027A4552E56E4D9600A79912A488A2B365228D4F06ECBEF0",
+    "qaSha256": "74B555B43AB32569027A4552E56E4D9600A79912A488A2B365228D4F06ECBEF0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Lantern-ashwood.mat",
+    "mainSha256": "6FEF2C265D13340A7CC814622E04DD6F8C89A8FDFBBEDA0A5DE1B0F3A9AD9DD1",
+    "qaSha256": "6FEF2C265D13340A7CC814622E04DD6F8C89A8FDFBBEDA0A5DE1B0F3A9AD9DD1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Lantern-ashwood.mat.meta",
+    "mainSha256": "8AA11DA2D330C2DB6E7F29C1EFBC6EB7D0F2A0AA1559BF76D503544FF3E83013",
+    "qaSha256": "8AA11DA2D330C2DB6E7F29C1EFBC6EB7D0F2A0AA1559BF76D503544FF3E83013",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Lantern-warm-quartz.mat",
+    "mainSha256": "7872DE4409F177CA89F55872B5A7C1D0BE0FFC28C88F0EAD51E5DBCF2F95F6E1",
+    "qaSha256": "7872DE4409F177CA89F55872B5A7C1D0BE0FFC28C88F0EAD51E5DBCF2F95F6E1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Lantern-warm-quartz.mat.meta",
+    "mainSha256": "C055C1083A376D70DF9C47B3DB4F6EA8F3936B16783510BED27C31DB4E19E340",
+    "qaSha256": "C055C1083A376D70DF9C47B3DB4F6EA8F3936B16783510BED27C31DB4E19E340",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Midnight-lining.mat",
+    "mainSha256": "80BEF8FFABF7622ED11AF44340DA457AF662241DD7F7C1DB107D89078819A6B0",
+    "qaSha256": "80BEF8FFABF7622ED11AF44340DA457AF662241DD7F7C1DB107D89078819A6B0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Midnight-lining.mat.meta",
+    "mainSha256": "4375C270F21F2762DC7364974B922F2E7A2D23421A369F64D58A5E528CB7278E",
+    "qaSha256": "4375C270F21F2762DC7364974B922F2E7A2D23421A369F64D58A5E528CB7278E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Muted-rose.mat",
+    "mainSha256": "60AE8BED076ABD8BACAA16839F4D7A127030B48DB4F12AE5BBBE2E1C81F6B9EA",
+    "qaSha256": "60AE8BED076ABD8BACAA16839F4D7A127030B48DB4F12AE5BBBE2E1C81F6B9EA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Muted-rose.mat.meta",
+    "mainSha256": "B859CF9FD1C27567FEDFF9EEFE946FB7F2E0BC60F93301B42104C8B6815983E3",
+    "qaSha256": "B859CF9FD1C27567FEDFF9EEFE946FB7F2E0BC60F93301B42104C8B6815983E3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Natural-warm-nails.mat",
+    "mainSha256": "A5F233163722B2206A681789AF29721D1F12C3212AFBDB6CD5FF38F67CA85CF7",
+    "qaSha256": "A5F233163722B2206A681789AF29721D1F12C3212AFBDB6CD5FF38F67CA85CF7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Natural-warm-nails.mat.meta",
+    "mainSha256": "ADFC92D15FEC3F8033E91835EDC73E36A61CB7BE3A1338C86F3657FC14B3B40E",
+    "qaSha256": "ADFC92D15FEC3F8033E91835EDC73E36A61CB7BE3A1338C86F3657FC14B3B40E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Oat-ivory-spun-linen.mat",
+    "mainSha256": "E2ADC2AB69AEEF271DC8EC6441AAFA6E2445EF91300C1FAE7AE7223B9BDD5F4D",
+    "qaSha256": "E2ADC2AB69AEEF271DC8EC6441AAFA6E2445EF91300C1FAE7AE7223B9BDD5F4D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Oat-ivory-spun-linen.mat.meta",
+    "mainSha256": "84DD7F4B75AE04D48A979296BB4B011169156B3D23C14D61F22E7A70934AF24C",
+    "qaSha256": "84DD7F4B75AE04D48A979296BB4B011169156B3D23C14D61F22E7A70934AF24C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Oxblood-leather.mat",
+    "mainSha256": "D180D4CD131B4DCECB0A1644E42A546622EBB5A80DE159F495CB7E693BC836EB",
+    "qaSha256": "D180D4CD131B4DCECB0A1644E42A546622EBB5A80DE159F495CB7E693BC836EB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Oxblood-leather.mat.meta",
+    "mainSha256": "C35C4EA4B003003052B32F5F9BEDC81CAC8EB7B06710372E0BA2372D115023CE",
+    "qaSha256": "C35C4EA4B003003052B32F5F9BEDC81CAC8EB7B06710372E0BA2372D115023CE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Petrol-blue-damask.mat",
+    "mainSha256": "1691C7405779C84440B5C105D8B8A4FED0EC3E5AB25BE3F5661B8214EB05B5AF",
+    "qaSha256": "1691C7405779C84440B5C105D8B8A4FED0EC3E5AB25BE3F5661B8214EB05B5AF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Petrol-blue-damask.mat.meta",
+    "mainSha256": "3E23C1390545C17C5657CBB2D87380DDF0BCF1C0F991CA53E450F1545AA7C00B",
+    "qaSha256": "3E23C1390545C17C5657CBB2D87380DDF0BCF1C0F991CA53E450F1545AA7C00B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Polished-golden-inlay.mat",
+    "mainSha256": "480D0FBF174327584E0FE1D509ACEE0B84EF36674B0BFAFF33336F6B02E80134",
+    "qaSha256": "480D0FBF174327584E0FE1D509ACEE0B84EF36674B0BFAFF33336F6B02E80134",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Polished-golden-inlay.mat.meta",
+    "mainSha256": "57FDC0C6D262DCF8414EAE6709D8B0252AA33843D0666D3316736EA3FE2B343D",
+    "qaSha256": "57FDC0C6D262DCF8414EAE6709D8B0252AA33843D0666D3316736EA3FE2B343D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Tideglass-enamel.mat",
+    "mainSha256": "432D36F1F8A5B1CC88554C2DA725A3C7474F83B156C22B47EFC26A85069FAE1B",
+    "qaSha256": "432D36F1F8A5B1CC88554C2DA725A3C7474F83B156C22B47EFC26A85069FAE1B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Tideglass-enamel.mat.meta",
+    "mainSha256": "65B9CF1F4A00E0EBC285CB8CDEFEB36287DAF7E6150BA1DE00E0BC6CC9E62D3D",
+    "qaSha256": "65B9CF1F4A00E0EBC285CB8CDEFEB36287DAF7E6150BA1DE00E0BC6CC9E62D3D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-bronze-skin.mat",
+    "mainSha256": "5A75042798BC2174CEF601DDF788BD5D3F6B2153331E686A03504CAF3E5FAAC0",
+    "qaSha256": "5A75042798BC2174CEF601DDF788BD5D3F6B2153331E686A03504CAF3E5FAAC0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-bronze-skin.mat.meta",
+    "mainSha256": "F6BA27AED7C5D48B1D6A5BBB76D12D5B56AF02019505043BD8360AFBB6CA1C58",
+    "qaSha256": "F6BA27AED7C5D48B1D6A5BBB76D12D5B56AF02019505043BD8360AFBB6CA1C58",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-lid-and-ear.mat",
+    "mainSha256": "50D6385EC00A4DF9E5B0A976C0AAB425AEC11C115CAB2D61B145A0037416F372",
+    "qaSha256": "50D6385EC00A4DF9E5B0A976C0AAB425AEC11C115CAB2D61B145A0037416F372",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-lid-and-ear.mat.meta",
+    "mainSha256": "B27F4ADFA465075A8DDFFA58C4AFAA8CF28D0DDFC61063447E60E1B882BB325B",
+    "qaSha256": "B27F4ADFA465075A8DDFFA58C4AFAA8CF28D0DDFC61063447E60E1B882BB325B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-sclera.mat",
+    "mainSha256": "EF4955CA80ED4FFFB434CA4D6FAE7CC71AAFF4A940E2B8F095BE030549666BAD",
+    "qaSha256": "EF4955CA80ED4FFFB434CA4D6FAE7CC71AAFF4A940E2B8F095BE030549666BAD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Materials/Warm-sclera.mat.meta",
+    "mainSha256": "D7D6B6F855647D007D8740526EF640B48A5C8EEB0F6B736AEFA3632D786BFE1E",
+    "qaSha256": "D7D6B6F855647D007D8740526EF640B48A5C8EEB0F6B736AEFA3632D786BFE1E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Midnight-lining-dyed-threads.png",
+    "mainSha256": "16C5E64CE135A0F741B2D44742ABBFC89234C24116A8C624651352D1C01362EC",
+    "qaSha256": "16C5E64CE135A0F741B2D44742ABBFC89234C24116A8C624651352D1C01362EC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Midnight-lining-dyed-threads.png.meta",
+    "mainSha256": "017A3D80E11F9D346103BA19FF352A8B0DE2F9049D17425666822C693C83A5B6",
+    "qaSha256": "017A3D80E11F9D346103BA19FF352A8B0DE2F9049D17425666822C693C83A5B6",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Oat-ivory-spun-linen-dyed-threads.png",
+    "mainSha256": "6F4B1C108ED19737506B0014659B7C4D35B25FD8B2120F7C20EB2A078BCD98BE",
+    "qaSha256": "6F4B1C108ED19737506B0014659B7C4D35B25FD8B2120F7C20EB2A078BCD98BE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Oat-ivory-spun-linen-dyed-threads.png.meta",
+    "mainSha256": "D53CA4EAA6DD7BAC696999C1A875E0FAF3D8579412FEE5ACDF3B7435A88B6496",
+    "qaSha256": "D53CA4EAA6DD7BAC696999C1A875E0FAF3D8579412FEE5ACDF3B7435A88B6496",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Petrol-blue-damask-dyed-threads.png",
+    "mainSha256": "657FD78AEEDA30A0D0F9F14EB2244EE89133D79DF3A34A5B78D87B3A78CCFEF1",
+    "qaSha256": "657FD78AEEDA30A0D0F9F14EB2244EE89133D79DF3A34A5B78D87B3A78CCFEF1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Petrol-blue-damask-dyed-threads.png.meta",
+    "mainSha256": "2699FE9BA20C81BF3574A6B6AADBDCFD800E919C02843491CDF9FFA0B2D676FD",
+    "qaSha256": "2699FE9BA20C81BF3574A6B6AADBDCFD800E919C02843491CDF9FFA0B2D676FD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Priest menu presentation.prefab",
+    "mainSha256": "A481A49A782329975783A3FE45517C96DD18547E18074A1FAEC895B5597FAB49",
+    "qaSha256": "52AB8021C7FFD191752B1D94C29F2E0A520B0D20A24920E7A273B02F9FF34564",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Priest menu presentation.prefab.meta",
+    "mainSha256": "8C35E6E63CD25E9092BE34A8E8024CDB50150D5553CFA37DC3956E02D3AB0524",
+    "qaSha256": "B845FC1F8CABB2BD44E0DBC668839A6CA9C18B15740A8FBFDDFAA6F658CA4B58",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Woven-linen-tangent-normal.png",
+    "mainSha256": "56546C25A68ADCA766C7CB4318B1AE48B7ABC3D1725B08B7A59A3AEC33B4B5E0",
+    "qaSha256": "56546C25A68ADCA766C7CB4318B1AE48B7ABC3D1725B08B7A59A3AEC33B4B5E0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Dawnwarden/Woven-linen-tangent-normal.png.meta",
+    "mainSha256": "6BC8A505CE4B2CB874A54B000D6650B1D955D8408853D0114D061B473184942D",
+    "qaSha256": "6BC8A505CE4B2CB874A54B000D6650B1D955D8408853D0114D061B473184942D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AuraVfx/EmberFlame.mat",
+    "mainSha256": "2FB916AFDA7CE335693A5E095511DB52C0C6C0035F226738227D7E0162DCA0D4",
+    "qaSha256": "6129DA4834E2C88E60C4B729968328E2F44FC8993DE5B487F131AF207ED9B9F0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AuraVfx/EmberFlame.mat.meta",
+    "mainSha256": "7478FD3E458B4CCEEA8490A4535AA72E604CA67E17175B792EB97CEE3A90ED3D",
+    "qaSha256": "7C905232270441EC8F45F67B390291D92C0C8C6B48AB33D319213A75E03EFF50",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/MenuPresentationCatalog.asset",
+    "mainSha256": "79A341AE588833324D5F80104CBE8F578DCACC612A553D8721CA7040171138B1",
+    "qaSha256": "79A341AE588833324D5F80104CBE8F578DCACC612A553D8721CA7040171138B1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/PlayerMotion/TierTwo/Priest.controller",
+    "mainSha256": "27D48672A8261473A530B42CA8F9A6DC308877DD73C13919FB445A114D9B2985",
+    "qaSha256": "27D48672A8261473A530B42CA8F9A6DC308877DD73C13919FB445A114D9B2985",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/Cornberg.unity",
+    "mainSha256": "C0BB68C3D92AC7D3AF3F0FAADB2B39E1CAD2D4A0D94A3C1DAFBF067E1874FBAE",
+    "qaSha256": "18020684D59B6E9E319C69BA78EE81BD8E3443CDD764DC1D62AF9DF097FA453A",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/DevelopmentRoom.unity",
+    "mainSha256": "3D5B2C3ECE839CFCA89BA9DF85D32BBA30583B445E53E805DA297D8819CE9A1E",
+    "qaSha256": "F589F3B07D6EC6803B3E8A17C4024560155F57AD1A809728CDC43B95DC7D2CA7",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/EmberCrownTrial.unity",
+    "mainSha256": "1A581FACB3B92393338325E0413B184636011BDD5CD3DB3ABD9492B0245C550F",
+    "qaSha256": "B10AF2A843FB8FC40035DB7A1D3DB6902DC472007238FDAE7818A37031B9BB35",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/EmberCrownTrial.unity.meta",
+    "mainSha256": "FB017083DCA0197FCB1DB325F04A90EF349FE8FB60B953B8C094313F64C44DD9",
+    "qaSha256": "7D5A21E0BDB53E6056B7037905A86A8EF3BF4464BB7077A939F2007FC0AC65BC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/WorldTwoArrival.unity",
+    "mainSha256": "573E766C0358A77A3A768393E82BF56409E362721DDC4826EBA903D2EEEDA4FB",
+    "qaSha256": "FD91B04B96FB0CC287F781F5042F5C2997EDC54D29EC0ADCF46B4390CE2CC794",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireEscapeRun.cs",
+    "mainSha256": "CB5A56F797B7B01736BB53DB07CA16A4232231B5AAEB1A0D4AB49A859124D3FD",
+    "qaSha256": "CB5A56F797B7B01736BB53DB07CA16A4232231B5AAEB1A0D4AB49A859124D3FD",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireEscapeRun.cs.meta",
+    "mainSha256": "C3C02A27D563DFF68073BBA5D9F520A2CE36D317076BC2D82DDC71F30F36D696",
+    "qaSha256": "C3C02A27D563DFF68073BBA5D9F520A2CE36D317076BC2D82DDC71F30F36D696",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireEscapeSite.cs",
+    "mainSha256": "06B150B7C1E01D61055C8D0523F29D02C06306310EF02CE3A303204ACBE20FA8",
+    "qaSha256": "06B150B7C1E01D61055C8D0523F29D02C06306310EF02CE3A303204ACBE20FA8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireEscapeSite.cs.meta",
+    "mainSha256": "FCF7217F11E1F4E808CDBA2C19FE8FF99A054AC07B2171BEFDA94B6562AFF627",
+    "qaSha256": "FCF7217F11E1F4E808CDBA2C19FE8FF99A054AC07B2171BEFDA94B6562AFF627",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireMageMentor.cs",
+    "mainSha256": "1E4C138DD951640AE6A18C47C0F50248375B7FBB76646911E08EEAECCCA575E4",
+    "qaSha256": "1E4C138DD951640AE6A18C47C0F50248375B7FBB76646911E08EEAECCCA575E4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/FireMageMentor.cs.meta",
+    "mainSha256": "35AE3842E2B778F0E84645A31C7F20129E99043D82AF7606E42ED6887FBBBC7D",
+    "qaSha256": "35AE3842E2B778F0E84645A31C7F20129E99043D82AF7606E42ED6887FBBBC7D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/IronpineSouthPass.cs",
+    "mainSha256": "DFCDAD3381D7628FCCFBBA8072442BB12003BC8FBEB5F751919F858B2AC90EF3",
+    "qaSha256": "DFCDAD3381D7628FCCFBBA8072442BB12003BC8FBEB5F751919F858B2AC90EF3",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/ActorStats.cs",
+    "mainSha256": "EC29BF6BCF20CCA476AA090B80A2BB7CD4CBEBB3D134C08E5CD802969570F75B",
+    "qaSha256": "EC29BF6BCF20CCA476AA090B80A2BB7CD4CBEBB3D134C08E5CD802969570F75B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/FireMageCaster.cs",
+    "mainSha256": "EC43510A8CF2035AD8E7D8F790E8DB348E375BBBE8016296C16B69B9A34D0CB6",
+    "qaSha256": "EC43510A8CF2035AD8E7D8F790E8DB348E375BBBE8016296C16B69B9A34D0CB6",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/FireMageCaster.cs.meta",
+    "mainSha256": "57670D1ED24FD44239FD099B9B69A217A333A1242C7352FC151AA0EC472451B2",
+    "qaSha256": "57670D1ED24FD44239FD099B9B69A217A333A1242C7352FC151AA0EC472451B2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/FireMageVfx.cs",
+    "mainSha256": "C3307C2F58F6E0B546B488853EC67595E7AFF37E2F7C084A4AAFE447C1AA9997",
+    "qaSha256": "C3307C2F58F6E0B546B488853EC67595E7AFF37E2F7C084A4AAFE447C1AA9997",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/FireMageVfx.cs.meta",
+    "mainSha256": "ABECDEBAD2CB28330D497B09EF07B6E6DF0870344AF1F8BAD172BFCCD92934F5",
+    "qaSha256": "ABECDEBAD2CB28330D497B09EF07B6E6DF0870344AF1F8BAD172BFCCD92934F5",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/GroundAuraVisual.cs",
+    "mainSha256": "5312DF9FD7257BC6393ECB4CDE332B3FC0461B70F20CFBEA316E64A905D84169",
+    "qaSha256": "5312DF9FD7257BC6393ECB4CDE332B3FC0461B70F20CFBEA316E64A905D84169",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/MageSkillCaster.cs",
+    "mainSha256": "877D57019C654D9F13401A58B6A7DA029CAC68F9865BC8024328286861E3D3E2",
+    "qaSha256": "877D57019C654D9F13401A58B6A7DA029CAC68F9865BC8024328286861E3D3E2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Foundation/RunLoadoutLock.cs",
+    "mainSha256": "454F6D49E1F5F96296C080D56DFF8E252FE651DF0B571CD03CFBF6C2AD0E9AF0",
+    "qaSha256": "454F6D49E1F5F96296C080D56DFF8E252FE651DF0B571CD03CFBF6C2AD0E9AF0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Gameplay/CodexProgression.cs",
+    "mainSha256": "8F6B42BDC21437F7E86EE20460EEB5A78A3D1C1AF62B29737D3AAD8D19DB03D4",
+    "qaSha256": "8F6B42BDC21437F7E86EE20460EEB5A78A3D1C1AF62B29737D3AAD8D19DB03D4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/FireMageProgression.cs",
+    "mainSha256": "AA218C4CB8AF8C50E63E78E040A10DBE6B77009D82266B804F0BEAFC887D154E",
+    "qaSha256": "AA218C4CB8AF8C50E63E78E040A10DBE6B77009D82266B804F0BEAFC887D154E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/FireMageProgression.cs.meta",
+    "mainSha256": "70622A80746B559DFA9B4D8516098877534DF387D69AEBCA79366A38C6FEE3DE",
+    "qaSha256": "70622A80746B559DFA9B4D8516098877534DF387D69AEBCA79366A38C6FEE3DE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/AbilityBarSource.cs",
+    "mainSha256": "2E6171F08A6191C2247DBEAB11910ECF4F0BE5BCEEDDF7D13F31F1328C0EFFDB",
+    "qaSha256": "2E6171F08A6191C2247DBEAB11910ECF4F0BE5BCEEDDF7D13F31F1328C0EFFDB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/CharacterHudPanel.cs",
+    "mainSha256": "AF6710DE019A461EC2795A6765A169E0870EDEF5E9EA24CAE72A94A204CFDA74",
+    "qaSha256": "AF6710DE019A461EC2795A6765A169E0870EDEF5E9EA24CAE72A94A204CFDA74",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/FireMageAbilityProvider.cs",
+    "mainSha256": "E4E0D110A63658048F2B98723D229C4D75519A555F8B9519E98EB20B0FE36DB0",
+    "qaSha256": "E4E0D110A63658048F2B98723D229C4D75519A555F8B9519E98EB20B0FE36DB0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/FireMageAbilityProvider.cs.meta",
+    "mainSha256": "1FB8422B070C75D44DBBCFCE42D0ED7325AC84FB3CCBDDA608133818F441325D",
+    "qaSha256": "1FB8422B070C75D44DBBCFCE42D0ED7325AC84FB3CCBDDA608133818F441325D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs",
+    "mainSha256": "A24924F961AEF6D5F1BDC8D2D39107AB202EB47CD5D1591BE6771FD35F7AE271",
+    "qaSha256": "A24924F961AEF6D5F1BDC8D2D39107AB202EB47CD5D1591BE6771FD35F7AE271",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Development/Priest/Development Priest catalog.asset",
+    "mainSha256": "E05AC88D69B9B5CC2F5258D4F3D86DE8471703C2BD49B8DCCBA4481920E4B285",
+    "qaSha256": "E05AC88D69B9B5CC2F5258D4F3D86DE8471703C2BD49B8DCCBA4481920E4B285",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage.meta",
+    "mainSha256": "E6B91FF246A912F7D9BAB53E887802C4C58F64AA9A133C4ED5D6D111E282B8BB",
+    "qaSha256": "C02C7C81750332E1AD964C34783CF555ECABF9879E145CFBDB2A2D849380A4EE",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Beacon blue.mat",
+    "mainSha256": "BEC33F7E39859926832F8ADDF9657175689B061B780BEE8C55670F80B27DCCBD",
+    "qaSha256": "17B22FAFBAF712A388999FE2F404E3D8400403DF58E0E4DDEADFFD631F19A53C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Beacon blue.mat.meta",
+    "mainSha256": "6FDA2D31E8F4548C01BA827D2BF42E50631B314AA2555717FC5B318A455C7A2E",
+    "qaSha256": "4D799A089E184CA8370F355F7983171734DF8285BAA81EB4DD4010D298ADC7F0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp basalt.mat",
+    "mainSha256": "96E9F9F5684B422B93A7272FABBA338F4169AA3B528B2CD4D9DCF1910AC6472B",
+    "qaSha256": "80DA2C566EAB5DE01313B93DBAAE74E0A7B4F8BF2C32FA9F00DFC4AE956E7470",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp basalt.mat.meta",
+    "mainSha256": "960DF7D783DA1F819D12359FF97177973EDB583864DFA50C0204A1DE65E4CBC1",
+    "qaSha256": "60AE8190AA16474EE98F4D12A8387A7509B37F3086915C5CB75026472F5CD723",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp brass.mat",
+    "mainSha256": "7317ECDF2903783095462739269291BF82E5C7EEF628C369BF7EF2D7D4F08DB5",
+    "qaSha256": "3073C10EE642BB31173B85843F252A44AF38CF79D1BB81679E75C0FEE2403459",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp brass.mat.meta",
+    "mainSha256": "BFDC489BE6B55E84A1C12412322798DBFECDB51A05ACE47CE17FE630B4FC3F90",
+    "qaSha256": "5B54E7C77CE27CF460C5CBDCC5308198787BACD842F1FD6D84A473496CB601A6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp crimson.mat",
+    "mainSha256": "8F4DFEC74224236EFEF38EF9BE8386D738A64BD8F3977BF0D812ACA32D1BD553",
+    "qaSha256": "564776C29E6179115EEC8801C86AEF8C3D87488D6D49113FCA6D97CC84B61574",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Camp crimson.mat.meta",
+    "mainSha256": "9127A53D76A0C8D0FBD7F773E4DBC31CB260B329AF419909555662CDD5022138",
+    "qaSha256": "EAB8547421AE3A2BF7110F7578166FD7B17A8FF57C6AC0427551AF9ABCB80898",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Amber-lining.mat",
+    "mainSha256": "31E895A84EE88FE94AC24C3D54F0B5F730DC1F9EA08F54CBB4D7BC76296C4191",
+    "qaSha256": "E94F08E05E8E994AAA2884E83C4259CF6F979F34F8A290D553EB11120D6D988A",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Amber-lining.mat.meta",
+    "mainSha256": "7152D56C99DD2AB095EDE41F2100B8A9325C990644BC375535052D0758ABA704",
+    "qaSha256": "77FB3487C2BC6CA9D4FDAD15BA8754ECE823B07AE1C42FFC246B77503BA20E98",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Antique-brass.mat",
+    "mainSha256": "6A4B8FAE1AC684EDC912F6EF5488FBC8935A7CD744655E597DFED9590A53D5D3",
+    "qaSha256": "EB628A64CC635C3D8C7738B7305B13C24810E170CA9CD9D7A52D9EAC719497E6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Antique-brass.mat.meta",
+    "mainSha256": "B949C398EFDB46552214196C03670DA47A51061B32FD8DB35D74AAD6C100E6B7",
+    "qaSha256": "7EBB29F8B940516A68B30645D9D1A86CF322A5FFCDFDAB6CC7A8012515F408A9",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Candlelight-silk-edge.mat",
+    "mainSha256": "F4B743A4F1652B7E7A5DD6A94A865389CB4648DC4B1E97EF34830C63F01F7C4D",
+    "qaSha256": "53BF2D61F2F76CB0645BA0FD6465B8B34277BD9CA3F43D7CF9F91A91D61802E4",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Candlelight-silk-edge.mat.meta",
+    "mainSha256": "873BD2FAB5635D995B1827EC7B774506E983B6602CDED7BB9E1D66A7F4D9D397",
+    "qaSha256": "1DBD45CC2076E3351DCA6082F3BC3FA477A709440108259B3B4FB74D564A6F8B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Deep-kingfisher-wool.mat",
+    "mainSha256": "93E93DBB45A807F52DEFD81214FCBA271DA93DAFA99169F49AE7953F555E8F9F",
+    "qaSha256": "5826FD5AFDCC9A445932481A074992C1AA80BD1CBB4585A01C5296F906CB7EDB",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Deep-kingfisher-wool.mat.meta",
+    "mainSha256": "C14849F924CACEDC0C616C94BD114CCE8346925EEF4E916DA391DD289BDB34A1",
+    "qaSha256": "6F0FCFD42EA4423109C689B3092AE3B4A88DE975724412F4BE5584B8E0AC578E",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Midnight-lining.mat",
+    "mainSha256": "9F52874D844096E1AE94B1657B3EAA9C448CAA2A64517947EE524EE8C9F5E212",
+    "qaSha256": "1541529B2F3983E9191DFE9F143D93BC073E316BAA92CC0FC81EA0A6D7FFA4E5",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Midnight-lining.mat.meta",
+    "mainSha256": "3FAE4C3710A7120E3DAF7C346712787211722C6B0DEBE2FA35FDB27ECB235D90",
+    "qaSha256": "A29F451FA7AFFDA30CA5951A6B1624E3F900F9D1F8C1C0482351902897D7CA2A",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Oat-ivory-spun-linen.mat",
+    "mainSha256": "363428E38DBD34A08912A76A95AC2B9A59DDE59C11E398F8F950D8BA7B44529A",
+    "qaSha256": "6290270A903BE3A66374C6935E3A7804510077813025BBE16BCAB3A64A12C533",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Cinderweave Oat-ivory-spun-linen.mat.meta",
+    "mainSha256": "6FD0C1CE305006EB0D08B965B4BBFB0B3540D32AE2BB3F2C73090D53296D82DE",
+    "qaSha256": "275F7EF09C70BABC02BA73F4535DACCD9DCEC905542834CD0B6DB0A992B0DB6B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Ember Walk NavMesh.asset",
+    "mainSha256": "87FF49CBD4A32F7A2C74F0A8BC005ED92C6916D026D403D7FF88C8C2C9A8E3FB",
+    "qaSha256": "87FF49CBD4A32F7A2C74F0A8BC005ED92C6916D026D403D7FF88C8C2C9A8E3FB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Ember Walk NavMesh.asset.meta",
+    "mainSha256": "2B877BA4ACC3C3D9AC700330454276868D6917C59112492DA20825474A3B92D0",
+    "qaSha256": "7818C9FC4D18657FD6B09F7C64AFEB731E585B40A57A66C86E98DB3E5432A12E",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage advancement.asset",
+    "mainSha256": "E581D541981DA28FEBDD5CC49458D865F21C90ED5C60D9FFE6ED3E85F2FAD75F",
+    "qaSha256": "E581D541981DA28FEBDD5CC49458D865F21C90ED5C60D9FFE6ED3E85F2FAD75F",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage advancement.asset.meta",
+    "mainSha256": "6A6620A6898B1DAED1189A82A14CC67E1F3B8A58DA84360984AE9EF04D2C945B",
+    "qaSha256": "D23B4949D48E9B8ACEAF3A5AFAC75C42E62BC326C8A015CD6DBA5E940F80C47C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage basic.asset",
+    "mainSha256": "29ACAFD7A69F83EC475D1F574911128081095AF93B11D859A8FCACE7BD89387C",
+    "qaSha256": "29ACAFD7A69F83EC475D1F574911128081095AF93B11D859A8FCACE7BD89387C",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage basic.asset.meta",
+    "mainSha256": "0B4F8B2B30AE79D8482ECC0BA179DC536D8389D68C4895781E36E2CB4A90F451",
+    "qaSha256": "B98B44641BF72755E630C393D37ACE33D524BB1A87EC64F78D497FC6BBAF1EBD",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage class.asset",
+    "mainSha256": "66ACFD46DCC856A299A6946ED5362447920AD372ADDDEE34ED0E071E80CA012A",
+    "qaSha256": "7B9D5252637842FEDBB1A2619C6421B710EB871483BB45F96FCBAE5EAFD78E42",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage class.asset.meta",
+    "mainSha256": "B73DF8B55ED072AC4DE0EB70014E2A57C132909880EA5E3BD42FF630BFC123AD",
+    "qaSha256": "AB8C104E404EB9729CF4B764E2A7BA863B490AB7E5144C23FEB5697E6DCF4125",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage form.prefab",
+    "mainSha256": "15A92575F974F3D283E37253A997088D7176D86258909CEA116C98E98A4F627B",
+    "qaSha256": "A070EC9D51888EDB1CE9D0B6472E615FB84C76EA0E988E554F2792BECBDDE2B7",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage form.prefab.meta",
+    "mainSha256": "EEFFD46F515B869D3EFF273466C53934DAF1F12B7E29AAABCEF7FB3B489E0212",
+    "qaSha256": "F0465B89C04F52C7693E212FA91096A84F7161491F09EC00664CC6279E61D5F9",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage Heat.asset",
+    "mainSha256": "3A55DEC87264A94C55ADC0F3E15218840F0FC566CA95DA5B8464B62E638A0580",
+    "qaSha256": "3A55DEC87264A94C55ADC0F3E15218840F0FC566CA95DA5B8464B62E638A0580",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage Heat.asset.meta",
+    "mainSha256": "A861E77D46AF90C4D210CFBB335409C2C2FD0A47F70EB363319AB222A4946B80",
+    "qaSha256": "89ED4B60B2D6A4A2BD46C1932C8F3855E35E999307CC18BB525EF86829D30048",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage Mana.asset",
+    "mainSha256": "AC9F75E10F24E9277F56516694F2D7601BB3C90F2F790FC84A89E43F79C7256D",
+    "qaSha256": "AC9F75E10F24E9277F56516694F2D7601BB3C90F2F790FC84A89E43F79C7256D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage Mana.asset.meta",
+    "mainSha256": "653E575B522E549D922559C623455A26213E346358AFCAF1AB77A37F80294945",
+    "qaSha256": "F45FF809F08307724F9C0A1C6A71ACCD167C18C0D2D7C63CFEFE7C98F5376D89",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage menu.prefab",
+    "mainSha256": "FC212C5E62CD012AD833D952B0F58DA893C2FEF299FC65EF9A19797363FB6968",
+    "qaSha256": "E8C4EB227D7820FADE6716CF3FB8596EEE03207877D48016E8E6B4FA1391561C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage menu.prefab.meta",
+    "mainSha256": "ED9F9B320586AB66900F965F7B42E44FFA9DD5DFCFAA547208253B653BD4F719",
+    "qaSha256": "CD06E7913637A7FAC4824BD9360CD3FE56F58AB37BD812C11B29B0F284D08442",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire spell packet.asset",
+    "mainSha256": "2D8C8473DD7C2C32DC7B32819D147FC2D68FA39BAF898F282923FC6C5749147B",
+    "qaSha256": "2D8C8473DD7C2C32DC7B32819D147FC2D68FA39BAF898F282923FC6C5749147B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire spell packet.asset.meta",
+    "mainSha256": "355695FFCB55766ACBE0D3A6663B33FF6976FE0A5793DFF3BAFD42B00F034E60",
+    "qaSha256": "A31A8DDF5F1754B77F3A6F10E0279D842E2B7B8EE3D4D691324D434FEBD324F1",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fireball icon.asset",
+    "mainSha256": "83A555043AB4CD2D997F2DE041E14A086DADDF7FCB00A8C302F4DBCD37CFBFF9",
+    "qaSha256": "9C40C6288C2DC01B2A9E881C8139457A54A7538D23AF62F25D3C5E7D1DAFB821",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fireball icon.asset.meta",
+    "mainSha256": "820C44F8EFC60F67E195BD4D829EC5532527575FC529DACC09EFD0CF29FA8B79",
+    "qaSha256": "4F8D6BF9683B88B2D9CB31DD519C18D5377D90F3B0F2F0B373BEDB6C0FDD3CCC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Flame Ward icon.asset",
+    "mainSha256": "49B31C9703585649C9D481AA0A8330C457265DAD4396FA2E6A68C8742717941F",
+    "qaSha256": "B59DA2036E51B9D9EB76E5052BD28C28894D48AA3AFFA2BFAF08696EF50C7E49",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Flame Ward icon.asset.meta",
+    "mainSha256": "1264237E76714A4423AC75EAE4859A6717607B7666137DA79C5B0F00F4E2D180",
+    "qaSha256": "DF30AA8E1950F9EE1D9C4368EB5F19A90BE7C40A503CE9A549CCB11DB13841FA",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Heat.asset",
+    "mainSha256": "667BEE574E21283A984ADF41E7EA520C28B7AACB2B5739029F131D7B59909818",
+    "qaSha256": "667BEE574E21283A984ADF41E7EA520C28B7AACB2B5739029F131D7B59909818",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Heat.asset.meta",
+    "mainSha256": "7CA9AB846012A11A12ECADE59D84E360710ED53E31058670F804867989DAABFD",
+    "qaSha256": "E625A0B43003A5FEC48B96219DCF9AD522531620E35287AC26EADA1DFBE302D1",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Ignite icon.asset",
+    "mainSha256": "AB4A15FB0A89C0C44CC2E3C682C9E6402ECAD4C8E9749AC88E4A5E929CBD8BB7",
+    "qaSha256": "2960F06086C0B4279839613553932670412CF31ECA1E0C6AB6E18F8D7AAEFB72",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Ignite icon.asset.meta",
+    "mainSha256": "7C11ED9810B3D94D1496D7A5CA6482D06EE30A3C94E4C220B442DAA55649E245",
+    "qaSha256": "A1088CCC68CCE50FFD58D334693B328F64A8DD17132075C8FB78B9E161E68E4D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Infernal Presence icon.asset",
+    "mainSha256": "D31559EC09CB5A8053B84B0614C131558C5E2BB984995AE665AED6544366BEE9",
+    "qaSha256": "1684E7708391112A2F6D0034BAB3EA194F0A8E851760B72DD4D09220500E2B61",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Infernal Presence icon.asset.meta",
+    "mainSha256": "9525D2498AC966473B4B370B0F49E0DCA4BBE5354F3037C9C7390A7F3D4C21A5",
+    "qaSha256": "40385483724B640C27A4251A0EC2A6F9B15D84F081C9364AD55A69E9A5F053EC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Living Bomb icon.asset",
+    "mainSha256": "0E5C31797E284B9ECA4A635D6D8302C63E94870F25CF62F4D36EA663C7858BF3",
+    "qaSha256": "DA51B9B8894AA15D0E362F3ACD7E16F3D1BF4EB8FA2833FE7A16591FD3A52418",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Living Bomb icon.asset.meta",
+    "mainSha256": "7E2E3DBD945A416E384F68AD7EA6F40E1D00893A4365909D1A886F6A0A21CD93",
+    "qaSha256": "AEDAF94C44860E87929E25E15E980EA6E325435501C863EFC07CD5DD9ABDFF1D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Living ember.mat",
+    "mainSha256": "F6A9C69B62D7AAAB4C20FE59C9BC70879EB2B5FE3A1D0B9A4B3CE32BCD7AA1A1",
+    "qaSha256": "ED0B4E081454252DCF84FF9010A3427DDA5D4E81BC2A52C74D8B2A0F247637B6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Living ember.mat.meta",
+    "mainSha256": "23C060BDA6338D118553A7C1BFF1E6D7479BD6C5901C95B69912F1B6205E1187",
+    "qaSha256": "62E03B1F85F18B508237194A58D552153026E3B6AEB179EE611B7B5D5C5A6321",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Molten lava.mat",
+    "mainSha256": "993C17CACA20B49495EA0F270AC85D483229194D6B4E4FE6093A0D7157F3D6F9",
+    "qaSha256": "AD58197F53B229C39840585535198DD6EDE5BA2EA0D5DA78E6538F059764978D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Molten lava.mat.meta",
+    "mainSha256": "681AC24E3500611D806AA16BE6B514E8D26BF8EE23593CF6A9917ECFD6427FB5",
+    "qaSha256": "92DF3D66253D8E249B74C42E0EC8F572097D0167A40255E83903B7AFA5D20B8F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Obsidian.mat",
+    "mainSha256": "BB2994F570F39E0DBB8A57D4A0A4CF9AA9A4A69EDEF7ECC5B3EA0A5F83A63D04",
+    "qaSha256": "227B66611830E4DA8CA8FC5E8E261DC72E73D68E88473BED6D9A1146A3DE6A40",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Obsidian.mat.meta",
+    "mainSha256": "68DB2052D0ADFEF3179CA2DC97509AF34DECFBE7649AFB5AAEEEC4B5FC91B6BD",
+    "qaSha256": "1F218E023F4F39FEAFAEB38E0D30BB443D02344F072DF0DFC1636EEC9E84477D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Overheat Mastery icon.asset",
+    "mainSha256": "90B31BECC6AF3F72B37F2C9F5038C8DAFD3D892E043D3741FFBF3324A762F1B9",
+    "qaSha256": "A53897ABB03FA53B5EADE4E5CAF086E6AD18AE8CE4F94BBDF3F0A842FC92C888",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Overheat Mastery icon.asset.meta",
+    "mainSha256": "F3ECF0556CB7EEA1CEA106C5455ED8B56248EB0366618BB8F8E97F6A13841992",
+    "qaSha256": "23AD89C9BB5A52C7D6C63BEF1A4D9BCD107555C4A123A04ED88BBDA582702662",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Pale safe stone.mat",
+    "mainSha256": "388A2ED5A3F4DCF103508346BED59CF21D544DB511BA03DD0B692D26D7099521",
+    "qaSha256": "2B5B5E595B3C9121FEB7F0EEA2CEAD71A906C180395C1AED62CA90C20EFAA6E2",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Pale safe stone.mat.meta",
+    "mainSha256": "509D83DF9AF7F740F6824F0E47A540BCCBEADDB770F799E8B2D31FC27CC2DE53",
+    "qaSha256": "CE596237A19D5048BE0993F5EFC0313A9833BDBAD25E7D77E9259BAD1F16B751",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/The Ember Walk.asset",
+    "mainSha256": "DB2B12F6EC6A38B90FC3279654DA060A7E8CFD287665952CFEA4D4E718A2069B",
+    "qaSha256": "8C347D258B760476E6B95A2482E829E71813A02A447991F0049AE2816E2A1A00",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/The Ember Walk.asset.meta",
+    "mainSha256": "D46806DC508F6F359B7D3E6754B7566378060F1B32F0BD542D97AB6527FF9F0B",
+    "qaSha256": "08DADE6FC06D87DF10B8BC5A6974BAB265A8AB62DF1BDB10FC295EFD29D21990",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Trial basalt.mat",
+    "mainSha256": "73745A33C100A3865F74FFD2F9E782442B16356A23DC2D80F1E2C6807CF7F0BE",
+    "qaSha256": "E83F29E1F32E1E66575D3E8DD9CCDA43F8F7A14C7D1AB203E7DB958BE25D8131",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Trial basalt.mat.meta",
+    "mainSha256": "33AA900099BB1C31D6AAEB0E5D76026535A53D9EC08B12AD4DEDCE56ED20F442",
+    "qaSha256": "1FE1F9058E52B1298512D2A72B308133A110C518ADCC834C75909DDF5D9D2BA8",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 0-0.mat",
+    "mainSha256": "B7636BFBC9D8336AB1184E61AA9641362A74088D1FA85A58401F405BBBD7ED39",
+    "qaSha256": "280E4C9A36E00B7E1539A3383E3101362B43272A1007AE09936BC810D80DCA85",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 0-0.mat.meta",
+    "mainSha256": "E7E1C27F864C3A40625E6A50B6FBE8C3113128037742E362912205FECFF6D86E",
+    "qaSha256": "E6767F00055EB840ABD63DF0A4878A1CC9773E4CC0DEDA7D46D6BBD880EBCAC0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 0-1.mat",
+    "mainSha256": "8E09E21CACE4672C5EDF9A622A638A55022ACB1C7D4038CCDB404BCC385AB4F2",
+    "qaSha256": "94833BE10B579EACF2B37B9DDC8AB5D7D997CDA27187461CC8EBF8C86C124B56",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 0-1.mat.meta",
+    "mainSha256": "AECB9051581AF35865D08011120AD90BD1290722CABB73D2C5CBCFA532BB647E",
+    "qaSha256": "A1357C51D428F5F6F3E826856BC6F96DDAFE7C6FCD1938B75E8121D29B09065B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 1-0.mat",
+    "mainSha256": "607E7DCAAD943561F28FAE2ADC57AA39095F09D71B570FFCFE61321310682550",
+    "qaSha256": "3FDC13E57F75BDC95BC848DF99C4AF7FCB237188EBA285E1193E526184BC0D39",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 1-0.mat.meta",
+    "mainSha256": "548AD8D7CCB9838F4543AC9BF9CCD9D0A7C71344E6FE83A2F41187B118839148",
+    "qaSha256": "2EAF52976BF6E6195E3CA9A8375DE7DFFE3C47A75FDB322A4593AC1926671563",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 1-1.mat",
+    "mainSha256": "41CA420476753FB7F6620F83EFF9519B93C6A6BF39CCF9C3872B98E97BB2DFED",
+    "qaSha256": "613D5B0A10EC8808B6571D4E66C9EC3F4F2AEF4EEA7E782760B2034AC6AD5462",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 1-1.mat.meta",
+    "mainSha256": "6E5A3269D7AB1ACD3BD85948F35DFFF5A8C9E34556053666DA6DDBE05EBEF335",
+    "qaSha256": "D5166639A47BE88F2F2FD406311408BC50905B4F660FD4201140D1600BE39C75",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 2-0.mat",
+    "mainSha256": "9FB7A4F56CE07831EF7F634A4EC96B2FBD538FC0EA35E38E6E183973DBB42EA0",
+    "qaSha256": "2265CCEA168C3C757D6A408A058070002D3AEB1AD070593BF63ADE2F3A90A7AB",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 2-0.mat.meta",
+    "mainSha256": "35B418EBFE73C6429E209F73C790F7C7DD777DC303FAA5E23BF0D715B46CF3E9",
+    "qaSha256": "22461C64D10DC9504C69AE03E8815CA0A2C15CA5B3DC94AFB31CC04AD1AE6F24",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 2-1.mat",
+    "mainSha256": "6CB1E3C1E768C8CFE00B6A5909254B08DEAEF200358FF0790F25C31DE485F5D7",
+    "qaSha256": "E3AF932CD93AC2DC4DF7DB53853CF8776671B73BCBD344329C83F385EE1D16F4",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 2-1.mat.meta",
+    "mainSha256": "7ADDDFD10B5F16EE93171DB4F4BC804229AF7CF8959463F5F56F1D72945512BD",
+    "qaSha256": "FCF545D2E3E25B033578DC458807B2561DE8C11A7670C8B58FDC1A423DF672DD",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 3-0.mat",
+    "mainSha256": "E271FE3B51C7D1E79EAB5102F25C65D2215D46880D1E108143F572AF0B120E65",
+    "qaSha256": "EAD1D32335BB40AFEAD7A960643B6A8BEB1FEB13251525EAE9EDB805E66EC0F4",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 3-0.mat.meta",
+    "mainSha256": "D4230C72F8B3F107BE66D5E12457A7386908247E4FE1CD2BB9C1DD5996706817",
+    "qaSha256": "09C5F049D82BAD1E7DEA74A21C30EC3933530866ECAA96E50B6BB323E77BDE32",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 3-1.mat",
+    "mainSha256": "54B4D76FD355F08E77CC759C8E0CFA7B37D45FA60E29886C471E2E6F4C9A8602",
+    "qaSha256": "4D1678158FD8ED64245857F7E8FAD875BC669DCD240680BEF30D751D935193F2",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 3-1.mat.meta",
+    "mainSha256": "57ADFE4A073076E9AC6FC4558037C97E3752382B2359DF0CBEF1FC8AC91B2447",
+    "qaSha256": "0E68FFF21D421843D5096E242819F18DF54BDB1A91564F102E3DF9844318DC79",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 4-0.mat",
+    "mainSha256": "AE05DC97A634D9EE759C1AF6DB687808AD960DB106DA52C4F01B3CE74CC124DE",
+    "qaSha256": "D8D87E1FA88064EB5970A58A848D537843036F9F8E495EE0241615E3D9397BF0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 4-0.mat.meta",
+    "mainSha256": "FD570559CAF9F89AB05B175C3361008594D8C536DC43239D849240E5775B889B",
+    "qaSha256": "B84DE995C9C248CE40E3B0D71EDAD9D8D75A0AA5014A0469444F109F0241E8D0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 4-1.mat",
+    "mainSha256": "AE36935626779002C063A071CA031537E351D27DC4EECB3ED4B83BDC375053CC",
+    "qaSha256": "53FCFBB6063F8B9BFEC429A2230A7E222FA05414293E609612C14BC5A140BB65",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Warning flame 4-1.mat.meta",
+    "mainSha256": "32DC8D823FE5EEF492B4BA94C4B6E37BD43671B3DD22BE642071CDF0505E8518",
+    "qaSha256": "0DD4EEB294B3EB7F433CFACEA680AC9E1606F0F95BF8433131610ED9C603E39A",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Progression/Class catalog.asset",
+    "mainSha256": "ECE7CA861C12CA5E8C52E5B58DBB3ACD4094E9073EB9966AAA1850BAA65C61A4",
+    "qaSha256": "ECE7CA861C12CA5E8C52E5B58DBB3ACD4094E9073EB9966AAA1850BAA65C61A4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/EmberFlame.shader",
+    "mainSha256": "47690B38A47404B75382B26ECA8D10E8975EDDC0838C75264935D0F7A4708652",
+    "qaSha256": "47690B38A47404B75382B26ECA8D10E8975EDDC0838C75264935D0F7A4708652",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/EmberFlame.shader.meta",
+    "mainSha256": "64CA32065C076C34D45F1A25B190045A3A0FA2EA6F5B7A87FFD343FBB1BCB34A",
+    "qaSha256": "CE8FBC053EBCA6D6CD7525767A27686C918B074F00F9F75DDD89FA48F0A892AD",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/EmberTerrain.shader",
+    "mainSha256": "13CC441FB80983432573647EC0D9EEFCC7465F82E7D4EA382C67213F4F242996",
+    "qaSha256": "13CC441FB80983432573647EC0D9EEFCC7465F82E7D4EA382C67213F4F242996",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/EmberTerrain.shader.meta",
+    "mainSha256": "B88AF311574DBDE81684716503CBAD9310217A94E4B64ACB46EFEF2E1E8FD883",
+    "qaSha256": "989B3DE5070A9A4D58044CDD27486BBA3187734AA62E81697A373B2A7D20DB1E",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/GroundAuraSigil.shader",
+    "mainSha256": "4685EFDB6B53E34A4E371FDCD6A2CDCB77B67535B4477521EC127D0D1F7AAE3B",
+    "qaSha256": "4685EFDB6B53E34A4E371FDCD6A2CDCB77B67535B4477521EC127D0D1F7AAE3B",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets\\_DiceFree\\Resources\\DiceFree\\DungeonRewards\\SlimeRegent\\Azure Slime Orb.asset",
+    "mainSha256": "E64EF7A71A55BFD5967A15B637BD15CD9CF8D7124A83E31746ADEA4DBFBBE7DA",
+    "qaSha256": "E64EF7A71A55BFD5967A15B637BD15CD9CF8D7124A83E31746ADEA4DBFBBE7DA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets\\_DiceFree\\Resources\\DiceFree\\DungeonRewards\\Wolf\\Starfall Wand.asset",
+    "mainSha256": "0611635EEF7B4525540278365D8874FC9663778389C9CEF390ABDD69B7772B77",
+    "qaSha256": "0611635EEF7B4525540278365D8874FC9663778389C9CEF390ABDD69B7772B77",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets\\_DiceFree\\Settings\\Dungeons\\Slime Orb.asset",
+    "mainSha256": "2B8AE12FCAF4BA7FEE798E781742C9444D01FBA08DC6A9960E2CD6AB63A66440",
+    "qaSha256": "2B8AE12FCAF4BA7FEE798E781742C9444D01FBA08DC6A9960E2CD6AB63A66440",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "ProjectSettings/EditorBuildSettings.asset",
+    "mainSha256": "CBAC06B9D1D6679DE36310BE86EF4621568B1C87EF57AFE8F686494F9993F31A",
+    "qaSha256": "CBAC06B9D1D6679DE36310BE86EF4621568B1C87EF57AFE8F686494F9993F31A",
+    "comparison": "byte-identical"
+  }
+]
