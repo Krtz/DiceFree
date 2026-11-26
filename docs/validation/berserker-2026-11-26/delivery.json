@@ -1,0 +1,17 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Berserker-20261126-162640\\DiceFree.exe",
+  "executableSha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "reviewBuild": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Berserker-20261126-162640",
+  "checks": {
+    "static-review.json": 392,
+    "reload-review.json": 25,
+    "combat-review.json": 398
+  },
+  "totalChecks": 815,
+  "sourceComparisons": 126,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "buildErrors": 0,
+  "buildWarnings": 1,
+  "limitations": "Automated disposable-profile checks and local party participation; no manual balance or live network co-op acceptance. Batch captures omit screen-space overlay UI."
+}

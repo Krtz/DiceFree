@@ -5,6 +5,7 @@ using UnityEngine;
 namespace DiceFree.Items
 {
     public enum EquipmentSlot { Head, Shoulders, Chest, Hands, Legs, Feet, MainHand, OffHand, Ring, Amulet, Back }
+    public enum GreatWeaponFamily { Unspecified, TwoHandedAxe, TwoHandedSword }
     [CreateAssetMenu(menuName = "DiceFree/Items/Handcrafted item")]
     public sealed class ItemDefinition : ScriptableObject
     {
@@ -12,6 +13,9 @@ namespace DiceFree.Items
         public Sprite icon;
         public EquipmentSlot slot;
         [Range(1,2)] public int handsRequired = 1;
+        public GreatWeaponFamily greatWeaponFamily;
+        public static bool IsGreatWeapon(ItemDefinition item) => item!=null && item.slot==EquipmentSlot.MainHand && item.handsRequired==2 &&
+            item.greatWeaponFamily is GreatWeaponFamily.TwoHandedAxe or GreatWeaponFamily.TwoHandedSword;
         [Min(1)] public int itemLevel = 1;
         public string rarityId = "rarity.provisional";
         public string sourceId;

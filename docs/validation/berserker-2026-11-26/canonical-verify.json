@@ -1,0 +1,58 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "package.verify",
+  "ok": true,
+  "data": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "T:\\TEMP\\DiceFree-BerserkerArt\\Canonical\\.game-dev\\packages\\dicefree_ashscar_orc\\1.0.0",
+    "manifest": {
+      "assetId": "dicefree_ashscar_orc",
+      "displayName": "dicefree-ashscar-orc",
+      "files": [
+        {
+          "bytes": 3385924,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "89361872207b4473a18482c1b4c58f1a20a5d410623500abf626819ccc144359"
+        },
+        {
+          "bytes": 1729,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "7cef3420d9eda98d02810d13a16d210943b5bc31cebf53d228f5b6dd0e825816"
+        },
+        {
+          "bytes": 227,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "257b52834749fef66d21e1948115e98f424f35d3888a1c29eee3afac6166a954"
+        },
+        {
+          "bytes": 3172,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "723e10456734d12fb6a1d99b221b2bed794faf3451d53abbf367026969f34c80"
+        }
+      ],
+      "license": "CC-BY-4.0",
+      "model": "model.glb",
+      "packageId": "pkg_6ae14478232223c2bb2ebe87",
+      "provenance": {
+        "origin": "imported"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 0
+      },
+      "version": "1.0.0"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  }
+}

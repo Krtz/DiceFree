@@ -32,7 +32,7 @@ namespace DiceFree.Combat
         public float ReachOverride { get; set; } = -1f;
         public float Reach => (ReachOverride >= 0 ? ReachOverride : Definition?.reach ?? 0f) + (ranger?.RangeBonus ?? 0f) + (marksman?.RangeBonus ?? 0f);
         internal CriticalRule CriticalRule => marksman?.CriticalRule() ?? GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicCriticalRule() ?? psion?.BasicCriticalRule() ?? ranger?.CriticalRule() ??
-            GetComponent<DiceFree.Skills.ThiefSkillCaster>()?.BasicCriticalRule();
+            GetComponent<DiceFree.Skills.ThiefSkillCaster>()?.BasicCriticalRule() ?? actor.Stats.ExternalCriticalRule();
         public event System.Action<CombatActor,DamageResult> Connected;
         public float CooldownRemaining => Mathf.Max(0, readyAt - Time.time);
         /// <summary>Extra damage only for actual auto-attack impacts.
@@ -45,7 +45,7 @@ namespace DiceFree.Combat
         private const float ClassMaximumDamage = 1.05f;
         // Skill/summon snapshots use DamageRange; the ranged aura belongs only to
         // the eventual basic packet and its HUD preview, never ability formulas.
-        public Vector2 DisplayDamageRange=>DamageRange*DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor);
+        public Vector2 DisplayDamageRange=>DamageRange*DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor)*(GetComponent<DiceFree.Skills.BerserkerCaster>()?.DamageMultiplier??1);
         public Vector2 DamageRange
         {
             get
@@ -166,7 +166,7 @@ namespace DiceFree.Combat
                 Definition.RollDamageMultiplier(actor.Stats.Attributes,BasicAttackDamageScale),
                 Random.Range(0f, actor.Stats.BasicAttackMaximumBonus),
                 Random.Range(actor.Stats.Definition.basicAttackMinimumOffset,actor.Stats.Definition.basicAttackMaximumOffset),
-                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) * DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor) *
+                finalRawMultiplier: opener * (ranger?.DamageMultiplier(target) ?? 1) * DiceFree.Skills.MarksmanCaster.AuraMultiplier(actor) * (GetComponent<DiceFree.Skills.BerserkerCaster>()?.DamageMultiplier??1) *
                     (HasClassDamageSpread ? Random.Range(ClassMinimumDamage, ClassMaximumDamage) : 1),
                 flatDefensePenetration: (psion?.BasicPenetration ?? 0) + (GetComponent<DiceFree.Skills.PsionEvolutionCaster>()?.BasicPenetration ?? 0));
             packet = target.Health.ApplyPacket(actor, packet);

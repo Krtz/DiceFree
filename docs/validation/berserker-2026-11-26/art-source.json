@@ -1,0 +1,44 @@
+{
+  "sourceArchive": "orc-warrior (2).zip",
+  "sourceSha256": "114d2ef322da9bd1519103c875846ec24627f301763e672a371b94675f988f69",
+  "sourceUrl": "https://sketchfab.com/3d-models/orc-warrior-21eaa407bf164cdea21135a1d1b2b8f3",
+  "author": "Callan McEntee",
+  "license": "CC-BY-4.0",
+  "heightMeters": 2.08,
+  "boneCount": 71,
+  "meshes": [
+    "Ashscar_Armour2",
+    "Ashscar_polySurface32",
+    "Ashscar_Body5"
+  ],
+  "materials": [
+    {
+      "name": "Orc_Armour",
+      "baseMap": "Orc_Armour.jpg"
+    },
+    {
+      "name": "Orc_Body",
+      "baseMap": "Orc_Body.jpg"
+    },
+    {
+      "name": "Orc_Head",
+      "baseMap": "Orc_Head.jpg"
+    }
+  ],
+  "transforms": [
+    "Removed source spear and display plinth",
+    "Removed the source idle animation tracks for humanoid retargeting",
+    "Baked source control transforms into a clean weighted bind pose",
+    "Normalized grounded model to 2.08 metres",
+    "Preserved existing skin weights and UVs",
+    "Converted textured Lambert materials to rough PBR"
+  ],
+  "files": {
+    "AshscarOrc.fbx": "19c35d7bf99a107df8a922a657bd1ed68f8993d54f6c3d98be3be0208b03fe84",
+    "AshscarOrc.glb": "89361872207b4473a18482c1b4c58f1a20a5d410623500abf626819ccc144359",
+    "Orc_Armour.jpg": "2001e7c96482d27ed846598ac8d51149e6635a6452c1b171fba999ecf6cfad9d",
+    "Orc_Body.jpg": "aac9b5f1eb00d127f43a7a5f6dcca1e927a82d8e18ecce267f7c216984b6ba28",
+    "Orc_Head.jpg": "f677f0cbdcfe8e35622725a33b44e47b87ea835ce7d3fb08226875639fcfe720",
+    "source-receipt.json": "fae72123db66c90ac7f983f7ecaf6c5bae19ca70894ed7b9ffbbafe74d17945f"
+  }
+}

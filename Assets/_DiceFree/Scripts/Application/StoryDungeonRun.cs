@@ -226,6 +226,12 @@ namespace DiceFree.Dungeons
         {
             foreach (var participant in members.Values) participant.events.Publish(fact);
         }
+        // Intermediate guardians grant quest facts without completing the run.
+        protected void PublishBossKill(string bossId,Func<CombatActor,bool> eligible)
+        {
+            foreach(var member in members.Values)
+                if(member.actor!=null&&eligible(member.actor))member.events.Publish(new DungeonBossKilledEvent(DefinitionId,bossId));
+        }
 
         public void RequestLeave(CombatActor actor)
         {

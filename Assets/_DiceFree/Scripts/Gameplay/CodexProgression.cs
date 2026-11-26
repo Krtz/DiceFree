@@ -99,7 +99,7 @@ namespace DiceFree.Gameplay
             RequireId(id,nameof(id));if(Teachers.Contains(id))return false;
             state.teachers=Teachers.Append(id).ToArray();Touch();return true;
         }
-        public static string TeacherName(string id)=>id=="teacher.ranger.marksman"?"Aelwen, the Farwatch":id=="teacher.psion.psionic-knight"?"Seren, the Whispered Blade":id=="teacher.psion.mirage-mage"?"Vaelis, the Glass Seer":id;
+        public static string TeacherName(string id)=>id=="teacher.greatblade.berserker"?"Gorren Ashscar":id=="teacher.ranger.marksman"?"Aelwen, the Farwatch":id=="teacher.psion.psionic-knight"?"Seren, the Whispered Blade":id=="teacher.psion.mirage-mage"?"Vaelis, the Glass Seer":id;
 
         public void RestoreJson(int version, string json)
         {

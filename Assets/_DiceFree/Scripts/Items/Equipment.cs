@@ -7,13 +7,14 @@ using UnityEngine;
 namespace DiceFree.Items
 {
     [RequireComponent(typeof(CarriedInventory), typeof(ActorStats))]
-    public sealed class Equipment : MonoBehaviour
+    public sealed class Equipment : MonoBehaviour,IGreatWeaponUser
     {
         private CarriedInventory inventory;
         private ActorStats stats;
         private readonly List<EquippedItem> slots = new();
         private readonly HashSet<string> applied = new(StringComparer.Ordinal);
         public event Action Changed;
+        public bool HasGreatWeapon=>ItemDefinition.IsGreatWeapon(ResolvedDefinition(EquipmentSlot.MainHand));
         public EquippedItem[] Slots => slots.Select(s => s.Copy()).ToArray();
         public bool IsEquipped(string instanceId) =>
             !string.IsNullOrWhiteSpace(instanceId) && slots.Any(s => s.instanceId == instanceId);
@@ -30,7 +31,7 @@ namespace DiceFree.Items
                 if(main!=null)return main.handsRequired==2;
                 // Greatblade's unequipped class model carries a default greatsword.
                 return ResolvedDefinition(EquipmentSlot.OffHand)==null&&
-                    stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId;
+                    (stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId || stats.Definition.stableId==DiceFree.Skills.BerserkerProgression.Id);
             }
         }
         public ItemInstance[] BagItems => inventory == null
@@ -44,6 +45,8 @@ namespace DiceFree.Items
             if (GetComponent<DiceFree.Foundation.RunLoadoutLock>()?.Locked == true) return false;
             var item = inventory.Find(instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
             if (definition == null || definition.slot != slot || !Enum.IsDefined(typeof(EquipmentSlot), slot)) return false;
+            if(stats.Definition.stableId==DiceFree.Skills.BerserkerProgression.Id &&
+                (slot==EquipmentSlot.OffHand || slot==EquipmentSlot.MainHand&&!ItemDefinition.IsGreatWeapon(definition)))return false;
             if(slot==EquipmentSlot.OffHand&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId&&!definition.modelTestingItem)return false;
             if (definition.allowedClassIds != null && definition.allowedClassIds.Length > 0 &&
                 !definition.allowedClassIds.Contains(stats.Definition.stableId)) return false;
@@ -69,6 +72,8 @@ namespace DiceFree.Items
         public bool IsResolved(EquippedItem slot)
         {
             var item = inventory.Find(slot.instanceId); var definition = item == null ? null : inventory.Resolve(item.definitionId);
+            if(stats.Definition.stableId==DiceFree.Skills.BerserkerProgression.Id &&
+                (slot.slotId==EquipmentSlot.OffHand.ToString() || slot.slotId==EquipmentSlot.MainHand.ToString()&&!ItemDefinition.IsGreatWeapon(definition)))return false;
             return definition != null && !(slot.slotId==EquipmentSlot.OffHand.ToString()&&MainHandUsesBothHands()) && !(slot.slotId==EquipmentSlot.OffHand.ToString()&&stats.Definition.stableId==DiceFree.Progression.GreatbladeProgressionRules.ClassId&&!definition.modelTestingItem) && definition.slot.ToString() == slot.slotId &&
                 (definition.allowedClassIds == null || definition.allowedClassIds.Length == 0 || definition.allowedClassIds.Contains(stats.Definition.stableId));
         }

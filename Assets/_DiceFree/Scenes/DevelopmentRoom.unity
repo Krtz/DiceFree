@@ -29834,6 +29834,9 @@ GameObject:
   - component: {fileID: 1724212372}
   - component: {fileID: 1724212371}
   - component: {fileID: 1724212370}
+  - component: {fileID: 1724212375}
+  - component: {fileID: 1724212374}
+  - component: {fileID: 1724212373}
   m_Layer: 10
   m_Name: Development Echo
   m_TagString: Untagged
@@ -29870,6 +29873,7 @@ Transform:
   - {fileID: 649459489}
   - {fileID: 1183300544}
   - {fileID: 1643636306}
+  - {fileID: 1055772757}
   m_Father: {fileID: 1562633928}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1724212271
@@ -30272,6 +30276,9 @@ MonoBehaviour:
   - classId: class.marksman
     visualRoot: {fileID: 1643636306}
     animator: {fileID: 1643636307}
+  - classId: class.berserker
+    visualRoot: {fileID: 1055772757}
+    animator: {fileID: 1055772758}
 --- !u!114 &1724212297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30372,6 +30379,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 792bfd20b0fe82d4587437b88cedf51a, type: 2}
   - {fileID: 11400000, guid: ce317438fe1de4e4a80976f1faeba04a, type: 2}
   - {fileID: 11400000, guid: 05be04658290f6247a439c0c51646b8c, type: 2}
+  - {fileID: 11400000, guid: 592ccb43fab8fb84faf6378a2a6ddfb7, type: 2}
 --- !u!114 &1724212303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30412,6 +30420,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9883528ed159c8a4cb582815b8993988, type: 2}
   - {fileID: 11400000, guid: 31b55ad9850b2f44a8ce98cf868e8119, type: 2}
   - {fileID: 11400000, guid: 045e6506e25b6fa4dbbd1258683f8f52, type: 2}
+  - {fileID: 11400000, guid: bcd0d6c8b9898294f9e741d8e3f8765a, type: 2}
 --- !u!114 &1724212305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30704,6 +30713,30 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3102269900d5d394aa57ce642e8e067e, type: 2}
   - {fileID: 11400000, guid: 1c9b1eaf56266164bab8ce7abcf5570c, type: 2}
   - {fileID: 11400000, guid: 38b85b94e79601f49a8ce64fe863bcfd, type: 2}
+  - {fileID: 11400000, guid: aaeac862ee6e2c344b67e2b3a960aff3, type: 2}
+  - {fileID: 11400000, guid: a54de82cb300b0b4f806f0fa346599ed, type: 2}
+  - {fileID: 11400000, guid: 814982ffc9674144d8712f92ebe02533, type: 2}
+  - {fileID: 11400000, guid: 287bb236f97698340856ab424418ff51, type: 2}
+  - {fileID: 11400000, guid: dd7adf0a9826b504c9422185723cd829, type: 2}
+  - {fileID: 11400000, guid: 51784e64186cdb648bd5b445176b4e18, type: 2}
+  - {fileID: 11400000, guid: 1b363839a9894bc40b51f645aed3b929, type: 2}
+  - {fileID: 11400000, guid: 4e8335962797475408e9ff233dafc72c, type: 2}
+  - {fileID: 11400000, guid: feed8d6201286144880735485155fd50, type: 2}
+  - {fileID: 11400000, guid: 857f8560800bbc04cb1ca1657d3ce17b, type: 2}
+  - {fileID: 11400000, guid: 3ae0b300aecf75e46a9ca7e73b75a065, type: 2}
+  - {fileID: 11400000, guid: 4cf99385cf776e949aa64972cf877668, type: 2}
+  - {fileID: 11400000, guid: 9f8eabc41df21024793e4c3f0e60f691, type: 2}
+  - {fileID: 11400000, guid: e0cb7acd784c8fb418ff3f55729082b7, type: 2}
+  - {fileID: 11400000, guid: 96878fb8a75f8a44ea0cc664f314c7e5, type: 2}
+  - {fileID: 11400000, guid: e05921eafa964af4f949dc6f4a5f5418, type: 2}
+  - {fileID: 11400000, guid: 7e39600ee144a614bbde06495946cc8b, type: 2}
+  - {fileID: 11400000, guid: ae1977ffc4c4f594ea1ae3f1b40585f0, type: 2}
+  - {fileID: 11400000, guid: 866bffcddcf6d9645b7136f9ebcbca21, type: 2}
+  - {fileID: 11400000, guid: bb063181d9124a74196262043489cc1d, type: 2}
+  - {fileID: 11400000, guid: 0e23e82fc2fd90641b513e97a1be3e6b, type: 2}
+  - {fileID: 11400000, guid: c1ed65a9a705e414c991641944237770, type: 2}
+  - {fileID: 11400000, guid: e331b36ec1f9e854c94db3189a882d58, type: 2}
+  - {fileID: 11400000, guid: b7a8432f5a8fe304c87c3ab6e27ac8c9, type: 2}
 --- !u!114 &1724212316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30784,6 +30817,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 10989b138080acf429ad180743c74535, type: 2}
   - {fileID: 11400000, guid: 9f11c2ddf4058bd4bb56b070437ef5a2, type: 2}
   - {fileID: 11400000, guid: 549636e2f7d6b1d478acd8325e255931, type: 2}
+  - {fileID: 11400000, guid: 598b239a2d2bba5459c7be50a9adf325, type: 2}
   progress: []
 --- !u!114 &1724212321
 MonoBehaviour:
@@ -40763,3 +40797,119 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70af559ba276374dbefebfe48ce34d0, type: 3}
   m_Name:
   m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.MarksmanProgression
+--- !u!1001 &1055772756
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1724212270}
+    m_Modifications:
+    - target: {fileID: 4240125480742227575, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_Name
+      value: Ashscar Berserker
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240125480742227575, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+--- !u!4 &1055772757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4540703186001096306, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+  m_PrefabInstance: {fileID: 1055772756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1055772758 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8282914853694215992, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
+  m_PrefabInstance: {fileID: 1055772756}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1724212373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8defd4bdf9edced4fbffd63c19e66c9e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.BerserkerAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: 3903ad996117e124198845f8d33c74a9, type: 2}
+  - {fileID: 2800000, guid: 46616a83f4cf8ac4eb5d533a56b9da3a, type: 2}
+  - {fileID: 2800000, guid: d8fd7d71c557cd643952dcf22d07f9f4, type: 2}
+  - {fileID: 2800000, guid: dcf284d7300001841a758e6b63c7a5b0, type: 2}
+  - {fileID: 2800000, guid: 0b6808119653c6749a0cc3ccde794feb, type: 2}
+--- !u!114 &1724212374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242bb26e8f4dbc64a98b3807e890a348, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.BerserkerCaster
+  wideArc: {fileID: 11400000, guid: d8d451b219915f44cb31fb509faccede, type: 2}
+  spinDash: {fileID: 11400000, guid: 33096623f50982e4ead518f92f8d478d, type: 2}
+  rageBreaker: {fileID: 11400000, guid: b6e816ef9bc08f74f9c90b971ecbcf23, type: 2}
+--- !u!114 &1724212375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b76caa8f4dd54b4f9ab0be9e7345009, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.BerserkerProgression

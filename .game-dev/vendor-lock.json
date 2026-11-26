@@ -2,6 +2,16 @@
   "schema": "game_dev.vendor_lock.v1",
   "entries": [
     {
+      "packageId": "pkg_6ae14478232223c2bb2ebe87",
+      "assetId": "dicefree_ashscar_orc",
+      "version": "1.0.0",
+      "destination": "Assets\\_DiceFree\\Art\\Characters\\Berserker\\Canonical",
+      "modelSha256": "89361872207b4473a18482c1b4c58f1a20a5d410623500abf626819ccc144359",
+      "manifestSha256": "f0d13e18d6694260e61f1755e79d7f68b6c114732c06730d12a5c28aac9f2c36",
+      "license": "CC-BY-4.0",
+      "admittedAt": "2026-11-26T15:16:02.641Z"
+    },
+    {
       "packageId": "pkg_607fd1941c9d4133637e283a",
       "assetId": "dicefree_mirage_mage",
       "version": "1.0.0",

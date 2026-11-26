@@ -47,7 +47,7 @@ namespace DiceFree.UI
                 if (target is TimedInteractionTarget work && work.Available(player))
                     MarkerFor(root, MapIconCategory.QuestObjective, work.ApproachPosition, work.DisplayName);
                 if (journal == null) continue;
-                if (target is QuestGiver giver)
+                if (target is IQuestOfferSource giver)
                 {
                     foreach (var quest in giver.Offers)
                     {

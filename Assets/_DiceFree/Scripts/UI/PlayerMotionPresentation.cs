@@ -14,7 +14,7 @@ namespace DiceFree.UI
         MageSkillCaster mage;GreatbladeSkillCaster greatblade;PriestSkillCaster priest;
         AcolyteSkillCaster acolyte;
         ThiefSkillCaster thief;
-        RangerSkillCaster ranger; MarksmanCaster marksman;
+        RangerSkillCaster ranger; MarksmanCaster marksman; BerserkerCaster berserker;
         DefenderSkillCaster defender;
         PsionSkillCaster psion;PsionEvolutionCaster psionEvolution;
         AnimatorOverrideController sessionController;RuntimeAnimatorController previousController;
@@ -26,11 +26,11 @@ namespace DiceFree.UI
         public bool SupportsCurrentClass => Resource(actor?.Stats.Definition?.stableId)!=null;
         bool controllerTwoHanded, thiefLeft;
         public bool UsesTwoHandedStance=>equipment!=null&&equipment.UsesTwoHandedStance;
-        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();priest=GetComponent<PriestSkillCaster>();acolyte=GetComponent<AcolyteSkillCaster>();thief=GetComponent<ThiefSkillCaster>();ranger=GetComponent<RangerSkillCaster>();marksman=GetComponent<MarksmanCaster>();defender=GetComponent<DefenderSkillCaster>();psion=GetComponent<PsionSkillCaster>();psionEvolution=GetComponent<PsionEvolutionCaster>();}
-        void OnEnable(){if(marksman!=null)marksman.Casted+=MarksmanCast;if(psionEvolution!=null)psionEvolution.Casted+=EvolutionCast;if(psion!=null)psion.Casted+=PsionCast;if(defender!=null)defender.Casted+=DefenderCast;if(ranger!=null)ranger.Casted+=RangerCast;if(thief!=null)thief.Casted+=ThiefCast;if(acolyte!=null)acolyte.Casted+=AcolyteCast;if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
-        void OnDisable(){if(marksman!=null)marksman.Casted-=MarksmanCast;if(psionEvolution!=null)psionEvolution.Casted-=EvolutionCast;if(psion!=null)psion.Casted-=PsionCast;if(defender!=null)defender.Casted-=DefenderCast;if(ranger!=null)ranger.Casted-=RangerCast;if(thief!=null)thief.Casted-=ThiefCast;if(acolyte!=null)acolyte.Casted-=AcolyteCast;if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
+        void Awake(){actor=GetComponent<CombatActor>();basic=GetComponent<BasicAttack>();equipment=GetComponent<Equipment>();novice=GetComponent<NoviceSkillCaster>();physical=GetComponent<PhysicalSkillCaster>();magical=GetComponent<MagicalSkillCaster>();mage=GetComponent<MageSkillCaster>();greatblade=GetComponent<GreatbladeSkillCaster>();priest=GetComponent<PriestSkillCaster>();acolyte=GetComponent<AcolyteSkillCaster>();thief=GetComponent<ThiefSkillCaster>();ranger=GetComponent<RangerSkillCaster>();marksman=GetComponent<MarksmanCaster>();berserker=GetComponent<BerserkerCaster>();defender=GetComponent<DefenderSkillCaster>();psion=GetComponent<PsionSkillCaster>();psionEvolution=GetComponent<PsionEvolutionCaster>();}
+        void OnEnable(){if(berserker!=null)berserker.CastStarted+=BerserkerCast;if(marksman!=null)marksman.Casted+=MarksmanCast;if(psionEvolution!=null)psionEvolution.Casted+=EvolutionCast;if(psion!=null)psion.Casted+=PsionCast;if(defender!=null)defender.Casted+=DefenderCast;if(ranger!=null)ranger.Casted+=RangerCast;if(thief!=null)thief.Casted+=ThiefCast;if(acolyte!=null)acolyte.Casted+=AcolyteCast;if(priest!=null)priest.Casted+=PriestCast;if(novice!=null)novice.Casted+=NoviceCast;if(physical!=null)physical.Casted+=PhysicalCast;if(magical!=null)magical.Casted+=MagicalCast;if(mage!=null)mage.Casted+=MageCast;if(greatblade!=null)greatblade.CastStarted+=GreatbladeCast;if(equipment!=null){equipment.Changed+=EquipmentChanged;EquipmentChanged();}if(actor!=null)actor.Health.Damaged+=Hurt;}
+        void OnDisable(){if(berserker!=null)berserker.CastStarted-=BerserkerCast;if(marksman!=null)marksman.Casted-=MarksmanCast;if(psionEvolution!=null)psionEvolution.Casted-=EvolutionCast;if(psion!=null)psion.Casted-=PsionCast;if(defender!=null)defender.Casted-=DefenderCast;if(ranger!=null)ranger.Casted-=RangerCast;if(thief!=null)thief.Casted-=ThiefCast;if(acolyte!=null)acolyte.Casted-=AcolyteCast;if(priest!=null)priest.Casted-=PriestCast;if(novice!=null)novice.Casted-=NoviceCast;if(physical!=null)physical.Casted-=PhysicalCast;if(magical!=null)magical.Casted-=MagicalCast;if(mage!=null)mage.Casted-=MageCast;if(greatblade!=null)greatblade.CastStarted-=GreatbladeCast;if(equipment!=null)equipment.Changed-=EquipmentChanged;if(actor!=null)actor.Health.Damaged-=Hurt;ReleaseController();}
         void EquipmentChanged(){armed=false;if(equipment!=null)foreach(var item in equipment.Slots)if(item.slotId==EquipmentSlot.MainHand.ToString()&&equipment.IsResolved(item))armed=true;}
-        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage" or "class.psion" or "class.psionic-knight" or "class.mirage-mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte","class.thief"=>"TierTwo/Thief","class.ranger" or "class.marksman"=>"TierTwo/Ranger","class.defender"=>"TierTwo/Defender",_=>null};
+        static string Resource(string id)=>id switch{"class.novice"=>"Novice","class.physically-blessed-novice"=>"Physical","class.magically-touched-novice" or "class.mage" or "class.psion" or "class.psionic-knight" or "class.mirage-mage"=>"Magical","class.greatblade"=>"TierTwo/Greatblade","class.berserker"=>"TierThree/Berserker","class.priest"=>"TierTwo/Priest","class.acolyte"=>"TierTwo/Acolyte","class.thief"=>"TierTwo/Thief","class.ranger" or "class.marksman"=>"TierTwo/Ranger","class.defender"=>"TierTwo/Defender",_=>null};
         void RestoreSpin(){if(spinning&&spinVisual!=null)spinVisual.localRotation=spinRest;spinning=false;spinVisual=null;}
         void ReleaseController()
         {
@@ -156,6 +156,12 @@ namespace DiceFree.UI
             else Play(skill == DefenderSkill.Challenge ? "Cast" : "Guard", .76f, 1.1f, true);
         }
 
+        void BerserkerCast(int skill)
+        {
+            if(actor.Stats.Definition?.stableId!=BerserkerProgression.Id||!Current())return;
+            if(skill==4){Play("Guard",.65f,1,true);return;}
+            Play(skill==1?"Spin Dash":skill==2?"Heavy":"ArmedAttack",skill==1?1.2f:.8f,skill==2?1.15f:1,true);
+        }
         void MarksmanCast(int skill){if(!Current())return;Play(skill==1?"SkySalvo":skill==3?"Guard":"ArmedAttack",skill==0||skill==1?1.5f:.6f,skill==0?.57f:1,true);}
         void RangerCast(RangerSkill skill)
         {

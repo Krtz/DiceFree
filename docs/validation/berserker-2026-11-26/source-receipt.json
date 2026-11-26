@@ -1,0 +1,758 @@
+[
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker.meta",
+    "mainSha256": "CE5ACFDE11B3790098B6533D0ABE35A25711222A6355E2B488F4CBC05585891A",
+    "qaSha256": "09AACA246A1BBD9D19E745684F5BD3C40AAA5509ED986CC7CD2BDC1E12CC520B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/AshscarOrc.fbx",
+    "mainSha256": "19C35D7BF99A107DF8A922A657BD1ED68F8993D54F6C3D98BE3BE0208B03FE84",
+    "qaSha256": "19C35D7BF99A107DF8A922A657BD1ED68F8993D54F6C3D98BE3BE0208B03FE84",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/AshscarOrc.fbx.meta",
+    "mainSha256": "7363411D947E6B9A133BF70FA542AFA0D9B745B7F39BB9659E7DFD1A721F53D4",
+    "qaSha256": "0FB391DD0776854513285491592B1DEEDDE9B020727874AFC09AA15BD6201128",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical.meta",
+    "mainSha256": "6A2DEFF92BCB5B93343B76C74B05079CB219712A22D4B346BF3CC758D94FB2DB",
+    "qaSha256": "CB13F6303ED9996FBA64C9A7877E3E712167BA7864763C83A867D2BFEFDC91B5",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/manifest.json",
+    "mainSha256": "F0D13E18D6694260E61F1755E79D7F68B6C114732C06730D12A5C28AAC9F2C36",
+    "qaSha256": "F0D13E18D6694260E61F1755E79D7F68B6C114732C06730D12A5C28AAC9F2C36",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/manifest.json.meta",
+    "mainSha256": "91526D77E56320366DE8F1D2522F57BD43B3085643C3315D93C4A71231E2332A",
+    "qaSha256": "7132EA922DB12D1DB2866E819ADBB2745C12300F626F60A42D107B12E62291F3",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/metadata.json",
+    "mainSha256": "7CEF3420D9EDA98D02810D13A16D210943B5BC31CEBF53D228F5B6DD0E825816",
+    "qaSha256": "7CEF3420D9EDA98D02810D13A16D210943B5BC31CEBF53D228F5B6DD0E825816",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/metadata.json.meta",
+    "mainSha256": "9D79BE376C118472914C995B6428D24FAB2B4AA3709EA0C4F5CCF81B02DAA380",
+    "qaSha256": "C0105AB03196FF59F698DC58F2C56D952FFCCE2D468FC09A5589572D508AE896",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/model.glb",
+    "mainSha256": "89361872207B4473A18482C1B4C58F1A20A5D410623500ABF626819CCC144359",
+    "qaSha256": "89361872207B4473A18482C1B4C58F1A20A5D410623500ABF626819CCC144359",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/model.glb.meta",
+    "mainSha256": "4087E97BA5B8F7215E81E7A3BD1C777A283B4AB806CC93FE27E377AFAFCB0773",
+    "qaSha256": "633714AF9C68F3424ED14860E31FDD40AFEEC3BD097698CE21E547CC6ACA565C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/provenance.json",
+    "mainSha256": "257B52834749FEF66D21E1948115E98F424F35D3888A1C29EEE3AFAC6166A954",
+    "qaSha256": "257B52834749FEF66D21E1948115E98F424F35D3888A1C29EEE3AFAC6166A954",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/provenance.json.meta",
+    "mainSha256": "1448DE24C973197CAB1C6A14BAA84ECC0BB80450B1B3F6AEF47CA463AFE34EC2",
+    "qaSha256": "E876E47F0DE848D6D73546F9F52B8133BB15DD9CBEA9AE74796DAF0F786E1D6B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/receipt.json",
+    "mainSha256": "8762E797F6743B94A2FBD49611D9F81364F752BC61C6BB2A6316995E28AEE7D2",
+    "qaSha256": "8762E797F6743B94A2FBD49611D9F81364F752BC61C6BB2A6316995E28AEE7D2",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/receipt.json.meta",
+    "mainSha256": "23FBBA2E3DCC828A5B8340979BC63854741E72635285056ECD8906264E08B896",
+    "qaSha256": "0541A3502691A08E6C248EDC321E1BE8D12CC76B240066544AC598B1B4F436BC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/validation.json",
+    "mainSha256": "723E10456734D12FB6A1D99B221B2BED794FAF3451D53ABBF367026969F34C80",
+    "qaSha256": "723E10456734D12FB6A1D99B221B2BED794FAF3451D53ABBF367026969F34C80",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Canonical/validation.json.meta",
+    "mainSha256": "6C5AAEF9EDC7233D2DBC4D65AEA433ADD29971A556B736BA58CBBEC9691E4065",
+    "qaSha256": "C28DB02247DD9FCA1DF4DAF0B61BC3DE63EFB9E90B7266B12CC2B235AB943C0D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Armour.jpg",
+    "mainSha256": "2001E7C96482D27ED846598AC8D51149E6635A6452C1B171FBA999ECF6CFAD9D",
+    "qaSha256": "2001E7C96482D27ED846598AC8D51149E6635A6452C1B171FBA999ECF6CFAD9D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Armour.jpg.meta",
+    "mainSha256": "A51816B3F08C484782CF61611E41342B235460F8B67869FDA44CA7C9F417C704",
+    "qaSha256": "616250DE0637F806792C41645C573F43DDF92EDE666EFF94943CBD3B1DC2C2F8",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Body.jpg",
+    "mainSha256": "AAC9B5F1EB00D127F43A7A5F6DCCA1E927A82D8E18ECCE267F7C216984B6BA28",
+    "qaSha256": "AAC9B5F1EB00D127F43A7A5F6DCCA1E927A82D8E18ECCE267F7C216984B6BA28",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Body.jpg.meta",
+    "mainSha256": "AB05292C66B4783B7C0E5A859A43AD02AF4322A5F1BD8588241BB1858B75693B",
+    "qaSha256": "648607349DAA5E23F14C1D25408E70207D67EE4783FA6D500A3FBCDDD6C54637",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Head.jpg",
+    "mainSha256": "F677F0CBDCFE8E35622725A33B44E47B87EA835CE7D3FB08226875639FCFE720",
+    "qaSha256": "F677F0CBDCFE8E35622725A33B44E47B87EA835CE7D3FB08226875639FCFE720",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/Orc_Head.jpg.meta",
+    "mainSha256": "3FD0D4508C3CFC5DD17520DC64F2E6B06A90E62EA0F69C5B1A8585A9D791EDC9",
+    "qaSha256": "CFE4C02618A8B094B258D9416F6E52F158F2FFB82D94B1D3DAC149D7A6109A23",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/source-receipt.json",
+    "mainSha256": "86F70728270BC6438FD8ABE2157EBBEC6858B56BC63527AF444E387C4A74DB05",
+    "qaSha256": "86F70728270BC6438FD8ABE2157EBBEC6858B56BC63527AF444E387C4A74DB05",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/Berserker/source-receipt.json.meta",
+    "mainSha256": "F753A9877A4E6D1971DCA9EB16CE441C9D21BE5496D3A52E498BEC96415CC33D",
+    "qaSha256": "2CC4BEDE2152AB8FFEE9A5947B4A5CAB1DCDC3B65159263A21C7884D5EBA44D6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/MenuPresentationCatalog.asset",
+    "mainSha256": "EDC99C119D458DEF7D123435B0EE2656CABD10D3AAC90137B03E4696CBD21CC1",
+    "qaSha256": "EDC99C119D458DEF7D123435B0EE2656CABD10D3AAC90137B03E4696CBD21CC1",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/PlayerMotion/TierThree.meta",
+    "mainSha256": "807A16CE9551A15B34D600E5A1E367318D65477F788E5F44F430E1932CCE0932",
+    "qaSha256": "263C37C33DFB8519244CD394A883AD47DB390CD6FA9C170D252BFA6390118243",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/PlayerMotion/TierThree/Berserker.controller",
+    "mainSha256": "84269AB2A0A9717E42C4B3279A9C241E04044E7EF4C5A630E835585F79D07DAD",
+    "qaSha256": "16281AF75850306A96205CCF8CCEACAE4CB22AF6308A7E2751FA8B501BF9A9F3",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/PlayerMotion/TierThree/Berserker.controller.meta",
+    "mainSha256": "426167A74C95C98DF15187862163F5E99BB18D34E6E28E7D479BC89831D0A382",
+    "qaSha256": "ECC4CA0C3C47E7B3B03BFDD2109FB7965A099D2CD8BD878C7A99CD7C9655DAD4",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/Cornberg.unity",
+    "mainSha256": "1E144B28DF29AC9625A4FEABB472724B1B248EF2A0C73F231ED2FFF5D26D6389",
+    "qaSha256": "D949D284BD8A0CFFA39BC98BABAD378B5379914618082E4DA17A8A6BFE8D2FE6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/DevelopmentRoom.unity",
+    "mainSha256": "B961C984C1C330C73F508C5CAB1E687AB819A7CBF9D1DFD92CCF9B96A6CB5727",
+    "qaSha256": "7C58CD8483F5C9ADEA882967463ED125F388ACAD7C4A32BD97D7DCDF3D665173",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/BerserkerMentor.cs",
+    "mainSha256": "FF057949F7E884E79CB6297A8086D856281C71403EC63EF01BDE38C2919AA83D",
+    "qaSha256": "FF057949F7E884E79CB6297A8086D856281C71403EC63EF01BDE38C2919AA83D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/BerserkerMentor.cs.meta",
+    "mainSha256": "5CD4C5699483930787AE94595134352D0F710B68EBFBDC0BCF857B653B166183",
+    "qaSha256": "5CD4C5699483930787AE94595134352D0F710B68EBFBDC0BCF857B653B166183",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/CrimsonCrucibleRun.cs",
+    "mainSha256": "F11E3616D109BD8C89A7012C973478CC89E313AF1F0FEB9F8677D8516C696C63",
+    "qaSha256": "F11E3616D109BD8C89A7012C973478CC89E313AF1F0FEB9F8677D8516C696C63",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Application/StoryDungeonRun.cs",
+    "mainSha256": "E0F640B311FA2454E1C13EF9F7334AF57F402228113727BB1F993E77E0CD8177",
+    "qaSha256": "E0F640B311FA2454E1C13EF9F7334AF57F402228113727BB1F993E77E0CD8177",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/ActorStats.cs",
+    "mainSha256": "027178400FFD701498898CCE14815030C505B3AD8A49870FFE1058092B21C685",
+    "qaSha256": "027178400FFD701498898CCE14815030C505B3AD8A49870FFE1058092B21C685",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/BasicAttack.cs",
+    "mainSha256": "6C1449ADDF7F9791FCFB516CCF35E00923AC578A0822AF93D8F8570EBBC6C8B4",
+    "qaSha256": "6C1449ADDF7F9791FCFB516CCF35E00923AC578A0822AF93D8F8570EBBC6C8B4",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/BerserkerCaster.cs",
+    "mainSha256": "DD2DA655CF9A9BB53A5E0B7B52A8E9BF5800609924512E2461AE0F51257432EC",
+    "qaSha256": "DD2DA655CF9A9BB53A5E0B7B52A8E9BF5800609924512E2461AE0F51257432EC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/BerserkerCaster.cs.meta",
+    "mainSha256": "5E62E05C1E800A2804E402DB1AEC1037D0ED119B1753EC31ACA129FD8DF4CC90",
+    "qaSha256": "5E62E05C1E800A2804E402DB1AEC1037D0ED119B1753EC31ACA129FD8DF4CC90",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/EquipmentStats.cs",
+    "mainSha256": "1BB800172B7C25B5A72226ABA68995871029C4C1D23E4900E4EE54A6A3CF75AC",
+    "qaSha256": "1BB800172B7C25B5A72226ABA68995871029C4C1D23E4900E4EE54A6A3CF75AC",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/GroundAuraVisual.cs",
+    "mainSha256": "1FA68E8DE0B7517121C6ABC0AEB73CAE381BD2F1D3AB385E5645D41C6D080F79",
+    "qaSha256": "1FA68E8DE0B7517121C6ABC0AEB73CAE381BD2F1D3AB385E5645D41C6D080F79",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Gameplay/CodexProgression.cs",
+    "mainSha256": "4F46F74B56E4386D5801E7EDE8E402667F62685D51872A3938FB914878E0F24D",
+    "qaSha256": "4F46F74B56E4386D5801E7EDE8E402667F62685D51872A3938FB914878E0F24D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Items/Equipment.cs",
+    "mainSha256": "C57B03F9F8A5CDDE9BD0B2513A9630EEDCEE7CA3191A26721605BA09E9A3DE45",
+    "qaSha256": "C57B03F9F8A5CDDE9BD0B2513A9630EEDCEE7CA3191A26721605BA09E9A3DE45",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Items/ItemDefinition.cs",
+    "mainSha256": "D8DB05CA798FDEDD5EAAA77E9DDEB7EA2B71EC377AD676D2A9E3F7B1F5C9DCE0",
+    "qaSha256": "D8DB05CA798FDEDD5EAAA77E9DDEB7EA2B71EC377AD676D2A9E3F7B1F5C9DCE0",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/BerserkerProgression.cs",
+    "mainSha256": "5386BF15767DF1388421CB36685E3173D272EE6A95F68735FC3ECAC2C70F2C2D",
+    "qaSha256": "5386BF15767DF1388421CB36685E3173D272EE6A95F68735FC3ECAC2C70F2C2D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Progression/BerserkerProgression.cs.meta",
+    "mainSha256": "3A95EA41D7003C35E809042EBC60687484E5360956DBB0CEAAA19257EF83609E",
+    "qaSha256": "3A95EA41D7003C35E809042EBC60687484E5360956DBB0CEAAA19257EF83609E",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Quests/QuestGiver.cs",
+    "mainSha256": "3BD8B915C9AEB70BF8206A4103B2F4CAF8A55E9148A7ACAB9A695223572944F8",
+    "qaSha256": "3BD8B915C9AEB70BF8206A4103B2F4CAF8A55E9148A7ACAB9A695223572944F8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Quests/QuestWorldMarker.cs",
+    "mainSha256": "DDF2CEF21B4DE4BB08B286B4EB6B54C47F78643C34A1F18F0FC65C5F1BCF8758",
+    "qaSha256": "DDF2CEF21B4DE4BB08B286B4EB6B54C47F78643C34A1F18F0FC65C5F1BCF8758",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/BerserkerAbilityProvider.cs",
+    "mainSha256": "BE1C3A21027861BACD1EB8549D71209865556BFF1546D256C06DC458AD4C0096",
+    "qaSha256": "BE1C3A21027861BACD1EB8549D71209865556BFF1546D256C06DC458AD4C0096",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/BerserkerAbilityProvider.cs.meta",
+    "mainSha256": "EA66B00577D0F8AF77DA175FBF07715E588828A7963BCFEB688D638103671B70",
+    "qaSha256": "EA66B00577D0F8AF77DA175FBF07715E588828A7963BCFEB688D638103671B70",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/BerserkerWeaponPresentation.cs",
+    "mainSha256": "58EDD9B7D28D445C4DFFE75235416A2C1B7EE3587FF73896DA47ED60B1968E86",
+    "qaSha256": "58EDD9B7D28D445C4DFFE75235416A2C1B7EE3587FF73896DA47ED60B1968E86",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/BerserkerWeaponPresentation.cs.meta",
+    "mainSha256": "3044A4EFC7D1F7A60C0236717C8B4327B3B436135939D3706CD4CA7FB4994560",
+    "qaSha256": "3044A4EFC7D1F7A60C0236717C8B4327B3B436135939D3706CD4CA7FB4994560",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs",
+    "mainSha256": "5012D12880B9DEF5F68A644EDD3FFE2DD3E1FF60B4B11405B5B61ACDD0D1D546",
+    "qaSha256": "5012D12880B9DEF5F68A644EDD3FFE2DD3E1FF60B4B11405B5B61ACDD0D1D546",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/WorldAtlasHudMarkers.cs",
+    "mainSha256": "E4663360C7BEB42F339A088B46C69B9DE0B985419D97A1A238F40665C62D7ECF",
+    "qaSha256": "E4663360C7BEB42F339A088B46C69B9DE0B985419D97A1A238F40665C62D7ECF",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker.meta",
+    "mainSha256": "9E5E317F7B517026070D4389F5B2B76061D9884CB75526B5732ECE52C748496E",
+    "qaSha256": "6992A61EF78F007536682865FE42BDC7181544EEB0E03D951D4961CFF72849BC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Anger Management icon.asset",
+    "mainSha256": "FA33C82E262B4CDFFD48FF21E36931081B323C49D1227AA6CCCEC107ED3E8FF8",
+    "qaSha256": "14C96DAAF1625C171113BF2B4686476C82C67291AE0BF6181E134BDBDFB2AE0D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Anger Management icon.asset.meta",
+    "mainSha256": "7BD51D725C3C7FB9ABBD28AF7E56814194FC45DFD6B67E73CD2D5CD7F7E84A6C",
+    "qaSha256": "FC49EB35E4C9498EA969A74E6B95E46574FED6B7ACB0FDD83305E3EED222683D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar Berserker.prefab",
+    "mainSha256": "04A5C7EB87F3FDB31E09A41CD5704C78B66AF2747FDFCB98B1EFDA9DB9F6FABB",
+    "qaSha256": "8D586AA8D7BD2083449FCE5D49E9503FA646CC421860A8715A2DBB374C7D72FE",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar Berserker.prefab.meta",
+    "mainSha256": "270EE52F18EEA441F3B989DBDB63DDAF6C8C8DB18B71F481E2EFF3E41DEC1AD3",
+    "qaSha256": "71D586E164186674C2D7627A96AD2FF220DC710136F7BB279C2523B8019E84E3",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar blade -1.asset",
+    "mainSha256": "1D77D55E881133A04A5B1242C9ED496C889F8FD0F7368482505205865D347859",
+    "qaSha256": "FFB83546B14FC63CEFCD9405746619104AFE88B014FCB3CB738E1E968098059E",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar blade -1.asset.meta",
+    "mainSha256": "9B0DDF111FBC77A259522AEBC29095512DBD84FCD5DA9A86FADCC99D4A6C0332",
+    "qaSha256": "9F16E5CAD099CFFCDFF24E67F09B44871725842532D29AD0E4F2AFBDD900E55B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar blade 1.asset",
+    "mainSha256": "DB5F0E52AF6961F064B8218807EAF55F7D731539760B62CB6C8AB2B8FD0EA855",
+    "qaSha256": "E91EA9B2ADFA203D33B4FC9243F6B2124D30CD3BE8C60C6AD50D9C21A68829E4",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar blade 1.asset.meta",
+    "mainSha256": "FACCBB34B1235BBDC19BC9A3442EDA4CBDF5D2E3E571A1A13D29B33D3253BFF6",
+    "qaSha256": "C5ECC058B2B73E389EA9722B3CDE9973137B5AE8D7364E3D7467DC5C2B20D107",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar bronze.mat",
+    "mainSha256": "C0F8CCB77306D76412CF54EFC3FC70BDFDA112683A700B3E98149A0A9766A501",
+    "qaSha256": "98000A2051693280BE6088E55719016DD5D8C5CFA9B16E78F82AA95CD67AE589",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar bronze.mat.meta",
+    "mainSha256": "19E0F8D778C231F6CB0A5A05B7D2CB1C398A8BC4E491E8CA2DD80DD3A0AE6A42",
+    "qaSha256": "CCB3B9625A28D64BB97B1FD17E705D1E57740B986B9FE9A60F488889D1B0EC83",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar edge.mat",
+    "mainSha256": "5F7A165E1244BBFD359CF725CA040F9EDCDFD1B2255C5456EF8325B5F49DF7BF",
+    "qaSha256": "1984B253010172CA4FA0526BFD0E55F66B612D4D1CD0E660BFF75C72FA8517C3",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar edge.mat.meta",
+    "mainSha256": "4122A5E45AEA6478A6C973D868E2EC8F59CEFF10F5B67712B0893CABADFD460B",
+    "qaSha256": "04478F84B3CA9F9587BB952ADE210239FFE2800BC3612BFB905936C3C6A5BE63",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar Greataxe.asset",
+    "mainSha256": "56C7411DBD60E32133B3DEF2607DA072658849731CFDA0443843E9BEE6AA9594",
+    "qaSha256": "3CB08822AA294A03AB5F8A25548884E013F48918AC036C4006D973AD7E87042C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar Greataxe.asset.meta",
+    "mainSha256": "8E85C1F4B6992F135CDF120727869B1F677A5B465AAD3DD992C3340C0F565DC8",
+    "qaSha256": "EDA6F8EFC654B25DB67581C868B9384AA645C4831582142FA7B0145396B99006",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar haft.mat",
+    "mainSha256": "40C0A5654693C438FA39B0FC826A3BDA1D29BE4D8ED4A7C6BA5A00048917E5C5",
+    "qaSha256": "2AD44537B8DF1D85B28C74E027C716149343BAF8C18D209972381B8C04EDFFDE",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar haft.mat.meta",
+    "mainSha256": "086F5A687307B226BC473C4B35E09DC464C3E16AE6DB54B9662686C2F09A3326",
+    "qaSha256": "3EF1AEAD6BCDB7A9110150E3A5CA40978808D1F7BB94483650F7299251F8BA6D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar red leather.mat",
+    "mainSha256": "E6D64607D0E47E767D7B39EFDAD349B62F67E47EDB7EDE6F52B9C0F174A78B24",
+    "qaSha256": "3CC885DCD8087860874AC408EE232054BE369425AC74C5FA3D979F322CAC28B0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar red leather.mat.meta",
+    "mainSha256": "1DF4FCB8F972C36E7D8E497C03850C677F78FE693D0A6E82CEA65BA1263807E4",
+    "qaSha256": "5CBF7CB1C6F414E69572DD30A88F0A7A271F941277D2E3C60D3FEAE872E18830",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar steel.mat",
+    "mainSha256": "A847D37F0C56B240AD86BD9C205D165D2F70129273C2271E1C37426A469A0FF4",
+    "qaSha256": "FDC4A629DD183DD3A9AF18DEDCDE004C576069F082812CE15920D38080C3CAA7",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Ashscar steel.mat.meta",
+    "mainSha256": "7FDF5F0323DDC28CDB592D72459B2E654E34C2D48A5217A7EFCFA9F8FFD8E3E2",
+    "qaSha256": "BFB1A6F1057123060A99B5FF7D22857E5FFE64A8BA70EF752BE963AE567E1620",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Banked camp embers.mat",
+    "mainSha256": "1A9EFC8C8FEBFEA22D41AFAD768C6405A591BD794BA604E14A8E693A02BB3794",
+    "qaSha256": "AB66DCDE1EF79128B76AD4E367D5C2AFA5D70A2F004C1CD1E9CDAD5914BC7EAD",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Banked camp embers.mat.meta",
+    "mainSha256": "80B718C28B135786EB14D885F994A53C6B67655E3AA3C64094C3C985DA0DBD1F",
+    "qaSha256": "30A7BC08B7809A9A989F0120A8AB7A8F893007B68842DE5C6E08AF875853B862",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker advancement.asset",
+    "mainSha256": "C0A37B21F2DD22BDC0A288B807A382A2521DD9D4D4695AB88D4B5421D746AFEE",
+    "qaSha256": "C0A37B21F2DD22BDC0A288B807A382A2521DD9D4D4695AB88D4B5421D746AFEE",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker advancement.asset.meta",
+    "mainSha256": "67E36CBDEC486B6B6A1D903358B9F1E16AA61136B61F5D2605E926D39E318A70",
+    "qaSha256": "C520F367A828A843CC7AFA6E20AC5D5A401641E906D7A185E791E5FE730095DA",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker class.asset",
+    "mainSha256": "F0F5093A3EACC74EF3F95066A281655CA59C0FD782238B5C68E99EAB773F3601",
+    "qaSha256": "75E552BA37696BCA48EA9F113D5FFC2C9C32B55B11053236A5A36BE1335260C9",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker class.asset.meta",
+    "mainSha256": "54A6F7656573A6B5DFEA18CE811BB35D1CD8BCA0E24D60DE5EE7B592A7BCD1E4",
+    "qaSha256": "AA73F97CCACBF469405C34DBD13E20711022D1FA9FAFB583AC5444C7A1BFC58E",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker great weapon basic.asset",
+    "mainSha256": "CF323D1AAE5230D14A71070CEC43838BD36986002081B461C48B2599685F42D7",
+    "qaSha256": "CF323D1AAE5230D14A71070CEC43838BD36986002081B461C48B2599685F42D7",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker great weapon basic.asset.meta",
+    "mainSha256": "E856C6E8804E07841BBF800973FC7A2714AA0FB82F851D008513DE6133F6EAE4",
+    "qaSha256": "EFD9899963A55C9946097807BE73E94F8B8E4D38C98D5605EE064CC1E97D0208",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker menu.prefab",
+    "mainSha256": "1140E5EB2E9952DC07CFF2E818D11EED3470B42AE6549A446602FCBA87C91E7D",
+    "qaSha256": "D3FD1F5462547C7AAEABC741AC009721D8D4DE0F9351165A00C57C10B7FD6942",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker menu.prefab.meta",
+    "mainSha256": "E5A2D2E0E6E36C7D4889B6C61E40026BD5DB552F79C1DE883A4731B62EDE2B25",
+    "qaSha256": "7511F988EC329435D063D122F9AC2A454E43C9FB0F86FC19DD65C394FDD2F751",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker Rage.asset",
+    "mainSha256": "19E51FFA8D85BADC4A7C71A0BD74605DCF363C8E67962B2B90A979E5B8CA4F0D",
+    "qaSha256": "19E51FFA8D85BADC4A7C71A0BD74605DCF363C8E67962B2B90A979E5B8CA4F0D",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Berserker Rage.asset.meta",
+    "mainSha256": "14E97ABFFEEB97128CB0F2B6F72C748A38F67BEB10F417BC8AEA8C3FA401C083",
+    "qaSha256": "D0E8F980C07CB6A3F0D604F224D823C535C8C948F180421FAAE28DFA5DB4CB25",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Camp charcoal stones.mat",
+    "mainSha256": "321D219AD1CCE4426FCE9C9DF5E833A53E4F177ABEB718934F19B36278CC1A28",
+    "qaSha256": "104F158795CB59909360CD236320BE4E718B4D8532B4AE881FFA8D4B15FE0076",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Camp charcoal stones.mat.meta",
+    "mainSha256": "6EE7E16DE7DAF8FE86895871F9CB8EFD7E2D01E581B67FE7A95B27056FCC9FA9",
+    "qaSha256": "34A59971ED58624AA95927AC9E603CC79CF520F68CF771CCB80B7581D59923AD",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Camp worn wood.mat",
+    "mainSha256": "C04D960D90CB6867108ED8E341994BC33F2EF9186524C3772F0B3102D96C1BA5",
+    "qaSha256": "FEE5824B7375EAD102A0DEC0009164E7777CD66A6BEAE9CE1C5E1E8B520F1CF2",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Camp worn wood.mat.meta",
+    "mainSha256": "AFA6D83E0A7F6FEE8AF27E820BC45C60DCC38C2F1FB736028871918BC293F4C6",
+    "qaSha256": "663639D644AFB4066757EA28030064AAB1F1F87D85FF25CA58956490A551D159",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Coffee Shield icon.asset",
+    "mainSha256": "52CE6A3287AC21D5DE61023EC27EA34B81036F460E6F9DF77BCD7B483D59C602",
+    "qaSha256": "4AF17A87E77D2E3C6E49F1DDA6088F57A025C55EB389A7849859AE262902F4CF",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Coffee Shield icon.asset.meta",
+    "mainSha256": "E8C59CC946A9F17DC46A103C77F68B1E417AAB717A832282366210BBD733AEE6",
+    "qaSha256": "B17FEB1A4A3F5077F4474A634BD1D254A27984447CA6B55263C3263520550B64",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Gorren red canvas.mat",
+    "mainSha256": "FD06F22F34D9A08F829969BCE01E1BC6183C2F3392C47FBD2E5E6457B12730B3",
+    "qaSha256": "3490C4F3D21F1B8788DEA99EBC2297F433597F6756432C5C3BE0054D19391650",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Gorren red canvas.mat.meta",
+    "mainSha256": "12011080F6370DC49DA4ADCB9E0DE9400F23F20705F426CA75A502D1DA945DC2",
+    "qaSha256": "249C0DF6064DB7D0176F1E946E7A919BD64A1F70478AAA49B42A4447C6A47102",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Armour.mat",
+    "mainSha256": "2AD7D4527E314AA3F90728A923058CB17599F339750881489DA8B49357288265",
+    "qaSha256": "EFB5FEC22E4802FEBACA260AD9C1B3736DF00CE35E51AFB13F141BCFD623920C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Armour.mat.meta",
+    "mainSha256": "D180FBF5D05D52B6D92786C029FC04544A1AF8D3830D024C6FFEA7E7E08C5BD9",
+    "qaSha256": "1DE978BA1ED435E955783B0454DCC284B0512D22630A06ABF7DA5A8242A9610F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Body.mat",
+    "mainSha256": "1B052B607B282D423EDA28CF1FF3ED020581335242FDB0227EBBB391C4495C69",
+    "qaSha256": "8E30E8BA5FA873B88FF19AC00B0861265ED242700B8FC31E4FD37937385CEB09",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Body.mat.meta",
+    "mainSha256": "0DB29E75320424DE70A4BF76775452060A1A87CC8418F3EC35D1676032368EBB",
+    "qaSha256": "FF8C36C9D90A9221D2D76B1219786D33B970C050CD27D7E950CB7407F580B203",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Head.mat",
+    "mainSha256": "33BBDF0A4108F66DC78067612CF2A61ACD7144F9A18C638362740C13CE001A45",
+    "qaSha256": "38D1A7241A25089CC29A1A461C810941BA88AF89E1BFEBE30F596CFC7D33E9B5",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Mentor Orc_Head.mat.meta",
+    "mainSha256": "4DD5EE098364B9D51BE0F8C0DE96D2DDF10A0060F93599FF57B1A6109E981C92",
+    "qaSha256": "6602F983DC7228974BD4255BD148D342422FCDF0D553B1865F7BABCDE7128B96",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Armour.mat",
+    "mainSha256": "304D8892323E86015E81628ADFF414896B17F17B09E1722AEBAA72D68FDEB0B3",
+    "qaSha256": "FB4BD8F2A94B2EFE742490D70EAF4042AB01D14BD8ED0980F712300FADC6A9B8",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Armour.mat.meta",
+    "mainSha256": "544DD1B4B9F7EAF60F402A421BD1F0BEA8D6891476DFBBF056F07AF05FE000FD",
+    "qaSha256": "5A393A51DB8EFE0CE058D4203CDCF42BDA3F56EBE1657EE1ABDE1585008CEDAC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Body.mat",
+    "mainSha256": "96718E461E6690E863C267BEAA29BF320010CF72313117B2E3B024D083C0FF31",
+    "qaSha256": "5A86D20B0111CB0E98F08848EB11A1AD8DE97E2FA4290D91A32668177863052B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Body.mat.meta",
+    "mainSha256": "70DA170DB737DB058F116ED0F8AF91D99BB12CA07C145CBBCB7E3851D82E3E80",
+    "qaSha256": "D32D9E816B2FE462AAB5D897F51954454A641901C3C0EE6856FF13A9BF2F71F6",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Head.mat",
+    "mainSha256": "AB42AB0C9DB02162C5959933A3CE5F231B16ED8030724BBEC609383D341EE0AE",
+    "qaSha256": "AD9888801B13E357586AFA86619BD71BF11DB026E666331E11A78A345C275B88",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Orc_Head.mat.meta",
+    "mainSha256": "7C04B2B2D454EEB89DC94929CD96052A6768CE5DD64F21B08A17E6C7FCAEDFA8",
+    "qaSha256": "85F015BF25998AE32466501B4ABDB6B7C473E834AC49BC011B645C39548B08CC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage Breaker icon.asset",
+    "mainSha256": "F933F3A515DF4ADD02BA77BC5A9F505CEE186BF9648FCAB3E4FE8682E3348F52",
+    "qaSha256": "70592B8B4B83167AECB1F103BCD1F5B9DD83C3D554D3661AF2B3A0D1AAC3E4A0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage Breaker icon.asset.meta",
+    "mainSha256": "6FBD455FE5A061533561B7B9C5CF54C6E0013568A93CC2E12B1C1063D98CFD6E",
+    "qaSha256": "7617E92BFF52BA0E71BE86BA6396F2440A0F83140B087C6200AA25E1B3665627",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage Breaker.asset",
+    "mainSha256": "9268C80A029BD45F1DEB51BFB1F1C312BE31D03965830D0D20FB714343879599",
+    "qaSha256": "9268C80A029BD45F1DEB51BFB1F1C312BE31D03965830D0D20FB714343879599",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage Breaker.asset.meta",
+    "mainSha256": "82BD8404F955A97264BCF9D58146565CD4D70233F2B1376C9C201CB00A784471",
+    "qaSha256": "B480F283345445D349CDFA2D3AFC049A6ED8E901B6C835918189E6057DA19473",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage.asset",
+    "mainSha256": "8FDB1D0F5D7FF6DFC61844E15659D9690D959D756EBCDC44299866DA5FC938D8",
+    "qaSha256": "8FDB1D0F5D7FF6DFC61844E15659D9690D959D756EBCDC44299866DA5FC938D8",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Rage.asset.meta",
+    "mainSha256": "8317284F31AF2444A942BB847FD0818800D5A96B2AD6C90CBB6046AC5FC13AAD",
+    "qaSha256": "C75BBD1EDB824E61519B0DF43F9EBC9F6907B24ADBEE0A80C09D82CF28738154",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Spin Dash icon.asset",
+    "mainSha256": "A6717123857D8FBDB28EC30BB3D0377B13620CD932EB3D98D00E70210E3BB911",
+    "qaSha256": "7835CB1354F7817197BFC3994C08CF2CF113DB049031939CF82AF737855FD211",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Spin Dash icon.asset.meta",
+    "mainSha256": "7D3286FDE078822E8E413027B4DAD30D02314D74D7C272137FA6098A1C995208",
+    "qaSha256": "11478579C8F7BBE932A190DFA0BFF0E0E2418FC297124A63B1B1EC9F2B8AF1D8",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Spin Dash.asset",
+    "mainSha256": "A2BD81C02FE7AA90442B8E6AA6CA1E109AD3D74ED90EB5794C8375D0F1E322E9",
+    "qaSha256": "A2BD81C02FE7AA90442B8E6AA6CA1E109AD3D74ED90EB5794C8375D0F1E322E9",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Spin Dash.asset.meta",
+    "mainSha256": "FDD4A33D8D24EE3402B30224E088EDC394519DEA785C51255BEC3F65F34EA9FE",
+    "qaSha256": "EC871A81FCDD21B638B61480168731D601772CBD3EA5627777D25B63A7485B68",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Trial of Fury.asset",
+    "mainSha256": "31FE103581FD5133BF134F6EFE228546B1F8C7770A65BE3C424FFD6FC5F29348",
+    "qaSha256": "75C044032248899E241401C883DF03298CD293D683EDBCB2A9C5BC16DCA7A805",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Trial of Fury.asset.meta",
+    "mainSha256": "91E9DD828DED8109B443528A7B32BC0B382BED9C6EDCA84A8B2D5B4635F385C5",
+    "qaSha256": "380B0602EFBDC6052B4C1034749127E37CC3283099E2D29649E9F66E1FDA83E7",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Wide Arc icon.asset",
+    "mainSha256": "4B8459670E8E311DFC97BC83FD32BA17ADCCB24C9AFC733C33BECA79F1307F9A",
+    "qaSha256": "4E3626CFD7D285FAE06BD5B347D3110C8EEEE7A310C44218E91F65FD18A37936",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Wide Arc icon.asset.meta",
+    "mainSha256": "6CDAB1BC989DF45C6B5FC9FF85A4B327822F1150B5B391CAB1709E325393024E",
+    "qaSha256": "F88166C06AA8EAB19CB349C5B5E72B679B7919DBBD641734CC73EBD1B2AADE4F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Wide Arc.asset",
+    "mainSha256": "270A4B034146ECF002793746A4EAF68E6972A4EC0F513DD92DBDFD11FF6F44B9",
+    "qaSha256": "270A4B034146ECF002793746A4EAF68E6972A4EC0F513DD92DBDFD11FF6F44B9",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Berserker/Wide Arc.asset.meta",
+    "mainSha256": "01965BC07B222721BCCDFAA328AB085F615C172C17A79D44DDFFFD9A043851BB",
+    "qaSha256": "7272F4F9DFE6E57BC40A24963D1308D47A1029CF3CD005090203763774ADE688",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Development/Priest/Development Priest catalog.asset",
+    "mainSha256": "5CD5CE8B6E4C450CC7800E56C1B1A9BC7F13019408BB04EC4C0F7713D0FF8CFA",
+    "qaSha256": "5CD5CE8B6E4C450CC7800E56C1B1A9BC7F13019408BB04EC4C0F7713D0FF8CFA",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Items/Wolf-Fang Greatsword.asset",
+    "mainSha256": "C3F76CA7611FB2FEBBF9493E0F772C8C19E6379E99DE60B4036007DEEC41789F",
+    "qaSha256": "BA69A134E9B9EC38A711C1B342D2973336C9DE26E784A98593F5E89754ADE72D",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/Progression/Class catalog.asset",
+    "mainSha256": "6377C5FCF354FCEE83AD161E37F02E7DDCE8F7F0C8B48A835B436321EF63DCDB",
+    "qaSha256": "6377C5FCF354FCEE83AD161E37F02E7DDCE8F7F0C8B48A835B436321EF63DCDB",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Shaders/GroundAuraSigil.shader",
+    "mainSha256": "2E7435EC1E05775FE19B1911B5C3E091508E22E293E14F9069D9F1803FBF1E48",
+    "qaSha256": "2E7435EC1E05775FE19B1911B5C3E091508E22E293E14F9069D9F1803FBF1E48",
+    "comparison": "byte-identical"
+  }
+]

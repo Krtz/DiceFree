@@ -55,6 +55,9 @@ MonoBehaviour:
   - classId: class.marksman
     tier: 3
     preview: {fileID: 920909527777988624, guid: 51e27fbbc986bdb489a2526063fe429d, type: 3}
+  - classId: class.berserker
+    tier: 3
+    preview: {fileID: 3793898878836468614, guid: 1cec81676ba228544aa7ad5058786d11, type: 3}
   items:
   - {fileID: 11400000, guid: be6abc5c98063a74c8cdd467cbb28b2f, type: 2}
   - {fileID: 11400000, guid: 96e0f9e0ceee27e42beb57b3b28114db, type: 2}
@@ -91,3 +94,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3102269900d5d394aa57ce642e8e067e, type: 2}
   - {fileID: 11400000, guid: 1c9b1eaf56266164bab8ce7abcf5570c, type: 2}
   - {fileID: 11400000, guid: 38b85b94e79601f49a8ce64fe863bcfd, type: 2}
+  - {fileID: 11400000, guid: b7a8432f5a8fe304c87c3ab6e27ac8c9, type: 2}

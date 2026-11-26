@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DiceFree.Quests
 {
-    public sealed class QuestGiver : InteractionTarget
+    public sealed class QuestGiver : InteractionTarget,IQuestOfferSource
     {
         [SerializeField] private QuestDefinition quest;
         [SerializeField] private QuestDefinition[] additionalQuests = Array.Empty<QuestDefinition>();

@@ -188,6 +188,22 @@ namespace DiceFree.Combat
                 return Mathf.Max(0, 1 + percent / 100f);
             }
         }
+        private readonly SortedDictionary<string,(float chance,float multiplier)> externalCriticalGrants = new(StringComparer.Ordinal);
+        public void SetExternalCriticalGrant(string sourceId,float chance,float multiplier)
+        {
+            if(string.IsNullOrWhiteSpace(sourceId)||!float.IsFinite(chance)||!float.IsFinite(multiplier)||chance<0||multiplier<=0)
+                throw new ArgumentException("External crit requires a stable source, explicit chance and multiplier.");
+            externalCriticalGrants[sourceId]=(Mathf.Clamp01(chance),multiplier);
+        }
+        public void RemoveExternalCriticalGrant(string sourceId)=>externalCriticalGrants.Remove(sourceId);
+        public CriticalRule ExternalCriticalRule()
+        {
+            var gear=EquipmentTotal;
+            float chance=gear.criticalDamageMultiplier>0?Mathf.Max(0,gear.criticalChancePercent)/100:0;
+            float multiplier=chance>0?gear.criticalDamageMultiplier:0;
+            foreach(var grant in externalCriticalGrants.Values){chance+=grant.chance;if(grant.chance>0)multiplier=Mathf.Max(multiplier,grant.multiplier);}
+            return chance>0&&multiplier>0?new CriticalRule("external.equipment-or-buff","external.critical",true,chance,multiplier):null;
+        }
         public void SetPhysicalDefenseContribution(string sourceId, float amount)
         {
             if (string.IsNullOrWhiteSpace(sourceId) || float.IsNaN(amount) || float.IsInfinity(amount) || amount < 0)
@@ -231,7 +247,7 @@ namespace DiceFree.Combat
         {
             float previous = MaximumHp;
             vitalityModifiers.Clear(); secondaryModifiers.Clear(); defenseModifiers.Clear();
-            resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear();
+            resistanceModifiers.Clear(); penetrationModifiers.Clear(); capModifiers.Clear(); externalCriticalGrants.Clear();
             attackSpeedPercentModifiers.Clear(); attackRateReductions.Clear(); movementSpeedPercentModifiers.Clear(); damageTakenModifiers.Clear(); Changed?.Invoke(previous);
         }
         private readonly SortedDictionary<string, EquipmentStats> equipment = new(StringComparer.Ordinal);
@@ -257,6 +273,8 @@ namespace DiceFree.Combat
                     total.regeneration += value.regeneration;
                     total.basicAttackMaximumBonus += value.basicAttackMaximumBonus;
                     total.basicAttackFlatBonus += value.basicAttackFlatBonus;
+                    total.criticalChancePercent += value.criticalChancePercent;
+                    total.criticalDamageMultiplier = Mathf.Max(total.criticalDamageMultiplier,value.criticalDamageMultiplier);
                     total.physicalDefense += value.physicalDefense; total.magicalDefense += value.magicalDefense;
                     total.attackSpeedPercent += value.attackSpeedPercent; total.movementSpeedPercent += value.movementSpeedPercent;
                 }

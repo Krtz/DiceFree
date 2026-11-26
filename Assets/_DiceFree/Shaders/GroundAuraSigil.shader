@@ -122,12 +122,20 @@ Shader "DiceFree/Ground Aura Sigil"
                     primary+=blade*.65+Stroke(r-.16,.021);
                     detail+=Stroke(r-.61,.014)*smoothstep(-.1,.15,sin(spin*9));
                 }
-                else // Marksman: arrowheads around a sighting ring.
+                else if(_Style<6.5) // Marksman: arrowheads around a sighting ring.
                 {
                     float angle=round(a/(TWO_PI/4))*(TWO_PI/4);float2 q=Rotate(p,-angle);
                     detail+=Stroke(Segment(q,float2(.20,0),float2(.58,0)),.014);
                     detail+=Stroke(min(Segment(q,float2(.40,-.11),float2(.58,0)),Segment(q,float2(.40,.11),float2(.58,0))),.020);
                     primary+=Stroke(r-.35,.014)+Stroke(r-.66,.012)*(.7+.3*sin(a*8+t));
+                }
+                else // Coffee: amber bean seal and warm rising steam.
+                {
+                    float2 q=Rotate(p,.45);
+                    primary+=Stroke(length(q*float2(1.5,1))-.34,.021);
+                    detail+=Stroke(q.x+.045*sin(q.y*12),.018)*(1-smoothstep(.25,.30,abs(q.y)));
+                    primary+=Stroke(Polygon(Rotate(p,t*.07),8,.62),.014);
+                    detail+=Stroke(abs(p.x)-(.14+.025*sin(p.y*15-t)),.012)*smoothstep(.35,.39,p.y)*(1-smoothstep(.58,.65,p.y));
                 }
                 float alpha=saturate((primary+detail)*_Opacity*breath)*(1-smoothstep(.94,1,r));
                 clip(alpha-.008);

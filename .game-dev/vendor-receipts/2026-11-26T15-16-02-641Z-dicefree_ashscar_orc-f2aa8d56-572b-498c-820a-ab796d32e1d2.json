@@ -1,0 +1,19 @@
+{
+  "schema": "game_dev.vendor_receipt.v1",
+  "packageId": "pkg_6ae14478232223c2bb2ebe87",
+  "assetId": "dicefree_ashscar_orc",
+  "version": "1.0.0",
+  "destination": "Assets\\_DiceFree\\Art\\Characters\\Berserker\\Canonical",
+  "modelSha256": "89361872207b4473a18482c1b4c58f1a20a5d410623500abf626819ccc144359",
+  "manifestSha256": "f0d13e18d6694260e61f1755e79d7f68b6c114732c06730d12a5c28aac9f2c36",
+  "license": "CC-BY-4.0",
+  "admittedAt": "2026-11-26T15:16:02.641Z",
+  "sourcePackagePath": "T:\\TEMP\\DiceFree-BerserkerArt\\Canonical\\.game-dev\\packages\\dicefree_ashscar_orc\\1.0.0",
+  "projectRoot": "T:\\TEMP\\DiceFree-Options",
+  "evidence": {
+    "packageHashesVerified": true,
+    "copiedPackageHashesVerified": true,
+    "projectImportTestPerformed": false,
+    "gpuRenderTestPerformed": false
+  }
+}

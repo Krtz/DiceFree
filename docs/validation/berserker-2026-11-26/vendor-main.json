@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "vendor.admit",
+  "ok": true,
+  "data": {
+    "reused": false,
+    "packageId": "pkg_6ae14478232223c2bb2ebe87",
+    "projectRoot": "T:\\TEMP\\DiceFree-Options",
+    "destination": "T:\\TEMP\\DiceFree-Options\\Assets\\_DiceFree\\Art\\Characters\\Berserker\\Canonical",
+    "lockPath": "T:\\TEMP\\DiceFree-Options\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "T:\\TEMP\\DiceFree-Options\\.game-dev\\vendor-receipts\\2026-11-26T15-16-02-641Z-dicefree_ashscar_orc-f2aa8d56-572b-498c-820a-ab796d32e1d2.json"
+  }
+}

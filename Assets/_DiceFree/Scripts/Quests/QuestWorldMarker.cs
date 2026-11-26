@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace DiceFree.Quests
 {
+    public interface IQuestOfferSource { System.Collections.Generic.IEnumerable<QuestDefinition> Offers { get; } }
     /// <summary>
     /// Animated world-space, physically modelled punctuation above NPCs:
     /// gold ! for ordinary quests, blue ! for repeatable quests, green ? for turn-ins.
@@ -11,7 +12,7 @@ namespace DiceFree.Quests
     [DisallowMultipleComponent]
     public sealed class QuestWorldMarker : MonoBehaviour
     {
-        private QuestGiver giver;
+        private IQuestOfferSource giver;
         private DiceFree.World.ConversationTarget conversation;
         private QuestJournal journal;
         private float nextJournalLookup;
@@ -27,7 +28,7 @@ namespace DiceFree.Quests
 
         private void Awake()
         {
-            giver=GetComponent<QuestGiver>();
+            giver=GetComponent<IQuestOfferSource>();
             conversation=GetComponent<DiceFree.World.ConversationTarget>();
         }
         private static Material MaterialFor(Color color,string name)

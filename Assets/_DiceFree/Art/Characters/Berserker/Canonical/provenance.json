@@ -1,0 +1,9 @@
+{
+  "origin": "imported",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 3385924,
+    "fileName": "AshscarOrc.glb",
+    "sha256": "89361872207b4473a18482c1b4c58f1a20a5d410623500abf626819ccc144359"
+  }
+}

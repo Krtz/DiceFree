@@ -1,5 +1,7 @@
 # DiceFree — Berserker Tier III (Greatblade evolution) — design interview
 
+> **Implementation checkpoint — 2026-11-26:** The final approved design is implemented in Unity, including Orc Warrior player/mentor art, Rage combat, all five skills and the Bristlebreaker advancement trial. See [implementation and validation](../BERSERKER_IMPLEMENTATION_2026-11-26.md). The interview rounds below retain the history of earlier decisions; later approved rounds supersede earlier open questions.
+
 **2026-11-25 — Round 1 user-approved identity; Round 2 open.** This is a **DESIGN document** and NOT a declaration of Unity implementation or balance verification.
 
 ## Lineage and core identity (Round 1 USER-APPROVED)

@@ -45,11 +45,30 @@ namespace DiceFree.Dungeons
                 return;
             }
             if(boss.Actor.Alive)return;
+            if(Stage==2&&!CreditBristlebreaker())return;
             boss.Cease();
             if(Stage<5){Arena.gates[Stage].SetOpen(true);Stage++;}
             else{Stage=6;Complete("boss.crucible.crimson-sovereign","six-cell-gauntlet",12000,650);}
         }
         public bool CanLeave(CombatActor actor)=>Phase==RunPhase.Active&&IsParticipant(actor);
+        private bool CreditBristlebreaker()
+        {
+            var before=new System.Collections.Generic.Dictionary<CombatActor,DiceFree.Quests.QuestProgress[]>();
+            foreach(var actor in Participants)
+                if(actor!=null&&actor.Alive&&actor.Stats.Definition.stableId=="class.greatblade"&&actor.Stats.Level>=60&&
+                    CrucibleArena.InCell(actor.transform.position,2)&&
+                    actor.GetComponent<DiceFree.Quests.QuestJournal>()?.GetProgress(DiceFree.Advancement.BerserkerMentor.QuestId)?.status==DiceFree.Quests.QuestStatus.Active)
+                    before.Add(actor,actor.GetComponent<DiceFree.Quests.QuestJournal>().CaptureState());
+            PublishBossKill(DiceFree.Advancement.BerserkerMentor.BossId,before.ContainsKey);
+            bool saved=true;
+            foreach(var pair in before)
+                if(pair.Key.GetComponent<DiceFree.Persistence.ManifestationPersistence>()?.Flush()!=true)
+                {
+                    pair.Key.GetComponent<DiceFree.Quests.QuestJournal>().RestoreState(pair.Value);saved=false;
+                    Debug.LogWarning("Bristlebreaker quest credit could not be saved; retrying before opening the next cell.");
+                }
+            return saved;
+        }
         protected override void StopEncounter(){if(Arena!=null)foreach(var boss in Arena.bosses)if(boss!=null){boss.Cease();boss.gameObject.SetActive(false);}}
         protected override void OnDestroy(){if(Current==this)Current=null;base.OnDestroy();}
     }

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297e3e868ea7d8740a1006ed32571358, type: 3}
+  m_Name: Trial of Fury
+  m_EditorClassIdentifier: DiceFree.Quests.Runtime::DiceFree.Quests.QuestDefinition
+  stableId: quest.berserker.trial-of-fury
+  title: Trial of Fury
+  category: 0
+  requiredClassId: class.greatblade
+  requiredLevel: 60
+  version: 1
+  offer: Rage is a tool. Let it choose your battles and you will soon have none left to fight. Enter the Crimson Crucible in Crimson Mire. Defeat its first two guardians, then bring down Bristlebreaker in the third cell. You may leave through the normal exit after that victory; your trial will be remembered. Return here when it is done.
+  activeDialogue: Bristlebreaker guards the third cell of the Crimson Crucible. The slime and wolf must fall before its gate opens. You do not need the final treasury to prove your control.
+  turnInDialogue: You faced the beast without becoming its echo. Take up your axe. Let anger serve your hand, never guide it.
+  locationHint: Gorren Ashscar camps beside the north road from Trimery, near the Quillboar frontier.
+  turnInHint: Return to Gorren Ashscar at his camp north of Trimery.
+  stages:
+  - kind: 0
+    objectiveId: bristlebreaker
+    requiredTag:
+    creditMode: 0
+    creditRadius: 50
+    instruction: Defeat Bristlebreaker in cell 3 of the Crimson Crucible; party participation counts
+    contentId: boss.crucible.bristlebreaker
+    dungeonBossOnly: 1
+    familyId:
+    familyIds: []
+    areaId:
+    conversationId:
+    count: 1
+    alternatives: []
+  completedQuestIds: []
+  rewardXp: 0
+  reward: {fileID: 0}
+  rewardTitle:
+  acceptOnTalk: 0
+  completeOnObjectives: 0
+  repeatable: 0
