@@ -885,3 +885,59 @@ Choose independent **linear per-rank** raw damage to match the existing Fireball
 5. **TierIII advancement quest and teacher:** specify quest origin / required proof and world-map region when relevant; no implementation yet.
 
 **Docs-only design round; NO Unity code/assets/build/test changes, no merges.**
+
+
+## Fire Mage Tier III Round 21 — 2026-11-26: USER-APPROVED DAMAGE SNAPSHOTS, DEATH DETONATION, UNLIMITED DISTINCT SECONDARIES
+
+**LATEST USER ROUND21 APPROVALS, authoritative over all earlier open/suggested snapshot and bomb-target-death alternatives. Design only; not yet Unity runtime implementation.**
+
+### 1. Ignite snapshot on successful application (USER APPROVED)
+
+- On each successful Ignite application, **snapshot caster's purchased Ignite rank, INT, and currently applicable damage bonuses** at that exact application time. Compute/store the resulting RAW Magical Fire damage-per-tick potency with the accepted formula `9.5+68*(r-1)/29+(0.085+0.34*(r-1)/29)*INT` and the captured offensive bonuses. **Do NOT dynamically recalculate caster attributes or outgoing damage buffs every subsequent tick.** Each actual damage packet is still processed through target mitigation/resistance at the tick's time under standard global combat rules; caster snapshot does NOT freeze target resistance or future immunity.
+- If the application is empowered, preserve its **3× tick damage** at the same8s duration and8 ticks. Every caster can have **one distinct Ignite effect per target**; different caster-owned Ignite effects coexist and tick separately.
+- Prior user-approved **same-caster Ignite reapplication** remains: restart the8-second duration AND next tick timer, but keep whichever **captured DoT potency is STRONGER**. Compare potency at application: a new weaker Ignite refresh does NOT downgrade an existing stronger empowered/buffed DoT; a new stronger Ignite upgrades it. For different casters do not compare or override across owners. Exact potency tie-breaking and handling a disconnected/dead caster need ordinary combat runtime semantics, not inferred extra user requirements.
+
+### 2. Living Bomb damage snapshot on application (USER APPROVED)
+
+- On successful application of **EACH distinct Living Bomb instance**, snapshot the **caster's purchased Living Bomb rank, caster INT and applicable offensive damage bonuses**; store independent normal/empowered provenance and effective explosion raw damage from `57+408*(r-1)/29+(0.51+2.04*(r-1)/29)*INT` before target defenses. **Do NOT recalculate from caster's current stats when the fuse expires**. The original empowered bomb's own3m explosion remains **2× that original's normal snapshot** per valid enemy in the AoE. Ordinary bomb raw is its normal snapshot.
+- **Secondary bombs** spawned by that empowered original remain **NORMAL power**, with a **normal3-second fuse** and their own subsequent **3m AoE explosion** and a hard no-propagation marker. As an integration-level DESIGNER GUIDANCE consistent with snapshot provenance, copy the parent's *normal snapshot potency* into each secondary instance rather than rerolling caster INT after the original explosion; not an independent user-approved exception. Multiple simultaneous snapshots from different casts can differ and must remain separate.
+- Multiple independent bomb instances on the same enemy, including different original/secondary bombs and from same or different casters, are explicitly allowed. Do not introduce one-bomb-per-target suppression, same-caster replacement, or global deduping merely for convenience. Each bomb has its own fuse, snapshot, instance ID, event and 3m blast.
+- Standard per-target post-snapshot mitigation/resistance occurs at actual detonation time; snapshots only lock offensive values, not future target defensive state.
+
+### 3. Target dies before fuse -> immediate AoE explosion (USER APPROVED)
+
+- If the **living bomb's attached target dies before the fuse completes**, that instance **immediately detonates at the target's death WORLD POSITION**, producing its normal full **3m AoE Magical Fire explosion**, rather than waiting, disappearing, or doing a single-target-only packet.
+- If the original bomb was an **empowered original**, the immediate detonation retains its **2× normal raw explosion** and its already-approved one generation of normal secondary bombs on other nearby **living valid** enemies within3m. If this is an ordinary or propagated secondary bomb, explosion remains **NORMAL power**; propagated secondary bombs **never propagate further**, including from death-triggered explosion.
+- For a death carrying SEVERAL bombs, each instance triggers independently; **explosion chain reactions** can kill other bomb-bearing enemies, and those bombs each must follow the same immediate death rule while maintaining distinct IDs and one-hop/no-recursion provenance. **Implementation safety proposal, not an extra damage rule:** mark instances detonated/deleted atomically before applying AoE damage and use bounded deterministic event processing to avoid duplicate explosions or re-entrant infinite loops. Target that was already dead should not be dealt a second HP hit; the AoE remains centered on death position, hitting other eligible recipients.
+
+### 4. Multiple secondary bombs on one target are allowed (USER APPROVED)
+
+- Every empowered original bomb can spawn its own **NORMAL full-damage secondary bomb** on each other eligible target within3m of its original explosion, even if that target already carries other secondary or original bomb instances, whether from same or different casters.
+- Each spawned bomb has **independent snapshot,3s fuse,3m AoE**, normal power, propagation flag FALSE. No caster-level or target-level "only one secondary" uniqueness cap. Secondary detonation can trigger deaths and thus immediate detonation of bombs carried by affected enemies, but **can never spawn new bombs**, which preserves one-generation propagation. One empowered original creates at most one new secondary per other *eligible enemy* in its own detonation event, not recursively for every enemy hit by a secondary.
+- No extra Mana or Heat per spawned bomb or explosion; only the original successful player cast counts toward Mana and Heat, based on previously approved rules.
+
+### 5. Empowered Fireball ground snapshot (USER APPROVED)
+
+- When the empowered Fireball first creates its fixed-position burning ground at the impacted target's location, **capture its OWN Fireball purchased rank and caster INT at patch creation**; the six tick packets follow frozen raw coefficient based on that captured rank/INT. Each raw tick is still exactly `0.25*(30+8*r+(0.3+0.04*r)*INT)=7.5+2*r+(0.075+0.01*r)*INT`. Do NOT dynamically recalculate rank/INT if buffs or purchased rank change during the patch lifetime.
+- Each independent 4m-radius ground patch lasts6seconds and ticks at t1,2,3,4,5,6 after patch creation; NO t0 explosion. Patches overlap and ALL deal damage independently, from same/different casters. Every raw tick is separately subjected to current target Magical DEF and Fire resistance/mitigation. **Whether non-INT outgoing buffs must also snapshot for Fireball ground was NOT explicitly answered**, so defer to existing global damage-snapshot policy or confirm later; never silently pretend user specified additional bonus snapshots for ground when only rank and INT were selected.
+
+### Current Fire Mage approved mechanics retained
+
+- Stat profile new TierIII Lv1 VIT19 STR7 AGI12 INT33 SPR13; per-level gains2/.75/1/6/1.5, baseMana160, universal maxMana=160+5INT and regen=4+0.1SPR.
+- 150 user-approved rank gates in Round16 table, six rank caps Fireball35/Ward25/Ignite30/Bomb30/Overheat15/Aura15; class rank0 starter with one earned point per Lv1..150.
+- Mana cast costs `Fireball=20+15r`, `Ignite=30+15r`, `Bomb=50+15r`, `Ward=10+6r` upfront plus redirected Mana for damage Ward actually prevents. Empowered spells cost usual Mana and consume100 Heat, no additional Mana surcharge.
+- Casts and CDs Fireball0.2s/14→7s, Ignite instant/14→10s, Bomb0.2s/22→15s, Ward instant self-only/28→20s, all cooldown changes linear in purchased ability rank.
+- Normal Fireball projectile raw `30+8r+(0.3+0.04r)*INT`; Ignite normal eight snapshot ticks, empowered triple; Living Bomb normal3m AoE all bombs including secondaries, original empowered2× normal and one-hop normal3m secondaries; Fireball empowered ground six independent ticks each one-quarter projectile raw in4m area.
+- Flame Ward main percentage-based Mana redirect and per-HP Mana spend, empowered true Fire elemental shield with capacity `50+(0.5+0.1r)*INT`, fixed10s shield lifetime; true elemental0.8 matching/1.2 otherwise eligible shield-HP consumption before Mana redirection to remainder. Infernal Presence aura15m, +.5pp ally Fire resistance per rank and -.5pp hostile, strongest identical source.
+- Ordinary eligible successful active Fire cast incl self-Ward Heat=10+OverheatMastery rank, max100, next Fire cast empowered uses all100 & awards no same-cast Heat; decay10/sec after10s no successful Fire cast. All propagation/tick damage triggers NO additional Heat.
+- TierIV Pyromancer combined aura/Overheat idea, Fire LAZOR, Meteor, toggle ward; parallel Frost Mage→Cryomancer, hidden Hydromancer if both Fire Mage and Frost Mage reach Lv120 remain future brainstorming, not implemented.
+
+### Follow-up Round22 candidates (NOT USER APPROVED)
+
+1. Confirm **Fireball ground other outgoing bonuses**: snapshot all damage bonuses at patch spawn like Ignite/Bomb, or only INT+rank and evaluate other damage modifiers per tick using global combat pipeline?
+2. Specify **Living Bomb chain reaction semantics** when bomb kills its attached target through another bomb's AoE (immediate on-death detonation) and ensure no cascade duplicates / reentrancy.
+3. Define **Ignite same-caster recast potency rule** if new weaker Ignite is empowered vs an existing stronger nonempowered buff snapshot; stronger actual tick raw after bonuses wins, not empowerment label alone, unless user changes policy.
+4. Determine whether **Fire Mage spell casts can crit** and whether Ignite/ground/bomb AoE ticks use global spell crit behavior. Do not invent Fire Mage-only crit exceptions.
+5. Plan Fire Mage TierIII **advancement NPC/quest and its exact world-map placement**, after mechanics settle.
+
+**Design docs only. Do not implement or touch Unity code/assets/build/tests; no merge.**
