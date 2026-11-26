@@ -746,3 +746,49 @@ Costs must be tested against actual player rotation, the 10sec Heat idle period,
 5. Later class advancement quest and TierIII stat resources/HP calculations with shared rules.
 
 **Design docs only; no Unity gameplay/source/asset edits, no game build, no merge.**
+
+
+## Fire Mage Tier III Round 18 — 2026-11-26: USER APPROVES STAT PROFILE AND BASE MANA, EXACT AUDITED 150 GATES, WARD MANA COST; OFFENSIVE ~15r DIRECTION
+
+**LATEST USER APPROVALS, superseding any prior designer proposals or tentative status for these specific matters:**
+
+1. **Fire Mage TierIII Lv1 base attributes and PER-LEVEL GROWTH definitively USER APPROVED as first-playtest baseline:**
+   - Lv1: `VIT19, STR7, AGI12, INT33, SPR13`.
+   - Per level: `VIT+2.00, STR+0.75, AGI+1.00, INT+6.00, SPR+1.50`. Sum level1 attributes84; growth total11.25 per class level.
+   - `ClassBaseMana = 160` definitively approved. Continue to use shared global max Mana `160+5*INT` and regen/s `4+0.1*SPR`; **DO NOT** invent a Fire Mage-only per-INT Mana/regen coefficient. Lv1 no-gear INT33/SPR13 yields Mana325, regen5.3 per sec; Lv150 no-gear INT927/SPR236.5 yields Mana4795, regen27.65/s. These are theoretical pre-gear stats; use game's existing fractional/rounding policies on implementation.
+   - TierIII class is its own Level1 manifestation after advancement, NOT accumulated Mage Lv60 stats pasted on top. TierII Mage source was checked and has lower Lv1 base and growth; do not modify it in this design-only round.
+2. **Exact full 150-rank Fire Mage Level-gate table from Round16 is NOW USER APPROVED, not just the design principle.** This is the already-authored six-row table in the Round16 section above, headed "Exact AUDITED designer gate table, awaiting explicit user review (NOT locked)" and enumerating every rank's minimum class level. User explicitly answers "Approve the exact 150-gate table in docs/classes/MAGE_TIER3_DESIGN.md". **That exact existing table is now authoritative first-test schedule**, including its unusual level1 two rank1 choices and no new availability gate at level4. Earlier Round16/17 headings and prose calling it designer-only/unapproved are HISTORICAL and superseded by this acceptance. Retain every numerical entry unchanged.
+   - Fireball cap35: first Lv1, final rank Lv150.
+   - Flame Ward cap25: first Lv5, final rank Lv147.
+   - Ignite cap30: first Lv3, final rank Lv148.
+   - Living Bomb cap30: first Lv8, final rank Lv149.
+   - Overheat Mastery cap15: first Lv1, final rank Lv146.
+   - Infernal Presence cap15: first Lv10, final rank Lv145.
+   - Sum 150 allowed rank purchases by ClassLv150, 1 class point per level1..150, all start purchased rank0. The already completed audit verified total eligible ranks at EVERY level L is >=L, so no permanently unspendable points while leveling, and all skill caps exactly achievable. Do not silently regenerate or change that exact table on implementation.
+3. **Flame Ward upfront Mana activation cost USER APPROVED EXACTLY `ManaCost_FlameWard(r)=10+6*r`, purchased rank r1..25**. Rank1 cost16, rank25 cost160. This is distinct from additional Mana automatically spent when redirecting applicable incoming damage to the Mana pool; `ManaPerHP(r)=1.9-0.6*(r-1)/24`, `RedirectFraction(r)=0.30+0.35*(r-1)/24` both previously approved. Empowered Flame Ward costs the same up-front Mana PLUS100 Heat and continues to consume extra Mana per damage blocked by Mana ward, with bonus true Fire elemental shield first (global 0.8 matching Fire, 1.2 other ordinary eligible shield capacity consumption).
+4. **Offensive spell Mana costs NOT numerically approved.** User selects option "**Suggest increasing offensive spell costs to 15 Mana per rank; formulas to finalize**" rather than approving prior `20+10r, 30+10r, 50+10r` candidates. Treat `~15*r` as user-directed higher COST RANK COEFFICIENT TARGET, not a final approved cost formula or a wholesale override of Flame Ward's expressly approved `10+6r`. Exact base additions and whether all three offensive spells share +15r are still open and need separate signoff. Previous 10r formulas remain rejected/unapproved proposals.
+
+### DESIGNER FOLLOW-UP OFFENSIVE MANA PROPOSALS (NOT USER APPROVED)
+
+For each SPELL'S OWN purchased rank `r`: Fireball `20+15*r` (rank1=35, rank35=545); Ignite `30+15*r` (rank1=45, rank30=480); Living Bomb `50+15*r` (rank1=65, rank30=500). Use the same first-test base terms from Round17 but increase marginal cost to user-directed 15/rank. At Lv150 with Mana4795, max-rank Fireball would spend545 Mana ≈11.37% of unmodified pool and recover ≈193.55 natural Mana over its7s cooldown at regen27.65/s, meaning rotation must manage Mana. These proposals are to be approved/revised next; do NOT implement as final values without approval. Ward stays user-approved `10+6r`.
+
+### Core existing user-approved spell mechanics retained
+
+- Fireball raw Magical Fire direct hit `30+8r+(0.3+0.04r)*INT`, r1..35; empowered Fireball adds fixed-position 4m burning ground six ticks t1..6 seconds, each tick approximately25% direct Fireball reference hit, exact packet coefficients still TBD.
+- Ignite normal8sec DoT ticks at t1..8, normal full tick sum ≈2x reference Fireball hit at comparable progression, empowered3x normal total on one target8s. Same-caster recast refresh, not stack.
+- Living Bomb fuse3s, radius3m. Normal blast per eligible enemy≈1.5x normal Fireball reference hit. Empowered original detonation2x its OWN normal blast plus one hop applying normal3s fuse, normal full damage bombs to nearby others, copies NEVER propagate.
+- Spells cast time/cooldown (all linear cooldowns): Fireball0.2s/14→7s r1..35, Ignite instant/14→10s r1..30, Living Bomb0.2s/22→15s r1..30, Flame Ward instant/28→20s r1..25. No shared custom cooldowns added.
+- All four active spells incl self-only Ward ordinary cast produce `10+OverheatMasteryRank` Heat, 100 Heat empowers NEXT eligible cast spending100 and no same-cast Heat; after10s without successful Fire cast Heat decays10/sec.
+- Self-only Flame Ward main Mana redirection fraction `0.30+0.35*(r-1)/24`, main duration `4+6*(r-1)/24`; empowered bonus true Fire-element shield capacity `50+(0.5+0.1*r)*INT` for10sec, absorbs any ordinary eligible damage using global elemental 0.8 matching/1.2 nonmatching shield-HP rules before Mana redirect on remaining damage and finally HP.
+- Infernal Presence always-on aura radius15m includes caster, ally Fire resist +0.5 percentage points/rank, enemy -0.5pp/rank; strongest matching aura only.
+- Future-only TierIV Pyromancer ideas combined Heat passive+aura, toggle Ward, huge Fire LAZOR, perhaps Meteor; later Frost Mage→Cryomancer and hidden Hydromancer if Fire Mage Lv120 + Frost Mage Lv120. No TierIV implementation authorization.
+
+### Next design pass (AWAITING USER INPUT)
+
+1. Approve/adjust offensive Mana first-test formulas `Fireball20+15r, Ignite30+15r, LivingBomb50+15r`, leaving approved Ward `10+6r` intact.
+2. Approve independent flat+INT rank-dependent packet formulas for empowered Fireball ground, Ignite eight ticks and Living Bomb normal explosion; keep ratio targets at comparable rank investment.
+3. Decide application/recast interactions for Ignite: empowered DoT potency vs normal reapplication, exact refresh/tick timer.
+4. Decide Living Bomb same-source reapplication/replacement/snapshot behavior and target de-duplication for one-hop bomb propagation.
+5. Fire Mage TierIII advancement quest, mentoring NPC, audiovisual theme and test plan/handover after mechanics complete.
+
+**Only docs updated. NO Unity gameplay code/assets/build/tests, no branch merge.**
