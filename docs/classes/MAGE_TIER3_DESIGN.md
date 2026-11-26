@@ -690,3 +690,59 @@ Actual source read this round: `Assets/_DiceFree/Scripts/Tools/Editor/MageAuthor
 - Ignite8 ticks across8s t1..8, empowered3x normal DoT on one target same duration, reapply refresh; Living Bomb3s fuse/3m splash, empowered original2x raw normal detonation plus single-generation normal-damage/normal-fuse bomb spread. Empowered Fireball4m fixed burning ground6s, t1..6 six ticks. Global Fire magical damage/resist/crit rules unchanged.
 - TierIV Pyromancer possible combined aura/passive, toggle Ward, Fire LAZOR and maybe Meteor; Frost Mage→Cryomancer and hidden Hydromancer requiring Fire Mage Lv120 and Frost Mage Lv120 are IDEA BANK ONLY, not now.
 - **Docs-only. No Unity source/assets/build, runtime changes, merge or gameplay testing authorized.**
+
+
+## Fire Mage Tier III Round 17 — 2026-11-26: USER REVISES AGI/INT GROWTH; HIGHER ~10r MANA COST IDEA
+
+**LATEST USER RESPONSE:** "remove 0.2 agi and add to int and also increase int by another 0.3. but yeah with these mana values and mana regen we need to increase the mana costs of spells a lot. i think maybe like 10r?"
+
+### USER-REQUESTED stat profile adjustment
+
+The prior Round16 designer proposal was Fire Mage TierIII own new class Lv1 VIT19/STR7/AGI12/INT33/SPR13, growth VIT+2.0/STR+0.75/AGI+1.2/INT+5.5/SPR+1.5, ClassBaseMana160. The user **explicitly changes growth** AGI -0.2 and INT +0.2 +0.3, leaving other stats unchanged:
+
+| Attribute | TierIII Fire Mage Lv1 | Per-level growth | Status |
+| --- | ---: | ---: | --- |
+| VIT | 19 | +2.00 | Previously proposed, no change requested |
+| STR | 7 | +0.75 | Previously proposed, no change requested |
+| AGI | 12 | **+1.00** | **Explicit user correction** from +1.20 |
+| INT | 33 | **+6.00** | **Explicit user correction** from +5.50 |
+| SPR | 13 | +1.50 | Previously proposed, no change requested |
+| **Total** | **84** | **+11.25** | Lv1 total unchanged; growth +0.30 vs old10.95 |
+
+User responds "but yeah with these mana values and mana regen" while correcting proposed stat growth; treat unchanged base stats, other growth and **ClassBaseMana160** as an **accepted first-test working baseline**, distinguish explicit correction from implicit assent. No new class-specific Mana coefficients. At class level `L`, use standalone new manifestation `Stat(L)=Base+(L-1)*Growth` rather than inherited accumulated Mage Lv60 parent attributes.
+
+Approved previously shared Mana formulas `MaxMana=ClassBaseMana+5*INT` and `NaturalManaRegenPerSecond=4+0.1*SPR` produce at the accepted first-test profile:
+- **Fire Mage Lv1:** INT33, SPR13, MaxMana `160+5*33=325`, natural regeneration `4+0.1*13=5.3 Mana/s` before gear/buffs.
+- **Fire Mage Lv150:** INT `33+149*6=927`; SPR `13+149*1.5=236.5`; **MaxMana `160+5*927=4795`**; regeneration `4+0.1*236.5=27.65 Mana/s` before gear/buffs/rounding. Compare old Round16 INT852.5 / MaxMana4422.5, superseded.
+- Other unmodified Lv150 stats: VIT `19+149*2=317`, STR `7+149*.75=118.75`, AGI `12+149*1=161`.
+- TierII Mage underlying authoring remains historical Lv1 VIT11/STR5/AGI8/INT18/SPR9, growth+1.5/+0.5/+0.75/+3/+1.5. Do not copy its deprecated class-specific resource multipliers into TierIII Fire Mage.
+
+### Mana cost escalation intent, exact formulas NOT APPROVED
+
+User says the large 4795 max Mana and27.65/sec regen at Lv150 require **MUCH HIGHER Mana COSTS** than prior designer proposal, tentatively "**maybe like 10r?**" This is a **suggested order-of-magnitude / rank coefficient** of roughly **+10 Mana per purchased active skill rank**, **NOT signoff on specific cost formulas**. Prior lower drafts `Fireball18+3r, Ignite24+3r, LivingBomb34+4r, Ward10+2r` remain unapproved; do NOT silently promote them.
+
+**Designer proposal to ask next (NOT USER-APPROVED):** for each skill's own purchased rank `r`:
+- Fireball `20+10r` (rank1=30, rank35=370), maintaining short0.2s cast, CD14→7s. At Lv150 max Fireball costs ~7.7% of4795 pool and7s natural regen ~194 Mana between cooldown completions before gear/other spells; not free but less than a full pool reset.
+- Ignite `30+10r` (rank1=40, rank30=330), instant, 8s DoT, CD14→10s.
+- Living Bomb `50+10r` (rank1=60, rank30=350),0.2s cast,3s fuse, CD22→15s.
+- Flame Ward `10+6r` (rank1=16, rank25=160) as **intentionally lower upfront cost**, since it ALSO spends Mana dynamically at `1.9-0.6*(r-1)/24` Mana per prevented HP, CD28→20s; alternative `10+10r` (rank1=20, max260) to explore if user wants uniform +10r. The user did not explicitly exempt Ward from the 10r thought; ask preference. All four still have costs rising with rank, empowered spells pay ordinary Mana cost PLUS100 Heat with no extra Mana surcharge, self-only Ward.
+
+Costs must be tested against actual player rotation, the 10sec Heat idle period, rank gate/ability availability, skill use frequency, and actual global Mana pool/regen. Do not treat `10r` or these four example formulas as user-approved.
+
+### Fireball damage and progression still valid
+
+- Normal Fireball raw direct Magical Fire damage `30+8r+(0.3+0.04r)*INT` at purchased r1..35 (Round16 user approved) before mitigation. Both flat and INT coefficient scale with OWN skill rank. At max r35 with proposed new Lv150 no-gear INT927, raw damage would be `310+1.7*927=1885.9`, before any gear/resistance modifiers; this is a theoretical formula output, NOT a measured DPS figure.
+- Prior approved comparative goals: burning-ground each of six ticks≈25% corresponding Fireball direct hit, Ignite eight-tick total≈2x comparable Fireball hit, Living Bomb initial normal3m explosion≈1.5x comparable Fireball hit. Exact independent INT and flat coefficients for other spells pending approval.
+- User approved evenly paced per-rank minimum-level gates / total150 points and first-unlock levels; a fully 150-entry designer gate table already recorded in Round16 remains **mathematically audited but NOT separately approved as exact gates**. No change to this table in Round17.
+- Six rank caps remain Fireball35 / Flame Ward25 / Ignite30 / Living Bomb30 / Overheat Mastery15 / Infernal Presence15. 1 class point/class level1..150, rank0 initial, other Fire Mage timing/Heat/Ward/aura/DoT/one-hop bomb details preserved in prior sections.
+- Future TierIV Pyromancer possible merged Heat/aura, toggle Ward, Fire LAZOR/Meteor; extra Frost Mage→Cryomancer and hidden Hydromancer after both Fire Mage and Frost Mage Lv120 remain future idea bank.
+
+### Next Round18 decisions to request
+
+1. Confirm full Lv1 attributes & growth table above and **ClassBaseMana160** as first-playtest canon, optionally adjust other stats rather than inferring hidden changes.
+2. Approve/adjust sample HIGH Mana formulas Fireball `20+10r`, Ignite `30+10r`, Bomb `50+10r`, Ward `10+6r` or `10+10r`, accounting for ongoing Ward Mana absorption.
+3. Confirm exact 150-rank-gate schedule table Round16 if player likes proposed distribution, or request different pacing.
+4. Decide whether damage/tick coefficient rounding is exact proportion of approved Fireball base formula or independently authored flat+INT per skill with comparable rank progression.
+5. Later class advancement quest and TierIII stat resources/HP calculations with shared rules.
+
+**Design docs only; no Unity gameplay/source/asset edits, no game build, no merge.**
