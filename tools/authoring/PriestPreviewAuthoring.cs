@@ -53,7 +53,7 @@ public static class PriestPreviewAuthoring
             basic.weights = new AttributeValues { spirit = 1 };
             basic.requiresAccuracy = true;
             basic.baseDamage = 6;
-            basic.coefficient = 1.1f;
+            basic.coefficient = 1f;
             basic.interval = 1.45f;
             basic.windup = .32f;
             basic.reach = 2.4f;

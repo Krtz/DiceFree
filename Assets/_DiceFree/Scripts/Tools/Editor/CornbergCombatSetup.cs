@@ -27,7 +27,7 @@ namespace DiceFree.EditorTools
             ConfigureLayer();
             var tuning = Asset<CombatTuning>("Cornberg provisional tuning", _ => { });
             var fists = Asset<AttackDefinition>("Novice fists", value => {
-                value.stableId = "attack.novice.fists"; value.displayName = "Fists"; value.scaling = AttributeScaling.Highest;
+                value.stableId = "attack.novice.fists"; value.displayName = "Fists"; value.scaling = AttributeScaling.Highest; value.coefficient = 1;
             });
             var bump = Asset<AttackDefinition>("Crop Slime bump", value => {
                 value.stableId = "attack.crop-slime.bump"; value.displayName = "Bump";

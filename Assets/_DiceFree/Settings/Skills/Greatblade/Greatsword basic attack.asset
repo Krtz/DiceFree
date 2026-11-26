@@ -25,7 +25,7 @@ MonoBehaviour:
     intelligence: 0
     spirit: 0
   baseDamage: 0
-  coefficient: 2
+  coefficient: 1
   minimumDamageMultiplier: 0.9
   maximumDamageMultiplier: 1.1
   interval: 1.5

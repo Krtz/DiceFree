@@ -55,7 +55,7 @@ namespace DiceFree.EditorTools
     definition.growth=new AttributeValues{vitality=1.5f,strength=.5f,agility=.75f,intelligence=3,spirit=1.5f};
     var basic=Asset<AttackDefinition>(Folder+"/Mage wand basic.asset");EditorUtility.CopySerialized(parent.basicAttack,basic);
     basic.stableId="attack.mage.wand";basic.displayName="Wand Spark";basic.weights=new AttributeValues{intelligence=1};basic.scaling=AttributeScaling.Weighted;basic.channel=DamageChannel.Magical;
-    basic.baseDamage=1;basic.coefficient=1.2f;basic.interval=1.5f;basic.reach=12;basic.windup=.25f;basic.element=null;definition.basicAttack=basic;
+    basic.baseDamage=1;basic.coefficient=1f;basic.interval=1.5f;basic.reach=12;basic.windup=.25f;basic.element=null;definition.basicAttack=basic;
     var tuning=Asset<MageCombatTuning>(TuningPath);tuning.attacks=new AttackDefinition[6];tuning.range=18;tuning.chainRange=6;tuning.quicksandRadius=3.5f;tuning.decayDelay=8;tuning.decayInterval=1;
     string[] elements={"Fire","Ice","Electric","Nature","Radiation","Math"};
     foreach(var rule in MageProgressionRules.Skills.Where(r=>!r.passive)){

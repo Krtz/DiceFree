@@ -39,7 +39,7 @@ public static class ThiefAuthoring
         var catalog = Load<ClassCatalog>(Catalog);
         var parent = catalog.Resolve(ThiefMentor.ParentClassId);
         var thief = Asset<ActorDefinition>("Thief class");
-        var basic = Attack("Thief dagger basic","attack.thief.daggers",null,5,1.05f,true);
+        var basic = Attack("Thief dagger basic","attack.thief.daggers",null,5,1f,true);
         basic.reach = .8f;
         basic.interval = .87f;
         basic.windup = .27f;

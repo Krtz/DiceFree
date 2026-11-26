@@ -21,7 +21,7 @@ MonoBehaviour:
   weights:
     vitality: 0
     strength: 0
-    agility: 1.05
+    agility: 1
     intelligence: 0
     spirit: 0
   baseDamage: 5

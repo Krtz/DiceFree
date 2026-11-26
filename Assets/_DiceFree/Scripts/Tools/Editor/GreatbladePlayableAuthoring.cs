@@ -39,7 +39,7 @@ namespace DiceFree.EditorTools
                 definition.stableId=GreatbladeProgressionRules.ClassId;definition.displayName="Greatblade";
                 definition.baseAttributes=new AttributeValues{vitality=14,strength=18,agility=9,intelligence=5,spirit=5};
                 definition.growth=new AttributeValues{vitality=2,strength=3,agility=1,intelligence=.5f,spirit=.5f};
-                definition.basicAttack=Attack("Greatsword basic",2,1.5f,.35f,1.3f);
+                definition.basicAttack=Attack("Greatsword basic",1,1.5f,.35f,1.3f);
                 definition.basicAttack.requiresAccuracy=true;definition.basicAttack.minimumDamageMultiplier=.9f;definition.basicAttack.maximumDamageMultiplier=1.1f;
                 EditorUtility.SetDirty(definition.basicAttack);EditorUtility.SetDirty(definition);
                 var tuning=Asset<GreatbladeCombatTuning>(TuningPath);

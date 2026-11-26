@@ -72,7 +72,7 @@ namespace DiceFree.EditorTools
             profile.loadPolicy = ResourceRetentionPolicy.Persist;
             EditorUtility.SetDirty(profile);
 
-            var basic = Attack(BasicAttackPath, "attack.physical.basic", "Adaptive Strike", 1.4f, 1.05f, 0.24f, 0.7f, true);
+            var basic = Attack(BasicAttackPath, "attack.physical.basic", "Adaptive Strike", 1f, 1.05f, 0.24f, 0.7f, true);
             physical.basicAttack = basic;
             EditorUtility.SetDirty(physical);
 

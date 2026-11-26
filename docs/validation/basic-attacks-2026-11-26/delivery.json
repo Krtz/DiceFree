@@ -1,0 +1,7 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\Marksman-20261126-092148\\DiceFree.exe",
+  "sha256": "4C93A4BB060A12B9044AB2103835DD1565AEC9AA8381372FA84FBBC14A19B989",
+  "levelOneAudit": "passed",
+  "freshWindowsBuild": true,
+  "runtimePlaytest": false
+}

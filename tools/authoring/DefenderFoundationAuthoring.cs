@@ -40,7 +40,7 @@ public static class DefenderFoundationAuthoring
         defender.magicalDefense = 6;
         defender.moveSpeed = parent.moveSpeed;
         defender.tuning = parent.tuning;
-        var basic = Attack("Defender sword", "attack.defender.sword", 6, 1.04f);
+        var basic = Attack("Defender sword", "attack.defender.sword", 6, 1f);
         basic.reach = .9f;
         basic.interval = 1.19f;
         basic.windup = .32f;

@@ -25,7 +25,7 @@ MonoBehaviour:
     intelligence: 0
     spirit: 0
   baseDamage: 1
-  coefficient: 1.4
+  coefficient: 1
   interval: 1.05
   windup: 0.24
   reach: 0.7

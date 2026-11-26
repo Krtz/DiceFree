@@ -1,0 +1,244 @@
+{
+    "status": "passed",
+    "changedClasses": 9,
+    "classes": [
+        {
+            "classId": "class.novice",
+            "className": "Novice",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 1.0,
+                "strength": 1.0,
+                "agility": 1.0,
+                "intelligence": 1.0,
+                "spirit": 1.0
+            },
+            "baseDamage": 1.0,
+            "coefficient": 1.0,
+            "raw": 2.0,
+            "minimum": 1.7480000257492065,
+            "maximum": 2.257499933242798
+        },
+        {
+            "classId": "class.physically-blessed-novice",
+            "className": "Physically Blessed Novice",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 12.0,
+                "strength": 12.0,
+                "agility": 12.0,
+                "intelligence": 5.0,
+                "spirit": 5.0
+            },
+            "baseDamage": 1.0,
+            "coefficient": 1.0,
+            "raw": 13.0,
+            "minimum": 9.38599967956543,
+            "maximum": 16.799999237060547
+        },
+        {
+            "classId": "class.magically-touched-novice",
+            "className": "Magically Touched Novice",
+            "damageType": "Magical",
+            "attributes": {
+                "vitality": 10.0,
+                "strength": 5.0,
+                "agility": 5.0,
+                "intelligence": 13.0,
+                "spirit": 13.0
+            },
+            "baseDamage": 1.0,
+            "coefficient": 1.0,
+            "raw": 14.0,
+            "minimum": 9.376500129699707,
+            "maximum": 18.899999618530273
+        },
+        {
+            "classId": "class.greatblade",
+            "className": "Greatblade",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 14.0,
+                "strength": 18.0,
+                "agility": 9.0,
+                "intelligence": 5.0,
+                "spirit": 5.0
+            },
+            "baseDamage": 0.0,
+            "coefficient": 1.0,
+            "raw": 18.0,
+            "minimum": 14.078999519348145,
+            "maximum": 22.049999237060547
+        },
+        {
+            "classId": "class.mage",
+            "className": "Mage",
+            "damageType": "Magical",
+            "attributes": {
+                "vitality": 11.0,
+                "strength": 5.0,
+                "agility": 8.0,
+                "intelligence": 18.0,
+                "spirit": 9.0
+            },
+            "baseDamage": 1.0,
+            "coefficient": 1.0,
+            "raw": 19.0,
+            "minimum": 14.078999519348145,
+            "maximum": 24.149999618530273
+        },
+        {
+            "classId": "class.priest",
+            "className": "Priest",
+            "damageType": "Magical",
+            "attributes": {
+                "vitality": 12.0,
+                "strength": 5.0,
+                "agility": 6.0,
+                "intelligence": 11.0,
+                "spirit": 18.0
+            },
+            "baseDamage": 6.0,
+            "coefficient": 1.0,
+            "raw": 24.0,
+            "minimum": 18.828998565673828,
+            "maximum": 29.39999771118164
+        },
+        {
+            "classId": "class.acolyte",
+            "className": "Acolyte",
+            "damageType": "Magical",
+            "attributes": {
+                "vitality": 12.0,
+                "strength": 5.0,
+                "agility": 7.0,
+                "intelligence": 16.0,
+                "spirit": 14.0
+            },
+            "baseDamage": 1.0,
+            "coefficient": 1.0,
+            "raw": 17.0,
+            "minimum": 15.998000144958496,
+            "maximum": 17.849998474121094
+        },
+        {
+            "classId": "class.thief",
+            "className": "Thief",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 12.0,
+                "strength": 7.0,
+                "agility": 18.0,
+                "intelligence": 6.0,
+                "spirit": 8.0
+            },
+            "baseDamage": 5.0,
+            "coefficient": 1.0,
+            "raw": 23.0,
+            "minimum": 21.678998947143555,
+            "maximum": 24.149999618530273
+        },
+        {
+            "classId": "class.ranger",
+            "className": "Ranger",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 13.0,
+                "strength": 8.0,
+                "agility": 18.0,
+                "intelligence": 7.0,
+                "spirit": 9.0
+            },
+            "baseDamage": 5.0,
+            "coefficient": 1.0,
+            "raw": 23.0,
+            "minimum": 21.678998947143555,
+            "maximum": 24.149999618530273
+        },
+        {
+            "classId": "class.defender",
+            "className": "Defender",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 23.0,
+                "strength": 17.0,
+                "agility": 7.0,
+                "intelligence": 6.0,
+                "spirit": 8.0
+            },
+            "baseDamage": 6.0,
+            "coefficient": 1.0,
+            "raw": 23.0,
+            "minimum": 21.688499450683594,
+            "maximum": 24.149999618530273
+        },
+        {
+            "classId": "class.psion",
+            "className": "Psion",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 12.0,
+                "strength": 7.0,
+                "agility": 14.0,
+                "intelligence": 18.0,
+                "spirit": 10.0
+            },
+            "baseDamage": 0.0,
+            "coefficient": 1.0,
+            "raw": 14.399999618530273,
+            "minimum": 13.54319953918457,
+            "maximum": 15.119998931884766
+        },
+        {
+            "classId": "class.psionic-knight",
+            "className": "Psionic Knight",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 22.0,
+                "strength": 8.0,
+                "agility": 30.0,
+                "intelligence": 22.0,
+                "spirit": 11.0
+            },
+            "baseDamage": 0.0,
+            "coefficient": 1.0,
+            "raw": 26.80000114440918,
+            "minimum": 25.205400466918945,
+            "maximum": 28.139999389648438
+        },
+        {
+            "classId": "class.mirage-mage",
+            "className": "Mirage Mage",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 19.0,
+                "strength": 8.0,
+                "agility": 22.0,
+                "intelligence": 32.0,
+                "spirit": 11.0
+            },
+            "baseDamage": 0.0,
+            "coefficient": 1.0,
+            "raw": 28.0,
+            "minimum": 26.334001541137695,
+            "maximum": 29.39999771118164
+        },
+        {
+            "classId": "class.marksman",
+            "className": "Marksman",
+            "damageType": "Physical",
+            "attributes": {
+                "vitality": 19.0,
+                "strength": 10.0,
+                "agility": 34.0,
+                "intelligence": 9.0,
+                "spirit": 11.0
+            },
+            "baseDamage": 8.0,
+            "coefficient": 1.0,
+            "raw": 42.0,
+            "minimum": 39.57699966430664,
+            "maximum": 44.099998474121094
+        }
+    ]
+}

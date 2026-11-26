@@ -46,6 +46,8 @@ public static partial class AcolyteFoundationAuthoring
         EditorUtility.CopySerialized(Load<AttackDefinition>("Assets/_DiceFree/Settings/Skills/Mage/Mage wand basic.asset"), wand);
         wand.stableId = "attack.acolyte.wand";
         wand.displayName = "Vigil Spark";
+        wand.coefficient = 1;
+        wand.weights = new AttributeValues { intelligence = 1 };
         acolyte.stableId = AcolyteSkillProgression.AcolyteClassId;
         acolyte.displayName = "Acolyte";
         acolyte.tuning = parent.tuning;
