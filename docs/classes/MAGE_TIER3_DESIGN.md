@@ -549,3 +549,54 @@ Fire Mage first TierIII coverage path with four actives and two nonactive skills
 5. Specify **Mana costs for four actives**, and then the full150-level rank eligibility gate audit (no unspendable points), tierIII stat/quest and advancement source.
 
 **DESIGN DOCS ONLY. No Unity source/assets/build/runtime implementation changed.**
+
+
+## Fire Mage Tier III Round 14 — 2026-11-26 USER APPROVES ALL FOUR LINEAR COOLDOWNS, RANK-RISING MANA COSTS, WARD HEAT AND ABSORPTION ORDER
+
+**LATEST USER APPROVALS:** User explicitly selects the proposed full linear rank-dependent cooldown schedule, all skill Mana costs rising by rank, a modest upfront Flame Ward Mana cost **PLUS** Mana consumed when preventing HP damage, Flame Ward as an eligible Fire spell for both generating and spending Overheat, and the empowered Fire shield absorbing damage BEFORE the Mana redirection process.
+
+### Exact four active spell cooldown formulas (USER APPROVED)
+
+For each bought skill rank r in that ability's valid range; cooldown begins upon completing its cast/activation under the shared cooldown-start convention, not the start of the cast:
+
+| Fire Mage active | Valid purchased ranks | Cooldown at rank1 | Cooldown at max rank | EXACT accepted linear formula | Cast time |
+| --- | --- | --- | --- | --- | --- |
+| **Fireball** | 1..35 | 14 seconds | 7 seconds | `CD_Fireball(r)=14-7*(r-1)/34` | 0.2s |
+| **Ignite** | 1..30 | 14 seconds | 10 seconds | `CD_Ignite(r)=14-4*(r-1)/29` | instant |
+| **Living Bomb** | 1..30 | 22 seconds | 15 seconds | `CD_LivingBomb(r)=22-7*(r-1)/29` | 0.2s |
+| **Flame Ward** | 1..25 | 28 seconds | 20 seconds | `CD_FlameWard(r)=28-8*(r-1)/24` | instant |
+
+These supersede the formerly fixed 10/15/20 second cooldown descriptions for Ignite/Living Bomb/Flame Ward at all ranks; those values are now **maximum-rank endpoints**. Fireball's formerly approved 14→7s rule is unchanged. There is no ordinary cooldown for Overheat Mastery passive or permanent Infernal Presence aura. The user approved a rank-varying formula for each of the FOUR actives, not a global cooldown reduction shared among them.
+
+### Mana economy (USER APPROVED PRINCIPLES; exact numbers STILL OPEN)
+
+- **ALL FOUR active Fire Mage spells have Mana costs that INCREASE as that spell's purchased rank increases.** This includes Fireball, Ignite, Living Bomb and Flame Ward. Each spell has its own future Mana cost curve, to be designed; do not invent numeric base or per-rank increments as already approved.
+- **Flame Ward incurs a SMALL upfront Mana cast cost** increasing with its own purchased rank, AND it **spends additional Mana when incoming damage is prevented**. These are two separate payments, expressly user approved (not an accidental implementation double charge).
+- Normal Flame Ward's per-prevented-HP Mana price remains `1.9-0.6*(r-1)/24`, r1..25, and redirection percentage `0.30+0.35*(r-1)/24`, duration `4+6*(r-1)/24`. Partial Mana handles only affordable prevented HP. Empowered additional Fire shield capacity `50+(0.5+0.1*r)*INT`, duration10 seconds; exact "Fire shield" type-specific absorption/mitigation is not separately resolved, so preserve game-wide elemental shield contract without inventing immunity to other damage types.
+
+### Overheat and shield absorption ordering (USER APPROVED)
+
+- **EVERY ACTIVE FIRE SPELL including Flame Ward** qualifies as an eligible successful Fire spell cast to gain Heat: ordinary cast awards `10+OverheatMasteryPurchasedRank` Heat (cap100), subject to distinct cast success (NOT ticks, proc blasts or each hit). **Every active Fire spell including Flame Ward also can be the NEXT empowered cast** if at100 Heat, consuming100 Heat and awarding zero replacement Heat.
+- **Empowered Flame Ward EXTRA Fire-element shield absorbs eligible incoming damage FIRST**, BEFORE evaluating Flame Ward's Mana redirection on the **remaining damage**. The main ward's percentage applies to the post-extra-shield remainder; excess damage not absorbed by either then reaches HP. Do NOT apply the full Mana redirect fraction to pre-shield damage, which would double-dip absorption or spend unnecessary Mana.
+- Damage-order example conceptual: damage enters, extra Fire shield reduces the eligible portion, apply existing damage mitigation semantics and remaining Mana redirection as appropriate, then HP receives the residue. Exact interaction with p.def/m.def mitigation, other shields and Fire resistance must respect the engine's global incoming-damage pipeline and still needs implementation-stage validation.
+
+### Prior user-approved class commitments retained
+
+- Four actives + Overheat Mastery passive + Infernal Presence resistance aura, total150 skill caps **35/25/30/30/15/15**. First-unlock Fireball1/Heat passive1/Ignite3/Ward5/Bomb8/aura10; later rank gates not audited/user-approved.
+- Fireball balanced flat+INT raw hit, empowered six burning-ground ticks each ≈25% direct-hit reference in4m radius6s under impacted target, ticks t1..6s.
+- Ignite eight ticks t1..8s, normal total ≈2x reference Fireball direct hit, empowered three times its own normal total, same target8s; no stacking on self-reapply.
+- Living Bomb normal 3s fuse, 3m radius, raw blast ≈1.5x Fireball hit per enemy, empowered original2x normal, spreads NORMAL-fuse/NORMAL-damage copies to valid enemies within3m ONCE, no further generation, procs grant no Heat.
+- Heat max100, gain `10+passiveRank` per successful ordinary Fire spell, at100 next spell empowers/spends all/no self-refill, after10s without successful Fire spell decay10 Heat/sec.
+- Aura permanent15m, includes caster, allied +0.5 percentage points Fire resistance/rank and hostile -0.5pp/rank, strongest same-name source wins.
+- Shared global Mana formula max `ClassBaseMana+5*INT`, regeneration `4+0.1*SPR`. No Fire Mage-specific Mana coefficient.
+- Future TierIV Pyromancer may merge aura/passive, evolve Flame Ward to toggle, gain Fire LAZOR / maybe Meteor; Frost Mage→Cryomancer later and hidden Hydromancer at Fire Mage Lv120 + Frost Mage Lv120 only future class ideas; not authorized gameplay additions.
+
+### Round 15 possible decisions (DESIGNER ONLY UNTIL USER ANSWERS)
+
+1. **Mana cost curves:** propose Fireball `10+2r`, Ignite `14+2r`, Living Bomb `22+3r`, Flame Ward `5+r` as affordable early-test candidates; each rises with rank. These values are NOT user approved; compare against actual TierIII Mana pool scaling and ability performance before locking.
+2. **Damage formula**, choose actual `flat(r)+coefficient(r)*INT` for Fireball direct hit, using Mage TierII Ember Bolt as reference; then define rank-scaled ground tick, Ignite tick and Bomb blast based on approved approximate ratios at comparable progression, not a cross-skill rank mix-up.
+3. **Ward Fire shield affinity:** shield absorbs all incoming damage or only Fire-element damage? User called it Fire shield and requested it absorb eligible damage before Mana redirect but the exact eligible damage types should be decided explicitly, using the already established global shield rule rather than inventing a new one.
+4. **Mana resource/Overheat cost evaluation:** spells spend Mana upon successful cast; empowered versions spend their normal Mana cost as well as100 Heat; ask whether empowered effect has extra Mana surcharge or not. No surcharge approved yet.
+5. **150-point rank-gate auditing:** author exact schedules consistent with six already-approved first-unlock class levels and caps, ensure every level1..150 can eventually spend all points; present as proposed gates for approval prior to code implementation.
+
+**This is design-documentation work ONLY, no Unity gameplay source/assets/build/tests or branch merge approved.**
