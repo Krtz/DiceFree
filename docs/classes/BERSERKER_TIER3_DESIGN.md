@@ -234,3 +234,35 @@ This is the newest authority for the stated values; historical Round 6 questions
 - Berserker starting attributes, per-level stat gains, and Tier III advancement teacher/quest.
 
 **Commit/push after each answered question round; never treat document approval as gameplay implementation.**
+
+
+## Round 8 — 2026-11-26 (user decisions: linear Coffee Shield, confirmed-hits haste, OOC Rage decay, staggered unlocks; boss Rage unresolved)
+
+**Most recent Round 8 user answers.** This is an **approved design discussion**, not a Unity implementation or a tested balance result. Where Round 8 introduces a concern, preserve it as an open decision rather than silently codifying a harmful formula.
+
+### Approved decisions
+
+1. **Coffee Shield rank scaling is LINEAR** between the previously approved rank1 **5% of MaxHP** and rank30 **35% of MaxHP**. Proposed exact first-test expression (now endorsed linear interpolation): for purchased shield rank r in 1..30, **absorption = current MaxHP × (0.05 + 0.30 × (r−1)/29)**. Decide integer HP rounding and snapshot/recompute semantics in implementation. Other confirmed parameters stay **self-only**, **Coffee element**, **25 Rage cost**, **5s duration**, **15s cooldown**; shield-to-heal after expiry is reserved for Tier IV only.
+2. **Rage Breaker post-use attack-speed haste requires at least one SUCCESSFUL HIT on a valid enemy**. A fully **shield-absorbed hit counts as successful** (even with zero enemy HP damage); no target/no resolved hit/miss does NOT grant haste. Existing approved buff **+2% attack speed per Rage Breaker purchased rank for 4s**, refreshes rather than stacks; Rage Breaker costs fixed **30 Rage**. Determine ability's actual hit/miss/blocked resolution using global hit and shield systems; do not accidentally require HP loss.
+3. **Out-of-combat Rage decays at BASE 5 Rage per second**, reduced by purchased **Anger Management** ranks, per earlier approved passive design. The amount of reduction per rank, whether decay pauses in combat, thresholds, and combat state transition mechanics are not yet specified; ensure nonnegative effective decay and no automatic Rage-to-HP conversion.
+4. **Berserker's five rankable skills have STAGGERED FIRST UNLOCK LEVELS**, not all automatically available at Berserker level1. **Exact first unlock levels and per-rank gate schedule are OPEN** and must be authored/audited for the approved 150 points across Wide Arc35, Spin Dash30, Rage Breaker30, Anger Management25, Coffee Shield30. Preserve the baseline ability to buy one rank per Berserker class level1..150 and avoid dead-end levels.
+
+### Rage gain: proposal accepted WITH explicit boss-fight objection (NOT FINAL)
+
+The user selected the presented first-test proposal of **5 Rage per 10% of an enemy's maximum HP dealt** and **10 Rage per 10% of Berserker's own maximum HP received**, but immediately added a critical caveat: **"for number 3, that wont work against bosses? maybe 1% = 1 rage?"**. Record the originally selected OUTGOING candidate as **0.5 Rage per 1% target MaxHP damage**, and the user's **counterproposal** as **1 Rage per 1% target MaxHP damage**. The incoming first-test proposal is **1 Rage per 1% Berserker MaxHP damage actually received**. The outgoing rate/denominator is **REOPENED** because a boss with a very large HP pool would generate negligible Rage even at 1 Rage per 1% boss maxHP.
+
+**Illustration of the unresolved scaling problem:** dealing 1,000 damage to a 1,000,000 HP boss removes 0.1% of its MaxHP: candidate 0.5/1% yields **0.05 Rage**, and the suggested 1/1% yields only **0.1 Rage**. At 30 Rage per Rage Breaker and 25 Rage per Coffee Shield, repeated ordinary attacks would starve the class in longer boss fights. This is a *design concern*, not a selected numeric fix.
+
+**Possible solutions for next round, NOT user-approved:**
+- A fixed **per-successful-basic-hit Rage floor** (possibly different on abilities), supplemented by normalized HP damage; cap per event and per ability use, clarify DoT/AoE/multi-hit cases.
+- Normalize outgoing damage to **Berserker's OWN MaxHP** or another level/damage-scale reference instead of enemy MaxHP. Tune multipliers and per-hit caps, avoid uncontrolled farming from many weak targets.
+- Award Rage based on **attack events or expected damage per level** so bosses and normal enemies produce similar combat resource cadence, not strictly each enemy's health bar percentage.
+- Consider **incoming Rage from final HP damage** versus shield absorbed damage carefully; shield cannot accidentally generate rage both as taking and absorbing without a rule. Pick a boss-safe system, then run simulated solo and group combat cases before codifying values.
+
+### Keep previously approved core kit unchanged
+
+- **Wide Arc35**; **Spin Dash30**; **Rage Breaker30** (fixed30 Rage, 4s rank-scaled post-hit haste); **Anger Management25** (Rage gain/retention, two-handed axes/swords mastery, smooth missing-HP bonus reaching first-test +40% at 1% HP); **Coffee Shield30** (self only, linear5%→35% MaxHP).
+- No Frenzy, separate Great Weapon Master, duplicate finisher or Battle Cry in Berserker.
+- Round 9 should settle boss-safe Rage generation and incoming damage/shield interactions, staggered first-unlock levels, and Anger Management retention/rank gain numbers before full gate audit/advancement quest.
+
+**STATUS:** Design docs updated and committed/pushed for this round; no gameplay files or save data touched.
