@@ -125,3 +125,10 @@ Verified current Greatblade class asset Lv1: **VIT14 STR18 AGI9 INT5 SPR5**, gro
 ## 2026-11-26 — Berserker Round 11: approved Lv1 stats and growth; global HP/VIT rule
 
 **LATEST USER APPROVED Berserker Tier III class Lv1 attributes (VIT/STR/AGI/INT/SPR): `25/34/10/5/7`**, and per-level gains **`+3.0/+6.0/+1.2/+0.5/+0.8`** (total11.5). These supersede prior provisional Berserker starting **22/32/13/7/7** and growth **2.8/6/1.3/0.7/0.7**. Separate TierIII Lv1 manifestation does not inherit additive accumulated parent Greatblade stats. At Lv150 before item/passive modifiers STR=928 and VIT=472. **GLOBAL PLAYER-CLASS RULE: +15 MaxHP per 1 VIT for ALL classes**, not a Berserker-special HP coefficient. Current Unity tuning defaults to 15 HP/VIT but supports overrides; future implementation audit should verify each playable class conforms (not a claim Unity was modified or tested). [Berserker Round11](classes/BERSERKER_TIER3_DESIGN.md). Design documentation only.
+
+
+## 2026-11-26 — Berserker Round 12: approved offensive damage rules and coefficient proposal
+
+**APPROVED:** Berserker's Physical basic/autoattack uses global **weapon/base damage +1×STR**, and **Rage Breaker is guaranteed to hit a valid in-range target** (subject to valid geometry, not auto-teleport). Each damaging skill's purchased rank grows **both flat raw damage and STR coefficient**. **Anger Management's low-HP damage bonus applies to both basic attacks and all offensive skills**; resolve once, not multiple times.
+
+**NEXT, DESIGNER-ONLY FIRST-TEST PROPOSALS awaiting user approval:** Wide Arc raw `12+4(r−1)+[1.8+0.10(r−1)]STR` cap35; Spin Dash raw `8+3(r−1)+[1.2+0.08(r−1)]STR` cap30; Rage Breaker raw `25+8(r−1)+[2.5+0.16(r−1)]STR` cap30. These reflect Greatblade's current Physical STR-weighted parent attacks, but **numerical coefficients are NOT approved** and must be tested and adjusted. Read [full Berserker Round12](classes/BERSERKER_TIER3_DESIGN.md). Documentation only.

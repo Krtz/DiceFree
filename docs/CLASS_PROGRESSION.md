@@ -612,3 +612,10 @@ Verified actual TierII Greatblade base **VIT14/STR18/AGI9/INT5/SPR5**, growth **
 **APPROVED Berserker Lv1 VIT25 STR34 AGI10 INT5 SPR7**, and **per Berserker class level VIT+3.0 STR+6.0 AGI+1.2 INT+0.5 SPR+0.8** (growth sum 11.5). Supersedes Round10 designer proposed VIT22 STR32 AGI13 INT7 SPR7 and growth +2.8/+6/+1.3/+0.7/+0.7. Lv150 no-gear STR928 and VIT472. The Berserker's separate TierIII manifestation starts Lv1 with these stats; it does not stack accumulated Greatblade attributes.
 
 **USER GLOBAL RULE: 1 VIT grants 15 maximum HP for ALL playable classes**, not just Berserker and not one coefficient per class. Existing Unity `CombatTuning.hpPerVitality` default is 15 and ActorDefinition override infrastructure exists, so implementation must audit class-specific overrides and modifiers to enforce the shared player-class coefficient; no Unity gameplay files changed during this design round. Base HP, item bonuses and shared status effects remain separate from the 15 HP/VIT contribution. [Full approved Round11](classes/BERSERKER_TIER3_DESIGN.md).
+
+
+## 2026-11-26 — Berserker Round 12 approved damage mechanics
+
+**User approved basic Physical attack as weapon/base damage +1×STR**, **Rage Breaker guaranteed hit on valid targets**, damaging skills whose **FLAT damage and STR multipliers BOTH scale with their own purchased skill ranks**, and Anger Management's **missing-HP damage bonus applies to all offensive abilities AND normal basic attacks**. Keep the max passive-rank target of +40% outgoing damage at 1% HP, applying the bonus once through shared mitigation pipeline.
+
+**Designer coefficient candidates awaiting approval, NOT LOCKED:** Wide Arc `12+4(r−1)+[1.8+0.10(r−1)]STR` max rank35; Spin Dash `8+3(r−1)+[1.2+0.08(r−1)]STR` max rank30; Rage Breaker `25+8(r−1)+[2.5+0.16(r−1)]STR` max rank30. All are raw Physical before buffs and enemy defenses, and should not add existing baseDamage twice. Previous Rage costs, attack-speed buff, Coffee Shield and Rage economy unchanged. See [Berserker Round12](classes/BERSERKER_TIER3_DESIGN.md). No Unity implementation or test.

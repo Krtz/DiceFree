@@ -380,3 +380,28 @@ The established 150 rank skill allocation **Wide Arc35 / Spin Dash30 / Rage Brea
 - **Validate global 15 HP per VIT** across playable class assets when Unity implementation is later authorized.
 
 **No gameplay implementation or runtime testing is claimed by this design-only approval.**
+
+
+## Round 12 — 2026-11-26 (USER-APPROVED damage rules; designer first-test coefficient proposal awaiting approval)
+
+**LATEST USER ANSWERS approved these four mechanics:** (1) Berserker basic attacks use the shared **physical weapon/base damage + 1 × STR** rule, not a mixed AGI+STR class-specific coefficient; (2) **Rage Breaker is a guaranteed-hit skill**, subject to a valid target and normal range/line-of-sight/geometry, not an unconditional teleporting hit; (3) **EVERY purchased damaging skill rank increases BOTH its FLAT damage contribution and its STR coefficient**, never flat-only or stat-only; (4) **Anger Management's gradual missing-HP damage bonus applies to basic attacks AND every damaging Berserker skill**, not just basic or just skills. Keep previous smooth maximum +40% damage at 1% HP when Anger Management rank25 is reached. Avoid double application through the global damage pipeline. (5) The user selects **design exact offensive ability coefficients next**; the numerical values below are designer PROPOSALS and NOT yet user-approved.
+
+### Verified current Greatblade source baseline
+
+`Assets/_DiceFree/Scripts/Combat/GreatbladeCombatTuning.cs` currently uses per-rank STR coefficient formulas **Wide Arc `1.8+0.2×(r−1)`**, **Spin Dash `1.2+0.2×(r−1)`**, **Overhead Breaker `2.5+0.3×(r−1)`**; its three attack assets are physical, STR-weighted, with current `baseDamage=0`, and accuracy checks on. Greatblade source already adds separate skill-rank FLAT damage. That is the grounded parent architecture, not a rule requiring Tier III to inherit Tier II's extreme per-rank slopes unchanged. The general AttackDefinition pipeline has additive `baseDamage+coefficient×scaledAttribute`. Berserker should follow the same engine structure without adding weapon base twice.
+
+### Designer first-playtest COEFFICIENT PROPOSALS ONLY (need user acceptance)
+
+Let `r` be the rank of the individual skill, 1..approved cap, and let `S` be caster STR after applicable attribute bonuses. Suggested **raw Physical damage per eligible target**, before defense/resistance, rarity, buffs, low-HP bonus, and attack variance:
+
+| Skill | Proposed FLAT(rank) | Proposed STR coefficient(rank) | Proposed raw damage at rank r | Maximum |
+| --- | --- | --- | --- | ---: |
+| Wide Arc | `12+4×(r−1)` | `1.8+0.10×(r−1)` | `12+4(r−1)+[1.8+0.10(r−1)]×S` | 35 |
+| Spin Dash | `8+3×(r−1)` | `1.2+0.08×(r−1)` | `8+3(r−1)+[1.2+0.08(r−1)]×S` | 30 |
+| Rage Breaker | `25+8×(r−1)` | `2.5+0.16×(r−1)` | `25+8(r−1)+[2.5+0.16(r−1)]×S` | 30 |
+
+At **max rank**, before other effects: Wide Arc `148+5.2S`; Spin Dash `95+3.52S`; Rage Breaker `257+7.14S`. At **Berserker class level150 pre-gear STR928**, this predicts approximately **4973.6 Wide Arc / 3361.56 Spin Dash per unique target / 6882.92 Rage Breaker raw damage**, at each skill's cap and before buffs/mitigation; these are **illustrative designer values** and not tested game DPS. Do not interpret illustrative STR as existing game save stats or actual implemented class damage.
+
+**Implementation guidance, still subject to damage-system audit:** Resolve Basic Auto damage using the game's GLOBAL selected-main-stat 1×STR policy; physical autos remain distinct from skill damage. Ensure all skill ranks update both the flat and stat-derived terms. Apply Anger Management's weapon effect and smooth missing-HP damage to basic/skill RAW damage precisely once, including all affected targets of Wide Arc/Spin Dash; do not accidentally apply a damage bonus again to a packet after mitigation. Rage Breaker **guaranteed-hit** bypasses accuracy RNG on valid in-range enemies; it **still** must resolve target validity, path/range constraints and hit/absorb. Rage Breaker's **4-second haste (+2% attack speed per Rage Breaker rank)** activates upon successful attack resolution, including an enemy shield-absorbed hit, which is compatible with guaranteed-hit unless the target vanishes/is invalid. Keep cost **30 Rage** and earlier approved behavior.
+
+**Open questions for Round 13:** user approval/adjustment of these three FLAT and STR scaling proposals, attack/skill coefficient interaction with two-handed axe/sword equipped weapon base, accuracy/crit eligibility for Wide Arc & Spin Dash, and 150-point rank eligibility gates. No changes to five-skill roster, 100 Rage cap, or Coffee Shield 5%→35% rules. No Unity code/asset/test was modified by Round12 documentation.
