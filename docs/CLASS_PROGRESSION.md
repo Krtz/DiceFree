@@ -668,3 +668,8 @@ TierII eligible Greatblade (ordinary TierIII advancement level60+) takes challen
 ## 2026-11-26 — Mage selected as next Tier III first-coverage design
 
 User recommits to at least one TierIII for every current TierII class before designing second branches, and picks **Mage** next. An opening design file reviews actual TierII Mage spell roster, six elements, two passives, class stats, advancement and old-vs-new universal Mana constraints. **Wizard, Sorcerer and Arcanist are designer-only potential first evolutions**, not decided names or skill kits. Begin with identity/role/inherited abilities/element specialization/resource design questions; retain normal TierII level60 to a distinct TierIII level1 manifestation model. [Mage TierIII interview](classes/MAGE_TIER3_DESIGN.md). No Unity content changed.
+
+
+## 2026-11-26 — Mage Tier III first evolution: Fire Mage (user direction approved)
+
+User chooses **Fire Mage** as the first Mage TierIII path (Mage level60+ to separate level1 TierIII manifestation under ordinary class progression). Primary role BURST magical DPS, **mostly new abilities** with fewer elements primarily FIRE, and **global Mana plus Overheat** as a secondary mechanic driven by casting multiple Fire spells in quick succession. "Empower the next spell" is only one candidate effect and is not specifically approved yet; similarly 0–100 scale, gain amount, decay window, status/burst/penalty and exact skill list remain TBD. Preserve universal Mana capacity `ClassBaseMana+5×INT`, regen `4+0.1×SPR`; no per-class magical coefficient override. Unchosen Wizard/Sorcerer/Arcanist can remain future options only. [Mage TierIII design](classes/MAGE_TIER3_DESIGN.md). Documentation round; no Unity implementation.
