@@ -511,3 +511,41 @@ No Fire Mage damage formulas/Mana costs/other cast times are accepted in this ro
 5. Determine **Flame Ward cast time**, other target restrictions, rank-gate audit for 150 points, and after numerical combat tuning the Fire Mage base stats/quest.
 
 **Documentation only. NO Unity gameplay code, assets, builds or runtime implementation touched.**
+
+
+## Fire Mage Tier III Round 13 — 2026-11-26 USER APPROVES OFFENSIVE DAMAGE RATIOS, INSTANT WARD; SUGGESTS RANK-REDUCED COOLDOWNS
+
+**LATEST USER ANSWERS:** User accepts comparative damage profiles at intended first-playtest relative strength; supplied free-text asks for OTHER spell cooldowns to decrease with purchased rank, but does NOT specify exact cooldown endpoints/curves. Distinguish confirmed relative targets from proposed final coefficients, and speculative cooldown changes from actually adopted new timings.
+
+### USER-APPROVED qualitative/ratiometric damage profiles
+
+1. **Normal Fireball direct hit** should have **balanced flat raw damage and INT multiplier** (not overwhelmingly INT-biased or flat-biased). At every purchased Fireball rank r1..35 both its flat raw damage and coefficient multiplying caster INT must increase with r. Exact numeric base damage and rank steps are NOT APPROVED.
+2. **Empowered Fireball burning-ground per tick** is approximately **25% of a normal Fireball direct hit** as a damage-balance target. Six ticks at t1..6 seconds, 4m radius fixed-location fire at the impacted enemy,6s field duration, so a unit standing in the whole field suffers approximately 1.5x normal Fireball direct hit worth of EXTRA ground DoT (plus the normal initial Fireball direct hit). The ground tick's own flat component AND INT coefficient MUST grow with Fireball rank; preserve the ratio as a comparative target rather than hard-coupling it to a Fireball damage value at a different rank. Exact final packet formula remains pending.
+3. **Normal Ignite 8-second full DoT** has target approximately **2x a normal Fireball direct hit** in total. Its eight ticks at t1..8s therefore average around **25% of the reference normal Fireball hit per tick**. Ignite has its OWN skill rank r1..30, which drives increasing flat/INT scaling; Fireball has cap35, so ratios require a reference comparison point (similar relative rank investment, playtest DPS or aligned class level), NOT equating unrelated ranks blindly. Empowered Ignite retains 3x its OWN normal total damage against a SINGLE enemy at unchanged8s duration/8 ticks, thus ≈6x reference Fireball hit for full DoT, if ratio alignment holds. Recast refreshes, no stacking.
+4. **Normal Living Bomb initial detonation** targets approximately **1.5x a normal Fireball hit PER enemy in the 3m radius**. Its own purchased rank r1..30 increases BOTH raw flat explosion damage and coefficient multiplying INT. At100 Heat the empowered ORIGINAL explosion is exactly **2x that normal Living Bomb hit** and spreads normal-damage normal3s-fuse copies to other eligible targets in 3m for ONE generation only. The spread copies are normal-strength bombs and NEVER re-spread, no Heat generated from procs.
+5. **Flame Ward is an INSTANT CAST**. Retains approved 20-second cooldown until explicitly revised, main Mana redirection (30% r1 to65% r25), efficiency (1.9 Mana/HP r1 to1.3 r25), main duration (4s→10s), and empowered additional INT-and-rank Fire shield `50+(0.5+0.1*r)*INT` for10s. Zero cast windup, but still successful Fire spell cast / cooldown rules apply as globally relevant; whether Ward activates Heat and can consume Overheat was previously assumed per every successfully cast Fire spell, no special exceptions user-specified.
+6. **Additional USER REQUEST, not exact numeric approval:** "i think maybe the cooldowns of the other skill should decrease with rank as well". Record STRONG DESIGN DIRECTION to give **Ignite, Living Bomb, and Flame Ward lower cooldowns at higher purchased ranks**, analogous to Fireball's explicitly approved linear14s→7s rank1..35 curve. **Exact endpoints and formulas NOT yet decided**, and existing user-selected Ignite10s, Living Bomb15s, Flame Ward20s should remain the baseline reference values pending clarification whether these are lower endpoints or another rank's values. No changes to existing accepted cooldown numbers are automatically enacted.
+
+### Designer-only next-round cooldown alternatives (NOT user approved)
+
+A conservative proposed set is:
+- **Ignite** rank1=14 seconds, max rank30=10 seconds: `CD(r)=14-4*(r-1)/29`.
+- **Living Bomb** rank1=22 seconds, max rank30=15 seconds: `CD(r)=22-7*(r-1)/29`.
+- **Flame Ward** rank1=28 seconds, max rank25=20 seconds: `CD(r)=28-8*(r-1)/24`.
+- **Fireball is ALREADY approved** rank1=14 seconds to rank35=7 seconds: `CD(r)=14-7*(r-1)/34`, cast0.2s.
+- If the user instead intended 10/15/20s as rank1 CDs, propose alternate lower rank-cap values separately; DO NOT quietly overwrite them.
+- Having all four active spells on cooldown at very low skill ranks may create long downtime with Heat decay after10s idle; balance time to reach100 Heat against casts and available Mana after selecting CD curves. The aura and passive have no ordinary skill-trigger cooldown.
+
+### Compact current state
+
+Fire Mage first TierIII coverage path with four actives and two nonactive skills: Fireball cap35, Flame Ward25, Ignite30, Living Bomb30, Overheat Mastery15, Infernal Presence15; 150 purchased skill ranks total and 1 earned point/class level1..150. Fireball+Heat passive first unlock Lv1, Ignite3, Ward5, Bomb8, aura10; rank2+ gates not audited/approved. Heat max100, ordinary Fire cast gain=10+OverheatMasteryPurchasedRank, empowered next Fire cast spends100 with no same-cast Heat, idle10s then -10 Heat/sec. Aura passive permanent15m, +0.5pp allied Fire resistance/-0.5pp hostile Fire resistance per aura rank including caster, strongest identical aura only. Universal global Mana `ClassBaseMana+5*INT`, regen `4+0.1*SPR`. Future Pyromancer TierIV maybe merged aura+passive, Fire LAZOR, Meteor, toggle Ward; Frost Mage→Cryomancer; hidden Hydromancer at BOTH Fire Mage and Frost Mage level120 are FUTURE IDEA BANK only.
+
+### Next design round priorities (NOT YET ANSWERED)
+
+1. User approval of exact rank-varying **Ignite/Living Bomb/Flame Ward cooldown endpoints and linear curves**, with previously chosen 10/15/20s likely max-rank endpoints.
+2. Quantify and approve **normal Fireball rank1 and max-rank flat and INT coefficient**; use Mage source and actual encounter durability before hard locking.
+3. Quantify **normal Ignite per-tick** and **normal Living Bomb per-target explosion** maintaining approximately 2x and1.5x reference Fireball-hit power at comparable development, with independent own-rank scaling.
+4. Quantify **Fireball empowered ground tick** ≈0.25x direct hit per tick, six ticks.
+5. Specify **Mana costs for four actives**, and then the full150-level rank eligibility gate audit (no unspendable points), tierIII stat/quest and advancement source.
+
+**DESIGN DOCS ONLY. No Unity source/assets/build/runtime implementation changed.**
