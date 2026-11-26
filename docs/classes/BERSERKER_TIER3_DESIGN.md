@@ -200,3 +200,37 @@ The historic [Tier II Core Classes v0.1](../TIER2_CORE_CLASSES_DESIGN_V01.md) me
 3. How should Rage gain from dealt/taken damage normalized by Max HP and out-of-combat decay be numerically defined?
 4. How much does Coffee Shield absorb per rank and maximum HP, and what cooldown should it have?
 5. Confirm 150 total Berserker rank purchases across five skills and first-unlock levels; proceed to eligibility audit, stats and quest design.
+
+
+## Round 7 — 2026-11-26 (USER-APPROVED first-playtest values and 150-rank split)
+
+This is the newest authority for the stated values; historical Round 6 questions asking about these specific choices are superseded. **Design/documentation only, not an implemented or tested Unity class.**
+
+### Decisions approved this round
+
+1. **Rage Breaker Rage cost:** **FIXED 30 Rage per activation** for first playtest, rather than spending all available Rage. Retains Rage for a possible Coffee Shield.
+2. **Rage Breaker haste:** after using Rage Breaker, grant a **4-second attack-speed buff at +2% attack speed per purchased Rage Breaker rank**, up to **+60% at rank 30**. Repeat applications **REFRESH rather than stack** the haste. Whether blocked/missed attacks still count for the post-use buff, and exact hit/cast trigger integration, remain OPEN; do not silently settle them. Rage Breaker still replaces Overhead Breaker, and **Frenzy is removed**.
+3. **Normalized Rage generation:** user APPROVED the direction of generating Rage proportionally to **damage dealt relative to the ENEMY's max HP** and **damage received relative to BERSERKER's own max HP**, with **per-hit caps** to protect boss and scaling interactions. Rage remains capped at **100**, decays outside combat, and Anger Management increases gain/reduces loss. Exact numeric gain multipliers, cap values, AoE/DoT aggregation and decay-per-second have NOT been chosen yet. "Sure" approves the model, not invented coefficients.
+4. **Coffee Shield:** **self-only**, true **Coffee** elemental shield, costing **25 Rage**, lasting **5 seconds**, with **15-second first-playtest cooldown**. User OVERRIDES the suggested 10%→25% absorption: **5% of BERSERKER MAX HP at Coffee Shield rank 1**, scaling to **35% of MAX HP at rank 30**. A natural smooth linear designer implementation candidate is `ShieldCapacity(r) = MaxHP × [0.05 + 0.30×(r−1)/29]` for integer ranks **1..30**; user approved endpoints, not the precise curve/rounding. Keep all shared elemental shield and matching/nonmatching interactions. **Remaining absorb capacity converts to healing ONLY in a future Tier IV upgrade**, not Tier III.
+5. **Exactly 150 Berserker skill-rank points, one per Berserker class level 1..150,** APPROVED. Exact skill caps, following user-requested transfer of **10 from Anger Management to Coffee Shield** and **5 from Rage Breaker to Spin Dash**:
+
+| Berserker Tier III ability | APPROVED maximum rank | Role |
+| --- | ---: | --- |
+| **Wide Arc** | **35** | Sweeping sustained melee cleave |
+| **Spin Dash** | **30** | Offensive mobility and AoE |
+| **Rage Breaker** | **30** | 30-Rage heavy finisher; post-use +2% attack-speed/rank for 4s |
+| **Anger Management** | **25** | Rage gain/retention, rank-scaled missing-HP damage and 2H axe/sword mastery, no axe-exclusive effect |
+| **Coffee Shield** | **30** | 25-Rage 5s Coffee-element self-shield, 15s cooldown, 5%→35% MaxHP absorption |
+| **TOTAL** | **150** | One skill point per Berserker level 1..150 |
+
+**No separate Frenzy; no separate Great Weapon Master; no extra Rage finisher.** At max Anger Management 25, the previously approved low-HP damage bonus target still reaches **up to +40% at 1% HP**. General weapon damage/rank and Rage gain/rank still need values. Mana coefficients are unrelated to Berserker's Rage; do not invent per-class Mana exceptions.
+
+### Open for Round 8
+
+- Exact Rage generation percentages/weights **per dealt vs taken max-HP-normalized damage**, per-hit/AoE caps, decay-per-second, and Heavy Rhythm→Anger Management passive coefficients.
+- Coffee Shield precise interpolation/rounding from 5%→35%, interaction with elemental shield shared rules and whether cooldown begins on cast or expiry (15s first-test baseline).
+- Rage Breaker post-use haste trigger when a hit misses/is blocked, and Rage Breaker damage/rank coefficients; all offensive skill FLAT and STAT coefficients should scale with purchased rank under the established global design principle.
+- First unlock levels and **150-rank full eligibility gate schedule** that allows a legal purchase each Berserker level 1..150, with final rank caps **35/30/30/25/30**.
+- Berserker starting attributes, per-level stat gains, and Tier III advancement teacher/quest.
+
+**Commit/push after each answered question round; never treat document approval as gameplay implementation.**
