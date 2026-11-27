@@ -60,3 +60,41 @@ C. Iron Guard stored damage release: **single-target selected enemy vs short-ran
 D. Preserve 100 Resolve global cap and basic gain/decay or modify? If user asks fewer questions, defer resource numeric tuning.
 
 **Round1 DESIGN DOCS ONLY, NO GAMEPLAY IMPLEMENTATION, UNITY CHANGES, TESTS, BUILDS OR MERGES.**
+
+
+## GUARDIAN-003 — 2026-11-27 Round 2 USER APPROVES CHALLENGE / IRON GUARD / BULWARK / HOLD THE LINE / INTERCEDE, PHYSICAL CLASSIC SWORD-AND-BOARD IDENTITY, AOE STORED-DAMAGE RELEASE
+
+### Authoritative user wording and decisions
+
+User explicitly submits:
+1. "**Retained Defender abilities: Challenge, Iron Guard, Bulwark, Hold the Line**".
+2. "**New protective ability concepts: Intercede**".
+3. "**Iron Guard damage release: AoE explosion centered on Guardian**".
+4. "**i think defender should be a classic 'boring' swoard and board class. the main knight you think of when you hear the word tank.. then the paladin or whatever can have more of a tank with some magic shield or buffs or whatever.**"
+
+Interpretation: The user uses "defender" to describe the baseline **nonmagical classic knight tank fantasy** as this Guardian lineage evolves: straightforward armored sword+shield tanking, aggro, guarding, interception and physical counterforce. **Do not give Guardian an invented holy/magical shield/buff spell identity**. Set aside magic-flavored protective Ward, magical barriers, and magical Sacrifice fantasy for a possible later **Paladin/Templar-style** Defender evolution, not approved as active classes yet. Respect inherited TierII Hold the Line elemental resist aura as an existing parent mechanic, NOT secretly delete or replace that confirmed parent rule; whether Guardian's own Hold the Line retains the precise +1pp-all-resistance per rank or shifts toward a purely physical protective expression is still an OPEN user choice.
+
+### Exact first-pass Guardian SKILL CONCEPT ROSTER, FIVE USER SELECTED
+
+1. **CHALLENGE**, retained/evolved TierII Defender area taunt and actual threat generation. Guardian should hold enemies and protect others from aggro. Exact new rank scaling, radius and effects for Guardian are OPEN.
+2. **IRON GUARD**, retained/evolved signature defensive stance storing incoming PRE-MITIGATION hostile damage during the approx2second action lock, then releasing damage in an **AOE EXPLOSION CENTERED ON GUARDIAN** when the stance ends. **AoE is explicitly USER-APPROVED, not single-target and not damage splitting among enemies**. This is a martial/impact-based retaliation fantasy, NOT a magical explosion requirement. The exact AoE radius, damage formula/caps, damage type, per-enemy falloff, stored-damage edge behavior, Resolve cost, cooldown, defensive buff scaling, rank eligibility and item interactions all OPEN. Ensure Guardian still primarily protects allies rather than being designed as DPS/retaliation-centric.
+3. **BULWARK**, retained/evolved Resolve-spending defensive mitigation. Existing parent uses Resolve, Guardian keeps same resource; exact Guardian additional ally functionality and coefficient progression OPEN.
+4. **HOLD THE LINE**, retained/evolved passive defensive resilience and nearby ally support. TierII parent has a 5m all-elemental resist aura, strongest same-type copy; Guardian should remain classic grounded knight identity. Whether the evolution retains the exact elemental aura or morphs into armor/mitigation/Resolve/team protection to avoid magical flavor is OPEN. No magical particle spells by default just because parent has an elemental-resistance numeric effect.
+5. **INTERCEDE**, NEW user-selected ally-protection ability. Identity: Guardian moves to/protects a threatened allied unit or redirects an incoming hit in a physically grounded, knightly fashion. **Exact implementation is NOT yet approved**: target vs area guard, dash to ally vs stationary interception, percent redirection vs complete hit interception, duration, cooldown, Resolve cost, eligibility of damage types, shield absorption, and whether self-target is supported are open. Intercede must be meaningful in a party and no-op handling in solo content should not make Guardian unplayable.
+
+**NOT SELECTED** from Round2's explicit checklist: inherited **Shield Bash**, **Shield Sweep**; new **Guardian Ward** (magical/general ally shielding), **Protective Barrier**, **Sacrifice**. Do not quietly add these as Guardian class abilities or treat them as current slots. They remain existing TierII skills (where applicable) or future design ideas. Five selected concepts do not automatically fix final max count, do not invent a sixth skill merely to match other classes. Guardian must remain solo viable, so deliberate review of a basic Physical attack or later melee ability is sensible, but not yet signed off.
+
+### Scope and progression untouched
+
+- TierII Defender classLv60+ unlocks separate Guardian TierIII classLv1 under Echo progression, retains parent. Sword+shield, Resolve0..100 baseline (incoming premitigation, tagged skill gains, 1 per3s out-of-combat decay), STR/VIT frontline. No unique Mana/holy-magic resource.
+- Prior approved TierII Defender Shield Bash, Shield Sweep, Challenge, Bulwark, Hold the Line, Iron Guard continue to exist in TierII; Guardian's omission of some TierII skills doesn't erase original parent gameplay. TierII Iron Guard does not store/release damage.
+- Guardian designer should follow first-pass150 rank points precedent only after user agrees to rank totals and caps. No numerics approved in this round.
+
+### Round3 questions appropriate to these decisions (NOT YET APPROVED)
+
+1. **Intercede behavior:** (A) targeted physical rush to ally, intercept next eligible attack, (B) stationary ally guard/redirect percentage for short duration, (C) immediate targeted ally physical damage reduction / positioning bonus. A nonmagical tackle/physical block should match user preference. Determine whether single ally target and movement distance.
+2. **Hold the Line tier evolution:** preserve tierII weak 5m elemental-resist aura mechanically without flashy magical effect vs replace Guardian version with purely physical party PDEF/MDEF bonus / blocking / Resolve aid; do not rewrite TierII underlying version.
+3. **Iron Guard AoE release:** all stored premitigation damage distributed? User approved AoE CENTERED ON GUARDIAN, not whether every target receives full shared stored value, % scaling, per-target caps or radius. For a tank, a modest 3–5m physical shockwave on stance completion can be suggested only, not declared decided.
+4. **Solo damage:** five selected Guardian concepts are mostly defensive; decide whether class BASIC attacks + Iron Guard AoE suffice, or add a sixth simple physical attack skill. Avoid inventing a magic skill or reintroducing omitted Shield Bash/Shield Sweep without user approval.
+
+**DESIGN-ONLY, no Unity C# or art/scene changes, no code compilation/tests/builds/merges.**
