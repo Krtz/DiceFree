@@ -1346,3 +1346,38 @@ User selects:
 5. Mentor outward civilian role (scribe/innkeeper/retired watchman/merchant) and moral rationale target is assassination; let user decide tone, if necessary.
 
 **DOCUMENTATION ONLY. Do not implement Unity quests/NPCs/assets/guards/scenes or merge branches. All user locked combat skills, six caps and150 rank gates, B=8+AGI and normal dagger0.85B each, 2.5s/AS interval and all previous round choices unchanged.**
+
+
+## Assassin Tier III Round 32 — 2026-11-27 USER APPROVES WEST RESIDENCE, RECOVERABLE GUARD ALERT, UNAWARE TOP-FLOOR TARGET, CLEAN UNDETECTED RETURN ESCAPE
+
+### Latest authoritative decisions
+
+User explicitly selects:
+1. "**House: Existing West Residence, three floors**". The Assassin advancement trial is set in Arborium's current **West Residence**, already verified in `docs/ARBORIUM_GATES_AND_FLOORS.md` to have THREE walkable levels **INCLUDING GROUND** (ground floor entrance, one middle floor and top floor), working stairs and camera-occlusion/cutaway navigation. This is the chosen building, not East Residence or a new house. The building geometry is already present, but quest NPCs/guards/patrols, target and win conditions have NOT been implemented. Separate instanced quest copy vs modifying the open-world house is still OPEN.
+2. "**Guard detection: Guards alert/investigate, short chance to hide**". On noticing the infiltrating Thief on the middle floor, guards go into ALERT/INVESTIGATION; it is **NOT instant automatic trial failure** at the first suspicious detection. The player has a SHORT opportunity to break contact, hide and continue. The specific sensory system (sight cones, audio, line-of-sight, proximity), alert decay time in seconds, patrol count, search behavior, whether killing/knocking out a guard counts as being caught, and the exact escalation from suspicion to confirmed failure remain UNAPPROVED, not invented.
+3. "**Top-floor target: Unaware, quickly eliminated with TierII Thief actions**". The designated target starts UNAWARE on the top (third) floor and should be quickly killable by the applicant's existing **Tier II Thief** damage/stealth toolkit. Do NOT impose a prolonged mandatory boss duel, a top-floor extra guard, or an Assassin-only Backstab/Execute prerequisite. Quick elimination is user-locked; exact enemy HP, one-shot vs two-hit, combat stats, target identity/story and AI reaction if Thief attacks poorly remain to decide. A quick stealth opener/Envenom is a plausible usable option, not a mandatory exclusive execution route.
+4. "**Escape success: Leave house without detection on return**". After killing the top-floor target, the Thief **must travel back out of West Residence without being DETECTED DURING THE RETURN JOURNEY**. Merely exiting alive while pursued does NOT count. The final clean escape is a condition for passing the assassination trial. Whether guard suspicion before target kill can be fully reset, whether investigative or confirmed alert during return means immediately fail vs possible recovery before reaching exit, whether the exit is the northern exterior doorway and whether return to disguised mentor is additionally required for promotion are OPEN in precise mechanics. Do not assert that an early recoverable alert automatically invalidates a future clean return, or that a chased exit suffices.
+
+### Consolidated mission spec after Rounds31–32
+
+- Mentor location World1 major capital Arborium OR immediate outskirts; **retired assassin hiding under a civilian identity**. Exact civilian occupation/name/location are open. Applicant requires parent TierII Thief classLv60+, and the trial is played as a TierII Thief before earning the NEW TierIII Assassin Lv1 manifestation; must not require Assassin-only skills.
+- Enter existing Arborium **West Residence** at ground floor; climb via real stairs and pass middle-floor guards without being caught. Guard suspicion produces a recoverable investigation and brief chance to hide, rather than immediate fail. This must be technically feasible with TierII Thief's SHORT pre-promotion stealth and normal controls.
+- Reach third/top floor, take out unaware designated target QUICKLY using available TierII Thief abilities. Target assassination is the user-specified primary objective, not an item theft and not a long forced duel. No extra stolen evidence artifact required without approval.
+- Travel BACK downward through the guarded house and **leave without detection on this return**. When the trial is successfully completed, unlock Assassin eligibility/class manifestation per existing Echo class progression (actual cutscene/reward/mentor hand-in details unapproved). Do not invent a new global stealth or guard AI subsystem without respecting existing combat/quest components.
+- Reuse `ArboriumInterior` cutaway and 3-level navigation, but guards/target/triggers/cinematic and quest orchestration are new future tasks. Quest dedicated instance vs same open-world area not yet user-selected. Existing public city services and residents should not accidentally inherit lethal quest NPCs, but how to isolate is a design question.
+- Earlier user-selected Round31 "retrieve objective and escape" is fulfilled by killing the designated top-floor target and leaving; Round31 later note explicitly requires assassination, and Round32 reinforces unaware target kill. Any added collectible item is optional proposal ONLY, not approved.
+
+### Round33 designer decisions to seek, none approved yet
+
+1. **Duration of investigation grace window and alert progression**: e.g. 3 or 5 seconds to break line of sight before caught, with suspicion decay (proposals, not yet approved). Make clear when spotting becomes failure and whether returning fully undetected after an earlier recovered pre-kill alarm is allowed.
+2. **Guard count/patrol arrangement** on middle floor: e.g. two patrols with alternating routes vs three static sentries; ensure routes allow TierII Thief 4–8s Stealth, cover, visual timing and can scale with player's Thief skill rank.
+3. **Return-trip detection semantics**: the user demands "without detection on return": strict any alert since target death is failure, or recoverable suspicion but must exit with no active search; ask. Keep clear distinction from inbound recoverable investigation.
+4. **Quest isolation**: private solo instanced copy of West Residence vs quest-phase within live Arborium building. Other TierIII advancement trials generally use single-player test spaces; this one needs multi-storey floor picking and camera cutaway preserved. Do not assume an instance exists.
+5. **Mentor facade, target reason/identity and hand-in**: select a plausible civilian profession and reason for target assassination once mechanics settled. No additional mission requirement or loot.
+
+### Existing Assassin combat design preserved
+
+- Approved baseline `B=8+AGI`; two .85B Physical basic hits (1.7B if both land), nominal sequence period2.5/AttackSpeed and intra-hit delay0.3/AttackSpeed, cancelled pending second if target dies/out of reach/movement/CC; preserve full cooldown and stop invalid animation. Other Stealth/Envenom/Backstab/Execute/CriticalMastery/ArmorPen coefficients, first-unlock ranks and full150 eligibility gates remain unchanged by this advancement quest design.
+- No Unity scripts/scene/asset/quest implementations, compilation, tests, branch merges or deployment authorized by this Round32 documentation request.
+
+**DESIGN DOCS ONLY: this is a USER-APPROVED QUEST CONCEPT, NOT ALREADY IMPLEMENTED CONTENT.**
