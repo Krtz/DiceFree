@@ -740,3 +740,47 @@ Start with **STEALTH** damage opener and avoid asking approval for all skills at
 5. After Stealth user approval, move to Backstab direct/positional rank curves, then Execute/Envenom one at a time.
 
 **DOCUMENTS ONLY. No Unity gameplay code/assets/scenes/builds/tests or merges.**
+
+
+## Assassin Tier III Round 18 — 2026-11-27 STEALTH DAMAGE/ELIGIBILITY/DURATION/MISS APPROVED; ENVENOM WEAPON-COATING ALTERNATIVE OPEN
+
+### Latest AUTHORITATIVE USER approval of STEALTH skill mechanics
+
+User selected:
+1. "**Opener multiplier: 1.10+0.05r, rank25 maximum 2.35x**".
+2. "**Opener eligibility: Basic sequence and Backstab only**".
+3. "**Stealth duration: 6s rank1 to15s rank25**".
+4. "**On opener miss: Opening bonus consumed on attempted attack including miss**".
+
+Thus these STEALTH-specific coefficients/rules are NOW USER-APPROVED and supersede the earlier unapproved Round16/Round17 `1.10+0.03r` proposer. Let `r` be the purchased Stealth rank1..25:
+- **StealthOpenerMultiplier(r)=1.10+0.05*r**: r1=1.15x, r25=2.35x. Intermediate r values are linear and increase strictly by +0.05 multiplier units per purchased rank.
+- Stealth's **duration scales from 6 seconds at rank1 to 15 seconds at rank25**. Exact between-rank interpolation is not expressly user defined; designer implementation proposal `6 + 9*(r-1)/24` seconds without rounding, with endpoints6/15 exactly; a different global duration rank policy would require confirmation, so do not falsely state interior duration formula is user-approved. Applies to this stealth buff's concealed state, not to a per-hit opener buff timer.
+- **Eligible OPENING attacks ONLY:** NORMAL two-hit BASIC DAGGER ATTACK SEQUENCE (the first attack cycle from stealth, with BOTH 50% dagger impacts receiving full StealthOpenerMultiplier), OR **Backstab** used as the first stealth-breaking attack; when Backstab is positional (target side/rear270deg), its existing bonus stacks multiplicatively with the approved Stealth opener multiplier. Both skill actions and basics consume ONE Stealth opener, never one per dagger hit. Envenom's initial physical hit, Nature DoT, and Execute are **NOT eligible** for the Stealth opener multiplier. No other skill becomes opener-eligible without user approval.
+- **Opening bonus is consumed on ATTACK ATTEMPT even when the attack MISSES**, not reserved until damage lands. This is consistent with prior parent convention. For two-hit first BASIC cycle, only first attempted attack SEQUENCE receives an opener; that sequence's second dagger impact remains entitled to its same opening multiplier EVEN IF the first dagger impact misses. Do not consume another opener on the second hit. If second hit misses, no preservation beyond that first opener attempt. For Backstab attempt missing, opener consumed. Normal Stealth concealment-breaking rules and which other abilities break concealment should still follow verified parent/global mechanics or await explicit design.
+- Existing Stealth rank25 signed concealed move modifier `(r-11)%` means -10% at r1 and +14% at r25, intentionally negative at r1 per explicit user approval; **Stealth activation Mana8+2r and cooldown22s remain locked Round17.**
+- 2.5second two-hit BASIC attack cycle, second hit0.3s after first and 50/50 normal sequence budget unchanged; AGI-only basic damage scaling unchanged.
+
+### New design question FROM USER: Envenom as weapon-coating buff vs existing active offensive strike
+
+User says "**hmmm, should we remake envenom into a buff instead of an active? like coat your blades in poison and do extra damage and apply dots with attacks? or is it more fun with an active offensive skill?**" This is an explicit request for **design evaluation**, not an approval to change Envenom yet. **EN VENOM'S NEW BEHAVIOR IS NOT LOCKED**. Existing approved prior ENVENOM is a stand-alone physical poison dagger stab with Nature DoT and user-approved `ManaCost=10+2*r`, cooldown8sec, rank cap30, first unlock Lv2 and fully approved 150 class-level gates unchanged. The alternative should **preserve its purchased ranks and gate schedule, Mana and cooldown unless user decides to revise**, and should NOT invent additional resource types.
+
+Compare options:
+- **A. Keep active Envenom physical strike + Nature poison DoT:** a direct damage button on CD8s that can be used for burst or continued poison damage. Benefits timing and simple upfront skill impact, but competes with Backstab and Execute as another direct attack.
+- **B. Change Envenom into an ACTIVATED TEMPORARY POISON-BLADE COATING BUFF (designer preferred, NOT YET USER APPROVED)**: spending Mana once activates a timed buff on BOTH equipped one-handed daggers. On successful normal basic dagger impacts, add a separate **Nature poison damage packet** plus apply or refresh a **Nature DoT**, with coefficients BOTH increasing with Envenom purchased rank, while normal dagger packets remain Physical and the basic sequence stays2.5sec with0.3sec gap. This creates sustained poison pressure between heavy burst windows and prep/rotation, not a global passive permanent effect. Designer recommendation initially trigger on basic dagger hits to avoid automatic poison multiplication through special attack procs; user can decide whether Backstab and Execute also trigger the coating. DoT stacking vs refresh, max stacks, duration, buff uptime, whether reactivation refreshes/replaces, missed hits, shields, dual hit rules, and damage coefficient are **ALL OPEN**, not auto-approved. The **Round17 approved** cooldown8sec and ManaCost10+2r are not automatically replaced by a designer's proposed higher cooldown if buff selected; need align coat duration, cooldown and uptime intentionally.
+- User approved Stealth opener attacks ONLY basics and Backstab; **a poison-coating activation does NOT itself receive the Stealth damage multiplier** and bonus Nature packets/DoT do not gain automatic opener multiplier from associated dagger strikes unless later expressly approved. The original initial poison stab would also not receive the opener bonus under user decision2.
+- Alternative **C**: activated poison coating with limited charges rather than fixed duration, if user wants more deliberate window; no user approval.
+- **DO NOT automatically change or implement Envenom into a buff**. Ask a clear choice and then tune rules skill-by-skill; user requests the comparison.
+
+### Existing approved class foundations retained
+
+TierIII Assassin separate class from Lv60 TierII Thief; six rank caps Stealth25, Envenom30, Backstab35, Execute25, Critical Mastery20, ArmorPen15 total150, entire level gate schedule USER approved Round15, first unlocks Stealth1 Envenom2 Backstab3 CritMastery5 ArmorPen8 Execute12 LAST. Lv1 VIT22 STR10 AGI35 INT10 SPR5, per-level VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8, BaseMana100, universal MaxMana100+5INT, regen4+0.1SPR. AGI-only Physical main damage, pure melee dual daggers, baseline 2.5sec one 2-hit sequence; positional Backstab from side/rear270deg bigger damage, front90deg standard; Backstab numeric damage/positional bonus still designer draft only, not approved. Execute usable at any HP and growing damage continuously with missingHP, cost20+5r, CD35s, 1.2s windup one heavy dagger strike, numeric DAMAGE coefficient pending. Critical Mastery hybrid passive +3AGI and+1pp BASIC crit/rank, active BASIC guaranteed crit charges2/3/4/5/6 with 25s CD and Mana12+3r, clears charges on death/logout/class swap; ArmorPen 1% target Physical Defense ignored per rank on basics and physical skills. All other existing cooldowns/Mana locked Round17. Stealth multiplier and opener targets are now approved THIS Round18; Backstab/Execute/Envenom damage coefficients remain pending skill-by-skill per Round17 requirement.
+
+### Round19 recommended next questions (NOT user approved)
+
+1. **Choose Envenom shape:** keep instant physical poison strike or turn it into an ACTIVATED coat-both-daggers poison buff, potentially a charge-based alternative. This choice must precede approving exact Envenom damage coefficients.
+2. If buff chosen: specify buff duration/rank scaling relative to already locked CD8s and Mana10+2r; whether applies to both BASIC dagger packets and Backstab/Execute; initial Nature packet coefficient and DoT tick/stacking model. Ensure per-hit application and 2.5sec basic cycle not double-counted.
+3. Confirm how long stealth duration grows between rank1 and rank25 (linear6+9*(r-1)/24 as proposed vs smooth rounding), if needed for implementation.
+4. Then review Backstab raw base `B*(0.90+0.07r)` and side/rear positional multiplier `1.25+0.02r`, with Stealth approved multiplier max2.35x. That combination may give `3.35*1.95*2.35=15.34B` at max ranks without criticals before target defense, a BURST balance implication that user should see before locking coefficients.
+5. Review Execute raw missingHP coefficient and Envenom with final design shape. No changes to skill progression and class stats.
+
+**DOCUMENTATION ONLY. No Unity game code/assets/scenes/builds/tests or branch merges.**
