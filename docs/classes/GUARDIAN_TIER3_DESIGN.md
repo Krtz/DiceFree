@@ -198,3 +198,45 @@ Normal Physical sword basic attacks remain available and TierII Defender's origi
 4. **150-rank budget**: confirm whether Guardian uses one point/class level1..150 and select skill cap distribution later; do not auto-copy 80-rank TierII Defender.
 
 **DESIGN DOCUMENTATION ONLY; no Unity gameplay changes, no code tests/builds/merges.**
+
+
+## GUARDIAN-007 — 2026-11-28 Round 6 USER APPROVES PROVOKING STRIKE MAX-RANK ENDPOINTS WITH IMPROVEMENT ON EVERY RANK
+
+### Authoritative user decision and the crucial free-text override
+
+User's submitted selections:
+1. **"Provoking Strike Resolve gain: 10 Resolve per successful hit"**
+2. **"Provoking Strike cooldown: 8 seconds"**
+3. **"Successful-hit forced taunt duration against susceptible enemies: 4 seconds; preserve ordinary threat rules"**
+4. Free-text correction **"But make it all scale into those final values. So every rank reduces cooldown untill we reach that number etc"**.
+
+**Interpret the three chosen values as MAX-RANK / FINAL VALUES, NOT rank-one constants.** This user clarification OVERRIDES the initial form's otherwise ambiguous fixed-value presentation. Guardian's Provoking Strike is an improving purchased-rank ability. Skill rank purchases increase the Resolve generated on a landed hit and the duration of forced taunt, and REDUCE the cooldown **at every purchased rank** until the final cap is reached. Do not implement 10 Resolve / 8sec / 4sec at rank1 and leave them unchanged at higher rank; do not silently treat "8 second cooldown" as a fixed all-ranks cooldown.
+
+**User-approved FINAL purchased-rank outcomes:**
+- **Resolve generation on valid successful single-target hit = 10** at maximum Provoking Strike rank (still on shield-absorbed successful impacts; misses grant0).
+- **Skill cooldown = 8.0 seconds** at maximum skill rank, with a strict cooldown decrease **on EACH rank purchase** between first and last eligible rank.
+- **Successful-hit forced-target taunt = 4.0 seconds** at maximum rank against taunt-susceptible enemies, increasing across purchased ranks; regular threat remains real and uses existing boss-immunity handling.
+- **Damage and threat contributions should scale with bought skill ranks**, consistent with global all-offensive-coefficients-scale-with-rank policy, without inventing a numeric Physical damage formula in this round.
+
+### Scaling model for later approval (PARAMETERIZED, not yet numerical)
+
+Let `R` = final maximum Provoking Strike rank, `r` = currently purchased skill rank (1..R), and interpolation `t=(r-1)/(R-1)`. **R has NOT been user selected yet**, nor have any rank-one numeric values, total Guardian150 skill-rank budget, per-rank purchase gates, cost, damage, cooldown start/refund or PvP boss exceptions. A straightforward linear first-playtest proposal, to be reviewed once cap and starts are chosen:
+
+- `ResolveOnHit(r)=G1+(10-G1)*t`, where **`G1 < 10`** and `G1` is the undecided starting Resolve amount. Fractional-resource rounding/accumulation is NOT locked, and any integer rounding scheme should preserve meaningful bought-rank benefits; don't promise integer+1 Resolve at every rank unless a suitable cap/start distribution is explicitly chosen.
+- `CooldownSeconds(r)=C1+(8-C1)*t`, where **`C1 > 8 seconds`**, with one real cooldown reduction at EVERY rank increment (avoid rounding displayed or backend cooldown to a constant 8s before max).
+- `ForcedTauntSeconds(r)=T1+(4-T1)*t`, where **`0 < T1 < 4 seconds`**; every rank contributes to gradual improvement, with exact timing precision to choose.
+- R must exceed1 for these expressions; if rank cap changes to1 (not proposed), model must be revisited rather than dividing by zero.
+- These equations are ONLY candidate interpolation between user-approved endpoints, **NOT approval of the unknown starting values, total ranks or strict linearity**; exact damage and threat curves remain open.
+
+### The approved valid hit rules still hold
+
+Provoking Strike is ONE on-demand single-target normal **Physical one-handed sword attack** with normal shared accuracy. **Successful enemy impact triggers sword damage, single-target taunt and one Resolve-generation event, even if all damage is absorbed by target shield.** Miss, invalid target, dodge or cancelled swing grants NO forced taunt and NO Resolve. A boss immune to forced-target taunts can still gain standard ordinary threat unless boss rules specifically prevent it. Challenge remains separate area taunt. No magic, extra damage packet, charge, new resource, or Shield Bash movement added.
+
+### Round 7 follow-up, all undecided
+
+1. Choose **Provoking Strike max purchasable ranks R**, with appropriate Guardian six-skill progression budget; does Guardian follow **150 ranks across class levels1..150** as earlier TierIII designs? Needs explicit user acceptance.
+2. Select **rank-one starting values** for gain `G1`, cooldown `C1` and taunt `T1`, or delegate a sensible first-playtest set, then audit every rank for strictly decreasing cooldown and improving resource/taunt.
+3. Design rank-scaled **direct Physical sword damage** (both flat and STR/VIT coefficient portions where used), actual single-target threat added and boss immune handling without falsely treating these as approved.
+4. Next after this, resolve Intercede redirect/self-defensive buff details, Hold the Line flat Physical/Magical DEF aura and Iron Guard's shockwave damage.
+
+**Documentation and design only. No Unity code, scenes/assets, builds, test changes, quest implementation or merge.**
