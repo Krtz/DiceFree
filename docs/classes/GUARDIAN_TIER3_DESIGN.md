@@ -130,3 +130,39 @@ User responds:
 TierIII Guardian is standard new Lv1 manifestation after DefenderLv60+, sword+shield, Resolve inherited baseline, dedicated party protector (not magical Paladin), not a damage-first Vanguard. Existing Defender TierII remains UNCHANGED and its six parent skills do not automatically become Guardian skill slots. No class stat numbers, rank caps/150 rank gates, new quests, skill mana, Resolve prices or implementation have been user-approved this round.
 
 **DOCUMENTATION ONLY. No Unity gameplay, C#, files beyond three design docs, build/test, branch merge or deployment.**
+
+
+## GUARDIAN-005 — 2026-11-27 Round 4 USER APPROVES NEW DIRECT SWORD DAMAGE + SINGLE-TARGET TAUNT
+
+### Exact user decision
+
+User selected **"Custom offensive concept"** rather than previous designer options Shield Strike / evolved Shield Bash / no skill, specifying: "**a straightforward attack with the sword that does damage and taunts the target.**"
+
+**NEW APPROVED SIXTH GUARDIAN SKILL IDENTITY:** an **ON-DEMAND SINGLE-TARGET SWORD STRIKE** dealing DIRECT PHYSICAL damage and **TAUNTING THE SAME TARGET**. The Guardian remains a grounded nonmagical sword-and-shield knight. This is NOT a gap-closing Shield Bash (not selected), not an AoE cleave/Shield Sweep (not selected), and not a standalone taunt with no damage. It should be usable in solo combat and in parties to establish/control threat. The parent Defender TierII skills remain unchanged.
+
+**Two taunt roles deliberately coexist:** Guardian's retained/evolved **Challenge** supplies area-wide taunt/real threat for several enemies; the NEW sword skill combines damage with **single-target threat/taunt** for focused enemy control. Honor underlying taunt susceptibility/immune boss behavior through shared threat rules: an immune boss may ignore forced focus but ordinary threat mechanics can still work under existing encounter system. Whether taunt follows a temporary forced-target effect in addition to a threat increase, how often it can be refreshed and how it scales by skill rank are NOT yet user-approved numeric rules.
+
+**Name not user-selected:** e.g. *Provoking Strike*, *Taunting Slash*, *Knight's Challenge* are possible designer labels only. For now reference it neutrally as **Sword Strike (working label; user approved the mechanics, not its name)**. No weapon other than a **ONE-HANDED SWORD** is needed for the strike; the Guardian retains shield equipment as locked in Round1. Do not imply a spell element, extra resource, magical effect, guaranteed-hit, multiple targets, dash, stun or damage-over-time.
+
+**Not yet locked:** raw Physical flat and STR/VIT coefficients, rank scaling, resource cost or Resolve gain on successful hit, cooldown, attack range, animation/timing, miss/taunt validity (recommend taunt applies on successful hit rather than misses but not signed off), threat amount, whether a shield-absorbed hit counts, target boss eligibility and specific class-rank unlock timetable. All future offensive coefficients should scale with purchased skill ranks consistent with existing project-wide skill scaling policy. Do not invent a starting numeric formula or impose unapproved one.
+
+### Guardian current agreed concepts: SIX
+
+1. **Challenge** — evolved parent area taunt and substantive threat.
+2. **Iron Guard** — two-second fortified stance storing premitigation hostile incoming damage; releases Physical AoE shockwave centered Guardian on completion.
+3. **Bulwark** — evolved Resolve-spending mitigation.
+4. **Hold the Line** — Guardian version grants nearby ally PDEF and MDEF buffs instead of TierII Defender elemental-resistance aura; parent TierII unchanged.
+5. **Intercede** — STATIONARY redirect some nearby ally damage to Guardian; Guardian receives defensive buff, self-cast gives buff only with no redirect.
+6. **Sword Strike (temporary descriptor)** — **NEW user-approved targeted Physical one-handed sword damage attack which taunts the struck target**.
+
+All six ability identities are now approved, but names/strengths/numeric scaling/rank caps and gates remain open. The sixth is NOT Shield Bash, Shield Sweep, magical protective Ward or some revived previously rejected alternative. Guardian retains normal Physical sword autoattacks in addition to this active. Guardian is a classic martial PARTY PROTECTOR tank with legitimate solo offense, using sword+shield and Resolve. Its TierIII promotion occurs Defender Lv60+ -> new Guardian Lv1 under standard class progression; TierII Defender unchanged.
+
+### Appropriate concise next Round5 decisions (all open)
+
+A. Final name for new single-target sword+taunt skill (e.g. Provoking Strike vs Taunting Slash vs Guardian's Mark; the user may propose one).
+B. Does taunt require landed sword damage, and should shield-absorbed valid impacts count? Recommend only a **successful impact**, respecting boss taunt immunity; no taunt on miss.
+C. On-hit Resolve: a small flat amount on a successful skill strike vs cost-only/none; ensure class can build Resolve during solo when attacks are weak.
+D. Numerical defensive Intercede redirect and personal DEF buff baseline and duration, for a first-playtest proposal.
+E. Six-skill TierIII total ~150 ranks, one per class level 1..150, standard precedent but explicit user signoff and exact distribution pending.
+
+**Documentation/design only; no Unity gameplay code or class implementation, no asset editing, builds, tests or branch merge.**
