@@ -1011,3 +1011,51 @@ Since user says "maybe make backstab a little stronger (especially the missing h
 4. Confirm Backstab animation timing only if needed, avoid undoing Round22 approved coefficients.
 
 **DOCS ONLY; no Unity gameplay code/assets/scenes/builds/tests/merges.**
+
+
+## Assassin Tier III Round 24 — 2026-11-27 USER CONFIRMS THEY MEANT EXECUTE AND APPROVES STRONGER CONTINUOUS MISSING-HP MULTIPLIER
+
+### Newest, AUTHORITATIVE USER APPROVAL and disambiguation
+
+User says "**Execute missing HP damage decision: Increase to 1+(0.40+0.09r)*missingHPFraction, max14.6B near death**", explicitly confirms "**Base damage stays B*(1+0.12r), max4B at full HP. Existing 35s cooldown, mana20+5r and 1.2s normal channel unchanged**", and clarifies "**yes, i did mean execute, sorry about that**". Therefore Round23 ambiguous reference to "backstab ... especially the missing hp bonus" definitively meant **EXECUTE**, NOT Backstab. No new Backstab damage or HP-scaling mechanics; preserve existing Round22 Backstab.
+
+### FINAL USER-APPROVED Execute raw Physical damage coefficient
+
+Let `rX` be purchased Execute rank1..25, `B` be the total RAW uncritted ONE full NORMAL two-dagger basic sequence damage before target mitigation (two separately resolved0.5B normal impacts), and `m=clamp((targetMaxHP-targetCurrentHP)/targetMaxHP,0,1)` be missing target HP fraction. **NEW CURRENT CANONICAL** Execute Physical hit raw:
+
+`ExecuteRawPhysicalDamage(rX,m)=B*(1+0.12*rX)*(1+(0.40+0.09*rX)*m)`
+
+SUPERSEDES the just-approved Round23 missingHP term `1+(0.40+0.07*rX)*m`. It preserves identical base `B*(1+0.12rX)` at full target HP and increases only the rank-scaled missingHP benefit. The user's note confirms exact change, rather than merely asking for an optional future suggestion.
+
+| Target current HP | Missing fraction m | r1 base1.12B, missing coeff0.49 | r25 base4B, missing coeff2.65 |
+| --- | ---: | ---: | ---: |
+| 100% | 0 | 1.1200B | **4.0000B** |
+| 75% | .25 | 1.2572B | **6.6500B** |
+| 50% | .5 | 1.3944B | **9.3000B** |
+| 25% | .75 | 1.5316B | **11.9500B** |
+| Approaches 0% | 1 | 1.6688B | **14.6000B** |
+
+Target remaining HP gate remains NONE: usable at any target HP with a smooth continuous missing HP scaling. This stays an AGI-only PHYSICAL skill, ONE heavy dagger impact after an approved **1.2-second normal global channel**, paid once Mana`20+5*rX` (r1=25, r25=145) and **35sec cooldown** on successful completion according to normal channel policy. Interruption within1.2sec cancels strike, refunds consumed Mana, and does NOT start/consume cooldown (USER approved Round23). **Execute NOT eligible for Stealth opening damage multiplier nor Envenom coating poison proc; Critical Mastery guaranteed crit charges affect BASIC dagger hits only and NOT Execute.**
+
+### Important comparison, no new unapproved nerf/buff
+
+At max ranks, Execute at nearly dead **14.6B raw** vs Backstab r35 side/rear first attack out of maximum Stealth **3.35*1.50*2.35=11.80875B raw**, before defenses/critical differences; these are not equivalent situations. Execute has no positional/Stealth multiplier, longer35sec cooldown and expensive145Mana, and the 1.2sec interruptible channel. Backstab remains a 9sec cooldown positional strike with raw `B*(0.90+0.07*rB)` (max3.35B), side/rear multiplier `1.15+0.01*rB` (max1.5x), target facing checked **at hit impact**, position stacks Stealth opener. It has NO missing target HP bonus. Do not alter Backstab because of ambiguous Round23 note; user resolved it Round24.
+
+### All prior user approvals remain unchanged
+
+- Lv1 Assassin VIT22 STR10 AGI35 INT10 SPR5, per-level VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8, class BaseMana100, MaxMana100+5INT, regen/s4+0.1SPR. Melee dual one-handed daggers, AGI-only offense, normal 2-hit attack sequence2.5s,0.3s between impacts,0.5B each.
+- Stealth rS1..25, duration6s rank1 to15s rank25, between-rank interpolation still not signed off; concealed move modifier `(rS-11)%`, first qualifying attempted basic TWO-HIT sequence or Backstab only opener damage `1.10+0.05*rS`, both dagger packets eligible, attempt consumes even on miss, Mana8+2rS,22sec cooldown. Excludes Execute and Nature poison procs/DoT.
+- Envenom ACTIVATABLE poison-coated BOTH blades (not direct stab) for `8+9*(rE-1)/29` seconds based on Envenom own rank1..30, reactivation replaces/refreshes coating, may cast in Stealth without breaking opener, Mana10+2rE/CD8sec. Each successful ordinary basic dagger impact OR Backstab (NEVER Execute) adds Nature `B*(0.08+0.006*rE)` and refreshes ONE nonstacking enemy poison DoT4sec; ticking0.5sec `B*(0.0075+0.001*rE)` Nature per tick, preserving original tick phase on refresh.
+- Critical Mastery20 hybrid passive+3AGI/r and+1 percentage point BASIC crit/r, active BASIC-only guaranteed crit charges2/3/4/5/6 at milestone ranks1/6/11/16/20, Mana12+3r/CD25sec; successful basic hit consumes including fully shield absorbed, misses don't, cooldown begins immediately, reactivation replaces, charges clear on death/logout/class change. ArmorPen15 ignores+1% target PDEF/rank on basics and Physical skills, not poison Nature.
+- EXACT approved150 individual class level/rank eligibility gates from Round15, first unlocks StealthLv1 EnvenomLv2 BackstabLv3 CritMasteryLv5 ArmorPenLv8 ExecuteLv12 LAST. Four actives, one hybrid, one pure passive, caps25/30/35/25/20/15=150.
+- No Unity gameplay code/scene/asset changes authorized.
+
+### Suggested Round25 follow-ups, DESIGNER PROPOSALS NOT USER APPROVED
+
+1. **Stealth duration INTERMEDIATE RANK FORMULA:** approve/revise linear `StealthDuration(rS)=6+9*(rS-1)/24` seconds, preserving endpoints6sec rank1 and15sec rank25; independent from the user-locked Envenom own-rank linear `8+9*(rE-1)/29`.
+2. **Basic raw `B` coefficient / NORMAL attack damage**: compare exact global physical base attack formula and TierII Thief's base damage and attack interval in source before proposing specific AGI coefficients. User approved 2.5sec two-hit cycle, 50/50 physical hits separated0.3sec, but NOT numerical B function. Evaluate slow sustain vs high skill burst, no independent per-dagger timers. If needed inspect Unity source or class design docs without changing active Unity checkout; keep work in isolated docs branch.
+3. **Backstab actual animation/contact windup timing**: target facing at IMPACT approved, animation duration open; can later choose amount.
+4. **Remaining Execute channel edge cases** should FOLLOW standard global channel rules, not bespoke Assassin-only deviations. No need to revisit user-locked coefficients/Mana/cooldowns.
+5. Mentor/class advancement and planned world placement when combat kit fully resolved.
+
+**DOCUMENTATION ONLY. No Unity gameplay code/assets/scenes/builds/tests or branch merges.**
