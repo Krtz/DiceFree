@@ -309,3 +309,27 @@ Total purchased ranks exactly **150**, one skill point/class level1..150. **Per-
 5. Determine Assassin classLv1 stats/growth, Envenom/Backstab/Execute raw damage rank formulas, basic cycle spacing, Stealth damage rank growth and positional bonus, and advancement quest.
 
 **DOCUMENTATION ONLY. No Unity code/assets/scenes, builds, tests, or branch merges.**
+
+
+## Assassin Tier III Round 9 — 2026-11-27 USER APPROVES RANK-INCREASING CRIT MANA COST, CLEAR CHARGES ON DEATH/LOGOUT/CLASS CHANGE, 25S CD ON ACTIVATION
+
+### Latest USER answers, authoritative
+
+1. **Critical Mastery HYBRID ACTIVATION MANA COST INCREASES WITH PURCHASED SKILL RANK.** Rank-scaled, NOT fixed; the EXACT Mana-cost formula, base cost and increment PER rank are **NOT YET APPROVED**. Preserve universal Mana system (MaxMana = AssassinClassBaseMana + 5*INT, natural Mana regeneration/s = 4 + 0.1*SPR), and no new class resource. A possible formula such as `20+5r` is only a designer candidate if discussed, not canonical. Activation still requires a purchased rank; no rank0 guaranteed crit activation is authorized.
+2. **UNUSED GUARANTEED-CRITICAL BASIC HIT CHARGES ARE CLEARED ON DEATH.** No charge carryover across death and respawn. Death must not magically refill charges or preserve a pre-death charge buff.
+3. **UNUSED CHARGES ARE CLEARED ON LOGOUT** (including reconnect as new session; no reappearing old buff). The user approved clearing on logout, not changing purchased passive ranks/stats.
+4. **UNUSED CHARGES ARE CLEARED WHEN CHANGING CLASSES / MANIFESTATIONS.** Switching out of Assassin forfeits unused temporary guaranteed-critical charges; later switching back cannot restore them. Persistent purchased Critical Mastery rank remains as class progression and resumes its PASSIVE AGI/crit benefit when appropriate.
+5. **CRITICAL MASTERY ACTIVATION 25-SECOND COOLDOWN STARTS IMMEDIATELY ON ACTIVATION**, **NOT** when final charge is used. If charges remain and activation comes off cooldown, user-approved Round7 reactivation replaces remaining charges with FULL new allotment. No short expiration timer for charges while alive/logged in/remaining Assassin. Whether the active cooldown itself persists through logout/class switching follows global engine behavior, not newly specified or waived here.
+6. **Current hybrid system unchanged:** One rankable hybrid Critical Mastery cap20. Passive each purchased rank +3 AGI and +1 percentage point BASIC ATTACK crit chance, rank20 +60AGI/+20pp. Active BASIC-HITS ONLY guaranteed crit, no short duration, charges `2+floor((r-1)/5)+(r==20?1:0)`: rank1–5=2, 6–10=3, 11–15=4, 16–19=5, 20=6 (user-selected extra rank20 charge). Successful basic dagger contact consumes1 even when shield absorbs all damage; misses consume0; every impact in Assassin's two-strike basic cycle resolved separately. Charge refill on activation replaces, never adds. No charge guarantees for Backstab, Execute, Envenom.
+7. **Assassin class scope retained:** TierII Thief Lv60+ to distinct TierIII Assassin Lv1; pure melee DPS, dual one-handed daggers, slower basic cycles with two hits, slower heavy skills, strong Stealth opening burst, weaker sustain. Stealth25 signed concealed movement modifier `(r-11)%` (-10% rank1, +14% rank25), both opening basic dagger hits empowered; Backstab35 usable any angle, gains side/rear270° positional bonus stacking with stealth opener. Envenom30 retained poison stab; Execute25 always usable and scales continuously with target missing HP. ArmorPen15 +1% target Physical Defense ignored/rank on basics and physical Assassin skills. CriticalMastery20 hybrid. Exactly150 rank points, one each Assassin classLv1..150, per-rank min-level gates still pending.
+8. **Not yet approved:** Exact rank-dependent Critical Mastery Mana cost; class base mana/starting stats/growth; each skill unlock/class-level gate table; Backstab/Envenom/Execute damage coefficients and cooldowns; precise basic two-hit timing; Stealth opener numbers and duration; ArmorPen multi-source stacking details; exact boss-facing positioning snapshots; NPC/quest/visuals. Do NOT invent values to claim implementation readiness.
+
+### Next designer questions, not yet approved
+
+1. **Select exact Critical Mastery Mana cost formula**, e.g. affordable fixed base + extra cost per rank, honoring existing global Mana rule.
+2. **Choose first-unlock class levels and rank gate intervals** for Stealth25/Envenom30/Backstab35/Execute25/CriticalMastery20/ArmorPen15, then author full150 legal rank-by-level gate audit without unspendable class points.
+3. **Define two-hit basic timeline, damage weighting and attack interval** relative to old Thief.
+4. **Set Stealth opening scaling/positional Backstab multiplier and Execute missing-HP function**; balance slow burst vs limited sustained pressure.
+5. **Establish Assassin Lv1 stats and per-level growth, starting Mana and TierIII mentor/trial** separately.
+
+**DOCUMENTATION ONLY. No Unity code, assets/scenes, builds, tests, class implementation or merge.**
