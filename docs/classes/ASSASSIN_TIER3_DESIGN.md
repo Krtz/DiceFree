@@ -1424,3 +1424,18 @@ Use existing `docs/ARBORIUM_GATES_AND_FLOORS.md` verified existing West Residenc
 No changes to Assassin's approved six skill rank schedules or combat damage/timings: B=8+AGI baseline; each of two basic Physical packets .85B, full combined1.7B, nominal cycle2.5/AS and hit delay.3/AS; Stealth, Envenom, Backstab, Execute, CritMastery, ArmorPen remain as previously signed off.
 
 **DOCUMENTATION ONLY. DO NOT MODIFY UNITY GAMEPLAY CODE, NPCS, SCENES, ASSETS, TESTS, BUILDS, BRANCH MERGES OR DEPLOYMENTS.**
+
+
+## Assassin Tier III Round 34 — 2026-11-27 USER REJECTS LORE EXPLANATION FOR QUEST RESET; TOP-FLOOR TARGET IS AN ORDINARY PERSON
+
+### Authoritative user clarification (supersedes designer's magical training construct pitch)
+
+The user explicitly responds to the suggestion that a target could be "a magical training construct disguised as a person" to explain respawning: "**also to complicated, we dont need to lore reason why the quest resets! it's just a person, maybe a person who has some kind of intel, or a person working for the dragon or whatever, it doesn't matter that much.**"
+
+- **TOP-FLOOR TARGET = ORDINARY PERSON, NOT MAGIC CONSTRUCT / ILLUSION / TRAINING DUMMY.** The person might possess some intel or work for the World1 dragon, but these are examples of OPTIONAL LIGHT STORY FLAVOR ONLY, **NOT USER-CHOSEN BACKSTORY, NAME OR AFFILIATION**. Do not canonize a connection to Ancient Road Dragon without user approval. Exact motive isn't important to the user and shouldn't block implementation.
+- **RESPAWN / RESET IS PURE GAME MECHANIC.** If caught, teleport Thief outside existing West Residence and restore an already-killed top-floor target alive so the quest can be retried. **No special story justification** for the target reviving; no resurrection cutscene, magic system, hidden clone, memory erasure or other scripted narrative explanation. Earlier use of the word "resurrect" in the reset requirements is operational/technical, NOT literal in-universe necromancy. Prefer `reset target alive` or `respawn quest NPC` in implementation terminology.
+- The user is asking us to STOP overdesigning a straightforward themed progression quest. Keep it simple. A retired assassin mentor in a hidden civilian identity in/near Arborium remains approved Round31, but the suggested civilian occupation "bookseller" has NOT been approved; do not assert it. The mentor's occupation/name and the target's exact identity can be filled with minimal appropriate flavor at implementation time when necessary, rather than delaying with another long questionnaire.
+- Canonical quest flow from Round33 unchanged: TierII ThiefLv60+ enters EXISTING quest-phased OPEN-WORLD three-storey Arborium West Residence; TWO guards alternate patrols on SECOND/MIDDLE FLOOR; Thief Stealths upstairs, quickly kills ordinary unaware person on TOP floor using available TII ability, waits for Stealth cooldown, Stealths downstairs, exits unseen. If guards notice the player on either traversal, INSTANT throwout/teleport outside and reset target alive and mission state. No 5-second investigation timer, stealth minigame, extra proof/theft, multi-stage boss, separate dungeon instance, prolonged alarm or gear requirement. The reward is new TierIII Assassin Lv1 Echo/manifestation via ordinary class advancement progression, exact hand-in detail not a design blocker.
+- No Assassin damage/skill/150 rank gate/attribute/Mana/attack cycle changes. Keep previously approved B=8+AGI and both .85B Physical impacts per cycle2.5/AS with .3/AS gap.
+
+**DOCS ONLY. No Unity code/scene/asset/quest changes or merges; this is a design clarification.**
