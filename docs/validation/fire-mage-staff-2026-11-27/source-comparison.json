@@ -1,0 +1,200 @@
+[
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician.meta",
+    "mainSha256": "CAE3EF8D7EC07D60433A9B407C99E0DB9541A7D755EBC23431CC0C9EE634A956",
+    "qaSha256": "B126212C1B6B335FD0DF9E4B0664CB7FF179A7E934403B16B39210DE519C5743",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical.meta",
+    "mainSha256": "63781D1AEC653D08F085A400A236FC9675529945DAFAE650144164269C200ADA",
+    "qaSha256": "9DC853147EED4CE435F8C569B720C7816B2B33E873DD254C87F3E62022D444EA",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/manifest.json",
+    "mainSha256": "6C4A18B1C945AD696AC69CEDBB85AED50141DA246D5F7DDBA060B5F7708740E0",
+    "qaSha256": "C7EF3083316534419CB51E6A29DFD2F4A42FCC495C8CF572357852E091284292",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/manifest.json.meta",
+    "mainSha256": "D48568D3662ED614D51A8B7E84C420306B8D3F21722223A88947DCC26AAFE7FC",
+    "qaSha256": "471FF195677F3306D1CD1DC495C17DABD6F73B517CB93D75C064BC310700813A",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/metadata.json",
+    "mainSha256": "A9D3DD5A03388FBEE34A750F18DF49D86170E12778EC8071D32B2EA2C0D7F1DD",
+    "qaSha256": "15D9D4DCCF63DD75BE374207A0C243480F48D7F3A79ABCA0D4AFFA5C9315A7D0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/metadata.json.meta",
+    "mainSha256": "FDDC230EFB0F33670D68B9E01A68CD2EAEFC4E620AE5BCA93832F51D251209F5",
+    "qaSha256": "80237D1606E5CD34BCBE993880A160ECBF8365CB21F0408C91E3B18E1541D5CE",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/model.glb",
+    "mainSha256": "2183388EB6831215521F75B7796E497291C1337295D5B57FC0581EE77A00CF89",
+    "qaSha256": "2183388EB6831215521F75B7796E497291C1337295D5B57FC0581EE77A00CF89",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/model.glb.meta",
+    "mainSha256": "29125B6E09B42A0152D6C034157FC41307053DFDAD938C0F451E2AAE56D9A07A",
+    "qaSha256": "E59332E73599CEF3D3774D68D76F40F30D089E1DBD67AE210B218353D73FBA36",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/provenance.json",
+    "mainSha256": "1D893696DE1500231B18C137BCAB84D3998D80E87FD3B877A98B47D475AD5AA8",
+    "qaSha256": "C55E3C37E981E6C1E4EF2FEFE92586080D26C5ABBDB781778434CC01396A83D9",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/provenance.json.meta",
+    "mainSha256": "70D6BBD59948FEE95271142FBEB18D9126589A3A077F9C48CF30C029C5015FFB",
+    "qaSha256": "F96E4B267236B9D65C2235942E60D55A5E818EA6BABCE0A0F70D3368E7801CDC",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/receipt.json",
+    "mainSha256": "200549EF1BD7FCD2815D32EB2DE1EA125A58289E0870B6EC786E1253EA803454",
+    "qaSha256": "C030ECDF0ED4694D394CAB1AAB4B6CD667674320039018AD2D5AAA116A5EDC19",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/receipt.json.meta",
+    "mainSha256": "A566B653B53787D352C74412560A5D07CFB6B2A8E58AA17BB029F993C4E52811",
+    "qaSha256": "DF599E34F9716A187358A4B93E3D7F5F6199FAC55A805BF87CEB196674CC7F0C",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/validation.json",
+    "mainSha256": "26785C4F7A1E1A4DD6680F7EC9D9DBF362FDA1AAAE6B92F6D85CB4086645839C",
+    "qaSha256": "E6EA0DA95D1A783B2D9DE577A27794175290F87764752FF3C3C61099E5FA66D7",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Canonical/validation.json.meta",
+    "mainSha256": "32195DB006028965D598440598FC8EF6C6BC48ED110DC1B8C4CC3CCAA53A385B",
+    "qaSha256": "35977A6A7FA70D63E26BC5C39A8886117BE6546D09E44D637249EB91F94FD66F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/EmberMagician.fbx",
+    "mainSha256": "F900143042974039E1ED7B662A5FE14EAC34B4A8599CE56EA64F68DCE7952586",
+    "qaSha256": "F900143042974039E1ED7B662A5FE14EAC34B4A8599CE56EA64F68DCE7952586",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/EmberMagician.fbx.meta",
+    "mainSha256": "D86885EEC03D9AAF24A933D0BC95B3E9404B72F0C78B381BAAF3F97473B12D99",
+    "qaSha256": "F3A5C08060212A1BEFDEEA9DFB0C375A1E4C0520B96E1B8ECAA2A1CB71FB9EAA",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/EmberMagicianStaff.fbx",
+    "mainSha256": "2298C3B1807A480148914980910DC94120462EB19A7FC0F3B0279FA233AFAB99",
+    "qaSha256": "2298C3B1807A480148914980910DC94120462EB19A7FC0F3B0279FA233AFAB99",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/EmberMagicianStaff.fbx.meta",
+    "mainSha256": "CEB05937DC537BD0B45FE8ED48D5C918B445308DB50D3B6D38525458AA0FA560",
+    "qaSha256": "00EAAA9484BEE4E89DAAA4107C4B27388C287B51450664DB16F507F1ED03E568",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Magician painted atlas.mat",
+    "mainSha256": "1758A83C242B7D65C74FB450B1E2C8B395AFD8E9718EE822C26B587FBF634F76",
+    "qaSha256": "E0AF12995E99560C99D225BD325EC9259E1CAF7B0433AB6CF3AF33335E952A27",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Magician painted atlas.mat.meta",
+    "mainSha256": "68D2F809E7549670C7BC448D912007C3243507F4CDF8D481C8369694BAF66E52",
+    "qaSha256": "95582EE83DEB311FD9D29464ED0668696E952937C3741F2C314851909D99B1C2",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Magician_Albedo.png",
+    "mainSha256": "DD99F4386966E2A3A8FEE587FA2EB39F88A65D2ECEDDFFFD7D77206A5A03A7E6",
+    "qaSha256": "DD99F4386966E2A3A8FEE587FA2EB39F88A65D2ECEDDFFFD7D77206A5A03A7E6",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/Magician_Albedo.png.meta",
+    "mainSha256": "A5B650F649FB51223533B11EE79E0C832E4A9D310E360492F40E1E92D9DEFF11",
+    "qaSha256": "94E7A2AF1B5F8B9FB23D83DBCA7F5C79A3F4AB0D2CF54A327F979B9C181F239F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/README.md",
+    "mainSha256": "43A8360965F6ED4066B6F35855B4AC4B3FE53D38838F105AA7B861413691753A",
+    "qaSha256": "37BC14A16786FB91F7919E673EFCD689AB96CF6639970E0A66784F6FAF95168F",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/README.md.meta",
+    "mainSha256": "5C1B5437EF8142EDBF4C6E0B7B4B781E3A4498DD768A9ABA3974A1A1AF4D7340",
+    "qaSha256": "B2D7F622E7D3DDFAA70520AB9AB97116C11BFFDB52CFA2614F9FA2D105C7A945",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/source-receipt.json",
+    "mainSha256": "F0FB93FCD5C9EA091FF8241205583557007E35335626BFE9DE1A18FB37ACFF77",
+    "qaSha256": "F0FB93FCD5C9EA091FF8241205583557007E35335626BFE9DE1A18FB37ACFF77",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Art/Characters/FireMageMagician/source-receipt.json.meta",
+    "mainSha256": "426B9325DDAC6D6149BF42F562CD3D74812FE4097724512FDDBBBC60A28F138B",
+    "qaSha256": "8DF2A7959B4667C8D12A085CA3258E4179F63F32EC2A8967C18C171A87631103",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/Cornberg.unity",
+    "mainSha256": "2404269280D76328E7198C7C90ECB8BBD1C3CE5667F11CA7DF9CEF2DCEA01311",
+    "qaSha256": "FC38E243F39F109DAA315466E1C5A51BE62EBFA51D8117CB92CA782D5F4F7549",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/DevelopmentRoom.unity",
+    "mainSha256": "09AF9B200CA4CDD5F4C463EA363359D9270EB70E0C52BFE34A38AACE373680BA",
+    "qaSha256": "8515725BBD8CE21F30B87401BA8215A59E88FD5B8AD46B6BF65E85E0AF171DAB",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scenes/WorldTwoArrival.unity",
+    "mainSha256": "A9275552055D56F530CEBFD4BAAD6A61FED900733E446EAE3BC0CD6A9041FA94",
+    "qaSha256": "7ABF8435096B564C47A9F28494EA2B81AE361F864FCFD4226D87DAB4A08A4925",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs",
+    "mainSha256": "5940CD609A7E7E209C2C74ECA936050C28B5D482040854D0A4323EEDFE778440",
+    "qaSha256": "5940CD609A7E7E209C2C74ECA936050C28B5D482040854D0A4323EEDFE778440",
+    "comparison": "byte-identical"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs.meta",
+    "mainSha256": "4547964B498C67EB9A69291307CCD6477456E95EDB921F2B4B3627FF3BAC2E9A",
+    "qaSha256": "8046E8F5E892F86A25157EEF5910780BE182DE6292C9B45CC1E0D0F2C6ABDE45",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs",
+    "mainSha256": "E378B026AABD9828E3198E9F2E8E187BC4D77105F7C28346E671F06BDF901C46",
+    "qaSha256": "0A9F45E5C0DCFB8219A30D33019C3E7331BBC1CF797A28E730CADDCBBDC7ECF0",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  },
+  {
+    "path": "Assets/_DiceFree/Settings/FireMage/Fire Mage form.prefab",
+    "mainSha256": "8BD2842E4878EA123F598496EF68175177B1E97E0208F0C6889A38A1E5695F22",
+    "qaSha256": "1166AE52A8E7B5712804360BE460E07B153CEBC1839893C7860A7A349E8A023B",
+    "comparison": "same serialized content; whitespace or scene record order differs"
+  }
+]

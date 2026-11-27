@@ -1,0 +1,14 @@
+{
+    "status": "passed",
+    "samples": 560,
+    "minimumHeadAndHatClearance": 0.07115405797958374,
+    "motions": [
+        "Idle",
+        "Locomotion",
+        "Cast",
+        "Guard",
+        "Attack",
+        "ArmedAttack",
+        "Hit"
+    ]
+}

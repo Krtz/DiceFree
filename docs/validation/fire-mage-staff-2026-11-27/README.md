@@ -1,0 +1,9 @@
+# Fire Mage staff clipping correction
+
+The long staff was following a shared casting hand in front of the chest, putting its shaft and crown through the head and hat. The corrected presentation places the holding arm beside the body with a two-joint solve and outward tilt. The other arm keeps the original casting animation. Joint rotations preserve arm lengths; death releases the upright holding pose. The component implements IPortraitBonePose so menu/HUD clones adjust bones before attached props follow them.
+
+`staff-grip-review.json` covers 560 geometry samples: Idle, Locomotion, Cast, Guard, Attack, ArmedAttack and Hit at twenty times and four headings. The test uses the real head-weighted skin vertices and clips every staff triangle to their vertical span. The staff remains outside the complete head/hat horizontal envelope, with a minimum measured gap of 0.071154m. Samples also verify the grip, arm lengths, unchanged free hand and repeatable posing. A separate death sample checks staff/hand rotation alignment.
+
+`runtime-review.json` contains 28 checks on the final Windows player, including disabled-Animator portrait posing, actual casting, saved Fire Mage/Mage state, ordinary World 2 travel, matching Maelis and return to class selection. Front and side captures use the real game renderer and runtime materials. Batch world captures omit overlay UI. Class and model reviews passed 355 and 41 checks respectively. The build has zero errors and one warning.
+
+Reproduce the geometry review in the QA editor harness with FireMageStaffGripReview.Batch, build using the existing local Windows build helper, run FireMageStaffRuntimeReview.cs through Unity CLI eval_file against a disposable copied save, then package using PackageFireMageStaffEvidence.ps1. No user profile is included in this evidence folder.
