@@ -1381,3 +1381,46 @@ User explicitly selects:
 - No Unity scripts/scene/asset/quest implementations, compilation, tests, branch merges or deployment authorized by this Round32 documentation request.
 
 **DESIGN DOCS ONLY: this is a USER-APPROVED QUEST CONCEPT, NOT ALREADY IMPLEMENTED CONTENT.**
+
+
+## Assassin Tier III Round 33 — 2026-11-27 USER SIMPLIFIES THE ADVANCEMENT TRIAL: TWO GUARDS ON SECOND FLOOR, STEALTH UP, KILL, COOLDOWN, STEALTH DOWN; INSTANT TELEPORT OUT/RESET ON CAUGHT
+
+### AUTHORITATIVE USER ROUND33 CHOICES AND HIGHER-PRIORITY FREE-TEXT CORRECTION
+
+User form selections:
+1. "**Middle-floor guards: Two alternating patrols**".
+2. "**Investigation grace window: 5 seconds**".
+3. "**Return detection: Any new guard alert after target death fails escape attempt**".
+4. "**Quest isolation: Quest-phased open-world West Residence**".
+Then user explicitly overrides complicated alarm design: "**i think you are making this harder than it needs to be. guards on second floor. target on the top floor. you use stealth to sneak up the stairs. you kill target. you wait for stealth to go off cd. use stealth to go down stairs. if guards notice you, you get 'thrown out' and youre teleported to outside the house again. if you killed the target when you get noticed, the target instantly ressurects at the top and you are outside the house again. it doesn't have to be hard or anything, it's more thematic.**"
+
+**CRITICAL: The final detailed free text governs.** Its clear "if guards notice you ... thrown out" supersedes the five-second investigation timer and recoverable-alert design previously suggested/selected in Rounds32–33. Preserve two simple alternating-patrol guards and the quest-phased public West Residence, but do NOT implement a five-second countdown, investigating/alert AI with a hide window, complex suspicion meters, or escalation states as mission requirements. The user expressly prioritizes accessible THEMATIC class unlock over a difficult stealth challenge.
+
+### NEW CURRENT USER-APPROVED MISSION FLOW (TIERII THIEF PLAYABLE)
+
+- A TierII **Thief classLv60+** undertakes its pre-TierIII Assassin advancement quest with a retired assassin concealed under a civilian identity in/near **Arborium**. Do not require unlocked Assassin abilities to finish the trial.
+- Existing Arborium **West Residence**, THREE WALKABLE FLOORS including ground, is used in an **open-world QUEST-PHASED** configuration, not a private solo instance. Reuse real geometry, vertical stair navigation and camera floor cutaway. Guard/target encounter entities should be quest-phased/visible only to the eligible participant as appropriate for existing world architecture, without turning the building into a new dungeon or interfering with normal city services.
+- **Ground floor**: enter house to begin/in-progress quest.
+- **SECOND FLOOR = MIDDLE FLOOR**: exactly TWO GUARDS, with simple alternating patrols on that floor. Their job is to NOTICE a visible/unstealthed Thief attempting to pass. No dense stealth puzzles, no extra three-guard sentry system, no patrol difficulty escalation. Use existing/straightforward stealth perception/visibility in gameplay implementation, rather than complex vision cones/timers or additional mechanics invented during interview.
+- **Go UP**: Use existing TierII **STEALTH** to move past the two second-floor guards and upstairs. Keep traversal straightforward and feasible with TierII Stealth's existing short duration. The user explicitly describes Stealth and stairs, not a need for Smoke Bomb, Fan of Knives or other advanced technique.
+- **TOP = THIRD FLOOR**: the designated target is UNAWARE and can be eliminated QUICKLY with existing TierII Thief attacks/skills. No prolonged boss duel, additional escort guards, required Assassin Backstab/Execute, stolen proof item, or scripted cinematic kill requirement. Target kill sets an ephemeral mission progress flag pending successful exit.
+- **Go DOWN**: After kill, wait for **TierII Stealth cooldown to become available**, reactivate Stealth and sneak DOWN past the same two guards on floor2. Returning unobserved to the OUTSIDE entrance of West Residence completes the trial (and advancement after appropriate hand-in/class progression). Do not impose artificial timer after target kill; waiting for Stealth cooldown is the user's intended rhythm.
+- **CAUGHT ANYTIME during trial**: if any second-floor guard NOTICES/DETECTS the Thief, immediately "**THROW OUT**" the player, i.e. **teleport them to a safe point OUTSIDE the West Residence** (without a punitive death/combat chase/capture fight). This applies on the way UP and DOWN; after the top-floor kill, any detection fails the attempt just as directly. No extra five-second investigation/recoverable alert grace period, despite the earlier multiple-choice answer, because user's explicit correction says instantly thrown out when noticed. No complex alert memories required.
+- **RESET on caught**: if top-floor target was killed before the failed attempt, **INSTANTLY RESURRECT/RESPAWN target ALIVE on TOP FLOOR** when ejecting the player outside. Clear the temporary 'target dead' mission flag, restore the trial to its initial repeatable state; for detection before target kill the target is already alive. The user wants repeatable easy retries, no dramatic punishment. Teleport to outside house is common reset/entry point. Exactly when next attempt starts (re-enter or interact) can follow existing quest objective API; no failure lockout invented.
+- **SUCCESS CONDITION**: target dead AND leave West Residence without being caught on the way down. Quest phased state should not let unrelated players kill/reset the user's target or trigger other player's ejection. On successful exit record advancement/trial completion, not reset target due to success. Whether mentor hand-in is required for creating TierIII Assassin Lv1 manifestation is not explicitly decided; preserve normal Echo progression conventions.
+
+### Supersessions / status
+
+- **Round31** user-approved World1 Arborium mentor retired covert assassin, kill on top of guarded house, escape.
+- **Round32** user-approved West Residence, top-floor unaware quick target kill, return unseen. **Round32 recoverable guard investigation is now SUPERSEDED** by Round33's explicit instant eject upon guard noticing player.
+- **Round33** form's two alternating guards and quest-phased open-world use APPROVED, but proposed **5 seconds alert investigation window is explicitly SUPERSEDED** by simplified instantaneous catch/ejection behavior. Form's 'any guard alert after target death fails' clarified to any actual guard NOTICE at any stage = teleport outside; no distinction between warning and confirmed pursuit.
+- This mission is an intentionally EASY, THEMATIC Stealth-cooldown teaching loop. Don't reopen as a complex detection design interview or require multiple rounds on NPC LOS/guard counts; primary goal is reasonably implementable enjoyable promotion.
+- Pending ONLY truly necessary story decisions: retired mentor's daytime disguise/name, top-floor target identity/motivation, and whether mentor turn-in or auto class unlock after exit. Exact guard AI sensory range can be tuned during playtesting without forcing another design interview, so long as they reliably eject visible Thief and remain navigable under TierII Stealth.
+
+### Implementation design guidance (NOT authorization to edit game)
+
+Use existing `docs/ARBORIUM_GATES_AND_FLOORS.md` verified existing West Residence three-floor navigation and `ArboriumInterior` camera cutaway. Reuse existing normal TierII Thief Stealth state and cooldown (not TierIII version), and implement basic condition check for guards noticing an unstealthed actor. Quest-state pseudocode conceptually: Entry -> AscendHidden -> KillTarget -> EscapeHidden -> Complete; GuardNotice at any active state -> TeleportToExterior + ResetQuestTargetAlive + Restart, no new alarm minigame. Actual architecture (quest-phased actor visibility in shared live/open world, multiplayer instance separation) follows existing systems; do not invent engine behavior or claim mission live. TierIII Assassin initial Lv1 new manifestation available after successful pre-unlock advancement, per Echo progression.
+
+No changes to Assassin's approved six skill rank schedules or combat damage/timings: B=8+AGI baseline; each of two basic Physical packets .85B, full combined1.7B, nominal cycle2.5/AS and hit delay.3/AS; Stealth, Envenom, Backstab, Execute, CritMastery, ArmorPen remain as previously signed off.
+
+**DOCUMENTATION ONLY. DO NOT MODIFY UNITY GAMEPLAY CODE, NPCS, SCENES, ASSETS, TESTS, BUILDS, BRANCH MERGES OR DEPLOYMENTS.**
