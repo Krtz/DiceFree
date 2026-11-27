@@ -683,3 +683,60 @@ Let `r` be each skill's own purchased rank, `B` the class's total NORMAL UNCRITT
 5. **Execute target state** and animation telegraph: immediate vs windup and cancellation/refund rules (not implicitly approved by "time it").
 
 **DOCS ONLY; no Unity gameplay code/assets/builds/tests or branch merges authorized.**
+
+
+## Assassin Tier III Round 17 — 2026-11-27 USER APPROVES ALL FIVE EXACT RANK-SCALED MANA COSTS AND COOLDOWNS, EXECUTE 1.2S WINDUP; ALL DAMAGE FORMULAS AWAIT INDIVIDUAL REVIEW
+
+### LATEST AUTHORITATIVE USER APPROVALS
+
+User says:
+1. "**Approve 20+5r Mana, 35s cooldown**" for Execute.
+2. "**Approve Stealth 8+2r/22s, Envenom 10+2r/8s, Backstab 12+2r/9s, Critical Mastery 12+3r/25s**".
+3. "**Review damage formulas skill by skill before approval**".
+4. "**1.2s windup then one dagger strike**" for Execute.
+
+The EXACT numeric rank-scaled activation Mana costs and cooldowns are NOW USER-APPROVED, superseding the Round15/Round16 DESIGNER-ONLY labeling for these specific values:
+
+| Active Assassin skill | User-approved Mana cost PER CAST, purchased rank r | Rank1 Mana | Cost at user-approved rank cap | User-approved cooldown |
+| --- | --- | ---: | ---: | ---: |
+| Stealth, cap25 | **8+2*r** | **10** | **58** | **22 seconds** |
+| Envenom, cap30 | **10+2*r** | **12** | **70** | **8 seconds** |
+| Backstab, cap35 | **12+2*r** | **14** | **82** | **9 seconds** |
+| Execute, cap25 | **20+5*r** | **25** | **145** | **35 seconds** |
+| Critical Mastery hybrid activation, cap20 | **12+3*r** | **15** | **72** | **25 seconds** (earlier approved, reaffirmed) |
+| Armor Penetration, cap15 | PASSIVE, NO ACTIVE MANA CAST | n/a | n/a | n/a |
+
+- All cost functions are **Mana paid for one activation/cast**. Do NOT create extra per-basic-dagger-impact, per-poison-tick, or per-second Mana drainage not authorized. Passive Crit Mastery stat bonuses and passive Armor Penetration do not cost Mana to remain active.
+- Exact Mana resource formula stays globally `MaxMana=AssassinClassBaseMana+5*INT`, `naturalRegen/s=4+0.1*SPR`, Assassin BaseMana100, Lv1 stats VIT22 STR10 AGI35 INT10 SPR5 and per-class level VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8. No-gear Mana Lv1=150, Lv12=194, Lv60=386, Lv150=746; regen/s4.5/5.38/9.22/16.42 respectively, before rounding. The five MAX-rank cast costs total `58+70+82+145+72=427` Mana, ~57.24% of no-gear classLv150 pool746 if all cast once without intervening regeneration; theoretical resource check, NOT playtested balance. Execute max-rank Mana145 alone ~=19.44% of no-gear Lv150 pool. Execute must feel more expensive and longer cooldown than regular abilities; these values now enforce it.
+- For four first-mentioned skills (Stealth/Envenom/Backstab/Execute), user approves NUMERIC cooldowns but has not separately specified the detailed cooldown START event, refund/interruption handling, and any GCD interactions. Retain existing engine-standard behavior until separately designed; do not assume these details follow from approving seconds. Critical Mastery cooldown **starts immediately on activation**, already user-approved Round9.
+
+### EXECUTE PRESENTATION AND WINDUP NOW USER APPROVED
+
+- **ONE 1.2-SECOND WINDUP, THEN ONE POWERFUL SINGLE-DAGGER STRIKE** as Execute's attack sequence; not instant, not 0.6-second windup, not two dagger hits. The 1.2s is the pre-impact windup (subject to game's existing animation timing integration) and the actual damage resolves on strike impact. A 35sec cooldown and more expensive 20+5r Mana reinforce deliberate timing.
+- Execute remains **usable at ANY target HP**, with damage continuously increasing against targets with higher MISSING HP. It is **AGI-ONLY PHYSICAL skill scaling** by existing class rules, NOT a guaranteed-critical basic attack and DOES NOT consume hybrid Critical Mastery guaranteed basic crit charges. Its position/facing and Stealth opener eligibility are not expanded from earlier approvals without user agreement.
+- **NOT YET DECIDED:** cast interruption by CC, movement and target death/LoS; whether Mana is spent at windup start or on successful strike; refunds on interruption; whether cooldown starts on cast start or successful resolution; whether cast is canceled when player changes range; attack-speed effects on windup; exact animation asset/VFX. Record as open rather than silently finalizing those behaviors.
+
+### DAMAGE COEFFICIENTS: USER EXPLICITLY DECLINES BULK APPROVAL
+
+User says "**Review damage formulas skill by skill before approval**". Therefore ALL prior Round16 damage functions remain **DESIGNER PROPOSALS, NOT SIGNED-OFF DAMAGE NUMBERS**:
+- Stealth opener `1.10+0.03*r` (rank1 1.13x, rank25 1.85x), to review FIRST. Approved regardless of coefficients: BOTH hits of first two-hit BASIC sequence breaking Stealth receive opener multiplier; when Backstab breaks Stealth its opener stacks with qualifying side/rear positional multiplier. The opener is consumed once for the triggering attack/sequence.
+- Backstab base packet `B*(0.90+0.07*r)` and eligible side/rear270deg positional multiplier `1.25+0.02*r`, multiply by Stealth opening multiplier if that Backstab is the qualifying Stealth-breaking skill; review SECOND to ensure rank35 positional burst is reasonable. Backstab usable from every angle; front90deg NO positional bonus.
+- Execute missing HP packet `B*(1+0.09*r)*(1+(0.30+0.03*r)*missingHPFraction)` is candidate only, not approved. This packet would hit after its new APPROVED 1.2sec windup; review skill damage AFTER Stealth/Backstab if preferred.
+- Envenom candidate immediate Physical `B*(0.80+0.055*r)` plus total Nature poison DoT `B*(0.25+0.03*r)` over current inherited tick behavior, candidate only, not user-signed-off.
+- `B` = total raw UNCRITTED NORMAL two-dagger basic sequence attack budget before target mitigation; two impacts are each0.5B with 0.3sec separation, one sequence every2.5sec. Actual normalization B(AGI,dagger stats) relative to global Thief auto formulas remains OPEN. Do not falsely treat proposed skill damage coefficients as approved simply because all Mana/CD values are now approved.
+- No poison tick Mana drain or extra basic crit grant is added by the damage review request.
+
+### Skill and progression identity remains unchanged
+
+Four pure actives Stealth25 / Envenom30 / Backstab35 / Execute25, hybrid CriticalMastery20, passive ArmorPen15, total150 purchased ranks / one per Assassin classLv1–150; first unlocks Stealth1 Envenom2 Backstab3 CriticalMastery5 ArmorPen8 Execute12 LAST. The entire exact level-gate schedule was **USER APPROVED Round15** (full table in that section). Pure AGI-only melee dual-dagger physical offense, deliberate two-hit 2.5sec basic sequence with two equal0.5B strikes separated0.3sec, Stealth opening burst, side/rear270deg Backstab bonus stacking with opening, Envenom physical stab+Nature poison, Execute continuous missing HP. Stealth rank-based concealed movement `(r-11)%`, Armor Penetration +1% target PDEF ignored/rank on basic attacks and Physical skills. Critical Mastery passive +3AGI and+1 percentage point basic crit chance/rank, activation grants basic-only charge count2/3/4/5/6 (rank milestones1/6/11/16/20), charges expire death/logout/class switch or refill/replace on recast, only successful basic dagger hits consume charges even if shield-absorbed, misses do not. No extra Fan of Knives, Smoke Bomb, Expose Weakness or separate Guaranteed Crit active.
+
+### Next Round18 skill-by-skill review (NOT user approved yet)
+
+Start with **STEALTH** damage opener and avoid asking approval for all skills at once. Discuss:
+1. Proposed Stealth opening damage multiplier `1.10+0.03r` (r1=1.13x, r25=1.85x) vs stronger/weaker rank curves. Its value is determined by STEALTH purchased rank, separate from Backstab ranks.
+2. Does Stealth's opener apply to Envenom direct stab and Execute, or exclusively first BASIC sequence and Backstab? Any Nature poison DoT excluded unless user explicitly asks.
+3. First-hit basic opener BOTH impacts stay empowered, and Backstab position multiplier still stacks; review whether this multiplication creates expected intended burst.
+4. Stealth duration and breaking conditions versus existing TierII parent. Existing movement `(r-11)%`, CD22s and Mana8+2r are LOCKED.
+5. After Stealth user approval, move to Backstab direct/positional rank curves, then Execute/Envenom one at a time.
+
+**DOCUMENTS ONLY. No Unity gameplay code/assets/scenes/builds/tests or merges.**
