@@ -916,3 +916,40 @@ Then user explicitly overrides the interval/damage PER TICK: "**i think maybye d
 5. Later **Execute damage** missing HP curve, interrupted 1.2sec windup/refunds, etc. Do not ask to re-decide already-locked Envenom 0.5s tick damage.
 
 **DOCUMENTATION ONLY: no Unity gameplay code/assets/scenes/builds/tests or branch merges.**
+
+
+## Assassin Tier III Round 22 — 2026-11-27 USER APPROVES BACKSTAB BASE DAMAGE, CONSERVATIVE POSITIONAL MULTIPLIER, TARGET FACING SAMPLED AT HIT IMPACT
+
+### AUTHORITATIVE LATEST USER APPROVALS
+
+User provided:
+1. "**Base Physical damage: B*(0.90+0.07r), max3.35B**".
+2. "**Side/rear positional multiplier: 1.15+0.01r, max1.50x**".
+3. "**Target facing evaluation: At hit impact**".
+4. "**Computed max-rank side/rear raw Backstab with max Stealth: 11.809B**".
+These are EXPLICITLY USER APPROVED, not mere designer recommendations. They SUPERSEDE Round16 draft positional multiplier `1.25+0.02r` (max1.95x), while APPROVING its proposed base direct physical coefficient `B*(0.90+0.07r)`. The coefficient `B` remains the RAW uncritted total ONE full two-dagger BASIC SEQUENCE damage before target mitigation, comprising two basic packets of0.5B at0.3s separation in an overall2.5s cycle. Actual B(AGI,dagger stats) normalization versus TierII Thief and shared engine damage conventions still pending.
+
+Let `rB` be Backstab's OWN purchased rank1..35:
+- **BackstabBasePhysicalDamage(rB)=B*(0.90+0.07*rB)**. r1=0.97B, r35=3.35B, each rank adds+0.07B. Single BACKSTAB physical skill hit, not two normal basic packets.
+- Facing measured relative to target's FRONT-90-DEGREE arc **AT THE ACTUAL DAMAGE HIT IMPACT**. Within frontal90deg, **positional multiplier=1.0** and Backstab is STILL usable; within enemy relative SIDE+REAR combined270deg, multiply base physical damage by **`BackstabPositional(rB)=1.15+0.01*rB`**, r1=1.16x, cap35=1.50x. This supersedes earlier unapproved max1.95x alternative. No extra distinct rear-only multiplier; entire side+rear270deg shares identical bonus. The attacker/target relative positions at impact, not button press, determine eligibility; if target rotates or attacker moves before strike lands, evaluate at real impact.
+- **Approved existing Stealth opener** when Backstab is FIRST qualifying attack out of concealment multiplies its Physical Backstab damage by `1.10+0.05*rS`, where `rS` is STEALTH purchased rank1..25, max2.35x. Side/rear multiplier and Stealth opener stack MULTIPLICATIVELY; the Stealth opening bonus is consumed on the attempted Backstab EVEN IF MISS, per Round18. If Backstab hits from front, it still receives Stealth opener but NOT positional. Nothing here grants auto-crit to Backstab from BASIC-only Critical Mastery guarantee, and Backstab has one attack/one Envenom proc when coated and connects.
+- Rank35 side/rear without Stealth: `3.35B*1.50=5.025B` before mitigation. Rank35 side/rear with max-rank Stealth: `3.35*1.50*2.35=11.80875B`, custom user-supplied rounded **11.809B**. Rank1 side/rear without Stealth `0.97*1.16=1.1252B`; with max-rank Stealth `1.1252*2.35=2.64422B`. These are raw potential outputs, not playtested damage guarantees. If comparing Backstab rank1 with Stealth rank1 instead, use Stealth1.15x not2.35x. Envenom bonus Nature proc `B*(0.08+0.006*rE)` on successful coated Backstab is IN ADDITION and not included in these Backstab Physical products, never automatically amplified by Stealth physical opener.
+- **Approved Mana cost `12+2*rB`**, rank1=14, cap35=82 Mana, cooldown **9 seconds**. No additional ability, power-up resource, positional condition that prevents cast, or new cooldown was approved. Whether physical skill hits can naturally crit under existing combat rules remains governed by actual shared engine/other skill conventions, NOT by Critical Mastery's guaranteed BASIC-only charges.
+- User approves check AT HIT IMPACT, but does NOT specify Backstab ability animation/windup duration or cancellation/refund, nor boss turning/lag compensation mechanics. Preserve actual global rules, do not invent them. The user-approved Execute 1.2s windup is a DIFFERENT skill and should not be copied to Backstab by default.
+
+### All previously approved rules retained
+
+- TierIII Assassin Lv1 VIT22 STR10 AGI35 INT10 SPR5, per-level VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8, ClassBaseMana100; shared MaxMana100+5INT / regen4+0.1SPR. AGI-only attack/physical skill stat scaling; dual one-handed daggers, normal basic 2.5s cycle with 0.3s between exactly two equal50/50 physical hits.
+- Stealth rank25, concealed duration6sec at rank1 ->15sec rank25 (intermediate interpolation still open), concealed movement `(rS-11)%`, first attempt opening multiplier `1.10+0.05rS` on ONE two-dagger basic sequence (both impacts) or Backstab only; consumed even on miss, Mana8+2rS/CD22sec.
+- Envenom now an ACTIVATABLE weapon coating buff on BOTH daggers (former standalone physical poison stab RETIRED). Self coating duration user-approved `8+9*(rE-1)/29` seconds, rank1=8s, rank30=17s, governed by OWN Envenom rank independently of Stealth rank; Mana10+2rE/CD8sec. Successful basic hit per packet and successful Backstab hit (NOT Execute) each deal bonus Nature `B*(0.08+0.006*rE)` and apply/refresh ONE nonstacking enemy Nature DoT,4sec lifetime, **ticks every0.5sec** for `B*(0.0075+0.001*rE)` per tick (cap0.0375B/tick), refresh expiration without resetting half-second tick clock. Recasting coating refreshes one buff without stacking; activating while concealed preserves Stealth and opener. Poison Nature packets/DoT don't automatically inherit the direct Physical Stealth multiplier.
+- Execute rank25 ALWAYS usable on any enemy HP, raw physical damage increases CONTINUOUSLY with missing target HP and skill rank, 1.2s windup then one dagger strike, Mana20+5rX/CD35sec, no Envenom coating proc, numeric DAMAGE coefficient still **DESIGNER PROPOSAL NOT USER APPROVED**. Prior candidate `B*(1+0.09rX)*(1+(0.30+0.03rX)*missingHPFraction)`.
+- Critical Mastery cap20 hybrid passive +3AGI/r, +1 percentage point BASIC crit chance/r, active BASIC-only guaranteed crit charges2/3/4/5/6 by rank breakpoints1/6/11/16/20, Mana12+3rC, CD25sec immediate on use, charge lifecycle rules as prior rounds. ArmorPen cap15 +1% target PDEF bypass/rank on basic and Physical skill direct damage, not Nature poison.
+- All six skill caps and EXACT 150 class-level rank eligibility gates fully USER APPROVED Round15, first unlock Stealth1 Envenom2 Backstab3 CriticalMastery5 ArmorPen8 Execute12 LAST. No gate changes.
+
+### Round23 NEXT skill-by-skill design recommendation (NONE yet USER APPROVED)
+
+Move to EXECUTE ONLY, whose **numerical damage coefficient still OPEN**. Proposed candidate:
+`DamageExecute=B*(1+0.09*rX)*(1+(0.30+0.03*rX)*missingHPFraction)`, `missingHPFraction=clamp(1-targetHP/maxHP,0,1)`; rank1 at full target HP1.09B; cap25 at full target HP3.25B; cap25 missing50% approx4.95625B; cap25 missing100% approx6.6625B; missingHP multiplier scales at each rank and is CONTINUOUS, no threshold. Contrast stronger high-commitment options against approved huge Backstab+Stealth side/rear max11.80875B; Execute's 35s cooldown, rank-scaled Mana up to145, 1.2s windup and no Stealth opener/Envenom proc imply its risk should be reflected in expected damage. Offer balance choices for Execute base coefficient and missing-HP coefficient SEPARATELY, plus windup interruption/cost/refund timing if desired. Do NOT silently claim old Execute formula user-approved or change user's locked numeric costs/CD. No extra Execute crit guarantee from Critical Mastery.
+Possible additional question: confirm linear Stealth interpolation `6+9*(rS-1)/24`, but only if needed after Execute damage.
+
+**DOCUMENTATION ONLY. No Unity game source/assets/scenes/build/tests or merges.**
