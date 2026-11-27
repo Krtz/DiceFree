@@ -116,3 +116,42 @@ Assets/_DiceFree/Resources/Audio/IronpineLicensed/
 # Local noncommercial dragon preview model and textures.
 /Assets/_DiceFree/Art/Creatures/AncientRoadDragon/
 /Assets/_DiceFree/Art/Creatures/AncientRoadDragon.meta
+
+# Generated references and derivatives of the user-owned local VFX packs.
+/Assets/_DiceFree/Resources/AssetLibraryLicensed/
+/Assets/_DiceFree/Resources/AssetLibraryLicensed.meta
+
+# User-owned imported source packs; catalog/recipes are tracked, raw packs stay local.
+/Assets/100BestEffectPack/
+/Assets/100BestEffectPack.meta
+/Assets/48 Particle Effect Pack/
+/Assets/48 Particle Effect Pack.meta
+/Assets/AC Little Enchant Mesh VFX/
+/Assets/AC Little Enchant Mesh VFX.meta
+/Assets/DefaultNetworkPrefabs.asset/
+/Assets/DefaultNetworkPrefabs.asset.meta
+/Assets/Eric VFX Studio/
+/Assets/Eric VFX Studio.meta
+/Assets/GUI_Parts/
+/Assets/GUI_Parts.meta
+/Assets/JMO Assets/
+/Assets/JMO Assets.meta
+/Assets/KoreanTraditionalPattern_Effect/
+/Assets/KoreanTraditionalPattern_Effect.meta
+/Assets/Matthew Guz/
+/Assets/Matthew Guz.meta
+/Assets/NamuFX/
+/Assets/NamuFX.meta
+/Assets/New Terrain.asset/
+/Assets/New Terrain.asset.meta
+/Assets/SpellBookPreface/
+/Assets/SpellBookPreface.meta
+/Assets/Spells Pack 2 Free Version/
+/Assets/Spells Pack 2 Free Version.meta
+/Assets/Tazo_2D/
+/Assets/Tazo_2D.meta
+/Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/
+/Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion.meta
+
+# Local Python inspection caches.
+__pycache__/

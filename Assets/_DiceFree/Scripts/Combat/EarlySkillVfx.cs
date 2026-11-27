@@ -83,6 +83,8 @@ namespace DiceFree.Combat
         private static void Spawn(Cue cue, Vector3 point, float range, bool editorPreview)
         {
             if (!Application.isPlaying && !editorPreview) return;
+            bool telegraph=cue==Cue.PhysicalArrowArea||cue==Cue.MagicalIceWarning;
+            if(!editorPreview&&!telegraph&&AssetPackVfx.Impact(cue.ToString(),point,range))return;
             bool magic = cue >= Cue.MagicalSand;
             bool physical = cue >= Cue.PhysicalHeavy && cue <= Cue.PhysicalArrowHit;
             bool area = cue == Cue.PhysicalArrowArea || cue == Cue.MagicalIceWarning || cue == Cue.MagicalIceImpact;
@@ -201,6 +203,7 @@ namespace DiceFree.Combat
 
         public static void PlayHolyLight(Vector3 origin, Vector3 impact, bool healing)
         {
+            if(AssetPackVfx.Impact("Holy Light",impact,.8f))return;
             var root = new GameObject("Skill VFX - Holy Light");
             root.transform.position = impact;
             var tint = healing ? new Color(1f, .94f, .56f) : new Color(1f, .63f, .22f);
@@ -215,6 +218,8 @@ namespace DiceFree.Combat
 
         public static void PlayPriestPulse(string name, Vector3 point, float radius, Color tint, bool impact = true)
         {
+            bool asset=AssetPackVfx.Impact(name,point,radius);
+            if(asset&&impact&&radius<=3&&!name.Contains("boundary"))return;
             var root = new GameObject("Skill VFX - " + name);
             root.transform.position = point;
             CreateRing(root.transform, tint, radius, impact ? .10f : .055f, impact ? .60f : .37f, true);

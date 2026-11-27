@@ -1,0 +1,897 @@
+[
+  {
+    "path": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Shader/AdditiveFlow.shader",
+    "sha256": "09CF6FE34FF2895BA1E7D026919E9B95AC2CE082AB44B7A23554B4A04E7BAC71",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Art/MageVfxVendor/Eric/Eric VFX Studio/Resource/Shader/AlphaBlendFlow.shader",
+    "sha256": "B837E362EB7E4DBC9CF902D3A70A348C89F8B963B17B55F0DFFCFAEDFD2BD0B0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Coffee.prefab",
+    "sha256": "E4D745A4A32D44A8D850F0AC1646D5AF075DAE8D3790BF6926E5E753EFA6FF49",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Defender.prefab",
+    "sha256": "52D0493C0EABAE02A51A65661B4A9E43AC2EC978D1E123E9E434495C3E7F6A4D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Elements.prefab",
+    "sha256": "7DC4F476678EA08394DC55E8913E364346882B188F619CF13535C4370210674D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Frost.prefab",
+    "sha256": "0FE7A6ECA076225EF7CF03B6CA3C500B4713790D82CC6134620B0BED0C6BC380",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Infernal.prefab",
+    "sha256": "48E1FCA571D60F59D1352ACC89B98F1D0C3AD13DB3F0B8DC23BC90028BAE2726",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Mana.prefab",
+    "sha256": "B422F1D22D2AC98CB9B6510DC367FE1BC14BED3F24CF210D38EC640B9580679A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Radiation.prefab",
+    "sha256": "3A71F38460E3822847491CD610DBE4927707E3AA1FAA48A478BC123EBF7875DB",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Ranged.prefab",
+    "sha256": "2D8AFE3E19C10D8ECD91A4F3925B24EB309FE09C9D3F7D5BC253CAF28D8A3BEB",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/aura-Speed.prefab",
+    "sha256": "4B38CFFD9B43C45CDDC78A09EF6AC154466047EE637EE8709EBD92EF5093165A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-arcane.prefab",
+    "sha256": "93B9A0040FA4F6491B6F3085D9E7F70C6E262972014BCBE0A46D44E0EA6266E5",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-buff.prefab",
+    "sha256": "C706A3F04486676114B472DBF0FED454FCB62939880797F5C61842119653DA75",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-dark.prefab",
+    "sha256": "BD64267B30FC855A3038F49245AA3B8519178DA048769E65BA8FF5C14921ABA0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-earth.prefab",
+    "sha256": "F58A44CDAD120A6617C710D69E23DE6EADCDA7AD3CAAEBD26CC9E2E4E6942F2C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-fire.prefab",
+    "sha256": "ADB072309B2DD21F33D2291B00634C71BB0A7B281E80504C3D4393D3FE2A5587",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-holy.prefab",
+    "sha256": "93DC843BF58B18F9B8708E42349501A973CFD63194AFAB7BFA78A50C90765536",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-ice.prefab",
+    "sha256": "69871677B24A0D493EF26315E80822F218C0403DC5A1F8091D02009DBD4D6C3B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-lightning.prefab",
+    "sha256": "9B32F1C835A084BB04A7AB6A22BE615737FB1410F3798CB10C43CA6C0BF72853",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-physical.prefab",
+    "sha256": "C18EF4BC74C08E4D5336755137D741311F29C74D4607C9C38382DB2E4DFCC12D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/cast-poison.prefab",
+    "sha256": "3039768F54B78A63B1D6BC2F9BE9A71C5B2B68CCC08282E0FB8C7410CE6BB75D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-arcane.prefab",
+    "sha256": "DF534499199D938869B9AE8D3BD2EC0A6AD7083C3DB7162D9852B9088F4F0ED8",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-buff.prefab",
+    "sha256": "79D8FE836B6BC640D39CD487C2B7DFB2277CAB281A01D96CAC73552C8748071A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-dark.prefab",
+    "sha256": "B4742E22C2972A54C63A73218591D2A184EBF206C4157AA09C79550C766CA304",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-earth.prefab",
+    "sha256": "9F1E9106E7C0EB125F65DBF97DF1533DADD7A6E5FC2F7D43E0C79E126CEAFE8B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-fire.prefab",
+    "sha256": "9CE962A6943F4B20169C6F2DCB04DA1C9F025E0D02D70EE1892CD4F43ABA8DAE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-holy.prefab",
+    "sha256": "B46D0034C68590B56C5E35157F2E39D35470BDD0779BCD73D1EC7DAFECCF3C19",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-ice.prefab",
+    "sha256": "3C74D56BF92E760D150C55FAB7CCDEEB67001353427BD259EAB8F6B0E2CBF54F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-lightning.prefab",
+    "sha256": "C8F4CCBC3F68E8219FB765472BC47582EBDED8D3E0235D1FCBEE89B32D658D70",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-physical.prefab",
+    "sha256": "41DE16717A2FA40EC890AA5F86BC57E279FEF6591A075ECBB14E46D4729D20DE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/impact-poison.prefab",
+    "sha256": "4CA242150450A52D313368783CD6565415BBD9990EB3BB4F378D98B94BDB42A1",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/044d1c9bf3b4355459c3079459a70d4e.mat",
+    "sha256": "2F9839C3612FA9E31AEC85642D9D64E0EB4EA45BB1709B53C4617AC3418699AE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/08081e74cb46c1e4bb077d4f15fe9cb6.mat",
+    "sha256": "C3FA1415E44E3CBD2E5CF890D46ABD85BBA7185D8282E3FFFF93F4A9C7A08AC1",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/0b9538905bb93e444ba09d2b0952d47a.mat",
+    "sha256": "5B1066D47D6C38D33A0B88EA93F17EC3C0E5B743AC2948DD4308A8FA318457FA",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/0bb5d0446c327b34da78585b2db218af.mat",
+    "sha256": "CD1515E73DEB7D75EBE376748FE9A4D234788C011DBF7661329F21762A004587",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/0bf2cc9f58210eb4a876f80e0fe8c8ce.mat",
+    "sha256": "0D81426721509541055C4F4A185DAFD6F35B3C6DB92F7FE032BD3DCE202D8F79",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/0c178436a6f402d48b4b575f7b078e19.mat",
+    "sha256": "DBECB7011547DC4873859E5B263F58A4F73C3ABBA6602F5C2B116DBE6AC0818B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/1068a574f6664ef4483fefd24fb99c19.mat",
+    "sha256": "F4A20296F7FBB0CB5F00870ED531F8CA1AACB8542B1D10456D308EBDAD516FB0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/180996306384fb1428de6a0566b95e31.mat",
+    "sha256": "ACEE4D264229C7EC214EBD0BD3DCCB18A6A7C9291172F6DFB87AA64ADFB135CE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/1aecc33e9b643e843a972282553ab190.mat",
+    "sha256": "C9D7460854B4479DC4AAF99060258F84462C24B8A931B593AC9090652599D2D9",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/1b05372e720b97d49b7e4394a0ce2701.mat",
+    "sha256": "6AB5434A6B8693720ABDC6B76D5219BBAAC52DCF008CE6F1221F301E4B88C390",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/200863d9aae9f404a8d2f5e21cde127d.mat",
+    "sha256": "C61C1DB5DA44B3D0C92B6192458C692EB2662D8E660996B3E8636B16FE13ADD5",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/212cfec5d4a38de4faa1e109a4c4a292.mat",
+    "sha256": "C23DB79885A4F306B286A7A2B8B9E0D2FB3800B0108FA36B5EB11A952555195F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/22c92127b932bd24889977904c1773ad.mat",
+    "sha256": "CB73EDA386D2729CAB0494F3E56B2BD856E70929FE39F6F2BAE63AF8A0335AD7",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/244feabb41c759249b8fabd408549530.mat",
+    "sha256": "9890D941FAC625FC7D64F29F1B1BFAE4B66A3124A47FF181065A38CB86B54D35",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/33e1ab10739063342b39d216c0af3779.mat",
+    "sha256": "44C515AC38E52AED9D9CEB7F49B4D8A012D412F41FC65F30F3D163EE79DB45A6",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/3a34d33310dafb848ac09c7fa559a5ab.mat",
+    "sha256": "B10BAAA5000036C91FF49C4A543AA7221B46C6C45AA081EF61963EB75B8AA66B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/3a750e8e63efcb340ac5af2fa2e95e04.mat",
+    "sha256": "AA49CE9667FBA9CC627DBC13EFA9862B32F6F53A3EF316C143A8340608688429",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/3aca017ba5bc84249be2ac479c19c4b7.mat",
+    "sha256": "A0033E40E2C4F391040507E943BDCD710C06AECB053403DCDB91E4690F8532AE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/3f15983dd7be9bf46b53e05243da1f91.mat",
+    "sha256": "FADA7B76F6A320C1A2685BC88172727F2069B7B208F834DB2902133B8EDD16E0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/4405d7fac17ce7b4b9d958d18d396e3e.mat",
+    "sha256": "29BDE5ABA99950434DE147902D0C7B8121A9146A679ABF90191D0178AE72290D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/472a9d23b5182b34ba35a9fc71640f79.mat",
+    "sha256": "9129CD000BF358A3EBE0A3736A2CEA13324116C8BCF73FB9B7170B5C9DF0CD04",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/478b0d4b7cf75dc4f8e2b9adb51973f5.mat",
+    "sha256": "1ECFF94EA911606AB65B78190588701F377BED0731C8CD94E95721A0A1FAC881",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/4af8c190e30ce434f8b1f934b8e5a514.mat",
+    "sha256": "516B5E0FC710074936DADEF5A732F66E1917932DD7A87AC56C237386EFBF76C9",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/4eeaa2c21cdb80248adf892b8cf534f8.mat",
+    "sha256": "B4C2E8E86A3D94EC0E5B1BAFCF1A7434D98C1508F10234675F4895F7BA776B2B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/51063487d35ad004ca025ed7377935e2.mat",
+    "sha256": "3C64E2869FE66DF6938706442FC5A1EB15E377FC308871F468718EA5A2C16327",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/51189cc35d6fea34bbde603f8324727b.mat",
+    "sha256": "6D355F0EB4BF1AC4967EA1218F1EDDDE757D8B125F70021BB3CB316B4349E29F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/53ea6e0a0e2964e479569bf216af53a1.mat",
+    "sha256": "EC716B59B569DABED9FD56B8E1E686DE4EB9F4391251503F976E9C3DE965A674",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/553f8cb368499034188dc247292c2186.mat",
+    "sha256": "B760FD9B0BE0E3857DD585C0D8EA0F1708CD739CEA9C39931ED45F5BF12324E2",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/5609bbeba3f7c9c41b410f7f75d3cd6b.mat",
+    "sha256": "0092EA22DAD3AF08B787BC5EC1FE0615FF704A8DD65555A63229E09B9F0D7614",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/5c5e93482f6d40349819cd040d33bce6.mat",
+    "sha256": "8D25A6330383596F698406CEF961BD2B2CC5BDD87E77071AA8DD386C0CD06983",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/614abdf288157aa43a8ddd6e90c9790e.mat",
+    "sha256": "530CBD1B4B12E6D78FE6B335FEB98598F0C5D298016347BDD92D2048806FD74E",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/631ce5855a6156249a32a2b63a60528d.mat",
+    "sha256": "9545FB35D47D51EC5AA00CA7780677AE4C2B032A8D6C208B76C05119C14AA580",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/66a5482fc9bf7c14aaea6c0932592c49.mat",
+    "sha256": "42866F3D5D0E5C386360A22F46B83332F62A220F842FDCC2D3D5386B6635F95E",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/68cfab634d7d8d24685f73f1b1df70ca.mat",
+    "sha256": "36EE54DD3C45308DD4F005F2F2C9878A09DE5F1CA28548D9C3B873F6EDB174F3",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/7b45dd877a8e73a44bbd55af1e6a6c13.mat",
+    "sha256": "B767F34E040960504EC001A2FBF473CAB01BD91298875D1B2C2BEA52E305A4F2",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/7ba5b2dbef5b6584586f714e4f6bea71.mat",
+    "sha256": "02ADAFA78168D543F306304EAEF083D576782F6885EBC105982E4B93FB44BFC3",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/7dc98504d406961499e0c78cc13476dc.mat",
+    "sha256": "AF8075F7F1A755DD271DA70CA2EB9E35748192F23A660764628B90A03C97FB6C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/818450d0efd25cc46be43b3e74d9dda2.mat",
+    "sha256": "4C9182C2AB901EB9C56B4A4C269783495BEDCED8F85559111F5CB260C5D43E94",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/880fc44a81ddc1242a04a26105bbc51d.mat",
+    "sha256": "B79020EBC16C70D91548BEB16210E0D52747D520E08B64192644A79915813948",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/8989979157ed9e04bb4163dd514e47c4.mat",
+    "sha256": "5308160140B0A13A39DB1B292D0124ADEE7A7CF961EABA748CBA45C864FA7B71",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/8b00314a9268e874e968bfebc203f071.mat",
+    "sha256": "9B9040FF86B42AE3FE230E9EECEA728AA37BD428FD6CE90A0704097CE756CC14",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/8d5eeb8412db8554fa7a96b7536f2ac6.mat",
+    "sha256": "14EA6A295C24A7A5BDD6450245A4CCFCDACD28F6DC05F7B524B3869AD5D9D44A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/8e58fa2a9f3065e4bb387839e8947880.mat",
+    "sha256": "F5965487D48BC9C26923BC172484C7263AEB3CAFB5A667064F461F81F92B157C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/919652e4a2fabb340a94256568c21c87.mat",
+    "sha256": "705C76F691F7814BD327A20024DEB0CE1F1603D0FE98E6DFE1EF3449CEAE67C6",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/93c21579d1d87b7468ff64089d2b175a.mat",
+    "sha256": "5DF8CB4D6E06CD458A5E6436A552D16670ACE01148D2F7D44C27B9FCB31C0C45",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/9623a218945d87d4fb2009329cb60dfb.mat",
+    "sha256": "46D8F95E32CBC786985C6B12556177F15C4C42CC748111D61F629001D532DB62",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/9dded56e61a5cbd49b8c8977e555bb4a.mat",
+    "sha256": "8D01E154EE655C50C5AAD90E75E8BCE473C8BC9F5684EAA37D1B5012BDAECF26",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/9e998826258841e4e871236681197004.mat",
+    "sha256": "CAC05DCF5CA839029ECCD462522FB606B1CF8A020282D1C63AB82561605ECCB4",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/9f9892a3888011e45baf9826aebd03f7.mat",
+    "sha256": "E71AC9492757578FABC36F28C09D47840805817253149A73AFB36B0FBAB81D3F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/a012eb1087e045f4aaadc8aeb5bee88f.mat",
+    "sha256": "2FBBF5DCE63C7375336B0320619A83F5DE0D5D534131058C5BC3F40ECED4C5F6",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/a3e0c753be4599f48b45cf55634317ee.mat",
+    "sha256": "C51F454C0E7CF3C84FA91951E06D02FF7068D3BEBD4E217071D3F1081EF34687",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/a8ea91a4040fbb543ba0920561a173fd.mat",
+    "sha256": "2E8826FFD46D1125E8FB3C70877E48C3F322CB2D593E37D2A9E54C16936EF030",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/ab5fd4823df47e7499a3d8783d5caa48.mat",
+    "sha256": "CE3FA02235E38DC30E7FF551CC3C719D9260D1E05B9C3AC9B429B5FD571B3E0E",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/b4c954b419e2c60478e8f6cbc728f2b5.mat",
+    "sha256": "A94440D598BA96EB86CB824A153BA9DEA799BFD1FA3497E72E48D1E0C4416084",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/b78c7a7b5527f814ca2ca37d3579b159.mat",
+    "sha256": "AE1D418BE2C55853A9FD417E709E050D9DBFCA3A7C9763D59D10FA86412BB9C5",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/b7b84484bddea4049a1b128d91810ce9.mat",
+    "sha256": "924D9EF53AD8BFF211C6C8754CEC64E1B6CD9D8E5D05510746B0AFDB6372DCF6",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/bbc8af7c354d884439c6a841fd25b01a.mat",
+    "sha256": "7A3D7566C7DC81D0076DF0EC1C8C1095C14416C425EFAEEB78D7B93AF35E1AC1",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/bdf61c3da3a275e49b07d625ffca2587.mat",
+    "sha256": "39FB0B25E4011B034A976FC9BBC2004983A229513B4E93D2C93E6C42DDEA28DD",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/be32ed50c0429014a8537d5454b3db5e.mat",
+    "sha256": "C889534E912A12C6FF6E168C0397DB95AF1A1095E22846B76C120D036066D06D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/c53e0b98bc680134686941cfa6dd2d66.mat",
+    "sha256": "9E60FA5797A295985218DA11E5B1E4AD7E36C7E732BDFE99AFFCB56E5D75E312",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/d74360f931fd3f24fa8ee0e81c2ba052.mat",
+    "sha256": "305FF224B326AF06278FE87A16148F13AF58089F5C0CC45063372E958572659F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/db4112cc1e0ed0b45bc0e40b35cae93f.mat",
+    "sha256": "B84AB48A12CCA48E83B7CF4B850CE6A737059C165A95A2CCE3BAD6AA8429EC28",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/dc2b93eb64668aa458b09ee9d9de5626.mat",
+    "sha256": "4BEEC4A3A226AF520277EFE17B6AC08069B881EE72A53037147216B18AF2DA93",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/df97821ad4ad1854daa164956e4d8093.mat",
+    "sha256": "3062C206394237E7CD6935E75A12A9CF369DC2B83BB20B11EAD48C2DDF3685D8",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/e823cd5b5d27c0f4b8256e7c12ee3e6d.mat",
+    "sha256": "74601B80BA6A409CD55C9E4F4222551ECA5F0F5969D58B9728BF3FCA0C00EEB5",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/efbd95e6fd9a1ba49ac92153a76a415e.mat",
+    "sha256": "DCAAE5DD86671C0D80A13FDB6ADF29555382A0D24FFF74904982366712D244AC",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/efe86629e5f10fb42ab33c7f168ff8a9.mat",
+    "sha256": "79C1E74C3473E6C95552EF43A0404357AB74AE8343D7B8E86FE5FC4431C5795A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/Materials/f246a2c11fbf55d4abcbb2fda282a0ae.mat",
+    "sha256": "FB49C7A3F7D2BC366A03D72536394C456C5C977CAC836186D6473B8A6D3A6462",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Resources/AssetLibraryLicensed/VisualEffects.asset",
+    "sha256": "ABB7873BA1E50FEBE20138A7A26CC1234270F8D159D5B91AC5ED84B45C5E587A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/AssetPackVfxLibrary.cs",
+    "sha256": "945D00BD822ED33355BB6CEC10CA3D75A35DCD438DF9E900A202D545E8606D85",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/EarlySkillVfx.cs",
+    "sha256": "B3E7106FBE62D62B17F217C243F24C52B7A4C99767A54CB0DEB55D13B29D072F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/FireMageVfx.cs",
+    "sha256": "A3473B994D7B629C5EF19AF71CD0B8840D2CAE6AC5CAE81D30C77D611F4F3E90",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/Combat/GroundAuraVisual.cs",
+    "sha256": "444B5B52C953F602C3D236BE3F2CF666C7C42600138E1B4BA55F3ABA77925FFC",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs",
+    "sha256": "9BEF06A8341D08EED365E4BF877DA424556BEDA99DC9C0B5BA3128A9794EDCE3",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/ParticleEffect_Shader/Additive/Shader_NormalAdditive.shader",
+    "sha256": "16B7C786911B7DA2D4022C400CB428B0D52A3D6171D519ACDE2595760F6FF3CD",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/ParticleEffect_Shader/Alpha Blended/Shader_AdvancedAlphaBlended.shader",
+    "sha256": "5F48987C03266D685D7CE535F4B12A92AC62D539874217743C379E406A44AF58",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/CrossTexture&Material/Cross.mat",
+    "sha256": "E62A1FAF0A553131911D61AF4F8591E44EE39110B34B5A75CB12D88E6C7E2170",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/CrossTexture&Material/Cross.png",
+    "sha256": "6E905001DC715E61B5EA32BD62AF53CD9199113AA6B197EE95506A3645548883",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/CrossTexture&Material/Cross3.mat",
+    "sha256": "5FB8139EF4841DFB2F2D41C429D411F96606059E35125D199A8CAF2EE664F7C7",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/CrossTexture&Material/Cross3.png",
+    "sha256": "9E50D24DA943D5F39DD75684DB8D63A317FF68A5BEFE9468912383FF3330AAE8",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Flash Texture&Mateiral/Flash.png",
+    "sha256": "68E1E77033F6CCAE429E25434DCACC9D9D7655A2B8C76E3101743E5F3BE0E1BF",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Flash Texture&Mateiral/Flash(Additive).mat",
+    "sha256": "CAF0AEF983F149075E38A27BDE200E27203C2BD34AB1BF3F18EB4CA57F03ADD0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Flash Texture&Mateiral/Flash(Alpha Blended).mat",
+    "sha256": "FCDCD15B0788B806BE508D1A116979140009745C577309C46A4520FA6F94684E",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Flash Texture&Mateiral/Flash2.mat",
+    "sha256": "A7135A5EB3549DDD870273BD62F5316ED9F34FB41F3D1484D46404405BC32EBB",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Flash Texture&Mateiral/Flash2.png",
+    "sha256": "2D542145F8693B687A65AD1901D76FB3527E3A5C8622314244C8FB6BA90A37A1",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Light2.mat",
+    "sha256": "F2690189151F93A5A533586E7FB3D58EF2DB10587354482ECF0969F400D85D52",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Light2.png",
+    "sha256": "A4A2E6ACBC3ECE045DA9827F6B9EF120D74925CFFF2B9D8529708795BBF03C0D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning2.mat",
+    "sha256": "35211ACDC1E1DF526CDB88760EECC58F81B57F177F6E217E30FDC58857FBD58C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning2.png",
+    "sha256": "FEE24E523B44FEFB61AC5B9297059FBE01F802BA23156F542881F262E03572F7",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning4.mat",
+    "sha256": "3BA6C01C34D817F1D2D90558650621ED151063F1E7C307835F4DD69AA640844F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning4.png",
+    "sha256": "45D0EB38B5B27719F0471DA0332ADA82AA606302C0D12608452620111470FC16",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning5.mat",
+    "sha256": "C0A2E3B3411A992E0CFD612157EAAE7BBFCC5F616CE7575DBE3E388513FD629A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Light Texture&Material/Lightning5.png",
+    "sha256": "1069F685B069D5C6055A552F46A26F85EA62AA97797AFFB80526DB23917552D7",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/MagicCircle Texture&Mateiral/MagicCircle.mat",
+    "sha256": "9AFFFB44C1780E12BF680169964E029136B708FBD5B6A1D9C492E2878A31E46B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/MagicCircle Texture&Mateiral/MagicCircle.png",
+    "sha256": "E6185602D43D357B4F83FA5424410F01498E8678BD0E6FD01165B2EE32460B81",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Other Texture&Mateiral/Ring.mat",
+    "sha256": "A4645D189EA2498A7FF2F1CDE455EA9A89E75E9B6496BBDD6548381D7FCEE843",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Other Texture&Mateiral/Ring.png",
+    "sha256": "D2C522CA47D6D543A8C666FAAD67002EEE2A15F7FC32661169CE705D818D3311",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke.png",
+    "sha256": "8C16B18C3A488DC116318E33720B27E37FFED4A8E3EDCDFE0E8739D834459937",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke(Alpha Blended).mat",
+    "sha256": "DC82BFB639495BD172BCEBB29068737A47AC52D047D6A6475A70D89C6E10D65B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke3.mat",
+    "sha256": "4B691C4742C693FA0D86C23A31C285DA9B6B852A1D8BCCCF64FC6BE6D73B8C86",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke3.png",
+    "sha256": "87F81E074B116E853944C0DCFBEF48ABFF190BF069D51981A5E6F4C181BA05EF",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke4_2.mat",
+    "sha256": "B15AB0EB9374049C4F3E04435A54C5AF822125A9FCE49BAE077BA5549D03A7EB",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke4.mat",
+    "sha256": "7417A1590C9BB8FC7CB43EEBD6E34F096D7160DFB7FB9F553473C6F84EAD9EDA",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke4.png",
+    "sha256": "107949EC4C643CC4B0608C3CFC22759458FFE7A7B64FCA60742E2AB2FBE9ADE6",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke5.mat",
+    "sha256": "F3133C27BCACB4474D1B5720432A5DC2DB534194E5A821656A310D5E38CD70CD",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke5.png",
+    "sha256": "E9F3A71ED58C256AE2D05329BB54CAF27BE62870442BB48D5DF9ADC355D45EBF",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke7.mat",
+    "sha256": "06B0358B6734A09E36E54F9363AB81568289DD7BCF1932BAEEDCC57511134498",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Smoke Texture&Mateiral/Smoke7.png",
+    "sha256": "582627321B0FF959349561D0B68A97380E90D2E32675E4CF3DF04C3DBE5C8BF7",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark.mat",
+    "sha256": "AAF46B64DA766016FC7F2CE6F0B50B03C2419978601D318A28B9680EB0465E03",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark.png",
+    "sha256": "C362F8C2B287CA9A4F4A66488AE67B44C7879C0860FFF4EAF802023825E030DD",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark2.png",
+    "sha256": "FC78031AB2BD5AF36A06ADA6D70AB44801A889F43F57AD84588BCC10FC6D1100",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark2(Additive).mat",
+    "sha256": "71BB1363DB4883B793CCEC573DC8482B8E9079F7DE333DA7DA4849A440BDCB5A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark2(Alpha Blended).mat",
+    "sha256": "0C767568E3FFD499915DB68A16DD043F9B05CC5CC9DBA5B212F72B9FC51AB42A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark3.mat",
+    "sha256": "1AD29FA6A6CEFC291DAD3BA30A6DE1F690010A0F4733B1FF4D0C69CF2F2B6556",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/100BestEffectPack/Texture&Material/Spark Texture&Mateiral/Spark3.png",
+    "sha256": "BE3C9BB2C212F6C1A7140F89240C39492A060E2A674C500C580F71F2A8ECE63E",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Materials/A35.mat",
+    "sha256": "F167A055E3DA90D49127E20BFB2DC0EE88C4A07622D849F97C7C9A4B08CA8273",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Materials/Default-Particle.mat",
+    "sha256": "C433B7B195D84D24E1A65F07A276C4515FEDFBC572B6DB33C24BFE7E3E4A90AA",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Materials/Slash16.mat",
+    "sha256": "97D9B2D4C73F8E12314BD2A09FD12D7B09B6B21E7928D5D935F918867C6B7BCC",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Materials/Slash17.mat",
+    "sha256": "A1F12871C9FE1F80B58AB88F8624DB42E4A69B40BF19A4EF83546DC29C9C1EC3",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Mesh/Eric_Cylinder002.FBX",
+    "sha256": "E86279114104C5443A2ACD5A009227CD3E50E05BB2E9C2979049DDDB0D2475F5",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Textures/A35.png",
+    "sha256": "C11182C90847C8EB5D56B2B6CA10C6B43036438C69587FAEC08C5B1F66A55B8C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Textures/Default-Particle.png",
+    "sha256": "739A31284EF873FC5D78932C3DB87A2D630CFD24C50336DA6B129BA814B3DA22",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/Eric VFX Studio/Resource/Textures/slash03_anim 1.png",
+    "sha256": "E6346EA96EC5E6DAFEAA202531031351FFD1725CF383FEDA7ABEDD5B5B827825",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Meshs/Fx_Light_02.FBX",
+    "sha256": "10D3DC468E298F07B61FB728C63C5EB8E3371936FEDD755160743A13ED2BA4BA",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Meshs/Fx_Light_03.FBX",
+    "sha256": "89A3831E7FEE04B7146B299C5A56F26481DFECD1DF19E8F1CF69B5CCC8C3BAEF",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Meshs/Light_01.FBX",
+    "sha256": "F21F8BE04B6C2F666F39EF21E37411128BCCE368662C04B9A712A273BBA24E06",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Meshs/Light_03.FBX",
+    "sha256": "6A1A47501C86BFC96F0A737E32DB91570D0602306BE4D28A4A12C74835FADA7F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Shader/AdditiveBlend_Scroll.shadergraph",
+    "sha256": "9674E808A871D9A1E599FBE5E7795B47A43D8DA0E94CC5A0B1A20078F84ADD2B",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Shader/AlphaBlend_Scroll_customdata.shadergraph",
+    "sha256": "C4BFA24297865B43A1B8A806E5003479A665352DF4854F71D99AF258A26FDFE0",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Shader/AlphaBlend_Scroll.shadergraph",
+    "sha256": "A958EDCD43F934DB95F9CAB3FF5D9B38DA77C2D8B65DDDB66C7054FCFFA93C42",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/Aura.png",
+    "sha256": "8D2DF4E91A19F722FADAB962285FA8321F32482BA7C4654FC327B94258CFB74D",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/line.png",
+    "sha256": "F507D1B6DBEBA63D0BE341D6439D4FB0DCEC8E04BEE7CA5B97A9AE10376C6429",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/Mask_01.png",
+    "sha256": "7D38DE4E3AB6FD09FF4B229C9A7D6BFC406B595CFEA42F244681A90877481E9C",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/Mask_02.png",
+    "sha256": "25C4AF130F7F9C709CC9627295264C4D5F4A9D66C6019BA902CFEDE63444ED49",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/Noise_01.png",
+    "sha256": "9F604130D401F7CD028F15EEA095EA98527ADF99F5CF0FC3E71441BDCA1BFFCE",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/Noise_03.png",
+    "sha256": "6D93FC86873DDF709B091801370102FEC83E3599F1AD78F4E4A0F2C3CE332F96",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/par_Fire.png",
+    "sha256": "369845CEF9CE2CC35F5B2A16B8AF53BF7DE56C7693FE28BFDEFC969B42776392",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/pointLight.png",
+    "sha256": "FB4782944F31AD242B3CD410ED9044A9C2FA89C8BFBD258FBABA9A8FBB7EEBE2",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/PublicTexture/TrailLight.png",
+    "sha256": "F3D421A2226501C13E7F9C0EBA8E59893D8C56902FACDE68BC78707F98CBA6C4",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_125.png",
+    "sha256": "D29D5D32416CCCD49811119F875B653BE8345DFA32C2C3C998EB4D4B870C86C4",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_142.png",
+    "sha256": "778FE5208D5F7E8E6E45420A66703DA2564D71001D826C6108C5726CF90FA775",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_164.png",
+    "sha256": "344B17A98A99B57409048BB672AEA9C0445B8F70FDDEBEB7EBCD86DE96403739",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_175.png",
+    "sha256": "9BF1A7E24E502A98384D0FF3F691ADBDD6429301A435680B88603CB176882C58",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_197.png",
+    "sha256": "3CDF17C1E092E7C39F0AB87C757A5A3911004F92EEB7C171C6C2F2BA05E3195F",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_240.png",
+    "sha256": "47042CDF29AAC5A52CEB238408997FC0CE596D70FED738D6FD733E5E0126DE10",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_246.png",
+    "sha256": "1A8386D902821B49746244F8C18B694D35DC4CDEB3B224DF43CE2A2958579022",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_27.png",
+    "sha256": "D3EF16D9C22B5BFDCE66E69C3CA51F48DF03A249E019CEEA86C09077BD625C2A",
+    "mainAndQaIdentical": true
+  },
+  {
+    "path": "Assets/KoreanTraditionalPattern_Effect/Textures/TraditionalTexture/Pattern_71.png",
+    "sha256": "D728DD90907CE5BB85CCC60DFF8C45AFBC1B7C347128A623C2B5D77ABD3121C9",
+    "mainAndQaIdentical": true
+  }
+]

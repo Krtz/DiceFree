@@ -1,0 +1,27 @@
+var output="T:/TEMP/DiceFree-AssetCatalog/2026-11-27";System.IO.Directory.CreateDirectory(output);
+string Q(string s)=>"\""+(s??"").Replace("\\","\\\\").Replace("\"","\\\"").Replace("\r"," ").Replace("\n"," ")+"\"";
+async System.Threading.Tasks.Task Export()
+{
+ try{
+ var paths=UnityEditor.AssetDatabase.GetAllAssetPaths().Where(p=>p.StartsWith("Assets/",StringComparison.Ordinal)&&!UnityEditor.AssetDatabase.IsValidFolder(p)).ToArray();
+ var roots=UnityEditor.EditorBuildSettings.scenes.Where(s=>s.enabled).Select(s=>s.path).Concat(paths.Where(p=>p.Contains("/Resources/")||p.EndsWith(".shader")&&p.StartsWith("Assets/_DiceFree/"))).ToArray();var used=UnityEditor.AssetDatabase.GetDependencies(roots,true);System.IO.File.WriteAllText(output+"/runtime-dependencies.json","["+string.Join(",",used.Select(Q))+"]");
+ System.IO.File.WriteAllText(output+"/editor-state.json","{\"playing\":"+UnityEditor.EditorApplication.isPlaying.ToString().ToLowerInvariant()+",\"pipeline\":"+Q(UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline?.GetType().Name)+",\"activeScene\":"+Q(UnityEngine.SceneManagement.SceneManager.GetActiveScene().path)+",\"dirtyScenes\":["+string.Join(",",Enumerable.Range(0,UnityEngine.SceneManagement.SceneManager.sceneCount).Select(i=>UnityEngine.SceneManagement.SceneManager.GetSceneAt(i)).Where(s=>s.isDirty).Select(s=>Q(s.path)))+"]}");
+ var modelRows=new System.Collections.Generic.List<string>();var clips=new System.Collections.Generic.List<string>();var models=paths.Where(p=>UnityEditor.AssetImporter.GetAtPath(p) is UnityEditor.ModelImporter).ToArray();int count=0;
+ foreach(var path in models){
+ var importer=(UnityEditor.ModelImporter)UnityEditor.AssetImporter.GetAtPath(path);var assets=UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path);var avatar=assets.OfType<Avatar>().FirstOrDefault();var model=assets.OfType<GameObject>().FirstOrDefault();
+ modelRows.Add("{\"path\":"+Q(path)+",\"animationType\":"+Q(importer.animationType.ToString())+",\"importAnimation\":"+importer.importAnimation.ToString().ToLowerInvariant()+",\"validHumanoid\":"+(avatar!=null&&avatar.isValid&&avatar.isHuman).ToString().ToLowerInvariant()+",\"skinnedMeshes\":"+(model==null?0:model.GetComponentsInChildren<SkinnedMeshRenderer>(true).Length)+",\"clips\":"+assets.OfType<AnimationClip>().Count(c=>!c.name.StartsWith("__preview__"))+"}");
+ foreach(var c in assets.OfType<AnimationClip>().Where(c=>!c.name.StartsWith("__preview__")))clips.Add("{\"path\":"+Q(path)+",\"clip\":"+Q(c.name)+",\"length\":"+c.length.ToString(System.Globalization.CultureInfo.InvariantCulture)+",\"humanoid\":"+c.humanMotion.ToString().ToLowerInvariant()+",\"loop\":"+c.isLooping.ToString().ToLowerInvariant()+"}");
+ if(++count%12==0)await System.Threading.Tasks.Task.Delay(10);
+ }
+ foreach(var path in paths.Where(p=>p.EndsWith(".anim"))){var c=UnityEditor.AssetDatabase.LoadAssetAtPath<AnimationClip>(path);if(c!=null)clips.Add("{\"path\":"+Q(path)+",\"clip\":"+Q(c.name)+",\"length\":"+c.length.ToString(System.Globalization.CultureInfo.InvariantCulture)+",\"humanoid\":"+c.humanMotion.ToString().ToLowerInvariant()+",\"loop\":"+c.isLooping.ToString().ToLowerInvariant()+"}");}
+ System.IO.File.WriteAllText(output+"/unity-models.json","["+string.Join(",",modelRows)+"]");System.IO.File.WriteAllText(output+"/unity-animation-clips.json","["+string.Join(",",clips)+"]");
+ var effects=new System.Collections.Generic.List<string>();var folders=new[]{"KoreanTraditionalPattern_Effect","100BestEffectPack","48 Particle Effect Pack","JMO Assets","Eric VFX Studio","NamuFX","Spells Pack 2 Free Version","VFXPACK_IMPACT_WALLCOEUR_FreeVersion","AC Little Enchant Mesh VFX","Matthew Guz"};count=0;
+ foreach(var path in paths.Where(p=>p.EndsWith(".prefab")&&folders.Any(f=>p.StartsWith("Assets/"+f+"/")))){
+ var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);if(prefab==null)continue;var ps=prefab.GetComponentsInChildren<ParticleSystem>(true);var renderers=prefab.GetComponentsInChildren<Renderer>(true);var materials=renderers.SelectMany(r=>r.sharedMaterials).Where(m=>m!=null).Distinct().ToArray();var shaders=materials.Select(m=>m.shader).Where(s=>s!=null).Distinct().ToArray();
+ effects.Add("{\"path\":"+Q(path)+",\"particleSystems\":"+ps.Length+",\"loopingSystems\":"+ps.Count(p=>p.main.loop)+",\"maxDuration\":"+(ps.Length==0?0:ps.Max(p=>p.main.duration+p.main.startLifetime.constantMax)).ToString(System.Globalization.CultureInfo.InvariantCulture)+",\"renderers\":"+renderers.Length+",\"unsupportedMaterials\":"+materials.Count(m=>m.shader==null||!m.shader.isSupported)+",\"shaders\":["+string.Join(",",shaders.Select(s=>Q(s.name)))+"]}");
+ if(++count%20==0)await System.Threading.Tasks.Task.Delay(10);
+ }
+ System.IO.File.WriteAllText(output+"/unity-vfx-prefabs.json","["+string.Join(",",effects)+"]");System.IO.File.WriteAllText(output+"/unity-export-result.json","{\"status\":\"passed\",\"models\":"+modelRows.Count+",\"clips\":"+clips.Count+",\"effects\":"+effects.Count+",\"dependencies\":"+used.Length+"}");
+ }catch(Exception e){System.IO.File.WriteAllText(output+"/unity-export-result.json","{\"status\":\"failed\",\"error\":"+Q(e.ToString())+"}");}
+}
+_ = Export();return "Catalog export scheduled; no scene changes or imports requested";

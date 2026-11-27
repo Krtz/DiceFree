@@ -6,6 +6,7 @@ namespace DiceFree.Combat
         private static Material Material()=>new Material(Resources.Load<Material>("AuraVfx/EmberFlame"));
         public static GameObject Ground(Vector3 point,float radius,float seconds,Color color)
         {
+            var native=AssetPackVfx.Spawn("impact.fire",point+Vector3.up*.08f,radius,seconds,null,true);if(native!=null)return native;
             var root=new GameObject("Burning embers");root.transform.position=point+Vector3.up*.08f;root.layer=2;
             var ring=root.AddComponent<LineRenderer>();ring.useWorldSpace=false;ring.loop=true;ring.positionCount=48;ring.widthMultiplier=.09f;
             var material=Material();ring.sharedMaterial=material;ring.startColor=ring.endColor=color;

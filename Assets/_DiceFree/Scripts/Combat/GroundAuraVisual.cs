@@ -20,6 +20,7 @@ namespace DiceFree.Combat
         private Behaviour source;
         private CombatActor recipient;
         private Func<bool> eligible;
+        private GameObject assetAura;
         private Mesh mesh;
         private MeshRenderer surface;
         private Material material;
@@ -28,7 +29,7 @@ namespace DiceFree.Combat
         private Vector3 sampledAt;
         private bool sampled;
         public GroundAuraStyle Style { get; private set; }
-        public bool Visible => surface != null && surface.enabled;
+        public bool Visible => assetAura!=null?assetAura.activeSelf:surface!=null&&surface.enabled;
         public float Radius { get; private set; }
         public CombatActor Recipient => recipient;
 
@@ -47,6 +48,7 @@ namespace DiceFree.Combat
 
         private void Initialize()
         {
+            if(AssetPackVfx.TryAura(transform,Style,Radius,out assetAura))return;
             var template = Resources.Load<Material>("AuraVfx/GroundSigil");
             if(template == null) { Destroy(gameObject); return; }
             material = new Material(template) { name = "Aura sigil - " + Style, hideFlags = HideFlags.DontSave };
@@ -86,8 +88,19 @@ namespace DiceFree.Combat
         private void LateUpdate()
         {
             if(source == null || recipient == null) { Remove(); return; }
-            if(surface == null) return;
+            if(surface == null&&assetAura==null) return;
             bool active=source.isActiveAndEnabled && recipient.Alive && !recipient.Concealed && eligible?.Invoke()==true;
+            if(assetAura!=null)
+            {
+                bool starting=active&&!assetAura.activeSelf;assetAura.SetActive(active);if(!active)return;
+                var center=recipient.transform.position;transform.SetPositionAndRotation(center,Quaternion.identity);
+                var inherited=recipient.transform.lossyScale;transform.localScale=new Vector3(1/Mathf.Max(.001f,Mathf.Abs(inherited.x)),1/Mathf.Max(.001f,Mathf.Abs(inherited.y)),1/Mathf.Max(.001f,Mathf.Abs(inherited.z)));
+                float height=center.y;if(Physics.Raycast(center+Vector3.up*.7f,Vector3.down,out var floor,2.1f,1<<8,QueryTriggerInteraction.Ignore))height=floor.point.y;
+                foreach(var road in groundSurfaces)if(road.TryGetHeight(center,out float roadHeight))height=Mathf.Max(height,roadHeight);
+                assetAura.transform.localPosition=Vector3.up*(height-center.y+.06f);
+                if(starting)foreach(var ps in assetAura.GetComponentsInChildren<ParticleSystem>(true)){ps.Simulate(1.2f,false,true,true);ps.Play(false);}
+                return;
+            }
             // Immediately hide invalid/dead sources. Fade-in keeps learning an aura subtle.
             opacity=active?Mathf.MoveTowards(opacity,1,Time.unscaledDeltaTime*4):0;
             surface.enabled=active && opacity>0;
@@ -115,10 +128,12 @@ namespace DiceFree.Combat
 
         public void Remove()
         {
+            if(assetAura!=null)assetAura.SetActive(false);
             if(surface != null) surface.enabled=false;
             Destroy(gameObject);
         }
-        private void OnDisable() { if(surface != null) surface.enabled=false; opacity=0; }
+        private void OnDisable() { if(assetAura!=null)assetAura.SetActive(false);
+            if(surface != null) surface.enabled=false; opacity=0; }
         private void OnDestroy()
         {
             if(material != null) Destroy(material);

@@ -1,0 +1,17 @@
+async System.Threading.Tasks.Task Preview()
+{
+ var directory="T:/TEMP/DiceFree-AssetCatalog/2026-11-27/previews";System.IO.Directory.CreateDirectory(directory);
+ var scene=UnityEditor.SceneManagement.EditorSceneManager.NewPreviewScene();Camera camera=null;RenderTexture rt=null;var active=RenderTexture.active;
+ try{
+ camera=new GameObject("Asset catalog camera").AddComponent<Camera>();UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.enabled=false;camera.scene=scene;camera.overrideSceneCullingMask=UnityEditor.SceneManagement.EditorSceneManager.GetSceneCullingMask(scene);camera.cullingMask=1<<31;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.025f,.035f,.045f);camera.orthographic=true;camera.nearClipPlane=.01f;camera.farClipPlane=100;camera.transform.rotation=Quaternion.Euler(90,0,0);rt=new RenderTexture(400,400,24);camera.targetTexture=rt;
+ var sheet=new Texture2D(2000,1600,TextureFormat.RGB24,false);
+ for(int i=1;i<=20;i++){
+ string name="Bottom"+i.ToString("00")+"-01";var prefab=UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/"+name+".prefab");var go=UnityEngine.Object.Instantiate(prefab);UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go,scene);go.transform.position=Vector3.zero;foreach(var t in go.GetComponentsInChildren<Transform>(true))t.gameObject.layer=31;foreach(var b in go.GetComponentsInChildren<MonoBehaviour>(true))b.enabled=false;
+ var particles=go.GetComponentsInChildren<ParticleSystem>(true);foreach(var p in particles){p.useAutoRandomSeed=false;p.randomSeed=123;p.Simulate(1.6f,false,true,true);}
+ var renderers=go.GetComponentsInChildren<Renderer>(true).Where(r=>r.enabled&&r.gameObject.activeInHierarchy).ToArray();var bounds=renderers[0].bounds;foreach(var r in renderers.Skip(1))bounds.Encapsulate(r.bounds);var center=bounds.center;center.y=0;camera.transform.position=center+Vector3.up*20;camera.orthographicSize=Mathf.Max(1,Mathf.Max(bounds.size.x,bounds.size.z)*.58f);camera.Render();RenderTexture.active=rt;var texture=new Texture2D(400,400,TextureFormat.RGB24,false);texture.ReadPixels(new Rect(0,0,400,400),0,0);texture.Apply();System.IO.File.WriteAllBytes(directory+"/"+name+".png",texture.EncodeToPNG());sheet.SetPixels(((i-1)%5)*400,(3-(i-1)/5)*400,400,400,texture.GetPixels());UnityEngine.Object.DestroyImmediate(texture);UnityEngine.Object.DestroyImmediate(go);await System.Threading.Tasks.Task.Delay(10);
+ }
+ sheet.Apply();System.IO.File.WriteAllBytes(directory+"/korean-ground-patterns.png",sheet.EncodeToPNG());UnityEngine.Object.DestroyImmediate(sheet);System.IO.File.WriteAllText(directory+"/result.txt","Rendered twenty original Korean ground-pattern families in Unity URP");
+ }catch(Exception e){System.IO.File.WriteAllText(directory+"/result.txt",e.ToString());}
+ finally{RenderTexture.active=active;if(camera!=null)UnityEngine.Object.DestroyImmediate(camera.gameObject);if(rt!=null)UnityEngine.Object.DestroyImmediate(rt);UnityEditor.SceneManagement.EditorSceneManager.ClosePreviewScene(scene);}
+}
+_ = Preview();return "Rendering ground-pattern catalog thumbnails in an isolated preview scene";

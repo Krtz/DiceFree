@@ -1,0 +1,272 @@
+﻿path,clip,length,humanoid,loop
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Cast,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Guard,0.7666669,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,AttackLeft,0.8666677,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Hit,0.4000006,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Locomotion,0.8,False,True
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Heal,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Idle,2,False,True
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Attack,0.866667,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,ArmedAttack,0.9000006,False,False
+Assets/_DiceFree/Art/Characters/QuietHands/QuietHandsThief.fbx,Death,0.9333344,False,False
+Assets/AllStarCharacterLibrary/Models/RootAnimsFemale/BaseFemale@1HIdle.fbx,1HIdle,1.666667,True,True
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Cast,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Guard,0.7666669,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,SkySalvo,1.500001,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Hit,0.4000006,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Locomotion,0.8,False,True
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Heal,0.833333,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Idle,2,False,True
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Attack,0.866667,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,ArmedAttack,0.9000006,False,False
+Assets/_DiceFree/Art/Characters/IronpineRanger/IronpineRanger.fbx,Death,0.9333344,False,False
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Herbalist.fbx,VillageArmature|Idle,2,False,True
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Herbalist.fbx,VillageArmature|Walk,1,False,True
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Villager.fbx,VillageArmature|Idle,2,False,True
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Villager.fbx,VillageArmature|Walk,1,False,True
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Farmer.fbx,VillageArmature|Idle,2,False,True
+Assets/_DiceFree/Art/World/WalkingVillagers/Models/NPC_Farmer.fbx,VillageArmature|Walk,1,False,True
+Assets/Blink/Art/Animations/Combat/SpinAttack_TwoHanded.fbx,SpinLoop_TwoHanded,0.8000001,True,True
+Assets/Blink/Art/Animations/Combat/SpinAttack_TwoHanded.fbx,tpose,0.03333334,True,False
+Assets/_DiceFree/Resources/WorldLoot/TreasureChestModel.fbx,Bounce,0.9583333,False,True
+Assets/_DiceFree/Resources/WorldLoot/TreasureChestModel.fbx,Closed,1,False,False
+Assets/_DiceFree/Resources/WorldLoot/TreasureChestModel.fbx,Open,0.4166667,False,False
+Assets/AdventureForge/Geometry/Metalstaff01/Metalstaff01.fbx,Metalstaff01SlowSpin,0.9666666,False,True
+Assets/AdventureForge/Geometry/Metalstaff01/Metalstaff01.fbx,Metalstaff01FastSpin,1,False,True
+Assets/Blink/Art/Animations/Combat/IdleCombat.fbx,IdleCombat,1.733333,True,True
+Assets/Blink/Art/Animations/Combat/IdleCombat.fbx,tpose,0.03333334,True,False
+Assets/_DiceFree/Art/Creatures/Briarback/Models/Quilboar.fbx,Novice_Armature|Quilboar|Idle,3,False,True
+Assets/_DiceFree/Art/Creatures/Briarback/Models/Quilboar.fbx,Novice_Armature|Quilboar|Locomotion,1,False,True
+Assets/_DiceFree/Art/Creatures/Briarback/Models/Quilboar.fbx,Novice_Armature|Quilboar|Death,1.458333,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/Models/Quilboar.fbx,Novice_Armature|Quilboar|Attack,0.875,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/Models/Quilboar.fbx,Novice_Armature|Quilboar|Slam,1.375,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Scratch,1,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|QuillShot,1.291667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Walk,1,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Forage,1.375,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Hurt,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Bite,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Run,0.6666667,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Idle,1.75,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Death,1.541667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Quillrat.fbx,IronpineQuillratArmature|Quillrat|Scurry,0.6666667,False,False
+Assets/Blink/Art/Animations/Movement/Idle.fbx,Idle,1.733333,True,True
+Assets/Blink/Art/Animations/Movement/Idle.fbx,tpose,0.03333334,True,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Idle,1.75,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Bite,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Scratch,1,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Sniff,1.375,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Pounce,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Howl,1.291667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Death,1.541667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Walk,1,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Hurt,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/Wolf.fbx,IronpineWolfArmature|Wolf|Run,0.6666667,False,True
+Assets/AllStarCharacterLibrary/Models/RootAnimsFemale/Marina@SpinningAttackLunge.FBX,SpinningAttackLunge,0.5666667,True,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Cast,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,ShieldBash,0.666667,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,ShieldSweep,1.000001,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Death,0.9333344,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,IronGuard,2.000001,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Locomotion,0.8,False,True
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Guard,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Idle,2,False,True
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Attack,0.866667,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,ArmedAttack,0.9000006,False,False
+Assets/_DiceFree/Art/Characters/TrimeryDefender/TrimeryDefender.fbx,Hit,0.4000006,False,False
+Assets/AllStarCharacterLibrary/Models/RootAnimsFemale/BaseFemale@1HWalkF.fbx,1HWalkF,1.133333,True,True
+Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx,Novice_Armature|Novice|Idle,3,True,True
+Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx,Novice_Armature|Novice|Locomotion,1,True,True
+Assets/_DiceFree/Art/Characters/Novice/Models/Novice.fbx,Novice_Armature|Novice|UnarmedAttack,0.875,True,False
+Assets/AllStarCharacterLibrary/Models/Characters/A03.FBX,Take 001,0.03333334,True,False
+Assets/Wolf/Models/Wolf.fbx,Jump_New (1),1.458333,False,False
+Assets/Wolf/Models/Wolf.fbx,WolfHowl_New (1),3.958333,False,False
+Assets/Wolf/Models/Wolf.fbx,GetHit_1,0.5833334,False,False
+Assets/Wolf/Models/Wolf.fbx,GetHit_2 (1),0.5833334,False,False
+Assets/Wolf/Models/Wolf.fbx,sitingIdle._New (1),9.875,False,False
+Assets/Wolf/Models/Wolf.fbx,Idle_New (1),21.54167,False,True
+Assets/Wolf/Models/Wolf.fbx,Walking,1.625,False,True
+Assets/Wolf/Models/Wolf.fbx,sits down._New (1),3.041667,False,False
+Assets/Wolf/Models/Wolf.fbx,dead (1),3.291667,False,False
+Assets/Wolf/Models/Wolf.fbx,Running_New (1),0.7916667,False,True
+Assets/Wolf/Models/Wolf.fbx,AttackL (1),1.75,False,False
+Assets/Wolf/Models/Wolf.fbx,AttackR (1),1.75,False,False
+Assets/_DiceFree/Art/Creatures/AncientRoadDragon/Winged Road Dragon.fbx,Mountain roost idle,22.45833,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Sniff,1.375,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Howl,1.291667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Scratch,1,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Bite,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Hurt,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Pounce,0.6666667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Death,1.541667,False,False
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Idle,1.75,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Walk,1,False,True
+Assets/_DiceFree/Art/Creatures/Ironpine/AlphaWolf.fbx,IronpineAlphaWolfArmature|AlphaWolf|Run,0.6666667,False,True
+Assets/Blink/Art/Animations/Combat/SpinToWin_TwoHanded.fbx,SpinToWin_TwoHanded,1,True,True
+Assets/Blink/Art/Animations/Combat/SpinToWin_TwoHanded.fbx,tpose,0.03333334,True,False
+Assets/Spells Pack 2 Free Version/Demo/Environment/Props/Meshes/LanternStone_01_Mesh.fbx,Take 001,0.06666667,False,False
+Assets/Blink/Art/Animations/Combat/SpinLoop_TwoHanded.fbx,SpinLoop_TwoHanded,0.8000001,True,True
+Assets/Blink/Art/Animations/Combat/SpinLoop_TwoHanded.fbx,tpose,0.03333334,True,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Cast,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Guard,0.7666669,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Revive,1.200001,False,True
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Hit,0.4000006,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Locomotion,0.8,False,True
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Heal,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Idle,2,False,True
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Attack,0.866667,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,ArmedAttack,0.9000006,False,False
+Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx,Death,0.9333344,False,False
+Assets/AllStarCharacterLibrary/Models/RootAnimsFemale/BaseFemale@1HAttack.fbx,1HAttack,0.7,True,True
+Assets/Blink/Art/Animations/Movement/WalkForward.fbx,WalkForward,1.066667,True,True
+Assets/Blink/Art/Animations/Movement/WalkForward.fbx,tpose,0.03333334,True,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Cast,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Guard,0.7666669,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Channel,1.200001,False,True
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Hit,0.4000006,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Locomotion,0.8,False,True
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Heal,0.8333335,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Idle,2,False,True
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Attack,0.866667,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,ArmedAttack,0.9000006,False,False
+Assets/_DiceFree/Art/Characters/Lanternrest/LanternrestAcolyte.fbx,Death,0.9333344,False,False
+Assets/Blink/Art/Animations/Combat/MeeleeAttack_TwoHanded.fbx,MeeleeAttack_TwoHanded,1.933333,True,False
+Assets/Blink/Art/Animations/Combat/MeeleeAttack_TwoHanded.fbx,tpose,0.03333334,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-04.anim,Fly2-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-02.anim,Fly4-02,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Death.anim,Physical Death,1.1,True,False
+Assets/_DiceFree/Resources/PlayerMotion/TierTwo/Spin Dash.anim,Spin Dash,0.9,True,True
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Idle.anim,Briarback Idle,3,False,True
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Attack.anim,Physical Attack,0.85,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-07.anim,Fly7-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-07.anim,Fly1-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-02.anim,Fly10-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-01.anim,Fly1-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-09.anim,Fly10-09,2.333333,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Slam.anim,Briarback Slam,1.8,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-05.anim,Fly4-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-03.anim,Fly8-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-04.anim,Fly5-04,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Idle.anim,Novice Idle,2.4,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-03.anim,Fly10-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-07.anim,Fly8-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-02.anim,Fly7-02,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Heavy.anim,Novice Heavy,1.05,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-04.anim,Fly10-04,2.333333,False,False
+Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeReady.anim,Greatblade armed ready,1.5,True,True
+Assets/_DiceFree/Resources/PlayerMotion/Novice/ArmedAttack.anim,Novice ArmedAttack,0.9,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/ArmedAttack.anim,Magical ArmedAttack,0.9,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-08.anim,Fly3-08,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Attack.anim,Novice Attack,0.85,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-01.anim,Fly9-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-01.anim,Fly8-01,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Hit.anim,Novice Hit,0.3,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-04.anim,Fly4-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-03.anim,Fly4-03,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Guard.anim,Physical Guard,0.8000001,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Cast.anim,Magical Cast,0.85,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-02.anim,Fly2-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-06.anim,Fly10-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-03.anim,Fly2-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-01.anim,Fly4-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-05.anim,Fly1-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-05.anim,Fly10-05,2.333333,False,False
+Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeSpin.anim,GreatbladeSpin,1,True,True
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Heavy.anim,Physical Heavy,1.05,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-04.anim,Fly7-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-06.anim,Fly3-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-02.anim,Fly6-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-08.anim,Fly2-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-02.anim,Fly3-02,2.333333,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Throw.anim,Briarback Throw,1.1,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-07.anim,Fly6-07,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Death.anim,Novice Death,1.1,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-03.anim,Fly5-03,2.333333,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Death.anim,Briarback Death,1.458333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Locomotion.anim,Physical Locomotion,0.85,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-05.anim,Fly6-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-06.anim,Fly1-06,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Guard.anim,Novice Guard,0.8000001,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-09.anim,Fly3-09,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Idle.anim,Magical Idle,2.4,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-05.anim,Fly8-05,2.333333,False,False
+Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceUnarmedAttack.anim,Novice Unarmed Attack,0.875,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Attack.anim,Magical Attack,0.85,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-04.anim,Fly1-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-04.anim,Fly8-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-09.anim,Fly7-09,2.333333,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Cast.anim,Briarback Cast,1.2,False,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Locomotion.anim,Briarback Locomotion,1,False,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-07.anim,Fly4-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-01.anim,Fly6-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-05.anim,Fly9-05,2.333333,False,False
+Assets/Eric VFX Studio/Resource/Animator/FX_Weapon Effect.anim,FX_Weapon Effect,1.1,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Heal.anim,Magical Heal,0.9,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-09.anim,Fly1-09,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-06.anim,Fly8-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-07.anim,Fly3-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-03.anim,Fly7-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-08.anim,Fly1-08,2.333333,False,False
+Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceIdle.anim,Novice Idle,3,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-02.anim,Fly9-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-08.anim,Fly9-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-04.anim,Fly3-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-05.anim,Fly3-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-08.anim,Fly5-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-09.anim,Fly5-09,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-08.anim,Fly8-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-01.anim,Fly2-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-06.anim,Fly9-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-03.anim,Fly1-03,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Heal.anim,Physical Heal,0.9,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-02.anim,Fly5-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-07.anim,Fly5-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-04.anim,Fly6-04,2.333333,False,False
+Assets/_DiceFree/Art/Characters/Novice/Animations/NoviceLocomotion.anim,Novice Locomotion,1,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-03.anim,Fly3-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-09.anim,Fly9-09,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/ArmedAttack.anim,Physical ArmedAttack,0.9,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Locomotion.anim,Magical Locomotion,0.85,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-07.anim,Fly2-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-06.anim,Fly6-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-06.anim,Fly4-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-05.anim,Fly5-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-08.anim,Fly7-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-02.anim,Fly8-02,2.333333,False,False
+Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeCarryWalk.anim,Greatblade two-handed carry walk,1.066667,True,True
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-05.anim,Fly7-05,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly1-02.anim,Fly1-02,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-03.anim,Fly6-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-01.anim,Fly5-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-01.anim,Fly7-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-07.anim,Fly10-07,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-08.anim,Fly6-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-08.anim,Fly10-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-04.anim,Fly9-04,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly8-09.anim,Fly8-09,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-06.anim,Fly2-06,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Cast.anim,Physical Cast,0.85,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly5-06.anim,Fly5-06,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-09.anim,Fly4-09,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly6-09.anim,Fly6-09,2.333333,False,False
+Assets/_DiceFree/Art/World/World1Handcrafted/Trimery mill slow turn.anim,Trimery mill slow turn,13,False,False
+Assets/100BestEffectPack/Animation/KunaiMoveAnimation.anim,KunaiMoveAnimation,6,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly4-08.anim,Fly4-08,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-03.anim,Fly9-03,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly9-07.anim,Fly9-07,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Hit.anim,Physical Hit,0.3,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-09.anim,Fly2-09,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly3-01.anim,Fly3-01,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Hit.anim,Magical Hit,0.3,True,False
+Assets/_DiceFree/Resources/GreatbladeLicensed/GreatbladeSwing.anim,GreatbladeSwing,1.933333,True,False
+Assets/_DiceFree/Art/Creatures/Briarback/RegionalMotion/Attack.anim,Briarback Attack,1,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly10-01.anim,Fly10-01,2.333333,False,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly2-05.anim,Fly2-05,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Heavy.anim,Magical Heavy,1.05,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Heal.anim,Novice Heal,0.9,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Cast.anim,Novice Cast,0.85,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Physical/Idle.anim,Physical Idle,2.4,True,True
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Death.anim,Magical Death,1.1,True,False
+Assets/KoreanTraditionalPattern_Effect/Animations/Fly7-06.anim,Fly7-06,2.333333,False,False
+Assets/_DiceFree/Resources/PlayerMotion/Magical/Guard.anim,Magical Guard,0.8000001,True,False
+Assets/_DiceFree/Resources/PlayerMotion/Novice/Locomotion.anim,Novice Locomotion,0.85,True,True

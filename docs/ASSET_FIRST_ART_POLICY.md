@@ -25,3 +25,7 @@
 - Next: check downloaded village architecture, wolf caves, NPC and advanced-class gear/rigs before building Village 2, Wolf Dungeon or Tier II manifestations.
 
 This policy prioritizes useful assets and working in-engine integration over visual homogeneity. Keep the gameplay readable at the Warcraft III-inspired camera distance.
+
+## User direction — 27 November 2026
+
+Korean Traditional Pattern Effects is the default source for the game's ground auras. Search the complete refreshed catalog at `T:\TEMP\DiceFree-AssetCatalog\2026-11-27\catalog.html` before making new models, rigs, animations, icons or VFX. The review and exact source-path shortlist are in `docs/assets/library-2026-11-27/README.md`. Prefer supplied rigs and animation packs, with small integration adapters and actual grip/deformation checks. Functional collision, navigation, masks and targeting geometry may remain code-defined. Keep approved class identities unless a replacement is chosen. Preserve accidental/unused imports until their use has been checked; cataloging is not deletion authorization.

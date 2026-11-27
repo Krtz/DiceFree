@@ -1,5 +1,7 @@
 # DiceFree Downloaded 3D Asset Catalog
 
+**Current full-library review (27 November 2026):** [Unity downloads, imports, raw archives, rig/animation/VFX metadata and replacement suggestions](assets/library-2026-11-27/README.md). The searchable offline catalog is T:\TEMP\DiceFree-AssetCatalog\2026-11-27\catalog.html. The October inventory below is historical.
+
 **License audit:** 60 files, 2026-10-17 UTC. **Current local inventory:** 206 ZIP archives + one standalone GLB (207 model packages), including the 52-file intake dated 2026-10-21, 34-file intake dated 2026-10-27, and 61-file intake dated 2026-10-28.
 The original license audit covers only the first 60 files. Later intakes have not had complete source-page/license verification and are not cleared for use or redistribution. The October 27 batch includes one byte-identical copy of a ZIP already present in the October 21 intake; the October 28 batch adds 61 distinct archive hashes. Across the 206 ZIPs, the only exact duplicate pair is `nyra-woman-warrior (1).zip` and `nyra-woman-warrior.zip`.
 

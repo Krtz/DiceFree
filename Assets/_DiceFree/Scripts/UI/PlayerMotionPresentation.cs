@@ -126,7 +126,7 @@ namespace DiceFree.UI
             Play(speed>.13f?"Locomotion":"Idle");model.speed=speed>.13f?Mathf.Clamp(speed/5,.4f,1.7f):1;return true;
         }
         void PriestCast(PriestSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if(actor.Stats.Definition?.stableId!=PriestSkillProgression.PriestClassId||!Current())return;
             string gesture=skill switch
             {
@@ -137,18 +137,18 @@ namespace DiceFree.UI
             Play(gesture,.82f,1,true);
         }
         void AcolyteCast(AcolyteSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if(!Current())return;
             Play(acolyte.IsChanneling?"Channel":"Cast",.82f,1,true);
         }
-        void EvolutionCast(int skill){if(Current())Play("Cast",psionEvolution.ChannelDuration,1.14f,true);}
+        void EvolutionCast(int skill){AssetPackVfx.Cast(actor,PsionEvolutionProgression.Name(actor.Stats.Definition?.stableId==PsionEvolutionProgression.KnightId,skill));if(Current())Play("Cast",psionEvolution.ChannelDuration,1.14f,true);}
         void PsionCast(PsionSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if (Current()) Play("Cast", skill == PsionSkill.LightningStorm ? .7f : .43f, 1.14f, true);
         }
 
         void DefenderCast(DefenderSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if (!Current()) return;
             if (skill == DefenderSkill.IronGuard) Play("IronGuard", 2f, 1, true);
             else if (skill == DefenderSkill.ShieldSweep) Play("ShieldSweep", .84f, 1.18f, true);
@@ -157,14 +157,14 @@ namespace DiceFree.UI
         }
 
         void BerserkerCast(int skill)
-        {
+        {AssetPackVfx.Cast(actor,BerserkerProgression.Name(skill));
             if(actor.Stats.Definition?.stableId!=BerserkerProgression.Id||!Current())return;
             if(skill==4){Play("Guard",.65f,1,true);return;}
             Play(skill==1?"Spin Dash":skill==2?"Heavy":"ArmedAttack",skill==1?1.2f:.8f,skill==2?1.15f:1,true);
         }
-        void MarksmanCast(int skill){if(!Current())return;Play(skill==1?"SkySalvo":skill==3?"Guard":"ArmedAttack",skill==0||skill==1?1.5f:.6f,skill==0?.57f:1,true);}
+        void MarksmanCast(int skill){AssetPackVfx.Cast(actor,MarksmanProgression.Name(skill));if(!Current())return;Play(skill==1?"SkySalvo":skill==3?"Guard":"ArmedAttack",skill==0||skill==1?1.5f:.6f,skill==0?.57f:1,true);}
         void RangerCast(RangerSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if (!Current()) return;
             if (skill == RangerSkill.ArrowRain) Play("SkySalvo", 1.5f, 1, true);
             else if (skill == RangerSkill.AimedShot) Play("ArmedAttack", .86f, 1, true);
@@ -173,29 +173,29 @@ namespace DiceFree.UI
         }
 
         void ThiefCast(ThiefSkill skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if(!Current())return;
             Play(skill==ThiefSkill.Envenom?"Attack":"Cast",.6f,1.2f,true);
         }
         void NoviceCast(NoviceSkillDefinition skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.displayName);
             if(!Current())return;
             Play(skill.kind==NoviceSkillKind.StrengthMeleeStun?"Heavy":skill.kind==NoviceSkillKind.SpiritHeal?"Heal":skill.kind==NoviceSkillKind.AgilityAttackSpeedBuff?"Guard":"Cast",.7f,1,true);
         }
-        void PhysicalCast(PhysicalSkillDefinition skill){if(Current())Play(skill.kind==PhysicalSkillKind.HeavyStrike?"Heavy":skill.kind==PhysicalSkillKind.Guard?"Guard":"Cast",.7f,1,true);}
+        void PhysicalCast(PhysicalSkillDefinition skill){AssetPackVfx.Cast(actor,skill.displayName);if(Current())Play(skill.kind==PhysicalSkillKind.HeavyStrike?"Heavy":skill.kind==PhysicalSkillKind.Guard?"Guard":"Cast",.7f,1,true);}
         void MagicalCast(MagicalSkillDefinition skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.displayName);
             if(!Current())return;float rate=skill.kind==MagicalSkillKind.IceBurst? .5f/Mathf.Max(.1f,skill.iceDelaySeconds):1;
             Play(skill.kind==MagicalSkillKind.Mend?"Heal":"Cast",.85f/rate,rate,true);
         }
-        void FireMageCast(int skill){if(actor.Stats.Definition?.stableId==FireMageProgression.Id&&Current())Play(skill==1?"Guard":"Cast",.7f,1,true);}
+        void FireMageCast(int skill){AssetPackVfx.Cast(actor,FireMageProgression.Name(skill));if(actor.Stats.Definition?.stableId==FireMageProgression.Id&&Current())Play(skill==1?"Guard":"Cast",.7f,1,true);}
         void MageCast(DiceFree.Progression.MageProgressionRules.Kind skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if(actor.Stats.Definition?.stableId!="class.mage"||!Current())return;
             Play(skill==DiceFree.Progression.MageProgressionRules.Kind.MathBarrier?"Guard":"Cast",.8f,1,true);
         }
         void GreatbladeCast(DiceFree.Progression.GreatbladeProgressionRules.Kind skill)
-        {
+        {AssetPackVfx.Cast(actor,skill.ToString());
             if(actor.Stats.Definition?.stableId!="class.greatblade"||!Current())return;
             if(skill==DiceFree.Progression.GreatbladeProgressionRules.Kind.BattleCry){Play("Guard",.7f,1,true);return;}
             committed=true;

@@ -1,0 +1,208 @@
+{
+    "status": "passed",
+    "bindings": [
+        {
+            "key": "aura.Mana",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-01.prefab",
+            "sourceGuid": "46b494c333b08b84bbeb27e7f63d10b7",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Elements",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-01.prefab",
+            "sourceGuid": "ac9cb8e84fde0a74c91fe01dfdc769e3",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Defender",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-01.prefab",
+            "sourceGuid": "4d67bcbc3c76c374fa90dc5ffa6f838e",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Speed",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-01.prefab",
+            "sourceGuid": "7a2e07eec5be34a46a84c8437fbdae1d",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Frost",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-01.prefab",
+            "sourceGuid": "9e990b3870f843e4dbd80afedee9a471",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Radiation",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-01.prefab",
+            "sourceGuid": "90f507a0cc49fc04d9221990f9e41625",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Ranged",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-01.prefab",
+            "sourceGuid": "b1041b0b6504dd14abe3a7e576ace224",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Coffee",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-01.prefab",
+            "sourceGuid": "9f7c7d2b464ca8e4ea0e8d11a5d8addb",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "aura.Infernal",
+            "source": "Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-01.prefab",
+            "sourceGuid": "83232d7f3e4021a428d5f63ef3fa1dce",
+            "unitRadius": 2.500000476837158,
+            "prewarmSeconds": 0.0
+        },
+        {
+            "key": "cast.holy",
+            "source": "Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect1.prefab",
+            "sourceGuid": "be5912b8efa97f745a577d20ecc27fc1",
+            "unitRadius": 17.040002822875977,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.ice",
+            "source": "Assets/100BestEffectPack/Effects/IceEffect/IceEffect3.prefab",
+            "sourceGuid": "a538c26b827a66e45a17c1f359fbd88b",
+            "unitRadius": 12.777503967285156,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.fire",
+            "source": "Assets/100BestEffectPack/Effects/FireEffect/FireEffect2.prefab",
+            "sourceGuid": "16009fa64e3a1724ca5ec5ade141913f",
+            "unitRadius": 7.340002059936523,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.lightning",
+            "source": "Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect1.prefab",
+            "sourceGuid": "c3680525f45d82543be3d8c94fe9b19f",
+            "unitRadius": 15.720004081726074,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.poison",
+            "source": "Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect1.prefab",
+            "sourceGuid": "a4e7a232c05e4e944afa1150096f4846",
+            "unitRadius": 9.357501983642578,
+            "prewarmSeconds": 0.07999999821186066
+        },
+        {
+            "key": "cast.earth",
+            "source": "Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect1.prefab",
+            "sourceGuid": "f959855c62e1a714fa6b267d5be75679",
+            "unitRadius": 16.042505264282227,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.buff",
+            "source": "Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect4.prefab",
+            "sourceGuid": "a410dd85a1c482d4484d8a04ddf47841",
+            "unitRadius": 12.42300033569336,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.dark",
+            "source": "Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect2.prefab",
+            "sourceGuid": "5bb3ae44215754a4b8d9a94ad088d0fe",
+            "unitRadius": 17.040002822875977,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.arcane",
+            "source": "Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect11.prefab",
+            "sourceGuid": "50264093ec1b1714a83b96f2e9de1f54",
+            "unitRadius": 10.650001525878906,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "cast.physical",
+            "source": "Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Orange_Slash_1.prefab",
+            "sourceGuid": "8f767d0b23c8e3b4cb2ead5380b1074d",
+            "unitRadius": 6.071504592895508,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.holy",
+            "source": "Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect1.prefab",
+            "sourceGuid": "be5912b8efa97f745a577d20ecc27fc1",
+            "unitRadius": 17.040002822875977,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.ice",
+            "source": "Assets/100BestEffectPack/Effects/IceEffect/IceEffect3.prefab",
+            "sourceGuid": "a538c26b827a66e45a17c1f359fbd88b",
+            "unitRadius": 12.777503967285156,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.fire",
+            "source": "Assets/100BestEffectPack/Effects/FireEffect/FireEffect2.prefab",
+            "sourceGuid": "16009fa64e3a1724ca5ec5ade141913f",
+            "unitRadius": 7.340002059936523,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.lightning",
+            "source": "Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect1.prefab",
+            "sourceGuid": "c3680525f45d82543be3d8c94fe9b19f",
+            "unitRadius": 15.720004081726074,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.poison",
+            "source": "Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect1.prefab",
+            "sourceGuid": "a4e7a232c05e4e944afa1150096f4846",
+            "unitRadius": 9.357501983642578,
+            "prewarmSeconds": 0.07999999821186066
+        },
+        {
+            "key": "impact.earth",
+            "source": "Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect1.prefab",
+            "sourceGuid": "f959855c62e1a714fa6b267d5be75679",
+            "unitRadius": 16.042505264282227,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.buff",
+            "source": "Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect4.prefab",
+            "sourceGuid": "a410dd85a1c482d4484d8a04ddf47841",
+            "unitRadius": 12.42300033569336,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.dark",
+            "source": "Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect2.prefab",
+            "sourceGuid": "5bb3ae44215754a4b8d9a94ad088d0fe",
+            "unitRadius": 17.040002822875977,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.arcane",
+            "source": "Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect11.prefab",
+            "sourceGuid": "50264093ec1b1714a83b96f2e9de1f54",
+            "unitRadius": 10.650001525878906,
+            "prewarmSeconds": 0.03999999910593033
+        },
+        {
+            "key": "impact.physical",
+            "source": "Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Orange_Slash_1.prefab",
+            "sourceGuid": "8f767d0b23c8e3b4cb2ead5380b1074d",
+            "unitRadius": 6.071504592895508,
+            "prewarmSeconds": 0.03999999910593033
+        }
+    ]
+}

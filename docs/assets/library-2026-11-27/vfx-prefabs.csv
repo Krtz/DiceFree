@@ -1,0 +1,579 @@
+﻿path,particleSystems,loopingSystems,maxDuration,unsupportedMaterials,shaders
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-06.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_PlaneDownCenter2.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Water Lvl 3.prefab,5,5,10,0,Standard; Particles/Standard Unlit
+Assets/48 Particle Effect Pack/Effect/Explosion9.prefab,3,0,1,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Ball2.prefab,3,3,5,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-04.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-07.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-01.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-06.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Sparking2.prefab,3,3,2,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-07.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect11.prefab,4,4,6.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-01.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_01.prefab,4,0,1.6,0,Mobile/Particles/Additive
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_04.prefab,3,0,1.6,0,Mobile/Particles/Additive; Mobile/Particles/Alpha Blended
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Bamboo_Group.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-06.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-01.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/NamuFX/AoeExplosions/Prefabs/explosion_prism.prefab,7,1,7,0,NAMU/MasterShader/Normal/SH_Base_Additive; NAMU/MasterShader/Normal/SH_Base_Alp
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-07.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/LightningState.prefab,2,2,4,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-03.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-02.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-01.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR2 Cartoon Fight (Loop).prefab,4,4,1.7,3,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect9.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-08.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Portal.prefab,6,6,5.2,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/ExplosionEffect/ExplosionEffect2.prefab,6,0,1.6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect5.prefab,5,5,8,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/AC Little Enchant Mesh VFX/Prefabs/Ice Lvl 2.prefab,5,5,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-04.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-06.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-09.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-05.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-05.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-08.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-05.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR _SLASH_.prefab,7,0,1.4,1,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/SwampEffect/SwampEffect4.prefab,5,1,5,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect4.prefab,6,6,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect10.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR4 _POISONED_.prefab,9,0,1.7,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-06.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect5.prefab,4,0,1.1,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-09.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-02.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-07.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect13.prefab,5,5,6,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/Laser bombardment.prefab,5,0,6,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Cube.prefab,4,0,5,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Snow.prefab,4,4,8,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect2.prefab,6,0,0.6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_Walkway_03_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-03.prefab,116,3,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect3.prefab,4,0,2,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-04.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect6.prefab,6,0,4,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-09.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect2.prefab,3,3,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-04.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-07.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_Cylinder 1.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-01.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-04.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-03.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/100BestEffectPack/Effects/FlameEmissionEffect/FlameEmissionEffect.prefab,1,1,7,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Nature/CFXR3 Shield Leaves A (Lit).prefab,2,2,2.5,2,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/PortalEffect/PortalEffect3.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-09.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-04.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-03.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-08.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-06.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-02.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-04.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/48 Particle Effect Pack/Effect/Ball.prefab,3,3,4.5,0,Legacy Shaders/Particles/Additive
+Assets/NamuFX/_CommonAssets/Prefabs/Viewer.prefab,0,0,0,0,
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR2 _WHAM_ 3.prefab,6,0,1.4,1,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/Kunai/Kunai5.prefab,5,5,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/Kunai/Kunai.prefab,3,3,7,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-02.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Liquids/CFXR Water Splash (Smaller).prefab,7,0,4,4,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-01.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-02.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Pike.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect10.prefab,4,0,0.6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-05.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-06.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-04.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-03.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/pzplane.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Prefabs/FX_MagicCircle_Icearrow03.prefab,9,9,10,0,Eric/URP_AdditiveFlow
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-05.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Water Lvl 1.prefab,3,3,10,0,Standard; Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect3.prefab,5,4,5.1,0,Legacy Shaders/Particles/Alpha Blended Premultiply; ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-06.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/LandscapeStone_02_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-06.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Tower_02_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-01.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Purple_Hit_02.prefab,9,1,10,0,Particles/Standard Unlit; Eric/URP_AlphaBlendFlow; Eric/URP_AdditiveFlow
+Assets/48 Particle Effect Pack/Effect/Sparking3.prefab,3,0,4,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-03.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Nature/CFXR4 Wind Trails.prefab,1,1,7,2,Hidden/InternalErrorShader
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_04_Prefab.prefab,0,0,0,0,Shader Graphs/MossRock_Graph
+Assets/48 Particle Effect Pack/Effect/Flame.prefab,2,2,2,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-08.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR2 Shiny Item (Loop).prefab,3,3,3,4,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/PortalEffect/PortalEffect2.prefab,5,5,6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-04.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/SpirEmission.prefab,4,4,4.5,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect7.prefab,6,0,2,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect4.prefab,7,7,4.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect1.prefab,6,6,2,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-05.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-02.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-07.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Explosion5.prefab,3,0,1.1,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-03.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Laser bombardment2.prefab,5,0,4,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Hole.prefab,5,5,6,0,Legacy Shaders/Particles/Additive
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Dark Lvl 3.prefab,6,6,10,0,Standard; Particles/Standard Unlit
+Assets/48 Particle Effect Pack/Effect/Explosion8.prefab,3,0,1.1,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect5.prefab,5,5,3.5,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Cherry_shrub_02.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Impacts/CFXR Impact Glowing HDR (Blue).prefab,4,0,1.45,4,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-08.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-08.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR3 Hit Misc A.prefab,2,0,0.9,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-01.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-09.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect2.prefab,3,0,1.1,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-07.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Fire/CFXR4 Sword Trail FIRE (360 Thin Spiral).prefab,3,0,1.1,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-04.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect1.prefab,6,6,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-07.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-01.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Wisteria_Vine_Ground.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/48 Particle Effect Pack/Effect/Explosion6.prefab,4,0,1.5,0,Legacy Shaders/Particles/Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/Props/Prefabs/LanternStone_01_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Fire/CFXR Fire.prefab,3,3,4,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-08.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-06.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactToon_1.1.0.prefab,3,0,1.6,0,Mobile/Particles/Alpha Blended; Mobile/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-01.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR _POW_.prefab,4,0,1.4,1,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/Kunai/Kunai7.prefab,7,7,6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-04.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Laser bombardment3.prefab,4,0,3.7,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/IceEffect/IceEffect2.prefab,5,5,4.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-05.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-04.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactClassic01_1.1.0.prefab,4,0,1.6,0,Mobile/Particles/Alpha Blended; Mobile/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-03.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect4.prefab,3,3,2,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_03_Prefab.prefab,0,0,0,0,Shader Graphs/MossRock_Graph
+Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect1.prefab,4,4,9,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended; Legacy Shaders/Particles/Additive
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/1_Critical/VFX_Critical_02.prefab,2,0,1.5,0,Mobile/Particles/Additive
+Assets/100BestEffectPack/Effects/BloodEffect/BloodEffect3.prefab,6,0,2.1,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-08.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/LightningCloud.prefab,3,0,6.2,0,Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR Magic Poof.prefab,3,0,2.5,3,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Fire/CFXR Fire Breath.prefab,3,3,2.5,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-03.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/BloodEffect/BloodEffect2.prefab,3,0,2.1,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect14.prefab,4,0,2,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_Cylinder002.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_PlaneDownCenter.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Liquids/CFXR2 Blood Shape Splash.prefab,3,0,1.1,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-02.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-01.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Dark Lvl 3.prefab,6,6,10,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/SwampEffect/SwampEffect2.prefab,7,7,8,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-08.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-05.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-06.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-06.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect.prefab,5,5,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-04.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-08.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Prefabs/Ice/Spell_Ice_2.prefab,6,0,6,0,Shader Graphs/SP2_VFX_SimpleMesh; Shader Graphs/SP2_VFX_AnimatedParticle; Shader Graphs/SP2_VFX_Flipbook; Shader Graphs/SP2_VFX_SimpleParticle
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect5.prefab,4,4,7,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_LightPillar.prefab,9,2,10,0,Eric/URP_AdditiveFlow
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Fire Lvl 2.prefab,4,4,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-07.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-02.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Water Lvl 1.prefab,3,3,10,0,Particles/Standard Unlit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Magic Misc/CFXR4 Falling Stars.prefab,2,2,3,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-06.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-03.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/FX_Eric_Plane001.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect5.prefab,4,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-03.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/FantasyEffect.prefab,4,4,4,0,Legacy Shaders/Particles/Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/VFX/Prefabs/Fireflies_Prefab.prefab,1,1,10,0,Universal Render Pipeline/Particles/Unlit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Spiral).prefab,1,0,0.9,1,Hidden/InternalErrorShader
+Assets/48 Particle Effect Pack/Effect/FireBall.prefab,3,1,4.5,0,Legacy Shaders/Particles/Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Weapon Effect.prefab,8,2,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; Eric/URP_AdditiveFlow; Eric/URP_AlphaBlendFlow
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-09.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/IceEffect/IceEffect3.prefab,5,0,1.1,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Eerie/CFXR2 Souls Escape.prefab,3,0,5.2,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-05.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Ice/CFXR4 Sword Trail ICE (360 Thin Spiral).prefab,3,0,1.12,2,Hidden/InternalErrorShader
+Assets/Matthew Guz/Orbs Effects FREE/Prefab/Basic Orb 2.prefab,1,1,15.5,0,Particles/Standard Unlit
+Assets/Spells Pack 2 Free Version/Prefabs/Ice/Spell_Ice_1.prefab,11,0,10,0,Shader Graphs/SP2_VFX_SphereArea; Shader Graphs/SP2_VFX_Flipbook; Shader Graphs/SP2_VFX_AnimatedMesh; Shader Graphs/SP2_VFX_SimpleParticle
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-03.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR Smoke Source 3D.prefab,1,1,1.3,1,Hidden/InternalErrorShader
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Ice Lvl 2.prefab,5,5,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-08.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Fire Lvl 3.prefab,5,5,10,0,Standard; Particles/Standard Unlit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Nature/CFXR4 Rain Falling.prefab,1,1,2,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-04.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/ExplosionEffect/ExplosionEffect3.prefab,5,0,0.85,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/Portal3.prefab,6,6,7,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect2.prefab,3,3,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-02.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Liriope_Leaves.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR _BOOM_.prefab,6,0,1.4,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-04.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Impacts/CFXR Hit D 3D (Yellow).prefab,3,0,1.1,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-03.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-01.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Nature Lvl 2.prefab,5,5,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-08.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Eerie/CFXR2 Skull Head Alt.prefab,1,0,2.5,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-03.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-03.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-06.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-02.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/FantasySun2.prefab,2,2,3.5,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect8.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/AC Little Enchant Mesh VFX/Prefabs/Fire Lvl 3.prefab,5,5,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-09.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Water Lvl 2.prefab,4,4,10,0,Standard; Particles/Standard Unlit
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Magic Door_Gold.prefab,6,6,10,0,Eric/URP_AdditiveFlow; Eric/URP_AlphaBlendFlow
+Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect3.prefab,4,4,3.5,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect3.prefab,5,5,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/Sparking.prefab,4,0,1.5,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-05.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-06.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-01.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Fire Lvl 1.prefab,3,3,10,0,Standard; Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect4.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-01.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-05.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/LightningBall2.prefab,6,5,4.5,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/BloodEffect/BloodEffect1.prefab,4,0,1.1,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-03.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Magic Misc/CFXR4 Bouncing Glows Bubble (Blue Purple).prefab,2,2,2,2,Hidden/InternalErrorShader
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Dark Lvl 2.prefab,4,4,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-07.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/Kunai/Kunai9.prefab,3,3,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-02.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/DarkBall.prefab,5,5,4.2,0,Legacy Shaders/Particles/Additive
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Blood_01.prefab,2,0,1.5,0,Mobile/Particles/Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-04.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-02.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-01.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-09.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Prefabs/FX_MagicCircle_Icearrow01.prefab,9,9,10,0,Eric/URP_AdditiveFlow
+Assets/100BestEffectPack/Effects/PortalEffect/PortalEffect5.prefab,6,6,6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-06.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Matthew Guz/Orbs Effects FREE/Prefab/Basic Orb.prefab,1,1,15.5,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect12.prefab,4,4,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Fire/CFXR4 Sword Trail FIRE (360 Spiral).prefab,3,0,1.1,2,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Electric/CFXR3 Hit Electric C (Air).prefab,5,0,1.6,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-05.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-03.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect.prefab,5,0,4,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Impacts/CFXR2 Ground Hit.prefab,2,0,1.15,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-07.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/FireBall2.prefab,3,0,5,0,Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Magic Misc/CFXR3 Magic Aura A (Runic).prefab,4,4,8.5,3,Hidden/InternalErrorShader
+Assets/Matthew Guz/Orbs Effects FREE/Prefab/Light Orb 2.prefab,3,2,30,0,Particles/Standard Unlit
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/04_Model/ImpactPlane.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-08.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/PortalEffect/PortalEffect4.prefab,4,4,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-08.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-05.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-08.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Ice Lvl 3.prefab,7,7,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-06.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Dark Lvl 1.prefab,3,3,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-07.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect20.prefab,6,1,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-03.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR3 Ambient Glows.prefab,1,1,3,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-01.prefab,110,71,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/LightningState3.prefab,6,6,4,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/Kunai/Kunai10.prefab,6,6,6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-02.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Buff2.prefab,3,3,4,0,Legacy Shaders/Particles/Additive
+Assets/NamuFX/AoeExplosions/Prefabs/explosion_arcane.prefab,7,2,7,0,NAMU/MasterShader/Normal/SH_Base_Additive; NAMU/MasterShader/Normal/SH_Base_Alp
+Assets/Spells Pack 2 Free Version/Prefabs/Ice/Spell_Ice_2_Hit.prefab,4,0,1.2,0,Shader Graphs/SP2_VFX_SimpleParticle; Shader Graphs/SP2_VFX_Flipbook
+Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect2.prefab,5,5,7,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/100BestEffectPack/Effects/IceEffect/IceEffect5.prefab,6,6,5,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/Kunai/Kunai6.prefab,4,4,9,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-05.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-03.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/NamuFX/AoeExplosions/Prefabs/explosion_wind.prefab,7,1,7,0,NAMU/MasterShader/Normal/SH_Base_Additive; NAMU/MasterShader/Normal/SH_Base_Alp; NAMU/Others/SH_WindExplosion
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-06.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-06.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-08.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Cherry_tree_01.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-06.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Hit PLAIN (Cross).prefab,3,0,1.2,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-08.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-05.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Nature Lvl 3.prefab,6,6,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-07.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Water Lvl 3.prefab,5,5,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-03.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-07.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/FlameEmission.prefab,4,0,8,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Explosion.prefab,4,0,1.5,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-08.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/Kunai/Kunai4.prefab,4,4,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/IceEffect/IceEffect1.prefab,7,7,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-05.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-05.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-08.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-04.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-02.prefab,122,0,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-07.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR Flash.prefab,5,0,1.8,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-08.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-02.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Ice/CFXR4 Sword Trail ICE (360 Spiral).prefab,3,0,1.12,2,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Electric/CFXR2 Sparks Rain.prefab,1,1,2.5,1,Hidden/InternalErrorShader
+Assets/AC Little Enchant Mesh VFX/Prefabs/Fire Lvl 2.prefab,4,4,10,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/FlameEmissionEffect/FlameEmissionEffect3.prefab,2,2,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/Flame2.prefab,2,2,3,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly04-02.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/SwampEffect/SwampEffect3.prefab,4,4,7,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-02.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR3 Fire Explosion B.prefab,5,0,1.5,4,Hidden/InternalErrorShader
+Assets/48 Particle Effect Pack/Effect/Buff.prefab,3,1,6,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-01.prefab,115,0,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/NamuFX/AoeExplosions/Prefabs/explosion_normal.prefab,7,2,7,0,NAMU/MasterShader/Normal/SH_Base_Additive; NAMU/MasterShader/Normal/SH_Base_Alp; NAMU/Others/SH_Sequence
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-01.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Prefabs/Ice/Spell_Ice_1_Hit.prefab,3,0,2,0,Shader Graphs/SP2_VFX_Flipbook; Shader Graphs/SP2_VFX_SimpleParticle
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-07.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Arcade_02.prefab,3,0,1.5,0,Mobile/Particles/Additive
+Assets/100BestEffectPack/Effects/Kunai/Kunai8.prefab,5,5,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-06.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Explosion7.prefab,5,0,4,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect1.prefab,6,6,9,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-04.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-05.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-02.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_Walkway_01_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect8.prefab,4,0,3.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-05.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Nature Lvl 2.prefab,5,5,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-07.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Fire/CFXR2 Firewall A.prefab,2,2,2,2,Hidden/InternalErrorShader
+Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Prefabs/FX_MagicCircle_Icearrow02.prefab,9,9,10,0,Eric/URP_AdditiveFlow
+Assets/AC Little Enchant Mesh VFX/Prefabs/Dark Lvl 2.prefab,4,4,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-04.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-06.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect5.prefab,6,0,0.8,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-03.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/BloodEffect/BloodEffect5.prefab,3,0,1.1,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Liquids/CFXR Water Ripples.prefab,1,0,1.7,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-05.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-02.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Japanese_Spurge_Small.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/100BestEffectPack/Effects/ExplosionEffect/ExplosionEffect5.prefab,6,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/DarkBall2.prefab,5,5,4,0,Legacy Shaders/Particles/Additive
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Ice Lvl 1.prefab,4,4,10,0,Standard; Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom03-02.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/sphere_12pl.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-01.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Demo/Prefabs Demo/Nature Lvl 1.prefab,4,4,10,0,Standard; Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect1.prefab,3,3,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect4.prefab,4,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-03.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Summon_Cylinder01.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-03.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/1_Critical/VFX_Critical_01.prefab,3,0,1.5,0,Mobile/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-05.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-03.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect16.prefab,4,4,8,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-05.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/PortalEffect/PortalEffect.prefab,7,7,6,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_HalfSphere000.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-08.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom04-07.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll_customdata; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-08.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect7.prefab,4,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect5.prefab,6,6,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-04.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Explosion4.prefab,5,1,1.5,0,Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Plain/CFXR4 Sword Trail PLAIN (360 Thin Spiral).prefab,1,0,0.9,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-04.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/ExplosionEffect/ExplosionEffect4.prefab,4,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR4 _FROZEN_.prefab,7,0,1.8,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-01.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR Explosion Smoke 2 Solo (HDR).prefab,4,0,3.2,4,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-06.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-05.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect2.prefab,7,7,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-02.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Poison_01.prefab,2,0,1.5,0,Mobile/Particles/Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-06.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-07.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-08.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-05.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/ExplosionEffect/ExplosionEffect.prefab,4,0,1.1,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect17.prefab,4,0,0.6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/Explosion2.prefab,4,0,1.9,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly02-03.prefab,97,54,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Nature Lvl 1.prefab,4,4,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-02.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR2 _CURSED_.prefab,9,0,2.3,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-05.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 Hit Light B (Air).prefab,4,0,1.5,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-08.prefab,110,71,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR2 Poison Cloud.prefab,2,0,4,2,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect6.prefab,9,9,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-01.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/FlameEmissionEffect/FlameEmissionEffect4.prefab,3,3,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-01.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-07.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-07.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_LootDrop_Blue.prefab,11,11,10,0,Eric/URP_AdditiveFlow
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Ice/CFXR4 Sword Hit ICE (Cross).prefab,4,0,1.2,3,Hidden/InternalErrorShader
+Assets/48 Particle Effect Pack/Effect/LightningBall.prefab,5,1,4.5,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/Kunai/Kunai3.prefab,5,5,5.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/Props/Prefabs/Lantern_Medium_01_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/100BestEffectPack/Effects/FlameEmissionEffect/FlameEmissionEffect2.prefab,3,3,7,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/HolyEffect/HolyEffect2.prefab,6,6,3,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Impacts/CFXR Hit A (Red).prefab,6,0,1.35,3,Hidden/InternalErrorShader
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Greenlight_shrink.prefab,8,2,10,0,Eric/URP_AdditiveFlow
+Assets/AC Little Enchant Mesh VFX/Prefabs/Ice Lvl 3.prefab,7,7,10,0,Particles/Standard Unlit
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Tower_04_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-08.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/LightningState2.prefab,2,2,4,0,Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR2 Broken Heart.prefab,7,0,2.9,4,Hidden/InternalErrorShader
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_03.prefab,4,0,1.6,0,Mobile/Particles/Additive; Mobile/Particles/Alpha Blended
+Assets/Matthew Guz/Orbs Effects FREE/Prefab/Multiple Earth Orb.prefab,23,23,30,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-07.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Fire Lvl 1.prefab,3,3,10,0,Particles/Standard Unlit
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Japanese_Spurge_Cluster.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom02-06.prefab,15,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactCross_1.1.0.prefab,4,0,1.6,0,Mobile/Particles/Alpha Blended; Mobile/Particles/Additive
+Assets/100BestEffectPack/Effects/LightningEffect/LightningEffect3.prefab,6,6,2,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Nature/CFXR4 Rain Splashes.prefab,2,1,1.1,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-03.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Poison_02.prefab,3,0,1.5,0,Mobile/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-07.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Light/CFXR3 LightGlow A (Loop).prefab,3,3,2.5,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom06-01.prefab,13,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-02.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-07.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/2_Impact_1.1.0/VFX_ImpactCritical_1.1.0_Pink.prefab,4,0,1.5,0,Mobile/Particles/Additive
+Assets/Eric VFX Studio/Game VFX - Magic Circle(Free)/Prefabs/FX_MagicCircle_Icearrow04.prefab,9,9,10,0,Eric/URP_AdditiveFlow
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-01.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-04.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-05.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/Kunai/Kunai2.prefab,4,4,6.25,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/48 Particle Effect Pack/Effect/FantasySun.prefab,5,5,3.5,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-07.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom05-02.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect18.prefab,5,0,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-06.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom20-01.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-07.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect9.prefab,3,3,3,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-01.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/SwampEffect/SwampEffect1.prefab,3,3,8.5,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly01-08.prefab,115,2,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/Eric_HalfSphere003.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-06.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-02.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/LandscapeStone_01_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/100BestEffectPack/Effects/FlameEmissionEffect/FlameEmissionEffect5.prefab,4,4,8.5,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-02.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom17-05.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/NamuFX/AoeExplosions/Prefabs/explosion_tech.prefab,8,2,7,0,NAMU/MasterShader/Normal/SH_Base_Additive; NAMU/MasterShader/Normal/SH_Base_Alp; NAMU/MasterShader/DepthAlways/SH_Base_Alp-DepthAlways
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly07-01.prefab,118,57,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-08.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-04.prefab,93,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-09.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/VFX/Prefabs/FireflyLight_Prefab.prefab,0,0,0,0,
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_PinkCross_Up.prefab,8,2,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; Eric/URP_AlphaBlendFlow; Eric/URP_AdditiveFlow
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Arcade_03.prefab,2,0,1.4,0,Mobile/Particles/Additive
+Assets/100BestEffectPack/Effects/FireEffect/FireEffect5.prefab,8,8,3.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Green_Hit.prefab,5,1,10,0,Eric/URP_AdditiveFlow
+Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect3.prefab,4,4,8,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-01.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom10-04.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-08.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-07.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-06.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR3 _WOW_.prefab,5,0,1.8,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-08.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/DirtyEffect/DirtyEffect4.prefab,6,6,7,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect4.prefab,4,4,8,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly09-04.prefab,124,69,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR2 WW Explosion.prefab,8,0,6,3,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Fire/CFXR3 Hit Fire B (Air).prefab,2,0,1.4,2,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR Explosion 1.prefab,6,0,2.75,5,Hidden/InternalErrorShader
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Tower_03_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-02.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Matthew Guz/Orbs Effects FREE/Prefab/Bubble Orb .prefab,2,2,30,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/DarkEffect/DarkEffect4.prefab,5,5,2.5,0,ParticleEffect_Shader/(Shader) Normal Additive; ParticleEffect_Shader/(Shader) Advanced Alpha Blended
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_Walkway_02_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Classic_02.prefab,4,0,2,0,Mobile/Particles/Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/VFX/Prefabs/CherryPetals_Prefab.prefab,1,1,75,0,Universal Render Pipeline/Particles/Lit
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Eerie/CFXR2 WW Enemy Explosion.prefab,7,0,4.1,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly10-09.prefab,89,53,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/AC Little Enchant Mesh VFX/Prefabs/Ice Lvl 1.prefab,4,4,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom01-06.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-07.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-01.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom19-04.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom07-04.prefab,11,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR4 Firework 1 Cyan-Purple (HDR).prefab,1,0,3.2,2,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-03.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly08-03.prefab,119,68,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect1.prefab,5,0,1.5,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom16-07.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Bamboo_Seedling.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/100BestEffectPack/Effects/MedicalEffect/MedicalEffect3.prefab,5,5,3,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Nature/CFXR3 Hit Leaves A (Lit).prefab,4,0,2.5,3,Hidden/InternalErrorShader
+Assets/AC Little Enchant Mesh VFX/Prefabs/Dark Lvl 1.prefab,3,3,10,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/BloodEffect/BloodEffect4.prefab,3,0,1.6,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-02.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Arcade_01.prefab,3,0,1.5,0,Mobile/Particles/Additive
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect19.prefab,3,0,6,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/AC Little Enchant Mesh VFX/Prefabs/Nature Lvl 3.prefab,6,6,10,0,Particles/Standard Unlit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom09-05.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Portal2.prefab,5,5,5,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/FireBall3.prefab,3,0,4.5,0,Legacy Shaders/Particles/Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Sword Trails/Fire/CFXR4 Sword Hit FIRE (Cross).prefab,4,0,1.2,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly03-05.prefab,102,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Liriope_Cluster.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/48 Particle Effect Pack/Effect/GreemPlame.prefab,3,3,4,0,Legacy Shaders/Particles/Additive
+Assets/48 Particle Effect Pack/Effect/Poison.prefab,3,3,4,0,Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom13-04.prefab,10,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom08-04.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Explosion3.prefab,8,0,6,0,Legacy Shaders/Particles/Additive
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect2.prefab,7,7,9,0,ParticleEffect_Shader/(Shader) Normal Additive; Legacy Shaders/Particles/Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-03.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly06-05.prefab,110,62,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Buff3.prefab,4,4,3,0,Legacy Shaders/Particles/Additive
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Wisteria_Vine_Ceiling.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Tower_01_Prefab.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-03.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Ice/CFXR3 Hit Ice B (Air).prefab,5,0,1.4,5,Hidden/InternalErrorShader
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Liquids/CFXR4 Bubbles Breath Underwater Loop.prefab,2,2,6,1,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom15-02.prefab,9,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/Eric VFX Studio/Free Game VFX/Prefab/FX_Orange_Slash_1.prefab,6,2,10,0,Eric/URP_AdditiveFlow; Eric/URP_AlphaBlendFlow
+Assets/Spells Pack 2 Free Version/Demo/Environment/Vegetation/Prefabs/Lily_Pad_Small.prefab,0,0,0,0,Shader Graphs/VegetationSSS_Graph
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Liquids/CFXR2 Blood (Directional).prefab,2,0,1.15,1,Hidden/InternalErrorShader
+Assets/100BestEffectPack/Effects/IceEffect/IceEffect4.prefab,7,7,4,0,ParticleEffect_Shader/(Shader) Normal Additive
+Assets/100BestEffectPack/Effects/SwampEffect/SwampEffect5.prefab,7,7,6.5,0,ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Misc/CFXR3 Hit Misc F Smoke.prefab,2,0,1.1,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-08.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom11-01.prefab,12,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/100BestEffectPack/Effects/OtherMagicEffect/MagicEffect15.prefab,8,8,7,0,Legacy Shaders/Particles/Additive; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Explosions/CFXR4 Firework HDR Shoot Single (Random Color).prefab,3,0,3.2,3,Hidden/InternalErrorShader
+Assets/Spells Pack 2 Free Version/Demo/Environment/Terrain/Prefabs/Stone_02_Prefab.prefab,0,0,0,0,Shader Graphs/MossRock_Graph
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom14-02.prefab,14,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Fire/CFXR4 Sun.prefab,2,2,2,2,Hidden/InternalErrorShader
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/00_Prefab/0_Classic/VFX_Blood_02.prefab,4,0,1.5,0,Mobile/Particles/Alpha Blended; Mobile/Particles/Additive
+Assets/Eric VFX Studio/Free Game VFX/Prefab/Mesh/sphere_8pl.prefab,0,0,0,0,Universal Render Pipeline/Lit
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom18-06.prefab,16,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Texts/CFXR _BOING_.prefab,6,0,1.4,1,Hidden/InternalErrorShader
+Assets/AC Little Enchant Mesh VFX/Prefabs/Water Lvl 2.prefab,4,4,10,0,Particles/Standard Unlit
+Assets/100BestEffectPack/Effects/PoisonEffect/PoisonEffect3.prefab,6,6,10,0,Legacy Shaders/Particles/Alpha Blended Premultiply; ParticleEffect_Shader/(Shader) Advanced Alpha Blended; ParticleEffect_Shader/(Shader) Normal Additive
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Bottom/Bottom12-04.prefab,25,1,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Electric/CFXR Electrified 3.prefab,3,3,1.8,3,Hidden/InternalErrorShader
+Assets/KoreanTraditionalPattern_Effect/Prefabs/Fly/Fly05-07.prefab,96,63,10,0,Universal Render Pipeline/Particles/Unlit; Shader Graphs/AdditiveBlend_Scroll; Shader Graphs/AlphaBlend_Scroll; Shader Graphs/AlphaBlend_Scroll_customdata
+Assets/48 Particle Effect Pack/Effect/Laser bombardment4.prefab,5,0,4,0,Legacy Shaders/Particles/Additive

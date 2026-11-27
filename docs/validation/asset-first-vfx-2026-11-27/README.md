@@ -1,0 +1,9 @@
+# Native asset VFX validation — 27 November 2026
+
+Final Windows player: FireMage-20261127-182821. The static review resolves all nine Korean ground-aura styles and twenty cast/impact bindings, rejects missing/unsupported materials and removes non-decorative imported scripts/colliders/audio/lights from the curated effects. Aura material queues preserve visibility over transparent roads.
+
+The 106-check standalone review uses a disposable copied save. It verifies real particles and shader support for all nine auras, eligibility hiding, restart and hierarchy cleanup; ten native cast themes and their lifetimes; rejected targeting; ordinary Fireball damage, Mana and Heat; and empowered direct damage plus the six expected field ticks. Ground patterns are sized by their actual Pattern plane rather than outlying sparks, and one-shot layers are adapted to continuous aura loops. Final captures include the persistent Infernal pattern and native lightning.
+
+`source-comparison.json` verifies 179 main/QA source and effect-dependency files are byte-identical. `editor-state.json` verifies the main editor was left on clean Cornberg outside Play Mode with no compilation failure. The source packs and generated local derivatives are not redistributed with this evidence. Reproduce from the tracked source recipe and existing local packs using AssetPackVfxAuthoring.Build, AssetFirstVfxQA, AssetFirstVfxRuntimeReview and PackageAssetFirstVfxEvidence.
+
+The catalog is an exhaustive filename/metadata inventory with explicit model-inspection limitations, and the replacement shortlist is technical/source-based triage. It does not claim artistic approval of every candidate or a unique finished choreography for every skill. Batch screenshots omit overlay UI. There was no new manual balance or live co-op acceptance test.

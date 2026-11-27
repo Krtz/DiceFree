@@ -1,0 +1,58 @@
+[
+  {
+    "folder": "Assets/JMO Assets/Cartoon FX Remaster/Demo Assets",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\JMO Assets\\Cartoon FX Remaster\\Demo Assets\\CFXR Demo.asmdef",
+    "reason": "Missing optional uGUI demo dependency",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/Spells Pack 2 Free Version/Demo/Environment/Scripts",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\Spells Pack 2 Free Version\\Demo\\Environment\\Scripts\\DiceFree.OptionalVendorDemo.SpellsEnvironment.asmdef",
+    "reason": "Demo light flicker uses removed GetInstanceID API",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/NamuFX/_CommonAssets/Scripts",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\NamuFX\\_CommonAssets\\Scripts\\DiceFree.OptionalVendorDemo.Namu.asmdef",
+    "reason": "Viewer is demo-only and requires uGUI",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/Spells Pack 2 Free Version/Demo/Scene/Scripts",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\Spells Pack 2 Free Version\\Demo\\Scene\\Scripts\\DiceFree.OptionalVendorDemo.SpellsPack.asmdef",
+    "reason": "Optional demo UI requires uGUI/TMP",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion/Scripts",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\VFXPACK_IMPACT_WALLCOEUR_FreeVersion\\Scripts\\DiceFree.OptionalVendorDemo.Wallcoeur.asmdef",
+    "reason": "Optional viewer UI requires TMP",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/100BestEffectPack/Script",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\100BestEffectPack\\Script\\DiceFree.OptionalLegacyVfxCode.Hundred.asmdef",
+    "reason": "Legacy GUIText demo and lifetime helpers; curated effects use shared game lifetime",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  },
+  {
+    "folder": "Assets/48 Particle Effect Pack/Script",
+    "definition": "T:\\TEMP\\DiceFree-Options\\Assets\\48 Particle Effect Pack\\Script\\DiceFree.OptionalLegacyVfxCode.FortyEight.asmdef",
+    "reason": "Duplicate global demo/lifetime type names and removed GUIText API",
+    "enableFlag": "DICEFREE_ENABLE_VENDOR_DEMOS",
+    "sourceFilesDeleted": 0,
+    "originalArchivePreserved": true
+  }
+]

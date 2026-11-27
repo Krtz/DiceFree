@@ -1,0 +1,26 @@
+﻿folder,files,bytes,referenced,scenes,scripts,review
+Assets/100BestEffectPack,320,41489913,41,1,45,retain: current scene/Resources references
+Assets/48 Particle Effect Pack,145,21538339,0,1,6,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/AC Little Enchant Mesh VFX,66,16776297,0,1,1,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/AdventureForge,25,5707031,4,0,0,retain: current scene/Resources references
+Assets/AllStarCharacterLibrary,8,43651406,4,0,0,retain: current scene/Resources references
+Assets/Blink,119,54612177,22,1,0,retain: current scene/Resources references
+Assets/Containers pack,3,33551,0,0,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/DefaultNetworkPrefabs.asset,1,491,0,0,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Eric VFX Studio,142,17610095,8,2,0,retain: current scene/Resources references
+Assets/GUI_Parts,45,9466706,0,1,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/JMO Assets,489,39377636,0,1,23,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/KoreanTraditionalPattern_Effect,3804,8878967758,25,1,0,retain: current scene/Resources references
+Assets/Low-Poly Medieval Market,39,13698158,30,0,0,retain: current scene/Resources references
+Assets/Matthew Guz,36,31799159,0,1,2,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Medieval Village Building Pack,17,124036429,14,0,0,retain: current scene/Resources references
+Assets/NamuFX,80,31454283,0,1,2,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/New Terrain.asset,1,557376,0,0,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Polytope Studio,14,7147162,3,0,0,retain: current scene/Resources references
+Assets/PurePoly,8,181205,4,0,0,retain: current scene/Resources references
+Assets/SpellBookPreface,28,1793676,0,1,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Spells Pack 2 Free Version,274,1408467543,0,1,11,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Tazo_2D,61,369339,0,0,0,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/VFXPACK_IMPACT_WALLCOEUR_FreeVersion,182,28230105,0,1,3,review: no enabled-scene/Resources references; not a deletion authorization
+Assets/Wolf,29,71660755,12,3,0,retain: current scene/Resources references
+Assets/the_wood_cabin,1,102919,0,0,0,review: no enabled-scene/Resources references; not a deletion authorization

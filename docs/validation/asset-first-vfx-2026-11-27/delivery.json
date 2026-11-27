@@ -1,0 +1,13 @@
+{
+  "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\FireMage-20261127-182821\\DiceFree.exe",
+  "runtimeChecks": 106,
+  "nativeBindings": 29,
+  "koreanAuras": 9,
+  "castImpactTemplates": 20,
+  "classCastPaths": 16,
+  "namedSkillMappings": 91,
+  "sourceComparisons": 179,
+  "buildErrors": 0,
+  "buildWarnings": 2,
+  "limitations": "Automated disposable-profile validation; source-based replacement suggestions are not artistic approval of every candidate. Batch captures omit overlay UI. Native casting/common-impact integration does not imply unique final choreography for every skill."
+}
