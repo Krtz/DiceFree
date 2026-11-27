@@ -1153,3 +1153,42 @@ Derived theoretical minimum per dagger `p` for Assassin to beat Thief RAW unmodd
 4. Continue class quest/mentor once combat rules complete.
 
 **DESIGN DOCS ONLY. No Unity source/asset/scene/build/test changes or branch merges.**
+
+
+## Assassin Tier III Round 27 — 2026-11-27 USER SELECTS 90% OF B PER DAGGER AS CURRENT PREFERENCE, REQUESTS 80/85/90 RECOMPARISON; ASSASSIN VS THIEF AT SAME CLASS LEVEL
+
+### Latest user wording and approval status
+
+User says "**Each of the two basic dagger hits deals 90% of B, so full sequence1.8B. B remains approved 8+AGI and serves as reference for existing ability formulas. Both attack cycle and intra-hit spacing scale with shared AttackSpeed.**" This is a direct selection of **p=0.90** as the current working design; user immediately adds "**90% seems the best so far, but what if we check again with 80% vs 85% and 90%. and yes, we are only comparing against thief at the same level, not a level 60 thief vs level 1 assasin :)**". Accordingly, **record 90% PER HIT as their selected CURRENT PREFERRED default**, not a finalized irreversible lock: user explicitly reopens p=.80/.85/.90 for comparison and may choose another after seeing numerical results. No change to B, attack timing or already-approved skill coefficients. The intended metric is **raw BASIC attack DPS versus Thief at THE SAME CLASS LEVEL**; do NOT benchmark freshly reset TierIII Assassin Lv1 against TierII Thief Lv60 or impose advancement-transition DPS equivalence.
+
+### Formulas, source verified in actual repository previous round
+
+Current Thief `Assets/_DiceFree/Settings/Thief/Thief dagger basic.asset`: Phys AGI-only `baseDamage5+AGI`, nominal basic interval0.87sec. `Thief class.asset` class-level1 AGI18, AGI growth+3.1 per class level. Assassin user-approved raw reference `B=8+AGI`, classLv1 AGI35, growth+7 AGI/class level, nominal one TWO-HIT BASIC sequence every2.5sec, the second packet0.3sec after first; shared `AttackSpeed=1+.00025*AGI` before gear/temp effects divides BOTH 2.5sec cycle and0.3sec gap. Let `p` = per-dagger raw fraction of B: **`RawBasicPerDagger=p*B`** and **`RawBasicFullSequence=2*p*B`**. Compare separate physical packets using shared hit, crit, defense/accuracy. B itself remains EXACT `8+AGI` and remains the normalization reference in approved Stealth, Backstab, Execute, Envenom formulas; DO NOT rebase skill B to 2pB. User's earlier two 50% packets sumB design is superseded as actual desired DPS after Round26 and current p0.90 selection, but now .80/.85 also under consideration.
+
+With no equipment, passives/AGI granted by CriticalMastery, crit, Stealth opener, Nature poison, skill casts, misses, target mitigation, level-gating differences, or class spread:
+`ThiefAGI(L)=18+3.1*(L-1)`, `AssassinAGI(L)=35+7*(L-1)`,
+`ThiefRawDPS(L)=(5+ThiefAGI(L))*(1+.00025*ThiefAGI(L))/.87`,
+`AssassinRawDPS(L,p)=2*p*(8+AssassinAGI(L))*(1+.00025*AssassinAGI(L))/2.5`.
+Calculated verified comparison table (same CLASS level each row):
+
+| CLASS LV | Thief raw basic DPS | Assassin p=.80 (1.6B cycle) | Assassin p=.85 (1.7B cycle) | Assassin p=.90 (1.8B cycle) | Assassin% greater than Thief at p=.80 / p=.85 / p=.90 |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 1 | 26.56 | 27.76 | 29.50 | 31.23 | +4.5% / +11.1% / +17.6% |
+| 10 | 59.18 | 69.50 | 73.85 | 78.19 | +17.4% / +24.8% / +32.1% |
+| 30 | 133.27 | 166.81 | 177.23 | 187.66 | +25.2% / +33.0% / +40.8% |
+| 60 | 248.55 | 324.53 | 344.81 | 365.09 | +30.6% / +38.7% / +46.9% |
+| 100 | 410.00 | 556.77 | 591.57 | 626.37 | +35.8% / +44.3% / +52.8% |
+| 150 | 624.23 | 882.35 | 937.50 | 992.65 | +41.4% / +50.2% / +59.0% |
+
+Break-even required p to merely tie Thief same class level without skills: classLv1 76.53%, Lv10 68.12%, Lv30 63.92%, Lv60 61.27%, Lv100 58.91%, Lv150 56.60%. All three .80/.85/.90 exceed Thief raw baseline even at classLv1, though margin at .80 classLv1 is only+4.5%. These are THEORETICAL SOURCE-GROUNDED BASELINE NUMBERS, NOT UNITY PLAYTEST, NOT DETERMINISTIC RESOLVED DAMAGE, and do not include physical defense, naturally inherited passives, crit mastery+3AGI/r and+1pp basic crit/r, coating Nature packet+DoT, items, burst skills, or class distinct unlock/survival. There is no claim of comparative *real gameplay* DPS from these values.
+
+### Recommendation and next decision (NO NEW P APPROVED AFTER RECOMPARISON)
+
+For preserving meaningful Assassin baseline advantage but avoiding excessive late-game combined synergy with poison and guaranteed basic crit, **designer now leans p=.85 per hit** (1.70B total cycle, Lv1+11.1% vs Thief, Lv60+38.7%, Lv150+50.2%) over the earlier p=.90 recommendation, although user previously selected p=.90 as the best so far and may retain that choice. If the class identity calls for stronger basic pressure, p=.90 remains reasonable target. The user has NOT explicitly switched to .85 yet; **do not replace their current .90 working selection with .85 on behalf of the user**. Ask next: choose after comparison **80% (1.6B cycle)** vs **85% (1.7B)** vs **retain 90% (1.8B)**, or custom. The chosen p impacts only raw normal basic hits, **not** the B reference itself or approved Backstab and Execute raw formula multipliers (Backstab `B*(.90+.07rB)` positional `1.15+.01rB`, max Stealth opener `1.10+.05rS`; Execute `B*(1+.12rX)*(1+(.40+.09rX)*missingHP)`, cap nearly dead14.6B). Envenom on-hit `B*(.08+.006rE)` per eligible success plus DoT `B*(.0075+.001rE)` every0.5sec do NOT change coefficients based on p.
+
+### Remaining design and engineering notes
+
+- Critical Mastery guaranteed basic crit charges consumed once per successful individual dagger impact, missed packet no charge, shield absorbed still consumes. Stealth's first two-hit basic sequence uses opener multiplier on BOTH hits but consumes the opener ONCE on sequence attempt including miss. Poison coat procs each individually successful dagger packet and Backstab, not Execute, refreshes ONE four-second DoT with unchanged0.5s tick phase. Two hits must be orchestrated by existing shared accuracy+DamageResolver hooks; current Unity `BasicAttack.cs` resolves only ONE hit per generic attack, so this is unimplemented design and needs a class-specific two-impact scheduler / basic pipeline re-use.
+- Preserve approved user mana/CD/rank caps, class start and growth, exact 150 gating schedule, skill damage math and Stealth linear duration `6+9*(rS-1)/24` seconds. No Unity implementation request in this round.
+
+**DOCS ONLY: no gameplay source/asset/scene/build/test changes or merges.**
