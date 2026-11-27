@@ -1,0 +1,65 @@
+{
+  "assetId": "dicefree_ember_magician",
+  "category": "character",
+  "description": "User-selected orange Magician from magician.zip, archive SHA256 daa6e548c585df2b5129e99d7fb883d508a984b8bc5abee8143a75b5bc6d3092. Added 22-bone weighted humanoid rig and T bind pose; preserved original orange atlas and staff. Source author and exact license remain unverified; user explicitly selected and authorized this local library asset.",
+  "displayName": "dicefree-ember-magician",
+  "inspection": {
+    "animationCount": 0,
+    "boundingBox": {
+      "max": [
+        0.6991000771522522,
+        2.4213595290597345,
+        0.6482030153274536
+      ],
+      "min": [
+        -0.8196515946011669,
+        -3.7835032884459e-9,
+        -0.4655541181564331
+      ],
+      "sizeMeters": [
+        1.518751671753419,
+        2.421359532843238,
+        1.1137571334838867
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "fileBytes": 720192,
+    "filePath": "model.glb",
+    "generator": "glTF-Transform v4.5.1",
+    "hasNormals": true,
+    "hasSkin": true,
+    "hasTangents": true,
+    "hasUVs": true,
+    "materialCount": 1,
+    "meshCount": 2,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasEmissiveTexture": false,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false
+    },
+    "primitiveCount": 2,
+    "sceneGraphFallback": false,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "bytes": 450025,
+        "height": 512,
+        "mimeType": "image/png",
+        "name": "Magician_Albedo",
+        "width": 512
+      }
+    ],
+    "triangleCount": 4874,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "vertexCount": 3556,
+    "warnings": [
+      "texture is below 1024px on an axis and will blur at close range: Magician_Albedo (512x512)"
+    ]
+  },
+  "license": "LicenseRef-UserSupplied",
+  "schema": "game_dev.asset_metadata.v1"
+}

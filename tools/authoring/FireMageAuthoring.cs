@@ -65,33 +65,14 @@ public static class FireMageAuthoring
     }
     private static void Form()
     {
-        var root=new GameObject("Cinderweave Fire Mage");
-        try
-        {
-            var model=(GameObject)PrefabUtility.InstantiatePrefab(Load<GameObject>("Assets/_DiceFree/Art/Characters/Dawnwarden/Dawnwarden.fbx"),root.transform);
-            var animator=model.GetComponent<Animator>();
-            animator.runtimeAnimatorController=Load<RuntimeAnimatorController>("Assets/_DiceFree/Resources/PlayerMotion/TierTwo/Priest.controller");animator.applyRootMotion=false;animator.cullingMode=AnimatorCullingMode.AlwaysAnimate;
-            foreach(var skin in model.GetComponentsInChildren<SkinnedMeshRenderer>(true))
-            {
-                skin.updateWhenOffscreen=true;skin.sharedMaterials=skin.sharedMaterials.Select(original=>{
-                    string name=original.name.ToLowerInvariant();if(!new[]{"wool","linen","lining","silk","brass"}.Any(name.Contains))return original;
-                    string path=Data+"Cinderweave "+original.name+".mat";var material=AssetDatabase.LoadAssetAtPath<Material>(path);
-                    if(material==null){material=new Material(original);AssetDatabase.CreateAsset(material,path);}
-                    material.color=name.Contains("brass")?new(.95f,.55f,.12f):name.Contains("lining")||name.Contains("silk")?new(.9f,.16f,.025f):new(.22f,.055f,.035f);EditorUtility.SetDirty(material);return material;
-                }).ToArray();
-            }
-            foreach(var skin in model.GetComponentsInChildren<SkinnedMeshRenderer>(true))if(skin.name.Contains("Lantern"))Object.DestroyImmediate(skin.gameObject);
-            var right=model.GetComponentsInChildren<Transform>(true).Single(t=>t.name=="Grip.R");var left=model.GetComponentsInChildren<Transform>(true).Single(t=>t.name=="Hand.L");
-            if(right==null||left==null)throw new InvalidOperationException("Fire Mage humanoid lacks normal hands.");
-            var wand=Group(right,"Emberglass wand",Vector3.zero);wand.localRotation=Quaternion.Euler(0,0,-90);
-            wand.localScale=new Vector3(1/Mathf.Abs(right.lossyScale.x),1/Mathf.Abs(right.lossyScale.y),1/Mathf.Abs(right.lossyScale.z));
-            Part(wand,"Obsidian wand",new(0,.20f,0),new(.04f,.48f,.04f),Paint("Obsidian",new(.09f,.06f,.055f)),PrimitiveType.Cylinder);
-            Part(wand,"Emberglass focus",new(0,.47f,0),new(.12f,.21f,.12f),Paint("Living ember",new(1,.34f,.035f),true),PrimitiveType.Sphere);
-            var focus=Group(left,"Left-hand focus",Vector3.zero);focus.localScale=new Vector3(1/Mathf.Abs(left.lossyScale.x),1/Mathf.Abs(left.lossyScale.y),1/Mathf.Abs(left.lossyScale.z));
-            Part(focus,"Levitating ember",new(.02f,.17f,.04f),Vector3.one*.17f,Paint("Living ember",new(1,.34f,.035f),true),PrimitiveType.Sphere);
-            foreach(var t in root.GetComponentsInChildren<Transform>(true))t.gameObject.layer=2;
-            form=PrefabUtility.SaveAsPrefabAsset(root,Data+"Fire Mage form.prefab");
-        }finally{Object.DestroyImmediate(root);}
+        form=FireMageMagicianAuthoring.CreateForm();
+    }
+    public static void RefreshPresentation()
+    {
+        Directory.CreateDirectory(Data);Directory.CreateDirectory("Logs");AssetDatabase.Refresh();
+        DataAssets();Form();Menu();PlayerScene("Cornberg");PlayerScene("DevelopmentRoom");Camp();
+        AssetDatabase.SaveAssets();EditorSceneManager.OpenScene("Assets/_DiceFree/Scenes/StartMenu.unity");
+        Debug.Log("DICEFREE_FIRE_MAGE_MAGICIAN_AUTHOR_OK");
     }
     private static void Menu()
     {

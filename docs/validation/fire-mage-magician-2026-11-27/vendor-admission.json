@@ -1,0 +1,21 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "vendor.admit",
+  "ok": true,
+  "data": {
+    "reused": false,
+    "packageId": "pkg_d42ecf821cd4f877b06265cc",
+    "projectRoot": "T:\\TEMP\\DiceFree-Options",
+    "destination": "T:\\TEMP\\DiceFree-Options\\Assets\\_DiceFree\\Art\\Characters\\FireMageMagician\\Canonical",
+    "lockPath": "T:\\TEMP\\DiceFree-Options\\.game-dev\\vendor-lock.json",
+    "blockers": [],
+    "evidence": {
+      "packageHashesVerified": true,
+      "copiedPackageHashesVerified": true,
+      "projectImportTestPerformed": false,
+      "gpuRenderTestPerformed": false
+    },
+    "dryRun": false,
+    "receiptPath": "T:\\TEMP\\DiceFree-Options\\.game-dev\\vendor-receipts\\2026-11-27T14-48-48-319Z-dicefree_ember_magician-dc944ecd-106f-4cc5-b912-27b48cd2e619.json"
+  }
+}

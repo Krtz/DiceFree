@@ -558570,7 +558570,7 @@ Transform:
   - {fileID: 810595051}
   - {fileID: 207729340}
   - {fileID: 1936839522}
-  - {fileID: 1156977806}
+  - {fileID: 1918291051}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1288724050
@@ -559316,8 +559316,8 @@ MonoBehaviour:
     visualRoot: {fileID: 1936839522}
     animator: {fileID: 1936839523}
   - classId: class.fire-mage
-    visualRoot: {fileID: 1156977806}
-    animator: {fileID: 1156977807}
+    visualRoot: {fileID: 1918291051}
+    animator: {fileID: 1918291052}
 --- !u!114 &1288724084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587464,7 +1587464,51 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8282914853694215992, guid: ad6cf21c7f0039b49a8548957436a688, type: 3}
   m_PrefabInstance: {fileID: 1936839521}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1156977805
+--- !u!114 &1288724155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e79afc2df5946043ac9573f340cdf77, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.FireMageAbilityProvider
+  icons:
+  - {fileID: 2800000, guid: 33106d2e9076b6645af8a4def15a103b, type: 2}
+  - {fileID: 2800000, guid: 1e929718e4b8a3d4b9e89cb8fcbf3c8d, type: 2}
+  - {fileID: 2800000, guid: 946657d63a4c5e643b74d398d86ed2e6, type: 2}
+  - {fileID: 2800000, guid: f1fa0fb958127dc4aabc77e77639908a, type: 2}
+  - {fileID: 2800000, guid: 193a1ff16c57d1146bedc9047a7c00d7, type: 2}
+  - {fileID: 2800000, guid: 376868297d44ea64cba5bd5a92ddf4c0, type: 2}
+--- !u!114 &1288724156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4ad7d2ebb9aa248811f1531282b072, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.FireMageCaster
+  fire: {fileID: 11400000, guid: 04cf0885623f38f48a7c20c946476cd2, type: 2}
+--- !u!114 &1288724157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288724048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693a179c63850134fac6dd8911c5db5b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.FireMageProgression
+--- !u!1001 &1918291050
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1587525,57 +1587569,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
---- !u!4 &1156977806 stripped
+--- !u!4 &1918291051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5972510867214236903, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
-  m_PrefabInstance: {fileID: 1156977805}
+  m_PrefabInstance: {fileID: 1918291050}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1156977807 stripped
+--- !u!95 &1918291052 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 387186686998166210, guid: a2edc20b6a6bf1f46b02c895cfc47dde, type: 3}
-  m_PrefabInstance: {fileID: 1156977805}
+  m_PrefabInstance: {fileID: 1918291050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1288724155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288724048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e79afc2df5946043ac9573f340cdf77, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: DiceFree.UI.Runtime::DiceFree.UI.FireMageAbilityProvider
-  icons:
-  - {fileID: 2800000, guid: 33106d2e9076b6645af8a4def15a103b, type: 2}
-  - {fileID: 2800000, guid: 1e929718e4b8a3d4b9e89cb8fcbf3c8d, type: 2}
-  - {fileID: 2800000, guid: 946657d63a4c5e643b74d398d86ed2e6, type: 2}
-  - {fileID: 2800000, guid: f1fa0fb958127dc4aabc77e77639908a, type: 2}
-  - {fileID: 2800000, guid: 193a1ff16c57d1146bedc9047a7c00d7, type: 2}
-  - {fileID: 2800000, guid: 376868297d44ea64cba5bd5a92ddf4c0, type: 2}
---- !u!114 &1288724156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288724048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4ad7d2ebb9aa248811f1531282b072, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Combat.FireMageCaster
-  fire: {fileID: 11400000, guid: 04cf0885623f38f48a7c20c946476cd2, type: 2}
---- !u!114 &1288724157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288724048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693a179c63850134fac6dd8911c5db5b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: DiceFree.Gameplay.Runtime::DiceFree.Skills.FireMageProgression

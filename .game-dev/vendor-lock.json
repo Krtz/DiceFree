@@ -12,6 +12,16 @@
       "admittedAt": "2026-11-26T15:16:02.641Z"
     },
     {
+      "packageId": "pkg_d42ecf821cd4f877b06265cc",
+      "assetId": "dicefree_ember_magician",
+      "version": "1.0.1",
+      "destination": "Assets\\_DiceFree\\Art\\Characters\\FireMageMagician\\Canonical",
+      "modelSha256": "2183388eb6831215521f75b7796e497291c1337295d5b57fc0581ee77a00cf89",
+      "manifestSha256": "c7ef3083316534419cb51e6a29dfd2f4a42fcc495c8cf572357852e091284292",
+      "license": "LicenseRef-UserSupplied",
+      "admittedAt": "2026-11-27T14:48:48.319Z"
+    },
+    {
       "packageId": "pkg_607fd1941c9d4133637e283a",
       "assetId": "dicefree_mirage_mage",
       "version": "1.0.0",

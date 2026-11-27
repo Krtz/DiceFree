@@ -1,0 +1,23 @@
+// Compare the delivered Unity source with the project used to build the player.
+const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
+const root=process.argv[2]||'T:/TEMP/DiceFree-Options',qa=process.argv[3]||'T:/TEMP/DiceFree-Roadwarden-QA';
+const build=fs.readFileSync(qa+'/Logs/FireMageBuildPath.txt','utf8').trim().replace(/\\/g,'/'),out=root+'/docs/validation/fire-mage-magician-2026-11-27';
+const git=(...args)=>cp.execFileSync('git',['-c','safe.directory='+root,...args],{cwd:root,encoding:'utf8',maxBuffer:400e6});
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(d+'/'+e.name):[d+'/'+e.name]);
+let paths=git('diff','HEAD','--name-only','--','Assets/_DiceFree').trim().split('\n').filter(Boolean);
+paths.push(...walk(root+'/Assets/_DiceFree/Art/Characters/FireMageMagician').map(p=>p.slice(root.length+1)),'Assets/_DiceFree/Art/Characters/FireMageMagician.meta','Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs','Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs.meta');
+const canonical=(b,p)=>{let s=b.toString('utf8').replace(/\r/g,'').replace(/[\t ]+$/gm,'');if(p.endsWith('.unity')){const blocks=s.split(/(?=^--- !u!)/m);s=blocks[0]+blocks.slice(1).sort().join('');}return s;};
+const receipts=[...new Set(paths)].sort().map(p=>{const a=fs.readFileSync(root+'/'+p),b=fs.readFileSync(qa+'/'+p),ha=hash(a),hb=hash(b);if(ha!==hb&&(/\.(fbx|glb|png|bin)$/.test(p)||canonical(a,p)!==canonical(b,p)))throw Error('Source mismatch: '+p);return {path:p,mainSha256:ha,qaSha256:hb,comparison:ha===hb?'byte-identical':'same serialized content; whitespace or scene record order differs'};});
+fs.writeFileSync(out+'/source-comparison.json',JSON.stringify(receipts,null,2)+'\n');
+const staticReview=JSON.parse(fs.readFileSync(out+'/class-static-review.json')),model=JSON.parse(fs.readFileSync(out+'/model-static-review.json')),runtime=JSON.parse(fs.readFileSync(out+'/runtime-review.json')),report=JSON.parse(fs.readFileSync(out+'/build-report.json'));
+for(const r of [staticReview,model,runtime])if(r.status!=='passed'||r.error||r.unityErrors?.length)throw Error('Review failed');
+if(report.result!=='Succeeded'||report.errors!==0)throw Error('Build failed');
+const log=fs.readFileSync(root+'/Logs/FireMageMagicianMainImport.log','utf8');if(!log.includes('Application will exit with return code 0')||/error CS\d+/.test(log))throw Error('Main import failed');
+if(hash(fs.readFileSync(root+'/ProjectSettings/PackageManagerSettings.asset'))!==hash(fs.readFileSync(root+'/Logs/FireMageMagicianPackageManagerBefore.asset')))throw Error('Unrelated settings changed');
+const prior=qa+'/Builds/FireMage-20261127-000732/DiceFree_Data/Managed';
+const assemblies=fs.readdirSync(build+'/DiceFree_Data/Managed').filter(n=>/^DiceFree.*\.dll$/.test(n)).map(n=>({assembly:n,priorSha256:hash(fs.readFileSync(prior+'/'+n)),deliverySha256:hash(fs.readFileSync(build+'/DiceFree_Data/Managed/'+n))}));
+const changedSource=git('diff','HEAD','--name-only','--','Assets/_DiceFree/Scripts').trim().split('\n').filter(p=>p.endsWith('.cs')); if(changedSource.some(p=>!['Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs','Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs'].includes(p)))throw Error('Unexpected runtime source modification');
+fs.writeFileSync(out+'/assembly-comparison.json',JSON.stringify(assemblies,null,2)+'\n');
+const delivery={executable:build+'/DiceFree.exe',executableSha256:hash(fs.readFileSync(build+'/DiceFree.exe')),classStaticChecks:staticReview.checks,modelStaticChecks:model.checks,runtimeChecks:runtime.checks,totalChecks:staticReview.checks+model.checks+runtime.checks,sourceComparisons:receipts.length,mainImportExitCode:0,mainCompileErrors:0,buildErrors:report.errors,buildWarnings:report.warnings,unchangedGameplayAssemblies:assemblies.filter(a=>a.priorSha256===a.deliverySha256).length,changedRuntimeSourceFiles:[...new Set(changedSource.concat('Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs'))],assemblyNote:'DLL hashes may change on rebuild when dependency metadata changes; source review confirms only the presentation source changes recorded here.',limitations:'Automated disposable-profile checks. Batch screenshots omit overlay UI. Historical combat/trial review is retained separately; no new manual balance or live co-op acceptance.'};
+fs.writeFileSync(out+'/delivery.json',JSON.stringify(delivery,null,2)+'\n');console.log(JSON.stringify(delivery,null,2));

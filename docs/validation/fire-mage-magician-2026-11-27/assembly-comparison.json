@@ -1,0 +1,52 @@
+[
+  {
+    "assembly": "DiceFree.AI.Runtime.dll",
+    "priorSha256": "d49c7fa5a7c34dd5d8d7629b9a7f1cf2e65d8be9c5732f7fe36701becd82c37a",
+    "deliverySha256": "d49c7fa5a7c34dd5d8d7629b9a7f1cf2e65d8be9c5732f7fe36701becd82c37a"
+  },
+  {
+    "assembly": "DiceFree.Application.Runtime.dll",
+    "priorSha256": "d7154afbf4bac7c07943f7518c3ef2d730b93e90ab8d6bd5a486ccaba60409c5",
+    "deliverySha256": "fc37cea89745ae21eef722a6fca9de9d3fe9cc5191a76b08cd526d660ddae236"
+  },
+  {
+    "assembly": "DiceFree.Foundation.Runtime.dll",
+    "priorSha256": "c4a8f4bf988ce5fb2e2e1f469db49fbecd333a1a6d0a7bee83ae6253a12f5e8e",
+    "deliverySha256": "c4a8f4bf988ce5fb2e2e1f469db49fbecd333a1a6d0a7bee83ae6253a12f5e8e"
+  },
+  {
+    "assembly": "DiceFree.Gameplay.Runtime.dll",
+    "priorSha256": "f78dbb0718f747a74d737f48d8ca1c025e5d2398bebaca06134d851e2ddc6a02",
+    "deliverySha256": "f78dbb0718f747a74d737f48d8ca1c025e5d2398bebaca06134d851e2ddc6a02"
+  },
+  {
+    "assembly": "DiceFree.Input.Runtime.dll",
+    "priorSha256": "48077e36c5cea1aea3fdcc9761681434946214b06496097976e75c803a25bd83",
+    "deliverySha256": "48077e36c5cea1aea3fdcc9761681434946214b06496097976e75c803a25bd83"
+  },
+  {
+    "assembly": "DiceFree.Items.Runtime.dll",
+    "priorSha256": "8c31c1d8f28080a79daf2f8e71df8d888540872116087f857a54c7cb8e631a6c",
+    "deliverySha256": "8c31c1d8f28080a79daf2f8e71df8d888540872116087f857a54c7cb8e631a6c"
+  },
+  {
+    "assembly": "DiceFree.Persistence.Runtime.dll",
+    "priorSha256": "021098bb5ffa977d4301144b634f9d90f66ebdee1ac61b5c6d8293e847613d0d",
+    "deliverySha256": "021098bb5ffa977d4301144b634f9d90f66ebdee1ac61b5c6d8293e847613d0d"
+  },
+  {
+    "assembly": "DiceFree.Quests.Runtime.dll",
+    "priorSha256": "6f6fce28f35df013caed89fcac7356232f4aab3513f4b7a67e27e426f69d2559",
+    "deliverySha256": "6f6fce28f35df013caed89fcac7356232f4aab3513f4b7a67e27e426f69d2559"
+  },
+  {
+    "assembly": "DiceFree.UI.Runtime.dll",
+    "priorSha256": "e97fc19355e11cf58448087d62e62da6441a90fd23e2677f3f2adc56a11652f9",
+    "deliverySha256": "c6272e9416eaa92ee78a1b54f01ab19f5ccbe82b43af5a967eb4ce31818804ba"
+  },
+  {
+    "assembly": "DiceFree.World.Runtime.dll",
+    "priorSha256": "9b3a5ee65daf2f30cbd47cdc4af5999330bac78e3c740888df066e5861de7ef7",
+    "deliverySha256": "9b3a5ee65daf2f30cbd47cdc4af5999330bac78e3c740888df066e5861de7ef7"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "executable": "T:/TEMP/DiceFree-Roadwarden-QA/Builds/FireMage-20261127-154934/DiceFree.exe",
+  "executableSha256": "4c93a4bb060a12b9044ab2103835dd1565aec9aa8381372fa84fbbc14a19b989",
+  "classStaticChecks": 355,
+  "modelStaticChecks": 41,
+  "runtimeChecks": 24,
+  "totalChecks": 420,
+  "sourceComparisons": 33,
+  "mainImportExitCode": 0,
+  "mainCompileErrors": 0,
+  "buildErrors": 0,
+  "buildWarnings": 1,
+  "unchangedGameplayAssemblies": 8,
+  "changedRuntimeSourceFiles": [
+    "Assets/_DiceFree/Scripts/UI/FireMageStaffPresentation.cs",
+    "Assets/_DiceFree/Scripts/UI/PlayerMotionPresentation.cs"
+  ],
+  "assemblyNote": "DLL hashes may change on rebuild when dependency metadata changes; source review confirms only the presentation source changes recorded here.",
+  "limitations": "Automated disposable-profile checks. Batch screenshots omit overlay UI. Historical combat/trial review is retained separately; no new manual balance or live co-op acceptance."
+}

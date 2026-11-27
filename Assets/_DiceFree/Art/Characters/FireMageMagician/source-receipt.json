@@ -1,0 +1,26 @@
+{
+  "sourceArchive": "magician.zip",
+  "sourceSha256": "daa6e548c585df2b5129e99d7fb883d508a984b8bc5abee8143a75b5bc6d3092",
+  "sourceGlbSha256": "d8791a9f8b399d94a17acd56f7cc06441dd15e4255d091559e815971ecb4ed4f",
+  "license": "LicenseRef-UserSupplied",
+  "rightsNote": "User-selected local library asset; original author and exact source license remain unverified. User explicitly directed use of this asset.",
+  "bodyHeightMeters": 1.85,
+  "bones": 22,
+  "weightedVertices": 2934,
+  "bodyTriangles": 4162,
+  "staffTriangles": 712,
+  "transforms": [
+    "Preserved original orange painted atlas and silhouette",
+    "Separated existing staff from the body",
+    "Created weighted humanoid skeleton and baked T bind pose",
+    "Normalized body height to1.85m",
+    "Converted original emissive-only atlas to conventional base-color material"
+  ],
+  "files": {
+    "EmberMagician-rig.blend": "d14d763c0e466da265de099b4ac33e736a9c2c3db1d7e906fa97406b1e671fe7",
+    "EmberMagician.fbx": "f900143042974039e1ed7b662a5fe14eac34b4a8599ce56ea64f68dce7952586",
+    "EmberMagician.glb": "2183388eb6831215521f75b7796e497291c1337295d5b57fc0581ee77a00cf89",
+    "EmberMagicianStaff.fbx": "2298c3b1807a480148914980910dc94120462eb19a7fc0f3b0279fa233afab99",
+    "Magician_Albedo.png": "dd99f4386966e2a3a8fee587fa2eb39f88a65d2eceddfffd7d77206a5a03a7e6"
+  }
+}

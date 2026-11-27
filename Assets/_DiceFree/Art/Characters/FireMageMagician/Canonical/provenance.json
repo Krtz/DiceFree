@@ -1,0 +1,9 @@
+{
+  "origin": "imported",
+  "schema": "game_dev.asset_provenance.v1",
+  "source": {
+    "bytes": 720192,
+    "fileName": "EmberMagician.glb",
+    "sha256": "2183388eb6831215521f75b7796e497291c1337295d5b57fc0581ee77a00cf89"
+  }
+}

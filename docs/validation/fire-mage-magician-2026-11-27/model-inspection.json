@@ -1,0 +1,62 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "asset.inspect",
+  "ok": true,
+  "data": {
+    "filePath": "T:\\TEMP\\DiceFree-MagicianArt\\Prepared\\EmberMagician.glb",
+    "fileBytes": 720192,
+    "generator": "glTF-Transform v4.5.1",
+    "meshCount": 2,
+    "primitiveCount": 2,
+    "vertexCount": 3556,
+    "triangleCount": 4874,
+    "undrawnMeshCount": 0,
+    "undrawnPrimitiveCount": 0,
+    "undrawnTriangleCount": 0,
+    "sceneGraphFallback": false,
+    "materialCount": 1,
+    "textureCount": 1,
+    "textureResolutions": [
+      {
+        "name": "Magician_Albedo",
+        "width": 512,
+        "height": 512,
+        "mimeType": "image/png",
+        "bytes": 450025
+      }
+    ],
+    "boundingBox": {
+      "min": [
+        -0.8196515946011669,
+        -3.7835032884459e-9,
+        -0.4655541181564331
+      ],
+      "max": [
+        0.6991000771522522,
+        2.4213595290597345,
+        0.6482030153274536
+      ],
+      "sizeMeters": [
+        1.518751671753419,
+        2.421359532843238,
+        1.1137571334838867
+      ]
+    },
+    "boundingBoxEmpty": false,
+    "hasUVs": true,
+    "hasNormals": true,
+    "hasTangents": true,
+    "pbr": {
+      "hasBaseColorTexture": true,
+      "hasMetallicRoughnessTexture": false,
+      "hasNormalTexture": false,
+      "hasOcclusionTexture": false,
+      "hasEmissiveTexture": false
+    },
+    "animationCount": 0,
+    "hasSkin": true,
+    "warnings": [
+      "texture is below 1024px on an axis and will blur at close range: Magician_Albedo (512x512)"
+    ]
+  }
+}

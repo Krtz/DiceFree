@@ -1,0 +1,31 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "asset.validate",
+  "ok": true,
+  "data": {
+    "schema": "org.gamedebug.asset_validation.v1",
+    "modelPath": "T:\\TEMP\\DiceFree-MagicianArt\\Prepared\\EmberMagician.glb",
+    "passed": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "summary": {
+      "triangles": 4874,
+      "materials": 1,
+      "textures": 1,
+      "hasUVs": true,
+      "hasNormals": true,
+      "hasTangents": true,
+      "sizeMeters": [
+        1.518751671753419,
+        2.421359532843238,
+        1.1137571334838867
+      ]
+    },
+    "failures": [],
+    "checksRun": 11,
+    "inspectorWarnings": [
+      "texture is below 1024px on an axis and will blur at close range: Magician_Albedo (512x512)"
+    ],
+    "nextStep": "Passes cleanly."
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "game_dev.result.v1",
+  "operation": "package.verify",
+  "ok": true,
+  "data": {
+    "schema": "game_dev.package_verification.v1",
+    "packagePath": "T:\\TEMP\\DiceFree-MagicianArt\\Canonical\\.game-dev\\packages\\dicefree_ember_magician\\1.0.1",
+    "manifest": {
+      "assetId": "dicefree_ember_magician",
+      "category": "character",
+      "description": "User-selected orange Magician from magician.zip, archive SHA256 daa6e548c585df2b5129e99d7fb883d508a984b8bc5abee8143a75b5bc6d3092. Added 22-bone weighted humanoid rig and T bind pose; preserved original orange atlas and staff. Source author and exact license remain unverified; user explicitly selected and authorized this local library asset.",
+      "displayName": "dicefree-ember-magician",
+      "files": [
+        {
+          "bytes": 720192,
+          "kind": "model",
+          "path": "model.glb",
+          "sha256": "2183388eb6831215521f75b7796e497291c1337295d5b57fc0581ee77a00cf89"
+        },
+        {
+          "bytes": 1960,
+          "kind": "metadata",
+          "path": "metadata.json",
+          "sha256": "15d9d4dccf63dd75be374207a0c243480f48d7f3a79abca0d4affa5c9315a7d0"
+        },
+        {
+          "bytes": 229,
+          "kind": "provenance",
+          "path": "provenance.json",
+          "sha256": "c55e3c37e981e6c1e4ef2fefe92586080d26c5abbdb781778434cc01396a83d9"
+        },
+        {
+          "bytes": 3286,
+          "kind": "validation",
+          "path": "validation.json",
+          "sha256": "e6ea0da95d1a783b2d9de577a27794175290f87764752ff3c3c61099e5fa66d7"
+        }
+      ],
+      "license": "LicenseRef-UserSupplied",
+      "model": "model.glb",
+      "packageId": "pkg_d42ecf821cd4f877b06265cc",
+      "provenance": {
+        "origin": "imported"
+      },
+      "schema": "game_dev.asset_package.v1",
+      "validation": {
+        "errorCount": 0,
+        "passed": true,
+        "warningCount": 1
+      },
+      "version": "1.0.1"
+    },
+    "hashesVerified": true,
+    "evidence": {
+      "packageBytesVerified": true,
+      "gpuImportTestPerformed": false,
+      "humanVisualReviewPerformed": false
+    }
+  }
+}

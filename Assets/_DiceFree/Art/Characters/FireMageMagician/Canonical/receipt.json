@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-11-27T14:39:39.135Z",
+  "destination": {
+    "assetId": "dicefree_ember_magician",
+    "version": "1.0.1"
+  },
+  "evidence": {
+    "blenderNormalizationPerformed": false,
+    "gpuImportTestPerformed": false,
+    "humanVisualReviewPerformed": false,
+    "modelBytesCopiedAndHashed": true,
+    "policyValidationCompleted": true,
+    "staticInspectionCompleted": true
+  },
+  "manifestSha256": "c7ef3083316534419cb51e6a29dfd2f4a42fcc495c8cf572357852e091284292",
+  "packageId": "pkg_d42ecf821cd4f877b06265cc",
+  "schema": "game_dev.package_receipt.v1",
+  "source": {
+    "bytes": 720192,
+    "fileName": "EmberMagician.glb",
+    "sha256": "2183388eb6831215521f75b7796e497291c1337295d5b57fc0581ee77a00cf89"
+  }
+}

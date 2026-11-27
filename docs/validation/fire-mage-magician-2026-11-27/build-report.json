@@ -1,0 +1,11 @@
+{
+    "result": "Succeeded",
+    "executable": "T:\\TEMP\\DiceFree-Roadwarden-QA\\Builds\\FireMage-20261127-154934\\DiceFree.exe",
+    "errors": 0,
+    "warnings": 1,
+    "sceneCount": 16,
+    "bytes": 706217777,
+    "development": true,
+    "localRuntimeAutomation": true,
+    "includesExistingWorkspaceWip": true
+}

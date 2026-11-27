@@ -1,0 +1,7 @@
+# Fire Mage orange Magician
+
+User selected candidate 2 from the local Fire Mage asset review: `T:/TEMP/ART_ASSETS/magician.zip`. Original GLB and archive hashes are in `source-receipt.json` and the canonical package receipt. The original author and exact license are not known; this records the user's explicit selection without inventing attribution metadata.
+
+The source was unrigged. Blender preparation preserves all original 4,874 triangles and the painted 512px atlas, separates the existing staff, weights the body to a new 22-bone humanoid skeleton, bakes a T bind pose and normalizes the character to 1.85m. The canonical GLB includes the staff on RightHand. Unity uses the native body/staff FBXs, a URP Lit material and the existing humanoid Magical controller. `FireMageStaffPresentation` supplies live and portrait staff grip posing. Maelis and the player use the same stable Fire Mage form prefab.
+
+Rebuild with Blender 4.5.3 in background mode and `tools/authoring/prepare_fire_mage_magician.py`. Environment overrides: `DICEFREE_MAGICIAN_SOURCE` (original GLB), `DICEFREE_MAGICIAN_ARCHIVE` (source ZIP), `DICEFREE_MAGICIAN_ART` (output workspace; exports go in Prepared). The editable Blender rig is in `SourceArt/FireMageMagician`. Import the FBXs/atlas, then run `FireMageAuthoring.RefreshPresentation` from the editor authoring harness. Native human mapping and material remaps are explicit in `FireMageMagicianAuthoring`.

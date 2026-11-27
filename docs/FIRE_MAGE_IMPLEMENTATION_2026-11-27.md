@@ -49,7 +49,7 @@ The course is one short continuous A→B route through interlocking basalt ridge
 
 ## Presentation and validation
 
-The character reuses the repository's native **Dawnwarden** robed model and its authored generic idle, locomotion, casting, guarding, hit and death animations. Charcoal/crimson cloth, an emberglass wand and a floating ember distinguish the Fire Mage presentation. Skin and hands retain their native materials and rig. Attachment scale is normalized independently of the source bone scale. Infernal Presence has an orange/gold ground sigil. New native shaders supply molten cracks, stone paving and soft additive flame particles; the flame material is included explicitly through Resources.
+The character now uses the user-selected orange **Magician** from the local library's magician.zip. Its original painted atlas, pointed hat, coat, bag and staff are preserved. A new 22-bone humanoid rig and T bind pose support the native Magical controller's idle, locomotion, cast, guard, attack, hit and death states. The original staff follows the right hand during live animation and portrait posing, with an outward tilt while alive and bone rotation on death. Maelis uses the same form. Existing Fire Mage saves and the form prefab GUID remain compatible. The original Dawnwarden/Priest assets remain available to their other users. Infernal Presence has an orange/gold ground sigil. New native shaders supply molten cracks, stone paving and soft additive flame particles; the flame material is included explicitly through Resources.
 
 Authoring is reproducible through `tools/authoring/FireMageAuthoring.cs`. The dedicated review scripts and evidence are in [the validation folder](validation/fire-mage-2026-11-27/).
 
@@ -60,3 +60,11 @@ Final evidence totals **627 checks: 355 static, 242 advancement/combat, 22 fresh
 These are automated disposable-profile checks, not manual balance acceptance or live network co-op acceptance. The advancement trial is deliberately solo. Batch captures show world geometry and omit screen-space overlay UI. Unrelated package-manager settings and recovery files were preserved.
 
 Final Windows development build: `T:\TEMP\DiceFree-Roadwarden-QA\Builds\FireMage-20261127-000732\DiceFree.exe`.
+
+## Orange Magician delivery checkpoint
+
+The selected model replacement is validated separately in [the Magician evidence folder](validation/fire-mage-magician-2026-11-27/): **355 class static checks, 41 model/animation checks and 24 standalone runtime checks**. The runtime review loads the existing level-150 Fire Mage and all 150 learned ranks, renders idle/cast/walk portraits through the game's actual materials, verifies live and disabled-portrait staff grips, casts Fireball with unchanged damage/Mana/Heat, preserves the level-60 Mage parent, visits matching Maelis through the ordinary World 2 crossing, saves and returns to class selection without Unity errors.
+
+The source retains 4,874 triangles and its original 512px painted atlas. Blender preparation, native FBX import and authoring are reproducible through `tools/authoring/prepare_fire_mage_magician.py`, `FireMageMagicianAuthoring.cs` and `FireMageAuthoring.RefreshPresentation`. The editable rig is stored under `SourceArt/FireMageMagician`. Source hashes and canonical package admission are recorded; the supplied asset's original author/license are recorded as unverified, with the user's explicit asset-selection authorization, rather than assigning an invented license.
+
+Latest Windows development build: `T:\TEMP\DiceFree-Roadwarden-QA\Builds\FireMage-20261127-154934\DiceFree.exe` (16 scenes, zero build errors). The earlier 627-check combat/trial milestone above remains historical; this presentation checkpoint reran 420 relevant checks. Screenshots from the batch player omit overlay UI. Manual balance and live co-op acceptance are unchanged.
