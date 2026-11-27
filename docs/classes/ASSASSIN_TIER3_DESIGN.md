@@ -368,3 +368,59 @@ The following table gives each skill purchased rank `r=1..cap` a **minimum class
 - Specific advancement quest/mentor location, assets and implementation all deferred. No assumption that Assassin's trial equals Fire Mage's volcano trial.
 
 **Documentation only; no Unity code, assets/scenes, builds/tests or branch merge.**
+
+
+## Assassin Tier III Round 11 — 2026-11-27 USER CONFIRMS AGI-ONLY OFFENSE, EXACT LV1 STARTING ATTRIBUTES, 100 CLASS BASE MANA, GLASS CANNON; GROWTH CUSTOM UNDECIDED
+
+### USER-APPROVED ONLY
+
+1. **ASSASSIN BASIC ATTACKS AND PHYSICAL SKILLS SCALE AGI-ONLY**, not a STR/AGI split, nor Psion-like INT hybrid. Exact numeric attack/stat damage coefficients still OPEN. Natural autoattacks remain Physical; existing class-specific ability elements/split packets require separate mechanical approval.
+2. **ASSASSIN TIER III CLASS LEVEL 1 STARTING ATTRIBUTE BASES:** `STR=4, AGI=20, INT=5, SPR=4, VIT=5` (total **38**, not 39). This is the new TierIII Assassin class manifestation baseline, NOT inherited additive TierII Thief stats. The Lv1 total is far below the approved Berserker81 and FireMage84; this dramatic tradeoff is NOT being silently overwritten.
+3. **ASSASSIN CLASS BASE MANA = 100.** Use the already approved UNIVERSAL formula `MaxMana=100+5*INT`; with starting INT5, classLv1 **MaxMana=125** excluding gear/temporary bonuses. Universal `ManaRegenPerSecond=4+0.1*SPR`; with starting SPR4, classLv1 **ManaRegen=4.4/s**. This approves the class base Mana, but NOT any numeric Assassin SKILL Mana costs; user explicitly deferred those until after stat distribution.
+4. **CLASS SURVIVABILITY = GLASS CANNON:** comparatively low HP/defenses, compensated by heavy slow dual-dagger damage, devastating Stealth opener and position mechanics. This is NOT approval for a specific dodge chance, immune state, extra resource or evasion-tank role.
+5. **PER-LEVEL ATTRIBUTE GROWTH = CUSTOM, REQUESTS A TABLE SUGGESTION BASED ON PRIOR TIER III CLASSES.** USER HAS NOT CHOSEN SPECIFIC GROWTH NUMBERS. All proposed growth numbers below are explicitly DESIGNER RECOMMENDATION, not user approval.
+
+### Comparison researched directly from existing DiceFree docs (distinguish approved numbers vs proposals)
+
+| Class/source | Lv1 starting VIT/STR/AGI/INT/SPR | Per-level VIT | STR | AGI | INT | SPR | Total per level | Status of growth values |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| Berserker Tier III | 25/34/10/5/7 (total81) | +3.0 | +6.0 | +1.2 | +0.5 | +0.8 | **+11.5** | Latest user-approved, `BERSERKER_TIER3_DESIGN.md` Round11 |
+| Fire Mage Tier III | 19/7/12/33/13 (total84) | +2.0 | +0.75 | +1.0 | +6.0 | +1.5 | **+11.25** | Latest user-approved `MAGE_TIER3_DESIGN.md` |
+| Psionic Knight Tier III | 22/8/30/22/11 (total93), *working proposed starts* | +2.5 | +1.0 | +5.0 | +2.7 | +1.0 | **+12.2** | Growth user-corrected in `PSION_TIER3_EVOLUTIONS_DESIGN.md` Round21; starts presented as proposals/working not independently re-approved there |
+| Mirage Mage Tier III | 19/8/22/32/11 (total92), *working proposed starts* | +2.0 | +1.0 | +2.7 | +5.0 | +1.0 | **+11.7** | Growth user-corrected in `PSION_TIER3_EVOLUTIONS_DESIGN.md` Round21; starts presented as proposals/working not independently re-approved there |
+| Marksman Tier III | 19/10/34/9/11 (total83), *proposed starts* | +2.0 | +0.9 | +6.0 | +1.0 | +1.2 | **+11.1** | `MARKSMAN_TIER3_DESIGN.md` Round6 proposal, **not** treated as confirmed final approved growth here |
+| Assassin Tier III | **5/4/20/5/4 (total38), USER APPROVED** | **+1.5** | **+0.5** | **+7.0** | **+1.0** | **+1.0** | **+11.0** | **DESIGNER RECOMMENDATION ONLY; not user-approved growth** |
+
+The above table is transcribed/computed from the class design sources, not an assertion that all numbers are implemented in Unity. The extreme low approved Assassin starting total38 versus other selected TierIII designs in81–93 range should be surfaced for user review, not corrected without permission. TierIII Assassin is a glass cannon at melee range; low initial HP makes gameplay feasibility an important review after player accepts the growth profile.
+
+### Proposed Assassin growth and no-gear progression (NOT USER APPROVED)
+
+**Recommended per Assassin class level up:** `VIT+1.5, STR+0.5, AGI+7, INT+1, SPR+1` = **+11.0 total/level**. Strongest offense in AGI (numerically exceeding Marksman's proposal +6 AGI/level), survivability low relative to Berserker's approved VIT+3 and Fire Mage's VIT+2. Both INT/SPR gain +1 per level to give baseline Mana growth while actual skill costs wait. This is intentionally distinct from earlier generic form options +3 or +4 AGI and honors user's request to compare real TierIII precedent rather than guessing.
+
+| Assassin attribute | USER-APPROVED Lv1 | PROPOSED per level | PROJECTED Lv150 with proposal, no gear |
+| --- | ---: | ---: | ---: |
+| STR | 4 | +0.5 | 78.5 |
+| AGI | 20 | +7 | 1063 |
+| INT | 5 | +1 | 154 |
+| SPR | 4 | +1 | 153 |
+| VIT | 5 | +1.5 | 228.5 |
+| Total | **38** | **+11** | **1677** |
+
+General proposed attribute at classLv L: `base+growth*(L-1)`, engine rounding unspecified. If proposal is accepted, no-gear `MaxMana(L)=100+5*(5+L-1)=120+5L`; Lv1=125, Lv60=420, Lv150=870. `ManaRegen/s=4+0.1*(4+L-1)`; Lv1=4.4/s, Lv60=10.3/s, Lv150=19.3/s. These Lv60/Lv150 stats and Mana figures are **conditional projections, not approved class growth**. Global HP policy is existing15 HP/VIT plus engine base (compare current class code), so low VIT is deliberate but actual survivability and class equipment not tested.
+
+### Already approved class kit remains unchanged
+
+- Pure melee dual-dagger glass cannon, slow two-impact basic attack cycle with **equal50/50 of total raw sequence damage**, AGI-only offense; heavy skills and powerful Stealth opener. Side/rear270deg enemy-relative Backstab bonus stacks with Stealth opener, any-facing Backstab cast allowed. Envenom kept separate; Execute scales continuously with missing target HP.
+- Skill caps **Stealth25 / Envenom30 / Backstab35 / Execute25 / CriticalMastery20 / ArmorPen15 =150** purchased ranks, one point per Assassin classLv1..150. Stagger first unlocks is approved; the exact 150-level gate schedule in Round10 is still **designer proposal, NOT approved**.
+- Critical Mastery passive +3 AGI and +1 percentage point BASIC crit chance per rank and active BASIC-only charge guarantees rank1–5=2,6–10=3,11–15=4,16–19=5,rank20=6, successful hits even fully absorbed spend, misses do not. Rank-dependent Mana cost amount TBD,25s CD begins on use, unspent charges clear at death/logout/class change.
+- Stealth modifier `(r-11)%` while hidden, from -10% at first rank to +14% at cap25. ArmorPen +1% target PDEF bypass per rank on basics and Physical Assassin skills, cap15. Universal MaxMana and regen still global, class BaseMana100 approved.
+
+### Round12 pending decisions
+
+1. **Choose/modify Assassin growth** in above table, perhaps redistribute points between VIT/AGI/INT/SPR, or clarify whether Lv1 starting total38 should be intentionally this far below other TierIII starts; DO NOT silently replace approved starts.
+2. **Approve/change exact first unlock levels** from Round10 designer schedule (Stealth1/Envenom2/Backstab3/CritMastery5/Execute8/ArmorPen10) and whether accompanying complete rank gate table is acceptable.
+3. **Only after growth is approved**, calculate no-gear Mana at levels1/60/150 and revisit every active ability's rank-scaled Mana costs.
+4. Set dagger cycle attack interval and impact delay, Backstab/Stealth/Execute raw damage formulas with rank scaling.
+5. Design mentor/advancement trial in World2 separately; no location/quest chosen yet.
+
+**DOCUMENTATION ONLY, do not alter Unity game code, assets, scenes, builds/tests or merge Codex work.**
