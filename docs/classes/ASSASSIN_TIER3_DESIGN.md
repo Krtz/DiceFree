@@ -953,3 +953,61 @@ Move to EXECUTE ONLY, whose **numerical damage coefficient still OPEN**. Propose
 Possible additional question: confirm linear Stealth interpolation `6+9*(rS-1)/24`, but only if needed after Execute damage.
 
 **DOCUMENTATION ONLY. No Unity game source/assets/scenes/build/tests or merges.**
+
+
+## Assassin Tier III Round 23 — 2026-11-27 USER APPROVES EXECUTE HEAVY BASE+MISSING HP DAMAGE, NORMAL CHANNEL INTERRUPTION/CANCEL REFUND; REQUESTS EVEN STRONGER FINISHER (AMBIGUOUS BACKSTAB WORDING)
+
+### LATEST AUTHORITATIVE USER ANSWERS
+
+User selects the following exact Execute damage formulas and cast-interruption rule:
+1. "**Base damage: B*(1+0.12r), max4.00B**".
+2. "**Missing HP bonus: 1+(0.40+0.07r)*missingHPFraction**".
+3. "**Interrupted 1.2s windup: Cancel, refund Mana, no cooldown**".
+4. Free text: "**normal channeling rules apply. i think maybe make backstab a little stronger (especially the missing hp bonus), high mana cost and high cooldown will limit the use of this skill any way.**"
+
+**IMPORTANT TERM AMBIGUITY:** user writes "backstab" in note, but Backstab has NO missing-HP multiplier and has only Mana12+2r/9sec cooldown. Execute is specifically the high Mana20+5r, long35sec cooldown skill and is the only skill with missing-HP scaling, which user just approved in options1/2. Interpret note's context as referring to **EXECUTE's strength and missing-HP bonus**, NOT an unrequested quantitative Backstab adjustment. Preserve previous Round22 Backstab raw and positional coefficients unchanged. The user's note requests consideration of further strengthening the missing-HP finisher, but contains NO exact additional numeric coefficients; thus **the exact numerical FORM selections above are approved canonical values**, and potential additional increase is **OPEN FOR USER APPROVAL**, not auto-applied. If user later clarifies they literally meant Backstab, then revisit with user.
+
+### USER-APPROVED EXACT EXECUTE RAW DAMAGE
+
+Let `rX=Execute purchased rank1..25`, `B`=RAW uncritted TOTAL one normal TWO DAGGER basic attack sequence damage before target mitigation/crit, `m=clamp((TargetMaxHP-TargetCurrentHP)/TargetMaxHP,0,1)` target MISSING HP fraction at the successful impact (precise snapshot timing should follow actual engine-standard hit resolution; don't automatically invent custom snapshot semantics). User-approved formula:
+
+`ExecuteRawPhysicalDamage(rX,m)=B*(1+0.12*rX)*(1+(0.40+0.07*rX)*m)`.
+
+This SUPERSEDES earlier designer-only `B*(1+0.09rX)*(1+(0.30+0.03rX)*m)`. Both **the base raw coefficient and the missing HP bonus coefficient scale with own Execute rank** and target missing HP increases multiplier CONTINUOUSLY, no threshold and no execute-only cast lockout at healthy target HP.
+
+| Target HP left | Missing HP fraction m | Execute r1 base1.12B and missingHP coeff0.47 | Execute r25 base4.00B and missingHP coeff2.15 |
+| --- | ---: | ---: | ---: |
+| 100% | 0 | 1.1200B | 4.0000B |
+| 75% | .25 | 1.2516B | 6.1500B |
+| 50% | .5 | 1.3832B | 8.3000B |
+| 25% | .75 | 1.5148B | 10.4500B |
+| Near 0% | 1 | 1.6464B | **12.6000B** |
+
+The raw high-end Execute12.6B at rank25 vs maximally positional Backstab with max Stealth11.80875B is an observation for balancing, **NOT a user request to nerf either**. The 35s cooldown, one1.2s windup and Mana cost20+5r (up to145) are user-approved and deliberately make Execute a potent, high-commitment long-reuse finisher. Execute still is one Physical dagger skill impact after windup, AGI-only scaling through B and standard physical defenses, **does NOT receive Stealth opener** and **DOES NOT proc Envenom poison coating**, nor consume BASIC-only Critical Mastery guaranteed hit charges. These distinctions are locked earlier.
+
+### USER-APPROVED INTERRUPTED EXECUTE WINDUP
+
+- Execute winds up for **1.2 seconds** under **NORMAL GLOBAL CHANNELING / CAST INTERRUPTION RULES**, as user explicitly instructs, then performs SINGLE heavy dagger hit on successful completion (Round17). Do **NOT** create special immunity to normal hard CC or an invented custom channel system.
+- On interrupted 1.2sec channel/windup: **NO DAMAGE**, cancel the strike, **refund any Execute Mana charged** and **DO NOT start/consume the35sec cooldown**. This overrides any earlier unresolved note about refund/no-CD; now approved. Follow existing engine standard behavior for movement, target validity, damage interruption etc where applicable, not invent additional exceptions. On SUCCESSFUL channel/strike use locked Execute ManaCost`20+5rX` and 35sec cooldown; exact internal debit/reserve timing can match global channeling policy so long as interrupted cast refund/no cooldown is honored. Normal/channel rule precedence should be consistent with other channeled skills, not Assassin-specific bespoke handling.
+- Whether channel finishing but attack misses gets refund (unlikely), LoS/path movement/cast bar display and effects at collision should rely on verified global semantics rather than silently assume.
+
+### OPEN USER DESIGN REQUEST: May strengthen Execute further despite approved high coefficients
+
+Since user says "maybe make backstab a little stronger (especially the missing hp bonus), high mana cost and high cooldown will limit the use of this skill anyway", log the probable intended referent as **EXECUTE** (only missing-HP and highCD/cost ability). Both the selected rank-scaling formula and comparative balance are fixed for now; designer may offer optional **additional missingHP emphasis** for next round, e.g. preserve base `B*(1+0.12rX)` and change ONLY missingHP multiplier to `1+(0.40+0.09rX)*m` (r25 extra2.65m, near death max14.6B rather than12.6B, r1 multiplier 0.49m); this is **DESIGNER PROPOSAL, NOT USER-APPROVED**. Could also ask whether note meant literal Backstab, but explicit user context strongly points to Execute, so don't automatically alter Backstab. If user wants more finisher punch, offer targeted increase options rather than redoing all skill coefficients. Do NOT label provisional extra curve as current approved.
+
+### Rest of assassin confirmed unchanged
+
+- Round22 USER-APPROVED Backstab rB1..35 RAW `B*(0.90+0.07rB)`, side/rear multiplier `1.15+0.01rB` (front90deg no bonus, still castable), facing sampled AT ACTUAL IMPACT, and opening Stealth `1.10+0.05rS` stacks multiplicatively on qualifying Backstab, max with position and Stealth11.80875B; 9sec cooldown, Mana12+2rB. No missingHP bonus on Backstab.
+- Stealth rS1..25 opener `1.10+0.05rS`, first attempted BASIC two-hit sequence BOTH impacts or Backstab only, spent even when missing, duration endpoint6sec r1 ->15sec r25, concealed move `(rS-11)%`, Mana8+2rS/CD22sec; exact Stealth intermediate duration interpolation still unspecified.
+- Envenom as ON-BOTH-DAGGERS timed activated coating, independent duration by own rank `8+9*(rE-1)/29` seconds rE1..30, Mana10+2rE/CD8sec, one coating refreshed on recast, preserves concealment and opener if activated while Stealthed. On successful basic dagger hit EACH packet or Backstab (NOT Execute), bonus Nature `B*(0.08+0.006rE)` PER hit, and one nonstacking Nature target DoT lasting4sec refreshed on subsequent hits WITHOUT resetting tick phase; ticks every0.5sec `B*(0.0075+0.001rE)`,8 ticks per uninterrupted4s. Poison Nature bonus/DoT not boosted by physical Stealth opener.
+- Assassin has pure dual one-handed dagger AGI-only melee DPS, basic attack sequence2.5sec two hits0.5B each with0.3sec separation, starting stats VIT22 STR10 AGI35 INT10 SPR5, growth VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8, class BaseMana100, global MaxMana100+5INT and regen/s4+0.1SPR. CriticalMastery20 passive+3AGI/r and+1pp basic crit/r, active BASIC-only guarantee charges2/3/4/5/6 at r1/6/11/16/20 with Mana12+3r/CD25sec; ArmorPen15 bypass+1% target PDEF/rank on basics and Physical skills. All six exact rank caps and 150 level eligibility rank gates approved Round15, initial unlock Stealth1 Envenom2 Backstab3 CritMastery5 ArmorPen8 Execute12 LAST.
+- No code changes implied from design-only conversation.
+
+### Round24 next design questions, NOT YET USER APPROVED
+
+1. With high-CD Execute already stronger (12.6B at near-death) ask **keep SELECTED curve 12.6B or strengthen missing HP specifically** e.g. near-death14.6B with `0.40+0.09rX` at cap, or even more user custom. Explicitly state "I'm interpreting Backstab in your note as Execute due to missing HP/high CD" and allow clarification.
+2. Execute channel rules now approved: 1.2sec global standard; interrupted refund/noCD. No re-approval needed.
+3. If no further Execute change, confirm Stealth intermediate duration interpolation `6+9*(rS-1)/24` and tune raw B coefficient versus TierII Thief/global class normal attacks; prioritize completing class baseline and movement/crit rules.
+4. Confirm Backstab animation timing only if needed, avoid undoing Round22 approved coefficients.
+
+**DOCS ONLY; no Unity gameplay code/assets/scenes/builds/tests/merges.**
