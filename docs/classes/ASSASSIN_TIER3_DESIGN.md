@@ -223,3 +223,51 @@ User says: "**hmmm, either we remove guaranteed crit or moove it into the crit p
 5. **Exact 150-rank allocation** across six skills, then audit per-rank min-level gates without forcing fully spent points before eligible purchases.
 
 **DOCS ONLY; no Unity changes, builds/tests, or branch merges.**
+
+
+## Assassin Tier III Round 7 — 2026-11-27 USER APPROVES CRIT CHARGES, SUCCESSFUL-HIT CONSUMPTION, BASIC-ONLY CRIT PASSIVE, REFILL ON RECAST, EXACT 150 SKILL-RANK CAPS
+
+### Latest USER DECISIONS, with free-text override authoritative
+
+1. **CRITICAL MASTERY HYBRID CHARGE PROGRESSION:** Start at **TWO guaranteed-basic-crit charges at purchased skill rank1**, gain **ONE ADDITIONAL charge every FIVE further purchased ranks**. For r=1..20 approved cap, `GuaranteedBasicCritCharges(r) = 2 + floor((r-1)/5)`; ranks1–5=2 charges,6–10=3,11–15=4,16–20=5. This ranks-to-charges interpretation means no extra charge at rank5: FIVE additional purchased ranks after first are required for first increase. All charges apply ONLY to normal BASIC dagger impacts, not Envenom, Backstab, Execute or any other skills. No short time-based expiration while holding charges.
+2. **CRIT CHARGE CONSUMPTION:** A basic dagger **MISS does NOT spend** a guaranteed critical-hit charge. **Only a SUCCESSFUL BASIC DAGGER HIT consumes one** charge. With the two-hit basic attack, each impact independently checks its own eligible crit charge: hit consumes one, miss consumes zero. If first misses and second hits, second hit can use one stored charge. Distinguish "successful hit" from effective HP damage: whether a fully shield-absorbed successful contact consumes a charge is still a global combat integration question, as the user explicitly decided misses vs hits, not shield-only HP outcomes. Do not consume at basic attack sequence start, or burn one charge on a miss.
+3. **PASSIVE CRITICAL-HIT CHANCE APPLIES TO BASIC ATTACKS ONLY**, keeping the parent's baseline crit-scope philosophy. Hybrid passive also continues to grant permanent bonus AGI per purchased rank (exact AGI and basic crit chance increments not chosen). Hybrid ACTIVATION remains BASIC-HIT GUARANTEE ONLY. Backstab, Envenom and Execute are not automatically eligible for this passive crit-chance bonus or guaranteed crit charges, notwithstanding their direct Physical damage and Armor Penetration passive eligibility.
+4. **REACTIVATION REFILLS/REPLACES CURRENT CHARGES with FULL ALLOTMENT** for purchased Critical Mastery rank. It **does not ADD, STACK, bank, or carry over** leftover charges. Example: rank11 with1 remaining charge reactivated -> exactly4 guaranteed basic crit charges, not5. Whether activation has Mana/CD, or whether charges persist through death/logout, remains open. Recast is subject to future normal ability restrictions/CD; this approval does not imply costless, spammable activation.
+5. **EXACT USER-APPROVED 150-RANK DISTRIBUTION WITH FREE-TEXT OVERRIDE:** Form proposed 25/25/35/30/20/15, but user adds "**move 5 points from execute to envenom**." Final authoritative caps are:
+   - **Stealth25**
+   - **Envenom30** (**+5 from form**)
+   - **Backstab35**
+   - **Execute25** (**-5 from form**)
+   - **Critical Mastery20** (SINGLE hybrid passive+active purchased skill)
+   - **Armor Penetration15**
+   **SUM = 25+30+35+25+20+15 = 150**. One skill-rank purchase point earned at EACH Assassin class Lv1..150. **Cap totals are APPROVED**, but **EXACT PER-RANK CLASS MINIMUM-LEVEL ELIGIBILITY GATES NOT APPROVED OR CALCULATED IN THIS ROUND**. A legal audited 150-level gate schedule is the next workflow task.
+6. **Skill roster unchanged:** four ordinary actives Evolved Stealth, Envenom, Backstab, Execute; one hybrid passive+activatable Critical Mastery; one Armor Penetration passive = SIX RANKABLE SKILLS. No standalone Guaranteed Crit skill, no Fan of Knives, Smoke Bomb or Expose Weakness. Armor Penetration continues applying to basics AND Physical Assassin skills, separate from basic-only crit passive/active.
+7. **Class fantasy unchanged:** Pure melee DPS with dual one-handed daggers, intentionally slower TWO-HIT basic attack cycle and slower powerful skill strikes; strong Stealth opener then weaker sustained damage. Both initial two-hit basic impacts get opening multiplier; opener consumed once for sequence, even if the attempt misses, per parent reference. Backstab usable any angle, qualifies for large positional bonus from enemy-side/rear270deg, and stacks Stealth opening multiplier when it is the breaking opening skill. Execute always usable, stronger as target missing HP increases. Stealth gives `(rank-11)%` movement speed while concealed, so at new rank25 cap it reaches **+14%**, rank1 **-10%**, rank11 0%; this is DERIVED directly from two separate approved decisions rather than separately chosen percentage. Universal Mana-only max=`AssassinClassBaseMana+5*INT`, natural regen/s=`4+0.1*SPR`, exact class base/growth TBD.
+8. **DO NOT ASSUME** that Assassin's 150 rank points imply every skill available to rank1 at classLv1. First unlock levels, follow-on rank gate intervals, complete rank gating feasibility audit, all damage formulas, Mana costs, cooldowns, class stats, mentor/quest and visual assets remain to be authored/approved.
+
+### Quantitative approved charge and movement examples
+
+| Rank | Critical Mastery available charge count |
+| ---: | ---: |
+| 1–5 | 2 |
+| 6–10 | 3 |
+| 11–15 | 4 |
+| 16–20 | 5 |
+
+| Stealth rank | Stealth movement modifier while concealed |
+| ---: | ---: |
+| 1 | -10% |
+| 11 | 0% |
+| 21 | +10% |
+| 25 (approved cap) | +14% |
+
+### Next round questions (NOT approved)
+
+1. Set Critical Mastery hybrid **ACTIVATION Mana cost and cooldown**, and whether cooldown starts immediately on activation, noting charges remain until used.
+2. Determine charges persist through **death, logout and swapping manifestations** or are cleared as ordinary temporary combat buffs; no hidden short timer.
+3. Specify guaranteed critical successful hit vs **fully shield-absorbed hit** and whether hit charge is consumed; missed hits explicitly do NOT.
+4. Decide **critical chance and AGI per Critical Mastery purchased rank**, and armor-penetration percentage/rank with15-rank cap.
+5. Choose **stealth availability, rank gate pacing and first unlocks**; then generate a proven legal 150-point rank gate schedule with each level1..150 having at least one eligible spend.
+6. Set two-hit basic cadence/damage split and execute curve after rank/level model.
+
+**DOCUMENTATION ONLY. No Unity code, scenes, assets, tests, builds, merges or implementation authorized.**
