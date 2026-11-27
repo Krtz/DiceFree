@@ -526,3 +526,46 @@ Six rankable concepts with exact caps **Stealth25 / Envenom30 / Backstab35 / Exe
 4. Define Backstab side/rear positional % bonus, stacking stealth opening multiplier, and Execute missing-health damage curve with purchased rank scaling.
 
 **DESIGN DOCUMENTATION ONLY. No Unity gameplay code/assets/scenes/builds/tests, no merges; commit/push docs each completed round.**
+
+
+## Assassin Tier III Round 14 — 2026-11-27 USER APPROVES MODERATE MANA PHILOSOPHY, 2.5S BASIC CYCLE/0.3S HIT GAP, EXECUTE MUST BE LAST SKILL UNLOCKED
+
+### LATEST AUTHORITATIVE USER ROUND14 ANSWERS (custom note overrides original level-gate proposal)
+
+1. **MANA-COST PHILOSOPHY: MODERATE.** Assassin should be able to use regular active skills while conserving Mana for important burst windows, as contrasted with permanently expensive/high-commitment casts or trivial Mana costs. This is an approved pacing/design direction, NOT any exact per-skill Mana numbers; class statistics and resource capacity are now approved (Assassin Lv1 VIT22 STR10 AGI35 INT10 SPR5; growth VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8; class BaseMana100; MaxMana100+5INT; regen4+0.1SPR). No unapproved skill cost or formula should be treated as decided. Critical Mastery activation still specifically grows Mana cost with purchased skill rank, numeric function TBD.
+2. **DELIBERATELY SLOW BASIC CYCLE: ONE TWO-DAGGER-HIT BASIC ATTACK SEQUENCE EVERY 2.5 SECONDS**, with **SECOND HIT 0.3 SECONDS AFTER FIRST HIT**. Previous Round10 equal split **50% + 50% of one sequence's raw attack damage** remains in force, not 100% each packet. These are nominal unmodified baseline attack cadence and impact spacing, before any global attack-speed, animation or interruption rules; exactly how general attack-speed modifiers rescale entire cycle and inter-impact gap remains to be implemented/defined globally. Separately resolve each dagger hit's hit roll, basic crit eligibility, damage mitigation, Stealth first-cycle multiplier and Critical Mastery basic guaranteed-crit charge consumption on successful hit (including shield absorbed), miss preserves charge. Do not spawn an independent offhand attack timer.
+3. **EXECUTE MUST BE THE LAST ASSASSIN SKILL TO UNLOCK**, explicitly requested in user free text. User's selection was "Adjust skill unlocks/rank schedule in notes" with only correction "**execute should be the last skill to unlock**". This SUPERSEDES older Round10 **DESIGNER-ONLY** initial first-unlock sequence where Execute was Lv8 and ArmorPen Lv10, which made Execute NOT last. **EXECUTE FINAL-UNLOCK ORDER is APPROVED**, but NO NUMERIC first-unlock level for Execute or exact per-rank schedule was explicitly selected by user. The full revised gated schedule below is a rigorously audited DESIGNER PROPOSAL, NOT auto-approved by this request. Ask user to confirm/change before claiming gates are locked.
+
+### Proposed NEW full 150-level rank-gate table, designer-only, all eligibility levels tested
+
+Proposed first skill access: **Stealth Lv1, Envenom Lv2, Backstab Lv3, Critical Mastery Lv5, Armor Penetration Lv8, EXECUTE Lv12 (last)**. Exact values **NOT YET USER APPROVED**. The previously approved skill caps remain **Stealth25, Envenom30, Backstab35, CriticalMastery20, ArmorPen15, Execute25**, total 150 purchased ranks and one skill point per Assassin class level1..150.
+
+Each comma-separated number at a skill represents the proposed minimum Assassin CLASS LEVEL for its consecutively purchased rank r1 through max rank. The designer audit built a legal single-purchase-per-class-level progression with rank prerequisite order maintained; **all 150 class levels 1..150 occur exactly once across the six gate rows**, so a straightforward spend-as-you-level path never has to bank a point, and all caps can be reached by class Lv150. **No specific numeric gate is represented as already user-approved.**
+
+| Skill | User-approved cap | Proposed first unlock class Lv | Last rank eligibility class Lv | Full proposed class-level gates per rank (in ascending purchased rank) |
+| --- | ---: | ---: | ---: | --- |
+| Stealth | 25 | 1 | 147 | 1, 7, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99, 105, 111, 117, 123, 129, 135, 141, 147 |
+| Envenom | 30 | 2 | 149 | 2, 6, 11, 18, 23, 29, 32, 38, 43, 48, 53, 59, 62, 68, 73, 78, 83, 89, 92, 98, 103, 108, 113, 119, 122, 128, 133, 138, 143, 149 |
+| Backstab | 35 | 3 | 150 | 3, 4, 10, 16, 20, 24, 30, 31, 37, 41, 46, 50, 54, 60, 61, 67, 71, 76, 80, 84, 90, 91, 97, 101, 106, 110, 114, 120, 121, 127, 131, 136, 140, 144, 150 |
+| Critical Mastery | 20 | 5 | 146 | 5, 9, 19, 26, 35, 42, 49, 56, 65, 72, 79, 86, 95, 102, 109, 116, 125, 132, 139, 146 |
+| Armor Penetration | 15 | 8 | 145 | 8, 14, 25, 36, 44, 55, 66, 74, 85, 96, 104, 115, 126, 134, 145 |
+| Execute | 25 | 12 | 148 | 12, 13, 17, 22, 28, 34, 40, 47, 52, 58, 64, 70, 77, 82, 88, 94, 100, 107, 112, 118, 124, 130, 137, 142, 148 |
+
+**Validation:** six caps add to150; total exactly150 gate entries; each integer classLv1..150 occurs exactly once; per-skill rank order strictly increasing; all proposed first unlocks precede its other ranks and Execute's first Lv12 follows ArmorPen's first Lv8, making Execute last. This is an accessible, mathematical proposal rather than a user-signed-off new system.
+
+### Already approved unchanged, do not regress
+
+- TierIII Assassin separate Lv1 manifestation after TierII Thief Lv60+, pure melee dual one-handed daggers, AGI-only basic and Physical skill scaling, heavy positional burst from Stealth rather than high sustained autoattack throughput. Final exact starting stats VIT22 STR10 AGI35 INT10 SPR5, per-level gain VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8. ClassBaseMana100; global formulas MaxMana100+5INT (no-gear L1=150/L60=386/L150=746), ManaRegen/s4+0.1SPR (L1=4.5/L60=9.22/L150=16.42), pre-rounding.
+- Stealth cap25 signed concealed move speed `(rank-11)%` from -10% at rank1 to +14% at rank25, opening two-hit basic attack sequence gains opener multiplier on BOTH hits but opener consumes once for sequence. Backstab any-angle with much higher side/rear270deg positional damage and separate Stealth opener multiplier that stacks with positional bonus; Execute always usable and grows continuously with target missingHP, distinct from Envenom physical poison stab.
+- Critical Mastery20 hybrid +3AGI and +1pp BASIC crit chance per rank; active BASIC-only guaranteed critical hit charges rank1–5=2,6–10=3,11–15=4,16–19=5,rank20=6; consumes only successful BASIC dagger hits including fully shield-absorbed hits, misses preserve charges,25s cooldown begins immediately, charge refill replaces, charges clear on death/logout/class swap. Activation Mana cost grows with rank, exact cost unresolved. Armor Penetration15 ignores 1% target PDEF per rank on basics and Physical skills (max15%).
+- No Fan of Knives, Smoke Bomb, Expose Weakness or separate Guaranteed Crit active. Rank caps 25/30/35/25/20/15 fixed; only class-level gate numbers still open.
+
+### Next Round15 recommended questions, all not approved yet
+
+1. **Approve or adjust proposed FIRST unlock order/numbers and entire audited rank-gate schedule**, distinguishing specifically that Execute must be FINAL skill unlocked from exact level12 proposal.
+2. **Assassin five activated skill Mana costs** (Stealth, Envenom, Backstab, Execute, Critical Mastery): candidate *moderate* base + rank growth curves chosen against level-appropriate unlocked Mana budgets, not arbitrary high-cost skills. Per-user "decide Mana costs after stat distribution" condition now met.
+3. **Core two-hit sequence attack damage coefficient versus Thief baseline** at 2.5-sec cycle and 0.3-sec gap; ensure 50%+50% combined damage rather than accidental double.
+4. **Skill raw damage formulas** and cooldowns with skill-rank coefficients, Stealth and Backstab opening synergy, Execute continuous missingHP damage, Envenom physical+poison tick.
+5. **Rank gating vs special charge breakpoints**, rank20 crit extra charge progression timing based on unlock table, not assumed free at TierIII Lv1.
+
+**DOCUMENTATION ONLY. Do not edit Unity code/assets/scenes/builds/tests, or merge branches.**
