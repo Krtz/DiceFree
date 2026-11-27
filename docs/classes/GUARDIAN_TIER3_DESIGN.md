@@ -98,3 +98,35 @@ Interpretation: The user uses "defender" to describe the baseline **nonmagical c
 4. **Solo damage:** five selected Guardian concepts are mostly defensive; decide whether class BASIC attacks + Iron Guard AoE suffice, or add a sixth simple physical attack skill. Avoid inventing a magic skill or reintroducing omitted Shield Bash/Shield Sweep without user approval.
 
 **DESIGN-ONLY, no Unity C# or art/scene changes, no code compilation/tests/builds/merges.**
+
+
+## GUARDIAN-004 — 2026-11-27 Round 3 approved stationary ally redirection + Guardian DEF buff/self cast, Guardian PDEF/MDEF aura, Physical Iron Guard shockwave, offense undecided
+
+### Exact user selections and clarifications
+
+User responds:
+1. "**Intercede: Stationary nearby ally damage redirection**"; note "**and give a defensive buff to the defender. and be able to use it on themselves so they can use it while solo play.**"
+2. "**Hold the Line evolution: Guardian version replaces elemental aura with Physical and Magical Defense bonuses**".
+3. "**Iron Guard AoE retaliation: Physical shockwave around Guardian**".
+4. "**Offensive skill: No extra offensive skill for now**"; note "**maybe? what skills does it have currently?**"
+
+**USER-APPROVED INTERCEDE:** NEW Guardian ability protects a nearby ally while GUARDIAN STAYS IN PLACE, **redirecting a portion of eligible incoming damage from selected ally to Guardian**, AND **granting a defensive buff to Guardian**. User explicitly requires **SELF-TARGET casting for SOLO PLAY**: casting Intercede on Guardian self grants the Guardian DEFENSIVE BUFF, with **NO self-to-self damage redirection loop**, no duplicated damage or resource generation. This is grounded MARTIAL tank behavior, NOT a magical barrier and not a rush/dash to ally. Whether protective buff increases Physical DEF, Magical DEF, flat block/damage reduction, or both and its exact numbers/rank scaling, redirect percent, duration, cooldown, range/line-of-sight, Resolve cost, incoming damage type eligibility, effect on shield absorption, interactions with Bulwark/Iron Guard, and whether redirection creates extra Resolve are OPEN. Avoid any chance that redirect duplicates incoming hit or Resolve on both ally and Guardian. The user typed "defender" referring to recipient Guardian/Defender-line character; preserve class protection concept without treating TierII parent Defender as changed. The redirect should maintain clear target/beneficiary bookkeeping: allied incoming packet eligible portion gets reattributed to Guardian and Guardian receives its own defense buff while active, with a self-cast buff-only branch.
+
+**USER-APPROVED HOLD THE LINE GUARDIAN EVOLUTION:** Guardian's version **REPLACES its predecessor's all-element resistance AURA** with nearby ally **Physical Defense AND Magical Defense bonuses**. It is a physical/standard knightly protective aura rather than magical shields/holy effects. Parent **TierII Defender Hold the Line continues its existing +1 percentage point per rank to all elemental resistances in 5m range**, unchanged; Guardian is a new TierIII class with its own evolved skill. Exact Guardian aura radius (could reuse5m but not explicitly reconfirmed), flat DEF amount/rank scaling, personal self-bonus, overlap/stacking among multiple Guardians, class buff interactions and VFX are still OPEN. Maintain strongest-identical-aura global policy if applicable; no invented additive Guardian stacking.
+
+**USER-APPROVED IRON GUARD PHYSICAL SHOCKWAVE:** After its historically reserved two-second defensive action lock which accumulates incoming pre-mitigation hostile damage, Guardian Iron Guard's previously chosen centered AoE release is specifically a **PHYSICAL shockwave around Guardian**. It is a martial retaliation effect, NOT magical/elemental shield explosion, not per-enemy separate reflect packet by source nor an obligatory forward shield-slam single facing arc. Exact radius, snapshot source, stored total multiplier and cap, each-target distribution, attack/crit/defense interactions, Resolve cost and cooldown remain OPEN. Store and release damaging amount via normal shared Physical DamageResolver, no magical school assumed.
+
+**OFFENSIVE SKILL STATUS:** User selected "**No extra offensive skill for now**" but immediately adds "**maybe? what skills does it have currently?**" They have NOT made an irrevocable ruling that Guardian may never have a sixth skill. Be candid: approved five selected concepts are **Challenge (AoE taunt/threat), Iron Guard (defensive stance + reactive physical AoE stored-damage shockwave), Bulwark (Resolve mitigation), Hold the Line (PDEF/MDEF ally aura), Intercede (ally redirection + Guardian DEF buff or self-cast buff)**. **Normal Physical sword basic attacks** exist by shared class combat; **currently NO active attack-on-demand damage skill** because Defender's parent Shield Bash and Shield Sweep were NOT selected in Round2. Solo output presently ordinary sword basics plus Iron Guard reactive AoE; WITHOUT an attacker Iron Guard may accumulate nothing. Designer recommends discussing optional one simple physical sword or shield offensive attack later (e.g. Shield Strike, name/effect PROPOSAL ONLY), potentially generating Resolve if it connects, but **DO NOT silently add a new skill or count six as user-approved**. The user's explicit question about current skills should be answered with these five and basic attacks, highlighting lack of active damage skill.
+
+### Remaining design decisions, useful for Round4
+
+1. Does Guardian WANT a sixth always-available Physical strike skill after seeing the roster? Options: **yes new basic sword/shield attack**, **reuse evolved Shield Bash**, **retain current 5**, or a different idea. Guard against assuming number six.
+2. Intercede redirect percentage and DEF buff type/duration: recommend designer offer modest first-test numerical options after user settles whether active cost/range should differ, with simple self-cast no-transfer behavior.
+3. Guardian Hold the Line PDEF/MDEF bonus should scale with purchased ranks using global flat defense unit semantics; seek exact initial % vs flat first-test preference. Should Guardian itself benefit? expected but not expressly selected as precise rule yet.
+4. Iron Guard stored premitigation hit damage -> physical AoE shockwave should have sensible target defense and cap model; ask in later design, no hidden mandatory extra subclass or resource.
+
+### Continuity
+
+TierIII Guardian is standard new Lv1 manifestation after DefenderLv60+, sword+shield, Resolve inherited baseline, dedicated party protector (not magical Paladin), not a damage-first Vanguard. Existing Defender TierII remains UNCHANGED and its six parent skills do not automatically become Guardian skill slots. No class stat numbers, rank caps/150 rank gates, new quests, skill mana, Resolve prices or implementation have been user-approved this round.
+
+**DOCUMENTATION ONLY. No Unity gameplay, C#, files beyond three design docs, build/test, branch merge or deployment.**
