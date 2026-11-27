@@ -471,3 +471,58 @@ AGI-ONLY scaling for Assassin basics and physical skills, pure melee glass canno
 4. Set cooldowns, attack intervals and rank-dependent raw damage curves.
 
 **DOCUMENTATION ONLY; no Unity source/assets/scenes/builds/tests, no code merges.**
+
+
+## Assassin Tier III Round 13 — 2026-11-27 USER APPROVES REVISED LEVEL1 STATS AFTER TRANSFERS; GROWTH PRESERVED
+
+### Definitive Round13 USER-APPROVED LEVEL1 STARTING DISTRIBUTION
+
+User selects starting candidate **C: VIT15 / STR8 / AGI40 / INT10 / SPR9 (total82)** and explicitly overrides its distribution: "**move 2 agi to str and 3 agi to vit and 4 spi into vit. it can have a bit more survivability at the start and gain more damage as it levels up.**" Apply **all three transfers ONLY to Lv1 starting stats**, not the already approved per-level gains:
+- From AGI40: move2 to STR and3 to VIT => **AGI35**.
+- STR8 +2 => **STR10**.
+- VIT15 +3 from AGI +4 from SPR => **VIT22**.
+- SPR9 -4 => **SPR5**.
+- INT remains **10**.
+- Total remains **VIT22 + STR10 + AGI35 + INT10 + SPR5 =82**.
+
+**LATEST AUTHORITATIVE ASSASSIN Lv1 STATS: VIT22 / STR10 / AGI35 / INT10 / SPR5**, total82. This SUPERCEDES both original Round11 extremely low Lv1 VIT5/STR4/AGI20/INT5/SPR4 total38 and Round13 pre-adjustment C VIT15/STR8/AGI40/INT10/SPR9. Never revert to either earlier set. User explicitly wants more initial survivability with longer-term AGI-heavy damage growth, so do not portray VIT22 as an unintended tank-role change. Assassin remains a PURE MELEE DPS with glass-cannon/burst-oriented identity relative to tank roles, although its early VIT now exceeds some caster/ranged alternatives.
+
+### Separate already USER-APPROVED Round12 stat gain remains UNCHANGED
+
+`VIT+1.7, STR+0.7, AGI+7.0, INT+0.8, SPR+0.8` PER ASSASSIN CLASS LEVEL-UP (total+11). Round13 user explicitly restates and preserves this. Damage scaling remains **AGI-only for basics and physical skills**; extra STR at start does NOT silently add STR offensive coefficients.
+
+| Stat | USER-APPROVED Lv1 start | USER-APPROVED growth/class level | Projected Lv60 before rounding | Projected Lv150 before rounding |
+| --- | ---: | ---: | ---: | ---: |
+| VIT | **22** | **+1.7** | **122.3** | **275.3** |
+| STR | **10** | **+0.7** | **51.3** | **114.3** |
+| AGI | **35** | **+7.0** | **448** | **1078** |
+| INT | **10** | **+0.8** | **57.2** | **129.2** |
+| SPR | **5** | **+0.8** | **52.2** | **124.2** |
+| TOTAL | **82** | **+11.0** | **731** | **1721** |
+
+Formula `Stat(L)=Lv1Start + Growth*(L-1)` before equipment, buffs, passive ranks, fractional storage/rounding. Hybrid CriticalMastery passive at rank20 provides **+60 AGI** beyond this base; no assumption it is already fully purchased at Lv1, Lv60 or Lv150.
+
+### Approved globally shared resource formulas, recomputed with final Assassin stats (NO SKILL COSTS APPROVED YET)
+
+USER APPROVED separate `AssassinClassBaseMana=100` Round11, and universal `MaxMana=100+5*INT`, natural `ManaRegenPerSecond=4+0.1*SPR`.
+
+| Class Lv | Base INT, no equipment | Base SPR, no equipment | Max Mana before rounding | Mana regen/sec before rounding |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 10 | 5 | **150** | **4.5** |
+| 60 | 57.2 | 52.2 | **386** | **9.22** |
+| 150 | 129.2 | 124.2 | **746** | **16.42** |
+
+If existing HP equation `baseHP10+15*VIT` applies unchanged, prospective no-gear HP would be Lv1 **340**, Lv60 **1844.5**, Lv150 **4139.5** before rounding, which is a CALCULATION under current global HP convention rather than separate new class-specific HP approval. Actual engine rounding and skill/class HP modifiers may differ. This stat snapshot now provides a firm numeric basis to propose SKILL MANA COSTS in NEXT ROUND after final stats, satisfying Round10 user instruction. Do not treat earlier discarded `CriticalMasteryCost=20+5r` as approved just because it was selected before user's defer note.
+
+### Other Assassin kit and progression rules unchanged
+
+Six rankable concepts with exact caps **Stealth25 / Envenom30 / Backstab35 / Execute25 / hybrid CriticalMastery20 / ArmorPen15 =150**. One point per classLv1–150. User approved staggered skill first unlocks but Round10 full mathematically audited 150-rank level-gate table remains **DESIGNER PROPOSAL, NOT USER APPROVED**. Assassin enters TierIII Lv1 on Thief TierII Lv60+ advancement; mentor/trial not authored. Dual one-handed daggers, slower TWO-IMPACT basic sequence with equal50/50 damage split, AGI-only offense, much stronger Stealth burst than sustain; Backstab any facing, enhanced side/rear270° and stacks Stealth opener. Envenom independent poison stab, Execute continuous missing target HP scaling. Stealth concealed movement mod `(StealthPurchasedRank-11)%`. CritMastery20 passive +3AGI and+1pp BASIC crit/rank; active rank-scaled BASIC-only guaranteed crit charges 2/3/4/5/6 at milestone r1/6/11/16/20,25sec cooldown begins on activation, charges clear at death/logout/class change and reset/replace on recast, only successful basic dagger hits spend charges even if shield absorbs all damage. ArmorPen15 +1% target PDEF bypass per rank on basics and physical Assassin skills. CritMastery Mana cost must rise with rank; exact all-ability Mana formulas unresolved. Exact skill rank gates, raw coefficients/CDs, baselines and visuals remain open.
+
+### Round14 recommended design order (NOT YET APPROVED)
+
+1. With Lv1 stats and per-level growth locked, **choose numeric Mana cost formulas** for five actives including hybrid activation, compare against max Mana at Lv1=150/Lv60=386/Lv150=746 and regen4.5/9.22/16.42 per second. Design realistic rank curves, avoid max-rank casts costing more than entire intended mana pool at expected unlock level.
+2. Confirm/adjust **audited proposed staggered six-skill first unlock levels** Stealth1/Envenom2/Backstab3/CritMastery5/Execute8/ArmorPen10 and full 150 individual gates, all still non-approved.
+3. Define Assassin basic attack cycle interval and impact gap, relative total damage vs Thief.
+4. Define Backstab side/rear positional % bonus, stacking stealth opening multiplier, and Execute missing-health damage curve with purchased rank scaling.
+
+**DESIGN DOCUMENTATION ONLY. No Unity gameplay code/assets/scenes/builds/tests, no merges; commit/push docs each completed round.**
