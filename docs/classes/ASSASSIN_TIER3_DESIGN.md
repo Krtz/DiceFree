@@ -184,3 +184,42 @@ User says: "**hmmm, either we remove guaranteed crit or moove it into the crit p
 5. **150-rank allocation across final skills** after crit merge decision, and rank gating (one eligible purchase per level1..150).
 
 **DOCUMENTS ONLY. No Unity gameplay/source/assets/builds/merge.**
+
+
+## Assassin Tier III Round 6 — 2026-11-27 USER APPROVES HYBRID CRIT PASSIVE/ACTIVE, CHARGE-BASED GUARANTEED BASIC CRITS, RANK-SCALED FROM TWO CHARGES
+
+**LATEST USER ROUND6 DECISIONS, DEFINITIVE, superseding the Round3/Round4 two-separate-crit-skills rule and Round5 merely exploratory hybrid proposal:**
+
+1. **MERGE the old Guaranteed Crit ACTIVE and Crit/AGI PASSIVE into ONE SINGLE RANKABLE HYBRID PASSIVE + ACTIVATABLE skill.** It has ONE purchased rank progression granting passive effects AND an activation using that same purchased rank. It is NOT two skills consuming separate points. Working label **Critical Mastery / Killer Instinct** is DESIGNER-ONLY; final in-game ability name has NOT been approved. Do not allocate a standalone Guaranteed Crit skill slot/ranks.
+2. **HYBRID PASSIVE must grant BOTH bonus AGI AND passive CRITICAL HIT CHANCE** with purchased ranks. User approves both attributes, not crit-only or crit damage instead. Exact AGI/crit increments per rank, cap, baseline crit damage multiplier, and whether passive critical chance affects physical skills beyond normal basic attacks remain TBD; parent TierII +1AGI/+1pp basic-crit per rank and1.5x crit raw are REFERENCE, not automatically adopted as TierIII coefficients.
+3. **HYBRID ACTIVATION grants a NUMBER OF GUARANTEED CRITICAL HIT CHARGES, NOT a short fixed time window.** Each eligible successful basic dagger hit will consume or use a charge per future exact charge-spending rules, to be approved; never implement a forced short buff timeout without a new decision. Long-term state persistence, refresh on recast, logout/death handling, and whether misses consume charges remain OPEN.
+4. **GUARANTEED CRIT CHARGES SCALE WITH SKILL RANK, STARTING AT EXACTLY TWO CHARGES** when the hybrid skill first reaches rank1. At rank1 two guaranteed critical basic strikes can cover the new Assassin TWO-IMPACT basic attack sequence, as long as charge eligibility/consumption is defined accordingly. More purchased ranks increase charges according to a still-UNAPPROVED progression. Do not silently freeze a two-charge maximum, grant +1 charge per every rank, or invent a specific final charge cap without consulting user.
+5. **HYBRID ACTIVE guaranteed-critical charges apply ONLY TO NORMAL BASIC ATTACK DAGGER STRIKES**, NOT to Backstab, Envenom direct stab or poison ticks, Execute or other physical skills. This confirms old parent Thief's basic-only scope for the hybrid active, but does NOT settle whether any active Assassin damage SKILLS can critically hit naturally via independent crit rules. Do not have Backstab/Execute consume charges or gain guaranteed crit merely because of this buff.
+6. **TWO-STRIKE BASIC INTERACTION:** The earlier approved separate-crit active checked its active state independently at EACH dagger impact. With the newly approved hybrid CHARGE model, keep **per-hit eligibility/charge accounting** rather than snapshotting a two-hit basic sequence and spending only one charge for both. Each actual eligible basic strike is one candidate for a guaranteed crit; precise miss and absorption policies remain undecided. Stealth opener still multiplies BOTH strikes of first stealth-breaking BASIC SEQUENCE, even though the stealth opening is consumed once for the entire sequence, not independently per hit.
+7. **AUTHORITATIVE POST-ROUND6 ASSASSIN ROSTER: SIX RANKABLE SKILL CONCEPTS**, four purely active, one hybrid, one purely passive:
+   - **Stealth** (ACTIVE, evolves TierII with rank-dependent movement modifier `(r-11)%`, strong opening damage).
+   - **Envenom** (ACTIVE, retained separate poison dagger stab).
+   - **Backstab** (ACTIVE, usable all angles, heavy bonus in target-side/rear270deg, Stealth opener multiplier stacks with positional bonus).
+   - **Execute** (ACTIVE, usable at any target HP, damage increases continuously with target missing HP).
+   - **Critical Mastery (working name)** (ONE HYBRID PASSIVE+ACTIVE; passive +AGI and +crit chance; activation rank-scaled basic-only guaranteed crit charges beginning at2).
+   - **Armor Penetration** (PASSIVE, percentage of target Physical Defense bypassed on normal basic attacks and physical Assassin skills; percent/rank/cap TBD).
+   **NO SEPARATE GUARANTEED CRIT ACTIVE**, NO Expose Weakness, Fan of Knives or Smoke Bomb in Assassin. Parent Thief is unchanged. Total **150 PURCHASABLE SKILL RANKS / 1 POINT ASSASSIN CLASS LEVEL1..150** signed off Round5, to be distributed among these six concepts AFTER caps and gates are designed.
+8. **OTHER APPROVED CLASS RULES PRESERVED:** TierII Thief Lv60+ -> separate TierIII Assassin Lv1; PURE MELEE DPS; dual one-handed daggers; one SLOWER basic ATTACK CYCLE containing TWO distinct dagger impacts, with a slower heavy skill cadence. Very strong burst from Stealth followed by weaker sustained DPS. Positional bonus valid from enemy's side/rear270deg, with only enemy front90deg excluded. Mana ONLY, universal MaxMana = AssassinClassBaseMana + 5*INT and regen/sec = 4 + 0.1*SPR; class-specific base and growth TBD. Envenom retained, Execute continuous missing-target-HP scaling, armor pen applies to basics and physical skill attacks. Stealth rank1 -10% movement and +1 percentage point per additional purchased Stealth rank. Rank caps/first eligibility and all ability numbers NOT yet locked.
+
+### Implementation/design caveats, UNDECIDED
+
+- Guaranteed crit **charge consumption on a MISS or full shield absorption**: user has only approved rank-scaled GUARANTEED CRITICAL HIT CHARGES; do not imply whether attempt versus successful impact spends a charge. The original Stealth opener has separate existing consumed-on-miss behavior; these systems should not be conflated.
+- Does hybrid active require Mana to activate, its cooldown, charge maximum and recharge model, persistence, overwriting/stacking on recast, and exact rank gain schedule all TBD.
+- What does the passive's CRIT CHANCE affect? User affirmed crit chance without explicitly narrowing it to basics; active GUARANTEE is specifically basics only. Current parent TierII crit passive was basic-only, but new TierIII scope should be explicitly confirmed.
+- No active guaranteed crit on Envenom, Backstab, Execute; natural critical chance for those still open.
+- Stat bases/growth, weapon basic damage coefficient/interval and hit spacing, raw skill damage formulas, Backstab positional multiplier, Stealth opener scaling, Execute missing-health curve, armor pen percentage curve, cooldown and rank eligibility gates still need user design.
+
+### Round7 interview ideas (NOT YET USER APPROVED)
+
+1. **Charge gain by skill rank**: e.g. rank1=2, +1 charge every 5 purchased ranks, max depending on hybrid cap; or a faster/slower progression.
+2. **Charge consumption**: consume on successful/eligible basic hit vs basic swing attempt (including misses), and whether damage fully shielded counts.
+3. **Crit passive scope**: basics only vs all direct Physical skill attacks in addition to basics; keep separate from basic-only GUARANTEE active.
+4. **Hybrid activation cost and CD**: choose global Mana-based cost and cooldown plus whether activation refills or adds to existing unused charges.
+5. **Exact 150-rank allocation** across six skills, then audit per-rank min-level gates without forcing fully spent points before eligible purchases.
+
+**DOCS ONLY; no Unity changes, builds/tests, or branch merges.**
