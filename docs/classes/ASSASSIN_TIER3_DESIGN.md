@@ -629,3 +629,57 @@ Ungeared before rounding, Assassin's previously approved resource trajectory is:
 5. **Advancement teacher/quest** and world location remain undecided.
 
 **DOCUMENTS ONLY. No Unity gameplay code/assets/scenes/builds/tests/merges authorized.**
+
+
+## Assassin Tier III Round 16 — 2026-11-27 USER REQUESTS EXECUTE AS EXPENSIVE HIGH-DAMAGE LONG-COOLDOWN TIMED FINISHER; NUMERIC COSTS AND COEFFICIENTS PROPOSED, NOT APPROVED
+
+### LATEST USER DECISION, authoritative
+
+User explicitly chooses **"Custom individual Mana cost changes in notes"** and states: "**make execute a bit more expensive, it should be like a high damage longer cd, expensive move that you kiind of time to use and stuff.**"
+
+1. **EXECUTE IS THE ASSASSIN'S INTENTIONAL, HIGH-DAMAGE, LONGER-COOLDOWN, MORE MANA-EXPENSIVE SINGLE-TARGET FINISHER**, not a cheap rotational strike. It remains usable at ANY target current HP, with damage increasing CONTINUOUSLY with the enemy's missing-HP percentage (Round5) and rank-scaled physical AGI-only coefficient. Strongest timing is after setup/positioning and as enemy becomes wounded. This is the **approved qualitative DIRECTION** for Execute Mana relative to other active attacks, cooldown and rank-scaling, with no exact user-selected numeric cost, damage or seconds this round.
+2. **NO blanket approval of the other FOUR numeric Mana formulas** occurred: Round15 offered Stealth8+2r, Envenom10+2r, Backstab12+2r, CritMastery12+3r, and Execute15+3r as designer examples. User chose CUSTOM and singled out Execute for higher cost. Continue treating four other cost functions as **unchanged working DESIGNER PROPOSALS, NOT USER-APPROVED**, pending explicit response. The old Execute15+3r candidate is **SUPERSEDED AS A DESIGN DIRECTION**, not canonically replaced by any concrete new numeric formula until user accepts one. Global moderate Mana pacing for normal skills and reserved burst capacity remains approved.
+3. **ALL EXACT DAMAGE COEFFICIENTS AND ACTIVE COOLDOWNS EXCEPT CRITICAL MASTERY'S ALREADY APPROVED 25S ARE NOT YET USER APPROVED.** They are modeled below to provide tangible Round17 questions without pretending the user's qualitative note decided particular numbers. In particular, do not silently lock a 35s Execute CD or a cost formula in implementation.
+
+### Designer-only proposed numeric Mana costs and cooldowns — TO APPROVE IN ROUND17
+
+Let `r` be each skill's own purchased rank, `B` the class's total NORMAL UNCRITTED RAW two-hit basic SEQUENCE damage before target-defense mitigation (the user approved two impacts each 0.5B separated0.3sec, sequence2.5sec). Let `m=clamp(1-targetCurrentHP/targetMaxHP,0,1)` be target's missing-health fraction. `A=AGI`, the ONLY offensive stat contributing to Assassin's basic and physical abilities (damage `B(A,weapon)` must still be finalized relative to actual global attack formula; do not assume B equals exactly AGI without review). Skill rank coefficients below are DIMENSIONLESS multiples of B, and therefore grow with skill rank, matching user's project-wide rank-scaling rule. **None are user-locked.**
+
+| Skill | Maximum rank | PROPOSED Mana cost per use | Rank1 cost | Max-rank cost | PROPOSED cooldown |
+| --- | ---: | --- | ---: | ---: | --- |
+| Stealth | 25 | `8+2r` | 10 | 58 | **22s** |
+| Envenom | 30 | `10+2r` | 12 | 70 | **8s** |
+| Backstab | 35 | `12+2r` | 14 | 82 | **9s** |
+| Execute | 25 | **`20+5r`** (stronger than discarded15+3r candidate) | **25** | **145** | **35s** |
+| Critical Mastery hybrid active | 20 | `12+3r` | 15 | 72 | **25s USER APPROVED, unchanged** |
+| Armor Penetration passive | 15 | none (passive only) | - | - | none |
+
+**Execute's suggested cost max145 is ~19.4% of Assassin's no-gear Lv150 MaxMana746** (vs old cap90 ~12.1%), so timing matters. Its proposed rank1 cost25 is ~12.9% of classLv12 MaxMana194. All five candidate maximum-rank activations once cost58+70+82+145+72=**427 Mana**, ~57.2% of unmodified Lv150 pool746, before natural regen at16.42/s, and before weapon stats, CD constraints or the fact skill ranks unlock progressively. **These are theoretical budget checks, not playtest validation**. An Execute whose target is fullHP can still be cast but yields less damage for the same Mana/CD and is strategically inefficient.
+
+### Designer-only proposed raw DAMAGE SCALING and cooldown interactions — NOT approved
+
+**Keep all class attack and skill damage AGI-only** and derive physical scaling from shared B(A,dagger gear), preserving already approved global physical/armor system and equal basic50/50 packets. The following coefficient curves are deliberately rank-dependent and avoid defining a parallel new base AGI damage equation without verifying runtime convention:
+
+- **Stealth opening damage multiplier proposal** on qualifying first basic sequence OR initial qualifying Backstab/Envenom, with specific eligible skills clarified separately: `StealthOpener(r) = 1.10+0.03r` (r1=1.13x, cap25=1.85x). Previously approved: BOTH dagger packets of first Stealth breaking basic sequence receive same multiplier (only ONE opener consumed) and opening Backstab gains multiplier stacking with positional buff. Whether Envenom, Execute and poison tick receive opener requires explicit design; no automatic blanket inclusion. Existing Stealth rank-based move speed `(r-11)%` and duration mechanics are separate.
+- **Backstab direct Physical packet candidate:** `B * (0.90+0.07r)` (r1=0.97B, cap35=3.35B). On target SIDE/REAR 270deg eligible area, multiply by `1.25+0.02r` (r1=1.27x, cap35=1.95x), no positional multiplier for target FRONT90deg. If first Backstab out of Stealth qualifies, ALSO multiply by `StealthOpener(stealthRank)`. Separate levels determine distinct multipliers. At max unstealthed eligible side/rear packet ~=3.35*1.95=6.53B; including max Stealth opening ~=12.08B before defense, crit and other effects. These high burst values are illustrative and demand later balance review; they are **NOT authorized**. All attack skill damage coefficients scale with their own ranks, not solely flat AGI value.
+- **Execute always-usable direct Physical packet candidate:** `B*(1.00+0.09r)*(1+(0.30+0.03r)*m)`; at r1 fullHP m0=1.09B, at max r25 fullHP=3.25B, at max with m0.5=4.96B, at nearly zero target HP m1~=6.66B. MissingHP increases damage continuously without a rigid30%-only gate. The rank of Execute scales BOTH base coefficient and missingHP bonus coefficient. Does NOT automatically crit through basic-only Critical Mastery charges. On same rank25 proposed **35s CD and145 Mana**, for deliberate setup and finishing.
+- **Envenom initial Physical stab candidate:** `B*(0.80+0.055r)` =0.855B at r1 to2.45B r30. **Nature poison supplementary DoT total candidate** `B*(0.25+0.03r)` over existing inherited three 1-second ticks, giving0.28B total at r1 and1.15B total at r30. This separation means the immediate direct packet is Physical and the poison is a distinct Nature effect, and ArmorPen's applicability to nonphysical poison ticks is NOT implied. Exact tick rank coefficient, duration, refresh stacking, snapshots and target status still require user approval. Do not assert direct Envenom is a free critical attack just because base damage comes from B.
+- **Normal two-dagger basic packet remains 0.5B each on an attack every2.5sec, with0.3sec between impacts.** `B` global normalization versus TierII Thief still OPEN; do not accidentally increase baseline by giving each of TWO impacts full B. Parent/weapon scaling and the separate Critical Mastery +3AGI/r passive, basic crit+1pp/r and basic-only guarantee charges affect B and each hit through approved existing systems.
+- Proposed cooldowns are **Envenom8s, Backstab9s, Stealth22s, Execute35s**, with CritMastery25s already USER APPROVED. Proposed CDs are static across ranks unless later approved otherwise. **High Execute CD must outlast ordinary rotational attack cooldowns**, user-approved comparative principle.
+
+### Progression, stats and prior approvals preserved
+
+- Round15 user finally approved EXACT 150 single-rank/class-level eligibility gates from Round14, first unlocks Stealth1 Envenom2 Backstab3 CriticalMastery5 ArmorPen8 Execute12 LAST, with caps25/30/35/20/15/25. Full gate lists in Round15 authoritative table; do not recast them as only suggestions.
+- Final Lv1 VIT22 STR10 AGI35 INT10 SPR5, growth VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8; ClassBaseMana100, global MaxMana100+5INT and regen/s4+0.1SPR. Pure dual-dagger AGI-only Physical DPS with intentionally meaningful Lv1 survival and fast-growing AGI, Stealth burst and positioning focus.
+- Critical Mastery hybrid rank20 passive +3 AGI and +1 percentage point BASIC crit/r, active BASIC-only hit charges2/3/4/5/6 based on r1/6/11/16/20,25sec CD starts activation, charges clear on death/logout/class swap, rerun replaces leftover, successful basic dagger hits spend even if shield absorbs, misses don't. Existing ArmorPen +1% target PDEF ignored/rank (cap15) on basics and physical skills. Stealth move modifier rank-dependent `(r-11)%`. Backstab usable all angles, side/rear270deg greater damage and opener stacks with positional. Execute always usable and missingHP-continuous; rank-dependent curves remain drafts.
+- No class implementation, item art or advancement teacher selected.
+
+### Round17 decision suggestions (NOT user approved yet)
+
+1. **Execute cost and CD:** approve/revise 20+5r (r1=25, r25=145) and35s, or user can pick another larger cost/longer cooldown.
+2. **Other four costs and cooldowns:** approve/revise Stealth8+2r /22s, Envenom10+2r /8s, Backstab12+2r /9s, CritMastery12+3r /25s user-fixed. Maybe approve cost formulas as one group except Execute.
+3. **Rank-scaled damage proposed**: accept/revise Backstab raw+positional, Stealth opener rank curve and Execute missingHP growth, with high burst multiplication checks.
+4. **Envenom Nature poison** direct/dot coefficients and whether critical proc/Stealth opener applies; global B normalization vs Thief.
+5. **Execute target state** and animation telegraph: immediate vs windup and cancellation/refund rules (not implicitly approved by "time it").
+
+**DOCS ONLY; no Unity gameplay code/assets/builds/tests or branch merges authorized.**
