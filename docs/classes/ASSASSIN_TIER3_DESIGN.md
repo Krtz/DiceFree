@@ -146,3 +146,41 @@
 6. **Rank budgeting**: decide whether TierIII Assassin will use 150 point ranks across 7 skills (working goal elsewhere, not yet explicitly approved for Assassin) and then allocate caps/gates.
 
 **DESIGN DOCS ONLY. Do not alter Unity code/assets/builds, or merge/overwrite Codex work.**
+
+
+## Assassin Tier III Round 5 — 2026-11-27 USER APPROVES STEALTH %-SPEED, BACKSTAB OPENER STACK, CONTINUOUS EXECUTE, ARMOR PEN BOTH, 150 RANKS; CRIT SKILL CONSOLIDATION PROPOSED ONLY
+
+### EXACT Round5 USER APPROVALS
+
+1. **ASSASSIN STEALTH MOVE SPEED UNIT CONFIRMED: PERCENT**, and signed rank curve EXACT: `StealthMoveSpeedPct(r) = -10 + (r-1) = (r-11)%` for purchased Stealth rank r>=1. At rank1 **-10%**, at rank11 **0%**, at rank21 **+10%**, at rank31 **+20%** if those ranks are eligible. This intentionally includes early Stealth MOVEMENT SLOWDOWN, despite older descriptive "increased movement speed" phrasing; do NOT silently flip sign. Actual MAX Stealth rank and thus final move-speed effect TBD. This explicitly settles Round4's unspecified stat-unit ambiguity; it is percent movement-speed modifier, not flat speed.
+2. **BACKSTAB receives the STEALTH OPENING DAMAGE MULTIPLIER**, **STACKING with** its qualifying **270-degree SIDE/REAR positional bonus**. Backstab remains USEABLE from ANY angle, including the front90-degree no-positional-bonus cone. This design creates strong dual-synergy opening from stealth in eligible position; exact multiplier values and whether stacking means raw multiplicative product vs another global modifier grouping remain TBD. The user has NOT authorized guaranteed crit on Backstab by merely approving opening damage; crit eligibility requires separate consideration.
+3. **EXECUTE ALWAYS USABLE AT ANY TARGET HP**, with **DAMAGE INCREASING CONTINUOUSLY AS TARGET MISSING HP INCREASES**. NO hard 30% execute threshold and NO separate activation gate below some HP fraction. Actual functional curve (linear vs nonlinear), base packet, maximum bonus, rank scaling, cast duration, Mana/CD and possible stealth interaction TBD. Target missing health is based on live target current/max HP per ordinary combat rules, to be explicitly formula-designed later.
+4. **% ARMOR PENETRATION PASSIVE** applies to **BOTH BASIC ATTACKS AND PHYSICAL ASSASSIN SKILLS**, not only one category. Exact percentage per purchased rank, cap and stacking with other sources TBD. Respect physical attack/defense engine, not a new magic resistance bypass; Envenom physical Nature poison ticks' inclusion is specifically undecided despite general 'physical skills' wording, as DoT periodic penetration handling can differ.
+5. **TOTAL ASSASSIN SKILL RANK BUDGET USER APPROVED EXACTLY 150**, with ONE earned skill point PER ASSASSIN CLASS LEVEL from1 through150. TierIII is separate manifestation Lv1 after TierII Thief Lv60+. Skill rank caps, min-level gates, and allocation across confirmed final skills pending; DO NOT simply reuse TierII Thief80 rank gates or Fire Mage six-skill rank caps. Since crit skill consolidation below is not decided, **DO NOT LOCK A FINAL SKILL COUNT OR SPLIT THESE 150 ranks yet**.
+
+### NEW USER IDEA / OPEN QUESTION, NOT YET A FINAL DECISION
+
+User says: "**hmmm, either we remove guaranteed crit or moove it into the crit passive, making it both a passive and an active at the same time, mmeaning it gives passive crit chance but you can activate it for guaranteed crit for either a time or for a certain amount of hits. what you thiink about this?**" This is exploratory, NOT an authorization to delete or merge now. The Round3/Round4 retained **Guaranteed Crit ACTIVE + Crit/AGI PASSIVE as two DISTINCT skills** remains the CURRENT APPROVED roster until the user decides in next round.
+
+**Designer recommendation (UNAPPROVED):** Merge separate Guaranteed Crit active into the existing Crit/AGI passive to create **ONE DUAL-FUNCTION RANKABLE SKILL** (working name *Killer Instinct*, not signed off). Its passive ranks would provide permanent crit chance (+ AGI if retained); its activated ability would grant guaranteed critical basic hit charges. **Prefer hit-charge activation over time duration** because Assassin has deliberately slow two-impact basic cycles, and a time-limited buff might expire between impacts. As an initial working example, an activation could grant TWO guaranteed critical strike charges, enough for ONE full two-hit basic sequence; hit-charge count, per-rank scaling, charge consumption on miss, eligibility on Backstab/Envenom/Execute, activation Mana/CD, rank cap and exact passive percentage growth all remain unapproved. Preserve general Round4 rule that when a guaranteed Crit status is time-varying, EACH individual basic dagger impact checks its OWN active eligibility, not a start-of-sequence snapshot; if ultimately switching to charges, consumption per qualifying strike must be specified separately.
+- **Possible post-approval roster if merged:** Active Stealth, Envenom, Backstab, Execute; hybrid Crit/AGI Mastery (passive and activation); Armor Penetration passive = **6 rankable skill concepts** (4 purely-active + 1 hybrid + 1 passive); currently 7 if crit stays separate. User might also choose to REMOVE guaranteed crit activation entirely, leaving other ranks to allocate. Do not force this recommendation.
+- This hybrid skill can be implemented with one purchased rank progression + passive stat hooks + active activation and cooldown, without requiring a second resource gauge. All class abilities still consume only Mana.
+
+### Previously approved unchanged
+
+- Pure dual-dagger melee DPS with slower heavy two-hit basic attack cycles and deliberate skills; opener burst stronger than sustained damage. Both dagger impacts of initial stealth-breaking basic sequence get opening multiplier, but opener is one consumed sequence (not two separate stealth charge triggers).
+- Guaranteed Crit currently distinct active checks each dagger impact separately, not snapshot once at cycle start; remains current until consolidation confirmed.
+- Evolved Stealth includes signed rank-dependent movement modifier `r-11` percent; Backstab usable from any facing but massive positional synergy outside enemy-front90-degree arc; user now approves STACKING opening multiplier for Backstab. Envenom retained independent physical poison stab skill, Execute always-usable continuous missing-HP scaling.
+- Armor Penetration passive affects both basics and physical skill attacks; new active Expose Weakness/Shadowstep was explicitly rejected, Fan of Knives/Smoke Bomb removed from Assassin only.
+- Shared global Mana max=`ClassBaseMana+5*INT`, natural regen/s=`4+0.1*SPR`; Assassin stat bases/growth and own ClassBaseMana TBD. No secondary resource.
+- World2 normal story access details for ASSASSIN mentor/quest are NOT yet approved; Fire Mage's specific volcanic trial does not transfer here.
+
+### Round6 priority questions (PENDING)
+
+1. **Choose Crit skill architecture:** merge passive and active into one dual-mode skill (recommended), remove guaranteed crit active completely, or retain two separate skills (prior-approved).
+2. **If merged, activation type:** fixed guaranteed-critical STRIKE CHARGES (e.g., 2 attacks total), fixed time buff, or rank-scaled number/duration; define buff eligibility basic-only vs certain skills and whether misses consume charges.
+3. **Do passive rank bonuses retain +AGI as well as +basic critical chance?** Is active activation tied to purchased ranks, and whether skills can crit naturally?
+4. **Execute missing-HP bonus curve:** linear fraction of enemy missing HP to raw damage vs another curve.
+5. **150-rank allocation across final skills** after crit merge decision, and rank gating (one eligible purchase per level1..150).
+
+**DOCUMENTS ONLY. No Unity gameplay/source/assets/builds/merge.**
