@@ -166,3 +166,35 @@ D. Numerical defensive Intercede redirect and personal DEF buff baseline and dur
 E. Six-skill TierIII total ~150 ranks, one per class level 1..150, standard precedent but explicit user signoff and exact distribution pending.
 
 **Documentation/design only; no Unity gameplay code or class implementation, no asset editing, builds, tests or branch merge.**
+
+
+## GUARDIAN-006 — 2026-11-27 Round 5 USER APPROVES PROVOKING STRIKE NAME, SUCCESSFUL-IMPACT TAUNT INCLUDING SHIELD ABSORPTION, RESOLVE GENERATION ON HIT
+
+### User-approved choices
+
+1. **Official skill name: PROVOKING STRIKE.** This REPLACES the Round4 temporary descriptive name "Sword Strike". The two other offered name choices (Taunting Slash and Sword Strike) are NOT selected. Its Round4 core is unchanged: a straightforward, single-target ONE-HANDED SWORD melee attack with a DIRECT PHYSICAL damage packet and single-target TAUNT. It is NOT a dash, shield charge, frontal cleave, magic spell, AoE attack or new class resource.
+2. **Taunt application: ONLY ON A SUCCESSFUL HIT, INCLUDING WHEN AN ENEMY SHIELD ABSORBS THE DAMAGE.** Accuracy/target validity is checked by the normal shared attack/hit system; an actual successful impact counts for taunt even if subsequent shield absorption makes HP damage zero. A MISS, dodge, invalid target, interrupted/cancelled strike or no connecting impact grants NO TAUNT. The target is the struck enemy only; the separate skill **Challenge** remains the Guardian's AoE taunt. Reuse existing real threat + boss/forced-target immunity semantics from Defender/Challenge rather than inventing per-class overrides. User has not yet selected exact threat amount or taunt duration for Provoking Strike.
+3. **Resolve interaction: GENERATE RESOLVE ON A SUCCESSFUL IMPACT.** The same successful sword hit that earns the taunt qualifies for a Resolve gain, EVEN IF the hit was fully absorbed by an enemy shield; it is still a connecting hit. Miss, invalid target and canceled hit produce zero Resolve. Generate one intended skill-tagged Resolve event PER activation/connected target, never one extra gain for each shield/HP processing stage, and do not create gain via mere activation without impact. The exact Resolve gain number and how it changes with purchased skill ranks remain OPEN, not assumed. Guardian retains its source Resolve0..100 pre-mitigation incoming-hit gain/standard out-of-combat decay unless separately approved; no automatic free resource on all ordinary sword basics.
+4. **Damage eligibility:** direct single-target normal Physical sword skill packet; rank-scaled raw flat and attribute coefficients should be designed under global "all coefficients scale with purchased rank" principle when numbers are approved. Per-rank raw damage, skill cooldown, weapon reach, animation windup, gear contributions, natural critical eligibility, first rank unlock and all rank gates still pending. No provisional numbers are promoted to user-approved values.
+
+### Updated locked six-concept Guardian ability roster
+
+| Skill | Current approved identity | Still open |
+| --- | --- | --- |
+| **Provoking Strike** | New one-handed sword Physical SINGLE-TARGET attack, successful hit -> taunt AND Resolve, including shield-absorbed successful impacts | Damage/rank, Resolve amount/rank, cooldown, threat and taunt duration |
+| **Challenge** | Evolved AoE taunt and substantial real enemy threat | New TierIII rank coefficients, radius, cooldown, Resolve interactions |
+| **Iron Guard** | Two-second defensive stance with pre-mitigation incoming damage storage, releases PHYSICAL centered AoE shockwave | Damage distribution/rank, AoE radius, defense buff, Resolve cost/CD |
+| **Bulwark** | Inherited Resolve-spending mitigation | Rank coefficients, protection scope, cost/CD |
+| **Hold the Line** | Guardian-specific PDEF and MDEF ally defense aura (NOT parent TierII elemental-resistance aura) | Base bonus/rank, range/stacking and self coverage |
+| **Intercede** | Stationary damage redirection from nearby ally to Guardian PLUS a Guardian DEF buff; self-cast grants self buff only without self-to-self redirection | Redirect fraction/rank, DEF buff amount/rank, duration, range, Resolve cost/CD |
+
+Normal Physical sword basic attacks remain available and TierII Defender's original six abilities remain unchanged. Guardian continues to use sword+shield and Resolve, not magic shielding, retaining the dedicated party-protection classic knight role. Advancement DefenderLv60+ -> separate GuardianTierIII Lv1.
+
+### Next Round6 recommended decisions (all proposals, NOT approved)
+
+1. **Provoking Strike initial Resolve gain**: e.g. +5 per successful impact (recommended starting playtest), +8, or +10; alternatively rank-scaling gain. Limit once per successful activation, including absorbed hits. Decide its cooldown separately or combine with first-test options (e.g. 6sec, 8sec, 10sec). Avoid implying any number already approved.
+2. **Single-target Provoking Strike taunt duration**: e.g. 2s normal forced-focus duration, or match TierII Challenge handling, with ordinary threat preserved against taunt-immune bosses. Do not conflate user-approved taunt ON HIT with an approved exact duration.
+3. **Intercede mechanics**: pick redirected damage fraction/DEF buff type and whether buff applies to Guardian self while using ally-target; self-cast continues buff-only. Resolve gain from redirected damage must not double-count same source attack.
+4. **150-rank budget**: confirm whether Guardian uses one point/class level1..150 and select skill cap distribution later; do not auto-copy 80-rank TierII Defender.
+
+**DESIGN DOCUMENTATION ONLY; no Unity gameplay changes, no code tests/builds/merges.**
