@@ -240,3 +240,42 @@ Provoking Strike is ONE on-demand single-target normal **Physical one-handed swo
 4. Next after this, resolve Intercede redirect/self-defensive buff details, Hold the Line flat Physical/Magical DEF aura and Iron Guard's shockwave damage.
 
 **Documentation and design only. No Unity code, scenes/assets, builds, test changes, quest implementation or merge.**
+
+
+## GUARDIAN-008 — 2026-11-28 Round 7 USER APPROVES 150-TOTAL SKILL RANKS, PROVOKING STRIKE 30-RANK CAP AND FIRST-RANK NUMERIC VALUES
+
+### Exact acceptance and applicable interpretation
+
+The user responds **"Yes"** to the immediately preceding complete proposal:
+
+- **Provoking Strike maximum purchased rank: 30.**
+- **Provoking Strike rank 1: 5 Resolve per successful sword hit, 15-second cooldown, 1.5-second forced-target taunt duration on susceptible enemies.**
+- **Provoking Strike rank 30: 10 Resolve per successful sword hit, 8-second cooldown, 4-second forced-target taunt duration on susceptible enemies.** These maximum-rank endpoints were already approved in Round 6.
+- **Guardian total skill-rank budget: exactly 150 purchasable ranks** across its approved SIX skill concepts, earned at **one point for every Guardian class level from 1 through 150**. The other five abilities together must account for the REMAINING **120 ranks**; their separate caps, first-unlock class levels and full audited exact 150 per-rank class-level eligibility gates remain OPEN, and must NOT be imported from TierII Defender's 80-rank schedule or Assassin's 150 gate schedule.
+- The proposed **gradual rank-by-rank interpolation** between chosen first and final values is accepted as initial design direction, subject to appropriate numerical representation of Resolve increments. The user specifically wanted cooldown to reduce with every rank in Round6 and did not revoke that requirement.
+
+### Working straightforward progression, anchored to now-approved endpoints
+
+Let `r` = purchased Provoking Strike rank (integer 1..30) and `t=(r-1)/29`:
+
+- **CooldownSeconds(r) = `15 - 7*t`** = 15.0s at r1, **8.0s at r30**. This is a **continuous unrounded** cooldown reducing on EVERY rank purchase by `7/29`s (about 0.241379s/rank). Do not round at runtime to whole seconds and unintentionally create non-improving rank steps. UI may show precision consistent with other class tooltips; preserve actual numeric monotonicity.
+- **ForcedTauntSeconds(r) = `1.5 + 2.5*t`** = 1.5s at r1, **4.0s at r30**; increases every rank until 4.0. Forced target behavior applies only to taunt-susceptible enemies on a successful impact; normal threat remains even for immune bosses per ordinary threat system.
+- **ResolveRawOnHit(r) = `5 + 5*t`** =5 at r1, 10 at r30. **The endpoints and gradual progression are approved; exact integer-resource policy remains OPEN.** If Resolve can store fractional points, accumulate internally with no premature rounding and preserve exact endpoints. If Resolve storage is integer-only, agree a rounding/step scheme or another progressive reward with the user during implementation design; do NOT represent Resolve as +1 integer at EVERY rank (impossible with +5 total spread over29 upgrades) and do not claim such a user approval. The raw interpolation is a proposed first-playtest math representation, not a signed-off rounding method.
+- The skill's **direct Physical sword damage flat and attribute coefficient(s)** MUST scale with rank under project-wide offensive skill policy, but **no absolute damage numbers, formulas or cooldown cost** are selected in this round. Threat increase amount and any scaling also remain numeric questions. All skill effects require a **SUCCESSFUL, valid, single-target sword IMPACT**, including fully shield-absorbed hits, and miss/cancel yields neither forced taunt nor Resolve. Passive ordinary sword basic hits do NOT automatically receive these special skill triggers.
+
+### Six selected Guardian skills and progress remaining
+
+1. **Provoking Strike 30 ranks (CONFIRMED)**: Physical single-target one-handed sword strike; rank1->30 gain5->10 Resolve, CD15->8s, taunt1.5->4s; landed hit incl fully shield absorbed required; Challenge stays separate area taunt.
+2. **Challenge (cap OPEN)**: area taunt and real threat.
+3. **Iron Guard (cap OPEN)**: fortified 2s defensive stance storing enemy PRE-MITIGATION incoming, then centered PHYSICAL area shockwave.
+4. **Bulwark (cap OPEN)**: Resolve-driven mitigation.
+5. **Hold the Line (cap OPEN)**: nearby Guardian-specific PDEF/MDEF ally aura, distinct from unchanged TierII Defender elemental resistance aura.
+6. **Intercede (cap OPEN)**: stationary partial ally-to-Guardian incoming redirection and self-defense buff; self-target yields only buff without self-to-self redirect.
+
+**Total 150 ranks APPROVED**; **120 not yet allocated** to last five skills. No extra seventh skill, no magic shield, no new resource.
+
+### Next Guardian design interview (NOT YET USER APPROVED)
+
+Move to **INTERCEDE**, as promised immediately after Round7: determine (a) redirection percent first/max rank, (b) what Guardian-specific defensive buff grants (flat PDEF+MDEF or percent mitigation) and how it scales, (c) duration, range, cooldown and whether it spends Resolve, plus eligibility of non-Physical damage and solo self-cast. Do not assume numerical choices from source Defender's Bulwark. Later distribute remaining120 skill ranks, then calculate rank-gated ability coefficients and quest/mentor.
+
+**Documentation ONLY, not implementation. No Unity code, assets, scene edits, compilation, playtesting or branch merge.**
