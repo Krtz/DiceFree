@@ -874,3 +874,45 @@ Let `rE` be the purchased **ENVENOM rank**,1..30, and `B` be the total raw uncri
 5. **Effects while shield-absorbed and multi-source DoT ownership** per actual engine/global policy, not assumed.
 
 **DOCUMENTATION ONLY. No Unity game source/assets/scenes edits, builds/tests or merges. Commit design decisions to GitHub each round.**
+
+
+## Assassin Tier III Round 21 — 2026-11-27 USER APPROVES 0.5S ENVENOM DOT TICKS WITH HALF PER-TICK DAMAGE, KEEP TICK PHASE ON REFRESH, LINEAR COATING DURATION
+
+### LATEST AUTHORITATIVE USER ROUND21, FREE-TEXT OVERRIDES THE SELECTED 1S TICK INTERVAL
+
+User initially selects:
+1. "**Enemy poison DoT damage per 1s tick: B*(0.015+0.002r), cap 0.075B/tick**".
+2. "**Poison DoT refresh: Refresh 4s duration, preserve scheduled 1s tick cadence**".
+3. "**Envenom coating rank duration: Linear 8+9*(r-1)/29 seconds, Envenom ranks 1 to 30**".
+Then user explicitly overrides the interval/damage PER TICK: "**i think maybye do a poison tick every 0.5 seconds instead and half the damage per tick?**" Interpret this as a clear intended change to DOUBLE frequency and HALF damage per individual tick, retaining same nominal total damage across four seconds. The precise final USER-APPROVED mechanics are:
+
+- **Enemy Nature poison DoT tick interval = EVERY 0.5 SECONDS**, NOT one second. This supersedes Round20 and Round21 selection of 1s ticks.
+- **Per half-second Nature DoT tick `B*(0.0075+0.001*rE)`**, half the selected prior one-second tick formula `B*(0.015+0.002*rE)`. Here `rE=EnvenomPurchasedRank`,1..30, `B=full raw uncritted NORMAL TWO-DAGGER BASIC ATTACK SEQUENCE DAMAGE` before target defenses, not one half-hit's raw damage.
+  - Envenom rank1: `0.0085B` PER 0.5s tick (0.85%B), 8 uninterrupted ticks total`0.068B` over four seconds (6.8%B).
+  - Envenom rank30: `0.0375B` PER 0.5s tick (3.75%B), 8 uninterrupted ticks total`0.30B` over four seconds (30%B).
+  - This preserves the earlier intended equivalent damage per second and four-second uninterrupted DoT total, while tick cadence doubles. **No secondary hidden on-tick Mana cost**. Tick damage scales with Envenom rank via +0.001B PER 0.5s tick/rank.
+- **ENEMY poison DoT LIFETIME remains 4.0 SECONDS** after most recent successful eligible coated attack, independent of coating self-buff duration. One NONSTACKING DoT per target; later valid poisoned hits refresh the expiry back to four seconds, but **DO NOT reset, delay or advance the existing 0.5 SECOND TICK PHASE**, nor create an instant extra tick. Treat refresh as expiry extension without scheduling duplicate/new initial tick. Under uninterrupted4sec dot with no further applications and a tick at each elapsed0.5sec including expiry boundary, eight scheduled ticks occur; boundary/tick ordering in engine implementation should be consistent and avoid duplicate ticks. Frequent 0.3sec-spaced dagger hits should not indefinitely starve ticks.
+- **SELF coating duration exact rank interpolation USER APPROVED: `CoatingDuration(rE)=8+9*(rE-1)/29 SECONDS`**, for own Envenom purchased rank1..30. r1=8s, r30=17s; intermediate ranks use the exact linear formula. This remains INDEPENDENT of Stealth rank/duration, superseding the expressly rejected Round19 `StealthDuration+2s` linkage. The endpoints are intentionally 2sec longer than Stealth's corresponding endpoints r1=6 and r25=15, but differing rank progressions do not dynamically couple.
+- Existing activated Envenom rank30 ManaCost`10+2rE`, CD8sec, first unlockLv2 remain unchanged. Recasting while active refreshes ONE coating to full Envenom-rank-based duration with no buffs stacking; can cast during Stealth without breaking concealment or consuming opener. Each SUCCESSFUL normal basic dagger packet and successful Backstab hit applies per-hit Nature bonus `B*(0.08+0.006rE)`, r1=.086B, cap30=.26B, AND refreshes same one enemy poison DoT. Execute NEVER procs coating. Coating application is not a direct poison stab; former direct-stab design retired. Nature on-hit bonus packet is ADDITIONAL to ordinary AGI-only Physical attack and Nature bonus/DoT do not automatically inherit Stealth opener multiplier. Each dual basic cycle has two 0.5B normal hits separated0.3sec within2.5sec overall cycle; if both hit they each proc once and refresh existing one dot.
+
+### Clarification and balance analysis, not additional user approvals
+
+- 0.5-second ticks produce the SAME total intended DPS as the user's first selected once-per-second DoT by halving each tick. Full initial4sec poison if not refreshed: `8 * B*(.0075+.001rE) = B*(.06+.008rE)`, equal to `4*B*(.015+.002rE)` originally selected. Continuous poison reapplication can keep a single four-second DoT active, but each subsequent hit adds its own extra Nature on-hit damage (not extra DoT stacks). At cap30, two successful normal basic impacts deliver **2 x0.26B =0.52B extra Nature on hit** per full 2.5s basic sequence; one poison DoT may deliver0.30B over4s without further procs. Real sustained DPS and stacking with other player effects must be checked after raw B and armor/element/resistance mechanics are defined.
+- Keep existing tick phase across expiry refresh but do not keep expired DoTs on targets. If effect expires and a later attack reapplies, it's a fresh DoT schedule; user only approved preserving schedule on an ACTIVE DoT REFRESH. Exact multi-source poison ownership, damage snapshot vs dynamic AGI changes, shield absorption effects on triggers and elemental resist interactions remain open. Avoid inventing crit ability for Nature packets.
+- Stealth's own intermediate-rank duration linear interpolation6+9*(rS-1)/24 remains a designer recommendation unless separately approved; this round approves Envenom linear duration ONLY.
+
+### All other class parameters remain user-approved and unchanged
+
+- TierIII Assassin separate Lv1 after eligible Thief TierII Lv60; user-approved EXACT 150 skill rank level gates first unlock Stealth1 Envenom2 Backstab3 CritMastery5 ArmorPen8 Execute12 LAST; approved caps25/30/35/20/15/25. Lv1 VIT22 STR10 AGI35 INT10 SPR5, growth +1.7 VIT,+0.7STR,+7AGI,+0.8INT,+0.8SPR, global MaxMana100+5INT, ManaRegen4+0.1SPR, class BaseMana100. AGI-only physical scaling.
+- Stealth cap25 duration6s r1..15s r25, move `(rS-11)%`, opener1.10+0.05rS on FIRST attempted normal basic two-packet sequence or Backstab only, consumed on MISS, not Envenom/Execute, Mana8+2rS/CD22sec. Backstab35 any-facing side/rear270deg physical bonus and opening multiplier stacking, Mana12+2rB/CD9sec, RAW damage and positional coefficients pending. Execute25 always usable and increasingly damaging with missing enemy HP, 1.2s windup then single dagger strike, Mana20+5rX/CD35sec, no Envenom proc, numeric damage pending. CritMastery20 hybrid passive +3AGI and+1pp basic crit/r, active guaranteed BASIC crit hit charges2/3/4/5/6 by milestones1/6/11/16/20, Mana12+3rC/CD25sec, charge lifecycle user approved; ArmorPen15 ignores +1% enemy PDEF per rank on basics/physical skills.
+- No Unity changes authorized by design interview. Damage reviews remain skill by skill, with Envenom on-hit and periodic damage now approved; next review is Backstab base and positional coefficients (prior DESIGNER draft `B*(0.9+0.07rB)`, side/rear multiplier `1.25+0.02rB`). At maximum, stacking with max Stealth2.35x produces ~15.35B before mitigations under that draft; warning useful for balancing, not locked numbers. Later Execute damage coefficient to review separately.
+
+### Round22 suggested follow-up questions, NOT USER APPROVED
+
+1. **Backstab RAW PHYSICAL direct packet coefficient** per purchased Backstab rank, with meaningful stand-alone impact relative to full basic B.
+2. **Backstab SIDE/REAR positional multiplier** r1..35 (front90deg no bonus), balancing multiplicative max Stealth opener2.35x so peak burst is deliberate but not inadvertently overpowered; compare draft15.35B total and a toned-down alternative.
+3. **Backstab hit/position sampling**: at button press vs impact; if target rotates mid-action, what facing counts? Not answered yet.
+4. **Stealth current duration interpolation** between6s/15s (independent of Envenom, which is NOW locked linear).
+5. Later **Execute damage** missing HP curve, interrupted 1.2sec windup/refunds, etc. Do not ask to re-decide already-locked Envenom 0.5s tick damage.
+
+**DOCUMENTATION ONLY: no Unity gameplay code/assets/scenes/builds/tests or branch merges.**
