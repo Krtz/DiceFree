@@ -424,3 +424,50 @@ General proposed attribute at classLv L: `base+growth*(L-1)`, engine rounding un
 5. Design mentor/advancement trial in World2 separately; no location/quest chosen yet.
 
 **DOCUMENTATION ONLY, do not alter Unity game code, assets, scenes, builds/tests or merge Codex work.**
+
+
+## Assassin Tier III Round 12 — 2026-11-27 USER APPROVES PER-LEVEL GROWTH WITH REDISTRIBUTIONS; WANTS HIGHER LV1 STARTS, NUMBERS UNDECIDED
+
+### AUTHORITATIVE USER ANSWERS, with custom free-text adjustments overriding the multiple-choice initial proposed growth
+
+1. User selected "Approve VIT+1.5 STR+0.5 AGI+7 INT+1 SPR+1 per class level", **then explicitly corrected it:** "**move 0.2 spi into vit and 0.2 int stat gain into str**". Both are redistribution of the PER-LEVEL ATTRIBUTE GAIN figures, not changes to the starting stats. Latest definitive per-level Assassin growth:
+   - **VIT +1.7** (previous candidate +1.5 plus0.2 from SPR).
+   - **STR +0.7** (previous candidate +0.5 plus0.2 from INT).
+   - **AGI +7.0** (unchanged).
+   - **INT +0.8** (previous candidate +1.0 minus0.2).
+   - **SPR +0.8** (previous candidate +1.0 minus0.2).
+   - **TOTAL +11.0 attribute points PER LEVEL** (unchanged aggregate). Apply for each level-up after new Assassin classLv1, subject to global existing fractional-stat rounding. This set is USER-APPROVED; supersedes Round11 +1.5/+0.5/+7/+1/+1 growth PROPOSAL.
+
+2. User selected "**Increase starting attributes, see notes**", BUT the free-text notes specify ONLY **stat gain** transfers, not any new Lv1 starting-stat values or target starting-total budget. Thus user **APPROVES THE DIRECTION OF INCREASING ASSASSIN LEVEL1 BASE ATTRIBUTES**, but **EXACT NEW BASE VALUES ARE NOT APPROVED / UNRESOLVED**. Do NOT silently apply +0.2 adjustments to starting VIT/STR; do not invent a new starting total38->80, and do not claim previous Lv1 numbers still user-endorsed as final. **Last exact approved Lv1 values from Round11 were STR4 AGI20 INT5 SPR4 VIT5 (total38), now explicitly REQUESTED TO BE REVISED UPWARD**, with replacement numbers awaiting next design selection. Suggested candidates may be offered separately, clearly not approved.
+
+3. Approved class BaseMana remains **100** and universal MaxMana=`100+5*INT`, natural regen/s=`4+0.1*SPR`; ONLY the eventual newly approved starting INT/SPR must be plugged into exact classLv1 and later Mana forecasts. **No numeric spell Mana COSTS yet**; Round10 explicitly deferred all Assassin costs until stat distribution is finalized. Round9 Critical Mastery activation Mana cost increases with purchased rank, precise function TBD.
+
+### Approved growth table and conditional calculations based on LAST KNOWN numerical starts (not the requested future increase)
+
+| Stat | Last exact approved Lv1 bases from Round11, now pending increase | FINAL USER-APPROVED per class level growth | CONDITIONAL Lv150 if old bases retained (NOT final) |
+| --- | ---: | ---: | ---: |
+| VIT | 5 | **+1.7** | 258.3 |
+| STR | 4 | **+0.7** | 108.3 |
+| AGI | 20 | **+7.0** | 1063.0 |
+| INT | 5 | **+0.8** | 124.2 |
+| SPR | 4 | **+0.8** | 123.2 |
+| Total | 38 | **+11.0** | 1677 |
+
+Formula `Stat(L)=NEW_APPROVED_START + growth*(L-1)`, classLv1 is a separate manifestation, not inherited accumulated Thief stat growth. Table Lv150 is scenario illustration **ONLY IF previously selected bases were kept despite latest intention to increase**. With those outdated bases, conditional MaxMana at Lv1=125, Lv60=`100+5*(5+59*.8)=361`, Lv150=`100+5*(5+149*.8)=721`. Conditional natural regen/s Lv1=4.4, Lv60=`4+.1*(4+59*.8)=9.12`, Lv150=`4+.1*(4+149*.8)=16.32`. These should be RECOMPUTED when increased starting stats are decided; never quote these as final approved class pool sizes.
+
+### Source-relative suggestions for next round (not USER approved)
+
+Prior TierIII references: approved Berserker Lv1 total81, Fire Mage Lv1 total84; working Psion evolution starts approximately92–93, prior Marksman starts83 (proposal). Assassin previously had only38 at Lv1 and is requested to increase. A potential **glass-cannon beginning around total80–85** with **heavy AGI bias and deliberately lower VIT than Fire Mage/Berserker** is a designer direction, NOT a selected number or binding minimum. For next user interview, offer two or three explicit revised Lv1 distribution candidates with exact sum and resulting Lv1 MaxMana, and an option to provide custom numbers. Do not modify selected +1.7/+0.7/+7/+0.8/+0.8 growth unless user instructs.
+
+### Previous locked mechanics retained
+
+AGI-ONLY scaling for Assassin basics and physical skills, pure melee glass cannon dual one-handed daggers, slow two-hit basic sequence with 50/50 raw damage split, devastating Stealth opening and lower sustain, any-angle Backstab with side/rear270° larger positional bonus stacking stealth opener, Envenom retained distinct poison stab, Execute always usable continuously increased damage as target missing HP rises. Stealth ranks25: `(r-11)%` concealed move speed; CriticalMastery20 hybrid passive +3AGI/r and +1pp BASIC crit/r, activation basic-only guaranteed crit charges rank1–5=2,6–10=3,11–15=4,16–19=5,20=6; successful hits even shield-absorbed spend, misses don't,25s CD starts immediately, charge clear on death/logout/class swap; ArmorPen15 +1% target PDEF bypass/rank on basics/physical skills. Six skill rank caps25/30/35/25/20/15=150, one point/classLv1–150. Staggered first skill unlocks approved but Round10 exact150-level gate proposal is still NOT signed off. No class mentor/trial/attack formulas approved beyond described principles.
+
+### Immediate follow-up questions
+
+1. **Choose exact increased TierIII Assassin Lv1 stat distribution:** STR/AGI/INT/SPR/VIT; preserve AGI focus and glass-cannon role without imposing equal class survivability.
+2. After revised starts accepted, recompute no-gear Mana/regen and HP vs previous TierIII, then (per user instruction) design actual skill Mana costs.
+3. Confirm or alter Round10 designer-first-unlock proposal and its exhaustive audited gate table.
+4. Set cooldowns, attack intervals and rank-dependent raw damage curves.
+
+**DOCUMENTATION ONLY; no Unity source/assets/scenes/builds/tests, no code merges.**
