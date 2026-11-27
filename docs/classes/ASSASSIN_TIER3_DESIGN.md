@@ -569,3 +569,63 @@ Each comma-separated number at a skill represents the proposed minimum Assassin 
 5. **Rank gating vs special charge breakpoints**, rank20 crit extra charge progression timing based on unlock table, not assumed free at TierIII Lv1.
 
 **DOCUMENTATION ONLY. Do not edit Unity code/assets/scenes/builds/tests, or merge branches.**
+
+
+## Assassin Tier III Round 15 — 2026-11-27 USER APPROVES ALL EXACT 150 SKILL RANK LEVEL GATES; DESIGNER PROPOSES RANK-SCALED MODERATE MANA COSTS (NOT APPROVED)
+
+### USER APPROVAL, AUTHORITATIVE
+
+User explicitly says "**Approve first unlocks Stealth1 Envenom2 Backstab3 CriticalMastery5 ArmorPen8 Execute12 and entire revised audited 150-rank gate schedule**." Therefore Round14's exact level gate table is **NOW USER-APPROVED**, not designer-only. Preserve it verbatim: every integer in each gate list below is the first Assassin class level allowing the next purchased rank, in ascending rank order, and Execute unlocks LAST at classLv12. Assassin earns one skill point each class Lv1..150. TierIII class Lv starts at1 as a separate manifestation after eligible TierII Thief advancement; do not transfer old skill ranks.
+
+### LOCKED, AUDITED 150-RANK SKILL LEVEL-GATE TABLE
+
+| Skill | Approved rank cap | Approved first unlock class Lv | Last rank class Lv | EXACT approved minimum class levels for purchased rank1..cap |
+| --- | ---: | ---: | ---: | --- |
+| Stealth | 25 | 1 | 147 | 1, 7, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99, 105, 111, 117, 123, 129, 135, 141, 147 |
+| Envenom | 30 | 2 | 149 | 2, 6, 11, 18, 23, 29, 32, 38, 43, 48, 53, 59, 62, 68, 73, 78, 83, 89, 92, 98, 103, 108, 113, 119, 122, 128, 133, 138, 143, 149 |
+| Backstab | 35 | 3 | 150 | 3, 4, 10, 16, 20, 24, 30, 31, 37, 41, 46, 50, 54, 60, 61, 67, 71, 76, 80, 84, 90, 91, 97, 101, 106, 110, 114, 120, 121, 127, 131, 136, 140, 144, 150 |
+| Critical Mastery | 20 | 5 | 146 | 5, 9, 19, 26, 35, 42, 49, 56, 65, 72, 79, 86, 95, 102, 109, 116, 125, 132, 139, 146 |
+| Armor Penetration | 15 | 8 | 145 | 8, 14, 25, 36, 44, 55, 66, 74, 85, 96, 104, 115, 126, 134, 145 |
+| Execute | 25 | 12 | 148 | 12, 13, 17, 22, 28, 34, 40, 47, 52, 58, 64, 70, 77, 82, 88, 94, 100, 107, 112, 118, 124, 130, 137, 142, 148 |
+
+**PROGRAMMATIC DESIGN AUDIT RE-PASSED THIS ROUND:** Skill cap counts25+30+35+20+15+25=150. Every skill's exact rank gate list length equals its approved cap, each rank's class-level gate strictly increases within that skill, the union of all gate lists equals **every integer Assassin class level 1..150 exactly once**, and Execute's first eligibility at Lv12 is later than all others' first eligibility (Stealth1 Envenom2 Backstab3 CriticalMastery5 ArmorPen8). Thus spending one point at each character-class level in this scheduled order satisfies each previous-rank prerequisite, never requires a banked point, and reaches all caps by Lv150. This is the **approved** table, not subject to further uncertainty unless user changes it. A player may choose to bank points instead of buying immediately; min-level requirements still apply.
+
+### Round15 designer-only proposed MODERATE rank-scaled MANA cost schedule (NOT user approved)
+
+User requests "Continue Assassin design and design rank-scaled Mana costs" but chooses ONLY gate approval and does not provide numeric Mana cost choices. The proposals below are **new DESIGNER CANDIDATES FOR NEXT USER APPROVAL**, based on earlier approved moderate resource philosophy and FINAL known Assassin stats/resource curve.
+
+| Active ability (one Mana payment on activation) | Candidate exact formula (purchased rank r) | Rank1 cost | At approved cap | Cap cost |
+| --- | --- | ---: | ---: | ---: |
+| Stealth (max rank25) | `8+2*r` | 10 | r25 | 58 |
+| Envenom (max rank30) | `10+2*r` | 12 | r30 | 70 |
+| Backstab (max rank35) | `12+2*r` | 14 | r35 | 82 |
+| Execute (max rank25) | `15+3*r` | 18 | r25 | 90 |
+| Critical Mastery activation (max rank20) | `12+3*r` | 15 | r20 | 72 |
+| Armor Penetration (max rank15) | PASSIVE, NO ACTIVE MANA COST | n/a | r15 | n/a |
+
+**NONE OF THESE MANA COST NUMBERS OR FUNCTIONS ARE YET APPROVED.** They are only moderate-rank-cost candidate values for user to tune or reject in Round16. The old pre-stats selection `Critical Mastery 20+5r` was explicitly deferred/overridden in Round10 and remains NOT APPROVED; don't reintroduce as canonical. In all candidates, a skill's Mana is deducted **once per activated cast**, with no invented Mana-per-dagger-hit or additional Mana-per-poison-tick drain, unless later user changes. Critical Mastery activation cost rises with its skill rank, satisfying an existing approved principle. All physical skills remain AGI-only for damage coefficients and global Mana formula is UNCHANGED.
+
+Ungeared before rounding, Assassin's previously approved resource trajectory is:
+- Lv1: Starting VIT22 STR10 AGI35 INT10 SPR5; `MaxMana=100+5*INT=150`, regen `4+0.1SPR=4.5/s`.
+- Lv12: INT=`10+11*0.8=18.8`, Mana `194`, SPR=`5+11*0.8=13.8`, regen `5.38/s`; Execute first rank becomes eligible at Lv12, candidate cast cost18 Mana.
+- Lv60: Mana386, regen9.22/s.
+- Lv150: Mana746, regen16.42/s.
+
+**Five candidate max-rank cast costs TOTAL =58+70+82+90+72=372 Mana (~49.87% of classLv150 no-gear pool746)**, if all five actives are cast ONCE at max rank and there are no intervening regen effects; not a full opener rotation simulation or playtested balance. They do not automatically fire or all occur in the same instant, and actual cooldowns/combat constraints may restrict use. Candidate rank1 costs are affordable at the respective first unlock levels under approved base Mana values, without inferring actual player gearing. Verify balance at intermediate rank caps and timing once ability cooldowns and damage are locked.
+
+### Already-approved Assassin specification remains unchanged
+
+- Pure melee DPS, two one-handed daggers, AGI-only basic and physical skill stat scaling, class Lv1 starts VIT22 STR10 AGI35 INT10 SPR5, per level VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8, class BaseMana100, natural regen global. Durability front-loaded a bit, damage grows quickly with class AGI.
+- Deliberate two-hit basic attack cycle 2.5s, second strike0.3s after first, equal 50/50 share of TOTAL raw cycle damage. Stealth first opening two-hit basic sequence multiplies BOTH impacts, but consumes a single opener. Backstab usable from any angle with huge positional bonus outside target front90deg (target side/rear270deg), and multiplier from first Stealth opening stacks with positional bonus. Envenom retains poison; Execute always usable, continuous missingHP damage curve. User-approved order first unlocks Stealth1 Envenom2 Backstab3 CritMastery5 ArmorPen8 Execute12 LAST.
+- Critical Mastery hybrid rank20 passive +3AGI and +1pp BASIC crit chance per rank, BASIC-only guaranteed critical hit charges rank1–5=2/r6–10=3/r11–15=4/r16–19=5/r20=6, 25s activation cooldown starts immediately, charges lost on death/logout/class change, replenishment replaces remaining charges, each successful basic dagger impact consumes one including fully shield-absorbed; misses do not. Stealth cap25 concealed speed `(r-11)%`, ArmorPen cap15 ignores 1% target Physical Defense per purchased rank on basic attacks and Physical Assassin skill damage.
+- Missing mechanics: skill damage coefficients and rank curves, precise cooldowns for Stealth/Envenom/Backstab/Execute, Stealth duration/RankIII opener multiplier, Backstab positional magnitude and timing, Execute missingHP coefficient, basic TOTAL raw sequence damage relation to TierII Thief, assets/teacher quest and exact cost choices above.
+
+### Recommended Round16 questions, all still open
+
+1. **Mana cost approval:** accept/tune/reject candidate 8+2r Stealth,10+2r Envenom,12+2r Backstab,15+3r Execute,12+3r Critical Mastery, or alter all to stronger/weaker economic pacing. Explicitly confirm no extra Mana on poison ticks.
+2. **Skill damage coefficient balancing priority**: Backstab position bonus and Stealth opener raw rank scaling first, then Execute missing HP and Envenom DoT/direct.
+3. **Cooldown pacing** for four active skills; Critical Mastery 25s already approved.
+4. **Basic raw DPS vs TierII Thief**: choose raw AGI cycle coefficient at2.5s and timing gap0.3s and ensure it is slower, hard-hitting.
+5. **Advancement teacher/quest** and world location remain undecided.
+
+**DOCUMENTS ONLY. No Unity gameplay code/assets/scenes/builds/tests/merges authorized.**
