@@ -333,3 +333,38 @@ Total purchased ranks exactly **150**, one skill point/class level1..150. **Per-
 5. **Establish Assassin Lv1 stats and per-level growth, starting Mana and TierIII mentor/trial** separately.
 
 **DOCUMENTATION ONLY. No Unity code, assets/scenes, builds, tests, class implementation or merge.**
+
+
+## Assassin Tier III Round 10 — 2026-11-27 USER OVERRIDES CRITICAL MASTERY MANA NUMBER UNTIL AFTER STATS; STAGGERED UNLOCKS AND EQUAL DAGGER IMPACT DAMAGE APPROVED
+
+### Latest Round10 explicit user decisions and free-text priority
+
+1. **CRITICAL MASTERY MANA COST FORMULA IS NOT APPROVED; ALL ASSASSIN MANA COST NUMBERS ARE DEFERRED UNTIL AFTER THE ASSASSIN STAT DISTRIBUTION.** User selected form's option `20+5r` then explicitly added: "**we decide mana costs after stat distrobution**." This later specific free-text instruction OVERRIDES treating `20+5r` as approved. Preserve the earlier Round9 rule that Critical Mastery activation Mana cost **increases with purchased rank**, but **do not lock base20 or +5/rank** or any exact cast-cost formula yet. No skill Mana cost for Stealth, Envenom, Backstab or Execute is to be newly finalized before choosing Assassin Lv1 attributes, per-level growth, class BaseMana and global Mana pool/regen consequences.
+2. **STAGGER FIRST SKILL UNLOCKS OVER EARLY ASSASSIN CLASS LEVELS**, with individual skill-rank purchase levels distributed through class levels1–150. The user selected staggered (NOT all six available at classLv1). Which exact first-unlock levels or later purchased-rank gate schedule are approved? **NONE YET**: a fully audited DESIGNER-ONLY candidate is provided below for the next round, not signed-off. Preserve the approved six caps: Stealth25 / Envenom30 / Backstab35 / Execute25 / CriticalMastery20 / ArmorPenetration15 =150 total; one point earned at each Assassin classLv1..150.
+3. **BOTH DAGGER IMPACTS IN ONE DELIBERATE TWO-HIT BASIC SEQUENCE DEAL EQUAL RAW DAMAGE, SPLIT 50% / 50% OF THE SEQUENCE'S NORMAL BASIC ATTACK DAMAGE BUDGET.** This overrides the proposed 40/60 or60/40 imbalance. The class remains slower in basic attack cycle frequency than TierII Thief, with exact attack interval and inter-impact delay still OPEN. Separate per-impact hit/crit/shield handling continues: critical charges consumed on each SUCCESSFUL BASIC HIT, including fully shield-absorbed hits, while MISSES consume0. Both basic impacts from the FIRST stealth-opening sequence receive opening multiplier as approved Round4, so apply same multiplier to both corresponding equal pre-mitigation hits; do not accidentally double the intended overall baseline merely by allocating the old single-hit damage to EACH strike.
+4. **Other approved class behavior unchanged**: pure melee dual-dagger DPS, slower heavy skills and basics, very strong Stealth opening burst and weaker sustain, Backstab usable all angles but major positional damage at target sides/rear270° stacking with Stealth opener, Execute always usable scaling with target missing HP, Envenom retained distinct. Stealth purchased rank speed modifier `(r-11)%` (r1 -10%, cap25 +14%). Hybrid CriticalMastery20 passive +3AGI/rank and +1 percentage point BASIC CRIT/rank; activation's basic-only guaranteed crit charges `2+floor((r-1)/5)+(r==20?1:0)` max6,25s cooldown starts immediately on use, rank-growing Mana cost TBD, charges persist while eligible but clear on death/logout/manifestation switch; recast replaces charges. ArmorPenetration15 ignores +1% target Physical Defense/rank on basics and physical Assassin skills. Global Mana max=`AssassinClassBaseMana+5INT`, natural regen/s=`4+0.1SPR` stays universal.
+
+### Proposed EXACT 150-rank class-level eligibility table — DESIGNER-ONLY, NOT YET USER APPROVED
+
+The following table gives each skill purchased rank `r=1..cap` a **minimum class level** `L=gate[r]`. The user approved only **staggered unlocks and auditing**, NOT these specific individual gates. Proposed first unlocks: **Stealth Lv1, Envenom Lv2, Backstab Lv3, Critical Mastery Lv5, Execute Lv8, Armor Penetration Lv10**. Can be adjusted if user wants different pacing (e.g., Execute later, earlier defensive passive).
+
+**AUDIT PASS:** exact150 gate records and user-approved caps; each Assassin class level1..150 has EXACTLY ONE candidate rank whose minimum class level equals that level, so a player who spends immediately has a legal skill purchase every level, including classLv1 and Lv150. For any L1..150, number of gate-eligible ranks equals L, assuming no previous purchases; rank-up requirements still require earlier ranks in that specific skill. Since each skill's gate list is strictly increasing, following the per-level gate order automatically satisfies rank prerequisites. Last rank gate reaches Lv150 (Backstab); other skills reach caps earlier than Lv150. This is a mathematical candidate and not a signed-off exact level schedule.
+
+| Skill | Approved cap | Proposed first eligible class Lv | Proposed last rank gate Lv | Complete proposed per-rank class-level gates (ordered by purchased rank) |
+| --- | ---: | ---: | ---: | --- |
+| Stealth | 25 | 1 | 147 | 1, 7, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, 87, 93, 99, 105, 111, 117, 123, 129, 135, 141, 147 |
+| Envenom | 30 | 2 | 149 | 2, 6, 13, 18, 23, 29, 32, 38, 43, 48, 53, 59, 62, 68, 73, 78, 83, 89, 92, 98, 103, 108, 113, 119, 122, 128, 133, 138, 143, 149 |
+| Backstab | 35 | 3 | 150 | 3, 4, 11, 16, 20, 24, 30, 31, 37, 41, 46, 50, 54, 60, 61, 67, 71, 76, 80, 84, 90, 91, 97, 101, 106, 110, 114, 120, 121, 127, 131, 136, 140, 144, 150 |
+| Execute | 25 | 8 | 148 | 8, 9, 17, 22, 28, 34, 40, 47, 52, 58, 64, 70, 77, 82, 88, 94, 100, 107, 112, 118, 124, 130, 137, 142, 148 |
+| Critical Mastery | 20 | 5 | 146 | 5, 12, 19, 26, 35, 42, 49, 56, 65, 72, 79, 86, 95, 102, 109, 116, 125, 132, 139, 146 |
+| Armor Penetration | 15 | 10 | 145 | 10, 14, 25, 36, 44, 55, 66, 74, 85, 96, 104, 115, 126, 134, 145 |
+
+### Pending after Round10
+
+- **Next design round should approve/alter starting stats before ANY numeric Mana-cost choices**, per user note. Ask for Assassin Lv1 VIT, STR, AGI, INT, SPR; per-level gains and own ClassBaseMana, then budget affordable mana skill costs later with global capacity/regen formulas.
+- The exact proposed rank level-gate table above remains **NOT APPROVED**, despite successful 150-level audit; ask for acceptance or changes separately, ideally after discussing how the unlock schedule feels.
+- Exact basic attack interval between the SLOWER two-hit cycles and spacing between two impacts, independent hit chance/crit rolls and death mid-sequence; raw basic attack damage coefficient and its relative relationship to TierII Thief all remain OPEN. Damage SPLIT 50/50 is approved.
+- Stealth opening raw damage rank curve, Backstab raw and270° bonus, Execute continuously scaled missingHP curve, Envenom higher-rank poison damage, crit/armor effects are awaiting their class-level and damage design; none is newly locked here.
+- Specific advancement quest/mentor location, assets and implementation all deferred. No assumption that Assassin's trial equals Fire Mage's volcano trial.
+
+**Documentation only; no Unity code, assets/scenes, builds/tests or branch merge.**
