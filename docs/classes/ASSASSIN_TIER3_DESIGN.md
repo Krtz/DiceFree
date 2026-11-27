@@ -271,3 +271,41 @@ User says: "**hmmm, either we remove guaranteed crit or moove it into the crit p
 6. Set two-hit basic cadence/damage split and execute curve after rank/level model.
 
 **DOCUMENTATION ONLY. No Unity code, scenes, assets, tests, builds, merges or implementation authorized.**
+
+
+## Assassin Tier III Round 8 — 2026-11-27 USER APPROVES CRIT+AGI, ARMOR PEN, 25S CRIT COOLDOWN, SHIELD-HIT CHARGE SPEND, BONUS SIXTH RANK20 CHARGE
+
+### Authoritative Round8 USER APPROVALS (free-text custom rank20 bonus OVERRIDES previously assumed charge cap5)
+
+1. **HYBRID CRITICAL MASTERY PASSIVE: +1 PERCENTAGE POINT BASIC ATTACK CRIT CHANCE PER PURCHASED RANK (r1..20)**, totaling **+20 percentage points** at rank20. Distinguish crit chance percentage POINTS (additive crit chance contribution), not 1% relative increase. Bonus remains BASIC ATTACKS ONLY per Round7. Does not imply any new natural crit eligibility for Backstab, Envenom, Execute or periodic poison.
+2. **HYBRID CRITICAL MASTERY PASSIVE: +3 AGI PER PURCHASED RANK (r1..20)**, totaling **+60 AGI** at rank20, in addition to basic crit chance. Both passive effects derive from the SAME purchased rank progression shared with its activation, no separate rankable Guaranteed Crit active.
+3. **ARMOR PENETRATION PASSIVE: IGNORE AN ADDITIONAL 1% OF TARGET PHYSICAL DEFENSE PER PURCHASED RANK (r1..15)**, totaling **15% TARGET PHYSICAL DEFENSE BYPASS** at rank15. Applies to BASIC ATTACKS and PHYSICAL ASSASSIN SKILLS, per Round5. This is % of the target's PDEF, not a flat -15 PDEF debuff and not a percentage of final HP damage. Combine with existing global physical-defense/penetration rules; any multiple-source stacking order remains a global engine integration detail, not license to invent new immunities.
+4. **HYBRID CRITICAL MASTERY ACTIVATION COOLDOWN EXACTLY 25 SECONDS**, independent of skill rank unless another explicit approved change. Charges have NO short time window/timeout per Round6. Mana activation cost, time at which cooldown starts, persistence through character death/logout/manifestation switching, and charge refill on reactivation beyond approved replace rule are still TBD. User has approved 25s cooldown, NOT that activation is free.
+5. **A SUCCESSFUL BASIC DAGGER HIT CONSUMES ONE GUARANTEED CRIT CHARGE EVEN IF ITS DAMAGE IS FULLY ABSORBED BY A SHIELD.** A MISS still consumes ZERO charges. A successful hit is defined by attack resolution connecting, before evaluating shield vs HP loss; a basic hit blocked/absorbed by a shield is still a successful hit. With the two-hit basic cycle each dagger impact resolves separately; 1 eligible connected impact consumes 1 charge, regardless of shield blocking final HP damage. Skills Backstab, Envenom, Execute remain INELIGIBLE for guaranteed basic-charge spending.
+6. **USER CUSTOM OVERRIDE: EXTRA GUARANTEED CRIT CHARGE AT RANK20**, creating **SIX charges at skill cap20**, not five. Preserve earlier user-approved start at2 rank1 and +1 charge every5 additional purchased ranks, then ADD ONE SPECIAL EXTRA at max rank:
+   `ChargeCount(r)=2+floor((r-1)/5)+(r==20 ? 1 : 0)` for purchased Critical Mastery rank r in1..20.
+   Explicit charge breakpoints: ranks1–5=2;6–10=3;11–15=4;16–19=5;**rank20=6**. Do not incorrectly use an ordinary +1-per-five formula to claim rank20=5, or grant max6 at rank16. At max, six fully successful dagger hits can cover three whole TWO-HIT basic cycles, assuming charges were not spent otherwise.
+7. Recast/refill Rule from Round7: when activated again after cooldown, replace any remaining charges with FULL current rank-dependent amount, not additive or stackable. Charge use is only on eligible SUCCESSFUL basic impacts, not on missed attempts and not when physical skills are cast. The hybrid passive AGI and crit chance bonus are always effective based on purchased rank and do not diminish when charges are used.
+
+### Approved consolidated Assassin numerical ledger after Round8
+
+| Purchased skill and cap | Numeric behavior |
+| --- | --- |
+| Stealth25 | Concealed movement percent modifier `(r-11)%`, rank1=-10%, rank25=+14%, exact duration/CD/stealth opener damage curve pending |
+| Envenom30 | Distinct poison stab; TierIII damage/cost/cooldown/rank formulas pending |
+| Backstab35 | Castable from all directions; significantly stronger in target-relative270deg side+rear and gains stacking Stealth opener multiplier; exact values pending |
+| Execute25 | Always usable; damage increases continuously with missing target HP, exact curve/cost pending |
+| Critical Mastery20 | Hybrid: passive +3AGI/r and +1pp basic crit/r; activated basic-only guaranteed crit CHARGES `2+floor((r-1)/5)+(r==20?1:0)`, NO short timer, **25s cooldown**, successful shield-absorbed hit spends1, missed hit spends0, reactivation resets to full allotment |
+| Armor Penetration15 | Passive ignores +1% of target PDEF/rank, max15%, basics AND physical Assassin skills |
+
+Total purchased ranks exactly **150**, one skill point/class level1..150. **Per-skill min-level rank gates not yet locked or audited**, and rank0 ability availability needs explicit handling. Mana ONLY, global `MaxMana=ClassBaseMana+5*INT`, `naturalRegen/s=4+0.1*SPR`, own class base stats/gains TBD. Pure melee two-dagger, deliberate two-hit basic sequence, heavy skills, strong stealth opening then weaker sustain, rear/side270deg positioning. Four active skills Stealth/Envenom/Backstab/Execute, one hybrid Crit Mastery and one passive Armor Pen. No extra Expose Weakness, Fan of Knives, Smoke Bomb, or separate guaranteed-crit skill.
+
+### Proposed Round9 next decisions, NOT YET APPROVED
+
+1. Determine **CRITICAL MASTERY MANA COST**: e.g. fixed cost or rank-scaled, noting global Mana formula remains universal.
+2. Determine **charge persistence** across death, logout and class swaps, while NOT adding a hidden short timeout.
+3. Determine timing of **25s cooldown** (on activation vs when charges are exhausted), plus whether rank0 hybrid is usable (no purchase means no bonuses/activation).
+4. Choose **per-rank class minimum-level unlock schedule** for six approved caps summing150. Validate every class level1..150 can spend one point if desired; don't assume all ranks initially unlocked.
+5. Determine Assassin classLv1 stats/growth, Envenom/Backstab/Execute raw damage rank formulas, basic cycle spacing, Stealth damage rank growth and positional bonus, and advancement quest.
+
+**DOCUMENTATION ONLY. No Unity code/assets/scenes, builds, tests, or branch merges.**
