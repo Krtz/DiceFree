@@ -828,3 +828,49 @@ The Assassin's six purchasable skill concepts remain Stealth25 / Envenom30 / Bac
 5. After Envenom math, next skill-by-skill Backstab and Execute damage curves, especially positional max burst with Stealth2.35x.
 
 **DOCUMENTATION ONLY. No Unity changes/commits to game source/assets, tests, builds or merges.**
+
+
+## Assassin Tier III Round 20 — 2026-11-27 USER APPROVES NATURE ON-HIT DAMAGE, 4S ENEMY DOT, ONE COATING REFRESH, STEALTH PRESERVATION; CORRECTS COATING DURATION TO INDEPENDENT ENVENOM RANK
+
+### MOST RECENT USER EXPLICIT CORRECTION SUPERSEDES ROUND19 STEALTH-DEPENDENT COATING FORMULA
+
+User answers:
+1. "**Nature on-hit damage: B*(0.08+0.006r), max 0.26B per hit**".
+2. "**Enemy poison DoT duration: 4 seconds, ticking once per second, refreshed on hit**".
+3. "**Coating recast: Refresh one coating to full duration, no stacking**".
+4. "**Envenom activation during Stealth: Preserves concealment and opener**".
+Then the user's HIGHER-PRIORITY free text explicitly corrects earlier Round19 interpretation: "**nonono i don't mean poison duration is actually governed by stealth, i meant more as in at the max rank of both skills and at the start rank of both skills it is +2 seconds longer duration on poison**".
+
+**AUTHORITATIVE CHANGE: Envenom WEAPON COATING duration is governed by ITS OWN ENVENOM RANK1..30, NOT Stealth rank.** At **Envenom rank1**, coating lasts **8 seconds** while **Stealth rank1** lasts6 seconds, +2sec. At **Envenom rank30**, coating lasts **17 seconds** while **Stealth rank25** lasts15 seconds, +2sec. The exact intermediate-rank increment/rounding formula not explicitly specified; a designer working recommendation is LINEAR `EnvenomCoatingDuration(rE)=8+9*(rE-1)/29` seconds for Envenom rank rE1..30 and `StealthDuration(rS)=6+9*(rS-1)/24` for Stealth rank rS1..25, but BOTH formulas for interior rank duration are **DESIGNER INTERPOLATIONS, NOT USER-SIGNED-OFF NUMERIC CURVES**; endpoints and independent rank source ARE USER APPROVED. A rank30 coating lasts17seconds whether the player's Stealth is rank1, rank25 or anything else. A rank1 Envenom lasts8seconds even if Stealth is rank25. DO NOT reintroduce `CoatingDuration=CurrentStealthDuration+2`: this formula is **explicitly REJECTED/SUPERSEDED**. The old form 15-30 seconds by Envenom rank was also superseded by endpoint8->17. The user intended Envenom's own duration to exceed corresponding starting and maximum Stealth durations by2 seconds, to permit coating before Stealth, NOT to couple every individual cross-skill rank or current duration to Stealth.
+
+### Approved on-hit NATURE damage formula, new canonical
+
+Let `rE` be the purchased **ENVENOM rank**,1..30, and `B` be the total raw uncritted NORMAL TWO-DAGGER BASIC ATTACK SEQUENCE budget before defenses (two normal Physical impacts0.5B each, 0.3seconds apart, one sequence per2.5seconds), based on AGI and dagger equipment through the still-to-be-finalized shared raw basic formula.
+
+- **On each successful connecting eligible poisoned impact**, apply **ONE separate Nature damage packet `NatureHit(rE)=B*(0.08+0.006*rE)`**, i.e. rank1 **0.086B (8.6%)**, cap rank30 **0.26B (26%)**. Nature packet is in ADDITION to normal Physical damage, not a replacement; damage ignores standard physical-only Armor Penetration passive unless a separate Nature damage rule applies. Neither this on-hit Nature packet nor the poison DoT automatically receives the Stealth opener physical multiplier.
+- Eligible triggers remain as previously USER APPROVED Round19: **each SUCCESSFUL NORMAL BASIC dagger impact** (both packet1 and packet2 when they connect) and **successful BACKSTAB hit** proc ONCE per connecting impact. **EXECUTE EXCLUDED**, even though it uses one dagger. Misses do not proc on-hit Nature nor apply/refill enemy poison DoT. The new damage formula is PER eligible hit, NOT per full two-hit sequence: two connecting BASIC hits yield two Nature packets at the selected rank, and each refreshes the same one DoT. Backstab hits once and gives one packet; separate Physical Backstab numeric coefficient still open.
+- Poison is Nature supplemental damage, not another Physical weapon strike or an independent auto attack. Critical Mastery BASIC guaranteed crit charges belong to the normal Basic Physical hit only, not an additional charge for Nature packet; whether Nature packets can naturally critically hit needs separate damage-channel rules rather than assumed.
+
+### Approved enemy DOT and recast/invisibility semantics
+
+- Poisoned target has **ONE NONSTACKING Nature damage-over-time status**, enemy DOT lifetime **4 seconds** from most recent eligible connecting coated hit; ticks **ONCE EVERY 1 SECOND**. Reapplying on further successful coated hits **refreshes the SAME DoT to its full4s**, does not create extra stacks, layers, 3-stack/5-stack variants or multiple overlapping dots. **EXACT DAMAGE PER TICK IS NOT YET USER APPROVED**, nor is precise cadence on refresh (reset tick clock vs preserve next scheduled tick) or multi-source stacking; do not manufacture a coefficient.
+- If coating recast becomes available again after its USER-APPROVED **8sec cooldown** and is activated while old coating still exists, **REFRESH/REPLACE ONE SELF COATING BUFF to ITS FULL ENVENOM-RANK-BASED DURATION**, not accumulate/stack two coating effects or merge damage coefficients. Cost `10+2*rE` Mana applies once again for each activation, as locked Round17. Old coating ends when replaced.
+- **Envenom may be ACTIVATED WHILE ALREADY IN STEALTH WITHOUT breaking concealment, consuming the opener, or triggering an opening attack**; prepping before Stealth is also permitted. Separate Nature poisoning from eligible attacks still uses the already-approved Stealth opener eligibility (the Phys basic/Backstab gets the Stealth opener multiplier, Nature supplement and DoT do not automatically).
+- Enemy poison DoT **4s lifetime is SEPARATE** from the SELF weapon-coating lifetime **8s rank1 ->17s rank30**. Expiring coating ends future poison-hit applications, and does NOT inherently imply already applied enemy poison ends immediately; retain separate status duration semantics subject to global effect cleanup.
+- Coating is activated buff only, no standalone Envenom Physical stab, no extra per-hit/per-tick Mana payment. Skill cap30, approved class level gate first unlockLv2 and all 150 gates, Mana10+2r, cooldown8s are unchanged.
+
+### Existing approved Assassin class mechanics not altered
+
+- TierIII Assassin class Lv1 attributes VIT22 STR10 AGI35 INT10 SPR5, growth VIT+1.7 STR+0.7 AGI+7 INT+0.8 SPR+0.8; ClassBaseMana100, universal max100+5INT, regen/s4+0.1SPR. AGI-only Normal Physical/skill scaling, dual one-handed daggers, 2.5sec normal attack cycle with two equal0.5B hits spaced0.3sec. Stealth cap25: duration6sec at r1 to15sec r25, opener multiplier1.10+0.05rS on first attempted two-hit BASIC sequence (both impacts) or Backstab ONLY, even when missed, signed movement `(rS-11)%`, Mana8+2rS and CD22s. Backstab35 eligible from any direction, with side/rear270deg bonus and 9s CD cost12+2r; raw/positional damage coefficient pending. Execute25 always usable damage grows continuously with missing HP, long1.2s pre-strike windup, one dagger strike,35s CD cost20+5r; poison coating EXCLUDED. CriticalMastery20 passive +3AGI and+1pp BASIC crit per rank, active BASIC-only guaranteed crit hit charges up to6 with Mana12+3r and25s CD; ArmorPen15 ignores +1% physical defense per rank on basic/physical skills.
+- Entire 150 exact rank minimum class-level eligibility gates user-locked Round15, first unlock StealthLv1, EnvenomLv2, BackstabLv3, CritMasteryLv5, ArmorPenLv8, ExecuteLv12 LAST. No progression changes.
+- Round17 user explicitly requests damage review skill-by-skill; no Backstab or Execute RAW DAMAGE formula was just approved by Envenom discussion.
+
+### Pending Round21 questions and balance (UNAPPROVED)
+
+1. **ENEMY NATURE DoT TICK DAMAGE FORMULA**, rank-scaled and meaningful alongside already locked direct on-hit Nature packet `B*(0.08+0.006rE)`; propose e.g. `B*(0.015+0.002rE)` PER tick (r1=1.7%B/tick, cap30=7.5%B/tick, 4 ticks=30%B if not refreshed) or alternative tuned outcomes; no user approval until answered. The player might land two coated dagger contacts per2.5sec, so check effective sustain and poison DoT refresh uptime.
+2. **DOT refresh timing:** restarting 1sec tick timer on each refreshed proc could repeatedly delay ticks for frequent dual hits0.3sec apart; consider retaining existing tick cadence while refreshing expiry and no instant extra tick, to prevent lost or duplicate ticks; ask for user decision.
+3. **COATING DURATION INTERPOLATION** between user-approved r1=8sec and r30=17sec, e.g. linearly based on purchased Envenom rank, not on Stealth rank, optional rounding/display.
+4. **Other skills damage review:** Backstab `B*(0.90+0.07rB)` base and side/rear multiplier `1.25+0.02rB` are designer proposals; with max Stealth opener2.35x resulting max eligible positional Backstab ~15.35B raw pre-defense, so validate burst balance before locking. Execute `B*(1+0.09rX)*(1+(0.30+0.03rX)*missingHPFraction)` also not approved.
+5. **Effects while shield-absorbed and multi-source DoT ownership** per actual engine/global policy, not assumed.
+
+**DOCUMENTATION ONLY. No Unity game source/assets/scenes edits, builds/tests or merges. Commit design decisions to GitHub each round.**
