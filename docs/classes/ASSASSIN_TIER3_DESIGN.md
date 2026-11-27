@@ -1192,3 +1192,52 @@ For preserving meaningful Assassin baseline advantage but avoiding excessive lat
 - Preserve approved user mana/CD/rank caps, class start and growth, exact 150 gating schedule, skill damage math and Stealth linear duration `6+9*(rS-1)/24` seconds. No Unity implementation request in this round.
 
 **DOCS ONLY: no gameplay source/asset/scene/build/test changes or merges.**
+
+
+## Assassin Tier III Round 28 — 2026-11-27 USER APPROVES EXACT 85% B PER DAGGER FOR FIRST PLAYTEST; TOTAL RAW 1.70B PER FULL TWO-HIT BASIC SEQUENCE
+
+### Latest authoritative USER approval
+
+User explicitly chooses "**85% of B per dagger, 1.7B full sequence. Keep B=8+AGI as separate reference for skills, 2.5s cycle, 0.3s gap, both attack-speed scaled. Compare versus same-class-level Thief.**" Their free text adds "**yeah i think 85% looks best for now. will obviously needs proper play testing but, we go with that for now :D**".
+
+**LOCKED AS USER APPROVED FIRST-PLAYTEST TARGET, SUBJECT TO FUTURE PLAYTEST BALANCE:**
+- **Reference `B=8+1.0*AGI` raw, Physical, before mitigation, crit, equipment, target defenses**, based on selected class flat8 and normal class AGI coefficient1. B is a normalization reference, **NOT the sum of both basic hits**. All already approved Assassin skill coefficients remain functions of this B, NOT the actual resulting1.7B two-hit raw auto sequence. This clarifies and supersedes historical language in earlier rounds that called B the "normal total two-hit sequence" before the user reopened the 50% split.
+- **Each of TWO successive dagger Physical basic attack impacts has raw `0.85*B`** before per-hit hit/miss, crit, defense, shield, resistance; **raw total for two landed noncritical base packets `1.70*B`** per full two-dagger normal attack sequence. Previous .50 per dagger initial design and user Round27 working preference .90 per dagger are SUPERSEDED by explicit Round28 .85 decision. This is first-playtest tuning, **not** confirmed by live combat tests.
+- **One nominal sequence every 2.5 seconds**, and **nominal separation between impacts0.3 seconds**, BOTH divided by global shared `ActorStats.AttackSpeed` factor per the separate user-approved Round26 rule, with attack speed equipment/buffs and AGI applying through same global formula. This is NOT two independent full attacks on0.3s and2.5s timers.
+- Keep global attack pipeline for each hit: EACH individual dagger packet gets independent hit/miss and crit resolution; CriticalMastery BASIC guaranteed crit charge consumed on successful dagger impact (including successful hit fully absorbed by shield), MISS doesn't consume. For first qualifying Basic two-hit sequence breaking Stealth, Stealth opener `1.10+0.05*StealthRank` multiplies BOTH dagger hits, consuming one opening bonus on attempted sequence even if hit1 or both miss. With active Envenom coating, EACH successful basic dagger impact triggers bonus Nature `B*(.08+.006*EnvenomRank)` and refreshes ONE nonstacking target Nature poison DoT, no Execute proc; second basic hit0.3/AS after first. IMPORTANT: do not multiply on-hit Nature packet or DoT by Stealth physical opener unless later explicitly user-approved. Apply equipment flat bonuses and percent modifiers consistent with shared global basic attack system, not doubled per packet by accident.
+- Contrast Backstab's single Physical skill raw `B*(0.90+0.07rB)`, side/rear physical multiplier `1.15+.01rB` and max Stealth opener2.35x; Execute's single Physical hit raw `B*(1+.12rX)*(1+(.40+.09rX)*missingHPFraction)`, long35s CD and interruptible1.2s channel; Envenom's Nature on-hit and per0.5s tick likewise remain based on base B. **Do not silently rescale these by factor1.7 just because full normal basic attack combined output is1.7B**.
+- USER specifically compares **Assassin and TierII Thief at the SAME CLASS LEVEL**, not a newly reset classLv1 Assassin vs fully ranked classLv60 Thief.
+
+### Source-verified raw DPS comparison, no gear/skills/crit/poison/defense
+
+From actual Thief asset `baseRaw=5+AGI`, interval0.87s, Thief AGI `18+3.1*(L-1)`; approved Assassin base B `8+AGI`, AGI `35+7*(L-1)`, interval2.5s, two0.85B packets; shared default AttackSpeed `1+0.00025*AGI`:
+
+`ThiefBasicRawDPS=(5+ThiefAGI)*ThiefAttackSpeed/0.87`;
+`AssassinBasicRawDPS=1.70*(8+AssassinAGI)*AssassinAttackSpeed/2.5`.
+
+| Equal CLASS level | Thief raw DPS | Assassin p=.85 per dagger raw DPS | Assassin relative lead |
+| ---: | ---: | ---: | ---: |
+| 1 | 26.56 | 29.50 | +11.1% |
+| 10 | 59.18 | 73.85 | +24.8% |
+| 30 | 133.27 | 177.23 | +33.0% |
+| 60 | 248.55 | 344.81 | +38.7% |
+| 100 | 410.00 | 591.57 | +44.3% |
+| 150 | 624.23 | 937.50 | +50.2% |
+
+The numbers are **theoretical unbuffed raw DPS** only and DO NOT validate actual sustained DPS, accuracy, defense, animation events, equipment effects, class rank-dependent CritMastery +3AGI and+1pp basic crit, boosted Nature poison proc/DoT, or class lifecycle. The user explicitly wants further PLAYTEST tuning later; don't call this final balanced game performance.
+
+### Remaining two-hit implementation-specific design to discuss in Round29 (not approved yet)
+
+Current source `Assets/_DiceFree/Scripts/Combat/BasicAttack.cs` resolves ONE impact per cycle. Assassin dual-IMPACT sequence will require additional orchestration reusing shared AccuracyResolver/DamageResolver, not independent damage engine. Ask user about edge cases:
+1. **If target dies, disappears or becomes invalid between first and second dagger impacts**, cancel second hit versus retarget next nearby enemy vs let windup swing harmlessly; no existing explicit Assassin decision.
+2. **If attacker moves / manually issues command or is hard-CC'd between two impacts**, can second hit complete or is it canceled? Should global BasicAttack interruption conventions apply? Don't invent a rule prematurely.
+3. **First dagger misses**: already approved Stealth opener applies to both packet attempts, consumes opener once, each independently resolves hit and Envenom proc. Do not re-ask.
+4. **Attack target goes out of melee range between impacts**: check range on each impact vs lock onto target once at attack start. Any chase must occur after full sequence, not in between unless specifically desired.
+5. **Basic attack windup for first hit** and whether movement can interrupt, whether cooldown remains consumed after partial hit.
+Potential implementation cross-cutting choices: preserve charged CritMastery and Nature proc semantics per individual successful dagger impact, keep UI preview and single cooldown correct with nominal2.5/AS; don't introduce phantom second damage or duplicated item flat bonuses.
+
+### Class remainder unchanged
+
+Six caps Stealth25 / Envenom30 / Backstab35 / Execute25 / CriticalMastery20 / ArmorPen15, exactly150 eligibility gates approved, first unlock levels Stealth1 Envenom2 Backstab3 CritMastery5 ArmorPen8 Execute12. Base stats VIT22 STR10 AGI35 INT10 SPR5, growth +1.7/+0.7/+7/+0.8/+0.8, classBaseMana100, universal maxMana100+5INT, regen4+.1SPR. Stealth linear duration `6+9*(rS-1)/24`, opener `1.10+0.05rS`, movement (rS-11)%, Mana8+2rS CD22s. Envenom own duration `8+9*(rE-1)/29`, Mana10+2rE CD8s, bonus Nature `B*(.08+.006rE)` per successful normal basic dagger hit/Backstab, one 4s Nature DoT each0.5s tick `B*(.0075+.001rE)` with refresh preserving tick phase. Backstab max 3.35B direct, side/rear bonus max1.50x sampled at impact; Execute cap25 max14.6B at near0% HP, normal1.2s channel interrupted refund/no CD, Mana20+5rX CD35s. CriticalMastery and ArmorPen per prior rounds.
+
+**DOCUMENTATION ONLY. NO UNITY GAME CODE, SCENES, ASSET EDITS, TESTS, BUILDS OR MERGES.**
